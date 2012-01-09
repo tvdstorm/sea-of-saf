@@ -1,0 +1,4 @@
+To-do:
+- Read SAF paper
+- Select parser generator
+- Read at least one other paper 
