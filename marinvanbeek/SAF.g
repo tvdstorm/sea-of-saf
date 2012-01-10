@@ -1,7 +1,8 @@
-grammar SuperAwesomeFighters;
+grammar SAF;
 
 options {
     output = 'AST' ;
+    ASTLabelType = 'CommonTree' ;
 }
 
 tokens {
@@ -20,6 +21,10 @@ tokens {
 /*--------------------------------------------------------------------------
  * PARSER RULES
  *--------------------------------------------------------------------------*/
+
+parse
+    : super_awesome_fighter
+    ;
 
 super_awesome_fighter 
     : name CURLY_OPEN traits behaviour CURLY_CLOSE EOF
