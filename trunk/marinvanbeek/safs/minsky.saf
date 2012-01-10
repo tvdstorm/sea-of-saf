@@ -1,0 +1,8 @@
+minsky
+{
+  kick_reach  = 2
+  punch_reach = 5
+  kick_power  = 7
+  punch_power = 2
+  always [run_towards kick_low]
+}

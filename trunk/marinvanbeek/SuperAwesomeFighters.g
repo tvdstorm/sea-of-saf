@@ -1,5 +1,9 @@
 grammar SuperAwesomeFighters;
 
+options {
+    output = 'AST' ;
+}
+
 tokens {
     CURLY_OPEN      = '{' ;
     CURLY_CLOSE     = '}' ;
@@ -18,10 +22,14 @@ tokens {
  *--------------------------------------------------------------------------*/
 
 super_awesome_fighter 
-    : STRING CURLY_OPEN personality behaviour CURLY_CLOSE EOF
+    : name CURLY_OPEN traits behaviour CURLY_CLOSE EOF
     ;
 
-personality
+name
+    : STRING
+    ;
+
+traits
     : (property EQUAL LEVEL)+
     ;
 
