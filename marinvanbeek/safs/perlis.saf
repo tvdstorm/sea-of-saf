@@ -1,0 +1,8 @@
+perlis
+{
+  kick_reach  = 5
+  punch_reach = 4
+  kick_power  = 9
+  punch_power = 7
+  always [walk_towards punch_high]
+}

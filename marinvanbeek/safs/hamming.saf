@@ -1,0 +1,8 @@
+hamming
+{
+  kick_reach  = 3
+  punch_reach = 7
+  kick_power  = 4
+  punch_power = 5
+  always [stand block_high]
+}
