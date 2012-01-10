@@ -10,10 +10,17 @@ tokens {
     AND     = 'and';
     OR      = 'or';
     EQUALS  = '=';
+    LPAREN  = '(';
+    RPAREN  = ')';
     LCURLY  = '{';
     RCURLY  = '}';
     LSQUARE = '[';
     RSQUARE = ']';
+
+    CHOOSE = 'choose';
+
+    PERSONALITY;
+    BEHAVIOUR;
 }
 
 WS
@@ -31,7 +38,7 @@ DIGIT
     ;
 
 bot
-    : name LCURLY personality behaviour RCURLY
+    : name^ LCURLY! personality behaviour RCURLY!
     ;
 
 name
@@ -39,24 +46,24 @@ name
     ;
 
 personality
-    : (characteristic EQUALS DIGIT)*
+    : characteristic* -> ^(PERSONALITY characteristic*)
     ;
 
 characteristic
-    : name
+    : name^ EQUALS! DIGIT
     ;
 
 behaviour
-    : rule*
+    : rule* -> ^(BEHAVIOUR rule*)
     ;
 
 rule
-    : condition LSQUARE moveAction fightAction RSQUARE
+    : condition^ LSQUARE! moveAction fightAction RSQUARE!
     ;
 
 condition
-    : state AND state
-    | state OR state
+    : state AND^ state
+    | state OR^ state
     | state
     ;
 
@@ -66,9 +73,11 @@ state
 
 moveAction
     : name
+    | CHOOSE^ LPAREN! name name RPAREN!
     ;
 
 fightAction
     : name
+    | CHOOSE^ LPAREN! name name RPAREN!
     ;
 
