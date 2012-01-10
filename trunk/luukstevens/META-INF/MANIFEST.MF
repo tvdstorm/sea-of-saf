@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SAF_FrondEnd
+Bundle-SymbolicName: SafFrontEnd
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.imp.pdb.values,
+ rascal
