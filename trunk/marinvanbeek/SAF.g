@@ -23,6 +23,7 @@ tokens {
 //    BEHAVIOURS      = 'behaviours' ;
 //    ACTION          = 'action' ;
 //    CONDITION       = 'condition' ;
+    /* Imaginary nodes, used for a well-formed tree. */
     SAF;
     NAME;
     TRAITS;
