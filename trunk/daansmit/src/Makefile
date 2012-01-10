@@ -1,13 +1,13 @@
-$ANTLR=../lib/antlr-3.4-complete.jar
+ANTLR=../lib/antlr-3.4-complete.jar
+
 
 all: SAF
 
-SAF: SAF.java SAF.g
-	javac -cp .:$(ANTLR) SAF.java
+SAF: SAF.java SAFLexer.java SAFParser.java
+	javac -cp .:$(ANTLR) SAF.java SAFLexer.java SAFParser.java
 
-grammar: SAF.g
-	java -jar $(ANTLR) SAF.g
-	javac -cp $(ANTLR) SAFLexer.java SAFParser.java
+%Lexer.java %Parser.java: SAF.g
+	java -jar $(ANTLR) $*.g
 
 clean:
-	rm -rf *.class *~ *.tokens
+	rm -rf *.class *~ *.tokens SAFLexer.java SAFParser.java
