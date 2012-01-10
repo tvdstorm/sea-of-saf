@@ -9,7 +9,8 @@ import java.io.IOException;
 
 public class Main
 {
-    public static final String TEST_FILE = "safs/dijkstra.saf";
+    //public static final String TEST_FILE = "safs/dijkstra.saf";
+    public static final String TEST_FILE = "safs/hamming.saf";
 
     public static void main(String[] args)
     {

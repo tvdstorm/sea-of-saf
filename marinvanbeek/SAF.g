@@ -16,6 +16,19 @@ tokens {
 
     AND             = 'and' ;
     OR              = 'or' ;
+
+//    SAF             = 'saf' ;
+//    NAME            = 'name' ;
+//    TRAITS          = 'traits' ;
+//    BEHAVIOURS      = 'behaviours' ;
+//    ACTION          = 'action' ;
+//    CONDITION       = 'condition' ;
+    SAF;
+    NAME;
+    TRAITS;
+    BEHAVIOURS;
+    ACTION;
+    CONDITION;
 }
 
 /*--------------------------------------------------------------------------
@@ -23,11 +36,11 @@ tokens {
  *--------------------------------------------------------------------------*/
 
 parse
-    : super_awesome_fighter
+    : super_awesome_fighter -> ^(SAF super_awesome_fighter)
     ;
 
 super_awesome_fighter 
-    : name CURLY_OPEN traits behaviour CURLY_CLOSE EOF
+    : name CURLY_OPEN traits behaviour CURLY_CLOSE EOF -> ^(NAME name) ^(TRAITS traits) ^(BEHAVIOURS behaviour)
     ;
 
 name
@@ -35,7 +48,7 @@ name
     ;
 
 traits
-    : (property EQUAL LEVEL)+
+    : (property EQUAL LEVEL)+ -> ^(property LEVEL)+
     ;
 
 property
@@ -43,7 +56,11 @@ property
     ;
 
 behaviour
-    : condition ((AND|OR) condition)* action
+    : (complex_condition action)+ -> ^(CONDITION complex_condition ^(ACTION action))+
+    ;
+
+complex_condition
+    : (condition ((AND|OR)^ condition)*) 
     ;
 
 condition
@@ -51,7 +68,7 @@ condition
     ;
 
 action
-    : SQUARE_OPEN move attack SQUARE_CLOSE
+    : SQUARE_OPEN move attack SQUARE_CLOSE -> move attack
     ;
 
 move
