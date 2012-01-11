@@ -23,3 +23,4 @@ data MoveAction     = chooseMoveAction(str firstMoveAction, str secondMoveAction
 
 data FightAction    = chooseFightAction(str firstFightAction, str secondFightAction)
                     | simpleFightAction(str fightAction); 
+                    
