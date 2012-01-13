@@ -2,8 +2,15 @@ module Ast
 
 import List;
 
+anno loc Personality@location;
 anno loc Characteristic@location;
+
+anno loc Behaviour@location;
 anno loc BehaviourRule@location;
+anno loc Condition@location;
+anno loc MoveAction@location;
+anno loc FightAction@location;
+
 
 data Fighter        = fighter(str fighteName, Personality personality, Behaviour behaviour);
 

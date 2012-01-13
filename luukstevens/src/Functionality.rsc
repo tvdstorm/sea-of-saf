@@ -11,6 +11,6 @@ public Language::Fighter parseSome(loc fileLocation) {
 }
 
 public Ast::Fighter implodeTest() {
-    t = parseSome(|project://SafFrontEnd/data/JackieChan.sdl|);
+    t = parseSome(|project://SafFrontEnd/data/JackieChan.fdl|);
     return implode(#Ast::Fighter, t);
 }
