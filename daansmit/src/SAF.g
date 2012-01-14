@@ -1,6 +1,5 @@
 grammar SAF;
 
-
 options {
     output = AST;
 }
@@ -72,12 +71,11 @@ state
     ;
 
 moveAction
-    : name
-    | CHOOSE^ LPAREN! name name RPAREN!
+    : CHOOSE^ LPAREN! name name RPAREN!
+    | name
     ;
 
 fightAction
-    : name
-    | CHOOSE^ LPAREN! name name RPAREN!
+    : CHOOSE^ LPAREN! name name RPAREN!
+    | name
     ;
-
