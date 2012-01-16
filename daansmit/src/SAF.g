@@ -74,14 +74,12 @@ state
     ;
 
 moveAction
-//    : CHOOSE^ LPAREN! STRING STRING RPAREN!
     : 'choose' LPAREN a=STRING b=STRING RPAREN ->
         ^(CHOOSE<Choose> STRING<MoveAction>[$a.text] STRING<FightAction>[$b.text])
     | action=STRING -> STRING<MoveAction>[$action.text]
     ;
 
 fightAction
-//    : CHOOSE<Choose>^ LPAREN! STRING STRING RPAREN!
     : 'choose' LPAREN a=STRING b=STRING RPAREN ->
         ^(CHOOSE<Choose> STRING<FightAction>[$a.text] STRING<FightAction>[$b.text])
     | action=STRING -> STRING<FightAction>[$action.text]
