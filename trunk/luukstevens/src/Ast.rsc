@@ -12,7 +12,7 @@ anno loc MoveAction@location;
 anno loc FightAction@location;
 
 
-data Fighter        = fighter(str fighteName, Personality personality, Behaviour behaviour);
+data Bot            = bot(str name, Personality personality, Behaviour behaviour);
 
 data Personality    = personality(list[Characteristic] characteristics);
 data Characteristic = characteristic(str name, int val);

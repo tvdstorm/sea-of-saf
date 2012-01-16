@@ -2,8 +2,8 @@ module Outline
 
 import Ast;
 
-public node outlineFighter(Fighter fighter) = outline(fighter);
-node outline(Fighter fighter) = "outline"([outline(fighter.personality), outline(fighter.behaviour)])[@label="Fighter"];
+public node outlineBot(Bot bot) = outline(bot);
+node outline(Bot bot) = "outline"([outline(bot.personality), outline(bot.behaviour)])[@label="Bot"];
 
 node outline(Personality personality) = "Personality"([ outline(characteristic) | characteristic <- personality.characteristics ])[@label="Personality"][@\loc=personality@location];
 node outline(Characteristic characteristic) = "Characteristic"()[@label="<characteristic.name> = <characteristic.val>"][@\loc=characteristic@location];

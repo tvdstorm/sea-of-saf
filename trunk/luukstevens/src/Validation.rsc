@@ -18,10 +18,10 @@ private str unknownFightActionMessage = "Unknown fight action: ";
 private str unknownCharacteristicMessage = "Unknown characteristic: ";
 private str invalidCharacteristicValueMessage = "Invalid characteristic value (<characteristicMinimum> - <characteristicMaximum> allowed): ";
 
-public set[Message] validate(Fighter fighter) {
+public set[Message] validate(Bot bot) {
     set[Message] validationMessages = {};
     
-    visit(fighter) {
+    visit(bot) {
         case Characteristic characteristic: {
             validationMessages += validateCharacteristic(characteristic);
         }

@@ -10,20 +10,20 @@ import Validation;
 import Outline;
 import IO;
 
-private str lang = "Fighter Description Language";
-private str ext = "fdl";
+private str lang = "Bot Description Language";
+private str ext = "bdl";
 
 public void main() {
-    registerLanguage(lang, ext, Language::Fighter(str input, loc org) {
-        return parse(#Language::Fighter, input, org);
+    registerLanguage(lang, ext, Language::Bot(str input, loc org) {
+        return parse(#Language::Bot, input, org);
     });
     
-    registerOutliner(lang, node (Language::Fighter input) {
-        return outlineFighter(implode(#Ast::Fighter, input));
+    registerOutliner(lang, node (Language::Bot input) {
+        return outlineBot(implode(#Ast::Bot, input));
     });
     
-    registerAnnotator(lang, Language::Fighter(Language::Fighter input) {
-        msgs = validate(implode(#Ast::Fighter, input));
+    registerAnnotator(lang, Language::Bot(Language::Bot input) {
+        msgs = validate(implode(#Ast::Bot, input));
         return input[@messages=msgs];
     });
 }
