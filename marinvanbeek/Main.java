@@ -21,10 +21,14 @@ public class Main
             SAFLexer lexer = new SAFLexer(input);
             SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
 
-            CommonTree tree = (CommonTree)parser.parse().getTree();
+            SafTree tree = (SafTree)parser.parse().getTree();
             DOTTreeGenerator gen = new DOTTreeGenerator();
             StringTemplate st = gen.toDOT(tree);
-            System.out.println(st);
+            //System.out.println(st);
+            //System.out.println("--------------------------");
+            //System.out.println(tree.toStringTree());
+            //System.out.println("--------------------------");
+            System.out.println(tree.isWellFormed());
         } catch (IOException e)
         {
             System.out.println(e.getMessage());

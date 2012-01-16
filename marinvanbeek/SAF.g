@@ -2,7 +2,6 @@ grammar SAF;
 
 options {
     output = 'AST' ;
-    ASTLabelType = 'CommonTree' ;
 }
 
 tokens {
@@ -17,13 +16,7 @@ tokens {
     AND             = 'and' ;
     OR              = 'or' ;
 
-//    SAF             = 'saf' ;
-//    NAME            = 'name' ;
-//    TRAITS          = 'traits' ;
-//    BEHAVIOURS      = 'behaviours' ;
-//    ACTION          = 'action' ;
-//    CONDITION       = 'condition' ;
-    /* Imaginary nodes, used for a well-formed tree. */
+    /* Imaginary nodes, used for tree topology. */
     SAF;
     NAME;
     TRAITS;
@@ -32,16 +25,29 @@ tokens {
     CONDITION;
 }
 
+@header {
+}
+
+@members {
+//    class V extends CommonTree {
+//        public V(Token t) { token=t;}                 // for 'int'<V>
+//        public V(V node) { super(node); }             // for dupNode
+//        public V(int tType, String name) { token=new CommonToken(tType, name); }
+//        public Tree dupNode() { return new V(this); } // for dup'ing type
+//        public String toString() { return token.getText()+"<V>";}
+//    }
+}
+
 /*--------------------------------------------------------------------------
  * PARSER RULES
  *--------------------------------------------------------------------------*/
 
 parse
-    : super_awesome_fighter -> ^(SAF super_awesome_fighter)
+    : super_awesome_fighter -> ^(SAF<SafFighter>["SAF"] super_awesome_fighter)
     ;
 
 super_awesome_fighter 
-    : name CURLY_OPEN traits behaviour CURLY_CLOSE EOF -> ^(NAME name) ^(TRAITS traits) ^(BEHAVIOURS behaviour)
+    : name CURLY_OPEN traits behaviour CURLY_CLOSE EOF -> ^(NAME<SafName>[$name.text]) ^(TRAITS<SafTraits>[$traits.text] traits) ^(BEHAVIOURS behaviour)
     ;
 
 name
