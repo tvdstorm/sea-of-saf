@@ -1,3 +1,5 @@
+//Annotaties toevoegen  @category="Constant"
+
 module Language
 
 import IO;
@@ -5,20 +7,16 @@ import IO;
 lexical Layout = [\ \t\n\r];
 layout LayoutList = Layout* !>> [\t\n\r\ ];
 
-lexical Id = [a-zA-Z_]+;
+lexical Id = [a-zA-Z_]+ !>> [a-zA-Z_];
 lexical Number = [0-9]+;
 
+syntax Bla = Id+;
+
 start syntax Bot 
-    = bot: Id name "{" Personality personality Behaviour behaviour "}"; 
-    
-syntax Personality
-    = personality : Characteristic* characteristics;
+    = bot: Id name "{" Characteristic* characteristics BehaviourRule* behaviourRules "}"; 
     
 syntax Characteristic
     = characteristic : Id name "=" Number val;    
-    
-syntax Behaviour
-    = behaviour : BehaviourRule* behaviourRules;
     
 syntax BehaviourRule
     = behaviourRule : Condition "[" MoveAction moveAction FightAction fightAction "]";
@@ -29,9 +27,9 @@ syntax Condition
     | simpleCondition : Id condition;    
     
 syntax MoveAction
-    = chooseMoveAction : "choose" "(" Id firstMoveAction Id secondMoveAction ")" 
-    | simpleMoveAction : Id moveAction;
+    = simpleMoveAction : Id moveAction
+    | chooseMoveAction : "choose" "(" Id+ moveActions ")";
     
 syntax FightAction
-    = chooseFightAction : "choose" "(" Id firstFightAction Id secondFightAction ")" 
-    | simpleFightAction : Id fightAction;
+    = simpleFightAction : Id fightAction 
+    | chooseFightAction : "choose" "(" Id+ fightActions ")";
