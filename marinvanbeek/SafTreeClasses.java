@@ -69,6 +69,7 @@ class SafTraits extends SafTree
         token = new CommonToken(tType, name);
     }
 
+    /* Trait names should be in trait list. */
     public boolean isWellFormed()
     {
         System.out.println("checking SafTraits");
@@ -91,6 +92,7 @@ class SafBehaviour extends SafTree
         token = new CommonToken(tType, name);
     }
 
+    /* Always condition should be present. */
     public boolean isWellFormed()
     {
         return super.isWellFormed();
@@ -105,6 +107,7 @@ class SafTrait extends SafTree
         token = new CommonToken(tType, name);
     }
 
+    /* Trait value should be between 0 and 11. */
     public boolean isWellFormed()
     {
         return super.isWellFormed();
@@ -118,6 +121,7 @@ class SafCondition extends SafTree
         token = new CommonToken(tType, name);
     }
 
+    /* Condition name should in known conditions. */
     public boolean isWellFormed()
     {
         return super.isWellFormed();
@@ -131,6 +135,7 @@ class SafAction extends SafTree
         token = new CommonToken(tType, name);
     }
 
+    /* Actions should be in known actions. */
     public boolean isWellFormed()
     {
         return super.isWellFormed();
