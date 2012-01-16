@@ -21,8 +21,6 @@ public class SAF
 class Fighter
 {
     public StringTemplate dot;
-    public Personality personality;
-    public Behaviour behaviour;
 
     public Fighter() { }
 
