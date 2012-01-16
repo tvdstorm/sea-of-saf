@@ -16,10 +16,14 @@ tokens {
     LSQUARE = '[';
     RSQUARE = ']';
 
-    CHOOSE = 'choose';
 
-    PERSONALITY;
     BEHAVIOUR;
+    BOT;
+    CHARACTERISTIC;
+    CHOOSE;
+    CONDITION;
+    PERSONALITY;
+    STATE;
 }
 
 WS
@@ -37,27 +41,26 @@ DIGIT
     ;
 
 bot
-    : name^ LCURLY! personality behaviour RCURLY!
-    ;
-
-name
-    : STRING
+    : name=STRING LCURLY personality behaviour RCURLY ->
+        ^(BOT<Bot>[$name.text] personality behaviour)
     ;
 
 personality
-    : characteristic* -> ^(PERSONALITY characteristic*)
+    : characteristic* -> ^(PERSONALITY<Personality> characteristic*)
     ;
 
 characteristic
-    : name^ EQUALS! DIGIT
+    : name=STRING EQUALS value=DIGIT ->
+        ^(CHARACTERISTIC<Characteristic>[$name.text, $value.text])
     ;
 
 behaviour
-    : rule* -> ^(BEHAVIOUR rule*)
+    : rule* -> ^(BEHAVIOUR<Behaviour> rule*)
     ;
 
 rule
-    : condition^ LSQUARE! moveAction fightAction RSQUARE!
+    : condition LSQUARE moveAction fightAction RSQUARE ->
+        ^(CONDITION<Condition> moveAction fightAction)
     ;
 
 condition
@@ -67,15 +70,19 @@ condition
     ;
 
 state
-    : name
+    : id=STRING -> STATE<State>[$id.text]
     ;
 
 moveAction
-    : CHOOSE^ LPAREN! name name RPAREN!
-    | name
+//    : CHOOSE^ LPAREN! STRING STRING RPAREN!
+    : 'choose' LPAREN a=STRING b=STRING RPAREN ->
+        ^(CHOOSE<Choose> STRING<MoveAction>[$a.text] STRING<FightAction>[$b.text])
+    | action=STRING -> STRING<MoveAction>[$action.text]
     ;
 
 fightAction
-    : CHOOSE^ LPAREN! name name RPAREN!
-    | name
+//    : CHOOSE<Choose>^ LPAREN! STRING STRING RPAREN!
+    : 'choose' LPAREN a=STRING b=STRING RPAREN ->
+        ^(CHOOSE<Choose> STRING<FightAction>[$a.text] STRING<FightAction>[$b.text])
+    | action=STRING -> STRING<FightAction>[$action.text]
     ;
