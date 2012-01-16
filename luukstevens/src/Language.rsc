@@ -8,8 +8,8 @@ layout LayoutList = Layout* !>> [\t\n\r\ ];
 lexical Id = [a-zA-Z_]+;
 lexical Number = [0-9]+;
 
-start syntax Fighter 
-    = fighter: Id fighteName "{" Personality personality Behaviour behaviour "}"; 
+start syntax Bot 
+    = bot: Id name "{" Personality personality Behaviour behaviour "}"; 
     
 syntax Personality
     = personality : Characteristic* characteristics;
