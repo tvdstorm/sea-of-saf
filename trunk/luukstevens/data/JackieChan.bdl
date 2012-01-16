@@ -1,7 +1,8 @@
-JackieChan{
+JackieChan {
     kickPower = 7
+    kickReach = 7
     far[run_towards punch_high]
     near[choose(stand crouch) kick_high]
-    stronger or far[choose(run_towards run_towards) kick_high]
+    stronger or far[choose(run_towards walk_away stand) kick_high]
     much_weaker and weaker[walk_away block_low]
 }

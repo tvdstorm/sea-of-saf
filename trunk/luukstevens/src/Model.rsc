@@ -2,6 +2,7 @@ module Model
 
 import Ast;
 
+//Uses BehaviourRule data type from Ast.
 data Bot = bot(str name, int punchReach, int punchPower, int kickReach, int kickPower, list[BehaviourRule] behaviourRules);
 
 public Bot convertAstToModel(Ast::Bot astBot) {
@@ -11,8 +12,6 @@ public Bot convertAstToModel(Ast::Bot astBot) {
                         getCharacteristicValue("kickReach", astBot),
                         getCharacteristicValue("kickPower", astBot),
                         astBot.behaviour.behaviourRules);
-    
-    //Bot modelBot = bot("d", 5, 5, 5, 5, []);
                         
     return modelBot;
 }

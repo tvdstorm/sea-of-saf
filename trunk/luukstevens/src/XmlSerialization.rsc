@@ -1,6 +1,6 @@
 module XmlSerialization
 
-import Ast;
+import Model;
 //import lang::xml::DOM;
 
 //Remove after bug fix --
@@ -28,21 +28,47 @@ public Node element(str name, list[Node] kids) = element(none(), name, kids);
 //    xmlPretty(xmlFighter);
 //}
 
-public Node toXmlNodeTree(Fighter fighter) {
-    Node name = attribute("name", fighter.fighteName);
-    Node personality = attribute("personality", "test");
-    Node behaviour = attribute("behaviour", "test");
-    return element("fighter", [name, personality, behaviour]);
+public Node toXmlNodeTree(Bot bot) {
+    Node name       = attribute("name", bot.name);
+    Node punchReach = attribute("punchReach", "<bot.punchReach>");
+    Node punchPower = attribute("punchPower", "<bot.punchPower>");
+    Node kickReach  = attribute("kickReach", "<bot.kickReach>");
+    Node kickPower  = attribute("kickPower", "<bot.kickPower>");
+
+    //Add behaviour
+    return element("fighter", [name, punchReach, punchPower, kickReach, kickPower, behaviour]);
 }
 
-//public Node behaviourToXmlNodeTree(Fighter fighter) {
+//public Node behaviourToXmlNodeTree(Bot bot) {
 //   list[Node] behaviourRuleNodes = []; 
 //   
-//   for(BehaviourRules behaviourRule <- fighter.behaviour.behaviourRules) {
-//        Node condition = attribute("condition", behaviourRule.condition);
-//        Node
-//        behaviourRuleNodes += attribute("behaviour", "test");
+//   for(BehaviourRule behaviourRule <- bot.behaviourRules) {
+//        ;
 //   }
 //
-//   element("rule", [])
+//   return element("behaviouRules", behaviourRuleNodes);
+//}
+
+//public Node createConditionNode(BehaviourRule behaviourRule) {
+//    switch(behaviourRule.condition) {
+//        case andCondition(str firstCondition, str secondCondition): {
+//            
+//        }
+//        case orCondition(str firstCondition, str secondCondition): {
+//
+//        }
+//        case simpleCondition(str condition): {
+//            return attribute("firstCondition", "<condition>");
+//        } 
+//    }
+//    
+//    return return element("condition", "<condition>");
+//}
+//
+//public Node createMoveActionNode(BehaviourRule behaviourRule) {
+//
+//}
+//
+//public Node createFightActionNode(BehaviourRule behaviourRule) {
+//
 //}
