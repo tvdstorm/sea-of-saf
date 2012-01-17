@@ -1,6 +1,6 @@
-package foo;
+package astobjects;
 
-class Bots {
+public class Bots {
 	public Bot firstBot;
 	public Bot secondBot;
 }
