@@ -17,6 +17,7 @@ import saf.entities.Condition;
 import saf.entities.ConditionType;
 import saf.entities.FightActionType;
 import saf.entities.MoveActionType;
+import saf.parser.ParserWithErrorHandling.ParseException;
 
 public class BotParser {
 
@@ -28,15 +29,16 @@ public class BotParser {
 		SuperAwesomeFightersLexer lexer = new SuperAwesomeFightersLexer(input);
 		CommonTokenStream token = new CommonTokenStream(lexer);
 		
-		SuperAwesomeFightersParser parser = new SuperAwesomeFightersParser(token);
-		//parser.setTreeAdaptor(new MyAdaptor());
+		SuperAwesomeFightersParser parser = new ParserWithErrorHandling(token);
+
 		SuperAwesomeFightersParser.prog_return r;
 		try {
 			r = parser.prog();
 		} catch (RecognitionException e) {
 			throw new BotDefinitionMalformedException(e);
+		} catch (ParseException e) {
+			throw new BotDefinitionMalformedException(e);
 		}
-		
 		CommonTree tree = (CommonTree) r.getTree();
 		
 		System.out.println(tree.toStringTree());
