@@ -1,4 +1,4 @@
-//Annotaties toevoegen  @category="Constant"
+//Add annotations @category="Constant"
 
 module Language
 
@@ -18,9 +18,9 @@ syntax BehaviourRule
     = behaviourRule : Condition "[" MoveAction moveAction FightAction fightAction "]";
 
 syntax Condition
-    = andCondition : Id firstCondition "and" Condition secondCondition
-    | orCondition : Id firstCondition "or" Condition secondCondition
-    | simpleCondition : Id condition;    
+    = left orCondition : Condition firstCondition "or" Condition secondCondition
+    | simpleCondition : Id condition 
+    > left andCondition : Condition firstCondition "and" Condition secondCondition; 
     
 syntax MoveAction
     = simpleMoveAction : Id moveAction

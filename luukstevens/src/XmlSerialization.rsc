@@ -1,74 +1,63 @@
 module XmlSerialization
 
 import Model;
-//import lang::xml::DOM;
+import Ast;
+import lang::xml::DOM;
 
-//Remove after bug fix --
-data Namespace = namespace(str prefix, str uri)
-               | none();
-               
-data Node = document(Node root)//
-          | attribute(Namespace namespace, str name, str text)
-          | element(Namespace namespace, str name, list[Node] children)
-          | charData(str text)
-          | cdata(str text)
-          | comment(str text)
-          | pi(str target, str text)
-          | entityRef(str name)
-          | charRef(int code);             
-
-
-public Node attribute(str name, str text) = attribute(none(), name, text);
-public Node element(str name, list[Node] kids) = element(none(), name, kids);
-
-//--
-
-//public str serializeFighter(Fighter fighter, loc location) {
-//    Node xmlFighter = toXmlNodeTree(fighter);
-//    xmlPretty(xmlFighter);
-//}
-
-public Node toXmlNodeTree(Bot bot) {
-    Node name       = attribute("name", bot.name);
-    Node punchReach = attribute("punchReach", "<bot.punchReach>");
-    Node punchPower = attribute("punchPower", "<bot.punchPower>");
-    Node kickReach  = attribute("kickReach", "<bot.kickReach>");
-    Node kickPower  = attribute("kickPower", "<bot.kickPower>");
-
-    //Add behaviour
-    return element("fighter", [name, punchReach, punchPower, kickReach, kickPower, behaviour]);
+public void serializeBot(Model::Bot bot, loc location) {
+    Node xmlFighter = toXmlNodeTree(bot);
+    Node document = document(xmlFighter);
+    writeXMLPretty(location, document);
 }
 
-//public Node behaviourToXmlNodeTree(Bot bot) {
-//   list[Node] behaviourRuleNodes = []; 
-//   
-//   for(BehaviourRule behaviourRule <- bot.behaviourRules) {
-//        ;
-//   }
-//
-//   return element("behaviouRules", behaviourRuleNodes);
-//}
+public Node toXmlNodeTree(Model::Bot bot) {
+    Node name       = element("name", [charData(bot.name)]);
+    Node punchReach = element("punchReach", [charData("<bot.punchReach>")]);
+    Node punchPower = element("punchPower", [charData("<bot.punchPower>")]);
+    Node kickReach  = element("kickReach", [charData("<bot.kickReach>")]);
+    Node kickPower  = element("kickPower", [charData("<bot.kickPower>")]);
+    
+    return element("fighter", [name, punchReach, punchPower, kickReach, kickPower, behaviourToXmlNodeTree(bot)]);
+}
 
-//public Node createConditionNode(BehaviourRule behaviourRule) {
-//    switch(behaviourRule.condition) {
-//        case andCondition(str firstCondition, str secondCondition): {
-//            
-//        }
-//        case orCondition(str firstCondition, str secondCondition): {
-//
-//        }
-//        case simpleCondition(str condition): {
-//            return attribute("firstCondition", "<condition>");
-//        } 
-//    }
-//    
-//    return return element("condition", "<condition>");
-//}
-//
-//public Node createMoveActionNode(BehaviourRule behaviourRule) {
-//
-//}
-//
-//public Node createFightActionNode(BehaviourRule behaviourRule) {
-//
-//}
+public Node behaviourToXmlNodeTree(Model::Bot bot) {
+   list[Node] behaviourRuleNodes = []; 
+   
+   for(BehaviourRule behaviourRule <- bot.behaviourRules) {
+        
+        Node moveActionNode   = element("moveActions", convertListToNodes("moveAction", behaviourRule.moveActions));
+        Node fightActionNode  = element("fightActions", convertListToNodes("fightAction", behaviourRule.moveActions));
+        Node condition        = conditionsToXmlNodeTree(behaviourRule.condition);
+   
+        behaviourRuleNodes += element("behaviourRule", [condition, moveActionNode, fightActionNode]);
+   }
+
+   return element("behaviouRules", behaviourRuleNodes);
+}
+
+public Node conditionsToXmlNodeTree(Ast::Condition condition) {
+    switch(condition) {
+        case andCondition(Condition firstCondition, Condition secondCondition): {
+            return element("condition", [element("type", [charData("and")]), 
+                conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
+        }
+        case orCondition(Condition firstCondition, Condition secondCondition): {
+            return element("condition", [element("type", [charData("or")]), 
+                conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
+        }
+        case simpleCondition(str condition): {
+            return element("condition", [charData(condition)]);
+        }
+    }
+}
+
+public list[Node] convertListToNodes(str nodeName, list[str] items) {
+    list[Node] nodes = [];
+    
+    for(str item <- items) {
+        Node newNode = element(nodeName, [charData(item)]);
+        nodes += newNode;
+    }
+    
+    return nodes;
+}

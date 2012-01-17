@@ -3,13 +3,15 @@ module Outline
 import Ast;
 
 public node outlineBot(Bot bot) = outline(bot);
-node outline(Bot bot) = "outline"([outline(bot.personality), outline(bot.behaviour)])[@label="Bot"];
+node outline(Bot bot) = "outline"([outline(bot.characteristics), outline(bot.behaviourRules)])[@label="Bot"];
 
-node outline(Personality personality) = "Personality"([ outline(characteristic) | characteristic <- personality.characteristics ])[@label="Personality"][@\loc=personality@location];
-node outline(Characteristic characteristic) = "Characteristic"()[@label="<characteristic.name> = <characteristic.val>"][@\loc=characteristic@location];
+node outline(list[Characteristic] characteristics) = "Characteristics"([ outline(characteristic) | characteristic <- characteristics ])[@label="Characteristics"];
+node outline(Characteristic characteristic) = "Characteristic"()[@label="<characteristic.name>: <characteristic.val>"][@\loc=characteristic@location];
 
-node outline(Behaviour behaviour) = "Behaviour"([ outline(behaviourRule) | behaviourRule <- behaviour.behaviourRules ])[@label="Behaviour"][@\loc=behaviour@location];
-node outline(BehaviourRule behaviourRule) = "BehaviourRule"([outline(behaviourRule.condition), outline(behaviourRule.moveAction), outline(behaviourRule.fightAction)])[@label="Rule"][@\loc=behaviourRule@location];
+node outline(list[BehaviourRule] behaviourRules) = "BehaviourRules"([ outline(behaviourRule) | behaviourRule <- behaviourRules ])[@label="BehaviourRules"];
+node outline(BehaviourRule behaviourRule) = "BehaviourRule"("test")[@label="Rule"][@\loc=behaviourRule@location];
+//node outline(BehaviourRule behaviourRule) = "BehaviourRule"([outline(behaviourRule.condition), outline(behaviourRule.moveAction), outline(behaviourRule.fightAction)])[@label="Rule"][@\loc=behaviourRule@location]
+
 
 node outline(Condition condition) = { 
     str conditionText = "";
