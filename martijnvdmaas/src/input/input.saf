@@ -12,5 +12,5 @@ chuck
 {
   punchReach = 9
   far or near and always and always or far [choose(crouch walk_towards) choose(block_high punch_low)]
-  always [crouch block_low]
+  always [crouch choose(block_low block_low)]
 }

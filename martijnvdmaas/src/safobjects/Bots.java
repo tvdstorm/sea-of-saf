@@ -1,6 +1,12 @@
 package safobjects;
 
 public class Bots {
-	public Bot firstBot;
-	public Bot secondBot;
+	private Bot firstBot;
+	private Bot secondBot;
+	
+	
+	public String toString() {
+		String output = firstBot.toString() + secondBot.toString();
+		return "Class: " + this.getClass().getName() +  "\n" + output;
+	}
 }
