@@ -51,41 +51,31 @@ private set[Message] validateBehaviourRule(BehaviourRule behaviourRule) {
     set[Message] validationMessages = {};
     
     visit(behaviourRule) {
-        case andCondition(str firstCondition, str secondCondition): {
-            if(!(firstCondition in conditions))
-                validationMessages += error(unknownConditionMessage + firstCondition, behaviourRule@location);
-            if(!(secondCondition in conditions))
-                validationMessages += error(unknownConditionMessage + secondCondition, behaviourRule@location);
-        }
-        case orCondition(str firstCondition, str secondCondition): {
-             if(!(firstCondition in conditions))
-                validationMessages += error(unknownConditionMessage + firstCondition, behaviourRule@location);
-             if(!(secondCondition in conditions))
-               validationMessages += error(unknownConditionMessage + secondCondition, behaviourRule@location);
-        }
-        case simpleCondition(str condition): {
+        case sc:simpleCondition(str condition): {
             if(!(condition in conditions))
-                validationMessages += error(unknownConditionMessage + condition, behaviourRule@location);
+                validationMessages += error(unknownConditionMessage + condition, sc@location);
         }
-        case chooseMoveAction(str firstMoveAction, str secondMoveAction): {
-            if(!(firstMoveAction in moveActions)) 
-                validationMessages += error(unknownMoveActionMessage + firstMoveAction, behaviourRule@location);
-            if(!(secondMoveAction in moveActions)) 
-                validationMessages += error(unknownMoveActionMessage + secondMoveAction, behaviourRule@location);
+        case cma:chooseMoveAction(list[str] chooseMoveActions): {
+            for(str chooseMoveAction <- chooseMoveActions) {
+                if(!(chooseMoveAction in moveActions)) {
+                    validationMessages += error(unknownMoveActionMessage + chooseMoveAction, cma@location);
+                }
+            }
         }
-        case simpleMoveAction(str moveAction): {
+        case sma:simpleMoveAction(str moveAction): {
             if(!(moveAction in moveActions)) 
-                validationMessages += error(unknownMoveActionMessage + moveAction, behaviourRule@location);
+                validationMessages += error(unknownMoveActionMessage + moveAction, sma@location);
         }
-        case chooseFightAction(str firstFightAction, str secondFightAction): {
-            if(!(firstFightAction in fightActions)) 
-                validationMessages += error(unknownFightActionMessage + firstFightAction, behaviourRule@location);
-            if(!(secondFightAction in fightActions)) 
-                validationMessages += error(unknownFightActionMessage + secondFightAction, behaviourRule@location);
+        case cfa:chooseFightAction(list[str] chooseFightActions): {
+            for(str chooseFightAction <- chooseFightActions) {
+                if(!(chooseFightAction in fightActions)) {
+                    validationMessages += error(unknownFightActionMessage + chooseFightAction, cfa@location);
+                }
+            }
         }
-        case simpleFightAction(str fightAction): {
+        case sfa:simpleFightAction(str fightAction): {
             if(!(fightAction in fightActions)) 
-                validationMessages += error(unknownFightActionMessage + fightAction, behaviourRule@location);
+                validationMessages += error(unknownFightActionMessage + fightAction, sfa@location);
         }
     };
     

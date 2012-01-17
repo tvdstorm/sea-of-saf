@@ -24,8 +24,8 @@ public void main() {
     //    return outlineBot(implode(#Ast::Bot, input));
     //});
     //
-    //registerAnnotator(lang, Language::Bot(Language::Bot input) {
-    //    msgs = validate(implode(#Ast::Bot, input));
-    //    return input[@messages=msgs];
-    //});
+    registerAnnotator(lang, Language::Bot(Language::Bot input) {
+        msgs = validate(implode(#Ast::Bot, input));
+        return input[@messages=msgs];
+    });
 }
