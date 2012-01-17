@@ -1,8 +1,8 @@
-package foo;
+package astobjects;
 
 import java.util.ArrayList;
 
-class Bot {
+public class Bot {
 	public ArrayList<Characteristic> characteristics 	= new ArrayList<Characteristic>();
 	public ArrayList<Behaviour> behaviours 				= new ArrayList<Behaviour>();
 	

@@ -1,4 +1,4 @@
-package foo;
+package astobjects;
 
 public class TypeCondition extends ConditionGroup {
 	public enum Operator {AND, OR};

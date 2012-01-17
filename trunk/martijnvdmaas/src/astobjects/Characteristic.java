@@ -1,4 +1,4 @@
-package foo;
+package astobjects;
 
 public class Characteristic {
 	public String name;
