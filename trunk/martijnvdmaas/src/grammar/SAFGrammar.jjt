@@ -1,68 +1,62 @@
-/**
- * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
- */
-options
-{
-  JDK_VERSION = "1.5";
-  static = true;
-  MULTI = true;
-}
+PARSER_BEGIN(SAFGrammar)
 
-PARSER_BEGIN(eg2)
 package grammar;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import safobjects.*;
 
-public class eg2
+public class SAFGrammar
 {
-  public static void main(String args []) 
-  {
-    System.out.println("Begin parsing..");
-    try
-    {
-      String projectPath  = new java.io.File(".").getCanonicalPath();
-	  String fileName = "input.saf";
-      
-      InputStream inputStream = new FileInputStream(projectPath + "/src/input/" + fileName);
-	  new eg2(inputStream);
-      Bots n = eg2.Start();
-      n.toString();
-      System.out.println("End Parsing.");  
-    }
-    catch (IndexOutOfBoundsException e)
-    {
-      System.out.println("Oops indexoutofbouunds.");
-      System.out.println(e.getMessage());
-    }
-    catch (NumberFormatException e)
-    {
-      System.out.println("Oops kutnummber.");
-      System.out.println(e.getMessage());
-    } 	
-    catch (Exception e)
-    {
-      System.out.println("Oops.");
-      System.out.println(e.getMessage());
-    }
-  }
+	public static void main(String args []) 
+  	{
+    	System.out.println("Begin parsing..");
+	    try
+	    { 
+			String projectPath  = new java.io.File(".").getCanonicalPath();
+			String fileName = "input.saf";
+			  
+			InputStream inputStream = new FileInputStream(projectPath + "/src/input/" + fileName);
+			new SAFGrammar(inputStream);
+			Bots bots = SAFGrammar.Start();
+
+			System.out.println(bots.toString());
+			      
+			System.out.println("End Parsing.");  
+    	}
+	    catch (IndexOutOfBoundsException e)
+	    {
+	      	System.out.println("IndexOutOfBoundsException");
+	      	System.out.println(e.getMessage());
+	    }
+	    catch (NumberFormatException e)
+	    { 
+	      	System.out.println("NumberFormatException");
+	      	System.out.println(e.getMessage());
+	    } 	 
+	    catch (Exception e)
+	    {
+	      	System.out.println("Exception.");
+	      	System.out.println(e.getMessage());
+	    }
+  	}
 }
 
-PARSER_END(eg2)
+PARSER_END(SAFGrammar)
 
 SKIP :
 {
-  " "
-| "\t"
-| "\n"
-| "\r"
-| < "//" (~[ "\n", "\r" ])*
+  	" "
+| 	"\t"
+| 	"\n"
+| 	"\r"
+| 	< "//" (~[ "\n", "\r" ])*
     (
-      "\n"
-    | "\r"
-    | "\r\n"
+      	"\n"
+    	| "\r"
+    	| "\r\n"
     ) >
-| < "/*" (~[ "*" ])* "*"
+| 	< "/*" (~[ "*" ])* "*"
     (
       ~[ "/" ] (~[ "*" ])* "*"
     )*
@@ -125,26 +119,25 @@ TOKEN : /* ATTACKS */
 
 TOKEN : /* LITERALS */
 {
-  < INTEGER_LITERAL :
+  	< INTEGER_LITERAL :
     < DECIMAL_LITERAL > ([ "l", "L" ])?
   | < HEX_LITERAL > ([ "l", "L" ])?
-  | < OCTAL_LITERAL > ([ "l", "L" ])? 
-    >
-| < #DECIMAL_LITERAL : [ "1"-"9" ] ([ "0"-"9" ])* >
-| < #HEX_LITERAL : "0" [ "x", "X" ] ([ "0"-"9", "a"-"f", "A"-"F" ])+ >
-| < #OCTAL_LITERAL : "0" ([ "0"-"7" ])* >
+  | < OCTAL_LITERAL > ([ "l", "L" ])? >
+| 	< #DECIMAL_LITERAL : [ "1"-"9" ] ([ "0"-"9" ])* >
+| 	< #HEX_LITERAL : "0" [ "x", "X" ] ([ "0"-"9", "a"-"f", "A"-"F" ])+ >
+| 	< #OCTAL_LITERAL : "0" ([ "0"-"7" ])* >
 }
 
 TOKEN : /* IDENTIFIERS */
 {
-  < IDENTIFIER :
-    < LETTER >
-    (
-      < LETTER >
-    | < DIGIT >
-    )* >
-| < #LETTER : [ "_", "a"-"z", "A"-"Z" ] >
-| < #DIGIT : [ "0"-"9" ] >
+  	< IDENTIFIER :
+    	< LETTER >
+    	(
+      		< LETTER >
+    		| < DIGIT >
+    	)* >
+| 	< #LETTER : [ "_", "a"-"z", "A"-"Z" ] >
+| 	< #DIGIT : [ "0"-"9" ] >
 }
 
 TOKEN : /* definition brackets */
@@ -165,16 +158,15 @@ Bots Start() :
   	Bot secondBot;
 }
 { 
-  firstBot 	= CreateBot()
-  secondBot = CreateBot()
-  < EOF >
-  {
-    Bots bots 		= new Bots();
-   	bots.firstBot 	= firstBot;
-   	bots.secondBot 	= secondBot;
-
-    return bots;
-  }
+  	firstBot 	= CreateBot()
+  	secondBot = CreateBot()
+  	< EOF >
+	{
+	    Bots bots 		= new Bots();
+	   	bots.firstBot 	= firstBot;
+	   	bots.secondBot 	= secondBot;
+	    return bots;
+	}
 } 
 
 Bot CreateBot() :
@@ -214,14 +206,14 @@ void addBehaviour(Bot bot) :
   bot.addBehaviour(behaviour);
 }
 {
-  ConditionRule(behaviour)  < OPENSQUAREBRACKET > MoveAction(behaviour) FightAction(behaviour) < CLOSESQUAREBRACKET >
+  ConditionRule(behaviour)  < OPENSQUAREBRACKET > MoveAction(behaviour) AttackAction(behaviour) < CLOSESQUAREBRACKET >
 }
 
 void ConditionRule(Behaviour behaviour) :
 {
   Token conditionType;
   ConditionChoices conditionChoices = new ConditionChoices();
-  behaviour.conditionChoices = conditionChoices;
+  behaviour.setConditionChoices(conditionChoices);
 }
 {
   	(
@@ -301,45 +293,49 @@ void MoveAction(Behaviour behaviour) :
 {}
 {
 	(
-	  < CHOOSE > < OPENBRACKET > MoveType(behaviour) MoveType(behaviour) < CLOSEBRACKET >
-	| MoveType(behaviour)
+	  MoveType(behaviour)
+| 	  < CHOOSE > < OPENBRACKET > MoveType(behaviour) MoveType(behaviour) < CLOSEBRACKET >	
 	)
 }
 
 void MoveType(Behaviour behaviour) :
 {Token name;}
 {
-  	name = < JUMP >
+  (
+  	name = < JUMP > 
 | 	name = < CROUCH >
 |  	name = < STAND >
-| 	name = < RUN_TOWARDS >
+| 	name = < RUN_TOWARDS > 
 |  	name = < RUN_AWAY >
 | 	name = < WALK_TOWARDS >
 | 	name = < WALK_AWAY >
+)
 {
-	behaviour.moveChoices.add(name.toString());
+	behaviour.addMoveChoice(name.toString());
 }
 }
 
 
-void FightAction(Behaviour behaviour) :
+void AttackAction(Behaviour behaviour) :
 {}
 {
 	(
-	  < CHOOSE > < OPENBRACKET > FightType(behaviour) FightType(behaviour) < CLOSEBRACKET >
-	| FightType(behaviour)
+	  AttackType(behaviour)
+| 	  < CHOOSE > < OPENBRACKET > AttackType(behaviour) AttackType(behaviour) < CLOSEBRACKET > 
 	)
 }
 
-void FightType(Behaviour behaviour) :
+void AttackType(Behaviour behaviour) :
 {Token name;}
 {
+  (
   	name = < PUNCH_LOW >
 | 	name = < PUNCH_HIGH >
 | 	name = < KICK_LOW >
 | 	name = < KICK_HIGH >
 | 	name = < BLOCK_LOW >
 | 	name = < BLOCK_HIGH >
+)
 {
 	behaviour.attackChoices.add(name.toString());
 }

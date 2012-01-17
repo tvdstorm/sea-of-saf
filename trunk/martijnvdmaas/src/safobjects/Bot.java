@@ -3,10 +3,10 @@ package safobjects;
 import java.util.ArrayList;
 
 public class Bot {
-	public ArrayList<Characteristic> characteristics 	= new ArrayList<Characteristic>();
-	public ArrayList<Behaviour> behaviours 				= new ArrayList<Behaviour>();
+	private ArrayList<Characteristic> characteristics 	= new ArrayList<Characteristic>();
+	private ArrayList<Behaviour> behaviours 				= new ArrayList<Behaviour>();
 	
-	public String botName = new String();
+	private String botName = new String();
 
 	public void addCharacteristic(Characteristic characteristic) {
 		this.characteristics.add(characteristic);
@@ -16,4 +16,23 @@ public class Bot {
 		this.behaviours.add(behaviour);
 	}
 	
+	public String toString() {
+		String output = "";
+		for(int i = 0; i < this.characteristics.size(); i++) {
+			output +=  this.characteristics.get(i).toString();
+		}
+		
+		for(int i = 0; i < this.behaviours.size(); i++) {
+			output +=  this.behaviours.get(i).toString();
+		}
+		return "  Class:" + this.getClass().getName() + "\n" +  output;
+	}
+
+	public String getBotName() {
+		return botName;
+	}
+
+	public void setBotName(String botName) {
+		this.botName = botName;
+	}
 }
