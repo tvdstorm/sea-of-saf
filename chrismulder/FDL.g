@@ -1,4 +1,5 @@
 grammar FDL;
+options { output=AST; }
 tokens {
 	LDELIM 	= '{' ;
 	RDELIM	= '}' ;
@@ -37,14 +38,39 @@ tokens {
 	OR = 'or';
 }
 
+@header {
+ package parser;
+ import AST.*;
+}
+
+@lexer::header {
+ package parser;
+}
+
+@init {
+	
+}
+
 @members {
+    private ArrayList<Node> nodes;
+    
+    private void addNode(Node n)	 {
+    	if (nodes == null) {
+    		nodes = new ArrayList<Node>();
+    	}
+    	nodes.add(n);
+    }
+    
     public static void main(String[] args) throws Exception {
         FDLLexer lex = new FDLLexer(new ANTLRFileStream(args[0]));
        	CommonTokenStream tokens = new CommonTokenStream(lex);
+       	
+
 
         FDLParser parser = new FDLParser(tokens);
 
         try {
+	    System.out.println("Start parsing...");
             parser.saf();
         } catch (RecognitionException e)  {
             e.printStackTrace();
@@ -56,19 +82,33 @@ tokens {
  * PARSER RULES
  *------------------------------------------------------------------*/
 
-saf:		 NAME LDELIM  property_list RDELIM ;
+saf:		NAME LDELIM  property_list RDELIM {
+	System.out.println("found saf: "+$text);
+	SafNode n =  new SafNode();
+	n.setText($text);
+	addNode(n);
+	System.out.println(nodes);
+	
+	
+};
 property_list: 	(property)*;
-property:	strength | behaviour ;
-strength: 	(KICKREACH| PUCHREACH | KICKPOWER | PUCHPOWER) EQ NUMBER;
-behaviour:	condition LSQUARE action RSQUARE;
+property:	strength | behaviour;
+strength:	(KICKREACH| PUCHREACH | KICKPOWER | PUCHPOWER) EQ NUMBER;
+behaviour:	condition LSQUARE action RSQUARE{
+	System.out.println("found behaviour: "+$text);
+	BehaviourNode n =  new BehaviourNode();
+	n.setText($text);
+	addNode(n);
+	System.out.println(nodes);
+};
 condition:	term (  OR  term )* ;
-term: 		condition_atom ( AND condition_atom )*;
+term:		condition_atom ( AND condition_atom )*;
 condition_atom:	STRONGER | WEAKER | MUCH_STRONGER | MUCH_WEAKER | EVEN | NEAR | FAR | ALWAYS;
-action:       	move | fight | move fight;
-fight_atom:	PUNCH_LOW | PUNCH_HIGH | KICK_LOW | KICK_HIGH | BLOCK_LOW | BLOCK_HIGH; // |
-move_atom: 	JUMP | CROUCH | STAND | RUN_TOWARDS | RUN_AWAY | WALK_TOWARDS | WALK_AWAY; // |
+action:		move | fight | move fight;
 move:		CHOOSE LPARAM move_atom move_atom RPARAM | move_atom; 
+move_atom:	JUMP | CROUCH | STAND | RUN_TOWARDS | RUN_AWAY | WALK_TOWARDS | WALK_AWAY; // |
 fight:		CHOOSE LPARAM fight_atom fight_atom RPARAM | fight_atom; 
+fight_atom:	PUNCH_LOW | PUNCH_HIGH | KICK_LOW | KICK_HIGH | BLOCK_LOW | BLOCK_HIGH; // |
 
 /*------------------------------------------------------------------
  * LEXER RULES
