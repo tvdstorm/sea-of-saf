@@ -1,4 +1,4 @@
-package astobjects;
+package safobjects;
 
 public class Bots {
 	public Bot firstBot;
