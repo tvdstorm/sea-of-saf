@@ -1,0 +1,247 @@
+/**
+ * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options{  JDK_VERSION = "1.5";  static = true;
+  MULTI = true;}PARSER_BEGIN(eg2)package foo;
+import java.io.FileInputStream;
+import java.io.InputStream; 
+import java.util.ArrayList;
+
+public class eg2{  public static void main(String args [])  {    System.out.println("Begin parsing..");
+    try
+    {  
+      InputStream inputStream = new FileInputStream("C:/Users/HP/workspace6/TestJavaCC/bin/bin/example.saf");
+	  new eg2(inputStream);      Bots n = eg2.Start();      System.out.println("End Parsing.");      }
+    catch (IndexOutOfBoundsException e)
+    {
+      System.out.println("Oops indexoutofbouunds.");
+      System.out.println(e.getMessage());
+    }
+    catch (NumberFormatException e)
+    {
+      System.out.println("Oops kutnummber.");
+      System.out.println(e.getMessage());
+    } 	
+    catch (Exception e)
+    {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+    }  }}PARSER_END(eg2)SKIP :{  " "| "\t"| "\n"| "\r"| < "//" (~[ "\n", "\r" ])*    (      "\n"    | "\r"    | "\r\n"    ) >| < "/*" (~[ "*" ])* "*"    (      ~[ "/" ] (~[ "*" ])* "*"    )*    "/" >}
+
+
+TOKEN : /* CHARACTERISTICS */
+{
+  	< PUNCH_REACH 	: "punchReach" >
+| 	< PUNCH_POWER 	: "punchPower" >
+|   < KICK_REACH	: "kickReach" >
+|   < KICK_POWER	: "kickPower" >
+}
+
+TOKEN : /* RULES */
+{
+  	< STRONGER 		: "stronger" >
+| 	< WEAKER 		: "weaker" >
+|   < MUCH_STRONGER	: "much_stronger" >
+|   < MUCH_WEAKER	: "much_weaker" >
+|   < EVEN 			: "even" >
+|   < NEAR 			: "near" >
+|   < FAR 			: "far" >
+|   < ALWAYS 		: "always" >
+}
+
+TOKEN : /* OPERATORS */
+{
+  	< AND 			: "and" >
+| 	< OR 			: "or" >
+}
+
+TOKEN : /* CHOOSE */
+{
+  	< CHOOSE 		: "choose" >
+}
+
+TOKEN : /* MOVES */
+{
+	< JUMP 			: "jump" >
+| 	< CROUCH 		: "crouch" >
+|  	< STAND			: "stand" >
+| 	< RUN_TOWARDS 	: "run_towards" >
+|  	< RUN_AWAY 		: "run_away" >
+| 	< WALK_TOWARDS 	: "walk_towards" >
+| 	< WALK_AWAY		: "walk_away" >
+}
+
+TOKEN : /* ATTACKS */
+{	< PUNCH_LOW 	: "punch_low" >
+| 	< PUNCH_HIGH	: "punch_high" >
+| 	< KICK_LOW		: "kick_low" >
+| 	< KICK_HIGH		: "kick_high" >
+| 	< BLOCK_LOW		: "block_low" >
+| 	< BLOCK_HIGH	: "block_high" >
+}
+TOKEN : /* LITERALS */{  < INTEGER_LITERAL :    < DECIMAL_LITERAL > ([ "l", "L" ])?  | < HEX_LITERAL > ([ "l", "L" ])?  | < OCTAL_LITERAL > ([ "l", "L" ])?     >| < #DECIMAL_LITERAL : [ "1"-"9" ] ([ "0"-"9" ])* >| < #HEX_LITERAL : "0" [ "x", "X" ] ([ "0"-"9", "a"-"f", "A"-"F" ])+ >| < #OCTAL_LITERAL : "0" ([ "0"-"7" ])* >}TOKEN : /* IDENTIFIERS */{  < IDENTIFIER :    < LETTER >    (      < LETTER >    | < DIGIT >    )* >| < #LETTER : [ "_", "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >}
+TOKEN : /* definition brackets */
+{
+	< OPENACCOLADE 			: "{" >
+|   < CLOSEACCOLADE  		: "}" >
+| 	< OPENBRACKET 			: "(" >
+|   < CLOSEBRACKET  		: ")" >
+|   < OPENSQUAREBRACKET  	: "[" >
+|   < CLOSESQUAREBRACKET  	: "]" >
+|   < ASSIGNMENT : "=" >
+| 	< VALUE : [ "0"-"9" ] >}
+Bots Start() : {
+  	Bot firstBot;
+  	Bot secondBot;
+}{   firstBot 	= CreateBot()
+  secondBot = CreateBot()
+  < EOF >  {
+    Bots bots 		= new Bots();
+   	bots.firstBot 	= firstBot;
+   	bots.secondBot 	= secondBot;
+    return bots;  }} Bot CreateBot() :{
+	Behaviour behaviour;
+	Bot bot = new Bot();
+	Token botName = new Token();
+}{  (botName = <  IDENTIFIER >) < OPENACCOLADE >  (createCharacteristic(bot))* (createBehaviour(bot))* < CLOSEACCOLADE >
+  {
+    bot.botName = botName.toString();	return bot;
+  }}
+
+void createCharacteristic(Bot bot) :
+{Token name = new Token(); Token value = new Token();}
+{
+  (	  name =  < PUNCH_REACH >
+  	| name =  < PUNCH_POWER >
+	| name =  < KICK_REACH >   
+	| name =  < KICK_POWER >
+  )  < ASSIGNMENT > (value =  < INTEGER_LITERAL >)
+  
+  {
+    Characteristic characteristic = new Characteristic();
+    characteristic.name 	= name.toString();
+    characteristic.value 	= Integer.parseInt(value.toString());
+    bot.addCharacteristic(characteristic);
+  }
+}
+
+void createBehaviour(Bot bot) :
+{
+  Behaviour behaviour = new Behaviour();  
+  bot.addBehaviour(behaviour);
+}{
+  ConditionRule(behaviour)  < OPENSQUAREBRACKET > MoveAction(behaviour) FightAction(behaviour) < CLOSESQUAREBRACKET >}
+
+void ConditionRule(Behaviour behaviour) :
+{
+  Token name;
+  ConditionChoices conditionChoices = new ConditionChoices();
+  behaviour.conditionChoices = conditionChoices;
+}
+{  	(
+	  name =	< STRONGER >
+	| name = 	< WEAKER >
+	| name =  	< MUCH_STRONGER >
+	| name = 	< MUCH_WEAKER >
+	| name =  	< EVEN >
+	| name =  	< NEAR >
+	| name =  	< FAR >
+	| name =  	< ALWAYS >
+	)
+	{
+	  ConditionGroup conditionGroup = new ConditionGroup();
+	  conditionGroup.addConditionType(name.toString());
+	  
+	  conditionChoices.addConditionGroup(conditionGroup);	}
+	RestCondition(conditionChoices)
+}
+
+void RestCondition(ConditionChoices conditionChoices) :
+{}
+{ (< OR >
+	{		conditionChoices.addConditionGroup(new ConditionGroup());
+	}
+
+ Term(conditionChoices))*
+}
+
+void Term(ConditionChoices conditionChoices) :
+{Token name;}
+{
+  (
+	  name =	< STRONGER >
+	| name = 	< WEAKER >
+	| name =  	< MUCH_STRONGER >
+	| name = 	< MUCH_WEAKER >
+	| name =  	< EVEN >
+	| name =  	< NEAR >
+	| name =  	< FAR >
+	| name =  	< ALWAYS >
+	)
+	{
+	 	ConditionGroup conditionGroup = conditionChoices.getLastCondition();
+	 	conditionGroup.addConditionType(name.toString());	}
+	RestTerm(conditionChoices)
+}
+
+void RestTerm(ConditionChoices conditionChoices) :
+{Token name;}
+{
+   (< AND >
+   (
+	  name =	< STRONGER >
+	| name = 	< WEAKER >
+	| name =  	< MUCH_STRONGER >
+	| name = 	< MUCH_WEAKER >
+	| name =  	< EVEN >
+	| name =  	< NEAR >
+	| name =  	< FAR >
+	| name =  	< ALWAYS >
+	)	{
+	  ConditionGroup conditionGroup = conditionChoices.getLastCondition();
+	  conditionGroup.addConditionType(name.toString());	}
+	)*}
+  
+
+void MoveAction(Behaviour behaviour) : 
+{}
+{	(
+	  < CHOOSE > < OPENBRACKET > MoveType(behaviour) MoveType(behaviour) < CLOSEBRACKET >
+	| MoveType(behaviour)	)
+}
+
+void MoveType(Behaviour behaviour) :
+{Token name;}
+{
+  	name = < JUMP >
+| 	name = < CROUCH >
+|  	name = < STAND >
+| 	name = < RUN_TOWARDS >
+|  	name = < RUN_AWAY >
+| 	name = < WALK_TOWARDS >
+| 	name = < WALK_AWAY >
+{	behaviour.moveChoices.add(name.toString());
+}
+}
+
+
+void FightAction(Behaviour behaviour) :
+{}
+{
+	(
+	  < CHOOSE > < OPENBRACKET > FightType(behaviour) FightType(behaviour) < CLOSEBRACKET >
+	| FightType(behaviour)
+	)
+}
+void FightType(Behaviour behaviour) :
+{Token name;}{
+  	name = < PUNCH_LOW >
+| 	name = < PUNCH_HIGH >
+| 	name = < KICK_LOW >
+| 	name = < KICK_HIGH >
+| 	name = < BLOCK_LOW >
+| 	name = < BLOCK_HIGH >
+{	behaviour.attackChoices.add(name.toString());
+}}
+void Identifier() :{}{  < IDENTIFIER >}void Integer() :{}{  < INTEGER_LITERAL >}
+
+
