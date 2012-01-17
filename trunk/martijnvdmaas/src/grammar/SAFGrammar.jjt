@@ -11,17 +11,20 @@ options
 PARSER_BEGIN(eg2)
 package grammar;
 import java.io.FileInputStream;
-import java.io.InputStream; 
-import astobjects.*; 
+import java.io.InputStream;
+import safobjects.*;
 
 public class eg2
 {
-  public static void main(String args [])
+  public static void main(String args []) 
   {
     System.out.println("Begin parsing..");
     try
-    {  
-      InputStream inputStream = new FileInputStream("C:/Users/HP/workspace6/TestJavaCC/bin/bin/example.saf");
+    {
+      String projectPath  = new java.io.File(".").getCanonicalPath();
+	  String fileName = "input.saf";
+      
+      InputStream inputStream = new FileInputStream(projectPath + "/src/input/" + fileName);
 	  new eg2(inputStream);
       Bots n = eg2.Start();
       n.toString();

@@ -1,4 +1,4 @@
-package astobjects;
+package safobjects;
 
 public class StringCondition extends ConditionGroup{
 	public String name;
