@@ -19,11 +19,11 @@ public void main() {
     });
     
     registerContributions(lang, { exportXml() });
-    //
-    //registerOutliner(lang, node (Language::Bot input) {
-    //    return outlineBot(implode(#Ast::Bot, input));
-    //});
-    //
+    
+    registerOutliner(lang, node (Language::Bot input) {
+        return outlineBot(implode(#Ast::Bot, input));
+    });
+    
     registerAnnotator(lang, Language::Bot(Language::Bot input) {
         msgs = validate(implode(#Ast::Bot, input));
         return input[@messages=msgs];

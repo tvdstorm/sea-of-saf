@@ -9,27 +9,41 @@ node outline(list[Characteristic] characteristics) = "Characteristics"([ outline
 node outline(Characteristic characteristic) = "Characteristic"()[@label="<characteristic.name>: <characteristic.val>"][@\loc=characteristic@location];
 
 node outline(list[BehaviourRule] behaviourRules) = "BehaviourRules"([ outline(behaviourRule) | behaviourRule <- behaviourRules ])[@label="BehaviourRules"];
-node outline(BehaviourRule behaviourRule) = "BehaviourRule"("test")[@label="Rule"][@\loc=behaviourRule@location];
-//node outline(BehaviourRule behaviourRule) = "BehaviourRule"([outline(behaviourRule.condition), outline(behaviourRule.moveAction), outline(behaviourRule.fightAction)])[@label="Rule"][@\loc=behaviourRule@location]
-
+node outline(BehaviourRule behaviourRule) = "BehaviourRule"([outline(behaviourRule.condition), outline(behaviourRule.moveAction), outline(behaviourRule.fightAction)])[@label="Rule"][@\loc=behaviourRule@location];
 
 node outline(Condition condition) = { 
-    str conditionText = "";
-
-    switch(condition) {
-        case andCondition(str firstCondition, str secondCondition): conditionText = "<firstCondition> and <secondCondition>";
-        case orCondition(str firstCondition, str secondCondition): conditionText = "<firstCondition> or <secondCondition>";
-        case simpleCondition(str condition): conditionText = condition;
-    }
-    
-    "Condition"()[@label= "Condition: " + conditionText][@\loc=condition@location]; 
+    str conditionText = simplifyCondition(condition);
+    "Condition"()[@label= "Condition: " + conditionText][@\loc=condition@location];
 };
+
+//Compose a string of the condition nodes recursively.
+str simplifyCondition(Condition condition) {
+    switch(condition) {
+        case andCondition(Condition firstCondition, Condition secondCondition): {
+            return simplifyCondition(firstCondition) + " and " + simplifyCondition(secondCondition);
+        }
+        case orCondition(Condition firstCondition, Condition secondCondition): {
+            return simplifyCondition(firstCondition) + " or " + simplifyCondition(secondCondition);
+        }
+        case sc:simpleCondition(str condition): {
+            return condition;
+        }
+    }
+}
 
 node outline(MoveAction moveAction) = { 
     str moveText = "";
 
     switch(moveAction) {
-        case chooseMoveAction(str firstMoveAction, str secondMoveAction): moveText = "choose(<firstMoveAction> <secondMoveAction>)";
+        case chooseMoveAction(list[str] moveActions): {
+            moveText = "choose( ";
+            
+            for(str moveAction <- moveActions) {
+                moveText += moveAction + " "; 
+            }
+   
+            moveText += ")";
+        }
         case simpleMoveAction(str moveAction): moveText = moveAction;
     }
     
@@ -40,7 +54,15 @@ node outline(FightAction fightAction) = {
     str fightText = "";
 
     switch(fightAction) {
-        case chooseFightAction(str firstFightAction, str secondFightAction): fightText = "choose(<firstFightAction> <secondFightAction>)";
+        case chooseFightAction(list[str] fightActions): {
+            fightText = "choose( ";
+            
+            for(str fightAction <- fightActions) {
+                fightText += fightAction + " "; 
+            }
+   
+            fightText += ")";
+        }
         case simpleFightAction(str fightAction): fightText = fightAction;
     }
     
