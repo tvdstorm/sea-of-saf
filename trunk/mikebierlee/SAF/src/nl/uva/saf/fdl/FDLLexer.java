@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-17 18:57:23
+// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-17 19:07:57
 
   package nl.uva.saf.fdl;
 
@@ -861,10 +861,10 @@ public class FDLLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:4: ( ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+ )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:35:4: ( ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+ )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:35:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
             {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:35:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
             int cnt1=0;
             loop1:
             do {
@@ -921,10 +921,10 @@ public class FDLLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:9: ( ( '0' .. '9' )+ )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:11: ( '0' .. '9' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:9: ( ( '0' .. '9' )+ )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:11: ( '0' .. '9' )+
             {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:11: ( '0' .. '9' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:11: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -979,8 +979,8 @@ public class FDLLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:41:8: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:41:10: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:8: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:10: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -992,7 +992,7 @@ public class FDLLexer extends Lexer {
             }
 
 
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:41:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop3:
             do {
                 int alt3=2;
