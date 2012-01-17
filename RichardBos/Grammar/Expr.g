@@ -33,8 +33,8 @@ multExpr returns [int value]
         (   '*' e=atom {$value *= $e.value;}
         |   '/' e=atom {$value /= $e.value;}
         )*
-    ; 
- 
+    ;
+   
 atom returns [int value]
     :   INT {$value = Integer.parseInt($INT.text);}
     |   ID

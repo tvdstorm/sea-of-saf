@@ -3,8 +3,13 @@ package SAF.Structure;
 import java.util.ArrayList;
 
 public class Bot {
-	public Bot() {}
+	public Bot() {
+		Characteristics = new ArrayList<Characteristic>();
+		Behavior = new ArrayList<BehaviorRule>();
+	}
 	public String name;
-	public Characteristic characteristic;
-	public ArrayList<BehaviorRule> behaviorRules;
+	
+	//Characteristics
+	public ArrayList<Characteristic> Characteristics;
+	public ArrayList<BehaviorRule> Behavior;
 }
