@@ -4,5 +4,5 @@ JackieChan {
     far[run_towards punch_high]
     near[choose(stand crouch) kick_high]
     stronger or far[choose(run_towards walk_away stand) kick_high]
-    much_weaker and weaker[walk_away block_low]
+    much_weaker and weaker or far[walk_away block_low]
 }

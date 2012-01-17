@@ -14,8 +14,8 @@ data Bot            = bot(str name, list[Characteristic] characteristics, list[B
 data Characteristic = characteristic(str name, int val);
 
 data BehaviourRule  = behaviourRule(Condition condition, MoveAction moveAction, FightAction fightAction); 
-data Condition      = andCondition(str firstCondition, str secondCondition) 
-                    | orCondition(str firstCondition, str secondCondition) 
+data Condition      = andCondition(str firstCondition, Condition secondCondition) 
+                    | orCondition(str firstCondition, Condition secondCondition) 
                     | simpleCondition(str condition);    
                     
 data MoveAction     = simpleMoveAction(str moveAction)
