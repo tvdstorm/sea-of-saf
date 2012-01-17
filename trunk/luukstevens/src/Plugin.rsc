@@ -8,15 +8,17 @@ import Language;
 import Ast;
 import Validation;
 import Outline;
-import IO;
+import Contribution;
 
 private str lang = "Bot Description Language";
 private str ext = "bdl";
 
 public void main() {
-    //registerLanguage(lang, ext, Language::Bot(str input, loc org) {
-    //    return parse(#Language::Bot, input, org);
-    //});
+    registerLanguage(lang, ext, Language::Bot(str input, loc org) {
+        return parse(#Language::Bot, input, org);
+    });
+    
+    registerContributions(lang, { exportXml() });
     //
     //registerOutliner(lang, node (Language::Bot input) {
     //    return outlineBot(implode(#Ast::Bot, input));
