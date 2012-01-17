@@ -32,8 +32,6 @@ options {
   package nl.uva.saf.fdl;
 }
 
-
-
 WS : (' ' | '\t' | '\r' | '\n' | '\f')+ {$channel=HIDDEN;};
 
 INTEGER : ('0'..'9')+;
@@ -82,8 +80,10 @@ conditionExpression : conditionType 'and'! conditionExpression
                     | conditionType
                     ;
 
-moveRule : moveAction | 'choose' '('! moveAction+ ')'!;
-fightRule : fightAction | 'choose' '('! fightAction+ ')'!;
+moveChoice : 'choose'! '('! moveAction+ ')'!;
+fightChoice : 'choose'! '('! fightAction+ ')'!;
+moveRule : moveAction | moveChoice;
+fightRule : fightAction | fightChoice;
 rules : moveRule fightRule;
 
 behaviour : conditionExpression '['! rules ']'!;
