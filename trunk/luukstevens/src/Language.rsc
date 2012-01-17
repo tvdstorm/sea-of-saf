@@ -17,9 +17,9 @@ syntax Characteristic
 syntax BehaviourRule
     = behaviourRule : Condition "[" MoveAction moveAction FightAction fightAction "]";
 
-syntax Condition
+syntax Condition 
     = left orCondition : Condition firstCondition "or" Condition secondCondition
-    | simpleCondition : Id condition 
+    | @category="Identifier" simpleCondition : Id condition 
     > left andCondition : Condition firstCondition "and" Condition secondCondition; 
     
 syntax MoveAction
