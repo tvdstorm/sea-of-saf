@@ -18,11 +18,13 @@ tokens {
 
     /* Imaginary nodes, used for tree topology. */
     SAF;
-    NAME;
-    TRAITS;
-    BEHAVIOURS;
-    ACTION;
+    ATTRIBUTES;
+    ATTRIBUTE;
+    BEHAVIOUR;
+    TACTIC;
     CONDITION;
+    MOVE;
+    ATTACK;
 }
 
 @header {
@@ -43,47 +45,34 @@ tokens {
  *--------------------------------------------------------------------------*/
 
 parse
-    : super_awesome_fighter -> ^(SAF<SafFighter>["SAF"] super_awesome_fighter)
+    : name=STRING super_awesome_fighter -> 
+            ^(SAF<SafTreeFighter>[$name.text] super_awesome_fighter)
     ;
 
 super_awesome_fighter 
-    : name CURLY_OPEN traits behaviour CURLY_CLOSE EOF -> ^(NAME<SafName>[$name.text]) ^(TRAITS<SafTraits>[$traits.text] traits) ^(BEHAVIOURS behaviour)
+    : CURLY_OPEN attributes behaviour CURLY_CLOSE EOF -> 
+            ^(ATTRIBUTES<SafTreeAttributes>[$attributes.text] attributes)
+            ^(BEHAVIOUR behaviour)
     ;
 
-name
-    : STRING
-    ;
-
-traits
-    : (property EQUAL LEVEL)+ -> ^(property LEVEL)+
-    ;
-
-property
-    : STRING
+attributes
+    : (attribute=STRING EQUAL LEVEL)+ -> 
+            (ATTRIBUTE<SafTreeAttribute>[$attribute.text, LEVEL] LEVEL)+
     ;
 
 behaviour
-    : (complex_condition action)+ -> ^(CONDITION complex_condition ^(ACTION action))+
+    : tactic+ -> ^(TACTIC<SafTreeTactic>["Tactic"] tactic+)
+    ;
+
+tactic
+    : complex_condition SQUARE_OPEN move=STRING attack=STRING SQUARE_CLOSE ->
+            ^(CONDITION<SafTreeCondition>["Condition"] )
+            ^(MOVE<SafTreeMove>[$move.text] )
+            ^(ATTACK<SafTreeAttack>[$attack.text] )
     ;
 
 complex_condition
-    : (condition ((AND|OR)^ condition)*) 
-    ;
-
-condition
-    : STRING
-    ;
-
-action
-    : SQUARE_OPEN move attack SQUARE_CLOSE -> move attack
-    ;
-
-move
-    : STRING
-    ;
-
-attack
-    : STRING
+    : (condition=STRING ((AND|OR)^ condition=STRING)*) 
     ;
  
 
@@ -92,7 +81,7 @@ attack
  *--------------------------------------------------------------------------*/
 
 LEVEL   
-    : '0'..'9' 
+    : '1'..'9' | '10'
     ;
 
 STRING  
