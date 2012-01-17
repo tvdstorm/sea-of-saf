@@ -42,6 +42,7 @@ public class ANTLFighterLoader implements IFighterLoader {
 
 			try {
 				parser.fighter();
+				
 			} catch (RecognitionException e) {
 				e.printStackTrace();
 			}

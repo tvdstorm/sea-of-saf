@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-16 22:31:08
+// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-17 18:57:22
 
   package nl.uva.saf.fdl;
 
@@ -85,29 +85,29 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class characteristic_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "characteristic"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:40:1: characteristic : ( 'kickPower' | 'kickReach' | 'punchPower' | 'punchReach' );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:1: characteristic : ( 'kickPower' | 'kickReach' | 'punchPower' | 'punchReach' );
     public final FDLParser.characteristic_return characteristic() throws RecognitionException {
         FDLParser.characteristic_return retval = new FDLParser.characteristic_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token set1=null;
 
-        Object set1_tree=null;
+        CommonTree set1_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:40:16: ( 'kickPower' | 'kickReach' | 'punchPower' | 'punchReach' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:16: ( 'kickPower' | 'kickReach' | 'punchPower' | 'punchReach' )
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
             set1=(Token)input.LT(1);
@@ -115,7 +115,7 @@ public TreeAdaptor getTreeAdaptor() {
             if ( (input.LA(1) >= 21 && input.LA(1) <= 22)||(input.LA(1) >= 29 && input.LA(1) <= 30) ) {
                 input.consume();
                 adaptor.addChild(root_0, 
-                (Object)adaptor.create(set1)
+                (CommonTree)adaptor.create(set1)
                 );
                 state.errorRecovery=false;
             }
@@ -130,14 +130,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -150,29 +150,29 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class conditionType_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "conditionType"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:46:1: conditionType : ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:49:1: conditionType : ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' );
     public final FDLParser.conditionType_return conditionType() throws RecognitionException {
         FDLParser.conditionType_return retval = new FDLParser.conditionType_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token set2=null;
 
-        Object set2_tree=null;
+        CommonTree set2_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:46:15: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:49:15: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
             set2=(Token)input.LT(1);
@@ -180,7 +180,7 @@ public TreeAdaptor getTreeAdaptor() {
             if ( input.LA(1)==12||(input.LA(1) >= 18 && input.LA(1) <= 19)||(input.LA(1) >= 25 && input.LA(1) <= 27)||input.LA(1)==36||input.LA(1)==39 ) {
                 input.consume();
                 adaptor.addChild(root_0, 
-                (Object)adaptor.create(set2)
+                (CommonTree)adaptor.create(set2)
                 );
                 state.errorRecovery=false;
             }
@@ -195,14 +195,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -215,29 +215,29 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class moveAction_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "moveAction"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:56:1: moveAction : ( 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand' );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:59:1: moveAction : ( 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand' );
     public final FDLParser.moveAction_return moveAction() throws RecognitionException {
         FDLParser.moveAction_return retval = new FDLParser.moveAction_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token set3=null;
 
-        Object set3_tree=null;
+        CommonTree set3_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:56:12: ( 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:59:12: ( 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand' )
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
             set3=(Token)input.LT(1);
@@ -245,7 +245,7 @@ public TreeAdaptor getTreeAdaptor() {
             if ( input.LA(1)==17||input.LA(1)==20||(input.LA(1) >= 33 && input.LA(1) <= 35)||(input.LA(1) >= 37 && input.LA(1) <= 38) ) {
                 input.consume();
                 adaptor.addChild(root_0, 
-                (Object)adaptor.create(set3)
+                (CommonTree)adaptor.create(set3)
                 );
                 state.errorRecovery=false;
             }
@@ -260,14 +260,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -280,29 +280,29 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class fightAction_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "fightAction"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:65:1: fightAction : ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:68:1: fightAction : ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' );
     public final FDLParser.fightAction_return fightAction() throws RecognitionException {
         FDLParser.fightAction_return retval = new FDLParser.fightAction_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token set4=null;
 
-        Object set4_tree=null;
+        CommonTree set4_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:65:13: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:68:13: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
             set4=(Token)input.LT(1);
@@ -310,7 +310,7 @@ public TreeAdaptor getTreeAdaptor() {
             if ( (input.LA(1) >= 14 && input.LA(1) <= 15)||(input.LA(1) >= 23 && input.LA(1) <= 24)||(input.LA(1) >= 31 && input.LA(1) <= 32) ) {
                 input.consume();
                 adaptor.addChild(root_0, 
-                (Object)adaptor.create(set4)
+                (CommonTree)adaptor.create(set4)
                 );
                 state.errorRecovery=false;
             }
@@ -325,14 +325,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -345,34 +345,34 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class fighterName_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "fighterName"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:73:1: fighterName : IDENT ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:76:1: fighterName : IDENT ;
     public final FDLParser.fighterName_return fighterName() throws RecognitionException {
         FDLParser.fighterName_return retval = new FDLParser.fighterName_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token IDENT5=null;
 
-        Object IDENT5_tree=null;
+        CommonTree IDENT5_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:73:13: ( IDENT )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:73:15: IDENT
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:76:13: ( IDENT )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:76:15: IDENT
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
-            IDENT5=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighterName611); 
+            IDENT5=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighterName632); 
             IDENT5_tree = 
-            (Object)adaptor.create(IDENT5)
+            (CommonTree)adaptor.create(IDENT5)
             ;
             adaptor.addChild(root_0, IDENT5_tree);
 
@@ -382,14 +382,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -402,52 +402,47 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class personality_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "personality"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:75:1: personality : characteristic '=' INTEGER ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:78:1: personality : characteristic '=' ! INTEGER ;
     public final FDLParser.personality_return personality() throws RecognitionException {
         FDLParser.personality_return retval = new FDLParser.personality_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token char_literal7=null;
         Token INTEGER8=null;
         FDLParser.characteristic_return characteristic6 =null;
 
 
-        Object char_literal7_tree=null;
-        Object INTEGER8_tree=null;
+        CommonTree char_literal7_tree=null;
+        CommonTree INTEGER8_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:75:13: ( characteristic '=' INTEGER )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:75:15: characteristic '=' INTEGER
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:78:13: ( characteristic '=' ! INTEGER )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:78:15: characteristic '=' ! INTEGER
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_characteristic_in_personality620);
+            pushFollow(FOLLOW_characteristic_in_personality641);
             characteristic6=characteristic();
 
             state._fsp--;
 
             adaptor.addChild(root_0, characteristic6.getTree());
 
-            char_literal7=(Token)match(input,9,FOLLOW_9_in_personality622); 
-            char_literal7_tree = 
-            (Object)adaptor.create(char_literal7)
-            ;
-            adaptor.addChild(root_0, char_literal7_tree);
+            char_literal7=(Token)match(input,9,FOLLOW_9_in_personality643); 
 
-
-            INTEGER8=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_personality624); 
+            INTEGER8=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_personality646); 
             INTEGER8_tree = 
-            (Object)adaptor.create(INTEGER8)
+            (CommonTree)adaptor.create(INTEGER8)
             ;
             adaptor.addChild(root_0, INTEGER8_tree);
 
@@ -457,14 +452,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -477,19 +472,19 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class conditionExpression_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "conditionExpression"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:77:1: conditionExpression : ( conditionType 'and' conditionExpression | conditionType 'or' conditionExpression | conditionType );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:80:1: conditionExpression : ( conditionType 'and' ! conditionExpression | conditionType 'or' ! conditionExpression | conditionType );
     public final FDLParser.conditionExpression_return conditionExpression() throws RecognitionException {
         FDLParser.conditionExpression_return retval = new FDLParser.conditionExpression_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token string_literal10=null;
         Token string_literal13=null;
@@ -504,11 +499,11 @@ public TreeAdaptor getTreeAdaptor() {
         FDLParser.conditionType_return conditionType15 =null;
 
 
-        Object string_literal10_tree=null;
-        Object string_literal13_tree=null;
+        CommonTree string_literal10_tree=null;
+        CommonTree string_literal13_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:77:21: ( conditionType 'and' conditionExpression | conditionType 'or' conditionExpression | conditionType )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:80:21: ( conditionType 'and' ! conditionExpression | conditionType 'or' ! conditionExpression | conditionType )
             int alt1=3;
             int LA1_0 = input.LA(1);
 
@@ -547,26 +542,21 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:77:23: conditionType 'and' conditionExpression
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:80:23: conditionType 'and' ! conditionExpression
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_conditionType_in_conditionExpression632);
+                    pushFollow(FOLLOW_conditionType_in_conditionExpression654);
                     conditionType9=conditionType();
 
                     state._fsp--;
 
                     adaptor.addChild(root_0, conditionType9.getTree());
 
-                    string_literal10=(Token)match(input,13,FOLLOW_13_in_conditionExpression634); 
-                    string_literal10_tree = 
-                    (Object)adaptor.create(string_literal10)
-                    ;
-                    adaptor.addChild(root_0, string_literal10_tree);
+                    string_literal10=(Token)match(input,13,FOLLOW_13_in_conditionExpression656); 
 
-
-                    pushFollow(FOLLOW_conditionExpression_in_conditionExpression636);
+                    pushFollow(FOLLOW_conditionExpression_in_conditionExpression659);
                     conditionExpression11=conditionExpression();
 
                     state._fsp--;
@@ -576,26 +566,21 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:78:23: conditionType 'or' conditionExpression
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:81:23: conditionType 'or' ! conditionExpression
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_conditionType_in_conditionExpression660);
+                    pushFollow(FOLLOW_conditionType_in_conditionExpression683);
                     conditionType12=conditionType();
 
                     state._fsp--;
 
                     adaptor.addChild(root_0, conditionType12.getTree());
 
-                    string_literal13=(Token)match(input,28,FOLLOW_28_in_conditionExpression662); 
-                    string_literal13_tree = 
-                    (Object)adaptor.create(string_literal13)
-                    ;
-                    adaptor.addChild(root_0, string_literal13_tree);
+                    string_literal13=(Token)match(input,28,FOLLOW_28_in_conditionExpression685); 
 
-
-                    pushFollow(FOLLOW_conditionExpression_in_conditionExpression664);
+                    pushFollow(FOLLOW_conditionExpression_in_conditionExpression688);
                     conditionExpression14=conditionExpression();
 
                     state._fsp--;
@@ -605,12 +590,12 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 3 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:79:23: conditionType
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:82:23: conditionType
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_conditionType_in_conditionExpression688);
+                    pushFollow(FOLLOW_conditionType_in_conditionExpression712);
                     conditionType15=conditionType();
 
                     state._fsp--;
@@ -624,14 +609,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -644,19 +629,19 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class moveRule_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "moveRule"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:82:1: moveRule : ( moveAction | 'choose' '(' ( moveAction )+ ')' );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:85:1: moveRule : ( moveAction | 'choose' '(' ! ( moveAction )+ ')' !);
     public final FDLParser.moveRule_return moveRule() throws RecognitionException {
         FDLParser.moveRule_return retval = new FDLParser.moveRule_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token string_literal17=null;
         Token char_literal18=null;
@@ -666,12 +651,12 @@ public TreeAdaptor getTreeAdaptor() {
         FDLParser.moveAction_return moveAction19 =null;
 
 
-        Object string_literal17_tree=null;
-        Object char_literal18_tree=null;
-        Object char_literal20_tree=null;
+        CommonTree string_literal17_tree=null;
+        CommonTree char_literal18_tree=null;
+        CommonTree char_literal20_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:82:10: ( moveAction | 'choose' '(' ( moveAction )+ ')' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:85:10: ( moveAction | 'choose' '(' ! ( moveAction )+ ')' !)
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -690,12 +675,12 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt3) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:82:12: moveAction
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:85:12: moveAction
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_moveAction_in_moveRule717);
+                    pushFollow(FOLLOW_moveAction_in_moveRule741);
                     moveAction16=moveAction();
 
                     state._fsp--;
@@ -705,26 +690,21 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:82:25: 'choose' '(' ( moveAction )+ ')'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:85:25: 'choose' '(' ! ( moveAction )+ ')' !
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    string_literal17=(Token)match(input,16,FOLLOW_16_in_moveRule721); 
+                    string_literal17=(Token)match(input,16,FOLLOW_16_in_moveRule745); 
                     string_literal17_tree = 
-                    (Object)adaptor.create(string_literal17)
+                    (CommonTree)adaptor.create(string_literal17)
                     ;
                     adaptor.addChild(root_0, string_literal17_tree);
 
 
-                    char_literal18=(Token)match(input,7,FOLLOW_7_in_moveRule723); 
-                    char_literal18_tree = 
-                    (Object)adaptor.create(char_literal18)
-                    ;
-                    adaptor.addChild(root_0, char_literal18_tree);
+                    char_literal18=(Token)match(input,7,FOLLOW_7_in_moveRule747); 
 
-
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:82:38: ( moveAction )+
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:85:39: ( moveAction )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -738,9 +718,9 @@ public TreeAdaptor getTreeAdaptor() {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:82:38: moveAction
+                    	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:85:39: moveAction
                     	    {
-                    	    pushFollow(FOLLOW_moveAction_in_moveRule725);
+                    	    pushFollow(FOLLOW_moveAction_in_moveRule750);
                     	    moveAction19=moveAction();
 
                     	    state._fsp--;
@@ -760,12 +740,7 @@ public TreeAdaptor getTreeAdaptor() {
                     } while (true);
 
 
-                    char_literal20=(Token)match(input,8,FOLLOW_8_in_moveRule728); 
-                    char_literal20_tree = 
-                    (Object)adaptor.create(char_literal20)
-                    ;
-                    adaptor.addChild(root_0, char_literal20_tree);
-
+                    char_literal20=(Token)match(input,8,FOLLOW_8_in_moveRule753); 
 
                     }
                     break;
@@ -774,14 +749,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -794,19 +769,19 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class fightRule_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "fightRule"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:83:1: fightRule : ( fightAction | 'choose' '(' ( fightAction )+ ')' );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:1: fightRule : ( fightAction | 'choose' '(' ! ( fightAction )+ ')' !);
     public final FDLParser.fightRule_return fightRule() throws RecognitionException {
         FDLParser.fightRule_return retval = new FDLParser.fightRule_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token string_literal22=null;
         Token char_literal23=null;
@@ -816,12 +791,12 @@ public TreeAdaptor getTreeAdaptor() {
         FDLParser.fightAction_return fightAction24 =null;
 
 
-        Object string_literal22_tree=null;
-        Object char_literal23_tree=null;
-        Object char_literal25_tree=null;
+        CommonTree string_literal22_tree=null;
+        CommonTree char_literal23_tree=null;
+        CommonTree char_literal25_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:83:11: ( fightAction | 'choose' '(' ( fightAction )+ ')' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:11: ( fightAction | 'choose' '(' ! ( fightAction )+ ')' !)
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -840,12 +815,12 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt5) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:83:13: fightAction
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:13: fightAction
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_fightAction_in_fightRule735);
+                    pushFollow(FOLLOW_fightAction_in_fightRule761);
                     fightAction21=fightAction();
 
                     state._fsp--;
@@ -855,26 +830,21 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:83:27: 'choose' '(' ( fightAction )+ ')'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:27: 'choose' '(' ! ( fightAction )+ ')' !
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    string_literal22=(Token)match(input,16,FOLLOW_16_in_fightRule739); 
+                    string_literal22=(Token)match(input,16,FOLLOW_16_in_fightRule765); 
                     string_literal22_tree = 
-                    (Object)adaptor.create(string_literal22)
+                    (CommonTree)adaptor.create(string_literal22)
                     ;
                     adaptor.addChild(root_0, string_literal22_tree);
 
 
-                    char_literal23=(Token)match(input,7,FOLLOW_7_in_fightRule741); 
-                    char_literal23_tree = 
-                    (Object)adaptor.create(char_literal23)
-                    ;
-                    adaptor.addChild(root_0, char_literal23_tree);
+                    char_literal23=(Token)match(input,7,FOLLOW_7_in_fightRule767); 
 
-
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:83:40: ( fightAction )+
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:41: ( fightAction )+
                     int cnt4=0;
                     loop4:
                     do {
@@ -888,9 +858,9 @@ public TreeAdaptor getTreeAdaptor() {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:83:40: fightAction
+                    	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:41: fightAction
                     	    {
-                    	    pushFollow(FOLLOW_fightAction_in_fightRule743);
+                    	    pushFollow(FOLLOW_fightAction_in_fightRule770);
                     	    fightAction24=fightAction();
 
                     	    state._fsp--;
@@ -910,12 +880,7 @@ public TreeAdaptor getTreeAdaptor() {
                     } while (true);
 
 
-                    char_literal25=(Token)match(input,8,FOLLOW_8_in_fightRule746); 
-                    char_literal25_tree = 
-                    (Object)adaptor.create(char_literal25)
-                    ;
-                    adaptor.addChild(root_0, char_literal25_tree);
-
+                    char_literal25=(Token)match(input,8,FOLLOW_8_in_fightRule773); 
 
                     }
                     break;
@@ -924,14 +889,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -944,19 +909,19 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class rules_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "rules"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:84:1: rules : moveRule fightRule ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:87:1: rules : moveRule fightRule ;
     public final FDLParser.rules_return rules() throws RecognitionException {
         FDLParser.rules_return retval = new FDLParser.rules_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         FDLParser.moveRule_return moveRule26 =null;
 
@@ -965,20 +930,20 @@ public TreeAdaptor getTreeAdaptor() {
 
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:84:7: ( moveRule fightRule )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:84:9: moveRule fightRule
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:87:7: ( moveRule fightRule )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:87:9: moveRule fightRule
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_moveRule_in_rules753);
+            pushFollow(FOLLOW_moveRule_in_rules781);
             moveRule26=moveRule();
 
             state._fsp--;
 
             adaptor.addChild(root_0, moveRule26.getTree());
 
-            pushFollow(FOLLOW_fightRule_in_rules755);
+            pushFollow(FOLLOW_fightRule_in_rules783);
             fightRule27=fightRule();
 
             state._fsp--;
@@ -990,14 +955,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1010,19 +975,19 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class behaviour_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "behaviour"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:1: behaviour : conditionExpression '[' rules ']' ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:89:1: behaviour : conditionExpression '[' ! rules ']' !;
     public final FDLParser.behaviour_return behaviour() throws RecognitionException {
         FDLParser.behaviour_return retval = new FDLParser.behaviour_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token char_literal29=null;
         Token char_literal31=null;
@@ -1031,57 +996,47 @@ public TreeAdaptor getTreeAdaptor() {
         FDLParser.rules_return rules30 =null;
 
 
-        Object char_literal29_tree=null;
-        Object char_literal31_tree=null;
+        CommonTree char_literal29_tree=null;
+        CommonTree char_literal31_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:11: ( conditionExpression '[' rules ']' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:86:13: conditionExpression '[' rules ']'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:89:11: ( conditionExpression '[' ! rules ']' !)
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:89:13: conditionExpression '[' ! rules ']' !
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_conditionExpression_in_behaviour763);
+            pushFollow(FOLLOW_conditionExpression_in_behaviour791);
             conditionExpression28=conditionExpression();
 
             state._fsp--;
 
             adaptor.addChild(root_0, conditionExpression28.getTree());
 
-            char_literal29=(Token)match(input,10,FOLLOW_10_in_behaviour765); 
-            char_literal29_tree = 
-            (Object)adaptor.create(char_literal29)
-            ;
-            adaptor.addChild(root_0, char_literal29_tree);
+            char_literal29=(Token)match(input,10,FOLLOW_10_in_behaviour793); 
 
-
-            pushFollow(FOLLOW_rules_in_behaviour767);
+            pushFollow(FOLLOW_rules_in_behaviour796);
             rules30=rules();
 
             state._fsp--;
 
             adaptor.addChild(root_0, rules30.getTree());
 
-            char_literal31=(Token)match(input,11,FOLLOW_11_in_behaviour769); 
-            char_literal31_tree = 
-            (Object)adaptor.create(char_literal31)
-            ;
-            adaptor.addChild(root_0, char_literal31_tree);
-
+            char_literal31=(Token)match(input,11,FOLLOW_11_in_behaviour798); 
 
             }
 
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1094,19 +1049,19 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class fighterAttribute_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "fighterAttribute"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:1: fighterAttribute : ( personality | behaviour );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:1: fighterAttribute : ( personality | behaviour );
     public final FDLParser.fighterAttribute_return fighterAttribute() throws RecognitionException {
         FDLParser.fighterAttribute_return retval = new FDLParser.fighterAttribute_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         FDLParser.personality_return personality32 =null;
 
@@ -1115,7 +1070,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:18: ( personality | behaviour )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:18: ( personality | behaviour )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1134,12 +1089,12 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt6) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:20: personality
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:20: personality
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_personality_in_fighterAttribute795);
+                    pushFollow(FOLLOW_personality_in_fighterAttribute825);
                     personality32=personality();
 
                     state._fsp--;
@@ -1149,12 +1104,12 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:34: behaviour
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:34: behaviour
                     {
-                    root_0 = (Object)adaptor.nil();
+                    root_0 = (CommonTree)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_behaviour_in_fighterAttribute799);
+                    pushFollow(FOLLOW_behaviour_in_fighterAttribute829);
                     behaviour33=behaviour();
 
                     state._fsp--;
@@ -1168,14 +1123,14 @@ public TreeAdaptor getTreeAdaptor() {
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1188,19 +1143,19 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class fighter_return extends ParserRuleReturnScope {
-        Object tree;
+        CommonTree tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "fighter"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:1: fighter : fighterName '{' ( fighterAttribute )* '}' ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:1: fighter : fighterName '{' ! ( fighterAttribute )* '}' !;
     public final FDLParser.fighter_return fighter() throws RecognitionException {
         FDLParser.fighter_return retval = new FDLParser.fighter_return();
         retval.start = input.LT(1);
 
 
-        Object root_0 = null;
+        CommonTree root_0 = null;
 
         Token char_literal35=null;
         Token char_literal37=null;
@@ -1209,31 +1164,26 @@ public TreeAdaptor getTreeAdaptor() {
         FDLParser.fighterAttribute_return fighterAttribute36 =null;
 
 
-        Object char_literal35_tree=null;
-        Object char_literal37_tree=null;
+        CommonTree char_literal35_tree=null;
+        CommonTree char_literal37_tree=null;
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:9: ( fighterName '{' ( fighterAttribute )* '}' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:11: fighterName '{' ( fighterAttribute )* '}'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:9: ( fighterName '{' ! ( fighterAttribute )* '}' !)
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:11: fighterName '{' ! ( fighterAttribute )* '}' !
             {
-            root_0 = (Object)adaptor.nil();
+            root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_fighterName_in_fighter807);
+            pushFollow(FOLLOW_fighterName_in_fighter837);
             fighterName34=fighterName();
 
             state._fsp--;
 
             adaptor.addChild(root_0, fighterName34.getTree());
 
-            char_literal35=(Token)match(input,40,FOLLOW_40_in_fighter809); 
-            char_literal35_tree = 
-            (Object)adaptor.create(char_literal35)
-            ;
-            adaptor.addChild(root_0, char_literal35_tree);
+            char_literal35=(Token)match(input,40,FOLLOW_40_in_fighter839); 
 
-
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:27: ( fighterAttribute )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:28: ( fighterAttribute )*
             loop7:
             do {
                 int alt7=2;
@@ -1246,9 +1196,9 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt7) {
             	case 1 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:27: fighterAttribute
+            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:28: fighterAttribute
             	    {
-            	    pushFollow(FOLLOW_fighterAttribute_in_fighter811);
+            	    pushFollow(FOLLOW_fighterAttribute_in_fighter842);
             	    fighterAttribute36=fighterAttribute();
 
             	    state._fsp--;
@@ -1264,26 +1214,21 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            char_literal37=(Token)match(input,41,FOLLOW_41_in_fighter814); 
-            char_literal37_tree = 
-            (Object)adaptor.create(char_literal37)
-            ;
-            adaptor.addChild(root_0, char_literal37_tree);
-
+            char_literal37=(Token)match(input,41,FOLLOW_41_in_fighter845); 
 
             }
 
             retval.stop = input.LT(-1);
 
 
-            retval.tree = (Object)adaptor.rulePostProcessing(root_0);
+            retval.tree = (CommonTree)adaptor.rulePostProcessing(root_0);
             adaptor.setTokenBoundaries(retval.tree, retval.start, retval.stop);
 
         }
         catch (RecognitionException re) {
             reportError(re);
             recover(input,re);
-    	retval.tree = (Object)adaptor.errorNode(input, retval.start, input.LT(-1), re);
+    	retval.tree = (CommonTree)adaptor.errorNode(input, retval.start, input.LT(-1), re);
 
         }
 
@@ -1299,38 +1244,38 @@ public TreeAdaptor getTreeAdaptor() {
 
  
 
-    public static final BitSet FOLLOW_IDENT_in_fighterName611 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_characteristic_in_personality620 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_personality622 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_INTEGER_in_personality624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditionType_in_conditionExpression632 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_conditionExpression634 = new BitSet(new long[]{0x000000900E0C1000L});
-    public static final BitSet FOLLOW_conditionExpression_in_conditionExpression636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditionType_in_conditionExpression660 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_28_in_conditionExpression662 = new BitSet(new long[]{0x000000900E0C1000L});
-    public static final BitSet FOLLOW_conditionExpression_in_conditionExpression664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditionType_in_conditionExpression688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_moveAction_in_moveRule717 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_moveRule721 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_7_in_moveRule723 = new BitSet(new long[]{0x0000006E00120000L});
-    public static final BitSet FOLLOW_moveAction_in_moveRule725 = new BitSet(new long[]{0x0000006E00120100L});
-    public static final BitSet FOLLOW_8_in_moveRule728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fightAction_in_fightRule735 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_fightRule739 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_7_in_fightRule741 = new BitSet(new long[]{0x000000018180C000L});
-    public static final BitSet FOLLOW_fightAction_in_fightRule743 = new BitSet(new long[]{0x000000018180C100L});
-    public static final BitSet FOLLOW_8_in_fightRule746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_moveRule_in_rules753 = new BitSet(new long[]{0x000000018181C000L});
-    public static final BitSet FOLLOW_fightRule_in_rules755 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditionExpression_in_behaviour763 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_behaviour765 = new BitSet(new long[]{0x0000006E00130000L});
-    public static final BitSet FOLLOW_rules_in_behaviour767 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_behaviour769 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_personality_in_fighterAttribute795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_behaviour_in_fighterAttribute799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fighterName_in_fighter807 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_fighter809 = new BitSet(new long[]{0x000002906E6C1000L});
-    public static final BitSet FOLLOW_fighterAttribute_in_fighter811 = new BitSet(new long[]{0x000002906E6C1000L});
-    public static final BitSet FOLLOW_41_in_fighter814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_fighterName632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_characteristic_in_personality641 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_personality643 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_INTEGER_in_personality646 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditionType_in_conditionExpression654 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_conditionExpression656 = new BitSet(new long[]{0x000000900E0C1000L});
+    public static final BitSet FOLLOW_conditionExpression_in_conditionExpression659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditionType_in_conditionExpression683 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_28_in_conditionExpression685 = new BitSet(new long[]{0x000000900E0C1000L});
+    public static final BitSet FOLLOW_conditionExpression_in_conditionExpression688 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditionType_in_conditionExpression712 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_moveAction_in_moveRule741 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_moveRule745 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_7_in_moveRule747 = new BitSet(new long[]{0x0000006E00120000L});
+    public static final BitSet FOLLOW_moveAction_in_moveRule750 = new BitSet(new long[]{0x0000006E00120100L});
+    public static final BitSet FOLLOW_8_in_moveRule753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fightAction_in_fightRule761 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_fightRule765 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_7_in_fightRule767 = new BitSet(new long[]{0x000000018180C000L});
+    public static final BitSet FOLLOW_fightAction_in_fightRule770 = new BitSet(new long[]{0x000000018180C100L});
+    public static final BitSet FOLLOW_8_in_fightRule773 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_moveRule_in_rules781 = new BitSet(new long[]{0x000000018181C000L});
+    public static final BitSet FOLLOW_fightRule_in_rules783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditionExpression_in_behaviour791 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_behaviour793 = new BitSet(new long[]{0x0000006E00130000L});
+    public static final BitSet FOLLOW_rules_in_behaviour796 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_behaviour798 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_personality_in_fighterAttribute825 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_behaviour_in_fighterAttribute829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fighterName_in_fighter837 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_fighter839 = new BitSet(new long[]{0x000002906E6C1000L});
+    public static final BitSet FOLLOW_fighterAttribute_in_fighter842 = new BitSet(new long[]{0x000002906E6C1000L});
+    public static final BitSet FOLLOW_41_in_fighter845 = new BitSet(new long[]{0x0000000000000002L});
 
 }

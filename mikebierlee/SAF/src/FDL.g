@@ -21,6 +21,7 @@ grammar FDL;
 options {
   language = Java;
   output = AST;
+  ASTLabelType = CommonTree;
 }
 
 @header {
@@ -31,11 +32,13 @@ options {
   package nl.uva.saf.fdl;
 }
 
+
+
+WS : (' ' | '\t' | '\r' | '\n' | '\f')+ {$channel=HIDDEN;};
+
+INTEGER : ('0'..'9')+;
+
 IDENT  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-
-WS : ( ' ' | '\t' | '\r' | '\n' | '\f' )+ {$channel=HIDDEN;};
-
-INTEGER : '0'..'9'+;
 
 characteristic : 'kickPower'
                | 'kickReach'
@@ -68,23 +71,23 @@ fightAction : 'block_low'
             | 'punch_high'
             | 'kick_low'
             | 'kick_high'
-            ;
+            ;          
 
 fighterName : IDENT;
  
-personality : characteristic '=' INTEGER;
+personality : characteristic '='! INTEGER;
 
-conditionExpression : conditionType 'and' conditionExpression
-                    | conditionType 'or' conditionExpression
+conditionExpression : conditionType 'and'! conditionExpression
+                    | conditionType 'or'! conditionExpression
                     | conditionType
                     ;
 
-moveRule : moveAction | 'choose' '(' moveAction+ ')';
-fightRule : fightAction | 'choose' '(' fightAction+ ')';
+moveRule : moveAction | 'choose' '('! moveAction+ ')'!;
+fightRule : fightAction | 'choose' '('! fightAction+ ')'!;
 rules : moveRule fightRule;
 
-behaviour : conditionExpression '[' rules ']';
+behaviour : conditionExpression '['! rules ']'!;
                   
 fighterAttribute : personality | behaviour;
 
-fighter : fighterName '{' fighterAttribute* '}';
+fighter : fighterName '{'! fighterAttribute* '}'!;
