@@ -31,6 +31,8 @@ public class Rule{
 	
 	@Override
 	public String toString(){
-		return this.condition.toString() + " [ " + this.moveAction.toString() + " " + this.fightAction.toString() + " ]" + "\n"; 
+		return this.condition.toString() + 
+				" [ " + ((this.moveAction == null)?"":this.moveAction.toString()) + 
+				" " + ((this.fightAction == null)?"":this.fightAction.toString()) + " ]" + "\n"; 
 	}
 }

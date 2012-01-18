@@ -18,6 +18,6 @@ public class ORCondition implements ICondition{
 	
 	@Override
 	public String toString(){
-		return this.condition1 + " || " + this.condition2 + "\n";
+		return this.condition1 + " || " + this.condition2;
 	}
 }

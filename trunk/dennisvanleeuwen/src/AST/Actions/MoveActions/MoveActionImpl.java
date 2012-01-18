@@ -14,6 +14,6 @@ public class MoveActionImpl implements IMoveAction{
 	
 	@Override
 	public String toString(){
-		return this.action + "\n";
+		return this.action;
 	}
 }

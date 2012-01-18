@@ -14,6 +14,6 @@ public class FightActionImpl implements IFightAction{
 	
 	@Override
 	public String toString(){
-		return this.action + "\n";
+		return this.action;
 	}
 }
