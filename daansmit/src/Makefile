@@ -1,17 +1,20 @@
 ANTLR=../lib/antlr-3.4-complete.jar
 
 
-all: SAF.class
+all: Main.class
 
-SAF.class: SAF.java SAFLexer.java SAFParser.java
-	javac -cp .:$(ANTLR) SAF.java SAFLexer.java SAFParser.java
+Main.class: Main.java SAFLexer.java SAFParser.java SAFChecker.java
+	javac -cp .:$(ANTLR) Main.java SAFLexer.java SAFParser.java SAFChecker.java
 
-%Lexer.java %Parser.java: SAF.g SAFClasses.class
+%Lexer.java %Parser.java: SAF.g SAFTree.class
 	java -jar $(ANTLR) $*.g
 
-SAFClasses.class: SAFClasses.java
-	javac -cp .:$(ANTLR) SAFClasses.java
+SAFChecker.java: SAFChecker.g SAFException.class
+	java -jar $(ANTLR) SAFChecker.g
+
+%Tree.class %Exception.class: SAF.java
+	javac -cp .:$(ANTLR) $*.java
 
 
 clean:
-	rm -rf *.class *~ *.tokens SAFLexer.java SAFParser.java
+	rm -rf *.class *~ *.tokens *.dot *.pdf SAFLexer.java SAFParser.java SAFChecker.java
