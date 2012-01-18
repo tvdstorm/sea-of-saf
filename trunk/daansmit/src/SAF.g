@@ -1,11 +1,13 @@
 grammar SAF;
 
-options {
+options
+{
     output = AST;
 }
 
 
-tokens {
+tokens
+{
     AND     = 'and';
     OR      = 'or';
     EQUALS  = '=';
@@ -15,14 +17,16 @@ tokens {
     RCURLY  = '}';
     LSQUARE = '[';
     RSQUARE = ']';
+    CHOOSE  = 'choose';
 
 
+    ACTION;
     BEHAVIOUR;
     BOT;
     CHARACTERISTIC;
-    CHOOSE;
     CONDITION;
     PERSONALITY;
+    RULE;
     STATE;
 }
 
@@ -42,7 +46,7 @@ DIGIT
 
 bot
     : name=STRING LCURLY personality behaviour RCURLY ->
-        ^(BOT<Bot>[$name.text] personality behaviour)
+        ^(BOT<Bot>[$name] personality behaviour)
     ;
 
 personality
@@ -51,7 +55,7 @@ personality
 
 characteristic
     : name=STRING EQUALS value=DIGIT ->
-        ^(CHARACTERISTIC<Characteristic>[$name.text, $value.text])
+        ^(CHARACTERISTIC<Characteristic>[$name] DIGIT<Digit>[$value])
     ;
 
 behaviour
@@ -59,28 +63,35 @@ behaviour
     ;
 
 rule
-    : condition LSQUARE moveAction fightAction RSQUARE ->
-        ^(CONDITION<Condition> moveAction fightAction)
+    : condition LSQUARE action RSQUARE -> ^(RULE<Rule> condition action)
     ;
 
 condition
-    : state AND^ state
-    | state OR^ state
+    : stateExpression -> ^(CONDITION<Condition> stateExpression)
+    ;
+
+stateExpression
+    : state AND<And>^ stateExpression
+    | state OR<Or>^ stateExpression
     | state
     ;
 
 state
-    : id=STRING -> STATE<State>[$id.text]
+    : id=STRING -> STATE<State>[$id]
+    ;
+
+action
+    : moveAction fightAction -> ^(ACTION<Action> moveAction fightAction)
     ;
 
 moveAction
-    : 'choose' LPAREN a=STRING b=STRING RPAREN ->
-        ^(CHOOSE<Choose> STRING<MoveAction>[$a.text] STRING<FightAction>[$b.text])
-    | action=STRING -> STRING<MoveAction>[$action.text]
+    : CHOOSE LPAREN a=STRING b=STRING RPAREN ->
+        ^(CHOOSE<Choose> STRING<MoveAction>[$a] STRING<FightAction>[$b])
+    | a=STRING -> STRING<MoveAction>[$a]
     ;
 
 fightAction
-    : 'choose' LPAREN a=STRING b=STRING RPAREN ->
-        ^(CHOOSE<Choose> STRING<FightAction>[$a.text] STRING<FightAction>[$b.text])
-    | action=STRING -> STRING<FightAction>[$action.text]
+    : CHOOSE LPAREN a=STRING b=STRING RPAREN ->
+        ^(CHOOSE<Choose> STRING<FightAction>[$a] STRING<FightAction>[$b])
+    | a=STRING -> STRING<FightAction>[$a]
     ;
