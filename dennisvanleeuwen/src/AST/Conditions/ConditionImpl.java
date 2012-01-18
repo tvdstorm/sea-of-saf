@@ -4,8 +4,8 @@ import AST.ICondition;
 
 public class ConditionImpl implements ICondition{
 	private String condition;
-	public ConditionImpl(String con){
-		this.condition = con;
+	public ConditionImpl(String condition){
+		this.condition = condition;
 	}
 	
 	@Override
@@ -15,6 +15,6 @@ public class ConditionImpl implements ICondition{
 	
 	@Override
 	public String toString(){
-		return this.condition + "\n";
+		return this.condition;
 	}
 }

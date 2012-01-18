@@ -23,9 +23,10 @@ public class ChooseAction implements IAction{
 	
 	@Override
 	public String toString(){
-		String s = "";
+		String s = "Choose => {\n";
 		for(IAction action: actions)
 			s += action.toString() + "\n";
-		return this.actions.toString();
+		s += "}\n";
+		return s;
 	}
 }
