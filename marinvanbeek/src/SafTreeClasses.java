@@ -5,6 +5,7 @@ import org.antlr.stringtemplate.*;
 import java.lang.Character;
 import java.lang.Integer;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 //import used_classes;
@@ -73,7 +74,7 @@ class SafTreeAttribute extends SafTreeNode
     /* Attribute value should be between 0 and 11. */
     public boolean isWellFormed()
     {
-        List<String> legal_attributes = Arrays.asList(SafAttribute.LEGAL);
+        List<String> legal_attributes = SafAttribute.LEGAL;
 
         if (!(1 <= value) || !(value <= 10))
         {
@@ -98,65 +99,6 @@ class SafTreeAttribute extends SafTreeNode
     }
 }
 
-class SafTreeBehaviour extends SafTreeNode
-{
-    public SafTreeBehaviour(int tType, String name)
-    {
-        token = new CommonToken(tType, name);
-    }
-
-    /* Required condition should be present. */
-    public boolean isWellFormed()
-    {
-        List children = getChildren();
-        List<String> required_conditions = 
-                Arrays.asList(SafCondition.REQUIRED);
-
-        for (String required : required_conditions)
-        {
-            for (Object child : children)
-                if ((child instanceof SafTreeTactic) && 
-                    ((SafTreeTactic)child).hasCondition(required))
-                    break;
-            else
-            {
-                System.err.println("Required condition: '" + required + "' " + 
-                                   "not found.");
-                //return false;
-            }
-        }
-
-        return true;
-    }
-}
-
-class SafTreeTactic extends SafTreeNode
-{
-    public SafTreeTactic(int tType, String name)
-    {
-        token = new CommonToken(tType, name);
-    }
-
-    public boolean isWellFormed()
-    {
-        return super.isWellFormed();
-    }
-
-    public boolean hasCondition(String condition)
-    {
-        if (getChildren().get(0) instanceof SafTreeCondition)
-        {
-            SafTreeCondition conditionChild =
-                    (SafTreeCondition)getChildren().get(0);
-
-            System.out.println(conditionChild.getText());
-            return conditionChild.getText().equals(condition);
-        }
-
-        return false;
-    }
-}
-
 class SafTreeMove extends SafTreeNode
 {
     public SafTreeMove(int tType, String name)
@@ -167,7 +109,7 @@ class SafTreeMove extends SafTreeNode
     /* Actions should be in known actions. */
     public boolean isWellFormed()
     {
-        List<String> legal_actions = Arrays.asList(SafMove.LEGAL);
+        List<String> legal_actions = SafMove.LEGAL;
 
         if (!legal_actions.contains(getText()))
         {
@@ -189,7 +131,7 @@ class SafTreeAttack extends SafTreeNode
     /* Actions should be in known actions. */
     public boolean isWellFormed()
     {
-        List<String> legal_actions = Arrays.asList(SafAttack.LEGAL);
+        List<String> legal_actions = SafAttack.LEGAL;
 
         if (!legal_actions.contains(getText()))
         {
@@ -198,6 +140,67 @@ class SafTreeAttack extends SafTreeNode
         }
 
         return true;
+    }
+}
+
+class SafTreeBehaviour extends SafTreeNode
+{
+    public SafTreeBehaviour(int tType, String name)
+    {
+        token = new CommonToken(tType, name);
+    }
+
+    /* Required condition should be present. */
+    public boolean isWellFormed()
+    {
+        List children = getChildren();
+        List<String> required_conditions = SafCondition.REQUIRED;
+        boolean foundRequiredCondition = false;
+
+        for (String required : required_conditions)
+        {
+            for (Object child : children)
+                if ((child instanceof SafTreeTactic) && 
+                    ((SafTreeTactic)child).hasCondition(required))
+                    foundRequiredCondition = true;
+
+            if (!foundRequiredCondition)
+            {
+                System.err.println("Required condition: '" + required + "' " + 
+                                   "not found.");
+                return false;
+            }
+
+            foundRequiredCondition = false;
+        }
+
+        return super.isWellFormed();
+    }
+}
+
+class SafTreeTactic extends SafTreeNode
+{
+    public SafTreeTactic(int tType, String name)
+    {
+        token = new CommonToken(tType, name);
+    }
+
+    public boolean isWellFormed()
+    {
+        return super.isWellFormed();
+    }
+
+    public boolean hasCondition(String condition)
+    {
+        if (getChildren().get(0) instanceof SafTreeComposedCondition)
+        {
+            SafTreeComposedCondition conditionChild =
+                    (SafTreeComposedCondition)getChildren().get(0);
+
+            return conditionChild.hasCondition(condition);
+        }
+
+        return false;
     }
 }
 
@@ -211,17 +214,20 @@ class SafTreeComposedCondition extends SafTreeNode
     /* Condition name should in known conditions. */
     public boolean isWellFormed()
     {
-        List<String> legal_conditions = 
-                Arrays.asList(SafCondition.LEGAL);
+        return super.isWellFormed();
+    }
 
-        if (!legal_conditions.contains(getText()))
+    public boolean hasCondition(String condition)
+    {
+        if (getChildren().get(0) instanceof SafTreeCondition)
         {
-            System.err.println("Illegal condition: '" + token.getText() + 
-                               "'.");
-            return false;
+            SafTreeCondition conditionChild =
+                    (SafTreeCondition)getChildren().get(0);
+
+            return conditionChild.getText().equals(condition);
         }
 
-        return true;
+        return false;
     }
 }
 
@@ -236,7 +242,8 @@ class SafTreeCondition extends SafTreeNode
     public boolean isWellFormed()
     {
         List<String> legal_conditions = 
-                Arrays.asList(SafCondition.LEGAL);
+                new ArrayList<String>(SafCondition.LEGAL);
+        legal_conditions.addAll(SafCondition.REQUIRED);
 
         if (!legal_conditions.contains(getText()))
         {

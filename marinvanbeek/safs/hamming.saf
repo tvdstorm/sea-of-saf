@@ -4,7 +4,7 @@ hamming
   punch_reach = 7
   kick_power  = 4
   punch_power = 5
-  far and stronger [move block_high]
+  far and stronger [stand block_high]
   near or much_stronger [walk_away block_low]
   always [stand block_high]
 }
