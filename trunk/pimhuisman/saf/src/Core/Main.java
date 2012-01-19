@@ -6,9 +6,33 @@ import Antler.*;
 
 public class Main {
 
+	public static void LoadFighter(String fileName) {
+		try {
+			CharStream inputStream = new ANTLRFileStream(fileName);
+			
+			SAFLexer lexer = new SAFLexer(inputStream);
+
+			TokenStream tokenStream = new CommonTokenStream(lexer);
+			SAFParser parser = new SAFParser(tokenStream);
+
+			try {
+				parser.fighter();
+				
+			} catch (RecognitionException exc) {
+				exc.printStackTrace();
+			}
+		} catch (IOException exc) {
+			exc.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) throws Exception {
 		
-		String calculationExpression = null;
+		System.out.println("Loading file...");
+		LoadFighter("data/fighter.saf");
+		System.out.println("File loaded.");
+		
+		/*String calculationExpression = null;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		while ( true ) {
@@ -35,7 +59,7 @@ public class Main {
 				System.out.println(tokenStream.get(i).toString());
 			}
 		
-		}
+		}*/
 		
 	}
 	

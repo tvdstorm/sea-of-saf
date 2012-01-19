@@ -1,0 +1,9 @@
+fighter
+{
+punchReach=9
+punchPower=9
+kickReach=9
+kickPower=9
+far[run_towards choose(block_low punch_high)]
+always[choose(walk_towards run_towards) choose(punch_low block_high)]
+}
