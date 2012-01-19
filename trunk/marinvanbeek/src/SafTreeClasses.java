@@ -3,6 +3,7 @@ import org.antlr.runtime.tree.*;
 import org.antlr.stringtemplate.*;
 
 import java.lang.Character;
+import java.lang.Integer;
 import java.util.List;
 import java.util.Arrays;
 
@@ -63,10 +64,10 @@ class SafTreeAttribute extends SafTreeNode
 {
     public int value = -1;
     
-    public SafTreeAttribute(int tType, String name, int value)
+    public SafTreeAttribute(int tType, String name, String value)
     {
         token = new CommonToken(tType, name);
-        this.value = value;
+        this.value = Integer.parseInt(value);
     }
 
     /* Attribute value should be between 0 and 11. */
@@ -74,11 +75,26 @@ class SafTreeAttribute extends SafTreeNode
     {
         List<String> legal_attributes = Arrays.asList(SafAttribute.LEGAL);
 
-        if (!(1 <= value) || !(value <= 10) ||
-            !legal_attributes.contains(token.getText()))
+        if (!(1 <= value) || !(value <= 10))
+        {
+            System.err.println("Attribute value: " + value + " not 1-10.");
+            System.err.println(token.getText());
             return false;
+        }
+
+        if (!legal_attributes.contains(token.getText()))
+        {
+            System.err.println("Illegal attribute name: '" + token.getText() +
+                                "'.");
+            return false;
+        }
 
         return true;
+    }
+
+    public String toString()
+    {
+        return token.getText() + "=" + value;
     }
 }
 
@@ -99,11 +115,15 @@ class SafTreeBehaviour extends SafTreeNode
         for (String required : required_conditions)
         {
             for (Object child : children)
-                if ((child instanceof SafCondition) && 
-                    ((CommonTree)child).getText().equals(required))
+                if ((child instanceof SafTreeTactic) && 
+                    ((SafTreeTactic)child).hasCondition(required))
                     break;
             else
-                return false;
+            {
+                System.err.println("Required condition: '" + required + "' " + 
+                                   "not found.");
+                //return false;
+            }
         }
 
         return true;
@@ -121,25 +141,19 @@ class SafTreeTactic extends SafTreeNode
     {
         return super.isWellFormed();
     }
-}
 
-class SafTreeCondition extends SafTreeNode
-{
-    public SafTreeCondition(int tType, String name)
+    public boolean hasCondition(String condition)
     {
-        token = new CommonToken(tType, name);
-    }
+        if (getChildren().get(0) instanceof SafTreeCondition)
+        {
+            SafTreeCondition conditionChild =
+                    (SafTreeCondition)getChildren().get(0);
 
-    /* Condition name should in known conditions. */
-    public boolean isWellFormed()
-    {
-        List<String> legal_conditions = 
-                Arrays.asList(SafCondition.LEGAL);
+            System.out.println(conditionChild.getText());
+            return conditionChild.getText().equals(condition);
+        }
 
-        if (!legal_conditions.contains(getText()))
-            return false;
-
-        return true;
+        return false;
     }
 }
 
@@ -156,7 +170,10 @@ class SafTreeMove extends SafTreeNode
         List<String> legal_actions = Arrays.asList(SafMove.LEGAL);
 
         if (!legal_actions.contains(getText()))
+        {
+            System.err.println("Illegal move: '" + token.getText() + "'.");
             return false;
+        }
 
         return true;
     }
@@ -175,9 +192,68 @@ class SafTreeAttack extends SafTreeNode
         List<String> legal_actions = Arrays.asList(SafAttack.LEGAL);
 
         if (!legal_actions.contains(getText()))
+        {
+            System.err.println("Illegal attack: '" + token.getText() + "'.");
             return false;
+        }
 
         return true;
+    }
+}
+
+class SafTreeComposedCondition extends SafTreeNode
+{
+    public SafTreeComposedCondition(int tType, String name)
+    {
+        token = new CommonToken(tType, name);
+    }
+
+    /* Condition name should in known conditions. */
+    public boolean isWellFormed()
+    {
+        List<String> legal_conditions = 
+                Arrays.asList(SafCondition.LEGAL);
+
+        if (!legal_conditions.contains(getText()))
+        {
+            System.err.println("Illegal condition: '" + token.getText() + 
+                               "'.");
+            return false;
+        }
+
+        return true;
+    }
+}
+
+class SafTreeCondition extends SafTreeNode
+{
+    public SafTreeCondition(int tType, String name)
+    {
+        token = new CommonToken(tType, name);
+    }
+
+    /* Condition name should in known conditions. */
+    public boolean isWellFormed()
+    {
+        List<String> legal_conditions = 
+                Arrays.asList(SafCondition.LEGAL);
+
+        if (!legal_conditions.contains(getText()))
+        {
+            System.err.println("Illegal condition: '" + token.getText() + 
+                               "'.");
+            return false;
+        }
+
+        return true;
+    }
+}
+
+class SafTreeLogic extends SafTreeNode
+{
+    public SafTreeLogic(int tType, String name)
+    {
+        token = new CommonToken(tType, name);
     }
 }
 

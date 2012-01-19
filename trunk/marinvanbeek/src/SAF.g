@@ -22,9 +22,11 @@ tokens {
     ATTRIBUTE;
     BEHAVIOUR;
     TACTIC;
-    CONDITION;
     MOVE;
     ATTACK;
+    COMPOSED_CONDITION;
+    CONDITION;
+    LOGIC;
 }
 
 @header {
@@ -50,29 +52,37 @@ parse
     ;
 
 super_awesome_fighter 
-    : CURLY_OPEN attributes behaviour CURLY_CLOSE EOF -> 
-            ^(ATTRIBUTES<SafTreeAttributes>[$attributes.text] attributes)
-            ^(BEHAVIOUR behaviour)
+    : CURLY_OPEN attribute+ behaviour CURLY_CLOSE EOF -> 
+            ^(ATTRIBUTES<SafTreeAttributes>["_Attributes"] attribute+)
+            ^(BEHAVIOUR<SafTreeBehaviour>["_Behaviour"] behaviour)
     ;
 
-attributes
-    : (attribute=STRING EQUAL LEVEL)+ -> 
-            (ATTRIBUTE<SafTreeAttribute>[$attribute.text, LEVEL] LEVEL)+
+attribute
+    : (name=STRING EQUAL value=LEVEL) -> 
+            ATTRIBUTE<SafTreeAttribute>[$name.text, $value.text]
     ;
 
 behaviour
-    : tactic+ -> ^(TACTIC<SafTreeTactic>["Tactic"] tactic+)
+    : tactic+ -> ^(TACTIC<SafTreeTactic>["_Tactic"] tactic)+
     ;
 
 tactic
-    : complex_condition SQUARE_OPEN move=STRING attack=STRING SQUARE_CLOSE ->
-            ^(CONDITION<SafTreeCondition>["Condition"] )
-            ^(MOVE<SafTreeMove>[$move.text] )
-            ^(ATTACK<SafTreeAttack>[$attack.text] )
+    : composed_condition SQUARE_OPEN move=STRING attack=STRING SQUARE_CLOSE ->
+            ^(COMPOSED_CONDITION<SafTreeComposedCondition>["_Condition"] composed_condition)
+            ^(MOVE<SafTreeMove>[$move.text])
+            ^(ATTACK<SafTreeAttack>[$attack.text])
     ;
 
-complex_condition
-    : (condition=STRING ((AND|OR)^ condition=STRING)*) 
+composed_condition
+    : (condition (logic^ condition)*)
+    ;
+
+condition
+    : name=STRING -> CONDITION<SafTreeCondition>[$name.text]
+    ;
+
+logic
+    : (var=AND|var=OR) -> LOGIC<SafTreeLogic>[$var.text]
     ;
  
 
