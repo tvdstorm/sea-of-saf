@@ -29,7 +29,7 @@ public class Main {
 	 */
 	public static void main(String[] args) throws IOException {
 		IFighterLoader loader = new ANTLFighterLoader();
-		loader.LoadFighter("data/chicken.saf");
+		loader.LoadFighter("data/challengingFighter.saf");
 
 		System.out.println("Done!");
 	}

@@ -20,31 +20,28 @@ grammar FDL;
 
 options {
   language = Java;
-  output = AST;
-  ASTLabelType = CommonTree;
+  //output = AST;
+  //ASTLabelType = CommonTree;
 }
 
 @header {
   package nl.uva.saf.fdl;
+  import nl.uva.saf.fdl.ast.*;
 }
 
 @lexer::header {
   package nl.uva.saf.fdl;
+  import nl.uva.saf.fdl.ast.*;
 }
 
 WS : (' ' | '\t' | '\r' | '\n' | '\f')+ {$channel=HIDDEN;};
+VALUE : ('1'..'9') | '10';
+CHOOSE : 'choose';
+AND : 'and';
+OR : 'or';
+ASSIGN : '=';
 
-INTEGER : ('0'..'9')+;
-
-IDENT  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-
-characteristic : 'kickPower'
-               | 'kickReach'
-               | 'punchPower'
-               | 'punchReach'
-               ;
-                
-conditionType : 'always'
+CONDITIONTYPE : 'always'
               | 'near'
               | 'far'
               | 'much_stronger'
@@ -54,7 +51,7 @@ conditionType : 'always'
               | 'much_weaker'
               ;
               
-moveAction : 'walk_towards'
+MOVEACTION : 'walk_towards'
            | 'walk_away'
            | 'run_towards'
            | 'run_away'
@@ -63,31 +60,42 @@ moveAction : 'walk_towards'
            | 'stand'
            ;
            
-fightAction : 'block_low'
+FIGHTACTION : 'block_low'
             | 'block_high'
             | 'punch_low'
             | 'punch_high'
             | 'kick_low'
             | 'kick_high'
-            ;          
-
-fighterName : IDENT;
+            ;        
+            
+IDENT  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;  
  
-personality : characteristic '='! INTEGER;
+personality returns [Characteristic characteristic]
+  : IDENT ASSIGN VALUE {$characteristic = new Characteristic($IDENT.text, $VALUE.text);};
+                    
+conditionAnd : CONDITIONTYPE (AND CONDITIONTYPE)*;
+conditionOr : conditionAnd (OR conditionAnd)*; 
 
-conditionExpression : conditionType 'and'! conditionExpression
-                    | conditionType 'or'! conditionExpression
-                    | conditionType
-                    ;
-
-moveChoice : 'choose'! '('! moveAction+ ')'!;
-fightChoice : 'choose'! '('! fightAction+ ')'!;
-moveRule : moveAction | moveChoice;
-fightRule : fightAction | fightChoice;
+moveChoice : CHOOSE '(' MOVEACTION+ ')';
+fightChoice : CHOOSE '(' FIGHTACTION+ ')';
+moveRule : MOVEACTION | moveChoice;
+fightRule : FIGHTACTION | fightChoice;
 rules : moveRule fightRule;
 
-behaviour : conditionExpression '['! rules ']'!;
+behaviour : conditionOr '[' rules ']';
                   
-fighterAttribute : personality | behaviour;
+fighterAttribute returns [FighterAttribute attribute]
+  : personality   {attribute = $personality.characteristic;}
+  | behaviour     {attribute = null;}
+  ;
 
-fighter : fighterName '{'! fighterAttribute* '}'!;
+fighter returns [Fighter fighter] 
+	@init {
+	  fighter = new Fighter("",new ArrayList<ITreeNode>());
+	}
+  : IDENT '{' (fighterAttribute {fighter.addAttribute($fighterAttribute.attribute);})* '}'   {fighter.setName($IDENT.text);}
+  ;
+
+parse returns [ITreeNode tree]
+  : fighter EOF   {tree = $fighter.fighter;}
+  ;

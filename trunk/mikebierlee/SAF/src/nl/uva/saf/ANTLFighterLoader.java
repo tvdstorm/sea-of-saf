@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import nl.uva.saf.fdl.FDLLexer;
 import nl.uva.saf.fdl.FDLParser;
+import nl.uva.saf.fdl.ast.ITreeNode;
 
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
@@ -41,7 +42,8 @@ public class ANTLFighterLoader implements IFighterLoader {
 			FDLParser parser = new FDLParser(tokenStream);
 
 			try {
-				parser.fighter();
+				ITreeNode tree = parser.parse();
+				System.out.println(tree);
 				
 			} catch (RecognitionException e) {
 				e.printStackTrace();
