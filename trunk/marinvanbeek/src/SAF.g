@@ -20,10 +20,10 @@ tokens {
     SAF;
     ATTRIBUTES;
     ATTRIBUTE;
-    BEHAVIOUR;
-    TACTIC;
     MOVE;
     ATTACK;
+    BEHAVIOUR;
+    TACTIC;
     COMPOSED_CONDITION;
     CONDITION;
     LOGIC;
