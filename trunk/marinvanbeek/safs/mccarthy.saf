@@ -1,8 +1,0 @@
-mccarthy
-{
-  kick_reach  = 3
-  punch_reach = 6
-  kick_power  = 7
-  punch_power = 2
-  always [walk_away kick_high]
-}

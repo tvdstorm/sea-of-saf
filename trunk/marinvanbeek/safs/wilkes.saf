@@ -1,8 +1,0 @@
-wilkes
-{
-  kick_reach  = 5
-  punch_reach = 5
-  kick_power  = 7
-  punch_power = 9
-  always [stand kick_high]
-}
