@@ -18,14 +18,17 @@ public Contribution exportXml() {
 }
 
 private void performExport(Tree tree, loc selection) {
-    str exportLocation = prompt("Export location:");
-    str bdlFileLocation = split("|", "<selection>")[1];
-    bdlFileLocation = replaceAll(bdlFileLocation, "%2F", "/");
+    str bdlStringLocation = selection.uri;
+    bdlStringLocation = replaceAll(bdlStringLocation, "%2F", "/");
+    loc bdlFileLocation = |file:///tmp|; //Ugly, but needed.
+    bdlFileLocation.uri = bdlStringLocation;
     
-    println(fileLocation);
+    str xmlStringLocation = prompt("Export XML to path:");
+    loc xmlFileLocation = |file:///tmp|; //Ugly, but needed.
+    xmlFileLocation.uri = xmlStringLocation;
     
-    //parseTree = parse(#Language::Bot, |project://| + bdlFileLocation);
-    //ast = implode(#Ast::Bot, parseTree);
-    //model convertAstToModel(ast);
-    //serializeBot(model, exportLocation);
+    parseTree = parse(#Language::Bot, bdlFileLocation);
+    Bot ast = implode(#Bot, parseTree);
+    ModelBot model = convertAstToModel(ast);
+    return serializeBot(model, xmlFileLocation);
 }

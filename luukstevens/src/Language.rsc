@@ -19,7 +19,7 @@ syntax BehaviourRule
 
 syntax Condition 
     = left orCondition : Condition firstCondition "or" Condition secondCondition
-    | @category="Identifier" simpleCondition : Id condition 
+    | simpleCondition : Id condition 
     > left andCondition : Condition firstCondition "and" Condition secondCondition; 
     
 syntax MoveAction

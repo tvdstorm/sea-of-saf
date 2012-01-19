@@ -4,26 +4,26 @@ import Model;
 import Ast;
 import lang::xml::DOM;
 
-public void serializeBot(Model::Bot bot, loc location) {
+public void serializeBot(ModelBot bot, loc location) {
     Node xmlFighter = toXmlNodeTree(bot);
     Node document = document(xmlFighter);
     writeXMLPretty(location, document);
 }
 
-public Node toXmlNodeTree(Model::Bot bot) {
+public Node toXmlNodeTree(ModelBot bot) {
     Node name       = element("name", [charData(bot.name)]);
     Node punchReach = element("punchReach", [charData("<bot.punchReach>")]);
     Node punchPower = element("punchPower", [charData("<bot.punchPower>")]);
     Node kickReach  = element("kickReach", [charData("<bot.kickReach>")]);
     Node kickPower  = element("kickPower", [charData("<bot.kickPower>")]);
     
-    return element("fighter", [name, punchReach, punchPower, kickReach, kickPower, behaviourToXmlNodeTree(bot)]);
+    return element("bot", [name, punchReach, punchPower, kickReach, kickPower, behaviourToXmlNodeTree(bot)]);
 }
 
-public Node behaviourToXmlNodeTree(Model::Bot bot) {
+public Node behaviourToXmlNodeTree(ModelBot bot) {
    list[Node] behaviourRuleNodes = []; 
    
-   for(BehaviourRule behaviourRule <- bot.behaviourRules) {
+   for(ModelBehaviourRule behaviourRule <- bot.behaviourRules) {
         
         Node moveActionNode   = element("moveActions", convertListToNodes("moveAction", behaviourRule.moveActions));
         Node fightActionNode  = element("fightActions", convertListToNodes("fightAction", behaviourRule.moveActions));

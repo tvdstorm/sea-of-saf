@@ -5,28 +5,27 @@ import List;
 
 private int defaultCharacteristicValue = 5;
 
-data Bot            = bot(str name, int punchReach, int punchPower, int kickReach, int kickPower, 
-                        list[BehaviourRule] behaviourRules);
+data ModelBot            = modelBot(str name, int punchReach, int punchPower, int kickReach, int kickPower, 
+                        list[ModelBehaviourRule] behaviourRules);
 
-data BehaviourRule  = behaviourRule(Condition condition, list[str] moveActions, list[str] fightActions);
+data ModelBehaviourRule  = modelBehaviourRule(Condition condition, list[str] moveActions, list[str] fightActions);
 
-public Bot convertAstToModel(Ast::Bot astBot) {
-    Bot modelBot = bot( astBot.name,    
-                        getCharacteristicValue("punchReach", astBot),
-                        getCharacteristicValue("punchPower", astBot),
-                        getCharacteristicValue("kickReach", astBot),
-                        getCharacteristicValue("kickPower", astBot),
-                        convertBehaviourRules(astBot.behaviourRules));
+public ModelBot convertAstToModel(Bot bot) {
+    ModelBot modelBot = modelBot( bot.name,    
+                        getCharacteristicValue("punchReach", bot),
+                        getCharacteristicValue("punchPower", bot),
+                        getCharacteristicValue("kickReach", bot),
+                        getCharacteristicValue("kickPower", bot),
+                        convertBehaviourRules(bot.behaviourRules));
                         
     return modelBot;
 }
 
-private list[BehaviourRule] convertBehaviourRules(list[Ast::BehaviourRule] astBehaviourRules) {
-    list[BehaviourRule] modelBehaviourRules = [];
+private list[ModelBehaviourRule] convertBehaviourRules(list[BehaviourRule] behaviourRules) {
+    list[ModelBehaviourRule] modelBehaviourRules = [];
     
-    for(Ast::BehaviourRule astBehaviourRule <- astBehaviourRules) {
-        //Add condition
-        BehaviourRule modelBehaviourRule = behaviourRule(astBehaviourRule.condition, [], []);
+    for(BehaviourRule astBehaviourRule <- behaviourRules) {
+        ModelBehaviourRule modelBehaviourRule = modelBehaviourRule(astBehaviourRule.condition, [], []);
         
         visit(astBehaviourRule) {
             case chooseMoveAction(list[str] moveActions): {
