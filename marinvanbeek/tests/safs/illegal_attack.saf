@@ -1,0 +1,4 @@
+illegal_attack
+{
+    always [jump illegal_round_house_kick]
+}

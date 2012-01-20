@@ -1,0 +1,4 @@
+illegal_move
+{
+    always [illegal_fly punch_low]
+}

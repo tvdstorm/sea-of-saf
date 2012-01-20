@@ -1,0 +1,5 @@
+illegal_attribute_name
+{
+    illegal_reach = 9
+    always [jump punch_low]
+}

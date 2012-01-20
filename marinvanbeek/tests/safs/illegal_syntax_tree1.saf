@@ -1,0 +1,5 @@
+illegal_syntax_tree1
+{
+    always [run_towards kick_low]
+    kick_reach = 10
+}
