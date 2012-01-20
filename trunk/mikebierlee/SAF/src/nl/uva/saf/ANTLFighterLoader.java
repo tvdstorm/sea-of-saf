@@ -33,7 +33,9 @@ import org.antlr.runtime.TokenStream;
 public class ANTLFighterLoader implements IFighterLoader {
 
 	@Override
-	public void LoadFighter(String fileName) {
+	public ITreeNode LoadFighter(String fileName) {
+		ITreeNode loadedTree = null;
+		
 		try {
 			CharStream inputStream = new ANTLRFileStream(fileName);
 			FDLLexer lexer = new FDLLexer(inputStream);
@@ -41,13 +43,15 @@ public class ANTLFighterLoader implements IFighterLoader {
 			TokenStream tokenStream = new CommonTokenStream(lexer);
 			FDLParser parser = new FDLParser(tokenStream);
 		
-			ITreeNode tree = parser.parse();
-			System.out.println(tree);
+			loadedTree = parser.parse();
+			System.out.println(loadedTree);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
+		
+		return loadedTree;
 	}
 }
