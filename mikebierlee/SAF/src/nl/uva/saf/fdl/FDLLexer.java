@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-20 15:00:17
+// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-20 22:33:12
 
   package nl.uva.saf.fdl;
   import nl.uva.saf.fdl.ast.*;
@@ -12,22 +12,23 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class FDLLexer extends Lexer {
     public static final int EOF=-1;
-    public static final int T__14=14;
     public static final int T__15=15;
     public static final int T__16=16;
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__19=19;
-    public static final int AND=4;
-    public static final int ASSIGN=5;
-    public static final int CHOOSE=6;
-    public static final int CONDITIONTYPE=7;
-    public static final int FIGHTACTION=8;
-    public static final int IDENT=9;
-    public static final int MOVEACTION=10;
-    public static final int OR=11;
-    public static final int VALUE=12;
-    public static final int WS=13;
+    public static final int T__20=20;
+    public static final int ALWAYS=4;
+    public static final int AND=5;
+    public static final int ASSIGN=6;
+    public static final int CHOOSE=7;
+    public static final int CONDITIONTYPE=8;
+    public static final int FIGHTACTION=9;
+    public static final int IDENT=10;
+    public static final int MOVEACTION=11;
+    public static final int OR=12;
+    public static final int VALUE=13;
+    public static final int WS=14;
 
     // delegates
     // delegators
@@ -44,36 +45,15 @@ public class FDLLexer extends Lexer {
     }
     public String getGrammarFileName() { return "C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g"; }
 
-    // $ANTLR start "T__14"
-    public final void mT__14() throws RecognitionException {
-        try {
-            int _type = T__14;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:12:7: ( '(' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:12:9: '('
-            {
-            match('('); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__14"
-
     // $ANTLR start "T__15"
     public final void mT__15() throws RecognitionException {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:13:7: ( ')' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:13:9: ')'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:12:7: ( '(' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:12:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -91,10 +71,10 @@ public class FDLLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:14:7: ( '[' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:14:9: '['
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:13:7: ( ')' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:13:9: ')'
             {
-            match('['); 
+            match(')'); 
 
             }
 
@@ -112,10 +92,10 @@ public class FDLLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:15:7: ( ']' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:15:9: ']'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:14:7: ( '[' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:14:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -133,10 +113,10 @@ public class FDLLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:16:7: ( '{' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:16:9: '{'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:15:7: ( ']' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:15:9: ']'
             {
-            match('{'); 
+            match(']'); 
 
             }
 
@@ -154,6 +134,27 @@ public class FDLLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:16:7: ( '{' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:16:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__19"
+
+    // $ANTLR start "T__20"
+    public final void mT__20() throws RecognitionException {
+        try {
+            int _type = T__20;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:17:7: ( '}' )
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:17:9: '}'
             {
@@ -168,7 +169,7 @@ public class FDLLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__19"
+    // $ANTLR end "T__20"
 
     // $ANTLR start "WS"
     public final void mWS() throws RecognitionException {
@@ -385,54 +386,72 @@ public class FDLLexer extends Lexer {
     }
     // $ANTLR end "ASSIGN"
 
+    // $ANTLR start "ALWAYS"
+    public final void mALWAYS() throws RecognitionException {
+        try {
+            int _type = ALWAYS;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:8: ( 'always' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:10: 'always'
+            {
+            match("always"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "ALWAYS"
+
     // $ANTLR start "CONDITIONTYPE"
     public final void mCONDITIONTYPE() throws RecognitionException {
         try {
             int _type = CONDITIONTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:44:15: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
-            int alt3=8;
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:45:15: ( 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
+            int alt3=7;
             switch ( input.LA(1) ) {
-            case 'a':
+            case 'n':
                 {
                 alt3=1;
                 }
                 break;
-            case 'n':
+            case 'f':
                 {
                 alt3=2;
                 }
                 break;
-            case 'f':
-                {
-                alt3=3;
-                }
-                break;
             case 'm':
                 {
-                int LA3_4 = input.LA(2);
+                int LA3_3 = input.LA(2);
 
-                if ( (LA3_4=='u') ) {
-                    int LA3_8 = input.LA(3);
+                if ( (LA3_3=='u') ) {
+                    int LA3_7 = input.LA(3);
 
-                    if ( (LA3_8=='c') ) {
-                        int LA3_9 = input.LA(4);
+                    if ( (LA3_7=='c') ) {
+                        int LA3_8 = input.LA(4);
 
-                        if ( (LA3_9=='h') ) {
-                            int LA3_10 = input.LA(5);
+                        if ( (LA3_8=='h') ) {
+                            int LA3_9 = input.LA(5);
 
-                            if ( (LA3_10=='_') ) {
-                                int LA3_11 = input.LA(6);
+                            if ( (LA3_9=='_') ) {
+                                int LA3_10 = input.LA(6);
 
-                                if ( (LA3_11=='s') ) {
-                                    alt3=4;
+                                if ( (LA3_10=='s') ) {
+                                    alt3=3;
                                 }
-                                else if ( (LA3_11=='w') ) {
-                                    alt3=8;
+                                else if ( (LA3_10=='w') ) {
+                                    alt3=7;
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("", 3, 11, input);
+                                        new NoViableAltException("", 3, 10, input);
 
                                     throw nvae;
 
@@ -440,7 +459,7 @@ public class FDLLexer extends Lexer {
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 3, 10, input);
+                                    new NoViableAltException("", 3, 9, input);
 
                                 throw nvae;
 
@@ -448,7 +467,7 @@ public class FDLLexer extends Lexer {
                         }
                         else {
                             NoViableAltException nvae =
-                                new NoViableAltException("", 3, 9, input);
+                                new NoViableAltException("", 3, 8, input);
 
                             throw nvae;
 
@@ -456,7 +475,7 @@ public class FDLLexer extends Lexer {
                     }
                     else {
                         NoViableAltException nvae =
-                            new NoViableAltException("", 3, 8, input);
+                            new NoViableAltException("", 3, 7, input);
 
                         throw nvae;
 
@@ -464,7 +483,7 @@ public class FDLLexer extends Lexer {
                 }
                 else {
                     NoViableAltException nvae =
-                        new NoViableAltException("", 3, 4, input);
+                        new NoViableAltException("", 3, 3, input);
 
                     throw nvae;
 
@@ -473,17 +492,17 @@ public class FDLLexer extends Lexer {
                 break;
             case 's':
                 {
-                alt3=5;
+                alt3=4;
                 }
                 break;
             case 'e':
                 {
-                alt3=6;
+                alt3=5;
                 }
                 break;
             case 'w':
                 {
-                alt3=7;
+                alt3=6;
                 }
                 break;
             default:
@@ -496,15 +515,6 @@ public class FDLLexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:44:17: 'always'
-                    {
-                    match("always"); 
-
-
-
-                    }
-                    break;
-                case 2 :
                     // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:45:17: 'near'
                     {
                     match("near"); 
@@ -513,7 +523,7 @@ public class FDLLexer extends Lexer {
 
                     }
                     break;
-                case 3 :
+                case 2 :
                     // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:46:17: 'far'
                     {
                     match("far"); 
@@ -522,7 +532,7 @@ public class FDLLexer extends Lexer {
 
                     }
                     break;
-                case 4 :
+                case 3 :
                     // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:47:17: 'much_stronger'
                     {
                     match("much_stronger"); 
@@ -531,7 +541,7 @@ public class FDLLexer extends Lexer {
 
                     }
                     break;
-                case 5 :
+                case 4 :
                     // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:48:17: 'stronger'
                     {
                     match("stronger"); 
@@ -540,7 +550,7 @@ public class FDLLexer extends Lexer {
 
                     }
                     break;
-                case 6 :
+                case 5 :
                     // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:49:17: 'even'
                     {
                     match("even"); 
@@ -549,7 +559,7 @@ public class FDLLexer extends Lexer {
 
                     }
                     break;
-                case 7 :
+                case 6 :
                     // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:50:17: 'weaker'
                     {
                     match("weaker"); 
@@ -558,7 +568,7 @@ public class FDLLexer extends Lexer {
 
                     }
                     break;
-                case 8 :
+                case 7 :
                     // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:51:17: 'much_weaker'
                     {
                     match("much_weaker"); 
@@ -1156,54 +1166,54 @@ public class FDLLexer extends Lexer {
     // $ANTLR end "IDENT"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | WS | VALUE | CHOOSE | AND | OR | ASSIGN | CONDITIONTYPE | MOVEACTION | FIGHTACTION | IDENT )
-        int alt7=16;
+        // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | WS | VALUE | CHOOSE | AND | OR | ASSIGN | ALWAYS | CONDITIONTYPE | MOVEACTION | FIGHTACTION | IDENT )
+        int alt7=17;
         alt7 = dfa7.predict(input);
         switch (alt7) {
             case 1 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:10: T__14
-                {
-                mT__14(); 
-
-
-                }
-                break;
-            case 2 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:16: T__15
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:10: T__15
                 {
                 mT__15(); 
 
 
                 }
                 break;
-            case 3 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:22: T__16
+            case 2 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:16: T__16
                 {
                 mT__16(); 
 
 
                 }
                 break;
-            case 4 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:28: T__17
+            case 3 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:22: T__17
                 {
                 mT__17(); 
 
 
                 }
                 break;
-            case 5 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:34: T__18
+            case 4 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:28: T__18
                 {
                 mT__18(); 
 
 
                 }
                 break;
-            case 6 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:40: T__19
+            case 5 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:34: T__19
                 {
                 mT__19(); 
+
+
+                }
+                break;
+            case 6 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:40: T__20
+                {
+                mT__20(); 
 
 
                 }
@@ -1257,31 +1267,39 @@ public class FDLLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:76: CONDITIONTYPE
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:76: ALWAYS
+                {
+                mALWAYS(); 
+
+
+                }
+                break;
+            case 14 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:83: CONDITIONTYPE
                 {
                 mCONDITIONTYPE(); 
 
 
                 }
                 break;
-            case 14 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:90: MOVEACTION
+            case 15 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:97: MOVEACTION
                 {
                 mMOVEACTION(); 
 
 
                 }
                 break;
-            case 15 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:101: FIGHTACTION
+            case 16 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:108: FIGHTACTION
                 {
                 mFIGHTACTION(); 
 
 
                 }
                 break;
-            case 16 :
-                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:113: IDENT
+            case 17 :
+                // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:1:120: IDENT
                 {
                 mIDENT(); 
 
@@ -1298,12 +1316,12 @@ public class FDLLexer extends Lexer {
     static final String DFA7_eotS =
         "\11\uffff\3\30\1\uffff\13\30\1\uffff\4\30\1\56\16\30\1\76\1\30\1"+
         "\uffff\1\30\1\101\15\30\1\uffff\1\30\1\101\1\uffff\3\30\1\101\3"+
-        "\30\1\127\10\30\1\127\4\30\1\uffff\3\30\1\152\1\127\1\101\3\30\1"+
-        "\101\10\30\1\uffff\17\30\1\101\3\30\1\127\4\30\1\u008e\4\30\1\127"+
-        "\1\30\1\u008e\1\30\1\u008e\1\30\1\uffff\1\u008e\4\30\2\u008e\1\30"+
+        "\30\1\127\10\30\1\127\4\30\1\uffff\3\30\1\152\1\127\1\153\3\30\1"+
+        "\101\10\30\2\uffff\17\30\1\101\3\30\1\127\4\30\1\u008f\4\30\1\127"+
+        "\1\30\1\u008f\1\30\1\u008f\1\30\1\uffff\1\u008f\4\30\2\u008f\1\30"+
         "\1\101\1\30\1\127\1\30\1\127\1\101";
     static final String DFA7_eofS =
-        "\u009d\uffff";
+        "\u009e\uffff";
     static final String DFA7_minS =
         "\1\11\10\uffff\1\150\1\154\1\162\1\uffff\1\145\1\141\1\165\1\164"+
         "\1\166\1\141\2\165\1\154\1\165\1\151\1\uffff\2\157\1\144\1\167\1"+
@@ -1313,7 +1331,7 @@ public class FDLLexer extends Lexer {
         "\60\1\uffff\1\137\1\156\1\144\1\60\1\145\1\137\1\141\1\60\1\153"+
         "\1\150\1\137\1\145\1\150\2\163\1\147\1\60\1\162\1\141\1\157\1\167"+
         "\1\uffff\2\137\1\150\3\60\1\164\2\145\1\60\1\157\2\167\1\141\2\150"+
-        "\1\157\1\151\1\uffff\1\162\1\141\1\162\1\167\2\141\1\171\1\157\1"+
+        "\1\157\1\151\2\uffff\1\162\1\141\1\162\1\167\2\141\1\171\1\157\1"+
         "\151\1\157\1\151\1\167\1\147\1\157\1\153\1\60\1\141\1\171\1\162"+
         "\1\60\1\167\1\147\1\167\1\147\1\60\1\150\1\156\1\145\1\162\1\60"+
         "\1\144\1\60\1\150\1\60\1\150\1\uffff\1\60\1\147\1\162\1\144\1\163"+
@@ -1327,17 +1345,17 @@ public class FDLLexer extends Lexer {
         "\1\172\1\uffff\1\137\1\156\1\144\1\172\1\145\1\137\1\164\1\172\1"+
         "\153\1\150\1\137\1\145\1\150\1\163\1\167\1\147\1\172\1\162\1\164"+
         "\1\157\1\167\1\uffff\2\137\1\154\3\172\1\164\2\145\1\172\1\157\2"+
-        "\167\1\141\2\154\1\157\1\151\1\uffff\1\162\1\141\1\162\1\167\2\141"+
+        "\167\1\141\2\154\1\157\1\151\2\uffff\1\162\1\141\1\162\1\167\2\141"+
         "\1\171\1\157\1\151\1\157\1\151\1\167\1\147\1\157\1\153\1\172\1\141"+
         "\1\171\1\162\1\172\1\167\1\147\1\167\1\147\1\172\1\150\1\156\1\145"+
         "\1\162\1\172\1\144\1\172\1\150\1\172\1\150\1\uffff\1\172\1\147\1"+
         "\162\1\144\1\163\2\172\1\145\1\172\1\163\1\172\1\162\2\172";
     static final String DFA7_acceptS =
         "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\3\uffff\1\14\13\uffff"+
-        "\1\20\25\uffff\1\13\17\uffff\1\12\2\uffff\1\15\25\uffff\1\16\22"+
-        "\uffff\1\11\43\uffff\1\17\16\uffff";
+        "\1\21\25\uffff\1\13\17\uffff\1\12\2\uffff\1\16\25\uffff\1\17\22"+
+        "\uffff\1\11\1\15\43\uffff\1\20\16\uffff";
     static final String DFA7_specialS =
-        "\u009d\uffff}>";
+        "\u009e\uffff}>";
     static final String[] DFA7_transitionS = {
             "\2\7\1\uffff\2\7\22\uffff\1\7\7\uffff\1\1\1\2\7\uffff\11\10"+
             "\3\uffff\1\14\3\uffff\32\30\1\3\1\uffff\1\4\1\uffff\1\30\1\uffff"+
@@ -1436,20 +1454,20 @@ public class FDLLexer extends Lexer {
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\153",
             "\1\154",
             "\1\155",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\156",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\157",
             "\1\160",
             "\1\161",
-            "\1\163\3\uffff\1\162",
-            "\1\165\3\uffff\1\164",
-            "\1\166",
+            "\1\162",
+            "\1\164\3\uffff\1\163",
+            "\1\166\3\uffff\1\165",
             "\1\167",
-            "",
             "\1\170",
+            "",
+            "",
             "\1\171",
             "\1\172",
             "\1\173",
@@ -1464,39 +1482,40 @@ public class FDLLexer extends Lexer {
             "\1\u0084",
             "\1\u0085",
             "\1\u0086",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u0087",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u0088",
             "\1\u0089",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u008a",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u008b",
             "\1\u008c",
             "\1\u008d",
+            "\1\u008e",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\1\u008f",
             "\1\u0090",
             "\1\u0091",
             "\1\u0092",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u0093",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u0094",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u0095",
-            "",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u0096",
+            "",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u0097",
             "\1\u0098",
             "\1\u0099",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
-            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u009a",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u009b",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\1\u009c",
+            "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
+            "\1\u009d",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30",
             "\12\30\7\uffff\32\30\4\uffff\1\30\1\uffff\32\30"
     };
@@ -1531,7 +1550,7 @@ public class FDLLexer extends Lexer {
             this.transition = DFA7_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | WS | VALUE | CHOOSE | AND | OR | ASSIGN | CONDITIONTYPE | MOVEACTION | FIGHTACTION | IDENT );";
+            return "1:1: Tokens : ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | WS | VALUE | CHOOSE | AND | OR | ASSIGN | ALWAYS | CONDITIONTYPE | MOVEACTION | FIGHTACTION | IDENT );";
         }
     }
  

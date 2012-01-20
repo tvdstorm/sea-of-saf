@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-20 15:00:17
+// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-20 22:33:11
 
   package nl.uva.saf.fdl;
   import nl.uva.saf.fdl.ast.*;
@@ -12,26 +12,27 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class FDLParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "ASSIGN", "CHOOSE", "CONDITIONTYPE", "FIGHTACTION", "IDENT", "MOVEACTION", "OR", "VALUE", "WS", "'('", "')'", "'['", "']'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "ALWAYS", "AND", "ASSIGN", "CHOOSE", "CONDITIONTYPE", "FIGHTACTION", "IDENT", "MOVEACTION", "OR", "VALUE", "WS", "'('", "')'", "'['", "']'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
-    public static final int T__14=14;
     public static final int T__15=15;
     public static final int T__16=16;
     public static final int T__17=17;
     public static final int T__18=18;
     public static final int T__19=19;
-    public static final int AND=4;
-    public static final int ASSIGN=5;
-    public static final int CHOOSE=6;
-    public static final int CONDITIONTYPE=7;
-    public static final int FIGHTACTION=8;
-    public static final int IDENT=9;
-    public static final int MOVEACTION=10;
-    public static final int OR=11;
-    public static final int VALUE=12;
-    public static final int WS=13;
+    public static final int T__20=20;
+    public static final int ALWAYS=4;
+    public static final int AND=5;
+    public static final int ASSIGN=6;
+    public static final int CHOOSE=7;
+    public static final int CONDITIONTYPE=8;
+    public static final int FIGHTACTION=9;
+    public static final int IDENT=10;
+    public static final int MOVEACTION=11;
+    public static final int OR=12;
+    public static final int VALUE=13;
+    public static final int WS=14;
 
     // delegates
     public Parser[] getDelegates() {
@@ -66,11 +67,11 @@ public class FDLParser extends Parser {
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:74:3: ( IDENT ASSIGN VALUE )
             // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:74:5: IDENT ASSIGN VALUE
             {
-            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality570); 
+            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality559); 
 
-            match(input,ASSIGN,FOLLOW_ASSIGN_in_personality572); 
+            match(input,ASSIGN,FOLLOW_ASSIGN_in_personality561); 
 
-            VALUE2=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality574); 
+            VALUE2=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality563); 
 
             result = new Characteristic((IDENT1!=null?IDENT1.getText():null), (VALUE2!=null?VALUE2.getText():null));
 
@@ -92,7 +93,7 @@ public class FDLParser extends Parser {
 
 
     // $ANTLR start "conditionAnd"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:76:1: conditionAnd returns [ConditionAnd result] : op1= CONDITIONTYPE ( AND oprest= CONDITIONTYPE )* ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:77:1: conditionAnd returns [ConditionAnd result] : op1= CONDITIONTYPE ( AND oprest= CONDITIONTYPE )* ;
     public final ConditionAnd conditionAnd() throws RecognitionException {
         ConditionAnd result = null;
 
@@ -104,12 +105,12 @@ public class FDLParser extends Parser {
             result = new ConditionAnd(new ArrayList<String>());
           
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:80:3: (op1= CONDITIONTYPE ( AND oprest= CONDITIONTYPE )* )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:80:5: op1= CONDITIONTYPE ( AND oprest= CONDITIONTYPE )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:81:3: (op1= CONDITIONTYPE ( AND oprest= CONDITIONTYPE )* )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:81:5: op1= CONDITIONTYPE ( AND oprest= CONDITIONTYPE )*
             {
-            op1=(Token)match(input,CONDITIONTYPE,FOLLOW_CONDITIONTYPE_in_conditionAnd619); 
+            op1=(Token)match(input,CONDITIONTYPE,FOLLOW_CONDITIONTYPE_in_conditionAnd611); 
 
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:80:23: ( AND oprest= CONDITIONTYPE )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:81:23: ( AND oprest= CONDITIONTYPE )*
             loop1:
             do {
                 int alt1=2;
@@ -122,11 +123,11 @@ public class FDLParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:80:24: AND oprest= CONDITIONTYPE
+            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:81:24: AND oprest= CONDITIONTYPE
             	    {
-            	    match(input,AND,FOLLOW_AND_in_conditionAnd622); 
+            	    match(input,AND,FOLLOW_AND_in_conditionAnd614); 
 
-            	    oprest=(Token)match(input,CONDITIONTYPE,FOLLOW_CONDITIONTYPE_in_conditionAnd626); 
+            	    oprest=(Token)match(input,CONDITIONTYPE,FOLLOW_CONDITIONTYPE_in_conditionAnd618); 
 
             	    result.addOperand((oprest!=null?oprest.getText():null));
 
@@ -159,7 +160,7 @@ public class FDLParser extends Parser {
 
 
     // $ANTLR start "conditionOr"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:83:1: conditionOr returns [ConditionOr result] : op1= conditionAnd ( OR oprest= conditionAnd )* ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:84:1: conditionOr returns [ConditionOr result] : op1= conditionAnd ( OR oprest= conditionAnd )* ;
     public final ConditionOr conditionOr() throws RecognitionException {
         ConditionOr result = null;
 
@@ -173,16 +174,16 @@ public class FDLParser extends Parser {
             result = new ConditionOr(new ArrayList<ITreeNode>());
           
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:87:3: (op1= conditionAnd ( OR oprest= conditionAnd )* )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:87:5: op1= conditionAnd ( OR oprest= conditionAnd )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:3: (op1= conditionAnd ( OR oprest= conditionAnd )* )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:5: op1= conditionAnd ( OR oprest= conditionAnd )*
             {
-            pushFollow(FOLLOW_conditionAnd_in_conditionOr659);
+            pushFollow(FOLLOW_conditionAnd_in_conditionOr651);
             op1=conditionAnd();
 
             state._fsp--;
 
 
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:87:22: ( OR oprest= conditionAnd )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:22: ( OR oprest= conditionAnd )*
             loop2:
             do {
                 int alt2=2;
@@ -195,11 +196,11 @@ public class FDLParser extends Parser {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:87:23: OR oprest= conditionAnd
+            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:88:23: OR oprest= conditionAnd
             	    {
-            	    match(input,OR,FOLLOW_OR_in_conditionOr662); 
+            	    match(input,OR,FOLLOW_OR_in_conditionOr654); 
 
-            	    pushFollow(FOLLOW_conditionAnd_in_conditionOr666);
+            	    pushFollow(FOLLOW_conditionAnd_in_conditionOr658);
             	    oprest=conditionAnd();
 
             	    state._fsp--;
@@ -236,51 +237,91 @@ public class FDLParser extends Parser {
 
 
     // $ANTLR start "moveChoice"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:1: moveChoice : CHOOSE '(' ( MOVEACTION )+ ')' ;
-    public final void moveChoice() throws RecognitionException {
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:1: moveChoice returns [MoveChoice result] : ( CHOOSE '(' ( MOVEACTION )+ ')' | MOVEACTION );
+    public final MoveChoice moveChoice() throws RecognitionException {
+        MoveChoice result = null;
+
+
+        Token MOVEACTION3=null;
+        Token MOVEACTION4=null;
+
+
+            result = new MoveChoice(new ArrayList<ITreeNode>());
+          
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:12: ( CHOOSE '(' ( MOVEACTION )+ ')' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:14: CHOOSE '(' ( MOVEACTION )+ ')'
-            {
-            match(input,CHOOSE,FOLLOW_CHOOSE_in_moveChoice684); 
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:95:3: ( CHOOSE '(' ( MOVEACTION )+ ')' | MOVEACTION )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            match(input,14,FOLLOW_14_in_moveChoice686); 
+            if ( (LA4_0==CHOOSE) ) {
+                alt4=1;
+            }
+            else if ( (LA4_0==MOVEACTION) ) {
+                alt4=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 4, 0, input);
 
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:25: ( MOVEACTION )+
-            int cnt3=0;
-            loop3:
-            do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
-
-                if ( (LA3_0==MOVEACTION) ) {
-                    alt3=1;
-                }
-
-
-                switch (alt3) {
-            	case 1 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:90:25: MOVEACTION
-            	    {
-            	    match(input,MOVEACTION,FOLLOW_MOVEACTION_in_moveChoice688); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt3 >= 1 ) break loop3;
-                        EarlyExitException eee =
-                            new EarlyExitException(3, input);
-                        throw eee;
-                }
-                cnt3++;
-            } while (true);
-
-
-            match(input,15,FOLLOW_15_in_moveChoice691); 
+                throw nvae;
 
             }
+            switch (alt4) {
+                case 1 :
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:95:5: CHOOSE '(' ( MOVEACTION )+ ')'
+                    {
+                    match(input,CHOOSE,FOLLOW_CHOOSE_in_moveChoice689); 
 
+                    match(input,15,FOLLOW_15_in_moveChoice691); 
+
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:95:16: ( MOVEACTION )+
+                    int cnt3=0;
+                    loop3:
+                    do {
+                        int alt3=2;
+                        int LA3_0 = input.LA(1);
+
+                        if ( (LA3_0==MOVEACTION) ) {
+                            alt3=1;
+                        }
+
+
+                        switch (alt3) {
+                    	case 1 :
+                    	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:95:17: MOVEACTION
+                    	    {
+                    	    MOVEACTION3=(Token)match(input,MOVEACTION,FOLLOW_MOVEACTION_in_moveChoice694); 
+
+                    	    result.addAction(new MoveAction((MOVEACTION3!=null?MOVEACTION3.getText():null)));
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt3 >= 1 ) break loop3;
+                                EarlyExitException eee =
+                                    new EarlyExitException(3, input);
+                                throw eee;
+                        }
+                        cnt3++;
+                    } while (true);
+
+
+                    match(input,16,FOLLOW_16_in_moveChoice700); 
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:96:5: MOVEACTION
+                    {
+                    MOVEACTION4=(Token)match(input,MOVEACTION,FOLLOW_MOVEACTION_in_moveChoice706); 
+
+                    result.addAction(new MoveAction((MOVEACTION4!=null?MOVEACTION4.getText():null)));
+
+                    }
+                    break;
+
+            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -290,142 +331,33 @@ public class FDLParser extends Parser {
         finally {
         	// do for sure before leaving
         }
-        return ;
+        return result;
     }
     // $ANTLR end "moveChoice"
 
 
 
     // $ANTLR start "fightChoice"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:1: fightChoice : CHOOSE '(' ( FIGHTACTION )+ ')' ;
-    public final void fightChoice() throws RecognitionException {
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:99:1: fightChoice returns [FightChoice result] : ( CHOOSE '(' ( FIGHTACTION )+ ')' | FIGHTACTION );
+    public final FightChoice fightChoice() throws RecognitionException {
+        FightChoice result = null;
+
+
+        Token FIGHTACTION5=null;
+        Token FIGHTACTION6=null;
+
+
+            result = new FightChoice(new ArrayList<ITreeNode>());
+          
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:13: ( CHOOSE '(' ( FIGHTACTION )+ ')' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:15: CHOOSE '(' ( FIGHTACTION )+ ')'
-            {
-            match(input,CHOOSE,FOLLOW_CHOOSE_in_fightChoice698); 
-
-            match(input,14,FOLLOW_14_in_fightChoice700); 
-
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:26: ( FIGHTACTION )+
-            int cnt4=0;
-            loop4:
-            do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
-
-                if ( (LA4_0==FIGHTACTION) ) {
-                    alt4=1;
-                }
-
-
-                switch (alt4) {
-            	case 1 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:91:26: FIGHTACTION
-            	    {
-            	    match(input,FIGHTACTION,FOLLOW_FIGHTACTION_in_fightChoice702); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt4 >= 1 ) break loop4;
-                        EarlyExitException eee =
-                            new EarlyExitException(4, input);
-                        throw eee;
-                }
-                cnt4++;
-            } while (true);
-
-
-            match(input,15,FOLLOW_15_in_fightChoice705); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-
-        finally {
-        	// do for sure before leaving
-        }
-        return ;
-    }
-    // $ANTLR end "fightChoice"
-
-
-
-    // $ANTLR start "moveRule"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:92:1: moveRule : ( MOVEACTION | moveChoice );
-    public final void moveRule() throws RecognitionException {
-        try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:92:10: ( MOVEACTION | moveChoice )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
-
-            if ( (LA5_0==MOVEACTION) ) {
-                alt5=1;
-            }
-            else if ( (LA5_0==CHOOSE) ) {
-                alt5=2;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 5, 0, input);
-
-                throw nvae;
-
-            }
-            switch (alt5) {
-                case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:92:12: MOVEACTION
-                    {
-                    match(input,MOVEACTION,FOLLOW_MOVEACTION_in_moveRule712); 
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:92:25: moveChoice
-                    {
-                    pushFollow(FOLLOW_moveChoice_in_moveRule716);
-                    moveChoice();
-
-                    state._fsp--;
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-
-        finally {
-        	// do for sure before leaving
-        }
-        return ;
-    }
-    // $ANTLR end "moveRule"
-
-
-
-    // $ANTLR start "fightRule"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:1: fightRule : ( FIGHTACTION | fightChoice );
-    public final void fightRule() throws RecognitionException {
-        try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:11: ( FIGHTACTION | fightChoice )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:103:3: ( CHOOSE '(' ( FIGHTACTION )+ ')' | FIGHTACTION )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==FIGHTACTION) ) {
+            if ( (LA6_0==CHOOSE) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==CHOOSE) ) {
+            else if ( (LA6_0==FIGHTACTION) ) {
                 alt6=2;
             }
             else {
@@ -437,20 +369,55 @@ public class FDLParser extends Parser {
             }
             switch (alt6) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:13: FIGHTACTION
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:103:5: CHOOSE '(' ( FIGHTACTION )+ ')'
                     {
-                    match(input,FIGHTACTION,FOLLOW_FIGHTACTION_in_fightRule723); 
+                    match(input,CHOOSE,FOLLOW_CHOOSE_in_fightChoice735); 
+
+                    match(input,15,FOLLOW_15_in_fightChoice737); 
+
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:103:16: ( FIGHTACTION )+
+                    int cnt5=0;
+                    loop5:
+                    do {
+                        int alt5=2;
+                        int LA5_0 = input.LA(1);
+
+                        if ( (LA5_0==FIGHTACTION) ) {
+                            alt5=1;
+                        }
+
+
+                        switch (alt5) {
+                    	case 1 :
+                    	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:103:17: FIGHTACTION
+                    	    {
+                    	    FIGHTACTION5=(Token)match(input,FIGHTACTION,FOLLOW_FIGHTACTION_in_fightChoice740); 
+
+                    	    result.addAction(new FightAction((FIGHTACTION5!=null?FIGHTACTION5.getText():null)));
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    if ( cnt5 >= 1 ) break loop5;
+                                EarlyExitException eee =
+                                    new EarlyExitException(5, input);
+                                throw eee;
+                        }
+                        cnt5++;
+                    } while (true);
+
+
+                    match(input,16,FOLLOW_16_in_fightChoice746); 
 
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:93:27: fightChoice
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:104:5: FIGHTACTION
                     {
-                    pushFollow(FOLLOW_fightChoice_in_fightRule727);
-                    fightChoice();
+                    FIGHTACTION6=(Token)match(input,FIGHTACTION,FOLLOW_FIGHTACTION_in_fightChoice752); 
 
-                    state._fsp--;
-
+                    result.addAction(new FightAction((FIGHTACTION6!=null?FIGHTACTION6.getText():null)));
 
                     }
                     break;
@@ -465,30 +432,40 @@ public class FDLParser extends Parser {
         finally {
         	// do for sure before leaving
         }
-        return ;
+        return result;
     }
-    // $ANTLR end "fightRule"
+    // $ANTLR end "fightChoice"
 
 
 
-    // $ANTLR start "rules"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:94:1: rules : moveRule fightRule ;
-    public final void rules() throws RecognitionException {
+    // $ANTLR start "rule"
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:107:1: rule returns [Rule result] : moveChoice fightChoice ;
+    public final Rule rule() throws RecognitionException {
+        Rule result = null;
+
+
+        MoveChoice moveChoice7 =null;
+
+        FightChoice fightChoice8 =null;
+
+
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:94:7: ( moveRule fightRule )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:94:9: moveRule fightRule
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:108:3: ( moveChoice fightChoice )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:108:5: moveChoice fightChoice
             {
-            pushFollow(FOLLOW_moveRule_in_rules734);
-            moveRule();
+            pushFollow(FOLLOW_moveChoice_in_rule772);
+            moveChoice7=moveChoice();
 
             state._fsp--;
 
 
-            pushFollow(FOLLOW_fightRule_in_rules736);
-            fightRule();
+            pushFollow(FOLLOW_fightChoice_in_rule774);
+            fightChoice8=fightChoice();
 
             state._fsp--;
 
+
+            result = new Rule(moveChoice7, fightChoice8);
 
             }
 
@@ -501,45 +478,88 @@ public class FDLParser extends Parser {
         finally {
         	// do for sure before leaving
         }
-        return ;
+        return result;
     }
-    // $ANTLR end "rules"
+    // $ANTLR end "rule"
 
 
 
     // $ANTLR start "behaviour"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:96:1: behaviour returns [Behaviour result] : conditionOr '[' rules ']' ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:111:1: behaviour returns [Behaviour result] : ( conditionOr '[' rule ']' | ALWAYS '[' rule ']' );
     public final Behaviour behaviour() throws RecognitionException {
         Behaviour result = null;
 
 
-        ConditionOr conditionOr3 =null;
+        ConditionOr conditionOr9 =null;
+
+        Rule rule10 =null;
+
+        Rule rule11 =null;
 
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:97:3: ( conditionOr '[' rules ']' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:97:5: conditionOr '[' rules ']'
-            {
-            pushFollow(FOLLOW_conditionOr_in_behaviour751);
-            conditionOr3=conditionOr();
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:112:3: ( conditionOr '[' rule ']' | ALWAYS '[' rule ']' )
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA7_0==CONDITIONTYPE) ) {
+                alt7=1;
+            }
+            else if ( (LA7_0==ALWAYS) ) {
+                alt7=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 7, 0, input);
 
-
-            match(input,16,FOLLOW_16_in_behaviour753); 
-
-            pushFollow(FOLLOW_rules_in_behaviour755);
-            rules();
-
-            state._fsp--;
-
-
-            match(input,17,FOLLOW_17_in_behaviour757); 
-
-            result = new Behaviour(conditionOr3);
+                throw nvae;
 
             }
+            switch (alt7) {
+                case 1 :
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:112:5: conditionOr '[' rule ']'
+                    {
+                    pushFollow(FOLLOW_conditionOr_in_behaviour794);
+                    conditionOr9=conditionOr();
 
+                    state._fsp--;
+
+
+                    match(input,17,FOLLOW_17_in_behaviour796); 
+
+                    pushFollow(FOLLOW_rule_in_behaviour798);
+                    rule10=rule();
+
+                    state._fsp--;
+
+
+                    match(input,18,FOLLOW_18_in_behaviour800); 
+
+                    result = new Behaviour(conditionOr9, rule10);
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:113:5: ALWAYS '[' rule ']'
+                    {
+                    match(input,ALWAYS,FOLLOW_ALWAYS_in_behaviour808); 
+
+                    match(input,17,FOLLOW_17_in_behaviour810); 
+
+                    pushFollow(FOLLOW_rule_in_behaviour812);
+                    rule11=rule();
+
+                    state._fsp--;
+
+
+                    match(input,18,FOLLOW_18_in_behaviour814); 
+
+                    result = new Behaviour(new ConditionAlways(), rule11);
+
+                    }
+                    break;
+
+            }
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -556,58 +576,58 @@ public class FDLParser extends Parser {
 
 
     // $ANTLR start "fighterAttribute"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:100:1: fighterAttribute returns [FighterAttribute result] : ( personality | behaviour );
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:116:1: fighterAttribute returns [FighterAttribute result] : ( personality | behaviour );
     public final FighterAttribute fighterAttribute() throws RecognitionException {
         FighterAttribute result = null;
 
 
-        Characteristic personality4 =null;
+        Characteristic personality12 =null;
 
-        Behaviour behaviour5 =null;
+        Behaviour behaviour13 =null;
 
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:101:3: ( personality | behaviour )
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:117:3: ( personality | behaviour )
+            int alt8=2;
+            int LA8_0 = input.LA(1);
 
-            if ( (LA7_0==IDENT) ) {
-                alt7=1;
+            if ( (LA8_0==IDENT) ) {
+                alt8=1;
             }
-            else if ( (LA7_0==CONDITIONTYPE) ) {
-                alt7=2;
+            else if ( (LA8_0==ALWAYS||LA8_0==CONDITIONTYPE) ) {
+                alt8=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt7) {
+            switch (alt8) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:101:5: personality
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:117:5: personality
                     {
-                    pushFollow(FOLLOW_personality_in_fighterAttribute794);
-                    personality4=personality();
+                    pushFollow(FOLLOW_personality_in_fighterAttribute851);
+                    personality12=personality();
 
                     state._fsp--;
 
 
-                    result = personality4;
+                    result = personality12;
 
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:102:5: behaviour
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:118:5: behaviour
                     {
-                    pushFollow(FOLLOW_behaviour_in_fighterAttribute804);
-                    behaviour5=behaviour();
+                    pushFollow(FOLLOW_behaviour_in_fighterAttribute861);
+                    behaviour13=behaviour();
 
                     state._fsp--;
 
 
-                    result = behaviour5;
+                    result = behaviour13;
 
                     }
                     break;
@@ -629,61 +649,61 @@ public class FDLParser extends Parser {
 
 
     // $ANTLR start "fighter"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:105:1: fighter returns [Fighter result] : IDENT '{' ( fighterAttribute )* '}' ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:121:1: fighter returns [Fighter result] : IDENT '{' ( fighterAttribute )* '}' ;
     public final Fighter fighter() throws RecognitionException {
         Fighter result = null;
 
 
-        Token IDENT7=null;
-        FighterAttribute fighterAttribute6 =null;
+        Token IDENT15=null;
+        FighterAttribute fighterAttribute14 =null;
 
 
 
         	  result = new Fighter("",new ArrayList<ITreeNode>());
         	
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:109:3: ( IDENT '{' ( fighterAttribute )* '}' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:109:5: IDENT '{' ( fighterAttribute )* '}'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:3: ( IDENT '{' ( fighterAttribute )* '}' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:5: IDENT '{' ( fighterAttribute )* '}'
             {
-            IDENT7=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter834); 
+            IDENT15=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter891); 
 
-            match(input,18,FOLLOW_18_in_fighter836); 
+            match(input,19,FOLLOW_19_in_fighter893); 
 
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:109:15: ( fighterAttribute )*
-            loop8:
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:15: ( fighterAttribute )*
+            loop9:
             do {
-                int alt8=2;
-                int LA8_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( (LA8_0==CONDITIONTYPE||LA8_0==IDENT) ) {
-                    alt8=1;
+                if ( (LA9_0==ALWAYS||LA9_0==CONDITIONTYPE||LA9_0==IDENT) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt8) {
+                switch (alt9) {
             	case 1 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:109:16: fighterAttribute
+            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:16: fighterAttribute
             	    {
-            	    pushFollow(FOLLOW_fighterAttribute_in_fighter839);
-            	    fighterAttribute6=fighterAttribute();
+            	    pushFollow(FOLLOW_fighterAttribute_in_fighter896);
+            	    fighterAttribute14=fighterAttribute();
 
             	    state._fsp--;
 
 
-            	    result.addAttribute(fighterAttribute6);
+            	    result.addAttribute(fighterAttribute14);
 
             	    }
             	    break;
 
             	default :
-            	    break loop8;
+            	    break loop9;
                 }
             } while (true);
 
 
-            match(input,19,FOLLOW_19_in_fighter845); 
+            match(input,20,FOLLOW_20_in_fighter902); 
 
-            result.setName((IDENT7!=null?IDENT7.getText():null));
+            result.setName((IDENT15!=null?IDENT15.getText():null));
 
             }
 
@@ -703,27 +723,27 @@ public class FDLParser extends Parser {
 
 
     // $ANTLR start "parse"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:112:1: parse returns [ITreeNode tree] : fighter EOF ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:128:1: parse returns [ITreeNode tree] : fighter EOF ;
     public final ITreeNode parse() throws RecognitionException {
         ITreeNode tree = null;
 
 
-        Fighter fighter8 =null;
+        Fighter fighter16 =null;
 
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:113:3: ( fighter EOF )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:113:5: fighter EOF
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:129:3: ( fighter EOF )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:129:5: fighter EOF
             {
-            pushFollow(FOLLOW_fighter_in_parse866);
-            fighter8=fighter();
+            pushFollow(FOLLOW_fighter_in_parse923);
+            fighter16=fighter();
 
             state._fsp--;
 
 
-            match(input,EOF,FOLLOW_EOF_in_parse868); 
+            match(input,EOF,FOLLOW_EOF_in_parse925); 
 
-            tree = fighter8;
+            tree = fighter16;
 
             }
 
@@ -745,40 +765,42 @@ public class FDLParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_IDENT_in_personality570 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ASSIGN_in_personality572 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_VALUE_in_personality574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CONDITIONTYPE_in_conditionAnd619 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_AND_in_conditionAnd622 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_CONDITIONTYPE_in_conditionAnd626 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_conditionAnd_in_conditionOr659 = new BitSet(new long[]{0x0000000000000802L});
-    public static final BitSet FOLLOW_OR_in_conditionOr662 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_conditionAnd_in_conditionOr666 = new BitSet(new long[]{0x0000000000000802L});
-    public static final BitSet FOLLOW_CHOOSE_in_moveChoice684 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_moveChoice686 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_MOVEACTION_in_moveChoice688 = new BitSet(new long[]{0x0000000000008400L});
-    public static final BitSet FOLLOW_15_in_moveChoice691 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_fightChoice698 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_fightChoice700 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_FIGHTACTION_in_fightChoice702 = new BitSet(new long[]{0x0000000000008100L});
-    public static final BitSet FOLLOW_15_in_fightChoice705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MOVEACTION_in_moveRule712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_moveChoice_in_moveRule716 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FIGHTACTION_in_fightRule723 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fightChoice_in_fightRule727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_moveRule_in_rules734 = new BitSet(new long[]{0x0000000000000140L});
-    public static final BitSet FOLLOW_fightRule_in_rules736 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditionOr_in_behaviour751 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_behaviour753 = new BitSet(new long[]{0x0000000000000440L});
-    public static final BitSet FOLLOW_rules_in_behaviour755 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_behaviour757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_personality_in_fighterAttribute794 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_behaviour_in_fighterAttribute804 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_fighter834 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_fighter836 = new BitSet(new long[]{0x0000000000080280L});
-    public static final BitSet FOLLOW_fighterAttribute_in_fighter839 = new BitSet(new long[]{0x0000000000080280L});
-    public static final BitSet FOLLOW_19_in_fighter845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fighter_in_parse866 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_parse868 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_personality559 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_ASSIGN_in_personality561 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_VALUE_in_personality563 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CONDITIONTYPE_in_conditionAnd611 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_AND_in_conditionAnd614 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_CONDITIONTYPE_in_conditionAnd618 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_conditionAnd_in_conditionOr651 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_OR_in_conditionOr654 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_conditionAnd_in_conditionOr658 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_CHOOSE_in_moveChoice689 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_moveChoice691 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_MOVEACTION_in_moveChoice694 = new BitSet(new long[]{0x0000000000010800L});
+    public static final BitSet FOLLOW_16_in_moveChoice700 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_MOVEACTION_in_moveChoice706 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_fightChoice735 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_fightChoice737 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_FIGHTACTION_in_fightChoice740 = new BitSet(new long[]{0x0000000000010200L});
+    public static final BitSet FOLLOW_16_in_fightChoice746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FIGHTACTION_in_fightChoice752 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_moveChoice_in_rule772 = new BitSet(new long[]{0x0000000000000280L});
+    public static final BitSet FOLLOW_fightChoice_in_rule774 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditionOr_in_behaviour794 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_behaviour796 = new BitSet(new long[]{0x0000000000000880L});
+    public static final BitSet FOLLOW_rule_in_behaviour798 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_behaviour800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ALWAYS_in_behaviour808 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_behaviour810 = new BitSet(new long[]{0x0000000000000880L});
+    public static final BitSet FOLLOW_rule_in_behaviour812 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_behaviour814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_personality_in_fighterAttribute851 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_behaviour_in_fighterAttribute861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_fighter891 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_fighter893 = new BitSet(new long[]{0x0000000000100510L});
+    public static final BitSet FOLLOW_fighterAttribute_in_fighter896 = new BitSet(new long[]{0x0000000000100510L});
+    public static final BitSet FOLLOW_20_in_fighter902 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fighter_in_parse923 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_parse925 = new BitSet(new long[]{0x0000000000000002L});
 
 }

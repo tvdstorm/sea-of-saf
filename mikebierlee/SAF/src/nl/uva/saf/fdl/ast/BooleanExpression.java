@@ -3,16 +3,16 @@ package nl.uva.saf.fdl.ast;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Conditional<T> extends TreeNode {
+public abstract class BooleanExpression<T> extends ConditionAlways {
 	private List<T> operands;
 	
-	public Conditional(List<T> operands) {
-		setOperands(operands);
+	public BooleanExpression() {
+		setOperands(new ArrayList<T>());
 	}
 	
-	public Conditional(ArrayList<T> operands) {
+	public BooleanExpression(List<T> operands) {
 		setOperands(operands);
-	}
+	}	
 
 	public List<T> getOperands() {
 		return operands;
