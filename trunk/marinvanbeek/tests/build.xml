@@ -1,0 +1,35 @@
+<project default="all">
+ 
+ <path id="cp">
+   <pathelement location="../lib/testng-6.3.1.jar"/>
+   <pathelement location="../lib/antlrworks-1.4.3.jar"/>
+   <pathelement location="../build"/>
+   <pathelement location="."/>
+ </path>
+ 
+ <taskdef name="testng" classpathref="cp"
+          classname="org.testng.TestNGAntTask" />
+ 
+ <target name="all">
+   <testng classpathref="cp" groups="legal-fighters">
+     <classfileset dir="." includes="ParseTest.class"/>
+   </testng>
+   <testng classpathref="cp" groups="illegal-fighters">
+     <classfileset dir="." includes="ParseTest.class"/>
+   </testng>
+ </target>
+
+ <target name="legal">
+   <testng classpathref="cp" groups="legal-fighters">
+     <classfileset dir="." includes="ParseTest.class"/>
+   </testng>
+ </target>
+
+ <target name="illegal">
+   <testng classpathref="cp" groups="illegal-fighters">
+     <classfileset dir="." includes="ParseTest.class"/>
+   </testng>
+ </target>
+ 
+</project>
+
