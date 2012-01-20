@@ -1,8 +1,8 @@
+// Copyright © Pim Huisman 2012.
 package Core;
 import java.io.*;
 import org.antlr.runtime.*;
-
-import Antler.*;
+import Antlr.*;
 
 public class Main {
 
