@@ -18,10 +18,12 @@
 
 package nl.uva.saf;
 
+import nl.uva.saf.fdl.ast.ITreeNode;
+
 /**
  * Fighter Loader Interface Allows for parser-generator independent loading of
  * fighters.
  */
 public interface IFighterLoader {
-	abstract void LoadFighter(String fighter);
+	abstract ITreeNode LoadFighter(String fighter);
 }
