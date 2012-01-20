@@ -28,7 +28,8 @@ public class Fighter extends TreeNode {
 	}
 	
 	public void addAttribute(ITreeNode attribute) {
-		if (attributes != null)
+		if (attributes != null) {
 			attributes.add(attribute);
+		}
 	}
 }
