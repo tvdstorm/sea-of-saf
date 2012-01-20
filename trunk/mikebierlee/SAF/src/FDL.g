@@ -40,9 +40,9 @@ CHOOSE : 'choose';
 AND : 'and';
 OR : 'or';
 ASSIGN : '=';
+ALWAYS : 'always';
 
-CONDITIONTYPE : 'always'
-              | 'near'
+CONDITIONTYPE : 'near'
               | 'far'
               | 'much_stronger'
               | 'stronger'
@@ -71,7 +71,8 @@ FIGHTACTION : 'block_low'
 IDENT  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;  
  
 personality returns [Characteristic result]
-  : IDENT ASSIGN VALUE {result = new Characteristic($IDENT.text, $VALUE.text);};
+  : IDENT ASSIGN VALUE {result = new Characteristic($IDENT.text, $VALUE.text);}
+  ;
                     
 conditionAnd returns [ConditionAnd result]
   @init {
@@ -87,14 +88,29 @@ conditionOr returns [ConditionOr result]
   : op1=conditionAnd (OR oprest=conditionAnd {result.addOperand($oprest.result);})* {result.addOperand($op1.result);}
   ; 
 
-moveChoice : CHOOSE '(' MOVEACTION+ ')';
-fightChoice : CHOOSE '(' FIGHTACTION+ ')';
-moveRule : MOVEACTION | moveChoice;
-fightRule : FIGHTACTION | fightChoice;
-rules : moveRule fightRule;
+moveChoice returns [MoveChoice result]
+  @init {
+    result = new MoveChoice(new ArrayList<ITreeNode>());
+  }
+  : CHOOSE '(' (MOVEACTION {result.addAction(new MoveAction($MOVEACTION.text));})+ ')'
+  | MOVEACTION {result.addAction(new MoveAction($MOVEACTION.text));}
+  ; 
+  
+fightChoice returns [FightChoice result]
+  @init {
+    result = new FightChoice(new ArrayList<ITreeNode>());
+  }
+  : CHOOSE '(' (FIGHTACTION {result.addAction(new FightAction($FIGHTACTION.text));})+ ')'
+  | FIGHTACTION {result.addAction(new FightAction($FIGHTACTION.text));}
+  ;
+
+rule returns [Rule result] 
+  : moveChoice fightChoice {result = new Rule($moveChoice.result, $fightChoice.result);}
+  ;
 
 behaviour returns [Behaviour result] 
-  : conditionOr '[' rules ']' {result = new Behaviour($conditionOr.result);}
+  : conditionOr '[' rule ']' {result = new Behaviour($conditionOr.result, $rule.result);}
+  | ALWAYS '[' rule ']' {result = new Behaviour(new ConditionAlways(), $rule.result);}
   ;
                   
 fighterAttribute returns [FighterAttribute result]

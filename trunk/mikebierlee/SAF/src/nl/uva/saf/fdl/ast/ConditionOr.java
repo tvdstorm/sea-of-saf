@@ -1,10 +1,10 @@
 package nl.uva.saf.fdl.ast;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ConditionOr extends Conditional<ITreeNode> {
+public class ConditionOr extends BooleanExpression<ITreeNode> {
 
-	public ConditionOr(ArrayList<ITreeNode> operands) {
+	public ConditionOr(List<ITreeNode> operands) {
 		super(operands);
 	}
 

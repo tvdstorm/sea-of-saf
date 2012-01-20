@@ -40,15 +40,13 @@ public class ANTLFighterLoader implements IFighterLoader {
 
 			TokenStream tokenStream = new CommonTokenStream(lexer);
 			FDLParser parser = new FDLParser(tokenStream);
-
-			try {
-				ITreeNode tree = parser.parse();
-				System.out.println(tree);
-				
-			} catch (RecognitionException e) {
-				e.printStackTrace();
-			}
+		
+			ITreeNode tree = parser.parse();
+			System.out.println(tree);
+			
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
 	}
