@@ -1,25 +1,25 @@
 VERSION_NUMBER  = 0.2
+
 GRAMMAR         = src/SAF.g
 SOURCES         = src/Main.java src/SafTreeClasses.java src/SafFighter.java src/SafArena.java build/SAFParser.java build/SAFLexer.java
-TARGETS         = build/*
+TESTS           = tests/ParseTest.java
 
 ANTLR_LIB       = lib/antlrworks-1.4.3.jar
 TESTNG_LIB      = lib/testng-6.3.1.jar
 
-JCC             = javac -d build
-JFLAGS          = -g -cp .:$(ANTLR_LIB)
-ANTLR           = java -cp .:$(ANTLR_LIB) org.antlr.Tool -fo build
+.PHONY: tests
 
-RM              = rm -f
-
-all: grammar parser
+all: grammar parser tests
 
 grammar: $(GRAMMAR)
 	java -cp .:$(ANTLR_LIB) org.antlr.Tool -fo build $(GRAMMAR)
 
 parser: $(SOURCES)
-	$(JCC) $(JFLAGS) $(SOURCES)
+	javac -g -cp .:$(ANTLR_LIB) -d build $(SOURCES)
+
+tests: $(TESTS)
+	javac -g -cp .:build:$(ANTLR_LIB):$(TESTNG_LIB) $(TESTS)
 
 clean: $(OBJECTS)
-	$(RM) $(TARGETS)
+	rm -f build/*
 
