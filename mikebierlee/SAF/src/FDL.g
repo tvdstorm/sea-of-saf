@@ -70,11 +70,22 @@ FIGHTACTION : 'block_low'
             
 IDENT  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;  
  
-personality returns [Characteristic characteristic]
-  : IDENT ASSIGN VALUE {$characteristic = new Characteristic($IDENT.text, $VALUE.text);};
+personality returns [Characteristic result]
+  : IDENT ASSIGN VALUE {result = new Characteristic($IDENT.text, $VALUE.text);};
                     
-conditionAnd : CONDITIONTYPE (AND CONDITIONTYPE)*;
-conditionOr : conditionAnd (OR conditionAnd)*; 
+conditionAnd returns [ConditionAnd result]
+  @init {
+    result = new ConditionAnd(new ArrayList<String>());
+  }
+  : op1=CONDITIONTYPE (AND oprest=CONDITIONTYPE {result.addOperand($oprest.text);})* {result.addOperand($op1.text);}
+  ;
+
+conditionOr returns [ConditionOr result] 
+  @init {
+    result = new ConditionOr(new ArrayList<ITreeNode>());
+  }
+  : op1=conditionAnd (OR oprest=conditionAnd {result.addOperand($oprest.result);})* {result.addOperand($op1.result);}
+  ; 
 
 moveChoice : CHOOSE '(' MOVEACTION+ ')';
 fightChoice : CHOOSE '(' FIGHTACTION+ ')';
@@ -82,20 +93,22 @@ moveRule : MOVEACTION | moveChoice;
 fightRule : FIGHTACTION | fightChoice;
 rules : moveRule fightRule;
 
-behaviour : conditionOr '[' rules ']';
+behaviour returns [Behaviour result] 
+  : conditionOr '[' rules ']' {result = new Behaviour($conditionOr.result);}
+  ;
                   
-fighterAttribute returns [FighterAttribute attribute]
-  : personality   {attribute = $personality.characteristic;}
-  | behaviour     {attribute = null;}
+fighterAttribute returns [FighterAttribute result]
+  : personality   {result = $personality.result;}
+  | behaviour     {result = $behaviour.result;}
   ;
 
-fighter returns [Fighter fighter] 
+fighter returns [Fighter result] 
 	@init {
-	  fighter = new Fighter("",new ArrayList<ITreeNode>());
+	  result = new Fighter("",new ArrayList<ITreeNode>());
 	}
-  : IDENT '{' (fighterAttribute {fighter.addAttribute($fighterAttribute.attribute);})* '}'   {fighter.setName($IDENT.text);}
+  : IDENT '{' (fighterAttribute {result.addAttribute($fighterAttribute.result);})* '}'   {result.setName($IDENT.text);}
   ;
 
 parse returns [ITreeNode tree]
-  : fighter EOF   {tree = $fighter.fighter;}
+  : fighter EOF   {tree = $fighter.result;}
   ;
