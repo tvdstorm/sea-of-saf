@@ -6,10 +6,13 @@ options {
 
 @header {
   package grammar;
+  import grammar.Evaluators.*;
+  // import program.*;
 }
 
 @lexer::header {
   package grammar;
+  
 }
 
 
@@ -34,9 +37,9 @@ inputRule returns [InputRule value]
       |'choose' '(' i=ID j=ID ')' {$value = new InputRule($i.text, $j.text);}
       ; 
 
-characteristic returns [Charasteristic value]
+characteristic returns [Characteristic value]
       : e=ID '=' i=INT    
-        {$value= new Charasteristic( $e.text, Integer.parseInt($i.text));}
+        {$value= new Characteristic( $e.text, Integer.parseInt($i.text));}
       ;
 
   
