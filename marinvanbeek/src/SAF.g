@@ -52,8 +52,8 @@ parse
     ;
 
 super_awesome_fighter 
-    : CURLY_OPEN attribute+ behaviour CURLY_CLOSE EOF -> 
-            ^(ATTRIBUTES<SafTreeAttributes>["_Attributes"] attribute+)
+    : CURLY_OPEN attribute* behaviour CURLY_CLOSE EOF -> 
+            ^(ATTRIBUTES<SafTreeAttributes>["_Attributes"] attribute*)
             ^(BEHAVIOUR<SafTreeBehaviour>["_Behaviour"] behaviour)
     ;
 

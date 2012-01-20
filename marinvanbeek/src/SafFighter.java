@@ -16,7 +16,7 @@ public class SafFighter
 
     public SafAction act(SafState state)
     {
-        return new SafAction(new SafMove("illegal"), new SafAttack("illegal"));
+        return new SafAction(new SafMove("illegal_name"), new SafAttack("illegal_name"));
     }
 }
 
@@ -56,7 +56,7 @@ class SafBehaviour
 
     public SafAction chooseAction(SafState state)
     {
-        return new SafAction(new SafMove("illegal"), new SafAttack("illegal"));
+        return new SafAction(new SafMove("illegal_name"), new SafAttack("illegal_name"));
     }
 }
 
