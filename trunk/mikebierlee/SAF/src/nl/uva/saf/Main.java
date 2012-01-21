@@ -20,6 +20,9 @@ package nl.uva.saf;
 
 import java.io.IOException;
 
+import nl.uva.saf.fdl.FighterValidator;
+import nl.uva.saf.fdl.ast.Fighter;
+
 public class Main {
 
 	/**
@@ -29,7 +32,10 @@ public class Main {
 	 */
 	public static void main(String[] args) throws IOException {
 		IFighterLoader loader = new ANTLFighterLoader();
-		loader.LoadFighter("data/challengingFighter.saf");
+		Fighter fighter = (Fighter) loader.loadFighter("data/challengingFighter.saf");
+		
+		FighterValidator validator = new FighterValidator();
+		validator.validate(fighter);
 
 		System.out.println("Done!");
 	}

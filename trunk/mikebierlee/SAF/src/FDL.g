@@ -112,17 +112,12 @@ behaviour returns [Behaviour result]
   : conditionOr '[' rule ']' {result = new Behaviour($conditionOr.result, $rule.result);}
   | ALWAYS '[' rule ']' {result = new Behaviour(new ConditionAlways(), $rule.result);}
   ;
-                  
-fighterAttribute returns [FighterAttribute result]
-  : personality   {result = $personality.result;}
-  | behaviour     {result = $behaviour.result;}
-  ;
 
 fighter returns [Fighter result] 
 	@init {
-	  result = new Fighter("",new ArrayList<ITreeNode>());
+	  result = new Fighter("");
 	}
-  : IDENT '{' (fighterAttribute {result.addAttribute($fighterAttribute.result);})* '}'   {result.setName($IDENT.text);}
+  : IDENT '{' ((personality {result.addCharacteristic($personality.result);}) | (behaviour {result.addBehaviour($behaviour.result);}))* '}'   {result.setName($IDENT.text);}
   ;
 
 parse returns [ITreeNode tree]
