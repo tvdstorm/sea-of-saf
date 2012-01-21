@@ -6,10 +6,10 @@ tokens {
 	LSQUARE = '[';
 	RSQUARE = ']';
 	EQ	= '=' ;
-	KICKREACH = 'kickReach';
+	/*KICKREACH = 'kickReach';
         PUCHREACH = 'punchReach';
         KICKPOWER = 'kickPower';
-        PUCHPOWER = 'punchPower';
+        PUCHPOWER = 'punchPower';*/
         STRONGER = 'stronger';
 	WEAKER = 'weaker';
 	MUCH_STRONGER = 'much_stronger';
@@ -36,6 +36,7 @@ tokens {
 	RPARAM = ')';
 	AND = 'and';
 	OR = 'or';
+	NODE;
 }
 
 @header {
@@ -82,26 +83,15 @@ tokens {
  * PARSER RULES
  *------------------------------------------------------------------*/
 
-saf:		NAME LDELIM  property_list RDELIM {
-	System.out.println("found saf: "+$text);
-	SafNode n =  new SafNode();
-	n.setText($text);
-	addNode(n);
-	System.out.println(nodes);
-	
-	
-};
+saf:		NAME LDELIM  property_list RDELIM -> ^(NAME property_list);
 property_list: 	(property)*;
-property:	strength | behaviour;
-strength:	(KICKREACH| PUCHREACH | KICKPOWER | PUCHPOWER) EQ NUMBER;
-behaviour:	condition LSQUARE action RSQUARE{
-	System.out.println("found behaviour: "+$text);
-	BehaviourNode n =  new BehaviourNode();
-	n.setText($text);
-	addNode(n);
-	System.out.println(nodes);
-};
+property:	strength  | behaviour;
+strength:	STRENGTH_TOKEN EQ NUMBER -> ^(STRENGTH_TOKEN<StrengthNode>[$STRENGTH_TOKEN,$NUMBER]);
+/*strength:	STRENGTH_TOKEN EQ NUMBER -> ^(STRENGTH_TOKEN NUMBER);*/
+/*strength_atom:	KICKREACH | PUCHREACH | KICKPOWER | PUCHPOWER;*/
+
 condition:	term (  OR  term )* ;
+behaviour:	condition LSQUARE action RSQUARE;
 term:		condition_atom ( AND condition_atom )*;
 condition_atom:	STRONGER | WEAKER | MUCH_STRONGER | MUCH_WEAKER | EVEN | NEAR | FAR | ALWAYS;
 action:		move | fight | move fight;
@@ -115,7 +105,7 @@ fight_atom:	PUNCH_LOW | PUNCH_HIGH | KICK_LOW | KICK_HIGH | BLOCK_LOW | BLOCK_HI
  *------------------------------------------------------------------*/
 
 NUMBER	: (DIGIT)+ ;
-
+STRENGTH_TOKEN:	'kickReach' | 'punchReach' | 'kickPower' | 'punchPower';
 WHITESPACE : ( '\t' | ' ' | '\u000C' | '\r' | '\n')+ 	{ $channel = HIDDEN; } ;
 NAME :	'a'..'z'+ ;
 fragment DIGIT	: '0'..'9' ;

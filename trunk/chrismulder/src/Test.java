@@ -1,8 +1,13 @@
 import java.io.*;
 import org.antlr.runtime.*;
-import org.antlr.runtime.debug.DebugEventSocketProxy;
+//import org.antlr.runtime.debug.DebugEventSocketProxy;
+import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeAdaptor;
+import org.antlr.runtime.tree.Tree;
 import org.antlr.runtime.tree.TreeAdaptor;
+
+import AST.Node;
+import AST.SafNode;
 
 import parser.FDLLexer;
 import parser.FDLParser;
@@ -13,47 +18,36 @@ public class Test {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		try {
-			FDLLexer lex = new FDLLexer(new ANTLRFileStream("C:\\Users\\Chris\\school\\SAFplayer\\src\\parser\\__Test___input.txt", "UTF8"));
-	        CommonTokenStream tokens = new CommonTokenStream(lex);
+	public static void main(String[] args) throws Exception {
+		FDLLexer lex = new FDLLexer(new ANTLRFileStream(System.getProperty("user.dir") + "/data/test.fdl", "UTF8"));
+	    CommonTokenStream tokens = new CommonTokenStream(lex);
 	
-	        FDLParser g = new FDLParser(tokens, null);
-	        try {
-	        	g.setTreeAdaptor(adaptor);
-	        	FDLParser.saf_return  ret = g.saf();
-	        	FDLAST tree = (FDLAST) ret.getTree();
-	        	System.out.println("bla");
-	        	printTree(tree, 0);//.toString());
-	        	System.out.println("bla");
-	        } catch (RecognitionException e) {
-	            e.printStackTrace();
-	        }
-		} catch (IOException e) {
-			//System.out.println()
-			e.printStackTrace();
-		}
+        FDLParser g = new FDLParser(tokens);
+    	g.setTreeAdaptor(adaptor);
+    	FDLParser.saf_return  r = g.saf();
+    	if ( r.getTree()!=null ) {
+            System.out.println(((Tree)r.getTree()).toString());
+            ((CommonTree)r.getTree()).sanityCheckParentAndChildIndexes();
+        }
+    	//Node tree = (Node) ret.getTree();
+    	printTree((CommonTree)r.getTree(), 0);//.toString());
 	}
 	
 	static final TreeAdaptor adaptor = new CommonTreeAdaptor() {
 		public Object create(Token payload) {
-			System.out.println("create:");
-			if (payload != null)
-				System.out.print(payload.getType());
-//			System.out.println(payload.);
-			System.out.println(payload);
-			return new FDLAST(payload);
+			return new Node(payload);
 		}
 	};
 	
-	public static void printTree(FDLAST t, int indent) {
+	public static void printTree(CommonTree t, int indent) {
 		if ( t != null ) {
 			StringBuffer sb = new StringBuffer(indent);
-			for ( int i = 0; i < indent; i++ )
-				sb = sb.append("   ");
+			System.out.print(indent + ":");
+			System.out.print(t.getChildCount() + ":");
+			System.out.print(t.getClass() + ":");
+			System.out.println(t.toString() );
 			for ( int i = 0; i < t.getChildCount(); i++ ) {
-				System.out.println(sb.toString() + t.getChild(i).toString());
-				printTree((FDLAST)t.getChild(i), indent+1);
+				printTree((Node)t.getChild(i), indent+1);
 			}
 		}
 	}
