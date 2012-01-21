@@ -11,7 +11,7 @@ import saf.fighter.*;
 public class PlaySAF {
 	
 	public static void main(String[] args) throws Exception{
-		System.out.println("-=[Started]=-");//DEBUG
+		System.out.println("============[Super Awesome Fighters]==================");
 		
         String arg1 = args.length>0 ? args[0] : null;
         String arg2 = args.length>1 ? args[1] : null;
@@ -19,18 +19,22 @@ public class PlaySAF {
         CommonTree ast1 = readFDL(arg1);
         CommonTree ast2 = readFDL(arg2);
         
+		System.out.println("Players:\t"+ast1.toStringTree());	//DEBUG
+		System.out.println("\t\t"+ast2.toStringTree());			//DEBUG
+		
         SuperAwesomeFighter f1 = createFighter(ast1);
         SuperAwesomeFighter f2 = createFighter(ast2);
         
         Arena arena = new Arena(f1,f2);        
         arena.run();
         
-        System.out.println("-=[Finished]=-");//DEBUG
+        System.out.println("============[  by  Sander Kuitert  ]==================");
 	}
 
 	private static CommonTree readFDL(String file) throws Exception{
 		
 		//Input
+		//TODO fix file input
 //		CharStream input = null;
 //      if (file != null)
 //          input = new ANTLRFileStream(file);
@@ -42,8 +46,7 @@ public class PlaySAF {
 //          	//		anyway, we'll use what we got so far
 //          }
 //      }
-		
-		//Hardcoded Fighters
+		//Hardcoded Fighters TODO move to tests
 		String chickenFDL =
 			"chicken" +
 			"{" +
@@ -84,8 +87,6 @@ public class PlaySAF {
 		FDLChecker checker = new FDLChecker(new CommonTreeNodeStream(ast));
 		checker.saf();
 		
-		ast.toString();//DEBUG
-		
         return ast;
 	}
 	
@@ -93,7 +94,6 @@ public class PlaySAF {
 		SuperAwesomeFighter fighter = new SuperAwesomeFighter();
 		
 		//TODO process properties from ast
-		System.out.println("AST:\t"+ast.toStringTree());//DEBUG
 		
 		return fighter;
 	}
