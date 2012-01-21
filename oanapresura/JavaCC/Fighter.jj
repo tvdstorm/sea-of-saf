@@ -32,11 +32,43 @@ public class Fighter {
 
 PARSER_END(Fighter)
 
-
+TOKEN :
+{
+	<NUM: ( ["1"-"9"] )> | 
+	<LBRACE: "{"> | 
+	<RBRACE: "}"> |
+	<LPARAN: "["> | 
+	<RPARAN: "]">   
+}
 
 /** Root production. */
-void Input() :
+
+
+void Move() :
 {}
 {
- ("\n"|"\r")* <EOF>
+	"jump" | "crouch" | "stand" | "run_towards" | "run_away" | "walk_towards" | "walk_away" "\n"
+}
+
+void Strength() :
+{}
+{
+	"punch_Reach" | "kick_Reach" | "kick_Power" | "punch_Power" (" ")* "=" (" ")* <NUM> "\n"
+}
+
+void Attack() :
+{}
+{
+	"punch_Low" | "punch_High" | "kick_Low" | "kick_High" | "block_Low" | "block_High" "\n"
+}
+void Condition() :
+{}
+{
+	"stronger" | "weaker" | "much_Stronger" | "much_Weaker" | "even" | "near" | "far" | "always"
+}
+
+void ConditionalSpec() :
+{}
+{
+	Condition() (" ")* <LPARAN> (" ")* ( Condition() " ")+ (" ")* <RPARAN> "\n"
 }
