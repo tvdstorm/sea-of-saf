@@ -1,0 +1,68 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  JDK_VERSION = "1.5";
+  static = true;
+}
+
+PARSER_BEGIN(SafParser)
+package parser;
+
+public class SafParser
+{
+  public static void main(String args []) throws ParseException
+  {
+    SafParser parser = new SafParser(System.in);
+    SimpleNode std = parser.Start();
+    std.dump("");
+         
+  }
+}
+
+PARSER_END(SafParser)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+| < EQUAL : "=" >
+}
+
+TOKEN :
+{
+  <PROP_VALUE :["1"-"9"]|"10">
+| < #DIGIT : [ "0"-"9" ] >
+| < PROPERTIES : "WEIGHT"|"HEIGHT"|"SPEED" >
+| < CONDITIONS : "STRONGER"|"WEAKER"|"MUCH_STRONGER"|"MUCH_WEAKER"|"EVEN"|"NEAR"|"FAR"|"ALWAYS" >
+| < MOVES : "JUMPS"|"CROUCH"|"STAND"|"RUN_TOWARDS"|"RUN_AWAY"|"WALK_TOWARDS"|"WALK_AWAY" >
+| < ATTACKS : "PUNCH_LOW"|"PUNCH_HEIGH"|"KICK_LOW"|"KICK_HEIGH"|"BLOCK_LOW"|"BLOCK_HEIGH" >
+| < STRENGTH : "PUNCHREACH"|"KICKREACH"|"KICKPOWER"|"PUNCHPOWER" >
+| < OP_BRACKETS: "[" >
+| < CL_BRACKETS: "]" >
+
+}
+
+SimpleNode Start() :
+{}
+{
+	(
+  		<STRENGTH><EQUAL><PROP_VALUE>
+  		|
+		<CONDITIONS><OP_BRACKETS><MOVES><ATTACKS><CL_BRACKETS>
+	)
+	{ return jjtThis;}
+ }
+   
+
