@@ -19,7 +19,10 @@ statement : personalityStatement | behaviourStatement;
 personalityStatement : personality '=' INTEGER;
 personality : 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach';
 
-behaviourStatement : condition '[' actionStatement ']';
+behaviourStatement : conditions '[' actionStatement ']';
+
+expression : condition | '(' conditions ')';
+conditions : expression (('and' | 'or') expression)*;
 condition : 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always';
 
 //possible todo: split in movement action and action-action. 
@@ -30,7 +33,7 @@ action : 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' |
 	'block_low' | 'block_high'
 	;
 
-INTEGER : (('1' '0'?) | '2'..'9');
+INTEGER : (('1' '0'?) | '2'..'9'); //1 to 10 inclusive
 IDENT : ('0'..'9')*('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')*; //ident has to have atleast one character
 
 //ignore all whitespace and comments:
