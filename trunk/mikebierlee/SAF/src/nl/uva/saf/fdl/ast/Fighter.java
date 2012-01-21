@@ -18,19 +18,15 @@
 
 package nl.uva.saf.fdl.ast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Fighter extends TreeNode {
 	private String name;
-
-	private List<Characteristic> characteristics;
-	private List<Behaviour> behaviours;
+	private List<ITreeNode> attributes;
 	
-	public Fighter(String name) {
+	public Fighter(String name, List<ITreeNode> attributes) {
 		this.setName(name);
-		characteristics = new ArrayList<Characteristic>();
-		behaviours = new ArrayList<Behaviour>();
+		this.setAttributes(attributes);
 	}
 
 	public String getName() {
@@ -40,24 +36,18 @@ public class Fighter extends TreeNode {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public List<Characteristic> getCharacteristics() {
-		return characteristics;
+
+	public List<ITreeNode> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<ITreeNode> attributes) {
+		this.attributes = attributes;
 	}
 	
-	public List<Behaviour> getBehaviours() {
-		return behaviours;
-	}
-	
-	public void addCharacteristic(Characteristic characteristic) {
-		if (characteristics != null) {
-			characteristics.add(characteristic);
-		}
-	}
-	
-	public void addBehaviour(Behaviour behaviour) {
-		if (behaviours != null) {
-			behaviours.add(behaviour);
+	public void addAttribute(ITreeNode attribute) {
+		if (attributes != null) {
+			attributes.add(attribute);
 		}
 	}
 }

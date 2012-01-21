@@ -6,16 +6,11 @@ import java.util.List;
 public abstract class TreeWalker implements ITreeWalker {
 
 	public void walk(Fighter fighterNode) {
-		List<Characteristic> characteristics = fighterNode.getCharacteristics();
-		List<Behaviour> behaviours = fighterNode.getBehaviours();
-		
-		for (Characteristic attribute : characteristics) {			
-			walk((Characteristic)attribute);
-		}
-		
-		for (ITreeNode behaviour : behaviours) {
-			walk((Behaviour)behaviour);
-		}
+		//List<ITreeNode> attributes = fighterNode.getAttributes();
+				
+		//for (ITreeNode attribute : attributes) {			
+		//	walk(attribute);
+		//}
 	}
 	
 	public void walk(Characteristic characteristicNode){};
