@@ -34,8 +34,8 @@ saf:                name attributes;
 name:               TEXT;
 attributes:         L_CURLY_BRACKET (characteristic | behaviour_rule)* R_CURLY_BRACKET;
 
-characteristic:     property !IS value;
-behaviour_rule:     condition !L_BRACKET move attack !R_BRACKET;
+characteristic:     property IS value;
+behaviour_rule:     condition L_BRACKET move attack R_BRACKET;
 
 property:           TEXT;
 value:              NUMBER;
@@ -43,7 +43,7 @@ condition:          TEXT;
 move:               TEXT | choice;
 attack:             TEXT | choice;
 
-choice:             CHOOSE !L_PAREN TEXT TEXT !R_PAREN;
+choice:             CHOOSE L_PAREN TEXT TEXT R_PAREN;
 
 // LEXER rules
 TEXT:               LETTER (LETTER | UNDERSCORE | DIGIT)*;
