@@ -1,25 +1,17 @@
 package AST;
 
-import java.util.ArrayList;
+import org.antlr.runtime.tree.*;
+import org.antlr.runtime.Token;
 
-public abstract class Node {
-	private ArrayList<Node> children;
-	private String text;
+public class Node extends CommonTree {
+//	public String text; 
 	
-	public ArrayList<Node> getChildren() {
-		return children;
+	public Node(Token t) {
+		super(t);
+//		text = (t != null? t.getText(): "[]");
 	}
-	
-	public void addChild(Node child) {
-		children.add(child);
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
+	public Node(Node node) { super(node); }  
+//	public String toString() {
+//		return text + super.toString();
+//	}
 }

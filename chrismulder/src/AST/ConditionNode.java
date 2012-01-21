@@ -2,9 +2,9 @@ package AST;
 
 import org.antlr.runtime.Token;
 
-public class SafNode extends Node {
+public class ConditionNode extends Node {
 
-	public SafNode(Token t) {
+	public ConditionNode(Token t) {
 		super(t);
 		// TODO Auto-generated constructor stub
 	}
