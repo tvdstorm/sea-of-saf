@@ -33,7 +33,7 @@ import org.antlr.runtime.TokenStream;
 public class ANTLFighterLoader implements IFighterLoader {
 
 	@Override
-	public ITreeNode LoadFighter(String fileName) {
+	public ITreeNode loadFighter(String fileName) {
 		ITreeNode loadedTree = null;
 		
 		try {

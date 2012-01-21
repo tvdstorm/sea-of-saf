@@ -25,5 +25,5 @@ import nl.uva.saf.fdl.ast.ITreeNode;
  * fighters.
  */
 public interface IFighterLoader {
-	abstract ITreeNode LoadFighter(String fighter);
+	abstract ITreeNode loadFighter(String fighter);
 }
