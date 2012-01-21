@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Bot {
 	private ArrayList<Characteristic> characteristics 	= new ArrayList<Characteristic>();
-	private ArrayList<Behaviour> behaviours 				= new ArrayList<Behaviour>();
+	private ArrayList<Behaviour> behaviours 			= new ArrayList<Behaviour>();
 	
 	private String botName = new String();
 
@@ -26,6 +26,22 @@ public class Bot {
 			output +=  this.behaviours.get(i).toString();
 		}
 		return "  Class:" + this.getClass().getName() + "\n" +  output;
+	}
+	
+	public ArrayList<Characteristic> getCharacteristics() {
+		return characteristics;
+	}
+	
+	public void setCharacteristics(ArrayList<Characteristic> characteristics) {
+		this.characteristics = characteristics;
+	}
+	
+	public ArrayList<Behaviour> getBehaviours() {
+		return behaviours;
+	}
+	
+	public void setBehaviours(ArrayList<Behaviour> behaviours) {
+		this.behaviours = behaviours;
 	}
 
 	public String getBotName() {

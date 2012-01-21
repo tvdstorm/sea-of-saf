@@ -8,7 +8,7 @@ public class ConditionGroup {
 	public ConditionGroup() {
 		conditionTypes = new ArrayList<String>();
 	}
-	
+
 	public void addConditionType(String type) {
 		this.conditionTypes.add(type);
 	}
@@ -20,5 +20,13 @@ public class ConditionGroup {
 		}
 		output = "          conditionTypes: " + output;
 		return "        Class: " + this.getClass().getName() + "\n" + output + "\n";
+	}
+	
+	public ArrayList<String> getConditionTypes() {
+		return conditionTypes;
+	}
+
+	public void setConditionTypes(ArrayList<String> conditionTypes) {
+		this.conditionTypes = conditionTypes;
 	}
 }

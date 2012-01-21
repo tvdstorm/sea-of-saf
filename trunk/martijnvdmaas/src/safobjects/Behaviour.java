@@ -5,13 +5,6 @@ import java.util.Iterator;
 
 public class Behaviour {
 	private ConditionChoices conditionChoices;
-	public ConditionChoices getConditionChoices() {
-		return conditionChoices;
-	}
-
-	public void setConditionChoices(ConditionChoices conditionChoices) {
-		this.conditionChoices = conditionChoices;
-	}
 
 	private HashSet<String>  moveChoices;
 	private HashSet<String> attackChoices;
@@ -47,4 +40,29 @@ public class Behaviour {
 		output += attacks + "\n";
 		return "    Class: " + this.getClass().getName() + "\n" + output;
 	}
+	
+	public ConditionChoices getConditionChoices() {
+		return conditionChoices;
+	}
+
+	public void setConditionChoices(ConditionChoices conditionChoices) {
+		this.conditionChoices = conditionChoices;
+	}
+	
+	public HashSet<String> getMoveChoices() {
+		return moveChoices;
+	}
+
+	public void setMoveChoices(HashSet<String> moveChoices) {
+		this.moveChoices = moveChoices;
+	}
+
+	public HashSet<String> getAttackChoices() {
+		return attackChoices;
+	}
+
+	public void setAttackChoices(HashSet<String> attackChoices) {
+		this.attackChoices = attackChoices;
+	}
+	
 }

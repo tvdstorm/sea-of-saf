@@ -25,8 +25,9 @@ public class Characteristic {
 	}
 
 	public String toString() {
-		String output = "      Name: " + this.name + "\n";
-		output += "      Value: " + this.value;
+		String output 	 = "      Name: " + this.name + "\n";
+		output 			+= "      Value: " + this.value;
+		
 		return "    Class: " + this.getClass().getName() + "\n" +  output + "\n";
 	}
 }
