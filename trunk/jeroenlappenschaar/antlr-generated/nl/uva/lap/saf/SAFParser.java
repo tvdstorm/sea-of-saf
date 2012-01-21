@@ -1,6 +1,7 @@
-// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-01-21 16:16:03
+// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-01-21 22:20:22
 
   package nl.uva.lap.saf;
+  import nl.uva.lap.saf.Fighter;
 
 
 import org.antlr.runtime.*;
@@ -73,19 +74,27 @@ public class SAFParser extends Parser {
     public String getGrammarFileName() { return "D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g"; }
 
 
+    	//we hold our own fighter and the grammar is going to set its properties for us! 
+    	private Fighter f = new Fighter();
+    	
+    	public Fighter getFighter(){return f;}
+
+
 
     // $ANTLR start "fighter"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:1: fighter : IDENT '{' ( statement )* '}' ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:1: fighter : IDENT '{' ( statement )* '}' ;
     public final void fighter() throws RecognitionException {
+        Token IDENT1=null;
+
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:9: ( IDENT '{' ( statement )* '}' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:11: IDENT '{' ( statement )* '}'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:8: ( IDENT '{' ( statement )* '}' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:27:2: IDENT '{' ( statement )* '}'
             {
-            match(input,IDENT,FOLLOW_IDENT_in_fighter39); 
+            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter48); 
 
-            match(input,40,FOLLOW_40_in_fighter41); 
+            match(input,40,FOLLOW_40_in_fighter50); 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:21: ( statement )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:27:12: ( statement )*
             loop1:
             do {
                 int alt1=2;
@@ -98,9 +107,9 @@ public class SAFParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:21: statement
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:27:12: statement
             	    {
-            	    pushFollow(FOLLOW_statement_in_fighter43);
+            	    pushFollow(FOLLOW_statement_in_fighter52);
             	    statement();
 
             	    state._fsp--;
@@ -115,7 +124,9 @@ public class SAFParser extends Parser {
             } while (true);
 
 
-            match(input,41,FOLLOW_41_in_fighter46); 
+            match(input,41,FOLLOW_41_in_fighter55); 
+
+            f.setName((IDENT1!=null?IDENT1.getText():null));
 
             }
 
@@ -135,10 +146,10 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "statement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:17:1: statement : ( personalityStatement | behaviourStatement );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:1: statement : ( personalityStatement | behaviourStatement );
     public final void statement() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:17:11: ( personalityStatement | behaviourStatement )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:10: ( personalityStatement | behaviourStatement )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -157,9 +168,9 @@ public class SAFParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:17:13: personalityStatement
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:30:2: personalityStatement
                     {
-                    pushFollow(FOLLOW_personalityStatement_in_statement55);
+                    pushFollow(FOLLOW_personalityStatement_in_statement67);
                     personalityStatement();
 
                     state._fsp--;
@@ -168,9 +179,9 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:17:36: behaviourStatement
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:30:25: behaviourStatement
                     {
-                    pushFollow(FOLLOW_behaviourStatement_in_statement59);
+                    pushFollow(FOLLOW_behaviourStatement_in_statement71);
                     behaviourStatement();
 
                     state._fsp--;
@@ -196,21 +207,27 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "personalityStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:19:1: personalityStatement : personality '=' INTEGER ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:32:1: personalityStatement : personality '=' INTEGER ;
     public final void personalityStatement() throws RecognitionException {
+        Token INTEGER3=null;
+        SAFParser.personality_return personality2 =null;
+
+
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:19:22: ( personality '=' INTEGER )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:19:24: personality '=' INTEGER
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:32:21: ( personality '=' INTEGER )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:33:2: personality '=' INTEGER
             {
-            pushFollow(FOLLOW_personality_in_personalityStatement67);
-            personality();
+            pushFollow(FOLLOW_personality_in_personalityStatement80);
+            personality2=personality();
 
             state._fsp--;
 
 
-            match(input,11,FOLLOW_11_in_personalityStatement69); 
+            match(input,11,FOLLOW_11_in_personalityStatement82); 
 
-            match(input,INTEGER,FOLLOW_INTEGER_in_personalityStatement71); 
+            INTEGER3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_personalityStatement84); 
+
+            f.setPersonality((personality2!=null?input.toString(personality2.start,personality2.stop):null), (INTEGER3!=null?INTEGER3.getText():null));
 
             }
 
@@ -228,12 +245,19 @@ public class SAFParser extends Parser {
     // $ANTLR end "personalityStatement"
 
 
+    public static class personality_return extends ParserRuleReturnScope {
+    };
+
 
     // $ANTLR start "personality"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:20:1: personality : ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' );
-    public final void personality() throws RecognitionException {
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:34:1: personality : ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' );
+    public final SAFParser.personality_return personality() throws RecognitionException {
+        SAFParser.personality_return retval = new SAFParser.personality_return();
+        retval.start = input.LT(1);
+
+
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:20:13: ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:34:13: ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' )
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:
             {
             if ( (input.LA(1) >= 21 && input.LA(1) <= 22)||(input.LA(1) >= 29 && input.LA(1) <= 30) ) {
@@ -248,6 +272,9 @@ public class SAFParser extends Parser {
 
             }
 
+            retval.stop = input.LT(-1);
+
+
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -257,34 +284,34 @@ public class SAFParser extends Parser {
         finally {
         	// do for sure before leaving
         }
-        return ;
+        return retval;
     }
     // $ANTLR end "personality"
 
 
 
     // $ANTLR start "behaviourStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:1: behaviourStatement : conditions '[' actionStatement ']' ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:1: behaviourStatement : conditions '[' actionStatement ']' ;
     public final void behaviourStatement() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:20: ( conditions '[' actionStatement ']' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:22: conditions '[' actionStatement ']'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:20: ( conditions '[' actionStatement ']' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:22: conditions '[' actionStatement ']'
             {
-            pushFollow(FOLLOW_conditions_in_behaviourStatement98);
+            pushFollow(FOLLOW_conditions_in_behaviourStatement113);
             conditions();
 
             state._fsp--;
 
 
-            match(input,12,FOLLOW_12_in_behaviourStatement100); 
+            match(input,12,FOLLOW_12_in_behaviourStatement115); 
 
-            pushFollow(FOLLOW_actionStatement_in_behaviourStatement102);
+            pushFollow(FOLLOW_actionStatement_in_behaviourStatement117);
             actionStatement();
 
             state._fsp--;
 
 
-            match(input,13,FOLLOW_13_in_behaviourStatement104); 
+            match(input,13,FOLLOW_13_in_behaviourStatement119); 
 
             }
 
@@ -304,10 +331,10 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "expression"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:1: expression : ( condition | '(' conditions ')' );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:38:1: expression : ( condition | '(' conditions ')' );
     public final void expression() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:12: ( condition | '(' conditions ')' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:38:12: ( condition | '(' conditions ')' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -326,9 +353,9 @@ public class SAFParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:14: condition
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:38:14: condition
                     {
-                    pushFollow(FOLLOW_condition_in_expression112);
+                    pushFollow(FOLLOW_condition_in_expression127);
                     condition();
 
                     state._fsp--;
@@ -337,17 +364,17 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:26: '(' conditions ')'
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:38:26: '(' conditions ')'
                     {
-                    match(input,9,FOLLOW_9_in_expression116); 
+                    match(input,9,FOLLOW_9_in_expression131); 
 
-                    pushFollow(FOLLOW_conditions_in_expression118);
+                    pushFollow(FOLLOW_conditions_in_expression133);
                     conditions();
 
                     state._fsp--;
 
 
-                    match(input,10,FOLLOW_10_in_expression120); 
+                    match(input,10,FOLLOW_10_in_expression135); 
 
                     }
                     break;
@@ -369,19 +396,19 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "conditions"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:1: conditions : expression ( ( 'and' | 'or' ) expression )* ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:1: conditions : expression ( ( 'and' | 'or' ) expression )* ;
     public final void conditions() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:12: ( expression ( ( 'and' | 'or' ) expression )* )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:14: expression ( ( 'and' | 'or' ) expression )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:12: ( expression ( ( 'and' | 'or' ) expression )* )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:14: expression ( ( 'and' | 'or' ) expression )*
             {
-            pushFollow(FOLLOW_expression_in_conditions127);
+            pushFollow(FOLLOW_expression_in_conditions142);
             expression();
 
             state._fsp--;
 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:25: ( ( 'and' | 'or' ) expression )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:25: ( ( 'and' | 'or' ) expression )*
             loop4:
             do {
                 int alt4=2;
@@ -394,7 +421,7 @@ public class SAFParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:26: ( 'and' | 'or' ) expression
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:26: ( 'and' | 'or' ) expression
             	    {
             	    if ( input.LA(1)==15||input.LA(1)==28 ) {
             	        input.consume();
@@ -406,7 +433,7 @@ public class SAFParser extends Parser {
             	    }
 
 
-            	    pushFollow(FOLLOW_expression_in_conditions138);
+            	    pushFollow(FOLLOW_expression_in_conditions153);
             	    expression();
 
             	    state._fsp--;
@@ -439,10 +466,10 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "condition"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:1: condition : ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:40:1: condition : ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' );
     public final void condition() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:11: ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:40:11: ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' )
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:
             {
             if ( input.LA(1)==14||input.LA(1)==20||(input.LA(1) >= 25 && input.LA(1) <= 27)||input.LA(1)==36||input.LA(1)==39 ) {
@@ -473,13 +500,13 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "actionStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:1: actionStatement : ( action | ( 'choose' '(' ( action )+ ')' ) )+ ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:1: actionStatement : ( action | ( 'choose' '(' ( action )+ ')' ) )+ ;
     public final void actionStatement() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:17: ( ( action | ( 'choose' '(' ( action )+ ')' ) )+ )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:17: ( ( action | ( 'choose' '(' ( action )+ ')' ) )+ )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
             {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
             int cnt6=0;
             loop6:
             do {
@@ -496,9 +523,9 @@ public class SAFParser extends Parser {
 
                 switch (alt6) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:20: action
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:20: action
             	    {
-            	    pushFollow(FOLLOW_action_in_actionStatement181);
+            	    pushFollow(FOLLOW_action_in_actionStatement196);
             	    action();
 
             	    state._fsp--;
@@ -507,16 +534,16 @@ public class SAFParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:29: ( 'choose' '(' ( action )+ ')' )
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:29: ( 'choose' '(' ( action )+ ')' )
             	    {
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:29: ( 'choose' '(' ( action )+ ')' )
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:30: 'choose' '(' ( action )+ ')'
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:29: ( 'choose' '(' ( action )+ ')' )
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:30: 'choose' '(' ( action )+ ')'
             	    {
-            	    match(input,18,FOLLOW_18_in_actionStatement186); 
+            	    match(input,18,FOLLOW_18_in_actionStatement201); 
 
-            	    match(input,9,FOLLOW_9_in_actionStatement188); 
+            	    match(input,9,FOLLOW_9_in_actionStatement203); 
 
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:43: ( action )+
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:43: ( action )+
             	    int cnt5=0;
             	    loop5:
             	    do {
@@ -530,9 +557,9 @@ public class SAFParser extends Parser {
 
             	        switch (alt5) {
             	    	case 1 :
-            	    	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:43: action
+            	    	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:43:43: action
             	    	    {
-            	    	    pushFollow(FOLLOW_action_in_actionStatement190);
+            	    	    pushFollow(FOLLOW_action_in_actionStatement205);
             	    	    action();
 
             	    	    state._fsp--;
@@ -551,7 +578,7 @@ public class SAFParser extends Parser {
             	    } while (true);
 
 
-            	    match(input,10,FOLLOW_10_in_actionStatement193); 
+            	    match(input,10,FOLLOW_10_in_actionStatement208); 
 
             	    }
 
@@ -587,10 +614,10 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "action"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:30:1: action : ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:44:1: action : ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' );
     public final void action() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:30:8: ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:44:8: ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' )
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:
             {
             if ( (input.LA(1) >= 16 && input.LA(1) <= 17)||input.LA(1)==19||(input.LA(1) >= 23 && input.LA(1) <= 24)||(input.LA(1) >= 31 && input.LA(1) <= 35)||(input.LA(1) >= 37 && input.LA(1) <= 38) ) {
@@ -623,30 +650,30 @@ public class SAFParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_IDENT_in_fighter39 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_40_in_fighter41 = new BitSet(new long[]{0x000002906E704200L});
-    public static final BitSet FOLLOW_statement_in_fighter43 = new BitSet(new long[]{0x000002906E704200L});
-    public static final BitSet FOLLOW_41_in_fighter46 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_personalityStatement_in_statement55 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_behaviourStatement_in_statement59 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_personality_in_personalityStatement67 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_personalityStatement69 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_INTEGER_in_personalityStatement71 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditions_in_behaviourStatement98 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_behaviourStatement100 = new BitSet(new long[]{0x0000006F818F0000L});
-    public static final BitSet FOLLOW_actionStatement_in_behaviourStatement102 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_behaviourStatement104 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_expression112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_9_in_expression116 = new BitSet(new long[]{0x000000900E104200L});
-    public static final BitSet FOLLOW_conditions_in_expression118 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_expression120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_expression_in_conditions127 = new BitSet(new long[]{0x0000000010008002L});
-    public static final BitSet FOLLOW_set_in_conditions130 = new BitSet(new long[]{0x000000900E104200L});
-    public static final BitSet FOLLOW_expression_in_conditions138 = new BitSet(new long[]{0x0000000010008002L});
-    public static final BitSet FOLLOW_action_in_actionStatement181 = new BitSet(new long[]{0x0000006F818F0002L});
-    public static final BitSet FOLLOW_18_in_actionStatement186 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_actionStatement188 = new BitSet(new long[]{0x0000006F818B0000L});
-    public static final BitSet FOLLOW_action_in_actionStatement190 = new BitSet(new long[]{0x0000006F818B0400L});
-    public static final BitSet FOLLOW_10_in_actionStatement193 = new BitSet(new long[]{0x0000006F818F0002L});
+    public static final BitSet FOLLOW_IDENT_in_fighter48 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_fighter50 = new BitSet(new long[]{0x000002906E704200L});
+    public static final BitSet FOLLOW_statement_in_fighter52 = new BitSet(new long[]{0x000002906E704200L});
+    public static final BitSet FOLLOW_41_in_fighter55 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_personalityStatement_in_statement67 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_behaviourStatement_in_statement71 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_personality_in_personalityStatement80 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_personalityStatement82 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_INTEGER_in_personalityStatement84 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditions_in_behaviourStatement113 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_behaviourStatement115 = new BitSet(new long[]{0x0000006F818F0000L});
+    public static final BitSet FOLLOW_actionStatement_in_behaviourStatement117 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_behaviourStatement119 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_in_expression127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_9_in_expression131 = new BitSet(new long[]{0x000000900E104200L});
+    public static final BitSet FOLLOW_conditions_in_expression133 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_expression135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expression_in_conditions142 = new BitSet(new long[]{0x0000000010008002L});
+    public static final BitSet FOLLOW_set_in_conditions145 = new BitSet(new long[]{0x000000900E104200L});
+    public static final BitSet FOLLOW_expression_in_conditions153 = new BitSet(new long[]{0x0000000010008002L});
+    public static final BitSet FOLLOW_action_in_actionStatement196 = new BitSet(new long[]{0x0000006F818F0002L});
+    public static final BitSet FOLLOW_18_in_actionStatement201 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_actionStatement203 = new BitSet(new long[]{0x0000006F818B0000L});
+    public static final BitSet FOLLOW_action_in_actionStatement205 = new BitSet(new long[]{0x0000006F818B0400L});
+    public static final BitSet FOLLOW_10_in_actionStatement208 = new BitSet(new long[]{0x0000006F818F0002L});
 
 }
