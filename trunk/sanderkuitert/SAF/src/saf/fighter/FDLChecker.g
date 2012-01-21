@@ -8,105 +8,78 @@ options {
 
 @header{
     package saf.fighter;
+    
+	import java.util.Arrays;
+	import java.util.Set;
+	import java.util.HashSet;
 }
-
-// Propagate exceptions upwards (by rethrowing them); replaces ANTLR's exception handling
-//@rulecatch { 
-//    catch (RecognitionException e) { 
-//        throw e; 
-//    } 
-//}
 
 @members {
+ 
+    //TODO Move constants to PlaySAF
+    private static final Set<String> characteristics = new HashSet<String>(Arrays.asList(
+                                    "punchReach","punchPower","kickReach","kickPower"));
+    private static final int lowerBound = 1;  //inclusive
+    private static final int upperBound = 10; //inclusive
+    private static final Set<String> conditions = new HashSet<String>(Arrays.asList(
+       "always","near","far","much_stronger","stronger","even","weaker","much_weaker"));    
+    private static final Set<String> moves = new HashSet<String>(Arrays.asList(
+          "walk_towards","walk_away","run_towards","run_away","jump","crouch","stand"));
+    private static final Set<String> attacks = new HashSet<String>(Arrays.asList(
+             "block_low","block_high","punch_low","punch_high","kick_low","kick_high")); 
+
     
-    //TODO Make own subclass of RecognitionException (include valid options)
-    
-    
-    //TODO Generalize; use following code:
-    // public static final Set<String> properties = new HashSet<String>(Arrays.asList(
-    //                                   {"punchReach","punchPower","kickReach","kickPower"}));
-    // properties.contains(prop);
-    //TODO Move constants to PlaySAF?
-    private void checkProperty(String prop){
-        if(!(       prop.equals("punchReach")
-                ||  prop.equals("punchPower")
-                ||  prop.equals("kickReach")
-                ||  prop.equals("kickPower")        )){
-                
-//            throw new Exception
-            System.err.println(prop+"is an invalid characteristic!");            
-        }
+    //TODO Use own subclass of RecognitionException
+    //TODO-afterwards: generalise methods below; use a map?
+    private void checkCharacteristic(String characteristic){
+        if(!characteristics.contains(characteristic))
+            System.err.println(characteristic+" is invalid! Valid characteristics: "
+                                                                      +characteristics);
     }
-    private void checkValue(String text){
-        int val = -1;
+    
+    private void checkCharacteristicRange(String valueText){
+        int value = -1;
         try{
-            val = Integer.parseInt(text);
+            value = Integer.parseInt(valueText);
         }catch (NumberFormatException nfe){
-            assert false; //Parser should only provide numbers
-//            throw new Exception(text+" is not a number!");
+            assert false; //the parser should only provide numbers
+            System.err.println(valueText + " is not a number!");
         }
         
-        if(val < 1 || val > 10){
-//            throw new Exception
-            System.err.println(val+" is an invalid value! Valid: 1-10");
+        if(value < lowerBound || value > upperBound){
+            System.err.println(value+" is invalid! Valid values:"+lowerBound+"-"+upperBound);
         }
     }
-    private void checkCondition(String cond){
-        if(!(       cond.equals("always")
-                ||  cond.equals("near")
-                ||  cond.equals("far")
-                ||  cond.equals("much_stronger")
-                ||  cond.equals("stronger")
-                ||  cond.equals("even")
-                ||  cond.equals("weaker")
-                ||  cond.equals("much_weaker")      )){
-                
-//            throw new Exception
-            System.err.println(cond+" is an invalid condition!"); 
-        }
+    
+    private void checkCondition(String condition){
+        if(!conditions.contains(condition))
+            System.err.println(condition+" is invalid! Valid conditions: "+conditions);
     }
+    
     private void checkMove(String move){
-        if(!(       move.equals("walk_towards")
-                ||  move.equals("walk_away")
-                ||  move.equals("run_towards")
-                ||  move.equals("run_away")
-                ||  move.equals("jump")
-                ||  move.equals("crouch")
-                ||  move.equals("stand")            )){
-                
-//            throw new Exception
-            System.err.println(move+" is an invalid move!"); 
-        }
+        if(!moves.contains(move))
+            System.err.println(move+" is invalid! Valid moves: "+moves);
     }
-    private void checkAttack(String att){
-        if(!(       att.equals("block_low")
-                ||  att.equals("block_high")
-                ||  att.equals("punch_low")
-                ||  att.equals("punch_high")
-                ||  att.equals("kick_low")
-                ||  att.equals("kick_high")         )){
-                
-//            throw new Exception
-            System.err.println(att+" is an invalid attack!"); 
-        }
+    
+    private void checkAttack(String attack){
+        if(!attacks.contains(attack))
+            System.err.println(attack+" is invalid! Valid moves: "+attacks);
     }
+    
 }
-
 
 saf:                name attributes;
 
 name:               TEXT;
-attributes:         L_CURLY_BRACKET (characteristic | behaviour_rule)* R_CURLY_BRACKET;
+attributes:         (characteristic | behaviour_rule)*;
 
-characteristic:     property IS value;      //{throw new RecognitionException();};//DEBUG
-behaviour_rule:     condition L_BRACKET move attack R_BRACKET; 
+characteristic:     property value;
+behaviour_rule:     condition move attack;
 
-property:           TEXT                    {checkProperty($TEXT.text);};
-value:              NUMBER                  {checkValue($NUMBER.text);};
+property:           TEXT                    {checkCharacteristic($TEXT.text);};
+value:              NUMBER                  {checkCharacteristicRange($NUMBER.text);};
 condition:          TEXT                    {checkCondition($TEXT.text);};
 move:               TEXT                    {checkMove($TEXT.text);}
-                  | CHOOSE L_PAREN t1=TEXT t2=TEXT R_PAREN 
-                                            {checkMove($t1.text); checkMove($t2.text);};
+                  | CHOOSE t1=TEXT t2=TEXT  {checkMove($t1.text); checkMove($t2.text);};
 attack:             TEXT                    {checkAttack($TEXT.text);}
-                  | CHOOSE L_PAREN t1=TEXT t2=TEXT R_PAREN 
-                                            {checkAttack($t1.text); checkAttack($t2.text);};
+                  | CHOOSE t1=TEXT t2=TEXT  {checkAttack($t1.text); checkAttack($t2.text);};
