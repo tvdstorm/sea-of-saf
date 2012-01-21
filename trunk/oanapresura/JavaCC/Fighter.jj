@@ -39,10 +39,10 @@ TOKEN :
 	<RBRACE: "}"> |
 	<LPARAN: "["> | 
 	<RPARAN: "]">   
+	<NAME: ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* >
 }
 
 /** Root production. */
-
 
 void Move() :
 {}
@@ -71,4 +71,12 @@ void ConditionalSpec() :
 {}
 {
 	Condition() (" ")* <LPARAN> (" ")* ( Condition() " ")+ (" ")* <RPARAN> "\n"
+}
+
+void Input() :
+{}
+{
+	<NAME> ("\n")? <LBRACE> ("\n")?
+	Strength() "\n" Strength() "\n" Strength() "\n" Strength() "\n" 
+	( ConditionalSpec() )+ ("\n")? <RBRACE>
 }
