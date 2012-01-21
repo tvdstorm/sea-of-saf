@@ -1,0 +1,111 @@
+options
+{
+  JDK_VERSION = "1.5";
+  static = false;
+}
+
+PARSER_BEGIN(Saf)
+
+package saf;
+
+public class Saf
+{   
+	public static void main(String args[])
+	{
+	    try
+	    {
+	          Saf parser = new Saf(System.in);
+	          SimpleNode tree = parser.Parse();
+	          tree.dump("");
+	    }
+	    catch(Exception e)
+	    {
+	          e.printStackTrace();
+	    }
+	}
+}
+
+PARSER_END(Saf)
+
+SKIP : // Whitespace
+{
+    " "
+|   "\r"
+|   "\t"
+|   "\n"
+|   "\r\n"
+}
+
+TOKEN : // Conditions
+{	< STRONGER : "stronger" >
+|   < WEAKER : "weaker" >
+|   < MSTRONGER : "much_stronger" >
+|   < MWEAKER : "much_weaker" >
+|   < EVEN : "even" >
+|   < NEAR : "near" >
+|   < FAR : "far" >
+|   < ALWAYS : "always" >
+}
+
+TOKEN : // Moves
+{
+    < JUMP : "jump" >
+|   < CROUCH : "crouch" >
+|   < STAND : "stand" >
+|   < RUNTOWARDS : "run_towards" >
+|   < RUNAWAY : "run_away" >
+|   < WALKTOWARDS : "walk_towards" >
+|   < WALKAWAY : "walk_away" >}
+
+TOKEN : // Attacks
+{
+    < PUNCHLOW : "punch_low" >
+|   < PUNCHHIGH : "punch_high" >
+|   < KICKLOW : "kick_low" >
+|   < KICKHIGH : "kick_high" >
+|   < BLOCKLOW : "block_low" >
+|   < BLOCKHIGH : "block_high" >
+}
+
+TOKEN : // Strengths 
+{
+    < PUNCHREACH : "punchReach" >
+|   < KICKREACH : "kickReach" >
+|   < KICPOWER : "kickPower" >
+|   < PUNCHPOWER : "punchPower" >
+}
+
+TOKEN :
+{
+	< EQUALS : "=" >
+|   < STRING : ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])* >
+|   < NUMBER : (["1"-"9"] | "10") >
+|   < OPSQBRACKET : "[" >
+|   < CLSQBRACKET : "]" >
+}
+
+SimpleNode Parse() :
+{}
+{
+	(Strength() | Condition())
+	{ return jjtThis; }
+}
+
+void Strength() :
+{}
+{
+    (< PUNCHREACH > | < KICKREACH > | < KICPOWER > | < PUNCHPOWER >)
+    (< EQUALS >)
+    (< NUMBER >)}
+
+void Condition() :
+{}{
+    (< STRONGER > | < WEAKER > | < MSTRONGER > | < MWEAKER > | < EVEN > | < NEAR > | < FAR > | < ALWAYS >)
+    (< OPSQBRACKET >)
+    (< JUMP > | < CROUCH > | < STAND > | < RUNTOWARDS > | < RUNAWAY > | < WALKTOWARDS > | < WALKAWAY >)
+    (< PUNCHLOW > | < PUNCHHIGH > | < KICKLOW > | < KICKHIGH > | < BLOCKLOW > | < BLOCKHIGH >)
+    (< CLSQBRACKET >)}
+
+
+
+
