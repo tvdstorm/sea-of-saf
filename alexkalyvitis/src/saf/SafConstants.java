@@ -11,65 +11,15 @@ public interface SafConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int STRONGER = 6;
+  int ASSIGNMENT = 6;
   /** RegularExpression Id. */
-  int WEAKER = 7;
+  int IDENTIFIER = 7;
   /** RegularExpression Id. */
-  int MSTRONGER = 8;
+  int PROPERTYVALUE = 8;
   /** RegularExpression Id. */
-  int MWEAKER = 9;
+  int OPENSQAREBRACKET = 9;
   /** RegularExpression Id. */
-  int EVEN = 10;
-  /** RegularExpression Id. */
-  int NEAR = 11;
-  /** RegularExpression Id. */
-  int FAR = 12;
-  /** RegularExpression Id. */
-  int ALWAYS = 13;
-  /** RegularExpression Id. */
-  int JUMP = 14;
-  /** RegularExpression Id. */
-  int CROUCH = 15;
-  /** RegularExpression Id. */
-  int STAND = 16;
-  /** RegularExpression Id. */
-  int RUNTOWARDS = 17;
-  /** RegularExpression Id. */
-  int RUNAWAY = 18;
-  /** RegularExpression Id. */
-  int WALKTOWARDS = 19;
-  /** RegularExpression Id. */
-  int WALKAWAY = 20;
-  /** RegularExpression Id. */
-  int PUNCHLOW = 21;
-  /** RegularExpression Id. */
-  int PUNCHHIGH = 22;
-  /** RegularExpression Id. */
-  int KICKLOW = 23;
-  /** RegularExpression Id. */
-  int KICKHIGH = 24;
-  /** RegularExpression Id. */
-  int BLOCKLOW = 25;
-  /** RegularExpression Id. */
-  int BLOCKHIGH = 26;
-  /** RegularExpression Id. */
-  int PUNCHREACH = 27;
-  /** RegularExpression Id. */
-  int KICKREACH = 28;
-  /** RegularExpression Id. */
-  int KICPOWER = 29;
-  /** RegularExpression Id. */
-  int PUNCHPOWER = 30;
-  /** RegularExpression Id. */
-  int EQUALS = 31;
-  /** RegularExpression Id. */
-  int STRING = 32;
-  /** RegularExpression Id. */
-  int NUMBER = 33;
-  /** RegularExpression Id. */
-  int OPSQBRACKET = 34;
-  /** RegularExpression Id. */
-  int CLSQBRACKET = 35;
+  int CLOSESQAREBRACKET = 10;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -82,34 +32,9 @@ public interface SafConstants {
     "\"\\t\"",
     "\"\\n\"",
     "\"\\r\\n\"",
-    "\"stronger\"",
-    "\"weaker\"",
-    "\"much_stronger\"",
-    "\"much_weaker\"",
-    "\"even\"",
-    "\"near\"",
-    "\"far\"",
-    "\"always\"",
-    "\"jump\"",
-    "\"crouch\"",
-    "\"stand\"",
-    "\"run_towards\"",
-    "\"run_away\"",
-    "\"walk_towards\"",
-    "\"walk_away\"",
-    "\"punch_low\"",
-    "\"punch_high\"",
-    "\"kick_low\"",
-    "\"kick_high\"",
-    "\"block_low\"",
-    "\"block_high\"",
-    "\"punchReach\"",
-    "\"kickReach\"",
-    "\"kickPower\"",
-    "\"punchPower\"",
     "\"=\"",
-    "<STRING>",
-    "<NUMBER>",
+    "<IDENTIFIER>",
+    "<PROPERTYVALUE>",
     "\"[\"",
     "\"]\"",
   };
