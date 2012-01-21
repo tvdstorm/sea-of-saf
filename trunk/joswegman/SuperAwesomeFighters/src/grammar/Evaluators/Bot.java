@@ -20,8 +20,9 @@ public class Bot {
 		this.regel = null;
 	}
 
-	public void toString (String value) {
-		System.out.println(value);
+	public String toString () {
+		// System.out.println("Bot: " + this.karakteristiek.toString() + " "+ this.regel.toString());
+		return "Bot: " + this.karakteristiek.toString() + " "+ this.regel.toString();
 	}
 	
 	

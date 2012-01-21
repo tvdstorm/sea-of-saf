@@ -7,7 +7,6 @@ options {
 @header {
   package grammar;
   import grammar.Evaluators.*;
-  // import program.*;
 }
 
 @lexer::header {
@@ -15,38 +14,27 @@ options {
   
 }
 
-
-
-bot returns [Bot value]
-      : ID '{' c=characteristic* & r=rule*  '}'
-        {$value = new Bot(c, r);}
+bot  returns [Bot value]
+      : ID '{' (c=characteristic)+  (r=rule)+  '}'
+        {$value = new Bot(c,r);}
       ;
 
-attrib  
-      : characteristic
-      | rule
-      ;
-  
 rule returns [Rule value]
       : i=ID'['e=inputRule f=inputRule']'
-        {$value = new Rule ( e , f);}
+        {$value = new Rule ($i.text, e, f); }
       ;
-  
+
 inputRule returns [InputRule value]
-      : e=ID {$value = new InputRule($e.text, "");}
-      |'choose' '(' i=ID j=ID ')' {$value = new InputRule($i.text, $j.text);}
+      : i=ID {$value = new InputRule ($i.text , null);} 
+      |'choose' '(' i=ID j=ID ')'
+        {$value = new InputRule($i.text, $j.text);}
       ; 
 
-characteristic returns [Characteristic value]
-      : e=ID '=' i=INT    
-        {$value= new Characteristic( $e.text, Integer.parseInt($i.text));}
+characteristic returns [Characteristic value] 
+      : i=ID '=' j=INT
+        {$value = new Characteristic ($i.text, Integer.parseInt($j.text)); }
       ;
-
-  
-
-
-
-
+      
 ID    : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
       ;
 
@@ -64,7 +52,4 @@ WS    :   ( ' '
           | '\n'
           )+ {$channel=HIDDEN;}
       ;
-
-
-
 

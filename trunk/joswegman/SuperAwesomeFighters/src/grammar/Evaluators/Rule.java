@@ -4,17 +4,20 @@ import grammar.Evaluators.InputRule;
 
 
 public class Rule {
+   String id;	
    InputRule item1;
    InputRule item2;
 
-   public Rule(InputRule item1, InputRule item2) {
+   public Rule(String id, InputRule item1, InputRule item2) {
 	super();
+	this.id = id;
 	this.item1 = item1;
 	this.item2 = item2;
    }
    
-   public void toString (String value) {
-	   System.out.println(value);
+   public  String toString () {
+	   //System.out.println("Rule: " +this.id + " " + this.item1.toString() + " "+ this.item2.toString());
+	   return "Rule: " + this.id + " " + this.item1.toString() + " "+ this.item2.toString();
    }
    
 }

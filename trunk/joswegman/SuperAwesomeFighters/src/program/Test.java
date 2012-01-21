@@ -12,11 +12,18 @@ import grammar.SafParser;
 import grammar.Evaluators.*;
 
 
-public class Test3 {
+public class Test {
 
 	
 	public static void main(String[] args) throws RecognitionException {
-		CharStream charStream = new ANTLRStringStream( "3  * (5 + 4) * 3");
+		CharStream charStream = new ANTLRStringStream( "Sample \n" +
+				"{ \n" +
+				"kickPower = 6 \n" +
+				"punchReach = 4 \n" +
+				"near [ stand punch_low] \n" +
+				"stronger [run_towards block_high] \n" +
+				"always [ choose (jump stand) kick_high] \n	"+
+				"} \n");
 		SafLexer lexer = new SafLexer(charStream);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SafParser parser = new SafParser(tokenStream);
@@ -24,7 +31,6 @@ public class Test3 {
 		System.out.println("done: " + bot.toString());
 		System.out.println();
 		
-
 	}
 
 }
