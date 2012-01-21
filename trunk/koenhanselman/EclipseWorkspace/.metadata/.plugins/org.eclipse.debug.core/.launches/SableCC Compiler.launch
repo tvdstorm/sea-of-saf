@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.ui.externaltools.ProgramLaunchConfigurationType">
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="C:\Program Files\Java\jdk1.7.0_02\bin\javaw.exe"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="-classpath C:\Werkmap\Documenten\School\SoftwareConstruction\svn\koenhanselman\EclipseWorkspace\sablecc-3.2\lib\sablecc.jar org.sablecc.sablecc.SableCC ${resource_name}"/>
+<stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${container_loc}"/>
+</launchConfiguration>
