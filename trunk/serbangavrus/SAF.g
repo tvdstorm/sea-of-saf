@@ -5,6 +5,11 @@ options {
   output = AST;
 }
 
+
+/*------------------------------------------------------------------
+ * PARSER RULES
+ *------------------------------------------------------------------*/
+
 fighter 
 	: NAME '{' specs '}'
 	;
@@ -14,22 +19,22 @@ specs
 	;
 
 fragment tactic
-	: CONDITION '[' MOVE ATTACK  ']'
+	: condition '[' move attack ']'
 	;
 
 fragment assignment
-	: STRENGTH ' = ' NUMBER
+	: strength ' = ' NUMBER
 	;
 
 
-STRENGTH
+strength
 	: 'punchReach'
 	| 'kickReach'
 	| 'kickPower'
 	| 'punchPower'
 	;
 	
-CONDITION
+condition
 	: 'stronger'
 	| 'weaker'
 	| 'much_stronger' 
@@ -40,16 +45,17 @@ CONDITION
 	| 'always'
 	;
 
-MOVE
+move
 	: 'jump'
 	| 'crouch'
 	| 'stand'
+	| 'run_towards'
 	| 'run_away'
 	| 'walk_towards'
 	| 'walk_away'
 	;
 
-ATTACK
+attack
 	: 'punch_low'
 	| 'punch_high'
 	| 'kick_low'
@@ -57,6 +63,11 @@ ATTACK
 	| 'block_low'
 	| 'block_high'
 	;
+
+
+/*------------------------------------------------------------------
+ * LEXER RULES
+ *------------------------------------------------------------------*/
 
 NUMBER
 	: Digit+
@@ -74,3 +85,4 @@ NAME
 fragment Digit
 	: '0'..'9'
 	;
+
