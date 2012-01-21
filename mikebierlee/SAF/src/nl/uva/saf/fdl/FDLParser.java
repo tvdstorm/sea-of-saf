@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-21 22:52:48
+// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-21 23:40:33
 
   package nl.uva.saf.fdl;
   import nl.uva.saf.fdl.ast.*;
@@ -575,92 +575,135 @@ public class FDLParser extends Parser {
 
 
 
-    // $ANTLR start "fighter"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:116:1: fighter returns [Fighter result] : IDENT '{' ( ( personality ) | ( behaviour ) )* '}' ;
-    public final Fighter fighter() throws RecognitionException {
-        Fighter result = null;
+    // $ANTLR start "fighterAttribute"
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:116:1: fighterAttribute returns [FighterAttribute result] : ( personality | behaviour );
+    public final FighterAttribute fighterAttribute() throws RecognitionException {
+        FighterAttribute result = null;
 
 
-        Token IDENT14=null;
         Characteristic personality12 =null;
 
         Behaviour behaviour13 =null;
 
 
-
-        	  result = new Fighter("");
-        	
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:3: ( IDENT '{' ( ( personality ) | ( behaviour ) )* '}' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:5: IDENT '{' ( ( personality ) | ( behaviour ) )* '}'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:117:3: ( personality | behaviour )
+            int alt8=2;
+            int LA8_0 = input.LA(1);
+
+            if ( (LA8_0==IDENT) ) {
+                alt8=1;
+            }
+            else if ( (LA8_0==ALWAYS||LA8_0==CONDITIONTYPE) ) {
+                alt8=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 8, 0, input);
+
+                throw nvae;
+
+            }
+            switch (alt8) {
+                case 1 :
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:117:5: personality
+                    {
+                    pushFollow(FOLLOW_personality_in_fighterAttribute851);
+                    personality12=personality();
+
+                    state._fsp--;
+
+
+                    result = personality12;
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:118:5: behaviour
+                    {
+                    pushFollow(FOLLOW_behaviour_in_fighterAttribute861);
+                    behaviour13=behaviour();
+
+                    state._fsp--;
+
+
+                    result = behaviour13;
+
+                    }
+                    break;
+
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return result;
+    }
+    // $ANTLR end "fighterAttribute"
+
+
+
+    // $ANTLR start "fighter"
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:121:1: fighter returns [Fighter result] : IDENT '{' ( fighterAttribute )* '}' ;
+    public final Fighter fighter() throws RecognitionException {
+        Fighter result = null;
+
+
+        Token IDENT15=null;
+        FighterAttribute fighterAttribute14 =null;
+
+
+
+            result = new Fighter("",new ArrayList<ITreeNode>());
+          
+        try {
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:3: ( IDENT '{' ( fighterAttribute )* '}' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:5: IDENT '{' ( fighterAttribute )* '}'
             {
-            IDENT14=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter840); 
+            IDENT15=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter892); 
 
-            match(input,19,FOLLOW_19_in_fighter842); 
+            match(input,19,FOLLOW_19_in_fighter894); 
 
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:15: ( ( personality ) | ( behaviour ) )*
-            loop8:
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:15: ( fighterAttribute )*
+            loop9:
             do {
-                int alt8=3;
-                int LA8_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( (LA8_0==IDENT) ) {
-                    alt8=1;
-                }
-                else if ( (LA8_0==ALWAYS||LA8_0==CONDITIONTYPE) ) {
-                    alt8=2;
+                if ( (LA9_0==ALWAYS||LA9_0==CONDITIONTYPE||LA9_0==IDENT) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt8) {
+                switch (alt9) {
             	case 1 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:16: ( personality )
+            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:125:16: fighterAttribute
             	    {
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:16: ( personality )
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:17: personality
-            	    {
-            	    pushFollow(FOLLOW_personality_in_fighter846);
-            	    personality12=personality();
+            	    pushFollow(FOLLOW_fighterAttribute_in_fighter897);
+            	    fighterAttribute14=fighterAttribute();
 
             	    state._fsp--;
 
 
-            	    result.addCharacteristic(personality12);
-
-            	    }
-
-
-            	    }
-            	    break;
-            	case 2 :
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:81: ( behaviour )
-            	    {
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:81: ( behaviour )
-            	    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:120:82: behaviour
-            	    {
-            	    pushFollow(FOLLOW_behaviour_in_fighter854);
-            	    behaviour13=behaviour();
-
-            	    state._fsp--;
-
-
-            	    result.addBehaviour(behaviour13);
-
-            	    }
-
+            	    result.addAttribute(fighterAttribute14);
 
             	    }
             	    break;
 
             	default :
-            	    break loop8;
+            	    break loop9;
                 }
             } while (true);
 
 
-            match(input,20,FOLLOW_20_in_fighter861); 
+            match(input,20,FOLLOW_20_in_fighter903); 
 
-            result.setName((IDENT14!=null?IDENT14.getText():null));
+            result.setName((IDENT15!=null?IDENT15.getText():null));
 
             }
 
@@ -680,27 +723,27 @@ public class FDLParser extends Parser {
 
 
     // $ANTLR start "parse"
-    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:123:1: parse returns [ITreeNode tree] : fighter EOF ;
+    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:128:1: parse returns [ITreeNode tree] : fighter EOF ;
     public final ITreeNode parse() throws RecognitionException {
         ITreeNode tree = null;
 
 
-        Fighter fighter15 =null;
+        Fighter fighter16 =null;
 
 
         try {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:124:3: ( fighter EOF )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:124:5: fighter EOF
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:129:3: ( fighter EOF )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:129:5: fighter EOF
             {
-            pushFollow(FOLLOW_fighter_in_parse882);
-            fighter15=fighter();
+            pushFollow(FOLLOW_fighter_in_parse924);
+            fighter16=fighter();
 
             state._fsp--;
 
 
-            match(input,EOF,FOLLOW_EOF_in_parse884); 
+            match(input,EOF,FOLLOW_EOF_in_parse926); 
 
-            tree = fighter15;
+            tree = fighter16;
 
             }
 
@@ -751,12 +794,13 @@ public class FDLParser extends Parser {
     public static final BitSet FOLLOW_17_in_behaviour810 = new BitSet(new long[]{0x0000000000000880L});
     public static final BitSet FOLLOW_rule_in_behaviour812 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_18_in_behaviour814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_fighter840 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_fighter842 = new BitSet(new long[]{0x0000000000100510L});
-    public static final BitSet FOLLOW_personality_in_fighter846 = new BitSet(new long[]{0x0000000000100510L});
-    public static final BitSet FOLLOW_behaviour_in_fighter854 = new BitSet(new long[]{0x0000000000100510L});
-    public static final BitSet FOLLOW_20_in_fighter861 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_fighter_in_parse882 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_parse884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_personality_in_fighterAttribute851 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_behaviour_in_fighterAttribute861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_fighter892 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_fighter894 = new BitSet(new long[]{0x0000000000100510L});
+    public static final BitSet FOLLOW_fighterAttribute_in_fighter897 = new BitSet(new long[]{0x0000000000100510L});
+    public static final BitSet FOLLOW_20_in_fighter903 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_fighter_in_parse924 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_parse926 = new BitSet(new long[]{0x0000000000000002L});
 
 }
