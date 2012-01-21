@@ -1,0 +1,50 @@
+/**
+ * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options{  JDK_VERSION = "1.5";
+  static = false;}PARSER_BEGIN(saf)
+package safparser; 
+
+public class saf {  public static void main(String args [])  {    System.out.println("Reading from standard input...");
+    System.out.print("Enter an expression like \"1+(2+3)*var;\" :");
+	saf generatedParser = new saf(System.in);
+    try    {      SimpleNode n = generatedParser.Start();      n.dump("");      System.out.println("Thank you.");    }    catch (Exception e)    {      System.out.println("Oops.");      System.out.println(e.getMessage());	}
+  }}PARSER_END(saf)SKIP :{  " "| "\t"| "\n"| "\r"| < "//" (~[ "\n", "\r" ])*    (      "\n"    | "\r"    | "\r\n"    ) >| < "/*" (~[ "*" ])* "*"    (      ~[ "/" ] (~[ "*" ])* "*"    )*    "/" >}
+
+TOKEN :
+{
+	< CHOOSE : "choose" >
+| 	< CONDITION : "stronger" | "weaker" | "much_stronger" | "much_weaker" | "even" | "near" | "far" | "always" >
+|  	< MOVE : "jump" | "crouch" | "stand" | "run_towards" | "run_away" | "walk_towards" | "walk_away" >
+|  	< STRENGTH : "punchReach" | "kickReach" | "kickPower" | "punchPower" >
+| 	< ATTACK : "punch_low" | "punch_high" | "kick_low" | "kick_high" | "block_low" | "block_high" >
+}TOKEN : /* LITERALS */{  < INTEGER_LITERAL : ["1"-"9"] | "10" >
+}TOKEN : /* IDENTIFIERS */{  < IDENTIFIER :    < LETTER >    (      < LETTER >    | < DIGIT >    )* >| < #LETTER : [ "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >
+}
+SimpleNode Start() :{}{
+  FighterExpression()  {    return jjtThis;  }}void FighterExpression() :{}{
+  Identifier()
+  "{"
+	  (CharacteristicExpression() | ActionExpression())*
+  "}" 
+}
+
+void MoveExpression() :
+{}
+{
+	< CHOOSE > "(" < MOVE > < MOVE > ")"| 	< MOVE >
+}
+
+void AttackExpression() :
+{}
+{	< CHOOSE > "(" < ATTACK > < ATTACK > ")"
+| 	< ATTACK >
+} 
+void CharacteristicExpression():
+{}{
+	< STRENGTH > "=" Integer()}
+
+void ActionExpression():{}
+{	< CONDITION > "[" MoveExpression() AttackExpression() "]"
+}
+
+void Identifier() :{}{  < IDENTIFIER >}void Integer() :{}{  < INTEGER_LITERAL >}
