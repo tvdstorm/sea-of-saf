@@ -7,22 +7,21 @@ import java.io.*;
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 
-@SuppressWarnings("unused") //TODO
 public class Play {
 	
 	public static void main(String[] args) throws Exception{
         String arg = args.length>0 ? args[0] : null; 
         
-        readFDL(arg); //TODO store checked AST
+        CommonTree ast = readFDL(arg);
         
-        //TODO make two new SAFs with these read properties
+        //TODO make two new SAFs from these ASTs
         
         //TODO make new Arena and give them the SAFs
         
         //TODO start game(s)
 	}
 	
-	private static void readFDL(String file) throws Exception{
+	private static CommonTree readFDL(String file) throws Exception{
 		//Input
 		CharStream input = null;
         if (file != null)
@@ -36,11 +35,12 @@ public class Play {
         
         //Parser
         FDLParser parser = new FDLParser(tokens);
-        parser.property();//TODO store tree for checker
+        CommonTree ast = (CommonTree) parser.saf().getTree();
         
         //Checker
-        //TODO
+		FDLChecker checker = new FDLChecker(new CommonTreeNodeStream(ast));
+		checker.saf();
 		
-        //return TODO;
+        return ast;
 	}
 }
