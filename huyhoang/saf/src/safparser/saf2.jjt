@@ -17,6 +17,7 @@ TOKEN :
 |  	< MOVE : "jump" | "crouch" | "stand" | "run_towards" | "run_away" | "walk_towards" | "walk_away" >
 |  	< STRENGTH : "punchReach" | "kickReach" | "kickPower" | "punchPower" >
 | 	< ATTACK : "punch_low" | "punch_high" | "kick_low" | "kick_high" | "block_low" | "block_high" >
+| 	< CONNECTIVE : "and" | "or" >
 }TOKEN : /* LITERALS */{  < INTEGER_LITERAL : ["1"-"9"] | "10" >
 }TOKEN : /* IDENTIFIERS */{  < IDENTIFIER :    < LETTER >    (      < LETTER >    | < DIGIT >    )* >| < #LETTER : [ "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >
 }
@@ -31,20 +32,48 @@ TOKEN :
 void MoveExpression() :
 {}
 {
-	< CHOOSE > "(" < MOVE > < MOVE > ")"| 	< MOVE >
+	< CHOOSE > "(" Move() Move() ")"| 	Move()
 }
 
 void AttackExpression() :
 {}
-{	< CHOOSE > "(" < ATTACK > < ATTACK > ")"
-| 	< ATTACK >
-} 
+{	< CHOOSE > "(" Attack() Attack() ")"
+| 	Attack()
+}
+
+void Attack() :{}
+{
+	< ATTACK >} 
 void CharacteristicExpression():
 {}{
-	< STRENGTH > "=" Integer()}
+	Strength() "=" Integer()}
 
 void ActionExpression():{}
-{	< CONDITION > "[" MoveExpression() AttackExpression() "]"
+{	ConditionExpression() "[" MoveExpression() AttackExpression() "]"
 }
+
+void ConditionExpression() :
+{}{
+  	LOOKAHEAD(2)
+  	Condition() Connective() ConditionExpression()
+|  	Condition()
+}
+
+void Connective() :
+{}{
+  < CONNECTIVE >}
+
+void Condition() :
+{}{
+  < CONDITION >}
+
+void Strength() :
+{}
+{
+	< STRENGTH >
+}
+
+void Move() :{}{
+  	< MOVE >}
 
 void Identifier() :{}{  < IDENTIFIER >}void Integer() :{}{  < INTEGER_LITERAL >}
