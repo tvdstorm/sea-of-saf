@@ -18,11 +18,11 @@ specs
 	: (assignment | tactic)+
 	;
 
-fragment tactic
+tactic
 	: condition '[' move attack ']'
 	;
 
-fragment assignment
+assignment
 	: strength ' = ' NUMBER
 	;
 
