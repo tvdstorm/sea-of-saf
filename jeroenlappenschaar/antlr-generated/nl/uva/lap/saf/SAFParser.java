@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-01-21 14:33:32
+// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-01-21 16:16:03
 
   package nl.uva.lap.saf;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "COMMENT", "IDENT", "INTEGER", "MULTICOMMENT", "WS", "'('", "')'", "'='", "'['", "']'", "'always'", "'block_high'", "'block_low'", "'choose'", "'crouch'", "'far'", "'kickPower'", "'kickReach'", "'kick_high'", "'kick_low'", "'much_stronger'", "'much_weaker'", "'near'", "'punchPower'", "'punchReach'", "'punch_high'", "'punch_low'", "'run_away'", "'run_towards'", "'stand'", "'stronger'", "'walk_away'", "'walk_towards'", "'weaker'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "COMMENT", "IDENT", "INTEGER", "MULTICOMMENT", "WS", "'('", "')'", "'='", "'['", "']'", "'always'", "'and'", "'block_high'", "'block_low'", "'choose'", "'crouch'", "'far'", "'kickPower'", "'kickReach'", "'kick_high'", "'kick_low'", "'much_stronger'", "'much_weaker'", "'near'", "'or'", "'punchPower'", "'punchReach'", "'punch_high'", "'punch_low'", "'run_away'", "'run_towards'", "'stand'", "'stronger'", "'walk_away'", "'walk_towards'", "'weaker'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
@@ -46,6 +46,8 @@ public class SAFParser extends Parser {
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
+    public static final int T__40=40;
+    public static final int T__41=41;
     public static final int COMMENT=4;
     public static final int IDENT=5;
     public static final int INTEGER=6;
@@ -81,7 +83,7 @@ public class SAFParser extends Parser {
             {
             match(input,IDENT,FOLLOW_IDENT_in_fighter39); 
 
-            match(input,38,FOLLOW_38_in_fighter41); 
+            match(input,40,FOLLOW_40_in_fighter41); 
 
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:21: ( statement )*
             loop1:
@@ -89,7 +91,7 @@ public class SAFParser extends Parser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==14||(LA1_0 >= 19 && LA1_0 <= 21)||(LA1_0 >= 24 && LA1_0 <= 28)||LA1_0==34||LA1_0==37) ) {
+                if ( (LA1_0==9||LA1_0==14||(LA1_0 >= 20 && LA1_0 <= 22)||(LA1_0 >= 25 && LA1_0 <= 27)||(LA1_0 >= 29 && LA1_0 <= 30)||LA1_0==36||LA1_0==39) ) {
                     alt1=1;
                 }
 
@@ -113,7 +115,7 @@ public class SAFParser extends Parser {
             } while (true);
 
 
-            match(input,39,FOLLOW_39_in_fighter46); 
+            match(input,41,FOLLOW_41_in_fighter46); 
 
             }
 
@@ -140,10 +142,10 @@ public class SAFParser extends Parser {
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( ((LA2_0 >= 20 && LA2_0 <= 21)||(LA2_0 >= 27 && LA2_0 <= 28)) ) {
+            if ( ((LA2_0 >= 21 && LA2_0 <= 22)||(LA2_0 >= 29 && LA2_0 <= 30)) ) {
                 alt2=1;
             }
-            else if ( (LA2_0==14||LA2_0==19||(LA2_0 >= 24 && LA2_0 <= 26)||LA2_0==34||LA2_0==37) ) {
+            else if ( (LA2_0==9||LA2_0==14||LA2_0==20||(LA2_0 >= 25 && LA2_0 <= 27)||LA2_0==36||LA2_0==39) ) {
                 alt2=2;
             }
             else {
@@ -234,7 +236,7 @@ public class SAFParser extends Parser {
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:20:13: ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' )
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:
             {
-            if ( (input.LA(1) >= 20 && input.LA(1) <= 21)||(input.LA(1) >= 27 && input.LA(1) <= 28) ) {
+            if ( (input.LA(1) >= 21 && input.LA(1) <= 22)||(input.LA(1) >= 29 && input.LA(1) <= 30) ) {
                 input.consume();
                 state.errorRecovery=false;
             }
@@ -262,14 +264,14 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "behaviourStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:1: behaviourStatement : condition '[' actionStatement ']' ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:1: behaviourStatement : conditions '[' actionStatement ']' ;
     public final void behaviourStatement() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:20: ( condition '[' actionStatement ']' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:22: condition '[' actionStatement ']'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:20: ( conditions '[' actionStatement ']' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:22:22: conditions '[' actionStatement ']'
             {
-            pushFollow(FOLLOW_condition_in_behaviourStatement98);
-            condition();
+            pushFollow(FOLLOW_conditions_in_behaviourStatement98);
+            conditions();
 
             state._fsp--;
 
@@ -301,14 +303,149 @@ public class SAFParser extends Parser {
 
 
 
+    // $ANTLR start "expression"
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:1: expression : ( condition | '(' conditions ')' );
+    public final void expression() throws RecognitionException {
+        try {
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:12: ( condition | '(' conditions ')' )
+            int alt3=2;
+            int LA3_0 = input.LA(1);
+
+            if ( (LA3_0==14||LA3_0==20||(LA3_0 >= 25 && LA3_0 <= 27)||LA3_0==36||LA3_0==39) ) {
+                alt3=1;
+            }
+            else if ( (LA3_0==9) ) {
+                alt3=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 3, 0, input);
+
+                throw nvae;
+
+            }
+            switch (alt3) {
+                case 1 :
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:14: condition
+                    {
+                    pushFollow(FOLLOW_condition_in_expression112);
+                    condition();
+
+                    state._fsp--;
+
+
+                    }
+                    break;
+                case 2 :
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:24:26: '(' conditions ')'
+                    {
+                    match(input,9,FOLLOW_9_in_expression116); 
+
+                    pushFollow(FOLLOW_conditions_in_expression118);
+                    conditions();
+
+                    state._fsp--;
+
+
+                    match(input,10,FOLLOW_10_in_expression120); 
+
+                    }
+                    break;
+
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return ;
+    }
+    // $ANTLR end "expression"
+
+
+
+    // $ANTLR start "conditions"
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:1: conditions : expression ( ( 'and' | 'or' ) expression )* ;
+    public final void conditions() throws RecognitionException {
+        try {
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:12: ( expression ( ( 'and' | 'or' ) expression )* )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:14: expression ( ( 'and' | 'or' ) expression )*
+            {
+            pushFollow(FOLLOW_expression_in_conditions127);
+            expression();
+
+            state._fsp--;
+
+
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:25: ( ( 'and' | 'or' ) expression )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( (LA4_0==15||LA4_0==28) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:25:26: ( 'and' | 'or' ) expression
+            	    {
+            	    if ( input.LA(1)==15||input.LA(1)==28 ) {
+            	        input.consume();
+            	        state.errorRecovery=false;
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        throw mse;
+            	    }
+
+
+            	    pushFollow(FOLLOW_expression_in_conditions138);
+            	    expression();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
+                }
+            } while (true);
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return ;
+    }
+    // $ANTLR end "conditions"
+
+
+
     // $ANTLR start "condition"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:23:1: condition : ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:1: condition : ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' );
     public final void condition() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:23:11: ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:11: ( 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always' )
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:
             {
-            if ( input.LA(1)==14||input.LA(1)==19||(input.LA(1) >= 24 && input.LA(1) <= 26)||input.LA(1)==34||input.LA(1)==37 ) {
+            if ( input.LA(1)==14||input.LA(1)==20||(input.LA(1) >= 25 && input.LA(1) <= 27)||input.LA(1)==36||input.LA(1)==39 ) {
                 input.consume();
                 state.errorRecovery=false;
             }
@@ -336,32 +473,32 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "actionStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:1: actionStatement : ( action | ( 'choose' '(' ( action )+ ')' ) )+ ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:1: actionStatement : ( action | ( 'choose' '(' ( action )+ ')' ) )+ ;
     public final void actionStatement() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:17: ( ( action | ( 'choose' '(' ( action )+ ')' ) )+ )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:17: ( ( action | ( 'choose' '(' ( action )+ ')' ) )+ )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
             {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
-            int cnt4=0;
-            loop4:
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:19: ( action | ( 'choose' '(' ( action )+ ')' ) )+
+            int cnt6=0;
+            loop6:
             do {
-                int alt4=3;
-                int LA4_0 = input.LA(1);
+                int alt6=3;
+                int LA6_0 = input.LA(1);
 
-                if ( ((LA4_0 >= 15 && LA4_0 <= 16)||LA4_0==18||(LA4_0 >= 22 && LA4_0 <= 23)||(LA4_0 >= 29 && LA4_0 <= 33)||(LA4_0 >= 35 && LA4_0 <= 36)) ) {
-                    alt4=1;
+                if ( ((LA6_0 >= 16 && LA6_0 <= 17)||LA6_0==19||(LA6_0 >= 23 && LA6_0 <= 24)||(LA6_0 >= 31 && LA6_0 <= 35)||(LA6_0 >= 37 && LA6_0 <= 38)) ) {
+                    alt6=1;
                 }
-                else if ( (LA4_0==17) ) {
-                    alt4=2;
+                else if ( (LA6_0==18) ) {
+                    alt6=2;
                 }
 
 
-                switch (alt4) {
+                switch (alt6) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:20: action
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:20: action
             	    {
-            	    pushFollow(FOLLOW_action_in_actionStatement145);
+            	    pushFollow(FOLLOW_action_in_actionStatement181);
             	    action();
 
             	    state._fsp--;
@@ -370,32 +507,32 @@ public class SAFParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:29: ( 'choose' '(' ( action )+ ')' )
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:29: ( 'choose' '(' ( action )+ ')' )
             	    {
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:29: ( 'choose' '(' ( action )+ ')' )
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:30: 'choose' '(' ( action )+ ')'
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:29: ( 'choose' '(' ( action )+ ')' )
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:30: 'choose' '(' ( action )+ ')'
             	    {
-            	    match(input,17,FOLLOW_17_in_actionStatement150); 
+            	    match(input,18,FOLLOW_18_in_actionStatement186); 
 
-            	    match(input,9,FOLLOW_9_in_actionStatement152); 
+            	    match(input,9,FOLLOW_9_in_actionStatement188); 
 
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:43: ( action )+
-            	    int cnt3=0;
-            	    loop3:
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:43: ( action )+
+            	    int cnt5=0;
+            	    loop5:
             	    do {
-            	        int alt3=2;
-            	        int LA3_0 = input.LA(1);
+            	        int alt5=2;
+            	        int LA5_0 = input.LA(1);
 
-            	        if ( ((LA3_0 >= 15 && LA3_0 <= 16)||LA3_0==18||(LA3_0 >= 22 && LA3_0 <= 23)||(LA3_0 >= 29 && LA3_0 <= 33)||(LA3_0 >= 35 && LA3_0 <= 36)) ) {
-            	            alt3=1;
+            	        if ( ((LA5_0 >= 16 && LA5_0 <= 17)||LA5_0==19||(LA5_0 >= 23 && LA5_0 <= 24)||(LA5_0 >= 31 && LA5_0 <= 35)||(LA5_0 >= 37 && LA5_0 <= 38)) ) {
+            	            alt5=1;
             	        }
 
 
-            	        switch (alt3) {
+            	        switch (alt5) {
             	    	case 1 :
-            	    	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:26:43: action
+            	    	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:29:43: action
             	    	    {
-            	    	    pushFollow(FOLLOW_action_in_actionStatement154);
+            	    	    pushFollow(FOLLOW_action_in_actionStatement190);
             	    	    action();
 
             	    	    state._fsp--;
@@ -405,16 +542,16 @@ public class SAFParser extends Parser {
             	    	    break;
 
             	    	default :
-            	    	    if ( cnt3 >= 1 ) break loop3;
+            	    	    if ( cnt5 >= 1 ) break loop5;
             	                EarlyExitException eee =
-            	                    new EarlyExitException(3, input);
+            	                    new EarlyExitException(5, input);
             	                throw eee;
             	        }
-            	        cnt3++;
+            	        cnt5++;
             	    } while (true);
 
 
-            	    match(input,10,FOLLOW_10_in_actionStatement157); 
+            	    match(input,10,FOLLOW_10_in_actionStatement193); 
 
             	    }
 
@@ -423,12 +560,12 @@ public class SAFParser extends Parser {
             	    break;
 
             	default :
-            	    if ( cnt4 >= 1 ) break loop4;
+            	    if ( cnt6 >= 1 ) break loop6;
                         EarlyExitException eee =
-                            new EarlyExitException(4, input);
+                            new EarlyExitException(6, input);
                         throw eee;
                 }
-                cnt4++;
+                cnt6++;
             } while (true);
 
 
@@ -450,13 +587,13 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "action"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:27:1: action : ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:30:1: action : ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' );
     public final void action() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:27:8: ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:30:8: ( 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 'stand' | 'crouch' | 'block_low' | 'block_high' )
             // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:
             {
-            if ( (input.LA(1) >= 15 && input.LA(1) <= 16)||input.LA(1)==18||(input.LA(1) >= 22 && input.LA(1) <= 23)||(input.LA(1) >= 29 && input.LA(1) <= 33)||(input.LA(1) >= 35 && input.LA(1) <= 36) ) {
+            if ( (input.LA(1) >= 16 && input.LA(1) <= 17)||input.LA(1)==19||(input.LA(1) >= 23 && input.LA(1) <= 24)||(input.LA(1) >= 31 && input.LA(1) <= 35)||(input.LA(1) >= 37 && input.LA(1) <= 38) ) {
                 input.consume();
                 state.errorRecovery=false;
             }
@@ -486,23 +623,30 @@ public class SAFParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_IDENT_in_fighter39 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_38_in_fighter41 = new BitSet(new long[]{0x000000A41F384000L});
-    public static final BitSet FOLLOW_statement_in_fighter43 = new BitSet(new long[]{0x000000A41F384000L});
-    public static final BitSet FOLLOW_39_in_fighter46 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_fighter39 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_40_in_fighter41 = new BitSet(new long[]{0x000002906E704200L});
+    public static final BitSet FOLLOW_statement_in_fighter43 = new BitSet(new long[]{0x000002906E704200L});
+    public static final BitSet FOLLOW_41_in_fighter46 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_personalityStatement_in_statement55 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_behaviourStatement_in_statement59 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_personality_in_personalityStatement67 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_11_in_personalityStatement69 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_INTEGER_in_personalityStatement71 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_behaviourStatement98 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_behaviourStatement100 = new BitSet(new long[]{0x0000001BE0C78000L});
+    public static final BitSet FOLLOW_conditions_in_behaviourStatement98 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_behaviourStatement100 = new BitSet(new long[]{0x0000006F818F0000L});
     public static final BitSet FOLLOW_actionStatement_in_behaviourStatement102 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_13_in_behaviourStatement104 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_action_in_actionStatement145 = new BitSet(new long[]{0x0000001BE0C78002L});
-    public static final BitSet FOLLOW_17_in_actionStatement150 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_actionStatement152 = new BitSet(new long[]{0x0000001BE0C58000L});
-    public static final BitSet FOLLOW_action_in_actionStatement154 = new BitSet(new long[]{0x0000001BE0C58400L});
-    public static final BitSet FOLLOW_10_in_actionStatement157 = new BitSet(new long[]{0x0000001BE0C78002L});
+    public static final BitSet FOLLOW_condition_in_expression112 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_9_in_expression116 = new BitSet(new long[]{0x000000900E104200L});
+    public static final BitSet FOLLOW_conditions_in_expression118 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_expression120 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expression_in_conditions127 = new BitSet(new long[]{0x0000000010008002L});
+    public static final BitSet FOLLOW_set_in_conditions130 = new BitSet(new long[]{0x000000900E104200L});
+    public static final BitSet FOLLOW_expression_in_conditions138 = new BitSet(new long[]{0x0000000010008002L});
+    public static final BitSet FOLLOW_action_in_actionStatement181 = new BitSet(new long[]{0x0000006F818F0002L});
+    public static final BitSet FOLLOW_18_in_actionStatement186 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_actionStatement188 = new BitSet(new long[]{0x0000006F818B0000L});
+    public static final BitSet FOLLOW_action_in_actionStatement190 = new BitSet(new long[]{0x0000006F818B0400L});
+    public static final BitSet FOLLOW_10_in_actionStatement193 = new BitSet(new long[]{0x0000006F818F0002L});
 
 }
