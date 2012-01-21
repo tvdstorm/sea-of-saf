@@ -1,5 +1,5 @@
 package saf.fighter;
 
-public abstract class Fighter {
-
+public interface Fighter {
+	 
 }
