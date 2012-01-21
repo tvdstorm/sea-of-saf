@@ -36,75 +36,40 @@ SKIP : // Whitespace
 |   "\r\n"
 }
 
-TOKEN : // Conditions
-{	< STRONGER : "stronger" >
-|   < WEAKER : "weaker" >
-|   < MSTRONGER : "much_stronger" >
-|   < MWEAKER : "much_weaker" >
-|   < EVEN : "even" >
-|   < NEAR : "near" >
-|   < FAR : "far" >
-|   < ALWAYS : "always" >
-}
-
-TOKEN : // Moves
-{
-    < JUMP : "jump" >
-|   < CROUCH : "crouch" >
-|   < STAND : "stand" >
-|   < RUNTOWARDS : "run_towards" >
-|   < RUNAWAY : "run_away" >
-|   < WALKTOWARDS : "walk_towards" >
-|   < WALKAWAY : "walk_away" >}
-
-TOKEN : // Attacks
-{
-    < PUNCHLOW : "punch_low" >
-|   < PUNCHHIGH : "punch_high" >
-|   < KICKLOW : "kick_low" >
-|   < KICKHIGH : "kick_high" >
-|   < BLOCKLOW : "block_low" >
-|   < BLOCKHIGH : "block_high" >
-}
-
-TOKEN : // Strengths 
-{
-    < PUNCHREACH : "punchReach" >
-|   < KICKREACH : "kickReach" >
-|   < KICPOWER : "kickPower" >
-|   < PUNCHPOWER : "punchPower" >
-}
-
 TOKEN :
 {
-	< EQUALS : "=" >
-|   < STRING : ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])* >
-|   < NUMBER : (["1"-"9"] | "10") >
-|   < OPSQBRACKET : "[" >
-|   < CLSQBRACKET : "]" >
+	< ASSIGNMENT : "=" >
+|   < IDENTIFIER : ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])* >
+|   < PROPERTYVALUE : (["1"-"9"] | "10") >
+|   < OPENSQAREBRACKET : "[" >
+|   < CLOSESQAREBRACKET : "]" >
 }
 
 SimpleNode Parse() :
 {}
 {
-	(Strength() | Condition())
+	(
+	    LOOKAHEAD(2) Strength()
+	    |
+	    LOOKAHEAD(2) Condition()
+	)
 	{ return jjtThis; }
 }
 
 void Strength() :
 {}
 {
-    (< PUNCHREACH > | < KICKREACH > | < KICPOWER > | < PUNCHPOWER >)
-    (< EQUALS >)
-    (< NUMBER >)}
+    < IDENTIFIER >
+    < ASSIGNMENT >
+    < PROPERTYVALUE >}
 
 void Condition() :
 {}{
-    (< STRONGER > | < WEAKER > | < MSTRONGER > | < MWEAKER > | < EVEN > | < NEAR > | < FAR > | < ALWAYS >)
-    (< OPSQBRACKET >)
-    (< JUMP > | < CROUCH > | < STAND > | < RUNTOWARDS > | < RUNAWAY > | < WALKTOWARDS > | < WALKAWAY >)
-    (< PUNCHLOW > | < PUNCHHIGH > | < KICKLOW > | < KICKHIGH > | < BLOCKLOW > | < BLOCKHIGH >)
-    (< CLSQBRACKET >)}
+    < IDENTIFIER >
+    < OPENSQAREBRACKET >
+    < IDENTIFIER >
+    < IDENTIFIER >
+    < CLOSESQAREBRACKET >}
 
 
 
