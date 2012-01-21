@@ -22,6 +22,7 @@ public class TestSAF {
 										"	far [run_towards kick_low]\r\n" +
 										"	near [crouch choose(punch_low kick_low)]\r\n" +
 										"	weaker [choose(run_away walk_away) choose(block_high block_low)]" +
+										"	stronger and near or far [stand punch_high]" +
 										"}" );
 		InputStream stream = new ByteArrayInputStream(sample.getBytes());
 		
