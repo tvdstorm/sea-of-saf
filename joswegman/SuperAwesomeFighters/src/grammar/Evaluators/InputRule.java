@@ -9,8 +9,9 @@ public class InputRule {
 		this.inputstring2 = inputstring2;
 	}
 	
-	public void toString (String value) {
-		System.out.println(value);
+	public String toString () {
+		//System.out.println("Inputrule: " + this.inputstring1 + " " + this.inputstring2);
+		return "Inputrule: " + this.inputstring1 + " " + this.inputstring2;
 	}
 
 }

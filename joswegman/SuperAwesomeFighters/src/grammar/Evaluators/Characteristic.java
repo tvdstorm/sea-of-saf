@@ -10,8 +10,9 @@ public class Characteristic {
 		this.inputvalue1 = inputvalue1;
 	}
 	
-	public void toString (String value) {
-		System.out.println(value);
+	public String toString () {
+		//System.out.println("Charact: " + this.inputtem1 + " " + String.valueOf(this.inputvalue1));
+		return "Charact: " + this.inputtem1 + "  " + String.valueOf(this.inputvalue1);
 	}
 	
 	
