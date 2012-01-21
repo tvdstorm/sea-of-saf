@@ -3,13 +3,18 @@ import java.util.Arrays;
 
 public class SafFighter
 {
-    String name;
-    SafAttribute[] attributes;
-    SafBehaviour behaviour;
+    public static final int MAX_HEALTH = 100;
 
-    public SafFighter(String name, SafAttribute[] attributes, SafBehaviour behaviour)
+    private String name;
+    private int healthPoints;
+    private SafAttribute[] attributes;
+    private SafBehaviour behaviour;
+
+    public SafFighter(String name, int healthPoints, SafAttribute[] attributes,
+                      SafBehaviour behaviour)
     {
         this.name = name;
+        this.healthPoints = healthPoints;
         this.attributes = attributes;
         this.behaviour = behaviour;
     }
@@ -22,6 +27,8 @@ public class SafFighter
 
 class SafAttribute
 {
+    /* This is determined by the value defined in the grammar (SAF.g). */
+    public static final int MAX_VALUE = 10;
     public static final ArrayList<String> LEGAL = new ArrayList<String>(
             Arrays.asList("punch_power", 
                           "punch_reach", 
@@ -31,8 +38,10 @@ class SafAttribute
     private String name;
     private int value;
 
-    public SafAttribute()
+    public SafAttribute(String name, int value)
     {
+        this.name = name;
+        this.value = value;
     }
 
     public String getName()
@@ -56,7 +65,8 @@ class SafBehaviour
 
     public SafAction chooseAction(SafState state)
     {
-        return new SafAction(new SafMove("illegal_name"), new SafAttack("illegal_name"));
+        return new SafAction(new SafMove("illegal_name"), 
+                             new SafAttack("illegal_name"));
     }
 }
 
