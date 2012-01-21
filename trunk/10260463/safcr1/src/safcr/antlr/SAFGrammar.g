@@ -3,6 +3,7 @@ grammar SAFGrammar;
 options {
   language = Java;
   output = AST;
+  ASTLabelType=CommonTree;
 }
 
 @header {
@@ -12,16 +13,17 @@ package safcr.antlr;
 @lexer::header {
 package safcr.antlr;
 }
-  
-bot
-    :   name '{'
-        personality
-        behaviour 
-        '}'
+    
+saf
+    : bot* EOF
     ;
 
-name
-    :   ID
+bot
+    :   ID^
+        '{'!
+        personality
+        behaviour 
+        '}'!
     ;
     
 personality
@@ -36,24 +38,41 @@ rule
     :   condition
     ;
 
+move_actions
+    :   (move_action -> move_action
+        | CHOOSE '(' move_action move_action ')' -> ^(CHOOSE move_action move_action)
+        ) 
+    ;
+
 move_action
-    :  move_action_type
+    :   move_action_type
 		;
 		
+fight_actions
+    :   (fight_action -> fight_action
+        | CHOOSE '(' fight_action fight_action ')' -> ^(CHOOSE fight_action fight_action)
+        ) 
+    ;
+    		
 fight_action
     :   fight_action_type
     ;
 
 condition
-    :   condition_type '[' ('choose' '(' move_action move_action ')')? move_action? fight_action? ('choose' '(' fight_action fight_action ')')? ']'
+    :   (condition_type^)?
+        '['! 
+        move_actions? 
+        fight_actions? 
+        ']'! 
     ;
 
 characteristic
-    :   (PUNCHREACH
-    |   KICKREACH
-    |   KICKPOWER
-    |   PUNCHPOWER)
-        '=' INT
+    :   (
+        PUNCHREACH  '='  pr=INT -> ^(PUNCHREACH $pr)
+    |   KICKREACH   '='  kr=INT -> ^(KICKREACH $kr)
+    |   KICKPOWER   '='  kp=INT -> ^(KICKPOWER $kp)
+    |   PUNCHPOWER  '='  pp=INT -> ^(PUNCHPOWER $pp)
+        )
     ;
     
 condition_type
@@ -87,31 +106,21 @@ fight_action_type
     ;
 
 // characteristic tokens
-PUNCHREACH : 'punchReach' ;
-KICKREACH : 'kickReach' ;
-KICKPOWER : 'kickPower' ;
-PUNCHPOWER : 'punchPower';
-    
-// class defintion
-/*classDefinition[SAFAST mod]
-    :   'class' cname=ID
-        ('extends' sup=typename)?
-        ('implements' i+=typename (',' i+=typename)*)?
-        '{'
-        ( variableDefinition
-        | methodDefinition
-        | ctorDefinition
-        )*
-        '}'
-        -> ^('class' ID {$mod} ^('extends' $sup)? ^('implements' $i+)?
-            variableDefinition* ctorDefinition* methodDefinition*
-            )
-    ;
-*/
+PUNCHREACH  : 'punchReach';
+KICKREACH   : 'kickReach' ;
+KICKPOWER   : 'kickPower' ;
+PUNCHPOWER  : 'punchPower';
 
-// General 
-ID : ('a'..'z' |'A'..'Z' )('a'..'z' |'A'..'Z' | '0'..'9')* ;
-INT : '0'..'9'+ ;
-WS : (' ' |'\t' |'\n' |'\r' |'\f' )+ {$channel = HIDDEN;} ;
+SAFROOT : 'SAF';
+CHOOSE  : 'choose';
+
+// General tokens
+fragment LETTER : ('a'..'z' |'A'..'Z' ) ;
+fragment DIGIT  : '0'..'9' ;
+
+ID  : LETTER (LETTER | DIGIT)* ;
+INT : DIGIT+ ;
+
+WS  : (' ' |'\t' |'\n' |'\r' |'\f' )+ {$channel = HIDDEN;} ;
 COMMENT : '//' .* ('\n' | '\r') {$channel = HIDDEN;} ;
 MULTILINE_COMMENT : '/*' .* '*/' {$channel = HIDDEN;} ;
