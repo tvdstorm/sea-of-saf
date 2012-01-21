@@ -5,12 +5,13 @@ package grammar;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import safobjects.*;
+import java.util.ArrayList;
 
 public class SAFGrammar
 {
 	public static void main(String args []) 
   	{
-    	System.out.println("Begin parsing.. \n");
+    	System.out.println("Begin parsing..");
 	    try
 	    { 
 			String projectPath  = new java.io.File(".").getCanonicalPath();
@@ -20,10 +21,16 @@ public class SAFGrammar
 			
 			new SAFGrammar(inputStream);
 			Bots bots = SAFGrammar.Start();
-
+			System.out.println("Succesful Parsing.");
+			
+    		System.out.println("Begin Interpreting..");
+    		
+			SAFInterpreter safInterpreter = new SAFInterpreter(bots);
+			safInterpreter.interpret();			
+			System.out.println("Succesful Interpreting.\n");
+			
 			System.out.println(bots.toString());
 			      
-			System.out.println("End Parsing.");  
     	}
 	    catch (IndexOutOfBoundsException e)
 	    {
@@ -67,8 +74,9 @@ SKIP :
 
 TOKEN : /* condition statements */
 {
-	< OR 					: "or" >
-|   < AND			  		: "and" >
+	< OR 		: "or" >
+|   < AND		: "and" >
+|   < CHOOSE 	: "choose" >
 }
 
 TOKEN : /* LITERALS */
@@ -175,7 +183,7 @@ void ConditionRule(Behaviour behaviour) :
 }
 {
   	(
-		  conditionType =	< IDENTIFIER >
+		  conditionType = < IDENTIFIER >
 	)
 	{
 	  ConditionGroup conditionGroup = new ConditionGroup();
@@ -203,7 +211,7 @@ void Term(ConditionChoices conditionChoices) :
 }
 {
   	(
-		  name =	< IDENTIFIER >
+		  name = < IDENTIFIER >
 	)
 	{
 	 	ConditionGroup conditionGroup = conditionChoices.getLastCondition();
@@ -220,7 +228,7 @@ void RestTerm(ConditionChoices conditionChoices) :
 	(
    		< AND >
    		(
-			  name =	< IDENTIFIER >
+			  name = < IDENTIFIER >
 		)
 		{
 	  		ConditionGroup conditionGroup = conditionChoices.getLastCondition();
@@ -234,8 +242,9 @@ void MoveAction(Behaviour behaviour) :
 {}
 {
 	(
-	   	LOOKAHEAD( 2 ) < IDENTIFIER > < OPENBRACKET > MoveType(behaviour) MoveType(behaviour) < CLOSEBRACKET >	
-		| MoveType(behaviour) 
+	  	MoveType(behaviour) 
+	  	| LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > MoveType(behaviour) MoveType(behaviour) < CLOSEBRACKET >	
+		 
 	)
 }
 
@@ -257,8 +266,9 @@ void AttackAction(Behaviour behaviour) :
 {}
 {
 	(
-		LOOKAHEAD( 2 ) < IDENTIFIER > < OPENBRACKET > AttackType(behaviour) AttackType(behaviour) < CLOSEBRACKET > 
-		| AttackType(behaviour)
+	  	AttackType(behaviour)
+		| LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > AttackType(behaviour) AttackType(behaviour) < CLOSEBRACKET > 
+		
 	)
 }
 
