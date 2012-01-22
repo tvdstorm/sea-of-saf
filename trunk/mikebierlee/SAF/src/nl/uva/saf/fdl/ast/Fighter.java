@@ -18,15 +18,15 @@
 
 package nl.uva.saf.fdl.ast;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class Fighter extends TreeNode {
 	private String name;
-	private List<ITreeNode> attributes;
+	private ArrayList<FighterAttribute> attributes;
 	
-	public Fighter(String name, List<ITreeNode> attributes) {
+	public Fighter(String name, ArrayList<FighterAttribute> attributes) {
 		this.setName(name);
 		this.setAttributes(attributes);
 	}
@@ -39,15 +39,15 @@ public class Fighter extends TreeNode {
 		this.name = name;
 	}
 
-	public List<ITreeNode> getAttributes() {
+	public ArrayList<FighterAttribute> getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(List<ITreeNode> attributes) {
+	public void setAttributes(ArrayList<FighterAttribute> attributes) {
 		this.attributes = attributes;
 	}
 	
-	public void addAttribute(ITreeNode attribute) {
+	public void addAttribute(FighterAttribute attribute) {
 		if (attributes != null) {
 			attributes.add(attribute);
 		}

@@ -18,12 +18,12 @@
 
 package nl.uva.saf.fdl.ast;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class ConditionAnd extends BooleanExpression<String> {
-	public ConditionAnd(List<String> operands) {
+	public ConditionAnd(ArrayList<String> operands) {
 		super(operands);
 	}
 	

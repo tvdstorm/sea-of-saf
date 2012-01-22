@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BooleanExpression<T> extends ConditionAlways {
-	private List<T> operands;
+	private ArrayList<T> operands;
 	
 	public BooleanExpression() {
 		setOperands(new ArrayList<T>());
 	}
 	
-	public BooleanExpression(List<T> operands) {
+	public BooleanExpression(ArrayList<T> operands) {
 		setOperands(operands);
 	}	
 
@@ -36,7 +36,7 @@ public abstract class BooleanExpression<T> extends ConditionAlways {
 		return operands;
 	}
 
-	public void setOperands(List<T> operands) {
+	public void setOperands(ArrayList<T> operands) {
 		this.operands = operands;
 	}
 	
