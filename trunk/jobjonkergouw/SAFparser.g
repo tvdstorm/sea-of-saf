@@ -10,23 +10,12 @@ tokens {
 	PERSONALITY;
 	BEHAVIOUR;
 }
+file			:	fighter+;
 
-file	:	(fighter)+;	
+fighter			: 	ID^ LEFT_BRACE! property+ RIGHT_BRACE!;
 
-fighter
-	: (
-		ID^
-		LEFT_BRACE
-		WHITESPACE*
-		(property WHITESPACE*)+
-		RIGHT_BRACE
-	  );
+property		:	characteristic | behaviour;
 
-property:	personality	|	behaviour;
-
-personality
-	:	PERSONALITY_TYPE WHITESPACE? ASSIGN^ WHITESPACE? 
-		NUMBER
-	;
+characteristic	:	STRENGTH^ ASSIGN! NUMBER;
 	
-behaviour	:	'test';
+behaviour		:	CONDITION^ LEFT_BRACKET! MOVE ATTACK RIGHT_BRACKET!;
