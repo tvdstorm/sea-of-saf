@@ -1,29 +1,61 @@
 grammar SAF;
 
 options {
-  language = Java;
-  output = AST;
+	language = Java;
+	output = AST;
+	ASTLabelType = CommonTree;
 }
 
+tokens {
+	CURLY_START = '{';
+	CURLY_END = '}';
+	
+	PERSONALITY;
+	BEHAVIOUR;
+}
+
+@header {
+	package antlrgenerated;
+}
+
+@lexer::header {
+	package antlrgenerated;
+}
 
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
 
-fighter 
-	: NAME '{' specs '}'
+curly_start
+	: '{' ->
 	;
 
-specs
-	: (assignment | tactic)+
+curly_end
+	: '}' ->
+	;
+
+fighter 
+	: NAME^ curly_start spec+ curly_end
+	;
+
+spec
+	: (parsonality | behaviour)
+	;
+
+parsonality
+	: assignment -> ^(PERSONALITY assignment)
+	;
+	
+behaviour
+	: tactic -> ^(BEHAVIOUR tactic)
 	;
 
 tactic
 	: condition '[' move attack ']'
 	;
-
+	
 assignment
-	: strength ' = ' NUMBER
+	: strength '=' NUMBER
 	;
 
 
@@ -70,7 +102,8 @@ attack
  *------------------------------------------------------------------*/
 
 NUMBER
-	: Digit+
+	: '0'..'9'
+	| '10'
 	;
 
 WHITESPACE
@@ -81,8 +114,3 @@ WHITESPACE
 NAME
 	: ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')+
 	;
-
-fragment Digit
-	: '0'..'9'
-	;
-
