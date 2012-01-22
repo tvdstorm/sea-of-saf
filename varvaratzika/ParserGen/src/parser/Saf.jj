@@ -13,6 +13,7 @@ PARSER_BEGIN(SafParser)
 package parser;
 import objects.*;
 import java.lang.String;
+import java.util.ArrayList;
 
 public class SafParser/*@bgen(jjtree)*/implements SafParserTreeConstants/*@egen*/
 {/*@bgen(jjtree)*/
@@ -21,11 +22,16 @@ public class SafParser/*@bgen(jjtree)*/implements SafParserTreeConstants/*@egen*
 /*@egen*/
   public static void main(String args []) throws ParseException
   {
-    SafParser parser = new SafParser(System.in);
-    Fighter str = parser.Start();
-    //interpreter(str);
-    
-         
+	try
+	{
+	  	SafParser parser = new SafParser(System.in);
+    	ArrayList<Fighter> f = parser.Start();
+    	Interpreter i = new Interpreter(f);
+    	i.Interpret();
+  	}
+ 	catch(Exception e)
+ 	{
+ 	  System.out.println("Exception:"+e); 	}        
   }
 }
 
@@ -61,36 +67,37 @@ TOKEN :
 }
 
 
-Fighter Start() :
+ArrayList<Fighter> Start() :
 {/*@bgen(jjtree) Start */
   SimpleNode jjtn000 = new SimpleNode(JJTSTART);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/
-  Token Fighter1,Fighter2=new Token();
-  Fighter f1=new Fighter();
-  Fighter f2=new Fighter();
-  
-  }
+  Token Fighter1  = new Token();
+  Token Fighter2 = new Token();
+  Fighter f1 = new Fighter();
+  Fighter f2 = new Fighter();
+  ArrayList<Fighter> fighters = new ArrayList<Fighter>();
+}
 {/*@bgen(jjtree) Start */
   try {
 /*@egen*/ 
   (Fighter1 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f1 = contents(f1))<CL_CURLY_BRACKETS>
   {
     f1.setFighterName(Fighter1.toString());
-    return f1;
-   }
-
-	 (Fighter2 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f2=contents(f2))<CL_CURLY_BRACKETS>/*@bgen(jjtree)*/
-  {
-    jjtree.closeNodeScope(jjtn000, true);
-    jjtc000 = false;
+    fighters.add(f1);
   }
+	(Fighter2 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f2=contents(f2))<CL_CURLY_BRACKETS>
+	{
+	    f2.setFighterName(Fighter2.toString());
+	   	fighters.add(f2);
+	}/*@bgen(jjtree)*/
+   {
+     jjtree.closeNodeScope(jjtn000, true);
+     jjtc000 = false;
+   }
 /*@egen*/
-  {
-    f2.setFighterName(Fighter2.toString());
-    return f2;
-   }/*@bgen(jjtree)*/
+   { return fighters; }/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -111,9 +118,9 @@ Fighter Start() :
     }
   }
 /*@egen*/
- }
+}
 
- Fighter contents(Fighter f) :
+Fighter contents(Fighter f) :
  {/*@bgen(jjtree) contents */
    SimpleNode jjtn000 = new SimpleNode(JJTCONTENTS);
    boolean jjtc000 = true;
@@ -134,9 +141,9 @@ Fighter Start() :
   		|
 		LOOKAHEAD( 2 )(conditionName=<IDENTIFIER>)<OP_BRACKETS>(movesName=<IDENTIFIER>)(attacksName=<IDENTIFIER>)<CL_BRACKETS>
 		{
-		  c1.ConditionName(conditionName.toString());
-		  c1.MovesName(movesName.toString());
-		  c1.AttacksName(attacksName.toString());
+		  c1.setConditionName(conditionName.toString());
+		  c1.setMovesName(movesName.toString());
+		  c1.setAttacksName(attacksName.toString());
 		  f.setCondition(c1);		}
 	)*/*@bgen(jjtree)*/
         {

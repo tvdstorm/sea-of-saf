@@ -6,27 +6,27 @@ private String ConditionName=new String();
 private String MovesName=new String();
 private String AttacksName=new String();
 
-public void ConditionName(String ConditionName)
+public void setConditionName(String ConditionName)
 {
     this.ConditionName = ConditionName;
 }
-public String ConditionName()
+public String getConditionName()
 {
 	return ConditionName;
 }
-public void MovesName(String MovesName)
+public void setMovesName(String MovesName)
 {
     this.MovesName = MovesName;
 }
-public String MovesName()
+public String getMovesName()
 {
 	return MovesName;
 }
-public void AttacksName(String AttacksName)
+public void setAttacksName(String AttacksName)
 {
     this.AttacksName = AttacksName;
 }
-public String AttacksName()
+public String getAttacksName()
 {
 	return AttacksName;
 }
