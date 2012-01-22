@@ -9,14 +9,14 @@ tokens {
 	/*KICKREACH = 'kickReach';
         PUCHREACH = 'punchReach';
         KICKPOWER = 'kickPower';
-        PUCHPOWER = 'punchPower';*/
+        PUCHPOWER = 'punchPower';
         STRONGER = 'stronger';
 	WEAKER = 'weaker';
 	MUCH_STRONGER = 'much_stronger';
 	MUCH_WEAKER = 'much_weaker';
 	EVEN = 'even';
 	NEAR = 'near';
-	FAR = 'far';
+	FAR = 'far';*/
 	ALWAYS = 'always';
 	PUNCH_LOW = 'punch_low';
 	PUNCH_HIGH = 'punch_high';
@@ -37,6 +37,7 @@ tokens {
 	AND = 'and';
 	OR = 'or';
 	NODE;
+	BEHAVIOUR_NODE;
 }
 
 @header {
@@ -91,9 +92,9 @@ strength:	STRENGTH_TOKEN EQ NUMBER -> ^(STRENGTH_TOKEN<StrengthNode>[$STRENGTH_T
 /*strength_atom:	KICKREACH | PUCHREACH | KICKPOWER | PUCHPOWER;*/
 
 condition:	term (  OR  term )* ;
-behaviour:	condition LSQUARE action RSQUARE;
-term:		condition_atom ( AND condition_atom )*;
-condition_atom:	STRONGER | WEAKER | MUCH_STRONGER | MUCH_WEAKER | EVEN | NEAR | FAR | ALWAYS;
+behaviour:	condition LSQUARE action RSQUARE -> ^(BEHAVIOUR_NODE<BehaviourNode> condition action);
+term:		CONDITION_TOKEN ( AND CONDITION_TOKEN )*;
+/*condition_atom:	STRONGER | WEAKER | MUCH_STRONGER | MUCH_WEAKER | EVEN | NEAR | FAR | ALWAYS;*/
 action:		move | fight | move fight;
 move:		CHOOSE LPARAM move_atom move_atom RPARAM | move_atom; 
 move_atom:	JUMP | CROUCH | STAND | RUN_TOWARDS | RUN_AWAY | WALK_TOWARDS | WALK_AWAY; // |
@@ -106,6 +107,7 @@ fight_atom:	PUNCH_LOW | PUNCH_HIGH | KICK_LOW | KICK_HIGH | BLOCK_LOW | BLOCK_HI
 
 NUMBER	: (DIGIT)+ ;
 STRENGTH_TOKEN:	'kickReach' | 'punchReach' | 'kickPower' | 'punchPower';
+CONDITION_TOKEN:'stronger'| 'weaker'| 'much_stronger' | 'much_weaker'| 'even'| 'near'| 'far'| 'always';
 WHITESPACE : ( '\t' | ' ' | '\u000C' | '\r' | '\n')+ 	{ $channel = HIDDEN; } ;
 NAME :	'a'..'z'+ ;
 fragment DIGIT	: '0'..'9' ;
