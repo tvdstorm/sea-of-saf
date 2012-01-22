@@ -1,0 +1,4 @@
+GLOBAL:
+-	All code is written with the basic guidelines of Java
+
+GRAMMAR: 
