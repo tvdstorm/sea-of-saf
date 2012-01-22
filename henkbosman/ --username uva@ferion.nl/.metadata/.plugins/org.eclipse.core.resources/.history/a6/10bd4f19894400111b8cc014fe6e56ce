@@ -1,0 +1,11 @@
+import org.antlr.runtime.*;
+public class SAF {
+	public static void main(String[] args) throws Exception {
+	
+		ANTLRInputStream input = new ANTLRInputStream(System.in);
+		SAFLexer lexer = new SAFLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		SAFParser parser = new SAFParser(tokens);
+		parser.r();
+	}
+}
