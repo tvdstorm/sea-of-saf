@@ -1,4 +1,13 @@
 GLOBAL:
 -	All code is written with the basic guidelines of Java
+-	The SAF package is divided in three packages: grammar, interpreter, and the safobjects
+-	The java-code open and close brackets for functions, methods and loops are always positioned on a single line
+-	Comments should be avoided unless the code needs a rationale
 
 GRAMMAR: 
+-	Each function must have an initializer: {}
+-	The 'or' symbol | is always written at the beginning of the next line
+
+SAFOBJECTS:
+-	Each class must have a custom toString() function that will show the values of the instantiated object
+-	The structure of the safobjects is the following: fields, constructors, class-specific methods, toString() method, getters and setters
