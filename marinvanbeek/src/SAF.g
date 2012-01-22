@@ -33,13 +33,6 @@ tokens {
 }
 
 @members {
-//    class V extends CommonTree {
-//        public V(Token t) { token=t;}                 // for 'int'<V>
-//        public V(V node) { super(node); }             // for dupNode
-//        public V(int tType, String name) { token=new CommonToken(tType, name); }
-//        public Tree dupNode() { return new V(this); } // for dup'ing type
-//        public String toString() { return token.getText()+"<V>";}
-//    }
 }
 
 /*--------------------------------------------------------------------------

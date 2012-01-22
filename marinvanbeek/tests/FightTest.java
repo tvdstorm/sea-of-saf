@@ -1,4 +1,5 @@
-import org.testng.annotations.*;
+//import org.testng.annotations.*;
+import org.junit.*;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -6,8 +7,14 @@ import java.lang.Long;
 
 public class FightTest
 {
-    @BeforeClass
+    @Beforeclass
     public void setUp()
+    {
+        // code that will be invoked when this test is instantiated
+    }
+
+    @Afterclass
+    public void tearDown()
     {
         // code that will be invoked when this test is instantiated
     }
@@ -33,10 +40,18 @@ public class FightTest
                               behaviour);
     }
 
-    @Test(groups = { "legal-fighters" })
-    public void aFastTest()
+//    @Test(expected = Exception.class)
+
+    @Test
+    public void legalSafsTest()
     {
-        System.out.println("Testing 'maximal' fighter...");
+        System.out.println("Testing 'legal' fighters...");
+    }
+
+    @Test
+    public void illegalSafsTest()
+    {
+        System.out.println("Testing 'illegal' fighters...");
     }
 }
 

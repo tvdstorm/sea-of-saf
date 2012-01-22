@@ -5,7 +5,7 @@ SOURCES         = src/Main.java src/SafTreeClasses.java src/SafFighter.java src/
 TESTS           = tests/ParseTest.java
 
 ANTLR_LIB       = lib/antlrworks-1.4.3.jar
-TESTNG_LIB      = lib/testng-6.3.1.jar
+TESTNG_LIB      = lib/junit-4.10.jar
 
 .PHONY: tests
 
