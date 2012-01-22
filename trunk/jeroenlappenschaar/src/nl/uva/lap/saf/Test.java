@@ -1,10 +1,15 @@
 package nl.uva.lap.saf;
 
+import nl.uva.lap.saf.SAFParser.fighter_return;
+
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
+import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.DOTTreeGenerator;
+import org.antlr.stringtemplate.StringTemplate;
 
 public class Test
 {
@@ -23,14 +28,31 @@ public class Test
 			"	weaker[run_away choose(block_high block_low)]\r\n" + 
 			"	always[walk_towards block_high]\r\n" +
 			"}");
+		
+		/*CharStream charStream = new ANTLRStringStream("" + 
+			"pietje{\r\n" + 
+			"	kickPower = 7\r\n" + 
+			"}");*/
 		SAFLexer lexer = new SAFLexer(charStream);
 		
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFParser parser = new SAFParser(tokenStream);
 		
-		parser.fighter();
-		Fighter f = parser.getFighter();
-		System.out.println(f.toString());
+		fighter_return evaluator = parser.fighter();
+		//System.out.println(evaluator.tree.toStringTree());
+		
+		CommonTree tree = (CommonTree)evaluator.getTree();
+        DOTTreeGenerator gen = new DOTTreeGenerator();
+        StringTemplate st = gen.toDOT(tree);
+        System.out.println(st);
+        
+		/*
+		CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(evaluator.tree);
+		EvaluatorWalker evaluatorWalker = new EvaluatorWalker(nodeStream);
+		int result = evaluatorWalker.evaluator();
+		System.out.println(result);		
+		System.out.println("ok");*/
+		
 	}
 
 }

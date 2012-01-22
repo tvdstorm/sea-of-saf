@@ -43,6 +43,40 @@ public class Fighter
 			"punch-power: " + punchPower + "\n\n" +
 			"and now it's time to kick some ass!!";
 	}
-	//behaviour
-	//List behaviour = new ArrayList<BehaviourProperty>();
+
+	public boolean isFar()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isNear()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isStronger()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isMuchStronger()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isWeaker()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isMuchWeaker()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
