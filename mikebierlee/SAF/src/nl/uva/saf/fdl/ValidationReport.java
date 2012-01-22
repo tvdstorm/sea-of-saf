@@ -30,4 +30,8 @@ public class ValidationReport {
 			warnings.add(warning);
 		}
 	}
+	
+	public boolean isValid() {
+		return errors.size() == 0 ? true : false;
+	}
 }

@@ -20,24 +20,28 @@ package nl.uva.saf;
 
 import java.io.IOException;
 
-import nl.uva.saf.fdl.FighterValidator;
+import nl.uva.saf.fdl.TreeValidator;
+import nl.uva.saf.fdl.ValidationReport;
 import nl.uva.saf.fdl.ast.Fighter;
 
 public class Main {
-
-	/**
-	 * @param args
-	 *            Command-line arguments
-	 * @throws IOException
-	 */
+	
 	public static void main(String[] args) throws IOException {
 		IFighterLoader loader = new ANTLFighterLoader();
 		Fighter fighter = (Fighter) loader.loadFighter("data/challengingFighter.saf");
 		
-		FighterValidator validator = new FighterValidator();
-		validator.validate(fighter);
+		TreeValidator validator = new TreeValidator();
+		ValidationReport validationReport = validator.validate(fighter);
+		
+		for(String warning : validationReport.getWarnings()) {
+			System.out.println(warning);
+		}
+		
+		for(String error : validationReport.getErrors()) {
+			System.err.println(error);
+		}
 
-		System.out.println("Done!");
+		System.out.println("Loaded " + fighter.getName() + " - " + validationReport.getWarnings().size() + " warnings, " + validationReport.getErrors().size() + " errors.");
 	}
 
 }

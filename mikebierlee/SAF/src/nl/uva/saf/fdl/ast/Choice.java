@@ -24,14 +24,14 @@ public abstract class Choice extends TreeNode {
 	private List<ITreeNode> actions;
 	
 	public Choice(List<ITreeNode> actions) {
-		this.setAction(actions);
+		this.setActions(actions);
 	}
 
-	public List<ITreeNode> getAction() {
+	public List<ITreeNode> getActions() {
 		return actions;
 	}
 
-	public void setAction(List<ITreeNode> actions) {
+	public void setActions(List<ITreeNode> actions) {
 		this.actions = actions;
 	}
 	

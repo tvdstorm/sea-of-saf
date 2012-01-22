@@ -18,6 +18,8 @@
 
 package nl.uva.saf.fdl.ast;
 
+import nl.uva.saf.fdl.ITreeVisitor;
+
 public class Characteristic extends FighterAttribute {
 	private String type;
 	private int value;	
@@ -41,6 +43,11 @@ public class Characteristic extends FighterAttribute {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	@Override
+	public void accept(ITreeVisitor visitor) {
+		visitor.visit(this);		
 	}
 	
 	

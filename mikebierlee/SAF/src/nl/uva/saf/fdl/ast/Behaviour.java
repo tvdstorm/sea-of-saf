@@ -18,6 +18,8 @@
 
 package nl.uva.saf.fdl.ast;
 
+import nl.uva.saf.fdl.ITreeVisitor;
+
 public class Behaviour extends FighterAttribute {
 	private ITreeNode condition;
 	private ITreeNode rule;
@@ -41,5 +43,10 @@ public class Behaviour extends FighterAttribute {
 
 	public void setRule(ITreeNode rule) {
 		this.rule = rule;
+	}
+
+	@Override
+	public void accept(ITreeVisitor visitor) {
+		visitor.visit(this);
 	}
 }

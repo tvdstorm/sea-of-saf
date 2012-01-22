@@ -18,6 +18,8 @@
 
 package nl.uva.saf.fdl.ast;
 
-public interface ITreeNode {
+import nl.uva.saf.fdl.ITreeVisitor;
 
+public interface ITreeNode {
+	public void accept(ITreeVisitor visitor);
 }

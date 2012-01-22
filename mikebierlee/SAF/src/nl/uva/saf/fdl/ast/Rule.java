@@ -18,6 +18,8 @@
 
 package nl.uva.saf.fdl.ast;
 
+import nl.uva.saf.fdl.ITreeVisitor;
+
 public class Rule extends TreeNode {
 	private ITreeNode moveChoice;
 	private ITreeNode fightChoice;
@@ -41,5 +43,10 @@ public class Rule extends TreeNode {
 
 	public void setMoveChoice(ITreeNode moveChoice) {
 		this.moveChoice = moveChoice;
+	}
+
+	@Override
+	public void accept(ITreeVisitor visitor) {
+		visitor.visit(this);
 	}
 }
