@@ -12,8 +12,6 @@ public class TestSAF {
 	@Test
 	public void testWellformedSpecification()
 	{
-		
-		
 		String sample = String.format(	"JackieChan {\r\n" +
 										"	kickPower = 1\r\n" +
 										"	punchPower = 10\r\n" +
@@ -25,7 +23,6 @@ public class TestSAF {
 										"	stronger and near or far [stand punch_high]" +
 										"}" );
 		InputStream stream = new ByteArrayInputStream(sample.getBytes());
-		
 		saf parser = new saf(stream);
 		try
 		{
@@ -34,6 +31,25 @@ public class TestSAF {
 		catch (ParseException exception)
 	    {
 			fail("Code should not have failed");
+	    }
+	}
+	
+	@Test
+	public void testInvalidRule()
+	{
+		String sample = String.format(	"ChuckNorris {\r\n" +
+										"	even [run_away]" +
+										"}"	);
+		InputStream stream = new ByteArrayInputStream(sample.getBytes());
+		saf parser = new saf(stream);
+		try
+		{
+			parser.Start();
+			fail("Code should have raised a ParseException");
+		}
+		catch (ParseException exception)
+	    {
+			assert(exception.getMessage().startsWith("Encountered \" \"]\" \"] \"\" at line 2, column 23"));
 	    }
 	}
 	
@@ -52,6 +68,7 @@ public class TestSAF {
 		}
 		catch (ParseException exception)
 		{
+			assert(exception.getMessage().startsWith("Encountered \" <IDENTIFIER> \"throwPower \"\" at line 2, column 9."));
 		}
 	}
 	
@@ -92,9 +109,11 @@ public class TestSAF {
 		    }
 		    catch (ParseException exception)
 		    {
+		    	assert(exception.getMessage().startsWith("Encountered \" <INTEGER_LITERAL> \"1 \"\" at line 1, column 27."));
 		    }
 			catch (TokenMgrError exception)
 			{
+				assert(exception.getMessage().startsWith("Lexical error at line 1, column 26.  Encountered: \"0\" (48), after : \"\""));
 			}
 		}
 	}
