@@ -24,59 +24,98 @@ public class Fighter {
 
   /** Main entry point. */
   public static void main(String args[]) throws ParseException {
+	System.out.println("Waiting for user input ... ");
+    System.out.print("Enter fighter specification:");
     Fighter parser = new Fighter(System.in);
-    parser.Input();
+	parser.Input();
+	System.out.print("Thanks!");
+   
   }
 
 }
 
 PARSER_END(Fighter)
 
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| < "//" (~[ "\n", "\r" ])*
+    (
+      "\n"
+    | "\r"
+    | "\r\n"
+    ) >
+| < "/*" (~[ "*" ])* "*"
+    (
+      ~[ "/" ] (~[ "*" ])* "*"
+    )*
+    "/" >
+}
+
+
 TOKEN :
 {
-	<NUM: ( ["1"-"9"] )> | 
-	<LBRACE: "{"> | 
-	<RBRACE: "}"> |
+	<STRENGTH_VALUE: ( ["1"-"9"] | "10")> 
+}
+
+TOKEN :
+{
 	<LPARAN: "["> | 
-	<RPARAN: "]">   
-	<NAME: ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* >
+	<RPARAN: "]"> 
+}
+
+TOKEN :
+{
+	<LBRACE: "{"> | 
+	<RBRACE: "}">   	
+
+}
+TOKEN :
+{	
+	< MOVE: "jump" | "crouch" | "stand" | "runTowards" | "runAway" | "walkTowards" | "walkAway" > 	
+|	< STRENGTH: "punchReach" | "kickReach" | "kickPower" | "punchPower" > 
+|	< ATTACK: "punchLow" | "punchHigh" | "kickLow" | "kickHigh" | "blockLow" | "blockHigh" > 
+|	< CONDITION: "stronger" | "weaker" | "muchStronger" | "muchWeaker" | "even" | "near" | "far" | "always" >
+
+}
+
+TOKEN :
+{
+	<NAME: ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* > 
 }
 
 /** Root production. */
 
-void Move() :
+void Input() :
 {}
 {
-	"jump" | "crouch" | "stand" | "run_towards" | "run_away" | "walk_towards" | "walk_away" "\n"
-}
+	<NAME> <LBRACE> Strength() Strength() Strength() Strength() ConditionalSpec() <RBRACE> 
+} 
 
+void Value() :
+{}
+{
+	<STRENGTH_VALUE> 
+}
 void Strength() :
 {}
 {
-	"punch_Reach" | "kick_Reach" | "kick_Power" | "punch_Power" (" ")* "=" (" ")* <NUM> "\n"
+	 <STRENGTH> "=" <STRENGTH_VALUE>
 }
 
 void Attack() :
 {}
 {
-	"punch_Low" | "punch_High" | "kick_Low" | "kick_High" | "block_Low" | "block_High" "\n"
+	 <ATTACK> 
 }
-void Condition() :
-{}
-{
-	"stronger" | "weaker" | "much_Stronger" | "much_Weaker" | "even" | "near" | "far" | "always"
-}
+
 
 void ConditionalSpec() :
 {}
 {
-	Condition() (" ")* <LPARAN> (" ")* ( Condition() " ")+ (" ")* <RPARAN> "\n"
+	<CONDITION> <LPARAN> ( <MOVE> )+ <RPARAN>
 }
 
-void Input() :
-{}
-{
-	<NAME> ("\n")? <LBRACE> ("\n")?
-	Strength() "\n" Strength() "\n" Strength() "\n" Strength() "\n" 
-	( ConditionalSpec() )+ ("\n")? <RBRACE>
-}
