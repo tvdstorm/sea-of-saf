@@ -54,6 +54,12 @@ characteristic
 
 behaviour
     :   ^(BEHAVIOUR rule*)
+        {
+            if (!hasAlwaysRule)
+            {
+                throw new SAFException("Always rule missing!");
+            }
+        }
     ;
 
 rule

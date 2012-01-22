@@ -46,21 +46,6 @@ class SAFTree extends CommonTree
         token = new CommonToken(ttype, id);
     }
 
-    public boolean isWelformed()
-    {
-        return childrenWelformed();
-    }
-
-    public boolean childrenWelformed()
-    {
-        boolean welformed = true;
-        for (Object child : getChildren())
-        {
-            welformed &= ((SAFTree)child).isWelformed();
-        }
-        return welformed;
-    }
-
     public String toString()
     {
         return token.getText() + "<" + this.getClass().getName() + ">";
@@ -82,18 +67,6 @@ class Personality extends SAFTree
 class Behaviour extends SAFTree
 {
     public Behaviour(int ttype) { super(ttype); }
-
-    // public boolean childrenWelformed()
-    // {
-    //     boolean hasAlwaysRule = false;
-    //     for (Object rule : getChildren())
-    //     {
-    //         SAFTree condition = ((SAFTree) rule).getFirstChildWithType(CONDITION);
-    //         hasAlwaysRule |= condition.getChildCount() == 1
-    //             && condition.getChild(0).getText() == "always";
-    //     }
-    //     return hasAlwaysRule && childrenWelformed();
-    // }
 }
 
 class Characteristic extends SAFTree

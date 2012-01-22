@@ -5,7 +5,6 @@ options
     output = AST;
 }
 
-
 tokens
 {
     AND     = 'and';
@@ -31,12 +30,12 @@ tokens
 }
 
 WS
-    : (' ' | '\r' | '\n' | '\t' | '\u000C')+
+    : ( ' ' | '\r' | '\n' | '\t' )+
       { $channel = HIDDEN; }
     ;
 
 STRING
-    : ('a'..'z' | 'A'..'Z' | '_')+
+    : ( 'a'..'z' | 'A'..'Z' | '_' )+
     ;
 
 DIGIT
