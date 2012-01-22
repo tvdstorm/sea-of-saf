@@ -3,8 +3,6 @@
 	<property name="src" value="src"/>
 	<property name="lib" value="lib"/>
 	
-
-	
 	<path id="classpath">
 		<fileset dir="${lib}" includes="*.jar"/>
 	</path>
@@ -21,7 +19,7 @@
 		<delete dir="${src}/parser"/>
 	</target>
 	
-	<target name="build" depends="init" description="Build project">
+	<target name="build" depends="antlr" description="Build project">
 		<javac srcdir="${src}" destdir="${build}" includeantruntime="false">
 			<classpath  refid="classpath"/>
 		</javac>
@@ -43,6 +41,7 @@
             <classpath refid="classpath"/>
         </antlr:ant-antlr3>
         -->
+		<echo>Generating parser code...</echo>
 		<java classname="org.antlr.Tool"  fork="false" classpath="${lib}/antlr-3.4-complete.jar">
 			<arg value="-fo" /> 
 			<arg value="${src}/parser" />
