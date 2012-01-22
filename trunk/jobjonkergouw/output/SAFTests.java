@@ -21,4 +21,9 @@ public class SAFTests {
         SAFParser parser = new SAFParser(tokens);
         return parser;
     }
+    
+    public static void main(String[] args) throws IOException, RecognitionException {
+        SAFTests test = new SAFTests();
+        test.testNewline();
+    }
 }
