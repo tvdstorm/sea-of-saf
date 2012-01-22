@@ -26,7 +26,7 @@ rule:
 
 //test rule: characteristic
 characteristic:
-// property value is 1 to 10. Not 0 and not > 10
+// property value is 1 to 10. Not < 1 and not > 10
 "kickPower = 9" OK
 "kickPower = 0" FAIL
 "kickPower = 11" FAIL
