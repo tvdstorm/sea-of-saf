@@ -17,7 +17,7 @@ public class Bot {
 	}
 	
 	public String toString() {
-		String output = "";
+		String output = "    Name: " + botName + "\n";
 		for(int i = 0; i < this.characteristics.size(); i++) {
 			output +=  this.characteristics.get(i).toString();
 		}

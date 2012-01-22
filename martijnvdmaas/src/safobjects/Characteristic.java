@@ -3,9 +3,14 @@ package safobjects;
 public class Characteristic {
 	private String name;
 	private int value;
-	
+
 	public Characteristic() {
-		value = 5; //set default value;
+		this.value = 5; //set default value;
+	}
+	
+	public Characteristic(String name, int value) {
+		this.name 	= name;
+		this.value 	= value;
 	}
 	
 	public String getName() {
