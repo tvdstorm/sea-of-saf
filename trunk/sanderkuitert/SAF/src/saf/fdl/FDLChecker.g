@@ -7,7 +7,7 @@ options {
 }
 
 @header{
-    package saf.fighter;
+    package saf.fdl;
     
 	import java.util.Arrays;
 	import java.util.Set;
@@ -15,20 +15,19 @@ options {
 }
 
 @members {
- 
-    //TODO Move constants to PlaySAF
-    private static final Set<String> characteristics = new HashSet<String>(Arrays.asList(
-                                    "punchReach","punchPower","kickReach","kickPower"));
+    
+    //TODO move to SuperAwesomeFighter
+    private Set<String> characteristics = new HashSet<String>(Arrays.asList(
+            "punchReach","punchPower","kickReach","kickPower"));
     private static final int lowerBound = 1;  //inclusive
     private static final int upperBound = 10; //inclusive
     private static final Set<String> conditions = new HashSet<String>(Arrays.asList(
-       "always","near","far","much_stronger","stronger","even","weaker","much_weaker"));    
+    "always","near","far","much_stronger","stronger","even","weaker","much_weaker"));    
     private static final Set<String> moves = new HashSet<String>(Arrays.asList(
-          "walk_towards","walk_away","run_towards","run_away","jump","crouch","stand"));
+    "walk_towards","walk_away","run_towards","run_away","jump","crouch","stand"));
     private static final Set<String> attacks = new HashSet<String>(Arrays.asList(
-             "block_low","block_high","punch_low","punch_high","kick_low","kick_high")); 
-
-    
+    "block_low","block_high","punch_low","punch_high","kick_low","kick_high"));
+ 
     //TODO Use own subclass of RecognitionException
     //TODO-afterwards: generalise methods below; use a map?
     private void checkCharacteristic(String characteristic){
