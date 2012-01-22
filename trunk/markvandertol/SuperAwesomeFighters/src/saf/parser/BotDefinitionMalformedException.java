@@ -1,39 +1,35 @@
 package saf.parser;
 
 public class BotDefinitionMalformedException extends Exception {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4446495545424179062L;
 
 	/**
 	 * 
 	 */
 	public BotDefinitionMalformedException() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @param arg0
-	 * @param arg1
+	 * @param msg
+	 * @param cause
 	 */
-	public BotDefinitionMalformedException(String arg0, Throwable arg1) {
-		super(arg0, arg1);
-		// TODO Auto-generated constructor stub
+	public BotDefinitionMalformedException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
 	/**
-	 * @param arg0
+	 * @param msg
 	 */
-	public BotDefinitionMalformedException(String arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
+	public BotDefinitionMalformedException(String msg) {
+		super(msg);
 	}
 
 	/**
-	 * @param arg0
+	 * @param cause
 	 */
-	public BotDefinitionMalformedException(Throwable arg0) {
-		super(arg0);
-		// TODO Auto-generated constructor stub
+	public BotDefinitionMalformedException(Throwable cause) {
+		super(cause);
 	}
 
 }

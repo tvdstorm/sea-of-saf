@@ -1,7 +1,7 @@
-grammar SuperAwesomeFighters;
+grammar SAF;
 
 options {
-output=AST;
+	output=AST;
 }
 
 tokens {
@@ -15,10 +15,10 @@ prog	:	ws? NAME ws? '{' ws (assignment endline ws?)* (action endline ws?)*
 		'}' ws? -> ^(PROGRAM NAME assignment* action*);
 
 assignment
-	:	strengths ws? '=' ws? DIGIT+
-	 	-> ^(ASSIGNMENT strengths DIGIT+);
+	:	strengths ws? '=' ws? DIGIT
+	 	-> ^(ASSIGNMENT strengths DIGIT);
 
-action 	:	condition ws? '[' move ws attack ws? ']'
+action 	:	condition ws? '[' ws? move ws attack ws? ']'
 		-> ^(ACTION condition move attack);
 
 ws	:	(NEWLINE | WS)+;
@@ -46,8 +46,8 @@ conditioni
 
 /* Tokens: */
 
-NEWLINE : '\r'? '\n';
-WS 	: ( ' ' | '\t')+;
-NAME	: ('a'..'z'|'A'..'Z')('a' .. 'z'| 'A'..'Z'| '0' .. '9')+;
-DIGIT	:	('0' .. '9');
+NEWLINE :	'\r'? '\n';
+WS 	:	( ' ' | '\t')+;
+NAME	:	('a'..'z'|'A'..'Z')('a' .. 'z'| 'A'..'Z'| '0' .. '9')+;
+DIGIT	:	('0' .. '9')+;
 

@@ -3,12 +3,23 @@ package saf.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.Max;
+import net.sf.oval.constraint.Min;
+import net.sf.oval.guard.Guarded;
+
+@Guarded
 public class Bot {
+	@Length(min = 1)
 	private String name;
 	
+	@Min(value = 1) @Max(value = 10)
 	private int punchReach = 5;
+	@Min(value = 1) @Max(value = 10)
 	private int punchPower = 5;
+	@Min(value = 1) @Max(value = 10)
 	private int kickReach = 5;
+	@Min(value = 1) @Max(value = 10)
 	private int kickPower = 5;
 	
 	private List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
@@ -22,7 +33,7 @@ public class Bot {
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	public void setName( String name) {
 		this.name = name;
 	}
 	/**
