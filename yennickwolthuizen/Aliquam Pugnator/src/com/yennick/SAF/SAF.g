@@ -7,8 +7,6 @@ options {
 
 tokens
 {
-	AND     = 'and';
-	OR      = 'or';
 	EQUALS  = '=';
 	CURLYOPEN  = '{';
 	CURLYCLOSE  = '}';
@@ -42,7 +40,7 @@ profile
 	;
 	
 distance
-	: ('far'|'near'|'always') '[' action attack ']'
+	: DISTANCE '[' action attack ']'
 	;
 	
 conditions
@@ -50,17 +48,21 @@ conditions
 	;
 
 action
-	:	ACTIONS
+	:	ACTIONS|'stand'
 	;
 	
 attack
 	: ATTACK'_'DIRECTION
-	;
-ATTACK			: ('kick'|'punch');
+	; 
+	
+//move cases to lists for testability
+ATTACK			: ('kick'|'punch'|'block');
+DISTANCE		: ('far'|'near'|'always');
 DIRECTION		: ('high'|'low');
-ACTIONS			: ('run'|'crouch')('_'('towards'|'away'))?;	
+ACTIONS			: ('run'|'crouch'|'walk'|'jump')('_'('towards'|'away'))?;	
 SKILLS			: ATTACK('Reach'|'Power');
+
+
 FIGHTERNAME	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'-')+;
 INT					: '0'..'9' |'10';
-
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+    { $channel = HIDDEN; } ;
