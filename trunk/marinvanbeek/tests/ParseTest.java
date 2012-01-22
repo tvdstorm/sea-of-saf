@@ -86,10 +86,13 @@ public class ParseTest
             SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
             SafTreeNode tree = (SafTreeNode)parser.parse().getTree();
 
+            if (parser.getNumberOfSyntaxErrors() > 0)
+                tree.setSyntaxError();
+
             Assert.assertEquals(passes, tree.isWellFormed());
 
-            System.out.println("[isWellFormed(); expected: " + passes + 
-                               ", result: " + tree.isWellFormed() + "]");
+            System.out.println("...passed (tree.isWellFormed() = " + passes + 
+                               ").");
             System.out.println();
         } catch (IOException e)
         {
