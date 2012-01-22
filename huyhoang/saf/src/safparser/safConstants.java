@@ -21,13 +21,15 @@ public interface safConstants {
   /** RegularExpression Id. */
   int ATTACK = 11;
   /** RegularExpression Id. */
-  int INTEGER_LITERAL = 12;
+  int CONNECTIVE = 12;
   /** RegularExpression Id. */
-  int IDENTIFIER = 13;
+  int INTEGER_LITERAL = 13;
   /** RegularExpression Id. */
-  int LETTER = 14;
+  int IDENTIFIER = 14;
   /** RegularExpression Id. */
-  int DIGIT = 15;
+  int LETTER = 15;
+  /** RegularExpression Id. */
+  int DIGIT = 16;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -46,6 +48,7 @@ public interface safConstants {
     "<MOVE>",
     "<STRENGTH>",
     "<ATTACK>",
+    "<CONNECTIVE>",
     "<INTEGER_LITERAL>",
     "<IDENTIFIER>",
     "<LETTER>",

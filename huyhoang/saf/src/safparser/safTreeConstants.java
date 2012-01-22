@@ -5,23 +5,39 @@ public interface safTreeConstants
 {
   public int JJTSTART = 0;
   public int JJTFIGHTEREXPRESSION = 1;
-  public int JJTMOVEEXPRESSION = 2;
-  public int JJTATTACKEXPRESSION = 3;
-  public int JJTCHARACTERISTICEXPRESSION = 4;
-  public int JJTACTIONEXPRESSION = 5;
-  public int JJTIDENTIFIER = 6;
-  public int JJTINTEGER = 7;
+  public int JJTCHARACTERISTICEXPRESSIONS = 2;
+  public int JJTACTIONEXPRESSIONS = 3;
+  public int JJTMOVEEXPRESSION = 4;
+  public int JJTATTACKEXPRESSION = 5;
+  public int JJTATTACK = 6;
+  public int JJTCHARACTERISTICEXPRESSION = 7;
+  public int JJTACTIONEXPRESSION = 8;
+  public int JJTCONDITIONEXPRESSION = 9;
+  public int JJTCONNECTIVE = 10;
+  public int JJTCONDITION = 11;
+  public int JJTSTRENGTH = 12;
+  public int JJTMOVE = 13;
+  public int JJTIDENTIFIER = 14;
+  public int JJTINTEGER = 15;
 
 
   public String[] jjtNodeName = {
     "Start",
     "FighterExpression",
+    "CharacteristicExpressions",
+    "ActionExpressions",
     "MoveExpression",
     "AttackExpression",
+    "Attack",
     "CharacteristicExpression",
     "ActionExpression",
+    "ConditionExpression",
+    "Connective",
+    "Condition",
+    "Strength",
+    "Move",
     "Identifier",
     "Integer",
   };
 }
-/* JavaCC - OriginalChecksum=d2e54393f87dd7d77709c5b62677dcd0 (do not edit this line) */
+/* JavaCC - OriginalChecksum=21f596281578e4a44d0b457f152ceaab (do not edit this line) */

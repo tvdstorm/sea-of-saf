@@ -5,9 +5,10 @@
 package safparser; 
 
 public class saf {  public static void main(String args [])  {    System.out.println("Reading from standard input...");
-    System.out.print("Enter an expression like \"1+(2+3)*var;\" :");
+    System.out.print("Enter a SAF specification: ");
 	saf generatedParser = new saf(System.in);
-    try    {      SimpleNode n = generatedParser.Start();      n.dump("");      System.out.println("Thank you.");    }    catch (Exception e)    {      System.out.println("Oops.");      System.out.println(e.getMessage());	}
+    try    {      SimpleNode n = generatedParser.Start();      n.dump("");
+    }    catch (Exception e)    {      System.out.println("Oops.");      System.out.println(e.getMessage());	}
   }}PARSER_END(saf)SKIP :{  " "| "\t"| "\n"| "\r"| < "//" (~[ "\n", "\r" ])*    (      "\n"    | "\r"    | "\r\n"    ) >| < "/*" (~[ "*" ])* "*"    (      ~[ "/" ] (~[ "*" ])* "*"    )*    "/" >}
 
 TOKEN :
@@ -25,8 +26,18 @@ TOKEN :
   FighterExpression()  {    return jjtThis;  }}void FighterExpression() :{}{
   Identifier()
   "{"
-	  (CharacteristicExpression() | ActionExpression())*
-  "}" 
+	  (CharacteristicExpressions())
+	  (ActionExpressions())
+  "}"
+}
+
+void CharacteristicExpressions() :
+{}{
+  (CharacteristicExpression())*}
+
+void ActionExpressions() :
+{}
+{	(ActionExpression())*
 }
 
 void MoveExpression() :
@@ -41,9 +52,11 @@ void AttackExpression() :
 | 	Attack()
 }
 
-void Attack() :{}
+void Attack() :{
+  	Token t;
+}
 {
-	< ATTACK >} 
+	t = < ATTACK > { jjtThis.value = t.image; }} 
 void CharacteristicExpression():
 {}{
 	Strength() "=" Integer()}
@@ -55,25 +68,37 @@ void ActionExpression():{}
 void ConditionExpression() :
 {}{
   	LOOKAHEAD(2)
-  	Condition() Connective() ConditionExpression()
+    Condition() Connective() ConditionExpression()
 |  	Condition()
 }
 
 void Connective() :
-{}{
-  < CONNECTIVE >}
+{
+  Token t;
+}{
+  t = < CONNECTIVE > { jjtThis.value = t.image; }}
 
 void Condition() :
-{}{
-  < CONDITION >}
+{
+  Token t;
+}{
+  t = < CONDITION > { jjtThis.value = t.image; }}
 
 void Strength() :
-{}
 {
-	< STRENGTH >
+  Token t;
+}
+{
+	t = < STRENGTH > { jjtThis.value = t.image; }
 }
 
-void Move() :{}{
-  	< MOVE >}
+void Move() :{
+  Token t;
+}{
+	t = < MOVE > { jjtThis.value = t.image; }}
 
-void Identifier() :{}{  < IDENTIFIER >}void Integer() :{}{  < INTEGER_LITERAL >}
+void Identifier() :{
+  Token t;
+}{  t = < IDENTIFIER > { jjtThis.value = t.image; }}void Integer() :{
+  Token t;
+}{  t = < INTEGER_LITERAL > { jjtThis.value = t.image; }}
