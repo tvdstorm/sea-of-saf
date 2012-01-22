@@ -13,9 +13,8 @@ public class Duel implements Runnable {
 		this.fighter2 = fighter2;
 	}
 
-	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		//TODO
 	}
 	
 }
