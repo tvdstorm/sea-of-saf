@@ -19,7 +19,8 @@ public class GrammarParser {
 
 	@Test
 	public void parseNormalGrammar() {
-		String inputFile = "." + File.separator+ "tests" +File.separator+"grammar"+File.separator+ "fighters.txt";
+		String inputFile = "." + File.separator + "tests" + File.separator
+				+ "grammar" + File.separator + "fighters.txt";
 		CharStream chStream = null;
 		try {
 			chStream = new ANTLRFileStream(inputFile);
@@ -30,11 +31,11 @@ public class GrammarParser {
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFParser parser = new SAFParser(tokenStream);
 		try {
-			parser.rule();
+			parser.fighter();
 		} catch (RecognitionException e) {
 			fail("Could not parse correcltly the grammar");
 		}
-	
+
 	}
 
 }
