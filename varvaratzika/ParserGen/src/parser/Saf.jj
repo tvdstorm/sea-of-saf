@@ -2,14 +2,17 @@
 /*@egen*//**
  * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
  */
+
 options
 {
   JDK_VERSION = "1.5";
   static = true;
-}
+} 
 
 PARSER_BEGIN(SafParser)
 package parser;
+import objects.*;
+import java.lang.String;
 
 public class SafParser/*@bgen(jjtree)*/implements SafParserTreeConstants/*@egen*/
 {/*@bgen(jjtree)*/
@@ -19,8 +22,9 @@ public class SafParser/*@bgen(jjtree)*/implements SafParserTreeConstants/*@egen*
   public static void main(String args []) throws ParseException
   {
     SafParser parser = new SafParser(System.in);
-    SimpleNode std = parser.Start();
-    std.dump("");
+    Fighter str = parser.Start();
+    //interpreter(str);
+    
          
   }
 }
@@ -52,37 +56,103 @@ TOKEN :
 | < IDENTIFIER: <LETTER>(<LETTER>|<DIGIT>)* >
 | < OP_BRACKETS: "[" >
 | < CL_BRACKETS: "]" >
-
+| < OP_CURLY_BRACKETS:"{" >
+| < CL_CURLY_BRACKETS:"}" >
 }
 
 
-SimpleNode Start() :
+Fighter Start() :
 {/*@bgen(jjtree) Start */
   SimpleNode jjtn000 = new SimpleNode(JJTSTART);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Start */
-        try {
 /*@egen*/
-	(
-  		LOOKAHEAD( 2 )<IDENTIFIER><ASSIGN><PROP_VALUE>
+  Token Fighter1,Fighter2=new Token();
+  Fighter f1=new Fighter();
+  Fighter f2=new Fighter();
+  
+  }
+{/*@bgen(jjtree) Start */
+  try {
+/*@egen*/ 
+  (Fighter1 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f1 = contents(f1))<CL_CURLY_BRACKETS>
+  {
+    f1.setFighterName(Fighter1.toString());
+    return f1;
+   }
+
+	 (Fighter2 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f2=contents(f2))<CL_CURLY_BRACKETS>/*@bgen(jjtree)*/
+  {
+    jjtree.closeNodeScope(jjtn000, true);
+    jjtc000 = false;
+  }
+/*@egen*/
+  {
+    f2.setFighterName(Fighter2.toString());
+    return f2;
+   }/*@bgen(jjtree)*/
+  } catch (Throwable jjte000) {
+    if (jjtc000) {
+      jjtree.clearNodeScope(jjtn000);
+      jjtc000 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte000 instanceof RuntimeException) {
+      throw (RuntimeException)jjte000;
+    }
+    if (jjte000 instanceof ParseException) {
+      throw (ParseException)jjte000;
+    }
+    throw (Error)jjte000;
+  } finally {
+    if (jjtc000) {
+      jjtree.closeNodeScope(jjtn000, true);
+    }
+  }
+/*@egen*/
+ }
+
+ Fighter contents(Fighter f) :
+ {/*@bgen(jjtree) contents */
+   SimpleNode jjtn000 = new SimpleNode(JJTCONTENTS);
+   boolean jjtc000 = true;
+   jjtree.openNodeScope(jjtn000);
+/*@egen*/
+   Strength s1=new Strength();
+   Condition c1=new Condition();
+   Token strengthName,strengValue,conditionName,movesName,attacksName=new Token(); }
+ {/*@bgen(jjtree) contents */
+   try {
+/*@egen*/
+   (
+  		LOOKAHEAD( 2 )(strengthName=<IDENTIFIER>)<ASSIGN>(strengValue=<PROP_VALUE>)
+  		{
+  		  s1.setStrengthName(strengthName.toString());
+  		  s1.setStrenghtValue(Integer.valueOf(strengValue.toString()));
+  		  f.setStrength(s1);  		}
   		|
-		LOOKAHEAD( 2 )<IDENTIFIER><OP_BRACKETS><IDENTIFIER><IDENTIFIER><CL_BRACKETS>
-	)/*@bgen(jjtree)*/
+		LOOKAHEAD( 2 )(conditionName=<IDENTIFIER>)<OP_BRACKETS>(movesName=<IDENTIFIER>)(attacksName=<IDENTIFIER>)<CL_BRACKETS>
+		{
+		  c1.ConditionName(conditionName.toString());
+		  c1.MovesName(movesName.toString());
+		  c1.AttacksName(attacksName.toString());
+		  f.setCondition(c1);		}
+	)*/*@bgen(jjtree)*/
         {
           jjtree.closeNodeScope(jjtn000, true);
           jjtc000 = false;
         }
+/*@egen*/	{return f; }/*@bgen(jjtree)*/
+   } finally {
+     if (jjtc000) {
+       jjtree.closeNodeScope(jjtn000, true);
+     }
+   }
 /*@egen*/
-	{ return jjtn000;}/*@bgen(jjtree)*/
-        } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-        }
-/*@egen*/
+ 
  }
+ 
 
 
 
