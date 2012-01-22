@@ -20,8 +20,6 @@ grammar FDL;
 
 options {
   language = Java;
-  //output = AST;
-  //ASTLabelType = CommonTree;
 }
 
 @header {
@@ -83,14 +81,14 @@ conditionAnd returns [ConditionAnd result]
 
 conditionOr returns [ConditionOr result] 
   @init {
-    result = new ConditionOr(new ArrayList<ITreeNode>());
+    result = new ConditionOr(new ArrayList<ConditionAnd>());
   }
   : op1=conditionAnd (OR oprest=conditionAnd {result.addOperand($oprest.result);})* {result.addOperand($op1.result);}
   ; 
 
 moveChoice returns [MoveChoice result]
   @init {
-    result = new MoveChoice(new ArrayList<ITreeNode>());
+    result = new MoveChoice(new ArrayList<Action>());
   }
   : CHOOSE '(' (MOVEACTION {result.addAction(new MoveAction($MOVEACTION.text));})+ ')'
   | MOVEACTION {result.addAction(new MoveAction($MOVEACTION.text));}
@@ -98,7 +96,7 @@ moveChoice returns [MoveChoice result]
   
 fightChoice returns [FightChoice result]
   @init {
-    result = new FightChoice(new ArrayList<ITreeNode>());
+    result = new FightChoice(new ArrayList<Action>());
   }
   : CHOOSE '(' (FIGHTACTION {result.addAction(new FightAction($FIGHTACTION.text));})+ ')'
   | FIGHTACTION {result.addAction(new FightAction($FIGHTACTION.text));}
@@ -120,7 +118,7 @@ fighterAttribute returns [FighterAttribute result]
 
 fighter returns [Fighter result] 
   @init {
-    result = new Fighter("",new ArrayList<ITreeNode>());
+    result = new Fighter("",new ArrayList<FighterAttribute>());
   }
   : IDENT '{' (fighterAttribute {result.addAttribute($fighterAttribute.result);})* '}'   {result.setName($IDENT.text);}
   ;

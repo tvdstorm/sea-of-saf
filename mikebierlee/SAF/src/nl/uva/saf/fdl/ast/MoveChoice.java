@@ -18,13 +18,13 @@
 
 package nl.uva.saf.fdl.ast;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class MoveChoice extends Choice {
 
-	public MoveChoice(List<ITreeNode> actions) {
+	public MoveChoice(ArrayList<Action> actions) {
 		super(actions);
 	}
 

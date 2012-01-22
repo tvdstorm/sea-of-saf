@@ -1,13 +1,15 @@
-// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-22 18:06:05
+// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-22 23:07:07
 
   package nl.uva.saf.fdl;
-  import nl.uva.saf.fdl.ast.*;
-
-
-import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
+  import org.antlr.runtime.BaseRecognizer;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.DFA;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.Lexer;
+import org.antlr.runtime.MismatchedSetException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.RecognizerSharedState;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class FDLLexer extends Lexer {
@@ -176,10 +178,10 @@ public class FDLLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:4: ( ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+ )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:35:4: ( ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+ )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:35:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
             {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:35:6: ( ' ' | '\\t' | '\\r' | '\\n' | '\\f' )+
             int cnt1=0;
             loop1:
             do {
@@ -236,10 +238,10 @@ public class FDLLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:38:9: ( ( '0' .. '9' )+ )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:38:11: ( '0' .. '9' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:36:9: ( ( '0' .. '9' )+ )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:36:11: ( '0' .. '9' )+
             {
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:38:11: ( '0' .. '9' )+
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:36:11: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -294,8 +296,8 @@ public class FDLLexer extends Lexer {
         try {
             int _type = CHOOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:8: ( 'choose' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:10: 'choose'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:8: ( 'choose' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:37:10: 'choose'
             {
             match("choose"); 
 
@@ -317,8 +319,8 @@ public class FDLLexer extends Lexer {
         try {
             int _type = AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:40:5: ( 'and' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:40:7: 'and'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:38:5: ( 'and' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:38:7: 'and'
             {
             match("and"); 
 
@@ -340,8 +342,8 @@ public class FDLLexer extends Lexer {
         try {
             int _type = OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:41:4: ( 'or' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:41:6: 'or'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:4: ( 'or' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:39:6: 'or'
             {
             match("or"); 
 
@@ -363,8 +365,8 @@ public class FDLLexer extends Lexer {
         try {
             int _type = ASSIGN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:42:8: ( '=' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:42:10: '='
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:40:8: ( '=' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:40:10: '='
             {
             match('='); 
 
@@ -384,8 +386,8 @@ public class FDLLexer extends Lexer {
         try {
             int _type = ALWAYS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:8: ( 'always' )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:10: 'always'
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:41:8: ( 'always' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:41:10: 'always'
             {
             match("always"); 
 
@@ -407,7 +409,7 @@ public class FDLLexer extends Lexer {
         try {
             int _type = CONDITIONTYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:45:15: ( 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:15: ( 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
             int alt3=7;
             switch ( input.LA(1) ) {
             case 'n':
@@ -508,7 +510,7 @@ public class FDLLexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:45:17: 'near'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:43:17: 'near'
                     {
                     match("near"); 
 
@@ -517,7 +519,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:46:17: 'far'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:44:17: 'far'
                     {
                     match("far"); 
 
@@ -526,7 +528,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:47:17: 'much_stronger'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:45:17: 'much_stronger'
                     {
                     match("much_stronger"); 
 
@@ -535,7 +537,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:48:17: 'stronger'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:46:17: 'stronger'
                     {
                     match("stronger"); 
 
@@ -544,7 +546,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:49:17: 'even'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:47:17: 'even'
                     {
                     match("even"); 
 
@@ -553,7 +555,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:50:17: 'weaker'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:48:17: 'weaker'
                     {
                     match("weaker"); 
 
@@ -562,7 +564,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:51:17: 'much_weaker'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:49:17: 'much_weaker'
                     {
                     match("much_weaker"); 
 
@@ -586,7 +588,7 @@ public class FDLLexer extends Lexer {
         try {
             int _type = MOVEACTION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:54:12: ( 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:52:12: ( 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand' )
             int alt4=7;
             switch ( input.LA(1) ) {
             case 'w':
@@ -729,7 +731,7 @@ public class FDLLexer extends Lexer {
 
             switch (alt4) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:54:14: 'walk_towards'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:52:14: 'walk_towards'
                     {
                     match("walk_towards"); 
 
@@ -738,7 +740,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:55:14: 'walk_away'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:53:14: 'walk_away'
                     {
                     match("walk_away"); 
 
@@ -747,7 +749,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:56:14: 'run_towards'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:54:14: 'run_towards'
                     {
                     match("run_towards"); 
 
@@ -756,7 +758,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:57:14: 'run_away'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:55:14: 'run_away'
                     {
                     match("run_away"); 
 
@@ -765,7 +767,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:58:14: 'jump'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:56:14: 'jump'
                     {
                     match("jump"); 
 
@@ -774,7 +776,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:59:14: 'crouch'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:57:14: 'crouch'
                     {
                     match("crouch"); 
 
@@ -783,7 +785,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:60:14: 'stand'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:58:14: 'stand'
                     {
                     match("stand"); 
 
@@ -807,7 +809,7 @@ public class FDLLexer extends Lexer {
         try {
             int _type = FIGHTACTION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:63:13: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:61:13: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
             int alt5=6;
             switch ( input.LA(1) ) {
             case 'b':
@@ -1031,7 +1033,7 @@ public class FDLLexer extends Lexer {
 
             switch (alt5) {
                 case 1 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:63:15: 'block_low'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:61:15: 'block_low'
                     {
                     match("block_low"); 
 
@@ -1040,7 +1042,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:64:15: 'block_high'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:62:15: 'block_high'
                     {
                     match("block_high"); 
 
@@ -1049,7 +1051,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:65:15: 'punch_low'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:63:15: 'punch_low'
                     {
                     match("punch_low"); 
 
@@ -1058,7 +1060,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:66:15: 'punch_high'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:64:15: 'punch_high'
                     {
                     match("punch_high"); 
 
@@ -1067,7 +1069,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:67:15: 'kick_low'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:65:15: 'kick_low'
                     {
                     match("kick_low"); 
 
@@ -1076,7 +1078,7 @@ public class FDLLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:68:15: 'kick_high'
+                    // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:66:15: 'kick_high'
                     {
                     match("kick_high"); 
 
@@ -1100,8 +1102,8 @@ public class FDLLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:71:8: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:71:10: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:69:8: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:69:10: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -1113,7 +1115,7 @@ public class FDLLexer extends Lexer {
             }
 
 
-            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:71:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g:69:34: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop6:
             do {
                 int alt6=2;
