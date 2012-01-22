@@ -9,7 +9,6 @@ options {
 @header 
 {
   package nl.uva.lap.saf;
-  import nl.uva.lap.saf.Fighter;
 }
 
 @lexer::header 
@@ -24,18 +23,18 @@ statement: personalityStatement | behaviourStatement;
 personalityStatement: personality^ '='! INTEGER;
 personality : 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach';
 
-behaviourStatement : conditions^ '['! abstractActionStatement ']'!;
+behaviourStatement : conditions^ '['! actionStatement actionStatement ']'!;
 
 expression : condition | '('! conditions ')'!;
 conditions : expression^ (('and' | 'or')^ expression)*;
-condition : 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always';
+condition : 'even' | 'far' | 'near' | 'stronger' | 'much_stronger' | 'weaker' | 'much_weaker' | 'always';
 
 //possible todo: split in movement action and action-action.
-abstractActionStatement : actionStatement+;
+//abstractActionStatement : actionStatement+;
 actionStatement : (action | ('choose'^ '('! action+ ')'!)); //note that choose is not recursive
 action : 'kick_low' | 'kick_high' | 'punch_low' | 'punch_high' | 
 	'run_away' | 'run_towards' | 'walk_away' | 'walk_towards' | 
-	'stand' | 'crouch' |
+	'jump' | 'stand' | 'crouch' |
 	'block_low' | 'block_high'
 	;
 
