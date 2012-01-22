@@ -11,5 +11,5 @@ public class Attack {
 		this.name = n;
 	}
 	
-	public String GetName(){ return this.name; }
+	public String getName(){ return this.name; }
 }

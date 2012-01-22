@@ -15,6 +15,7 @@ public class Fighter {
 	}
 	
 	public void setName(String n){ this.name = n; }
+	public void appendName(String n){ this.name += " " + n; }
 	public void addStrength(Strength s){ this.strengths.add(s); }
 	public void addBehavior(Behavior b){ this.behaviors.add(b); }
 	
