@@ -4,10 +4,14 @@ gunit SAFGrammar;
 package safcr.antlr;
 }
 
-// test rule: saf
+// test files with rule: saf
 saf: 
 test.saf  OK        // correct file
 test_fail.saf FAIL  // there is error
+
+// test rule: bot. Bot characteristic should be defined before behaviour
+bot:
+test_fail2.saf FAIL
 
 // test rule: rule
 rule:
@@ -30,4 +34,7 @@ characteristic:
 "kickPower = 9" OK
 "kickPower = 0" FAIL
 "kickPower = 11" FAIL
+// format test
+"kickPower 5" FAIL
+"KickPower = 7" FAIL
 
