@@ -6,6 +6,25 @@ options {
   ASTLabelType=CommonTree;
 }
 
+tokens{
+	  ROOT;
+	  BOT;
+	  NAME;
+	  PERSONALITY;
+	  CHARACTERISTIC;
+	  BEHAVIOUR;
+	  RULE;
+	  MOVE_ACTION;
+	  FIGHT_ACTION;
+	  CONDITION;
+	  CHOOSE = 'choose';
+	  
+	  PUNCHREACH  = 'punchReach';
+		KICKREACH   = 'kickReach' ;
+		KICKPOWER   = 'kickPower' ;
+		PUNCHPOWER  = 'punchPower';
+}
+
 @header {
 package safcr.antlr;
 }
@@ -13,65 +32,65 @@ package safcr.antlr;
 @lexer::header {
 package safcr.antlr;
 }
-    
+
 saf
-    : bot* EOF
+    : bot* EOF -> ^(ROOT bot*)
     ;
 
 bot
-    :   ID^
-        '{'!
+    :   ID
+        '{'
         personality
         behaviour 
-        '}'!
+        '}'
+        -> ^(BOT ^(NAME ID) personality behaviour)
     ;
     
 personality
-    :   characteristic*
+    :   characteristic* -> ^(PERSONALITY ^(CHARACTERISTIC characteristic*))
     ;
     
 behaviour
-    :   rule*
+    :   rule* -> ^(BEHAVIOUR rule*)
     ;
 
 rule
-    :   condition
+    :   condition? 
+        '['
+        move_actions? 
+        fight_actions? 
+        ']'
+        -> ^(RULE condition? move_actions? fight_actions?)
     ;
 
 move_actions
-    :   (move_action -> move_action
+    :   move_action -> move_action
         | CHOOSE '(' move_action move_action ')' -> ^(CHOOSE move_action move_action)
-        ) 
     ;
 
 move_action
-    :   move_action_type
+    :   move_action_type -> ^(MOVE_ACTION move_action_type)
 		;
 		
 fight_actions
-    :   (fight_action -> fight_action
+    :   fight_action -> fight_action
         | CHOOSE '(' fight_action fight_action ')' -> ^(CHOOSE fight_action fight_action)
-        ) 
     ;
     		
 fight_action
-    :   fight_action_type
+    :   fight_action_type -> ^(FIGHT_ACTION fight_action_type)
     ;
 
 condition
-    :   (condition_type^)?
-        '['! 
-        move_actions? 
-        fight_actions? 
-        ']'! 
+    :   condition_type -> ^(CONDITION condition_type)
     ;
 
 characteristic
     :   (
-        PUNCHREACH  '='  pr=INT -> ^(PUNCHREACH $pr)
-    |   KICKREACH   '='  kr=INT -> ^(KICKREACH $kr)
-    |   KICKPOWER   '='  kp=INT -> ^(KICKPOWER $kp)
-    |   PUNCHPOWER  '='  pp=INT -> ^(PUNCHPOWER $pp)
+        PUNCHREACH  '='  pr=PROPERTIES_VALUE -> ^(PUNCHREACH $pr)
+    |   KICKREACH   '='  kr=PROPERTIES_VALUE -> ^(KICKREACH  $kr)
+    |   KICKPOWER   '='  kp=PROPERTIES_VALUE -> ^(KICKPOWER  $kp)
+    |   PUNCHPOWER  '='  pp=PROPERTIES_VALUE -> ^(PUNCHPOWER $pp)
         )
     ;
     
@@ -105,16 +124,9 @@ fight_action_type
     |   'block_high' 
     ;
 
-// characteristic tokens
-PUNCHREACH  : 'punchReach';
-KICKREACH   : 'kickReach' ;
-KICKPOWER   : 'kickPower' ;
-PUNCHPOWER  : 'punchPower';
-
-SAFROOT : 'SAF';
-CHOOSE  : 'choose';
-
 // General tokens
+PROPERTIES_VALUE  : ('10' | '1'..'9');
+
 fragment LETTER : ('a'..'z' |'A'..'Z' ) ;
 fragment DIGIT  : '0'..'9' ;
 
