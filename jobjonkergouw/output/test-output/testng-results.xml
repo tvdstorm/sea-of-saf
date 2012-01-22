@@ -2,12 +2,12 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Command line suite" duration-ms="33" started-at="2012-01-22T17:08:40Z" finished-at="2012-01-22T17:08:40Z">
+  <suite name="Command line suite" duration-ms="38" started-at="2012-01-22T19:24:08Z" finished-at="2012-01-22T19:24:08Z">
     <groups>
     </groups>
-    <test name="Command line test" duration-ms="33" started-at="2012-01-22T17:08:40Z" finished-at="2012-01-22T17:08:40Z">
+    <test name="Command line test" duration-ms="38" started-at="2012-01-22T19:24:08Z" finished-at="2012-01-22T19:24:08Z">
       <class name="SAFTests">
-        <test-method status="PASS" signature="testNewline()[pri:0, instance:SAFTests@80d3d6f]" name="testNewline" duration-ms="21" started-at="2012-01-22T17:08:40Z" finished-at="2012-01-22T17:08:40Z">
+        <test-method status="PASS" signature="testNewline()[pri:0, instance:SAFTests@1a84da23]" name="testNewline" duration-ms="23" started-at="2012-01-22T19:24:08Z" finished-at="2012-01-22T19:24:08Z">
         </test-method>
       </class>
     </test>
