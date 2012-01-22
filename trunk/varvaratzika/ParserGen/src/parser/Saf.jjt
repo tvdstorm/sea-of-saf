@@ -1,22 +1,26 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
  */
+
 options
 {
   JDK_VERSION = "1.5";
   static = true;
-}
+} 
 
 PARSER_BEGIN(SafParser)
 package parser;
+import objects.*;
+import java.lang.String;
 
 public class SafParser
 {
   public static void main(String args []) throws ParseException
   {
     SafParser parser = new SafParser(System.in);
-    SimpleNode std = parser.Start();
-    std.dump("");
+    Fighter str = parser.Start();
+    //interpreter(str);
+    
          
   }
 }
@@ -48,20 +52,55 @@ TOKEN :
 | < IDENTIFIER: <LETTER>(<LETTER>|<DIGIT>)* >
 | < OP_BRACKETS: "[" >
 | < CL_BRACKETS: "]" >
-
+| < OP_CURLY_BRACKETS:"{" >
+| < CL_CURLY_BRACKETS:"}" >
 }
 
 
-SimpleNode Start() :
-{}
+Fighter Start() :
 {
-	(
-  		LOOKAHEAD( 2 )<IDENTIFIER><ASSIGN><PROP_VALUE>
-  		|
-		LOOKAHEAD( 2 )<IDENTIFIER><OP_BRACKETS><IDENTIFIER><IDENTIFIER><CL_BRACKETS>
-	)
-	{ return jjtThis;}
+  Token Fighter1,Fighter2=new Token();
+  Fighter f1=new Fighter();
+  Fighter f2=new Fighter();
+  
+  }
+{ 
+  (Fighter1 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f1 = contents(f1))<CL_CURLY_BRACKETS>
+  {
+    f1.setFighterName(Fighter1.toString());
+    return f1;
+   }
+
+	 (Fighter2 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f2=contents(f2))<CL_CURLY_BRACKETS>
+  {
+    f2.setFighterName(Fighter2.toString());
+    return f2;
+   }
  }
+
+ Fighter contents(Fighter f) :
+ {
+   Strength s1=new Strength();
+   Condition c1=new Condition();
+   Token strengthName,strengValue,conditionName,movesName,attacksName=new Token(); }
+ {
+   (
+  		LOOKAHEAD( 2 )(strengthName=<IDENTIFIER>)<ASSIGN>(strengValue=<PROP_VALUE>)
+  		{
+  		  s1.setStrengthName(strengthName.toString());
+  		  s1.setStrenghtValue(Integer.valueOf(strengValue.toString()));
+  		  f.setStrength(s1);  		}
+  		|
+		LOOKAHEAD( 2 )(conditionName=<IDENTIFIER>)<OP_BRACKETS>(movesName=<IDENTIFIER>)(attacksName=<IDENTIFIER>)<CL_BRACKETS>
+		{
+		  c1.ConditionName(conditionName.toString());
+		  c1.MovesName(movesName.toString());
+		  c1.AttacksName(attacksName.toString());
+		  f.setCondition(c1);		}
+	)*	{return f; }
+ 
+ }
+ 
 
 
 
