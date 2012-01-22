@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="34" version="2.0">
+<workbench progressCount="31" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="100" y="100">
 <fastViewData fastViewLocation="1024"/>
@@ -40,21 +40,21 @@
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.ui.DefaultTextEditor" name="simpleAdder.sable" partName="simpleAdder.sable" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SableCCParser/src/simpleAdder.sable" title="simpleAdder.sable" tooltip="SableCCParser/src/simpleAdder.sable" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SableCCParser/src/simpleAdder.sable"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="458" selectionTopPixel="0"/>
+<editor activePart="true" focus="true" id="org.eclipse.ui.DefaultTextEditor" name="saf.grammar" partName="saf.grammar" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/saf.grammar" title="saf.grammar" tooltip="SAFParser/src/saf.grammar" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/saf.grammar"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1774" selectionTopPixel="720"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Interpreter.java" partName="Interpreter.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SableCCParser/src/simpleAdder/interpret/Interpreter.java" title="Interpreter.java" tooltip="SableCCParser/src/simpleAdder/interpret/Interpreter.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SableCCParser/src/simpleAdder/interpret/Interpreter.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="567" selectionTopPixel="0"/>
+<editor id="org.eclipse.ui.DefaultTextEditor" name="testFile.sa" partName="testFile.sa" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/testFile.sa" title="testFile.sa" tooltip="SAFParser/src/testFile.sa" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/testFile.sa"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="122" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SableCCParser/src/Main.java" title="Main.java" tooltip="SableCCParser/src/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SableCCParser/src/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="937" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Interpreter.java" partName="Interpreter.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/saf/interpret/Interpreter.java" title="Interpreter.java" tooltip="SAFParser/src/saf/interpret/Interpreter.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/saf/interpret/Interpreter.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="270" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Analysis.java" partName="Analysis.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SableCCParser/src/simpleAdder/analysis/Analysis.java" title="Analysis.java" tooltip="SableCCParser/src/simpleAdder/analysis/Analysis.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SableCCParser/src/simpleAdder/analysis/Analysis.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/Main.java" title="Main.java" tooltip="SAFParser/src/Main.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/Main.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="709" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -129,7 +129,7 @@
 </view>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.ui.DefaultTextEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.pde.internal.ui.PDEPerspective" id="org.eclipse.pde.ui.PDEPerspective" label="Plug-in Development"/>
 <alwaysOnActionSet id="org.eclipse.egit.ui.navigation"/>
@@ -354,31 +354,169 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SableCCParser/src/simpleAdder.sable"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SableCCParser/src/simpleAdder/interpret/Interpreter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SableCCParser/src/Main.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SableCCParser/src/simpleAdder/analysis/Analysis.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/saf.grammar"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/interpret/Interpreter.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/Main.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/node/Node.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/node/AKickpowerProgram.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/node/AProgram.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/testFile.sa"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/saf.grammar"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/testFile.sa"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/lexer/Lexer.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/interpret/Interpreter.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/Main.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/saf.grammar"/>
 </editors>
-<item historyLabel="simpleAdder.sable" index="0">
-<position info="not_deleted" x="458" y="0"/>
-</item>
 <item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="567" y="0"/>
+<position info="not_deleted" x="4" y="0"/>
 </item>
 <item historyLabel="Main.java" index="2">
-<position info="not_deleted" x="937" y="0"/>
-</item>
-<item historyLabel="Analysis.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="simpleAdder.sable" index="0">
-<position info="not_deleted" x="458" y="0"/>
+<position info="not_deleted" x="160" y="0"/>
 </item>
 <item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="567" y="0"/>
+<position info="not_deleted" x="539" y="0"/>
 </item>
-<item active="true" historyLabel="Main.java" index="2">
-<position info="not_deleted" x="937" y="0"/>
+<item historyLabel="saf.grammar" index="0">
+<position info="not_deleted" x="878" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="94" y="0"/>
+</item>
+<item historyLabel="Main.java" index="2">
+<position info="not_deleted" x="649" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="0">
+<position/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="94" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="0">
+<position/>
+</item>
+<item historyLabel="Main.java" index="2">
+<position info="not_deleted" x="649" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="0">
+<position info="not_deleted" x="700" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="520" y="0"/>
+</item>
+<item historyLabel="Main.java" index="2">
+<position info="not_deleted" x="576" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="227" y="12"/>
+</item>
+<item historyLabel="Node.java" index="3">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="227" y="12"/>
+</item>
+<item historyLabel="saf.grammar" index="0">
+<position info="not_deleted" x="503" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="227" y="12"/>
+</item>
+<item historyLabel="saf.grammar" index="0">
+<position info="not_deleted" x="667" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="243" y="0"/>
+</item>
+<item historyLabel="Main.java" index="2">
+<position info="not_deleted" x="576" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="1">
+<position info="not_deleted" x="243" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="0">
+<position info="not_deleted" x="667" y="0"/>
+</item>
+<item historyLabel="AKickpowerProgram.java" index="4">
+<position info="not_deleted" x="572" y="0"/>
+</item>
+<item historyLabel="AProgram.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="testFile.sa" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position info="not_deleted" x="388" y="0"/>
+</item>
+<item historyLabel="testFile.sa" index="6">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position info="not_deleted" x="388" y="0"/>
+</item>
+<item historyLabel="testFile.sa" index="8">
+<position info="not_deleted" x="268" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position/>
+</item>
+<item historyLabel="Lexer.java" index="9">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Lexer.java" index="9">
+<position info="not_deleted" x="209" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position/>
+</item>
+<item historyLabel="testFile.sa" index="8">
+<position info="not_deleted" x="268" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position/>
+</item>
+<item historyLabel="testFile.sa" index="8">
+<position info="not_deleted" x="14" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position info="not_deleted" x="419" y="0"/>
+</item>
+<item historyLabel="testFile.sa" index="8">
+<position info="not_deleted" x="14" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position info="not_deleted" x="2351" y="0"/>
+</item>
+<item historyLabel="testFile.sa" index="8">
+<position info="not_deleted" x="14" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position info="not_deleted" x="2351" y="0"/>
+</item>
+<item historyLabel="testFile.sa" index="8">
+<position info="not_deleted" x="11" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position info="not_deleted" x="1762" y="0"/>
+</item>
+<item historyLabel="testFile.sa" index="8">
+<position info="not_deleted" x="122" y="0"/>
+</item>
+<item historyLabel="saf.grammar" index="7">
+<position info="not_deleted" x="1762" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="10">
+<position info="not_deleted" x="243" y="0"/>
+</item>
+<item historyLabel="Main.java" index="11">
+<position info="not_deleted" x="709" y="0"/>
+</item>
+<item historyLabel="Interpreter.java" index="10">
+<position info="not_deleted" x="270" y="0"/>
+</item>
+<item active="true" historyLabel="saf.grammar" index="12">
+<position info="not_deleted" x="542" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -398,6 +536,39 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Lexer.java" tooltip="SAFParser/src/saf/lexer/Lexer.java">
+<persistable path="/SAFParser/src/saf/lexer/Lexer.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AProgram.java" tooltip="SAFParser/src/saf/node/AProgram.java">
+<persistable path="/SAFParser/src/saf/node/AProgram.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AKickpowerProgram.java" tooltip="SAFParser/src/saf/node/AKickpowerProgram.java">
+<persistable path="/SAFParser/src/saf/node/AKickpowerProgram.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Node.java" tooltip="SAFParser/src/saf/node/Node.java">
+<persistable path="/SAFParser/src/saf/node/Node.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="SAFParser/src/Main.java">
+<persistable path="/SAFParser/src/Main.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Interpreter.java" tooltip="SAFParser/src/saf/interpret/Interpreter.java">
+<persistable path="/SAFParser/src/saf/interpret/Interpreter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="testFile.sa" tooltip="SAFParser/src/testFile.sa">
+<persistable path="/SAFParser/src/testFile.sa"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TPlus.java" tooltip="SAFParser/src/saf/node/TPlus.java">
+<persistable path="/SAFParser/src/saf/node/TPlus.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Analysis.java" tooltip="SAFParser/src/saf/analysis/Analysis.java">
+<persistable path="/SAFParser/src/saf/analysis/Analysis.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnalysisAdapter.java" tooltip="SAFParser/src/saf/analysis/AnalysisAdapter.java">
+<persistable path="/SAFParser/src/saf/analysis/AnalysisAdapter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="characteristic.grammar" tooltip="SAFParser/src/characteristic.grammar">
+<persistable path="/SAFParser/src/characteristic.grammar"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Analysis.java" tooltip="SableCCParser/src/simpleAdder/analysis/Analysis.java">
 <persistable path="/SableCCParser/src/simpleAdder/analysis/Analysis.java"/>
 </file>

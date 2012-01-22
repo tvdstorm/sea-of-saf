@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SableCCParser/src/simpleAdder.sable&apos; to &apos;SAF.sable&apos;" description="Rename resource &apos;simpleAdder.sable&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/simpleAdder.sable" name="SAF.sable" stamp="1327241751247" updateReferences="true"/>
+</session>

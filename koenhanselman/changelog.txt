@@ -1,2 +1,5 @@
 Tuesday 17-1-2012
 - Installed the SableCC parser in a test project. Currently parses additions (e.g. 1+2)
+
+Sunday 22-1-2012
+- Grammar is done. Interpreter still needs to be implemented.
