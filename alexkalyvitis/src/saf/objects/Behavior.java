@@ -17,7 +17,7 @@ public class Behavior {
 		this.attack = a;
 	}
 	
-	public Condition GetCondition(){ return this.condition; }
-	public Move GetMove(){ return this.move; }
-	public Attack GetAttack(){ return this.attack; }
+	public Condition getCondition(){ return this.condition; }
+	public Move getMove(){ return this.move; }
+	public Attack getAttack(){ return this.attack; }
 }

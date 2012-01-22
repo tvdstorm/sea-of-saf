@@ -19,6 +19,6 @@ public class Strength {
 		this.value = v;
 	}
 	
-	public String GetName(){ return this.name; }
-	public int GetValue(){ return this.value; }
+	public String getName(){ return this.name; }
+	public int getValue(){ return this.value; }
 }
