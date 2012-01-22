@@ -32,7 +32,21 @@ tokens {
 @header {
 }
 
-@members {
+@parser::members {
+//    @Override
+//    protected Object recoverFromMismatchedToken(IntStream input, int ttype,
+//                            BitSet follow) throws RecognitionException
+//    {
+//        throw new UnwantedTokenException(ttype, input);
+//    }
+}
+
+@lexer::members {
+//    @Override
+//    public void recover(RecognitionException e)
+//    {     
+//        throw new RuntimeException(e);
+//    }
 }
 
 /*--------------------------------------------------------------------------
