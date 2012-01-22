@@ -12,9 +12,9 @@ import java.util.Arrays;
 
 class SafTreeNode extends CommonTree
 {
-    public SafTreeNode()
-    {
-    }
+    public boolean hasSyntaxError = false;
+
+    public SafTreeNode() {}
 
     /* Test if all SafTree children all well-formed. */
     public boolean isWellFormed()
@@ -30,7 +30,12 @@ class SafTreeNode extends CommonTree
                 return false;
         }
 
-        return true;
+        return !hasSyntaxError;
+    }
+
+    public void setSyntaxError()
+    {
+        hasSyntaxError = true;
     }
 }
 
