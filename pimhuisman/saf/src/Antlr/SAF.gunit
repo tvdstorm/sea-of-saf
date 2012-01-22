@@ -1,0 +1,12 @@
+gunit SAF;
+
+@header {
+  package Antlr;
+}
+
+characteristic:
+	"kickPower = -1" FAIL
+	"kickPower = 0" OK
+	"kickPower = 9" OK
+	"kickPower = 10" FAIL
+	"kickPower = 1.1" FAIL
