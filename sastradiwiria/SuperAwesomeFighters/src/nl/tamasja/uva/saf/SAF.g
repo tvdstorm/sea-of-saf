@@ -7,6 +7,7 @@ options {
 
 @header {
   package nl.tamasja.uva.saf;
+  import nl.tamasja.uva.saf.bot.*;
 }
 
 @lexer::header {
@@ -16,15 +17,36 @@ options {
 // Ignore whitespaces, tabs, eol, etc by removing it from the default channel.
 WS : (' ' | '\\t' | '\n' | '\r' | '\f' | '\t')+ {$channel = HIDDEN;};
 
-bot :
+
+parse returns [FighterBot fighterBot]:
+  bot EOF {$fighterBot = $bot.fighterBot;}
+;
+
+bot returns [FighterBot fighterBot]:
   ident '{'
-  (statistic|personality)*
+  properties personalities {$fighterBot = new FighterBot($ident.text,$properties.fighterProperties,$personalities.fighterPersonalities);}
   '}'
 ;
 
 
-statistic : strength '=' fighter_stat;
-personality : condition '[' move attack ']';
+properties returns [FighterProperties fighterProperties]
+@init
+    {
+      $fighterProperties = new FighterProperties();
+    }
+    : (property {$fighterProperties.Add($property.fighterProperty);})+;
+
+property returns [FighterProperty fighterProperty] : strength '=' fighter_stat { $fighterProperty = new FighterProperty($strength.text,Integer.parseInt($fighter_stat.text)); };
+
+
+personalities returns [FighterPersonalities fighterPersonalities]
+@init
+    {
+      $fighterPersonalities = new FighterPersonalities();
+    }
+    : (personality {$fighterPersonalities.Add($personality.fighterPersonality);})+; 
+       
+personality returns [FighterPersonality fighterPersonality] : condition '[' move attack ']' {$fighterPersonality = new FighterPersonality($condition.text,$move.text,$attack.text);};
 
 
 condition : ('stronger'|'weaker'|'much_stronger'|'much_weaker'|'even'|'near'|'far'|'always');

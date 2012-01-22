@@ -2,6 +2,9 @@ package nl.tamasja.uva.saf;
 
 import java.io.IOException;
 
+import nl.tamasja.uva.saf.SAFParser.parse_return;
+import nl.tamasja.uva.saf.bot.FighterBot;
+
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -11,8 +14,10 @@ import org.antlr.runtime.TokenStream;
 public class BotLoader {
 	
 	
-	public void loadFile(String fileName) {
+	public FighterBot loadFile(String fileName) {
 		CharStream charStream;
+		FighterBot fighterBot = null;
+		
 		try {
 			charStream = new ANTLRFileStream(fileName);
 
@@ -21,7 +26,7 @@ public class BotLoader {
 			SAFParser parser = new SAFParser(tokenStream);
 			
 			try {
-				parser.bot();
+				fighterBot = parser.parse().fighterBot;
 			} catch (RecognitionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -30,7 +35,9 @@ public class BotLoader {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		System.out.println("done!");	
+		return fighterBot;
 	}
+	
+	
 	
 }
