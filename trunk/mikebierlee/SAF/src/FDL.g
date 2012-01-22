@@ -35,7 +35,7 @@ options {
 }
 
 WS : (' ' | '\t' | '\r' | '\n' | '\f')+ {$channel=HIDDEN;};
-VALUE : ('1'..'9') | '10';
+INTEGER : ('0'..'9')+;
 CHOOSE : 'choose';
 AND : 'and';
 OR : 'or';
@@ -71,7 +71,7 @@ FIGHTACTION : 'block_low'
 IDENT  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;  
  
 personality returns [Characteristic result]
-  : IDENT ASSIGN VALUE {result = new Characteristic($IDENT.text, $VALUE.text);}
+  : IDENT ASSIGN INTEGER {result = new Characteristic($IDENT.text, $INTEGER.text);}
   ;
                     
 conditionAnd returns [ConditionAnd result]
