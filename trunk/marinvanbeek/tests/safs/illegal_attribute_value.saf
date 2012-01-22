@@ -1,5 +1,5 @@
 illegal_attribute_value
 {
-    punch_reach = -1
+    punch_reach = 11
     always [jump punch_low]
 ]

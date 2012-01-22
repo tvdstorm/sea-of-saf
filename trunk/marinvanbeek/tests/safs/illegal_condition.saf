@@ -1,4 +1,5 @@
 illegal_condition
 {
     illegal_never [jump punch_low]
+    always [jump punch_low]
 }
