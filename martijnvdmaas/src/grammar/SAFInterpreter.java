@@ -1,11 +1,8 @@
 package grammar;
 
-import java.awt.Choice;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Arrays;
 import java.util.HashSet;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import safobjects.Behaviour;
 import safobjects.Bot;
@@ -14,15 +11,18 @@ import safobjects.Characteristic;
 import safobjects.ConditionChoices;
 import safobjects.ConditionGroup;
 
-public class SAFInterpreter {
-	Bots bots;
+public class SAFInterpreter 
+{
+	private Bots bots;
+	private final String ERROR_PREFIX = "Interpret error: ";
 	
-	private String[] validCharacteristics  = { "kickReach", "kickPower", "punchReach", "punchPower" };
-	private String[] validMoves  = { "jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away" };
-	private String[] validAttacks = { "punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high" };
-	private String[] validConditions = { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
+	private String[] validCharacteristics  	= { "kickReach", "kickPower", "punchReach", "punchPower" };
+	private String[] validMoves  			= { "jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away" };
+	private String[] validAttacks 			= { "punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high" };
+	private String[] validConditions 		= { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
 	
-	public SAFInterpreter(Bots bots) {
+	public SAFInterpreter(Bots bots) 
+	{
 		this.bots = bots;
 	}
 	
@@ -46,19 +46,20 @@ public class SAFInterpreter {
 	
 	private ArrayList<Characteristic> interpetCharacteristics(ArrayList<Characteristic> characteristics) 
 	{
-	 	ArrayList<Characteristic> characteristicSet 	= new ArrayList<Characteristic>();
+	 	ArrayList<Characteristic> newCharacteristics 	= new ArrayList<Characteristic>();
+	 	ArrayList<String> definedCharacteristicNames 	= new ArrayList<String>();
 	 	
 		for(Characteristic characteristic : characteristics) 
 	 	{
-	 		if(!isStringInArray(characteristic.getName(), validCharacteristics)) 
+			if(!Arrays.asList(validCharacteristics).contains(characteristic.getName()))
 	 		{
 	 			interpretError("Unkown characteristic found: " + characteristic.getName());
 	 			continue;
 	 		}
 	 		boolean duplicateFound = false;
-	 		for(int j = 0; j < characteristicSet.size(); j++) 
+	 		for(int j = 0; j < newCharacteristics.size(); j++) 
 	 		{
-	 			if(characteristic.getName().equals((characteristicSet.get(j).getName()))) 
+	 			if(characteristic.getName().equals((newCharacteristics.get(j).getName()))) 
 	 			{
 	 				duplicateFound = true;
 	 			}
@@ -79,14 +80,27 @@ public class SAFInterpreter {
 		 			interpretError("Characteristic with higher value than 10 detected. Set to default value: 5");
 		 			characteristic.setValue(5);
 		 		}	
-		 		
-		 		characteristicSet.add(characteristic);
+		 		definedCharacteristicNames.add(characteristic.getName());
+		 		newCharacteristics.add(characteristic);
 	 		}
 	 	}
 		
-	 	return characteristicSet;	 
+		newCharacteristics = addDefaultCharacteristics(newCharacteristics, definedCharacteristicNames);
+		
+	 	return newCharacteristics;	 
 	}
 	
+	private ArrayList<Characteristic> addDefaultCharacteristics(ArrayList<Characteristic> newCharacteristics, ArrayList<String> definedCharacteristicNames) {
+		for(String characteristicName : validCharacteristics) 
+		{
+			if(!definedCharacteristicNames.contains(characteristicName)) 
+			{
+				newCharacteristics.add(new Characteristic(characteristicName, 5));
+			}
+		}
+		return newCharacteristics;
+	}
+
 	private ArrayList<Behaviour> interpetBehaviours(ArrayList<Behaviour> behaviours) 
 	{
 		HashSet<Behaviour> removedBehaviours = new HashSet<Behaviour>();
@@ -137,14 +151,14 @@ public class SAFInterpreter {
 		return behaviours;
 	}
 	
-	public HashSet<String> removeInvalidItemsInSet(HashSet<String> items, String[] validItems, String typeName) 
+	public HashSet<String> removeInvalidItemsInSet(HashSet<String> items, String[] validItems, String errorTypeName) 
 	{
 		ArrayList<String> removedMoves = new ArrayList<String>();
 		for(String item : items) 
 		{
-			if(!isStringInArray(item, validItems))
+			if(!Arrays.asList(validItems).contains(item))
 			{
-				interpretError("Invalid " + typeName + " detected: " + item);
+				interpretError("Invalid " + errorTypeName + " detected: " + item);
 				removedMoves.add(item);
 			}
 		}
@@ -154,18 +168,13 @@ public class SAFInterpreter {
 	
 	public boolean isStringInArray(String name, String[] validNames) 
 	{
-		for (String option : validNames) 
-		{
-			if(option.equals(name)) 
-			{
-				return true;
-			}
-		}
+		if(Arrays.asList(validNames).contains(name)) return true;
+		
 		return false;
 	}
 	
 	public void interpretError(String error) 
 	{
-		System.err.println(error);
+		System.err.println(ERROR_PREFIX + error);
 	}
 }
