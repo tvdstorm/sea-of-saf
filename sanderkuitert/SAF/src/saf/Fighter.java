@@ -1,4 +1,4 @@
-package saf.fighter;
+package saf;
 
 public interface Fighter {
 	 
