@@ -18,11 +18,7 @@ tokens{
 	  FIGHT_ACTION;
 	  CONDITION;
 	  CHOOSE = 'choose';
-	  
-	  PUNCHREACH  = 'punchReach';
-		KICKREACH   = 'kickReach' ;
-		KICKPOWER   = 'kickPower' ;
-		PUNCHPOWER  = 'punchPower';
+	  DEFAULT_VALUE;
 }
 
 @header {
@@ -64,8 +60,8 @@ rule
     ;
 
 move_actions
-    :   move_action -> move_action
-        | CHOOSE '(' move_action move_action ')' -> ^(CHOOSE move_action move_action)
+    :   move_action
+        | CHOOSE^ '('! move_action move_action ')'!
     ;
 
 move_action
@@ -73,8 +69,8 @@ move_action
 		;
 		
 fight_actions
-    :   fight_action -> fight_action
-        | CHOOSE '(' fight_action fight_action ')' -> ^(CHOOSE fight_action fight_action)
+    :   fight_action
+        | CHOOSE^ '('! fight_action fight_action ')'!
     ;
     		
 fight_action
@@ -86,12 +82,7 @@ condition
     ;
 
 characteristic
-    :   (
-        PUNCHREACH  '='  pr=PROPERTIES_VALUE -> ^(PUNCHREACH $pr)
-    |   KICKREACH   '='  kr=PROPERTIES_VALUE -> ^(KICKREACH  $kr)
-    |   KICKPOWER   '='  kp=PROPERTIES_VALUE -> ^(KICKPOWER  $kp)
-    |   PUNCHPOWER  '='  pp=PROPERTIES_VALUE -> ^(PUNCHPOWER $pp)
-        )
+    :   characteristic_properties^ '='! PROPERTIES_VALUE
     ;
     
 condition_type
@@ -122,6 +113,13 @@ fight_action_type
     |   'kick_high'
     |   'block_low'
     |   'block_high' 
+    ;
+    
+characteristic_properties
+    :   'punchReach'
+    |   'kickReach'
+    |   'kickPower'
+    |   'punchPower'
     ;
 
 // General tokens

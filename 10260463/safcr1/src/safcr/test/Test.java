@@ -28,17 +28,16 @@ public class Test {
 		    }
 		  }
 
-	public static void main(String[] args) throws RecognitionException, IOException {		
-		ANTLRFileStream fileStream = new ANTLRFileStream("C:\\tmp\\test.saf");
+	public static void main(String[] args) throws RecognitionException, IOException {
+		String testFile = System.getProperty("user.dir") + "\\src\\safcr\\test\\test.saf";
+		ANTLRFileStream fileStream = new ANTLRFileStream(testFile);
 		CharStream charStream = new ANTLRStringStream(fileStream.toString());
-		
 		SAFGrammarLexer lexer = new SAFGrammarLexer(charStream);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFGrammarParser parser = new SAFGrammarParser(tokenStream);
 			
 		CommonTree saf = (CommonTree) parser.saf().getTree();
-		System.out.println(saf.toStringTree());
-		//traverse(saf, 0);
+		traverse(saf, 0);
 	}
 
 }
