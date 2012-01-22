@@ -1,0 +1,111 @@
+/* saf.grammar - A grammar the SAF language */ 
+Package saf ; 
+     
+Helpers 
+    /* Helpers */
+    any_character = [0x0 .. 0xfffff] ;
+    nl = 10 ;
+    space = ' ' ;
+    tab = 9 ;
+      
+Tokens 
+    /* General tokens */
+	digit = ['0' .. '9'] ;
+    letter = [['a' .. 'z'] + ['A' .. 'Z']] ;
+    comment = '//' any_character nl ;
+    newline = nl ;
+    blank = (space | tab)? ;
+    curlybracel = '{' ;
+    curlybracer = '}' ;
+    bracketl = '[' ;
+    bracketr = ']' ;
+    equals = '=' ;
+    
+    /* Characteristics */
+    punch_reach = 'punchReach' ;
+    punch_power = 'punchPower' ;
+    kick_reach = 'kickReach' ;
+    kick_power = 'kickPower' ;
+    
+    /* Enum general */
+    choose = 'choose' ;
+    
+    /* Enum MoveActionType */
+    walk_towards = 'walk_towards' ;
+    walk_away = 'walk_away' ;
+    run_towards = 'run_towards' ;
+    run_away = 'run_away' ;
+    jump = 'jump' ;
+    crouch = 'crouch' ;
+    stand = 'stand' ;
+    
+    /* Enum ConditionType */
+    always = 'always' ;
+    near = 'near' ;
+    far = 'far' ;
+    much_stronger = 'much_stronger' ;
+    stronger = 'stronger' ;
+    even = 'even' ;
+    weaker = 'weaker' ;
+    much_weaker = 'much_weaker' ;
+    
+    /* Enum FightActionType */
+    block_low = 'block_low' ;
+    block_high = 'block_high' ;
+    punch_low = 'punch_low' ;
+    punch_high = 'punch_high' ;
+    kick_low = 'kick_low' ;
+    kick_high = 'kick_high' ;
+
+Ignored Tokens
+	/* Tokens that will be ignored */
+	comment,
+	blank ;
+  
+Productions 
+    program = program_header program_personality program_behaviour program_footer ;
+    program_header = letter? curlybracel ;
+    program_footer = curlybracer ;
+    
+    program_behaviour = program_rule* ;
+    
+    program_rule = condition_type bracketl program_move_action program_fight_action bracketr newline ;
+    
+    program_move_action = {single_move_action} move_action_type | {choose_move_action} choose bracketl move_action_type? bracketr ;
+    program_fight_action = {single_fight_action} fight_action_type | {choose_fight_action} choose bracketl fight_action_type? bracketr ;
+    
+    move_action_type = {walk_towards} walk_towards |
+    				   {walk_away} walk_away |
+    				   {run_towards} run_towards |
+    				   {run_away} run_away |
+    				   {jump} jump |
+    				   {crouch} crouch |
+    				   {stand} stand ;
+    				 
+	fight_action_type = {block_low} block_low |
+    					{block_high} block_high |
+    					{punch_low} punch_low |
+    					{punch_high} punch_high |
+    					{kick_low} kick_low |
+    					{kick_high} kick_high ;
+    
+    condition_type = {always} always |
+    				 {near} near |
+    				 {far} far |
+    				 {much_stronger} much_stronger |
+    				 {stronger} stronger |
+    				 {even} even |
+    				 {weaker} weaker |
+    				 {much_weaker} much_weaker ;
+    
+    program_personality = program_characteristic* ;
+    
+    program_characteristic = {punch_reach} program_punch_reach | 
+    						 {punch_power} program_punch_power | 
+    						 {kick_reach} program_kick_reach | 
+    						 {kick_power} program_kick_power ;
+    						 
+    program_punch_reach = punch_reach equals digit newline ;
+    program_punch_power = punch_power equals digit newline ;
+    program_kick_reach = kick_reach equals digit newline ;
+    program_kick_power = kick_power equals digit newline ;

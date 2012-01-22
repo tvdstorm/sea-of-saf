@@ -1,0 +1,40 @@
+/* saf.grammar - A grammar the SAF language */ 
+Package saf ; 
+     
+Helpers 
+    any_character = [0x0 .. 0xfffff] ;
+    digit = ['0' .. '9'] ;  
+    nl = '\n' ; 
+  
+Tokens 
+    comment = '//' any_character nl ;
+    blank = 10 | 10 13 | 9 ;
+    equals = '=' ; 
+    punchreach = 'punchReach' ;
+    punchpower = 'punchPower' ;
+    kickreach = 'kickReach' ;
+    kickpower = 'kickPower' ; 
+
+Ignored Tokens
+	comment,
+	blank ;
+  
+Productions 
+    program = program_characteristic ;
+    
+    moveactiontype = {walktowards} blank |
+    				 {walkaway} blank |
+    				 {runtowards} 'run_towards' |
+    				 {runaway} 'run_away' |
+    				 {jump} 'jump' |
+    				 {crouch} 'crouch' |
+    				 {stand} 'stand' ;
+    
+    program_characteristic = {punchreach} program_punchreach | 
+    						 {punchpower} program_punchpower | 
+    						 {kickreach} program_kickreach | 
+    						 {kickpower} program_kickpower ;
+    program_punchreach = punchreach equals ;
+    program_punchpower = punchpower equals ;
+    program_kickreach = kickreach equals ;
+    program_kickpower = kickpower equals ;
