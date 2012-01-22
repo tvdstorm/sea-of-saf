@@ -1,4 +1,4 @@
-package grammar;
+package interpreter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
