@@ -2,6 +2,10 @@ package saf.entities;
 
 import java.util.Set;
 
+import net.sf.oval.constraint.NotNull;
+import net.sf.oval.guard.Guarded;
+
+@Guarded
 public class CombinedCondition extends Condition {
 	
 	private Condition condition1;
@@ -15,14 +19,16 @@ public class CombinedCondition extends Condition {
 	 * @param condition2
 	 * @param requireBoth
 	 */
-	public CombinedCondition(Condition condition1, Condition condition2,
+	public CombinedCondition(@NotNull Condition condition1, @NotNull Condition condition2,
 			boolean requireBoth) {
-		super();
 		this.condition1 = condition1;
 		this.condition2 = condition2;
 		this.requireBoth = requireBoth;
 	}
 
+	/**
+	 * Returns true when one or 
+	 */
 	@Override
 	public boolean matched(Set<ConditionType> currentConditions) {
 		boolean c1 = condition1.matched(currentConditions);

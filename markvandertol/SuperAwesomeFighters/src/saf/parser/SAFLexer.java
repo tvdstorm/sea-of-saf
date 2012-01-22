@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g 2012-01-17 18:31:52
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g 2012-01-22 22:26:31
 package saf.parser;
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
-public class SuperAwesomeFightersLexer extends Lexer {
+public class SAFLexer extends Lexer {
     public static final int EOF=-1;
     public static final int T__12=12;
     public static final int T__13=13;
@@ -57,22 +57,22 @@ public class SuperAwesomeFightersLexer extends Lexer {
         return new Lexer[] {};
     }
 
-    public SuperAwesomeFightersLexer() {} 
-    public SuperAwesomeFightersLexer(CharStream input) {
+    public SAFLexer() {} 
+    public SAFLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
-    public SuperAwesomeFightersLexer(CharStream input, RecognizerSharedState state) {
+    public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g"; }
+    public String getGrammarFileName() { return "C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:2:7: ( '(' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:2:9: '('
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:2:7: ( '(' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:2:9: '('
             {
             match('('); 
 
@@ -92,8 +92,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:3:7: ( ')' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:3:9: ')'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:3:7: ( ')' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:3:9: ')'
             {
             match(')'); 
 
@@ -113,8 +113,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:4:7: ( '=' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:4:9: '='
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:4:7: ( '=' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:4:9: '='
             {
             match('='); 
 
@@ -134,8 +134,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:5:7: ( '[' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:5:9: '['
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:5:7: ( '[' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:5:9: '['
             {
             match('['); 
 
@@ -155,8 +155,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:6:7: ( ']' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:6:9: ']'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:6:7: ( ']' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:6:9: ']'
             {
             match(']'); 
 
@@ -176,8 +176,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:7:7: ( 'always' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:7:9: 'always'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:7:7: ( 'always' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:7:9: 'always'
             {
             match("always"); 
 
@@ -199,8 +199,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:8:7: ( 'and' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:8:9: 'and'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:8:7: ( 'and' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:8:9: 'and'
             {
             match("and"); 
 
@@ -222,8 +222,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:9:7: ( 'block_high' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:9:9: 'block_high'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:9:7: ( 'block_high' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:9:9: 'block_high'
             {
             match("block_high"); 
 
@@ -245,8 +245,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:10:7: ( 'block_low' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:10:9: 'block_low'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:10:7: ( 'block_low' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:10:9: 'block_low'
             {
             match("block_low"); 
 
@@ -268,8 +268,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:11:7: ( 'crouch' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:11:9: 'crouch'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:11:7: ( 'crouch' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:11:9: 'crouch'
             {
             match("crouch"); 
 
@@ -291,8 +291,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:12:7: ( 'even' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:12:9: 'even'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:12:7: ( 'even' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:12:9: 'even'
             {
             match("even"); 
 
@@ -314,8 +314,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:13:7: ( 'far' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:13:9: 'far'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:13:7: ( 'far' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:13:9: 'far'
             {
             match("far"); 
 
@@ -337,8 +337,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:14:7: ( 'jump' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:14:9: 'jump'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:14:7: ( 'jump' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:14:9: 'jump'
             {
             match("jump"); 
 
@@ -360,8 +360,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:15:7: ( 'kickPower' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:15:9: 'kickPower'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:15:7: ( 'kickPower' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:15:9: 'kickPower'
             {
             match("kickPower"); 
 
@@ -383,8 +383,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:16:7: ( 'kickReach' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:16:9: 'kickReach'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:16:7: ( 'kickReach' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:16:9: 'kickReach'
             {
             match("kickReach"); 
 
@@ -406,8 +406,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:17:7: ( 'kick_high' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:17:9: 'kick_high'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:17:7: ( 'kick_high' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:17:9: 'kick_high'
             {
             match("kick_high"); 
 
@@ -429,8 +429,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:18:7: ( 'kick_low' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:18:9: 'kick_low'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:18:7: ( 'kick_low' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:18:9: 'kick_low'
             {
             match("kick_low"); 
 
@@ -452,8 +452,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:19:7: ( 'much_stronger' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:19:9: 'much_stronger'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:19:7: ( 'much_stronger' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:19:9: 'much_stronger'
             {
             match("much_stronger"); 
 
@@ -475,8 +475,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:20:7: ( 'much_weaker' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:20:9: 'much_weaker'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:20:7: ( 'much_weaker' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:20:9: 'much_weaker'
             {
             match("much_weaker"); 
 
@@ -498,8 +498,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:21:7: ( 'near' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:21:9: 'near'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:21:7: ( 'near' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:21:9: 'near'
             {
             match("near"); 
 
@@ -521,8 +521,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:22:7: ( 'or' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:22:9: 'or'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:22:7: ( 'or' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:22:9: 'or'
             {
             match("or"); 
 
@@ -544,8 +544,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:23:7: ( 'punchPower' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:23:9: 'punchPower'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:23:7: ( 'punchPower' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:23:9: 'punchPower'
             {
             match("punchPower"); 
 
@@ -567,8 +567,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:24:7: ( 'punchReach' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:24:9: 'punchReach'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:24:7: ( 'punchReach' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:24:9: 'punchReach'
             {
             match("punchReach"); 
 
@@ -590,8 +590,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:25:7: ( 'punch_high' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:25:9: 'punch_high'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:25:7: ( 'punch_high' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:25:9: 'punch_high'
             {
             match("punch_high"); 
 
@@ -613,8 +613,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:26:7: ( 'punch_low' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:26:9: 'punch_low'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:26:7: ( 'punch_low' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:26:9: 'punch_low'
             {
             match("punch_low"); 
 
@@ -636,8 +636,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:27:7: ( 'run_away' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:27:9: 'run_away'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:27:7: ( 'run_away' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:27:9: 'run_away'
             {
             match("run_away"); 
 
@@ -659,8 +659,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:28:7: ( 'run_towards' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:28:9: 'run_towards'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:28:7: ( 'run_towards' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:28:9: 'run_towards'
             {
             match("run_towards"); 
 
@@ -682,8 +682,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:29:7: ( 'stand' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:29:9: 'stand'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:29:7: ( 'stand' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:29:9: 'stand'
             {
             match("stand"); 
 
@@ -705,8 +705,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:30:7: ( 'stronger' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:30:9: 'stronger'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:30:7: ( 'stronger' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:30:9: 'stronger'
             {
             match("stronger"); 
 
@@ -728,8 +728,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:31:7: ( 'walk_away' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:31:9: 'walk_away'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:31:7: ( 'walk_away' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:31:9: 'walk_away'
             {
             match("walk_away"); 
 
@@ -751,8 +751,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:32:7: ( 'walk_towards' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:32:9: 'walk_towards'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:32:7: ( 'walk_towards' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:32:9: 'walk_towards'
             {
             match("walk_towards"); 
 
@@ -774,8 +774,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:33:7: ( 'weaker' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:33:9: 'weaker'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:33:7: ( 'weaker' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:33:9: 'weaker'
             {
             match("weaker"); 
 
@@ -797,8 +797,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:34:7: ( '{' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:34:9: '{'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:34:7: ( '{' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:34:9: '{'
             {
             match('{'); 
 
@@ -818,8 +818,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:35:7: ( '}' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:35:9: '}'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:35:7: ( '}' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:35:9: '}'
             {
             match('}'); 
 
@@ -839,10 +839,10 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:49:9: ( ( '\\r' )? '\\n' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:49:11: ( '\\r' )? '\\n'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:9: ( ( '\\r' )? '\\n' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:11: ( '\\r' )? '\\n'
             {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:49:11: ( '\\r' )?
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:11: ( '\\r' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -851,7 +851,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:49:11: '\\r'
+                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:11: '\\r'
                     {
                     match('\r'); 
 
@@ -879,10 +879,10 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:50:5: ( ( ' ' | '\\t' )+ )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:50:7: ( ' ' | '\\t' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:50:5: ( ( ' ' | '\\t' )+ )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:50:7: ( ' ' | '\\t' )+
             {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:50:7: ( ' ' | '\\t' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:50:7: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -896,7 +896,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:
             	    {
             	    if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -937,8 +937,8 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = NAME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:51:6: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+ )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:51:8: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:51:6: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+ )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:51:8: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -950,7 +950,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
             }
 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:51:27: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:51:27: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -964,7 +964,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -1005,17 +1005,46 @@ public class SuperAwesomeFightersLexer extends Lexer {
         try {
             int _type = DIGIT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:52:7: ( ( '0' .. '9' ) )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:52:7: ( ( '0' .. '9' )+ )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:52:9: ( '0' .. '9' )+
             {
-            if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-                input.consume();
-            }
-            else {
-                MismatchedSetException mse = new MismatchedSetException(null,input);
-                recover(mse);
-                throw mse;
-            }
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:52:9: ( '0' .. '9' )+
+            int cnt4=0;
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:
+            	    {
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt4 >= 1 ) break loop4;
+                        EarlyExitException eee =
+                            new EarlyExitException(4, input);
+                        throw eee;
+                }
+                cnt4++;
+            } while (true);
 
 
             }
@@ -1030,12 +1059,12 @@ public class SuperAwesomeFightersLexer extends Lexer {
     // $ANTLR end "DIGIT"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | NEWLINE | WS | NAME | DIGIT )
-        int alt4=38;
-        alt4 = dfa4.predict(input);
-        switch (alt4) {
+        // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | NEWLINE | WS | NAME | DIGIT )
+        int alt5=38;
+        alt5 = dfa5.predict(input);
+        switch (alt5) {
             case 1 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:10: T__12
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:10: T__12
                 {
                 mT__12(); 
 
@@ -1043,7 +1072,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:16: T__13
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:16: T__13
                 {
                 mT__13(); 
 
@@ -1051,7 +1080,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:22: T__14
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:22: T__14
                 {
                 mT__14(); 
 
@@ -1059,7 +1088,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:28: T__15
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:28: T__15
                 {
                 mT__15(); 
 
@@ -1067,7 +1096,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:34: T__16
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:34: T__16
                 {
                 mT__16(); 
 
@@ -1075,7 +1104,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:40: T__17
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:40: T__17
                 {
                 mT__17(); 
 
@@ -1083,7 +1112,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:46: T__18
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:46: T__18
                 {
                 mT__18(); 
 
@@ -1091,7 +1120,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:52: T__19
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:52: T__19
                 {
                 mT__19(); 
 
@@ -1099,7 +1128,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:58: T__20
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:58: T__20
                 {
                 mT__20(); 
 
@@ -1107,7 +1136,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:64: T__21
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:64: T__21
                 {
                 mT__21(); 
 
@@ -1115,7 +1144,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:70: T__22
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:70: T__22
                 {
                 mT__22(); 
 
@@ -1123,7 +1152,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:76: T__23
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:76: T__23
                 {
                 mT__23(); 
 
@@ -1131,7 +1160,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:82: T__24
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:82: T__24
                 {
                 mT__24(); 
 
@@ -1139,7 +1168,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 14 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:88: T__25
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:88: T__25
                 {
                 mT__25(); 
 
@@ -1147,7 +1176,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 15 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:94: T__26
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:94: T__26
                 {
                 mT__26(); 
 
@@ -1155,7 +1184,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 16 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:100: T__27
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:100: T__27
                 {
                 mT__27(); 
 
@@ -1163,7 +1192,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 17 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:106: T__28
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:106: T__28
                 {
                 mT__28(); 
 
@@ -1171,7 +1200,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 18 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:112: T__29
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:112: T__29
                 {
                 mT__29(); 
 
@@ -1179,7 +1208,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 19 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:118: T__30
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:118: T__30
                 {
                 mT__30(); 
 
@@ -1187,7 +1216,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 20 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:124: T__31
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:124: T__31
                 {
                 mT__31(); 
 
@@ -1195,7 +1224,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 21 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:130: T__32
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:130: T__32
                 {
                 mT__32(); 
 
@@ -1203,7 +1232,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 22 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:136: T__33
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:136: T__33
                 {
                 mT__33(); 
 
@@ -1211,7 +1240,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 23 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:142: T__34
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:142: T__34
                 {
                 mT__34(); 
 
@@ -1219,7 +1248,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 24 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:148: T__35
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:148: T__35
                 {
                 mT__35(); 
 
@@ -1227,7 +1256,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 25 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:154: T__36
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:154: T__36
                 {
                 mT__36(); 
 
@@ -1235,7 +1264,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 26 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:160: T__37
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:160: T__37
                 {
                 mT__37(); 
 
@@ -1243,7 +1272,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 27 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:166: T__38
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:166: T__38
                 {
                 mT__38(); 
 
@@ -1251,7 +1280,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 28 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:172: T__39
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:172: T__39
                 {
                 mT__39(); 
 
@@ -1259,7 +1288,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 29 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:178: T__40
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:178: T__40
                 {
                 mT__40(); 
 
@@ -1267,7 +1296,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 30 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:184: T__41
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:184: T__41
                 {
                 mT__41(); 
 
@@ -1275,7 +1304,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 31 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:190: T__42
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:190: T__42
                 {
                 mT__42(); 
 
@@ -1283,7 +1312,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 32 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:196: T__43
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:196: T__43
                 {
                 mT__43(); 
 
@@ -1291,7 +1320,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 33 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:202: T__44
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:202: T__44
                 {
                 mT__44(); 
 
@@ -1299,7 +1328,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 34 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:208: T__45
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:208: T__45
                 {
                 mT__45(); 
 
@@ -1307,7 +1336,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 35 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:214: NEWLINE
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:214: NEWLINE
                 {
                 mNEWLINE(); 
 
@@ -1315,7 +1344,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 36 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:222: WS
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:222: WS
                 {
                 mWS(); 
 
@@ -1323,7 +1352,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 37 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:225: NAME
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:225: NAME
                 {
                 mNAME(); 
 
@@ -1331,7 +1360,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
                 }
                 break;
             case 38 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SuperAwesomeFighters.g:1:230: DIGIT
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:230: DIGIT
                 {
                 mDIGIT(); 
 
@@ -1344,17 +1373,17 @@ public class SuperAwesomeFightersLexer extends Lexer {
     }
 
 
-    protected DFA4 dfa4 = new DFA4(this);
-    static final String DFA4_eotS =
+    protected DFA5 dfa5 = new DFA5(this);
+    static final String DFA5_eotS =
         "\32\uffff\12\30\1\64\6\30\1\74\3\30\1\100\4\30\1\uffff\7\30\1\uffff"+
         "\2\30\1\116\1\uffff\1\117\2\30\1\124\1\30\1\uffff\7\30\2\uffff\2"+
         "\30\3\uffff\1\30\2\uffff\1\150\1\30\1\uffff\1\30\1\155\1\uffff\1"+
         "\160\2\30\4\uffff\2\30\2\uffff\1\30\2\uffff\1\170\4\uffff\4\30\2"+
         "\uffff\1\30\1\uffff\4\30\1\u0082\1\u0083\1\u0084\2\30\3\uffff\1"+
         "\u0087\1\u0088\2\uffff";
-    static final String DFA4_eofS =
+    static final String DFA5_eofS =
         "\u0089\uffff";
-    static final String DFA4_minS =
+    static final String DFA5_minS =
         "\1\11\5\uffff\16\60\6\uffff\1\167\1\144\2\157\1\145\1\162\1\155"+
         "\2\143\1\141\1\60\2\156\1\141\1\154\2\141\1\60\1\143\1\165\1\156"+
         "\1\60\1\160\1\153\1\150\1\162\1\uffff\1\143\1\137\1\156\1\157\2"+
@@ -1365,7 +1394,7 @@ public class SuperAwesomeFightersLexer extends Lexer {
         "\1\145\2\uffff\1\60\4\uffff\1\145\1\143\1\167\1\141\2\uffff\1\162"+
         "\1\uffff\1\162\1\150\1\145\1\143\3\60\1\162\1\150\3\uffff\2\60\2"+
         "\uffff";
-    static final String DFA4_maxS =
+    static final String DFA5_maxS =
         "\1\175\5\uffff\16\172\6\uffff\1\167\1\144\2\157\1\145\1\162\1\155"+
         "\2\143\1\141\1\172\2\156\1\162\1\154\2\141\1\172\1\143\1\165\1\156"+
         "\1\172\1\160\1\153\1\150\1\162\1\uffff\1\143\1\137\1\156\1\157\2"+
@@ -1376,15 +1405,15 @@ public class SuperAwesomeFightersLexer extends Lexer {
         "\1\145\2\uffff\1\172\4\uffff\1\145\1\143\1\167\1\141\2\uffff\1\162"+
         "\1\uffff\1\162\1\150\1\145\1\143\3\172\1\162\1\150\3\uffff\2\172"+
         "\2\uffff";
-    static final String DFA4_acceptS =
+    static final String DFA5_acceptS =
         "\1\uffff\1\1\1\2\1\3\1\4\1\5\16\uffff\1\41\1\42\1\43\1\44\1\45\1"+
         "\46\32\uffff\1\25\7\uffff\1\7\3\uffff\1\14\15\uffff\1\13\1\15\4"+
         "\uffff\1\24\1\uffff\1\32\1\33\11\uffff\1\20\1\21\1\22\1\23\3\uffff"+
         "\1\34\1\uffff\1\36\1\37\1\uffff\1\6\1\10\1\11\1\12\4\uffff\1\30"+
         "\1\31\1\uffff\1\40\11\uffff\1\35\1\16\1\17\2\uffff\1\26\1\27";
-    static final String DFA4_specialS =
+    static final String DFA5_specialS =
         "\u0089\uffff}>";
-    static final String[] DFA4_transitionS = {
+    static final String[] DFA5_transitionS = {
             "\1\27\1\26\2\uffff\1\26\22\uffff\1\27\7\uffff\1\1\1\2\6\uffff"+
             "\12\31\3\uffff\1\3\3\uffff\32\30\1\4\1\uffff\1\5\3\uffff\1\6"+
             "\1\7\1\10\1\30\1\11\1\12\3\30\1\13\1\14\1\30\1\15\1\16\1\17"+
@@ -1527,34 +1556,34 @@ public class SuperAwesomeFightersLexer extends Lexer {
             ""
     };
 
-    static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
-    static final short[] DFA4_eof = DFA.unpackEncodedString(DFA4_eofS);
-    static final char[] DFA4_min = DFA.unpackEncodedStringToUnsignedChars(DFA4_minS);
-    static final char[] DFA4_max = DFA.unpackEncodedStringToUnsignedChars(DFA4_maxS);
-    static final short[] DFA4_accept = DFA.unpackEncodedString(DFA4_acceptS);
-    static final short[] DFA4_special = DFA.unpackEncodedString(DFA4_specialS);
-    static final short[][] DFA4_transition;
+    static final short[] DFA5_eot = DFA.unpackEncodedString(DFA5_eotS);
+    static final short[] DFA5_eof = DFA.unpackEncodedString(DFA5_eofS);
+    static final char[] DFA5_min = DFA.unpackEncodedStringToUnsignedChars(DFA5_minS);
+    static final char[] DFA5_max = DFA.unpackEncodedStringToUnsignedChars(DFA5_maxS);
+    static final short[] DFA5_accept = DFA.unpackEncodedString(DFA5_acceptS);
+    static final short[] DFA5_special = DFA.unpackEncodedString(DFA5_specialS);
+    static final short[][] DFA5_transition;
 
     static {
-        int numStates = DFA4_transitionS.length;
-        DFA4_transition = new short[numStates][];
+        int numStates = DFA5_transitionS.length;
+        DFA5_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA4_transition[i] = DFA.unpackEncodedString(DFA4_transitionS[i]);
+            DFA5_transition[i] = DFA.unpackEncodedString(DFA5_transitionS[i]);
         }
     }
 
-    class DFA4 extends DFA {
+    class DFA5 extends DFA {
 
-        public DFA4(BaseRecognizer recognizer) {
+        public DFA5(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 4;
-            this.eot = DFA4_eot;
-            this.eof = DFA4_eof;
-            this.min = DFA4_min;
-            this.max = DFA4_max;
-            this.accept = DFA4_accept;
-            this.special = DFA4_special;
-            this.transition = DFA4_transition;
+            this.decisionNumber = 5;
+            this.eot = DFA5_eot;
+            this.eof = DFA5_eof;
+            this.min = DFA5_min;
+            this.max = DFA5_max;
+            this.accept = DFA5_accept;
+            this.special = DFA5_special;
+            this.transition = DFA5_transition;
         }
         public String getDescription() {
             return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | NEWLINE | WS | NAME | DIGIT );";

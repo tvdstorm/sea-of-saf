@@ -2,7 +2,13 @@ package saf.entities;
 
 import java.util.Set;
 
+import net.sf.oval.constraint.NotEmpty;
+import net.sf.oval.constraint.NotNull;
+import net.sf.oval.guard.Guarded;
+
+@Guarded
 public class ConcreteCondition extends Condition {
+	@NotNull
 	private ConditionType condition;
 	
 	public ConcreteCondition( ConditionType condition) {
@@ -11,7 +17,7 @@ public class ConcreteCondition extends Condition {
 	
 
 	@Override
-	public boolean matched(Set<ConditionType> currentConditions) {
+	public boolean matched(@NotNull @NotEmpty Set<ConditionType> currentConditions) {
 		return currentConditions.contains(condition);
 	}
 

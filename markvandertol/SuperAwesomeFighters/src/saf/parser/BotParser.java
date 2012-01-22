@@ -2,6 +2,11 @@ package saf.parser;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
+import net.sf.oval.configuration.annotation.IsInvariant;
+import net.sf.oval.constraint.NotNull;
+import net.sf.oval.guard.Guarded;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -17,21 +22,30 @@ import saf.entities.Condition;
 import saf.entities.ConditionType;
 import saf.entities.FightActionType;
 import saf.entities.MoveActionType;
-import saf.parser.ParserWithErrorHandling.ParseException;
 
+@Guarded
 public class BotParser {
 
-	public Bot parseBot(String path) throws IOException, BotDefinitionMalformedException
+	@IsInvariant
+	@NotNull
+	public Bot parseBot(@NotNull String path) throws IOException, BotDefinitionMalformedException
 	{
 		FileInputStream stream = new FileInputStream(path);
+		return parseBot(stream);
+	}
+	
+	@IsInvariant
+	@NotNull
+	public Bot parseBot(@NotNull InputStream stream) throws IOException, BotDefinitionMalformedException
+	{
 		ANTLRInputStream input = new ANTLRInputStream(stream);
 		
-		SuperAwesomeFightersLexer lexer = new SuperAwesomeFightersLexer(input);
+		SAFLexer lexer = new ErrorHandlingSAFLexer(input);
 		CommonTokenStream token = new CommonTokenStream(lexer);
 		
-		SuperAwesomeFightersParser parser = new ParserWithErrorHandling(token);
-
-		SuperAwesomeFightersParser.prog_return r;
+		SAFParser parser = new ErrorHandlingSAFParser(token);
+		
+		SAFParser.prog_return r;
 		try {
 			r = parser.prog();
 		} catch (RecognitionException e) {
@@ -40,13 +54,13 @@ public class BotParser {
 			throw new BotDefinitionMalformedException(e);
 		}
 		CommonTree tree = (CommonTree) r.getTree();
-		
-		System.out.println(tree.toStringTree());
-		
+		stream.close();
 		return walkBotTree(tree);
 	}
 	
-	private Bot walkBotTree(Tree tree) throws BotDefinitionMalformedException
+	@IsInvariant
+	@NotNull
+	protected Bot walkBotTree(@NotNull Tree tree) throws BotDefinitionMalformedException
 	{
 		Bot bot = new Bot();
 		for (int i = 0; i < tree.getChildCount(); i++)
@@ -54,13 +68,13 @@ public class BotParser {
 			Tree child = tree.getChild(i);
 			switch (child.getType())
 			{
-			case SuperAwesomeFightersParser.NAME:
+			case SAFParser.NAME:
 				walkBotName(child, bot);
 				break;
-			case SuperAwesomeFightersParser.ASSIGNMENT:
+			case SAFParser.ASSIGNMENT:
 				walkAssignment(child, bot);
 				break;
-			case SuperAwesomeFightersParser.ACTION:
+			case SAFParser.ACTION:
 				walkAction(child, bot);
 				break;
 			}
@@ -70,7 +84,7 @@ public class BotParser {
 		return bot;
 	}
 	
-	private void walkBotName(Tree tree, Bot bot) throws BotDefinitionMalformedException
+	protected void walkBotName(@NotNull Tree tree, @NotNull Bot bot) throws BotDefinitionMalformedException
 	{
 		String name = tree.getText();
 		if (name == null || name.equals(""))
@@ -78,7 +92,7 @@ public class BotParser {
 		bot.setName(name);
 	}
 	
-	private void walkAssignment(Tree tree, Bot bot) throws BotDefinitionMalformedException
+	protected void walkAssignment(@NotNull Tree tree, @NotNull Bot bot) throws BotDefinitionMalformedException
 	{
 		String var = tree.getChild(0).getText();
 		
@@ -97,7 +111,8 @@ public class BotParser {
 			bot.setPunchPower(newValue);
 	}
 	
-	private void walkAction(Tree tree, Bot bot)
+	
+	protected void walkAction(@NotNull Tree tree, @NotNull Bot bot)
 	{
 		Condition condition = walkCondition(tree.getChild(0));
 		MoveActionType moveAction = MoveActionType.valueOf(tree.getChild(1).getText());
@@ -111,12 +126,13 @@ public class BotParser {
 		bot.getBehaviourRules().add(rule);
 	}
 	
-	private Condition walkCondition(Tree tree)
+	@IsInvariant
+	@NotNull
+	protected Condition walkCondition(@NotNull Tree tree)
 	{
-		System.out.println(tree.toStringTree());
-		if (tree.getChild(0).getType() == SuperAwesomeFightersParser.CONDITION)
+		if (tree.getChild(0).getType() == SAFParser.CONDITION)
 		{
-			return walkCondition(tree.getChild(0)); // (..)
+			return walkCondition(tree.getChild(0)); // handles the case for (...)
 		}
 		
 		ConditionType type1 = ConditionType.valueOf(tree.getChild(0).getText());
