@@ -1,0 +1,29 @@
+package logger;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.Date;
+
+public class ErrorLog 
+{	
+	private static String logFile = "error.log";
+
+	public ErrorLog(String errorMessage) 
+	{
+		try 
+		{
+			String projectPath  = new java.io.File(".").getCanonicalPath();
+			
+			FileWriter fstream = new FileWriter(projectPath + "/" + logFile, true);
+			BufferedWriter out = new BufferedWriter(fstream);
+			
+			out.write(new Date().toString() + " " + errorMessage + "\n");
+			out.close();
+		} 
+		catch (Exception e) 
+		{
+			System.err.println("LOG Error: " + e.getMessage());
+		}
+
+	}
+}
