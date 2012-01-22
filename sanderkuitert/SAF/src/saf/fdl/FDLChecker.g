@@ -1,9 +1,9 @@
 tree grammar FDLChecker;
 
 options {
-  language = Java;
-  tokenVocab = FDL;
-  ASTLabelType = CommonTree;
+    language = Java;
+    tokenVocab = FDL;
+    ASTLabelType = CommonTree;
 }
 
 @header{
@@ -16,7 +16,8 @@ options {
 
 @members {
     
-    //TODO move to SuperAwesomeFighter
+    //TODO when SuperAwesomeFighter is implemented: share the following checks?
+    //TODO replace error own subclass of RecognitionException?
     private Set<String> characteristics = new HashSet<String>(Arrays.asList(
             "punchReach","punchPower","kickReach","kickPower"));
     private static final int lowerBound = 1;  //inclusive
@@ -27,9 +28,7 @@ options {
     "walk_towards","walk_away","run_towards","run_away","jump","crouch","stand"));
     private static final Set<String> attacks = new HashSet<String>(Arrays.asList(
     "block_low","block_high","punch_low","punch_high","kick_low","kick_high"));
- 
-    //TODO Use own subclass of RecognitionException
-    //TODO-afterwards: generalise methods below; use a map?
+    
     private void checkCharacteristic(String characteristic){
         if(!characteristics.contains(characteristic))
             System.err.println(characteristic+" is invalid! Valid characteristics: "
