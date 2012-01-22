@@ -17,9 +17,13 @@ public interface SafConstants {
   /** RegularExpression Id. */
   int PROPERTYVALUE = 8;
   /** RegularExpression Id. */
-  int OPENSQAREBRACKET = 9;
+  int OPENCURLYBRACKET = 9;
   /** RegularExpression Id. */
-  int CLOSESQAREBRACKET = 10;
+  int CLOSECURLYBRACKET = 10;
+  /** RegularExpression Id. */
+  int OPENSQAREBRACKET = 11;
+  /** RegularExpression Id. */
+  int CLOSESQAREBRACKET = 12;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -35,6 +39,8 @@ public interface SafConstants {
     "\"=\"",
     "<IDENTIFIER>",
     "<PROPERTYVALUE>",
+    "\"{\"",
+    "\"}\"",
     "\"[\"",
     "\"]\"",
   };

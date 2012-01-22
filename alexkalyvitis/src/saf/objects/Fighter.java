@@ -14,13 +14,11 @@ public class Fighter {
 		this.behaviors = new ArrayList<Behavior>();
 	}
 	
-	public Fighter(String n, Strength s, Behavior b){
-		this.name = "";
-		this.strengths = new ArrayList<Strength>(); this.strengths.add(s);
-		this.behaviors = new ArrayList<Behavior>(); this.behaviors.add(b);
-	}
+	public void setName(String n){ this.name = n; }
+	public void addStrength(Strength s){ this.strengths.add(s); }
+	public void addBehavior(Behavior b){ this.behaviors.add(b); }
 	
-	public String GetName(){ return this.name; }
-	public ArrayList<Strength> GetStrengths(){ return this.strengths; }
-	public ArrayList<Behavior> GetBehaviors(){ return this.behaviors; }
+	public String getName(){ return this.name; }
+	public ArrayList<Strength> getStrengths(){ return this.strengths; }
+	public ArrayList<Behavior> getBehaviors(){ return this.behaviors; }
 }
