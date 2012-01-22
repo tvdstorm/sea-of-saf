@@ -1,0 +1,3 @@
+Average{
+ always [walk_towards punch_high]
+}

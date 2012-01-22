@@ -1,7 +1,0 @@
-Average{
- kickPower = 5
- punchPower = 5
- kickReach = 5
- punchReach = 5
- always [walk_towards punch_high]
-}

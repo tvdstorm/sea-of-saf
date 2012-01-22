@@ -11,57 +11,47 @@ public class Main
         {
             String path = "../data/" + s + ".saf";
 
-            Fighter fighter = Fighter.fromFile(path);
-            System.out.println(fighter.dot);
+            Fighter fighter = new Fighter(path);
+            DOTTreeGenerator generator = new DOTTreeGenerator();
+            StringTemplate dot = generator.toDOT(fighter.ast);
 
-            // ANTLRFileStream input = new ANTLRFileStream(path);
-            // CommonTree ast = treeFromCharStream(input);
+            System.out.println(dot);
         }
     }
-
-    // private static treeFromCharStream(CharStream stream)
-    //     throws RecognitionException
-    // {
-    //     SAFLexer lexer = new SAFLexer(stream);
-    //     CommonTokenStream token = new CommonTokenStream(lexer);
-    //     SAFParser parser = new SAFParser(tokens);
-    //     SAFParser.bot_return bot = parser.bot();
-    //     CommonTree tree = (CommonTree)bot.getTree();
-    // }
 }
 
 
 class Fighter
 {
-    public StringTemplate dot;
+    public SAFTree ast;
 
-    public Fighter() { }
 
-    public static Fighter fromFile(String path)
-        throws java.io.IOException, RecognitionException, Exception
+    public Fighter(String path)
+        throws java.io.IOException, RecognitionException
     {
-        ANTLRFileStream input = new ANTLRFileStream(path);
-        return Fighter.fromCharStream(input);
+        buildAST(new ANTLRFileStream(path));
+        checkAST();
     }
 
-    private static Fighter fromCharStream(CharStream stream)
-        throws RecognitionException, Exception
+    public Fighter(ANTLRStringStream stream) throws RecognitionException
+    {
+        buildAST(stream);
+        checkAST();
+    }
+
+    public void buildAST(CharStream stream) throws RecognitionException
     {
         SAFLexer lexer = new SAFLexer(stream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SAFParser parser = new SAFParser(tokens);
         SAFParser.bot_return bot = parser.bot();
-        CommonTree tree = (CommonTree)bot.getTree();
+        this.ast = (SAFTree)bot.getTree();
+    }
 
-        CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
+    public void checkAST() throws RecognitionException
+    {
+        CommonTreeNodeStream nodes = new CommonTreeNodeStream(this.ast);
         SAFChecker checker = new SAFChecker(nodes);
         checker.bot();
-
-        DOTTreeGenerator generator = new DOTTreeGenerator();
-        StringTemplate dot = generator.toDOT(tree);
-
-        Fighter fighter = new Fighter();
-        fighter.dot = dot;
-        return fighter;
     }
 }
