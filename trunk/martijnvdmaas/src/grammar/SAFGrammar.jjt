@@ -5,6 +5,8 @@ package grammar;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import safobjects.*;
+import interpreter.SAFInterpreter;
+import logger.ErrorLog;
 
 public class SAFGrammar
 {
@@ -30,20 +32,10 @@ public class SAFGrammar
 			
 			System.out.println(bots.toString());
 			      
-    	}
-	    catch (IndexOutOfBoundsException e)
-	    {
-	      	System.out.println("IndexOutOfBoundsException");
-	      	System.out.println(e.getMessage());
-	    }
-	    catch (NumberFormatException e)
-	    { 
-	      	System.out.println("NumberFormatException");
-	      	System.out.println(e.getMessage());
-	    } 	 
+    	} 
 	    catch (Exception e)
 	    {
-	      	System.out.println("Exception.");
+	      	new ErrorLog("dsf"); 
 	      	System.out.println(e.getMessage());
 	    }
   	}
@@ -57,17 +49,6 @@ SKIP :
 | 	"\t"
 | 	"\n"
 | 	"\r"
-| 	< "//" (~[ "\n", "\r" ])*
-    (
-      	"\n"
-    	| "\r"
-    	| "\r\n"
-    ) >
-| 	< "/*" (~[ "*" ])* "*"
-    (
-      ~[ "/" ] (~[ "*" ])* "*"
-    )*
-    "/" >
 }
 
 

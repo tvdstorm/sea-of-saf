@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import logger.ErrorLog;
+
 import safobjects.Behaviour;
 import safobjects.Bot;
 import safobjects.Bots;
@@ -53,7 +55,7 @@ public class SAFInterpreter
 	 	{
 			if(!Arrays.asList(validCharacteristics).contains(characteristic.getName()))
 	 		{
-	 			interpretError("Unkown characteristic found: " + characteristic.getName());
+	 			interpretError("Unknown characteristic found: " + characteristic.getName());
 	 			continue;
 	 		}
 	 		boolean duplicateFound = false;
@@ -175,6 +177,7 @@ public class SAFInterpreter
 	
 	public void interpretError(String error) 
 	{
+		new ErrorLog(ERROR_PREFIX + error); 
 		System.err.println(ERROR_PREFIX + error);
 	}
 }
