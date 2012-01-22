@@ -8,6 +8,8 @@ PARSER_BEGIN(Saf)
 
 package saf;
 
+import saf.objects.*;
+
 public class Saf
 {   
 	public static void main(String args[])
@@ -15,8 +17,7 @@ public class Saf
 	    try
 	    {
 	          Saf parser = new Saf(System.in);
-	          SimpleNode tree = parser.Parse();
-	          tree.dump("");
+	          Fighter fighter = parser.Parse();
 	    }
 	    catch(Exception e)
 	    {
@@ -41,35 +42,56 @@ TOKEN :
 	< ASSIGNMENT : "=" >
 |   < IDENTIFIER : ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])* >
 |   < PROPERTYVALUE : (["1"-"9"] | "10") >
+|   < OPENCURLYBRACKET : "{" >
+|   < CLOSECURLYBRACKET : "}" >
 |   < OPENSQAREBRACKET : "[" >
 |   < CLOSESQAREBRACKET : "]" >
 }
 
-SimpleNode Parse() :
-{}
+Fighter Parse() :
 {
+	Fighter fighter = new Fighter();
+	Token fighterName = new Token();
+	Strength fighterStrength = new Strength();
+	Behavior fighterBehavior = new Behavior();
+}
+{
+    ( fighterName = < IDENTIFIER > )*    {
+        fighter.setName(fighterName.toString());    }
+    < OPENCURLYBRACKET >
 	(
-	    LOOKAHEAD(2) Strength()
+	    LOOKAHEAD(2) ( fighterStrength = Strength() )
+	    { fighter.addStrength(fighterStrength); }
 	    |
-	    LOOKAHEAD(2) Condition()
-	)
-	{ return jjtThis; }
+	    LOOKAHEAD(2) ( fighterBehavior = Behavior() )	    { fighter.addBehavior(fighterBehavior); }
+	)*
+	<  CLOSECURLYBRACKET >
+	{ return fighter; }
 }
 
-void Strength() :
-{}
+Strength Strength() :
 {
-    < IDENTIFIER >
+    Token name = new Token();
+    Token value = new Token();
+}
+{
+    (name = < IDENTIFIER >)
     < ASSIGNMENT >
-    < PROPERTYVALUE >}
+    (value = < PROPERTYVALUE >)
+    { return new Strength(name.toString(),Integer.valueOf(value.toString())); }}
 
-void Condition() :
-{}{
-    < IDENTIFIER >
+Behavior Behavior() :
+{
+    Token condition = new Token();
+    Token move = new Token();
+    Token attack = new Token();
+}{
+    (condition = < IDENTIFIER >)
     < OPENSQAREBRACKET >
-    < IDENTIFIER >
-    < IDENTIFIER >
-    < CLOSESQAREBRACKET >}
+    (move = < IDENTIFIER >)
+    (attack = < IDENTIFIER >)
+    < CLOSESQAREBRACKET >
+    { return new Behavior(new Condition(condition.toString()), new Move(move.toString()), new Attack(attack.toString())); }}
 
 
 
