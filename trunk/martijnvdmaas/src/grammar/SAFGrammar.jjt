@@ -10,6 +10,8 @@ import logger.ErrorLog;
 
 public class SAFGrammar
 {
+	private static final String ERROR_PREFIX = "Parser error: ";
+	
 	public static void main(String args []) 
   	{
     	System.out.println("Begin parsing..");
@@ -35,8 +37,7 @@ public class SAFGrammar
     	} 
 	    catch (Exception e)
 	    {
-	      	new ErrorLog("dsf"); 
-	      	System.out.println(e.getMessage());
+	      	new ErrorLog(ERROR_PREFIX + e); 
 	    }
   	}
 }

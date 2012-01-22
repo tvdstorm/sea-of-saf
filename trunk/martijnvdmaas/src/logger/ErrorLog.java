@@ -10,6 +10,7 @@ public class ErrorLog
 
 	public ErrorLog(String errorMessage) 
 	{
+		System.err.println(errorMessage);
 		try 
 		{
 			String projectPath  = new java.io.File(".").getCanonicalPath();
@@ -24,6 +25,6 @@ public class ErrorLog
 		{
 			System.err.println("LOG Error: " + e.getMessage());
 		}
-
+		
 	}
 }

@@ -178,6 +178,5 @@ public class SAFInterpreter
 	public void interpretError(String error) 
 	{
 		new ErrorLog(ERROR_PREFIX + error); 
-		System.err.println(ERROR_PREFIX + error);
 	}
 }
