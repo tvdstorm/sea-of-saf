@@ -28,6 +28,11 @@ public class Characteristic extends FighterAttribute {
 		setType(type);
 		setValue(Integer.parseInt(value));
 	}
+	
+	public Characteristic(String type, int value) {
+		setType(type);
+		setValue(value);
+	}
 
 	public int getValue() {
 		return value;

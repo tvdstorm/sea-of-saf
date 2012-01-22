@@ -34,11 +34,11 @@ public class Main {
 		ValidationReport validationReport = validator.validate(fighter);
 		
 		for(String warning : validationReport.getWarnings()) {
-			System.out.println(warning);
+			System.out.println("Warning: " + warning);
 		}
 		
 		for(String error : validationReport.getErrors()) {
-			System.err.println(error);
+			System.err.println("Error: " + error);
 		}
 
 		System.out.println("Loaded " + fighter.getName() + " - " + validationReport.getWarnings().size() + " warnings, " + validationReport.getErrors().size() + " errors.");
