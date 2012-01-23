@@ -1,6 +1,6 @@
-<project name="SuperAwesomeFighters" default="dist" basedir=".">
+<project name="SuperAwesomeFighters" default="cleanAndDist" basedir=".">
     <description>
-        simple example build file
+        Build file for SuperAwesomeFighters
     </description>
 
 	<property name="src" location="src"/>
@@ -13,9 +13,8 @@
 	<property name="antlr-generated-target" location="${src}/saf/parser" />
 	
 	<target name="init">
-		<!-- Create the time stamp -->
 		<tstamp/>
-		<!-- Create the build directory structure used by compile -->
+
 		<mkdir dir="${build}"/>
 	</target>
 	
@@ -39,10 +38,8 @@
 	</target>
 
 	<target name="dist" depends="compile" description="generate the distribution" >
-		<!-- Create the distribution directory -->
-		<mkdir dir="${dist}/lib"/>
+		<mkdir dir="${dist}"/>
 	
-		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
 		<jar jarfile="${dist}/SAF-${DSTAMP}.jar" basedir="${build}"/>
 		<copy todir="${dist}" file="${classpath}/antlr-3.4-complete.jar" />
 	</target>

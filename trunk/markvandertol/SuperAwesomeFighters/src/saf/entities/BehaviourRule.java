@@ -1,5 +1,7 @@
 package saf.entities;
 
+import java.util.List;
+
 /**
  * A rule for behavior. 
  */
@@ -49,6 +51,17 @@ public class BehaviourRule {
 	 */
 	public void setCondition(Condition condition) {
 		this.condition = condition;
+	}
+	
+	public void validate(List<String> errorList) {
+		if (fightAction == null)
+			errorList.add("Fightaction not set");
+		if (moveAction == null)
+			errorList.add("Moveaction not set");
+		if (condition == null)
+			errorList.add("Condition not set");
+		else
+			condition.validate(errorList);
 	}
 	
 }

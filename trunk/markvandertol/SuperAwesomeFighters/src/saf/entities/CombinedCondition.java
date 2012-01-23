@@ -1,5 +1,6 @@
 package saf.entities;
 
+import java.util.List;
 import java.util.Set;
 
 public class CombinedCondition extends Condition {
@@ -57,6 +58,16 @@ public class CombinedCondition extends Condition {
 	 */
 	public boolean isRequireBoth() {
 		return requireBoth;
+	}
+
+	@Override
+	public void validate(List<String> errorList) {
+		if (condition1 == null || condition2 == null)
+			errorList.add("Not all conditions set");
+		else {
+			condition1.validate(errorList);
+			condition2.validate(errorList);
+		}
 	}
 
 

@@ -1,5 +1,6 @@
 package saf.entities;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,4 +14,6 @@ public abstract class Condition {
 	 * @return whether the condition matches with the given current states.
 	 */
 	public abstract boolean matched(Set<State> currentStates);
+	
+	public abstract void validate(List<String> errorList);
 }

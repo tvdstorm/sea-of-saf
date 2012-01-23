@@ -15,23 +15,23 @@ import saf.entities.FightAction;
 import saf.entities.MoveAction;
 import saf.parser.SAFParser.prog_return;
 
-public class ErrorHandlingSAFParserTest {
+public class SAFParserTest {
 	
-	private ErrorHandlingSAFParser getParser(String toParse) throws IOException
+	private SAFParser getParser(String toParse) throws IOException
 	{
 		ByteArrayInputStream stream = new ByteArrayInputStream(toParse.getBytes());
 		ANTLRInputStream input = new ANTLRInputStream(stream);
 		
-		SAFLexer lexer = new ErrorHandlingSAFLexer(input);
+		SAFLexer lexer = new SAFLexer(input);
 		CommonTokenStream token = new CommonTokenStream(lexer);
 		
-		return new ErrorHandlingSAFParser(token);
+		return new SAFParser(token);
 	}
 
 	@Test
 	public void testProg() throws Exception {
 		final String program = "testname {\nkickReach  = 9\nnear [crouch punch_low]\n}";
-		ErrorHandlingSAFParser parser = getParser(program);
+		SAFParser parser = getParser(program);
 		
 		prog_return result = parser.prog();
 		Tree tree = (Tree) result.getTree();
@@ -48,7 +48,7 @@ public class ErrorHandlingSAFParserTest {
 		for (String assignmentVariable : assignmentVariables) {
 			for (int i = 1; i <= 10; i++) {
 				for (String format : formats) {
-					ErrorHandlingSAFParser parser = getParser(String.format(format, assignmentVariable, i));
+					SAFParser parser = getParser(String.format(format, assignmentVariable, i));
 					SAFParser.assignment_return result = parser.assignment();
 					
 					Tree tree = (Tree) result.getTree();
@@ -71,7 +71,7 @@ public class ErrorHandlingSAFParserTest {
 		for(MoveAction moveAction : moveActions) {
 			for (FightAction fightAction : fightActions) {
 				for (String format : formats) {
-					ErrorHandlingSAFParser parser = getParser(String.format(format, condition, moveAction.toString(), fightAction.toString()));
+					SAFParser parser = getParser(String.format(format, condition, moveAction.toString(), fightAction.toString()));
 					SAFParser.action_return result = parser.action();
 					
 					Tree tree = (Tree) result.getTree();
