@@ -51,7 +51,7 @@ fragment LETTER
 	;
 	
 IDENT 
-	:	(LETTER | '_')+;
+	:	LETTER (LETTER | '_')+;
 
 // Strip whitespaces from input.
 WS : (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
