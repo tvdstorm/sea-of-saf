@@ -11,105 +11,78 @@ digraph {
   n1 [label="SKILLS"];
   n2 [label="PERSONALITIES"];
   n2 [label="PERSONALITIES"];
-  n3 [label="PERSONALITY"];
-  n3 [label="PERSONALITY"];
-  n4 [label="kickPower"];
-  n5 [label="8"];
-  n6 [label="PERSONALITY"];
-  n6 [label="PERSONALITY"];
-  n7 [label="punchPower"];
+  n3 [label="kickPower"];
+  n3 [label="kickPower"];
+  n4 [label="8"];
+  n5 [label="punchPower"];
+  n5 [label="punchPower"];
+  n6 [label="8"];
+  n7 [label="kickReach"];
+  n7 [label="kickReach"];
   n8 [label="8"];
-  n9 [label="PERSONALITY"];
-  n9 [label="PERSONALITY"];
-  n10 [label="kickReach"];
-  n11 [label="8"];
-  n12 [label="PERSONALITY"];
-  n12 [label="PERSONALITY"];
-  n13 [label="punchReach"];
-  n14 [label="9"];
-  n15 [label="BEHAVIOURS"];
-  n15 [label="BEHAVIOURS"];
-  n16 [label="far"];
-  n17 [label="["];
-  n18 [label="run_towards"];
-  n19 [label="punch_high"];
-  n20 [label="]"];
-  n21 [label="near"];
-  n22 [label="["];
-  n23 [label="choose"];
-  n24 [label="("];
-  n25 [label="stand"];
-  n26 [label="crouch"];
-  n27 [label=")"];
-  n28 [label="kick_high"];
-  n29 [label="]"];
-  n30 [label="much_stronger"];
-  n31 [label="["];
-  n32 [label="walk_towards"];
-  n33 [label="punch_low"];
-  n34 [label="]"];
-  n35 [label="weaker"];
-  n36 [label="["];
-  n37 [label="run_away"];
-  n38 [label="choose"];
-  n39 [label="("];
-  n40 [label="block_high"];
-  n41 [label="block_low"];
-  n42 [label=")"];
-  n43 [label="]"];
-  n44 [label="always"];
-  n45 [label="["];
-  n46 [label="walk_towards"];
-  n47 [label="kick_high"];
-  n48 [label="]"];
+  n9 [label="punchReach"];
+  n9 [label="punchReach"];
+  n10 [label="9"];
+  n11 [label="BEHAVIOURS"];
+  n11 [label="BEHAVIOURS"];
+  n12 [label="far"];
+  n12 [label="far"];
+  n13 [label="run_towards"];
+  n14 [label="punch_high"];
+  n15 [label="near"];
+  n15 [label="near"];
+  n16 [label="choose"];
+  n16 [label="choose"];
+  n17 [label="stand"];
+  n18 [label="crouch"];
+  n19 [label="jump"];
+  n20 [label="kick_high"];
+  n21 [label="much_stronger"];
+  n21 [label="much_stronger"];
+  n22 [label="walk_towards"];
+  n23 [label="punch_low"];
+  n24 [label="weaker"];
+  n24 [label="weaker"];
+  n25 [label="run_away"];
+  n26 [label="choose"];
+  n26 [label="choose"];
+  n27 [label="block_high"];
+  n28 [label="block_low"];
+  n29 [label="always"];
+  n29 [label="always"];
+  n30 [label="walk_towards"];
+  n31 [label="kick_high"];
 
   n0 -> n1 // "Stallone" -> "SKILLS"
   n1 -> n2 // "SKILLS" -> "PERSONALITIES"
-  n2 -> n3 // "PERSONALITIES" -> "PERSONALITY"
-  n3 -> n4 // "PERSONALITY" -> "kickPower"
-  n3 -> n5 // "PERSONALITY" -> "8"
-  n2 -> n6 // "PERSONALITIES" -> "PERSONALITY"
-  n6 -> n7 // "PERSONALITY" -> "punchPower"
-  n6 -> n8 // "PERSONALITY" -> "8"
-  n2 -> n9 // "PERSONALITIES" -> "PERSONALITY"
-  n9 -> n10 // "PERSONALITY" -> "kickReach"
-  n9 -> n11 // "PERSONALITY" -> "8"
-  n2 -> n12 // "PERSONALITIES" -> "PERSONALITY"
-  n12 -> n13 // "PERSONALITY" -> "punchReach"
-  n12 -> n14 // "PERSONALITY" -> "9"
-  n1 -> n15 // "SKILLS" -> "BEHAVIOURS"
-  n15 -> n16 // "BEHAVIOURS" -> "far"
-  n15 -> n17 // "BEHAVIOURS" -> "["
-  n15 -> n18 // "BEHAVIOURS" -> "run_towards"
-  n15 -> n19 // "BEHAVIOURS" -> "punch_high"
-  n15 -> n20 // "BEHAVIOURS" -> "]"
-  n15 -> n21 // "BEHAVIOURS" -> "near"
-  n15 -> n22 // "BEHAVIOURS" -> "["
-  n15 -> n23 // "BEHAVIOURS" -> "choose"
-  n15 -> n24 // "BEHAVIOURS" -> "("
-  n15 -> n25 // "BEHAVIOURS" -> "stand"
-  n15 -> n26 // "BEHAVIOURS" -> "crouch"
-  n15 -> n27 // "BEHAVIOURS" -> ")"
-  n15 -> n28 // "BEHAVIOURS" -> "kick_high"
-  n15 -> n29 // "BEHAVIOURS" -> "]"
-  n15 -> n30 // "BEHAVIOURS" -> "much_stronger"
-  n15 -> n31 // "BEHAVIOURS" -> "["
-  n15 -> n32 // "BEHAVIOURS" -> "walk_towards"
-  n15 -> n33 // "BEHAVIOURS" -> "punch_low"
-  n15 -> n34 // "BEHAVIOURS" -> "]"
-  n15 -> n35 // "BEHAVIOURS" -> "weaker"
-  n15 -> n36 // "BEHAVIOURS" -> "["
-  n15 -> n37 // "BEHAVIOURS" -> "run_away"
-  n15 -> n38 // "BEHAVIOURS" -> "choose"
-  n15 -> n39 // "BEHAVIOURS" -> "("
-  n15 -> n40 // "BEHAVIOURS" -> "block_high"
-  n15 -> n41 // "BEHAVIOURS" -> "block_low"
-  n15 -> n42 // "BEHAVIOURS" -> ")"
-  n15 -> n43 // "BEHAVIOURS" -> "]"
-  n15 -> n44 // "BEHAVIOURS" -> "always"
-  n15 -> n45 // "BEHAVIOURS" -> "["
-  n15 -> n46 // "BEHAVIOURS" -> "walk_towards"
-  n15 -> n47 // "BEHAVIOURS" -> "kick_high"
-  n15 -> n48 // "BEHAVIOURS" -> "]"
+  n2 -> n3 // "PERSONALITIES" -> "kickPower"
+  n3 -> n4 // "kickPower" -> "8"
+  n2 -> n5 // "PERSONALITIES" -> "punchPower"
+  n5 -> n6 // "punchPower" -> "8"
+  n2 -> n7 // "PERSONALITIES" -> "kickReach"
+  n7 -> n8 // "kickReach" -> "8"
+  n2 -> n9 // "PERSONALITIES" -> "punchReach"
+  n9 -> n10 // "punchReach" -> "9"
+  n1 -> n11 // "SKILLS" -> "BEHAVIOURS"
+  n11 -> n12 // "BEHAVIOURS" -> "far"
+  n12 -> n13 // "far" -> "run_towards"
+  n12 -> n14 // "far" -> "punch_high"
+  n11 -> n15 // "BEHAVIOURS" -> "near"
+  n15 -> n16 // "near" -> "choose"
+  n16 -> n17 // "choose" -> "stand"
+  n16 -> n18 // "choose" -> "crouch"
+  n16 -> n19 // "choose" -> "jump"
+  n15 -> n20 // "near" -> "kick_high"
+  n11 -> n21 // "BEHAVIOURS" -> "much_stronger"
+  n21 -> n22 // "much_stronger" -> "walk_towards"
+  n21 -> n23 // "much_stronger" -> "punch_low"
+  n11 -> n24 // "BEHAVIOURS" -> "weaker"
+  n24 -> n25 // "weaker" -> "run_away"
+  n24 -> n26 // "weaker" -> "choose"
+  n26 -> n27 // "choose" -> "block_high"
+  n26 -> n28 // "choose" -> "block_low"
+  n11 -> n29 // "BEHAVIOURS" -> "always"
+  n29 -> n30 // "always" -> "walk_towards"
+  n29 -> n31 // "always" -> "kick_high"
 
 }
