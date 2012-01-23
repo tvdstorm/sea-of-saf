@@ -5,13 +5,17 @@ public interface SafTreeConstants
 {
   public int JJTPARSE = 0;
   public int JJTSTRENGTH = 1;
-  public int JJTBEHAVIOR = 2;
+  public int JJTBEHAVIORS = 2;
+  public int JJTMOVES = 3;
+  public int JJTATTACKS = 4;
 
 
   public String[] jjtNodeName = {
     "Parse",
     "Strength",
-    "Behavior",
+    "Behaviors",
+    "Moves",
+    "Attacks",
   };
 }
-/* JavaCC - OriginalChecksum=0df5ea131d73ad38850925d1baab97d0 (do not edit this line) */
+/* JavaCC - OriginalChecksum=8a5554ae34601fa21f573972b341b6a0 (do not edit this line) */

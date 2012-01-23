@@ -13,17 +13,23 @@ public interface SafConstants {
   /** RegularExpression Id. */
   int ASSIGNMENT = 6;
   /** RegularExpression Id. */
-  int IDENTIFIER = 7;
+  int CHOOSE = 7;
   /** RegularExpression Id. */
-  int PROPERTYVALUE = 8;
+  int IDENTIFIER = 8;
   /** RegularExpression Id. */
-  int OPENCURLYBRACKET = 9;
+  int PROPERTYVALUE = 9;
   /** RegularExpression Id. */
-  int CLOSECURLYBRACKET = 10;
+  int OPENPARENTHESIS = 10;
   /** RegularExpression Id. */
-  int OPENSQAREBRACKET = 11;
+  int CLOSEPARENTHESIS = 11;
   /** RegularExpression Id. */
-  int CLOSESQAREBRACKET = 12;
+  int OPENCURLYBRACKET = 12;
+  /** RegularExpression Id. */
+  int CLOSECURLYBRACKET = 13;
+  /** RegularExpression Id. */
+  int OPENSQAREBRACKET = 14;
+  /** RegularExpression Id. */
+  int CLOSESQAREBRACKET = 15;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -37,8 +43,11 @@ public interface SafConstants {
     "\"\\n\"",
     "\"\\r\\n\"",
     "\"=\"",
+    "\"choose\"",
     "<IDENTIFIER>",
     "<PROPERTYVALUE>",
+    "\"(\"",
+    "\")\"",
     "\"{\"",
     "\"}\"",
     "\"[\"",
