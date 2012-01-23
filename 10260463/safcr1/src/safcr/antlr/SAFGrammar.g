@@ -64,30 +64,22 @@ or_expr
 rule
     :   condition? 
         '['
-        move_actions? 
-        fight_actions? 
+        move_action? 
+        fight_action? 
         ']'
-        -> ^(RULE condition? move_actions? fight_actions?)
-    ;
-
-move_actions
-    :   move_action
-        | CHOOSE^ '('! move_action move_action ')'!
+        -> ^(RULE condition? move_action? fight_action?)
     ;
 
 move_action
     :   move_action_type -> ^(MOVE_ACTION move_action_type)
-		;
-		
-fight_actions
-    :   fight_action
-        | CHOOSE^ '('! fight_action fight_action ')'!
+        | CHOOSE '(' m1=move_action_type m2=move_action_type ')' -> ^(MOVE_ACTION ^(CHOOSE $m1 $m2))
     ;
-    		
+		
 fight_action
     :   fight_action_type -> ^(FIGHT_ACTION fight_action_type)
+        | CHOOSE '(' f1=fight_action_type f2=fight_action_type ')' -> ^(FIGHT_ACTION ^(CHOOSE $f1 $f2))
     ;
-
+    		
 condition
     :   condition_type -> ^(CONDITION condition_type)
     ;
