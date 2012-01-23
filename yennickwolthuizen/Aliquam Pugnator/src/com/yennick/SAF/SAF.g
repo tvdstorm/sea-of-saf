@@ -22,7 +22,7 @@ tokens
 
 fighter
 	: fightername CURLYOPEN
-		(skills|conditions|profile)+
+		(skills|conditions|distance|profile)+
 		CURLYCLOSE
 	;
 	
@@ -32,7 +32,7 @@ fightername
 
 
 skills
-	:SKILLS EQUALS INT
+	:SKILLS EQUALS SKILLVALUE
 	;
 
 profile
@@ -40,29 +40,42 @@ profile
 	;
 	
 distance
-	: DISTANCE '[' action attack ']'
+	: DISTANCE move
 	;
 	
 conditions
-	: ('health'|distance)
+	: (CONDITION | 'always') move
 	;
 
-action
-	:	ACTIONS|'stand'
+move 
+	:	'[' action+ ']'
 	;
 	
-attack
-	: ATTACK'_'DIRECTION
+action
+	:	 ('choose' '(')? (moveAction|fightAction)  (')')?
+	;
+	
+moveAction
+	:	  (MOVEACTION|'stand')
+	;
+	
+fightAction
+	: FIGHTACTION 
 	; 
+
+	
 	
 //move cases to lists for testability
 ATTACK			: ('kick'|'punch'|'block');
 DISTANCE		: ('far'|'near'|'always');
 DIRECTION		: ('high'|'low');
-ACTIONS			: ('run'|'crouch'|'walk'|'jump')('_'('towards'|'away'))?;	
+FIGHTACTION	: ATTACK'_'DIRECTION;
+CONDITION		: ('much''_')?('stronger'|'weaker');
+MOVEACTION	: ('run'|'crouch'|'walk'|'jump')('_'('towards'|'away'))?;	
 SKILLS			: ATTACK('Reach'|'Power');
 
 
 FIGHTERNAME	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'-')+;
-INT					: '0'..'9' |'10';
+SKILLVALUE	: '0'..'9' |'10';
+
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+    { $channel = HIDDEN; } ;
