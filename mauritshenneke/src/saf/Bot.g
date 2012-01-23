@@ -16,13 +16,9 @@ options {
   import java.util.ArrayList;
 }
 
-@members {
-  private ArrayList<Characteristic> characteristics = new ArrayList<Characteristic>();
-  private ArrayList<Behaviour> behaviours= new ArrayList<Behaviour>();
-}
-
-create returns [Bot value]
-    : IDENT '{' a=(attribute*) '}' {$value = new Bot($IDENT.text,characteristics, behaviours);}
+create returns [Bot bot]
+    @init{ $bot = new Bot(); }
+    : IDENT {$bot.setName($IDENT.text);} '{' ( c = characteristic { $bot.addCharacteristic(c); } | b=behaviour {$bot.addBehaviour(b);})* '}'
     ;
 
 attribute
@@ -30,12 +26,12 @@ attribute
     | behaviour
     ;
 
-characteristic
-    : IDENT '=' i=INTEGER {characteristics.add(new Characteristic($IDENT.text, Integer.parseInt($i.text)));}
+characteristic returns [Characteristic c]
+    : IDENT '=' i=INTEGER {c = new Characteristic($IDENT.text, Integer.parseInt($i.text));}
     ;
 
-behaviour
-    : IDENT '[' mats = behaviour_action_types fats = behaviour_action_types']' {behaviours.add(new Behaviour($IDENT.text, $mats.result, $fats.result));}
+behaviour returns [Behaviour b]
+    : IDENT '[' mats = behaviour_action_types fats = behaviour_action_types']' {b = new Behaviour($IDENT.text, mats, fats);}
     ;
 
 behaviour_action_types returns [ArrayList<BehaviourActionType> result]
