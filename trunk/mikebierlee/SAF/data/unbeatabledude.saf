@@ -1,0 +1,12 @@
+mrUnbeatable{
+ punchPower=9
+ punchPower=7
+ punchPower=2
+ kickPower=7
+ punchPower=2
+ kickPower=2
+ near[crouch punch_low]
+ stronger or far[choose(run_towards run_towards) kick_high]
+ much_weaker and weaker[walk_away block_low]
+ always[crouch kick_high]
+}

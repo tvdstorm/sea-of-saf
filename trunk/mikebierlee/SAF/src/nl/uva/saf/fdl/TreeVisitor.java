@@ -23,6 +23,7 @@ import nl.uva.saf.fdl.ast.Behaviour;
 import nl.uva.saf.fdl.ast.Characteristic;
 import nl.uva.saf.fdl.ast.Choice;
 import nl.uva.saf.fdl.ast.ConditionAlways;
+import nl.uva.saf.fdl.ast.ConditionAnd;
 import nl.uva.saf.fdl.ast.ConditionOr;
 import nl.uva.saf.fdl.ast.FightAction;
 import nl.uva.saf.fdl.ast.FightChoice;
@@ -82,8 +83,6 @@ public abstract class TreeVisitor implements ITreeVisitor {
 		node.getFightChoice().accept(this);
 		node.getMoveChoice().accept(this);
 	}
-	
-
 
 	@Override
 	public void visit(ConditionOr node) {
@@ -91,4 +90,7 @@ public abstract class TreeVisitor implements ITreeVisitor {
 			operand.accept(this);
 		}
 	}
+	
+	@Override
+	public void visit(ConditionAnd node) {}
 }
