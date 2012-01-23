@@ -65,7 +65,7 @@ public class ErrorHandlingSAFParserTest {
 		final MoveAction[] moveActions = MoveAction.class.getEnumConstants();
 		final FightAction[] fightActions = FightAction.class.getEnumConstants();
 		final String[] formats = {"%1s [%2s %3s]", "%1s\t\t[%2s %3s]", "%1s [ %2s %3s ]"};
-		final String condition = "always";
+		final String condition = "always"; //only one case, test separately
 		
 		for(MoveAction moveAction : moveActions) {
 			for (FightAction fightAction : fightActions) {
@@ -81,5 +81,14 @@ public class ErrorHandlingSAFParserTest {
 			}
 		}
 		
+	}
+	
+	@Test
+	public void testConstraint() throws Exception {
+		final String moveAction = "walk_towards";
+		final String fightAction = "block_high";
+		
+		
+	
 	}
 }

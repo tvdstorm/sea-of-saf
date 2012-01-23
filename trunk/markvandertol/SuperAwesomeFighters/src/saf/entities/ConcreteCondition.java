@@ -2,16 +2,12 @@ package saf.entities;
 
 import java.util.Set;
 
-import net.sf.oval.constraint.NotEmpty;
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
-
 /**
  * A conditions that looks for one specific State.
  */
-@Guarded
+
 public class ConcreteCondition extends Condition {
-	@NotNull
+
 	private State state;
 	
 	/**
@@ -27,7 +23,7 @@ public class ConcreteCondition extends Condition {
 	 * @return whether currentStates contains the state of this instance.
 	 */
 	@Override
-	public boolean matched(@NotNull @NotEmpty Set<State> currentStates) {
+	public boolean matched(Set<State> currentStates) {
 		return currentStates.contains(state);
 	}
 

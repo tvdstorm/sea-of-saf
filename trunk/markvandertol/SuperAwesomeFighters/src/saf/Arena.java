@@ -2,15 +2,13 @@ package saf;
 
 import java.io.IOException;
 
-import net.sf.oval.guard.Guarded;
-
 import org.antlr.runtime.RecognitionException;
 
 import saf.entities.Bot;
 import saf.parser.BotDefinitionMalformedException;
 import saf.parser.BotParser;
 
-@Guarded
+
 public class Arena {
 
 	/**
