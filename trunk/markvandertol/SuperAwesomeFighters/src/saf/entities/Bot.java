@@ -1,7 +1,9 @@
 package saf.entities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Describes a bot.
@@ -11,12 +13,14 @@ public class Bot {
 
 	private String name;
 
-	private int punchReach = DefaultValue;
-	private int punchPower = DefaultValue;
-	private int kickReach = DefaultValue;
-	private int kickPower = DefaultValue;
+	private HashMap<String, Integer> properties = new HashMap<String, Integer>();
 	
 	private List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
+	
+	private int getProperty(String property) {
+		Integer result = properties.get(property);
+		return (result != null) ? result : DefaultValue;
+	}
 	
 	/**
 	 * @return the name
@@ -34,49 +38,33 @@ public class Bot {
 	 * @return the punchReach
 	 */
 	public int getPunchReach() {
-		return punchReach;
-	}
-	/**
-	 * @param punchReach the punchReach to set
-	 */
-	public void setPunchReach(int punchReach) {
-		this.punchReach = punchReach;
+		return getProperty("punchReach");
 	}
 	/**
 	 * @return the punchPower
 	 */
 	public int getPunchPower() {
-		return punchPower;
-	}
-	/**
-	 * @param punchPower the punchPower to set
-	 */
-	public void setPunchPower(int punchPower) {
-		this.punchPower = punchPower;
+		return getProperty("punchPower");
 	}
 	/**
 	 * @return the kickReach
 	 */
 	public int getKickReach() {
-		return kickReach;
-	}
-	/**
-	 * @param kickReach the kickReach to set
-	 */
-	public void setKickReach(int kickReach) {
-		this.kickReach = kickReach;
+		return getProperty("kickReach");
 	}
 	/**
 	 * @return the kickPower
 	 */
 	public int getKickPower() {
-		return kickPower;
+		return getProperty("kickPower");
 	}
-	/**
-	 * @param kickPower the kickPower to set
-	 */
-	public void setKickPower(int kickPower) {
-		this.kickPower = kickPower;
+	
+	public Set<String> getDefinedProperties() {
+		return properties.keySet();
+	}
+	
+	public void setProperty(String key, int value) {
+		properties.put(key, value);
 	}
 	
 	/**

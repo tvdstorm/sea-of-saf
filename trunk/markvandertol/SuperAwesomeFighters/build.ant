@@ -3,6 +3,58 @@
         simple example build file
     </description>
 
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist"  location="dist"/>
+	<property name="classpath" location="lib" />
+	
+	<property name="antlr" location="antlr" />
+	<property name="antlr-output" location="${antlr}/output" />
+	<property name="antlr-generated-target" location="${src}/saf/parser" />
+	
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+	</target>
+	
+	<target name="antlr">
+		<java fork="true" failonerror="yes" classpath="antlrworks-1.4.3.jar" classname="org.antlr.Tool" >
+			<arg line="-o ${antlr-output} ${antlr}/SAF.g ${antlr}/SAFWalker.g" />
+		</java>
+		
+		<copy todir="${antlr-generated-target}" file="${antlr-output}/SAFLexer.java"/>
+		<copy todir="${antlr-generated-target}" file="${antlr-output}/SAFParser.java"/>
+		<copy todir="${antlr-generated-target}" file="${antlr-output}/SAFWalker.java"/>
+	</target>
 
+	
+	<target name="compile" depends="init,antlr" description="compile the source" >
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+			<classpath>
+				<pathelement path="${classpath}/antlr-3.4-complete.jar"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="dist" depends="compile" description="generate the distribution" >
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib"/>
+	
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<jar jarfile="${dist}/SAF-${DSTAMP}.jar" basedir="${build}"/>
+		<copy todir="${dist}" file="${classpath}/antlr-3.4-complete.jar" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${antlr-output}"/>
+		<delete dir="${dist}" />
+	</target>
+	
+	<target name="cleanAndDist" depends="clean,dist">
+	
+	</target>
 
 </project>

@@ -10,6 +10,7 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.tree.Tree;
 import org.junit.Test;
 
+
 import saf.entities.FightAction;
 import saf.entities.MoveAction;
 import saf.parser.SAFParser.prog_return;
