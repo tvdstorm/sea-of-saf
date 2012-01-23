@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-01-23 01:05:53
+// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-01-23 10:39:47
 
 package reader.antlr;
 
@@ -268,10 +268,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = CONDITIONS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:3: ( ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' ) )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:3: ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:11: ( ( 'stronger' | 'weaker' | ' much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' ) )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:13: ( 'stronger' | 'weaker' | ' much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
             {
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:3: ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:13: ( 'stronger' | 'weaker' | ' much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
             int alt1=8;
             switch ( input.LA(1) ) {
             case 's':
@@ -284,67 +284,14 @@ public class SAFLexer extends Lexer {
                 alt1=2;
                 }
                 break;
+            case ' ':
+                {
+                alt1=3;
+                }
+                break;
             case 'm':
                 {
-                int LA1_3 = input.LA(2);
-
-                if ( (LA1_3=='u') ) {
-                    int LA1_8 = input.LA(3);
-
-                    if ( (LA1_8=='c') ) {
-                        int LA1_9 = input.LA(4);
-
-                        if ( (LA1_9=='h') ) {
-                            int LA1_10 = input.LA(5);
-
-                            if ( (LA1_10=='_') ) {
-                                int LA1_11 = input.LA(6);
-
-                                if ( (LA1_11=='s') ) {
-                                    alt1=3;
-                                }
-                                else if ( (LA1_11=='w') ) {
-                                    alt1=4;
-                                }
-                                else {
-                                    NoViableAltException nvae =
-                                        new NoViableAltException("", 1, 11, input);
-
-                                    throw nvae;
-
-                                }
-                            }
-                            else {
-                                NoViableAltException nvae =
-                                    new NoViableAltException("", 1, 10, input);
-
-                                throw nvae;
-
-                            }
-                        }
-                        else {
-                            NoViableAltException nvae =
-                                new NoViableAltException("", 1, 9, input);
-
-                            throw nvae;
-
-                        }
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 1, 8, input);
-
-                        throw nvae;
-
-                    }
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 1, 3, input);
-
-                    throw nvae;
-
-                }
+                alt1=4;
                 }
                 break;
             case 'e':
@@ -377,7 +324,7 @@ public class SAFLexer extends Lexer {
 
             switch (alt1) {
                 case 1 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:5: 'stronger'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:14: 'stronger'
                     {
                     match("stronger"); 
 
@@ -386,7 +333,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:80:7: 'weaker'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:27: 'weaker'
                     {
                     match("weaker"); 
 
@@ -395,16 +342,16 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:81:7: 'much_stronger'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:36: ' much_stronger'
                     {
-                    match("much_stronger"); 
+                    match(" much_stronger"); 
 
 
 
                     }
                     break;
                 case 4 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:82:7: 'much_weaker'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:53: 'much_weaker'
                     {
                     match("much_weaker"); 
 
@@ -413,7 +360,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:83:7: 'even'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:69: 'even'
                     {
                     match("even"); 
 
@@ -422,7 +369,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:84:7: 'near'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:78: 'near'
                     {
                     match("near"); 
 
@@ -431,7 +378,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:85:7: 'far'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:87: 'far'
                     {
                     match("far"); 
 
@@ -440,7 +387,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:86:7: 'always'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:76:95: 'always'
                     {
                     match("always"); 
 
@@ -468,10 +415,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = MOVES;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:91:3: ( ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' ) )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:92:3: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:6: ( ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' ) )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:8: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
             {
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:92:3: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:8: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
             int alt2=7;
             switch ( input.LA(1) ) {
             case 'j':
@@ -614,7 +561,7 @@ public class SAFLexer extends Lexer {
 
             switch (alt2) {
                 case 1 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:5: 'jump'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:9: 'jump'
                     {
                     match("jump"); 
 
@@ -623,7 +570,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:94:7: 'crouch'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:18: 'crouch'
                     {
                     match("crouch"); 
 
@@ -632,7 +579,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:95:7: 'stand'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:29: 'stand'
                     {
                     match("stand"); 
 
@@ -641,7 +588,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:96:7: 'run_towards'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:39: 'run_towards'
                     {
                     match("run_towards"); 
 
@@ -650,7 +597,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:97:7: 'run_away'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:55: 'run_away'
                     {
                     match("run_away"); 
 
@@ -659,7 +606,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:98:7: 'walk_towards'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:68: 'walk_towards'
                     {
                     match("walk_towards"); 
 
@@ -668,7 +615,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:99:7: 'walk_away'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:77:85: 'walk_away'
                     {
                     match("walk_away"); 
 
@@ -696,10 +643,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = ATTACKS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:104:3: ( ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' ) )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:105:3: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:9: ( ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' ) )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:11: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
             {
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:105:3: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:11: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
             int alt3=6;
             switch ( input.LA(1) ) {
             case 'p':
@@ -923,7 +870,7 @@ public class SAFLexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:106:5: 'punch_low'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:12: 'punch_low'
                     {
                     match("punch_low"); 
 
@@ -932,7 +879,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:107:7: 'punch_high'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:26: 'punch_high'
                     {
                     match("punch_high"); 
 
@@ -941,7 +888,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:108:7: 'kick_low'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:41: 'kick_low'
                     {
                     match("kick_low"); 
 
@@ -950,7 +897,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:109:7: 'kick_high'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:54: 'kick_high'
                     {
                     match("kick_high"); 
 
@@ -959,7 +906,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:110:7: 'block_low'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:68: 'block_low'
                     {
                     match("block_low"); 
 
@@ -968,7 +915,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:111:7: 'block_high'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:78:82: 'block_high'
                     {
                     match("block_high"); 
 
@@ -996,10 +943,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = STRENGTHS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:116:3: ( ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' ) )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:117:3: ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:11: ( ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' ) )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:13: ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' )
             {
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:117:3: ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:13: ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' )
             int alt4=4;
             int LA4_0 = input.LA(1);
 
@@ -1123,7 +1070,7 @@ public class SAFLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:118:5: 'punchReach'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:14: 'punchReach'
                     {
                     match("punchReach"); 
 
@@ -1132,7 +1079,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:119:7: 'kickReach'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:29: 'kickReach'
                     {
                     match("kickReach"); 
 
@@ -1141,7 +1088,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:120:7: 'kickPower'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:43: 'kickPower'
                     {
                     match("kickPower"); 
 
@@ -1150,7 +1097,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:121:7: 'punchPower'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:79:57: 'punchPower'
                     {
                     match("punchPower"); 
 
@@ -1178,8 +1125,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:126:3: ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( '0' .. '9' | 'A' .. 'Z' | 'a' .. 'z' )* )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:127:3: ( 'A' .. 'Z' | 'a' .. 'z' ) ( '0' .. '9' | 'A' .. 'Z' | 'a' .. 'z' )*
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:81:7: ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( '0' .. '9' | 'A' .. 'Z' | 'a' .. 'z' )* )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:81:9: ( 'A' .. 'Z' | 'a' .. 'z' ) ( '0' .. '9' | 'A' .. 'Z' | 'a' .. 'z' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -1191,7 +1138,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:131:3: ( '0' .. '9' | 'A' .. 'Z' | 'a' .. 'z' )*
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:81:28: ( '0' .. '9' | 'A' .. 'Z' | 'a' .. 'z' )*
             loop5:
             do {
                 int alt5=2;
@@ -1241,12 +1188,12 @@ public class SAFLexer extends Lexer {
         try {
             int _type = TWODIGITS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:139:3: ( '0' .. '9' ( '0' .. '9' )? )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:140:3: '0' .. '9' ( '0' .. '9' )?
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:84:3: ( '0' .. '9' ( '0' .. '9' )? )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:85:3: '0' .. '9' ( '0' .. '9' )?
             {
             matchRange('0','9'); 
 
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:140:12: ( '0' .. '9' )?
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:85:12: ( '0' .. '9' )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1289,10 +1236,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:3: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:147:3: ( '\\t' | ' ' | '\\r' | '\\n' )+
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:90:12: ( ( '\\t' | ' ' | '\\r' | '\\n' )+ )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:90:14: ( '\\t' | ' ' | '\\r' | '\\n' )+
             {
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:147:3: ( '\\t' | ' ' | '\\r' | '\\n' )+
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:90:14: ( '\\t' | ' ' | '\\r' | '\\n' )+
             int cnt7=0;
             loop7:
             do {
@@ -1331,9 +1278,7 @@ public class SAFLexer extends Lexer {
             } while (true);
 
 
-
-                _channel = HIDDEN;
-               
+             _channel = HIDDEN; 
 
             }
 
@@ -1351,10 +1296,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = COMMENTS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:160:3: ( ( '/*' ( options {greedy=false; } : . )* '*/' || '//' ( . )* ( '\\n' | '\\r' ) ) )
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:161:3: ( '/*' ( options {greedy=false; } : . )* '*/' || '//' ( . )* ( '\\n' | '\\r' ) )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:5: ( ( '/*' ( options {greedy=false; } : . )* '*/' || '//' ( . )* ( '\\n' | '\\r' ) ) )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:9: ( '/*' ( options {greedy=false; } : . )* '*/' || '//' ( . )* ( '\\n' | '\\r' ) )
             {
-            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:161:3: ( '/*' ( options {greedy=false; } : . )* '*/' || '//' ( . )* ( '\\n' | '\\r' ) )
+            // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:9: ( '/*' ( options {greedy=false; } : . )* '*/' || '//' ( . )* ( '\\n' | '\\r' ) )
             int alt10=3;
             int LA10_0 = input.LA(1);
 
@@ -1380,13 +1325,13 @@ public class SAFLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:162:5: '/*' ( options {greedy=false; } : . )* '*/'
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:10: '/*' ( options {greedy=false; } : . )* '*/'
                     {
                     match("/*"); 
 
 
 
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:162:10: ( options {greedy=false; } : . )*
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:15: ( options {greedy=false; } : . )*
                     loop8:
                     do {
                         int alt8=2;
@@ -1411,7 +1356,7 @@ public class SAFLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:162:36: .
+                    	    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:42: .
                     	    {
                     	    matchAny(); 
 
@@ -1431,18 +1376,18 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:164:5: 
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:52: 
                     {
                     }
                     break;
                 case 3 :
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:164:7: '//' ( . )* ( '\\n' | '\\r' )
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:54: '//' ( . )* ( '\\n' | '\\r' )
                     {
                     match("//"); 
 
 
 
-                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:164:12: ( . )*
+                    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:58: ( . )*
                     loop9:
                     do {
                         int alt9=2;
@@ -1458,7 +1403,7 @@ public class SAFLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:164:12: .
+                    	    // D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:93:58: .
                     	    {
                     	    matchAny(); 
 
@@ -1487,9 +1432,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-
-                _channel = HIDDEN;
-               
+            _channel=HIDDEN;
 
             }
 
@@ -1659,57 +1602,56 @@ public class SAFLexer extends Lexer {
 
     protected DFA11 dfa11 = new DFA11(this);
     static final String DFA11_eotS =
-        "\1\30\4\uffff\3\25\2\uffff\13\25\4\uffff\4\25\1\56\15\25\1\75\2"+
-        "\25\1\uffff\7\25\1\107\6\25\1\uffff\7\25\2\107\1\uffff\1\111\1\uffff"+
-        "\7\25\1\111\2\25\1\uffff\3\25\1\141\1\25\1\111\1\25\1\107\4\25\2"+
-        "\uffff\5\25\1\107\6\25\4\163\1\uffff";
+        "\1\31\4\uffff\3\26\2\uffff\2\26\1\30\11\26\4\uffff\4\26\1\60\3\26"+
+        "\1\uffff\12\26\1\77\2\26\1\uffff\7\26\1\42\6\26\1\uffff\7\26\2\42"+
+        "\1\112\1\uffff\7\26\1\112\2\26\1\uffff\3\26\1\142\1\26\1\112\1\26"+
+        "\1\42\4\26\2\uffff\5\26\1\42\6\26\4\164\1\uffff";
     static final String DFA11_eofS =
-        "\164\uffff";
+        "\165\uffff";
     static final String DFA11_minS =
-        "\1\11\4\uffff\1\154\1\150\1\162\2\uffff\1\164\1\141\1\165\1\166"+
-        "\1\145\1\141\3\165\1\151\1\154\4\uffff\1\167\1\144\2\157\1\60\2"+
-        "\141\1\154\1\143\1\145\1\141\1\162\1\155\2\156\1\143\1\157\1\141"+
-        "\1\60\1\157\1\165\1\uffff\1\157\1\156\2\153\1\150\1\156\1\162\1"+
-        "\60\1\160\1\137\1\143\1\153\1\143\1\171\1\uffff\1\163\1\143\1\156"+
-        "\1\144\1\145\2\137\2\60\1\uffff\1\60\1\uffff\1\150\1\120\1\153\1"+
+        "\1\11\4\uffff\1\154\1\150\1\162\2\uffff\1\164\1\141\1\155\1\165"+
+        "\1\166\1\145\1\141\3\165\1\151\1\154\4\uffff\1\167\1\144\2\157\1"+
+        "\60\2\141\1\154\1\uffff\1\143\1\145\1\141\1\162\1\155\2\156\1\143"+
+        "\1\157\1\141\1\60\1\157\1\165\1\uffff\1\157\1\156\2\153\1\150\1"+
+        "\156\1\162\1\60\1\160\1\137\1\143\1\153\1\143\1\171\1\uffff\1\163"+
+        "\1\143\1\156\1\144\1\145\2\137\3\60\1\uffff\1\150\1\120\1\153\1"+
         "\163\1\145\1\150\1\147\1\60\1\162\1\120\1\uffff\1\145\1\157\1\137"+
         "\1\60\1\50\1\60\1\145\1\60\1\145\1\157\1\141\1\167\2\uffff\1\162"+
         "\1\141\1\167\1\143\1\145\1\60\1\143\1\145\1\150\1\162\1\150\1\162"+
         "\4\60\1\uffff";
     static final String DFA11_maxS =
-        "\1\175\4\uffff\1\156\2\162\2\uffff\1\164\1\145\1\165\1\166\1\145"+
-        "\1\141\3\165\1\151\1\154\4\uffff\1\167\1\144\2\157\1\172\1\162\1"+
-        "\141\1\154\1\143\1\145\1\141\1\162\1\155\2\156\1\143\1\157\1\141"+
-        "\1\172\1\157\1\165\1\uffff\1\157\1\156\2\153\1\150\1\156\1\162\1"+
-        "\172\1\160\1\137\1\143\1\153\1\143\1\171\1\uffff\1\163\1\143\1\156"+
-        "\1\144\1\145\2\137\2\172\1\uffff\1\172\1\uffff\1\150\1\137\1\153"+
-        "\1\163\1\145\1\150\1\147\1\172\1\162\1\137\1\uffff\1\145\1\157\1"+
-        "\137\1\172\1\50\1\172\1\145\1\172\1\145\1\157\1\141\1\167\2\uffff"+
-        "\1\162\1\141\1\167\1\143\1\145\1\172\1\143\1\145\1\150\1\162\1\150"+
+        "\1\175\4\uffff\1\156\2\162\2\uffff\1\164\1\145\1\155\1\165\1\166"+
+        "\1\145\1\141\3\165\1\151\1\154\4\uffff\1\167\1\144\2\157\1\172\1"+
+        "\162\1\141\1\154\1\uffff\1\143\1\145\1\141\1\162\1\155\2\156\1\143"+
+        "\1\157\1\141\1\172\1\157\1\165\1\uffff\1\157\1\156\2\153\1\150\1"+
+        "\156\1\162\1\172\1\160\1\137\1\143\1\153\1\143\1\171\1\uffff\1\163"+
+        "\1\143\1\156\1\144\1\145\2\137\3\172\1\uffff\1\150\1\137\1\153\1"+
+        "\163\1\145\1\150\1\147\1\172\1\162\1\137\1\uffff\1\145\1\157\1\137"+
+        "\1\172\1\50\1\172\1\145\1\172\1\145\1\157\1\141\1\167\2\uffff\1"+
+        "\162\1\141\1\167\1\143\1\145\1\172\1\143\1\145\1\150\1\162\1\150"+
         "\1\162\4\172\1\uffff";
     static final String DFA11_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\3\uffff\1\11\1\12\13\uffff\1\17\1\20\1"+
-        "\21\1\22\25\uffff\1\10\16\uffff\1\6\11\uffff\1\13\1\uffff\1\14\12"+
-        "\uffff\1\15\14\uffff\1\5\1\7\20\uffff\1\16";
+        "\1\uffff\1\1\1\2\1\3\1\4\3\uffff\1\11\1\12\14\uffff\1\17\1\20\1"+
+        "\21\1\22\10\uffff\1\13\15\uffff\1\10\16\uffff\1\6\12\uffff\1\14"+
+        "\12\uffff\1\15\14\uffff\1\5\1\7\20\uffff\1\16";
     static final String DFA11_specialS =
-        "\164\uffff}>";
+        "\165\uffff}>";
     static final String[] DFA11_transitionS = {
-            "\2\27\2\uffff\1\27\22\uffff\1\27\10\uffff\1\1\6\uffff\12\26"+
-            "\3\uffff\1\2\3\uffff\32\25\1\3\1\uffff\1\4\3\uffff\1\5\1\24"+
-            "\1\6\1\25\1\15\1\17\3\25\1\20\1\23\1\25\1\14\1\16\1\7\1\22\1"+
-            "\25\1\21\1\12\3\25\1\13\3\25\1\10\1\uffff\1\11",
+            "\2\30\2\uffff\1\30\22\uffff\1\14\10\uffff\1\1\6\uffff\12\27"+
+            "\3\uffff\1\2\3\uffff\32\26\1\3\1\uffff\1\4\3\uffff\1\5\1\25"+
+            "\1\6\1\26\1\16\1\20\3\26\1\21\1\24\1\26\1\15\1\17\1\7\1\23\1"+
+            "\26\1\22\1\12\3\26\1\13\3\26\1\10\1\uffff\1\11",
             "",
             "",
             "",
             "",
-            "\1\31\1\uffff\1\32",
-            "\1\33\11\uffff\1\34",
-            "\1\35",
-            "",
-            "",
+            "\1\32\1\uffff\1\33",
+            "\1\34\11\uffff\1\35",
             "\1\36",
-            "\1\40\3\uffff\1\37",
-            "\1\41",
+            "",
+            "",
+            "\1\37",
+            "\1\41\3\uffff\1\40",
             "\1\42",
             "\1\43",
             "\1\44",
@@ -1718,20 +1660,21 @@ public class SAFLexer extends Lexer {
             "\1\47",
             "\1\50",
             "\1\51",
-            "",
-            "",
-            "",
-            "",
             "\1\52",
             "\1\53",
+            "",
+            "",
+            "",
+            "",
             "\1\54",
             "\1\55",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\60\20\uffff\1\57",
-            "\1\61",
-            "\1\62",
+            "\1\56",
+            "\1\57",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\62\20\uffff\1\61",
             "\1\63",
             "\1\64",
+            "",
             "\1\65",
             "\1\66",
             "\1\67",
@@ -1740,78 +1683,79 @@ public class SAFLexer extends Lexer {
             "\1\72",
             "\1\73",
             "\1\74",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\75",
             "\1\76",
-            "\1\77",
-            "",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "\1\100",
             "\1\101",
+            "",
             "\1\102",
             "\1\103",
             "\1\104",
             "\1\105",
             "\1\106",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\107",
             "\1\110",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "\1\111",
             "\1\112",
             "\1\113",
             "\1\114",
             "\1\115",
-            "",
             "\1\116",
+            "",
             "\1\117",
             "\1\120",
             "\1\121",
             "\1\122",
-            "\1\111",
-            "\1\107",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "",
             "\1\123",
-            "\1\126\1\uffff\1\125\14\uffff\1\124",
-            "\1\127",
+            "\1\112",
+            "\1\42",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "",
+            "\1\124",
+            "\1\127\1\uffff\1\126\14\uffff\1\125",
             "\1\130",
             "\1\131",
             "\1\132",
             "\1\133",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
             "\1\134",
-            "\1\136\1\uffff\1\135\14\uffff\1\124",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\1\135",
+            "\1\137\1\uffff\1\136\14\uffff\1\125",
             "",
-            "\1\137",
             "\1\140",
-            "\1\124",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\1\142",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\141",
+            "\1\125",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "\1\143",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "\1\144",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "\1\145",
             "\1\146",
             "\1\147",
-            "",
-            "",
             "\1\150",
+            "",
+            "",
             "\1\151",
             "\1\152",
             "\1\153",
             "\1\154",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
             "\1\155",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             "\1\156",
             "\1\157",
             "\1\160",
             "\1\161",
             "\1\162",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
-            "\12\25\7\uffff\32\25\6\uffff\32\25",
+            "\1\163",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
+            "\12\26\7\uffff\32\26\6\uffff\32\26",
             ""
     };
 
