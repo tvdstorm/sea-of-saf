@@ -11,62 +11,54 @@ digraph {
   n1 [label="PERSONALITY"];
   n2 [label="kickReach"];
   n2 [label="kickReach"];
-  n3 [label="="];
-  n4 [label="9"];
-  n5 [label="punchReach"];
-  n5 [label="punchReach"];
-  n6 [label="="];
-  n7 [label="1"];
-  n8 [label="kickPower"];
-  n8 [label="kickPower"];
-  n9 [label="="];
-  n10 [label="2"];
-  n11 [label="punchPower"];
-  n11 [label="punchPower"];
-  n12 [label="="];
-  n13 [label="2"];
-  n14 [label="BEHAVIOUR"];
-  n14 [label="BEHAVIOUR"];
-  n15 [label="far"];
-  n15 [label="far"];
-  n16 [label="choose"];
-  n16 [label="choose"];
-  n17 [label="run_towards"];
-  n18 [label="run_away"];
-  n19 [label="kick_low"];
-  n20 [label="near"];
-  n20 [label="near"];
-  n21 [label="run_away"];
-  n22 [label="kick_low"];
-  n23 [label="near"];
-  n23 [label="near"];
-  n24 [label="crouch"];
-  n25 [label="punch_low"];
+  n3 [label="9"];
+  n4 [label="punchReach"];
+  n4 [label="punchReach"];
+  n5 [label="1"];
+  n6 [label="kickPower"];
+  n6 [label="kickPower"];
+  n7 [label="2"];
+  n8 [label="punchPower"];
+  n8 [label="punchPower"];
+  n9 [label="2"];
+  n10 [label="BEHAVIOUR"];
+  n10 [label="BEHAVIOUR"];
+  n11 [label="far"];
+  n11 [label="far"];
+  n12 [label="choose"];
+  n12 [label="choose"];
+  n13 [label="run_towards"];
+  n14 [label="run_away"];
+  n15 [label="kick_low"];
+  n16 [label="near"];
+  n16 [label="near"];
+  n17 [label="run_away"];
+  n18 [label="kick_low"];
+  n19 [label="near"];
+  n19 [label="near"];
+  n20 [label="crouch"];
+  n21 [label="punch_low"];
 
   n0 -> n1 // "chicken" -> "PERSONALITY"
   n1 -> n2 // "PERSONALITY" -> "kickReach"
-  n2 -> n3 // "kickReach" -> "="
-  n2 -> n4 // "kickReach" -> "9"
-  n1 -> n5 // "PERSONALITY" -> "punchReach"
-  n5 -> n6 // "punchReach" -> "="
-  n5 -> n7 // "punchReach" -> "1"
-  n1 -> n8 // "PERSONALITY" -> "kickPower"
-  n8 -> n9 // "kickPower" -> "="
-  n8 -> n10 // "kickPower" -> "2"
-  n1 -> n11 // "PERSONALITY" -> "punchPower"
-  n11 -> n12 // "punchPower" -> "="
-  n11 -> n13 // "punchPower" -> "2"
-  n0 -> n14 // "chicken" -> "BEHAVIOUR"
-  n14 -> n15 // "BEHAVIOUR" -> "far"
-  n15 -> n16 // "far" -> "choose"
-  n16 -> n17 // "choose" -> "run_towards"
-  n16 -> n18 // "choose" -> "run_away"
-  n15 -> n19 // "far" -> "kick_low"
-  n14 -> n20 // "BEHAVIOUR" -> "near"
-  n20 -> n21 // "near" -> "run_away"
-  n20 -> n22 // "near" -> "kick_low"
-  n14 -> n23 // "BEHAVIOUR" -> "near"
-  n23 -> n24 // "near" -> "crouch"
-  n23 -> n25 // "near" -> "punch_low"
+  n2 -> n3 // "kickReach" -> "9"
+  n1 -> n4 // "PERSONALITY" -> "punchReach"
+  n4 -> n5 // "punchReach" -> "1"
+  n1 -> n6 // "PERSONALITY" -> "kickPower"
+  n6 -> n7 // "kickPower" -> "2"
+  n1 -> n8 // "PERSONALITY" -> "punchPower"
+  n8 -> n9 // "punchPower" -> "2"
+  n0 -> n10 // "chicken" -> "BEHAVIOUR"
+  n10 -> n11 // "BEHAVIOUR" -> "far"
+  n11 -> n12 // "far" -> "choose"
+  n12 -> n13 // "choose" -> "run_towards"
+  n12 -> n14 // "choose" -> "run_away"
+  n11 -> n15 // "far" -> "kick_low"
+  n10 -> n16 // "BEHAVIOUR" -> "near"
+  n16 -> n17 // "near" -> "run_away"
+  n16 -> n18 // "near" -> "kick_low"
+  n10 -> n19 // "BEHAVIOUR" -> "near"
+  n19 -> n20 // "near" -> "crouch"
+  n19 -> n21 // "near" -> "punch_low"
 
 }

@@ -27,7 +27,7 @@ personality
 	;
 
 characteristic
-	:	(ATTRIBUTE^ EQUALS ONEDIGIT)
+	:	(ATTRIBUTE EQUALS ONEDIGIT) -> ^(ATTRIBUTE ^(ONEDIGIT))
 	;
 	
 behaviour

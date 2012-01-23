@@ -1,0 +1,5 @@
+gunit FDL;
+
+characteristic
+  :
+    "test" FAIL
