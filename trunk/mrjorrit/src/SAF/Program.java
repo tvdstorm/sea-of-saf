@@ -21,7 +21,8 @@ public class Program {
 				+ "  punchPower = 2\n"
 				+ "  far [choose(run_towards run_away) kick_low]\n" + "  \n"
 				+ "  near [run_away kick_low]\n"
-				+ "  near [crouch punch_low]\n" + "}";
+				+ "  near [crouch punch_low]\n" 
+				+ "}";
 		FDLLexer lexer = new FDLLexer(new ANTLRStringStream(src));
 		FDLParser parser = new FDLParser(new CommonTokenStream(lexer));
 
