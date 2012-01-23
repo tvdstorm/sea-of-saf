@@ -24,6 +24,7 @@ import nl.uva.saf.fdl.ast.Behaviour;
 import nl.uva.saf.fdl.ast.Characteristic;
 import nl.uva.saf.fdl.ast.Choice;
 import nl.uva.saf.fdl.ast.ConditionAlways;
+import nl.uva.saf.fdl.ast.ConditionAnd;
 import nl.uva.saf.fdl.ast.ConditionOr;
 import nl.uva.saf.fdl.ast.FightAction;
 import nl.uva.saf.fdl.ast.FightChoice;
@@ -38,6 +39,7 @@ public interface ITreeVisitor {
 	public abstract void visit(Behaviour node);
 	public abstract void visit(ConditionAlways node);
 	public abstract void visit(ConditionOr node);
+	public abstract void visit(ConditionAnd node);
 	public abstract void visit(FightAction node);
 	public abstract void visit(FightChoice node);
 	public abstract void visit(Choice node);

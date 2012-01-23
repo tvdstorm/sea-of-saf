@@ -1,0 +1,3 @@
+- Change hardcoded behaviour names into identifiers in grammar
+- Immutable AST (Construct soley in constructor)
+- Make AND/OR nodes Binary, not big n weirdish.

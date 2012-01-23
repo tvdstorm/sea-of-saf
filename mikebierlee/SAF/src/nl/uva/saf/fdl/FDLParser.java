@@ -1,31 +1,13 @@
-// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-22 23:07:07
+// $ANTLR 3.4 C:\\Repositories\\SoftwareConstruction\\SAF\\src\\FDL.g 2012-01-23 10:15:18
 
   package nl.uva.saf.fdl;
-  import java.util.ArrayList;
+  import nl.uva.saf.fdl.ast.*;
 
-import nl.uva.saf.fdl.ast.Action;
-import nl.uva.saf.fdl.ast.Behaviour;
-import nl.uva.saf.fdl.ast.Characteristic;
-import nl.uva.saf.fdl.ast.ConditionAlways;
-import nl.uva.saf.fdl.ast.ConditionAnd;
-import nl.uva.saf.fdl.ast.ConditionOr;
-import nl.uva.saf.fdl.ast.FightAction;
-import nl.uva.saf.fdl.ast.FightChoice;
-import nl.uva.saf.fdl.ast.Fighter;
-import nl.uva.saf.fdl.ast.FighterAttribute;
-import nl.uva.saf.fdl.ast.ITreeNode;
-import nl.uva.saf.fdl.ast.MoveAction;
-import nl.uva.saf.fdl.ast.MoveChoice;
-import nl.uva.saf.fdl.ast.Rule;
 
-import org.antlr.runtime.BitSet;
-import org.antlr.runtime.EarlyExitException;
-import org.antlr.runtime.NoViableAltException;
-import org.antlr.runtime.Parser;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.RecognizerSharedState;
-import org.antlr.runtime.Token;
-import org.antlr.runtime.TokenStream;
+import org.antlr.runtime.*;
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class FDLParser extends Parser {
