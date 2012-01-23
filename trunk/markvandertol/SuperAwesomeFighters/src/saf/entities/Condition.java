@@ -2,7 +2,15 @@ package saf.entities;
 
 import java.util.Set;
 
+/**
+ * Condition for an action. Determines when the condition holds for the given state.
+ */
 public abstract class Condition {
 
-	public abstract boolean matched(Set<ConditionType> currentConditions);
+	/**
+	 * 
+	 * @param currentStates states to match to
+	 * @return whether the condition matches with the given current states.
+	 */
+	public abstract boolean matched(Set<State> currentStates);
 }

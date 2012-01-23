@@ -1,6 +1,8 @@
 package saf.entities;
-
-public enum MoveActionType {
+/**
+ * Move actions a bot can perform.
+ */
+public enum MoveAction {
 	walk_towards,
 	walk_away,
 	run_towards,

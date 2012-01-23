@@ -10,8 +10,8 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.tree.Tree;
 import org.junit.Test;
 
-import saf.entities.FightActionType;
-import saf.entities.MoveActionType;
+import saf.entities.FightAction;
+import saf.entities.MoveAction;
 import saf.parser.SAFParser.prog_return;
 
 public class ErrorHandlingSAFParserTest {
@@ -62,13 +62,13 @@ public class ErrorHandlingSAFParserTest {
 
 	@Test
 	public void testAction() throws Exception {
-		final MoveActionType[] moveActions = MoveActionType.class.getEnumConstants();
-		final FightActionType[] fightActions = FightActionType.class.getEnumConstants();
+		final MoveAction[] moveActions = MoveAction.class.getEnumConstants();
+		final FightAction[] fightActions = FightAction.class.getEnumConstants();
 		final String[] formats = {"%1s [%2s %3s]", "%1s\t\t[%2s %3s]", "%1s [ %2s %3s ]"};
 		final String condition = "always";
 		
-		for(MoveActionType moveAction : moveActions) {
-			for (FightActionType fightAction : fightActions) {
+		for(MoveAction moveAction : moveActions) {
+			for (FightAction fightAction : fightActions) {
 				for (String format : formats) {
 					ErrorHandlingSAFParser parser = getParser(String.format(format, condition, moveAction.toString(), fightAction.toString()));
 					SAFParser.action_return result = parser.action();

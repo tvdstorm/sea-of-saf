@@ -27,12 +27,13 @@ public class CombinedCondition extends Condition {
 	}
 
 	/**
-	 * Returns true when one or 
+	 * When requiredBoth is set, returns true when both subconditions are true. When requiredBoth isn't set, returns 
+	 * true when one or both of the conditions are true.
 	 */
 	@Override
-	public boolean matched(Set<ConditionType> currentConditions) {
-		boolean c1 = condition1.matched(currentConditions);
-		boolean c2 = condition2.matched(currentConditions);
+	public boolean matched(Set<State> currentStates) {
+		boolean c1 = condition1.matched(currentStates);
+		boolean c2 = condition2.matched(currentStates);
 		
 		if (requireBoth)
 			return c1 && c2;
@@ -54,8 +55,6 @@ public class CombinedCondition extends Condition {
 	public Condition getCondition2() {
 		return condition2;
 	}
-
-
 
 	/**
 	 * @return the requireBoth

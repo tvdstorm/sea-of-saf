@@ -6,33 +6,43 @@ import net.sf.oval.constraint.NotEmpty;
 import net.sf.oval.constraint.NotNull;
 import net.sf.oval.guard.Guarded;
 
+/**
+ * A conditions that looks for one specific State.
+ */
 @Guarded
 public class ConcreteCondition extends Condition {
 	@NotNull
-	private ConditionType condition;
+	private State state;
 	
-	public ConcreteCondition( ConditionType condition) {
-		this.condition = condition;
+	/**
+	 * 
+	 * @param state
+	 */
+	public ConcreteCondition(State state) {
+		this.state = state;
 	}
 	
 
+	/**
+	 * @return whether currentStates contains the state of this instance.
+	 */
 	@Override
-	public boolean matched(@NotNull @NotEmpty Set<ConditionType> currentConditions) {
-		return currentConditions.contains(condition);
+	public boolean matched(@NotNull @NotEmpty Set<State> currentStates) {
+		return currentStates.contains(state);
 	}
 
 	/**
-	 * @return the condition
+	 * @return the current state
 	 */
-	public ConditionType getCondition() {
-		return condition;
+	public State getState() {
+		return state;
 	}
 
 	/**
-	 * @param condition the condition to set
+	 * @param state the state to set
 	 */
-	public void setCondition(ConditionType condition) {
-		this.condition = condition;
+	public void setState(State state) {
+		this.state = state;
 	}
 
 }

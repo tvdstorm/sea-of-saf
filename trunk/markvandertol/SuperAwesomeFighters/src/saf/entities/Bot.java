@@ -8,19 +8,24 @@ import net.sf.oval.constraint.Max;
 import net.sf.oval.constraint.Min;
 import net.sf.oval.guard.Guarded;
 
+/**
+ * Describes a bot.
+ */
 @Guarded
 public class Bot {
+	private final int DefaultValue = 5;
+	
 	@Length(min = 1)
 	private String name;
 	
 	@Min(value = 1) @Max(value = 10)
-	private int punchReach = 5;
+	private int punchReach = DefaultValue;
 	@Min(value = 1) @Max(value = 10)
-	private int punchPower = 5;
+	private int punchPower = DefaultValue;
 	@Min(value = 1) @Max(value = 10)
-	private int kickReach = 5;
+	private int kickReach = DefaultValue;
 	@Min(value = 1) @Max(value = 10)
-	private int kickPower = 5;
+	private int kickPower = DefaultValue;
 	
 	private List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
 	
@@ -85,6 +90,10 @@ public class Bot {
 		this.kickPower = kickPower;
 	}
 	
+	/**
+	 * 
+	 * @return list with behaviourRules
+	 */
 	public List<BehaviourRule> getBehaviourRules() {
 		return behaviourRules;
 	}

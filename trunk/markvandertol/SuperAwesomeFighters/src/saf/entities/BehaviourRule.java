@@ -1,39 +1,57 @@
 package saf.entities;
 
+import net.sf.oval.constraint.NotNull;
+import net.sf.oval.guard.Guarded;
+
+/**
+ * A rule for behavior. 
+ */
+@Guarded
 public class BehaviourRule {
-	private FightActionType fightAction;
-	private MoveActionType moveAction;
+	@NotNull
+	private FightAction fightAction;
+	@NotNull
+	private MoveAction moveAction;
+	@NotNull
 	private Condition condition;
 	
 	/**
 	 * @return the fightAction
 	 */
-	public FightActionType getFightAction() {
+	public FightAction getFightAction() {
 		return fightAction;
 	}
 	/**
 	 * @param fightAction the fightAction to set
 	 */
-	public void setFightAction(FightActionType fightAction) {
+	public void setFightAction(FightAction fightAction) {
 		this.fightAction = fightAction;
 	}
 	/**
 	 * @return the moveAction
 	 */
-	public MoveActionType getMoveAction() {
+	public MoveAction getMoveAction() {
 		return moveAction;
 	}
 	/**
 	 * @param moveAction the moveAction to set
 	 */
-	public void setMoveAction(MoveActionType moveAction) {
+	public void setMoveAction(MoveAction moveAction) {
 		this.moveAction = moveAction;
 	}
 	
+	/**
+	 * 
+	 * @return the condition associated to this rule
+	 */
 	public Condition getCondition() {
 		return condition;
 	}
 	
+	/**
+	 * 
+	 * @param condition the condition associated to this rule
+	 */
 	public void setCondition(Condition condition) {
 		this.condition = condition;
 	}
