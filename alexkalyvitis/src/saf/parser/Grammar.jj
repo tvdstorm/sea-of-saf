@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import saf.interpreter.SafInterpreter;
-import saf.objects.*;
+import saf.ast.*;
 
 public class Saf/*@bgen(jjtree)*/implements SafTreeConstants/*@egen*/
 {/*@bgen(jjtree)*/
@@ -45,10 +45,15 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants/*@egen*/
 			} else {			    System.out.println("Interpreting Failed");
 			}
 	    }
-	    catch(Exception e)
+	    catch(ParseException e)
 	    {
 	        System.out.println("Parsing Failed");
-	        //e.printStackTrace();
+	        e.printStackTrace();
+	    }
+	    catch(Exception e)
+	    {
+	        System.out.println("Error");
+	        e.printStackTrace();
 	    }
 	}
 }
@@ -67,8 +72,11 @@ SKIP : // Whitespace
 TOKEN :
 {
 	< ASSIGNMENT : "=" >
+|   < CHOOSE : "choose" >
 |   < IDENTIFIER : ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])* >
 |   < PROPERTYVALUE : (["0"-"9"])+ >
+|   < OPENPARENTHESIS : "(" >
+|   < CLOSEPARENTHESIS : ")" >
 |   < OPENCURLYBRACKET : "{" >
 |   < CLOSECURLYBRACKET : "}" >
 |   < OPENSQAREBRACKET : "[" >
@@ -86,7 +94,7 @@ ArrayList<Fighter> Parse() :
 	 
 	Token fighterName = new Token();
 	Strength fighterStrength = new Strength();
-	Behavior fighterBehavior = new Behavior();
+	ArrayList<Behavior> fighterBehaviors = new ArrayList<Behavior>();
 }
 {/*@bgen(jjtree) Parse */
     try {
@@ -98,7 +106,7 @@ ArrayList<Fighter> Parse() :
 		    LOOKAHEAD(2)
 		    ( fighterStrength = Strength() ) { fighter.addStrength(fighterStrength); }
 		    |
-		    ( fighterBehavior = Behavior() ) { fighter.addBehavior(fighterBehavior); }
+		    ( fighterBehaviors = Behaviors() ) { fighter.addBehaviors(fighterBehaviors); }
 		)*
 		( <  CLOSECURLYBRACKET >) { fighters.add(fighter); }
 	)*
@@ -159,29 +167,126 @@ Strength Strength() :
     }
 /*@egen*/}
 
-Behavior Behavior() :
-{/*@bgen(jjtree) Behavior */
-    SimpleNode jjtn000 = new SimpleNode(JJTBEHAVIOR);
+ArrayList<Behavior> Behaviors() :
+{/*@bgen(jjtree) Behaviors */
+    SimpleNode jjtn000 = new SimpleNode(JJTBEHAVIORS);
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);
 /*@egen*/
-    Token condition = new Token();
-    Token move = new Token();
-    Token attack = new Token();
-}{/*@bgen(jjtree) Behavior */
+    Token conditionToken = new Token();
+
+    ArrayList<Move> moves = new ArrayList<Move>();
+    ArrayList<Attack> attacks = new ArrayList<Attack>();
+
+    ArrayList<Behavior> behaviors = new ArrayList<Behavior>();
+}{/*@bgen(jjtree) Behaviors */
     try {
 /*@egen*/
-    (condition = < IDENTIFIER >)
+    (conditionToken = < IDENTIFIER >)
     < OPENSQAREBRACKET >
-    (move = < IDENTIFIER >)
-    (attack = < IDENTIFIER >)
+    (moves = Moves())
+    (attacks = Attacks())
     < CLOSESQAREBRACKET >/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
     }
 /*@egen*/
-    { return new Behavior(new Condition(condition.toString()), new Move(move.toString()), new Attack(attack.toString())); }/*@bgen(jjtree)*/
+    {
+        for(Move move : moves)        {
+            for(Attack attack : attacks)
+            {
+                behaviors.add(new Behavior(new Condition(conditionToken.toString()),move,attack));            }        }
+        return behaviors;
+    }/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/}
+
+ArrayList<Move> Moves() :
+{/*@bgen(jjtree) Moves */
+        SimpleNode jjtn000 = new SimpleNode(JJTMOVES);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
+/*@egen*/	Token moveToken = new Token();
+	ArrayList<Move> moves = new ArrayList<Move>(); 
+}
+{/*@bgen(jjtree) Moves */
+    try {
+/*@egen*/
+    (moveToken = < IDENTIFIER >)/*@bgen(jjtree)*/
+                                 {
+                                   jjtree.closeNodeScope(jjtn000, true);
+                                   jjtc000 = false;
+                                 }
+/*@egen*/ { moves.add(new Move(moveToken.toString())); return moves; }
+    |
+    (< CHOOSE >)
+    (< OPENPARENTHESIS >)
+    (
+        (moveToken = < IDENTIFIER >){ moves.add(new Move(moveToken.toString())); }
+    )+
+    (< CLOSEPARENTHESIS >)/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    { return moves; }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/}
+
+ArrayList<Attack> Attacks() :
+{/*@bgen(jjtree) Attacks */
+    SimpleNode jjtn000 = new SimpleNode(JJTATTACKS);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token attackToken = new Token();
+    ArrayList<Attack> attacks = new ArrayList<Attack>();}
+{/*@bgen(jjtree) Attacks */
+    try {
+/*@egen*/
+    (attackToken = < IDENTIFIER >)/*@bgen(jjtree)*/
+                                   {
+                                     jjtree.closeNodeScope(jjtn000, true);
+                                     jjtc000 = false;
+                                   }
+/*@egen*/ { attacks.add(new Attack(attackToken.toString())); return attacks; }
+    |
+    (< CHOOSE >)
+    (< OPENPARENTHESIS >)
+    (
+        (attackToken = < IDENTIFIER >){ attacks.add(new Attack(attackToken.toString())); }
+    )+
+    (< CLOSEPARENTHESIS >)/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    { return attacks; }/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);

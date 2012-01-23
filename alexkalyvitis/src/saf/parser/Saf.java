@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-import saf.ast.*;
 import saf.interpreter.SafInterpreter;
+import saf.ast.*;
 
 public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@bgen(jjtree)*/
   protected JJTSafState jjtree = new JJTSafState();public static void main(String args[])
@@ -34,10 +34,15 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
                             System.out.println("Interpreting Failed");
                         }
             }
-            catch(Exception e)
+            catch(ParseException e)
             {
                 System.out.println("Parsing Failed");
-                //e.printStackTrace();
+                e.printStackTrace();
+            }
+            catch(Exception e)
+            {
+                System.out.println("Error");
+                e.printStackTrace();
             }
         }
 
@@ -50,7 +55,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
 
         Token fighterName = new Token();
         Strength fighterStrength = new Strength();
-        Behavior fighterBehavior = new Behavior();
+        ArrayList<Behavior> fighterBehaviors = new ArrayList<Behavior>();
     try {
       label_1:
       while (true) {
@@ -94,8 +99,8 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
           } else {
             switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
             case IDENTIFIER:
-              fighterBehavior = Behavior();
-                                                       fighter.addBehavior(fighterBehavior);
+              fighterBehaviors = Behaviors();
+                                                         fighter.addBehaviors(fighterBehaviors);
               break;
             default:
               jj_la1[3] = jj_gen;
@@ -154,22 +159,142 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     throw new Error("Missing return statement in function");
   }
 
-  final public Behavior Behavior() throws ParseException {
- /*@bgen(jjtree) Behavior */
-    SimpleNode jjtn000 = new SimpleNode(JJTBEHAVIOR);
+  final public ArrayList<Behavior> Behaviors() throws ParseException {
+ /*@bgen(jjtree) Behaviors */
+    SimpleNode jjtn000 = new SimpleNode(JJTBEHAVIORS);
     boolean jjtc000 = true;
-    jjtree.openNodeScope(jjtn000);Token condition = new Token();
-    Token move = new Token();
-    Token attack = new Token();
+    jjtree.openNodeScope(jjtn000);Token conditionToken = new Token();
+
+    ArrayList<Move> moves = new ArrayList<Move>();
+    ArrayList<Attack> attacks = new ArrayList<Attack>();
+
+    ArrayList<Behavior> behaviors = new ArrayList<Behavior>();
     try {
-      condition = jj_consume_token(IDENTIFIER);
+      conditionToken = jj_consume_token(IDENTIFIER);
       jj_consume_token(OPENSQAREBRACKET);
-      move = jj_consume_token(IDENTIFIER);
-      attack = jj_consume_token(IDENTIFIER);
+      moves = Moves();
+      attacks = Attacks();
       jj_consume_token(CLOSESQAREBRACKET);
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
-      {if (true) return new Behavior(new Condition(condition.toString()), new Move(move.toString()), new Attack(attack.toString()));}
+        for(Move move : moves)
+        {
+            for(Attack attack : attacks)
+            {
+                behaviors.add(new Behavior(new Condition(conditionToken.toString()),move,attack));
+            }
+        }
+        {if (true) return behaviors;}
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        {if (true) throw (RuntimeException)jjte000;}
+      }
+      if (jjte000 instanceof ParseException) {
+        {if (true) throw (ParseException)jjte000;}
+      }
+      {if (true) throw (Error)jjte000;}
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  final public ArrayList<Move> Moves() throws ParseException {
+ /*@bgen(jjtree) Moves */
+        SimpleNode jjtn000 = new SimpleNode(JJTMOVES);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);Token moveToken = new Token();
+        ArrayList<Move> moves = new ArrayList<Move>();
+    try {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+        moveToken = jj_consume_token(IDENTIFIER);
+                                   jjtree.closeNodeScope(jjtn000, true);
+                                   jjtc000 = false;
+                                   moves.add(new Move(moveToken.toString())); {if (true) return moves;}
+        break;
+      case CHOOSE:
+        jj_consume_token(CHOOSE);
+        jj_consume_token(OPENPARENTHESIS);
+        label_4:
+        while (true) {
+          moveToken = jj_consume_token(IDENTIFIER);
+                                      moves.add(new Move(moveToken.toString()));
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[4] = jj_gen;
+            break label_4;
+          }
+        }
+        jj_consume_token(CLOSEPARENTHESIS);
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+      {if (true) return moves;}
+        break;
+      default:
+        jj_la1[5] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  final public ArrayList<Attack> Attacks() throws ParseException {
+ /*@bgen(jjtree) Attacks */
+    SimpleNode jjtn000 = new SimpleNode(JJTATTACKS);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);Token attackToken = new Token();
+    ArrayList<Attack> attacks = new ArrayList<Attack>();
+    try {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case IDENTIFIER:
+        attackToken = jj_consume_token(IDENTIFIER);
+                                     jjtree.closeNodeScope(jjtn000, true);
+                                     jjtc000 = false;
+                                     attacks.add(new Attack(attackToken.toString())); {if (true) return attacks;}
+        break;
+      case CHOOSE:
+        jj_consume_token(CHOOSE);
+        jj_consume_token(OPENPARENTHESIS);
+        label_5:
+        while (true) {
+          attackToken = jj_consume_token(IDENTIFIER);
+                                        attacks.add(new Attack(attackToken.toString()));
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case IDENTIFIER:
+            ;
+            break;
+          default:
+            jj_la1[6] = jj_gen;
+            break label_5;
+          }
+        }
+        jj_consume_token(CLOSEPARENTHESIS);
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+      {if (true) return attacks;}
+        break;
+      default:
+        jj_la1[7] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -185,14 +310,14 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     finally { jj_save(0, xla); }
   }
 
-  private boolean jj_3R_4() {
+  private boolean jj_3R_6() {
     if (jj_scan_token(IDENTIFIER)) return true;
     if (jj_scan_token(ASSIGNMENT)) return true;
     return false;
   }
 
   private boolean jj_3_1() {
-    if (jj_3R_4()) return true;
+    if (jj_3R_6()) return true;
     return false;
   }
 
@@ -207,13 +332,13 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[4];
+  final private int[] jj_la1 = new int[8];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x80,0x80,0x80,0x80,};
+      jj_la1_0 = new int[] {0x100,0x100,0x100,0x100,0x100,0x180,0x100,0x180,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[1];
   private boolean jj_rescan = false;
@@ -230,7 +355,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -246,7 +371,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -257,7 +382,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -269,7 +394,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -279,7 +404,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -290,7 +415,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 8; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -402,12 +527,12 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[13];
+    boolean[] la1tokens = new boolean[16];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 8; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -416,7 +541,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
         }
       }
     }
-    for (int i = 0; i < 13; i++) {
+    for (int i = 0; i < 16; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

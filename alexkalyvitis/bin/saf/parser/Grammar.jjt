@@ -13,7 +13,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 import saf.interpreter.SafInterpreter;
-import saf.objects.*;
+import saf.ast.*;
 
 public class Saf
 {   
@@ -41,10 +41,15 @@ public class Saf
 			} else {			    System.out.println("Interpreting Failed");
 			}
 	    }
-	    catch(Exception e)
+	    catch(ParseException e)
 	    {
 	        System.out.println("Parsing Failed");
-	        //e.printStackTrace();
+	        e.printStackTrace();
+	    }
+	    catch(Exception e)
+	    {
+	        System.out.println("Error");
+	        e.printStackTrace();
 	    }
 	}
 }
@@ -63,8 +68,11 @@ SKIP : // Whitespace
 TOKEN :
 {
 	< ASSIGNMENT : "=" >
+|   < CHOOSE : "choose" >
 |   < IDENTIFIER : ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])* >
 |   < PROPERTYVALUE : (["0"-"9"])+ >
+|   < OPENPARENTHESIS : "(" >
+|   < CLOSEPARENTHESIS : ")" >
 |   < OPENCURLYBRACKET : "{" >
 |   < CLOSECURLYBRACKET : "}" >
 |   < OPENSQAREBRACKET : "[" >
@@ -78,7 +86,7 @@ ArrayList<Fighter> Parse() :
 	 
 	Token fighterName = new Token();
 	Strength fighterStrength = new Strength();
-	Behavior fighterBehavior = new Behavior();
+	ArrayList<Behavior> fighterBehaviors = new ArrayList<Behavior>();
 }
 {
     (        (fighterName = < IDENTIFIER >) { fighter.setName(fighterName.toString()); }
@@ -88,7 +96,7 @@ ArrayList<Fighter> Parse() :
 		    LOOKAHEAD(2)
 		    ( fighterStrength = Strength() ) { fighter.addStrength(fighterStrength); }
 		    |
-		    ( fighterBehavior = Behavior() ) { fighter.addBehavior(fighterBehavior); }
+		    ( fighterBehaviors = Behaviors() ) { fighter.addBehaviors(fighterBehaviors); }
 		)*
 		( <  CLOSECURLYBRACKET >) { fighters.add(fighter); }
 	)*
@@ -107,18 +115,57 @@ Strength Strength() :
     (value = < PROPERTYVALUE >)
     { return new Strength(name.toString(),Integer.valueOf(value.toString())); }}
 
-Behavior Behavior() :
+ArrayList<Behavior> Behaviors() :
 {
-    Token condition = new Token();
-    Token move = new Token();
-    Token attack = new Token();
+    Token conditionToken = new Token();
+
+    ArrayList<Move> moves = new ArrayList<Move>();
+    ArrayList<Attack> attacks = new ArrayList<Attack>();
+
+    ArrayList<Behavior> behaviors = new ArrayList<Behavior>();
 }{
-    (condition = < IDENTIFIER >)
+    (conditionToken = < IDENTIFIER >)
     < OPENSQAREBRACKET >
-    (move = < IDENTIFIER >)
-    (attack = < IDENTIFIER >)
+    (moves = Moves())
+    (attacks = Attacks())
     < CLOSESQAREBRACKET >
-    { return new Behavior(new Condition(condition.toString()), new Move(move.toString()), new Attack(attack.toString())); }}
+    {
+        for(Move move : moves)        {
+            for(Attack attack : attacks)
+            {
+                behaviors.add(new Behavior(new Condition(conditionToken.toString()),move,attack));            }        }
+        return behaviors;
+    }}
+
+ArrayList<Move> Moves() :
+{	Token moveToken = new Token();
+	ArrayList<Move> moves = new ArrayList<Move>(); 
+}
+{
+    (moveToken = < IDENTIFIER >) { moves.add(new Move(moveToken.toString())); return moves; }
+    |
+    (< CHOOSE >)
+    (< OPENPARENTHESIS >)
+    (
+        (moveToken = < IDENTIFIER >){ moves.add(new Move(moveToken.toString())); }
+    )+
+    (< CLOSEPARENTHESIS >)
+    { return moves; }}
+
+ArrayList<Attack> Attacks() :
+{
+    Token attackToken = new Token();
+    ArrayList<Attack> attacks = new ArrayList<Attack>();}
+{
+    (attackToken = < IDENTIFIER >) { attacks.add(new Attack(attackToken.toString())); return attacks; }
+    |
+    (< CHOOSE >)
+    (< OPENPARENTHESIS >)
+    (
+        (attackToken = < IDENTIFIER >){ attacks.add(new Attack(attackToken.toString())); }
+    )+
+    (< CLOSEPARENTHESIS >)
+    { return attacks; }}
 
 
 
