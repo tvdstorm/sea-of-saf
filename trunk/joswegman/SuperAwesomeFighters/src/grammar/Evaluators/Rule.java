@@ -16,7 +16,6 @@ public class Rule {
    }
    
    public  String toString () {
-	   //System.out.println("Rule: " +this.id + " " + this.item1.toString() + " "+ this.item2.toString());
 	   return "Rule: " + this.id + " " + this.item1.toString() + " "+ this.item2.toString();
    }
    
