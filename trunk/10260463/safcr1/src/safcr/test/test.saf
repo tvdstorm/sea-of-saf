@@ -16,9 +16,13 @@ Terminator{
 	kickReach = 2
 	punchReach = 6
 	far[run_towards punch_high]
+	and
 	near[choose(stand crouch) kick_high]
+	and
 	much_stronger[walk_towards punch_low]
+	or
 	weaker[run_away choose(block_high block_low)]
+	and
 	always[walk_towards block_high]
 }
 
