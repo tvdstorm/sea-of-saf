@@ -1,10 +1,22 @@
 package SAF.Structure;
 
-public class Condition {
+public class Condition implements SAFElement {
 	public Condition(){}
-	public Condition(Condition _condition)
+	public Condition(Condition condition)
 	{
-		condition = _condition;
+		this.condition = condition;
 	}
-	public Condition condition;
+	
+    public void accept(SAFElementVisitor visitor) throws Exception {
+        visitor.visit(this);
+    }
+	
+	private Condition condition;
+
+	public Condition getCondition() {
+		return condition;
+	}
+	public void setCondition(Condition condition) {
+		this.condition = condition;
+	}
 }

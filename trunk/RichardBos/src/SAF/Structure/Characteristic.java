@@ -1,11 +1,28 @@
 package SAF.Structure;
 
-public class Characteristic {
+public class Characteristic implements SAFElement {
 	public Characteristic(String _name)
 	{
 		name = _name;
 	}
 	
-	public String name;
-	public int value = 5;
+    public void accept(SAFElementVisitor visitor) throws Exception {
+        visitor.visit(this);
+    }
+	
+	private String name;
+	private int value = 5;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getValue() {
+		return value;
+	}
+	public void setValue(int value) {
+		this.value = value;
+	}
 }

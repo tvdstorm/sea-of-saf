@@ -2,16 +2,21 @@ package SAF.Structure;
 
 import java.util.ArrayList;
 
-public class Bots {
+public class Bots implements SAFElement {
 	public Bots()
 	{ 
-		System.out.println("new bots");
-		ChildBots = new ArrayList<Bot>();
+		this.bots = new ArrayList<Bot>();
 	}
-	public void AddBot(Bot b)
-	{
-		System.out.println(b.name);
-		ChildBots.add(b);
+	
+    public void accept(SAFElementVisitor visitor) throws Exception {
+        visitor.visit(this);
+    }
+	
+	private ArrayList<Bot> bots;
+	public ArrayList<Bot> getBots() {
+		return bots;
 	}
-	public ArrayList<Bot> ChildBots;
+	public void setBots(ArrayList<Bot> bots) {
+		this.bots = bots;
+	}
 }
