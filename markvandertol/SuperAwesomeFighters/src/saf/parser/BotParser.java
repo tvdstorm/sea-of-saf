@@ -4,10 +4,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import net.sf.oval.configuration.annotation.IsInvariant;
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
-
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
@@ -19,11 +15,10 @@ import saf.entities.Bot;
 import saf.entities.CombinedCondition;
 import saf.entities.ConcreteCondition;
 import saf.entities.Condition;
-import saf.entities.State;
 import saf.entities.FightAction;
 import saf.entities.MoveAction;
+import saf.entities.State;
 
-@Guarded
 public class BotParser {
 
 	/**
@@ -33,9 +28,7 @@ public class BotParser {
 	 * @throws IOException error while reading file
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	@IsInvariant
-	@NotNull
-	public Bot parseBot(@NotNull String path) throws IOException, BotDefinitionMalformedException {
+	public Bot parseBot(String path) throws IOException, BotDefinitionMalformedException {
 		FileInputStream stream = new FileInputStream(path);
 		return parseBot(stream);
 	}
@@ -47,9 +40,7 @@ public class BotParser {
 	 * @throws IOException error while reading file
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	@IsInvariant
-	@NotNull
-	public Bot parseBot(@NotNull InputStream stream) throws IOException, BotDefinitionMalformedException {
+	public Bot parseBot(InputStream stream) throws IOException, BotDefinitionMalformedException {
 		try {
 			ANTLRInputStream input = new ANTLRInputStream(stream);
 
@@ -80,9 +71,7 @@ public class BotParser {
 	 * @return the bot
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	@IsInvariant
-	@NotNull
-	protected Bot walkBotTree(@NotNull Tree tree) throws BotDefinitionMalformedException {
+	protected Bot walkBotTree(Tree tree) throws BotDefinitionMalformedException {
 		Bot bot = new Bot();
 		for (int i = 0; i < tree.getChildCount(); i++) {
 			Tree child = tree.getChild(i);
@@ -109,7 +98,7 @@ public class BotParser {
 	 * @param bot bot to update
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	protected void walkBotName(@NotNull Tree tree, @NotNull Bot bot) throws BotDefinitionMalformedException {
+	protected void walkBotName(Tree tree, Bot bot) throws BotDefinitionMalformedException {
 		String name = tree.getText();
 		if (name == null || name.equals(""))
 			throw new BotDefinitionMalformedException("Invalid name");
@@ -122,7 +111,7 @@ public class BotParser {
 	 * @param bot bot to update
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	protected void walkAssignment(@NotNull Tree tree, @NotNull Bot bot) throws BotDefinitionMalformedException {
+	protected void walkAssignment(Tree tree, Bot bot) throws BotDefinitionMalformedException {
 		String var = tree.getChild(0).getText();
 
 		int newValue = Integer.parseInt(tree.getChild(1).getText());
@@ -145,7 +134,7 @@ public class BotParser {
 	 * @param tree part of the tree that contains one action
 	 * @param bot bot to update
 	 */
-	protected void walkAction(@NotNull Tree tree, @NotNull Bot bot) {
+	protected void walkAction(Tree tree, Bot bot) {
 		Condition condition = walkCondition(tree.getChild(0));
 		MoveAction moveAction = MoveAction.valueOf(tree.getChild(1).getText());
 		FightAction fightAction = FightAction.valueOf(tree.getChild(2).getText());
@@ -163,9 +152,7 @@ public class BotParser {
 	 * @param tree part of the tree that contains one condition (the condition can include subconditions)
 	 * @return the condition
 	 */
-	@IsInvariant
-	@NotNull
-	protected Condition walkCondition(@NotNull Tree tree) {
+	protected Condition walkCondition(Tree tree) {
 		if (tree.getChild(0).getType() == SAFParser.CONDITION) {
 			return walkCondition(tree.getChild(0)); // handles the case for
 													// (...)

@@ -1,18 +1,13 @@
 package saf.entities;
 
-import net.sf.oval.constraint.NotNull;
-import net.sf.oval.guard.Guarded;
-
 /**
  * A rule for behavior. 
  */
-@Guarded
+
 public class BehaviourRule {
-	@NotNull
+
 	private FightAction fightAction;
-	@NotNull
 	private MoveAction moveAction;
-	@NotNull
 	private Condition condition;
 	
 	/**

@@ -1,0 +1,8 @@
+<project name="SuperAwesomeFighters" default="dist" basedir=".">
+    <description>
+        simple example build file
+    </description>
+
+
+
+</project>
