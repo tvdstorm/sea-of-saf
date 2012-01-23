@@ -1,0 +1,11 @@
+JackieChan{
+ kickPower = 7
+ punchPower = 5
+ kickReach = 3
+ punchReach = 9
+ far[runTowards punchHigh]
+ near[stand kickHigh]
+ muchStronger[walkTowards punchLow]
+ weaker[runAway blockHigh]
+ always[walkTowards blockHigh]
+}
