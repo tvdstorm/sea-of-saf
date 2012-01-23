@@ -24,40 +24,27 @@ public class Fight {
     	safParser.saf_return ret = grammar.saf();
     	CommonTree tree = (CommonTree)ret.getTree();
     	
-    	//for (Object t : tokens.getTokens()) {
-		//	System.out.println(t);
-		//}
-        
-    	// show S-Expression respresentation of the AST 
-    	String s = tree.toStringTree(); 
-    	//System.out.println(s);
-    	
-    	// print the AST as DOT specification 
+    	String treeString = generateStringDotTree(tree);
+    	saveDotFile("output/fighter_ast.dot", treeString);
+    }
+    
+    // print the AST as DOT specification 
+    public static String generateStringDotTree(CommonTree tree) {
     	DOTTreeGenerator gen = new DOTTreeGenerator(); 
     	StringTemplate st = gen.toDOT(tree); 
-    	
-    	try{
-    		FileWriter fstream = new FileWriter("fighter_ast.dot");
+    	return st.toString();
+    }
+    
+    // save the file to disk
+    public static void saveDotFile(String file, String content) {
+    	try {
+    		FileWriter fstream = new FileWriter(file);
     		BufferedWriter out = new BufferedWriter(fstream);
-    		out.write(st.toString());
+    		out.write(content);
     		out.close();
     	} catch (Exception e){
     		System.err.println("Error: " + e.getMessage());
         }
-    	
-    	System.out.println(st.toString());
-    	
-    	//printTree(tree, 2);
-    	
-	    // CharStream input = new ANTLRFileStream(args[0]);
-	    //CharStream input = new ANTLRFileStream("fighters/Statham.saf");
-		//safLexer lexer = new safLexer(input);
-		//CommonTokenStream tokens = new CommonTokenStream(lexer);
-	
-		
-	
-		//safParser parser = new safParser(tokens);
-		//parser.saf();
     }
     
     public static void printTree(CommonTree t, int indent) {
