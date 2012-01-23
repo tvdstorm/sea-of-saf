@@ -36,8 +36,11 @@ tokens {
 	RPARAM = ')';
 	AND = 'and';
 	OR = 'or';
-	NODE;
+	SAF_NODE;
 	BEHAVIOUR_NODE;
+	STRENGTH_NODE;
+	CONDITION_NODE;
+	ACTION_NODE;
 }
 
 @header {
@@ -87,13 +90,13 @@ tokens {
 saf:		NAME LDELIM  property_list RDELIM -> ^(NAME property_list);
 property_list: 	(property)*;
 property:	strength  | behaviour;
-strength:	STRENGTH_TOKEN EQ NUMBER -> ^(STRENGTH_TOKEN<StrengthNode>[$STRENGTH_TOKEN,$NUMBER]);
+strength:	STRENGTH_TOKEN EQ NUMBER -> ^(STRENGTH_NODE STRENGTH_TOKEN NUMBER);
 /*strength:	STRENGTH_TOKEN EQ NUMBER -> ^(STRENGTH_TOKEN NUMBER);*/
 /*strength_atom:	KICKREACH | PUCHREACH | KICKPOWER | PUCHPOWER;*/
 
-condition:	term (  OR  term )* ;
-behaviour:	condition LSQUARE action RSQUARE -> ^(BEHAVIOUR_NODE<BehaviourNode> condition action);
-term:		CONDITION_TOKEN ( AND CONDITION_TOKEN )*;
+condition:	term (  OR  term )* -> ^(term ( OR term));
+behaviour:	condition LSQUARE action RSQUARE -> ^(BEHAVIOUR_NODE condition action);
+term:		CONDITION_TOKEN ( AND CONDITION_TOKEN )* -> ^(CONDITION_NODE CONDITION_TOKEN ( AND CONDITION_TOKEN )*);
 /*condition_atom:	STRONGER | WEAKER | MUCH_STRONGER | MUCH_WEAKER | EVEN | NEAR | FAR | ALWAYS;*/
 action:		move | fight | move fight;
 move:		CHOOSE LPARAM move_atom move_atom RPARAM | move_atom; 

@@ -1,16 +1,13 @@
 import java.io.*;
 import org.antlr.runtime.*;
-//import org.antlr.runtime.debug.DebugEventSocketProxy;
+
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeAdaptor;
 import org.antlr.runtime.tree.Tree;
 import org.antlr.runtime.tree.TreeAdaptor;
 
-import AST.Node;
-import AST.SafNode;
-
-import parser.FDLLexer;
-import parser.FDLParser;
+import AST.*;
+import parser.*;
 
 
 public class Test {
@@ -29,12 +26,26 @@ public class Test {
             System.out.println(((Tree)r.getTree()).toString());
             ((CommonTree)r.getTree()).sanityCheckParentAndChildIndexes();
         }
-    	//Node tree = (Node) ret.getTree();
-    	printTree((CommonTree)r.getTree(), 0);//.toString());
+    	printTree((CommonTree)r.getTree(), 0);
 	}
 	
 	static final TreeAdaptor adaptor = new CommonTreeAdaptor() {
 		public Object create(Token payload) {
+			System.out.println(payload);
+			if (payload != null) { 
+				switch (payload.getType()) {
+					case FDLParser.SAF_NODE:
+						return new SafNode(payload);
+					case FDLParser.BEHAVIOUR_NODE:
+						return new BehaviourNode(payload);
+					case FDLParser.STRENGTH_NODE:
+						return new StrengthNode(payload);
+					case FDLParser.CONDITION_NODE:
+						return new ConditionNode(payload);
+					default:
+						return new Node(payload);
+				}
+			}
 			return new Node(payload);
 		}
 	};
@@ -42,7 +53,9 @@ public class Test {
 	public static void printTree(CommonTree t, int indent) {
 		if ( t != null ) {
 			StringBuffer sb = new StringBuffer(indent);
-			System.out.print(indent + ":");
+			for ( int i = 0; i < indent; i++ ) {
+				System.out.print("    ");
+			}
 			System.out.print(t.getChildCount() + ":");
 			System.out.print(t.getClass() + ":");
 			System.out.println(t.toString() );
