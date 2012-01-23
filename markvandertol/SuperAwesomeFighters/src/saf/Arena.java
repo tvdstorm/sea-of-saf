@@ -22,7 +22,7 @@ public class Arena {
 	public static void main(String[] args) throws IOException, BotDefinitionMalformedException {
 		BotParser parser = new BotParser();
 		Bot result = parser.parseBot("test.saf");
-		System.out.println(result);
+
 	}
 
 }

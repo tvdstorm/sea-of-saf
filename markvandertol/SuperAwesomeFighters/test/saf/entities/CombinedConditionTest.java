@@ -1,4 +1,4 @@
-package saf.parser;
+package saf.entities;
 
 import static org.junit.Assert.*;
 
@@ -10,14 +10,14 @@ import org.junit.Test;
 
 import saf.entities.CombinedCondition;
 import saf.entities.Condition;
-import saf.entities.ConditionType;
+import saf.entities.State;
 
 public class CombinedConditionTest {
 	
 	Condition conditionTrue = new Condition() {
 		
 		@Override
-		public boolean matched(Set<ConditionType> currentConditions) {
+		public boolean matched(Set<State> currentConditions) {
 			return true;
 		}
 	};
@@ -25,12 +25,12 @@ public class CombinedConditionTest {
 	Condition conditionFalse = new Condition() {
 		
 		@Override
-		public boolean matched(Set<ConditionType> currentConditions) {
+		public boolean matched(Set<State> currentConditions) {
 			return false;
 		}
 	};
 
-	Set<ConditionType> setDummy = new HashSet<ConditionType>();
+	Set<State> setDummy = new HashSet<State>();
 
 	@Test
 	public void testMatchedAnd() {

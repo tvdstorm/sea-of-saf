@@ -10,21 +10,21 @@ import org.junit.Test;
 
 public class ConcreteConditionTest {
 	
-	Set<ConditionType> testSet;
+	Set<State> testSet;
 
 	@Before
 	public void setUp() throws Exception {
-		testSet = new HashSet<ConditionType>();
-		testSet.add(ConditionType.always);
-		testSet.add(ConditionType.even);
+		testSet = new HashSet<State>();
+		testSet.add(State.always);
+		testSet.add(State.even);
 	}
 
 	@Test
 	public void testMatched() {
-		ConcreteCondition condition1 = new ConcreteCondition(ConditionType.always);
+		ConcreteCondition condition1 = new ConcreteCondition(State.always);
 		assertTrue(condition1.matched(testSet));
 		
-		ConcreteCondition condition2 = new ConcreteCondition(ConditionType.far);
+		ConcreteCondition condition2 = new ConcreteCondition(State.far);
 		assertFalse(condition2.matched(testSet));
 	}
 	

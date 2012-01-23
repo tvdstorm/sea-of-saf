@@ -1,6 +1,9 @@
 package saf.entities;
 
-public enum FightActionType {
+/**
+ * Fight actions a bot can perform.
+ */
+public enum FightAction {
 	block_low,
 	block_high,
 	punch_low,
