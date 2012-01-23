@@ -2,6 +2,7 @@ package saf.fdl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CharStream;
@@ -16,7 +17,7 @@ import saf.SuperAwesomeFighter;
 
 public class FDLReader {
 
-	public Fighter createFighter(String fdl) throws IOException{
+	public Fighter createFighter(String fdl) throws IOException, InvalidParameterException {
 		if(fdl==null)
 			return null;
 		
@@ -25,7 +26,7 @@ public class FDLReader {
 			ast = readFDL(fdl);
 		} catch (RecognitionException e) {
 			System.err.println(e);
-			throw new IOException(e.getMessage()); //keep ANTLR lib usage to this package
+			throw new InvalidParameterException(e.getMessage()); //keep ANTLR lib usage to this package
 		}
 		
 		Fighter fighter = new SuperAwesomeFighter();
@@ -36,7 +37,8 @@ public class FDLReader {
 		return fighter;
 	}
 	
-	private CommonTree readFDL(String fdl) throws IOException, RecognitionException{
+	private CommonTree readFDL(String fdl) throws IOException, RecognitionException, 
+																InvalidParameterException {
 		
 		//Input
 		CharStream input = new ANTLRInputStream(new ByteArrayInputStream(fdl.getBytes()));
@@ -47,11 +49,11 @@ public class FDLReader {
 
         //Parser
         FDLParser parser = new FDLParser(tokens);
-        CommonTree ast = (CommonTree) parser.saf().getTree();
+        CommonTree ast = (CommonTree) parser.fighter().getTree();
 
         //Checker
 		FDLChecker checker = new FDLChecker(new CommonTreeNodeStream(ast));
-		checker.saf();
+		checker.fighter();
 		
 		return ast;
 	}	
