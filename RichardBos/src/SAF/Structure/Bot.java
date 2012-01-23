@@ -2,16 +2,37 @@ package SAF.Structure;
 
 import java.util.ArrayList;
 
-public class Bot {
-	public Bot(String _name) {
-		System.out.println(_name);
+public class Bot implements SAFElement {
+	public Bot(String name) {
 		Characteristics = new ArrayList<Characteristic>();
-		Behavior = new ArrayList<BehaviorRule>();
-		name = _name;
+		Behaviors = new ArrayList<Behavior>();
+		setName(name);
 	}
-	public String name;
 	
-	//Characteristics
-	public ArrayList<Characteristic> Characteristics;
-	public ArrayList<BehaviorRule> Behavior;
+    public void accept(SAFElementVisitor visitor) throws Exception {
+        visitor.visit(this);
+    }
+	
+	private String name;
+	private ArrayList<Characteristic> Characteristics;
+	private ArrayList<Behavior> Behaviors;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public ArrayList<Characteristic> getCharacteristics() {
+		return Characteristics;
+	}
+	public void setCharacteristics(ArrayList<Characteristic> characteristics) {
+		Characteristics = characteristics;
+	}
+	public ArrayList<Behavior> getBehaviors() {
+		return Behaviors;
+	}
+	public void setBehaviors(ArrayList<Behavior> behaviors) {
+		Behaviors = behaviors;
+	}
 }
