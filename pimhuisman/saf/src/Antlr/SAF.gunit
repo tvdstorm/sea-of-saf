@@ -4,9 +4,28 @@ gunit SAF;
   package Antlr;
 }
 
-characteristic:
-	"kickPower = -1" FAIL
-	"kickPower = 0" OK
-	"kickPower = 9" OK
-	"kickPower = 10" FAIL
-	"kickPower = 1.1" FAIL
+characteristic	:
+					"kickPower = 0" OK
+					"kickPower = 9" OK
+					"kickPower = -1" FAIL // Negative values are not allowed.
+					"kickPower = 1.1" FAIL // Floating point values are not allowed.
+
+rule			:
+					"near[choose(stand crouch) kick_high]" OK
+					"much_stronger[walk_towards punch_low]" OK
+					"weaker and far[run_away choose(block_high block_low)]" OK
+					"always[walk_towards block_high]" OK
+					"always walk_away block2_low" FAIL // Attack action does not exist.
+					"always choose(walk_away run_away block_low)" FAIL // First attack action missing.
+
+condition		:
+					"far and near" OK
+					"iswinning" FAIL // Condition does not exist.
+
+actions			:
+					"run_away punch_high" OK
+					"choose(walk_away run_away) punch_high" OK
+					"walk_away choose(punch_low punch_high)" OK
+					"choose(walk_away punch_low run_towards kick_high)" OK
+					"punch_high run_away" FAIL // Reversed.
+					"run_away specialmove_low" FAIL // Attack action does not exist.
