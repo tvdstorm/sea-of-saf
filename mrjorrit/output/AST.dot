@@ -6,59 +6,78 @@ digraph {
 		width=.25, height=.25, color="black", fillcolor="white", style="filled, solid, bold"];
 	edge [arrowsize=.5, color="black", style="bold"]
 
-  n0 [label="chicken"];
+  n0 [label="JackieChan"];
   n1 [label="PERSONALITY"];
   n1 [label="PERSONALITY"];
-  n2 [label="kickReach"];
-  n2 [label="kickReach"];
-  n3 [label="9"];
-  n4 [label="punchReach"];
-  n4 [label="punchReach"];
-  n5 [label="1"];
-  n6 [label="kickPower"];
-  n6 [label="kickPower"];
-  n7 [label="2"];
-  n8 [label="punchPower"];
-  n8 [label="punchPower"];
-  n9 [label="2"];
+  n2 [label="kickPower"];
+  n2 [label="kickPower"];
+  n3 [label="7"];
+  n4 [label="punchPower"];
+  n4 [label="punchPower"];
+  n5 [label="5"];
+  n6 [label="kickReach"];
+  n6 [label="kickReach"];
+  n7 [label="3"];
+  n8 [label="punchReach"];
+  n8 [label="punchReach"];
+  n9 [label="9"];
   n10 [label="BEHAVIOUR"];
   n10 [label="BEHAVIOUR"];
   n11 [label="far"];
   n11 [label="far"];
-  n12 [label="choose"];
-  n12 [label="choose"];
-  n13 [label="run_towards"];
-  n14 [label="run_away"];
-  n15 [label="kick_low"];
-  n16 [label="near"];
-  n16 [label="near"];
-  n17 [label="run_away"];
-  n18 [label="kick_low"];
-  n19 [label="near"];
-  n19 [label="near"];
-  n20 [label="crouch"];
+  n12 [label="run_towards"];
+  n13 [label="punch_high"];
+  n14 [label="near"];
+  n14 [label="near"];
+  n15 [label="choose"];
+  n15 [label="choose"];
+  n16 [label="stand"];
+  n17 [label="crouch"];
+  n18 [label="kick_high"];
+  n19 [label="much_stronger"];
+  n19 [label="much_stronger"];
+  n20 [label="walk_towards"];
   n21 [label="punch_low"];
+  n22 [label="weaker"];
+  n22 [label="weaker"];
+  n23 [label="run_away"];
+  n24 [label="choose"];
+  n24 [label="choose"];
+  n25 [label="block_high"];
+  n26 [label="block_low"];
+  n27 [label="always"];
+  n27 [label="always"];
+  n28 [label="walk_towards"];
+  n29 [label="block_high"];
 
-  n0 -> n1 // "chicken" -> "PERSONALITY"
-  n1 -> n2 // "PERSONALITY" -> "kickReach"
-  n2 -> n3 // "kickReach" -> "9"
-  n1 -> n4 // "PERSONALITY" -> "punchReach"
-  n4 -> n5 // "punchReach" -> "1"
-  n1 -> n6 // "PERSONALITY" -> "kickPower"
-  n6 -> n7 // "kickPower" -> "2"
-  n1 -> n8 // "PERSONALITY" -> "punchPower"
-  n8 -> n9 // "punchPower" -> "2"
-  n0 -> n10 // "chicken" -> "BEHAVIOUR"
+  n0 -> n1 // "JackieChan" -> "PERSONALITY"
+  n1 -> n2 // "PERSONALITY" -> "kickPower"
+  n2 -> n3 // "kickPower" -> "7"
+  n1 -> n4 // "PERSONALITY" -> "punchPower"
+  n4 -> n5 // "punchPower" -> "5"
+  n1 -> n6 // "PERSONALITY" -> "kickReach"
+  n6 -> n7 // "kickReach" -> "3"
+  n1 -> n8 // "PERSONALITY" -> "punchReach"
+  n8 -> n9 // "punchReach" -> "9"
+  n0 -> n10 // "JackieChan" -> "BEHAVIOUR"
   n10 -> n11 // "BEHAVIOUR" -> "far"
-  n11 -> n12 // "far" -> "choose"
-  n12 -> n13 // "choose" -> "run_towards"
-  n12 -> n14 // "choose" -> "run_away"
-  n11 -> n15 // "far" -> "kick_low"
-  n10 -> n16 // "BEHAVIOUR" -> "near"
-  n16 -> n17 // "near" -> "run_away"
-  n16 -> n18 // "near" -> "kick_low"
-  n10 -> n19 // "BEHAVIOUR" -> "near"
-  n19 -> n20 // "near" -> "crouch"
-  n19 -> n21 // "near" -> "punch_low"
+  n11 -> n12 // "far" -> "run_towards"
+  n11 -> n13 // "far" -> "punch_high"
+  n10 -> n14 // "BEHAVIOUR" -> "near"
+  n14 -> n15 // "near" -> "choose"
+  n15 -> n16 // "choose" -> "stand"
+  n15 -> n17 // "choose" -> "crouch"
+  n14 -> n18 // "near" -> "kick_high"
+  n10 -> n19 // "BEHAVIOUR" -> "much_stronger"
+  n19 -> n20 // "much_stronger" -> "walk_towards"
+  n19 -> n21 // "much_stronger" -> "punch_low"
+  n10 -> n22 // "BEHAVIOUR" -> "weaker"
+  n22 -> n23 // "weaker" -> "run_away"
+  n22 -> n24 // "weaker" -> "choose"
+  n24 -> n25 // "choose" -> "block_high"
+  n24 -> n26 // "choose" -> "block_low"
+  n10 -> n27 // "BEHAVIOUR" -> "always"
+  n27 -> n28 // "always" -> "walk_towards"
+  n27 -> n29 // "always" -> "block_high"
 
 }
