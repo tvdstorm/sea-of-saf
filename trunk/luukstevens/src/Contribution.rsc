@@ -17,18 +17,12 @@ public Contribution exportXml() {
     return popup(menu);
 }
 
-private void performExport(Tree tree, loc selection) {
-    str bdlStringLocation = selection.uri;
-    bdlStringLocation = replaceAll(bdlStringLocation, "%2F", "/");
-    loc bdlFileLocation = |file:///tmp|; //Ugly, but needed.
-    bdlFileLocation.uri = bdlStringLocation;
-    
+private void performExport(Tree tree, loc selection) {    
     str xmlStringLocation = prompt("Export XML to path:");
     loc xmlFileLocation = |file:///tmp|; //Ugly, but needed.
     xmlFileLocation.uri = xmlStringLocation;
-    
-    parseTree = parse(#Language::Bot, bdlFileLocation);
-    Bot ast = implode(#Bot, parseTree);
+
+    Bot ast = implode(#Bot, tree);
     ModelBot model = convertAstToModel(ast);
     return serializeBot(model, xmlFileLocation);
 }

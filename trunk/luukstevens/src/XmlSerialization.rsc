@@ -17,22 +17,19 @@ public Node toXmlNodeTree(ModelBot bot) {
     Node kickReach  = element("kickReach", [charData("<bot.kickReach>")]);
     Node kickPower  = element("kickPower", [charData("<bot.kickPower>")]);
     
-    return element("bot", [name, punchReach, punchPower, kickReach, kickPower, behaviourToXmlNodeTree(bot)]);
+    return element("bot", [name, punchReach, punchPower, kickReach, kickPower, element("behaviouRules", behaviourToXmlNode(bot))]);
 }
 
-public Node behaviourToXmlNodeTree(ModelBot bot) {
-   list[Node] behaviourRuleNodes = []; 
+private list[Node] behaviourToXmlNode(ModelBot bot) {
    
-   for(ModelBehaviourRule behaviourRule <- bot.behaviourRules) {
+   return for(ModelBehaviourRule behaviourRule <- bot.behaviourRules) {
         
         Node moveActionNode   = element("moveActions", convertListToNodes("moveAction", behaviourRule.moveActions));
         Node fightActionNode  = element("fightActions", convertListToNodes("fightAction", behaviourRule.moveActions));
         Node condition        = conditionsToXmlNodeTree(behaviourRule.condition);
    
-        behaviourRuleNodes += element("behaviourRule", [condition, moveActionNode, fightActionNode]);
+        append element("behaviourRule", [condition, moveActionNode, fightActionNode]);
    }
-
-   return element("behaviouRules", behaviourRuleNodes);
 }
 
 public Node conditionsToXmlNodeTree(Ast::Condition condition) {
@@ -51,13 +48,5 @@ public Node conditionsToXmlNodeTree(Ast::Condition condition) {
     }
 }
 
-public list[Node] convertListToNodes(str nodeName, list[str] items) {
-    list[Node] nodes = [];
-    
-    for(str item <- items) {
-        Node newNode = element(nodeName, [charData(item)]);
-        nodes += newNode;
-    }
-    
-    return nodes;
-}
+public list[Node] convertListToNodes(str nodeName, list[str] items) =
+    [ element(nodeName, [charData(item)]) | item <- items ];
