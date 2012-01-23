@@ -26,24 +26,32 @@ public class Test {
             System.out.println(((Tree)r.getTree()).toString());
             ((CommonTree)r.getTree()).sanityCheckParentAndChildIndexes();
         }
+    	
     	printTree((CommonTree)r.getTree(), 0);
 	}
 	
 	static final TreeAdaptor adaptor = new CommonTreeAdaptor() {
 		public Object create(Token payload) {
-			System.out.println(payload);
 			if (payload != null) { 
 				switch (payload.getType()) {
 					case FDLParser.SAF_NODE:
 						return new SafNode(payload);
-					case FDLParser.BEHAVIOUR_NODE:
-						return new BehaviourNode(payload);
 					case FDLParser.STRENGTH_NODE:
 						return new StrengthNode(payload);
+					case FDLParser.NUMBER:
+						return new NumberNode(payload);
+					case FDLParser.NAME:
+						return new NameNode(payload);
+					case FDLParser.BEHAVIOUR_NODE:
+						return new BehaviourNode(payload);
+					case FDLParser.ACTION_NODE:
+						return new ActionNode(payload);
 					case FDLParser.CONDITION_NODE:
 						return new ConditionNode(payload);
-					default:
-						return new Node(payload);
+					case FDLParser.OR_NODE:
+						return new OrNode(payload);
+					case FDLParser.AND_NODE:
+						return new AndNode(payload);
 				}
 			}
 			return new Node(payload);
@@ -56,7 +64,6 @@ public class Test {
 			for ( int i = 0; i < indent; i++ ) {
 				System.out.print("    ");
 			}
-			System.out.print(t.getChildCount() + ":");
 			System.out.print(t.getClass() + ":");
 			System.out.println(t.toString() );
 			for ( int i = 0; i < t.getChildCount(); i++ ) {

@@ -8,4 +8,8 @@ public class Node extends CommonTree {
 	public Node(Token t) {
 		super(t);
 	}
+	
+	public boolean validate() {
+		return true;
+	}
 }
