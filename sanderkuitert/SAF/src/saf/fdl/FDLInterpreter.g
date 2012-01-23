@@ -25,7 +25,7 @@ options {
     public void applyAttributes(Fighter fighter){
         this.fighter = fighter;
         try {
-              saf();
+              fighter(); //start interpreting
         } catch (RecognitionException e) {
               assert false;
               e.printStackTrace();
@@ -64,7 +64,7 @@ options {
     
 }
 
-saf:                name attributes;
+fighter:            name attributes;
 
 name:               TEXT                        {setName($TEXT.text);};
 attributes:         (characteristic | behaviour_rule)*;

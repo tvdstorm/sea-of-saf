@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,13 +30,13 @@ public class GameSetup {
 			Simulator simulator = new Simulator();
         	simulator.simulate(fighters);
 		}else{
-			System.err.println("Simulation needs more fighters!");
+			System.err.println("Simulation needs more fighters to start!");
 		}
 	}
 
 	private static List<Fighter> obtainFighters(String[] args) {
 		List<Fighter> fighters = new LinkedList<Fighter>();
-		
+
 		FDLReader fdlReader = new FDLReader();
 		for(String source : args){
 			Fighter fighter = null;
@@ -44,9 +45,12 @@ public class GameSetup {
 				fighter = fdlReader.createFighter(fdl);
 			} catch (FileNotFoundException e1){
 				System.err.println(e1.getMessage());
-			} catch (IOException e2) { // includes misformed FDL syntax
+			} catch (IOException e2) {
 				System.err.println("Failed to extract fighter from "+source);
 				System.err.println(e2.getMessage());
+			} catch (InvalidParameterException e3){
+				System.err.println("Misformed FDL:");
+				System.err.println(e3.getMessage());
 			}
 			if(fighter != null)
 				fighters.add(fighter);

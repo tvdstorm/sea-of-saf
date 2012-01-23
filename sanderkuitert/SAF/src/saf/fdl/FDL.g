@@ -25,7 +25,7 @@ tokens{
 }
 
 // PARSER rules
-saf:                name attributes;
+fighter:            name attributes;
 
 name:               TEXT;
 attributes:         L_CURLY_BRACKET! (characteristic | behaviour_rule)* R_CURLY_BRACKET!;
