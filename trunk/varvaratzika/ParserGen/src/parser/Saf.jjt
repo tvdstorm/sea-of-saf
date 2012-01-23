@@ -22,7 +22,7 @@ public class SafParser
 	{
 	  	SafParser parser = new SafParser(System.in);
     	ArrayList<Fighter> f = parser.Start();
-    	Interpreter i = new Interpreter(f);
+		Interpreter i = new Interpreter(f);
     	i.Interpret();
   	}
  	catch(Exception e)
@@ -70,19 +70,24 @@ ArrayList<Fighter> Start() :
   Fighter f1 = new Fighter();
   Fighter f2 = new Fighter();
   ArrayList<Fighter> fighters = new ArrayList<Fighter>();
+  
 }
 { 
   (Fighter1 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f1 = contents(f1))<CL_CURLY_BRACKETS>
   {
-    f1.setFighterName(Fighter1.toString());
-    fighters.add(f1);
+      f1.setFighterName(Fighter1.toString());
+      fighters.add(f1);
   }
 	(Fighter2 = <IDENTIFIER>)<OP_CURLY_BRACKETS>(f2=contents(f2))<CL_CURLY_BRACKETS>
 	{
 	    f2.setFighterName(Fighter2.toString());
 	   	fighters.add(f2);
 	}
-   { return fighters; }
+   {
+      
+       jjtThis.dump("");
+       return fighters;
+    }
 }
 
 Fighter contents(Fighter f) :
@@ -107,7 +112,3 @@ Fighter contents(Fighter f) :
 	)*	{return f; }
  
  }
- 
-
-
-

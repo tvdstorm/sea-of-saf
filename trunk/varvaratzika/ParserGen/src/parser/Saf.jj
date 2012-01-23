@@ -26,7 +26,7 @@ public class SafParser/*@bgen(jjtree)*/implements SafParserTreeConstants/*@egen*
 	{
 	  	SafParser parser = new SafParser(System.in);
     	ArrayList<Fighter> f = parser.Start();
-    	Interpreter i = new Interpreter(f);
+		Interpreter i = new Interpreter(f);
     	i.Interpret();
   	}
  	catch(Exception e)
@@ -78,6 +78,7 @@ ArrayList<Fighter> Start() :
   Fighter f1 = new Fighter();
   Fighter f2 = new Fighter();
   ArrayList<Fighter> fighters = new ArrayList<Fighter>();
+  
 }
 {/*@bgen(jjtree) Start */
   try {
@@ -97,7 +98,11 @@ ArrayList<Fighter> Start() :
      jjtc000 = false;
    }
 /*@egen*/
-   { return fighters; }/*@bgen(jjtree)*/
+   {
+       //SimpleNode parseTree =parserTree(jjtThis);
+       jjtn000.dump("");
+       return fighters;
+    }/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -159,7 +164,3 @@ Fighter contents(Fighter f) :
 /*@egen*/
  
  }
- 
-
-
-
