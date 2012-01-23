@@ -21,35 +21,26 @@ package nl.uva.saf.fdl.ast;
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class Characteristic extends FighterAttribute {
-	private String type;
-	private int value;	
+	private final String type;
+	private final int value;	
 	
 	public Characteristic(String type, String value) {
-		setType(type);
-		setValue(Integer.parseInt(value));
+		this(type, Integer.parseInt(value));
 	}
 	
 	public Characteristic(String type, int value) {
-		setType(type);
-		setValue(value);
+		this.type = type;
+		this.value = value;
 	}
 
 	public int getValue() {
 		return value;
 	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-
+	
 	public String getType() {
 		return type;
 	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
+	
 	@Override
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);		

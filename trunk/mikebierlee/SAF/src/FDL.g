@@ -38,68 +38,42 @@ CHOOSE : 'choose';
 AND : 'and';
 OR : 'or';
 ASSIGN : '=';
-ALWAYS : 'always';
-
-CONDITIONTYPE : 'near'
-              | 'far'
-              | 'much_stronger'
-              | 'stronger'
-              | 'even'
-              | 'weaker'
-              | 'much_weaker'
-              ;
-              
-MOVEACTION : 'walk_towards'
-           | 'walk_away'
-           | 'run_towards'
-           | 'run_away'
-           | 'jump'
-           | 'crouch'
-           | 'stand'
-           ;
-           
-FIGHTACTION : 'block_low'
-            | 'block_high'
-            | 'punch_low'
-            | 'punch_high'
-            | 'kick_low'
-            | 'kick_high'
-            ;        
+ALWAYS : 'always';        
             
 IDENT  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;  
  
-personality returns [Characteristic result]
+characteristic returns [Characteristic result]
   : IDENT ASSIGN INTEGER {result = new Characteristic($IDENT.text, $INTEGER.text);}
   ;
                     
 conditionAnd returns [ConditionAnd result]
   @init {
-    result = new ConditionAnd(new ArrayList<String>());
+    ArrayList<String> operands = new ArrayList<String>();
   }
-  : op1=CONDITIONTYPE (AND oprest=CONDITIONTYPE {result.addOperand($oprest.text);})* {result.addOperand($op1.text);}
+  : op1=IDENT {operands.add($op1.text);} (AND oprest=IDENT {operands.add($oprest.text);})* {result = new ConditionAnd(operands);}
   ;
 
 conditionOr returns [ConditionOr result] 
   @init {
-    result = new ConditionOr(new ArrayList<ConditionAnd>());
+    ArrayList<ConditionAnd> operands = new ArrayList<ConditionAnd>();
   }
-  : op1=conditionAnd (OR oprest=conditionAnd {result.addOperand($oprest.result);})* {result.addOperand($op1.result);}
+  : op1=conditionAnd {operands.add($op1.result);} (OR oprest=conditionAnd {operands.add($oprest.result);})* {result = new ConditionOr(operands);}
   ; 
 
 moveChoice returns [MoveChoice result]
   @init {
-    result = new MoveChoice(new ArrayList<Action>());
+    ArrayList<Action> actions = new ArrayList<Action>();
   }
-  : CHOOSE '(' (MOVEACTION {result.addAction(new MoveAction($MOVEACTION.text));})+ ')'
-  | MOVEACTION {result.addAction(new MoveAction($MOVEACTION.text));}
+  : CHOOSE '(' (IDENT {actions.add(new MoveAction($IDENT.text));})+ ')' {result = new MoveChoice(actions);}
+  | IDENT {actions.add(new MoveAction($IDENT.text));} {result = new MoveChoice(actions);}
   ; 
   
 fightChoice returns [FightChoice result]
   @init {
-    result = new FightChoice(new ArrayList<Action>());
+    ArrayList<Action> actions = new ArrayList<Action>();
   }
-  : CHOOSE '(' (FIGHTACTION {result.addAction(new FightAction($FIGHTACTION.text));})+ ')'
-  | FIGHTACTION {result.addAction(new FightAction($FIGHTACTION.text));}
+  : CHOOSE '(' (IDENT {actions.add(new FightAction($IDENT.text));})+ ')' {result = new FightChoice(actions);}
+  | IDENT {actions.add(new FightAction($IDENT.text));} {result = new FightChoice(actions);}
   ;
 
 rule returns [Rule result] 
@@ -112,15 +86,15 @@ behaviour returns [Behaviour result]
   ;
                   
 fighterAttribute returns [FighterAttribute result]
-  : personality   {result = $personality.result;}
+  : characteristic   {result = $characteristic.result;}
   | behaviour     {result = $behaviour.result;}
   ;
 
 fighter returns [Fighter result] 
   @init {
-    result = new Fighter("",new ArrayList<FighterAttribute>());
+    ArrayList<FighterAttribute> attributes = new ArrayList<FighterAttribute>();
   }
-  : IDENT '{' (fighterAttribute {result.addAttribute($fighterAttribute.result);})* '}'   {result.setName($IDENT.text);}
+  : IDENT '{' (fighterAttribute {attributes.add($fighterAttribute.result);})* '}'   {result = new Fighter($IDENT.text, attributes);}
   ;
 
 parse returns [ITreeNode tree]

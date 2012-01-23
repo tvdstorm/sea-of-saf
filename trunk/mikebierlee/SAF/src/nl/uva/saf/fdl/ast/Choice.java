@@ -19,25 +19,17 @@
 package nl.uva.saf.fdl.ast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class Choice extends TreeNode {
-	private ArrayList<Action> actions;
+	private final ArrayList<Action> actions;
 	
 	public Choice(ArrayList<Action> actions) {
-		this.setActions(actions);
-	}
-
-	public ArrayList<Action> getActions() {
-		return actions;
-	}
-
-	public void setActions(ArrayList<Action> actions) {
 		this.actions = actions;
 	}
-	
-	public void addAction(Action action) {
-		if (actions != null) {
-			actions.add(action);
-		}
+
+	public List<Action> getActions() {
+		return Collections.unmodifiableList(actions);
 	}
 }

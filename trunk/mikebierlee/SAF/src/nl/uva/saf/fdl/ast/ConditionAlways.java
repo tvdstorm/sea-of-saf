@@ -21,10 +21,8 @@ package nl.uva.saf.fdl.ast;
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class ConditionAlways extends TreeNode {
-
 	@Override
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);
-	}
-	
+	}	
 }
