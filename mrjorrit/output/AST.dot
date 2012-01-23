@@ -1,0 +1,72 @@
+digraph {
+
+	ordering=out;
+	ranksep=.4;
+	bgcolor="lightgrey"; node [shape=box, fixedsize=false, fontsize=12, fontname="Helvetica-bold", fontcolor="blue"
+		width=.25, height=.25, color="black", fillcolor="white", style="filled, solid, bold"];
+	edge [arrowsize=.5, color="black", style="bold"]
+
+  n0 [label="chicken"];
+  n1 [label="PERSONALITY"];
+  n1 [label="PERSONALITY"];
+  n2 [label="kickReach"];
+  n2 [label="kickReach"];
+  n3 [label="="];
+  n4 [label="9"];
+  n5 [label="punchReach"];
+  n5 [label="punchReach"];
+  n6 [label="="];
+  n7 [label="1"];
+  n8 [label="kickPower"];
+  n8 [label="kickPower"];
+  n9 [label="="];
+  n10 [label="2"];
+  n11 [label="punchPower"];
+  n11 [label="punchPower"];
+  n12 [label="="];
+  n13 [label="2"];
+  n14 [label="BEHAVIOUR"];
+  n14 [label="BEHAVIOUR"];
+  n15 [label="far"];
+  n15 [label="far"];
+  n16 [label="choose"];
+  n16 [label="choose"];
+  n17 [label="run_towards"];
+  n18 [label="run_away"];
+  n19 [label="kick_low"];
+  n20 [label="near"];
+  n20 [label="near"];
+  n21 [label="run_away"];
+  n22 [label="kick_low"];
+  n23 [label="near"];
+  n23 [label="near"];
+  n24 [label="crouch"];
+  n25 [label="punch_low"];
+
+  n0 -> n1 // "chicken" -> "PERSONALITY"
+  n1 -> n2 // "PERSONALITY" -> "kickReach"
+  n2 -> n3 // "kickReach" -> "="
+  n2 -> n4 // "kickReach" -> "9"
+  n1 -> n5 // "PERSONALITY" -> "punchReach"
+  n5 -> n6 // "punchReach" -> "="
+  n5 -> n7 // "punchReach" -> "1"
+  n1 -> n8 // "PERSONALITY" -> "kickPower"
+  n8 -> n9 // "kickPower" -> "="
+  n8 -> n10 // "kickPower" -> "2"
+  n1 -> n11 // "PERSONALITY" -> "punchPower"
+  n11 -> n12 // "punchPower" -> "="
+  n11 -> n13 // "punchPower" -> "2"
+  n0 -> n14 // "chicken" -> "BEHAVIOUR"
+  n14 -> n15 // "BEHAVIOUR" -> "far"
+  n15 -> n16 // "far" -> "choose"
+  n16 -> n17 // "choose" -> "run_towards"
+  n16 -> n18 // "choose" -> "run_away"
+  n15 -> n19 // "far" -> "kick_low"
+  n14 -> n20 // "BEHAVIOUR" -> "near"
+  n20 -> n21 // "near" -> "run_away"
+  n20 -> n22 // "near" -> "kick_low"
+  n14 -> n23 // "BEHAVIOUR" -> "near"
+  n23 -> n24 // "near" -> "crouch"
+  n23 -> n25 // "near" -> "punch_low"
+
+}
