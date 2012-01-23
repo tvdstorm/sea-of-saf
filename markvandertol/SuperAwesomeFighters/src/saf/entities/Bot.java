@@ -16,6 +16,7 @@ public class Bot {
 	private HashMap<String, Integer> properties = new HashMap<String, Integer>();
 	
 	private List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
+	private final String[] propertyNames = {"punchReach", "punchPower", "kickReach", "kickPower"};
 	
 	private int getProperty(String property) {
 		Integer result = properties.get(property);
@@ -31,7 +32,7 @@ public class Bot {
 	/**
 	 * @param name the name to set
 	 */
-	public void setName( String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	/**
@@ -59,10 +60,6 @@ public class Bot {
 		return getProperty("kickPower");
 	}
 	
-	public Set<String> getDefinedProperties() {
-		return properties.keySet();
-	}
-	
 	public void setProperty(String key, int value) {
 		properties.put(key, value);
 	}
@@ -73,5 +70,29 @@ public class Bot {
 	 */
 	public List<BehaviourRule> getBehaviourRules() {
 		return behaviourRules;
+	}
+	
+	public void validate(List<String> errorList) {
+		for (String key : properties.keySet()) {
+			boolean found = false;
+			for (String string : propertyNames) {
+				if (string.equals(key)) {
+					found = true;
+					
+					int value = getProperty(key);
+					if (value < 1 || value > 10)
+						errorList.add("Value out of range for " + key + " (" + value + ")");
+				}
+			}
+			if (!found)
+				errorList.add("Unknown assignment: " + key);
+		}
+		
+		for (BehaviourRule rule : behaviourRules) {
+			rule.validate(errorList);
+		}
+		
+		if (name == null | name.equals(""))
+			errorList.add("Name not set");
 	}
 }

@@ -3,6 +3,7 @@ package saf.entities;
 import static org.junit.Assert.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -20,6 +21,10 @@ public class CombinedConditionTest {
 		public boolean matched(Set<State> currentConditions) {
 			return true;
 		}
+
+		@Override
+		public void validate(List<String> errorList) {
+		}
 	};
 	
 	Condition conditionFalse = new Condition() {
@@ -27,6 +32,10 @@ public class CombinedConditionTest {
 		@Override
 		public boolean matched(Set<State> currentConditions) {
 			return false;
+		}
+
+		@Override
+		public void validate(List<String> errorList) {
 		}
 	};
 

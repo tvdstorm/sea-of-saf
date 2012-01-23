@@ -1,6 +1,6 @@
 chicken
 {
-  kickReach  = 9
+  kickReach  = 10
   punchReach = 1
   kickPower  = 2
   punchPower = 2

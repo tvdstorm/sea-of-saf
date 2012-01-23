@@ -1,5 +1,6 @@
 package saf.entities;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -39,6 +40,13 @@ public class ConcreteCondition extends Condition {
 	 */
 	public void setState(State state) {
 		this.state = state;
+	}
+
+
+	@Override
+	public void validate(List<String> errorList) {
+		if (state == null)
+			errorList.add("condition not set");
 	}
 
 }
