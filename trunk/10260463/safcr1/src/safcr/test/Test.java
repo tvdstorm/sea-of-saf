@@ -1,7 +1,6 @@
 package safcr.test;
 
 import java.io.IOException;
-import java.io.File;
 
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
@@ -10,12 +9,9 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.DOTTreeGenerator;
-import org.antlr.stringtemplate.StringTemplate;
 
 import safcr.antlr.SAFGrammarLexer;
 import safcr.antlr.SAFGrammarParser;
-import safcr.antlr.SAFGrammarParser.saf_return;
 
 public class Test {
 	
