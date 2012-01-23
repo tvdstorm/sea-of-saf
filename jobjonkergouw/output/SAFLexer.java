@@ -1,28 +1,30 @@
-// $ANTLR 3.4 /Users/job/Programming/svn-sc/SAFlexer.g 2012-01-22 23:58:54
+// $ANTLR 3.4 /Users/job/Programming/svn-sc/SAFlexer.g 2012-01-23 09:54:13
 
 import org.antlr.runtime.*;
 import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.HashMap;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFlexer extends Lexer {
     public static final int EOF=-1;
     public static final int ASSIGN=4;
-    public static final int ATTACK=5;
-    public static final int CONDITION=6;
-    public static final int ID=7;
-    public static final int LEFT_BRACE=8;
-    public static final int LEFT_BRACKET=9;
-    public static final int MOVE=10;
-    public static final int NEWLINE=11;
-    public static final int NUMBER=12;
-    public static final int RIGHT_BRACE=13;
-    public static final int RIGHT_BRACKET=14;
-    public static final int STRENGTH=15;
-    public static final int WHITESPACE=16;
+    public static final int ATTACK_TYPE=5;
+    public static final int CHOOSE=6;
+    public static final int CONDITION_TYPE=7;
+    public static final int DIGIT=8;
+    public static final int ID=9;
+    public static final int LEFT_BRACE=10;
+    public static final int LEFT_BRACKET=11;
+    public static final int LEFT_PAREN=12;
+    public static final int LOGICAL_OPERATOR=13;
+    public static final int MOVE_TYPE=14;
+    public static final int NEWLINE=15;
+    public static final int RIGHT_BRACE=16;
+    public static final int RIGHT_BRACKET=17;
+    public static final int RIGHT_PAREN=18;
+    public static final int STRENGTH=19;
+    public static final int WHITESPACE=20;
 
     // delegates
     // delegators
@@ -44,10 +46,10 @@ public class SAFlexer extends Lexer {
         try {
             int _type = LEFT_BRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:3:13: ( '{' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:3:15: '{'
+            // /Users/job/Programming/svn-sc/SAFlexer.g:4:13: ( '{' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:4:15: '{'
             {
-            match('{'); if (state.failed) return ;
+            match('{'); 
 
             }
 
@@ -65,10 +67,10 @@ public class SAFlexer extends Lexer {
         try {
             int _type = RIGHT_BRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:4:14: ( '}' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:4:16: '}'
+            // /Users/job/Programming/svn-sc/SAFlexer.g:5:14: ( '}' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:5:16: '}'
             {
-            match('}'); if (state.failed) return ;
+            match('}'); 
 
             }
 
@@ -86,10 +88,10 @@ public class SAFlexer extends Lexer {
         try {
             int _type = LEFT_BRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:5:14: ( '[' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:5:16: '['
+            // /Users/job/Programming/svn-sc/SAFlexer.g:6:14: ( '[' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:6:16: '['
             {
-            match('['); if (state.failed) return ;
+            match('['); 
 
             }
 
@@ -107,10 +109,10 @@ public class SAFlexer extends Lexer {
         try {
             int _type = RIGHT_BRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:6:15: ( ']' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:6:17: ']'
+            // /Users/job/Programming/svn-sc/SAFlexer.g:7:15: ( ']' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:7:17: ']'
             {
-            match(']'); if (state.failed) return ;
+            match(']'); 
 
             }
 
@@ -123,15 +125,57 @@ public class SAFlexer extends Lexer {
     }
     // $ANTLR end "RIGHT_BRACKET"
 
+    // $ANTLR start "LEFT_PAREN"
+    public final void mLEFT_PAREN() throws RecognitionException {
+        try {
+            int _type = LEFT_PAREN;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/job/Programming/svn-sc/SAFlexer.g:8:13: ( '(' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:8:15: '('
+            {
+            match('('); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "LEFT_PAREN"
+
+    // $ANTLR start "RIGHT_PAREN"
+    public final void mRIGHT_PAREN() throws RecognitionException {
+        try {
+            int _type = RIGHT_PAREN;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/job/Programming/svn-sc/SAFlexer.g:9:14: ( ')' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:9:16: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "RIGHT_PAREN"
+
     // $ANTLR start "ASSIGN"
     public final void mASSIGN() throws RecognitionException {
         try {
             int _type = ASSIGN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:7:10: ( '=' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:7:12: '='
+            // /Users/job/Programming/svn-sc/SAFlexer.g:10:10: ( '=' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:10:12: '='
             {
-            match('='); if (state.failed) return ;
+            match('='); 
 
             }
 
@@ -149,7 +193,7 @@ public class SAFlexer extends Lexer {
         try {
             int _type = STRENGTH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:9:12: ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:13:12: ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' )
             int alt1=4;
             int LA1_0 = input.LA(1);
 
@@ -172,7 +216,6 @@ public class SAFlexer extends Lexer {
                                 alt1=3;
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 1, 7, input);
 
@@ -181,7 +224,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 1, 5, input);
 
@@ -190,7 +232,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 1, 3, input);
 
@@ -199,7 +240,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 1, 1, input);
 
@@ -229,7 +269,6 @@ public class SAFlexer extends Lexer {
                                     alt1=4;
                                 }
                                 else {
-                                    if (state.backtracking>0) {state.failed=true; return ;}
                                     NoViableAltException nvae =
                                         new NoViableAltException("", 1, 11, input);
 
@@ -238,7 +277,6 @@ public class SAFlexer extends Lexer {
                                 }
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 1, 8, input);
 
@@ -247,7 +285,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 1, 6, input);
 
@@ -256,7 +293,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 1, 4, input);
 
@@ -265,7 +301,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 1, 2, input);
 
@@ -274,7 +309,6 @@ public class SAFlexer extends Lexer {
                 }
             }
             else {
-                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 1, 0, input);
 
@@ -283,36 +317,36 @@ public class SAFlexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:9:14: 'kickPower'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:14: 'kickPower'
                     {
-                    match("kickPower"); if (state.failed) return ;
+                    match("kickPower"); 
 
 
 
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:9:28: 'punchPower'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:28: 'punchPower'
                     {
-                    match("punchPower"); if (state.failed) return ;
+                    match("punchPower"); 
 
 
 
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:9:43: 'kickReach'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:43: 'kickReach'
                     {
-                    match("kickReach"); if (state.failed) return ;
+                    match("kickReach"); 
 
 
 
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:9:57: 'punchReach'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:57: 'punchReach'
                     {
-                    match("punchReach"); if (state.failed) return ;
+                    match("punchReach"); 
 
 
 
@@ -329,12 +363,12 @@ public class SAFlexer extends Lexer {
     }
     // $ANTLR end "STRENGTH"
 
-    // $ANTLR start "ATTACK"
-    public final void mATTACK() throws RecognitionException {
+    // $ANTLR start "ATTACK_TYPE"
+    public final void mATTACK_TYPE() throws RecognitionException {
         try {
-            int _type = ATTACK;
+            int _type = ATTACK_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:10:11: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:14:15: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
             int alt2=6;
             switch ( input.LA(1) ) {
             case 'p':
@@ -363,7 +397,6 @@ public class SAFlexer extends Lexer {
                                         alt2=2;
                                     }
                                     else {
-                                        if (state.backtracking>0) {state.failed=true; return ;}
                                         NoViableAltException nvae =
                                             new NoViableAltException("", 2, 16, input);
 
@@ -372,7 +405,6 @@ public class SAFlexer extends Lexer {
                                     }
                                 }
                                 else {
-                                    if (state.backtracking>0) {state.failed=true; return ;}
                                     NoViableAltException nvae =
                                         new NoViableAltException("", 2, 13, input);
 
@@ -381,7 +413,6 @@ public class SAFlexer extends Lexer {
                                 }
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 2, 10, input);
 
@@ -390,7 +421,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 2, 7, input);
 
@@ -399,7 +429,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 2, 4, input);
 
@@ -408,7 +437,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 2, 1, input);
 
@@ -440,7 +468,6 @@ public class SAFlexer extends Lexer {
                                     alt2=4;
                                 }
                                 else {
-                                    if (state.backtracking>0) {state.failed=true; return ;}
                                     NoViableAltException nvae =
                                         new NoViableAltException("", 2, 14, input);
 
@@ -449,7 +476,6 @@ public class SAFlexer extends Lexer {
                                 }
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 2, 11, input);
 
@@ -458,7 +484,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 2, 8, input);
 
@@ -467,7 +492,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 2, 5, input);
 
@@ -476,7 +500,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 2, 2, input);
 
@@ -511,7 +534,6 @@ public class SAFlexer extends Lexer {
                                         alt2=6;
                                     }
                                     else {
-                                        if (state.backtracking>0) {state.failed=true; return ;}
                                         NoViableAltException nvae =
                                             new NoViableAltException("", 2, 19, input);
 
@@ -520,7 +542,6 @@ public class SAFlexer extends Lexer {
                                     }
                                 }
                                 else {
-                                    if (state.backtracking>0) {state.failed=true; return ;}
                                     NoViableAltException nvae =
                                         new NoViableAltException("", 2, 15, input);
 
@@ -529,7 +550,6 @@ public class SAFlexer extends Lexer {
                                 }
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 2, 12, input);
 
@@ -538,7 +558,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 2, 9, input);
 
@@ -547,7 +566,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 2, 6, input);
 
@@ -556,7 +574,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 2, 3, input);
 
@@ -566,7 +583,6 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             default:
-                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 2, 0, input);
 
@@ -576,54 +592,54 @@ public class SAFlexer extends Lexer {
 
             switch (alt2) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:10:13: 'punch_low'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:17: 'punch_low'
                     {
-                    match("punch_low"); if (state.failed) return ;
+                    match("punch_low"); 
 
 
 
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:10:27: 'punch_high'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:31: 'punch_high'
                     {
-                    match("punch_high"); if (state.failed) return ;
+                    match("punch_high"); 
 
 
 
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:10:42: 'kick_low'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:46: 'kick_low'
                     {
-                    match("kick_low"); if (state.failed) return ;
+                    match("kick_low"); 
 
 
 
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:10:55: 'kick_high'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:59: 'kick_high'
                     {
-                    match("kick_high"); if (state.failed) return ;
+                    match("kick_high"); 
 
 
 
                     }
                     break;
                 case 5 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:10:69: 'block_low'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:73: 'block_low'
                     {
-                    match("block_low"); if (state.failed) return ;
+                    match("block_low"); 
 
 
 
                     }
                     break;
                 case 6 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:10:83: 'block_high'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:87: 'block_high'
                     {
-                    match("block_high"); if (state.failed) return ;
+                    match("block_high"); 
 
 
 
@@ -638,14 +654,14 @@ public class SAFlexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "ATTACK"
+    // $ANTLR end "ATTACK_TYPE"
 
-    // $ANTLR start "MOVE"
-    public final void mMOVE() throws RecognitionException {
+    // $ANTLR start "MOVE_TYPE"
+    public final void mMOVE_TYPE() throws RecognitionException {
         try {
-            int _type = MOVE;
+            int _type = MOVE_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:11:9: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:15:13: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
             int alt3=7;
             switch ( input.LA(1) ) {
             case 'j':
@@ -683,7 +699,6 @@ public class SAFlexer extends Lexer {
                                 alt3=5;
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 3, 10, input);
 
@@ -692,7 +707,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 3, 8, input);
 
@@ -701,7 +715,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 3, 6, input);
 
@@ -710,7 +723,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 3, 4, input);
 
@@ -742,7 +754,6 @@ public class SAFlexer extends Lexer {
                                     alt3=7;
                                 }
                                 else {
-                                    if (state.backtracking>0) {state.failed=true; return ;}
                                     NoViableAltException nvae =
                                         new NoViableAltException("", 3, 14, input);
 
@@ -751,7 +762,6 @@ public class SAFlexer extends Lexer {
                                 }
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 3, 11, input);
 
@@ -760,7 +770,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 3, 9, input);
 
@@ -769,7 +778,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 3, 7, input);
 
@@ -778,7 +786,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 3, 5, input);
 
@@ -788,7 +795,6 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             default:
-                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 3, 0, input);
 
@@ -798,63 +804,63 @@ public class SAFlexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:11:11: 'jump'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:15: 'jump'
                     {
-                    match("jump"); if (state.failed) return ;
+                    match("jump"); 
 
 
 
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:11:20: 'crouch'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:24: 'crouch'
                     {
-                    match("crouch"); if (state.failed) return ;
+                    match("crouch"); 
 
 
 
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:11:31: 'stand'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:35: 'stand'
                     {
-                    match("stand"); if (state.failed) return ;
+                    match("stand"); 
 
 
 
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:11:41: 'run_towards'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:45: 'run_towards'
                     {
-                    match("run_towards"); if (state.failed) return ;
+                    match("run_towards"); 
 
 
 
                     }
                     break;
                 case 5 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:11:57: 'run_away'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:61: 'run_away'
                     {
-                    match("run_away"); if (state.failed) return ;
+                    match("run_away"); 
 
 
 
                     }
                     break;
                 case 6 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:11:70: 'walk_towards'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:74: 'walk_towards'
                     {
-                    match("walk_towards"); if (state.failed) return ;
+                    match("walk_towards"); 
 
 
 
                     }
                     break;
                 case 7 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:11:87: 'walk_away'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:91: 'walk_away'
                     {
-                    match("walk_away"); if (state.failed) return ;
+                    match("walk_away"); 
 
 
 
@@ -869,14 +875,14 @@ public class SAFlexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "MOVE"
+    // $ANTLR end "MOVE_TYPE"
 
-    // $ANTLR start "CONDITION"
-    public final void mCONDITION() throws RecognitionException {
+    // $ANTLR start "CONDITION_TYPE"
+    public final void mCONDITION_TYPE() throws RecognitionException {
         try {
-            int _type = CONDITION;
+            int _type = CONDITION_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:12:13: ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:16:17: ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
             int alt4=8;
             switch ( input.LA(1) ) {
             case 's':
@@ -912,7 +918,6 @@ public class SAFlexer extends Lexer {
                                     alt4=4;
                                 }
                                 else {
-                                    if (state.backtracking>0) {state.failed=true; return ;}
                                     NoViableAltException nvae =
                                         new NoViableAltException("", 4, 11, input);
 
@@ -921,7 +926,6 @@ public class SAFlexer extends Lexer {
                                 }
                             }
                             else {
-                                if (state.backtracking>0) {state.failed=true; return ;}
                                 NoViableAltException nvae =
                                     new NoViableAltException("", 4, 10, input);
 
@@ -930,7 +934,6 @@ public class SAFlexer extends Lexer {
                             }
                         }
                         else {
-                            if (state.backtracking>0) {state.failed=true; return ;}
                             NoViableAltException nvae =
                                 new NoViableAltException("", 4, 9, input);
 
@@ -939,7 +942,6 @@ public class SAFlexer extends Lexer {
                         }
                     }
                     else {
-                        if (state.backtracking>0) {state.failed=true; return ;}
                         NoViableAltException nvae =
                             new NoViableAltException("", 4, 8, input);
 
@@ -948,7 +950,6 @@ public class SAFlexer extends Lexer {
                     }
                 }
                 else {
-                    if (state.backtracking>0) {state.failed=true; return ;}
                     NoViableAltException nvae =
                         new NoViableAltException("", 4, 3, input);
 
@@ -978,7 +979,6 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             default:
-                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 4, 0, input);
 
@@ -988,72 +988,72 @@ public class SAFlexer extends Lexer {
 
             switch (alt4) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:15: 'stronger'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:19: 'stronger'
                     {
-                    match("stronger"); if (state.failed) return ;
+                    match("stronger"); 
 
 
 
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:28: 'weaker'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:32: 'weaker'
                     {
-                    match("weaker"); if (state.failed) return ;
+                    match("weaker"); 
 
 
 
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:39: 'much_stronger'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:43: 'much_stronger'
                     {
-                    match("much_stronger"); if (state.failed) return ;
+                    match("much_stronger"); 
 
 
 
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:57: 'much_weaker'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:61: 'much_weaker'
                     {
-                    match("much_weaker"); if (state.failed) return ;
+                    match("much_weaker"); 
 
 
 
                     }
                     break;
                 case 5 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:73: 'even'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:77: 'even'
                     {
-                    match("even"); if (state.failed) return ;
+                    match("even"); 
 
 
 
                     }
                     break;
                 case 6 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:82: 'near'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:86: 'near'
                     {
-                    match("near"); if (state.failed) return ;
+                    match("near"); 
 
 
 
                     }
                     break;
                 case 7 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:91: 'far'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:95: 'far'
                     {
-                    match("far"); if (state.failed) return ;
+                    match("far"); 
 
 
 
                     }
                     break;
                 case 8 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:12:99: 'always'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:103: 'always'
                     {
-                    match("always"); if (state.failed) return ;
+                    match("always"); 
 
 
 
@@ -1068,32 +1068,24 @@ public class SAFlexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "CONDITION"
+    // $ANTLR end "CONDITION_TYPE"
 
-    // $ANTLR start "NUMBER"
-    public final void mNUMBER() throws RecognitionException {
+    // $ANTLR start "LOGICAL_OPERATOR"
+    public final void mLOGICAL_OPERATOR() throws RecognitionException {
         try {
-            int _type = NUMBER;
+            int _type = LOGICAL_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:14:10: ( ( '1' )=> '1' | '2' .. '9' | '10' )
-            int alt5=3;
+            // /Users/job/Programming/svn-sc/SAFlexer.g:17:18: ( 'or' | 'and' )
+            int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0=='1') ) {
-                int LA5_1 = input.LA(2);
-
-                if ( (LA5_1=='0') ) {
-                    alt5=3;
-                }
-                else {
-                    alt5=1;
-                }
+            if ( (LA5_0=='o') ) {
+                alt5=1;
             }
-            else if ( ((LA5_0 >= '2' && LA5_0 <= '9')) ) {
+            else if ( (LA5_0=='a') ) {
                 alt5=2;
             }
             else {
-                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 5, 0, input);
 
@@ -1102,23 +1094,18 @@ public class SAFlexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:12: ( '1' )=> '1'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:17:20: 'or'
                     {
-                    match('1'); if (state.failed) return ;
+                    match("or"); 
+
+
 
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:27: '2' .. '9'
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:17:27: 'and'
                     {
-                    matchRange('2','9'); if (state.failed) return ;
-
-                    }
-                    break;
-                case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:38: '10'
-                    {
-                    match("10"); if (state.failed) return ;
+                    match("and"); 
 
 
 
@@ -1133,49 +1120,125 @@ public class SAFlexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "NUMBER"
+    // $ANTLR end "LOGICAL_OPERATOR"
+
+    // $ANTLR start "CHOOSE"
+    public final void mCHOOSE() throws RecognitionException {
+        try {
+            int _type = CHOOSE;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/job/Programming/svn-sc/SAFlexer.g:18:11: ( 'choose' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:18:13: 'choose'
+            {
+            match("choose"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "CHOOSE"
+
+    // $ANTLR start "DIGIT"
+    public final void mDIGIT() throws RecognitionException {
+        try {
+            int _type = DIGIT;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/job/Programming/svn-sc/SAFlexer.g:21:9: ( '1' .. '9' | '10' )
+            int alt6=2;
+            int LA6_0 = input.LA(1);
+
+            if ( (LA6_0=='1') ) {
+                int LA6_1 = input.LA(2);
+
+                if ( (LA6_1=='0') ) {
+                    alt6=2;
+                }
+                else {
+                    alt6=1;
+                }
+            }
+            else if ( ((LA6_0 >= '2' && LA6_0 <= '9')) ) {
+                alt6=1;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 6, 0, input);
+
+                throw nvae;
+
+            }
+            switch (alt6) {
+                case 1 :
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:21:11: '1' .. '9'
+                    {
+                    matchRange('1','9'); 
+
+                    }
+                    break;
+                case 2 :
+                    // /Users/job/Programming/svn-sc/SAFlexer.g:21:22: '10'
+                    {
+                    match("10"); 
+
+
+
+                    }
+                    break;
+
+            }
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "DIGIT"
 
     // $ANTLR start "ID"
     public final void mID() throws RecognitionException {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:15:7: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:15:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /Users/job/Programming/svn-sc/SAFlexer.g:22:7: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:22:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
-                state.failed=false;
             }
             else {
-                if (state.backtracking>0) {state.failed=true; return ;}
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
                 throw mse;
             }
 
 
-            // /Users/job/Programming/svn-sc/SAFlexer.g:15:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
-            loop6:
+            // /Users/job/Programming/svn-sc/SAFlexer.g:22:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            loop7:
             do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
+                int alt7=2;
+                int LA7_0 = input.LA(1);
 
-                if ( ((LA6_0 >= '0' && LA6_0 <= '9')||(LA6_0 >= 'A' && LA6_0 <= 'Z')||LA6_0=='_'||(LA6_0 >= 'a' && LA6_0 <= 'z')) ) {
-                    alt6=1;
+                if ( ((LA7_0 >= '0' && LA7_0 <= '9')||(LA7_0 >= 'A' && LA7_0 <= 'Z')||LA7_0=='_'||(LA7_0 >= 'a' && LA7_0 <= 'z')) ) {
+                    alt7=1;
                 }
 
 
-                switch (alt6) {
+                switch (alt7) {
             	case 1 :
             	    // /Users/job/Programming/svn-sc/SAFlexer.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
-            	        state.failed=false;
             	    }
             	    else {
-            	        if (state.backtracking>0) {state.failed=true; return ;}
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
             	        recover(mse);
             	        throw mse;
@@ -1186,7 +1249,7 @@ public class SAFlexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop6;
+            	    break loop7;
                 }
             } while (true);
 
@@ -1207,22 +1270,20 @@ public class SAFlexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:17:14: ( ( ' ' | '\\t' ) )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:17:16: ( ' ' | '\\t' )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:24:14: ( ( ' ' | '\\t' ) )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:24:16: ( ' ' | '\\t' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
                 input.consume();
-                state.failed=false;
             }
             else {
-                if (state.backtracking>0) {state.failed=true; return ;}
                 MismatchedSetException mse = new MismatchedSetException(null,input);
                 recover(mse);
                 throw mse;
             }
 
 
-            if ( state.backtracking==0 ) { _channel = HIDDEN; }
+             _channel = HIDDEN; 
 
             }
 
@@ -1240,31 +1301,60 @@ public class SAFlexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:18:11: ( ( '\\r' )? '\\n' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:18:13: ( '\\r' )? '\\n'
+            // /Users/job/Programming/svn-sc/SAFlexer.g:25:11: ( ( ( '\\r' )? '\\n' )+ )
+            // /Users/job/Programming/svn-sc/SAFlexer.g:25:13: ( ( '\\r' )? '\\n' )+
             {
-            // /Users/job/Programming/svn-sc/SAFlexer.g:18:13: ( '\\r' )?
-            int alt7=2;
-            int LA7_0 = input.LA(1);
+            // /Users/job/Programming/svn-sc/SAFlexer.g:25:13: ( ( '\\r' )? '\\n' )+
+            int cnt9=0;
+            loop9:
+            do {
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-            if ( (LA7_0=='\r') ) {
-                alt7=1;
-            }
-            switch (alt7) {
-                case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:18:13: '\\r'
-                    {
-                    match('\r'); if (state.failed) return ;
-
-                    }
-                    break;
-
-            }
+                if ( (LA9_0=='\n'||LA9_0=='\r') ) {
+                    alt9=1;
+                }
 
 
-            match('\n'); if (state.failed) return ;
+                switch (alt9) {
+            	case 1 :
+            	    // /Users/job/Programming/svn-sc/SAFlexer.g:25:14: ( '\\r' )? '\\n'
+            	    {
+            	    // /Users/job/Programming/svn-sc/SAFlexer.g:25:14: ( '\\r' )?
+            	    int alt8=2;
+            	    int LA8_0 = input.LA(1);
 
-            if ( state.backtracking==0 ) { _channel = HIDDEN; }
+            	    if ( (LA8_0=='\r') ) {
+            	        alt8=1;
+            	    }
+            	    switch (alt8) {
+            	        case 1 :
+            	            // /Users/job/Programming/svn-sc/SAFlexer.g:25:14: '\\r'
+            	            {
+            	            match('\r'); 
+
+            	            }
+            	            break;
+
+            	    }
+
+
+            	    match('\n'); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt9 >= 1 ) break loop9;
+                        EarlyExitException eee =
+                            new EarlyExitException(9, input);
+                        throw eee;
+                }
+                cnt9++;
+            } while (true);
+
+
+             _channel = HIDDEN; 
 
             }
 
@@ -1278,14 +1368,14 @@ public class SAFlexer extends Lexer {
     // $ANTLR end "NEWLINE"
 
     public void mTokens() throws RecognitionException {
-        // /Users/job/Programming/svn-sc/SAFlexer.g:1:8: ( LEFT_BRACE | RIGHT_BRACE | LEFT_BRACKET | RIGHT_BRACKET | ASSIGN | STRENGTH | ATTACK | MOVE | CONDITION | NUMBER | ID | WHITESPACE | NEWLINE )
-        int alt8=13;
-        alt8 = dfa8.predict(input);
-        switch (alt8) {
+        // /Users/job/Programming/svn-sc/SAFlexer.g:1:8: ( LEFT_BRACE | RIGHT_BRACE | LEFT_BRACKET | RIGHT_BRACKET | LEFT_PAREN | RIGHT_PAREN | ASSIGN | STRENGTH | ATTACK_TYPE | MOVE_TYPE | CONDITION_TYPE | LOGICAL_OPERATOR | CHOOSE | DIGIT | ID | WHITESPACE | NEWLINE )
+        int alt10=17;
+        alt10 = dfa10.predict(input);
+        switch (alt10) {
             case 1 :
                 // /Users/job/Programming/svn-sc/SAFlexer.g:1:10: LEFT_BRACE
                 {
-                mLEFT_BRACE(); if (state.failed) return ;
+                mLEFT_BRACE(); 
 
 
                 }
@@ -1293,7 +1383,7 @@ public class SAFlexer extends Lexer {
             case 2 :
                 // /Users/job/Programming/svn-sc/SAFlexer.g:1:21: RIGHT_BRACE
                 {
-                mRIGHT_BRACE(); if (state.failed) return ;
+                mRIGHT_BRACE(); 
 
 
                 }
@@ -1301,7 +1391,7 @@ public class SAFlexer extends Lexer {
             case 3 :
                 // /Users/job/Programming/svn-sc/SAFlexer.g:1:33: LEFT_BRACKET
                 {
-                mLEFT_BRACKET(); if (state.failed) return ;
+                mLEFT_BRACKET(); 
 
 
                 }
@@ -1309,79 +1399,111 @@ public class SAFlexer extends Lexer {
             case 4 :
                 // /Users/job/Programming/svn-sc/SAFlexer.g:1:46: RIGHT_BRACKET
                 {
-                mRIGHT_BRACKET(); if (state.failed) return ;
+                mRIGHT_BRACKET(); 
 
 
                 }
                 break;
             case 5 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:60: ASSIGN
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:60: LEFT_PAREN
                 {
-                mASSIGN(); if (state.failed) return ;
+                mLEFT_PAREN(); 
 
 
                 }
                 break;
             case 6 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:67: STRENGTH
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:71: RIGHT_PAREN
                 {
-                mSTRENGTH(); if (state.failed) return ;
+                mRIGHT_PAREN(); 
 
 
                 }
                 break;
             case 7 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:76: ATTACK
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:83: ASSIGN
                 {
-                mATTACK(); if (state.failed) return ;
+                mASSIGN(); 
 
 
                 }
                 break;
             case 8 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:83: MOVE
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:90: STRENGTH
                 {
-                mMOVE(); if (state.failed) return ;
+                mSTRENGTH(); 
 
 
                 }
                 break;
             case 9 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:88: CONDITION
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:99: ATTACK_TYPE
                 {
-                mCONDITION(); if (state.failed) return ;
+                mATTACK_TYPE(); 
 
 
                 }
                 break;
             case 10 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:98: NUMBER
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:111: MOVE_TYPE
                 {
-                mNUMBER(); if (state.failed) return ;
+                mMOVE_TYPE(); 
 
 
                 }
                 break;
             case 11 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:105: ID
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:121: CONDITION_TYPE
                 {
-                mID(); if (state.failed) return ;
+                mCONDITION_TYPE(); 
 
 
                 }
                 break;
             case 12 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:108: WHITESPACE
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:136: LOGICAL_OPERATOR
                 {
-                mWHITESPACE(); if (state.failed) return ;
+                mLOGICAL_OPERATOR(); 
 
 
                 }
                 break;
             case 13 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:119: NEWLINE
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:153: CHOOSE
                 {
-                mNEWLINE(); if (state.failed) return ;
+                mCHOOSE(); 
+
+
+                }
+                break;
+            case 14 :
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:160: DIGIT
+                {
+                mDIGIT(); 
+
+
+                }
+                break;
+            case 15 :
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:166: ID
+                {
+                mID(); 
+
+
+                }
+                break;
+            case 16 :
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:169: WHITESPACE
+                {
+                mWHITESPACE(); 
+
+
+                }
+                break;
+            case 17 :
+                // /Users/job/Programming/svn-sc/SAFlexer.g:1:180: NEWLINE
+                {
+                mNEWLINE(); 
 
 
                 }
@@ -1391,118 +1513,93 @@ public class SAFlexer extends Lexer {
 
     }
 
-    // $ANTLR start synpred1_SAFlexer
-    public final void synpred1_SAFlexer_fragment() throws RecognitionException {
-        // /Users/job/Programming/svn-sc/SAFlexer.g:14:12: ( '1' )
-        // /Users/job/Programming/svn-sc/SAFlexer.g:14:13: '1'
-        {
-        match('1'); if (state.failed) return ;
 
-        }
-
-    }
-    // $ANTLR end synpred1_SAFlexer
-
-    public final boolean synpred1_SAFlexer() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred1_SAFlexer_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-
-
-    protected DFA8 dfa8 = new DFA8(this);
-    static final String DFA8_eotS =
-        "\6\uffff\15\24\4\uffff\33\24\1\101\4\24\1\110\7\24\2\101\1\uffff"+
-        "\6\24\1\uffff\1\24\1\110\17\24\1\110\5\24\1\101\2\24\1\101\23\24"+
-        "\1\u0088\7\24\1\101\1\24\1\110\4\24\2\u0095\1\uffff\1\u0088\2\24"+
-        "\1\u0088\1\24\1\u0088\3\24\1\110\2\24\1\uffff\2\u0095\2\u0088\4"+
-        "\24\1\110\2\24\1\101\1\110\1\24\1\101";
-    static final String DFA8_eofS =
-        "\u00a5\uffff";
-    static final String DFA8_minS =
-        "\1\11\5\uffff\1\151\1\165\1\154\1\165\1\162\1\164\1\165\1\141\1"+
-        "\165\1\166\1\145\1\141\1\154\4\uffff\1\143\1\156\1\157\1\155\1\157"+
-        "\1\141\1\156\1\154\1\141\1\143\1\145\1\141\1\162\1\167\1\153\2\143"+
-        "\1\160\1\165\1\156\1\157\1\137\2\153\1\150\1\156\1\162\1\60\1\141"+
-        "\1\120\1\150\1\153\1\60\1\143\1\144\1\156\1\141\1\137\1\145\1\137"+
-        "\2\60\1\uffff\1\171\1\157\1\145\1\150\1\120\1\137\1\uffff\1\150"+
-        "\1\60\1\147\1\157\1\167\1\141\1\162\2\163\1\167\1\141\1\157\1\151"+
-        "\1\157\1\145\2\150\1\60\1\145\1\167\1\141\1\157\1\167\1\60\1\164"+
-        "\1\145\1\60\1\145\1\143\1\167\1\147\1\167\1\141\1\157\1\151\1\157"+
-        "\1\151\1\162\1\141\1\171\1\167\1\141\1\162\1\141\1\162\1\150\1\60"+
-        "\1\150\1\145\1\143\1\167\1\147\1\167\1\147\1\60\1\162\1\60\1\141"+
-        "\1\171\1\157\1\153\2\60\1\uffff\1\60\1\162\1\150\1\60\1\150\1\60"+
-        "\1\150\1\144\1\162\1\60\1\156\1\145\1\uffff\4\60\1\163\1\144\1\147"+
-        "\1\162\1\60\1\163\1\145\2\60\1\162\1\60";
-    static final String DFA8_maxS =
-        "\1\175\5\uffff\1\151\1\165\1\154\1\165\1\162\1\164\1\165\1\145\1"+
-        "\165\1\166\1\145\1\141\1\154\4\uffff\1\143\1\156\1\157\1\155\1\157"+
-        "\1\162\1\156\1\154\1\141\1\143\1\145\1\141\1\162\1\167\1\153\2\143"+
-        "\1\160\1\165\1\156\1\157\1\137\2\153\1\150\1\156\1\162\1\172\1\141"+
-        "\1\137\1\150\1\153\1\172\1\143\1\144\1\156\1\164\1\137\1\145\1\137"+
-        "\2\172\1\uffff\1\171\1\157\1\145\1\154\2\137\1\uffff\1\150\1\172"+
-        "\1\147\1\157\1\167\1\164\1\162\1\167\1\163\1\167\1\141\1\157\1\151"+
-        "\1\157\1\145\2\154\1\172\1\145\1\167\1\141\1\157\1\167\1\172\1\164"+
-        "\1\145\1\172\1\145\1\143\1\167\1\147\1\167\1\141\1\157\1\151\1\157"+
-        "\1\151\1\162\1\141\1\171\1\167\1\141\1\162\1\141\1\162\1\150\1\172"+
-        "\1\150\1\145\1\143\1\167\1\147\1\167\1\147\1\172\1\162\1\172\1\141"+
-        "\1\171\1\157\1\153\2\172\1\uffff\1\172\1\162\1\150\1\172\1\150\1"+
-        "\172\1\150\1\144\1\162\1\172\1\156\1\145\1\uffff\4\172\1\163\1\144"+
-        "\1\147\1\162\1\172\1\163\1\145\2\172\1\162\1\172";
-    static final String DFA8_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\15\uffff\1\12\1\13\1\14\1\15\52\uffff"+
-        "\1\11\6\uffff\1\10\77\uffff\1\7\14\uffff\1\6\17\uffff";
-    static final String DFA8_specialS =
-        "\u00a5\uffff}>";
-    static final String[] DFA8_transitionS = {
-            "\1\25\1\26\2\uffff\1\26\22\uffff\1\25\20\uffff\11\23\3\uffff"+
-            "\1\5\3\uffff\32\24\1\3\1\uffff\1\4\1\uffff\1\24\1\uffff\1\22"+
-            "\1\10\1\12\1\24\1\17\1\21\3\24\1\11\1\6\1\24\1\16\1\20\1\24"+
-            "\1\7\1\24\1\14\1\13\3\24\1\15\3\24\1\1\1\uffff\1\2",
+    protected DFA10 dfa10 = new DFA10(this);
+    static final String DFA10_eotS =
+        "\10\uffff\16\27\4\uffff\20\27\1\74\16\27\1\113\1\27\1\74\1\uffff"+
+        "\3\27\1\122\10\27\2\113\1\uffff\6\27\1\uffff\2\27\1\122\17\27\1"+
+        "\122\1\172\5\27\1\113\2\27\1\113\12\27\1\uffff\11\27\1\u0095\7\27"+
+        "\1\113\1\27\1\122\4\27\2\u00a2\1\uffff\1\u0095\2\27\1\u0095\1\27"+
+        "\1\u0095\3\27\1\122\2\27\1\uffff\2\u00a2\2\u0095\4\27\1\122\2\27"+
+        "\1\113\1\122\1\27\1\113";
+    static final String DFA10_eofS =
+        "\u00b2\uffff";
+    static final String DFA10_minS =
+        "\1\11\7\uffff\1\151\1\165\1\154\1\165\1\150\1\164\1\165\1\141\1"+
+        "\165\1\166\1\145\1\141\1\154\1\162\4\uffff\1\143\1\156\1\157\1\155"+
+        "\2\157\1\141\1\156\1\154\1\141\1\143\1\145\1\141\1\162\1\167\1\144"+
+        "\1\60\1\153\2\143\1\160\1\165\1\157\1\156\1\157\1\137\2\153\1\150"+
+        "\1\156\1\162\1\60\1\141\1\60\1\uffff\1\120\1\150\1\153\1\60\1\143"+
+        "\1\163\1\144\1\156\1\141\1\137\1\145\1\137\2\60\1\uffff\1\171\1"+
+        "\157\1\145\1\150\1\120\1\137\1\uffff\1\150\1\145\1\60\1\147\1\157"+
+        "\1\167\1\141\1\162\2\163\1\167\1\141\1\157\1\151\1\157\1\145\2\150"+
+        "\2\60\1\145\1\167\1\141\1\157\1\167\1\60\1\164\1\145\1\60\1\145"+
+        "\1\143\1\167\1\147\1\167\1\141\1\157\1\151\1\157\1\151\1\uffff\1"+
+        "\162\1\141\1\171\1\167\1\141\1\162\1\141\1\162\1\150\1\60\1\150"+
+        "\1\145\1\143\1\167\1\147\1\167\1\147\1\60\1\162\1\60\1\141\1\171"+
+        "\1\157\1\153\2\60\1\uffff\1\60\1\162\1\150\1\60\1\150\1\60\1\150"+
+        "\1\144\1\162\1\60\1\156\1\145\1\uffff\4\60\1\163\1\144\1\147\1\162"+
+        "\1\60\1\163\1\145\2\60\1\162\1\60";
+    static final String DFA10_maxS =
+        "\1\175\7\uffff\1\151\1\165\1\154\1\165\1\162\1\164\1\165\1\145\1"+
+        "\165\1\166\1\145\1\141\1\156\1\162\4\uffff\1\143\1\156\1\157\1\155"+
+        "\2\157\1\162\1\156\1\154\1\141\1\143\1\145\1\141\1\162\1\167\1\144"+
+        "\1\172\1\153\2\143\1\160\1\165\1\157\1\156\1\157\1\137\2\153\1\150"+
+        "\1\156\1\162\1\172\1\141\1\172\1\uffff\1\137\1\150\1\153\1\172\1"+
+        "\143\1\163\1\144\1\156\1\164\1\137\1\145\1\137\2\172\1\uffff\1\171"+
+        "\1\157\1\145\1\154\2\137\1\uffff\1\150\1\145\1\172\1\147\1\157\1"+
+        "\167\1\164\1\162\1\167\1\163\1\167\1\141\1\157\1\151\1\157\1\145"+
+        "\2\154\2\172\1\145\1\167\1\141\1\157\1\167\1\172\1\164\1\145\1\172"+
+        "\1\145\1\143\1\167\1\147\1\167\1\141\1\157\1\151\1\157\1\151\1\uffff"+
+        "\1\162\1\141\1\171\1\167\1\141\1\162\1\141\1\162\1\150\1\172\1\150"+
+        "\1\145\1\143\1\167\1\147\1\167\1\147\1\172\1\162\1\172\1\141\1\171"+
+        "\1\157\1\153\2\172\1\uffff\1\172\1\162\1\150\1\172\1\150\1\172\1"+
+        "\150\1\144\1\162\1\172\1\156\1\145\1\uffff\4\172\1\163\1\144\1\147"+
+        "\1\162\1\172\1\163\1\145\2\172\1\162\1\172";
+    static final String DFA10_acceptS =
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\16\uffff\1\16\1\17\1\20\1\21"+
+        "\42\uffff\1\14\16\uffff\1\13\6\uffff\1\12\47\uffff\1\15\32\uffff"+
+        "\1\11\14\uffff\1\10\17\uffff";
+    static final String DFA10_specialS =
+        "\u00b2\uffff}>";
+    static final String[] DFA10_transitionS = {
+            "\1\30\1\31\2\uffff\1\31\22\uffff\1\30\7\uffff\1\5\1\6\7\uffff"+
+            "\11\26\3\uffff\1\7\3\uffff\32\27\1\3\1\uffff\1\4\1\uffff\1\27"+
+            "\1\uffff\1\24\1\12\1\14\1\27\1\21\1\23\3\27\1\13\1\10\1\27\1"+
+            "\20\1\22\1\25\1\11\1\27\1\16\1\15\3\27\1\17\3\27\1\1\1\uffff"+
+            "\1\2",
             "",
             "",
             "",
             "",
             "",
-            "\1\27",
-            "\1\30",
-            "\1\31",
+            "",
+            "",
             "\1\32",
             "\1\33",
             "\1\34",
             "\1\35",
-            "\1\36\3\uffff\1\37",
+            "\1\37\11\uffff\1\36",
             "\1\40",
             "\1\41",
-            "\1\42",
-            "\1\43",
+            "\1\42\3\uffff\1\43",
             "\1\44",
-            "",
-            "",
-            "",
-            "",
             "\1\45",
             "\1\46",
             "\1\47",
-            "\1\50",
-            "\1\51",
-            "\1\52\20\uffff\1\53",
+            "\1\50\1\uffff\1\51",
+            "\1\52",
+            "",
+            "",
+            "",
+            "",
+            "\1\53",
             "\1\54",
             "\1\55",
             "\1\56",
             "\1\57",
             "\1\60",
-            "\1\61",
-            "\1\62",
+            "\1\61\20\uffff\1\62",
             "\1\63",
             "\1\64",
             "\1\65",
@@ -1512,159 +1609,175 @@ public class SAFlexer extends Lexer {
             "\1\71",
             "\1\72",
             "\1\73",
-            "\1\74",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\75",
             "\1\76",
             "\1\77",
             "\1\100",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+            "\1\101",
             "\1\102",
-            "\1\103\1\uffff\1\104\14\uffff\1\105",
+            "\1\103",
+            "\1\104",
+            "\1\105",
             "\1\106",
             "\1\107",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+            "\1\110",
             "\1\111",
             "\1\112",
-            "\1\113",
-            "\1\115\22\uffff\1\114",
-            "\1\116",
-            "\1\117",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\114",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "",
+            "\1\115\1\uffff\1\116\14\uffff\1\117",
             "\1\120",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "",
             "\1\121",
-            "\1\122",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\123",
-            "\1\125\3\uffff\1\124",
-            "\1\126\1\uffff\1\127\14\uffff\1\130",
+            "\1\124",
+            "\1\125",
+            "\1\126",
+            "\1\130\22\uffff\1\127",
             "\1\131",
-            "",
             "\1\132",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\133",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "",
             "\1\134",
             "\1\135",
-            "\1\137\22\uffff\1\136",
-            "\1\140",
-            "\1\141\3\uffff\1\142",
-            "\1\143",
+            "\1\136",
+            "\1\140\3\uffff\1\137",
+            "\1\141\1\uffff\1\142\14\uffff\1\143",
             "\1\144",
+            "",
             "\1\145",
             "\1\146",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\147",
             "\1\150",
             "\1\151",
-            "\1\153\3\uffff\1\152",
-            "\1\155\3\uffff\1\154",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\1\156",
+            "\1\153\22\uffff\1\152",
+            "\1\154",
+            "\1\155\3\uffff\1\156",
             "\1\157",
             "\1\160",
             "\1\161",
             "\1\162",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\163",
             "\1\164",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\165",
-            "\1\166",
-            "\1\167",
-            "\1\170",
-            "\1\171",
-            "\1\172",
+            "\1\167\3\uffff\1\166",
+            "\1\171\3\uffff\1\170",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\173",
             "\1\174",
             "\1\175",
             "\1\176",
             "\1\177",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\u0080",
             "\1\u0081",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\u0082",
             "\1\u0083",
             "\1\u0084",
             "\1\u0085",
             "\1\u0086",
             "\1\u0087",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+            "\1\u0088",
             "\1\u0089",
             "\1\u008a",
             "\1\u008b",
+            "",
             "\1\u008c",
             "\1\u008d",
             "\1\u008e",
             "\1\u008f",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\u0090",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\u0091",
             "\1\u0092",
             "\1\u0093",
             "\1\u0094",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\u0096",
             "\1\u0097",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\u0098",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\u0099",
             "\1\u009a",
             "\1\u009b",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\u009c",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\u009d",
-            "",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\u009e",
             "\1\u009f",
             "\1\u00a0",
             "\1\u00a1",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\1\u00a2",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
             "\1\u00a3",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24",
             "\1\u00a4",
-            "\12\24\7\uffff\32\24\4\uffff\1\24\1\uffff\32\24"
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\u00a5",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\u00a6",
+            "\1\u00a7",
+            "\1\u00a8",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\u00a9",
+            "\1\u00aa",
+            "",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\u00ab",
+            "\1\u00ac",
+            "\1\u00ad",
+            "\1\u00ae",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\u00af",
+            "\1\u00b0",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27",
+            "\1\u00b1",
+            "\12\27\7\uffff\32\27\4\uffff\1\27\1\uffff\32\27"
     };
 
-    static final short[] DFA8_eot = DFA.unpackEncodedString(DFA8_eotS);
-    static final short[] DFA8_eof = DFA.unpackEncodedString(DFA8_eofS);
-    static final char[] DFA8_min = DFA.unpackEncodedStringToUnsignedChars(DFA8_minS);
-    static final char[] DFA8_max = DFA.unpackEncodedStringToUnsignedChars(DFA8_maxS);
-    static final short[] DFA8_accept = DFA.unpackEncodedString(DFA8_acceptS);
-    static final short[] DFA8_special = DFA.unpackEncodedString(DFA8_specialS);
-    static final short[][] DFA8_transition;
+    static final short[] DFA10_eot = DFA.unpackEncodedString(DFA10_eotS);
+    static final short[] DFA10_eof = DFA.unpackEncodedString(DFA10_eofS);
+    static final char[] DFA10_min = DFA.unpackEncodedStringToUnsignedChars(DFA10_minS);
+    static final char[] DFA10_max = DFA.unpackEncodedStringToUnsignedChars(DFA10_maxS);
+    static final short[] DFA10_accept = DFA.unpackEncodedString(DFA10_acceptS);
+    static final short[] DFA10_special = DFA.unpackEncodedString(DFA10_specialS);
+    static final short[][] DFA10_transition;
 
     static {
-        int numStates = DFA8_transitionS.length;
-        DFA8_transition = new short[numStates][];
+        int numStates = DFA10_transitionS.length;
+        DFA10_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA8_transition[i] = DFA.unpackEncodedString(DFA8_transitionS[i]);
+            DFA10_transition[i] = DFA.unpackEncodedString(DFA10_transitionS[i]);
         }
     }
 
-    class DFA8 extends DFA {
+    class DFA10 extends DFA {
 
-        public DFA8(BaseRecognizer recognizer) {
+        public DFA10(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 8;
-            this.eot = DFA8_eot;
-            this.eof = DFA8_eof;
-            this.min = DFA8_min;
-            this.max = DFA8_max;
-            this.accept = DFA8_accept;
-            this.special = DFA8_special;
-            this.transition = DFA8_transition;
+            this.decisionNumber = 10;
+            this.eot = DFA10_eot;
+            this.eof = DFA10_eof;
+            this.min = DFA10_min;
+            this.max = DFA10_max;
+            this.accept = DFA10_accept;
+            this.special = DFA10_special;
+            this.transition = DFA10_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( LEFT_BRACE | RIGHT_BRACE | LEFT_BRACKET | RIGHT_BRACKET | ASSIGN | STRENGTH | ATTACK | MOVE | CONDITION | NUMBER | ID | WHITESPACE | NEWLINE );";
+            return "1:1: Tokens : ( LEFT_BRACE | RIGHT_BRACE | LEFT_BRACKET | RIGHT_BRACKET | LEFT_PAREN | RIGHT_PAREN | ASSIGN | STRENGTH | ATTACK_TYPE | MOVE_TYPE | CONDITION_TYPE | LOGICAL_OPERATOR | CHOOSE | DIGIT | ID | WHITESPACE | NEWLINE );";
         }
     }
  
