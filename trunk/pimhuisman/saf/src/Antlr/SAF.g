@@ -18,6 +18,8 @@ tokens {
 	CHOOSE;
 	MOVE_ACTION;
 	ATTACK_ACTION;
+	AND_CONDITION;
+	OR_CONDITION;
 }
 
 @header {
@@ -48,8 +50,20 @@ characteristic		:	CHARACTERISTIC_TYPE '=' NUMBER
 					;
 
 behaviour			:	rule+;
-rule				:	CONDITION_TYPE '[' actions ']'
-						->	^(CONDITION ^(NAME CONDITION_TYPE) actions)
+rule				:	condition '[' actions ']'
+						->	^(CONDITION condition actions)
+					;
+					
+condition			:	CONDITION_TYPE -> ^(NAME CONDITION_TYPE)
+					|	andStatement
+					|	orStatement
+					;
+
+andStatement		:	c1=CONDITION_TYPE 'and' c2=CONDITION_TYPE
+						-> ^(AND_CONDITION ^(NAME $c1) ^(NAME $c2))
+					;
+orStatement			:	c1=CONDITION_TYPE 'or' c2=CONDITION_TYPE
+						-> ^(OR_CONDITION ^(NAME $c1) ^(NAME $c2))
 					;
 
 actions				:	(moveAction attackAction)
