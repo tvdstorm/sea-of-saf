@@ -7,9 +7,7 @@ options {
 
 tokens
 {
-	EQUALS  = '=';
-	CURLYOPEN  = '{';
-	CURLYCLOSE  = '}';
+	CHOOSE  		= 'choose';
 }
 
 @header {
@@ -20,62 +18,27 @@ tokens
   package com.yennick.SAF;
 }
 
-fighter
-	: fightername CURLYOPEN
-		(skills|conditions|distance|profile)+
-		CURLYCLOSE
-	;
-	
-fightername
-	: FIGHTERNAME
+fighter 
+	: IDENT '{'
+			(personality|behaviour)*
+		'}'
 	;
 
-
-skills
-	:SKILLS EQUALS SKILLVALUE
+behaviour
+	:	IDENT '[' action action ']' 
 	;
-
-profile
-	: ('weight'|'height'|'speed')
-	;
-	
-distance
-	: DISTANCE move
-	;
-	
-conditions
-	: (CONDITION | 'always') move
-	;
-
-move 
-	:	'[' action+ ']'
-	;
-	
+ 
 action
-	:	 ('choose' '(')? (moveAction|fightAction)  (')')?
+	:	CHOOSE '(' IDENT IDENT ')' | IDENT
 	;
 	
-moveAction
-	:	  (MOVEACTION|'stand')
+	
+personality
+	: IDENT '=' VALUE
 	;
 	
-fightAction
-	: FIGHTACTION 
-	; 
 
-	
-	
-//move cases to lists for testability
-ATTACK			: ('kick'|'punch'|'block');
-DISTANCE		: ('far'|'near'|'always');
-DIRECTION		: ('high'|'low');
-FIGHTACTION	: ATTACK'_'DIRECTION;
-CONDITION		: ('much''_')?('stronger'|'weaker');
-MOVEACTION	: ('run'|'crouch'|'walk'|'jump')('_'('towards'|'away'))?;	
-SKILLS			: ATTACK('Reach'|'Power');
+IDENT	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'_')*;
+VALUE	: '0'..'9'+;
 
-
-FIGHTERNAME	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'0'..'9'|'-')+;
-SKILLVALUE	: '0'..'9' |'10';
-
-WHITESPACE : ( '\t' | ' ' | '\r' | '\n'| '\u000C' )+    { $channel = HIDDEN; } ;
+WHITESPACE : ( '\t' | ' ' | '\r' | '\n' )*   { $channel = HIDDEN; } ;
