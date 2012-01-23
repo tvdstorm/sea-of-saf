@@ -1,5 +1,3 @@
-//Add annotations @category="Constant"
-
 module Language
 
 lexical Layout = [\ \t\n\r];
