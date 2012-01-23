@@ -47,7 +47,8 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants/*@egen*/
 	    }
 	    catch(Exception e)
 	    {
-	          e.printStackTrace();
+	        System.out.println("Parsing Failed");
+	        //e.printStackTrace();
 	    }
 	}
 }
@@ -67,7 +68,7 @@ TOKEN :
 {
 	< ASSIGNMENT : "=" >
 |   < IDENTIFIER : ["a"-"z","A"-"Z","_"](["a"-"z","A"-"Z","_","0"-"9"])* >
-|   < PROPERTYVALUE : (["1"-"9"] | "10") >
+|   < PROPERTYVALUE : (["0"-"9"])+ >
 |   < OPENCURLYBRACKET : "{" >
 |   < CLOSECURLYBRACKET : "}" >
 |   < OPENSQAREBRACKET : "[" >
@@ -90,21 +91,18 @@ ArrayList<Fighter> Parse() :
 {/*@bgen(jjtree) Parse */
     try {
 /*@egen*/
-    (        fighterName = < IDENTIFIER >
-        { fighter.setName(fighterName.toString()); }
-        (fighterName = < IDENTIFIER >)*	    { fighter.appendName(fighterName.toString()); }
-	    < OPENCURLYBRACKET >
+    (        (fighterName = < IDENTIFIER >) { fighter.setName(fighterName.toString()); }
+        (fighterName = < IDENTIFIER >)* { fighter.appendName(fighterName.toString()); }
+	    (< OPENCURLYBRACKET >)
 		(
 		    LOOKAHEAD(2)
-		    ( fighterStrength = Strength() )
-		    { fighter.addStrength(fighterStrength); }
+		    ( fighterStrength = Strength() ) { fighter.addStrength(fighterStrength); }
 		    |
-		    ( fighterBehavior = Behavior() )		    { fighter.addBehavior(fighterBehavior); }
+		    ( fighterBehavior = Behavior() ) { fighter.addBehavior(fighterBehavior); }
 		)*
-		<  CLOSECURLYBRACKET >
-		{ fighters.add(fighter); }
+		( <  CLOSECURLYBRACKET >) { fighters.add(fighter); }
 	)*
-	<  EOF >/*@bgen(jjtree)*/
+	< EOF >/*@bgen(jjtree)*/
         {
           jjtree.closeNodeScope(jjtn000, true);
           jjtc000 = false;

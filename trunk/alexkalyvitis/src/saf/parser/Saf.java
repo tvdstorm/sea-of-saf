@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
+import saf.ast.*;
 import saf.interpreter.SafInterpreter;
-import saf.objects.*;
 
 public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@bgen(jjtree)*/
   protected JJTSafState jjtree = new JJTSafState();public static void main(String args[])
@@ -36,7 +36,8 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
             }
             catch(Exception e)
             {
-                  e.printStackTrace();
+                System.out.println("Parsing Failed");
+                //e.printStackTrace();
             }
         }
 
@@ -62,7 +63,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
           break label_1;
         }
         fighterName = jj_consume_token(IDENTIFIER);
-          fighter.setName(fighterName.toString());
+                                         fighter.setName(fighterName.toString());
         label_2:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -75,7 +76,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
           }
           fighterName = jj_consume_token(IDENTIFIER);
         }
-              fighter.appendName(fighterName.toString());
+                                          fighter.appendName(fighterName.toString());
         jj_consume_token(OPENCURLYBRACKET);
         label_3:
         while (true) {
@@ -89,12 +90,12 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
           }
           if (jj_2_1(2)) {
             fighterStrength = Strength();
-                      fighter.addStrength(fighterStrength);
+                                                       fighter.addStrength(fighterStrength);
           } else {
             switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
             case IDENTIFIER:
               fighterBehavior = Behavior();
-                      fighter.addBehavior(fighterBehavior);
+                                                       fighter.addBehavior(fighterBehavior);
               break;
             default:
               jj_la1[3] = jj_gen;
@@ -104,7 +105,7 @@ public class Saf/*@bgen(jjtree)*/implements SafTreeConstants, SafConstants {/*@b
           }
         }
         jj_consume_token(CLOSECURLYBRACKET);
-                  fighters.add(fighter);
+                                            fighters.add(fighter);
       }
       jj_consume_token(0);
           jjtree.closeNodeScope(jjtn000, true);

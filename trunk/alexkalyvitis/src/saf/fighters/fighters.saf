@@ -1,4 +1,4 @@
-Peter Griffin
+Eric Cartman
 {
 	kickReach = 6
 	kickPower = 7
@@ -8,7 +8,7 @@ Peter Griffin
 	far [run_towards kick_high]
 }
 
-Lois Griffin
+Kyle Broflovski
 {
 	kickReach = 8
 	kickPower = 3
@@ -18,7 +18,7 @@ Lois Griffin
 	far [run_towards kick_high]
 }
 
-Brian Griffin
+Stan Marsh
 {
 	kickReach = 6
 	kickPower = 7
@@ -28,27 +28,7 @@ Brian Griffin
 	far [run_towards kick_high]
 }
 
-Meg Griffin
-{
-	kickReach = 6
-	kickPower = 7
-	punchReach = 5
-	punchPower = 3
-	near [crouch punch_low]
-	far [run_towards kick_high]
-}
-
-Chris Griffin
-{
-	kickReach = 6
-	kickPower = 7
-	punchReach = 5
-	punchPower = 3
-	near [crouch punch_low]
-	far [run_towards kick_high]
-}
-
-Stewey Griffin
+Kenny McCormick
 {
 	kickReach = 6
 	kickPower = 7

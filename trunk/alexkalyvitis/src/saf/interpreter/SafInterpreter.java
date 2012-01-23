@@ -1,7 +1,8 @@
 package saf.interpreter;
 
 import java.util.ArrayList;
-import saf.objects.*;
+
+import saf.ast.*;
 
 public class SafInterpreter {
 	
@@ -15,6 +16,7 @@ public class SafInterpreter {
 	public SafInterpreter(ArrayList<Fighter> f){
 		fighters = f;
 	}
+	
 	public boolean interpret(){
 		for (Fighter fighter : fighters){
 			for (Strength strength : fighter.getStrengths()){

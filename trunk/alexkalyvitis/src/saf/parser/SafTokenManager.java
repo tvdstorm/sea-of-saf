@@ -3,8 +3,9 @@ package saf.parser;
 import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.InputStream;
+
+import saf.ast.*;
 import saf.interpreter.SafInterpreter;
-import saf.objects.*;
 
 /** Token Manager. */
 public class SafTokenManager implements SafConstants
@@ -74,7 +75,7 @@ private int jjMoveStringLiteralDfa1_0(long active0)
 private int jjMoveNfa_0(int startState, int curPos)
 {
    int startsAt = 0;
-   jjnewStateCnt = 5;
+   jjnewStateCnt = 3;
    int i = 1;
    jjstateSet[0] = startState;
    int kind = 0x7fffffff;
@@ -90,13 +91,12 @@ private int jjMoveNfa_0(int startState, int curPos)
             switch(jjstateSet[--i])
             {
                case 0:
-                  if ((0x3fe000000000000L & l) != 0L)
-                  {
-                     if (kind > 8)
-                        kind = 8;
-                  }
-                  if (curChar == 49)
-                     jjstateSet[jjnewStateCnt++] = 3;
+               case 2:
+                  if ((0x3ff000000000000L & l) == 0L)
+                     break;
+                  if (kind > 8)
+                     kind = 8;
+                  jjCheckNAdd(2);
                   break;
                case 1:
                   if ((0x3ff000000000000L & l) == 0L)
@@ -104,18 +104,6 @@ private int jjMoveNfa_0(int startState, int curPos)
                   if (kind > 7)
                      kind = 7;
                   jjstateSet[jjnewStateCnt++] = 1;
-                  break;
-               case 2:
-                  if ((0x3fe000000000000L & l) != 0L && kind > 8)
-                     kind = 8;
-                  break;
-               case 3:
-                  if (curChar == 48 && kind > 8)
-                     kind = 8;
-                  break;
-               case 4:
-                  if (curChar == 49)
-                     jjstateSet[jjnewStateCnt++] = 3;
                   break;
                default : break;
             }
@@ -159,7 +147,7 @@ private int jjMoveNfa_0(int startState, int curPos)
          kind = 0x7fffffff;
       }
       ++curPos;
-      if ((i = jjnewStateCnt) == (startsAt = 5 - (jjnewStateCnt = startsAt)))
+      if ((i = jjnewStateCnt) == (startsAt = 3 - (jjnewStateCnt = startsAt)))
          return curPos;
       try { curChar = input_stream.readChar(); }
       catch(java.io.IOException e) { return curPos; }
@@ -184,8 +172,8 @@ static final long[] jjtoSkip = {
    0x3eL, 
 };
 protected SimpleCharStream input_stream;
-private final int[] jjrounds = new int[5];
-private final int[] jjstateSet = new int[10];
+private final int[] jjrounds = new int[3];
+private final int[] jjstateSet = new int[6];
 protected char curChar;
 /** Constructor. */
 public SafTokenManager(SimpleCharStream stream){
@@ -212,7 +200,7 @@ private void ReInitRounds()
 {
    int i;
    jjround = 0x80000001;
-   for (i = 5; i-- > 0;)
+   for (i = 3; i-- > 0;)
       jjrounds[i] = 0x80000000;
 }
 
