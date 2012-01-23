@@ -16,7 +16,8 @@ private str unknownConditionMessage = "Unknown condition: ";
 private str unknownMoveActionMessage = "Unknown move action: ";
 private str unknownFightActionMessage = "Unknown fight action: ";
 private str unknownCharacteristicMessage = "Unknown characteristic: ";
-private str invalidCharacteristicValueMessage = "Invalid characteristic value (<characteristicMinimum> - <characteristicMaximum> allowed): ";
+private str invalidCharacteristicValueMessage = 
+    "Invalid characteristic value (<characteristicMinimum> - <characteristicMaximum> allowed): ";
 
 public set[Message] validate(Bot bot) {
     set[Message] validationMessages = {};
@@ -51,33 +52,41 @@ private set[Message] validateBehaviourRule(BehaviourRule behaviourRule) {
     set[Message] validationMessages = {};
     
     visit(behaviourRule) {
-        case sc:simpleCondition(str condition): {
-            if(!(condition in conditions))
-                validationMessages += error(unknownConditionMessage + condition, sc@location);
-        }
-        case cma:chooseMoveAction(list[str] chooseMoveActions): {
-            for(str chooseMoveAction <- chooseMoveActions) {
-                if(!(chooseMoveAction in moveActions)) {
-                    validationMessages += error(unknownMoveActionMessage + chooseMoveAction, cma@location);
-                }
-            }
-        }
-        case sma:simpleMoveAction(str moveAction): {
-            if(!(moveAction in moveActions)) 
-                validationMessages += error(unknownMoveActionMessage + moveAction, sma@location);
-        }
-        case cfa:chooseFightAction(list[str] chooseFightActions): {
-            for(str chooseFightAction <- chooseFightActions) {
-                if(!(chooseFightAction in fightActions)) {
-                    validationMessages += error(unknownFightActionMessage + chooseFightAction, cfa@location);
-                }
-            }
-        }
-        case sfa:simpleFightAction(str fightAction): {
-            if(!(fightAction in fightActions)) 
-                validationMessages += error(unknownFightActionMessage + fightAction, sfa@location);
-        }
+        case sc:simpleCondition(str condition): 
+            if(!(condition in conditions)) validationMessages += error(unknownConditionMessage + condition, sc@location);
+        case cma:chooseMoveAction(list[str] chooseMoveActions): 
+            validationMessages += validateMoveActions(chooseMoveActions, cma@location);
+        case sma:simpleMoveAction(str moveAction): 
+            validationMessages += validateMoveActions([moveAction], sma@location);
+        case cfa:chooseFightAction(list[str] chooseFightActions): 
+            validationMessages += validateFightActions(chooseFightActions, cfa@location);
+        case sfa:simpleFightAction(str fightAction):
+            validationMessages += validateFightActions([fightAction], sfa@location);
     };
+    
+    return validationMessages;
+}
+
+private set[Message] validateMoveActions(list[str] checkMoveActions, loc location) {
+   set[Message] validationMessages = {};
+   
+   for(str checkMoveAction <- checkMoveActions) {
+        if(!(checkMoveAction in moveActions)) {
+            validationMessages += error(unknownMoveActionMessage + checkMoveAction, location);
+        }
+    } 
+    
+    return validationMessages;
+}
+
+private set[Message] validateFightActions(list[str] checkFightActions, loc location) {
+    set[Message] validationMessages = {};
+    
+    for(str checkFightAction <- checkFightActions) {
+        if(!(checkFightAction in fightActions)) {
+            validationMessages += error(unknownFightActionMessage + checkFightAction, location);
+        }
+    }
     
     return validationMessages;
 }

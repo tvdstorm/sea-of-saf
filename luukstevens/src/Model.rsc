@@ -6,7 +6,7 @@ import List;
 private int defaultCharacteristicValue = 5;
 
 data ModelBot            = modelBot(str name, int punchReach, int punchPower, int kickReach, int kickPower, 
-                        list[ModelBehaviourRule] behaviourRules);
+                            list[ModelBehaviourRule] behaviourRules);
 
 data ModelBehaviourRule  = modelBehaviourRule(Condition condition, list[str] moveActions, list[str] fightActions);
 
@@ -22,9 +22,9 @@ public ModelBot convertAstToModel(Bot bot) {
 }
 
 private list[ModelBehaviourRule] convertBehaviourRules(list[BehaviourRule] behaviourRules) {
-    list[ModelBehaviourRule] modelBehaviourRules = [];
-    
-    for(BehaviourRule astBehaviourRule <- behaviourRules) {
+   
+    return for(BehaviourRule astBehaviourRule <- behaviourRules) {
+        
         ModelBehaviourRule modelBehaviourRule = modelBehaviourRule(astBehaviourRule.condition, [], []);
         
         visit(astBehaviourRule) {
@@ -42,10 +42,8 @@ private list[ModelBehaviourRule] convertBehaviourRules(list[BehaviourRule] behav
             }
         }
         
-        modelBehaviourRules += modelBehaviourRule;
+        append modelBehaviourRule;
     }
-    
-    return modelBehaviourRules;
 } 
 
 //Get the value of a given characteristic from ast. Return default if not defined.

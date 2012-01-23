@@ -6,7 +6,8 @@ layout LayoutList = Layout* !>> [\t\n\r\ ];
 lexical Id = [a-zA-Z_]+ !>> [a-zA-Z_];
 lexical Num = [0-9]+;
 
-//Introduced to annotated lexical tokens.
+//Introduced to annotate lexical tokens.
+//The categories used are random.
 syntax Number
     = @category = "Constant" Num;
     
@@ -36,9 +37,9 @@ syntax BehaviourRule
     = behaviourRule : Condition "[" MoveAction moveAction FightAction fightAction "]";
 
 syntax Condition 
-    = left orCondition : Condition firstCondition "or" Condition secondCondition
-    | simpleCondition : ConditionId condition 
-    > left andCondition : Condition firstCondition "and" Condition secondCondition; 
+    = simpleCondition : ConditionId condition
+    | left andCondition : Condition firstCondition "and" Condition secondCondition  
+    > left orCondition : Condition firstCondition "or" Condition secondCondition; 
     
 syntax MoveAction
     = simpleMoveAction : MoveId moveAction
