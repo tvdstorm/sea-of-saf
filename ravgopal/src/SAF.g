@@ -1,8 +1,8 @@
-grammar superawesomefighter;
+grammar SAF;
 
 options {
-  language = Java;
   output = AST;
+  ASTLabelType = CommonTree;
 }
 
 tokens {
@@ -23,19 +23,20 @@ tokens {
   BEHAVIOUR;
   ACTION;
   CONDITION;
+  CHOICE;
 }
 
-/* PARSER RULES */
+/* PARSER */
 fighter
-  : name FIGHTER_START personality behaviour FIGHTER_END EOF
+  : name FIGHTER_START personality behaviour FIGHTER_END EOF -> ^(name ^(PERSONALITY personality) ^(BEHAVIOUR behaviour))
   ;
 
 name
-  : ID
+  : STRING
   ;
 
 personality
-  : (characteristic EQLS INT)*
+  : (characteristic EQLS INT)* -> ^(characteristic INT)*
   ;
 
 characteristic
@@ -50,7 +51,7 @@ behaviour
   ;
 
 rule
-  : condition RULE_START (move fight) RULE_END
+  : condition RULE_START (move fight) RULE_END -> ^(condition ^(ACTION ^(move fight)))
   ;
 
 condition
@@ -60,11 +61,12 @@ condition
   ;
 
 move
-  : moveAction | CHOOSE CHOICE_START (moveAction)+ CHOICE_END
+  : moveAction | CHOOSE CHOICE_START (moveAction)+ CHOICE_END -> ^(CHOICE (moveAction)+)
   ;
  
 fight
-  : fightAction | CHOOSE CHOICE_START (fightAction)+ CHOICE_END;
+  : fightAction | CHOOSE CHOICE_START (fightAction)+ CHOICE_END -> ^(CHOICE (fightAction)+)
+  ;
   
 moveAction
   : 'walk_towards'
@@ -97,8 +99,8 @@ conditionType
   ;
 
 
-/* LEXER RULES */
-ID
+/* LEXER */
+STRING
   : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
   ;
 
@@ -106,7 +108,7 @@ INT
   : '0'..'9'+
   ;
 
-WS
+WHITESPACE
   : ( ' '
     | '\t'
     | '\r'
