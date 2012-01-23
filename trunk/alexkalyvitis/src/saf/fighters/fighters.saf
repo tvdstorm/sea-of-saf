@@ -1,0 +1,39 @@
+Eric Cartman
+{
+	kickReach = 6
+	kickPower = 7
+	punchReach = 5
+	punchPower = 3
+	near [crouch punch_low]
+	far [run_towards kick_high]
+}
+
+Kyle Broflovski
+{
+	kickReach = 8
+	kickPower = 3
+	punchReach = 7
+	punchPower = 5
+	near [jump kick_high]
+	far [run_towards kick_high]
+}
+
+Stan Marsh
+{
+	kickReach = 6
+	kickPower = 7
+	punchReach = 5
+	punchPower = 3
+	near [crouch punch_low]
+	far [run_towards kick_high]
+}
+
+Kenny McCormick
+{
+	kickReach = 6
+	kickPower = 7
+	punchReach = 5
+	punchPower = 3
+	near [crouch punch_low]
+	far [run_towards kick_high]
+}
