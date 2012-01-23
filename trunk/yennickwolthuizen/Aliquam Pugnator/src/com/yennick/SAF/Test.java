@@ -12,7 +12,7 @@ import org.antlr.runtime.TokenStream;
 public class Test {
 
 	public static void main(String[] args) throws RecognitionException, IOException {
-		CharStream charStream = new ANTLRFileStream("src/chicken.txt");
+		CharStream charStream = new ANTLRFileStream("src/JackieChan.txt");
 		SAFLexer lexer = new SAFLexer(charStream);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFParser parser = new SAFParser(tokenStream);
