@@ -21,28 +21,20 @@ package nl.uva.saf.fdl.ast;
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class Rule extends TreeNode {
-	private MoveChoice moveChoice;
-	private FightChoice fightChoice;
+	private final MoveChoice moveChoice;
+	private final FightChoice fightChoice;
 	
 	public Rule(MoveChoice moveChoice, FightChoice fightChoice) {
-		this.setMoveChoice(moveChoice);
-		this.setFightChoice(fightChoice);
+		this.moveChoice = moveChoice;
+		this.fightChoice = fightChoice;
 	}
 
 	public ITreeNode getFightChoice() {
 		return fightChoice;
 	}
 
-	public void setFightChoice(FightChoice fightChoice) {
-		this.fightChoice = fightChoice;
-	}
-
 	public ITreeNode getMoveChoice() {
 		return moveChoice;
-	}
-
-	public void setMoveChoice(MoveChoice moveChoice) {
-		this.moveChoice = moveChoice;
 	}
 
 	@Override

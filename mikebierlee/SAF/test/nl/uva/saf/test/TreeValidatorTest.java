@@ -12,7 +12,6 @@ import nl.uva.saf.fdl.ast.FightAction;
 import nl.uva.saf.fdl.ast.FightChoice;
 import nl.uva.saf.fdl.ast.Fighter;
 import nl.uva.saf.fdl.ast.FighterAttribute;
-import nl.uva.saf.fdl.ast.ITreeNode;
 import nl.uva.saf.fdl.ast.MoveChoice;
 import nl.uva.saf.fdl.ast.Rule;
 
@@ -21,23 +20,15 @@ import org.junit.Test;
 
 public class TreeValidatorTest {
 	private TreeValidator validator;
-	private Fighter fighter;
-
-	private ITreeNode createEmptyFighter() {
-		ArrayList<FighterAttribute> attributes = new ArrayList<FighterAttribute>();
-		ITreeNode tree = new Fighter("validatorTest", attributes);
-
-		return tree;
-	}
 
 	@Before
 	public void setUp() throws Exception {
 		validator = new TreeValidator();
-		fighter = (Fighter) createEmptyFighter();
 	}
 
 	@Test
-	public void treeLacksAlwaysBehaviourTest() {		
+	public void treeLacksAlwaysBehaviourTest() {	
+		Fighter fighter = new Fighter("fighter", new ArrayList<FighterAttribute>());
 		ValidationReport report = validator.validate(fighter);
 
 		boolean containsAlwaysError = false;
@@ -53,23 +44,12 @@ public class TreeValidatorTest {
 
 	@Test
 	public void emptyChoiceClauseTest() {
-		ArrayList<Action> fightChoice = new ArrayList<Action>();
-		fightChoice.add(new FightAction("kick_low"));
-		
-		fighter.getAttributes().add(
-				new Behaviour(
-						new ConditionAlways(), 
-						new Rule(
-								new MoveChoice(
-										new ArrayList<Action>()
-										), 
-								new FightChoice(
-										fightChoice
-										)
-								)
-						)
-				);
-		
+		ArrayList<Action> fightChoices = new ArrayList<Action>();
+		fightChoices.add(new FightAction("kick_low"));		
+		ArrayList<FighterAttribute> fighterAttributes = new ArrayList<FighterAttribute>();
+		fighterAttributes.add(new Behaviour(new ConditionAlways(), new Rule(new MoveChoice(new ArrayList<Action>()), new FightChoice(fightChoices))));
+		Fighter fighter = new Fighter("emptyChoiceClauseTest", fighterAttributes);
+				
 		ValidationReport report = validator.validate(fighter);
 
 		boolean containsEmptyChoiceError = false;
@@ -86,7 +66,9 @@ public class TreeValidatorTest {
 	@Test
 	public void characteristicValueOutOfBoundsTest() {
 		Characteristic testCharacteristic = new Characteristic("kickPower", 11);
-		fighter.getAttributes().add(testCharacteristic);
+		ArrayList<FighterAttribute> fighterAttributes = new ArrayList<FighterAttribute>();
+		fighterAttributes.add(testCharacteristic);		
+		Fighter fighter = new Fighter("characteristicValueOutOfBoundsTest", fighterAttributes);
 		
 		ValidationReport report = validator.validate(fighter);
 		
@@ -100,7 +82,7 @@ public class TreeValidatorTest {
 		
 		assert(containsOutOfBoundsError);
 		
-		testCharacteristic.setValue(0);
+		//testCharacteristic.setValue(0);
 		report = validator.validate(fighter);
 		
 		containsOutOfBoundsError = false;

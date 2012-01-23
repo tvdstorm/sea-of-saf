@@ -21,7 +21,6 @@ package nl.uva.saf.fdl.ast;
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class MoveAction extends Action {
-
 	public MoveAction(String actionType) {
 		super(actionType);
 	}
@@ -30,5 +29,4 @@ public class MoveAction extends Action {
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);
 	}
-
 }

@@ -45,7 +45,7 @@ public class Main {
 		TreeVisualizer visualizer = new TreeVisualizer();
 		visualizer.printTree(fighter);
 
-		System.out.println("Loaded " + fighter.getName() + " - " + validationReport.getWarnings().size() + " warnings, " + validationReport.getErrors().size() + " errors.");
+		System.out.println("Loaded \"" + fighter.getName() + "\" - " + validationReport.getWarnings().size() + " warning(s), " + validationReport.getErrors().size() + " error(s).");
 	}
 
 }

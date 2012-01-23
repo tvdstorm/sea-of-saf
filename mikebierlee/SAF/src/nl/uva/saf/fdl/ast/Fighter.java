@@ -19,32 +19,26 @@
 package nl.uva.saf.fdl.ast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class Fighter extends TreeNode {
-	private String name;
-	private ArrayList<FighterAttribute> attributes;
+	private final String name;
+	private final ArrayList<FighterAttribute> attributes;
 	
 	public Fighter(String name, ArrayList<FighterAttribute> attributes) {
-		this.setName(name);
-		this.setAttributes(attributes);
+		this.name = name;
+		this.attributes = attributes;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ArrayList<FighterAttribute> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(ArrayList<FighterAttribute> attributes) {
-		this.attributes = attributes;
+	public List<FighterAttribute> getAttributes() {
+		return Collections.unmodifiableList(attributes);
 	}
 	
 	public void addAttribute(FighterAttribute attribute) {

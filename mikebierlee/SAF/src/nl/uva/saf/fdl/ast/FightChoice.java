@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class FightChoice extends Choice {
-
 	public FightChoice(ArrayList<Action> actions) {
 		super(actions);
 	}
@@ -32,5 +31,4 @@ public class FightChoice extends Choice {
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);
 	}
-
 }

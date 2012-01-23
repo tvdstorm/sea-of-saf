@@ -21,28 +21,20 @@ package nl.uva.saf.fdl.ast;
 import nl.uva.saf.fdl.ITreeVisitor;
 
 public class Behaviour extends FighterAttribute {
-	private ConditionAlways condition;
-	private Rule rule;
+	private final ConditionAlways condition;
+	private final Rule rule;
 	
 	public Behaviour(ConditionAlways condition, Rule rule) {
-		setCondition(condition);
-		this.setRule(rule);
+		this.condition = condition;
+		this.rule = rule;
 	}
 
 	public ConditionAlways getCondition() {
 		return condition;
 	}
 
-	public void setCondition(ConditionAlways condition) {
-		this.condition = condition;
-	}
-
 	public Rule getRule() {
 		return rule;
-	}
-
-	public void setRule(Rule rule) {
-		this.rule = rule;
 	}
 
 	@Override
