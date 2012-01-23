@@ -14,19 +14,37 @@ public class TestSAF {
 	{
 		String sample = String.format(	"JackieChan {\r\n" +
 										"	kickPower = 1\r\n" +
-										"	punchPower = 10\r\n" +
-										"	kickReach = 1\r\n" +
-										"	punchReach = 5\r\n" +
+										"	punchPower = 2\r\n" +
+										"	kickReach = 3\r\n" +
+										"	punchReach = 4\r\n" +
 										"	far [run_towards kick_low]\r\n" +
 										"	near [crouch choose(punch_low kick_low)]\r\n" +
 										"	weaker [choose(run_away walk_away) choose(block_high block_low)]" +
 										"	stronger and near or far [stand punch_high]" +
+										"	even [crouch punch_high]" +
 										"}" );
 		InputStream stream = new ByteArrayInputStream(sample.getBytes());
 		saf parser = new saf(stream);
 		try
 		{
-			parser.Start();
+			SimpleNode node = parser.Start();
+			
+			// the root node
+			assertEquals(1, node.jjtGetNumChildren());
+			
+			SimpleNode root = (SimpleNode)node.jjtGetChild(0);
+			
+			// 3 nodes expected: name of the bot, the characteristics, and the rules
+			assertEquals(3, root.jjtGetNumChildren());
+			
+			SimpleNode fighterName = (SimpleNode)root.jjtGetChild(0);
+			assertEquals(0, fighterName.jjtGetNumChildren());
+
+			SimpleNode characteristics = (SimpleNode)root.jjtGetChild(1);
+			assertEquals(4, characteristics.jjtGetNumChildren());
+
+			SimpleNode rules = (SimpleNode)root.jjtGetChild(2);
+			assertEquals(5, rules.jjtGetNumChildren());
 		}
 		catch (ParseException exception)
 	    {
