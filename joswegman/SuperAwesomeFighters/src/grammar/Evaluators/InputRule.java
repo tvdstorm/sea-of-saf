@@ -10,7 +10,6 @@ public class InputRule {
 	}
 	
 	public String toString () {
-		//System.out.println("Inputrule: " + this.inputstring1 + " " + this.inputstring2);
 		return "Inputrule: " + this.inputstring1 + " " + this.inputstring2;
 	}
 
