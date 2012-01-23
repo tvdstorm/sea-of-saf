@@ -10,8 +10,7 @@ public class FighterGrammar{  public static void main(String args [])  {    
 		InputStream input = new FileInputStream("input.txt");
 		System.out.println("Parsing from file ... ");	
 		FighterGrammar parser = new FighterGrammar(input);
-		SimpleNode n = parser.Input();
-		n.dump("");      
+		SAF saf = parser.Parse();		   
 		System.out.print("All good!");
     }
 	catch(Exception e)
@@ -77,33 +76,78 @@ TOKEN :
 
 /** Root production. */
 
-SimpleNode Input() :
-{}
+SAF Parse() :
 {
-	<NAME> <LBRACE> ( Strength() )+ ( ConditionalSpec() )+ <RBRACE> <EOF>
-	{ return jjtThis; }
+ 	 	
+	Bot bot1 = getBot();
+	Bot bot2 = getBot();	
+}
+{  	
+	(	  <EOF>
+	)
+	{	  		SAF saf = new SAF();
+		saf.setBot1(bot1);
+		saf.setBot2(bot2);
+		return saf;
+	} 	
+}	
+Bot getBot():
+{	Token name = new Token();
+	Personality p = new Personality();
+	Behaviour b = new Behaviour();
+	Strength s = new Strength();
+	BehaviourItem i = new BehaviourItem();
+	Bot bot = new Bot();
+}
+{
+	(		name = < NAME >
+		{
+		  bot.setName(name.toString());	  		}
+		
+		<LBRACE>
+		
+		(
+		  LOOKAHEAD(2)
+		  ( s = Strength() )
+		  {
+		    p.addStrength(s);		  }
+		  ( i = BehaviourItem() )
+		  {
+		    b.addCondition(i);		  }
+		    
+		)*	
+		
+		<RBRACE>
+	
+		{
+		  bot.setBehaviour(b);
+		  bot.setPersonality(p);		}
+	)*	
+	{	  return bot;
+	}
 } 
 
-void Value() :
-{}
+
+Strength Strength() :
 {
-	<STRENGTH_VALUE> 
+	Token strength = new Token();
+	Token value = new Token();
+	
 }
-void Strength() :
-{}
 {
-	 <STRENGTH> <ASSIGN> <STRENGTH_VALUE>
+	 (strength = <STRENGTH>) <ASSIGN> (value = <STRENGTH_VALUE>)
+	 {
+		return new Strength(strength.toString(), Integer.valueOf(value.toString()));   	 }
 }
 
-void Attack() :
-{}
-{
-	 <ATTACK> 
+BehaviourItem BehaviourItem() :
+{	Token condition = new Token();
+	Token move = new Token();
+	Token attack = new Token();	
+}
+{	(condition = <CONDITION>) <LSQBRACKET> (move = <MOVE>) (attack = <ATTACK>) <RSQBRACKET>
+	{			 		return new BehaviourItem(condition.toString(), move.toString(), attack.toString()); 
+	}
 }
 
-void ConditionalSpec() :
-{}
-{
-	  <CONDITION> <LSQBRACKET> ( <MOVE> <ATTACK> ) <RSQBRACKET> 
-}
 
