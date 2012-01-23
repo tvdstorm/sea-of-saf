@@ -1,0 +1,1 @@
+Willis {  kickPower = 6  punchPower = 9  kickReach = 4  punchReach = 3  far[walk_towards punch_low]  near[choose(jump crouch) punch_high]  much_stronger[walk_towards punch_low]  weaker[run_away choose(block_high block_low)]  always[walk_towards block_high]}
