@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g 2012-01-23 17:26:57
+// $ANTLR 3.4 C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g 2012-01-23 17:30:38
 
   package grammar; 
 
@@ -301,10 +301,13 @@ public class SAFLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g:54:2: ( ( LETTER | '_' )+ )
-            // C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g:54:4: ( LETTER | '_' )+
+            // C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g:54:2: ( LETTER ( LETTER | '_' )+ )
+            // C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g:54:4: LETTER ( LETTER | '_' )+
             {
-            // C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g:54:4: ( LETTER | '_' )+
+            mLETTER(); 
+
+
+            // C:\\Users\\ASHIM\\aworkspace\\workspace\\SAF\\src\\grammar\\SAF.g:54:11: ( LETTER | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -493,7 +496,6 @@ public class SAFLexer extends Lexer {
         case 'X':
         case 'Y':
         case 'Z':
-        case '_':
         case 'a':
         case 'b':
         case 'c':
