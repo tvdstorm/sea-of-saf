@@ -3,19 +3,17 @@ package foo;
 
 public interface FighterGrammarTreeConstants
 {
-  public int JJTINPUT = 0;
-  public int JJTVALUE = 1;
+  public int JJTPARSE = 0;
+  public int JJTGETBOT = 1;
   public int JJTSTRENGTH = 2;
-  public int JJTATTACK = 3;
-  public int JJTCONDITIONALSPEC = 4;
+  public int JJTBEHAVIOURITEM = 3;
 
 
   public String[] jjtNodeName = {
-    "Input",
-    "Value",
+    "Parse",
+    "getBot",
     "Strength",
-    "Attack",
-    "ConditionalSpec",
+    "BehaviourItem",
   };
 }
-/* JavaCC - OriginalChecksum=5ceb3735c9cf3d5870f92150f5770193 (do not edit this line) */
+/* JavaCC - OriginalChecksum=45b174ed5e6bcf6b5c4fb33a34d36e8e (do not edit this line) */

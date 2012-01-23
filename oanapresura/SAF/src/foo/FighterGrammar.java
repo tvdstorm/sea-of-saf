@@ -11,8 +11,7 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
                 InputStream input = new FileInputStream("input.txt");
                 System.out.println("Parsing from file ... ");
                 FighterGrammar parser = new FighterGrammar(input);
-                SimpleNode n = parser.Input();
-                n.dump("");
+                SAF saf = parser.Parse();
                 System.out.print("All good!");
     }
         catch(Exception e)
@@ -24,43 +23,71 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
   }
 
 /** Root production. */
-  static final public SimpleNode Input() throws ParseException {
- /*@bgen(jjtree) Input */
-  SimpleNode jjtn000 = new SimpleNode(JJTINPUT);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+  static final public SAF Parse() throws ParseException {
+ /*@bgen(jjtree) Parse */
+        SimpleNode jjtn000 = new SimpleNode(JJTPARSE);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);Bot bot1 = getBot();
+        Bot bot2 = getBot();
     try {
-      jj_consume_token(NAME);
-      jj_consume_token(LBRACE);
+      jj_consume_token(0);
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+                SAF saf = new SAF();
+                saf.setBot1(bot1);
+                saf.setBot2(bot2);
+                {if (true) return saf;}
+    } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public Bot getBot() throws ParseException {
+ /*@bgen(jjtree) getBot */
+        SimpleNode jjtn000 = new SimpleNode(JJTGETBOT);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);Token name = new Token();
+        Personality p = new Personality();
+        Behaviour b = new Behaviour();
+        Strength s = new Strength();
+        BehaviourItem i = new BehaviourItem();
+        Bot bot = new Bot();
+    try {
       label_1:
       while (true) {
-        Strength();
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case STRENGTH:
+        case NAME:
           ;
           break;
         default:
           jj_la1[0] = jj_gen;
           break label_1;
         }
-      }
-      label_2:
-      while (true) {
-        ConditionalSpec();
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case CONDITION:
-          ;
-          break;
-        default:
-          jj_la1[1] = jj_gen;
-          break label_2;
+        name = jj_consume_token(NAME);
+                  bot.setName(name.toString());
+        jj_consume_token(LBRACE);
+        label_2:
+        while (true) {
+          if (jj_2_1(2)) {
+            ;
+          } else {
+            break label_2;
+          }
+          s = Strength();
+                    p.addStrength(s);
+          i = BehaviourItem();
+                    b.addCondition(i);
         }
+        jj_consume_token(RBRACE);
+                  bot.setBehaviour(b);
+                  bot.setPersonality(p);
       }
-      jj_consume_token(RBRACE);
-      jj_consume_token(0);
           jjtree.closeNodeScope(jjtn000, true);
           jjtc000 = false;
-          {if (true) return jjtn000;}
+          {if (true) return bot;}
     } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -83,66 +110,67 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     throw new Error("Missing return statement in function");
   }
 
-  static final public void Value() throws ParseException {
- /*@bgen(jjtree) Value */
-  SimpleNode jjtn000 = new SimpleNode(JJTVALUE);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+  static final public Strength Strength() throws ParseException {
+ /*@bgen(jjtree) Strength */
+        SimpleNode jjtn000 = new SimpleNode(JJTSTRENGTH);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);Token strength = new Token();
+        Token value = new Token();
     try {
-      jj_consume_token(STRENGTH_VALUE);
+      strength = jj_consume_token(STRENGTH);
+      jj_consume_token(ASSIGN);
+      value = jj_consume_token(STRENGTH_VALUE);
+           jjtree.closeNodeScope(jjtn000, true);
+           jjtc000 = false;
+                {if (true) return new Strength(strength.toString(), Integer.valueOf(value.toString()));}
+    } finally {
+           if (jjtc000) {
+             jjtree.closeNodeScope(jjtn000, true);
+           }
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public BehaviourItem BehaviourItem() throws ParseException {
+ /*@bgen(jjtree) BehaviourItem */
+        SimpleNode jjtn000 = new SimpleNode(JJTBEHAVIOURITEM);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);Token condition = new Token();
+        Token move = new Token();
+        Token attack = new Token();
+    try {
+      condition = jj_consume_token(CONDITION);
+      jj_consume_token(LSQBRACKET);
+      move = jj_consume_token(MOVE);
+      attack = jj_consume_token(ATTACK);
+      jj_consume_token(RSQBRACKET);
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+                {if (true) return new BehaviourItem(condition.toString(), move.toString(), attack.toString());}
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
           }
     }
+    throw new Error("Missing return statement in function");
   }
 
-  static final public void Strength() throws ParseException {
- /*@bgen(jjtree) Strength */
-  SimpleNode jjtn000 = new SimpleNode(JJTSTRENGTH);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      jj_consume_token(STRENGTH);
-      jj_consume_token(ASSIGN);
-      jj_consume_token(STRENGTH_VALUE);
-    } finally {
-           if (jjtc000) {
-             jjtree.closeNodeScope(jjtn000, true);
-           }
-    }
+  static private boolean jj_2_1(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_1(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(0, xla); }
   }
 
-  static final public void Attack() throws ParseException {
- /*@bgen(jjtree) Attack */
-  SimpleNode jjtn000 = new SimpleNode(JJTATTACK);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      jj_consume_token(ATTACK);
-    } finally {
-           if (jjtc000) {
-             jjtree.closeNodeScope(jjtn000, true);
-           }
-    }
+  static private boolean jj_3_1() {
+    if (jj_3R_3()) return true;
+    return false;
   }
 
-  static final public void ConditionalSpec() throws ParseException {
- /*@bgen(jjtree) ConditionalSpec */
-  SimpleNode jjtn000 = new SimpleNode(JJTCONDITIONALSPEC);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      jj_consume_token(CONDITION);
-      jj_consume_token(LSQBRACKET);
-      jj_consume_token(MOVE);
-      jj_consume_token(ATTACK);
-      jj_consume_token(RSQBRACKET);
-    } finally {
-            if (jjtc000) {
-              jjtree.closeNodeScope(jjtn000, true);
-            }
-    }
+  static private boolean jj_3R_3() {
+    if (jj_scan_token(STRENGTH)) return true;
+    if (jj_scan_token(ASSIGN)) return true;
+    return false;
   }
 
   static private boolean jj_initialized_once = false;
@@ -154,15 +182,20 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
   /** Next token. */
   static public Token jj_nt;
   static private int jj_ntk;
+  static private Token jj_scanpos, jj_lastpos;
+  static private int jj_la;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[2];
+  static final private int[] jj_la1 = new int[1];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x80000,0x200000,};
+      jj_la1_0 = new int[] {0x400000,};
    }
+  static final private JJCalls[] jj_2_rtns = new JJCalls[1];
+  static private boolean jj_rescan = false;
+  static private int jj_gc = 0;
 
   /** Constructor with InputStream. */
   public FighterGrammar(java.io.InputStream stream) {
@@ -182,7 +215,8 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Reinitialise. */
@@ -197,7 +231,8 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Constructor. */
@@ -214,7 +249,8 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Reinitialise. */
@@ -225,7 +261,8 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Constructor with generated Token Manager. */
@@ -241,7 +278,8 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   /** Reinitialise. */
@@ -251,7 +289,8 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 1; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -261,11 +300,44 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
     jj_ntk = -1;
     if (token.kind == kind) {
       jj_gen++;
+      if (++jj_gc > 100) {
+        jj_gc = 0;
+        for (int i = 0; i < jj_2_rtns.length; i++) {
+          JJCalls c = jj_2_rtns[i];
+          while (c != null) {
+            if (c.gen < jj_gen) c.first = null;
+            c = c.next;
+          }
+        }
+      }
       return token;
     }
     token = oldToken;
     jj_kind = kind;
     throw generateParseException();
+  }
+
+  static private final class LookaheadSuccess extends java.lang.Error { }
+  static final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  static private boolean jj_scan_token(int kind) {
+    if (jj_scanpos == jj_lastpos) {
+      jj_la--;
+      if (jj_scanpos.next == null) {
+        jj_lastpos = jj_scanpos = jj_scanpos.next = token_source.getNextToken();
+      } else {
+        jj_lastpos = jj_scanpos = jj_scanpos.next;
+      }
+    } else {
+      jj_scanpos = jj_scanpos.next;
+    }
+    if (jj_rescan) {
+      int i = 0; Token tok = token;
+      while (tok != null && tok != jj_scanpos) { i++; tok = tok.next; }
+      if (tok != null) jj_add_error_token(kind, i);
+    }
+    if (jj_scanpos.kind != kind) return true;
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) throw jj_ls;
+    return false;
   }
 
 
@@ -298,6 +370,33 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
   static private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
   static private int[] jj_expentry;
   static private int jj_kind = -1;
+  static private int[] jj_lasttokens = new int[100];
+  static private int jj_endpos;
+
+  static private void jj_add_error_token(int kind, int pos) {
+    if (pos >= 100) return;
+    if (pos == jj_endpos + 1) {
+      jj_lasttokens[jj_endpos++] = kind;
+    } else if (jj_endpos != 0) {
+      jj_expentry = new int[jj_endpos];
+      for (int i = 0; i < jj_endpos; i++) {
+        jj_expentry[i] = jj_lasttokens[i];
+      }
+      jj_entries_loop: for (java.util.Iterator<?> it = jj_expentries.iterator(); it.hasNext();) {
+        int[] oldentry = (int[])(it.next());
+        if (oldentry.length == jj_expentry.length) {
+          for (int i = 0; i < jj_expentry.length; i++) {
+            if (oldentry[i] != jj_expentry[i]) {
+              continue jj_entries_loop;
+            }
+          }
+          jj_expentries.add(jj_expentry);
+          break jj_entries_loop;
+        }
+      }
+      if (pos != 0) jj_lasttokens[(jj_endpos = pos) - 1] = kind;
+    }
+  }
 
   /** Generate ParseException. */
   static public ParseException generateParseException() {
@@ -307,7 +406,7 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 1; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -323,6 +422,9 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
         jj_expentries.add(jj_expentry);
       }
     }
+    jj_endpos = 0;
+    jj_rescan_token();
+    jj_add_error_token(0, 0);
     int[][] exptokseq = new int[jj_expentries.size()][];
     for (int i = 0; i < jj_expentries.size(); i++) {
       exptokseq[i] = jj_expentries.get(i);
@@ -336,6 +438,41 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
 
   /** Disable tracing. */
   static final public void disable_tracing() {
+  }
+
+  static private void jj_rescan_token() {
+    jj_rescan = true;
+    for (int i = 0; i < 1; i++) {
+    try {
+      JJCalls p = jj_2_rtns[i];
+      do {
+        if (p.gen > jj_gen) {
+          jj_la = p.arg; jj_lastpos = jj_scanpos = p.first;
+          switch (i) {
+            case 0: jj_3_1(); break;
+          }
+        }
+        p = p.next;
+      } while (p != null);
+      } catch(LookaheadSuccess ls) { }
+    }
+    jj_rescan = false;
+  }
+
+  static private void jj_save(int index, int xla) {
+    JJCalls p = jj_2_rtns[index];
+    while (p.gen > jj_gen) {
+      if (p.next == null) { p = p.next = new JJCalls(); break; }
+      p = p.next;
+    }
+    p.gen = jj_gen + xla - jj_la; p.first = token; p.arg = xla;
+  }
+
+  static final class JJCalls {
+    int gen;
+    Token first;
+    int arg;
+    JJCalls next;
   }
 
 }

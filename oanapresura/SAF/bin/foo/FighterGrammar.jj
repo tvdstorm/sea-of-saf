@@ -14,8 +14,7 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
 		InputStream input = new FileInputStream("input.txt");
 		System.out.println("Parsing from file ... ");	
 		FighterGrammar parser = new FighterGrammar(input);
-		SimpleNode n = parser.Input();
-		n.dump("");      
+		SAF saf = parser.Parse();		   
 		System.out.print("All good!");
     }
 	catch(Exception e)
@@ -81,22 +80,83 @@ TOKEN :
 
 /** Root production. */
 
-SimpleNode Input() :
-{/*@bgen(jjtree) Input */
-  SimpleNode jjtn000 = new SimpleNode(JJTINPUT);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Input */
-        try {
+SAF Parse() :
+{/*@bgen(jjtree) Parse */
+        SimpleNode jjtn000 = new SimpleNode(JJTPARSE);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
 /*@egen*/
-	<NAME> <LBRACE> ( Strength() )+ ( ConditionalSpec() )+ <RBRACE> <EOF>/*@bgen(jjtree)*/
+ 	 	
+	Bot bot1 = getBot();
+	Bot bot2 = getBot();	
+}
+{/*@bgen(jjtree) Parse */
+        try {
+/*@egen*/  	
+	(	  <EOF>
+	)/*@bgen(jjtree)*/
         {
           jjtree.closeNodeScope(jjtn000, true);
           jjtc000 = false;
         }
 /*@egen*/
-	{ return jjtn000; }/*@bgen(jjtree)*/
+	{	  		SAF saf = new SAF();
+		saf.setBot1(bot1);
+		saf.setBot2(bot2);
+		return saf;
+	}/*@bgen(jjtree)*/
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/ 	
+}	
+Bot getBot():
+{/*@bgen(jjtree) getBot */
+        SimpleNode jjtn000 = new SimpleNode(JJTGETBOT);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
+/*@egen*/	Token name = new Token();
+	Personality p = new Personality();
+	Behaviour b = new Behaviour();
+	Strength s = new Strength();
+	BehaviourItem i = new BehaviourItem();
+	Bot bot = new Bot();
+}
+{/*@bgen(jjtree) getBot */
+        try {
+/*@egen*/
+	(		name = < NAME >
+		{
+		  bot.setName(name.toString());	  		}
+		
+		<LBRACE>
+		
+		(
+		  LOOKAHEAD(2)
+		  ( s = Strength() )
+		  {
+		    p.addStrength(s);		  }
+		  ( i = BehaviourItem() )
+		  {
+		    b.addCondition(i);		  }
+		    
+		)*	
+		
+		<RBRACE>
+	
+		{
+		  bot.setBehaviour(b);
+		  bot.setPersonality(p);		}
+	)*/*@bgen(jjtree)*/
+        {
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+        }
+/*@egen*/	
+	{	  return bot;
+	}/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -119,74 +179,61 @@ SimpleNode Input() :
 /*@egen*/
 } 
 
-void Value() :
-{/*@bgen(jjtree) Value */
-  SimpleNode jjtn000 = new SimpleNode(JJTVALUE);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Value */
-        try {
+
+Strength Strength() :
+{/*@bgen(jjtree) Strength */
+        SimpleNode jjtn000 = new SimpleNode(JJTSTRENGTH);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
 /*@egen*/
-	<STRENGTH_VALUE>/*@bgen(jjtree)*/
+	Token strength = new Token();
+	Token value = new Token();
+	
+}
+{/*@bgen(jjtree) Strength */
+         try {
+/*@egen*/
+	 (strength = <STRENGTH>) <ASSIGN> (value = <STRENGTH_VALUE>)/*@bgen(jjtree)*/
+         {
+           jjtree.closeNodeScope(jjtn000, true);
+           jjtc000 = false;
+         }
+/*@egen*/
+	 {
+		return new Strength(strength.toString(), Integer.valueOf(value.toString()));   	 }/*@bgen(jjtree)*/
+         } finally {
+           if (jjtc000) {
+             jjtree.closeNodeScope(jjtn000, true);
+           }
+         }
+/*@egen*/
+}
+
+BehaviourItem BehaviourItem() :
+{/*@bgen(jjtree) BehaviourItem */
+        SimpleNode jjtn000 = new SimpleNode(JJTBEHAVIOURITEM);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
+/*@egen*/	Token condition = new Token();
+	Token move = new Token();
+	Token attack = new Token();	
+}
+{/*@bgen(jjtree) BehaviourItem */
+        try {
+/*@egen*/	(condition = <CONDITION>) <LSQBRACKET> (move = <MOVE>) (attack = <ATTACK>) <RSQBRACKET>/*@bgen(jjtree)*/
+        {
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+        }
+/*@egen*/
+	{			 		return new BehaviourItem(condition.toString(), move.toString(), attack.toString()); 
+	}/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
           }
         }
-/*@egen*/ 
-}
-void Strength() :
-{/*@bgen(jjtree) Strength */
-  SimpleNode jjtn000 = new SimpleNode(JJTSTRENGTH);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Strength */
-         try {
-/*@egen*/
-	 <STRENGTH> <ASSIGN> <STRENGTH_VALUE>/*@bgen(jjtree)*/
-         } finally {
-           if (jjtc000) {
-             jjtree.closeNodeScope(jjtn000, true);
-           }
-         }
 /*@egen*/
 }
 
-void Attack() :
-{/*@bgen(jjtree) Attack */
-  SimpleNode jjtn000 = new SimpleNode(JJTATTACK);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Attack */
-         try {
-/*@egen*/
-	 <ATTACK>/*@bgen(jjtree)*/
-         } finally {
-           if (jjtc000) {
-             jjtree.closeNodeScope(jjtn000, true);
-           }
-         }
-/*@egen*/ 
-}
-
-void ConditionalSpec() :
-{/*@bgen(jjtree) ConditionalSpec */
-  SimpleNode jjtn000 = new SimpleNode(JJTCONDITIONALSPEC);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) ConditionalSpec */
-          try {
-/*@egen*/
-	  <CONDITION> <LSQBRACKET> ( <MOVE> <ATTACK> ) <RSQBRACKET>/*@bgen(jjtree)*/
-          } finally {
-            if (jjtc000) {
-              jjtree.closeNodeScope(jjtn000, true);
-            }
-          }
-/*@egen*/ 
-}
 

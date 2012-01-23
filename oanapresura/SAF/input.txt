@@ -9,3 +9,14 @@ JackieChan{
  weaker[runAway blockHigh]
  always[walkTowards blockHigh]
 }
+
+chicken
+{
+  kickReach  = 9
+  punchReach = 1
+  kickPower  = 2
+  punchPower = 2
+  far [runTowards kickLow]
+  near [runAway kickLow]
+  near [crouch punchLow]
+}
