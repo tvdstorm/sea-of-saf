@@ -34,6 +34,8 @@
 	</target>
 	
 	<target name="antlr" depends="init">
+		<delete dir="${src}/parser"/>
+		<mkdir dir="${src}/parser"/>
 		<!--
 	    <antlr:ant-antlr3 xmlns:antlr="antlib:org/apache/tools/ant/antlr"
 	        target="${src}/FDL.g"
