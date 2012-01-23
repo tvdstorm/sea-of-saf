@@ -23,4 +23,4 @@ html_header
 html_body
 	: '<body>' TEXT '</body>' -> ^('body' TEXT)	;
 
-TEXT : (~('<'))*;
+TEXT : (~('<'))*; 

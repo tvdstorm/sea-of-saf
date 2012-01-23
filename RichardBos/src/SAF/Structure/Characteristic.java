@@ -1,7 +1,11 @@
 package SAF.Structure;
 
 public class Characteristic {
-	public Characteristic(){}
-	public String Name;
-	public int Value = 5;
+	public Characteristic(String _name)
+	{
+		name = _name;
+	}
+	
+	public String name;
+	public int value = 5;
 }

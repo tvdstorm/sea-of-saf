@@ -13,71 +13,76 @@ output=AST; ASTLabelType=CommonTree;
   package Generated;
 }
 @members {
-/** Map variable name to Integer object holding value */
 Bots bots = new Bots();
-}
+} 
 
 bots returns [Bots bots] :
-  b=bot*                  { $bots.ChildBots.add(b.bot); };
+  b=bot*                      { $bots.AddBot(b.bot); };
 bot returns [Bot bot]:
-  n=name NEWLINE*         { $bot.name = n.name; }
+  n=name NEWLINE*             { $bot = new Bot(n.name); }
     '{' NEWLINE*  
-      ( b=behavior        { $bot.Behavior.add(b.rule); }
-      | c=characteristic  { $bot.Characteristics.add(c.character); }
+      ( b=behavior            { $bot.Behavior.add(b.behavior); }
+      | c=characteristic      { $bot.Characteristics.add(c.character); }
       )+
     '}' NEWLINE*;
     
 name returns [String name]:
-  ID sn=subname*          { $name = $ID.text + $sn.name; };
+  ID sn=subname*              { $name = $ID.text + $sn.name; };
 subname returns [String name]:
-  ( ID                    { $name = $ID.text; }
-  | INT                   { $name = $INT.text; }
+  ( ID                        { $name = $ID.text; }
+  | INT                       { $name = $INT.text; }
   ) ;
   
 characteristic returns [Characteristic character]:
   WS* ID+ WS* '=' WS* INT NEWLINE
-                          { $character.Name = $ID.text;
-                            $character.Value = Integer.parseInt($INT.text);};
+                              { $character = new Characteristic($ID.text);
+                                $character.value = Integer.parseInt($INT.text);};
 
-behavior returns [BehaviorRule rule]:
-  WS* c=condition '['     { $rule.condition = $c.condition; }
-  (ID+ 
-  | choose) WS 
-  (ID+ 
-  | choose
+behavior returns [BehaviorRule behavior]:
+  WS* c=condition '['         { $behavior = new BehaviorRule();
+                                $behavior.condition = $c.condition; }
+  ( id1 = ID+                 { $behavior.moveAction = new Action($id1.text);}
+  | c1  = choose) WS          { $behavior.moveAction = $c1.action;}
+  ( id2 = ID+                 { $behavior.fightAction = new Action($id2.text);}
+  | c2  = choose              { $behavior.moveAction = $c2.action;}
   ) ']' NEWLINE;
 
+choose returns [Action action]:
+  CHOOSE  '(' ID+             { $action = new Action();
+                                $action.values.add($ID.text); }  
+  (
+    chooseEnd                 { $action = new Action();
+                                $action.values.add($chooseEnd.value); }
+  )+')'
+  ;
+chooseEnd returns [String value]:
+  WS ID                       {$value = $ID.text;};
+
 condition returns [Condition condition]:
-   ID                      { $condition.condition = new StringCondition($ID.text);}
-   (c=conditionRule        { $c.choiceCondition.condition = $condition.condition;
-                             $condition.condition = $c.choiceCondition.condition;} 
+   cr1=conditionRule          { $condition.condition = $cr1.condition;}
+   ( OR WS cr2=conditionRule  {ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ConditionType.OR, $cr2.condition);
+                               cc.condition = $cr1.condition;
+                               $condition.condition =cc;} 
    )*;
    
-//conditionRule returns [ChoiceCondition choiceCondition]:
-//   ( WS+ 'and' WS+ id1=ID+ { $choiceCondition = new ChoiceCondition(ChoiceCondition.ConditionType.OR, new StringCondition($id1.text));} 
-//   | WS+ 'or' WS+ id2=ID+  { $choiceCondition = new ChoiceCondition(ChoiceCondition.ConditionType.AND, new StringCondition($id2.text));}
-//   );
-
-conditionRule returns [ChoiceCondition choiceCondition]:
-  ( 
-    conditionTerm conditionRest* 
-  );
-conditionRest returns [Condition condition]:
-    WS+ 'or' WS+ ct=conditionTerm { $choiceCondition = new ChoiceCondition(ChoiceCondition.ConditionType.AND, $ct.condition));};
-
-conditionTerm:
-  ( ID conditionTermRest* );
-conditionTermRest:
-    WS+ 'and' WS+ id1=ID+ { $choiceCondition = new ChoiceCondition(ChoiceCondition.ConditionType.OR, new StringCondition($id1.text)); };
+conditionRule returns [Condition condition]:
+   v1=var                     {$condition = new Condition($v1._condition);}
+   ( AND WS v2=var)*          {ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ConditionType.AND,$v2._condition);
+                               cc.condition = $v1._condition;
+                               $condition = new Condition(cc);};
+   
+var returns [Condition _condition]: 
+   ID WS*                             {$_condition = new Condition(new StringCondition($ID.text));}
+   | '(' WS* c=condition WS* ')' WS*  {$_condition = new Condition($c.condition);};
   
-choose:
-  CHOOSE  '(' ID+  (chooseEnd)+ ')';
-chooseEnd:
-  WS ID+;
+  
 
+
+OR    : 'or';
+AND   : 'and';
 CHOOSE: 'choose';
 NEWLINE
-      :'\r'? '\n' ;
-ID    :   ('a'..'z'|'A'..'Z'|'_')+ ;
-INT   :   '0'..'9'+ ;
-WS    :   (' '|'\t')+ {skip();} ;
+      : '\r'? '\n' ;
+ID    : ('a'..'z'|'A'..'Z'|'_')+ ;
+INT   : '0'..'9'+ ;
+WS    : (' '|'\t')+ {skip();} ;

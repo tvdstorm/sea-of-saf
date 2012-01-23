@@ -4,7 +4,7 @@ public class ChoiceCondition extends Condition
 {
 	public ChoiceCondition(ConditionType Type, Condition SecondCondition)
 	{
-		type = ConditionType.AND;
+		type = Type;
 		secondCondition = SecondCondition;
 	}
 	public ConditionType type;
