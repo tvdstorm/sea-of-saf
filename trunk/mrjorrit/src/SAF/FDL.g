@@ -14,51 +14,52 @@ options {
 }
 
 fighter
-	:	
-		(
-			(IDENT+)^
-			LEFT_CURLY
+	:		IDENT^
+			LEFT_CURLY!
 			personality
 			behaviour
-			RIGHT_CURLY
-		)^
+			RIGHT_CURLY!
 	;
 
 
 personality
-	:	characteristic*
+	:	(characteristic*) -> ^(PERSONALITY characteristic*)
 	;
 
 characteristic
-	:	ATTRIBUTE EQUALS ONEDIGIT
+	:	(ATTRIBUTE^ EQUALS ONEDIGIT)
 	;
 	
 behaviour
-	:	rule*
+	:	(rule*) -> ^(BEHAVIOUR rule*)
 	;
 
 rule
-	: 	CONDITIONTYPE 
-		LEFT_BRACKET 
-			(MOVEACTIONTYPE | chooseMoveActionType) (FIGHTACTIONTYPE | chooseFightActionType)
-		RIGHT_BRACKET
+	: 	(
+			CONDITIONTYPE^
+			LEFT_BRACKET!
+				(MOVEACTIONTYPE | chooseMoveActionType) (FIGHTACTIONTYPE | chooseFightActionType)
+			RIGHT_BRACKET!
+		)
 	;
 	
 chooseFightActionType
-	:	CHOOSE 
-		LEFT_PAREN 
+	:	CHOOSE^
+		LEFT_PAREN!
 			FIGHTACTIONTYPE+ 
-		RIGHT_PAREN
+		RIGHT_PAREN!
 	;
 	
 chooseMoveActionType
-	:	CHOOSE 
-		LEFT_PAREN 
+	:	CHOOSE^
+		LEFT_PAREN!
 			MOVEACTIONTYPE+ 
-		RIGHT_PAREN
+		RIGHT_PAREN!
 	;
 
 
+PERSONALITY : 'Personality' ;
+BEHAVIOUR : 'Behaviour' ;
 FIGHTACTIONTYPE : ('block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high') ;
 MOVEACTIONTYPE : ('walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand') ;
 CONDITIONTYPE : ('always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker') ;
