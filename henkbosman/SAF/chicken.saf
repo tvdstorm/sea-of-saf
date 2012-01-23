@@ -1,0 +1,10 @@
+chicken
+{
+  kickReach  = 9
+  punchReach = 1
+  kickPower  = 2
+  punchPower = 2
+  far and near[choose(run_towards run_away) kick_low]
+  near [run_away choose(kick_low punch_low kick_low)]
+  near [crouch punch_low]
+}
