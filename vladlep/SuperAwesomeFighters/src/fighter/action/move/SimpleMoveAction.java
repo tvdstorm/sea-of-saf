@@ -4,6 +4,7 @@ public class SimpleMoveAction implements IMoveAction {
 
 	private MoveActionType action;
 
+	@Override
 	public MoveActionType getAction() {
 		return action;
 	};

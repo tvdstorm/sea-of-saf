@@ -1,7 +1,5 @@
 package fighter;
 
-import org.stringtemplate.v4.compiler.CodeGenerator.region_return;
-
 public class Bot {
 
 	private String name;

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-01-23 01:05:52
+// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-01-23 10:39:46
 
 package reader.antlr;
   import fighter.*;

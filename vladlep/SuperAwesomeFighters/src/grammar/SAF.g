@@ -73,67 +73,12 @@ behaviour returns [Behaviour behaviour]
   'always' '[' MOVES ATTACKS ']'
   ;
 
-CONDITIONS
-  :
-  (
-    'stronger'
-    | 'weaker'
-    | 'much_stronger'
-    | 'much_weaker'
-    | 'even'
-    | 'near'
-    | 'far'
-    | 'always'
-  )
-  ;
+CONDITIONS: ('stronger' | 'weaker'|' much_stronger'|'much_weaker' | 'even' | 'near' | 'far' | 'always');
+MOVES: ('jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away');
+ATTACKS : ('punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high');
+STRENGTHS : ('punchReach' | 'kickReach' | 'kickPower' | 'punchPower');
 
-MOVES
-  :
-  (
-    'jump'
-    | 'crouch'
-    | 'stand'
-    | 'run_towards'
-    | 'run_away'
-    | 'walk_towards'
-    | 'walk_away'
-  )
-  ;
-
-ATTACKS
-  :
-  (
-    'punch_low'
-    | 'punch_high'
-    | 'kick_low'
-    | 'kick_high'
-    | 'block_low'
-    | 'block_high'
-  )
-  ;
-
-STRENGTHS
-  :
-  (
-    'punchReach'
-    | 'kickReach'
-    | 'kickPower'
-    | 'punchPower'
-  )
-  ;
-
-IDENT
-  :
-  (
-    'A'..'Z'
-    | 'a'..'z'
-  )
-  (
-    '0'..'9'
-    | 'A'..'Z'
-    | 'a'..'z'
-  )*
-  ;
+IDENT : ('A'..'Z'|'a'..'z')('0'..'9'|'A'..'Z'|'a'..'z')*;
 
 TWODIGITS
   :
@@ -142,33 +87,8 @@ TWODIGITS
 
 //parse comments and whitespaces to a hidden channel
 
-WHITESPACE
-  :
-  (
-    '\t'
-    | ' '
-    | '\r'
-    | '\n'
-  )+
-  
-   {
-    $channel = HIDDEN;
-   }
-  ;
+WHITESPACE : ( '\t' | ' ' | '\r' | '\n' )+    { $channel = HIDDEN; } ;
 
 COMMENTS
-  :
-  (
-    '/*' (options {greedy=false;}: .)* '*/'
-    |
-    | '//' .*
-    (
-      '\n'
-      | '\r'
-    )
-  )
-  
-   {
-    $channel = HIDDEN;
-   }
-  ;
+    :   ('/*' (options {greedy=false;} : .)* '*/' || '//'.* ('\n'|'\r') ){$channel=HIDDEN;}
+    ;
