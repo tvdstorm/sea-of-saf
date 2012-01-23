@@ -1,0 +1,135 @@
+digraph {
+
+	ordering=out;
+	ranksep=.4;
+	bgcolor="lightgrey"; node [shape=box, fixedsize=false, fontsize=12, fontname="Helvetica-bold", fontcolor="blue"
+		width=.25, height=.25, color="black", fillcolor="white", style="filled, solid, bold"];
+	edge [arrowsize=.5, color="black", style="bold"]
+
+  n0 [label="JackieChan"];
+  n1 [label="{"];
+  n2 [label="CHARACTERISTIC"];
+  n2 [label="CHARACTERISTIC"];
+  n3 [label="kickPower"];
+  n4 [label="="];
+  n5 [label="7"];
+  n6 [label="CHARACTERISTIC"];
+  n6 [label="CHARACTERISTIC"];
+  n7 [label="punchPower"];
+  n8 [label="="];
+  n9 [label="5"];
+  n10 [label="CHARACTERISTIC"];
+  n10 [label="CHARACTERISTIC"];
+  n11 [label="kickReach"];
+  n12 [label="="];
+  n13 [label="3"];
+  n14 [label="CHARACTERISTIC"];
+  n14 [label="CHARACTERISTIC"];
+  n15 [label="punchReach"];
+  n16 [label="="];
+  n17 [label="9"];
+  n18 [label="BEHAVIOUR"];
+  n18 [label="BEHAVIOUR"];
+  n19 [label="far"];
+  n20 [label="["];
+  n21 [label="run_towards"];
+  n22 [label="punch_high"];
+  n23 [label="]"];
+  n24 [label="BEHAVIOUR"];
+  n24 [label="BEHAVIOUR"];
+  n25 [label="near"];
+  n26 [label="["];
+  n27 [label="choose"];
+  n27 [label="choose"];
+  n28 [label="("];
+  n29 [label="stand"];
+  n30 [label="crouch"];
+  n31 [label=")"];
+  n32 [label="kick_high"];
+  n33 [label="]"];
+  n34 [label="BEHAVIOUR"];
+  n34 [label="BEHAVIOUR"];
+  n35 [label="much_stronger"];
+  n36 [label="["];
+  n37 [label="walk_towards"];
+  n38 [label="punch_low"];
+  n39 [label="]"];
+  n40 [label="BEHAVIOUR"];
+  n40 [label="BEHAVIOUR"];
+  n41 [label="weaker"];
+  n42 [label="["];
+  n43 [label="run_away"];
+  n44 [label="choose"];
+  n44 [label="choose"];
+  n45 [label="("];
+  n46 [label="block_high"];
+  n47 [label="block_low"];
+  n48 [label=")"];
+  n49 [label="]"];
+  n50 [label="BEHAVIOUR"];
+  n50 [label="BEHAVIOUR"];
+  n51 [label="always"];
+  n52 [label="["];
+  n53 [label="walk_towards"];
+  n54 [label="block_high"];
+  n55 [label="]"];
+  n56 [label="}"];
+
+  n0 -> n1 // "JackieChan" -> "{"
+  n0 -> n2 // "JackieChan" -> "CHARACTERISTIC"
+  n2 -> n3 // "CHARACTERISTIC" -> "kickPower"
+  n2 -> n4 // "CHARACTERISTIC" -> "="
+  n2 -> n5 // "CHARACTERISTIC" -> "7"
+  n0 -> n6 // "JackieChan" -> "CHARACTERISTIC"
+  n6 -> n7 // "CHARACTERISTIC" -> "punchPower"
+  n6 -> n8 // "CHARACTERISTIC" -> "="
+  n6 -> n9 // "CHARACTERISTIC" -> "5"
+  n0 -> n10 // "JackieChan" -> "CHARACTERISTIC"
+  n10 -> n11 // "CHARACTERISTIC" -> "kickReach"
+  n10 -> n12 // "CHARACTERISTIC" -> "="
+  n10 -> n13 // "CHARACTERISTIC" -> "3"
+  n0 -> n14 // "JackieChan" -> "CHARACTERISTIC"
+  n14 -> n15 // "CHARACTERISTIC" -> "punchReach"
+  n14 -> n16 // "CHARACTERISTIC" -> "="
+  n14 -> n17 // "CHARACTERISTIC" -> "9"
+  n0 -> n18 // "JackieChan" -> "BEHAVIOUR"
+  n18 -> n19 // "BEHAVIOUR" -> "far"
+  n18 -> n20 // "BEHAVIOUR" -> "["
+  n18 -> n21 // "BEHAVIOUR" -> "run_towards"
+  n18 -> n22 // "BEHAVIOUR" -> "punch_high"
+  n18 -> n23 // "BEHAVIOUR" -> "]"
+  n0 -> n24 // "JackieChan" -> "BEHAVIOUR"
+  n24 -> n25 // "BEHAVIOUR" -> "near"
+  n24 -> n26 // "BEHAVIOUR" -> "["
+  n24 -> n27 // "BEHAVIOUR" -> "choose"
+  n27 -> n28 // "choose" -> "("
+  n27 -> n29 // "choose" -> "stand"
+  n27 -> n30 // "choose" -> "crouch"
+  n27 -> n31 // "choose" -> ")"
+  n24 -> n32 // "BEHAVIOUR" -> "kick_high"
+  n24 -> n33 // "BEHAVIOUR" -> "]"
+  n0 -> n34 // "JackieChan" -> "BEHAVIOUR"
+  n34 -> n35 // "BEHAVIOUR" -> "much_stronger"
+  n34 -> n36 // "BEHAVIOUR" -> "["
+  n34 -> n37 // "BEHAVIOUR" -> "walk_towards"
+  n34 -> n38 // "BEHAVIOUR" -> "punch_low"
+  n34 -> n39 // "BEHAVIOUR" -> "]"
+  n0 -> n40 // "JackieChan" -> "BEHAVIOUR"
+  n40 -> n41 // "BEHAVIOUR" -> "weaker"
+  n40 -> n42 // "BEHAVIOUR" -> "["
+  n40 -> n43 // "BEHAVIOUR" -> "run_away"
+  n40 -> n44 // "BEHAVIOUR" -> "choose"
+  n44 -> n45 // "choose" -> "("
+  n44 -> n46 // "choose" -> "block_high"
+  n44 -> n47 // "choose" -> "block_low"
+  n44 -> n48 // "choose" -> ")"
+  n40 -> n49 // "BEHAVIOUR" -> "]"
+  n0 -> n50 // "JackieChan" -> "BEHAVIOUR"
+  n50 -> n51 // "BEHAVIOUR" -> "always"
+  n50 -> n52 // "BEHAVIOUR" -> "["
+  n50 -> n53 // "BEHAVIOUR" -> "walk_towards"
+  n50 -> n54 // "BEHAVIOUR" -> "block_high"
+  n50 -> n55 // "BEHAVIOUR" -> "]"
+  n0 -> n56 // "JackieChan" -> "}"
+
+}
