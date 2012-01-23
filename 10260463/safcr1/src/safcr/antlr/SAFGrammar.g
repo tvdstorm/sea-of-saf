@@ -18,7 +18,6 @@ tokens{
 	  FIGHT_ACTION;
 	  CONDITION;
 	  CHOOSE = 'choose';
-	  DEFAULT_VALUE;
 }
 
 @header {
