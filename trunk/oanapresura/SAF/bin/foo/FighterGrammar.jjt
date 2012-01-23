@@ -1,0 +1,109 @@
+/**
+ * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options{  JDK_VERSION = "1.5";  static = true;}PARSER_BEGIN(FighterGrammar)
+package foo;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+public class FighterGrammar{  public static void main(String args [])  {    try{
+		String file = "input.txt";
+		InputStream input = new FileInputStream("input.txt");
+		System.out.println("Parsing from file ... ");	
+		FighterGrammar parser = new FighterGrammar(input);
+		SimpleNode n = parser.Input();
+		n.dump("");      
+		System.out.print("All good!");
+    }
+	catch(Exception e)
+	{
+		System.out.println("Oops! ");
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}  }}PARSER_END(FighterGrammar)SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| < "//" (~[ "\n", "\r" ])*
+    (
+      "\n"
+    | "\r"
+    | "\r\n"
+    ) >
+| < "/*" (~[ "*" ])* "*"
+    (
+      ~[ "/" ] (~[ "*" ])* "*"
+    )*
+    "/" >
+}
+
+
+TOKEN : /* Values for player strength */
+{
+	<STRENGTH_VALUE: ( ["1"-"9"] | "10")> 
+}
+
+TOKEN : /* Operators */
+{
+	<AND: "AND" | "and"> |
+	<OR: "OR" | "or"> |
+	<CHOOSE: "choose"> |
+	<ASSIGN: "=">
+}
+
+TOKEN : /* Types of paranthesis used */
+{
+	<LSQBRACKET: "["> | 
+	<RSQBRACKET: "]"> |
+	<LBRACE: "{"> | 
+	<RBRACE: "}"> |
+	<LBRACKET: "(" > |
+	<RBRACKET: ")">		
+}
+
+TOKEN : 
+{	
+	< MOVE: "jump" | "crouch" | "stand" | "runTowards" | "runAway" | "walkTowards" | "walkAway" > 	|
+	< STRENGTH: "punchReach" | "kickReach" | "kickPower" | "punchPower" > |
+	< ATTACK: "punchLow" | "punchHigh" | "kickLow" | "kickHigh" | "blockLow" | "blockHigh" > |
+	< CONDITION: "stronger" | "weaker" | "muchStronger" | "muchWeaker" | "even" | "near" | "far" | "always" >
+}
+
+TOKEN :
+{
+	<NAME: ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* > 
+}
+
+/** Root production. */
+
+SimpleNode Input() :
+{}
+{
+	<NAME> <LBRACE> ( Strength() )+ ( ConditionalSpec() )+ <RBRACE> <EOF>
+	{ return jjtThis; }
+} 
+
+void Value() :
+{}
+{
+	<STRENGTH_VALUE> 
+}
+void Strength() :
+{}
+{
+	 <STRENGTH> <ASSIGN> <STRENGTH_VALUE>
+}
+
+void Attack() :
+{}
+{
+	 <ATTACK> 
+}
+
+void ConditionalSpec() :
+{}
+{
+	  <CONDITION> <LSQBRACKET> ( <MOVE> <ATTACK> ) <RSQBRACKET> 
+}
+
