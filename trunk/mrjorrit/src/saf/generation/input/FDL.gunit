@@ -1,0 +1,28 @@
+gunit FDL;
+
+@header
+{
+  package saf.generation.output; 
+}
+
+
+
+fighter
+  :
+  "chicken { kickReach  = 9 punchReach = 1 kickPower  = 2 punchPower = 2 far [choose(run_towards run_away) kick_low] near [run_away kick_low] near [crouch punch_low] }" -> (chicken (PERSONALITY (kickReach 9) (punchReach 1) (kickPower 2) (punchPower 2)) (BEHAVIOUR (far (choose run_towards run_away) kick_low) (near run_away kick_low) (near crouch punch_low)))
+
+
+
+
+characteristic
+  :
+    "punchReach = 8"  -> (punchReach 8)
+    "punchPower = 7"  -> (punchPower 7)
+    "kickReach = 3"   -> (kickReach 3)
+    "kickPower = 4"   -> (kickPower 4)
+    
+rule
+  :   
+    "always [walk_towards block_low]"                     -> (always walk_towards block_low)
+    "near [ choose(walk_away run_towards) block_low]"     -> (near (choose walk_away run_towards) block_low)
+    
