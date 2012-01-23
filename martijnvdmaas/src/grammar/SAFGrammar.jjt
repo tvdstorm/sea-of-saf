@@ -189,32 +189,32 @@ void RestCondition(ConditionChoices conditionChoices) :
 
 void Term(ConditionChoices conditionChoices) :
 {
-	Token name;
+	Token conditionChoice;
 }
 {
   	(
-		  name = < IDENTIFIER >
+		  conditionChoice = < IDENTIFIER >
 	)
 	{
 	 	ConditionGroup conditionGroup = conditionChoices.getLastCondition();
-	 	conditionGroup.addConditionType(name.toString());
+	 	conditionGroup.addConditionType(conditionChoice.toString());
 	}
 	RestTerm(conditionChoices)
 }
 
 void RestTerm(ConditionChoices conditionChoices) :
 {
-  Token name;
+  Token conditionChoice;
 }
 {
 	(
    		< AND >
    		(
-			  name = < IDENTIFIER >
+			  conditionChoice = < IDENTIFIER >
 		)
 		{
 	  		ConditionGroup conditionGroup = conditionChoices.getLastCondition();
-	  		conditionGroup.addConditionType(name.toString());
+	  		conditionGroup.addConditionType(conditionChoice.toString());
 		}
 	)*
 }
@@ -232,14 +232,14 @@ void MoveAction(Behaviour behaviour) :
 
 void MoveType(Behaviour behaviour) :
 {
-	Token name;
+	Token moveType;
 }
 {
   	(
-  		  name = < IDENTIFIER > 
+  		  moveType = < IDENTIFIER > 
 	)
 	{
-		behaviour.addMoveChoice(name.toString());
+		behaviour.addMoveChoice(moveType.toString());
 	}
 }
 
@@ -256,13 +256,13 @@ void AttackAction(Behaviour behaviour) :
 
 void AttackType(Behaviour behaviour) :
 {
-	Token name;
+	Token attackType;
 }
 {
   	(
-	  	  name = < IDENTIFIER >
+	  	  attackType = < IDENTIFIER >
 	)
 	{
-		behaviour.addAttackChoice(name.toString());
+		behaviour.addAttackChoice(attackType.toString());
 	}
 }
