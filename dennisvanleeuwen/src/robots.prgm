@@ -7,6 +7,7 @@ chicken
   far [run_towards kick_low]
   near [run_away kick_low]
   near [crouch punch_low]
+  always [crouch punch_low]
 }
 
 JackieChan
