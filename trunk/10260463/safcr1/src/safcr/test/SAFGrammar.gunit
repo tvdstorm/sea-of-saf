@@ -7,9 +7,9 @@ package safcr.antlr;
 // test files with rule: saf
 saf: 
 test.saf  OK        // correct file
-test_fail.saf FAIL  // there is error
+test_fail.saf FAIL  // there is error in file
 
-// test rule: bot. Bot characteristic should be defined before behaviour
+// test rule: bot for format. Example: Bot characteristic should be defined before behaviour
 bot:
 test_fail2.saf FAIL
 
@@ -21,13 +21,13 @@ rule:
 "weaker[run_away choose(block_high block_low)]" OK  
 "far[punch_high]" OK
 "near[choose(stand crouch)]" OK
-// wrong format
+// wrong format (wrong order etc)
 "far[punch_high run_towards]" FAIL
 "far[run_towards punch_high punch_high]" FAIL
 "far[run_towards punch_high punch_high" FAIL
 "weaker[run_away choose(block_low)]" FAIL
 
-// test rule: behaviour
+// test rule: behaviour can use and & or
 behaviour:
 <<
 far[punch_high]
