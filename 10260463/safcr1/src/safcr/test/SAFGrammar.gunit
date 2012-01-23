@@ -21,12 +21,28 @@ rule:
 "weaker[run_away choose(block_high block_low)]" OK  
 "far[punch_high]" OK
 "near[choose(stand crouch)]" OK
-
 // wrong format
 "far[punch_high run_towards]" FAIL
 "far[run_towards punch_high punch_high]" FAIL
 "far[run_towards punch_high punch_high" FAIL
 "weaker[run_away choose(block_low)]" FAIL
+
+// test rule: behaviour
+behaviour:
+<<
+far[punch_high]
+and
+near[choose(stand crouch)]
+or
+near[choose(stand crouch) kick_high]
+>> OK
+<<
+far[punch_high]
+and and
+near[choose(stand crouch)]
+or
+near[choose(stand crouch) kick_high]
+>> FAIL
 
 //test rule: characteristic
 characteristic:

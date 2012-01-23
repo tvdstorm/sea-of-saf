@@ -38,15 +38,27 @@ bot
         personality
         behaviour 
         '}'
-        -> ^(BOT ^(NAME ID) personality behaviour)
+        -> ^(BOT ^(NAME ID) ^(PERSONALITY personality) ^(BEHAVIOUR behaviour))
     ;
     
 personality
-    :   characteristic* -> ^(PERSONALITY ^(CHARACTERISTIC characteristic*))
+    :   characteristic* ->  ^(CHARACTERISTIC characteristic*)
     ;
     
 behaviour
-    :   rule* -> ^(BEHAVIOUR rule*)
+    :   expression*
+    ;
+    
+expression
+    :   and_expr
+    ;
+    
+and_expr 
+    :   or_expr (AND^ and_expr)*
+    ;
+    
+or_expr 
+    :   rule | OR^ expression
     ;
 
 rule
@@ -122,6 +134,8 @@ characteristic_properties
     ;
 
 // General tokens
+AND: ('and' | 'AND' | '&&');
+OR: ('or' | 'OR' '|');
 PROPERTIES_VALUE  : ('10' | '1'..'9');
 
 fragment LETTER : ('a'..'z' |'A'..'Z' ) ;
