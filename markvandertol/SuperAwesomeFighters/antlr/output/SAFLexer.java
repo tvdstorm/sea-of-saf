@@ -1,4 +1,8 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g 2012-01-22 22:26:31
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g 2012-01-23 15:53:04
+
+package saf.parser;
+import java.util.List;
+
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -17,39 +21,26 @@ public class SAFLexer extends Lexer {
     public static final int T__18=18;
     public static final int T__19=19;
     public static final int T__20=20;
-    public static final int T__21=21;
-    public static final int T__22=22;
-    public static final int T__23=23;
-    public static final int T__24=24;
-    public static final int T__25=25;
-    public static final int T__26=26;
-    public static final int T__27=27;
-    public static final int T__28=28;
-    public static final int T__29=29;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int T__33=33;
-    public static final int T__34=34;
-    public static final int T__35=35;
-    public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
-    public static final int T__39=39;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__44=44;
-    public static final int T__45=45;
     public static final int ACTION=4;
     public static final int ASSIGNMENT=5;
     public static final int CONDITION=6;
     public static final int DIGIT=7;
-    public static final int NAME=8;
+    public static final int IDENTIFIER=8;
     public static final int NEWLINE=9;
     public static final int PROGRAM=10;
     public static final int WS=11;
+
+    	private List<String> errorList;
+    	
+    	public void setErrorList(List<String> errorList) {
+    		this.errorList = errorList;
+    	}
+    	
+    	@Override
+    	public void emitErrorMessage(String msg) {
+    		errorList.add("Lexer error: " + msg);
+    	}
+
 
     // delegates
     // delegators
@@ -64,15 +55,15 @@ public class SAFLexer extends Lexer {
     public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g"; }
+    public String getGrammarFileName() { return "C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:2:7: ( '(' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:2:9: '('
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:19:7: ( '(' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:19:9: '('
             {
             match('('); 
 
@@ -92,8 +83,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:3:7: ( ')' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:3:9: ')'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:20:7: ( ')' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:20:9: ')'
             {
             match(')'); 
 
@@ -113,8 +104,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:4:7: ( '=' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:4:9: '='
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:21:7: ( '=' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:21:9: '='
             {
             match('='); 
 
@@ -134,8 +125,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:5:7: ( '[' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:5:9: '['
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:22:7: ( '[' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:22:9: '['
             {
             match('['); 
 
@@ -155,8 +146,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:6:7: ( ']' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:6:9: ']'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:23:7: ( ']' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:23:9: ']'
             {
             match(']'); 
 
@@ -176,10 +167,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:7:7: ( 'always' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:7:9: 'always'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:24:7: ( 'and' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:24:9: 'and'
             {
-            match("always"); 
+            match("and"); 
 
 
 
@@ -199,10 +190,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:8:7: ( 'and' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:8:9: 'and'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:25:7: ( 'or' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:25:9: 'or'
             {
-            match("and"); 
+            match("or"); 
 
 
 
@@ -222,12 +213,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:9:7: ( 'block_high' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:9:9: 'block_high'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:26:7: ( '{' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:26:9: '{'
             {
-            match("block_high"); 
-
-
+            match('{'); 
 
             }
 
@@ -245,581 +234,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:10:7: ( 'block_low' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:10:9: 'block_low'
-            {
-            match("block_low"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__20"
-
-    // $ANTLR start "T__21"
-    public final void mT__21() throws RecognitionException {
-        try {
-            int _type = T__21;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:11:7: ( 'crouch' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:11:9: 'crouch'
-            {
-            match("crouch"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__21"
-
-    // $ANTLR start "T__22"
-    public final void mT__22() throws RecognitionException {
-        try {
-            int _type = T__22;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:12:7: ( 'even' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:12:9: 'even'
-            {
-            match("even"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__22"
-
-    // $ANTLR start "T__23"
-    public final void mT__23() throws RecognitionException {
-        try {
-            int _type = T__23;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:13:7: ( 'far' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:13:9: 'far'
-            {
-            match("far"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__23"
-
-    // $ANTLR start "T__24"
-    public final void mT__24() throws RecognitionException {
-        try {
-            int _type = T__24;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:14:7: ( 'jump' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:14:9: 'jump'
-            {
-            match("jump"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__24"
-
-    // $ANTLR start "T__25"
-    public final void mT__25() throws RecognitionException {
-        try {
-            int _type = T__25;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:15:7: ( 'kickPower' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:15:9: 'kickPower'
-            {
-            match("kickPower"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__25"
-
-    // $ANTLR start "T__26"
-    public final void mT__26() throws RecognitionException {
-        try {
-            int _type = T__26;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:16:7: ( 'kickReach' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:16:9: 'kickReach'
-            {
-            match("kickReach"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__26"
-
-    // $ANTLR start "T__27"
-    public final void mT__27() throws RecognitionException {
-        try {
-            int _type = T__27;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:17:7: ( 'kick_high' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:17:9: 'kick_high'
-            {
-            match("kick_high"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__27"
-
-    // $ANTLR start "T__28"
-    public final void mT__28() throws RecognitionException {
-        try {
-            int _type = T__28;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:18:7: ( 'kick_low' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:18:9: 'kick_low'
-            {
-            match("kick_low"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__28"
-
-    // $ANTLR start "T__29"
-    public final void mT__29() throws RecognitionException {
-        try {
-            int _type = T__29;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:19:7: ( 'much_stronger' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:19:9: 'much_stronger'
-            {
-            match("much_stronger"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__29"
-
-    // $ANTLR start "T__30"
-    public final void mT__30() throws RecognitionException {
-        try {
-            int _type = T__30;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:20:7: ( 'much_weaker' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:20:9: 'much_weaker'
-            {
-            match("much_weaker"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__30"
-
-    // $ANTLR start "T__31"
-    public final void mT__31() throws RecognitionException {
-        try {
-            int _type = T__31;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:21:7: ( 'near' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:21:9: 'near'
-            {
-            match("near"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__31"
-
-    // $ANTLR start "T__32"
-    public final void mT__32() throws RecognitionException {
-        try {
-            int _type = T__32;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:22:7: ( 'or' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:22:9: 'or'
-            {
-            match("or"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__32"
-
-    // $ANTLR start "T__33"
-    public final void mT__33() throws RecognitionException {
-        try {
-            int _type = T__33;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:23:7: ( 'punchPower' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:23:9: 'punchPower'
-            {
-            match("punchPower"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__33"
-
-    // $ANTLR start "T__34"
-    public final void mT__34() throws RecognitionException {
-        try {
-            int _type = T__34;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:24:7: ( 'punchReach' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:24:9: 'punchReach'
-            {
-            match("punchReach"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__34"
-
-    // $ANTLR start "T__35"
-    public final void mT__35() throws RecognitionException {
-        try {
-            int _type = T__35;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:25:7: ( 'punch_high' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:25:9: 'punch_high'
-            {
-            match("punch_high"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__35"
-
-    // $ANTLR start "T__36"
-    public final void mT__36() throws RecognitionException {
-        try {
-            int _type = T__36;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:26:7: ( 'punch_low' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:26:9: 'punch_low'
-            {
-            match("punch_low"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__36"
-
-    // $ANTLR start "T__37"
-    public final void mT__37() throws RecognitionException {
-        try {
-            int _type = T__37;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:27:7: ( 'run_away' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:27:9: 'run_away'
-            {
-            match("run_away"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__37"
-
-    // $ANTLR start "T__38"
-    public final void mT__38() throws RecognitionException {
-        try {
-            int _type = T__38;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:28:7: ( 'run_towards' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:28:9: 'run_towards'
-            {
-            match("run_towards"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__38"
-
-    // $ANTLR start "T__39"
-    public final void mT__39() throws RecognitionException {
-        try {
-            int _type = T__39;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:29:7: ( 'stand' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:29:9: 'stand'
-            {
-            match("stand"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__39"
-
-    // $ANTLR start "T__40"
-    public final void mT__40() throws RecognitionException {
-        try {
-            int _type = T__40;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:30:7: ( 'stronger' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:30:9: 'stronger'
-            {
-            match("stronger"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__40"
-
-    // $ANTLR start "T__41"
-    public final void mT__41() throws RecognitionException {
-        try {
-            int _type = T__41;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:31:7: ( 'walk_away' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:31:9: 'walk_away'
-            {
-            match("walk_away"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__41"
-
-    // $ANTLR start "T__42"
-    public final void mT__42() throws RecognitionException {
-        try {
-            int _type = T__42;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:32:7: ( 'walk_towards' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:32:9: 'walk_towards'
-            {
-            match("walk_towards"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__42"
-
-    // $ANTLR start "T__43"
-    public final void mT__43() throws RecognitionException {
-        try {
-            int _type = T__43;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:33:7: ( 'weaker' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:33:9: 'weaker'
-            {
-            match("weaker"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__43"
-
-    // $ANTLR start "T__44"
-    public final void mT__44() throws RecognitionException {
-        try {
-            int _type = T__44;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:34:7: ( '{' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:34:9: '{'
-            {
-            match('{'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__44"
-
-    // $ANTLR start "T__45"
-    public final void mT__45() throws RecognitionException {
-        try {
-            int _type = T__45;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:35:7: ( '}' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:35:9: '}'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:27:7: ( '}' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:27:9: '}'
             {
             match('}'); 
 
@@ -832,17 +248,17 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__45"
+    // $ANTLR end "T__20"
 
     // $ANTLR start "NEWLINE"
     public final void mNEWLINE() throws RecognitionException {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:9: ( ( '\\r' )? '\\n' )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:11: ( '\\r' )? '\\n'
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:74:9: ( ( '\\r' )? '\\n' )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:74:11: ( '\\r' )? '\\n'
             {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:11: ( '\\r' )?
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:74:11: ( '\\r' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -851,7 +267,7 @@ public class SAFLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:49:11: '\\r'
+                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:74:11: '\\r'
                     {
                     match('\r'); 
 
@@ -879,10 +295,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:50:5: ( ( ' ' | '\\t' )+ )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:50:7: ( ' ' | '\\t' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:75:5: ( ( ' ' | '\\t' )+ )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:75:7: ( ' ' | '\\t' )+
             {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:50:7: ( ' ' | '\\t' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:75:7: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -896,7 +312,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:
             	    {
             	    if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -932,15 +348,15 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "WS"
 
-    // $ANTLR start "NAME"
-    public final void mNAME() throws RecognitionException {
+    // $ANTLR start "IDENTIFIER"
+    public final void mIDENTIFIER() throws RecognitionException {
         try {
-            int _type = NAME;
+            int _type = IDENTIFIER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:51:6: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+ )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:51:8: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:76:12: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )+ )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:76:14: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )+
             {
-            if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+            if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
             }
             else {
@@ -950,23 +366,23 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:51:27: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:76:37: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' )+
             int cnt3=0;
             loop3:
             do {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( ((LA3_0 >= '0' && LA3_0 <= '9')||(LA3_0 >= 'A' && LA3_0 <= 'Z')||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
+                if ( (LA3_0=='-'||(LA3_0 >= '0' && LA3_0 <= '9')||(LA3_0 >= 'A' && LA3_0 <= 'Z')||LA3_0=='_'||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
                     alt3=1;
                 }
 
 
                 switch (alt3) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:
             	    {
-            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+            	    if ( input.LA(1)=='-'||(input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
             	    }
             	    else {
@@ -998,17 +414,17 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "NAME"
+    // $ANTLR end "IDENTIFIER"
 
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
             int _type = DIGIT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:52:7: ( ( '0' .. '9' )+ )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:52:9: ( '0' .. '9' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:77:7: ( ( '0' .. '9' )+ )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:77:9: ( '0' .. '9' )+
             {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:52:9: ( '0' .. '9' )+
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:77:9: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -1022,7 +438,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -1059,12 +475,195 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "DIGIT"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | NEWLINE | WS | NAME | DIGIT )
-        int alt5=38;
-        alt5 = dfa5.predict(input);
+        // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | NEWLINE | WS | IDENTIFIER | DIGIT )
+        int alt5=13;
+        switch ( input.LA(1) ) {
+        case '(':
+            {
+            alt5=1;
+            }
+            break;
+        case ')':
+            {
+            alt5=2;
+            }
+            break;
+        case '=':
+            {
+            alt5=3;
+            }
+            break;
+        case '[':
+            {
+            alt5=4;
+            }
+            break;
+        case ']':
+            {
+            alt5=5;
+            }
+            break;
+        case 'a':
+            {
+            int LA5_6 = input.LA(2);
+
+            if ( (LA5_6=='n') ) {
+                int LA5_14 = input.LA(3);
+
+                if ( (LA5_14=='d') ) {
+                    int LA5_16 = input.LA(4);
+
+                    if ( (LA5_16=='-'||(LA5_16 >= '0' && LA5_16 <= '9')||(LA5_16 >= 'A' && LA5_16 <= 'Z')||LA5_16=='_'||(LA5_16 >= 'a' && LA5_16 <= 'z')) ) {
+                        alt5=12;
+                    }
+                    else {
+                        alt5=6;
+                    }
+                }
+                else {
+                    alt5=12;
+                }
+            }
+            else if ( (LA5_6=='-'||(LA5_6 >= '0' && LA5_6 <= '9')||(LA5_6 >= 'A' && LA5_6 <= 'Z')||LA5_6=='_'||(LA5_6 >= 'a' && LA5_6 <= 'm')||(LA5_6 >= 'o' && LA5_6 <= 'z')) ) {
+                alt5=12;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 5, 6, input);
+
+                throw nvae;
+
+            }
+            }
+            break;
+        case 'o':
+            {
+            int LA5_7 = input.LA(2);
+
+            if ( (LA5_7=='r') ) {
+                int LA5_15 = input.LA(3);
+
+                if ( (LA5_15=='-'||(LA5_15 >= '0' && LA5_15 <= '9')||(LA5_15 >= 'A' && LA5_15 <= 'Z')||LA5_15=='_'||(LA5_15 >= 'a' && LA5_15 <= 'z')) ) {
+                    alt5=12;
+                }
+                else {
+                    alt5=7;
+                }
+            }
+            else if ( (LA5_7=='-'||(LA5_7 >= '0' && LA5_7 <= '9')||(LA5_7 >= 'A' && LA5_7 <= 'Z')||LA5_7=='_'||(LA5_7 >= 'a' && LA5_7 <= 'q')||(LA5_7 >= 's' && LA5_7 <= 'z')) ) {
+                alt5=12;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 5, 7, input);
+
+                throw nvae;
+
+            }
+            }
+            break;
+        case '{':
+            {
+            alt5=8;
+            }
+            break;
+        case '}':
+            {
+            alt5=9;
+            }
+            break;
+        case '\n':
+        case '\r':
+            {
+            alt5=10;
+            }
+            break;
+        case '\t':
+        case ' ':
+            {
+            alt5=11;
+            }
+            break;
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+        case 'F':
+        case 'G':
+        case 'H':
+        case 'I':
+        case 'J':
+        case 'K':
+        case 'L':
+        case 'M':
+        case 'N':
+        case 'O':
+        case 'P':
+        case 'Q':
+        case 'R':
+        case 'S':
+        case 'T':
+        case 'U':
+        case 'V':
+        case 'W':
+        case 'X':
+        case 'Y':
+        case 'Z':
+        case '_':
+        case 'b':
+        case 'c':
+        case 'd':
+        case 'e':
+        case 'f':
+        case 'g':
+        case 'h':
+        case 'i':
+        case 'j':
+        case 'k':
+        case 'l':
+        case 'm':
+        case 'n':
+        case 'p':
+        case 'q':
+        case 'r':
+        case 's':
+        case 't':
+        case 'u':
+        case 'v':
+        case 'w':
+        case 'x':
+        case 'y':
+        case 'z':
+            {
+            alt5=12;
+            }
+            break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            {
+            alt5=13;
+            }
+            break;
+        default:
+            NoViableAltException nvae =
+                new NoViableAltException("", 5, 0, input);
+
+            throw nvae;
+
+        }
+
         switch (alt5) {
             case 1 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:10: T__12
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:10: T__12
                 {
                 mT__12(); 
 
@@ -1072,7 +671,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:16: T__13
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:16: T__13
                 {
                 mT__13(); 
 
@@ -1080,7 +679,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:22: T__14
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:22: T__14
                 {
                 mT__14(); 
 
@@ -1088,7 +687,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:28: T__15
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:28: T__15
                 {
                 mT__15(); 
 
@@ -1096,7 +695,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:34: T__16
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:34: T__16
                 {
                 mT__16(); 
 
@@ -1104,7 +703,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:40: T__17
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:40: T__17
                 {
                 mT__17(); 
 
@@ -1112,7 +711,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:46: T__18
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:46: T__18
                 {
                 mT__18(); 
 
@@ -1120,7 +719,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:52: T__19
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:52: T__19
                 {
                 mT__19(); 
 
@@ -1128,7 +727,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:58: T__20
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:58: T__20
                 {
                 mT__20(); 
 
@@ -1136,231 +735,31 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:64: T__21
-                {
-                mT__21(); 
-
-
-                }
-                break;
-            case 11 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:70: T__22
-                {
-                mT__22(); 
-
-
-                }
-                break;
-            case 12 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:76: T__23
-                {
-                mT__23(); 
-
-
-                }
-                break;
-            case 13 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:82: T__24
-                {
-                mT__24(); 
-
-
-                }
-                break;
-            case 14 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:88: T__25
-                {
-                mT__25(); 
-
-
-                }
-                break;
-            case 15 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:94: T__26
-                {
-                mT__26(); 
-
-
-                }
-                break;
-            case 16 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:100: T__27
-                {
-                mT__27(); 
-
-
-                }
-                break;
-            case 17 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:106: T__28
-                {
-                mT__28(); 
-
-
-                }
-                break;
-            case 18 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:112: T__29
-                {
-                mT__29(); 
-
-
-                }
-                break;
-            case 19 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:118: T__30
-                {
-                mT__30(); 
-
-
-                }
-                break;
-            case 20 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:124: T__31
-                {
-                mT__31(); 
-
-
-                }
-                break;
-            case 21 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:130: T__32
-                {
-                mT__32(); 
-
-
-                }
-                break;
-            case 22 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:136: T__33
-                {
-                mT__33(); 
-
-
-                }
-                break;
-            case 23 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:142: T__34
-                {
-                mT__34(); 
-
-
-                }
-                break;
-            case 24 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:148: T__35
-                {
-                mT__35(); 
-
-
-                }
-                break;
-            case 25 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:154: T__36
-                {
-                mT__36(); 
-
-
-                }
-                break;
-            case 26 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:160: T__37
-                {
-                mT__37(); 
-
-
-                }
-                break;
-            case 27 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:166: T__38
-                {
-                mT__38(); 
-
-
-                }
-                break;
-            case 28 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:172: T__39
-                {
-                mT__39(); 
-
-
-                }
-                break;
-            case 29 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:178: T__40
-                {
-                mT__40(); 
-
-
-                }
-                break;
-            case 30 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:184: T__41
-                {
-                mT__41(); 
-
-
-                }
-                break;
-            case 31 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:190: T__42
-                {
-                mT__42(); 
-
-
-                }
-                break;
-            case 32 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:196: T__43
-                {
-                mT__43(); 
-
-
-                }
-                break;
-            case 33 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:202: T__44
-                {
-                mT__44(); 
-
-
-                }
-                break;
-            case 34 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:208: T__45
-                {
-                mT__45(); 
-
-
-                }
-                break;
-            case 35 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:214: NEWLINE
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:64: NEWLINE
                 {
                 mNEWLINE(); 
 
 
                 }
                 break;
-            case 36 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:222: WS
+            case 11 :
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:72: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
-            case 37 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:225: NAME
+            case 12 :
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:75: IDENTIFIER
                 {
-                mNAME(); 
+                mIDENTIFIER(); 
 
 
                 }
                 break;
-            case 38 :
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr\\SAF.g:1:230: DIGIT
+            case 13 :
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:1:86: DIGIT
                 {
                 mDIGIT(); 
 
@@ -1373,222 +772,6 @@ public class SAFLexer extends Lexer {
     }
 
 
-    protected DFA5 dfa5 = new DFA5(this);
-    static final String DFA5_eotS =
-        "\32\uffff\12\30\1\64\6\30\1\74\3\30\1\100\4\30\1\uffff\7\30\1\uffff"+
-        "\2\30\1\116\1\uffff\1\117\2\30\1\124\1\30\1\uffff\7\30\2\uffff\2"+
-        "\30\3\uffff\1\30\2\uffff\1\150\1\30\1\uffff\1\30\1\155\1\uffff\1"+
-        "\160\2\30\4\uffff\2\30\2\uffff\1\30\2\uffff\1\170\4\uffff\4\30\2"+
-        "\uffff\1\30\1\uffff\4\30\1\u0082\1\u0083\1\u0084\2\30\3\uffff\1"+
-        "\u0087\1\u0088\2\uffff";
-    static final String DFA5_eofS =
-        "\u0089\uffff";
-    static final String DFA5_minS =
-        "\1\11\5\uffff\16\60\6\uffff\1\167\1\144\2\157\1\145\1\162\1\155"+
-        "\2\143\1\141\1\60\2\156\1\141\1\154\2\141\1\60\1\143\1\165\1\156"+
-        "\1\60\1\160\1\153\1\150\1\162\1\uffff\1\143\1\137\1\156\1\157\2"+
-        "\153\1\171\1\uffff\1\153\1\143\1\60\1\uffff\1\60\1\120\1\137\1\60"+
-        "\1\150\1\141\1\144\1\156\1\137\1\145\1\163\1\137\1\150\2\uffff\1"+
-        "\157\1\145\1\150\1\163\1\uffff\1\120\2\uffff\1\60\1\147\1\141\1"+
-        "\162\1\60\1\150\1\60\1\167\1\141\4\uffff\1\157\1\145\1\150\1\uffff"+
-        "\1\145\2\uffff\1\60\4\uffff\1\145\1\143\1\167\1\141\2\uffff\1\162"+
-        "\1\uffff\1\162\1\150\1\145\1\143\3\60\1\162\1\150\3\uffff\2\60\2"+
-        "\uffff";
-    static final String DFA5_maxS =
-        "\1\175\5\uffff\16\172\6\uffff\1\167\1\144\2\157\1\145\1\162\1\155"+
-        "\2\143\1\141\1\172\2\156\1\162\1\154\2\141\1\172\1\143\1\165\1\156"+
-        "\1\172\1\160\1\153\1\150\1\162\1\uffff\1\143\1\137\1\156\1\157\2"+
-        "\153\1\171\1\uffff\1\153\1\143\1\172\1\uffff\1\172\2\137\1\172\1"+
-        "\150\1\164\1\144\1\156\1\137\1\145\1\163\1\137\1\150\2\uffff\1\157"+
-        "\1\145\1\154\1\167\1\uffff\1\137\2\uffff\1\172\1\147\1\164\1\162"+
-        "\1\172\1\154\1\172\1\167\1\141\4\uffff\1\157\1\145\1\154\1\uffff"+
-        "\1\145\2\uffff\1\172\4\uffff\1\145\1\143\1\167\1\141\2\uffff\1\162"+
-        "\1\uffff\1\162\1\150\1\145\1\143\3\172\1\162\1\150\3\uffff\2\172"+
-        "\2\uffff";
-    static final String DFA5_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\16\uffff\1\41\1\42\1\43\1\44\1\45\1"+
-        "\46\32\uffff\1\25\7\uffff\1\7\3\uffff\1\14\15\uffff\1\13\1\15\4"+
-        "\uffff\1\24\1\uffff\1\32\1\33\11\uffff\1\20\1\21\1\22\1\23\3\uffff"+
-        "\1\34\1\uffff\1\36\1\37\1\uffff\1\6\1\10\1\11\1\12\4\uffff\1\30"+
-        "\1\31\1\uffff\1\40\11\uffff\1\35\1\16\1\17\2\uffff\1\26\1\27";
-    static final String DFA5_specialS =
-        "\u0089\uffff}>";
-    static final String[] DFA5_transitionS = {
-            "\1\27\1\26\2\uffff\1\26\22\uffff\1\27\7\uffff\1\1\1\2\6\uffff"+
-            "\12\31\3\uffff\1\3\3\uffff\32\30\1\4\1\uffff\1\5\3\uffff\1\6"+
-            "\1\7\1\10\1\30\1\11\1\12\3\30\1\13\1\14\1\30\1\15\1\16\1\17"+
-            "\1\20\1\30\1\21\1\22\3\30\1\23\3\30\1\24\1\uffff\1\25",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\12\30\7\uffff\32\30\6\uffff\13\30\1\32\1\30\1\33\14\30",
-            "\12\30\7\uffff\32\30\6\uffff\13\30\1\34\16\30",
-            "\12\30\7\uffff\32\30\6\uffff\21\30\1\35\10\30",
-            "\12\30\7\uffff\32\30\6\uffff\25\30\1\36\4\30",
-            "\12\30\7\uffff\32\30\6\uffff\1\37\31\30",
-            "\12\30\7\uffff\32\30\6\uffff\24\30\1\40\5\30",
-            "\12\30\7\uffff\32\30\6\uffff\10\30\1\41\21\30",
-            "\12\30\7\uffff\32\30\6\uffff\24\30\1\42\5\30",
-            "\12\30\7\uffff\32\30\6\uffff\4\30\1\43\25\30",
-            "\12\30\7\uffff\32\30\6\uffff\21\30\1\44\10\30",
-            "\12\30\7\uffff\32\30\6\uffff\24\30\1\45\5\30",
-            "\12\30\7\uffff\32\30\6\uffff\24\30\1\46\5\30",
-            "\12\30\7\uffff\32\30\6\uffff\23\30\1\47\6\30",
-            "\12\30\7\uffff\32\30\6\uffff\1\50\3\30\1\51\25\30",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\52",
-            "\1\53",
-            "\1\54",
-            "\1\55",
-            "\1\56",
-            "\1\57",
-            "\1\60",
-            "\1\61",
-            "\1\62",
-            "\1\63",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\65",
-            "\1\66",
-            "\1\67\20\uffff\1\70",
-            "\1\71",
-            "\1\72",
-            "\1\73",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\75",
-            "\1\76",
-            "\1\77",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\101",
-            "\1\102",
-            "\1\103",
-            "\1\104",
-            "",
-            "\1\105",
-            "\1\106",
-            "\1\107",
-            "\1\110",
-            "\1\111",
-            "\1\112",
-            "\1\113",
-            "",
-            "\1\114",
-            "\1\115",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\120\1\uffff\1\121\14\uffff\1\122",
-            "\1\123",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\125",
-            "\1\126\22\uffff\1\127",
-            "\1\130",
-            "\1\131",
-            "\1\132",
-            "\1\133",
-            "\1\134",
-            "\1\135",
-            "\1\136",
-            "",
-            "",
-            "\1\137",
-            "\1\140",
-            "\1\141\3\uffff\1\142",
-            "\1\143\3\uffff\1\144",
-            "",
-            "\1\145\1\uffff\1\146\14\uffff\1\147",
-            "",
-            "",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\151",
-            "\1\152\22\uffff\1\153",
-            "\1\154",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\156\3\uffff\1\157",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\161",
-            "\1\162",
-            "",
-            "",
-            "",
-            "",
-            "\1\163",
-            "\1\164",
-            "\1\165\3\uffff\1\166",
-            "",
-            "\1\167",
-            "",
-            "",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "",
-            "",
-            "",
-            "",
-            "\1\171",
-            "\1\172",
-            "\1\173",
-            "\1\174",
-            "",
-            "",
-            "\1\175",
-            "",
-            "\1\176",
-            "\1\177",
-            "\1\u0080",
-            "\1\u0081",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\1\u0085",
-            "\1\u0086",
-            "",
-            "",
-            "",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "\12\30\7\uffff\32\30\6\uffff\32\30",
-            "",
-            ""
-    };
-
-    static final short[] DFA5_eot = DFA.unpackEncodedString(DFA5_eotS);
-    static final short[] DFA5_eof = DFA.unpackEncodedString(DFA5_eofS);
-    static final char[] DFA5_min = DFA.unpackEncodedStringToUnsignedChars(DFA5_minS);
-    static final char[] DFA5_max = DFA.unpackEncodedStringToUnsignedChars(DFA5_maxS);
-    static final short[] DFA5_accept = DFA.unpackEncodedString(DFA5_acceptS);
-    static final short[] DFA5_special = DFA.unpackEncodedString(DFA5_specialS);
-    static final short[][] DFA5_transition;
-
-    static {
-        int numStates = DFA5_transitionS.length;
-        DFA5_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA5_transition[i] = DFA.unpackEncodedString(DFA5_transitionS[i]);
-        }
-    }
-
-    class DFA5 extends DFA {
-
-        public DFA5(BaseRecognizer recognizer) {
-            this.recognizer = recognizer;
-            this.decisionNumber = 5;
-            this.eot = DFA5_eot;
-            this.eof = DFA5_eof;
-            this.min = DFA5_min;
-            this.max = DFA5_max;
-            this.accept = DFA5_accept;
-            this.special = DFA5_special;
-            this.transition = DFA5_transition;
-        }
-        public String getDescription() {
-            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | NEWLINE | WS | NAME | DIGIT );";
-        }
-    }
  
 
 }
