@@ -4,16 +4,17 @@ package grammar;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import safobjects.*;
-import interpreter.SAFInterpreter;
+import elements.*;
+import checker.SAFChecker;
 import logger.ErrorLog;
+import visitor.SAFElementPrintVisitor;
 
 public class SAFGrammar
 {
 	private static final String ERROR_PREFIX = "Parser error: ";
 	
 	public static void main(String args []) 
-  	{
+  	{ 
     	System.out.println("Begin parsing..");
 	    try
 	    { 
@@ -26,14 +27,13 @@ public class SAFGrammar
 			Bots bots = SAFGrammar.Start();
 			System.out.println("Succesful Parsing.");
 			
-    		System.out.println("Begin Interpreting..");
+    		System.out.println("Begin Checking..");
     		
-			SAFInterpreter safInterpreter = new SAFInterpreter(bots);
-			safInterpreter.interpret();			
-			System.out.println("Succesful Interpreting.\n");
-			
-			System.out.println(bots.toString());
-			      
+			SAFChecker safChecker = new SAFChecker(bots);
+			bots = safChecker.check();			
+			System.out.println("Succesful Checking.\n");
+
+			bots.accept(new SAFElementPrintVisitor());			      
     	} 
 	    catch (Exception e)
 	    {
@@ -239,7 +239,7 @@ void MoveType(Behaviour behaviour) :
   		  moveType = < IDENTIFIER > 
 	)
 	{
-		behaviour.addMoveChoice(moveType.toString());
+		behaviour.addMove(moveType.toString());
 	}
 }
 
@@ -263,6 +263,6 @@ void AttackType(Behaviour behaviour) :
 	  	  attackType = < IDENTIFIER >
 	)
 	{
-		behaviour.addAttackChoice(attackType.toString());
+		behaviour.addAttack(attackType.toString());
 	}
 }
