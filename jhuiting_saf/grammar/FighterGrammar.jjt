@@ -1,0 +1,154 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */
+options
+{
+  JDK_VERSION = "1.5";
+  STATIC = false;
+  MULTI = true;
+  VISITOR=true;
+}
+
+PARSER_BEGIN(FighterGrammar)
+
+public class FighterGrammar
+{
+  public static void main(String args []) throws ParseException
+  {
+    FighterGrammar parser = new FighterGrammar(System.in);
+
+    if (args.length == 0) {
+      System.out.println("Fighter Parser New Version 1.0.2:  Reading from standard input . . .");
+      parser = new FighterGrammar(System.in);
+    } else if (args.length == 1) {
+      System.out.println("Fighter Parser New Version 1.0.2:  Reading from file " + args[0] + " . . .");
+      try {
+        parser = new FighterGrammar(new java.io.FileInputStream(args[0]));
+      } catch (java.io.FileNotFoundException e) {
+        System.out.println("Fighter Parser New Version 1.0.2:  File " + args[0] + " not found.");
+        return; 
+      }
+    } else {
+      System.out.println("Fighter Parser New Version 1.0.2:  Usage is one of:");
+      System.out.println("         java FighterParserNew < inputfile");
+      System.out.println("OR");
+      System.out.println("         java FighterParserNew inputfile");
+      return;
+    }
+    try {
+  		SimpleNode sn = parser.parseFighterBasics();
+		FighterVisitor fv = new FighterVisitor();
+		sn.jjtAccept(fv, null);
+      
+    } catch (ParseException e) {
+      System.out.println("Encountered errors during while parsing this fighter." + e.getMessage());
+    } catch (TokenMgrError tm){
+      System.out.println("Encountered errors during while parsing this fighter." + tm.getMessage());
+    }
+      
+  }
+
+}
+
+PARSER_END(FighterGrammar)
+//Skip all whitelines / tokens for now
+SKIP : 
+{ 
+  " "
+| "\r"
+| "\t"
+| "\n"
+}
+
+TOKEN : /* Basic types */
+{
+  	<  	ASSIGNMENT   		: "=" >
+|   <   NUMBER			 	: (< DIGIT >)+ > 
+| 	< 	CHOOSE 				: "choose" >
+| 	<   OR					: "or" >
+|  	< 	AND					: "and" >
+|   < 	IDENTIFIER		 	: (< CHARACTER >)+ >
+| 	< 	STARTBRACE			: "{" >
+| 	< 	ENDBRACE			: "}" >
+| 	< 	LIST_OPEN			: "[" > 
+| 	<	LIST_CLOSE			: "]" >
+| 	<  #DIGIT 				: [ "0" - "9" ] > 
+| 	<  #CHARACTER 			: [ "a"-"z", "A" - "Z", "_"] >
+
+}
+ 
+SimpleNode parseFighterBasics() #FighterNode: 
+{
+}{ 
+   parseFighterStructure()   {		return jjtThis;
+   }
+}
+
+void parseFighterStructure() #Fighter :
+{
+}
+{
+   Identifier()
+   < STARTBRACE >
+ 		fighterOptions()
+   		(
+   		  fighterOptions()
+   		)*
+   < ENDBRACE >
+}
+
+void fighterOptions() #void:
+{
+}
+{
+  LOOKAHEAD(2) //Required because both start with an identifier
+  fighterPersonalityRule() | fighterCharacteristicsRule()
+}
+
+void fighterPersonalityRule() #FighterPersonality :
+{
+}
+{
+  	Identifier()
+  	Assignment()
+  	CharacteristicValue()
+}
+
+void fighterCharacteristicsRule() #FighterCharactaristic :
+{
+}
+{
+	Identifier() // Todo: conditionType() 
+	< LIST_OPEN >
+	actionType()
+	actionType()
+	< LIST_CLOSE >
+}
+
+//void conditionType() :
+//{
+//}
+//{
+//  	Identifier() < AND > Identifier() | Identifier() < OR > Identifier() | Identifier()
+//}
+
+void actionType() #void :
+{}
+{
+ 	< CHOOSE > "(" Identifier() Identifier() ")" | Identifier()
+}
+ 
+void Identifier():
+{}
+{ 
+	< IDENTIFIER >
+} 
+
+void Assignment():{}
+{	< ASSIGNMENT >
+}
+
+void CharacteristicValue() #Number :			
+{}
+{
+  	< NUMBER >}
