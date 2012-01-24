@@ -1,4 +1,4 @@
-lexer grammar SAFlexer;
+lexer grammar SAFLexer;
 
 // syntactical symbols
 LEFT_BRACE		:	'{';	
