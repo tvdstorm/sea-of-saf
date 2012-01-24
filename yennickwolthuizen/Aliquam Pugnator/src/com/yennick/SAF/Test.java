@@ -17,7 +17,7 @@ public class Test {
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFParser parser = new SAFParser(tokenStream);
 		parser.fighter();
-		System.out.println("ok!");
+		System.out.println("\n----\nkiller fighter");
 	}
 
 }

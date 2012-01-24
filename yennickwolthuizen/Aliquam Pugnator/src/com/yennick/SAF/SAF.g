@@ -12,16 +12,24 @@ tokens
 
 @header {
   package com.yennick.SAF;
+  import com.yennick.SAF.Bot.*;
 }
 
 @lexer::header {
   package com.yennick.SAF;
 }
 
-fighter 
-	: IDENT '{'
-			(personality|behaviour)*
+
+
+fighter returns [Bot fighter]
+	: IDENT '{' 
+			(personality|behaviour)* 
 		'}'
+		{
+			$fighter = new Bot($IDENT.text);
+			$fighter.addPersonality($personality.personality);
+			System.out.println("FighterName:  " + $fighter.toString()); 
+		}
 	;
 
 behaviour
@@ -29,12 +37,15 @@ behaviour
 	;
  
 action
-	:	CHOOSE '(' IDENT IDENT ')' | IDENT
+	:	CHOOSE '(' a1=IDENT a2=IDENT ')' | act=IDENT
 	;
 	
 	
-personality
+personality returns [Personality personality]
 	: IDENT '=' VALUE
+		{
+			$personality = new Personality($IDENT.text,Integer.parseInt($VALUE.text)); 
+		}
 	;
 	
 
