@@ -37,13 +37,25 @@ behaviour
 
 rule
 	: 	(
-			((CONDITIONTYPE^ | (CONDITIONTYPE LOGICAL^ CONDITIONTYPE)))
-			LEFT_BRACKET!
-				(MOVEACTIONTYPE | chooseMoveActionType) (FIGHTACTIONTYPE | chooseFightActionType)
-			RIGHT_BRACKET!
-			)
-			
+			conditionTypes
+			LEFT_BRACKET
+				moveActionTypes fightActionTypes
+			RIGHT_BRACKET
+			) -> ^(RULE conditionTypes moveActionTypes fightActionTypes)
 	;
+	
+conditionTypes
+  : CONDITIONTYPE 
+  | (CONDITIONTYPE LOGICAL CONDITIONTYPE) -> ^(LOGICAL CONDITIONTYPE CONDITIONTYPE)
+  ;
+
+moveActionTypes
+  : MOVEACTIONTYPE | chooseMoveActionType
+  ;
+
+fightActionTypes
+  : FIGHTACTIONTYPE | chooseFightActionType
+  ;
 	
 chooseFightActionType
 	:	CHOOSE^
