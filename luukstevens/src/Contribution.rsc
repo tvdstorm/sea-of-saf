@@ -8,8 +8,8 @@ import String;
 
 import Language;
 import Ast;
-import Model;
 import XmlSerialization;
+import lang::xml::DOM;
 
 public Contribution exportXml() {
     action = action("Export to XML", performExport);
@@ -17,12 +17,11 @@ public Contribution exportXml() {
     return popup(menu);
 }
 
-private void performExport(Tree tree, loc selection) {    
+public void performExport(Tree tree, loc selection) {   
     str xmlStringLocation = prompt("Export XML to path:");
     loc xmlFileLocation = |file:///tmp|; //Ugly, but needed.
     xmlFileLocation.uri = xmlStringLocation;
 
     Bot ast = implode(#Bot, tree);
-    ModelBot model = convertAstToModel(ast);
-    return serializeBot(model, xmlFileLocation);
+    serializeBot(ast, xmlFileLocation);
 }
