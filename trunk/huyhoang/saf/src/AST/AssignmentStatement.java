@@ -10,4 +10,10 @@ public class AssignmentStatement extends Statement
 		this.variableName = variableName;
 		this.value = value;
 	}
+	
+	public String toString()
+	{
+		return	"\t" + this.variableName + "\r\n" +
+				"\t" + this.value;
+	}
 }
