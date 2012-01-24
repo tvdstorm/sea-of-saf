@@ -29,10 +29,10 @@ private Node behaviourToXmlNode(Bot bot) {
    
    for(BehaviourRule behaviourRule <- bot.behaviourRules) {
         Node moveActionNode = element("moveActions", 
-            convertListToNodes("moveAction", getMoveActions(behaviourRule.moveAction)));
+            convertListToNodes("action", getMoveActions(behaviourRule.moveAction)));
         
         Node fightActionNode = element("fightActions", 
-            convertListToNodes("fightAction", getFightActions(behaviourRule.fightAction)));
+            convertListToNodes("action", getFightActions(behaviourRule.fightAction)));
         
         Node condition = conditionsToXmlNodeTree(behaviourRule.condition);
    
