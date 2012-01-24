@@ -10,7 +10,7 @@ gunit FDL;
 fighter
   :
   "chicken { kickReach  = 9 punchReach = 1 kickPower  = 2 punchPower = 2 far or near [choose(run_towards run_away) kick_low] near or far [run_away kick_low] near [crouch punch_low] }" 
-  -> (chicken (PERSONALITY (CHARACTERISTIC kickReach 9) (CHARACTERISTIC punchReach 1) (CHARACTERISTIC kickPower 2) (CHARACTERISTIC punchPower 2)) (BEHAVIOUR (or far near (choose run_towards run_away) kick_low) (or near far run_away kick_low) (near crouch punch_low)))
+  -> (chicken (PERSONALITY (CHARACTERISTIC kickReach 9) (CHARACTERISTIC punchReach 1) (CHARACTERISTIC kickPower 2) (CHARACTERISTIC punchPower 2)) (BEHAVIOUR (RULE (or far near) (choose run_towards run_away) kick_low) (RULE (or near far) run_away kick_low) (RULE near crouch punch_low)))
 
 
 
@@ -24,6 +24,6 @@ characteristic
     
 rule
   :   
-    "always [walk_towards block_low]"                     -> (always walk_towards block_low)
-    "near [ choose(walk_away run_towards) block_low]"     -> (near (choose walk_away run_towards) block_low)
+    "always [walk_towards block_low]"                     -> (RULE always walk_towards block_low)
+    "near [ choose(walk_away run_towards) block_low]"     -> (RULE near (choose walk_away run_towards) block_low)
     
