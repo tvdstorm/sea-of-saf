@@ -3,7 +3,7 @@ JackieChan{
 	punchPower = 5
 	kickReach = 3
 	punchReach = 9
-	far or near and much_stronger[run_towards punch_high]
+	fars or near and much_stronger[run_towards punch_high]
 	near or far[choose(stand crouch) kick_high]
 	much_stronger[walk_towards punch_low]
 	weaker[run_away choose(block_high block_low)]

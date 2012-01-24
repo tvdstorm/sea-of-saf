@@ -1,6 +1,6 @@
 package saf.classes;
 
-public class Characteristic {
+public class Characteristic implements Strict {
 	
 	//Attribute
 	private Attribute attribute;
@@ -9,10 +9,6 @@ public class Characteristic {
 		return attribute;
 	}
 
-	public void setAttribute(Attribute attribute) {
-		this.attribute = attribute;
-	}
-	
 	//Power
 	private int power;
 		
@@ -20,14 +16,15 @@ public class Characteristic {
 		return power;
 	}
 
-	public void setPower(int power) {
+	public Characteristic(Attribute attribute, int power)
+	{
+		this.attribute = attribute;
 		this.power = power;
 	}
 
-	public Characteristic(Attribute attribute, int power)
-	{
-		setAttribute(attribute);
-		setPower(power);
+	@Override
+	public void check() throws Exception {
+		if(power < 1 || power > 10) throw new Exception("Power can't be lower then 1 of higher then 10");
 	}
 	
 }
