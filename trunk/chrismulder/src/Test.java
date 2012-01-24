@@ -1,14 +1,8 @@
 import java.io.*;
 import org.antlr.runtime.*;
 
-import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.CommonTreeAdaptor;
-import org.antlr.runtime.tree.Tree;
-import org.antlr.runtime.tree.TreeAdaptor;
-
-import AST.*;
+import ast.*;
 import parser.*;
-
 
 public class Test {
 
@@ -20,56 +14,19 @@ public class Test {
 	    CommonTokenStream tokens = new CommonTokenStream(lex);
 	
         FDLParser g = new FDLParser(tokens);
-    	g.setTreeAdaptor(adaptor);
-    	FDLParser.saf_return  r = g.saf();
-    	if ( r.getTree()!=null ) {
-            System.out.println(((Tree)r.getTree()).toString());
-            ((CommonTree)r.getTree()).sanityCheckParentAndChildIndexes();
-        }
+    	Saf saf = g.saf();
+    	System.out.println("Created saf: " + saf.getName());
     	
-    	printTree((CommonTree)r.getTree(), 0);
+    	System.out.print("Valid: ");
+    	System.out.println(saf.validate());
+    	System.out.println("");
+    	System.out.println("Strengths:");
+    	
+    	for (Strength s : saf.getStrengths()) {
+    		System.out.println("  " + s.toString());
+		}
+    	
 	}
 	
-	static final TreeAdaptor adaptor = new CommonTreeAdaptor() {
-		public Object create(Token payload) {
-			if (payload != null) { 
-				switch (payload.getType()) {
-					case FDLParser.SAF_NODE:
-						return new SafNode(payload);
-					case FDLParser.STRENGTH_NODE:
-						return new StrengthNode(payload);
-					case FDLParser.NUMBER:
-						return new NumberNode(payload);
-					case FDLParser.NAME:
-						return new NameNode(payload);
-					case FDLParser.BEHAVIOUR_NODE:
-						return new BehaviourNode(payload);
-					case FDLParser.ACTION_NODE:
-						return new ActionNode(payload);
-					case FDLParser.CONDITION_NODE:
-						return new ConditionNode(payload);
-					case FDLParser.OR_NODE:
-						return new OrNode(payload);
-					case FDLParser.AND_NODE:
-						return new AndNode(payload);
-				}
-			}
-			return new Node(payload);
-		}
-	};
-	
-	public static void printTree(CommonTree t, int indent) {
-		if ( t != null ) {
-			StringBuffer sb = new StringBuffer(indent);
-			for ( int i = 0; i < indent; i++ ) {
-				System.out.print("    ");
-			}
-			System.out.print(t.getClass() + ":");
-			System.out.println(t.toString() );
-			for ( int i = 0; i < t.getChildCount(); i++ ) {
-				printTree((Node)t.getChild(i), indent+1);
-			}
-		}
-	}
 
 }
