@@ -34,11 +34,11 @@ public class Arena {
 			return e.toString();
 		} catch (BotDefinitionMalformedException e) {
 			StringBuilder builder = new StringBuilder();
+			builder.append(e.toString());
 			for (String error : e.getErrorList()) {
 				builder.append(error);
 				builder.append('\n');
 			}
-			builder.append(e.toString());
 			return builder.toString();
 		}
 		restartRound();
