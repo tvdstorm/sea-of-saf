@@ -1,9 +1,13 @@
 package SAF.Structure;
 
+import SAF.Checker.SAFElement;
+import SAF.Checker.SAFElementVisitor;
+import SAF.Checker.SAFValidationException;
+
 public class Behavior implements SAFElement {
 	public Behavior(){}
 	
-    public void accept(SAFElementVisitor visitor) throws Exception {
+    public void accept(SAFElementVisitor visitor) throws SAFValidationException {
         visitor.visit(this);
     }
 	
@@ -59,12 +63,5 @@ public class Behavior implements SAFElement {
 		even,
 		weaker,
 		much_weaker
-	}
-	public enum CharacteristicType
-	{
-		punchReach,
-		punchPower,
-		kickReach,
-		kickPower
 	}
 }

@@ -1,12 +1,16 @@
 package SAF.Structure;
 
+import SAF.Checker.SAFElement;
+import SAF.Checker.SAFElementVisitor;
+import SAF.Checker.SAFValidationException;
+
 public class Characteristic implements SAFElement {
 	public Characteristic(String _name)
 	{
 		name = _name;
 	}
 	
-    public void accept(SAFElementVisitor visitor) throws Exception {
+    public void accept(SAFElementVisitor visitor) throws SAFValidationException {
         visitor.visit(this);
     }
 	
@@ -24,5 +28,13 @@ public class Characteristic implements SAFElement {
 	}
 	public void setValue(int value) {
 		this.value = value;
+	}
+	
+	public enum CharacteristicType
+	{
+		punchReach,
+		punchPower,
+		kickReach,
+		kickPower
 	}
 }
