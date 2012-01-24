@@ -84,12 +84,4 @@ public class SAFParserTest {
 		
 	}
 	
-	@Test
-	public void testConstraint() throws Exception {
-		final String moveAction = "walk_towards";
-		final String fightAction = "block_high";
-		
-		
-	
-	}
 }
