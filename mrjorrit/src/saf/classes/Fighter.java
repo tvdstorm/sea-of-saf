@@ -1,49 +1,42 @@
 package saf.classes;
 
-import java.lang.reflect.Field;
-import java.util.Vector;
-
-public class Fighter {
+public class Fighter implements Strict {
 	
 	//Constructor
-	public Fighter(String name, Vector<Characteristic> personality, Vector<Rule> behaviour) {
-		setName(name);
-		setPersonality(personality);
-		setBehaviour(behaviour);
+	public Fighter(String name, Personality personality, Behaviour behaviour) {
+		this.name = name;
+		this.personality = personality;
+		this.behaviour = behaviour;
 	}
 	
 	//Name
-	private String name;
+	private String name = null;
 	
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 	
 	//Personality
-	private Vector<Characteristic> personality;
+	private Personality personality;
 	
-	public Vector<Characteristic> getPersonality() {
+	public Personality getPersonality() {
 		return personality;
 	}
-
-	public void setPersonality(Vector<Characteristic> personality) {
-		this.personality = personality;
-	}
-	
 	
 	//Behaviour
-	private Vector<Rule> behaviour;
+	private Behaviour behaviour;
 	
-	public Vector<Rule> getBehaviour() {
+	public Behaviour getBehaviour() {
 		return behaviour;
 	}
 
-	public void setBehaviour(Vector<Rule> behaviour) {
-		this.behaviour = behaviour;
+	@Override
+	public void check() throws Exception{
+		if(name == null || name.isEmpty()) throw new Exception("Undefined name!");
+		personality.check();
+		behaviour.check();
 	}
+
 }
 

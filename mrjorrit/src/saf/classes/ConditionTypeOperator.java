@@ -1,9 +1,20 @@
 package saf.classes;
 
-public class ConditionTypeOperator {
+public class ConditionTypeOperator implements Strict {
 
 	
-	public ConditionTypeOperator(){};
+	public ConditionTypeOperator(ConditionType conditionType)
+	{
+		this.conditionType = conditionType;
+	};
+	
+
+	public ConditionTypeOperator(ConditionType conditionType, LogicalOperators logicalOperator, ConditionTypeOperator conditionTypeOperator)
+	{
+		this.conditionType = conditionType;
+		this.logicalOperator = logicalOperator;
+		this.conditionTypeOperator = conditionTypeOperator;
+	}
 	
 	
 	private ConditionType conditionType;
@@ -23,10 +34,6 @@ public class ConditionTypeOperator {
 		return logicalOperator;
 	}
 
-	public void setLogicalOperator(LogicalOperators logicalOperator) {
-		this.logicalOperator = logicalOperator;
-	}
-
 
 	private ConditionTypeOperator conditionTypeOperator;
 	
@@ -34,8 +41,11 @@ public class ConditionTypeOperator {
 		return conditionTypeOperator;
 	}
 
-	public void setConditionTypeOperator(ConditionTypeOperator conditionTypeOperator) {
-		this.conditionTypeOperator = conditionTypeOperator;
+
+	@Override
+	public void check() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

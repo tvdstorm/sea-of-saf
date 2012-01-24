@@ -3,11 +3,14 @@ package saf.classes;
 import java.util.Vector;
 
 
-public class Rule {
+public class Rule implements Strict  {
 	
 	//Constructor
-	public Rule()
+	public Rule(ConditionTypeOperator conditionTypeOperator, Vector<MoveActionType> moveActionTypes, Vector<FightActionType> fightActionTypes)
 	{
+		this.conditionTypeOperator = conditionTypeOperator;
+		this.moveActionTypes = moveActionTypes;
+		this.fightActionTypes = fightActionTypes;
 	}
 	
 	//conditionTypeOperator
@@ -15,10 +18,6 @@ public class Rule {
 
 	public ConditionTypeOperator getConditionType() {		
 		return conditionTypeOperator;
-	}
-
-	public void setConditionTypeOperator(ConditionTypeOperator conditionTypeOperator) {
-		this.conditionTypeOperator = conditionTypeOperator;
 	}
 	
 	
@@ -31,10 +30,6 @@ public class Rule {
 		return moveActionTypes;
 	}
 
-	public void setMoveActionTypes(Vector<MoveActionType> moveActionTypes) {
-		this.moveActionTypes = moveActionTypes;
-	}
-
 	
 	//FightActionTypes
 	private Vector<FightActionType> fightActionTypes;
@@ -45,8 +40,8 @@ public class Rule {
 		return fightActionTypes;
 	}
 
-	public void setFightActionTypes(Vector<FightActionType> fightActionTypes) {
-		this.fightActionTypes = fightActionTypes;
+	@Override
+	public void check() throws Exception {
+		// TODO specifieke checks
 	}
-
 }

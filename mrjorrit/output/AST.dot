@@ -33,7 +33,7 @@ digraph {
   n16 [label="and"];
   n17 [label="or"];
   n17 [label="or"];
-  n18 [label="far"];
+  n18 [label="fars"];
   n19 [label="near"];
   n20 [label="much_stronger"];
   n21 [label="run_towards"];
@@ -85,7 +85,7 @@ digraph {
   n14 -> n15 // "BEHAVIOUR" -> "RULE"
   n15 -> n16 // "RULE" -> "and"
   n16 -> n17 // "and" -> "or"
-  n17 -> n18 // "or" -> "far"
+  n17 -> n18 // "or" -> "fars"
   n17 -> n19 // "or" -> "near"
   n16 -> n20 // "and" -> "much_stronger"
   n15 -> n21 // "RULE" -> "run_towards"

@@ -28,7 +28,7 @@ personality
 	;
 
 characteristic
-	:	(ATTRIBUTE EQUALS ONEDIGIT) -> ^(CHARACTERISTIC ATTRIBUTE ONEDIGIT)
+	:	(IDENT EQUALS DIGIT) -> ^(CHARACTERISTIC IDENT DIGIT)
 	;
 	
 behaviour
@@ -45,46 +45,45 @@ rule
 	;
 	
 conditionTypes
-  : CONDITIONTYPE 
-  | (CONDITIONTYPE (LOGICAL^ CONDITIONTYPE)+)
+  : IDENT 
+  | (IDENT (LOGICAL^ IDENT)+)
   ;
 
 moveActionTypes
-  : MOVEACTIONTYPE | chooseMoveActionType
+  : IDENT | chooseMoveActionType
   ;
 
 fightActionTypes
-  : FIGHTACTIONTYPE | chooseFightActionType
+  : IDENT | chooseFightActionType
   ;
 	
 chooseFightActionType
 	:	CHOOSE^
 		LEFT_PAREN!
-			FIGHTACTIONTYPE+ 
+			IDENT+ 
 		RIGHT_PAREN!
 	;
 	
 chooseMoveActionType
 	:	CHOOSE^
 		LEFT_PAREN!
-			MOVEACTIONTYPE+ 
+			IDENT+ 
 		RIGHT_PAREN!
 	;
 
 
-LOGICAL : ('and' | 'or');
+//AST Nodes
 PERSONALITY : 'Personality' ;
 BEHAVIOUR : 'Behaviour' ;
 CHARACTERISTIC : 'Characteristic';
 RULE : 'Rule';
-FIGHTACTIONTYPE : ('block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high') ;
-MOVEACTIONTYPE : ('walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand') ;
-CONDITIONTYPE : ('always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker') ;
-ATTRIBUTE : ('punchReach' | 'punchPower' | 'kickReach' | 'kickPower') ; 
+
+LOGICAL : ('and' | 'or');
+
+
 CHOOSE : 'choose' ;
-IDENT : ('a' .. 'z' | 'A' .. 'Z')('a' .. 'z' | 'A' .. 'Z' | '0'..'9')*;
+IDENT : ('a' .. 'z' | 'A' .. 'Z')('a' .. 'z' | 'A' .. 'Z' | '0'..'9' | '_')*;
 WS : (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
-ONEDIGIT : '0' .. '9';
 DIGIT : '0' .. '9'+;
 EQUALS : '=';
 LEFT_CURLY : '{';
@@ -93,3 +92,10 @@ LEFT_PAREN : '(';
 RIGHT_PAREN : ')';
 LEFT_BRACKET : '[';
 RIGHT_BRACKET : ']';
+
+
+//Apperantly not allowed
+//FIGHTACTIONTYPE : ('block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high') ;
+//MOVEACTIONTYPE : ('walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand') ;
+//CONDITIONTYPE : ('always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker') ;
+//ATTRIBUTE : ('punchReach' | 'punchPower' | 'kickReach' | 'kickPower') ; 

@@ -17,41 +17,43 @@ fighter returns [Fighter fighter]
   : ^( name=IDENT pers=personality beh=behaviour) {fighter = new Fighter(name.getText(), pers, beh);}
   ;
 
-personality returns [Vector<Characteristic> personality]
-  : {personality = new Vector<Characteristic>();}
-    ^(PERSONALITY (chara=characteristic {personality.add(chara);})*) 
+personality returns [Personality personality]
+  : {Vector<Characteristic> personalityVector = new Vector<Characteristic>();}
+    ^(PERSONALITY (chara=characteristic {personalityVector.add(chara);})*)
+    {personality = new Personality(personalityVector);}
   ;
   
-behaviour returns [Vector<Rule> behaviour]
-  : {behaviour = new Vector<Rule>();}
-    ^(BEHAVIOUR (rul=rule {behaviour.add(rul);})*)
+behaviour returns [Behaviour behaviour]
+  : {Vector<Rule> behaviourVector = new Vector<Rule>();}
+    ^(BEHAVIOUR (rul=rule {behaviourVector.add(rul);})*)
+    {behaviour = new Behaviour(behaviourVector);}
   ;
   
 characteristic returns [Characteristic characteristic]
-  : ^(CHARACTERISTIC att=ATTRIBUTE pow=ONEDIGIT) {characteristic = new Characteristic(Attribute.valueOf(att.getText()), Integer.parseInt(pow.getText()));}
+  : ^(CHARACTERISTIC att=IDENT pow=DIGIT) {characteristic = new Characteristic(Attribute.valueOf(att.getText()), Integer.parseInt(pow.getText()));}
   ;
   
 rule returns [Rule rule]
-  : {rule = new Rule();}
+  : 
     ^(RULE con=conditionTypes mov=moveActionTypes fight=fightActionTypes)
     {
-      rule.setConditionTypeOperator(con);
-      rule.setMoveActionTypes(mov);
-      rule.setFightActionTypes(fight);
+      rule = new Rule(con, mov, fight);
     }
   ;
 
 conditionTypes returns [ConditionTypeOperator conditionType]
   : 
-    {conditionType = new ConditionTypeOperator();}
     (
-    con=CONDITIONTYPE {conditionType.setConditionType(ConditionType.valueOf(con.getText()));}
+    con=IDENT {conditionType = new ConditionTypeOperator(ConditionType.valueOf(con.getText()));}
     |
-    ^(log=LOGICAL rec=conditionTypes con=CONDITIONTYPE )
+    ^(log=LOGICAL rec=conditionTypes con=IDENT )
       {
-        conditionType.setConditionType(ConditionType.valueOf(con.getText()));
-        conditionType.setLogicalOperator(LogicalOperators.valueOf(log.getText()));
-        conditionType.setConditionTypeOperator(rec);
+        conditionType = new ConditionTypeOperator(
+        ConditionType.valueOf(con.getText()),
+        LogicalOperators.valueOf(log.getText()),
+        rec
+        );
+        
       }
     )
   ;
@@ -59,7 +61,7 @@ conditionTypes returns [ConditionTypeOperator conditionType]
 moveActionTypes returns [Vector<MoveActionType> moveActionTypes]
   :{moveActionTypes = new Vector<MoveActionType>();}
   (
-    mov=MOVEACTIONTYPE {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));}
+    mov=IDENT {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));}
     | movs=chooseMoveActionType {moveActionTypes = movs;}
   )
   ;
@@ -67,18 +69,18 @@ moveActionTypes returns [Vector<MoveActionType> moveActionTypes]
 fightActionTypes returns [Vector<FightActionType> fightActionTypes]
   :{fightActionTypes = new Vector<FightActionType>();}
   (
-    fight=FIGHTACTIONTYPE {fightActionTypes.add(FightActionType.valueOf(fight.getText()));}
+    fight=IDENT {fightActionTypes.add(FightActionType.valueOf(fight.getText()));}
     | fights=chooseFightActionType {fightActionTypes = fights;}
   )
   ;
   
 chooseMoveActionType returns [Vector<MoveActionType> moveActionTypes]
   : {moveActionTypes = new Vector<MoveActionType>();}
-    ^(CHOOSE (mov=MOVEACTIONTYPE {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));})+)
+    ^(CHOOSE (mov=IDENT {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));})+)
   ;
 
 chooseFightActionType returns [Vector<FightActionType> fightActionTypes]
   : {fightActionTypes = new Vector<FightActionType>();}
-    ^(CHOOSE (fight=FIGHTACTIONTYPE {fightActionTypes.add(FightActionType.valueOf(fight.getText()));})+)
+    ^(CHOOSE (fight=IDENT {fightActionTypes.add(FightActionType.valueOf(fight.getText()));})+)
   ;
   
