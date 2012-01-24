@@ -51,7 +51,7 @@ behaviour
   ;
 
 rule
-  : condition RULE_START (move fight) RULE_END -> ^(condition ^(ACTION ^(move fight)))
+  : condition RULE_START (action action) RULE_END -> ^(condition ^(ACTION ^(action action)))
   ;
 
 condition
@@ -60,42 +60,16 @@ condition
   | conditionType
   ;
 
-move
-  : moveAction | CHOOSE CHOICE_START (moveAction)+ CHOICE_END -> ^(CHOICE (moveAction)+)
+action
+  : actionType | CHOOSE CHOICE_START (action)+ CHOICE_END -> ^(CHOICE (action)+)
   ;
  
-fight
-  : fightAction | CHOOSE CHOICE_START (fightAction)+ CHOICE_END -> ^(CHOICE (fightAction)+)
-  ;
-  
-moveAction
-  : 'walk_towards'
-  | 'walk_away'
-  | 'run_towards'
-  | 'run_away'
-  | 'jump'
-  | 'crouch'
-  | 'stand'
-  ;
-
-fightAction
-  : 'block_low'
-  | 'block_high'
-  | 'punch_low'
-  | 'punch_high'
-  | 'kick_low'
-  | 'kick_high'
+actionType
+  : STRING
   ;
 
 conditionType
-  : 'always'
-  | 'near'
-  | 'far'
-  | 'much_stronger'
-  | 'stronger'
-  | 'even'
-  | 'weaker'
-  | 'much_weaker'
+  : STRING
   ;
 
 

@@ -7,13 +7,8 @@ import java.io.*;
 public class Main {
 	
 	static final String fighterFile = "models/jackiechan.saf";
+	static final String dotFile = "AST.dot";
 
-	static final TreeAdaptor adaptor = new CommonTreeAdaptor() {
-		public Object create(Token payload) {
-			return new CommonTree(payload);
-		}
-	};
-	
 	public static void main(String[] args) {
 		try {
 			ANTLRFileStream filestream = new ANTLRFileStream(fighterFile);
@@ -27,8 +22,7 @@ public class Main {
 			
 			DOTTreeGenerator gen = new DOTTreeGenerator();
 			StringTemplate st = gen.toDOT(tree);
-		    saveToFile("AST.dot", st.toString());
-			
+			saveDotGraph(dotFile, st.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (RecognitionException re) {
@@ -36,8 +30,13 @@ public class Main {
 		}
 	}
 	
-	// Save dot graph to file
-	public static void saveToFile(String file, String content) {
+	static final TreeAdaptor adaptor = new CommonTreeAdaptor() {
+		public Object create(Token payload) {
+			return new CommonTree(payload);
+		}
+	};	
+	
+	public static void saveDotGraph(String file, String content) {
 	    try {
 	            FileWriter fstream = new FileWriter(file);
 	            BufferedWriter out = new BufferedWriter(fstream);
