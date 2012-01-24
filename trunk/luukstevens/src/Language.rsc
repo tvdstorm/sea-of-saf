@@ -26,10 +26,10 @@ syntax FightId
 syntax BotName
     = @category = "Type" Id;
 
+//Grammar  
 start syntax Bot 
     = bot: BotName name "{" Characteristic* characteristics BehaviourRule* behaviourRules "}";  
-
-//Grammar    
+  
 syntax Characteristic
     = characteristic : CharacteristicId name "=" Number val;    
     

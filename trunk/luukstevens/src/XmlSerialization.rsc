@@ -1,52 +1,79 @@
 module XmlSerialization
 
-import Model;
 import Ast;
 import lang::xml::DOM;
 
-public void serializeBot(ModelBot bot, loc location) {
-    Node xmlFighter = toXmlNodeTree(bot);
-    Node document = document(xmlFighter);
-    writeXMLPretty(location, document);
+public void serializeBot(Bot bot, loc location) {
+    writeXMLPretty(location, toXmlNodeTree(bot));
 }
 
-public Node toXmlNodeTree(ModelBot bot) {
-    Node name       = element("name", [charData(bot.name)]);
-    Node punchReach = element("punchReach", [charData("<bot.punchReach>")]);
-    Node punchPower = element("punchPower", [charData("<bot.punchPower>")]);
-    Node kickReach  = element("kickReach", [charData("<bot.kickReach>")]);
-    Node kickPower  = element("kickPower", [charData("<bot.kickPower>")]);
+public Node toXmlNodeTree(Bot bot) {
+    Node name = attribute("name", bot.name);
+    return document(element("bot", 
+        [name, characteristicToXmlNode(bot.characteristics), behaviourToXmlNode(bot)]));
+}
+
+private Node characteristicToXmlNode(list[Characteristic] characteristics) {
+    list[Node] characteristicNodes = [];
     
-    return element("bot", [name, punchReach, punchPower, kickReach, kickPower, element("behaviouRules", behaviourToXmlNode(bot))]);
+    for(Characteristic characteristic <- characteristics) {
+        characteristicNodes += element("characteristic", [attribute("name", characteristic.name), 
+            attribute("value", "<characteristic.val>")]);
+    }
+    
+    return element("characteristics", characteristicNodes);
 }
 
-private list[Node] behaviourToXmlNode(ModelBot bot) {
+private Node behaviourToXmlNode(Bot bot) {
+   list[Node] behaviourRuleNodes = [];
    
-   return for(ModelBehaviourRule behaviourRule <- bot.behaviourRules) {
+   for(BehaviourRule behaviourRule <- bot.behaviourRules) {
+        Node moveActionNode = element("moveActions", 
+            convertListToNodes("moveAction", getMoveActions(behaviourRule.moveAction)));
         
-        Node moveActionNode   = element("moveActions", convertListToNodes("moveAction", behaviourRule.moveActions));
-        Node fightActionNode  = element("fightActions", convertListToNodes("fightAction", behaviourRule.moveActions));
-        Node condition        = conditionsToXmlNodeTree(behaviourRule.condition);
+        Node fightActionNode = element("fightActions", 
+            convertListToNodes("fightAction", getFightActions(behaviourRule.fightAction)));
+        
+        Node condition = conditionsToXmlNodeTree(behaviourRule.condition);
    
-        append element("behaviourRule", [condition, moveActionNode, fightActionNode]);
+        behaviourRuleNodes += element("behaviourRule", [condition, moveActionNode, fightActionNode]);
    }
+   
+   return element("behaviourRules", behaviourRuleNodes);
 }
 
 public Node conditionsToXmlNodeTree(Ast::Condition condition) {
     switch(condition) {
         case andCondition(Condition firstCondition, Condition secondCondition): {
-            return element("condition", [element("type", [charData("and")]), 
-                conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
+            return element("andCondition", 
+                [conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
         }
         case orCondition(Condition firstCondition, Condition secondCondition): {
-            return element("condition", [element("type", [charData("or")]), 
-                conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
+            return element("orCondition", 
+                [conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
         }
         case simpleCondition(str condition): {
-            return element("condition", [charData(condition)]);
+            return element("simpleCondition", [charData(condition)]);
         }
     }
 }
 
-public list[Node] convertListToNodes(str nodeName, list[str] items) =
+private list[str] getMoveActions(MoveAction moveAction) {
+    switch(moveAction) {
+        case simpleMoveAction(str moveAction): return [moveAction];
+        case chooseMoveAction(list[str] moveActions): return moveActions;
+    }
+}
+
+private list[str] getFightActions(FightAction moveAction) {
+    switch(moveAction) {
+        case simpleFightAction(str fightAction): return [fightAction];
+        case chooseFightAction(list[str] fightActions): return fightActions;
+    }
+}
+
+private list[Node] convertListToNodes(str nodeName, list[str] items) =
     [ element(nodeName, [charData(item)]) | item <- items ];
+    
+    
+    
