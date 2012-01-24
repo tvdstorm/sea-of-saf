@@ -53,7 +53,7 @@ public Node conditionsToXmlNodeTree(Ast::Condition condition) {
                 [conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
         }
         case simpleCondition(str condition): {
-            return element("simpleCondition", [charData(condition)]);
+            return element("simpleCondition", [attribute("value", condition)]);
         }
     }
 }
@@ -73,7 +73,7 @@ private list[str] getFightActions(FightAction moveAction) {
 }
 
 private list[Node] convertListToNodes(str nodeName, list[str] items) =
-    [ element(nodeName, [charData(item)]) | item <- items ];
+    [ element(nodeName, [attribute("value", item)]) | item <- items ];
     
     
     
