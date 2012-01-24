@@ -2,13 +2,17 @@ package SAF.Structure;
 
 import java.util.ArrayList;
 
+import SAF.Checker.SAFElement;
+import SAF.Checker.SAFElementVisitor;
+import SAF.Checker.SAFValidationException;
+
 public class Bots implements SAFElement {
 	public Bots()
 	{ 
 		this.bots = new ArrayList<Bot>();
 	}
 	
-    public void accept(SAFElementVisitor visitor) throws Exception {
+    public void accept(SAFElementVisitor visitor) throws SAFValidationException {
         visitor.visit(this);
     }
 	

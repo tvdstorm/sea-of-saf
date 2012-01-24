@@ -1,9 +1,10 @@
 package SAF.Structure;
 
-public class FightAction extends Action {
+public class FightAction extends ActionType {
+	public FightAction() {}
 	public FightAction(String fightAction)
 	{
-		
+		this.setFightAction(fightAction);
 	}
 	
 	private String fightAction;
@@ -19,5 +20,5 @@ public class FightAction extends Action {
 		Behavior.FightType fightActionType = Behavior.FightType.valueOf(this.getFightAction());
 
 		return fightActionType;
-	}	
+	}
 }

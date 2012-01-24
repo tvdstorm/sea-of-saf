@@ -2,6 +2,10 @@ package SAF.Structure;
 
 import java.util.ArrayList;
 
+import SAF.Checker.SAFElement;
+import SAF.Checker.SAFElementVisitor;
+import SAF.Checker.SAFValidationException;
+
 public class Bot implements SAFElement {
 	public Bot(String name) {
 		Characteristics = new ArrayList<Characteristic>();
@@ -9,7 +13,7 @@ public class Bot implements SAFElement {
 		setName(name);
 	}
 	
-    public void accept(SAFElementVisitor visitor) throws Exception {
+    public void accept(SAFElementVisitor visitor) throws SAFValidationException {
         visitor.visit(this);
     }
 	

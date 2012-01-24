@@ -2,25 +2,29 @@ package SAF.Structure;
 
 import java.util.ArrayList;
 
+import SAF.Checker.SAFElement;
+import SAF.Checker.SAFElementVisitor;
+import SAF.Checker.SAFValidationException;
+
 public class Action implements SAFElement {
 	public Action()
 	{
-		values = new ArrayList<String>();
+		values = new ArrayList<ActionType>();
 	}
-	public Action(String _value){
-		values = new ArrayList<String>();
+	public Action(ActionType _value){
+		values = new ArrayList<ActionType>();
 		values.add(_value);
 	}
 	
-    public void accept(SAFElementVisitor visitor) throws Exception {
+    public void accept(SAFElementVisitor visitor) throws SAFValidationException {
         visitor.visit(this);
     }
 	
-	private ArrayList<String> values;
-	public ArrayList<String> getValues() {
+	private ArrayList<ActionType> values;
+	public ArrayList<ActionType> getValues() {
 		return values;
 	}
-	public void setValues(ArrayList<String> values) {
+	public void setValues(ArrayList<ActionType> values) {
 		this.values = values;
 	}
 }

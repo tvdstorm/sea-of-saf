@@ -33,9 +33,9 @@ bot returns [Bot bot]:
 name returns [String name]:
   ID                                    {     $name = $ID.text;
                                         }
-  (sn=subname*                          {     $name += $sn.name;
+  (sn=subname                           {     $name += $sn.name;
                                         }
-  );
+  )*;
 subname returns [String name]:
   ( ID                                  {     $name = $ID.text; 
                                         }
@@ -52,35 +52,40 @@ behavior returns [Behavior behavior]:
   WS* c=condition '['                   {     $behavior = new Behavior();
                                               $behavior.setCondition($c.condition); 
                                         }
-  ( id1 = ID                            {     $behavior.setMoveAction(new Action($id1.text));
+  ( id1 = ID                            {     $behavior.setMoveAction(new Action(new MoveAction($id1.text)));
                                         }
-  | c1  = choose                        {     $behavior.setMoveAction($c1.action);
+  | c1  = chooseMove                    {     $behavior.setMoveAction($c1.action);
                                         }
   ) WS
-  ( id2 = ID                            {     $behavior.setFightAction(new Action($id2.text));
+  ( id2 = ID                            {     $behavior.setFightAction(new Action(new FightAction($id2.text)));
                                         }
-  | c2  = choose                        {     $behavior.setFightAction($c2.action);
+  | c2  = chooseFight                   {     $behavior.setFightAction($c2.action);
                                         }
   )
   ']' NEWLINE;
 
-choose returns [Action action]:
+chooseMove returns [Action action]:
   CHOOSE  '('                           {     $action = new Action();
                                         }
   (
-    choosePart                          {     $action.getValues().add($choosePart.value); 
+    WS* ID                              {     $action.getValues().add(new MoveAction($ID.text)); 
                                         }
   )+
   ')';
-  
-choosePart returns [String value]:
-  WS* ID                                {     $value = $ID.text;
-                                        };
+
+chooseFight returns [Action action]:
+  CHOOSE  '('                           {     $action = new Action();
+                                        }
+  (
+    WS* ID                              {     $action.getValues().add(new FightAction($ID.text)); 
+                                        }
+  )+
+  ')';
 
 condition returns [Condition condition]:
    cr1=conditionRule                    {     $condition = $cr1.condition;
                                         }
-   ( OR WS cr2=conditionRule            {     ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ConditionType.OR);
+   ( OR WS cr2=conditionRule            {     ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ChoiceType.OR);
                                               cc.setCondition($cr1.condition);
                                               cc.setSecondCondition($cr2.condition);
                                               $condition = cc;
@@ -90,8 +95,8 @@ condition returns [Condition condition]:
 conditionRule returns [Condition condition]:
    v1=var                               {     $condition = $v1._condition;
                                         }
-   ( AND WS v2=var                      {     ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ConditionType.AND);
-                                              cc.setCondition($v1._condition);
+   ( AND WS v2=var                      {     ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ChoiceType.AND);
+                                              cc.setCondition($condition);
                                               cc.setSecondCondition($v2._condition);
 							                                $condition = cc;    
 							                          }
