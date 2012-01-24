@@ -6,10 +6,13 @@ options
   JDK_VERSION = "1.5";
   STATIC = false;
   MULTI = true;
+  DEBUG_TOKEN_MANAGER = false;
   VISITOR=true;
 }
 
 PARSER_BEGIN(FighterGrammar)
+
+import visitor.*;
 
 public class FighterGrammar
 {
@@ -36,9 +39,8 @@ public class FighterGrammar
       return;
     }
     try {
-  		SimpleNode sn = parser.parseFighterBasics();
-		FighterVisitor fv = new FighterVisitor();
-		sn.jjtAccept(fv, null);
+  		Fighter f = parser.parseFighter();
+  		f.accept(new FighterDumper());
       
     } catch (ParseException e) {
       System.out.println("Encountered errors during while parsing this fighter." + e.getMessage());
@@ -76,49 +78,69 @@ TOKEN : /* Basic types */
 | 	<  #CHARACTER 			: [ "a"-"z", "A" - "Z", "_"] >
 
 }
+
  
-SimpleNode parseFighterBasics() #FighterNode: 
+Fighter parseFighter() #FighterNode: 
 {
+  Fighter.Options o;
 }{ 
-   parseFighterStructure()   {		return jjtThis;
+   o=parseFighterStructure()   {		return new Fighter(o);
    }
 }
 
-void parseFighterStructure() #Fighter :
+Fighter.Options parseFighterStructure() #Fighter :
 {
+  	Fighter.Options fo = new Fighter.Options();
+  	Fighter.FighterElement f;
 }
 {
    Identifier()
    < STARTBRACE >
- 		fighterOptions()
    		(
-   		  fighterOptions()
+   		  f = fighterOptions()
+   		  {			fo.addElement(f);
+   		  }
    		)*
+   		{			return fo;
+   		}
    < ENDBRACE >
 }
 
-void fighterOptions() #void:
+Fighter.FighterElement fighterOptions() #void:
 {
+  	Fighter.FighterElement fe;
 }
 {
   LOOKAHEAD(2) //Required because both start with an identifier
-  fighterPersonalityRule() | fighterCharacteristicsRule()
+  fe = fighterPersonalityRule() {	return fe;
+  }
+  |
+  fe = fighterCharacteristicsRule() {
+    return fe;
+  }
 }
 
-void fighterPersonalityRule() #FighterPersonality :
+Fighter.Personality fighterPersonalityRule() #FighterPersonality :
 {
+  	Fighter.Identifier i1;
+  	Fighter.Identifier i2;
 }
 {
-  	Identifier()
-  	Assignment()
-  	CharacteristicValue()
+  	(	  	i1 = Identifier()
+		Assignment()
+		i2 = CharacteristicValue()
+	)	{
+	  	return new Fighter.Personality(i1, i2);	}  
 }
 
-void fighterCharacteristicsRule() #FighterCharactaristic :
+Fighter.Identifier fighterCharacteristicsRule() :
 {
+  	Fighter.Identifier i;
 }
 {
-	Identifier() // Todo: conditionType() 
+	i = Identifier(){
+		return i;
+	} // Todo: conditionType() 
 	< LIST_OPEN >
 	actionType()
 	actionType()
@@ -138,17 +160,25 @@ void actionType() #void :
  	< CHOOSE > "(" Identifier() Identifier() ")" | Identifier()
 }
  
-void Identifier():
-{}
+Fighter.Identifier Identifier():
+{
+	Token t;
+}
 { 
-	< IDENTIFIER >
+	( t = < IDENTIFIER >)	{	return new Fighter.Identifier(t.image);	}
 } 
 
-void Assignment():{}
-{	< ASSIGNMENT >
+void Assignment():{
+}
+{
+	< ASSIGNMENT >
 }
 
-void CharacteristicValue() #Number :			
-{}
+Fighter.Identifier CharacteristicValue() :			
 {
-  	< NUMBER >}
+  	Token t;}
+{
+  	(  	  t  = < NUMBER >)
+  	  {		return new Fighter.Identifier(t.image);
+	}
+	}

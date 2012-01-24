@@ -5,9 +5,9 @@ public interface FighterGrammarVisitor
   public Object visit(ASTFighterNode node, Object data);
   public Object visit(ASTFighter node, Object data);
   public Object visit(ASTFighterPersonality node, Object data);
-  public Object visit(ASTFighterCharactaristic node, Object data);
+  public Object visit(ASTfighterCharacteristicsRule node, Object data);
   public Object visit(ASTIdentifier node, Object data);
   public Object visit(ASTAssignment node, Object data);
-  public Object visit(ASTNumber node, Object data);
+  public Object visit(ASTCharacteristicValue node, Object data);
 }
-/* JavaCC - OriginalChecksum=9c2e40a39e5dc3371ade229821210937 (do not edit this line) */
+/* JavaCC - OriginalChecksum=5978801266b43f9a17d6dff541beac56 (do not edit this line) */

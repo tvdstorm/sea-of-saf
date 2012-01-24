@@ -5,10 +5,10 @@ public interface FighterGrammarTreeConstants
   public int JJTFIGHTER = 1;
   public int JJTVOID = 2;
   public int JJTFIGHTERPERSONALITY = 3;
-  public int JJTFIGHTERCHARACTARISTIC = 4;
+  public int JJTFIGHTERCHARACTERISTICSRULE = 4;
   public int JJTIDENTIFIER = 5;
   public int JJTASSIGNMENT = 6;
-  public int JJTNUMBER = 7;
+  public int JJTCHARACTERISTICVALUE = 7;
 
 
   public String[] jjtNodeName = {
@@ -16,10 +16,10 @@ public interface FighterGrammarTreeConstants
     "Fighter",
     "void",
     "FighterPersonality",
-    "FighterCharactaristic",
+    "fighterCharacteristicsRule",
     "Identifier",
     "Assignment",
-    "Number",
+    "CharacteristicValue",
   };
 }
-/* JavaCC - OriginalChecksum=7de2dbeff4dcc16a357d0e01f72a9948 (do not edit this line) */
+/* JavaCC - OriginalChecksum=86d2f17caf0b55af3d2232a595993753 (do not edit this line) */
