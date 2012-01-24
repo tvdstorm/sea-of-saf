@@ -10,15 +10,15 @@ public class Rule {
 	{
 	}
 	
-	//ConditionType
-	private ConditionType conditionType;
+	//conditionTypeOperator
+	private ConditionTypeOperator conditionTypeOperator;
 
-	public ConditionType getConditionType() {		
-		return conditionType;
+	public ConditionTypeOperator getConditionType() {		
+		return conditionTypeOperator;
 	}
 
-	public void setConditionType(ConditionType conditionType) {
-		this.conditionType = conditionType;
+	public void setConditionTypeOperator(ConditionTypeOperator conditionTypeOperator) {
+		this.conditionTypeOperator = conditionTypeOperator;
 	}
 	
 	

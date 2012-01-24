@@ -33,31 +33,48 @@ characteristic returns [Characteristic characteristic]
   
 rule returns [Rule rule]
   : {rule = new Rule();}
-  
+    ^(RULE con=conditionTypes mov=moveActionTypes fight=fightActionTypes)
+    {
+      rule.setConditionTypeOperator(con);
+      rule.setMoveActionTypes(mov);
+      rule.setFightActionTypes(fight);
+    }
+  ;
+
+conditionTypes returns [ConditionTypeOperator conditionType]
+  : 
+    {conditionType = new ConditionTypeOperator();}
     (
-    
-			^(con=CONDITIONTYPE {rule.setConditionType(ConditionType.valueOf(con.getText()));}
-			  
-			(move=MOVEACTIONTYPE {rule.getMoveActionTypes().add(MoveActionType.valueOf(move.getText()));} 
-			| moves=chooseMoveActionType {rule.setMoveActionTypes(moves);}) 
-			
-			(fightaction=FIGHTACTIONTYPE  {rule.getFightActionTypes().add(FightActionType.valueOf(fightaction.getText()));} 
-			| fights=chooseFightActionType {rule.setFightActionTypes(fights);})) 
-		|
-		
-		  ^(LOGICAL CONDITIONTYPE CONDITIONTYPE 
-		  (move=MOVEACTIONTYPE {rule.getMoveActionTypes().add(MoveActionType.valueOf(move.getText()));} 
-      | moves=chooseMoveActionType {rule.setMoveActionTypes(moves);}) 
-      
-      (fightaction=FIGHTACTIONTYPE  {rule.getFightActionTypes().add(FightActionType.valueOf(fightaction.getText()));} 
-      | fights=chooseFightActionType {rule.setFightActionTypes(fights);}))
-      
-		)
+    con=CONDITIONTYPE {conditionType.setConditionType(ConditionType.valueOf(con.getText()));}
+    |
+    ^(log=LOGICAL rec=conditionTypes con=CONDITIONTYPE )
+      {
+        conditionType.setConditionType(ConditionType.valueOf(con.getText()));
+        conditionType.setLogicalOperator(LogicalOperators.valueOf(log.getText()));
+        conditionType.setConditionTypeOperator(rec);
+      }
+    )
+  ;
+
+moveActionTypes returns [Vector<MoveActionType> moveActionTypes]
+  :{moveActionTypes = new Vector<MoveActionType>();}
+  (
+    mov=MOVEACTIONTYPE {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));}
+    | movs=chooseMoveActionType {moveActionTypes = movs;}
+  )
+  ;
+
+fightActionTypes returns [Vector<FightActionType> fightActionTypes]
+  :{fightActionTypes = new Vector<FightActionType>();}
+  (
+    fight=FIGHTACTIONTYPE {fightActionTypes.add(FightActionType.valueOf(fight.getText()));}
+    | fights=chooseFightActionType {fightActionTypes = fights;}
+  )
   ;
   
 chooseMoveActionType returns [Vector<MoveActionType> moveActionTypes]
   : {moveActionTypes = new Vector<MoveActionType>();}
-    ^(CHOOSE (move=MOVEACTIONTYPE {moveActionTypes.add(MoveActionType.valueOf(move.getText()));})+)
+    ^(CHOOSE (mov=MOVEACTIONTYPE {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));})+)
   ;
 
 chooseFightActionType returns [Vector<FightActionType> fightActionTypes]

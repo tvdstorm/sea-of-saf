@@ -29,41 +29,44 @@ digraph {
   n14 [label="BEHAVIOUR"];
   n15 [label="RULE"];
   n15 [label="RULE"];
-  n16 [label="or"];
-  n16 [label="or"];
-  n17 [label="far"];
-  n18 [label="near"];
-  n19 [label="run_towards"];
-  n20 [label="punch_high"];
-  n21 [label="RULE"];
-  n21 [label="RULE"];
-  n22 [label="or"];
-  n22 [label="or"];
-  n23 [label="near"];
-  n24 [label="far"];
-  n25 [label="choose"];
-  n25 [label="choose"];
-  n26 [label="stand"];
-  n27 [label="crouch"];
-  n28 [label="kick_high"];
-  n29 [label="RULE"];
-  n29 [label="RULE"];
-  n30 [label="much_stronger"];
-  n31 [label="walk_towards"];
-  n32 [label="punch_low"];
-  n33 [label="RULE"];
-  n33 [label="RULE"];
-  n34 [label="weaker"];
-  n35 [label="run_away"];
-  n36 [label="choose"];
-  n36 [label="choose"];
-  n37 [label="block_high"];
-  n38 [label="block_low"];
-  n39 [label="RULE"];
-  n39 [label="RULE"];
-  n40 [label="always"];
-  n41 [label="walk_towards"];
-  n42 [label="block_high"];
+  n16 [label="and"];
+  n16 [label="and"];
+  n17 [label="or"];
+  n17 [label="or"];
+  n18 [label="far"];
+  n19 [label="near"];
+  n20 [label="much_stronger"];
+  n21 [label="run_towards"];
+  n22 [label="punch_high"];
+  n23 [label="RULE"];
+  n23 [label="RULE"];
+  n24 [label="or"];
+  n24 [label="or"];
+  n25 [label="near"];
+  n26 [label="far"];
+  n27 [label="choose"];
+  n27 [label="choose"];
+  n28 [label="stand"];
+  n29 [label="crouch"];
+  n30 [label="kick_high"];
+  n31 [label="RULE"];
+  n31 [label="RULE"];
+  n32 [label="much_stronger"];
+  n33 [label="walk_towards"];
+  n34 [label="punch_low"];
+  n35 [label="RULE"];
+  n35 [label="RULE"];
+  n36 [label="weaker"];
+  n37 [label="run_away"];
+  n38 [label="choose"];
+  n38 [label="choose"];
+  n39 [label="block_high"];
+  n40 [label="block_low"];
+  n41 [label="RULE"];
+  n41 [label="RULE"];
+  n42 [label="always"];
+  n43 [label="walk_towards"];
+  n44 [label="block_high"];
 
   n0 -> n1 // "JackieChan" -> "PERSONALITY"
   n1 -> n2 // "PERSONALITY" -> "CHARACTERISTIC"
@@ -80,32 +83,34 @@ digraph {
   n11 -> n13 // "CHARACTERISTIC" -> "9"
   n0 -> n14 // "JackieChan" -> "BEHAVIOUR"
   n14 -> n15 // "BEHAVIOUR" -> "RULE"
-  n15 -> n16 // "RULE" -> "or"
-  n16 -> n17 // "or" -> "far"
-  n16 -> n18 // "or" -> "near"
-  n15 -> n19 // "RULE" -> "run_towards"
-  n15 -> n20 // "RULE" -> "punch_high"
-  n14 -> n21 // "BEHAVIOUR" -> "RULE"
-  n21 -> n22 // "RULE" -> "or"
-  n22 -> n23 // "or" -> "near"
-  n22 -> n24 // "or" -> "far"
-  n21 -> n25 // "RULE" -> "choose"
-  n25 -> n26 // "choose" -> "stand"
-  n25 -> n27 // "choose" -> "crouch"
-  n21 -> n28 // "RULE" -> "kick_high"
-  n14 -> n29 // "BEHAVIOUR" -> "RULE"
-  n29 -> n30 // "RULE" -> "much_stronger"
-  n29 -> n31 // "RULE" -> "walk_towards"
-  n29 -> n32 // "RULE" -> "punch_low"
-  n14 -> n33 // "BEHAVIOUR" -> "RULE"
-  n33 -> n34 // "RULE" -> "weaker"
-  n33 -> n35 // "RULE" -> "run_away"
-  n33 -> n36 // "RULE" -> "choose"
-  n36 -> n37 // "choose" -> "block_high"
-  n36 -> n38 // "choose" -> "block_low"
-  n14 -> n39 // "BEHAVIOUR" -> "RULE"
-  n39 -> n40 // "RULE" -> "always"
-  n39 -> n41 // "RULE" -> "walk_towards"
-  n39 -> n42 // "RULE" -> "block_high"
+  n15 -> n16 // "RULE" -> "and"
+  n16 -> n17 // "and" -> "or"
+  n17 -> n18 // "or" -> "far"
+  n17 -> n19 // "or" -> "near"
+  n16 -> n20 // "and" -> "much_stronger"
+  n15 -> n21 // "RULE" -> "run_towards"
+  n15 -> n22 // "RULE" -> "punch_high"
+  n14 -> n23 // "BEHAVIOUR" -> "RULE"
+  n23 -> n24 // "RULE" -> "or"
+  n24 -> n25 // "or" -> "near"
+  n24 -> n26 // "or" -> "far"
+  n23 -> n27 // "RULE" -> "choose"
+  n27 -> n28 // "choose" -> "stand"
+  n27 -> n29 // "choose" -> "crouch"
+  n23 -> n30 // "RULE" -> "kick_high"
+  n14 -> n31 // "BEHAVIOUR" -> "RULE"
+  n31 -> n32 // "RULE" -> "much_stronger"
+  n31 -> n33 // "RULE" -> "walk_towards"
+  n31 -> n34 // "RULE" -> "punch_low"
+  n14 -> n35 // "BEHAVIOUR" -> "RULE"
+  n35 -> n36 // "RULE" -> "weaker"
+  n35 -> n37 // "RULE" -> "run_away"
+  n35 -> n38 // "RULE" -> "choose"
+  n38 -> n39 // "choose" -> "block_high"
+  n38 -> n40 // "choose" -> "block_low"
+  n14 -> n41 // "BEHAVIOUR" -> "RULE"
+  n41 -> n42 // "RULE" -> "always"
+  n41 -> n43 // "RULE" -> "walk_towards"
+  n41 -> n44 // "RULE" -> "block_high"
 
 }
