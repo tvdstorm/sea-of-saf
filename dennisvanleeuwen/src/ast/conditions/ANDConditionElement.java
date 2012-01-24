@@ -17,11 +17,27 @@ public class ANDConditionElement implements IConditionElement{
 //		return this.condition1.isConditionValid() && this.condition2.isConditionValid();
 //	}
 	
+	public IConditionElement getFirstCondition() {
+		return this.condition1;
+	}
+
+	public void setFirstCondition(IConditionElement condition) {
+		this.condition1 = condition;
+	}
+
+	public IConditionElement getSecondCondition() {
+		return this.condition2;
+	}
+
+	public void setSecondCondition(IConditionElement condition) {
+		this.condition2 = condition;
+	}
+
 	@Override
-	public void accept(ISAFElementVisitor visitor)  throws Exception{
-		condition1.accept(visitor);
-		condition2.accept(visitor);
+	public void accept(ISAFElementVisitor visitor){
 		visitor.visit(this);		
+		condition1.accept(visitor);
+		condition2.accept(visitor);		
 	}
 }
 

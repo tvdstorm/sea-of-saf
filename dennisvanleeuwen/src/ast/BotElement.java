@@ -24,11 +24,10 @@ public class BotElement implements ISAFElement{
 		this.name = name;
 	}
 
-	/* TODO iterator??? */
 	public List<CharacteristicElement> getCharacteristicElements() {
 		return this.characteristicElements;
 	}
-	/* TODO iterator??? */
+
 	public List<RuleElement> getRules() {
 		return this.ruleElements;
 	}
@@ -42,7 +41,7 @@ public class BotElement implements ISAFElement{
 	}
 
 	@Override
-	public void accept(ISAFElementVisitor visitor) throws Exception{
+	public void accept(ISAFElementVisitor visitor){
 		visitor.visit(this);
 		for(CharacteristicElement characteristic: this.characteristicElements)
 			characteristic.accept(visitor);

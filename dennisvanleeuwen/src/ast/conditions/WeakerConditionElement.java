@@ -4,9 +4,8 @@ import saf.ISAFElementVisitor;
 import ast.IConditionElement;
 
 public class WeakerConditionElement implements IConditionElement{
-
 	@Override
-	public void accept(ISAFElementVisitor visitor) throws Exception {
+	public void accept(ISAFElementVisitor visitor){
 		visitor.visit(this);
 	}
 }

@@ -30,7 +30,7 @@ public class RuleElement implements ISAFElement {
 	}
 	
 	@Override
-	public void accept(ISAFElementVisitor visitor) throws Exception {
+	public void accept(ISAFElementVisitor visitor){
 		visitor.visit(this);
 		this.condition.accept(visitor);
 		this.moveAction.accept(visitor);

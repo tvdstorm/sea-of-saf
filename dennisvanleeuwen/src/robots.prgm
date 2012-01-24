@@ -19,5 +19,5 @@ JackieChan
 	far[run_towards punch_high]
 	much_stronger[walk_towards punch_low]
 	weaker and always[run_away choose(block_high block_low)]
-	always[walk_towards block_high]
+	always [walk_towards block_high]
 }

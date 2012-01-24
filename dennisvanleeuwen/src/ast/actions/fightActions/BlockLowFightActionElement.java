@@ -1,12 +1,11 @@
 package ast.actions.fightActions;
 
 import saf.ISAFElementVisitor;
-import ast.IFightActionElement;
+import ast.actions.IFightActionElement;
 
 public class BlockLowFightActionElement implements IFightActionElement{
-
 	@Override
-	public void accept(ISAFElementVisitor visitor)  throws Exception{
+	public void accept(ISAFElementVisitor visitor){
 		visitor.visit(this);
 	}
 }
