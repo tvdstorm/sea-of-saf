@@ -28,7 +28,7 @@ personality
 	;
 
 characteristic
-	:	(ATTRIBUTE^ EQUALS! ONEDIGIT)
+	:	(ATTRIBUTE EQUALS ONEDIGIT) -> ^(CHARACTERISTIC ATTRIBUTE ONEDIGIT)
 	;
 	
 behaviour
@@ -41,7 +41,8 @@ rule
 			LEFT_BRACKET!
 				(MOVEACTIONTYPE | chooseMoveActionType) (FIGHTACTIONTYPE | chooseFightActionType)
 			RIGHT_BRACKET!
-		)
+			)
+			
 	;
 	
 chooseFightActionType
@@ -62,6 +63,8 @@ chooseMoveActionType
 LOGICAL : ('and' | 'or');
 PERSONALITY : 'Personality' ;
 BEHAVIOUR : 'Behaviour' ;
+CHARACTERISTIC : 'Characteristic';
+RULE : 'Rule';
 FIGHTACTIONTYPE : ('block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high') ;
 MOVEACTIONTYPE : ('walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand') ;
 CONDITIONTYPE : ('always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker') ;
