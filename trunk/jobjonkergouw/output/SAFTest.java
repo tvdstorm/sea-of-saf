@@ -18,7 +18,6 @@ public class SAFTest {
         }
     }
 
-
     public static void main(String[] args) throws Exception {
         String src = "chicken {" + 
                      "kickReach  = 9" + 
@@ -35,7 +34,11 @@ public class SAFTest {
         //DOTTreeGenerator gen = new DOTTreeGenerator();
         //StringTemplate st = gen.toDOT(tree);
         //System.out.println(st);
-        printTree(tree, 4);
+        //printTree(tree, 4);
+        //
+        FighterExtractor fighter = new FighterExtractor((CommonTree)tree);
+        fighter.extractTree();
+        fighter.print();
     }
     
     

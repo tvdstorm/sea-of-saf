@@ -1,16 +1,32 @@
 import java.io.*;
-
+/**
+ * This class contains all properties of a behaviour rule of a fighter bot
+ **/
 public class BehaviourRule {
+//////////// interface ///////////////    
     void print() {
-        System.out.print("If " + condition1 + " ");
+        // print condition
+        System.out.print(condition1 + " ");
         if (!logicalOperator.isEmpty()) {
             System.out.print(logicalOperator + " " + condition2 + " ");
         }
-        
-        System.out.println("-> ");
+        System.out.print("-> ");
+        // print move actions
+        if (!moveAction2.isEmpty()) {
+            System.out.print("move = (" + moveAction1 + " or " + moveAction2 + "), ");
+        } else {
+            System.out.print("move = " + moveAction1 + ", ");
+        }
+        // print fight actions
+        if (!fightAction2.isEmpty()) {
+            System.out.print("fight = (" + fightAction1 + " or " + fightAction2 + ")");
+        } else {
+            System.out.print("fight = " + fightAction1 + "");
+        }
+        System.out.print("\n");
     }
     
-    
+//////////// constructor ///////////////    
     BehaviourRule (String c1, String c2, String lo, String m1, String m2, String f1, String f2) {
             condition1 = c1;
             condition2 = c2;
@@ -22,7 +38,8 @@ public class BehaviourRule {
             fightAction1 = f1;
             fightAction2 = f2;               
     }
-    
+
+//////////// variables ///////////////   
     private String condition1;
     private String condition2;
     private String logicalOperator;

@@ -1,10 +1,13 @@
 import java.io.*;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * This class contains all properties of a fighter bot
+ **/
 public class Fighter {
-
-    // interface
+/////////////// interface ///////////////
     public void print() {
         System.out.println("Fighter " + name);
         System.out.println("---------------------");
@@ -20,32 +23,39 @@ public class Fighter {
         }
     }
     
-    // getters & setters
-    public int GetPunchReach () {
+/////////////// getters & setters ///////////////
+    public String getName () {
+        return name;
+    }
+    public void setName (String n) {
+        name = n;
+    }
+    
+    public int getPunchReach () {
         return punchReach;
     } 
-    public void SetPunchReach (int reach) {
+    public void setPunchReach (int reach) {
         punchReach = reach;
     }  
     
-    public int GetPunchPower () {
+    public int getPunchPower () {
         return punchPower;
     }
-    public void SetPunchPower (int power) {
+    public void setPunchPower (int power) {
         punchPower = power;
     }
     
-    public int GetKickReach () {
+    public int getKickReach () {
         return kickReach;
     }
-    public void SetKickReach (int reach) {
+    public void setKickReach (int reach) {
         kickReach = reach;
     }
     
-    public int GetKickPower () {
+    public int getKickPower () {
         return kickPower;
     }
-    public void SetKickPower (int power) {
+    public void setKickPower (int power) {
         kickPower = power;
     }
     
@@ -54,18 +64,19 @@ public class Fighter {
         rules.add(new BehaviourRule(c1, c2, lo, m1, m2, f1, f2));              
     }
     
-    // constructor
+//////////// constructor ///////////////    
     Fighter () {
         punchReach = 0;
         punchPower = 0;
         kickReach = 0;
         kickPower = 0;
         
-        //rules = new List<BehaviourRule>();
+        rules = new ArrayList<BehaviourRule>();
     }
-    
+
+//////////// variables ///////////////    
     List<BehaviourRule> rules;
-    
+   
     private String name;
     private int punchReach;
     private int punchPower;
