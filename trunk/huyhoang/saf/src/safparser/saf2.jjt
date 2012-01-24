@@ -4,14 +4,14 @@
   static = false;}PARSER_BEGIN(saf)
 package safparser; 
 
-public class saf {  public static void main(String args [])  {    System.out.println("Reading from standard input...");
+public class saf {  public static void main(String args [])  {     System.out.println("Reading from standard input...");
     System.out.print("Enter a SAF specification: ");
 	saf generatedParser = new saf(System.in);
     try    {      SimpleNode n = generatedParser.Start();      n.dump("");
     }    catch (Exception e)    {      System.out.println("Oops.");      System.out.println(e.getMessage());	}
-  }}PARSER_END(saf)SKIP :{  " "| "\t"| "\n"| "\r"| < "//" (~[ "\n", "\r" ])*    (      "\n"    | "\r"    | "\r\n"    ) >| < "/*" (~[ "*" ])* "*"    (      ~[ "/" ] (~[ "*" ])* "*"    )*    "/" >}
+  }}PARSER_END(saf)SKIP :{  " "| "\t"| "\n"| "\r"}
 
-TOKEN :
+TOKEN :	/* SAF */
 {
 	< CHOOSE : "choose" >
 | 	< CONDITION : "stronger" | "weaker" | "much_stronger" | "much_weaker" | "even" | "near" | "far" | "always" >
@@ -19,7 +19,7 @@ TOKEN :
 |  	< STRENGTH : "punchReach" | "kickReach" | "kickPower" | "punchPower" >
 | 	< ATTACK : "punch_low" | "punch_high" | "kick_low" | "kick_high" | "block_low" | "block_high" >
 | 	< CONNECTIVE : "and" | "or" >
-}TOKEN : /* LITERALS */{  < INTEGER_LITERAL : ["1"-"9"] | "10" >
+}TOKEN : /* LITERALS */{  < INTEGER_LITERAL : (["0"-"9"])+ >
 }TOKEN : /* IDENTIFIERS */{  < IDENTIFIER :    < LETTER >    (      < LETTER >    | < DIGIT >    )* >| < #LETTER : [ "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >
 }
 SimpleNode Start() :{}{
