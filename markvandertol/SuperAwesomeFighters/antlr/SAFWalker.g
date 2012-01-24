@@ -14,10 +14,9 @@ options {
 }
 
 @members {
-	private Bot bot = new Bot();
+	private BotDefinition bot = new BotDefinition();
 	
 	private List<String> errorList;
-	private BehaviourRule behaviourRule;
 	private Stack<Condition> conditions = new Stack<Condition>();
 	
 	public void setErrorList(List<String> errorList) {
@@ -29,13 +28,12 @@ options {
 		errorList.add("Walker error: " + msg);
 	}
 	
-	public Bot getBot() {
+	public BotDefinition getBotDefinition() {
 		return bot;
 	}
 	
-	private void createAction(String move, String attack) {
-		
-		behaviourRule = new BehaviourRule();
+	private void createAction(String move, String attack) {	
+		BehaviourRule behaviourRule = new BehaviourRule();
 		try {
 			MoveAction moveAction = MoveAction.valueOf(move);
 			behaviourRule.setMoveAction(moveAction);

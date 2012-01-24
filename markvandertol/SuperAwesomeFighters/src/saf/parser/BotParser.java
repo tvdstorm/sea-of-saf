@@ -13,7 +13,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 
-import saf.entities.Bot;
+import saf.entities.BotDefinition;
 
 public class BotParser {
 
@@ -24,11 +24,11 @@ public class BotParser {
 	 * @throws IOException error while reading file
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	public Bot parseBot(String path) throws IOException, BotDefinitionMalformedException {
+	public BotDefinition parseBotDefinition(String path) throws IOException, BotDefinitionMalformedException {
 		FileInputStream stream = null;
 		try {
 			stream = new FileInputStream(path);
-			return parseBot(stream);
+			return parseBotDefinition(stream);
 		} finally {
 			if (stream != null)
 				stream.close();
@@ -42,7 +42,7 @@ public class BotParser {
 	 * @throws IOException error while reading file
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	public Bot parseBot(InputStream stream) throws IOException, BotDefinitionMalformedException {		
+	public BotDefinition parseBotDefinition(InputStream stream) throws IOException, BotDefinitionMalformedException {		
 		ANTLRInputStream input = new ANTLRInputStream(stream);
 
 		List<String> errorList = new ArrayList<String>();
@@ -82,7 +82,7 @@ public class BotParser {
 			throw new BotDefinitionMalformedException("Errors during walking.", errorList);
 		}
 		
-		Bot bot = walker.getBot();
+		BotDefinition bot = walker.getBotDefinition();
 		
 		bot.validate(errorList);
 		if (!errorList.isEmpty()) {

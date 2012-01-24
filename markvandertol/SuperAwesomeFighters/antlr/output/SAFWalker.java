@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g 2012-01-23 15:53:04
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g 2012-01-24 15:31:50
 
 	package saf.parser;
 	
@@ -57,10 +57,9 @@ public class SAFWalker extends TreeParser {
     public String getGrammarFileName() { return "C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g"; }
 
 
-    	private Bot bot = new Bot();
+    	private BotDefinition bot = new BotDefinition();
     	
     	private List<String> errorList;
-    	private BehaviourRule behaviourRule;
     	private Stack<Condition> conditions = new Stack<Condition>();
     	
     	public void setErrorList(List<String> errorList) {
@@ -72,13 +71,12 @@ public class SAFWalker extends TreeParser {
     		errorList.add("Walker error: " + msg);
     	}
     	
-    	public Bot getBot() {
+    	public BotDefinition getBotDefinition() {
     		return bot;
     	}
     	
-    	private void createAction(String move, String attack) {
-    		
-    		behaviourRule = new BehaviourRule();
+    	private void createAction(String move, String attack) {	
+    		BehaviourRule behaviourRule = new BehaviourRule();
     		try {
     			MoveAction moveAction = MoveAction.valueOf(move);
     			behaviourRule.setMoveAction(moveAction);
@@ -128,20 +126,20 @@ public class SAFWalker extends TreeParser {
 
 
     // $ANTLR start "prog"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:1: prog : ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* ) ;
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:1: prog : ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* ) ;
     public final void prog() throws RecognitionException {
         CommonTree name=null;
 
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:7: ( ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* ) )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:9: ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:7: ( ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:9: ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* )
             {
             match(input,PROGRAM,FOLLOW_PROGRAM_in_prog44); 
 
             match(input, Token.DOWN, null); 
             name=(CommonTree)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_prog48); 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:35: ( assignment )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:35: ( assignment )*
             loop1:
             do {
                 int alt1=2;
@@ -154,7 +152,7 @@ public class SAFWalker extends TreeParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:35: assignment
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:35: assignment
             	    {
             	    pushFollow(FOLLOW_assignment_in_prog50);
             	    assignment();
@@ -171,7 +169,7 @@ public class SAFWalker extends TreeParser {
             } while (true);
 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:47: ( action )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:47: ( action )*
             loop2:
             do {
                 int alt2=2;
@@ -184,7 +182,7 @@ public class SAFWalker extends TreeParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:47: action
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:47: action
             	    {
             	    pushFollow(FOLLOW_action_in_prog53);
             	    action();
@@ -224,14 +222,14 @@ public class SAFWalker extends TreeParser {
 
 
     // $ANTLR start "assignment"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:89:1: assignment : ^( ASSIGNMENT key= IDENTIFIER value= DIGIT ) ;
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:87:1: assignment : ^( ASSIGNMENT key= IDENTIFIER value= DIGIT ) ;
     public final void assignment() throws RecognitionException {
         CommonTree key=null;
         CommonTree value=null;
 
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:90:2: ( ^( ASSIGNMENT key= IDENTIFIER value= DIGIT ) )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:90:4: ^( ASSIGNMENT key= IDENTIFIER value= DIGIT )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:88:2: ( ^( ASSIGNMENT key= IDENTIFIER value= DIGIT ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:88:4: ^( ASSIGNMENT key= IDENTIFIER value= DIGIT )
             {
             match(input,ASSIGNMENT,FOLLOW_ASSIGNMENT_in_assignment67); 
 
@@ -263,14 +261,14 @@ public class SAFWalker extends TreeParser {
 
 
     // $ANTLR start "action"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:92:1: action : ^( ACTION condition move= IDENTIFIER attack= IDENTIFIER ) ;
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:90:1: action : ^( ACTION condition move= IDENTIFIER attack= IDENTIFIER ) ;
     public final void action() throws RecognitionException {
         CommonTree move=null;
         CommonTree attack=null;
 
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:92:9: ( ^( ACTION condition move= IDENTIFIER attack= IDENTIFIER ) )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:92:11: ^( ACTION condition move= IDENTIFIER attack= IDENTIFIER )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:90:9: ( ^( ACTION condition move= IDENTIFIER attack= IDENTIFIER ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:90:11: ^( ACTION condition move= IDENTIFIER attack= IDENTIFIER )
             {
             match(input,ACTION,FOLLOW_ACTION_in_action88); 
 
@@ -308,7 +306,7 @@ public class SAFWalker extends TreeParser {
 
 
     // $ANTLR start "condition"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:94:1: condition : ( ^( CONDITION c= condition ) | ^( CONDITION c2= IDENTIFIER ) | ^( CONDITION c3= IDENTIFIER op= operator condition ) );
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:92:1: condition : ( ^( CONDITION c= condition ) | ^( CONDITION c2= IDENTIFIER ) | ^( CONDITION c3= IDENTIFIER op= operator condition ) );
     public final void condition() throws RecognitionException {
         CommonTree c2=null;
         CommonTree c3=null;
@@ -316,7 +314,7 @@ public class SAFWalker extends TreeParser {
 
 
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:95:2: ( ^( CONDITION c= condition ) | ^( CONDITION c2= IDENTIFIER ) | ^( CONDITION c3= IDENTIFIER op= operator condition ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:93:2: ( ^( CONDITION c= condition ) | ^( CONDITION c2= IDENTIFIER ) | ^( CONDITION c3= IDENTIFIER op= operator condition ) )
             int alt3=3;
             int LA3_0 = input.LA(1);
 
@@ -371,7 +369,7 @@ public class SAFWalker extends TreeParser {
             }
             switch (alt3) {
                 case 1 :
-                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:95:4: ^( CONDITION c= condition )
+                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:93:4: ^( CONDITION c= condition )
                     {
                     match(input,CONDITION,FOLLOW_CONDITION_in_condition112); 
 
@@ -390,7 +388,7 @@ public class SAFWalker extends TreeParser {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:96:4: ^( CONDITION c2= IDENTIFIER )
+                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:94:4: ^( CONDITION c2= IDENTIFIER )
                     {
                     match(input,CONDITION,FOLLOW_CONDITION_in_condition125); 
 
@@ -405,7 +403,7 @@ public class SAFWalker extends TreeParser {
                     }
                     break;
                 case 3 :
-                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:97:4: ^( CONDITION c3= IDENTIFIER op= operator condition )
+                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:95:4: ^( CONDITION c3= IDENTIFIER op= operator condition )
                     {
                     match(input,CONDITION,FOLLOW_CONDITION_in_condition138); 
 
@@ -452,14 +450,14 @@ public class SAFWalker extends TreeParser {
 
 
     // $ANTLR start "operator"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:99:1: operator : ( 'and' | 'or' ) ;
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:97:1: operator : ( 'and' | 'or' ) ;
     public final SAFWalker.operator_return operator() throws RecognitionException {
         SAFWalker.operator_return retval = new SAFWalker.operator_return();
         retval.start = input.LT(1);
 
 
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:100:2: ( ( 'and' | 'or' ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:98:2: ( ( 'and' | 'or' ) )
             // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:
             {
             if ( (input.LA(1) >= 17 && input.LA(1) <= 18) ) {
