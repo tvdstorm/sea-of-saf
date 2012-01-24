@@ -7,10 +7,13 @@ options
   JDK_VERSION = "1.5";
   STATIC = false;
                
+  DEBUG_TOKEN_MANAGER = false;
                
 }
 
 PARSER_BEGIN(FighterGrammar)
+
+import visitor.*;
 
 public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstants/*@egen*/
 {/*@bgen(jjtree)*/
@@ -40,9 +43,8 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
       return;
     }
     try {
-  		SimpleNode sn = parser.parseFighterBasics();
-		FighterVisitor fv = new FighterVisitor();
-		sn.jjtAccept(fv, null);
+  		Fighter f = parser.parseFighter();
+  		f.accept(new FighterDumper());
       
     } catch (ParseException e) {
       System.out.println("Encountered errors during while parsing this fighter." + e.getMessage());
@@ -80,22 +82,24 @@ TOKEN : /* Basic types */
 | 	<  #CHARACTER 			: [ "a"-"z", "A" - "Z", "_"] >
 
 }
+
  
-SimpleNode parseFighterBasics()             : 
+Fighter parseFighter()             : 
 {/*@bgen(jjtree) FighterNode */
   ASTFighterNode jjtn000 = new ASTFighterNode(JJTFIGHTERNODE);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/
+  Fighter.Options o;
 }{/*@bgen(jjtree) FighterNode */
    try {
 /*@egen*/ 
-   parseFighterStructure()/*@bgen(jjtree)*/
+   o=parseFighterStructure()/*@bgen(jjtree)*/
    {
      jjtree.closeNodeScope(jjtn000, true);
      jjtc000 = false;
    }
-/*@egen*/   {		return jjtn000;
+/*@egen*/   {		return new Fighter(o);
    }/*@bgen(jjtree)*/
    } catch (Throwable jjte000) {
      if (jjtc000) {
@@ -119,22 +123,27 @@ SimpleNode parseFighterBasics()             :
 /*@egen*/
 }
 
-void parseFighterStructure()          :
+Fighter.Options parseFighterStructure()          :
 {/*@bgen(jjtree) Fighter */
-  ASTFighter jjtn000 = new ASTFighter(JJTFIGHTER);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+        ASTFighter jjtn000 = new ASTFighter(JJTFIGHTER);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
 /*@egen*/
+  	Fighter.Options fo = new Fighter.Options();
+  	Fighter.FighterElement f;
 }
 {/*@bgen(jjtree) Fighter */
    try {
 /*@egen*/
    Identifier()
    < STARTBRACE >
- 		fighterOptions()
    		(
-   		  fighterOptions()
+   		  f = fighterOptions()
+   		  {			fo.addElement(f);
+   		  }
    		)*
+   		{			return fo;
+   		}
    < ENDBRACE >/*@bgen(jjtree)*/
    } catch (Throwable jjte000) {
      if (jjtc000) {
@@ -158,27 +167,42 @@ void parseFighterStructure()          :
 /*@egen*/
 }
 
-void fighterOptions()      :
+Fighter.FighterElement fighterOptions()      :
 {
+  	Fighter.FighterElement fe;
 }
 {
   LOOKAHEAD(2) //Required because both start with an identifier
-  fighterPersonalityRule() | fighterCharacteristicsRule()
+  fe = fighterPersonalityRule() {	return fe;
+  }
+  |
+  fe = fighterCharacteristicsRule() {
+    return fe;
+  }
 }
 
-void fighterPersonalityRule()                     :
+Fighter.Personality fighterPersonalityRule()                     :
 {/*@bgen(jjtree) FighterPersonality */
-  ASTFighterPersonality jjtn000 = new ASTFighterPersonality(JJTFIGHTERPERSONALITY);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+        ASTFighterPersonality jjtn000 = new ASTFighterPersonality(JJTFIGHTERPERSONALITY);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
 /*@egen*/
+  	Fighter.Identifier i1;
+  	Fighter.Identifier i2;
 }
 {/*@bgen(jjtree) FighterPersonality */
         try {
 /*@egen*/
-  	Identifier()
-  	Assignment()
-  	CharacteristicValue()/*@bgen(jjtree)*/
+  	(	  	i1 = Identifier()
+		Assignment()
+		i2 = CharacteristicValue()
+	)/*@bgen(jjtree)*/
+        {
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+        }
+/*@egen*/	{
+	  	return new Fighter.Personality(i1, i2);	}/*@bgen(jjtree)*/
         } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -198,20 +222,23 @@ void fighterPersonalityRule()                     :
             jjtree.closeNodeScope(jjtn000, true);
           }
         }
-/*@egen*/
+/*@egen*/  
 }
 
-void fighterCharacteristicsRule()                        :
-{/*@bgen(jjtree) FighterCharactaristic */
-  ASTFighterCharactaristic jjtn000 = new ASTFighterCharactaristic(JJTFIGHTERCHARACTARISTIC);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+Fighter.Identifier fighterCharacteristicsRule() :
+{/*@bgen(jjtree) fighterCharacteristicsRule */
+        ASTfighterCharacteristicsRule jjtn000 = new ASTfighterCharacteristicsRule(JJTFIGHTERCHARACTERISTICSRULE);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
 /*@egen*/
+  	Fighter.Identifier i;
 }
-{/*@bgen(jjtree) FighterCharactaristic */
+{/*@bgen(jjtree) fighterCharacteristicsRule */
         try {
 /*@egen*/
-	Identifier() // Todo: conditionType() 
+	i = Identifier(){
+		return i;
+	} // Todo: conditionType() 
 	< LIST_OPEN >
 	actionType()
 	actionType()
@@ -251,16 +278,23 @@ void actionType()       :
  	< CHOOSE > "(" Identifier() Identifier() ")" | Identifier()
 }
  
-void Identifier():
+Fighter.Identifier Identifier():
 {/*@bgen(jjtree) Identifier */
-  ASTIdentifier jjtn000 = new ASTIdentifier(JJTIDENTIFIER);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+        ASTIdentifier jjtn000 = new ASTIdentifier(JJTIDENTIFIER);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
+/*@egen*/
+	Token t;
+}
 {/*@bgen(jjtree) Identifier */
         try {
 /*@egen*/ 
-	< IDENTIFIER >/*@bgen(jjtree)*/
+	( t = < IDENTIFIER >)/*@bgen(jjtree)*/
+        {
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+        }
+/*@egen*/	{	return new Fighter.Identifier(t.image);	}/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -273,10 +307,12 @@ void Assignment():{/*@bgen(jjtree) Assignment */
   ASTAssignment jjtn000 = new ASTAssignment(JJTASSIGNMENT);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+/*@egen*/
+}
 {/*@bgen(jjtree) Assignment */
         try {
-/*@egen*/	< ASSIGNMENT >/*@bgen(jjtree)*/
+/*@egen*/
+	< ASSIGNMENT >/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -285,19 +321,28 @@ void Assignment():{/*@bgen(jjtree) Assignment */
 /*@egen*/
 }
 
-void CharacteristicValue()         :			
-{/*@bgen(jjtree) Number */
-  ASTNumber jjtn000 = new ASTNumber(JJTNUMBER);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Number */
+Fighter.Identifier CharacteristicValue() :			
+{/*@bgen(jjtree) CharacteristicValue */
+        ASTCharacteristicValue jjtn000 = new ASTCharacteristicValue(JJTCHARACTERISTICVALUE);
+        boolean jjtc000 = true;
+        jjtree.openNodeScope(jjtn000);
+/*@egen*/
+  	Token t;}
+{/*@bgen(jjtree) CharacteristicValue */
         try {
 /*@egen*/
-  	< NUMBER >/*@bgen(jjtree)*/
+  	(  	  t  = < NUMBER >)/*@bgen(jjtree)*/
+          {
+            jjtree.closeNodeScope(jjtn000, true);
+            jjtc000 = false;
+          }
+/*@egen*/
+  	  {		return new Fighter.Identifier(t.image);
+	}/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
           }
         }
-/*@egen*/}
+/*@egen*/
+	}
