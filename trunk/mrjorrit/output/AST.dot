@@ -23,32 +23,36 @@ digraph {
   n9 [label="9"];
   n10 [label="BEHAVIOUR"];
   n10 [label="BEHAVIOUR"];
-  n11 [label="far"];
-  n11 [label="far"];
-  n12 [label="run_towards"];
-  n13 [label="punch_high"];
-  n14 [label="near"];
-  n14 [label="near"];
-  n15 [label="choose"];
-  n15 [label="choose"];
-  n16 [label="stand"];
-  n17 [label="crouch"];
-  n18 [label="kick_high"];
-  n19 [label="much_stronger"];
-  n19 [label="much_stronger"];
-  n20 [label="walk_towards"];
-  n21 [label="punch_low"];
-  n22 [label="weaker"];
-  n22 [label="weaker"];
-  n23 [label="run_away"];
-  n24 [label="choose"];
-  n24 [label="choose"];
-  n25 [label="block_high"];
-  n26 [label="block_low"];
-  n27 [label="always"];
-  n27 [label="always"];
-  n28 [label="walk_towards"];
+  n11 [label="or"];
+  n11 [label="or"];
+  n12 [label="far"];
+  n13 [label="near"];
+  n14 [label="run_towards"];
+  n15 [label="punch_high"];
+  n16 [label="or"];
+  n16 [label="or"];
+  n17 [label="near"];
+  n18 [label="far"];
+  n19 [label="choose"];
+  n19 [label="choose"];
+  n20 [label="stand"];
+  n21 [label="crouch"];
+  n22 [label="kick_high"];
+  n23 [label="much_stronger"];
+  n23 [label="much_stronger"];
+  n24 [label="walk_towards"];
+  n25 [label="punch_low"];
+  n26 [label="weaker"];
+  n26 [label="weaker"];
+  n27 [label="run_away"];
+  n28 [label="choose"];
+  n28 [label="choose"];
   n29 [label="block_high"];
+  n30 [label="block_low"];
+  n31 [label="always"];
+  n31 [label="always"];
+  n32 [label="walk_towards"];
+  n33 [label="block_high"];
 
   n0 -> n1 // "JackieChan" -> "PERSONALITY"
   n1 -> n2 // "PERSONALITY" -> "kickPower"
@@ -60,24 +64,28 @@ digraph {
   n1 -> n8 // "PERSONALITY" -> "punchReach"
   n8 -> n9 // "punchReach" -> "9"
   n0 -> n10 // "JackieChan" -> "BEHAVIOUR"
-  n10 -> n11 // "BEHAVIOUR" -> "far"
-  n11 -> n12 // "far" -> "run_towards"
-  n11 -> n13 // "far" -> "punch_high"
-  n10 -> n14 // "BEHAVIOUR" -> "near"
-  n14 -> n15 // "near" -> "choose"
-  n15 -> n16 // "choose" -> "stand"
-  n15 -> n17 // "choose" -> "crouch"
-  n14 -> n18 // "near" -> "kick_high"
-  n10 -> n19 // "BEHAVIOUR" -> "much_stronger"
-  n19 -> n20 // "much_stronger" -> "walk_towards"
-  n19 -> n21 // "much_stronger" -> "punch_low"
-  n10 -> n22 // "BEHAVIOUR" -> "weaker"
-  n22 -> n23 // "weaker" -> "run_away"
-  n22 -> n24 // "weaker" -> "choose"
-  n24 -> n25 // "choose" -> "block_high"
-  n24 -> n26 // "choose" -> "block_low"
-  n10 -> n27 // "BEHAVIOUR" -> "always"
-  n27 -> n28 // "always" -> "walk_towards"
-  n27 -> n29 // "always" -> "block_high"
+  n10 -> n11 // "BEHAVIOUR" -> "or"
+  n11 -> n12 // "or" -> "far"
+  n11 -> n13 // "or" -> "near"
+  n11 -> n14 // "or" -> "run_towards"
+  n11 -> n15 // "or" -> "punch_high"
+  n10 -> n16 // "BEHAVIOUR" -> "or"
+  n16 -> n17 // "or" -> "near"
+  n16 -> n18 // "or" -> "far"
+  n16 -> n19 // "or" -> "choose"
+  n19 -> n20 // "choose" -> "stand"
+  n19 -> n21 // "choose" -> "crouch"
+  n16 -> n22 // "or" -> "kick_high"
+  n10 -> n23 // "BEHAVIOUR" -> "much_stronger"
+  n23 -> n24 // "much_stronger" -> "walk_towards"
+  n23 -> n25 // "much_stronger" -> "punch_low"
+  n10 -> n26 // "BEHAVIOUR" -> "weaker"
+  n26 -> n27 // "weaker" -> "run_away"
+  n26 -> n28 // "weaker" -> "choose"
+  n28 -> n29 // "choose" -> "block_high"
+  n28 -> n30 // "choose" -> "block_low"
+  n10 -> n31 // "BEHAVIOUR" -> "always"
+  n31 -> n32 // "always" -> "walk_towards"
+  n31 -> n33 // "always" -> "block_high"
 
 }
