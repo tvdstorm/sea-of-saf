@@ -1,6 +1,7 @@
 package AST;
 
 import java.util.*;
+import java.lang.StringBuilder;
 
 public class ASTManager
 {
@@ -13,5 +14,16 @@ public class ASTManager
 	public ASTManager()
 	{
 		statements = new ArrayList<Statement>();
+	}
+	
+	public String toString()
+	{
+		StringBuilder result = new StringBuilder();
+		for ( Statement statement : statements )
+		{
+			result.append(statement.toString()).append("\r\n");
+		}
+		
+		return result.toString();
 	}
 }
