@@ -6,7 +6,7 @@ import ast.IConditionElement;
 public class StrongerConditionElement implements IConditionElement{
 	
 	@Override
-	public void accept(ISAFElementVisitor visitor) throws Exception {
+	public void accept(ISAFElementVisitor visitor) {
 		visitor.visit(this);
 	}
 }

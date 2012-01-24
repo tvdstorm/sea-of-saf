@@ -20,9 +20,9 @@ public class ChooseActionElement implements IActionElement{
 	}
 
 	@Override
-	public void accept(ISAFElementVisitor visitor)  throws Exception{
+	public void accept(ISAFElementVisitor visitor){
+		visitor.visit(this);
 		for(IActionElement action: this.actions)
-			action.accept(visitor);
-		visitor.visit(this);		
+			action.accept(visitor);		
 	}
 }

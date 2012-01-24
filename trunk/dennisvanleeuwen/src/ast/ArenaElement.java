@@ -22,7 +22,7 @@ public class ArenaElement implements ISAFElement{
 	}	
 	
 	@Override
-	public void accept(ISAFElementVisitor visitor) throws Exception{
+	public void accept(ISAFElementVisitor visitor){
 		visitor.visit(this);		
 		for(BotElement bot: this.bots)
 			bot.accept(visitor);
