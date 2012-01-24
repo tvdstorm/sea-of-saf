@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileFilter;
 import saf.Arena;
 
 public class MainView extends JFrame {
+	private static final String TITLE = "Super Awesome Fighters";
 	private static final long serialVersionUID = -6777082252189246561L;
 	private final Fighter[] fighters = new Fighter[2];
 	
@@ -36,10 +37,10 @@ public class MainView extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		setTitle("Super Awesome Fighters");
+		setTitle(TITLE);
 		setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 		
-		JLabel title = new JLabel("Super Awesome Fighters");
+		JLabel title = new JLabel(TITLE);
 		title.setAlignmentX(0.5f);
 		title.setFont(new Font("Arial", Font.BOLD, 24));
 		add(title);
@@ -171,14 +172,13 @@ public class MainView extends JFrame {
 				}
 				
 				private String getExtension(File f) {
-			        String ext = null;
-			        String s = f.getName();
-			        int i = s.lastIndexOf('.');
+			        String name = f.getName();
+			        int i = name.lastIndexOf('.');
 
-			        if (i > 0 &&  i < s.length() - 1) {
-			            ext = s.substring(i+1).toLowerCase();
-			        }
-			        return ext;
+			        if (i > 0 &&  i < name.length() - 1)
+			            return name.substring(i+1);
+			        
+			        return null;
 			    }
 			});
 			if (fc.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
@@ -187,7 +187,7 @@ public class MainView extends JFrame {
 				if (result == null)
 					updateView();
 				else
-					JOptionPane.showMessageDialog(parent, result, "SAF", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(parent, result, TITLE, JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}

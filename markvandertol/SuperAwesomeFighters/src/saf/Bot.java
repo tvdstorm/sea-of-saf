@@ -39,7 +39,7 @@ public class Bot {
 	}
 	
 	public float getSpeed() {
-		return (getHeight() - getWeight()) / 2.0f;
+		return Math.max(getHeight() - getWeight() / 2.0f, 0.2f);
 	}
 	
 	public void setWinner(boolean winner) {

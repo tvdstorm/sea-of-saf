@@ -13,7 +13,6 @@ import javax.swing.JComponent;
 import saf.Arena;
 import saf.Bot;
 import saf.entities.FightAction;
-import saf.entities.State;
 
 public class Fighter extends JComponent {
 	private static final long serialVersionUID = 3245956395796360708L;
@@ -21,21 +20,21 @@ public class Fighter extends JComponent {
 	private final int fighterIndex;
 	private final Arena arena;
 	
-	private final int Width = 250;
-	private final int Height = 300;
+	private final int width = 250;
+	private final int height = 300;
 	
 	public Fighter(Arena arena, int index) {
 		this.fighterIndex = index;
 		this.arena = arena;
 		
-		setPreferredSize(new Dimension(Width, Height));
+		setPreferredSize(new Dimension(width, height));
 	}
 	
 	@Override
 	protected void paintComponent(Graphics g) {
 		Graphics2D graphics = (Graphics2D)g;
 		graphics.setColor(Color.white);
-		graphics.fillRect(0, 0, Width, Height);
+		graphics.fillRect(0, 0, width, height);
 		
 		Bot bot = arena.getBot(fighterIndex);
 		if (bot == null)
