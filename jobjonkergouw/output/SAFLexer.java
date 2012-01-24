@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/job/Programming/svn-sc/SAFlexer.g 2012-01-23 09:54:13
+// $ANTLR 3.4 /Users/job/Programming/svn-sc/SAFLexer.g 2012-01-24 00:51:54
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked"})
-public class SAFlexer extends Lexer {
+public class SAFLexer extends Lexer {
     public static final int EOF=-1;
     public static final int ASSIGN=4;
     public static final int ATTACK_TYPE=5;
@@ -32,22 +32,22 @@ public class SAFlexer extends Lexer {
         return new Lexer[] {};
     }
 
-    public SAFlexer() {} 
-    public SAFlexer(CharStream input) {
+    public SAFLexer() {} 
+    public SAFLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
-    public SAFlexer(CharStream input, RecognizerSharedState state) {
+    public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "/Users/job/Programming/svn-sc/SAFlexer.g"; }
+    public String getGrammarFileName() { return "/Users/job/Programming/svn-sc/SAFLexer.g"; }
 
     // $ANTLR start "LEFT_BRACE"
     public final void mLEFT_BRACE() throws RecognitionException {
         try {
             int _type = LEFT_BRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:4:13: ( '{' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:4:15: '{'
+            // /Users/job/Programming/svn-sc/SAFLexer.g:6:13: ( '{' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:6:15: '{'
             {
             match('{'); 
 
@@ -67,8 +67,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = RIGHT_BRACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:5:14: ( '}' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:5:16: '}'
+            // /Users/job/Programming/svn-sc/SAFLexer.g:7:14: ( '}' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:7:16: '}'
             {
             match('}'); 
 
@@ -88,8 +88,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = LEFT_BRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:6:14: ( '[' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:6:16: '['
+            // /Users/job/Programming/svn-sc/SAFLexer.g:8:14: ( '[' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:8:16: '['
             {
             match('['); 
 
@@ -109,8 +109,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = RIGHT_BRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:7:15: ( ']' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:7:17: ']'
+            // /Users/job/Programming/svn-sc/SAFLexer.g:9:15: ( ']' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:9:17: ']'
             {
             match(']'); 
 
@@ -130,8 +130,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = LEFT_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:8:13: ( '(' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:8:15: '('
+            // /Users/job/Programming/svn-sc/SAFLexer.g:10:13: ( '(' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:10:15: '('
             {
             match('('); 
 
@@ -151,8 +151,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = RIGHT_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:9:14: ( ')' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:9:16: ')'
+            // /Users/job/Programming/svn-sc/SAFLexer.g:11:14: ( ')' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:11:16: ')'
             {
             match(')'); 
 
@@ -172,8 +172,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = ASSIGN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:10:10: ( '=' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:10:12: '='
+            // /Users/job/Programming/svn-sc/SAFLexer.g:12:10: ( '=' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:12:12: '='
             {
             match('='); 
 
@@ -193,7 +193,7 @@ public class SAFlexer extends Lexer {
         try {
             int _type = STRENGTH;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:13:12: ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:15:12: ( 'kickPower' | 'punchPower' | 'kickReach' | 'punchReach' )
             int alt1=4;
             int LA1_0 = input.LA(1);
 
@@ -317,7 +317,7 @@ public class SAFlexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:14: 'kickPower'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:15:14: 'kickPower'
                     {
                     match("kickPower"); 
 
@@ -326,7 +326,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:28: 'punchPower'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:15:28: 'punchPower'
                     {
                     match("punchPower"); 
 
@@ -335,7 +335,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:43: 'kickReach'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:15:43: 'kickReach'
                     {
                     match("kickReach"); 
 
@@ -344,7 +344,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:13:57: 'punchReach'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:15:57: 'punchReach'
                     {
                     match("punchReach"); 
 
@@ -368,7 +368,7 @@ public class SAFlexer extends Lexer {
         try {
             int _type = ATTACK_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:14:15: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:16:15: ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high' )
             int alt2=6;
             switch ( input.LA(1) ) {
             case 'p':
@@ -592,7 +592,7 @@ public class SAFlexer extends Lexer {
 
             switch (alt2) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:17: 'punch_low'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:16:17: 'punch_low'
                     {
                     match("punch_low"); 
 
@@ -601,7 +601,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:31: 'punch_high'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:16:31: 'punch_high'
                     {
                     match("punch_high"); 
 
@@ -610,7 +610,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:46: 'kick_low'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:16:46: 'kick_low'
                     {
                     match("kick_low"); 
 
@@ -619,7 +619,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:59: 'kick_high'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:16:59: 'kick_high'
                     {
                     match("kick_high"); 
 
@@ -628,7 +628,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:73: 'block_low'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:16:73: 'block_low'
                     {
                     match("block_low"); 
 
@@ -637,7 +637,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:14:87: 'block_high'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:16:87: 'block_high'
                     {
                     match("block_high"); 
 
@@ -661,7 +661,7 @@ public class SAFlexer extends Lexer {
         try {
             int _type = MOVE_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:15:13: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:17:13: ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away' )
             int alt3=7;
             switch ( input.LA(1) ) {
             case 'j':
@@ -804,7 +804,7 @@ public class SAFlexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:15: 'jump'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:17:15: 'jump'
                     {
                     match("jump"); 
 
@@ -813,7 +813,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:24: 'crouch'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:17:24: 'crouch'
                     {
                     match("crouch"); 
 
@@ -822,7 +822,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:35: 'stand'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:17:35: 'stand'
                     {
                     match("stand"); 
 
@@ -831,7 +831,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:45: 'run_towards'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:17:45: 'run_towards'
                     {
                     match("run_towards"); 
 
@@ -840,7 +840,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:61: 'run_away'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:17:61: 'run_away'
                     {
                     match("run_away"); 
 
@@ -849,7 +849,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:74: 'walk_towards'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:17:74: 'walk_towards'
                     {
                     match("walk_towards"); 
 
@@ -858,7 +858,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:15:91: 'walk_away'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:17:91: 'walk_away'
                     {
                     match("walk_away"); 
 
@@ -882,7 +882,7 @@ public class SAFlexer extends Lexer {
         try {
             int _type = CONDITION_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:16:17: ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:18:17: ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' | 'even' | 'near' | 'far' | 'always' )
             int alt4=8;
             switch ( input.LA(1) ) {
             case 's':
@@ -988,7 +988,7 @@ public class SAFlexer extends Lexer {
 
             switch (alt4) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:19: 'stronger'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:19: 'stronger'
                     {
                     match("stronger"); 
 
@@ -997,7 +997,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:32: 'weaker'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:32: 'weaker'
                     {
                     match("weaker"); 
 
@@ -1006,7 +1006,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:43: 'much_stronger'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:43: 'much_stronger'
                     {
                     match("much_stronger"); 
 
@@ -1015,7 +1015,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:61: 'much_weaker'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:61: 'much_weaker'
                     {
                     match("much_weaker"); 
 
@@ -1024,7 +1024,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:77: 'even'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:77: 'even'
                     {
                     match("even"); 
 
@@ -1033,7 +1033,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:86: 'near'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:86: 'near'
                     {
                     match("near"); 
 
@@ -1042,7 +1042,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:95: 'far'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:95: 'far'
                     {
                     match("far"); 
 
@@ -1051,7 +1051,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:16:103: 'always'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:18:103: 'always'
                     {
                     match("always"); 
 
@@ -1075,7 +1075,7 @@ public class SAFlexer extends Lexer {
         try {
             int _type = LOGICAL_OPERATOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:17:18: ( 'or' | 'and' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:19:18: ( 'or' | 'and' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1094,7 +1094,7 @@ public class SAFlexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:17:20: 'or'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:19:20: 'or'
                     {
                     match("or"); 
 
@@ -1103,7 +1103,7 @@ public class SAFlexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:17:27: 'and'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:19:27: 'and'
                     {
                     match("and"); 
 
@@ -1127,8 +1127,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = CHOOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:18:11: ( 'choose' )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:18:13: 'choose'
+            // /Users/job/Programming/svn-sc/SAFLexer.g:20:11: ( 'choose' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:20:13: 'choose'
             {
             match("choose"); 
 
@@ -1150,7 +1150,7 @@ public class SAFlexer extends Lexer {
         try {
             int _type = DIGIT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:21:9: ( '1' .. '9' | '10' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:23:9: ( '1' .. '9' | '10' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1176,14 +1176,14 @@ public class SAFlexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:21:11: '1' .. '9'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:23:11: '1' .. '9'
                     {
                     matchRange('1','9'); 
 
                     }
                     break;
                 case 2 :
-                    // /Users/job/Programming/svn-sc/SAFlexer.g:21:22: '10'
+                    // /Users/job/Programming/svn-sc/SAFLexer.g:23:22: '10'
                     {
                     match("10"); 
 
@@ -1207,8 +1207,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:22:7: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:22:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /Users/job/Programming/svn-sc/SAFLexer.g:24:7: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:24:9: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -1220,7 +1220,7 @@ public class SAFlexer extends Lexer {
             }
 
 
-            // /Users/job/Programming/svn-sc/SAFlexer.g:22:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /Users/job/Programming/svn-sc/SAFLexer.g:24:33: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop7:
             do {
                 int alt7=2;
@@ -1233,7 +1233,7 @@ public class SAFlexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // /Users/job/Programming/svn-sc/SAFlexer.g:
+            	    // /Users/job/Programming/svn-sc/SAFLexer.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -1270,8 +1270,8 @@ public class SAFlexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:24:14: ( ( ' ' | '\\t' ) )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:24:16: ( ' ' | '\\t' )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:27:14: ( ( ' ' | '\\t' ) )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:27:16: ( ' ' | '\\t' )
             {
             if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
                 input.consume();
@@ -1301,10 +1301,10 @@ public class SAFlexer extends Lexer {
         try {
             int _type = NEWLINE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/job/Programming/svn-sc/SAFlexer.g:25:11: ( ( ( '\\r' )? '\\n' )+ )
-            // /Users/job/Programming/svn-sc/SAFlexer.g:25:13: ( ( '\\r' )? '\\n' )+
+            // /Users/job/Programming/svn-sc/SAFLexer.g:28:11: ( ( ( '\\r' )? '\\n' )+ )
+            // /Users/job/Programming/svn-sc/SAFLexer.g:28:13: ( ( '\\r' )? '\\n' )+
             {
-            // /Users/job/Programming/svn-sc/SAFlexer.g:25:13: ( ( '\\r' )? '\\n' )+
+            // /Users/job/Programming/svn-sc/SAFLexer.g:28:13: ( ( '\\r' )? '\\n' )+
             int cnt9=0;
             loop9:
             do {
@@ -1318,9 +1318,9 @@ public class SAFlexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // /Users/job/Programming/svn-sc/SAFlexer.g:25:14: ( '\\r' )? '\\n'
+            	    // /Users/job/Programming/svn-sc/SAFLexer.g:28:14: ( '\\r' )? '\\n'
             	    {
-            	    // /Users/job/Programming/svn-sc/SAFlexer.g:25:14: ( '\\r' )?
+            	    // /Users/job/Programming/svn-sc/SAFLexer.g:28:14: ( '\\r' )?
             	    int alt8=2;
             	    int LA8_0 = input.LA(1);
 
@@ -1329,7 +1329,7 @@ public class SAFlexer extends Lexer {
             	    }
             	    switch (alt8) {
             	        case 1 :
-            	            // /Users/job/Programming/svn-sc/SAFlexer.g:25:14: '\\r'
+            	            // /Users/job/Programming/svn-sc/SAFLexer.g:28:14: '\\r'
             	            {
             	            match('\r'); 
 
@@ -1368,12 +1368,12 @@ public class SAFlexer extends Lexer {
     // $ANTLR end "NEWLINE"
 
     public void mTokens() throws RecognitionException {
-        // /Users/job/Programming/svn-sc/SAFlexer.g:1:8: ( LEFT_BRACE | RIGHT_BRACE | LEFT_BRACKET | RIGHT_BRACKET | LEFT_PAREN | RIGHT_PAREN | ASSIGN | STRENGTH | ATTACK_TYPE | MOVE_TYPE | CONDITION_TYPE | LOGICAL_OPERATOR | CHOOSE | DIGIT | ID | WHITESPACE | NEWLINE )
+        // /Users/job/Programming/svn-sc/SAFLexer.g:1:8: ( LEFT_BRACE | RIGHT_BRACE | LEFT_BRACKET | RIGHT_BRACKET | LEFT_PAREN | RIGHT_PAREN | ASSIGN | STRENGTH | ATTACK_TYPE | MOVE_TYPE | CONDITION_TYPE | LOGICAL_OPERATOR | CHOOSE | DIGIT | ID | WHITESPACE | NEWLINE )
         int alt10=17;
         alt10 = dfa10.predict(input);
         switch (alt10) {
             case 1 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:10: LEFT_BRACE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:10: LEFT_BRACE
                 {
                 mLEFT_BRACE(); 
 
@@ -1381,7 +1381,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 2 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:21: RIGHT_BRACE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:21: RIGHT_BRACE
                 {
                 mRIGHT_BRACE(); 
 
@@ -1389,7 +1389,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 3 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:33: LEFT_BRACKET
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:33: LEFT_BRACKET
                 {
                 mLEFT_BRACKET(); 
 
@@ -1397,7 +1397,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 4 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:46: RIGHT_BRACKET
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:46: RIGHT_BRACKET
                 {
                 mRIGHT_BRACKET(); 
 
@@ -1405,7 +1405,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 5 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:60: LEFT_PAREN
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:60: LEFT_PAREN
                 {
                 mLEFT_PAREN(); 
 
@@ -1413,7 +1413,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 6 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:71: RIGHT_PAREN
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:71: RIGHT_PAREN
                 {
                 mRIGHT_PAREN(); 
 
@@ -1421,7 +1421,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 7 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:83: ASSIGN
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:83: ASSIGN
                 {
                 mASSIGN(); 
 
@@ -1429,7 +1429,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 8 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:90: STRENGTH
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:90: STRENGTH
                 {
                 mSTRENGTH(); 
 
@@ -1437,7 +1437,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 9 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:99: ATTACK_TYPE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:99: ATTACK_TYPE
                 {
                 mATTACK_TYPE(); 
 
@@ -1445,7 +1445,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 10 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:111: MOVE_TYPE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:111: MOVE_TYPE
                 {
                 mMOVE_TYPE(); 
 
@@ -1453,7 +1453,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 11 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:121: CONDITION_TYPE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:121: CONDITION_TYPE
                 {
                 mCONDITION_TYPE(); 
 
@@ -1461,7 +1461,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 12 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:136: LOGICAL_OPERATOR
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:136: LOGICAL_OPERATOR
                 {
                 mLOGICAL_OPERATOR(); 
 
@@ -1469,7 +1469,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 13 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:153: CHOOSE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:153: CHOOSE
                 {
                 mCHOOSE(); 
 
@@ -1477,7 +1477,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 14 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:160: DIGIT
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:160: DIGIT
                 {
                 mDIGIT(); 
 
@@ -1485,7 +1485,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 15 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:166: ID
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:166: ID
                 {
                 mID(); 
 
@@ -1493,7 +1493,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 16 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:169: WHITESPACE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:169: WHITESPACE
                 {
                 mWHITESPACE(); 
 
@@ -1501,7 +1501,7 @@ public class SAFlexer extends Lexer {
                 }
                 break;
             case 17 :
-                // /Users/job/Programming/svn-sc/SAFlexer.g:1:180: NEWLINE
+                // /Users/job/Programming/svn-sc/SAFLexer.g:1:180: NEWLINE
                 {
                 mNEWLINE(); 
 
