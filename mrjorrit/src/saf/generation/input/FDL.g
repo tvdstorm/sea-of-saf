@@ -3,6 +3,7 @@ grammar FDL;
 options {
   language = Java;
   output=AST;
+  ASTLabelType = CommonTree;
 }
 
 @header {
@@ -27,7 +28,7 @@ personality
 	;
 
 characteristic
-	:	(ATTRIBUTE EQUALS ONEDIGIT) -> ^(ATTRIBUTE ^(ONEDIGIT))
+	:	(ATTRIBUTE^ EQUALS! ONEDIGIT)
 	;
 	
 behaviour
@@ -36,7 +37,7 @@ behaviour
 
 rule
 	: 	(
-			CONDITIONTYPE^
+			((CONDITIONTYPE^ | (CONDITIONTYPE LOGICAL^ CONDITIONTYPE)))
 			LEFT_BRACKET!
 				(MOVEACTIONTYPE | chooseMoveActionType) (FIGHTACTIONTYPE | chooseFightActionType)
 			RIGHT_BRACKET!
@@ -58,6 +59,7 @@ chooseMoveActionType
 	;
 
 
+LOGICAL : ('and' | 'or');
 PERSONALITY : 'Personality' ;
 BEHAVIOUR : 'Behaviour' ;
 FIGHTACTIONTYPE : ('block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high') ;
@@ -76,4 +78,3 @@ LEFT_PAREN : '(';
 RIGHT_PAREN : ')';
 LEFT_BRACKET : '[';
 RIGHT_BRACKET : ']';
-
