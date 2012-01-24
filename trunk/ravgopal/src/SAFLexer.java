@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g 2012-01-23 15:05:14
+// $ANTLR 3.4 /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g 2012-01-24 14:31:35
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -12,27 +12,6 @@ public class SAFLexer extends Lexer {
     public static final int T__25=25;
     public static final int T__26=26;
     public static final int T__27=27;
-    public static final int T__28=28;
-    public static final int T__29=29;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int T__33=33;
-    public static final int T__34=34;
-    public static final int T__35=35;
-    public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
-    public static final int T__39=39;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__48=48;
     public static final int ACTION=4;
     public static final int AND=5;
     public static final int BEHAVIOUR=6;
@@ -290,10 +269,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:12:7: ( 'always' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:12:9: 'always'
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:12:7: ( 'kickPower' )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:12:9: 'kickPower'
             {
-            match("always"); 
+            match("kickPower"); 
 
 
 
@@ -313,10 +292,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:13:7: ( 'block_high' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:13:9: 'block_high'
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:13:7: ( 'kickReach' )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:13:9: 'kickReach'
             {
-            match("block_high"); 
+            match("kickReach"); 
 
 
 
@@ -336,10 +315,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:14:7: ( 'block_low' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:14:9: 'block_low'
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:14:7: ( 'punchPower' )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:14:9: 'punchPower'
             {
-            match("block_low"); 
+            match("punchPower"); 
 
 
 
@@ -359,284 +338,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:15:7: ( 'crouch' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:15:9: 'crouch'
-            {
-            match("crouch"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__27"
-
-    // $ANTLR start "T__28"
-    public final void mT__28() throws RecognitionException {
-        try {
-            int _type = T__28;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:16:7: ( 'even' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:16:9: 'even'
-            {
-            match("even"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__28"
-
-    // $ANTLR start "T__29"
-    public final void mT__29() throws RecognitionException {
-        try {
-            int _type = T__29;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:17:7: ( 'far' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:17:9: 'far'
-            {
-            match("far"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__29"
-
-    // $ANTLR start "T__30"
-    public final void mT__30() throws RecognitionException {
-        try {
-            int _type = T__30;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:18:7: ( 'jump' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:18:9: 'jump'
-            {
-            match("jump"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__30"
-
-    // $ANTLR start "T__31"
-    public final void mT__31() throws RecognitionException {
-        try {
-            int _type = T__31;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:19:7: ( 'kickPower' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:19:9: 'kickPower'
-            {
-            match("kickPower"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__31"
-
-    // $ANTLR start "T__32"
-    public final void mT__32() throws RecognitionException {
-        try {
-            int _type = T__32;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:20:7: ( 'kickReach' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:20:9: 'kickReach'
-            {
-            match("kickReach"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__32"
-
-    // $ANTLR start "T__33"
-    public final void mT__33() throws RecognitionException {
-        try {
-            int _type = T__33;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:21:7: ( 'kick_high' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:21:9: 'kick_high'
-            {
-            match("kick_high"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__33"
-
-    // $ANTLR start "T__34"
-    public final void mT__34() throws RecognitionException {
-        try {
-            int _type = T__34;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:22:7: ( 'kick_low' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:22:9: 'kick_low'
-            {
-            match("kick_low"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__34"
-
-    // $ANTLR start "T__35"
-    public final void mT__35() throws RecognitionException {
-        try {
-            int _type = T__35;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:23:7: ( 'much_stronger' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:23:9: 'much_stronger'
-            {
-            match("much_stronger"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__35"
-
-    // $ANTLR start "T__36"
-    public final void mT__36() throws RecognitionException {
-        try {
-            int _type = T__36;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:24:7: ( 'much_weaker' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:24:9: 'much_weaker'
-            {
-            match("much_weaker"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__36"
-
-    // $ANTLR start "T__37"
-    public final void mT__37() throws RecognitionException {
-        try {
-            int _type = T__37;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:25:7: ( 'near' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:25:9: 'near'
-            {
-            match("near"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__37"
-
-    // $ANTLR start "T__38"
-    public final void mT__38() throws RecognitionException {
-        try {
-            int _type = T__38;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:26:7: ( 'punchPower' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:26:9: 'punchPower'
-            {
-            match("punchPower"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__38"
-
-    // $ANTLR start "T__39"
-    public final void mT__39() throws RecognitionException {
-        try {
-            int _type = T__39;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:27:7: ( 'punchReach' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:27:9: 'punchReach'
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:15:7: ( 'punchReach' )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:15:9: 'punchReach'
             {
             match("punchReach"); 
 
@@ -651,222 +354,15 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__39"
-
-    // $ANTLR start "T__40"
-    public final void mT__40() throws RecognitionException {
-        try {
-            int _type = T__40;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:28:7: ( 'punch_high' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:28:9: 'punch_high'
-            {
-            match("punch_high"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__40"
-
-    // $ANTLR start "T__41"
-    public final void mT__41() throws RecognitionException {
-        try {
-            int _type = T__41;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:29:7: ( 'punch_low' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:29:9: 'punch_low'
-            {
-            match("punch_low"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__41"
-
-    // $ANTLR start "T__42"
-    public final void mT__42() throws RecognitionException {
-        try {
-            int _type = T__42;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:30:7: ( 'run_away' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:30:9: 'run_away'
-            {
-            match("run_away"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__42"
-
-    // $ANTLR start "T__43"
-    public final void mT__43() throws RecognitionException {
-        try {
-            int _type = T__43;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:31:7: ( 'run_towards' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:31:9: 'run_towards'
-            {
-            match("run_towards"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__43"
-
-    // $ANTLR start "T__44"
-    public final void mT__44() throws RecognitionException {
-        try {
-            int _type = T__44;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:32:7: ( 'stand' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:32:9: 'stand'
-            {
-            match("stand"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__44"
-
-    // $ANTLR start "T__45"
-    public final void mT__45() throws RecognitionException {
-        try {
-            int _type = T__45;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:33:7: ( 'stronger' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:33:9: 'stronger'
-            {
-            match("stronger"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__45"
-
-    // $ANTLR start "T__46"
-    public final void mT__46() throws RecognitionException {
-        try {
-            int _type = T__46;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:34:7: ( 'walk_away' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:34:9: 'walk_away'
-            {
-            match("walk_away"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__46"
-
-    // $ANTLR start "T__47"
-    public final void mT__47() throws RecognitionException {
-        try {
-            int _type = T__47;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:35:7: ( 'walk_towards' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:35:9: 'walk_towards'
-            {
-            match("walk_towards"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__47"
-
-    // $ANTLR start "T__48"
-    public final void mT__48() throws RecognitionException {
-        try {
-            int _type = T__48;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:36:7: ( 'weaker' )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:36:9: 'weaker'
-            {
-            match("weaker"); 
-
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__48"
+    // $ANTLR end "T__27"
 
     // $ANTLR start "STRING"
     public final void mSTRING() throws RecognitionException {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:104:3: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:104:5: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:78:3: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:78:5: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -878,7 +374,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:104:29: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:78:29: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop1:
             do {
                 int alt1=2;
@@ -928,10 +424,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:108:3: ( ( '0' .. '9' )+ )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:108:5: ( '0' .. '9' )+
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:82:3: ( ( '0' .. '9' )+ )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:82:5: ( '0' .. '9' )+
             {
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:108:5: ( '0' .. '9' )+
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:82:5: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -986,8 +482,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:112:3: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:112:5: ( ' ' | '\\t' | '\\r' | '\\n' )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:86:3: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:86:5: ( ' ' | '\\t' | '\\r' | '\\n' )
             {
             if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
                 input.consume();
@@ -1013,9 +509,445 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "WHITESPACE"
 
     public void mTokens() throws RecognitionException {
-        // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:8: ( AND | CHOICE_END | CHOICE_START | CHOOSE | EQLS | FIGHTER_END | FIGHTER_START | OR | RULE_END | RULE_START | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | STRING | INT | WHITESPACE )
-        int alt3=38;
-        alt3 = dfa3.predict(input);
+        // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:8: ( AND | CHOICE_END | CHOICE_START | CHOOSE | EQLS | FIGHTER_END | FIGHTER_START | OR | RULE_END | RULE_START | T__24 | T__25 | T__26 | T__27 | STRING | INT | WHITESPACE )
+        int alt3=17;
+        switch ( input.LA(1) ) {
+        case 'a':
+            {
+            int LA3_1 = input.LA(2);
+
+            if ( (LA3_1=='n') ) {
+                int LA3_16 = input.LA(3);
+
+                if ( (LA3_16=='d') ) {
+                    int LA3_21 = input.LA(4);
+
+                    if ( ((LA3_21 >= '0' && LA3_21 <= '9')||(LA3_21 >= 'A' && LA3_21 <= 'Z')||LA3_21=='_'||(LA3_21 >= 'a' && LA3_21 <= 'z')) ) {
+                        alt3=15;
+                    }
+                    else {
+                        alt3=1;
+                    }
+                }
+                else {
+                    alt3=15;
+                }
+            }
+            else {
+                alt3=15;
+            }
+            }
+            break;
+        case ')':
+            {
+            alt3=2;
+            }
+            break;
+        case '(':
+            {
+            alt3=3;
+            }
+            break;
+        case 'c':
+            {
+            int LA3_4 = input.LA(2);
+
+            if ( (LA3_4=='h') ) {
+                int LA3_17 = input.LA(3);
+
+                if ( (LA3_17=='o') ) {
+                    int LA3_22 = input.LA(4);
+
+                    if ( (LA3_22=='o') ) {
+                        int LA3_27 = input.LA(5);
+
+                        if ( (LA3_27=='s') ) {
+                            int LA3_30 = input.LA(6);
+
+                            if ( (LA3_30=='e') ) {
+                                int LA3_34 = input.LA(7);
+
+                                if ( ((LA3_34 >= '0' && LA3_34 <= '9')||(LA3_34 >= 'A' && LA3_34 <= 'Z')||LA3_34=='_'||(LA3_34 >= 'a' && LA3_34 <= 'z')) ) {
+                                    alt3=15;
+                                }
+                                else {
+                                    alt3=4;
+                                }
+                            }
+                            else {
+                                alt3=15;
+                            }
+                        }
+                        else {
+                            alt3=15;
+                        }
+                    }
+                    else {
+                        alt3=15;
+                    }
+                }
+                else {
+                    alt3=15;
+                }
+            }
+            else {
+                alt3=15;
+            }
+            }
+            break;
+        case '=':
+            {
+            alt3=5;
+            }
+            break;
+        case '}':
+            {
+            alt3=6;
+            }
+            break;
+        case '{':
+            {
+            alt3=7;
+            }
+            break;
+        case 'o':
+            {
+            int LA3_8 = input.LA(2);
+
+            if ( (LA3_8=='r') ) {
+                int LA3_18 = input.LA(3);
+
+                if ( ((LA3_18 >= '0' && LA3_18 <= '9')||(LA3_18 >= 'A' && LA3_18 <= 'Z')||LA3_18=='_'||(LA3_18 >= 'a' && LA3_18 <= 'z')) ) {
+                    alt3=15;
+                }
+                else {
+                    alt3=8;
+                }
+            }
+            else {
+                alt3=15;
+            }
+            }
+            break;
+        case ']':
+            {
+            alt3=9;
+            }
+            break;
+        case '[':
+            {
+            alt3=10;
+            }
+            break;
+        case 'k':
+            {
+            int LA3_11 = input.LA(2);
+
+            if ( (LA3_11=='i') ) {
+                int LA3_19 = input.LA(3);
+
+                if ( (LA3_19=='c') ) {
+                    int LA3_24 = input.LA(4);
+
+                    if ( (LA3_24=='k') ) {
+                        switch ( input.LA(5) ) {
+                        case 'P':
+                            {
+                            int LA3_31 = input.LA(6);
+
+                            if ( (LA3_31=='o') ) {
+                                int LA3_35 = input.LA(7);
+
+                                if ( (LA3_35=='w') ) {
+                                    int LA3_40 = input.LA(8);
+
+                                    if ( (LA3_40=='e') ) {
+                                        int LA3_44 = input.LA(9);
+
+                                        if ( (LA3_44=='r') ) {
+                                            int LA3_48 = input.LA(10);
+
+                                            if ( ((LA3_48 >= '0' && LA3_48 <= '9')||(LA3_48 >= 'A' && LA3_48 <= 'Z')||LA3_48=='_'||(LA3_48 >= 'a' && LA3_48 <= 'z')) ) {
+                                                alt3=15;
+                                            }
+                                            else {
+                                                alt3=11;
+                                            }
+                                        }
+                                        else {
+                                            alt3=15;
+                                        }
+                                    }
+                                    else {
+                                        alt3=15;
+                                    }
+                                }
+                                else {
+                                    alt3=15;
+                                }
+                            }
+                            else {
+                                alt3=15;
+                            }
+                            }
+                            break;
+                        case 'R':
+                            {
+                            int LA3_32 = input.LA(6);
+
+                            if ( (LA3_32=='e') ) {
+                                int LA3_36 = input.LA(7);
+
+                                if ( (LA3_36=='a') ) {
+                                    int LA3_41 = input.LA(8);
+
+                                    if ( (LA3_41=='c') ) {
+                                        int LA3_45 = input.LA(9);
+
+                                        if ( (LA3_45=='h') ) {
+                                            int LA3_49 = input.LA(10);
+
+                                            if ( ((LA3_49 >= '0' && LA3_49 <= '9')||(LA3_49 >= 'A' && LA3_49 <= 'Z')||LA3_49=='_'||(LA3_49 >= 'a' && LA3_49 <= 'z')) ) {
+                                                alt3=15;
+                                            }
+                                            else {
+                                                alt3=12;
+                                            }
+                                        }
+                                        else {
+                                            alt3=15;
+                                        }
+                                    }
+                                    else {
+                                        alt3=15;
+                                    }
+                                }
+                                else {
+                                    alt3=15;
+                                }
+                            }
+                            else {
+                                alt3=15;
+                            }
+                            }
+                            break;
+                        default:
+                            alt3=15;
+                        }
+
+                    }
+                    else {
+                        alt3=15;
+                    }
+                }
+                else {
+                    alt3=15;
+                }
+            }
+            else {
+                alt3=15;
+            }
+            }
+            break;
+        case 'p':
+            {
+            int LA3_12 = input.LA(2);
+
+            if ( (LA3_12=='u') ) {
+                int LA3_20 = input.LA(3);
+
+                if ( (LA3_20=='n') ) {
+                    int LA3_25 = input.LA(4);
+
+                    if ( (LA3_25=='c') ) {
+                        int LA3_29 = input.LA(5);
+
+                        if ( (LA3_29=='h') ) {
+                            switch ( input.LA(6) ) {
+                            case 'P':
+                                {
+                                int LA3_37 = input.LA(7);
+
+                                if ( (LA3_37=='o') ) {
+                                    int LA3_42 = input.LA(8);
+
+                                    if ( (LA3_42=='w') ) {
+                                        int LA3_46 = input.LA(9);
+
+                                        if ( (LA3_46=='e') ) {
+                                            int LA3_50 = input.LA(10);
+
+                                            if ( (LA3_50=='r') ) {
+                                                int LA3_54 = input.LA(11);
+
+                                                if ( ((LA3_54 >= '0' && LA3_54 <= '9')||(LA3_54 >= 'A' && LA3_54 <= 'Z')||LA3_54=='_'||(LA3_54 >= 'a' && LA3_54 <= 'z')) ) {
+                                                    alt3=15;
+                                                }
+                                                else {
+                                                    alt3=13;
+                                                }
+                                            }
+                                            else {
+                                                alt3=15;
+                                            }
+                                        }
+                                        else {
+                                            alt3=15;
+                                        }
+                                    }
+                                    else {
+                                        alt3=15;
+                                    }
+                                }
+                                else {
+                                    alt3=15;
+                                }
+                                }
+                                break;
+                            case 'R':
+                                {
+                                int LA3_38 = input.LA(7);
+
+                                if ( (LA3_38=='e') ) {
+                                    int LA3_43 = input.LA(8);
+
+                                    if ( (LA3_43=='a') ) {
+                                        int LA3_47 = input.LA(9);
+
+                                        if ( (LA3_47=='c') ) {
+                                            int LA3_51 = input.LA(10);
+
+                                            if ( (LA3_51=='h') ) {
+                                                int LA3_55 = input.LA(11);
+
+                                                if ( ((LA3_55 >= '0' && LA3_55 <= '9')||(LA3_55 >= 'A' && LA3_55 <= 'Z')||LA3_55=='_'||(LA3_55 >= 'a' && LA3_55 <= 'z')) ) {
+                                                    alt3=15;
+                                                }
+                                                else {
+                                                    alt3=14;
+                                                }
+                                            }
+                                            else {
+                                                alt3=15;
+                                            }
+                                        }
+                                        else {
+                                            alt3=15;
+                                        }
+                                    }
+                                    else {
+                                        alt3=15;
+                                    }
+                                }
+                                else {
+                                    alt3=15;
+                                }
+                                }
+                                break;
+                            default:
+                                alt3=15;
+                            }
+
+                        }
+                        else {
+                            alt3=15;
+                        }
+                    }
+                    else {
+                        alt3=15;
+                    }
+                }
+                else {
+                    alt3=15;
+                }
+            }
+            else {
+                alt3=15;
+            }
+            }
+            break;
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+        case 'F':
+        case 'G':
+        case 'H':
+        case 'I':
+        case 'J':
+        case 'K':
+        case 'L':
+        case 'M':
+        case 'N':
+        case 'O':
+        case 'P':
+        case 'Q':
+        case 'R':
+        case 'S':
+        case 'T':
+        case 'U':
+        case 'V':
+        case 'W':
+        case 'X':
+        case 'Y':
+        case 'Z':
+        case '_':
+        case 'b':
+        case 'd':
+        case 'e':
+        case 'f':
+        case 'g':
+        case 'h':
+        case 'i':
+        case 'j':
+        case 'l':
+        case 'm':
+        case 'n':
+        case 'q':
+        case 'r':
+        case 's':
+        case 't':
+        case 'u':
+        case 'v':
+        case 'w':
+        case 'x':
+        case 'y':
+        case 'z':
+            {
+            alt3=15;
+            }
+            break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            {
+            alt3=16;
+            }
+            break;
+        case '\t':
+        case '\n':
+        case '\r':
+        case ' ':
+            {
+            alt3=17;
+            }
+            break;
+        default:
+            NoViableAltException nvae =
+                new NoViableAltException("", 3, 0, input);
+
+            throw nvae;
+
+        }
+
         switch (alt3) {
             case 1 :
                 // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:10: AND
@@ -1130,191 +1062,23 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 15 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:123: T__28
-                {
-                mT__28(); 
-
-
-                }
-                break;
-            case 16 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:129: T__29
-                {
-                mT__29(); 
-
-
-                }
-                break;
-            case 17 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:135: T__30
-                {
-                mT__30(); 
-
-
-                }
-                break;
-            case 18 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:141: T__31
-                {
-                mT__31(); 
-
-
-                }
-                break;
-            case 19 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:147: T__32
-                {
-                mT__32(); 
-
-
-                }
-                break;
-            case 20 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:153: T__33
-                {
-                mT__33(); 
-
-
-                }
-                break;
-            case 21 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:159: T__34
-                {
-                mT__34(); 
-
-
-                }
-                break;
-            case 22 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:165: T__35
-                {
-                mT__35(); 
-
-
-                }
-                break;
-            case 23 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:171: T__36
-                {
-                mT__36(); 
-
-
-                }
-                break;
-            case 24 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:177: T__37
-                {
-                mT__37(); 
-
-
-                }
-                break;
-            case 25 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:183: T__38
-                {
-                mT__38(); 
-
-
-                }
-                break;
-            case 26 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:189: T__39
-                {
-                mT__39(); 
-
-
-                }
-                break;
-            case 27 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:195: T__40
-                {
-                mT__40(); 
-
-
-                }
-                break;
-            case 28 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:201: T__41
-                {
-                mT__41(); 
-
-
-                }
-                break;
-            case 29 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:207: T__42
-                {
-                mT__42(); 
-
-
-                }
-                break;
-            case 30 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:213: T__43
-                {
-                mT__43(); 
-
-
-                }
-                break;
-            case 31 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:219: T__44
-                {
-                mT__44(); 
-
-
-                }
-                break;
-            case 32 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:225: T__45
-                {
-                mT__45(); 
-
-
-                }
-                break;
-            case 33 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:231: T__46
-                {
-                mT__46(); 
-
-
-                }
-                break;
-            case 34 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:237: T__47
-                {
-                mT__47(); 
-
-
-                }
-                break;
-            case 35 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:243: T__48
-                {
-                mT__48(); 
-
-
-                }
-                break;
-            case 36 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:249: STRING
+                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:123: STRING
                 {
                 mSTRING(); 
 
 
                 }
                 break;
-            case 37 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:256: INT
+            case 16 :
+                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:130: INT
                 {
                 mINT(); 
 
 
                 }
                 break;
-            case 38 :
-                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:260: WHITESPACE
+            case 17 :
+                // /Users/ravish/Documents/Informatica/SE/Evolution/workspace/saf/src/SAF.g:1:134: WHITESPACE
                 {
                 mWHITESPACE(); 
 
@@ -1327,303 +1091,6 @@ public class SAFLexer extends Lexer {
     }
 
 
-    protected DFA3 dfa3 = new DFA3(this);
-    static final String DFA3_eotS =
-        "\1\uffff\1\26\2\uffff\1\26\3\uffff\1\26\2\uffff\13\26\3\uffff\4"+
-        "\26\1\56\14\26\1\74\3\26\1\uffff\2\26\1\102\12\26\1\uffff\4\26\1"+
-        "\121\1\uffff\1\122\2\26\1\127\12\26\2\uffff\4\26\1\uffff\3\26\1"+
-        "\156\3\26\1\163\1\164\1\165\14\26\1\uffff\3\26\1\u0087\3\uffff\21"+
-        "\26\1\uffff\5\26\1\u009e\6\26\1\u00a5\1\26\1\u00a7\3\26\1\u00ab"+
-        "\1\u00ac\1\u00ad\1\u00ae\1\uffff\5\26\1\u00b4\1\uffff\1\26\1\uffff"+
-        "\1\u00b6\1\26\1\u00b8\4\uffff\2\26\1\u00bb\1\u00bc\1\u00bd\1\uffff"+
-        "\1\26\1\uffff\1\26\1\uffff\1\26\1\u00c1\3\uffff\1\u00c2\2\26\2\uffff"+
-        "\1\u00c5\1\u00c6\2\uffff";
-    static final String DFA3_eofS =
-        "\u00c7\uffff";
-    static final String DFA3_minS =
-        "\1\11\1\154\2\uffff\1\150\3\uffff\1\162\2\uffff\1\154\1\166\1\141"+
-        "\1\165\1\151\1\165\1\145\2\165\1\164\1\141\3\uffff\1\144\1\167\2"+
-        "\157\1\60\1\157\1\145\1\162\1\155\2\143\1\141\2\156\1\141\1\154"+
-        "\1\141\1\60\1\141\1\157\1\165\1\uffff\1\143\1\156\1\60\1\160\1\153"+
-        "\1\150\1\162\1\143\1\137\1\156\1\157\2\153\1\uffff\1\171\1\163\1"+
-        "\143\1\153\1\60\1\uffff\1\60\1\120\1\137\1\60\1\150\1\141\1\144"+
-        "\1\156\1\137\1\145\1\163\1\145\1\150\1\137\2\uffff\1\157\1\145\1"+
-        "\150\1\163\1\uffff\1\120\1\167\1\157\1\60\1\147\1\141\1\162\3\60"+
-        "\1\150\1\167\1\141\1\151\1\157\1\164\1\145\1\157\1\145\1\150\1\141"+
-        "\1\167\1\uffff\1\145\1\167\1\157\1\60\3\uffff\1\151\1\157\1\145"+
-        "\1\143\1\147\1\167\1\162\1\141\1\167\1\141\1\151\1\157\1\171\1\141"+
-        "\1\162\1\141\1\167\1\uffff\1\147\1\167\1\162\2\150\1\60\1\157\1"+
-        "\153\1\145\1\143\1\147\1\167\1\60\1\162\1\60\1\171\1\141\1\150\4"+
-        "\60\1\uffff\1\156\1\145\1\162\2\150\1\60\1\uffff\1\144\1\uffff\1"+
-        "\60\1\162\1\60\4\uffff\1\147\1\162\3\60\1\uffff\1\163\1\uffff\1"+
-        "\144\1\uffff\1\145\1\60\3\uffff\1\60\1\163\1\162\2\uffff\2\60\2"+
-        "\uffff";
-    static final String DFA3_maxS =
-        "\1\175\1\156\2\uffff\1\162\3\uffff\1\162\2\uffff\1\154\1\166\1\141"+
-        "\1\165\1\151\1\165\1\145\2\165\1\164\1\145\3\uffff\1\144\1\167\2"+
-        "\157\1\172\1\157\1\145\1\162\1\155\2\143\1\141\2\156\1\162\1\154"+
-        "\1\141\1\172\1\141\1\157\1\165\1\uffff\1\143\1\156\1\172\1\160\1"+
-        "\153\1\150\1\162\1\143\1\137\1\156\1\157\2\153\1\uffff\1\171\1\163"+
-        "\1\143\1\153\1\172\1\uffff\1\172\2\137\1\172\1\150\1\164\1\144\1"+
-        "\156\1\137\1\145\1\163\1\145\1\150\1\137\2\uffff\1\157\1\145\1\154"+
-        "\1\167\1\uffff\1\137\1\167\1\157\1\172\1\147\1\164\1\162\3\172\1"+
-        "\154\1\167\1\141\1\151\1\157\1\164\1\145\1\157\1\145\1\154\1\141"+
-        "\1\167\1\uffff\1\145\1\167\1\157\1\172\3\uffff\1\151\1\157\1\145"+
-        "\1\143\1\147\1\167\1\162\1\141\1\167\1\141\1\151\1\157\1\171\1\141"+
-        "\1\162\1\141\1\167\1\uffff\1\147\1\167\1\162\2\150\1\172\1\157\1"+
-        "\153\1\145\1\143\1\147\1\167\1\172\1\162\1\172\1\171\1\141\1\150"+
-        "\4\172\1\uffff\1\156\1\145\1\162\2\150\1\172\1\uffff\1\144\1\uffff"+
-        "\1\172\1\162\1\172\4\uffff\1\147\1\162\3\172\1\uffff\1\163\1\uffff"+
-        "\1\144\1\uffff\1\145\1\172\3\uffff\1\172\1\163\1\162\2\uffff\2\172"+
-        "\2\uffff";
-    static final String DFA3_acceptS =
-        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\1\7\1\uffff\1\11\1\12\13\uffff"+
-        "\1\44\1\45\1\46\25\uffff\1\10\15\uffff\1\1\5\uffff\1\20\16\uffff"+
-        "\1\17\1\21\4\uffff\1\30\26\uffff\1\37\4\uffff\1\13\1\4\1\16\21\uffff"+
-        "\1\43\26\uffff\1\25\6\uffff\1\35\1\uffff\1\40\3\uffff\1\15\1\22"+
-        "\1\23\1\24\5\uffff\1\34\1\uffff\1\41\1\uffff\1\14\2\uffff\1\31\1"+
-        "\32\1\33\3\uffff\1\27\1\36\2\uffff\1\42\1\26";
-    static final String DFA3_specialS =
-        "\u00c7\uffff}>";
-    static final String[] DFA3_transitionS = {
-            "\2\30\2\uffff\1\30\22\uffff\1\30\7\uffff\1\3\1\2\6\uffff\12"+
-            "\27\3\uffff\1\5\3\uffff\32\26\1\12\1\uffff\1\11\1\uffff\1\26"+
-            "\1\uffff\1\1\1\13\1\4\1\26\1\14\1\15\3\26\1\16\1\17\1\26\1\20"+
-            "\1\21\1\10\1\22\1\26\1\23\1\24\3\26\1\25\3\26\1\7\1\uffff\1"+
-            "\6",
-            "\1\32\1\uffff\1\31",
-            "",
-            "",
-            "\1\33\11\uffff\1\34",
-            "",
-            "",
-            "",
-            "\1\35",
-            "",
-            "",
-            "\1\36",
-            "\1\37",
-            "\1\40",
-            "\1\41",
-            "\1\42",
-            "\1\43",
-            "\1\44",
-            "\1\45",
-            "\1\46",
-            "\1\47",
-            "\1\50\3\uffff\1\51",
-            "",
-            "",
-            "",
-            "\1\52",
-            "\1\53",
-            "\1\54",
-            "\1\55",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\57",
-            "\1\60",
-            "\1\61",
-            "\1\62",
-            "\1\63",
-            "\1\64",
-            "\1\65",
-            "\1\66",
-            "\1\67",
-            "\1\70\20\uffff\1\71",
-            "\1\72",
-            "\1\73",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\75",
-            "\1\76",
-            "\1\77",
-            "",
-            "\1\100",
-            "\1\101",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\103",
-            "\1\104",
-            "\1\105",
-            "\1\106",
-            "\1\107",
-            "\1\110",
-            "\1\111",
-            "\1\112",
-            "\1\113",
-            "\1\114",
-            "",
-            "\1\115",
-            "\1\116",
-            "\1\117",
-            "\1\120",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\123\1\uffff\1\124\14\uffff\1\125",
-            "\1\126",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\130",
-            "\1\131\22\uffff\1\132",
-            "\1\133",
-            "\1\134",
-            "\1\135",
-            "\1\136",
-            "\1\137",
-            "\1\140",
-            "\1\141",
-            "\1\142",
-            "",
-            "",
-            "\1\143",
-            "\1\144",
-            "\1\145\3\uffff\1\146",
-            "\1\147\3\uffff\1\150",
-            "",
-            "\1\151\1\uffff\1\152\14\uffff\1\153",
-            "\1\154",
-            "\1\155",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\157",
-            "\1\160\22\uffff\1\161",
-            "\1\162",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\166\3\uffff\1\167",
-            "\1\170",
-            "\1\171",
-            "\1\172",
-            "\1\173",
-            "\1\174",
-            "\1\175",
-            "\1\176",
-            "\1\177",
-            "\1\u0080\3\uffff\1\u0081",
-            "\1\u0082",
-            "\1\u0083",
-            "",
-            "\1\u0084",
-            "\1\u0085",
-            "\1\u0086",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "",
-            "",
-            "\1\u0088",
-            "\1\u0089",
-            "\1\u008a",
-            "\1\u008b",
-            "\1\u008c",
-            "\1\u008d",
-            "\1\u008e",
-            "\1\u008f",
-            "\1\u0090",
-            "\1\u0091",
-            "\1\u0092",
-            "\1\u0093",
-            "\1\u0094",
-            "\1\u0095",
-            "\1\u0096",
-            "\1\u0097",
-            "\1\u0098",
-            "",
-            "\1\u0099",
-            "\1\u009a",
-            "\1\u009b",
-            "\1\u009c",
-            "\1\u009d",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\u009f",
-            "\1\u00a0",
-            "\1\u00a1",
-            "\1\u00a2",
-            "\1\u00a3",
-            "\1\u00a4",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\u00a6",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\u00a8",
-            "\1\u00a9",
-            "\1\u00aa",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "\1\u00af",
-            "\1\u00b0",
-            "\1\u00b1",
-            "\1\u00b2",
-            "\1\u00b3",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "\1\u00b5",
-            "",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\u00b7",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "",
-            "",
-            "",
-            "\1\u00b9",
-            "\1\u00ba",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "\1\u00be",
-            "",
-            "\1\u00bf",
-            "",
-            "\1\u00c0",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            "",
-            "",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\1\u00c3",
-            "\1\u00c4",
-            "",
-            "",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "\12\26\7\uffff\32\26\4\uffff\1\26\1\uffff\32\26",
-            "",
-            ""
-    };
-
-    static final short[] DFA3_eot = DFA.unpackEncodedString(DFA3_eotS);
-    static final short[] DFA3_eof = DFA.unpackEncodedString(DFA3_eofS);
-    static final char[] DFA3_min = DFA.unpackEncodedStringToUnsignedChars(DFA3_minS);
-    static final char[] DFA3_max = DFA.unpackEncodedStringToUnsignedChars(DFA3_maxS);
-    static final short[] DFA3_accept = DFA.unpackEncodedString(DFA3_acceptS);
-    static final short[] DFA3_special = DFA.unpackEncodedString(DFA3_specialS);
-    static final short[][] DFA3_transition;
-
-    static {
-        int numStates = DFA3_transitionS.length;
-        DFA3_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA3_transition[i] = DFA.unpackEncodedString(DFA3_transitionS[i]);
-        }
-    }
-
-    class DFA3 extends DFA {
-
-        public DFA3(BaseRecognizer recognizer) {
-            this.recognizer = recognizer;
-            this.decisionNumber = 3;
-            this.eot = DFA3_eot;
-            this.eof = DFA3_eof;
-            this.min = DFA3_min;
-            this.max = DFA3_max;
-            this.accept = DFA3_accept;
-            this.special = DFA3_special;
-            this.transition = DFA3_transition;
-        }
-        public String getDescription() {
-            return "1:1: Tokens : ( AND | CHOICE_END | CHOICE_START | CHOOSE | EQLS | FIGHTER_END | FIGHTER_START | OR | RULE_END | RULE_START | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | STRING | INT | WHITESPACE );";
-        }
-    }
  
 
 }
