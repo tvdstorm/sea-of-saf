@@ -28,7 +28,6 @@ public class Program {
 		
 		FighterWalker walker = new FighterWalker(new CommonTreeNodeStream(tree));
 		Fighter fighter = walker.fighter();
-		System.out.println(fighter.toString());
 	}
 	
 

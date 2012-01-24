@@ -45,13 +45,5 @@ public class Fighter {
 	public void setBehaviour(Vector<Rule> behaviour) {
 		this.behaviour = behaviour;
 	}
-	
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		Field[] fields = this.getClass().getDeclaredFields();
-		sb.append(name);
-		return sb.toString();
-	}
 }
 

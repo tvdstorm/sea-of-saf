@@ -28,7 +28,7 @@ behaviour returns [Vector<Rule> behaviour]
   ;
   
 characteristic returns [Characteristic characteristic]
-  : ^(att=ATTRIBUTE pow=ONEDIGIT) {characteristic = new Characteristic(Attribute.valueOf(att.getText()), Integer.parseInt(pow.getText()));}
+  : ^(CHARACTERISTIC att=ATTRIBUTE pow=ONEDIGIT) {characteristic = new Characteristic(Attribute.valueOf(att.getText()), Integer.parseInt(pow.getText()));}
   ;
   
 rule returns [Rule rule]
