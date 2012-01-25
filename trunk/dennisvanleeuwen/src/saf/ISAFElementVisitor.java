@@ -1,22 +1,18 @@
 package saf;
 
-import ast.*;
-import ast.actions.IFightActionElement;
-import ast.actions.IMoveActionElement;
-import ast.actions.fightActions.*;
-import ast.actions.moveActions.*;
-import ast.conditions.*;
+import saf.astelements.*;
+import saf.astelements.actions.*;
 
 public interface ISAFElementVisitor {
-	public void visit(ArenaElement element);
-	public void visit(BotElement element);
+	public void visit(Arena element);
+	public void visit(Fighter element);
 	
-	public void visit(CharacteristicElement element);
-	public void visit(RuleElement ruleElement);	
+	public void visit(Characteristic element);
+	public void visit(Rule ruleElement);	
 
-	public void visit(IActionElement ruleElement);	
-	public void visit(IConditionElement ruleElement);	
-	public void visit(IMoveActionElement element);
-	public void visit(IFightActionElement element);
+	public void visit(IAction ruleElement);	
+	public void visit(ICondition ruleElement);	
+	public void visit(IMove element);
+	public void visit(IFight element);
 	
 }
