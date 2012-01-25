@@ -2,7 +2,7 @@ package data;
 
 public class Rule {
 
-	private MoveActionType moveAction;
+	/*private MoveActionType moveAction;
 	private FightActionType fightAction;
 	private ConditionType condition;
 	
@@ -22,6 +22,6 @@ public class Rule {
 	
 	public ConditionType getCondition() {
 		return condition;
-	}
+	}*/
 	
 }
