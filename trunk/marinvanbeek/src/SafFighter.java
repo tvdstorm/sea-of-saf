@@ -1,39 +1,49 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+//package saf.syntax;
 
-public class SafFighter
+import java.util.Arrays;
+import java.util.List;
+import java.util.Collections;
+
+interface ISyntaxCheck
 {
-    public static final int MAX_HEALTH = 100;
+    public boolean isWellFormed();
+}
+
+public class SafFighter implements ISyntexCheck
+{
+    public static final Integer MAX_HEALTH = 100;
 
     private String name;
     private int healthPoints;
-    private SafAttribute[] attributes;
+    private List<SafAttribute> attributes;
     private SafBehaviour behaviour;
 
-    public SafFighter(String name, int healthPoints, SafAttribute[] attributes,
+    public SafFighter(String name, List<SafAttribute> attributes,
                       SafBehaviour behaviour)
     {
         this.name = name;
-        this.healthPoints = healthPoints;
+        this.healthPoints = MAX_HEALTH;
         this.attributes = attributes;
         this.behaviour = behaviour;
     }
 
     public SafAction act(SafState state)
     {
-        return new SafAction(new SafMove("illegal_name"), new SafAttack("illegal_name"));
+        return new SafAction(new SafMove("illegal_name"), 
+                             new SafAttack("illegal_name"));
     }
 }
 
 class SafAttribute
 {
     /* This is determined by the value defined in the grammar (SAF.g). */
-    public static final int MAX_VALUE = 10;
-    public static final ArrayList<String> LEGAL = new ArrayList<String>(
+    public static final Integer MAX_VALUE = 10;
+    public static final List<String> LEGAL = Collections.unmodifiableList(
             Arrays.asList("punch_power", 
                           "punch_reach", 
                           "kick_power", 
-                          "kick_reach"));
+                          "kick_reach")
+    );
 
     private String name;
     private int value;
@@ -106,17 +116,19 @@ class SafLogicOperator implements SafLogic
 
 class SafCondition implements SafLogic
 {
-    public static final ArrayList<String> REQUIRED = new ArrayList<String>(
-            Arrays.asList("always"));
+    public static final List<String> REQUIRED = Collections.unmodifiableList(
+            Arrays.asList("always")
+    );
 
-    public static final ArrayList<String> LEGAL = new ArrayList<String>(
+    public static final List<String> LEGAL = Collections.unmodifiableList(
             Arrays.asList("stronger",
                           "much_stronger",
                           "weaker",
                           "much_weaker",
                           "even",
                           "near",
-                          "far"));
+                          "far")
+    );
 
     private String name;
 
@@ -145,14 +157,15 @@ class SafAction
 
 class SafMove
 {
-    public static final ArrayList<String> LEGAL = new ArrayList<String>(
+    public static final List<String> LEGAL = Collections.unmodifiableList(
             Arrays.asList("jump",
                           "crouch",
                           "stand",
                           "walk_towards",
                           "run_towards",
                           "walk_away",
-                          "run_away"));
+                          "run_away")
+    );
 
     private String name;
 
@@ -164,13 +177,14 @@ class SafMove
 
 class SafAttack
 {
-    public static final ArrayList<String> LEGAL = new ArrayList<String>(
+    public static final List<String> LEGAL = Collections.unmodifiableList(
             Arrays.asList("punch_low",
                           "punch_high",
                           "kick_low",
                           "kick_high",
                           "block_low",
-                          "block_high"));
+                          "block_high")
+    );
 
     private String name;
 

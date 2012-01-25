@@ -26,36 +26,73 @@ tokens {
     TACTIC;
     COMPOSED_CONDITION;
     CONDITION;
-    LOGIC;
+    LOGIC_AND;
+    LOGIC_OR;
 }
 
 @header {
 }
 
 @parser::members {
-//    @Override
-//    protected Object recoverFromMismatchedToken(IntStream input, int ttype,
-//                            BitSet follow) throws RecognitionException
-//    {
-//        throw new UnwantedTokenException(ttype, input);
-//    }
-}
-
-@lexer::members {
-//    @Override
-//    public void recover(RecognitionException e)
-//    {     
-//        throw new RuntimeException(e);
-//    }
+    Fighter fighter;
 }
 
 /*--------------------------------------------------------------------------
  * PARSER RULES
  *--------------------------------------------------------------------------*/
 
+
+    { 
+        String name;
+        List<Attribute> attributes = new ArrayList<Attribute>();
+        Behaviour behaviour;
+
+        fighter = new Fighter(name, attributes, behaviour);
+    }
+
+    {
+        attributes.add(new Attribute());
+    }
+
+    {
+        List<Tactic> tactics = new ArrayList<Tactic>();
+
+        behaviour = new Behaviour(tactics);
+    }
+
+    {
+        Logic condition;
+        Action action;
+
+        tactics.add(new Tactic(condition, action));
+    }
+
+    {
+        //blah
+
+        new Logic();
+    }
+
+    {
+        Move move;
+        Attack attack;
+
+        new Action(move, attack);
+    }
+
+    {
+        new Move();
+    }
+
+    {
+        new Attack();
+    }
+
+
+
+
 parse
-    : name=STRING super_awesome_fighter -> 
-            ^(SAF<SafTreeFighter>[$name.text] super_awesome_fighter)
+    : name=STRING super_awesome_fighter
     ;
 
 super_awesome_fighter 
@@ -67,10 +104,18 @@ super_awesome_fighter
 attribute
     : (name=STRING EQUAL value=LEVEL) -> 
             ATTRIBUTE<SafTreeAttribute>[$name.text, $value.text]
+    {
+        attributes.add();
+    }
     ;
 
 behaviour
     : tactic+ -> ^(TACTIC<SafTreeTactic>["_Tactic"] tactic)+
+    {
+        List<Tactic> tactics = new ArrayList<Tactic>;
+
+        behaviour = new Behaviour(tactics);
+    }
     ;
 
 tactic
@@ -78,14 +123,19 @@ tactic
             ^(COMPOSED_CONDITION<SafTreeComposedCondition>["_Condition"] composed_condition)
             ^(MOVE<SafTreeMove>[$move.text])
             ^(ATTACK<SafTreeAttack>[$attack.text])
+    {
+        tactics.add();
+    }
     ;
 
 composed_condition
     : (condition (logic^ condition)*)
     ;
 
-condition
-    : name=STRING -> CONDITION<SafTreeCondition>[$name.text]
+//condition returns [List<SafTreeCondition> condList = new ArrayList<SafTreeCondition>()]
+condition returns [int blah = 0]
+    : name=STRING -> CONDITION {blah += 1}
+//    : name=STRING -> CONDITION<SafTreeCondition>[$name.text]
     ;
 
 logic
@@ -98,7 +148,7 @@ logic
  *--------------------------------------------------------------------------*/
 
 LEVEL   
-    : '1'..'9' | '10'
+    : ('1'..'9')+
     ;
 
 STRING  
