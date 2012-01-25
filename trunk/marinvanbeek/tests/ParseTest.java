@@ -83,7 +83,7 @@ public class ParseTest
     public void safFilesTest(String fileName, boolean passes)
         throws IOException, RecognitionException
     {
-        System.out.println("Testing " + fileName + "...");
+        System.out.println("Testing " + fileName + ">");
 
         ANTLRFileStream input = new ANTLRFileStream("tests/safs/" + fileName);
         SAFLexer lexer = new SAFLexer(input);
@@ -99,10 +99,14 @@ public class ParseTest
         List<String> syntaxErrors = new ArrayList<String>();
 
         boolean wellFormed = fighter.isWellFormed(syntaxErrors);
-        System.out.println("Errors: " + syntaxErrors);
+        System.out.println("Reported errors:");
+        for (String error : syntaxErrors)
+        {
+            System.out.println(" -- " + error);
+        }
         Assert.assertEquals(passes, wellFormed);
 
-        System.out.println("...passed (fighter.isWellFormed() = " + passes + 
+        System.out.println("<passed (fighter.isWellFormed() = " + passes + 
                            ").");
         System.out.println();
     }
