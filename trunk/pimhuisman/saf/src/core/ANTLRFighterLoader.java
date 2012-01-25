@@ -9,10 +9,11 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.CommonTree;
 
+import parser.SAFLexer;
+import parser.SAFParser;
+
 import data.Fighter;
 
-import antlr.SAFLexer;
-import antlr.SAFParser;
 
 public class ANTLRFighterLoader implements FighterLoader {
 
