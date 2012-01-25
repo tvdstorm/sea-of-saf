@@ -40,8 +40,7 @@ class Fighter implements SyntaxCheck
 
         if (nrParseErrors > 0)
         {
-            errorMessages.add("There were (was) " + nrParseErrors + " parse " +
-                              "error(s).");
+            errorMessages.add("Number of parse errors: " + nrParseErrors);
             wellFormed = false;
         }
 
