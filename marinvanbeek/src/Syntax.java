@@ -13,6 +13,8 @@ class Fighter implements SyntaxCheck
 {
     public static final Integer MAX_HEALTH = 100;
 
+    private int nrParseErrors = 0;
+
     private String name;
     private int healthPoints;
     private List<Attribute> attributes;
@@ -29,18 +31,37 @@ class Fighter implements SyntaxCheck
 
     public boolean isWellFormed(List<String> errorMessages)
     {
+        boolean wellFormed = true;
+
         for (Attribute attribute : attributes)
         {
-            attribute.isWellFormed(errorMessages);
+            wellFormed &= attribute.isWellFormed(errorMessages);
         }
 
-        return behaviour.isWellFormed(errorMessages);
+        if (nrParseErrors > 0)
+        {
+            errorMessages.add("There were (was) " + nrParseErrors + " parse " +
+                              "error(s).");
+            wellFormed = false;
+        }
+
+        if (!behaviour.isWellFormed(errorMessages))
+        {
+            wellFormed = false;
+        }
+
+        return wellFormed;
     }
 
     public Action act(State state)
     {
         return new Action(new Move("illegal_name"), 
                              new Attack("illegal_name"));
+    }
+
+    public void setParseErrors(int nr)
+    {
+        nrParseErrors = nr;
     }
 }
 
@@ -130,6 +151,11 @@ class Behaviour implements SyntaxCheck
                                   requiredCondition + "'.");
                 wellFormed = false;
             }
+        }
+
+        for (Tactic tactic : tactics)
+        {
+            wellFormed &= tactic.isWellFormed(errorMessages);
         }
 
         return wellFormed;
