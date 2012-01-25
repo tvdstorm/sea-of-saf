@@ -10,6 +10,8 @@ import org.antlr.stringtemplate.*;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ParseTest
 {
@@ -37,6 +39,7 @@ public class ParseTest
 
     @Test
     public void legalFilesTest()
+        throws IOException, RecognitionException
     {
         String[] legalFiles = new String[] {"legal_minimum.saf",
                                             "legal_maximum.saf"};
@@ -46,22 +49,24 @@ public class ParseTest
             safFilesTest(fileName, true);
         }
     }
-
-    @Test(expected = NumberFormatException.class)
-    public void illegalNumberTest()
-    {
-        String[] illegalFiles = new String[] {"illegal_attribute_value.saf"};
-
-        for (String fileName : illegalFiles)
-        {
-            safFilesTest(fileName, false);
-        }
-    }
+//
+//    @Test(expected = NumberFormatException.class)
+//    public void illegalNumberTest()
+//    {
+//        String[] illegalFiles = new String[] {"illegal_attribute_value.saf"};
+//
+//        for (String fileName : illegalFiles)
+//        {
+//            safFilesTest(fileName, false);
+//        }
+//    }
 
     @Test
     public void illegalFilesTest()
+        throws IOException, RecognitionException
     {
         String[] illegalFiles = new String[] {"illegal_attribute_name.saf",
+                                              "illegal_attribute_value.saf",
                                               "illegal_condition.saf",
                                               "illegal_attack.saf",
                                               "illegal_missing_requirement.saf",
@@ -76,31 +81,30 @@ public class ParseTest
     }
 
     public void safFilesTest(String fileName, boolean passes)
+        throws IOException, RecognitionException
     {
-        try
+        System.out.println("Testing " + fileName + "...");
+
+        ANTLRFileStream input = new ANTLRFileStream("tests/safs/" + fileName);
+        SAFLexer lexer = new SAFLexer(input);
+        SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
+        parser.parse();
+        Fighter fighter = parser.fighter;
+
+        if (parser.getNumberOfSyntaxErrors() > 0)
         {
-            System.out.println("Testing " + fileName + "...");
+            fighter.setParseErrors(parser.getNumberOfSyntaxErrors());
+        }
 
-            ANTLRFileStream input = new ANTLRFileStream("safs/" + fileName);
-            SAFLexer lexer = new SAFLexer(input);
-            SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
-            SafTreeNode tree = (SafTreeNode)parser.parse().getTree();
+        List<String> syntaxErrors = new ArrayList<String>();
 
-            if (parser.getNumberOfSyntaxErrors() > 0)
-                tree.setSyntaxError();
+        boolean wellFormed = fighter.isWellFormed(syntaxErrors);
+        System.out.println("Errors: " + syntaxErrors);
+        Assert.assertEquals(passes, wellFormed);
 
-            Assert.assertEquals(passes, tree.isWellFormed());
-
-            System.out.println("...passed (tree.isWellFormed() = " + passes + 
-                               ").");
-            System.out.println();
-        } catch (IOException e)
-        {
-            System.out.println(e.getMessage());
-        } catch (RecognitionException e)
-        {
-            System.out.println(e.getMessage());
-        } 
+        System.out.println("...passed (fighter.isWellFormed() = " + passes + 
+                           ").");
+        System.out.println();
     }
 }
 
