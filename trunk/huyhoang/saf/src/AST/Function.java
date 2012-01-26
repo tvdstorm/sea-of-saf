@@ -16,4 +16,9 @@ public class Function extends Statement {
 	{
 		parameters.add(parameter);
 	}
+	
+	public String toString()
+	{
+		return String.format("Function: %s", this.functionName);
+	}
 }
