@@ -2,12 +2,14 @@
 public interface FighterGrammarVisitor
 {
   public Object visit(SimpleNode node, Object data);
-  public Object visit(ASTFighterNode node, Object data);
-  public Object visit(ASTFighter node, Object data);
-  public Object visit(ASTFighterPersonality node, Object data);
+  public Object visit(ASTparseFighter node, Object data);
+  public Object visit(ASTparseFighterStructure node, Object data);
+  public Object visit(ASTfighterOptions node, Object data);
+  public Object visit(ASTfighterPersonalityRule node, Object data);
   public Object visit(ASTfighterCharacteristicsRule node, Object data);
+  public Object visit(ASTactionType node, Object data);
   public Object visit(ASTIdentifier node, Object data);
   public Object visit(ASTAssignment node, Object data);
   public Object visit(ASTCharacteristicValue node, Object data);
 }
-/* JavaCC - OriginalChecksum=5978801266b43f9a17d6dff541beac56 (do not edit this line) */
+/* JavaCC - OriginalChecksum=9c3ffd19f5bfbd1006a6104f4ff6cb7c (do not edit this line) */
