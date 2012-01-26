@@ -1,13 +1,17 @@
 package model.condition;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
+import model.ConditionType;
 
 @XmlRootElement(name = "andCondition")
 public class And extends Composite {
 
 	@Override
-	public boolean evaluate() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean evaluate(List<ConditionType> conditions) {
+		return this.getFirstCondition().evaluate(conditions) && 
+				this.getSecondCondition().evaluate(conditions);
 	}
 }
