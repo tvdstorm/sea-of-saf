@@ -1,8 +1,12 @@
 package model.condition;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlAccessType;
+
+import model.ConditionType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Composite extends Condition {

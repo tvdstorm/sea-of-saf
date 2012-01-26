@@ -1,6 +1,6 @@
 package model;
 
-public enum CharacteristicOptions {
+public enum CharacteristicType {
 	KICK_POWER("kickPower"), 
 	KICK_REACH("kickReach"),
 	PUNCH_POWER("punchPower"), 
@@ -8,7 +8,7 @@ public enum CharacteristicOptions {
 	
 	private String text;
 	
-	CharacteristicOptions(String text) {
+	CharacteristicType(String text) {
 		this.text = text;
 	}
 

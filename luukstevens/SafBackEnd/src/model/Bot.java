@@ -39,9 +39,9 @@ public class Bot {
 		return behaviourRules;
 	}
 	
-	public int getCharacteristicValue(CharacteristicOptions characteristicOption) {
+	public int getCharacteristicValue(CharacteristicType characteristicType) {
 		for(Characteristic characteristic : characteristics) {
-			if(characteristicOption.getText().equals(characteristic.getName())) {
+			if(characteristicType.getText().equals(characteristic.getName())) {
 				return characteristic.getValue();
 			}
 		}
