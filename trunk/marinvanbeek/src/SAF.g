@@ -52,6 +52,7 @@ parse
         Behaviour behaviour = new Behaviour(tactics);
         String fighterName = $name.text;
         fighter = new Fighter(fighterName, attributes, behaviour);
+        fighter.setParseErrors(getNumberOfSyntaxErrors());
     }
     ;
 

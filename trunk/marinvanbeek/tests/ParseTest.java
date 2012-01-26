@@ -92,11 +92,6 @@ public class ParseTest
         parser.parse();
         Fighter fighter = parser.fighter;
 
-        if (parser.getNumberOfSyntaxErrors() > 0)
-        {
-            fighter.setParseErrors(parser.getNumberOfSyntaxErrors());
-        }
-
         List<String> syntaxErrors = new ArrayList<String>();
 
         boolean wellFormed = fighter.isWellFormed(syntaxErrors);
