@@ -11,12 +11,7 @@ options {
 	import data.*;
 }
 
-
 fighter returns [Fighter result]
-	: { result = new Fighter("", null, null); }
-	;
-
-/*fighter returns [Fighter result]
 	:	
 		IDENTIFIER 
 			p=personality
@@ -32,11 +27,10 @@ personality returns [Personality result]
 characteristic returns [Characteristic result]
 	: 	CHARACTERISTIC_TYPE NUMBER
 	{ 
-		result = new Characteristic();
-		result.setPunchReach(Integer.parseInt($NUMBER.text));
+		result = new Characteristic($CHARACTERISTIC_TYPE.text, Integer.parseInt($NUMBER.text));
 		System.out.println("made a characteristic");
 	}
-	;*/
+	;
 	//: 	bla=characteristicType '=' NUMBER
 	//	{ result = new Characteristic(); 
 	//		result.setKickPower(Integer.parseInt($NUMBER.text));

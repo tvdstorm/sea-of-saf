@@ -1,7 +1,7 @@
 gunit SAF;
 
 @header {
-  package Antlr;
+  package parser;
 }
 
 characteristic	:
