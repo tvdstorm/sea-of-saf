@@ -1,22 +1,31 @@
 package model.condition;
 
-public abstract class Composite extends Condition {
-	private Checkable firstCondition;
-	private Checkable secondCondition;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlAccessType;
 
-	public Checkable getFirstCondition() {
-		return firstCondition;
-	}
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Composite extends Condition {
 
-	public void setFirstCondition(Checkable firstCondition) {
-		this.firstCondition = firstCondition;
-	}
+    @XmlElementRef
+    private Condition[] condition = new Condition[2];
 
-	public Checkable getSecondCondition() {
-		return secondCondition;
-	}
+    public Condition getFirstCondition() {
+        return condition[0];
+    }
 
-	public void setSecondCondition(Checkable secondCondition) {
-		this.secondCondition = secondCondition;
-	}
+    public void setFirstCondition(Condition firstCondition) {
+        condition[0] = firstCondition;
+    }
+
+    public Condition getSecondCondition() {
+        return condition[1];
+    }
+
+    public void setSecondCondition(Condition secondCondition) {
+        condition[1] = secondCondition;
+    }
+
 }

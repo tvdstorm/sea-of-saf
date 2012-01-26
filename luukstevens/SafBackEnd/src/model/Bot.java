@@ -12,6 +12,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import model.condition.And;
+import model.condition.Or;
+import model.condition.Simple;
+
 @XmlRootElement(name = "bot")
 public class Bot {
 	private static final int DEFAULT_CHARACTERISTIC_VALUE = 5;
@@ -46,7 +50,7 @@ public class Bot {
 	}
 	
 	public static Bot deserialize(String fileLocation) throws JAXBException, FileNotFoundException {
-		JAXBContext context = JAXBContext.newInstance(Bot.class);
+		JAXBContext context = JAXBContext.newInstance(Bot.class, And.class, Or.class, Simple.class);
 		Unmarshaller um = context.createUnmarshaller();
 		return (Bot) um.unmarshal(new FileReader(fileLocation));
 	}
