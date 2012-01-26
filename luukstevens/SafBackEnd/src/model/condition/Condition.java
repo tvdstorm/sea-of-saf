@@ -1,7 +1,5 @@
 package model.condition;
 
-import javax.xml.bind.annotation.XmlType;
-
-public class Condition {
+public abstract class Condition implements Evaluable {
 
 }
