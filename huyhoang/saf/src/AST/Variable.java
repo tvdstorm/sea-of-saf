@@ -17,4 +17,11 @@ public class Variable {
 		this.name = name;
 		this.variableValue = initializationValue;
 	}
+	
+	// Create uninitialized variable (please use jdoc)
+	public Variable(String name)
+	{
+		this.name = name;
+		this.variableValue = null;
+	}
 }
