@@ -36,7 +36,7 @@ fighter				:	IDENTIFIER '{'
 						->	^(FIGHTER
 								^(NAME IDENTIFIER)
 								^(PERSONALITY personality)
-								^(BEHAVIOUR behaviour)
+								//^(BEHAVIOUR behaviour)
 							)
 					;
 

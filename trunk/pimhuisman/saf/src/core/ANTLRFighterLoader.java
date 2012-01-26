@@ -8,9 +8,12 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.CommonTreeNodeStream;
 
 import parser.SAFLexer;
 import parser.SAFParser;
+import parser.SAFParser.fighter_return;
+import parser.SAFTreeWalker;
 
 import data.Fighter;
 
@@ -32,6 +35,15 @@ public class ANTLRFighterLoader implements FighterLoader {
 				CommonTree parserTree = (CommonTree) parser.fighter().getTree();
 				System.out.println(parserTree.toStringTree());
 				printTree(parserTree, 0);
+				
+				fighter_return evaluator = parser.fighter();
+				System.out.println(evaluator.getTree().toString());
+				
+				CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(evaluator.getTree());
+				SAFTreeWalker walker = new SAFTreeWalker(nodeStream);
+				Fighter fighter = walker.fighter();
+				System.out.println("done! result = " + fighter.getName());
+				
 				
 			} catch (RecognitionException exc) {
 				exc.printStackTrace();
