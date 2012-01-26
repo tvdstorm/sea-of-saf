@@ -42,6 +42,7 @@ public class ParseTest
         throws IOException, RecognitionException
     {
         String[] legalFiles = new String[] {"legal_minimum.saf",
+                                            "logic_test.saf",
                                             "legal_maximum.saf"};
 
         for (String fileName : legalFiles)
@@ -105,6 +106,9 @@ public class ParseTest
             System.out.println(" -- " + error);
         }
         Assert.assertEquals(passes, wellFormed);
+
+        if (passes)
+            System.out.println(fighter);
 
         System.out.println("<passed (fighter.isWellFormed() = " + passes + 
                            ").");

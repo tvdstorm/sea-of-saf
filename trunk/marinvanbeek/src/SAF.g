@@ -46,11 +46,10 @@ tokens {
 
 parse
     : {
-        Behaviour behaviour;
     }
       name=STRING super_awesome_fighter
     { 
-        behaviour = new Behaviour(tactics);
+        Behaviour behaviour = new Behaviour(tactics);
         String fighterName = $name.text;
         fighter = new Fighter(fighterName, attributes, behaviour);
     }
@@ -68,41 +67,45 @@ attribute
     }
     ;
 
-tactic
-    : condition=STRING SQUARE_OPEN move=STRING attack=STRING SQUARE_CLOSE
-    {
-        Logic logCond = new Condition($condition.text);
-        Action action = new Action(new Move($move.text), 
-                                   new Attack($attack.text));
-
-        tactics.add(new Tactic(logCond, action));
-    }
-    ;
-
 //tactic
-//    : {
-//        Logic condition;
-//    }
-//        logic SQUARE_OPEN move=STRING attack=STRING SQUARE_CLOSE
+//    : condition=STRING SQUARE_OPEN move=STRING attack=STRING SQUARE_CLOSE
 //    {
+//        Logic logCond = new Condition($condition.text);
 //        Action action = new Action(new Move($move.text), 
 //                                   new Attack($attack.text));
 //
-//        tactics.add(new Tactic(condition, action));
+//        tactics.add(new Tactic(logCond, action));
 //    }
 //    ;
-//
-//logic
-//    : '(' logic AND logic ')'
-//    | '(' logic OR logic ')'
-//    {
-//        
-//    }
-//    | condition=STRING
-//    {
-//        condition = new Condition($condition.text);
-//    }
-//    ;
+
+tactic
+    :
+        logic SQUARE_OPEN move=STRING attack=STRING SQUARE_CLOSE
+    {
+        Action action = new Action(new Move($move.text), 
+                                   new Attack($attack.text));
+
+        tactics.add(new Tactic($logic.operand, action));
+    }
+    ;
+
+logic returns [Logic operand]
+    :
+    '(' o1=logic (op=AND|op=OR) o2=logic ')'
+    {
+        if ($op.text.equals("and"))
+        {
+            $operand = new LogicAnd($o1.operand, $o2.operand);
+        } else
+        {
+            $operand = new LogicOr($o1.operand, $o2.operand);
+        }
+    }
+    | condition=STRING
+    {
+        $operand = new Condition($condition.text);
+    }
+    ;
  
 
 /*--------------------------------------------------------------------------
