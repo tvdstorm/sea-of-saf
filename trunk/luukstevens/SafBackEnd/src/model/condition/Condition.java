@@ -1,8 +1,7 @@
 package model.condition;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement
-public abstract class Condition implements Checkable {
-	
+public class Condition {
+
 }

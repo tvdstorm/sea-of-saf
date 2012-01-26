@@ -1,10 +1,9 @@
 package model;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "Characteristic")
+@XmlType(name = "Characteristic")
 public class Characteristic {
 	@XmlAttribute
 	private String name;
