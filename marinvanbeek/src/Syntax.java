@@ -9,6 +9,11 @@ interface SyntaxCheck
     public boolean isWellFormed(List<String> errorMessages);
 }
 
+interface RandomGenerator<T>
+{
+    public T getRandom();
+}
+
 class Fighter implements SyntaxCheck
 {
     public static final Integer MAX_HEALTH = 100;
@@ -65,8 +70,16 @@ class Fighter implements SyntaxCheck
 
     public String toString()
     {
-        return name + ";\n attrs: " + attributes + ";\n behaviour: " + 
-               behaviour;
+        String stringRep = name + "\n{\n";
+
+        for (Attribute attribute : attributes)
+        {
+            stringRep += "    " + attribute + "\n";
+        }
+
+        stringRep += behaviour + "}\n";
+
+        return stringRep;
     }
 }
 
@@ -176,7 +189,7 @@ class Behaviour implements SyntaxCheck
         String s = "";
         for (Tactic tactic : tactics)
         {
-            s += tactic + ", ";
+            s += "    " + tactic + "\n";
         }
 
         return s;
@@ -207,7 +220,7 @@ class Tactic implements SyntaxCheck
 
     public String toString()
     {
-        return condition + " -> " + action;
+        return condition + " [" + action + "]";
     }
 }
 
@@ -254,7 +267,7 @@ class LogicAnd extends LogicOperator
 
     public String toString()
     {
-        return "(" + operand1 + " && " + operand2 + ")";
+        return "(" + operand1 + " and " + operand2 + ")";
     }
 }
 
@@ -273,7 +286,7 @@ class LogicOr extends LogicOperator
 
     public String toString()
     {
-        return "(" + operand1 + " || " + operand2 + ")";
+        return "(" + operand1 + " or " + operand2 + ")";
     }
 }
 
@@ -348,7 +361,7 @@ class Action implements SyntaxCheck
 
     public String toString()
     {
-        return "<" + move + " " + attack + ">";
+        return move + " " + attack;
     }
 }
 
