@@ -1,0 +1,9 @@
+logic_test
+{
+    punch_power = 3
+    punch_reach = 4
+    kick_power = 8
+    kick_reach = 5
+    ((near or stronger) and stronger) [run_away block_low] 
+    always [walk_towards punch_low]
+}

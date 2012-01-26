@@ -62,6 +62,12 @@ class Fighter implements SyntaxCheck
     {
         nrParseErrors = nr;
     }
+
+    public String toString()
+    {
+        return name + ";\n attrs: " + attributes + ";\n behaviour: " + 
+               behaviour;
+    }
 }
 
 class Attribute implements SyntaxCheck
@@ -111,6 +117,11 @@ class Attribute implements SyntaxCheck
     {
         return value;
     }
+
+    public String toString()
+    {
+        return name + " = " + value;
+    }
 }
 
 class Behaviour implements SyntaxCheck
@@ -159,6 +170,17 @@ class Behaviour implements SyntaxCheck
 
         return wellFormed;
     }
+
+    public String toString()
+    {
+        String s = "";
+        for (Tactic tactic : tactics)
+        {
+            s += tactic + ", ";
+        }
+
+        return s;
+    }
 }
 
 class Tactic implements SyntaxCheck
@@ -181,6 +203,11 @@ class Tactic implements SyntaxCheck
     public Logic getCondition()
     {
         return condition;
+    }
+
+    public String toString()
+    {
+        return condition + " -> " + action;
     }
 }
 
@@ -224,6 +251,11 @@ class LogicAnd extends LogicOperator
         return operand1.isTrue(state) && 
                operand2.isTrue(state);
     }
+
+    public String toString()
+    {
+        return "(" + operand1 + " && " + operand2 + ")";
+    }
 }
 
 class LogicOr extends LogicOperator
@@ -237,6 +269,11 @@ class LogicOr extends LogicOperator
     {
         return operand1.isTrue(state) || 
                operand2.isTrue(state);
+    }
+
+    public String toString()
+    {
+        return "(" + operand1 + " || " + operand2 + ")";
     }
 }
 
@@ -285,6 +322,11 @@ class Condition implements Logic
 
         return wellFormed;
     }
+
+    public String toString()
+    {
+        return name;
+    }
 }
 
 class Action implements SyntaxCheck
@@ -302,6 +344,11 @@ class Action implements SyntaxCheck
     {
         return move.isWellFormed(errorMessages) &&
                attack.isWellFormed(errorMessages);
+    }
+
+    public String toString()
+    {
+        return "<" + move + " " + attack + ">";
     }
 }
 
@@ -336,6 +383,11 @@ class Move implements SyntaxCheck
 
         return wellFormed;
     }
+
+    public String toString()
+    {
+        return name;
+    }
 }
 
 class Attack implements SyntaxCheck
@@ -367,6 +419,11 @@ class Attack implements SyntaxCheck
         }
 
         return wellFormed;
+    }
+
+    public String toString()
+    {
+        return name;
     }
 }
 
