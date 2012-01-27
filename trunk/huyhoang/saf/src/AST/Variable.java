@@ -4,11 +4,13 @@ public class Variable {
 	private String name;
 	private Object variableValue;
 	
-	public Object getVariableValue() {
+	public Object getVariableValue() 
+	{
 		return variableValue;
 	}
 
-	public void setVariableValue(Object variableValue) {
+	public void setVariableValue(Object variableValue) 
+	{
 		this.variableValue = variableValue;
 	}
 

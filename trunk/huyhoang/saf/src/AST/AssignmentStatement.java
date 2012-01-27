@@ -1,9 +1,16 @@
 package AST;
 
+import Evaluator.EvaluationManager;
+
 public class AssignmentStatement extends Statement
 {
 	protected String variableName;
 	protected int value;
+	
+	public int getValue()
+	{
+		return this.value;
+	}
 	
 	public AssignmentStatement(String variableName, int value)
 	{
@@ -13,7 +20,14 @@ public class AssignmentStatement extends Statement
 	
 	public String toString()
 	{
-		return	"\t" + this.variableName + "\r\n" +
-				"\t" + this.value;
+		return	"AssignmentStatement\r\n" +
+				"\tVariable name: " + this.variableName + "\r\n" +
+				"\tValue: " + this.value;
+	}
+
+	@Override
+	public void accept(EvaluationManager visitor)
+	{
+		visitor.visit(this);
 	}
 }

@@ -1,5 +1,7 @@
 package AST;
 
+import Evaluator.EvaluationManager;
+
 public class LogicalExpression extends Statement 
 {
 	public enum ConditionalOperators 
@@ -27,10 +29,16 @@ public class LogicalExpression extends Statement
 		this.rightExpression = rightExpression;
 	}
 	
-	public String toString()
+	public String toString(String prefix)
 	{
-		return	"LogicalExpression\r\n" +
-				"	" + this.leftExpression.toString() + "\r\n" +
-				"	" + this.rightExpression.toString() + "\r\n";
+		return	prefix + "LogicalExpression\r\n" +
+				prefix + "\t" + this.leftExpression.toString() + "\r\n" +
+				prefix + "\t" + this.rightExpression.toString() + "\r\n";
+	}
+
+	@Override
+	public void accept(EvaluationManager visitor) 
+	{
+		visitor.visit(this);
 	}
 }
