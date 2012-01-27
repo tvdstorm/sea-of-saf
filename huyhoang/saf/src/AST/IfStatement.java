@@ -2,6 +2,8 @@ package AST;
 
 import java.util.*;
 
+import Evaluator.EvaluationManager;
+
 public class IfStatement extends Statement
 {
 	Object evaluationExpression;
@@ -15,14 +17,19 @@ public class IfStatement extends Statement
 	
 	public String toString()
 	{
-		return	"IfStatement\r\n" +
-				"	Expression: " + evaluationExpression.toString() + "\r\n" +
-				"	Statements: " + statements.toString();
+		return "IfStatement\r\n" +
+			   "\tExpression: " + evaluationExpression.toString() + "\r\n" +
+			   "\tStatements: " + statements.toString();
 	}
-	
-	/*
-	public IfStatement( LogicalExpression expression, List<Statement> statements )
+
+	@Override
+	public void accept(EvaluationManager visitor)
 	{
-	
-	}*/
+		visitor.visit(this);
+		for (Statement statement : statements)
+		{
+			System.out.println(statement.toString());
+			statement.accept(visitor);
+		}
+	}
 }
