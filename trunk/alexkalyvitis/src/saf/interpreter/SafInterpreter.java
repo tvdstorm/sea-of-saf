@@ -1,19 +1,19 @@
 package saf.interpreter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import saf.ast.*;
 
 public class SafInterpreter {
 	
-	private ArrayList<Fighter> fighters;
+	private List<Fighter> fighters;
 	
-	private String[] availableConditions = { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
+	private static final String[] availableConditions = { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
 	private String[] availableMoves = { "jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away" };
 	private String[] availableAttacks = { "punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high" };
 	private String[] availableStrengths = { "punchReach", "kickReach", "kickPower", "punchPower" };
 	
-	public SafInterpreter(ArrayList<Fighter> f){
+	public SafInterpreter(List<Fighter> f){
 		fighters = f;
 	}
 	
@@ -34,7 +34,7 @@ public class SafInterpreter {
 			}
 			for (Behavior behavior : fighter.getBehaviors()){
 				boolean behaviorFound = false;
-				for (String currentAvailableCondition : this.availableConditions){
+				for (String currentAvailableCondition : availableConditions){
 					if (behavior.getCondition().getName().equals(currentAvailableCondition)){
 						behaviorFound = true;
 						break;

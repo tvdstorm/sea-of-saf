@@ -1,6 +1,6 @@
 package saf.ast;
 
-public class Strength {
+public class Strength extends SafObject {
 	private String name;
 	private int value;
 	

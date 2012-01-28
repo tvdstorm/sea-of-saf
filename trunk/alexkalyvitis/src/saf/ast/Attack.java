@@ -1,6 +1,6 @@
 package saf.ast;
 
-public class Attack {
+public class Attack  extends SafObject{
 	private String name;
 	
 	public Attack(){

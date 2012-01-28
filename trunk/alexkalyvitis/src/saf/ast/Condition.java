@@ -1,6 +1,6 @@
 package saf.ast;
 
-public class Condition {
+public class Condition extends SafObject{
 	private String name;
 	
 	public Condition(){
