@@ -1,10 +1,10 @@
 package nodes;
 
-import org.antlr.runtime.*;
-
-public class Fighter extends SAFTree
+public class Fighter
 {
-	public Fighter(int id, String name) {
-		super((Token)new CommonToken(id, name));
-	}	
+	public Fighter(String name)
+	{
+		System.out.println(name);
+	}
+	
 }
