@@ -10,88 +10,47 @@ grammar SAF;
 
 bot 
 	:	IDENT '{' 
-			personality behaviour
+			(characterstics | rule)*
 	 	'}'
-	;
-
-personality
-	: 
-	characterstics*
 	;
 
 characterstics
 	:
 		IDENT '=' INTEGER
-	;
-		
-behaviour
-	:
-	rule*
-	;
-
+	;		
+	
 rule
 	:
-	 moveAction
-	|fightAction
-	|condition
+	function (operator function)* (ruleExpression)* 
 	;
-
-moveAction
-	:
-	  MOVEACTIONTYPE
-	|'choose(' MOVEACTIONTYPE MOVEACTIONTYPE')'
-	| MOVEACTIONTYPE 'or' MOVEACTIONTYPE
-	| MOVEACTIONTYPE 'and' MOVEACTIONTYPE
-	;
-
 	
-fightAction
+ruleExpression:
+	operator '(' rule ')'
+	;
+	
+operator
 	:
-	  FIGHTACTIONTYPE 
-	|'choose(' FIGHTACTIONTYPE FIGHTACTIONTYPE')'
-	| FIGHTACTIONTYPE 'or' FIGHTACTIONTYPE
-	| FIGHTACTIONTYPE 'and' FIGHTACTIONTYPE
-	;	
+	'and'	
+	|'or'
+	;
 		
-condition
+function
 	:
-	  CONDITIONTYPE
-	| CONDITIONTYPE'['moveAction fightAction']'  
-	| CONDITIONTYPE 'and' CONDITIONTYPE
-	| CONDITIONTYPE'['moveAction fightAction']' 'or' CONDITIONTYPE
-	| CONDITIONTYPE'['moveAction fightAction']' 'and' CONDITIONTYPE
-	;	
-
-CONDITIONTYPE 
-	:	'always' 
-	|	'near'
-	| 	'far'
-	|	'much_stronger'
-	|	'stronger'
-	|	'even'
-	|	'weaker'
-	|	'much_weaker'
+	IDENT '[' parameters ']'
 	;
 	
-MOVEACTIONTYPE 
-	:	'walk_towards'
-	|	'walk_away'
-	|	'run_towards'
-	|	'run_away'
-	|	'jump'
-	|	'crouch'
-	| 	'stand'
+parameters
+	:
+	IDENT IDENT
+	|choose IDENT
+	|IDENT choose
 	;
 	
-FIGHTACTIONTYPE 
-	:	'block_low'
-	|	'block_high'
-	| 	'punch_low'
-	|	'punch_high'
-	|	'kick_low'
-	|	'kick_high'
+choose
+	:
+	'choose(' IDENT IDENT ')'
 	;
-
+	
 INTEGER : '0'..'9'+;
-IDENT : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')*;
+IDENT : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9'| '_')*;
 WS : (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
