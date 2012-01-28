@@ -15,6 +15,12 @@ public class Fighter extends SafObject{
 		this.behaviors = new ArrayList<Behavior>();
 	}
 	
+	public Fighter(String n){
+		this.name = n;
+		this.strengths = new ArrayList<Strength>();
+		this.behaviors = new ArrayList<Behavior>();
+	}
+	
 	public void setName(String n){ this.name = n; }
 	public void appendName(String n){ this.name += " " + n; }
 	public void addStrength(Strength s){ this.strengths.add(s); }
@@ -24,4 +30,14 @@ public class Fighter extends SafObject{
 	public String getName(){ return this.name; }
 	public List<Strength> getStrengths(){ return this.strengths; }
 	public List<Behavior> getBehaviors(){ return this.behaviors; }
+	
+	public void print(){
+		System.out.println("Name: " + name);
+		for (Strength strength : strengths){
+			System.out.println("\tStrength :" + strength.toString());
+		}
+		for (Behavior behavior : behaviors){
+			System.out.println("\tBehavior :" + behavior);
+		}
+	}
 }
