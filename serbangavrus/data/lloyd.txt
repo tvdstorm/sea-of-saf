@@ -7,4 +7,7 @@ lloyd
   far [run_towards kick_low]
   near [run_away kick_low]
   near [crouch punch_low]
+even or uneven[choose(crouch walk_towards) choose(block_high
+punch_low)]
+always and never[crouch block_low]
 }

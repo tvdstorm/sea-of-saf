@@ -5,7 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.antlr.runtime.ANTLRFileStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
+
+import antlrgenerated.*;
+import antlrgenerated.SAFParser.fighter_return;
+import nodes.*;
 
 
 public class SAF
@@ -18,15 +25,22 @@ public class SAF
 		String file_path = getFighterFile();
 		try
 		{
-			System.out.println("Loading fighter AST..");
-			FighterTreeAdaptor fightertree = new FighterTreeAdaptor(file_path);
+			// Get the CharStream for the file where the data is
+			CharStream cs = new ANTLRFileStream(file_path);
 			
-			System.out.println("Exporting AST..");
-			fightertree.exportTree("treegraph");
-
-			fightertree.getFighter();
+			// Get the ANTLR generated lexer and parser
+			SAFLexer lexer = new SAFLexer(cs);
+			CommonTokenStream tokens = new CommonTokenStream();
+			tokens.setTokenSource(lexer);
+			SAFParser parser = new SAFParser(tokens);
 			
-			System.out.println("Done.");
+			// Get the CommonTree
+			SAFParser.fighter_return fr = parser.fighter();
+			Fighter f = fr.f;
+			f.haha();
+			
+			//CommonTree tree = (CommonTree)fighter.getTree();
+			//this.tree = tree;
 		}
 		catch(FileNotFoundException e)
 		{
