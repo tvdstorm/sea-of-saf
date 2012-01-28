@@ -1,6 +1,6 @@
 package saf.ast;
 
-public class Behavior extends SafObject{
+public class Behavior {
 	private Condition condition;
 	private Move move;
 	private Attack attack;
@@ -20,4 +20,9 @@ public class Behavior extends SafObject{
 	public Condition getCondition(){ return this.condition; }
 	public Move getMove(){ return this.move; }
 	public Attack getAttack(){ return this.attack; }
+	
+	@Override
+	public String toString(){
+		return condition.getCondition() + "\n\t\tMove: " + move.getName() + "\n\t\tAttack: " + attack.getName();
+	}
 }

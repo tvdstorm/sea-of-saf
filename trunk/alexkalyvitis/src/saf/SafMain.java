@@ -44,6 +44,11 @@ public class SafMain {
 			} else {
 			    System.out.println("Interpreting Failed");
 			}
+			
+			// Print AST
+			for(Fighter fighter : fighters){
+				fighter.print();
+			}
 	    }
 	    catch(Exception e) {
 	        System.out.println("Error");

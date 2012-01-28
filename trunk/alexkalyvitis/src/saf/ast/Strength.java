@@ -21,4 +21,9 @@ public class Strength extends SafObject {
 	
 	public String getName(){ return this.name; }
 	public int getValue(){ return this.value; }
+	
+	@Override
+	public String toString(){
+		return "\n\t\tName: " + name + "\n\t\tValue: " + value;
+	}
 }

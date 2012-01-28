@@ -13,7 +13,7 @@ Kyle Broflovski
 	kickPower = 6
 	punchReach = 7
 	punchPower = 7
-	near [jump kick_high]
+	near and weaker [jump kick_high]
 	far [choose(run_towards walk_towards) kick_high]
 }
 Stan Marsh
@@ -23,7 +23,7 @@ Stan Marsh
 	punchReach = 9
 	punchPower = 8
 	near [walk_towards choose(punch_low punch_high)]
-	far [run_towards choose(punch_low punch_high)]
+	far or stronger [run_towards choose(punch_low punch_high)]
 }
 Kenny McCormick
 {
