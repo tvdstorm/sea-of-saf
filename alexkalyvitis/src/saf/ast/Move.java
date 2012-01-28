@@ -1,6 +1,6 @@
 package saf.ast;
 
-public class Move {
+public class Move extends SafObject {
 	private String name;
 	
 	public Move(){

@@ -1,12 +1,13 @@
 package saf.ast;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Fighter {
+public class Fighter extends SafObject{
 	
 	private String name;
-	private ArrayList<Strength> strengths;
-	private ArrayList<Behavior> behaviors;
+	private List<Strength> strengths;
+	private List<Behavior> behaviors;
 	
 	public Fighter(){
 		this.name = "";
@@ -18,9 +19,9 @@ public class Fighter {
 	public void appendName(String n){ this.name += " " + n; }
 	public void addStrength(Strength s){ this.strengths.add(s); }
 	public void addBehavior(Behavior b){ this.behaviors.add(b); }
-	public void addBehaviors(ArrayList<Behavior> b){ this.behaviors.addAll(b); }
+	public void addBehaviors(List<Behavior> b){ this.behaviors.addAll(b); }
 	
 	public String getName(){ return this.name; }
-	public ArrayList<Strength> getStrengths(){ return this.strengths; }
-	public ArrayList<Behavior> getBehaviors(){ return this.behaviors; }
+	public List<Strength> getStrengths(){ return this.strengths; }
+	public List<Behavior> getBehaviors(){ return this.behaviors; }
 }

@@ -1,6 +1,6 @@
 package saf.ast;
 
-public class Behavior {
+public class Behavior extends SafObject{
 	private Condition condition;
 	private Move move;
 	private Attack attack;
