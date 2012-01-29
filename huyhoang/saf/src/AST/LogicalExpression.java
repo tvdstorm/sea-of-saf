@@ -1,8 +1,9 @@
 package AST;
 
 import Evaluator.EvaluationManager;
+import Game.Interpreter;
 
-public class LogicalExpression extends Statement 
+public class LogicalExpression implements Statement 
 {
 	public enum ConditionalOperators 
 	{ 
@@ -10,21 +11,28 @@ public class LogicalExpression extends Statement
 		OrOperator 
 	}
 	
-	private Object leftExpression;
-	private Object rightExpression;
+	private ConditionalOperators conditionalOperator;
+	private Statement leftExpression;
+	private Statement rightExpression;
 
-	public Object getLeftExpression() 
+	public ConditionalOperators getConditionalOperator()
+	{
+		return conditionalOperator;
+	}
+	
+	public Statement getLeftExpression() 
 	{
 		return leftExpression;
 	}
 	
-	public Object getRightExpression() 
+	public Statement getRightExpression() 
 	{
 		return rightExpression;
 	}
 	
-	public LogicalExpression(ConditionalOperators operator, Object leftExpression, Object rightExpression )
+	public LogicalExpression(ConditionalOperators operator, Statement leftExpression, Statement rightExpression )
 	{
+		this.conditionalOperator = operator;
 		this.leftExpression = leftExpression;
 		this.rightExpression = rightExpression;
 	}
@@ -38,6 +46,12 @@ public class LogicalExpression extends Statement
 
 	@Override
 	public void accept(EvaluationManager visitor) 
+	{
+		visitor.visit(this);
+	}
+
+	@Override
+	public void accept(Interpreter visitor)
 	{
 		visitor.visit(this);
 	}

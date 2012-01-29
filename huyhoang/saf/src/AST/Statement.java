@@ -1,6 +1,7 @@
 package AST;
 
-public abstract class Statement 
+public interface Statement 
 {
-	public abstract void accept(Evaluator.EvaluationManager visitor);
+	public void accept(Evaluator.EvaluationManager visitor);
+	public void accept(Game.Interpreter visitor);
 }

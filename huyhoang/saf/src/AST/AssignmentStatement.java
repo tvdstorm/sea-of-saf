@@ -1,12 +1,23 @@
 package AST;
 
 import Evaluator.EvaluationManager;
+import Game.Interpreter;
 
-public class AssignmentStatement extends Statement
+/**
+ * The AssignmentStatement object holds the "variable name" and the "variable value" of an assignment.
+ * The object allows an EvaluationManager and Interpreter object to visit.
+ * 
+ * @author huyhoang
+ */
+public class AssignmentStatement implements Statement
 {
-	protected String variableName;
-	protected int value;
+	private String variableName;
+	public String getVariableName()
+	{
+		return this.variableName;
+	}
 	
+	private int value;
 	public int getValue()
 	{
 		return this.value;
@@ -29,5 +40,17 @@ public class AssignmentStatement extends Statement
 	public void accept(EvaluationManager visitor)
 	{
 		visitor.visit(this);
+	}
+
+	@Override
+	public void accept(Interpreter visitor)
+	{
+		try
+		{
+			visitor.visit(this);
+		}
+		catch (Exception ex)
+		{
+		}
 	}
 }

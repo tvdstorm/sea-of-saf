@@ -3,10 +3,33 @@ package AST;
 import java.util.*;
 
 import Evaluator.EvaluationManager;
+import Game.Interpreter;
 
-public class Function extends Statement {
+/**
+ * This class holds a procedure call, and its parameters.
+ * 
+ * @author huyhoang
+ */
+public class Function implements Statement 
+{
 	List<Variable> parameters;
-	String functionName;
+	
+	private String functionName;
+	public String getFunctionName()
+	{
+		return functionName;
+	}
+	
+	private Class<?> returnType;
+	public Class<?> getReturnType()
+	{
+		return this.returnType;
+	}
+	
+	public void setReturnType(Class<?> returnType)
+	{
+		this.returnType = returnType;
+	}
 	
 	public Function(String functionName)
 	{
@@ -14,6 +37,7 @@ public class Function extends Statement {
 		parameters = new ArrayList<Variable>();
 	}
 	
+	// Variable may need to be refactored.
 	public void AddParameter(Variable parameter)
 	{
 		parameters.add(parameter);
@@ -22,12 +46,6 @@ public class Function extends Statement {
 	public String toString()
 	{
 		return String.format("Function: %s", this.functionName);
-	}
-
-	@Override
-	public void accept(EvaluationManager visitor) 
-	{
-		visitor.visit(this);
 	}
 	
 	public boolean equals(Object obj)
@@ -41,5 +59,17 @@ public class Function extends Statement {
 		{
 			return false;
 		}
+	}
+
+	@Override
+	public void accept(EvaluationManager visitor) 
+	{
+		visitor.visit(this);
+	}
+
+	@Override
+	public void accept(Interpreter visitor) 
+	{
+		visitor.visit(this);
 	}
 }

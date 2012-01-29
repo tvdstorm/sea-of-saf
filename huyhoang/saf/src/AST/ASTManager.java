@@ -3,11 +3,16 @@ package AST;
 import java.util.*;
 import java.lang.StringBuilder;
 
+/**
+ * The ASTManager class holds the AST of a SAF specification. The AST consists of a list of Statement objects.
+ * 
+ * @author huyhoang
+ */
 public class ASTManager
 {
 	private List<Statement> statements;
-	
-	public List<Statement> getStatements() {
+	public List<Statement> getStatements()
+	{
 		return statements;
 	}
 

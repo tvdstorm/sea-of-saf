@@ -1,19 +1,55 @@
 package AST;
 
-public class BoolExpression {
+import Evaluator.EvaluationManager;
+import Game.Interpreter;
+
+/**
+ * This class holds a Boolean Expression, consisting of a "left operand", "right operand", and the "operator".
+ * 
+ * @author huyhoang
+ */
+public class BoolExpression implements Statement
+{
 	public enum ComparisonOperators
 	{
 		equalsOperator
 	}
 	
-	private Object leftOperand;
-	private Object rightOperand;
-	private ComparisonOperators comparisonOperator;
+	private Statement leftOperand;
+	public Statement getLeftOperand()
+	{
+		return leftOperand;
+	}
 	
-	public BoolExpression(ComparisonOperators comparisonOperator, Object leftOperand, Object rightOperand)
+	// this may need refactoring... change it to Statement instead of Object.
+	private Object rightOperand;
+	public Object getRightOperand()
+	{
+		return rightOperand;
+	}
+	
+	private ComparisonOperators comparisonOperator;
+	public ComparisonOperators getComparisonOperator() 
+	{
+		return comparisonOperator;
+	}
+	
+	public BoolExpression(ComparisonOperators comparisonOperator, Statement leftOperand, Object rightOperand)
 	{
 		this.leftOperand 		= leftOperand;
 		this.rightOperand		= rightOperand;
 		this.comparisonOperator = comparisonOperator;
+	}
+
+	@Override
+	public void accept(EvaluationManager visitor)
+	{
+		visitor.visit(this);
+	}
+
+	@Override
+	public void accept(Interpreter visitor) 
+	{
+		visitor.visit(this);
 	}
 }
