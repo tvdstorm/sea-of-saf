@@ -1,9 +1,15 @@
 package AST;
 
-public class Variable {
+/* Please refactor it and call it Identifier. */
+public class Variable 
+{
 	private String name;
-	private Object variableValue;
+	public String getName()
+	{
+		return name;
+	}
 	
+	private Object variableValue;
 	public Object getVariableValue() 
 	{
 		return variableValue;

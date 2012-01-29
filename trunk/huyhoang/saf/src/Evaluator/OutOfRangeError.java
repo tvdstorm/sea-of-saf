@@ -9,6 +9,6 @@ public class OutOfRangeError extends EvaluationError
 
 	public String toString()
 	{
-		return String.format("The assignment value is out of range for");
+		return String.format("%d is out of range. You cannot assign this to %s", 0, "");
 	}
 }

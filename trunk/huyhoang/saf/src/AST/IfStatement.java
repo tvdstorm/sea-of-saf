@@ -3,18 +3,28 @@ package AST;
 import java.util.*;
 
 import Evaluator.EvaluationManager;
+import Game.Interpreter;
 
-public class IfStatement extends Statement
+public class IfStatement implements Statement
 {
-	Object evaluationExpression;
-	List<Statement> statements;
-	
-	public IfStatement( Object expression, List<Statement> statements )
+	private Statement evaluationExpression;
+	public Statement getEvaluationExpression()
 	{
-		this.evaluationExpression = expression;
-		this.statements = statements;
+		return this.evaluationExpression;
 	}
 	
+	private List<Statement> statements;
+	public List<Statement> getStatements()
+	{
+		return this.statements;
+	}
+	
+	public IfStatement(Statement evaluationExpression, List<Statement> statements)
+	{
+		this.evaluationExpression = evaluationExpression;
+		this.statements = statements;
+	}
+
 	public String toString()
 	{
 		return "IfStatement\r\n" +
@@ -28,8 +38,13 @@ public class IfStatement extends Statement
 		visitor.visit(this);
 		for (Statement statement : statements)
 		{
-			System.out.println(statement.toString());
 			statement.accept(visitor);
 		}
+	}
+
+	@Override
+	public void accept(Interpreter visitor) 
+	{
+		visitor.visit(this);
 	}
 }
