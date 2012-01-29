@@ -20,7 +20,7 @@ public class Test {
 				"{ \n" +
 				"kickPower = 6 " +
 				"punchReach = 4 \n" +
-				"near [ stand punch_low] \n" +
+				"stronger near or far [ stand punch_low] \n" +
 				"stronger [run_towards block_high] \n" +
 				"always [ choose (jump stand) kick_high] \n	"+
 				"} \n");
@@ -46,6 +46,7 @@ public class Test {
 		SafParser parser1 = new SafParser(tokenStream1);
 		//parser1.bot();
 		Bot b1 = parser1.bot();
+		b1.accept(new BotChecker());
 		System.out.println("done: " + b1.toString());
 		System.out.println();
 

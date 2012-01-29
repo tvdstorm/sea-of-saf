@@ -1,18 +1,33 @@
 package grammar.Evaluators;
 
-public class Characteristic {
-	String inputtem1;
-	int inputvalue1;
+public class Characteristic implements Visitable {
+	final private String character;
+	final private int value;
 	
-	public Characteristic(String inputtem1, int inputvalue1) {
-		super();
-		this.inputtem1 = inputtem1;
-		this.inputvalue1 = inputvalue1;
+	public Characteristic(String character, int value) {
+		this.character = character;
+		if ((value >1) & (value <10)){
+			this.value = value;
+		} else {
+			this.value = 5;
+		}
+	}
+	
+	public String getCharacterName (){
+		return this.character;
+	}
+	
+	public int getCharacterValue (){
+		return this.value;
 	}
 	
 	public String toString () {
-		//System.out.println("Charact: " + this.inputtem1 + " " + String.valueOf(this.inputvalue1));
-		return "Charact: " + this.inputtem1 + "  " + String.valueOf(this.inputvalue1);
+		return "Charact: " + this.character + "  " + String.valueOf(this.value);
+	}
+
+	@Override
+	public void accept(BotVisit visitor) {
+		visitor.visit(this);
 	}
 	
 	

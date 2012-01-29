@@ -1,16 +1,21 @@
 package grammar.Evaluators;
 
-public class InputRule {
-	String inputstring1;
-	String inputstring2;
-	public InputRule(String inputstring1, String inputstring2) {
-		super();
-		this.inputstring1 = inputstring1;
-		this.inputstring2 = inputstring2;
+public class InputRule implements Visitable{
+	final private String firstinputrule;
+	final private String secondinputrule;
+
+	public InputRule(String finputrule, String sinputrule) {
+		this.firstinputrule = finputrule;
+		this.secondinputrule = sinputrule;
 	}
 	
 	public String toString () {
-		return "Inputrule: " + this.inputstring1 + " " + this.inputstring2;
+		return "Inputrule: " + this.firstinputrule + " " + this.secondinputrule;
+	}
+
+	@Override
+	public void accept(BotVisit visitor) {
+		visitor.visit(this);
 	}
 
 }
