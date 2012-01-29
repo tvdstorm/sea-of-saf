@@ -3,20 +3,24 @@ package grammar.Evaluators;
 import grammar.Evaluators.InputRule;
 
 
-public class Rule {
-   String id;	
-   InputRule item1;
-   InputRule item2;
+public class Rule implements Visitable {
+   private  final Conditions id;	
+   private  final InputRule frule;
+   private  final InputRule srule;
 
-   public Rule(String id, InputRule item1, InputRule item2) {
-	super();
+   public Rule(Conditions id, InputRule frule, InputRule srule) {
 	this.id = id;
-	this.item1 = item1;
-	this.item2 = item2;
+	this.frule = frule;
+	this.srule = srule;
    }
    
    public  String toString () {
-	   return "Rule: " + this.id + " " + this.item1.toString() + " "+ this.item2.toString();
+	   return "Rule: " + this.id + " " + this.frule.toString() + " "+ this.srule.toString();
    }
+
+  @Override
+  public void accept(BotVisit visitor) {
+	  	visitor.visit(this);
+  }
    
 }

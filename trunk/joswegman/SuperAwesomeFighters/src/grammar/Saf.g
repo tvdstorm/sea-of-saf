@@ -22,9 +22,26 @@ bot returns [Bot b]
       : i=ID {$b.setName($i.text);} '{' (c=characteristic {$b.addC(c);})* (r=rule {$b.addR(r);})* '}' 
       ;
 
-rule returns [Rule value]
-      : i=ID'['e=inputRule f=inputRule']' 
-        {$value = new Rule ($i.text, e, f);}
+conditions returns [Conditions value]
+      @init {
+        $value = new Conditions();
+      }
+      : c=condition+ {$value.addCondition(c);}
+      ; 
+
+condition returns [Condition value]
+      : i=ID {$value = new Const($i.text);} //subclass Condition
+      | b=binairycondition {$value = (b);}
+      ;
+
+binairycondition returns [Condition value]
+      : i=ID 'and' j=ID  {$value =  new ConAnd($i.text, $j.text);} 
+      | k=ID 'or' l=ID   {$value =  new ConOr($k.text, $l.text);} 
+      ;
+      
+rule returns [Rule value] 
+      : i=conditions '['e=inputRule f=inputRule']' 
+        {$value = new Rule (i, e, f);}
       ;
 
 inputRule returns [InputRule value]

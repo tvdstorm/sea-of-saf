@@ -2,21 +2,17 @@ package grammar.Evaluators;
 
 import java.util.*;
 
-public class Bot {
-	//Characteristic [] characteristics ;
-	List <Characteristic> karakterestieken = new LinkedList<Characteristic>();
-	List <Rule>regels = new LinkedList<Rule>();
-	String naam;
+
+public class Bot implements Visitable {
+	final private List <Characteristic> karakterestieken = new LinkedList<Characteristic>();
+	final private List <Rule>regels = new LinkedList<Rule>();
+	private String naam;
 	
 	public Bot() {
+
 	}
 	
-	public Bot(String naam, List<Characteristic> karakterestieken, List<Rule> regels) {
-		this.karakterestieken = karakterestieken;
-		this.regels = regels;
-		this.naam = naam;
-	}
-
+	
     public void setName(String name) {
     	this.naam = name;
     }
@@ -38,8 +34,16 @@ public class Bot {
 	public String toString () {
 		return "Bot: "+this.naam + this.karakterestieken.toString() + " "+ this.regels.toString();
 	}
-	
-	
+
+	public List<Characteristic> getCharacteristics (){
+		return this.karakterestieken;
+	}
+	@Override
+	public void accept(BotVisit visitor) {
+		visitor.visit(this);
+	}
+
+
 	
 	
 
