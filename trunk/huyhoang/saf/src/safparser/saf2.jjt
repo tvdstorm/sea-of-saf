@@ -1,104 +1,0 @@
-/**
- * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
- */options{  JDK_VERSION = "1.5";
-  static = false;}PARSER_BEGIN(saf)
-package safparser; 
-
-public class saf {  public static void main(String args [])  {     System.out.println("Reading from standard input...");
-    System.out.print("Enter a SAF specification: ");
-	saf generatedParser = new saf(System.in);
-    try    {      SimpleNode n = generatedParser.Start();      n.dump("");
-    }    catch (Exception e)    {      System.out.println("Oops.");      System.out.println(e.getMessage());	}
-  }}PARSER_END(saf)SKIP :{  " "| "\t"| "\n"| "\r"}
-
-TOKEN :	/* SAF */
-{
-	< CHOOSE : "choose" >
-| 	< CONDITION : "stronger" | "weaker" | "much_stronger" | "much_weaker" | "even" | "near" | "far" | "always" >
-|  	< MOVE : "jump" | "crouch" | "stand" | "run_towards" | "run_away" | "walk_towards" | "walk_away" >
-|  	< STRENGTH : "punchReach" | "kickReach" | "kickPower" | "punchPower" >
-| 	< ATTACK : "punch_low" | "punch_high" | "kick_low" | "kick_high" | "block_low" | "block_high" >
-| 	< CONNECTIVE : "and" | "or" >
-}TOKEN : /* LITERALS */{  < INTEGER_LITERAL : (["0"-"9"])+ >
-}TOKEN : /* IDENTIFIERS */{  < IDENTIFIER :    < LETTER >    (      < LETTER >    | < DIGIT >    )* >| < #LETTER : [ "a"-"z", "A"-"Z" ] >| < #DIGIT : [ "0"-"9" ] >
-}
-SimpleNode Start() :{}{
-  FighterExpression()  {    return jjtThis;  }}void FighterExpression() :{}{
-  Identifier()
-  "{"
-	  (CharacteristicExpressions())
-	  (ActionExpressions())
-  "}"
-}
-
-void CharacteristicExpressions() :
-{}{
-  (CharacteristicExpression())*}
-
-void ActionExpressions() :
-{}
-{	(ActionExpression())*
-}
-
-void MoveExpression() :
-{}
-{
-	< CHOOSE > "(" Move() Move() ")"| 	Move()
-}
-
-void AttackExpression() :
-{}
-{	< CHOOSE > "(" Attack() Attack() ")"
-| 	Attack()
-}
-
-void Attack() :{
-  	Token t;
-}
-{
-	t = < ATTACK > { jjtThis.value = t.image; }} 
-void CharacteristicExpression():
-{}{
-	Strength() "=" Integer()}
-
-void ActionExpression():{}
-{	ConditionExpression() "[" MoveExpression() AttackExpression() "]"
-}
-
-void ConditionExpression() :
-{}{
-  	LOOKAHEAD(2)
-    Condition() Connective() ConditionExpression()
-|  	Condition()
-}
-
-void Connective() :
-{
-  Token t;
-}{
-  t = < CONNECTIVE > { jjtThis.value = t.image; }}
-
-void Condition() :
-{
-  Token t;
-}{
-  t = < CONDITION > { jjtThis.value = t.image; }}
-
-void Strength() :
-{
-  Token t;
-}
-{
-	t = < STRENGTH > { jjtThis.value = t.image; }
-}
-
-void Move() :{
-  Token t;
-}{
-	t = < MOVE > { jjtThis.value = t.image; }}
-
-void Identifier() :{
-  Token t;
-}{  t = < IDENTIFIER > { jjtThis.value = t.image; }}void Integer() :{
-  Token t;
-}{  t = < INTEGER_LITERAL > { jjtThis.value = t.image; }}
