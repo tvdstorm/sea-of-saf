@@ -1,7 +1,7 @@
-// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g 2012-01-30 16:39:16
+// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g 2012-01-30 17:29:53
 
   package com.yennick.fighter;
-  import com.yennick.figher.bot.*;
+  import com.yennick.fighter.bot.*;
 
 
 import org.antlr.runtime.*;
@@ -93,14 +93,14 @@ public TreeAdaptor getTreeAdaptor() {
             root_0 = (Object)adaptor.nil();
 
 
-            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter71); 
+            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter72); 
             IDENT1_tree = 
             (Object)adaptor.create(IDENT1)
             ;
             adaptor.addChild(root_0, IDENT1_tree);
 
 
-            char_literal2=(Token)match(input,13,FOLLOW_13_in_fighter73); 
+            char_literal2=(Token)match(input,13,FOLLOW_13_in_fighter74); 
             char_literal2_tree = 
             (Object)adaptor.create(char_literal2)
             ;
@@ -133,7 +133,7 @@ public TreeAdaptor getTreeAdaptor() {
             	case 1 :
             	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:26:5: personality
             	    {
-            	    pushFollow(FOLLOW_personality_in_fighter81);
+            	    pushFollow(FOLLOW_personality_in_fighter82);
             	    personality3=personality();
 
             	    state._fsp--;
@@ -147,7 +147,7 @@ public TreeAdaptor getTreeAdaptor() {
             	case 2 :
             	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:27:5: behaviour
             	    {
-            	    pushFollow(FOLLOW_behaviour_in_fighter89);
+            	    pushFollow(FOLLOW_behaviour_in_fighter90);
             	    behaviour4=behaviour();
 
             	    state._fsp--;
@@ -165,7 +165,7 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            char_literal5=(Token)match(input,14,FOLLOW_14_in_fighter98); 
+            char_literal5=(Token)match(input,14,FOLLOW_14_in_fighter99); 
             char_literal5_tree = 
             (Object)adaptor.create(char_literal5)
             ;
@@ -208,7 +208,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "behaviour"
-    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:34:1: behaviour returns [Behaviour behaviour] : IDENT '[' move= action fight= action ']' ;
+    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:34:1: behaviour returns [Behaviour behaviour] : IDENT '[' a1= action a2= action ']' ;
     public final SAFParser.behaviour_return behaviour() throws RecognitionException {
         SAFParser.behaviour_return retval = new SAFParser.behaviour_return();
         retval.start = input.LT(1);
@@ -219,9 +219,9 @@ public TreeAdaptor getTreeAdaptor() {
         Token IDENT6=null;
         Token char_literal7=null;
         Token char_literal8=null;
-        SAFParser.action_return move =null;
+        SAFParser.action_return a1 =null;
 
-        SAFParser.action_return fight =null;
+        SAFParser.action_return a2 =null;
 
 
         Object IDENT6_tree=null;
@@ -229,41 +229,41 @@ public TreeAdaptor getTreeAdaptor() {
         Object char_literal8_tree=null;
 
         try {
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:35:2: ( IDENT '[' move= action fight= action ']' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:35:4: IDENT '[' move= action fight= action ']'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:35:2: ( IDENT '[' a1= action a2= action ']' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:35:4: IDENT '[' a1= action a2= action ']'
             {
             root_0 = (Object)adaptor.nil();
 
 
-            IDENT6=(Token)match(input,IDENT,FOLLOW_IDENT_in_behaviour117); 
+            IDENT6=(Token)match(input,IDENT,FOLLOW_IDENT_in_behaviour118); 
             IDENT6_tree = 
             (Object)adaptor.create(IDENT6)
             ;
             adaptor.addChild(root_0, IDENT6_tree);
 
 
-            char_literal7=(Token)match(input,11,FOLLOW_11_in_behaviour119); 
+            char_literal7=(Token)match(input,11,FOLLOW_11_in_behaviour120); 
             char_literal7_tree = 
             (Object)adaptor.create(char_literal7)
             ;
             adaptor.addChild(root_0, char_literal7_tree);
 
 
-            pushFollow(FOLLOW_action_in_behaviour123);
-            move=action();
+            pushFollow(FOLLOW_action_in_behaviour124);
+            a1=action();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, move.getTree());
+            adaptor.addChild(root_0, a1.getTree());
 
-            pushFollow(FOLLOW_action_in_behaviour127);
-            fight=action();
+            pushFollow(FOLLOW_action_in_behaviour128);
+            a2=action();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, fight.getTree());
+            adaptor.addChild(root_0, a2.getTree());
 
-            char_literal8=(Token)match(input,12,FOLLOW_12_in_behaviour129); 
+            char_literal8=(Token)match(input,12,FOLLOW_12_in_behaviour130); 
             char_literal8_tree = 
             (Object)adaptor.create(char_literal8)
             ;
@@ -356,35 +356,35 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:43:3: CHOOSE '(' a1= IDENT a2= IDENT ')'
                     {
-                    CHOOSE9=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_action152); 
+                    CHOOSE9=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_action153); 
                     CHOOSE9_tree = 
                     (Object)adaptor.create(CHOOSE9)
                     ;
                     adaptor.addChild(root_0, CHOOSE9_tree);
 
 
-                    char_literal10=(Token)match(input,8,FOLLOW_8_in_action154); 
+                    char_literal10=(Token)match(input,8,FOLLOW_8_in_action155); 
                     char_literal10_tree = 
                     (Object)adaptor.create(char_literal10)
                     ;
                     adaptor.addChild(root_0, char_literal10_tree);
 
 
-                    a1=(Token)match(input,IDENT,FOLLOW_IDENT_in_action158); 
+                    a1=(Token)match(input,IDENT,FOLLOW_IDENT_in_action159); 
                     a1_tree = 
                     (Object)adaptor.create(a1)
                     ;
                     adaptor.addChild(root_0, a1_tree);
 
 
-                    a2=(Token)match(input,IDENT,FOLLOW_IDENT_in_action162); 
+                    a2=(Token)match(input,IDENT,FOLLOW_IDENT_in_action163); 
                     a2_tree = 
                     (Object)adaptor.create(a2)
                     ;
                     adaptor.addChild(root_0, a2_tree);
 
 
-                    char_literal11=(Token)match(input,9,FOLLOW_9_in_action164); 
+                    char_literal11=(Token)match(input,9,FOLLOW_9_in_action165); 
                     char_literal11_tree = 
                     (Object)adaptor.create(char_literal11)
                     ;
@@ -396,7 +396,7 @@ public TreeAdaptor getTreeAdaptor() {
                 case 2 :
                     // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:44:5: act= IDENT
                     {
-                    act=(Token)match(input,IDENT,FOLLOW_IDENT_in_action173); 
+                    act=(Token)match(input,IDENT,FOLLOW_IDENT_in_action174); 
                     act_tree = 
                     (Object)adaptor.create(act)
                     ;
@@ -464,21 +464,21 @@ public TreeAdaptor getTreeAdaptor() {
             root_0 = (Object)adaptor.nil();
 
 
-            IDENT12=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality196); 
+            IDENT12=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality197); 
             IDENT12_tree = 
             (Object)adaptor.create(IDENT12)
             ;
             adaptor.addChild(root_0, IDENT12_tree);
 
 
-            char_literal13=(Token)match(input,10,FOLLOW_10_in_personality198); 
+            char_literal13=(Token)match(input,10,FOLLOW_10_in_personality199); 
             char_literal13_tree = 
             (Object)adaptor.create(char_literal13)
             ;
             adaptor.addChild(root_0, char_literal13_tree);
 
 
-            VALUE14=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality200); 
+            VALUE14=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality201); 
             VALUE14_tree = 
             (Object)adaptor.create(VALUE14)
             ;
@@ -517,24 +517,24 @@ public TreeAdaptor getTreeAdaptor() {
 
  
 
-    public static final BitSet FOLLOW_IDENT_in_fighter71 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_fighter73 = new BitSet(new long[]{0x0000000000004020L});
-    public static final BitSet FOLLOW_personality_in_fighter81 = new BitSet(new long[]{0x0000000000004020L});
-    public static final BitSet FOLLOW_behaviour_in_fighter89 = new BitSet(new long[]{0x0000000000004020L});
-    public static final BitSet FOLLOW_14_in_fighter98 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_behaviour117 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_behaviour119 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_action_in_behaviour123 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_action_in_behaviour127 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_behaviour129 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_action152 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_action154 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENT_in_action158 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENT_in_action162 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_action164 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_action173 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_personality196 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_personality198 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_VALUE_in_personality200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_fighter72 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_fighter74 = new BitSet(new long[]{0x0000000000004020L});
+    public static final BitSet FOLLOW_personality_in_fighter82 = new BitSet(new long[]{0x0000000000004020L});
+    public static final BitSet FOLLOW_behaviour_in_fighter90 = new BitSet(new long[]{0x0000000000004020L});
+    public static final BitSet FOLLOW_14_in_fighter99 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_behaviour118 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_behaviour120 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_action_in_behaviour124 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_action_in_behaviour128 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_behaviour130 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_action153 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_action155 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENT_in_action159 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENT_in_action163 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_action165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_action174 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_personality197 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_personality199 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_VALUE_in_personality201 = new BitSet(new long[]{0x0000000000000002L});
 
 }
