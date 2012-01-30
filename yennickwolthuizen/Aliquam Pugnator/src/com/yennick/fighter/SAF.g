@@ -7,16 +7,16 @@ options {
 
 tokens
 {
-	CHOOSE  		= 'choose';
+	CHOOSE  		= 'choose'; 
 }
 
 @header {
-  package com.yennick.SAF;
-  import com.yennick.SAF.Bot.*;
+  package com.yennick.fighter;
+  import com.yennick.fighter.bot.*;
 }
 
 @lexer::header {
-  package com.yennick.SAF;
+  package com.yennick.fighter;
 }
 
 
@@ -32,7 +32,7 @@ fighter returns [Bot fighter]
 	;
 
 behaviour returns [Behaviour behaviour]
-	:	IDENT '[' move=action fight=action ']'
+	:	IDENT '[' a1=action a2=action ']'
 		{
 			$behaviour = new Behaviour($IDENT.text); 
 		}

@@ -1,4 +1,4 @@
-package com.yennick.figher.bot;
+package com.yennick.fighter.bot;
 
 import java.util.ArrayList;
 import java.util.List;

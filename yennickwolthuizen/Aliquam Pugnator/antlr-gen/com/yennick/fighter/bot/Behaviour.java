@@ -1,4 +1,4 @@
-package com.yennick.figher.bot;
+package com.yennick.fighter.bot;
 
 public class Behaviour {
 	private String condition;
