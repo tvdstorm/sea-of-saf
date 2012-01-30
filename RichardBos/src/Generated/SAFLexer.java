@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g 2012-01-24 11:33:59
+// $ANTLR 3.4 C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g 2012-01-30 13:02:45
 
   package Generated;
 
@@ -11,23 +11,21 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFLexer extends Lexer {
     public static final int EOF=-1;
+    public static final int T__12=12;
+    public static final int T__13=13;
     public static final int T__14=14;
     public static final int T__15=15;
     public static final int T__16=16;
     public static final int T__17=17;
     public static final int T__18=18;
-    public static final int T__19=19;
-    public static final int T__20=20;
     public static final int AND=4;
     public static final int CHAR=5;
     public static final int CHOOSE=6;
     public static final int DIGIT=7;
     public static final int ID=8;
     public static final int INT=9;
-    public static final int NEWLINE=10;
-    public static final int OR=11;
-    public static final int WHITESPACE=12;
-    public static final int WS=13;
+    public static final int OR=10;
+    public static final int WS=11;
 
     // delegates
     // delegators
@@ -42,17 +40,59 @@ public class SAFLexer extends Lexer {
     public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g"; }
+    public String getGrammarFileName() { return "C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g"; }
+
+    // $ANTLR start "T__12"
+    public final void mT__12() throws RecognitionException {
+        try {
+            int _type = T__12;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:7: ( '(' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:9: '('
+            {
+            match('('); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__12"
+
+    // $ANTLR start "T__13"
+    public final void mT__13() throws RecognitionException {
+        try {
+            int _type = T__13;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:7: ( ')' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:9: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__13"
 
     // $ANTLR start "T__14"
     public final void mT__14() throws RecognitionException {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:7: ( '(' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:9: '('
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:7: ( '=' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:9: '='
             {
-            match('('); 
+            match('='); 
 
             }
 
@@ -70,10 +110,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:7: ( ')' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:9: ')'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:7: ( '[' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:9: '['
             {
-            match(')'); 
+            match('['); 
 
             }
 
@@ -91,10 +131,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:7: ( '=' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:9: '='
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:7: ( ']' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:9: ']'
             {
-            match('='); 
+            match(']'); 
 
             }
 
@@ -112,10 +152,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:7: ( '[' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:9: '['
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:7: ( '{' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:9: '{'
             {
-            match('['); 
+            match('{'); 
 
             }
 
@@ -133,50 +173,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:7: ( ']' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:9: ']'
-            {
-            match(']'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__18"
-
-    // $ANTLR start "T__19"
-    public final void mT__19() throws RecognitionException {
-        try {
-            int _type = T__19;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:7: ( '{' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:9: '{'
-            {
-            match('{'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__19"
-
-    // $ANTLR start "T__20"
-    public final void mT__20() throws RecognitionException {
-        try {
-            int _type = T__20;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:7: ( '}' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:9: '}'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:7: ( '}' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:9: '}'
             {
             match('}'); 
 
@@ -189,17 +187,17 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__20"
+    // $ANTLR end "T__18"
 
     // $ANTLR start "OR"
     public final void mOR() throws RecognitionException {
         try {
             int _type = OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:114:11: ( ( 'or' | 'OR' ) )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:114:13: ( 'or' | 'OR' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:11: ( ( 'or' | 'OR' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:13: ( 'or' | 'OR' )
             {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:114:13: ( 'or' | 'OR' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:13: ( 'or' | 'OR' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -218,7 +216,7 @@ public class SAFLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:114:14: 'or'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:14: 'or'
                     {
                     match("or"); 
 
@@ -227,7 +225,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:114:21: 'OR'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:21: 'OR'
                     {
                     match("OR"); 
 
@@ -255,10 +253,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:115:11: ( ( 'and' | 'AND' | '&&' ) )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:115:13: ( 'and' | 'AND' | '&&' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:11: ( ( 'and' | 'AND' | '&&' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:13: ( 'and' | 'AND' | '&&' )
             {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:115:13: ( 'and' | 'AND' | '&&' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:13: ( 'and' | 'AND' | '&&' )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 'a':
@@ -286,7 +284,7 @@ public class SAFLexer extends Lexer {
 
             switch (alt2) {
                 case 1 :
-                    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:115:14: 'and'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:14: 'and'
                     {
                     match("and"); 
 
@@ -295,7 +293,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:115:22: 'AND'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:22: 'AND'
                     {
                     match("AND"); 
 
@@ -304,7 +302,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:115:30: '&&'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:30: '&&'
                     {
                     match("&&"); 
 
@@ -332,8 +330,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = CHOOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:116:11: ( 'choose' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:116:13: 'choose'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:100:11: ( 'choose' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:100:13: 'choose'
             {
             match("choose"); 
 
@@ -350,34 +348,52 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "CHOOSE"
 
-    // $ANTLR start "NEWLINE"
-    public final void mNEWLINE() throws RecognitionException {
+    // $ANTLR start "ID"
+    public final void mID() throws RecognitionException {
         try {
-            int _type = NEWLINE;
+            int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:117:11: ( ( '\\r' )? '\\n' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:117:13: ( '\\r' )? '\\n'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:11: ( ( CHAR | '_' )+ )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:13: ( CHAR | '_' )+
             {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:117:13: ( '\\r' )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:13: ( CHAR | '_' )+
+            int cnt3=0;
+            loop3:
+            do {
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-            if ( (LA3_0=='\r') ) {
-                alt3=1;
-            }
-            switch (alt3) {
-                case 1 :
-                    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:117:13: '\\r'
-                    {
-                    match('\r'); 
-
-                    }
-                    break;
-
-            }
+                if ( ((LA3_0 >= 'A' && LA3_0 <= 'Z')||LA3_0=='_'||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
+                    alt3=1;
+                }
 
 
-            match('\n'); 
+                switch (alt3) {
+            	case 1 :
+            	    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            	    {
+            	    if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt3 >= 1 ) break loop3;
+                        EarlyExitException eee =
+                            new EarlyExitException(3, input);
+                        throw eee;
+                }
+                cnt3++;
+            } while (true);
+
 
             }
 
@@ -388,33 +404,33 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "NEWLINE"
+    // $ANTLR end "ID"
 
-    // $ANTLR start "ID"
-    public final void mID() throws RecognitionException {
+    // $ANTLR start "INT"
+    public final void mINT() throws RecognitionException {
         try {
-            int _type = ID;
+            int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:118:11: ( ( CHAR | '_' )+ )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:118:13: ( CHAR | '_' )+
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:11: ( ( DIGIT )+ )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:13: ( DIGIT )+
             {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:118:13: ( CHAR | '_' )+
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:13: ( DIGIT )+
             int cnt4=0;
             loop4:
             do {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( ((LA4_0 >= 'A' && LA4_0 <= 'Z')||LA4_0=='_'||(LA4_0 >= 'a' && LA4_0 <= 'z')) ) {
+                if ( ((LA4_0 >= '0' && LA4_0 <= '9')) ) {
                     alt4=1;
                 }
 
 
                 switch (alt4) {
             	case 1 :
-            	    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            	    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
             	    {
-            	    if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
             	    }
             	    else {
@@ -446,64 +462,6 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "ID"
-
-    // $ANTLR start "INT"
-    public final void mINT() throws RecognitionException {
-        try {
-            int _type = INT;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:119:11: ( ( DIGIT )+ )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:119:13: ( DIGIT )+
-            {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:119:13: ( DIGIT )+
-            int cnt5=0;
-            loop5:
-            do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
-
-                if ( ((LA5_0 >= '0' && LA5_0 <= '9')) ) {
-                    alt5=1;
-                }
-
-
-                switch (alt5) {
-            	case 1 :
-            	    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
-            	    {
-            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
-            	        input.consume();
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt5 >= 1 ) break loop5;
-                        EarlyExitException eee =
-                            new EarlyExitException(5, input);
-                        throw eee;
-                }
-                cnt5++;
-            } while (true);
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
     // $ANTLR end "INT"
 
     // $ANTLR start "WS"
@@ -511,49 +469,20 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:120:11: ( ( WHITESPACE )+ )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:120:13: ( WHITESPACE )+
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:103:11: ( ( ' ' | '\\t' | '\\u000C' | '\\r' | '\\n' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:103:13: ( ' ' | '\\t' | '\\u000C' | '\\r' | '\\n' )
             {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:120:13: ( WHITESPACE )+
-            int cnt6=0;
-            loop6:
-            do {
-                int alt6=2;
-                int LA6_0 = input.LA(1);
-
-                if ( (LA6_0=='\t'||LA6_0=='\f'||LA6_0==' ') ) {
-                    alt6=1;
-                }
+            if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' ' ) {
+                input.consume();
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;
+            }
 
 
-                switch (alt6) {
-            	case 1 :
-            	    // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
-            	    {
-            	    if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
-            	        input.consume();
-            	    }
-            	    else {
-            	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        recover(mse);
-            	        throw mse;
-            	    }
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt6 >= 1 ) break loop6;
-                        EarlyExitException eee =
-                            new EarlyExitException(6, input);
-                        throw eee;
-                }
-                cnt6++;
-            } while (true);
-
-
-                 skip();
+                 _channel = HIDDEN;
                                                     
 
             }
@@ -570,8 +499,8 @@ public class SAFLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:123:21: ( '0' .. '9' )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:106:21: ( '0' .. '9' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
                 input.consume();
@@ -596,8 +525,8 @@ public class SAFLexer extends Lexer {
     // $ANTLR start "CHAR"
     public final void mCHAR() throws RecognitionException {
         try {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:124:21: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:107:21: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -619,217 +548,185 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "CHAR"
 
-    // $ANTLR start "WHITESPACE"
-    public final void mWHITESPACE() throws RecognitionException {
-        try {
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:125:21: ( ( ' ' | '\\t' | '\\u000C' ) )
-            // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
-            {
-            if ( input.LA(1)=='\t'||input.LA(1)=='\f'||input.LA(1)==' ' ) {
-                input.consume();
-            }
-            else {
-                MismatchedSetException mse = new MismatchedSetException(null,input);
-                recover(mse);
-                throw mse;
-            }
-
-
-            }
-
-
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "WHITESPACE"
-
     public void mTokens() throws RecognitionException {
-        // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | OR | AND | CHOOSE | NEWLINE | ID | INT | WS )
-        int alt7=14;
+        // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | OR | AND | CHOOSE | ID | INT | WS )
+        int alt5=13;
         switch ( input.LA(1) ) {
         case '(':
             {
-            alt7=1;
+            alt5=1;
             }
             break;
         case ')':
             {
-            alt7=2;
+            alt5=2;
             }
             break;
         case '=':
             {
-            alt7=3;
+            alt5=3;
             }
             break;
         case '[':
             {
-            alt7=4;
+            alt5=4;
             }
             break;
         case ']':
             {
-            alt7=5;
+            alt5=5;
             }
             break;
         case '{':
             {
-            alt7=6;
+            alt5=6;
             }
             break;
         case '}':
             {
-            alt7=7;
+            alt5=7;
             }
             break;
         case 'o':
             {
-            int LA7_8 = input.LA(2);
+            int LA5_8 = input.LA(2);
 
-            if ( (LA7_8=='r') ) {
-                int LA7_18 = input.LA(3);
+            if ( (LA5_8=='r') ) {
+                int LA5_17 = input.LA(3);
 
-                if ( ((LA7_18 >= 'A' && LA7_18 <= 'Z')||LA7_18=='_'||(LA7_18 >= 'a' && LA7_18 <= 'z')) ) {
-                    alt7=12;
+                if ( ((LA5_17 >= 'A' && LA5_17 <= 'Z')||LA5_17=='_'||(LA5_17 >= 'a' && LA5_17 <= 'z')) ) {
+                    alt5=11;
                 }
                 else {
-                    alt7=8;
+                    alt5=8;
                 }
             }
             else {
-                alt7=12;
+                alt5=11;
             }
             }
             break;
         case 'O':
             {
-            int LA7_9 = input.LA(2);
+            int LA5_9 = input.LA(2);
 
-            if ( (LA7_9=='R') ) {
-                int LA7_19 = input.LA(3);
+            if ( (LA5_9=='R') ) {
+                int LA5_18 = input.LA(3);
 
-                if ( ((LA7_19 >= 'A' && LA7_19 <= 'Z')||LA7_19=='_'||(LA7_19 >= 'a' && LA7_19 <= 'z')) ) {
-                    alt7=12;
+                if ( ((LA5_18 >= 'A' && LA5_18 <= 'Z')||LA5_18=='_'||(LA5_18 >= 'a' && LA5_18 <= 'z')) ) {
+                    alt5=11;
                 }
                 else {
-                    alt7=8;
+                    alt5=8;
                 }
             }
             else {
-                alt7=12;
+                alt5=11;
             }
             }
             break;
         case 'a':
             {
-            int LA7_10 = input.LA(2);
+            int LA5_10 = input.LA(2);
 
-            if ( (LA7_10=='n') ) {
-                int LA7_20 = input.LA(3);
+            if ( (LA5_10=='n') ) {
+                int LA5_19 = input.LA(3);
 
-                if ( (LA7_20=='d') ) {
-                    int LA7_24 = input.LA(4);
+                if ( (LA5_19=='d') ) {
+                    int LA5_23 = input.LA(4);
 
-                    if ( ((LA7_24 >= 'A' && LA7_24 <= 'Z')||LA7_24=='_'||(LA7_24 >= 'a' && LA7_24 <= 'z')) ) {
-                        alt7=12;
+                    if ( ((LA5_23 >= 'A' && LA5_23 <= 'Z')||LA5_23=='_'||(LA5_23 >= 'a' && LA5_23 <= 'z')) ) {
+                        alt5=11;
                     }
                     else {
-                        alt7=9;
+                        alt5=9;
                     }
                 }
                 else {
-                    alt7=12;
+                    alt5=11;
                 }
             }
             else {
-                alt7=12;
+                alt5=11;
             }
             }
             break;
         case 'A':
             {
-            int LA7_11 = input.LA(2);
+            int LA5_11 = input.LA(2);
 
-            if ( (LA7_11=='N') ) {
-                int LA7_21 = input.LA(3);
+            if ( (LA5_11=='N') ) {
+                int LA5_20 = input.LA(3);
 
-                if ( (LA7_21=='D') ) {
-                    int LA7_25 = input.LA(4);
+                if ( (LA5_20=='D') ) {
+                    int LA5_24 = input.LA(4);
 
-                    if ( ((LA7_25 >= 'A' && LA7_25 <= 'Z')||LA7_25=='_'||(LA7_25 >= 'a' && LA7_25 <= 'z')) ) {
-                        alt7=12;
+                    if ( ((LA5_24 >= 'A' && LA5_24 <= 'Z')||LA5_24=='_'||(LA5_24 >= 'a' && LA5_24 <= 'z')) ) {
+                        alt5=11;
                     }
                     else {
-                        alt7=9;
+                        alt5=9;
                     }
                 }
                 else {
-                    alt7=12;
+                    alt5=11;
                 }
             }
             else {
-                alt7=12;
+                alt5=11;
             }
             }
             break;
         case '&':
             {
-            alt7=9;
+            alt5=9;
             }
             break;
         case 'c':
             {
-            int LA7_13 = input.LA(2);
+            int LA5_13 = input.LA(2);
 
-            if ( (LA7_13=='h') ) {
-                int LA7_22 = input.LA(3);
+            if ( (LA5_13=='h') ) {
+                int LA5_21 = input.LA(3);
 
-                if ( (LA7_22=='o') ) {
-                    int LA7_26 = input.LA(4);
+                if ( (LA5_21=='o') ) {
+                    int LA5_25 = input.LA(4);
 
-                    if ( (LA7_26=='o') ) {
-                        int LA7_27 = input.LA(5);
+                    if ( (LA5_25=='o') ) {
+                        int LA5_26 = input.LA(5);
 
-                        if ( (LA7_27=='s') ) {
-                            int LA7_28 = input.LA(6);
+                        if ( (LA5_26=='s') ) {
+                            int LA5_27 = input.LA(6);
 
-                            if ( (LA7_28=='e') ) {
-                                int LA7_29 = input.LA(7);
+                            if ( (LA5_27=='e') ) {
+                                int LA5_28 = input.LA(7);
 
-                                if ( ((LA7_29 >= 'A' && LA7_29 <= 'Z')||LA7_29=='_'||(LA7_29 >= 'a' && LA7_29 <= 'z')) ) {
-                                    alt7=12;
+                                if ( ((LA5_28 >= 'A' && LA5_28 <= 'Z')||LA5_28=='_'||(LA5_28 >= 'a' && LA5_28 <= 'z')) ) {
+                                    alt5=11;
                                 }
                                 else {
-                                    alt7=10;
+                                    alt5=10;
                                 }
                             }
                             else {
-                                alt7=12;
+                                alt5=11;
                             }
                         }
                         else {
-                            alt7=12;
+                            alt5=11;
                         }
                     }
                     else {
-                        alt7=12;
+                        alt5=11;
                     }
                 }
                 else {
-                    alt7=12;
+                    alt5=11;
                 }
             }
             else {
-                alt7=12;
+                alt5=11;
             }
-            }
-            break;
-        case '\n':
-        case '\r':
-            {
-            alt7=11;
             }
             break;
         case 'B':
@@ -881,7 +778,7 @@ public class SAFLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            alt7=12;
+            alt5=11;
             }
             break;
         case '0':
@@ -895,83 +792,85 @@ public class SAFLexer extends Lexer {
         case '8':
         case '9':
             {
-            alt7=13;
+            alt5=12;
             }
             break;
         case '\t':
+        case '\n':
         case '\f':
+        case '\r':
         case ' ':
             {
-            alt7=14;
+            alt5=13;
             }
             break;
         default:
             NoViableAltException nvae =
-                new NoViableAltException("", 7, 0, input);
+                new NoViableAltException("", 5, 0, input);
 
             throw nvae;
 
         }
 
-        switch (alt7) {
+        switch (alt5) {
             case 1 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:10: T__14
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:10: T__12
+                {
+                mT__12(); 
+
+
+                }
+                break;
+            case 2 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:16: T__13
+                {
+                mT__13(); 
+
+
+                }
+                break;
+            case 3 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:22: T__14
                 {
                 mT__14(); 
 
 
                 }
                 break;
-            case 2 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:16: T__15
+            case 4 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:28: T__15
                 {
                 mT__15(); 
 
 
                 }
                 break;
-            case 3 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:22: T__16
+            case 5 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:34: T__16
                 {
                 mT__16(); 
 
 
                 }
                 break;
-            case 4 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:28: T__17
+            case 6 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:40: T__17
                 {
                 mT__17(); 
 
 
                 }
                 break;
-            case 5 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:34: T__18
+            case 7 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:46: T__18
                 {
                 mT__18(); 
 
 
                 }
                 break;
-            case 6 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:40: T__19
-                {
-                mT__19(); 
-
-
-                }
-                break;
-            case 7 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:46: T__20
-                {
-                mT__20(); 
-
-
-                }
-                break;
             case 8 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:52: OR
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:52: OR
                 {
                 mOR(); 
 
@@ -979,7 +878,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:55: AND
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:55: AND
                 {
                 mAND(); 
 
@@ -987,7 +886,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:59: CHOOSE
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:59: CHOOSE
                 {
                 mCHOOSE(); 
 
@@ -995,31 +894,23 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:66: NEWLINE
-                {
-                mNEWLINE(); 
-
-
-                }
-                break;
-            case 12 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:74: ID
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:66: ID
                 {
                 mID(); 
 
 
                 }
                 break;
-            case 13 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:77: INT
+            case 12 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:69: INT
                 {
                 mINT(); 
 
 
                 }
                 break;
-            case 14 :
-                // C:\\Users\\r.bos\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:81: WS
+            case 13 :
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:73: WS
                 {
                 mWS(); 
 

@@ -1,4 +1,5 @@
-package SAF;
+package saf;
+
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
@@ -6,13 +7,15 @@ import org.antlr.runtime.RecognitionException;
 import Generated.SAFLexer;
 import Generated.SAFParser;
 import Generated.SAFParser.bots_return;
-import SAF.Checker.SAFElementDoVisitor;
-import SAF.Structure.Bots;
+
+import saf.checker.ElementChecker;
+import saf.structure.Bots;
+
 
 public class Main {
 	public static void main(String args[]) throws Exception {
 		
-		SAFLexer lexer = new SAFLexer(new ANTLRFileStream("src/SAF/Tests/input.txt"));
+		SAFLexer lexer = new SAFLexer(new ANTLRFileStream("src/SAF/Tests/test.txt"));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         SAFParser parser = new SAFParser(tokens);
 
@@ -22,7 +25,10 @@ public class Main {
         	bots_return _bots = parser.bots();
         	Bots bots = _bots.bots;
         	
-        	bots.accept(new SAFElementDoVisitor());
+        	ElementChecker.check(bots);
+        	
+        	
+        	
         	DF.PrintAST(bots);
         	
         } catch (RecognitionException e)  {

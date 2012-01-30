@@ -1,0 +1,23 @@
+checks:
+
+Bot name verplicht
+
+alle types worden gecontroleerd:
+-	characteristic
+-	condition
+-	move
+-	fight
+
+duplicate characteristics mogen niet
+
+duplicate move/fight actions in een choose mogen niet
+
+characteristic mag van 0-10
+
+minimaal 1 bot behavior verplicht
+
+minimaal 1 always behavior-condition verplicht
+
+always mag niet voorkomen in een AND of OR 
+
+Minimaal 1 bot verplicht
