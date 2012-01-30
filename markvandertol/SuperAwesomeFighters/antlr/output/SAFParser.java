@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g 2012-01-24 15:31:49
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g 2012-01-30 12:01:01
 
 package saf.parser;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.antlr.runtime.tree.*;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACTION", "ASSIGNMENT", "CONDITION", "DIGIT", "IDENTIFIER", "NEWLINE", "PROGRAM", "WS", "'('", "')'", "'='", "'['", "']'", "'and'", "'or'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACTION", "ASSIGNMENT", "CONDITION", "DIGIT", "FIGHTER", "IDENTIFIER", "NEWLINE", "WS", "'('", "')'", "'='", "'['", "']'", "'and'", "'or'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
@@ -32,9 +32,9 @@ public class SAFParser extends Parser {
     public static final int ASSIGNMENT=5;
     public static final int CONDITION=6;
     public static final int DIGIT=7;
-    public static final int IDENTIFIER=8;
-    public static final int NEWLINE=9;
-    public static final int PROGRAM=10;
+    public static final int FIGHTER=8;
+    public static final int IDENTIFIER=9;
+    public static final int NEWLINE=10;
     public static final int WS=11;
 
     // delegates
@@ -76,16 +76,16 @@ public TreeAdaptor getTreeAdaptor() {
     	}
 
 
-    public static class prog_return extends ParserRuleReturnScope {
+    public static class fighter_return extends ParserRuleReturnScope {
         Object tree;
         public Object getTree() { return tree; }
     };
 
 
-    // $ANTLR start "prog"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:1: prog : ( ws )? IDENTIFIER ( ws )? '{' ws ( assignment endline ( ws )? )* ( action endline ( ws )? )* '}' ( ws )? -> ^( PROGRAM IDENTIFIER ( assignment )* ( action )* ) ;
-    public final SAFParser.prog_return prog() throws RecognitionException {
-        SAFParser.prog_return retval = new SAFParser.prog_return();
+    // $ANTLR start "fighter"
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:1: fighter : ( ws )? IDENTIFIER ( ws )? '{' ws ( assignment endline ( ws )? )* ( action endline ( ws )? )* '}' ( ws )? -> ^( FIGHTER IDENTIFIER ( assignment )* ( action )* ) ;
+    public final SAFParser.fighter_return fighter() throws RecognitionException {
+        SAFParser.fighter_return retval = new SAFParser.fighter_return();
         retval.start = input.LT(1);
 
 
@@ -126,21 +126,21 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleSubtreeStream stream_action=new RewriteRuleSubtreeStream(adaptor,"rule action");
         RewriteRuleSubtreeStream stream_ws=new RewriteRuleSubtreeStream(adaptor,"rule ws");
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:6: ( ( ws )? IDENTIFIER ( ws )? '{' ws ( assignment endline ( ws )? )* ( action endline ( ws )? )* '}' ( ws )? -> ^( PROGRAM IDENTIFIER ( assignment )* ( action )* ) )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:8: ( ws )? IDENTIFIER ( ws )? '{' ws ( assignment endline ( ws )? )* ( action endline ( ws )? )* '}' ( ws )?
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:9: ( ( ws )? IDENTIFIER ( ws )? '{' ws ( assignment endline ( ws )? )* ( action endline ( ws )? )* '}' ( ws )? -> ^( FIGHTER IDENTIFIER ( assignment )* ( action )* ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:11: ( ws )? IDENTIFIER ( ws )? '{' ws ( assignment endline ( ws )? )* ( action endline ( ws )? )* '}' ( ws )?
             {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:8: ( ws )?
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:11: ( ws )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==NEWLINE||LA1_0==WS) ) {
+            if ( ((LA1_0 >= NEWLINE && LA1_0 <= WS)) ) {
                 alt1=1;
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:8: ws
+                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:11: ws
                     {
-                    pushFollow(FOLLOW_ws_in_prog74);
+                    pushFollow(FOLLOW_ws_in_fighter74);
                     ws1=ws();
 
                     state._fsp--;
@@ -153,22 +153,22 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            IDENTIFIER2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_prog77);  
+            IDENTIFIER2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_fighter77);  
             stream_IDENTIFIER.add(IDENTIFIER2);
 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:23: ( ws )?
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:26: ( ws )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==NEWLINE||LA2_0==WS) ) {
+            if ( ((LA2_0 >= NEWLINE && LA2_0 <= WS)) ) {
                 alt2=1;
             }
             switch (alt2) {
                 case 1 :
-                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:23: ws
+                    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:26: ws
                     {
-                    pushFollow(FOLLOW_ws_in_prog79);
+                    pushFollow(FOLLOW_ws_in_fighter79);
                     ws3=ws();
 
                     state._fsp--;
@@ -181,52 +181,52 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            char_literal4=(Token)match(input,19,FOLLOW_19_in_prog82);  
+            char_literal4=(Token)match(input,19,FOLLOW_19_in_fighter82);  
             stream_19.add(char_literal4);
 
 
-            pushFollow(FOLLOW_ws_in_prog84);
+            pushFollow(FOLLOW_ws_in_fighter84);
             ws5=ws();
 
             state._fsp--;
 
             stream_ws.add(ws5.getTree());
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:34: ( assignment endline ( ws )? )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:37: ( assignment endline ( ws )? )*
             loop4:
             do {
                 int alt4=2;
                 alt4 = dfa4.predict(input);
                 switch (alt4) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:35: assignment endline ( ws )?
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:38: assignment endline ( ws )?
             	    {
-            	    pushFollow(FOLLOW_assignment_in_prog87);
+            	    pushFollow(FOLLOW_assignment_in_fighter87);
             	    assignment6=assignment();
 
             	    state._fsp--;
 
             	    stream_assignment.add(assignment6.getTree());
 
-            	    pushFollow(FOLLOW_endline_in_prog89);
+            	    pushFollow(FOLLOW_endline_in_fighter89);
             	    endline7=endline();
 
             	    state._fsp--;
 
             	    stream_endline.add(endline7.getTree());
 
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:54: ( ws )?
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:57: ( ws )?
             	    int alt3=2;
             	    int LA3_0 = input.LA(1);
 
-            	    if ( (LA3_0==NEWLINE||LA3_0==WS) ) {
+            	    if ( ((LA3_0 >= NEWLINE && LA3_0 <= WS)) ) {
             	        alt3=1;
             	    }
             	    switch (alt3) {
             	        case 1 :
-            	            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:54: ws
+            	            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:57: ws
             	            {
-            	            pushFollow(FOLLOW_ws_in_prog91);
+            	            pushFollow(FOLLOW_ws_in_fighter91);
             	            ws8=ws();
 
             	            state._fsp--;
@@ -248,7 +248,7 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:60: ( action endline ( ws )? )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:63: ( action endline ( ws )? )*
             loop6:
             do {
                 int alt6=2;
@@ -261,34 +261,34 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt6) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:61: action endline ( ws )?
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:64: action endline ( ws )?
             	    {
-            	    pushFollow(FOLLOW_action_in_prog97);
+            	    pushFollow(FOLLOW_action_in_fighter97);
             	    action9=action();
 
             	    state._fsp--;
 
             	    stream_action.add(action9.getTree());
 
-            	    pushFollow(FOLLOW_endline_in_prog99);
+            	    pushFollow(FOLLOW_endline_in_fighter99);
             	    endline10=endline();
 
             	    state._fsp--;
 
             	    stream_endline.add(endline10.getTree());
 
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:76: ( ws )?
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:79: ( ws )?
             	    int alt5=2;
             	    int LA5_0 = input.LA(1);
 
-            	    if ( (LA5_0==NEWLINE||LA5_0==WS) ) {
+            	    if ( ((LA5_0 >= NEWLINE && LA5_0 <= WS)) ) {
             	        alt5=1;
             	    }
             	    switch (alt5) {
             	        case 1 :
-            	            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:76: ws
+            	            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:50:79: ws
             	            {
-            	            pushFollow(FOLLOW_ws_in_prog101);
+            	            pushFollow(FOLLOW_ws_in_fighter101);
             	            ws11=ws();
 
             	            state._fsp--;
@@ -310,7 +310,7 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            char_literal12=(Token)match(input,20,FOLLOW_20_in_prog108);  
+            char_literal12=(Token)match(input,20,FOLLOW_20_in_fighter108);  
             stream_20.add(char_literal12);
 
 
@@ -318,14 +318,14 @@ public TreeAdaptor getTreeAdaptor() {
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==NEWLINE||LA7_0==WS) ) {
+            if ( ((LA7_0 >= NEWLINE && LA7_0 <= WS)) ) {
                 alt7=1;
             }
             switch (alt7) {
                 case 1 :
                     // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:51:7: ws
                     {
-                    pushFollow(FOLLOW_ws_in_prog110);
+                    pushFollow(FOLLOW_ws_in_fighter110);
                     ws13=ws();
 
                     state._fsp--;
@@ -349,13 +349,13 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 51:11: -> ^( PROGRAM IDENTIFIER ( assignment )* ( action )* )
+            // 51:11: -> ^( FIGHTER IDENTIFIER ( assignment )* ( action )* )
             {
-                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:51:14: ^( PROGRAM IDENTIFIER ( assignment )* ( action )* )
+                // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g:51:14: ^( FIGHTER IDENTIFIER ( assignment )* ( action )* )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(
-                (Object)adaptor.create(PROGRAM, "PROGRAM")
+                (Object)adaptor.create(FIGHTER, "FIGHTER")
                 , root_1);
 
                 adaptor.addChild(root_1, 
@@ -405,7 +405,7 @@ public TreeAdaptor getTreeAdaptor() {
         }
         return retval;
     }
-    // $ANTLR end "prog"
+    // $ANTLR end "fighter"
 
 
     public static class assignment_return extends ParserRuleReturnScope {
@@ -450,7 +450,7 @@ public TreeAdaptor getTreeAdaptor() {
             int alt8=2;
             int LA8_0 = input.LA(1);
 
-            if ( (LA8_0==NEWLINE||LA8_0==WS) ) {
+            if ( ((LA8_0 >= NEWLINE && LA8_0 <= WS)) ) {
                 alt8=1;
             }
             switch (alt8) {
@@ -478,7 +478,7 @@ public TreeAdaptor getTreeAdaptor() {
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==NEWLINE||LA9_0==WS) ) {
+            if ( ((LA9_0 >= NEWLINE && LA9_0 <= WS)) ) {
                 alt9=1;
             }
             switch (alt9) {
@@ -616,7 +616,7 @@ public TreeAdaptor getTreeAdaptor() {
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==NEWLINE||LA10_0==WS) ) {
+            if ( ((LA10_0 >= NEWLINE && LA10_0 <= WS)) ) {
                 alt10=1;
             }
             switch (alt10) {
@@ -644,7 +644,7 @@ public TreeAdaptor getTreeAdaptor() {
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==NEWLINE||LA11_0==WS) ) {
+            if ( ((LA11_0 >= NEWLINE && LA11_0 <= WS)) ) {
                 alt11=1;
             }
             switch (alt11) {
@@ -683,7 +683,7 @@ public TreeAdaptor getTreeAdaptor() {
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( (LA12_0==NEWLINE||LA12_0==WS) ) {
+            if ( ((LA12_0 >= NEWLINE && LA12_0 <= WS)) ) {
                 alt12=1;
             }
             switch (alt12) {
@@ -800,7 +800,7 @@ public TreeAdaptor getTreeAdaptor() {
                 int alt13=2;
                 int LA13_0 = input.LA(1);
 
-                if ( (LA13_0==NEWLINE||LA13_0==WS) ) {
+                if ( ((LA13_0 >= NEWLINE && LA13_0 <= WS)) ) {
                     alt13=1;
                 }
 
@@ -811,7 +811,7 @@ public TreeAdaptor getTreeAdaptor() {
             	    {
             	    set26=(Token)input.LT(1);
 
-            	    if ( input.LA(1)==NEWLINE||input.LA(1)==WS ) {
+            	    if ( (input.LA(1) >= NEWLINE && input.LA(1) <= WS) ) {
             	        input.consume();
             	        adaptor.addChild(root_0, 
             	        (Object)adaptor.create(set26)
@@ -1310,7 +1310,7 @@ public TreeAdaptor getTreeAdaptor() {
     static final String DFA4_eofS =
         "\6\uffff";
     static final String DFA4_minS =
-        "\1\10\1\uffff\3\11\1\uffff";
+        "\1\11\1\uffff\3\12\1\uffff";
     static final String DFA4_maxS =
         "\1\24\1\uffff\1\17\1\22\1\17\1\uffff";
     static final String DFA4_acceptS =
@@ -1318,11 +1318,11 @@ public TreeAdaptor getTreeAdaptor() {
     static final String DFA4_specialS =
         "\6\uffff}>";
     static final String[] DFA4_transitionS = {
-            "\1\2\3\uffff\1\1\7\uffff\1\1",
+            "\1\2\2\uffff\1\1\7\uffff\1\1",
             "",
-            "\1\4\1\uffff\1\3\2\uffff\1\5\1\1",
-            "\1\4\1\uffff\1\3\2\uffff\1\5\1\1\1\uffff\2\1",
-            "\1\4\1\uffff\1\4\2\uffff\1\5\1\1",
+            "\1\4\1\3\2\uffff\1\5\1\1",
+            "\1\4\1\3\2\uffff\1\5\1\1\1\uffff\2\1",
+            "\2\4\2\uffff\1\5\1\1",
             ""
     };
 
@@ -1356,7 +1356,7 @@ public TreeAdaptor getTreeAdaptor() {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "()* loopback of 50:34: ( assignment endline ( ws )? )*";
+            return "()* loopback of 50:37: ( assignment endline ( ws )? )*";
         }
     }
     static final String DFA17_eotS =
@@ -1364,7 +1364,7 @@ public TreeAdaptor getTreeAdaptor() {
     static final String DFA17_eofS =
         "\6\uffff";
     static final String DFA17_minS =
-        "\1\10\1\uffff\2\11\2\uffff";
+        "\1\11\1\uffff\2\12\2\uffff";
     static final String DFA17_maxS =
         "\1\14\1\uffff\1\17\1\22\2\uffff";
     static final String DFA17_acceptS =
@@ -1372,10 +1372,10 @@ public TreeAdaptor getTreeAdaptor() {
     static final String DFA17_specialS =
         "\6\uffff}>";
     static final String[] DFA17_transitionS = {
-            "\1\2\3\uffff\1\1",
+            "\1\2\2\uffff\1\1",
             "",
-            "\1\4\1\uffff\1\3\1\uffff\1\4\1\uffff\1\4",
-            "\1\4\1\uffff\1\3\3\uffff\1\4\1\uffff\2\5",
+            "\1\4\1\3\1\uffff\1\4\1\uffff\1\4",
+            "\1\4\1\3\3\uffff\1\4\1\uffff\2\5",
             "",
             ""
     };
@@ -1415,42 +1415,42 @@ public TreeAdaptor getTreeAdaptor() {
     }
  
 
-    public static final BitSet FOLLOW_ws_in_prog74 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_prog77 = new BitSet(new long[]{0x0000000000080A00L});
-    public static final BitSet FOLLOW_ws_in_prog79 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_19_in_prog82 = new BitSet(new long[]{0x0000000000000A00L});
-    public static final BitSet FOLLOW_ws_in_prog84 = new BitSet(new long[]{0x0000000000101100L});
-    public static final BitSet FOLLOW_assignment_in_prog87 = new BitSet(new long[]{0x0000000000000A00L});
-    public static final BitSet FOLLOW_endline_in_prog89 = new BitSet(new long[]{0x0000000000101B00L});
-    public static final BitSet FOLLOW_ws_in_prog91 = new BitSet(new long[]{0x0000000000101100L});
-    public static final BitSet FOLLOW_action_in_prog97 = new BitSet(new long[]{0x0000000000000A00L});
-    public static final BitSet FOLLOW_endline_in_prog99 = new BitSet(new long[]{0x0000000000101B00L});
-    public static final BitSet FOLLOW_ws_in_prog101 = new BitSet(new long[]{0x0000000000101100L});
-    public static final BitSet FOLLOW_20_in_prog108 = new BitSet(new long[]{0x0000000000000A02L});
-    public static final BitSet FOLLOW_ws_in_prog110 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_assignment134 = new BitSet(new long[]{0x0000000000004A00L});
+    public static final BitSet FOLLOW_ws_in_fighter74 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_fighter77 = new BitSet(new long[]{0x0000000000080C00L});
+    public static final BitSet FOLLOW_ws_in_fighter79 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_fighter82 = new BitSet(new long[]{0x0000000000000C00L});
+    public static final BitSet FOLLOW_ws_in_fighter84 = new BitSet(new long[]{0x0000000000101200L});
+    public static final BitSet FOLLOW_assignment_in_fighter87 = new BitSet(new long[]{0x0000000000000C00L});
+    public static final BitSet FOLLOW_endline_in_fighter89 = new BitSet(new long[]{0x0000000000101E00L});
+    public static final BitSet FOLLOW_ws_in_fighter91 = new BitSet(new long[]{0x0000000000101200L});
+    public static final BitSet FOLLOW_action_in_fighter97 = new BitSet(new long[]{0x0000000000000C00L});
+    public static final BitSet FOLLOW_endline_in_fighter99 = new BitSet(new long[]{0x0000000000101E00L});
+    public static final BitSet FOLLOW_ws_in_fighter101 = new BitSet(new long[]{0x0000000000101200L});
+    public static final BitSet FOLLOW_20_in_fighter108 = new BitSet(new long[]{0x0000000000000C02L});
+    public static final BitSet FOLLOW_ws_in_fighter110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_assignment134 = new BitSet(new long[]{0x0000000000004C00L});
     public static final BitSet FOLLOW_ws_in_assignment136 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_assignment139 = new BitSet(new long[]{0x0000000000000A80L});
+    public static final BitSet FOLLOW_14_in_assignment139 = new BitSet(new long[]{0x0000000000000C80L});
     public static final BitSet FOLLOW_ws_in_assignment141 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_DIGIT_in_assignment144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_action166 = new BitSet(new long[]{0x0000000000008A00L});
+    public static final BitSet FOLLOW_condition_in_action166 = new BitSet(new long[]{0x0000000000008C00L});
     public static final BitSet FOLLOW_ws_in_action168 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_action171 = new BitSet(new long[]{0x0000000000000B00L});
-    public static final BitSet FOLLOW_ws_in_action173 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_action178 = new BitSet(new long[]{0x0000000000000A00L});
-    public static final BitSet FOLLOW_ws_in_action180 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_action184 = new BitSet(new long[]{0x0000000000010A00L});
+    public static final BitSet FOLLOW_15_in_action171 = new BitSet(new long[]{0x0000000000000E00L});
+    public static final BitSet FOLLOW_ws_in_action173 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_action178 = new BitSet(new long[]{0x0000000000000C00L});
+    public static final BitSet FOLLOW_ws_in_action180 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_action184 = new BitSet(new long[]{0x0000000000010C00L});
     public static final BitSet FOLLOW_ws_in_action186 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_16_in_action189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_WS_in_endline227 = new BitSet(new long[]{0x0000000000000A00L});
+    public static final BitSet FOLLOW_WS_in_endline227 = new BitSet(new long[]{0x0000000000000C00L});
     public static final BitSet FOLLOW_NEWLINE_in_endline230 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_condition240 = new BitSet(new long[]{0x0000000000001100L});
+    public static final BitSet FOLLOW_12_in_condition240 = new BitSet(new long[]{0x0000000000001200L});
     public static final BitSet FOLLOW_condition_in_condition244 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_13_in_condition246 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_IDENTIFIER_in_condition262 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_WS_in_condition264 = new BitSet(new long[]{0x0000000000060800L});
     public static final BitSet FOLLOW_operator_in_condition267 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_WS_in_condition269 = new BitSet(new long[]{0x0000000000001900L});
+    public static final BitSet FOLLOW_WS_in_condition269 = new BitSet(new long[]{0x0000000000001A00L});
     public static final BitSet FOLLOW_condition_in_condition274 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_IDENTIFIER_in_condition295 = new BitSet(new long[]{0x0000000000000002L});
 

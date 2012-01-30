@@ -13,9 +13,9 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 
-import saf.entities.BotDefinition;
+import saf.ast.FighterDefinition;
 
-public class BotParser {
+public class FighterDefinitionParser {
 
 	/**
 	 * Parses the given file and returns the bot.
@@ -24,11 +24,11 @@ public class BotParser {
 	 * @throws IOException error while reading file
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	public BotDefinition parseBotDefinition(String path) throws IOException, BotDefinitionMalformedException {
+	public FighterDefinition parseFighterDefinition(String path) throws IOException, BotDefinitionMalformedException {
 		FileInputStream stream = null;
 		try {
 			stream = new FileInputStream(path);
-			return parseBotDefinition(stream);
+			return parseFighterDefinition(stream);
 		} finally {
 			if (stream != null)
 				stream.close();
@@ -42,7 +42,7 @@ public class BotParser {
 	 * @throws IOException error while reading file
 	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
 	 */
-	public BotDefinition parseBotDefinition(InputStream stream) throws IOException, BotDefinitionMalformedException {		
+	public FighterDefinition parseFighterDefinition(InputStream stream) throws IOException, BotDefinitionMalformedException {		
 		ANTLRInputStream input = new ANTLRInputStream(stream);
 
 		List<String> errorList = new ArrayList<String>();
@@ -55,15 +55,14 @@ public class BotParser {
 		SAFParser parser = new SAFParser(tokens);
 		parser.setErrorList(errorList);
 
-		SAFParser.prog_return r;
+		SAFParser.fighter_return fighterTree;
 		try {
-			r = parser.prog();
+			fighterTree = parser.fighter();
 		} catch (RecognitionException e) {
 			throw new BotDefinitionMalformedException(e);
 		} 
-		CommonTree tree = (CommonTree) r.getTree();
 
-		CommonTreeNodeStream nodes = new CommonTreeNodeStream(tree);
+		CommonTreeNodeStream nodes = new CommonTreeNodeStream((CommonTree) fighterTree.getTree());
 		nodes.setTokenStream(tokens);
 
 		if (!errorList.isEmpty()) {
@@ -73,7 +72,7 @@ public class BotParser {
 		SAFWalker walker = new SAFWalker(nodes);
 		walker.setErrorList(errorList);
 		try {
-			walker.prog();
+			walker.fighter();
 		} catch (RecognitionException e) {
 			throw new BotDefinitionMalformedException(e);
 		}
@@ -82,13 +81,13 @@ public class BotParser {
 			throw new BotDefinitionMalformedException("Errors during walking.", errorList);
 		}
 		
-		BotDefinition bot = walker.getBotDefinition();
+		FighterDefinition fighter = walker.getFighterDefinition();
 		
-		bot.validate(errorList);
+		fighter.validate(errorList);
 		if (!errorList.isEmpty()) {
 			throw new BotDefinitionMalformedException("Errors during validation.", errorList);
 		}
-		return bot;		
+		return fighter;		
 	}
 
 

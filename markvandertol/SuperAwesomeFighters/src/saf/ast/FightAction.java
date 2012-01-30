@@ -1,4 +1,4 @@
-package saf.entities;
+package saf.ast;
 
 /**
  * Fight actions a bot can perform.

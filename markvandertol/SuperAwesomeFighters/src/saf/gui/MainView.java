@@ -25,7 +25,7 @@ import saf.Arena;
 public class MainView extends JFrame {
 	private static final String TITLE = "Super Awesome Fighters";
 	private static final long serialVersionUID = -6777082252189246561L;
-	private final Fighter[] fighters = new Fighter[2];
+	private final FighterComponent[] fighters = new FighterComponent[2];
 	
 	private final Arena arena;
 	
@@ -52,8 +52,8 @@ public class MainView extends JFrame {
 		
 		JPanel fightersPanel = new JPanel();
 		
-		fighters[0] = new Fighter(arena, 0);
-		fighters[1] = new Fighter(arena, 1);
+		fighters[0] = new FighterComponent(arena, 0);
+		fighters[1] = new FighterComponent(arena, 1);
 		
 		fightersPanel.add(fighters[0]);
 		fightersPanel.add(fighters[1]);

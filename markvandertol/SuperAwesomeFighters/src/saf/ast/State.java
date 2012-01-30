@@ -1,4 +1,4 @@
-package saf.entities;
+package saf.ast;
 
 /**
  * States that the bot can be in.

@@ -1,4 +1,4 @@
-package saf.entities;
+package saf.ast;
 
 import static org.junit.Assert.*;
 
@@ -8,9 +8,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import saf.entities.CombinedCondition;
-import saf.entities.Condition;
-import saf.entities.State;
+import saf.ast.CombinedCondition;
+import saf.ast.Condition;
+import saf.ast.State;
 
 public class CombinedConditionTest {
 	
