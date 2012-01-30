@@ -1,5 +1,7 @@
 package game;
 
+import common.*;
+
 public abstract class AbstractFighter {
 	protected int m_PunchPower=5;
 	protected int m_PunchReach=5;
@@ -38,6 +40,12 @@ public abstract class AbstractFighter {
 	}
 	public boolean isMuchStronger(){
 		return false;
+	}
+	public ActionType choose(ActionType action1,ActionType action2){
+		if(Math.random()>0.5){
+			return action1;
+		}
+		return action2;
 	}
 }
 

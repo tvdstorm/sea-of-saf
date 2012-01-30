@@ -6,7 +6,7 @@ public class JavaCompiler implements SafVisitor{
 	
 	private JavaCompiler(){}
 	
-	public static String getJavaCode(){
+	public static String getJavaCode(String packagename,String name, String saffile){
 		JavaCompiler c=new JavaCompiler();
 		return "";
 	
@@ -34,7 +34,7 @@ public class JavaCompiler implements SafVisitor{
 	@Override
 	public void visit(ChooseAction a) {
 		// TODO Auto-generated method stub
-		
+		m_Actions.append(arg0)
 	}
 
 	@Override
