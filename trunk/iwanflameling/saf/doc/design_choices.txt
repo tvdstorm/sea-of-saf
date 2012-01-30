@@ -1,0 +1,3 @@
+- I choose to add the characteristics of a fighter as Fighter instance variables instead
+as a set of attributes since they have a default value and, because of that, have to be
+defined anyway.
