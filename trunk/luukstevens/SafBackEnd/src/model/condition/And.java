@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.ConditionType;
+import model.enums.ConditionType;
 
 @XmlRootElement(name = "andCondition")
 public class And extends Composite {

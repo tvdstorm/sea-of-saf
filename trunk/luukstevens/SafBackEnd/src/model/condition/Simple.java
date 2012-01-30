@@ -5,7 +5,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.ConditionType;
+import model.enums.ConditionType;
 
 @XmlRootElement(name = "simpleCondition")
 public class Simple extends Condition {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.ConditionType;
+import model.enums.ConditionType;
 
 @XmlRootElement(name = "orCondition")
 public class Or extends Composite {
