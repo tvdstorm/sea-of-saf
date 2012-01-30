@@ -1,6 +1,6 @@
 // $ANTLR 3.4 C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g 2012-01-30 13:02:45
  
-  package Generated;
+  package generated;
   import saf.structure.*;
 
 

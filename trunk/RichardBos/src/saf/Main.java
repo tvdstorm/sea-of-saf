@@ -1,12 +1,13 @@
 package saf;
 
+import generated.SAFLexer;
+import generated.SAFParser;
+import generated.SAFParser.bots_return;
+
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
-import Generated.SAFLexer;
-import Generated.SAFParser;
-import Generated.SAFParser.bots_return;
 
 import saf.checker.ElementChecker;
 import saf.structure.Bots;
