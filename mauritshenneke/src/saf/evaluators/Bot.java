@@ -17,7 +17,7 @@ public class Bot {
 	@Override
 	public String toString() {
 		return "Bot [name=" + name + ", characteristics=" + characteristics
-				+ ", behaviours=" + behaviours + "]";
+				+ ", behaviours=" + behaviours + "]\n";
 	}
 	
 	public void setName(String name) {

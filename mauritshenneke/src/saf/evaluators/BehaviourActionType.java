@@ -9,7 +9,7 @@ public class BehaviourActionType {
 
 	@Override
 	public String toString() {
-		return "BehaviourActionType [name=" + name + "]";
+		return "BehaviourActionType [name=" + name + "]\n";
 	}
 
 }
