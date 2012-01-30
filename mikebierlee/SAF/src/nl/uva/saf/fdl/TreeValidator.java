@@ -28,7 +28,16 @@ public class TreeValidator extends TreeVisitor {
 	private ValidationReport report = null;
 	boolean alwaysConditionPresent = false;
 		
+	/**
+	 * Validates a syntax tree, executing general type checking.
+	 * @param tree Reference to a FDL AST. Cannot be null.
+	 * @return Returns an instance of a validation report.
+	 */
 	public ValidationReport validate(ITreeNode tree) {
+		if (tree == null) {
+			throw new IllegalArgumentException("Tree reference cannot be null");
+		}
+		
 		report = new ValidationReport();
 		alwaysConditionPresent = false;
 		

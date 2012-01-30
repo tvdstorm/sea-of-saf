@@ -31,5 +31,5 @@ public abstract class BooleanExpression<T> extends ConditionAlways {
 
 	public List<T> getOperands() {
 		return Collections.unmodifiableList(operands);
-	}
+	}	
 }

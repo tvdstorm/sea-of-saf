@@ -29,7 +29,7 @@ public class Fighter extends TreeNode {
 	private final ArrayList<FighterAttribute> attributes;
 	
 	public Fighter(String name, ArrayList<FighterAttribute> attributes) {
-		this.name = name;
+		this.name = name == null ? "" : name;
 		this.attributes = attributes;
 	}
 
