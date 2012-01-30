@@ -22,7 +22,7 @@ public abstract class Action extends TreeNode {
 	private final String actionType;
 	
 	public Action(String actionType) {
-		this.actionType = actionType;
+		this.actionType = actionType == null ? "" : actionType;
 	}
 
 	public String getActionType() {

@@ -29,7 +29,7 @@ public class Characteristic extends FighterAttribute {
 	}
 	
 	public Characteristic(String type, int value) {
-		this.type = type;
+		this.type = type == null ? "" : type;
 		this.value = value;
 	}
 
@@ -44,7 +44,5 @@ public class Characteristic extends FighterAttribute {
 	@Override
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);		
-	}
-	
-	
+	}	
 }
