@@ -29,11 +29,12 @@ behaviour returns [Behaviour b]
     : bc = behaviour_condition '[' mats = behaviour_action_types fats = behaviour_action_types']' {$b = new Behaviour(bc, mats, fats);}
     ;
 
+// By varying the input of the add method, the order in which the
 behaviour_condition returns [BehaviourCondition bc]
   @init{ $bc = new BehaviourCondition();}
   : IDENT {$bc.add($IDENT.text);}
-  | IDENT 'and' rn = behaviour_condition {$bc.add($IDENT.text, rn);}
-  | IDENT 'or' ln = behaviour_condition {$bc.add(ln, $IDENT.text);}
+  | IDENT 'and' rn = behaviour_condition {$bc.add($IDENT.text, rn, "and");}
+  | IDENT 'or' ln = behaviour_condition {$bc.add(ln, $IDENT.text, "or");}
   ;
 
 
