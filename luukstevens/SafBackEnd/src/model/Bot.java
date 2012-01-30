@@ -12,9 +12,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import view.Arena;
+
 import model.condition.And;
 import model.condition.Or;
 import model.condition.Simple;
+import model.enums.AttackType;
+import model.enums.CharacteristicType;
+import model.enums.MoveType;
 
 @XmlRootElement(name = "bot")
 public class Bot {
@@ -30,6 +35,15 @@ public class Bot {
 	@XmlElementWrapper(name = "behaviourRules")
 	@XmlElement(name = "behaviourRule")
 	private List<BehaviourRule> behaviourRules;
+	
+	private MoveType currentMove;
+	private AttackType currentAttack;
+	private Arena arena;
+	
+	public Bot() {
+		currentMove = MoveType.STAND;
+		currentAttack = AttackType.BLOCK_HIGH;
+	}
 
 	public String getName() {
 		return name;
@@ -37,6 +51,42 @@ public class Bot {
 
 	public List<BehaviourRule> getBehaviourRules() {
 		return behaviourRules;
+	}
+	
+	public MoveType getCurrentMove() {
+		return currentMove;
+	}
+
+	public void setCurrentMove(MoveType currentMove) {
+		this.currentMove = currentMove;
+		if(arena != null) arena.update();
+	}
+
+	public AttackType getCurrentAttack() {
+		return currentAttack;
+	}
+
+	public void setCurrentAttack(AttackType currentAttack) {
+		this.currentAttack = currentAttack;
+		if(arena != null) arena.update();
+	}
+	
+	public void setArena(Arena arena) {
+		this.arena = arena;
+	}
+	
+	public double getWeight() {
+		return 	(getCharacteristicValue(CharacteristicType.PUNCH_POWER) + 
+				getCharacteristicValue(CharacteristicType.KICK_POWER)) / 2;
+	}
+	
+	public double getHeight() {
+		return 	(getCharacteristicValue(CharacteristicType.PUNCH_REACH) + 
+				getCharacteristicValue(CharacteristicType.KICK_REACH)) / 2;
+	}
+	
+	public double getSpeed() {
+		return 	Math.abs((0.5 * (getHeight() - getWeight())));	
 	}
 	
 	public int getCharacteristicValue(CharacteristicType characteristicType) {
