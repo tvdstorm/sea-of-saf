@@ -1,0 +1,37 @@
+
+%package compiler
+%semantic SafObject
+%token OR AND '{' '}' '(' ')' '[' ']' '=' VAR CHOOSE INTEGER
+%left  OR AND
+%left  CHOOSE
+
+%%
+
+prog : VAR '{' statements '}' {$$ =new Fighter($1,$3);}
+	|  VAR '{' '}' {$$ =new Fighter($1);}
+	;
+statements: statement statements {$$=new Statements($1, $2);}
+	| statement{$$ = new Statements($1);}
+	;
+statement: VAR '=' INTEGER {$$=new VariableStatement($1, $3);}
+	| condition '[' action action ']' {$$=new ActionStatement($1, $3, $4);}
+	;
+action: CHOOSE '(' action action ')' {$$=new ChooseAction($3,$4);}
+	| VAR {$$ = new Action($1);}
+	;
+condition: subcondition AND condition { $$=new AndCondition($1, $3);}
+	| subcondition OR condition { $$=new OrCondition($1, $3);}
+	| subcondition 
+	;
+	subcondition:'(' condition ')'
+	| VAR { $$=new Condition($1);}
+	;
+%%
+  private SafLexer lexer;
+  SafParser(SafLexer lexer) { this.lexer = lexer; }
+  private void yyerror(String msg) {
+    SafCompiler.fatalError(yyerrno<0 ? msg : yyerrmsgs[yyerrno]);
+  }
+  public SafObject getRootNode(){
+  	return yyrv;
+  }
