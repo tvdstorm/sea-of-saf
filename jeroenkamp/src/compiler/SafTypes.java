@@ -1,11 +1,15 @@
 package compiler;
 
+import java.util.*;
+import common.*;
+
 abstract class SafObject{
 	private int m_Line;
 	private int m_Column;
 	public void accept(SafVisitor visitor){
 		visitor.visit(this);
 	}
+	abstract String toJavaCode();
 	
 	
 }
@@ -21,6 +25,39 @@ class Fighter extends SafObject{
 	public Fighter(SafObject name){
 		m_Name=(StringValue)name;
 	}
+	String toJavaCode(){
+		String response= "class "+m_Name.toJavaCode()+"{public "+m_Name.toJavaCode()+"(){";
+		if(m_Statement!=null){
+			List<Statement> actions=new ArrayList<Statement>();
+			List<Statement> declarations=new ArrayList<Statement>();;
+			Statements st=m_Statement;
+			do{
+				Statement s=st.getStatement();
+				if(s instanceof ActionStatement){
+					actions.add(s);
+				}
+				else{
+					declarations.add(s);
+				}
+				
+			}while((st=st.getNext())!=null);
+			
+			
+		}
+		
+
+	}
+	private String toCode(List<Statement> actions,List<Statement> declarations){
+		StringBuffer result=new StringBuffer();
+		for(Statement s:declarations){
+			result.append(s.toJavaCode());
+		}
+		//TODO determine function name and arguments
+		result.append("} {");
+		for(Statement s:actions){
+			result.append(s.toJavaCode());
+		}
+	}
 }
 
 class Statements extends SafObject{
@@ -35,6 +72,15 @@ class Statements extends SafObject{
 	{	
 		m_Statement=(Statement)statement;
 		m_Next=null;
+	}
+	String toJavaCode(){
+		return "";
+	}
+	Statements getNext(){
+		return m_Next;
+	}
+	Statement getStatement(){
+		return m_Statement;
 	}
 }
 abstract class Statement extends SafObject{}
@@ -52,6 +98,9 @@ class VariableStatement extends Statement{
 	}
 	public NamesValue getVarName(){
 		return m_Varname;
+	}
+	String toJavaCode(){
+		return m_Varname.toJavaCode()+"="+m_Value.toJavaCode()+";";
 	}
 }
 class ActionStatement extends Statement{
@@ -72,6 +121,9 @@ class ActionStatement extends Statement{
 	public ICondition getCondition(){
 		return m_Cond;
 	}
+	String toJavaCode(){
+		
+	}
 }
 abstract class IAction extends SafObject{
 	
@@ -82,6 +134,9 @@ class ChooseAction extends IAction{
 	public ChooseAction(SafObject action1, SafObject action2){
 		m_Action1=(IAction)action1;
 		m_Action2=(IAction)action2;
+	}
+	String toJavaCode(){
+		return "choose("+m_Action1.toJavaCode()+","+m_Action2.toJavaCode()+")";
 	}
 }
 class Action extends IAction{
@@ -94,6 +149,9 @@ class Action extends IAction{
 		catch(IllegalArgumentException iae){
 			SafCompiler.error("Invalid Action keyword");
 		}
+	}
+	String toJavaCode(){
+		return "ActionType."+m_Type.toString();
 	}
 }
 abstract class ICondition extends SafObject{
@@ -108,9 +166,15 @@ abstract class BinCondition extends ICondition{
 }
 class OrCondition extends BinCondition{
 	public OrCondition(SafObject left, SafObject right){super(left,right);}
+	String toJavaCode(){
+		return "("+m_Left.toJavaCode()+"||"+m_Right.toJavaCode()+")";
+	}
 }
 class AndCondition extends BinCondition{
 	public AndCondition(SafObject left, SafObject right){super(left,right);}
+	String toJavaCode(){
+		return "("+m_Left.toJavaCode()+"||"+m_Right.toJavaCode()+")";
+	}
 }
 class Condition extends ICondition{
 	private ConditionType m_Type;
@@ -122,6 +186,9 @@ class Condition extends ICondition{
 		catch(IllegalArgumentException iae){
 			SafCompiler.error("Invalid Condition keyword");
 		}
+	}
+	String toJavaCode(){
+		return m_Type+"()";
 	}
 }
 
@@ -136,6 +203,9 @@ class IntValue extends Value{
 	public int getValue(){
 		return m_Value;
 	}
+	String toJavaCode(){
+		return ""+m_Value;
+	}
 }
 class NamesValue extends Value{
 	private Names m_Name;
@@ -146,6 +216,9 @@ class NamesValue extends Value{
 		catch(IllegalArgumentException iae){
 			SafCompiler.error("Invalid Names keyword");
 		}
+	}
+	String toJavaCode(){
+		return m_Name.toString();
 	}
 }
 
@@ -158,6 +231,9 @@ class StringValue extends Value{
 	public String getValue(){
 		return m_Value;
 	}
+	String toJavaCode(){
+		return m_Value;
+	}
 }
 enum ConditionType{
 	far,
@@ -168,21 +244,7 @@ enum ConditionType{
 	much_stronger,
 	always
 }
-enum ActionType{
-	kick_low,
-	kick_high,
-	punch_low,
-	punch_high,
-	block_high,
-	block_low,
-	stand,
-	run_towards,
-	run_away,
-	jump,
-	crouch,
-	walk_towards,
-	walk_away,
-}
+
 
 enum Names{
 	punchreach,
