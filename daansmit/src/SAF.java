@@ -4,128 +4,119 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 
 
-class SAFException extends org.antlr.runtime.RecognitionException
+class Bot
 {
-    public String message;
+    private List<Characteristic> personality;
+    private List<BehaviourRule> behaviour;
 
-    public SAFException(String message)
+    public Bot()
     {
-        this.message = message;
+        personality = new List<Characteristic>;
+        behaviour = new List<BehaviourRule>;
     }
 
-    public String toString()
+    public addCharacteristic(Characteristic characteristic)
     {
-        return message;
-    }
-}
-
-
-class SAFTree extends CommonTree
-{
-    public SAFTree() { }
-
-    public SAFTree(SAFTree node) { }
-
-    public SAFTree(Token t)
-    {
-        token = t;
+        personality.add(characteristic);
     }
 
-    public SAFTree(int ttype)
+    public addBehaviourRule(BehaviourRule rule)
     {
-        token = new CommonToken(ttype, "<" + this.getClass().getName() + ">");
-    }
-
-    public SAFTree(int ttype, Token id)
-    {
-        token = new CommonToken(ttype, id.getText());
-    }
-
-    public SAFTree(int ttype, String id)
-    {
-        token = new CommonToken(ttype, id);
-    }
-
-    public String toString()
-    {
-        return token.getText() + "<" + this.getClass().getName() + ">";
+        behaviour.add(rule);
     }
 }
 
-
-class Bot extends SAFTree
+class Characteristic
 {
-    public Bot(int ttype, Token id) { super(ttype, id); }
-}
+    private String name;
+    private int value;
 
-
-class Personality extends SAFTree
-{
-    public Personality(int ttype) { super(ttype); }
-}
-
-class Behaviour extends SAFTree
-{
-    public Behaviour(int ttype) { super(ttype); }
-}
-
-class Characteristic extends SAFTree
-{
-    public Characteristic(int ttype, Token id) { super(ttype, id); }
-}
-
-class Digit extends SAFTree
-{
-    public int value;
-
-    public Digit(int ttype, Token value)
+    public Characteristic(String name, int value)
     {
-        this.value = Integer.parseInt(value.getText());
-        token = new CommonToken(ttype, Integer.toString(this.value));
+        this.name = name;
+        this.value = value;
     }
 }
 
-class Condition extends SAFTree
+class BehaviourRule
 {
-    public Condition(int ttype) { super(ttype); }
+    private ConditionTree condition;
+    private List<Action> action;
+
+    public BehaviourRule()
+    {
+        this.action = new List<Action>;
+    }
 }
 
-class Rule extends SAFTree
+interface Evaluable
 {
-    public Rule(int ttype) { super(ttype); }
+    abstract public bool evaluate(State);
 }
 
-class And extends SAFTree
+class ConditionNode implements Evaluable
 {
-    public And(Token t) { super(t); }
+    private TwoPlaceLogicalOperation operation;
+    public Evaluable left;
+    public Evaluable right;
+
+    public ConditionNode(LogicalOperation operation)
+    {
+        this.operation = operation;
+    }
+
+    public bool evaluate(State current)
+    {
+        return True;
+    }
 }
 
-class Or extends SAFTree
+class ConditionLeaf implements Evaluable
 {
-    public Or(Token t) { super(t); }
+    private State state;
+
+    public ConditionLeaf(State state)
+    {
+        this.state = state;
+    }
+
+    public bool evaluate(State current)
+    {
+        return True;
+    }
 }
 
-class State extends SAFTree
+abstract class TwoPlaceLogicalOperation
 {
-    public State(int ttype, Token id) { super(ttype, id); }
+    public bool evaluate(State, State, State);
 }
 
-class Action extends SAFTree
+class And
 {
-    public Action(int ttype) { super(ttype); }
+    public And() { }
+
+    public bool evaluate(State current, State a, State b)
+    {
+        return True;
+    }
 }
 
-class Choose extends SAFTree
+class Or
 {
-    public Choose(Token t) { super(t); }
+    public Or() { }
+
+    public bool evaluate(State current, State a, State b)
+    {
+        return True;
+    }
 }
 
-class MoveAction extends SAFTree
+class State
 {
-    public MoveAction(int ttype, Token id) { super(ttype, id); }
-}
+    private String id;
 
-class FightAction extends SAFTree
-{
-    public FightAction(int ttype, Token id) { super(ttype, id); }
+    public State(id)
+    {
+        this.id = id;
+    }
 }

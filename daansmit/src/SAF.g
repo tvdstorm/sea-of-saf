@@ -1,12 +1,15 @@
 grammar SAF;
 
-options
-{
+options {
     output = AST;
 }
 
-tokens
-{
+@members {
+    private Bot bot;
+    private BehaviourRule currentBehaviourRule;
+}
+
+tokens {
     AND     = 'and';
     OR      = 'or';
     EQUALS  = '=';
@@ -17,62 +20,64 @@ tokens
     LSQUARE = '[';
     RSQUARE = ']';
     CHOOSE  = 'choose';
-
-
-    ACTION;
-    BEHAVIOUR;
-    BOT;
-    CHARACTERISTIC;
-    CONDITION;
-    PERSONALITY;
-    RULE;
-    STATE;
 }
 
+
 WS
-    : ( ' ' | '\r' | '\n' | '\t' )+
-      { $channel = HIDDEN; }
+    :   ( ' ' | '\r' | '\n' | '\t' )+
+        { $channel = HIDDEN; }
     ;
 
 STRING
-    : ( 'a'..'z' | 'A'..'Z' | '_' )+
+    :   ( 'a'..'z' | 'A'..'Z' | '_' )+
     ;
 
 DIGIT
-    : '10'
-    | '1'..'9'
+    :   '10'
+    |   '1'..'9'
     ;
 
 bot
-    : name=STRING LCURLY personality behaviour RCURLY ->
-        ^(BOT<Bot>[$name] personality behaviour)
-    ;
-
-personality
-    : characteristic* -> ^(PERSONALITY<Personality> characteristic*)
+    :   name=STRING LCURLY characteristic* behaviourRule* RCURLY
+        { bot = new Bot(); }
     ;
 
 characteristic
-    : name=STRING EQUALS value=DIGIT ->
-        ^(CHARACTERISTIC<Characteristic>[$name] DIGIT<Digit>[$value])
+    :   name=STRING EQUALS value=DIGIT
+        { bot.addBehaviourRule(new Characteristic(name, value)); }
     ;
 
-behaviour
-    : rule* -> ^(BEHAVIOUR<Behaviour> rule*)
-    ;
-
-rule
-    : condition LSQUARE action RSQUARE -> ^(RULE<Rule> condition action)
+behaviourRule
+    :   condition LSQUARE action RSQUARE
+        {
+            if (!currentBehaviourRule)
+            {
+                currentBehaviourRule = new BehaviourRule();
+            }
+        }
     ;
 
 condition
-    : stateExpression -> ^(CONDITION<Condition> stateExpression)
-    ;
-
-stateExpression
-    : state AND<And>^ stateExpression
-    | state OR<Or>^ stateExpression
-    | state
+    :   id=STRING AND<And>^ condition
+        {
+            if (!currentCondition)
+            {
+                currentCondition = new ConditionNode(new And());
+                currentCondition.left = new State(id);
+            }                    
+        }
+    |   id=STRING OR<Or>^ condition
+        {
+            if (!currentCondition)
+            {
+                currentCondition = new ConditionNode(new Or());
+                currentCondition.left = new State(id);
+            }
+        }
+    |   id=STRING
+        {
+            currentCondition.right = new State(id);
+        }
     ;
 
 state
