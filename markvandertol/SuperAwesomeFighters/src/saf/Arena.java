@@ -23,7 +23,7 @@ public class Arena {
 	private Fighter[] bots = new Fighter[2];
 	private float distanceBetweenBots;
 	
-	public Fighter getBot(int index) {
+	public Fighter getFighter(int index) {
 		return bots[index];
 	}
 	
@@ -35,6 +35,7 @@ public class Arena {
 		} catch (BotDefinitionMalformedException e) {
 			StringBuilder builder = new StringBuilder();
 			builder.append(e.toString());
+			builder.append("\n\n");
 			for (String error : e.getErrorList()) {
 				builder.append(error);
 				builder.append('\n');

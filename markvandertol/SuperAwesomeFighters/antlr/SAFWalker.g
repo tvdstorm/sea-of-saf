@@ -60,23 +60,8 @@ options {
 		}
 	}
 	
-	private void createCombinedCondition(String state, String operator) {
-		Condition c = null;
-		try {
-			State s = State.valueOf(state);
-			c = new ConcreteCondition(s);
-		} catch(IllegalArgumentException ex) {
-			emitErrorMessage("Unknown state: " + state);
-		}
-		boolean requireBoth = false;
-		if ("and".equals(operator))
-			requireBoth = true;
-		else if ("or".equals(operator))
-			requireBoth = false;
-		else
-			emitErrorMessage("Unknown operator: " + operator);
-		
-		conditions.push(new CombinedCondition(c, conditions.pop(), requireBoth));
+	private void createCombinedCondition(boolean requireBoth) {
+		conditions.push(new CombinedCondition(conditions.pop(), conditions.pop(), requireBoth));
 	}
 	
 }
@@ -90,9 +75,7 @@ assignment
 action 	:	^(ACTION condition move=IDENTIFIER attack=IDENTIFIER) { createAction($move.text, $attack.text);};
 
 condition 
-	:	^(CONDITION c=condition) { /* No action */ }
-	|	^(CONDITION c2=IDENTIFIER) { createCondition($c2.text); }
-	|	^(CONDITION c3=IDENTIFIER op=operator condition) { createCombinedCondition($c3.text, $op.text); };
-
-operator 
-	:	('and' | 'or');
+	:	^(RCONDITION c=condition) { /* No action */ }
+	|	^(ANDCONDITION condition condition) { createCombinedCondition(true); }
+	|	^(ORCONDITION condition condition) { createCombinedCondition(false); }
+	|	^(CONDITION c2=IDENTIFIER) { createCondition($c2.text); };
