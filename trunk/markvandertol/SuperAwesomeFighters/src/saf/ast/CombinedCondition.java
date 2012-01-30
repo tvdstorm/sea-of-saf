@@ -10,12 +10,6 @@ public class CombinedCondition extends Condition {
 	
 	private boolean requireBoth;
 	
-	
-	/**
-	 * @param condition1
-	 * @param condition2
-	 * @param requireBoth
-	 */
 	public CombinedCondition(Condition condition1, Condition condition2,
 			boolean requireBoth) {
 		this.condition1 = condition1;
@@ -38,24 +32,14 @@ public class CombinedCondition extends Condition {
 			return c1 || c2;
 	}
 
-	/**
-	 * @return the condition1
-	 */
 	public Condition getCondition1() {
 		return condition1;
 	}
 
-
-	/**
-	 * @return the condition2
-	 */
 	public Condition getCondition2() {
 		return condition2;
 	}
 
-	/**
-	 * @return the requireBoth
-	 */
 	public boolean isRequireBoth() {
 		return requireBoth;
 	}

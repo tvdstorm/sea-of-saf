@@ -1,6 +1,6 @@
 package saf.ast;
 /**
- * Move actions a bot can perform.
+ * Move actions a fighter can perform.
  */
 public enum MoveAction {
 	walk_towards,

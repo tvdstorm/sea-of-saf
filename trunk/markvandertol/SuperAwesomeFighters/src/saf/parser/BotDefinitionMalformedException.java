@@ -6,7 +6,6 @@ import java.util.List;
  * Thrown when the bot definition has an error.
  */
 public class BotDefinitionMalformedException extends Exception {
-	private static final long serialVersionUID = 4446495545424179062L;
 	
 	private List<String> errorList;
 

@@ -1,7 +1,7 @@
 package saf.ast;
 
 /**
- * States that the bot can be in.
+ * States that the fighter can be in.
  */
 public enum State {
 	always,
