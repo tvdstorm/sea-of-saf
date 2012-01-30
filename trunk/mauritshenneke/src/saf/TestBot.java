@@ -17,7 +17,7 @@ public class TestBot {
 										                "punchPower = 5 \n" +
 										                "kichReach = 3 \n" +
 										                "punchReach = 4 \n" +
-										                "far[run_towards punch_high] \n" +
+										                "far and weaker[run_towards punch_high] \n" +
 										                "near[choose(stand crouch) kick_high] \n     "+
 										                "much_stronger[walk_towards punch_low] \n     "+
 										                "weaker[run_away choose(block_high block_low)] \n     "+

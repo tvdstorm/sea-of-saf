@@ -11,7 +11,7 @@ public class Characteristic {
 
 	@Override
 	public String toString() {
-		return "Characteristic [name=" + name + ", value=" + value + "]";
+		return "Characteristic [name=" + name + ", value=" + value + "]\n";
 	}
 	
 }

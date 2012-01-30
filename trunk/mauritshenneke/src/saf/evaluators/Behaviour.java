@@ -3,24 +3,24 @@ package saf.evaluators;
 import java.util.List;
 
 public class Behaviour {
-	private String condition;
+	private BehaviourCondition behaviourCondition;
 	private List<BehaviourActionType> moveActionTypes;
 	private List<BehaviourActionType> fightActionTypes;
 	
-	public Behaviour(String condition,
+	public Behaviour(BehaviourCondition behaviourCondition,
 			List<BehaviourActionType> moveActionTypes,
 			List<BehaviourActionType> fightActionTypes) {
 
-		this.condition= condition;
+		this.behaviourCondition= behaviourCondition;
 		this.moveActionTypes = moveActionTypes;
 		this.fightActionTypes = fightActionTypes;
 	}
 
 	@Override
 	public String toString() {
-		return "Behaviour [condition=" + condition + ", moveActionTypes="
+		return "Behaviour [behaviourCondition=" + behaviourCondition+ ", moveActionTypes="
 				+ moveActionTypes + ", fightActionTypes=" + fightActionTypes
-				+ "]";
+				+ "]\n";
 	}
 	
 }

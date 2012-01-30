@@ -21,18 +21,21 @@ create returns [Bot bot]
     : IDENT {$bot.setName($IDENT.text);} '{' ( c = characteristic { $bot.addCharacteristic(c); } | b=behaviour {$bot.addBehaviour(b);})* '}'
     ;
 
-attribute
-    : characteristic
-    | behaviour
-    ;
-
 characteristic returns [Characteristic c]
     : IDENT '=' i=INTEGER {c = new Characteristic($IDENT.text, Integer.parseInt($i.text));}
     ;
 
 behaviour returns [Behaviour b]
-    : IDENT '[' mats = behaviour_action_types fats = behaviour_action_types']' {b = new Behaviour($IDENT.text, mats, fats);}
+    : bc = behaviour_condition '[' mats = behaviour_action_types fats = behaviour_action_types']' {$b = new Behaviour(bc, mats, fats);}
     ;
+
+behaviour_condition returns [BehaviourCondition bc]
+  @init{ $bc = new BehaviourCondition();}
+  : IDENT {$bc.add($IDENT.text);}
+  | IDENT 'and' rn = behaviour_condition {$bc.add($IDENT.text, rn);}
+  | IDENT 'or' ln = behaviour_condition {$bc.add(ln, $IDENT.text);}
+  ;
+
 
 behaviour_action_types returns [ArrayList<BehaviourActionType> result]
     @init {	$result = new ArrayList<BehaviourActionType>();	}
