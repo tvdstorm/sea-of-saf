@@ -3,7 +3,8 @@ package ast;
 import visitor.FighterVisitor;
 
 public class FighterTree implements FighterNode {
-    Elements el;
+    
+	Elements el;
     
     /** Constructor. */
     public FighterTree(Elements e) {
@@ -18,5 +19,9 @@ public class FighterTree implements FighterNode {
 	@Override
 	public void accept(FighterVisitor v) {
 	     v.visit(this);
+	     
+		for(FighterNode e : this.getElements()) {
+			v.visit(e);
+		}
 	}
 }
