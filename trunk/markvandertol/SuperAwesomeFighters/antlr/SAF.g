@@ -9,6 +9,9 @@ tokens {
   ASSIGNMENT;
   ACTION;
   CONDITION;
+  ANDCONDITION;
+  ORCONDITION;
+  RCONDITION;
 }
 
 @header {
@@ -61,12 +64,16 @@ ws	:	(NEWLINE | WS)+;
 endline :	WS* NEWLINE;
 
 condition 
-	:	'(' c=condition ')' -> ^(CONDITION $c)
-	|	first=IDENTIFIER WS+ operator WS+ second=condition -> ^(CONDITION $first operator $second)
-	|	p=IDENTIFIER -> ^(CONDITION $p);
+	:	first=andcondition (WS+ 'or' WS+ second=condition -> ^(ORCONDITION $first $second) | -> ^(RCONDITION $first));
 
-operator 
-	:	('and' | 'or');
+	
+andcondition
+	:	first=pcondition (WS+ 'and' WS+ second=andcondition -> ^(ANDCONDITION $first $second) | -> ^(RCONDITION $first));
+	
+
+pcondition 
+	:	'(' c=condition ')' -> ^(RCONDITION $c)
+	|	p=IDENTIFIER -> ^(CONDITION $p);
 
 
 /* Tokens: */
