@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Describes a bot.
+ * Describes a Fighter. This file doesn't contain any game state.
  */
 public class FighterDefinition {
 	private static final String KICK_POWER = "kickPower";

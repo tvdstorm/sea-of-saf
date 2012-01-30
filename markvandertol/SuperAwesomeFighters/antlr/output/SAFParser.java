@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g 2012-01-30 14:52:47
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g 2012-01-30 15:52:13
 
 package saf.parser;
 import java.util.List;
@@ -342,7 +342,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: action, IDENTIFIER, assignment
+            // elements: action, assignment, IDENTIFIER
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -506,7 +506,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: IDENTIFIER, DIGIT
+            // elements: DIGIT, IDENTIFIER
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -711,7 +711,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: condition, attack, move
+            // elements: move, attack, condition
             // token labels: attack, move
             // rule labels: retval
             // token list labels: 
@@ -1080,7 +1080,7 @@ public TreeAdaptor getTreeAdaptor() {
                     stream_condition.add(second.getTree());
 
                     // AST REWRITE
-                    // elements: second, first
+                    // elements: first, second
                     // token labels: 
                     // rule labels: retval, second, first
                     // token list labels: 
@@ -1305,7 +1305,7 @@ public TreeAdaptor getTreeAdaptor() {
                     stream_andcondition.add(second.getTree());
 
                     // AST REWRITE
-                    // elements: second, first
+                    // elements: first, second
                     // token labels: 
                     // rule labels: retval, second, first
                     // token list labels: 

@@ -1,6 +1,7 @@
 package saf.parser;
 
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,17 +18,11 @@ import saf.ast.FighterDefinition;
 
 public class FighterDefinitionParser {
 
-	/**
-	 * Parses the given file and returns the bot.
-	 * @param path path of the bot definition file
-	 * @return the bot
-	 * @throws IOException error while reading file
-	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
-	 */
-	public FighterDefinition parseFighterDefinition(String path) throws IOException, BotDefinitionMalformedException {
+
+	public FighterDefinition parseFighterDefinition(File file) throws IOException, BotDefinitionMalformedException {
 		FileInputStream stream = null;
 		try {
-			stream = new FileInputStream(path);
+			stream = new FileInputStream(file);
 			return parseFighterDefinition(stream);
 		} finally {
 			if (stream != null)
@@ -35,13 +30,6 @@ public class FighterDefinitionParser {
 		}
 	}
 
-	/**
-	 * Parses the given stream and returns the bot.
-	 * @param stream stream that contains the definition
-	 * @return the bot
-	 * @throws IOException error while reading file
-	 * @throws BotDefinitionMalformedException when the bot definition doesn't have the right format
-	 */
 	public FighterDefinition parseFighterDefinition(InputStream stream) throws IOException, BotDefinitionMalformedException {		
 		ANTLRInputStream input = new ANTLRInputStream(stream);
 

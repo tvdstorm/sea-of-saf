@@ -1,7 +1,7 @@
 package saf.ast;
 
 /**
- * Fight actions a bot can perform.
+ * Fight actions a fighter can perform.
  */
 public enum FightAction {
 	block_low,

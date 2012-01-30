@@ -1,5 +1,6 @@
 package saf;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -14,22 +15,25 @@ import saf.ast.State;
 import saf.parser.BotDefinitionMalformedException;
 import saf.parser.FighterDefinitionParser;
 
+/**
+ * Hosts the fight between two Fighters. Contains the game logic.
+ */
 public class Arena {
-	private final FighterDefinitionParser botParser = new FighterDefinitionParser();
+	private final FighterDefinitionParser fighterParser = new FighterDefinitionParser();
 	private final Random random = new Random();
 	
-	private FighterDefinition[] botDefinitions = new FighterDefinition[2];
+	private FighterDefinition[] playerDefinitions = new FighterDefinition[2];
 	
-	private Fighter[] bots = new Fighter[2];
-	private float distanceBetweenBots;
+	private Fighter[] player = new Fighter[2];
+	private float distanceBetweenPlayers;
 	
 	public Fighter getFighter(int index) {
-		return bots[index];
+		return player[index];
 	}
 	
-	public String openBotDefinition(int index, String path) {
+	public String openBotDefinition(int index, File file) {
 		try {
-			botDefinitions[index] = botParser.parseFighterDefinition(path);
+			playerDefinitions[index] = fighterParser.parseFighterDefinition(file);
 		} catch (IOException e) {
 			return e.toString();
 		} catch (BotDefinitionMalformedException e) {
@@ -47,127 +51,142 @@ public class Arena {
 	}
 	
 	public void restartRound() {
-		if (botDefinitions[0] != null)
-			bots[0] = new Fighter(botDefinitions[0]);
-		if (botDefinitions[1] != null)
-			bots[1] = new Fighter(botDefinitions[1]);
-		distanceBetweenBots = 0.0f;
+		if (playerDefinitions[0] != null)
+			player[0] = new Fighter(playerDefinitions[0]);
+		if (playerDefinitions[1] != null)
+			player[1] = new Fighter(playerDefinitions[1]);
+		distanceBetweenPlayers = 0.0f;
 	}
 	
+	/**
+	 * When one of the players has won, nothing happens. Else:
+	 * - First selects the actions the players will perform.
+	 * - After that moves the player.
+	 * - After that performs the attacks.
+	 */
 	public void doMoves() {
-		if (bots[0] == null || bots[1] == null)
+		if (player[0] == null || player[1] == null)
 			return;
-		if (bots[0].hasWonRound() || bots[1].hasWonRound())
+		if (player[0].hasWonRound() || player[1].hasWonRound())
 			return;
 		
-		selectActions(bots[0], bots[1]);
-		selectActions(bots[1], bots[0]);
+		selectActions(player[0], player[1]);
+		selectActions(player[1], player[0]);
 		
-		performMoveAction(bots[0]);
-		performMoveAction(bots[1]);
+		performMoveAction(player[0]);
+		performMoveAction(player[1]);
 		
-		performAttackAction(bots[0], bots[1]);
-		if (bots[0].hasWonRound())
+		performAttackAction(player[0], player[1]);
+		if (player[0].hasWonRound())
 			return;
-		performAttackAction(bots[1], bots[0]);
+		performAttackAction(player[1], player[0]);
 	}
 	
-	private void selectActions(Fighter bot1, Fighter bot2) {
-		BehaviourRule behaviourRule = pickRule(bot1, bot2);
+	private void selectActions(Fighter currentPlayer, Fighter opponent) {
+		BehaviourRule behaviourRule = pickRule(currentPlayer, opponent);
 		
-		bot1.setLastFightAction(behaviourRule.getFightAction());
-		bot1.setLastMoveAction(behaviourRule.getMoveAction());
+		currentPlayer.setLastFightAction(behaviourRule.getFightAction());
+		currentPlayer.setLastMoveAction(behaviourRule.getMoveAction());
 	}
 	
 	public float getDistanceBetweenBots() {
-		return distanceBetweenBots;
+		return distanceBetweenPlayers;
 	}
 	
-	private void performMoveAction(Fighter bot) {
-		float walkspeed = bot.getSpeed() / 0.5f;
-		float runspeed = bot.getSpeed();
+	private void performMoveAction(Fighter currentPlayer) {
+		float walkspeed = 1.5f * (1.0f + currentPlayer.getSpeed()) * currentPlayer.getCurrentStance().getMultiplier();
+		float runspeed = 3.0f * (1.0f + currentPlayer.getSpeed()) * currentPlayer.getCurrentStance().getMultiplier();
 		
-		MoveAction moveAction = bot.getLastMoveAction();
+		MoveAction moveAction = currentPlayer.getLastMoveAction();
 		switch (moveAction) {
 			case run_away:
-				distanceBetweenBots += runspeed;
+				distanceBetweenPlayers += runspeed;
 				break;
 			case walk_away:
-				distanceBetweenBots += walkspeed;
+				distanceBetweenPlayers += walkspeed;
 				break;
 			case run_towards:
-				distanceBetweenBots -= runspeed;
+				distanceBetweenPlayers -= runspeed;
 				break;
 			case walk_towards:
-				distanceBetweenBots -= walkspeed;
+				distanceBetweenPlayers -= walkspeed;
+				break;
+			case jump:
+				currentPlayer.setCurrentStance(Stance.jumping);
+				break;
+			case crouch:
+				currentPlayer.setCurrentStance(Stance.crouching);
+				break;
+			case stand:
+				currentPlayer.setCurrentStance(Stance.standing);
 				break;
 		}
 
-		if (distanceBetweenBots < 0.0f)
-			distanceBetweenBots = 0.0f;
+		if (distanceBetweenPlayers < 0.0f)
+			distanceBetweenPlayers = 0.0f;
 	}
 	
-	private void doAttack(Fighter bot1, Fighter bot2, boolean high, boolean kick)
+	private void doAttack(Fighter currentPlayer, Fighter opponent, boolean high, boolean kick)
 	{
-		if (kick && distanceBetweenBots > bot1.getKickReach())
+		if (kick && distanceBetweenPlayers > currentPlayer.getKickReach())
 			return;
-		else if (!kick && distanceBetweenBots > bot1.getPuchReach())
-			return;
-		
-		if (high && FightAction.block_high.equals(bot2.getLastFightAction()))
-			return;
-		else if (!high && FightAction.block_low.equals(bot2.getLastFightAction()))
+		else if (!kick && distanceBetweenPlayers > currentPlayer.getPuchReach())
 			return;
 		
-		int power = (kick) ? bot1.getKickPower() : bot1.getPunchPower();
-		bot2.subtractHealth(power);
+		if (high && FightAction.block_high.equals(opponent.getLastFightAction()))
+			return;
+		else if (!high && FightAction.block_low.equals(opponent.getLastFightAction()))
+			return;
 		
-		if (bot2.getHealth() == 0)
-			bot1.setWonRound(true);
+		float power = (kick) ? currentPlayer.getKickPower() : currentPlayer.getPunchPower();
+		power *= currentPlayer.getCurrentStance().getMultiplier();
+		power *= opponent.getCurrentStance().getMultiplier();
+		opponent.subtractHealth(Math.round(power));
+		
+		if (opponent.getHealth() == 0)
+			currentPlayer.setWonRound(true);
 	}
 	
-	private void performAttackAction(Fighter bot1, Fighter bot2) {
-		FightAction action = bot1.getLastFightAction();
+	private void performAttackAction(Fighter currentPlayer, Fighter opponent) {
+		FightAction action = currentPlayer.getLastFightAction();
 		
 		switch (action) {
 			case kick_high:
-				doAttack(bot1, bot2, true, true);				
+				doAttack(currentPlayer, opponent, true, true);				
 				break;
 			case kick_low:
-				doAttack(bot1, bot2, false, true);	
+				doAttack(currentPlayer, opponent, false, true);	
 				break;
 			case punch_high:
-				doAttack(bot1, bot2, true, false);	
+				doAttack(currentPlayer, opponent, true, false);	
 				break;
 			case punch_low:
-				doAttack(bot1, bot2, false, false);	
+				doAttack(currentPlayer, opponent, false, false);	
 				break;
 		}
 	}
 	
-	private BehaviourRule pickRule(Fighter bot1, Fighter bot2) {
+	private BehaviourRule pickRule(Fighter currentPlayer, Fighter opponent) {
 		Set<State> currentStates = new HashSet<State>();
 		currentStates.add(State.always);
-		currentStates.add(getNearOrFar(bot1));
-		currentStates.add(getStrengthComparison(bot1, bot2));
+		currentStates.add(getNearOrFar(currentPlayer));
+		currentStates.add(getStrengthComparison(currentPlayer, opponent));
 		
-		List<BehaviourRule> rules = bot1.getBeheaviourRules(currentStates);
+		List<BehaviourRule> rules = currentPlayer.getBeheaviourRules(currentStates);
 		int index = random.nextInt(rules.size());
 		return rules.get(index);
 	}
 
-	private State getNearOrFar(Fighter bot) {
-		if (bot.getSpeed() > distanceBetweenBots)
-			return State.near;
-		return State.far;
+	private State getNearOrFar(Fighter currentPlayer) {
+		return (Math.min(currentPlayer.getKickReach(), currentPlayer.getPuchReach()) >= distanceBetweenPlayers) ? State.near : State.far;
 	}
 	
-	private State getStrengthComparison(Fighter bot1, Fighter bot2) {
-		float strength1 = bot1.getWeight();
-		float strength2 = bot2.getWeight();
+	private State getStrengthComparison(Fighter currentPlayer, Fighter opponent) {
+		float strength1 = currentPlayer.getWeight();
+		float strength2 = opponent.getWeight();
 		float diff = strength1 - strength2;
 		
-		if (diff > 3)
+		if (diff > 3.0f)
 			return State.much_weaker;
 		if (diff > 0.5f)
 			return State.weaker;

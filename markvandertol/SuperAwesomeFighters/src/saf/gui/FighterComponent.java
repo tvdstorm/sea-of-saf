@@ -12,20 +12,22 @@ import javax.swing.JComponent;
 
 import saf.Arena;
 import saf.Fighter;
+import saf.Stance;
 import saf.ast.FightAction;
 
 public class FighterComponent extends JComponent {
-	private static final long serialVersionUID = 3245956395796360708L;
-
 	private final int fighterIndex;
 	private final Arena arena;
 	
 	private final int width = 250;
 	private final int height = 300;
 	
-	public FighterComponent(Arena arena, int index) {
+	private final boolean mirror;
+	
+	public FighterComponent(Arena arena, int index, boolean mirror) {
 		this.fighterIndex = index;
 		this.arena = arena;
+		this.mirror = mirror;
 		
 		setPreferredSize(new Dimension(width, height));
 	}
@@ -44,15 +46,21 @@ public class FighterComponent extends JComponent {
 		
 		boolean near = fighter.getSpeed() > arena.getDistanceBetweenBots();
 		String move = (fighter.getLastMoveAction() != null) ? fighter.getLastMoveAction().toString() : "";
-		paintStats(graphics, fighter.getName(), move, fighter.getHealth(), near, fighter.hasWonRound());
+		paintStats(graphics, fighter.getName(), move, fighter.getHealth(), near, fighter.hasWonRound(), fighter.getCurrentStance());
 	}
 	
-	private void paintStats(Graphics2D g, String name, String move, int health, boolean near, boolean winner) {
+	private void paintStats(Graphics2D g, String name, String move, int health, boolean near, boolean winner, Stance stance) {
 		g.setColor(Color.darkGray);
 		Font font = new Font("Arial", Font.PLAIN, 14);
 		g.setFont(font);
-		g.drawString("Name: " + name, 0, 25);
+		g.drawString(name, 0, 25);
 		g.drawString(health + "/100", 0, 50);
+		
+		if (Stance.jumping.equals(stance))
+			g.drawString("Jumping", 0, 75);
+		if (Stance.crouching.equals(stance))
+			g.drawString("Crouching", 0, 75);
+			
 		
 		if (near)
 			g.drawString("Near", 0, 275);
@@ -82,9 +90,9 @@ public class FighterComponent extends JComponent {
 		final int headSize = 75;
 		final int bodyLength = 125;
 		final int bodyYOffset = offsetTop + headSize;
-		final int armWidth = 40;
+		final int armWidth = (mirror) ? -40 : 40;
 		final int armYOffset = offsetTop + headSize + 30;
-		final int legWidth = 35;
+		final int legWidth = (mirror) ? -35 : 35;
 		final int legHeight = 35;
 		final int legYOffset =  offsetTop + headSize + bodyLength;
 		

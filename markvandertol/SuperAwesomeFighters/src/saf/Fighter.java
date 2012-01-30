@@ -9,6 +9,9 @@ import saf.ast.FighterDefinition;
 import saf.ast.MoveAction;
 import saf.ast.State;
 
+/**
+ * Stores the state for a fighter
+ */
 public class Fighter {
 	private boolean wonRound;
 	private final FighterDefinition definition;
@@ -17,7 +20,11 @@ public class Fighter {
 	
 	private FightAction lastFightAction;
 	private MoveAction lastMoveAction;
+	
+	private Stance currentStance = Stance.standing;
 
+	private int movesPending = 0;
+	
 	public Fighter(FighterDefinition definition) {
 		this.definition = definition;
 	}
@@ -38,8 +45,11 @@ public class Fighter {
 		return (definition.getKickReach() + definition.getPunchReach()) / 2.0f;
 	}
 	
+	/**
+	 * Returns speed. Can be negative!
+	 */
 	public float getSpeed() {
-		return Math.max(getHeight() - getWeight() / 2.0f, 0.2f);
+		return getHeight() - getWeight() / 2.0f;
 	}
 	
 	public void setWonRound(boolean wonRound) {
@@ -88,5 +98,13 @@ public class Fighter {
 	
 	public String getName() {
 		return definition.getName();
+	}
+	
+	public Stance getCurrentStance() {
+		return currentStance;
+	}
+	
+	public void setCurrentStance(Stance currentStance) {
+		this.currentStance = currentStance;
 	}
 }

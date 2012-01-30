@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -18,13 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.filechooser.FileFilter;
 
 import saf.Arena;
 
 public class MainView extends JFrame {
 	private static final String TITLE = "Super Awesome Fighters";
-	private static final long serialVersionUID = -6777082252189246561L;
 	private final FighterComponent[] fighters = new FighterComponent[2];
 	
 	private final Arena arena;
@@ -52,8 +49,8 @@ public class MainView extends JFrame {
 		
 		JPanel fightersPanel = new JPanel();
 		
-		fighters[0] = new FighterComponent(arena, 0);
-		fighters[1] = new FighterComponent(arena, 1);
+		fighters[0] = new FighterComponent(arena, 0, false);
+		fighters[1] = new FighterComponent(arena, 1, true);
 		
 		fightersPanel.add(fighters[0]);
 		fightersPanel.add(fighters[1]);
@@ -147,42 +144,23 @@ public class MainView extends JFrame {
 		return buttonPanel;
 	}
 	
-	private class LoadFighterClickHandler extends MouseAdapter {
+	private class LoadFighterClickHandler extends MouseAdapter {		
 		private final int index;
 		private final Component parent;
+		
 		public LoadFighterClickHandler(Component parent, int index) {
 			this.parent = parent;
 			this.index = index;
 		}
+		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			JFileChooser fc = new JFileChooser();
 			
 			fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fc.addChoosableFileFilter(new FileFilter() {
-				
-				@Override
-				public String getDescription() {
-					return "Super Awesome Fighter Files (*.saf)";
-				}
-				
-				@Override
-				public boolean accept(File file) {				
-					return "saf".equalsIgnoreCase(getExtension(file));
-				}
-				
-				private String getExtension(File f) {
-			        String name = f.getName();
-			        int i = name.lastIndexOf('.');
-
-			        if (i > 0 &&  i < name.length() - 1)
-			            return name.substring(i+1);
-			        
-			        return null;
-			    }
-			});
+			fc.addChoosableFileFilter(new SafFileFilter());
 			if (fc.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
-				String result = arena.openBotDefinition(index, fc.getSelectedFile().toString());
+				String result = arena.openBotDefinition(index, fc.getSelectedFile());
 				
 				if (result == null)
 					updateView();
