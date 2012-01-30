@@ -267,7 +267,7 @@ FighterNode fighterBehaviourRule() :
 {/*@bgen(jjtree) fighterBehaviourRule */
         try {
 /*@egen*/
-	cond = Identifier() // Todo: conditionType() 
+	cond = conditionType() 
 	< LIST_OPEN > 
 	fg = actionType() { 		fight = new Action("fight", fg.getValue());
 	}
@@ -304,12 +304,44 @@ FighterNode fighterBehaviourRule() :
 	  
 }
 
-//void conditionType() :
-//{
-//}
-//{
-//  	Identifier() < AND > Identifier() | Identifier() < OR > Identifier() | Identifier()
-//}
+Identifier conditionType() :{/*@bgen(jjtree) conditionType */
+  SimpleNode jjtn000 = new SimpleNode(JJTCONDITIONTYPE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/
+  Identifier i;}{/*@bgen(jjtree) conditionType */
+        try {
+/*@egen*/
+  	//LOOKAHEAD(2)
+  	//i = Identifier() < AND > Identifier()
+  	//| i = Identifier() < OR > Identifier()
+  	i = Identifier()/*@bgen(jjtree)*/
+                         {
+                           jjtree.closeNodeScope(jjtn000, true);
+                           jjtc000 = false;
+                         }
+/*@egen*/ {		return i;
+	}/*@bgen(jjtree)*/
+        } catch (Throwable jjte000) {
+          if (jjtc000) {
+            jjtree.clearNodeScope(jjtn000);
+            jjtc000 = false;
+          } else {
+            jjtree.popNode();
+          }
+          if (jjte000 instanceof RuntimeException) {
+            throw (RuntimeException)jjte000;
+          }
+          if (jjte000 instanceof ParseException) {
+            throw (ParseException)jjte000;
+          }
+          throw (Error)jjte000;
+        } finally {
+          if (jjtc000) {
+            jjtree.closeNodeScope(jjtn000, true);
+          }
+        }
+/*@egen*/}
 
 Identifier actionType():
 {/*@bgen(jjtree) actionType */

@@ -22,7 +22,7 @@ public class Personality implements FighterNode {
 	}
 	
 	public void accept(FighterVisitor v) {
-	     v.visit(this);
+	     v.visit(this); 
 	}
 	
     public String toString()

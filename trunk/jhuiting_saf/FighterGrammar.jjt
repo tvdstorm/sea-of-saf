@@ -146,7 +146,12 @@ FighterNode fighterBehaviourRule() :
 }
 
 Identifier conditionType() :{
-  Identifier i = new Identifier();}{  	Identifier() < AND > Identifier() | Identifier() < OR > Identifier() | Identifier()}
+  Identifier i;}{
+  	//LOOKAHEAD(2)
+  	//i = Identifier() < AND > Identifier()
+  	//| i = Identifier() < OR > Identifier()
+  	i = Identifier() {		return i;
+	}}
 
 Identifier actionType():
 {
