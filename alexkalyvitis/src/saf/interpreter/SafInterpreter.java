@@ -20,34 +20,22 @@ public class SafInterpreter {
 	public boolean interpret(){
 		for (Fighter fighter : fighters){
 			for (Strength strength : fighter.getStrengths()){
-				if(!identifierIsValid(strength, availableStrengths)){
-					System.out.println("ERROR: \"" + strength.getName() + "\" is not a recognised SAF strength. \nFighter: " + fighter.getName());
-					return false;
-				}
-				if(!valueIsValid(strength)){
-					System.out.println("ERROR: Strength value must be between 1 and 10 inclusive. \nFighter: " + fighter.getName() + "\nStrength: " + strength.getName());
-					return false;
-				}
+				if(!identifierIsValid(fighter, strength, availableStrengths)){ return false; }
+				if(!valueIsValid(fighter,strength)){ return false; }
+				fighter.setWeight((float)(fighter.getValueOfStrength("punchPower") + fighter.getValueOfStrength("kickPower")) / 2);
+				fighter.setHeight((float)(fighter.getValueOfStrength("punchReach") + fighter.getValueOfStrength("kickReach")) / 2);
+				fighter.setSpeed((float)Math.abs(fighter.getHeight() - fighter.getWeight()) / 2);
 			}
 			for (Behavior behavior : fighter.getBehaviors()){
-				if(!identifierIsValid(behavior.getCondition(), availableConditions)){
-					System.out.println("ERROR: \"" + behavior.getCondition().getName() + "\" is not a recognised SAF condition. \nFighter: " + fighter.getName());
-					return false;
-				}
-				if(!identifierIsValid(behavior.getMove(), availableMoves)){
-					System.out.println("ERROR: \"" + behavior.getMove().getName() + "\" is not a recognised SAF move. \nFighter: " + fighter.getName());
-					return false;
-				}
-				if(!identifierIsValid(behavior.getAttack(), availableAttacks)){
-					System.out.println("ERROR: \"" + behavior.getAttack().getName() + "\" is not a recognised SAF attack. \nFighter: " + fighter.getName());
-					return false;
-				}
+				if(!identifierIsValid(fighter, behavior.getCondition(), availableConditions)){ return false; }
+				if(!identifierIsValid(fighter, behavior.getMove(), availableMoves)){ return false; }
+				if(!identifierIsValid(fighter, behavior.getAttack(), availableAttacks)){ return false; }
 			}
 		}
 		return true;
 	}
 	
-	private boolean identifierIsValid(SafObject object, String[] keywords) {
+	private boolean identifierIsValid(Fighter fighter, SafObject object, String[] keywords) {
 		boolean keywordFound = false;
 		for (String keyword : keywords){
 			if (object.getName().equals(keyword)){
@@ -55,13 +43,18 @@ public class SafInterpreter {
 				break;
 			}
 		}
-		if (keywordFound){
-			return true;
+		if (!keywordFound){
+			System.out.println("ERROR: \"" + object.getName() + "\" is not a recognised SAF behavior attribute. \nFighter: " + fighter.getName());
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
-	private boolean valueIsValid(Strength s){
-		return (s.getValue() <= 10 && s.getValue() >= 1);
+	private boolean valueIsValid(Fighter f, Strength s){
+		if(s.getValue() > 10 || s.getValue() < 1){
+			System.out.println("ERROR: Strength value must be between 1 and 10 inclusive. \nFighter: " + f.getName() + "\nStrength: " + s.getName());
+			return false;
+		}
+		return true;
 	}
 }

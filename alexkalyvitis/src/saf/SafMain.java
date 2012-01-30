@@ -7,20 +7,23 @@ import java.util.List;
 import saf.ast.Fighter;
 import saf.interpreter.SafInterpreter;
 import saf.parser.Saf;
+import saf.parser.ParseException;
+import saf.simulator.FightSimulator;
 
 /**
  * @author      Alex Kalyvitis <me@alexkappa.com>
  * @version     1.0                   
  * @since       09/01/2012
  */
+
 public class SafMain {
 
 	/**
 	 * Main method
 	 * 
-	 * Reads a ".saf" file from inside the saf.fighters package and:
+	 * Reads a (.saf) file from inside the saf.fighters package and:
 	 * 1) Parses it and generates an abstract syntax tree (see package saf.ast)
-	 * 2) Interprets the ast.
+	 * 2) Interprets the abstract syntax tree.
 	 */
 	public static void main(String[] args){
 		try{
@@ -41,17 +44,21 @@ public class SafMain {
 			SafInterpreter interpreter = new SafInterpreter(fighters);
 			if (interpreter.interpret()) {
 				System.out.println("Interpreting Succeeded");
+				// Print AST
+				/*for(Fighter fighter : fighters){
+					fighter.print();
+				}*/
+				FightSimulator fightSimulator = new FightSimulator(fighters);
+				fightSimulator.Simulate();
 			} else {
 			    System.out.println("Interpreting Failed");
 			}
-			
-			// Print AST
-			for(Fighter fighter : fighters){
-				fighter.print();
-			}
 	    }
+		catch(ParseException e){
+			System.out.println("ERROR: " + e.getMessage());
+		}
 	    catch(Exception e) {
-	        System.out.println("Error");
+	        System.out.println("ERROR: " + e.getMessage());
 	        e.printStackTrace();
 	    }
 	}
