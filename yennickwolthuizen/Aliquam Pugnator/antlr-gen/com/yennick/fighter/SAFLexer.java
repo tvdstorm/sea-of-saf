@@ -1,6 +1,6 @@
-// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g 2012-01-24 13:31:25
+// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g 2012-01-30 16:39:17
 
-  package com.yennick.SAF;
+  package com.yennick.fighter;
 
 
 import org.antlr.runtime.*;
@@ -36,15 +36,15 @@ public class SAFLexer extends Lexer {
     public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "/Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g"; }
+    public String getGrammarFileName() { return "/Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g"; }
 
     // $ANTLR start "CHOOSE"
     public final void mCHOOSE() throws RecognitionException {
         try {
             int _type = CHOOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:11:8: ( 'choose' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:11:10: 'choose'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:11:8: ( 'choose' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:11:10: 'choose'
             {
             match("choose"); 
 
@@ -66,8 +66,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:12:6: ( '(' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:12:8: '('
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:12:6: ( '(' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:12:8: '('
             {
             match('('); 
 
@@ -87,8 +87,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:13:6: ( ')' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:13:8: ')'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:13:6: ( ')' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:13:8: ')'
             {
             match(')'); 
 
@@ -108,8 +108,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:14:7: ( '=' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:14:9: '='
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:14:7: ( '=' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:14:9: '='
             {
             match('='); 
 
@@ -129,8 +129,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:15:7: ( '[' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:15:9: '['
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:15:7: ( '[' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:15:9: '['
             {
             match('['); 
 
@@ -150,8 +150,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:16:7: ( ']' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:16:9: ']'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:16:7: ( ']' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:16:9: ']'
             {
             match(']'); 
 
@@ -171,8 +171,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:17:7: ( '{' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:17:9: '{'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:17:7: ( '{' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:17:9: '{'
             {
             match('{'); 
 
@@ -192,8 +192,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:18:7: ( '}' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:18:9: '}'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:18:7: ( '}' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:18:9: '}'
             {
             match('}'); 
 
@@ -213,8 +213,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:52:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )* )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:52:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:57:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )* )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:57:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -226,7 +226,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:52:29: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:57:29: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
             loop1:
             do {
                 int alt1=2;
@@ -239,7 +239,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:
+            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:
             	    {
             	    if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -276,10 +276,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = VALUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:53:7: ( ( '0' .. '9' )+ )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:53:9: ( '0' .. '9' )+
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:58:7: ( ( '0' .. '9' )+ )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:58:9: ( '0' .. '9' )+
             {
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:53:9: ( '0' .. '9' )+
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:58:9: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -293,7 +293,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:
+            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -334,10 +334,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:55:12: ( ( '\\t' | ' ' | '\\r' | '\\n' )* )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:55:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:60:12: ( ( '\\t' | ' ' | '\\r' | '\\n' )* )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:60:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
             {
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:55:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:60:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
             loop3:
             do {
                 int alt3=2;
@@ -350,7 +350,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:
+            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:
             	    {
             	    if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -385,7 +385,7 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "WHITESPACE"
 
     public void mTokens() throws RecognitionException {
-        // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:8: ( CHOOSE | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | IDENT | VALUE | WHITESPACE )
+        // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:8: ( CHOOSE | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | IDENT | VALUE | WHITESPACE )
         int alt4=11;
         switch ( input.LA(1) ) {
         case 'c':
@@ -545,7 +545,7 @@ public class SAFLexer extends Lexer {
 
         switch (alt4) {
             case 1 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:10: CHOOSE
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:10: CHOOSE
                 {
                 mCHOOSE(); 
 
@@ -553,7 +553,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:17: T__8
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:17: T__8
                 {
                 mT__8(); 
 
@@ -561,7 +561,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:22: T__9
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:22: T__9
                 {
                 mT__9(); 
 
@@ -569,7 +569,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:27: T__10
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:27: T__10
                 {
                 mT__10(); 
 
@@ -577,7 +577,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:33: T__11
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:33: T__11
                 {
                 mT__11(); 
 
@@ -585,7 +585,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:39: T__12
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:39: T__12
                 {
                 mT__12(); 
 
@@ -593,7 +593,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:45: T__13
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:45: T__13
                 {
                 mT__13(); 
 
@@ -601,7 +601,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:51: T__14
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:51: T__14
                 {
                 mT__14(); 
 
@@ -609,7 +609,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:57: IDENT
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:57: IDENT
                 {
                 mIDENT(); 
 
@@ -617,7 +617,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:63: VALUE
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:63: VALUE
                 {
                 mVALUE(); 
 
@@ -625,7 +625,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/SAF/SAF.g:1:69: WHITESPACE
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:69: WHITESPACE
                 {
                 mWHITESPACE(); 
 

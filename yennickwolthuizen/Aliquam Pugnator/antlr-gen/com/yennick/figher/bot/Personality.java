@@ -1,4 +1,4 @@
-package com.yennick.SAF.Bot;
+package com.yennick.figher.bot;
 
 public class Personality {
 	private String characteristic;
@@ -25,5 +25,8 @@ public class Personality {
 		this.characteristic = characteristic;
 	}
 	
+	public String toString(){
+		return characteristic + " = " + value + "\n";
+	}
 	
 }
