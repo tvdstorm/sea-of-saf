@@ -1,15 +1,16 @@
 package Game;
 
 import java.lang.reflect.*;
-import AST.*;
-import AST.LogicalExpression.ConditionalOperators;
+
+import saf.ast.*;
+import saf.ast.LogicalExpression.ConditionalOperators;
 
 public class Interpreter 
 {
-	private AST.ASTManager astManager;
+	private saf.ast.ASTManager astManager;
 	private FighterBot bot;
 	
-	public Interpreter(AST.ASTManager astManager)
+	public Interpreter(ASTManager astManager)
 	{
 		this.astManager = astManager;
 		bot = new FighterBot();
