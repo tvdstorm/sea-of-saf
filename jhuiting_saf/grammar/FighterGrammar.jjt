@@ -1,190 +1,0 @@
-/**
- * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
- */
-options
-{
-  JDK_VERSION = "1.5";
-  STATIC = false;
-  MULTI = true;
-  DEBUG_TOKEN_MANAGER = false;
-  VISITOR=true;
-}
-
-PARSER_BEGIN(FighterGrammar)
-
-import ast.*; 
-import visitor.*;
-
-public class FighterGrammar
-{
-  public static void main(String args []) throws ParseException
-  { 
-    FighterGrammar parser = new FighterGrammar(System.in);
-
-    if (args.length == 0) {
-      System.out.println("Fighter Parser New Version 1.0.2:  Reading from standard input . . .");
-      parser = new FighterGrammar(System.in);
-    } else if (args.length == 1) {
-      System.out.println("Fighter Parser New Version 1.0.2:  Reading from file " + args[0] + " . . .");
-      try { 
-        parser = new FighterGrammar(new java.io.FileInputStream(args[0]));
-      } catch (java.io.FileNotFoundException e) {
-        System.out.println("Fighter Parser New Version 1.0.2:  File " + args[0] + " not found.");
-        return; 
-      }
-    } else {
-      System.out.println("Fighter Parser New Version 1.0.2:  Usage is one of:");
-      System.out.println("         java FighterParserNew < inputfile");
-      System.out.println("OR");
-      System.out.println("         java FighterParserNew inputfile");
-      return;
-    }
-    try {
-  		FighterTree f = parser.parseFighter();
-  		f.accept(new FighterChecker());
-      
-    } catch (ParseException e) {
-      System.out.println("Encountered errors during while parsing this " + e.getMessage());
-    } catch (TokenMgrError tm){
-      System.out.println("Encountered errors during while parsing this " + tm.getMessage());
-    }
-      
-  }
-
-}
-
-PARSER_END(FighterGrammar)
-//Skip all whitelines / tokens for now
-SKIP : 
-{  
-  " " 
-| "\r"
-| "\t"
-| "\n"
-}
-
-TOKEN : /* Basic types */
-{
-  	<  	ASSIGNMENT   		: "=" >
-|   <   NUMBER			 	: (< DIGIT >)+ > 
-| 	< 	CHOOSE 				: "choose" >
-| 	<   OR					: "or" >
-|  	< 	AND					: "and" >
-|   < 	IDENTIFIER		 	: (< CHARACTER >)+ >
-| 	< 	STARTBRACE			: "{" >
-| 	< 	ENDBRACE			: "}" >
-| 	< 	LIST_OPEN			: "[" > 
-| 	<	LIST_CLOSE			: "]" >
-| 	<  #DIGIT 				: [ "0" - "9" ] > 
-| 	<  #CHARACTER 			: [ "a"-"z", "A" - "Z", "_"] >
-}
-
-FighterTree parseFighter() : 
-{ 
-  Options o; 
-}{  
-   o=parseFighterStructure()    {		return new FighterTree(o); 
-   }
-}
-
-Options parseFighterStructure() :
-{
-  	Options fo = new Options();
-  	INode n;
-}
-{
-   Identifier()
-   < STARTBRACE >
-   		(
-   		  n = fighterOptions()
-   		  {			fo.addElement(n);
-   		  }
-   		)*
-   		{			return fo;
-   		} 
-   < ENDBRACE >
-}
-
-INode fighterOptions():
-{
-  	INode n;
-} 
-{
-  LOOKAHEAD(2) //Required because both start with an identifier  n = fighterPersonalityRule() {	return n;  }   |  n = fighterCharacteristicsRule() {    return n;  }
-}
-
-INode fighterPersonalityRule() :
-{
-  	Identifier i1; 
-  	Identifier i2;
-}
-{
-  	(	  	i1 = Identifier()
-		Assignment()
-		i2 = CharacteristicValue()
-	)  	{  
-	  	return ((INode) new Personality(i1, i2));	}  
-}
-
-INode fighterCharacteristicsRule() :
-{
-  	Identifier cond;
-  	Identifier fg;
-  	Identifier mv;
-  	Action fight;
-  	Action move;
-}
-{
-	cond = Identifier() // Todo: conditionType() 
-	< LIST_OPEN > 
-	fg = actionType() { 		fight = new Action("fight", fg.getValue());
-	}
-	mv = actionType() {
-		move = new Action("move", mv.getValue());
-	}
-	< LIST_CLOSE >	{		return (INode) new Characteristic(cond, move, fight);
-	}
-	  
-}
-
-//void conditionType() :
-//{
-//}
-//{
-//  	Identifier() < AND > Identifier() | Identifier() < OR > Identifier() | Identifier()
-//}
-
-Identifier actionType():
-{
-	Identifier i; 
-}
-{
- 	 < CHOOSE > "(" Identifier() Identifier() ")" //@TODO 	|
- 	i = Identifier() 	{
- 	  return i;	}
- 	  
- 	
-}
- 
-Identifier Identifier():
-{
-	Token t;
-}
-{ 
-	( t = < IDENTIFIER >)	{	return new Identifier(t.image);	}
-} 
-
-void Assignment():{
-}
-{
-	< ASSIGNMENT >
-}
-
-Identifier CharacteristicValue() :			
-{
-  	Token t;}
-{
-  	(  	  t  = < NUMBER >)
-  	  {		return new Identifier(t.image);
-	}
-	}
