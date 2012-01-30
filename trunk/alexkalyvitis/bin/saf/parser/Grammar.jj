@@ -1,4 +1,6 @@
-options
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options
 {
   JDK_VERSION = "1.5";
   static = false;
@@ -13,10 +15,7 @@ import java.util.ArrayList;
 
 import saf.ast.*;
 
-public class Saf
-{   
-	
-}
+public class Saf {   }
 
 PARSER_END(Saf)
 
@@ -114,10 +113,13 @@ Condition Condition() :
     Token conditionToken = new Token();
     Token secondConditionToken = new Token();
     
-    Condition condition;}{
+    Condition condition;
+}
+{
     LOOKAHEAD(2)
     (
-        LOOKAHEAD(2)        (
+        LOOKAHEAD(2)
+        (
             conditionToken = < IDENTIFIER >
 	        < AND >
 	        secondConditionToken = < IDENTIFIER >
@@ -137,7 +139,8 @@ Condition Condition() :
 	    	    condition = new OrCondition();
 	            ((OrCondition)condition).setCondition(conditionToken.toString());
 	            ((OrCondition)condition).setOrCondition(secondConditionToken.toString());
-	            return condition;	    	}
+	            return condition;
+	    	}
 		)
 	)
 	|
@@ -148,7 +151,8 @@ Condition Condition() :
 		    condition.setName(conditionToken.toString());
 		    return condition;
 		}
-	)}
+	)
+}
 
 List<Move> Moves() :
 {

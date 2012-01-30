@@ -1,4 +1,4 @@
-Eric Cartman AKA Fat Ass
+Eric Cartman
 {
 	kickReach = 6
 	kickPower = 7
@@ -7,9 +7,9 @@ Eric Cartman AKA Fat Ass
 	near [crouch punch_low]
 	far [run_towards kick_high]
 }
-Kyle Broflovski AKA Son of a Bitch
+Kyle Broflovski
 {
-	kickReach = 8
+	kickReach = 9
 	kickPower = 6
 	punchReach = 7
 	punchPower = 7
