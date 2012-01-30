@@ -5,13 +5,13 @@ options {
   ASTLabelType=CommonTree;
 }
 
-@header {
-  package Generated;
-  import SAF.Structure.*;
+@header { 
+  package generated;
+  import saf.structure.*;
 }
 @lexer::header
 {
-  package Generated;
+  package generated;
 }
 
 bots returns [Bots bots] :              {     $bots = new Bots();
@@ -20,15 +20,15 @@ bots returns [Bots bots] :              {     $bots = new Bots();
                                         }
   )*;
 bot returns [Bot bot]:
-  n=name NEWLINE*                       {     $bot = new Bot(n.name); 
+  n=name                                {     $bot = new Bot(n.name); 
                                         }
-    '{' NEWLINE*  
+    '{' 
       ( b=behavior                      {     $bot.getBehaviors().add(b.behavior); 
                                         }
       | c=characteristic                {     $bot.getCharacteristics().add(c.character); 
                                         }
       )+
-    '}' NEWLINE*;
+    '}';
     
 name returns [String name]:
   ID                                    {     $name = $ID.text;
@@ -44,68 +44,52 @@ subname returns [String name]:
   );
 
 characteristic returns [Characteristic character]:
-  WS* ID+ WS* '=' WS* INT NEWLINE       {     $character = new Characteristic($ID.text);
-                                              $character.setValue(Integer.parseInt($INT.text));
+  ID+ '=' INT                           {     $character = new Characteristic($ID.text,Integer.parseInt($INT.text));
                                         };
 
 behavior returns [Behavior behavior]:
-  WS* c=condition '['                   {     $behavior = new Behavior();
-                                              $behavior.setCondition($c.condition); 
+  c=condition  '['                      {     $behavior = new Behavior($c.condition);
                                         }
-  ( id1 = ID                            {     $behavior.setMoveAction(new Action(new MoveAction($id1.text)));
+                                        
+  ( id1 = ID                            {     $behavior.addMoveAction(new Action($id1.text));
                                         }
-  | c1  = chooseMove                    {     $behavior.setMoveAction($c1.action);
+  | CHOOSE  '(' 
+                (
+                  c1 = ID               {     $behavior.addMoveAction(new Action($c1.text));
                                         }
-  ) WS
-  ( id2 = ID                            {     $behavior.setFightAction(new Action(new FightAction($id2.text)));
-                                        }
-  | c2  = chooseFight                   {     $behavior.setFightAction($c2.action);
-                                        }
+                )*
+            ')'
   )
-  ']' NEWLINE;
-
-chooseMove returns [Action action]:
-  CHOOSE  '('                           {     $action = new Action();
+  
+  ( id2 = ID                            {     $behavior.addFightAction(new Action($id2.text));
                                         }
-  (
-    WS* ID                              {     $action.getValues().add(new MoveAction($ID.text)); 
+  | CHOOSE  '(' 
+                (
+                  c2  = ID              {     $behavior.addFightAction(new Action($c2.text));
                                         }
-  )+
-  ')';
-
-chooseFight returns [Action action]:
-  CHOOSE  '('                           {     $action = new Action();
-                                        }
-  (
-    WS* ID                              {     $action.getValues().add(new FightAction($ID.text)); 
-                                        }
-  )+
-  ')';
+                 )*
+            ')'
+  )
+  ']';
 
 condition returns [Condition condition]:
    cr1=conditionRule                    {     $condition = $cr1.condition;
                                         }
-   ( OR WS cr2=conditionRule            {     ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ChoiceType.OR);
-                                              cc.setCondition($cr1.condition);
-                                              cc.setSecondCondition($cr2.condition);
-                                              $condition = cc;
+   ( OR cr2=conditionRule               {     $condition = new ConditionOr($cr1.condition, $cr2.condition);
                                         }
    )*;
    
 conditionRule returns [Condition condition]:
-   v1=var                               {     $condition = $v1._condition;
+   v1=var                               {     $condition = $v1.condition;
                                         }
-   ( AND WS v2=var                      {     ChoiceCondition cc = new ChoiceCondition(ChoiceCondition.ChoiceType.AND);
-                                              cc.setCondition($condition);
-                                              cc.setSecondCondition($v2._condition);
-							                                $condition = cc;    
+   ( AND v2=var                         {     $condition = new ConditionAnd($v1.condition, $v2.condition);   
 							                          }
    )*;
    
-var returns [Condition _condition]:
-   ID WS*                               {     $_condition = new StringCondition($ID.text);   
+var returns [Condition condition]:
+   ID                                   {     $condition = new ConditionSimple($ID.text);   
                                         }
-   | '(' WS* c=condition WS* ')' WS*    {     $_condition = $c.condition;    
+   | '(' c=condition ')'                {     $condition = $c.condition;    
                                         };
   
   
@@ -114,12 +98,10 @@ var returns [Condition _condition]:
 OR        : ('or' | 'OR');
 AND       : ('and' | 'AND' | '&&');
 CHOOSE    : 'choose';
-NEWLINE   : '\r'? '\n' ;
 ID        : (CHAR | '_')+;
 INT       : DIGIT+;
-WS        : WHITESPACE+                 {     skip();
+WS        : (' ' | '\t' | '\u000C' | '\r' | '\n') 
+                                        {     $channel = HIDDEN;
                                         };
-
 fragment DIGIT      :   '0'..'9';
 fragment CHAR       :   ('a'..'z' | 'A'..'Z');
-fragment WHITESPACE :   (' ' | '\t' | '\u000C');
