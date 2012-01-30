@@ -1,4 +1,4 @@
-package saf.entities;
+package saf.ast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Describes a bot.
  */
-public class BotDefinition {
+public class FighterDefinition {
 	private static final String KICK_POWER = "kickPower";
 	private static final String KICK_REACH = "kickReach";
 	private static final String PUNCH_POWER = "punchPower";

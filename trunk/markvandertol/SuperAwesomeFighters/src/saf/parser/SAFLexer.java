@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g 2012-01-24 15:31:50
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAF.g 2012-01-30 12:01:01
 
 package saf.parser;
 import java.util.List;
@@ -25,9 +25,9 @@ public class SAFLexer extends Lexer {
     public static final int ASSIGNMENT=5;
     public static final int CONDITION=6;
     public static final int DIGIT=7;
-    public static final int IDENTIFIER=8;
-    public static final int NEWLINE=9;
-    public static final int PROGRAM=10;
+    public static final int FIGHTER=8;
+    public static final int IDENTIFIER=9;
+    public static final int NEWLINE=10;
     public static final int WS=11;
 
     	private List<String> errorList;

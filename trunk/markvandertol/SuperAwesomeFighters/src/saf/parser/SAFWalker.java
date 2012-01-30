@@ -1,8 +1,8 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g 2012-01-24 15:31:50
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g 2012-01-30 12:01:01
 
 	package saf.parser;
 	
-	import saf.entities.*;
+	import saf.ast.*;
 	import java.util.Stack;
 	import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFWalker extends TreeParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACTION", "ASSIGNMENT", "CONDITION", "DIGIT", "IDENTIFIER", "NEWLINE", "PROGRAM", "WS", "'('", "')'", "'='", "'['", "']'", "'and'", "'or'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "ACTION", "ASSIGNMENT", "CONDITION", "DIGIT", "FIGHTER", "IDENTIFIER", "NEWLINE", "WS", "'('", "')'", "'='", "'['", "']'", "'and'", "'or'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
@@ -33,9 +33,9 @@ public class SAFWalker extends TreeParser {
     public static final int ASSIGNMENT=5;
     public static final int CONDITION=6;
     public static final int DIGIT=7;
-    public static final int IDENTIFIER=8;
-    public static final int NEWLINE=9;
-    public static final int PROGRAM=10;
+    public static final int FIGHTER=8;
+    public static final int IDENTIFIER=9;
+    public static final int NEWLINE=10;
     public static final int WS=11;
 
     // delegates
@@ -57,7 +57,7 @@ public class SAFWalker extends TreeParser {
     public String getGrammarFileName() { return "C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g"; }
 
 
-    	private BotDefinition bot = new BotDefinition();
+    	private FighterDefinition fighter = new FighterDefinition();
     	
     	private List<String> errorList;
     	private Stack<Condition> conditions = new Stack<Condition>();
@@ -71,8 +71,8 @@ public class SAFWalker extends TreeParser {
     		errorList.add("Walker error: " + msg);
     	}
     	
-    	public BotDefinition getBotDefinition() {
-    		return bot;
+    	public FighterDefinition getFighterDefinition() {
+    		return fighter;
     	}
     	
     	private void createAction(String move, String attack) {	
@@ -91,7 +91,7 @@ public class SAFWalker extends TreeParser {
     			emitErrorMessage("Unknown fight action: " + attack);
     		}
     		behaviourRule.setCondition(conditions.pop());
-    		bot.getBehaviourRules().add(behaviourRule);
+    		fighter.getBehaviourRules().add(behaviourRule);
     	}
     	
     	private void createCondition(String state) {
@@ -125,21 +125,21 @@ public class SAFWalker extends TreeParser {
 
 
 
-    // $ANTLR start "prog"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:1: prog : ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* ) ;
-    public final void prog() throws RecognitionException {
+    // $ANTLR start "fighter"
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:1: fighter : ^( FIGHTER name= IDENTIFIER ( assignment )* ( action )* ) ;
+    public final void fighter() throws RecognitionException {
         CommonTree name=null;
 
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:7: ( ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* ) )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:9: ^( PROGRAM name= IDENTIFIER ( assignment )* ( action )* )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:10: ( ^( FIGHTER name= IDENTIFIER ( assignment )* ( action )* ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:12: ^( FIGHTER name= IDENTIFIER ( assignment )* ( action )* )
             {
-            match(input,PROGRAM,FOLLOW_PROGRAM_in_prog44); 
+            match(input,FIGHTER,FOLLOW_FIGHTER_in_fighter44); 
 
             match(input, Token.DOWN, null); 
-            name=(CommonTree)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_prog48); 
+            name=(CommonTree)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_fighter48); 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:35: ( assignment )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:38: ( assignment )*
             loop1:
             do {
                 int alt1=2;
@@ -152,9 +152,9 @@ public class SAFWalker extends TreeParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:35: assignment
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:38: assignment
             	    {
-            	    pushFollow(FOLLOW_assignment_in_prog50);
+            	    pushFollow(FOLLOW_assignment_in_fighter50);
             	    assignment();
 
             	    state._fsp--;
@@ -169,7 +169,7 @@ public class SAFWalker extends TreeParser {
             } while (true);
 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:47: ( action )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:50: ( action )*
             loop2:
             do {
                 int alt2=2;
@@ -182,9 +182,9 @@ public class SAFWalker extends TreeParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:47: action
+            	    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:85:50: action
             	    {
-            	    pushFollow(FOLLOW_action_in_prog53);
+            	    pushFollow(FOLLOW_action_in_fighter53);
             	    action();
 
             	    state._fsp--;
@@ -202,7 +202,7 @@ public class SAFWalker extends TreeParser {
             match(input, Token.UP, null); 
 
 
-             bot.setName((name!=null?name.getText():null));
+             fighter.setName((name!=null?name.getText():null));
 
             }
 
@@ -217,7 +217,7 @@ public class SAFWalker extends TreeParser {
         }
         return ;
     }
-    // $ANTLR end "prog"
+    // $ANTLR end "fighter"
 
 
 
@@ -241,7 +241,7 @@ public class SAFWalker extends TreeParser {
             match(input, Token.UP, null); 
 
 
-             bot.setProperty((key!=null?key.getText():null), Integer.parseInt((value!=null?value.getText():null))); 
+             fighter.setProperty((key!=null?key.getText():null), Integer.parseInt((value!=null?value.getText():null))); 
 
             }
 
@@ -490,16 +490,16 @@ public class SAFWalker extends TreeParser {
 
  
 
-    public static final BitSet FOLLOW_PROGRAM_in_prog44 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_prog48 = new BitSet(new long[]{0x0000000000000038L});
-    public static final BitSet FOLLOW_assignment_in_prog50 = new BitSet(new long[]{0x0000000000000038L});
-    public static final BitSet FOLLOW_action_in_prog53 = new BitSet(new long[]{0x0000000000000018L});
+    public static final BitSet FOLLOW_FIGHTER_in_fighter44 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_fighter48 = new BitSet(new long[]{0x0000000000000038L});
+    public static final BitSet FOLLOW_assignment_in_fighter50 = new BitSet(new long[]{0x0000000000000038L});
+    public static final BitSet FOLLOW_action_in_fighter53 = new BitSet(new long[]{0x0000000000000018L});
     public static final BitSet FOLLOW_ASSIGNMENT_in_assignment67 = new BitSet(new long[]{0x0000000000000004L});
     public static final BitSet FOLLOW_IDENTIFIER_in_assignment71 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_DIGIT_in_assignment75 = new BitSet(new long[]{0x0000000000000008L});
     public static final BitSet FOLLOW_ACTION_in_action88 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_condition_in_action90 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_action94 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_condition_in_action90 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_action94 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_IDENTIFIER_in_action98 = new BitSet(new long[]{0x0000000000000008L});
     public static final BitSet FOLLOW_CONDITION_in_condition112 = new BitSet(new long[]{0x0000000000000004L});
     public static final BitSet FOLLOW_condition_in_condition116 = new BitSet(new long[]{0x0000000000000008L});

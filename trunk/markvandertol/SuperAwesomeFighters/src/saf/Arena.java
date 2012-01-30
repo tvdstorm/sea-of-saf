@@ -6,30 +6,30 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import saf.entities.BehaviourRule;
-import saf.entities.BotDefinition;
-import saf.entities.FightAction;
-import saf.entities.MoveAction;
-import saf.entities.State;
+import saf.ast.BehaviourRule;
+import saf.ast.FightAction;
+import saf.ast.FighterDefinition;
+import saf.ast.MoveAction;
+import saf.ast.State;
 import saf.parser.BotDefinitionMalformedException;
-import saf.parser.BotParser;
+import saf.parser.FighterDefinitionParser;
 
 public class Arena {
-	private final BotParser botParser = new BotParser();
+	private final FighterDefinitionParser botParser = new FighterDefinitionParser();
 	private final Random random = new Random();
 	
-	private BotDefinition[] botDefinitions = new BotDefinition[2];
+	private FighterDefinition[] botDefinitions = new FighterDefinition[2];
 	
-	private Bot[] bots = new Bot[2];
+	private Fighter[] bots = new Fighter[2];
 	private float distanceBetweenBots;
 	
-	public Bot getBot(int index) {
+	public Fighter getBot(int index) {
 		return bots[index];
 	}
 	
 	public String openBotDefinition(int index, String path) {
 		try {
-			botDefinitions[index] = botParser.parseBotDefinition(path);
+			botDefinitions[index] = botParser.parseFighterDefinition(path);
 		} catch (IOException e) {
 			return e.toString();
 		} catch (BotDefinitionMalformedException e) {
@@ -47,16 +47,16 @@ public class Arena {
 	
 	public void restartRound() {
 		if (botDefinitions[0] != null)
-			bots[0] = new Bot(botDefinitions[0]);
+			bots[0] = new Fighter(botDefinitions[0]);
 		if (botDefinitions[1] != null)
-			bots[1] = new Bot(botDefinitions[1]);
+			bots[1] = new Fighter(botDefinitions[1]);
 		distanceBetweenBots = 0.0f;
 	}
 	
 	public void doMoves() {
 		if (bots[0] == null || bots[1] == null)
 			return;
-		if (bots[0].isWinner() || bots[1].isWinner())
+		if (bots[0].hasWonRound() || bots[1].hasWonRound())
 			return;
 		
 		selectActions(bots[0], bots[1]);
@@ -66,12 +66,12 @@ public class Arena {
 		performMoveAction(bots[1]);
 		
 		performAttackAction(bots[0], bots[1]);
-		if (bots[0].isWinner())
+		if (bots[0].hasWonRound())
 			return;
 		performAttackAction(bots[1], bots[0]);
 	}
 	
-	private void selectActions(Bot bot1, Bot bot2) {
+	private void selectActions(Fighter bot1, Fighter bot2) {
 		BehaviourRule behaviourRule = pickRule(bot1, bot2);
 		
 		bot1.setLastFightAction(behaviourRule.getFightAction());
@@ -82,7 +82,7 @@ public class Arena {
 		return distanceBetweenBots;
 	}
 	
-	private void performMoveAction(Bot bot) {
+	private void performMoveAction(Fighter bot) {
 		float walkspeed = bot.getSpeed() / 0.5f;
 		float runspeed = bot.getSpeed();
 		
@@ -106,7 +106,7 @@ public class Arena {
 			distanceBetweenBots = 0.0f;
 	}
 	
-	private void doAttack(Bot bot1, Bot bot2, boolean high, boolean kick)
+	private void doAttack(Fighter bot1, Fighter bot2, boolean high, boolean kick)
 	{
 		if (kick && distanceBetweenBots > bot1.getKickReach())
 			return;
@@ -122,10 +122,10 @@ public class Arena {
 		bot2.subtractHealth(power);
 		
 		if (bot2.getHealth() == 0)
-			bot1.setWinner(true);
+			bot1.setWonRound(true);
 	}
 	
-	private void performAttackAction(Bot bot1, Bot bot2) {
+	private void performAttackAction(Fighter bot1, Fighter bot2) {
 		FightAction action = bot1.getLastFightAction();
 		
 		switch (action) {
@@ -144,7 +144,7 @@ public class Arena {
 		}
 	}
 	
-	private BehaviourRule pickRule(Bot bot1, Bot bot2) {
+	private BehaviourRule pickRule(Fighter bot1, Fighter bot2) {
 		Set<State> currentStates = new HashSet<State>();
 		currentStates.add(State.always);
 		currentStates.add(getNearOrFar(bot1));
@@ -155,13 +155,13 @@ public class Arena {
 		return rules.get(index);
 	}
 
-	private State getNearOrFar(Bot bot) {
+	private State getNearOrFar(Fighter bot) {
 		if (bot.getSpeed() > distanceBetweenBots)
 			return State.near;
 		return State.far;
 	}
 	
-	private State getStrengthComparison(Bot bot1, Bot bot2) {
+	private State getStrengthComparison(Fighter bot1, Fighter bot2) {
 		float strength1 = bot1.getWeight();
 		float strength2 = bot2.getWeight();
 		float diff = strength1 - strength2;

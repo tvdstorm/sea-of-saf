@@ -1,4 +1,4 @@
-package saf.entities;
+package saf.ast;
 
 import java.util.List;
 

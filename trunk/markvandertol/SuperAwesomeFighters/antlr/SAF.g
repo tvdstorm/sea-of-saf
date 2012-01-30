@@ -5,7 +5,7 @@ options {
 }
 
 tokens {
-  PROGRAM;
+  FIGHTER;
   ASSIGNMENT;
   ACTION;
   CONDITION;
@@ -47,8 +47,8 @@ import java.util.List;
 	}
 }
 
-prog	:	ws? IDENTIFIER ws? '{' ws (assignment endline ws?)* (action endline ws?)*
-		'}' ws? -> ^(PROGRAM IDENTIFIER assignment* action*);
+fighter	:	ws? IDENTIFIER ws? '{' ws (assignment endline ws?)* (action endline ws?)*
+		'}' ws? -> ^(FIGHTER IDENTIFIER assignment* action*);
 
 assignment
 	:	IDENTIFIER ws? '=' ws? DIGIT

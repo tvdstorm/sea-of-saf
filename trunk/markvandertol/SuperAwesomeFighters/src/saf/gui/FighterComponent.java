@@ -11,10 +11,10 @@ import java.awt.Graphics2D;
 import javax.swing.JComponent;
 
 import saf.Arena;
-import saf.Bot;
-import saf.entities.FightAction;
+import saf.Fighter;
+import saf.ast.FightAction;
 
-public class Fighter extends JComponent {
+public class FighterComponent extends JComponent {
 	private static final long serialVersionUID = 3245956395796360708L;
 
 	private final int fighterIndex;
@@ -23,7 +23,7 @@ public class Fighter extends JComponent {
 	private final int width = 250;
 	private final int height = 300;
 	
-	public Fighter(Arena arena, int index) {
+	public FighterComponent(Arena arena, int index) {
 		this.fighterIndex = index;
 		this.arena = arena;
 		
@@ -36,7 +36,7 @@ public class Fighter extends JComponent {
 		graphics.setColor(Color.white);
 		graphics.fillRect(0, 0, width, height);
 		
-		Bot bot = arena.getBot(fighterIndex);
+		Fighter bot = arena.getBot(fighterIndex);
 		if (bot == null)
 			return;
 		
@@ -44,7 +44,7 @@ public class Fighter extends JComponent {
 		
 		boolean near = bot.getSpeed() > arena.getDistanceBetweenBots();
 		String move = (bot.getLastMoveAction() != null) ? bot.getLastMoveAction().toString() : "";
-		paintStats(graphics, bot.getName(), move, bot.getHealth(), near, bot.isWinner());
+		paintStats(graphics, bot.getName(), move, bot.getHealth(), near, bot.hasWonRound());
 	}
 	
 	private void paintStats(Graphics2D g, String name, String move, int health, boolean near, boolean winner) {

@@ -11,9 +11,9 @@ import org.antlr.runtime.tree.Tree;
 import org.junit.Test;
 
 
-import saf.entities.FightAction;
-import saf.entities.MoveAction;
-import saf.parser.SAFParser.prog_return;
+import saf.ast.FightAction;
+import saf.ast.MoveAction;
+import saf.parser.SAFParser.fighter_return;
 
 public class SAFParserTest {
 	
@@ -33,7 +33,7 @@ public class SAFParserTest {
 		final String program = "testname {\nkickReach  = 9\nnear [crouch punch_low]\n}";
 		SAFParser parser = getParser(program);
 		
-		prog_return result = parser.prog();
+		fighter_return result = parser.fighter();
 		Tree tree = (Tree) result.getTree();
 		
 		assertEquals(3, tree.getChildCount());

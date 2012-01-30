@@ -8,13 +8,13 @@ options {
 @header {
 	package saf.parser;
 	
-	import saf.entities.*;
+	import saf.ast.*;
 	import java.util.Stack;
 	import java.util.List;
 }
 
 @members {
-	private BotDefinition bot = new BotDefinition();
+	private FighterDefinition fighter = new FighterDefinition();
 	
 	private List<String> errorList;
 	private Stack<Condition> conditions = new Stack<Condition>();
@@ -28,8 +28,8 @@ options {
 		errorList.add("Walker error: " + msg);
 	}
 	
-	public BotDefinition getBotDefinition() {
-		return bot;
+	public FighterDefinition getFighterDefinition() {
+		return fighter;
 	}
 	
 	private void createAction(String move, String attack) {	
@@ -48,7 +48,7 @@ options {
 			emitErrorMessage("Unknown fight action: " + attack);
 		}
 		behaviourRule.setCondition(conditions.pop());
-		bot.getBehaviourRules().add(behaviourRule);
+		fighter.getBehaviourRules().add(behaviourRule);
 	}
 	
 	private void createCondition(String state) {
@@ -82,10 +82,10 @@ options {
 }
 
 
-prog 	:	^(PROGRAM name=IDENTIFIER assignment* action*) { bot.setName($name.text);};
+fighter 	:	^(FIGHTER name=IDENTIFIER assignment* action*) { fighter.setName($name.text);};
 
 assignment
-	:	^(ASSIGNMENT key=IDENTIFIER value=DIGIT) { bot.setProperty($key.text, Integer.parseInt($value.text)); };
+	:	^(ASSIGNMENT key=IDENTIFIER value=DIGIT) { fighter.setProperty($key.text, Integer.parseInt($value.text)); };
 
 action 	:	^(ACTION condition move=IDENTIFIER attack=IDENTIFIER) { createAction($move.text, $attack.text);};
 

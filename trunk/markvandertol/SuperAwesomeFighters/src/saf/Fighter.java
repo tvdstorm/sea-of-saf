@@ -3,22 +3,22 @@ package saf;
 import java.util.List;
 import java.util.Set;
 
-import saf.entities.BehaviourRule;
-import saf.entities.BotDefinition;
-import saf.entities.FightAction;
-import saf.entities.MoveAction;
-import saf.entities.State;
+import saf.ast.BehaviourRule;
+import saf.ast.FightAction;
+import saf.ast.FighterDefinition;
+import saf.ast.MoveAction;
+import saf.ast.State;
 
-public class Bot {
-	private boolean winner;
-	private final BotDefinition definition;
+public class Fighter {
+	private boolean wonRound;
+	private final FighterDefinition definition;
 	private final int START_HEALTH = 100;
 	private int health = START_HEALTH;
 	
 	private FightAction lastFightAction;
 	private MoveAction lastMoveAction;
 
-	public Bot(BotDefinition definition) {
+	public Fighter(FighterDefinition definition) {
 		this.definition = definition;
 	}
 
@@ -26,8 +26,8 @@ public class Bot {
 		return health;
 	}
 	
-	public boolean isWinner() {
-		return winner;
+	public boolean hasWonRound() {
+		return wonRound;
 	}
 	
 	public float getWeight() {
@@ -42,8 +42,8 @@ public class Bot {
 		return Math.max(getHeight() - getWeight() / 2.0f, 0.2f);
 	}
 	
-	public void setWinner(boolean winner) {
-		this.winner = winner;
+	public void setWonRound(boolean wonRound) {
+		this.wonRound = wonRound;
 	}
 	
 	public void subtractHealth(int ammount) {

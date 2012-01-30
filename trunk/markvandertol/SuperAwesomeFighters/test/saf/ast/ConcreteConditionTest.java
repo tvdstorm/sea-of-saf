@@ -1,4 +1,4 @@
-package saf.entities;
+package saf.ast;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,9 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import saf.ast.ConcreteCondition;
+import saf.ast.State;
 
 public class ConcreteConditionTest {
 	
