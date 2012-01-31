@@ -52,41 +52,28 @@ public class Arena extends JPanel {
 	}
     
     private void drawLeftBot(Graphics g, Bot bot) {
-    	BufferedImage image;
-    	String imagePath = "data/sprites/" + bot.getCurrentAttack().getText() + "_left.png";
-
-    	try {                
-    		image = ImageIO.read(new File(imagePath));
-    		addMoveAnimation(bot, image);
-    		//g.drawImage(image, LEFT_BOT_XPOS, LEFT_BOT_YPOS, null);
-    	} catch (IOException ex) {
-    		//TODO: Handle exception.
-    		System.out.println("Image not found!");
-    	}  
+    	BufferedImage image = null;
+		
+    	try {
+			image = bot.getCurrentAttack().getImage(true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	g.drawImage(image, LEFT_BOT_XPOS, LEFT_BOT_YPOS, null); 
     }
     
     private void drawRightBot(Graphics g, Bot bot) {
-    	BufferedImage image;
-    	String imagePath = "data/sprites/" + bot.getCurrentAttack().getText() + ".png";
-
-    	try {                
-    		image = ImageIO.read(new File(imagePath));
-    		g.drawImage(image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS, null);
-    	} catch (IOException ex) {
-    		//TODO: Handle exception.
-    		System.out.println("Image not found!");
-    	}  
-    }
-    
-    private void addMoveAnimation(Bot bot, BufferedImage image) {
-    	//System.out.println("Hoi");
-    	switch(bot.getCurrentMove()) {
-    		case CROUCH: g.drawImage(image, LEFT_BOT_XPOS, LEFT_BOT_YPOS + (image.getHeight() / 2), image.getWidth(), image.getHeight() / 2, null);
-    			break;
-    		case JUMP: g.drawImage(image, LEFT_BOT_XPOS, LEFT_BOT_YPOS, image.getWidth(), image.getHeight() / 2, null);
-    			break;
-    		default: g.drawImage(image, LEFT_BOT_XPOS, LEFT_BOT_YPOS, null);
-    			break;
-    	}
+    	BufferedImage image = null;
+		
+    	try {
+			image = bot.getCurrentAttack().getImage(false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+    	g.drawImage(image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS, null); 
     }
 }

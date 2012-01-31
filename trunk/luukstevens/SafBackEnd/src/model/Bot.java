@@ -12,15 +12,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import view.Arena;
-import view.Main;
-
-import model.condition.And;
-import model.condition.Or;
-import model.condition.Simple;
-import model.enums.AttackType;
-import model.enums.CharacteristicType;
-import model.enums.MoveType;
+import model.attack.*;
+import model.condition.*;
+import model.enums.*;
 
 @XmlRootElement(name = "bot")
 public class Bot {
@@ -38,12 +32,12 @@ public class Bot {
 	private List<BehaviourRule> behaviourRules;
 	
 	private MoveType currentMove;
-	private AttackType currentAttack;
+	private Attack currentAttack;
 	private int health;
 	
 	public Bot() {
 		currentMove = MoveType.STAND;
-		currentAttack = AttackType.BLOCK_HIGH;
+		currentAttack = new BlockHigh();
 		health = 100;
 	}
 
@@ -63,11 +57,11 @@ public class Bot {
 		this.currentMove = currentMove;
 	}
 
-	public AttackType getCurrentAttack() {
+	public Attack getCurrentAttack() {
 		return currentAttack;
 	}
 
-	public void setCurrentAttack(AttackType currentAttack) {
+	public void setCurrentAttack(Attack currentAttack) {
 		this.currentAttack = currentAttack;
 	}
 
