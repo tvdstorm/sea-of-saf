@@ -59,7 +59,10 @@ public class Arena {
 	}
 	
 	/**
-	 * When one of the players has won, nothing happens. Else:
+	 * When one of the players isn't initialized, nothing happens.
+	 * When one of the players has won, nothing happens.
+	 * 
+	 * Else:
 	 * - First selects the actions the players will perform.
 	 * - After that moves the player.
 	 * - After that performs the attacks.
@@ -182,18 +185,18 @@ public class Arena {
 	}
 	
 	private State getStrengthComparison(Fighter currentPlayer, Fighter opponent) {
-		float strength1 = currentPlayer.getWeight();
-		float strength2 = opponent.getWeight();
-		float diff = strength1 - strength2;
+		float playerStrength = currentPlayer.getWeight();
+		float opponentStrength = opponent.getWeight();
+		float difference = playerStrength - opponentStrength;
 		
-		if (diff > 3.0f)
-			return State.much_weaker;
-		if (diff > 0.5f)
-			return State.weaker;
-		if (diff > -0.5f)
-			return State.even;
-		if (diff > -3.0f)
+		if (difference > 3.0f)
+			return State.much_stronger;
+		if (difference > 0.5f)
 			return State.stronger;
-		return State.much_stronger;
+		if (difference > -0.5f)
+			return State.even;
+		if (difference > -3.0f)
+			return State.weaker;
+		return State.much_weaker;
 	}
 }
