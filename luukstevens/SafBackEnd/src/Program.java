@@ -22,14 +22,14 @@ public class Program {
 		
 		Main mainView = new Main(left, right);
 		
-		for(;;) {
+		while(left.getHealth() > 0 && right.getHealth() > 0) {
 			left.setCurrentAttack(new BlockHigh());
 			Thread.sleep(100);
 			right.setCurrentAttack(new BlockHigh());
 			Thread.sleep(100);
 			mainView.update();
 			left.setCurrentAttack(new KickLow());
-			left.setCurrentMove(new Crouch());
+			left.setCurrentMove(new RunTowards());
 			right.setCurrentMove(new Stand());
 			Thread.sleep(100);
 			right.setCurrentAttack(new KickLow());
@@ -39,7 +39,7 @@ public class Program {
 			Thread.sleep(100);
 			right.setCurrentAttack(new PunchLow());
 			right.setCurrentMove(new Jump());
-			left.setCurrentMove(new Stand());
+			left.setCurrentMove(new RunAway());
 			Thread.sleep(100);
 			mainView.update();
 			left.reduceHealth(10);

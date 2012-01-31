@@ -14,9 +14,9 @@ public class WalkTowards extends Move {
 	@Override
 	public void draw(Graphics g, BufferedImage image, int baseX, int baseY, boolean left) {
 		if(left) {
-			g.drawImage(image, baseX, baseY - DISTANCE, null); 
+			g.drawImage(image, baseX - DISTANCE, baseY, null); 
 		} else {
-			g.drawImage(image, baseX, baseY + DISTANCE, null); 
+			g.drawImage(image, baseX + DISTANCE, baseY, null); 
 		}
 	}
 }
