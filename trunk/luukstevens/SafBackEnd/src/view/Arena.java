@@ -1,10 +1,12 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Bot;
@@ -13,21 +15,22 @@ import model.move.*;
 public class Arena extends JPanel {
 	
 	//Constants
-	private static final int X_POSITION = 40;
+	private static final int X_POSITION = 75;
 	private static final int Y_POSITION = 40;
 	
-	private static final int WIDTH = 400;
-	private static final int HIGHT = 300;
+	private static final int WIDTH = 450;
+	private static final int HIGHT = 250;
 	
-	private static final int LEFT_BOT_XPOS = 50;
-	private static final int LEFT_BOT_YPOS = 50;
+	private static final int LEFT_BOT_XPOS = 100;
+	private static final int LEFT_BOT_YPOS = 75;
 	
-	private static final int RIGHT_BOT_XPOS = 200;
-	private static final int RIGHT_BOT_YPOS = 50;
+	private static final int RIGHT_BOT_XPOS = 300;
+	private static final int RIGHT_BOT_YPOS = 75;
 	
 	//Instance variables
 	private Bot left;
 	private Bot right;
+	private boolean endGame = false;
 	
 	public Arena(Bot left, Bot right) {
 		this.left = left;
@@ -35,18 +38,48 @@ public class Arena extends JPanel {
 		
 		setBounds(X_POSITION, Y_POSITION, WIDTH, HEIGHT);
 		setSize(WIDTH, HIGHT);
+		setOpaque(false);
 	}
 	
     public void paint(Graphics g) {
-    	g.clearRect(X_POSITION, Y_POSITION, WIDTH, HIGHT);
+    	if(left.getHealth() <= 0 || right.getHealth() <= 0) {
+    		endGame = true;
+    	}
+    	
+    	g.setColor(Color.LIGHT_GRAY);
+    	g.fillRect(0, 0, WIDTH, HIGHT);
     	drawLeftBot(g, left);
     	drawRightBot(g, right);
+    	 
+    	if(endGame) {
+    		addWinsText(g, left, right, WIDTH, HEIGHT);
+    	}
     }
-	
+    
 	public void update() {
 		repaint();
 	}
     
+	private void addWinsText(Graphics g, Bot left, Bot right, int arenaWith, int arenaHeight) {
+		g.setColor(Color.RED);
+    	Font font = new Font("Calibri", Font.BOLD, 35);
+    	g.setFont(font);
+    	
+    	if(left.getHealth() <= 0) {
+    		addCenteredString(g, right.getName() + " WINS!", arenaWith, arenaHeight, 130);
+    	}
+    	
+    	if(right.getHealth() <= 0) {
+    		addCenteredString(g, left.getName() + " WINS!", arenaWith, arenaHeight, 130);
+    	}
+	}
+	
+	private void addCenteredString(Graphics g, String s, int width, int XPos, int YPos){  
+        int stringLen = (int) g.getFontMetrics().getStringBounds(s, g).getWidth();  
+        int start = width/2 - stringLen/2;  
+        g.drawString(s, start + XPos, YPos);  
+	} 
+	
     private void drawLeftBot(Graphics g, Bot bot) {
     	BufferedImage image = null;
 		
@@ -57,7 +90,7 @@ public class Arena extends JPanel {
 			e.printStackTrace();
 		}
 		
-    	bot.getCurrentMove().draw(g, image, LEFT_BOT_XPOS, LEFT_BOT_YPOS);
+    	bot.getCurrentMove().draw(g, image, LEFT_BOT_XPOS, LEFT_BOT_YPOS, true);
     }
     
     private void drawRightBot(Graphics g, Bot bot) {
@@ -70,6 +103,6 @@ public class Arena extends JPanel {
 			e.printStackTrace();
 		}
 		
-    	bot.getCurrentMove().draw(g, image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS);
+    	bot.getCurrentMove().draw(g, image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS, false);
     }
 }

@@ -8,6 +8,11 @@ import javax.swing.JFrame;
 import model.Bot;
 
 public class Main extends JFrame {
+	private static final int WIDTH = 600;
+	private static final int HEIGHT = 350; 
+	
+	private static final int X_POSITION = 100;
+	private static final int Y_POSITION = 100;
 	
 	//Subcomponents of the main view.
 	private Arena arena;
@@ -24,12 +29,12 @@ public class Main extends JFrame {
 		
 		//Frame properties
 		setTitle("Super Awesome Fighters");
-		setSize(800,600);
-		setLocation(100,100);
+		setSize(WIDTH, HEIGHT);
+		setLocation(X_POSITION, Y_POSITION);
 		setVisible(true);
+		setBackground(Color.WHITE);
 		setLayout(new FlowLayout(FlowLayout.CENTER));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBackground(Color.WHITE);
 	}
 	
 	public void update() {
