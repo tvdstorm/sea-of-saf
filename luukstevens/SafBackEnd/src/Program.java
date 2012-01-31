@@ -5,7 +5,7 @@ import javax.xml.bind.JAXBException;
 import view.Arena;
 import view.Main;
 import model.Bot;
-import model.enums.AttackType;
+import model.attack.*;
 import model.enums.MoveType;
 
 public class Program {
@@ -23,20 +23,20 @@ public class Program {
 		Main mainView = new Main(left, right);
 		
 		for(;;) {
-			left.setCurrentAttack(AttackType.BLOCK_HIGH);
+			left.setCurrentAttack(new BlockHigh());
 			Thread.sleep(100);
-			right.setCurrentAttack(AttackType.BLOCK_HIGH);
+			right.setCurrentAttack(new BlockHigh());
 			Thread.sleep(100);
 			mainView.update();
-			left.setCurrentAttack(AttackType.KICK_LOW);
+			left.setCurrentAttack(new KickLow());
 			left.setCurrentMove(MoveType.CROUCH);
 			Thread.sleep(100);
-			right.setCurrentAttack(AttackType.KICK_LOW);
+			right.setCurrentAttack(new KickLow());
 			Thread.sleep(100);
 			mainView.update();
-			left.setCurrentAttack(AttackType.PUNCH_HIGH);
+			left.setCurrentAttack(new PunchLow());
 			Thread.sleep(100);
-			right.setCurrentAttack(AttackType.PUNCH_HIGH);
+			right.setCurrentAttack(new PunchLow());
 			left.setCurrentMove(MoveType.JUMP);
 			Thread.sleep(100);
 			mainView.update();
