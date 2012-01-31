@@ -28,40 +28,27 @@ public class FighterDefinition {
 		Integer result = properties.get(property);
 		return (result != null) ? result : DefaultValue;
 	}
-	
-	/**
-	 * @return the name
-	 */
+
 	public String getName() {
 		return name;
 	}
-	/**
-	 * @param name the name to set
-	 */
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	/**
-	 * @return the punchReach
-	 */
+
 	public int getPunchReach() {
 		return getProperty(PUNCH_REACH);
 	}
-	/**
-	 * @return the punchPower
-	 */
+
 	public int getPunchPower() {
 		return getProperty(PUNCH_POWER);
 	}
-	/**
-	 * @return the kickReach
-	 */
+
 	public int getKickReach() {
 		return getProperty(KICK_REACH);
 	}
-	/**
-	 * @return the kickPower
-	 */
+
 	public int getKickPower() {
 		return getProperty(KICK_POWER);
 	}
@@ -70,15 +57,34 @@ public class FighterDefinition {
 		properties.put(key, value);
 	}
 	
-	/**
-	 * 
-	 * @return list with behaviourRules
-	 */
 	public List<BehaviourRule> getBehaviourRules() {
 		return behaviourRules;
 	}
 	
 	public void validate(List<String> errorList) {
+		validateProperties(errorList);		
+		validateBehaviourRules(errorList);	
+		validateName(errorList);
+	}
+
+	private void validateName(List<String> errorList) {
+		if (name == null | name.equals(""))
+			errorList.add("Name not set");
+	}
+
+	private void validateBehaviourRules(List<String> errorList) {
+		for (BehaviourRule rule : behaviourRules) {
+			rule.validate(errorList);
+		}
+		
+		//To cover the case that there are no applicable rules, there must be an "always" rule.
+		Set<State> alwaysSet = new HashSet<State>();
+		alwaysSet.add(State.always); 
+		if (findBehaviourRulesForStates(alwaysSet).isEmpty())
+			errorList.add("No always rule added");
+	}
+
+	private void validateProperties(List<String> errorList) {
 		for (String key : properties.keySet()) {
 			boolean found = false;
 			for (String string : propertyNames) {
@@ -93,22 +99,9 @@ public class FighterDefinition {
 			if (!found)
 				errorList.add("Unknown assignment: " + key);
 		}
-		
-		for (BehaviourRule rule : behaviourRules) {
-			rule.validate(errorList);
-		}
-		
-		//To cover the case that there are no applicable rules, there must be an "always" rule.
-		Set<State> alwaysSet = new HashSet<State>();
-		alwaysSet.add(State.always); 
-		if (getBehaviourRules(alwaysSet).isEmpty())
-			errorList.add("No always rule added");
-		
-		if (name == null | name.equals(""))
-			errorList.add("Name not set");
 	}
 
-	public List<BehaviourRule> getBehaviourRules(Set<State> filter) {
+	public List<BehaviourRule> findBehaviourRulesForStates(Set<State> filter) {
 		List<BehaviourRule> result = new ArrayList<BehaviourRule>();
 		for (BehaviourRule rule : behaviourRules) {
 			if (rule.getCondition().matched(filter))
