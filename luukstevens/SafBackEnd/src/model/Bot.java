@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import view.Arena;
+import view.Main;
 
 import model.condition.And;
 import model.condition.Or;
@@ -38,11 +39,12 @@ public class Bot {
 	
 	private MoveType currentMove;
 	private AttackType currentAttack;
-	private Arena arena;
+	private int health;
 	
 	public Bot() {
 		currentMove = MoveType.STAND;
 		currentAttack = AttackType.BLOCK_HIGH;
+		health = 100;
 	}
 
 	public String getName() {
@@ -59,7 +61,6 @@ public class Bot {
 
 	public void setCurrentMove(MoveType currentMove) {
 		this.currentMove = currentMove;
-		if(arena != null) arena.update();
 	}
 
 	public AttackType getCurrentAttack() {
@@ -68,11 +69,14 @@ public class Bot {
 
 	public void setCurrentAttack(AttackType currentAttack) {
 		this.currentAttack = currentAttack;
-		if(arena != null) arena.update();
 	}
-	
-	public void setArena(Arena arena) {
-		this.arena = arena;
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void reduceHealth(int health) {
+		this.health -= health;
 	}
 	
 	public double getWeight() {
