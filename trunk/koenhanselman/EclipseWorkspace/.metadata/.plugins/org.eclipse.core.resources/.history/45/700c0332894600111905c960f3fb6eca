@@ -1,0 +1,5 @@
+package saf.interpret;
+
+public enum move_action_type {
+
+}

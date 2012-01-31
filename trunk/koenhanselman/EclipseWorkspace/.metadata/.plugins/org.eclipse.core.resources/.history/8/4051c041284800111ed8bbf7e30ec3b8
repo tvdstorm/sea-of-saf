@@ -1,0 +1,15 @@
+grammar Sample;
+
+options {
+  language = Java;
+}
+
+@header {
+  package a.b.c;
+}
+
+@lexer::header {
+  package a.b.c;
+}
+
+rule: ;

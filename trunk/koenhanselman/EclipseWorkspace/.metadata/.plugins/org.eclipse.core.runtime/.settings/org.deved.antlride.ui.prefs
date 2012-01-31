@@ -1,0 +1,13 @@
+#Thu Jan 26 17:20:42 CET 2012
+useQuickDiffPrefPage=true
+editor_bg_color=255,255,255
+useAnnotationsPrefPage=true
+content_assist_autoactivation=false
+sourceHoverBackgroundColor=255,255,225
+formatter.indentation.size=4
+formatterId=org.deved.antlride.formatter.AntlrFormatterFactory
+editor_folding_enabled=false
+formatter.tabulation.size=4
+formatter.tabulation.char=tab
+eclipse.preferences.version=1
+sourceHoverBackgroundColor.SystemDefault=true

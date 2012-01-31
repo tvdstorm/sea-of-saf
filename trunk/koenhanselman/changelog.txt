@@ -3,3 +3,6 @@ Tuesday 17-1-2012
 
 Sunday 22-1-2012
 - Grammar is done. Interpreter still needs to be implemented.
+
+Monday 3-1-2012
+- Converted project to ANTLR

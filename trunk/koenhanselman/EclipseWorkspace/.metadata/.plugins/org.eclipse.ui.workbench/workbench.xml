@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="31" version="2.0">
+<workbench progressCount="28" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="1024" x="100" y="100">
+<window height="1050" maximized="true" width="960" x="960" y="0">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -17,10 +17,12 @@
 <coolItem id="org.eclipse.soc.ewi.actionSet" itemType="typeToolBarContribution" x="38" y="22"/>
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="130" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="61" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="190" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.deved.antlride.ui.antlrEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
@@ -36,30 +38,35 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.ui.DefaultTextEditor" name="saf.grammar" partName="saf.grammar" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/saf.grammar" title="saf.grammar" tooltip="SAFParser/src/saf.grammar" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/saf.grammar"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1774" selectionTopPixel="720"/>
+<editor id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name=".project" partName=".project" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAF Parser ANTLR/.project" title=".project" tooltip="SAF Parser ANTLR/.project" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAF Parser ANTLR/.project"/>
 </editor>
-<editor id="org.eclipse.ui.DefaultTextEditor" name="testFile.sa" partName="testFile.sa" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/testFile.sa" title="testFile.sa" tooltip="SAFParser/src/testFile.sa" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/testFile.sa"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="122" selectionTopPixel="0"/>
+<editor id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name=".classpath" partName=".classpath" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAF Parser ANTLR/.classpath" title=".classpath" tooltip="SAF Parser ANTLR/.classpath" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAF Parser ANTLR/.classpath"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Interpreter.java" partName="Interpreter.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/saf/interpret/Interpreter.java" title="Interpreter.java" tooltip="SAFParser/src/saf/interpret/Interpreter.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/saf/interpret/Interpreter.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="270" selectionTopPixel="0"/>
+<editor id="org.deved.antlride.ui.antlrEditor" name="Sample.g" partName="Sample.g" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAF Parser ANTLR/src/a/b/c/Sample.g" title="Sample.g" tooltip="SAF Parser ANTLR/src/a/b/c/Sample.g" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAF Parser ANTLR/src/a/b/c/Sample.g"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAFParser/src/Main.java" title="Main.java" tooltip="SAFParser/src/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAFParser/src/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="709" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SampleLexer.java" partName="SampleLexer.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAF Parser ANTLR/antlr-generated/a/b/c/SampleLexer.java" title="SampleLexer.java" tooltip="SAF Parser ANTLR/antlr-generated/a/b/c/SampleLexer.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAF Parser ANTLR/antlr-generated/a/b/c/SampleLexer.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SampleParser.java" partName="SampleParser.java" path="C:/Werkmap/Documenten/School/SoftwareConstruction/svn/koenhanselman/EclipseWorkspace/SAF Parser ANTLR/antlr-generated/a/b/c/SampleParser.java" title="SampleParser.java" tooltip="SAF Parser ANTLR/antlr-generated/a/b/c/SampleParser.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SAF Parser ANTLR/antlr-generated/a/b/c/SampleParser.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
+<expanded>
+<category IMemento.internal.id="Warnings (100 of 229 items)"/>
+</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -72,7 +79,7 @@
 <viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
-<viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
+<viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="Aggregate for window 1327076527554">
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
@@ -92,30 +99,16 @@
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.FieldsFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.internal.ui.PackageExplorer.HideInnerClassFilesFilter" isEnabled="true"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.NonPublicFilter" isEnabled="false"/>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*" isEnabled="true"/>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.EmptyLibraryContainerFilter" isEnabled="true"/>
 <child filterId="org.eclipse.pde.ui.BinaryProjectFilter1" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.SyntheticMembersFilter" isEnabled="true"/>
 <child filterId="org.eclipse.mylyn.java.ui.MembersFilter" isEnabled="false"/>
 </xmlDefinedFilters>
+<lastRecentlyUsedFilters>
+<child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*"/>
+</lastRecentlyUsedFilters>
 </customFilters>
-</viewState>
-</view>
-<view id="org.eclipse.mylyn.tasks.ui.views.tasks" partName="Task List">
-<viewState linkWithEditor="true" presentation="org.eclipse.mylyn.tasks.ui.categorized">
-<sorter groupBy="CATEGORY_QUERY">
-<sorter>
-<sort0 sortDirection="1" sortKey="PRIORITY"/>
-<sort1 sortDirection="1" sortKey="RANK"/>
-<sort2 sortDirection="1" sortKey="DATE_CREATED"/>
-<sort3 sortDirection="1" sortKey="NONE"/>
-<sort4 sortDirection="1" sortKey="NONE"/>
-<sort5 sortDirection="1" sortKey="NONE"/>
-<sort6 sortDirection="1" sortKey="NONE"/>
-<sort7 sortDirection="1" sortKey="NONE"/>
-</sorter>
-</sorter>
-<filteredTreeFindHistory/>
 </viewState>
 </view>
 <view id="org.eclipse.pde.runtime.LogView" partName="Error Log">
@@ -129,7 +122,7 @@
 </view>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.ui.DefaultTextEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.pde.internal.ui.PDEPerspective" id="org.eclipse.pde.ui.PDEPerspective" label="Plug-in Development"/>
 <alwaysOnActionSet id="org.eclipse.egit.ui.navigation"/>
@@ -184,7 +177,7 @@
 <view id="org.eclipse.ui.views.TaskList"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
-<view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
+<view id="org.eclipse.mylyn.tasks.ui.views.tasks" removed="true"/>
 <fastViewBars/>
 <layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="topLeft">&#x0A;<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
 <page content="org.eclipse.pde.ui.PluginsView" label="Plug-ins"/>
@@ -224,10 +217,6 @@
 </perspective>
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
-<alwaysOnActionSet id="org.eclipse.egit.ui.navigation"/>
-<alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
-<alwaysOnActionSet id="org.eclipse.mylyn.doc.actionSet"/>
-<alwaysOnActionSet id="org.eclipse.mylyn.tasks.ui.navigation"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.edit.text.actionSet.annotationNavigation"/>
@@ -236,10 +225,6 @@
 <alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
-<alwaysOnActionSet id="org.eclipse.imp.runtime.refactoringActions"/>
-<alwaysOnActionSet id="org.eclipse.imp.runtime.analysisActions"/>
-<alwaysOnActionSet id="rascal_eclipse.rascalActionSet"/>
-<alwaysOnActionSet id="org.eclipse.soc.ewi.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
@@ -247,6 +232,15 @@
 <alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.debug.ui.JDTDebugActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.junit.JUnitActionSet"/>
+<alwaysOnActionSet id="org.eclipse.egit.ui.navigation"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.doc.actionSet"/>
+<alwaysOnActionSet id="org.eclipse.mylyn.tasks.ui.navigation"/>
+<alwaysOnActionSet id="org.eclipse.imp.runtime.refactoringActions"/>
+<alwaysOnActionSet id="org.eclipse.imp.runtime.analysisActions"/>
+<alwaysOnActionSet id="rascal_eclipse.rascalActionSet"/>
+<alwaysOnActionSet id="org.eclipse.soc.ewi.actionSet"/>
+<alwaysOnActionSet id="org.deved.antlride.debug.ui.AntlrDebugActionSet"/>
 <show_view_action id="org.eclipse.jdt.ui.PackageExplorer"/>
 <show_view_action id="org.eclipse.jdt.ui.TypeHierarchy"/>
 <show_view_action id="org.eclipse.jdt.ui.SourceView"/>
@@ -286,8 +280,6 @@
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
-<view id="org.eclipse.ui.views.ContentOutline"/>
-<view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -310,8 +302,8 @@
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="478" ratioRight="1434" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.74920636" ratioLeft="708" ratioRight="237" relationship="4" relative="org.eclipse.ui.editorss">
+<info part="org.eclipse.ui.editorss" ratio="0.19949654" ratioLeft="317" ratioRight="1272" relationship="2" relative="left"/>
+<info folder="true" part="bottom" ratio="0.77559054" ratioLeft="591" ratioRight="171" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
@@ -328,22 +320,18 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@49eeb08c" ratio="0.7496513" ratioLeft="1075" ratioRight="359" relationship="2" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.mylyn.tasks.ui.views.tasks" appearance="2" expanded="2">
-<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="Task List"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@49eeb08c" ratio="0.6511628" ratioLeft="448" ratioRight="240" relationship="2" relative="org.eclipse.ui.editorss">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.mylyn.tasks.ui.views.tasks" label="LabelNotFound"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info folder="true" part="right" ratio="0.5" ratioLeft="354" ratioRight="354" relationship="4" relative="org.eclipse.ui.internal.ViewStack@49eeb08c">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.egit.ui.RepositoriesView" ratio="0.6" ratioLeft="567" ratioRight="378" relationship="4" relative="left"/>
@@ -354,169 +342,61 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/saf.grammar"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/interpret/Interpreter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/Main.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/node/Node.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/node/AKickpowerProgram.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/node/AProgram.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/testFile.sa"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/saf.grammar"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/testFile.sa"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/lexer/Lexer.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/saf/interpret/Interpreter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAFParser/src/Main.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/SAFParser/src/saf.grammar"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/SAF Parser ANTLR/.project"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" path="/SAF Parser ANTLR/.classpath"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.deved.antlride.ui.antlrEditor" path="/SAF Parser ANTLR/src/a/b/c/Sample.g"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.core.runtime.xml.source" path="/SAF Parser ANTLR/.classpath"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.core.runtime.xml.source" path="/SAF Parser ANTLR/.project"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.deved.antlride.ui.antlrEditor" path="/SAF Parser ANTLR/src/a/b/c/Sample.g"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAF Parser ANTLR/antlr-generated/a/b/c/SampleLexer.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SAF Parser ANTLR/antlr-generated/a/b/c/SampleParser.java"/>
 </editors>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="4" y="0"/>
-</item>
-<item historyLabel="Main.java" index="2">
-<position info="not_deleted" x="160" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="539" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="0">
-<position info="not_deleted" x="878" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="94" y="0"/>
-</item>
-<item historyLabel="Main.java" index="2">
-<position info="not_deleted" x="649" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="0">
-<position/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="94" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="0">
-<position/>
-</item>
-<item historyLabel="Main.java" index="2">
-<position info="not_deleted" x="649" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="0">
-<position info="not_deleted" x="700" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="520" y="0"/>
-</item>
-<item historyLabel="Main.java" index="2">
-<position info="not_deleted" x="576" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="227" y="12"/>
-</item>
-<item historyLabel="Node.java" index="3">
+<item historyLabel=".project" index="0">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="227" y="12"/>
-</item>
-<item historyLabel="saf.grammar" index="0">
-<position info="not_deleted" x="503" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="227" y="12"/>
-</item>
-<item historyLabel="saf.grammar" index="0">
-<position info="not_deleted" x="667" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="243" y="0"/>
-</item>
-<item historyLabel="Main.java" index="2">
-<position info="not_deleted" x="576" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="1">
-<position info="not_deleted" x="243" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="0">
-<position info="not_deleted" x="667" y="0"/>
-</item>
-<item historyLabel="AKickpowerProgram.java" index="4">
-<position info="not_deleted" x="572" y="0"/>
-</item>
-<item historyLabel="AProgram.java" index="5">
+<item historyLabel=".classpath" index="1">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="testFile.sa" index="6">
+<item historyLabel=".project" index="0">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="saf.grammar" index="7">
-<position info="not_deleted" x="388" y="0"/>
-</item>
-<item historyLabel="testFile.sa" index="6">
+<item historyLabel="Sample.g" index="2"/>
+<item historyLabel=".classpath" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="saf.grammar" index="7">
-<position info="not_deleted" x="388" y="0"/>
-</item>
-<item historyLabel="testFile.sa" index="8">
-<position info="not_deleted" x="268" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="7">
-<position/>
-</item>
-<item historyLabel="Lexer.java" index="9">
+<item historyLabel=".classpath" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="Lexer.java" index="9">
-<position info="not_deleted" x="209" y="0"/>
+<item historyLabel=".classpath" index="3">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="saf.grammar" index="7">
-<position/>
+<item historyLabel=".project" index="0">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="testFile.sa" index="8">
-<position info="not_deleted" x="268" y="0"/>
+<item historyLabel=".project" index="4">
+<position info="not_deleted" x="178" y="48"/>
 </item>
-<item historyLabel="saf.grammar" index="7">
-<position/>
+<item historyLabel=".classpath" index="3">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="testFile.sa" index="8">
-<position info="not_deleted" x="14" y="0"/>
+<item historyLabel="Sample.g" index="5"/>
+<item historyLabel=".classpath" index="3">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="saf.grammar" index="7">
-<position info="not_deleted" x="419" y="0"/>
+<item historyLabel="SampleLexer.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="testFile.sa" index="8">
-<position info="not_deleted" x="14" y="0"/>
+<item historyLabel=".project" index="4">
+<position info="not_deleted" x="178" y="48"/>
 </item>
-<item historyLabel="saf.grammar" index="7">
-<position info="not_deleted" x="2351" y="0"/>
+<item historyLabel="SampleLexer.java" index="6">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="testFile.sa" index="8">
-<position info="not_deleted" x="14" y="0"/>
+<item historyLabel=".classpath" index="3">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="saf.grammar" index="7">
-<position info="not_deleted" x="2351" y="0"/>
-</item>
-<item historyLabel="testFile.sa" index="8">
-<position info="not_deleted" x="11" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="7">
-<position info="not_deleted" x="1762" y="0"/>
-</item>
-<item historyLabel="testFile.sa" index="8">
-<position info="not_deleted" x="122" y="0"/>
-</item>
-<item historyLabel="saf.grammar" index="7">
-<position info="not_deleted" x="1762" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="10">
-<position info="not_deleted" x="243" y="0"/>
-</item>
-<item historyLabel="Main.java" index="11">
-<position info="not_deleted" x="709" y="0"/>
-</item>
-<item historyLabel="Interpreter.java" index="10">
-<position info="not_deleted" x="270" y="0"/>
-</item>
-<item active="true" historyLabel="saf.grammar" index="12">
-<position info="not_deleted" x="542" y="0"/>
+<item active="true" historyLabel="SampleParser.java" index="7">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -525,8 +405,8 @@
 <actionBarAdvisor/>
 <trimLayout>
 <trimArea IMemento.internal.id="128">
-<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 <trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
+<trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
 <trimArea IMemento.internal.id="1024">
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
@@ -536,50 +416,50 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Lexer.java" tooltip="SAFParser/src/saf/lexer/Lexer.java">
-<persistable path="/SAFParser/src/saf/lexer/Lexer.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SampleParser.java" tooltip="SAF Parser ANTLR/antlr-generated/a/b/c/SampleParser.java">
+<persistable path="/SAF Parser ANTLR/antlr-generated/a/b/c/SampleParser.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SampleLexer.java" tooltip="SAF Parser ANTLR/antlr-generated/a/b/c/SampleLexer.java">
+<persistable path="/SAF Parser ANTLR/antlr-generated/a/b/c/SampleLexer.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.deved.antlride.ui.antlrEditor" name="Sample.g" tooltip="SAF Parser ANTLR/src/a/b/c/Sample.g">
+<persistable path="/SAF Parser ANTLR/src/a/b/c/Sample.g"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name=".classpath" tooltip="SAF Parser ANTLR/.classpath">
+<persistable path="/SAF Parser ANTLR/.classpath"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorPart" name=".project" tooltip="SAF Parser ANTLR/.project">
+<persistable path="/SAF Parser ANTLR/.project"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AProgram.java" tooltip="SAFParser/src/saf/node/AProgram.java">
 <persistable path="/SAFParser/src/saf/node/AProgram.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AKickpowerProgram.java" tooltip="SAFParser/src/saf/node/AKickpowerProgram.java">
-<persistable path="/SAFParser/src/saf/node/AKickpowerProgram.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Node.java" tooltip="SAFParser/src/saf/node/Node.java">
-<persistable path="/SAFParser/src/saf/node/Node.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="SAFParser/src/Main.java">
-<persistable path="/SAFParser/src/Main.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="move_action_type.java" tooltip="SAFParser/src/saf/interpret/move_action_type.java">
+<persistable path="/SAFParser/src/saf/interpret/move_action_type.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Interpreter.java" tooltip="SAFParser/src/saf/interpret/Interpreter.java">
 <persistable path="/SAFParser/src/saf/interpret/Interpreter.java"/>
 </file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="fight_action_type.java" tooltip="SAFParser/src/saf/interpret/fight_action_type.java">
+<persistable path="/SAFParser/src/saf/interpret/fight_action_type.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="condition_type.java" tooltip="SAFParser/src/saf/interpret/condition_type.java">
+<persistable path="/SAFParser/src/saf/interpret/condition_type.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="SAFParser/src/Main.java">
+<persistable path="/SAFParser/src/Main.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Node.java" tooltip="SAFParser/src/saf/node/Node.java">
+<persistable path="/SAFParser/src/saf/node/Node.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Lexer.java" tooltip="SAFParser/src/saf/lexer/Lexer.java">
+<persistable path="/SAFParser/src/saf/lexer/Lexer.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AKickpowerProgram.java" tooltip="SAFParser/src/saf/node/AKickpowerProgram.java">
+<persistable path="/SAFParser/src/saf/node/AKickpowerProgram.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="testFile.sa" tooltip="SAFParser/src/testFile.sa">
 <persistable path="/SAFParser/src/testFile.sa"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TPlus.java" tooltip="SAFParser/src/saf/node/TPlus.java">
-<persistable path="/SAFParser/src/saf/node/TPlus.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Analysis.java" tooltip="SAFParser/src/saf/analysis/Analysis.java">
-<persistable path="/SAFParser/src/saf/analysis/Analysis.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AnalysisAdapter.java" tooltip="SAFParser/src/saf/analysis/AnalysisAdapter.java">
-<persistable path="/SAFParser/src/saf/analysis/AnalysisAdapter.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="characteristic.grammar" tooltip="SAFParser/src/characteristic.grammar">
-<persistable path="/SAFParser/src/characteristic.grammar"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Analysis.java" tooltip="SableCCParser/src/simpleAdder/analysis/Analysis.java">
-<persistable path="/SableCCParser/src/simpleAdder/analysis/Analysis.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="SableCCParser/src/Main.java">
-<persistable path="/SableCCParser/src/Main.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Interpreter.java" tooltip="SableCCParser/src/simpleAdder/interpret/Interpreter.java">
-<persistable path="/SableCCParser/src/simpleAdder/interpret/Interpreter.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="simpleAdder.sable" tooltip="SableCCParser/src/simpleAdder.sable">
-<persistable path="/SableCCParser/src/simpleAdder.sable"/>
 </file>
 </mruList>
 </workbench>

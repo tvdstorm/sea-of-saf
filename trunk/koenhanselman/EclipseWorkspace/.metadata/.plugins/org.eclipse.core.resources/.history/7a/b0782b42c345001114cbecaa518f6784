@@ -1,0 +1,23 @@
+/* The interpreter for the SAF language */ 
+package saf.interpret; 
+  
+import saf.node.* ; 
+import saf.analysis.* ; 
+import java.lang.System;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+  
+public class Interpreter extends DepthFirstAdapter { 
+  
+	private Map<Node, String> nodeMap = new HashMap<Node, String>();
+    ArrayList<Node> resultnodes = new ArrayList<Node>();
+	
+	public int getNodeInt(Node node) {
+    	return ToString(node);
+	}
+	
+	public ArrayList<Node> getResultnodes() {
+        return resultnodes;
+	}
+}
