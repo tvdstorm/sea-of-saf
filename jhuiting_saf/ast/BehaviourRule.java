@@ -17,9 +17,17 @@ public class BehaviourRule implements FighterNode {
 	public Action getMoveAction() {
 		return moveAction;
 	}
+	
+	public String getMoveActionValue() {
+		return moveAction.getValue();
+	}
 
 	public Action getFightAction() {
 		return fightAction;
+	}
+	
+	public String getFightActionValue() {
+		return fightAction.getValue();
 	}
 	
 	public BehaviourRule(Identifier cond, Action move, Action fight)
@@ -35,6 +43,6 @@ public class BehaviourRule implements FighterNode {
 	
 	public String toString()
 	{
-		return this.condition + "[" + this.moveAction + " " + this.fightAction;
+		return this.condition.getValue() + "[" + this.moveAction.getValue() + " " + this.fightAction.getValue() + "]";
 	}
 }

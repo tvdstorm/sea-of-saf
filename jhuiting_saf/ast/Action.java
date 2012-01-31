@@ -1,26 +1,23 @@
 package ast;
 
-public class Action {
-	String actionType;
+import ast.interfaces.IAction;
+
+public class Action implements IAction {
+	
 	String value;
 	
-	public Action(String actionType, String value)
+	public Action(String value)
 	{
-		this.actionType = actionType;
 		this.value = value;
 	}
 	
-	public String getActionType() {
-		return actionType;
-	}
-
 	public String getValue() {
 		return value;
 	}
 	
 	public String toString()
 	{
-		return "Action: " + this.actionType;
+		return this.getValue();
 	}
 
 }

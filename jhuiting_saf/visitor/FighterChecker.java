@@ -26,12 +26,15 @@ public class FighterChecker extends FighterVisitor {
 	private boolean isValidBehaviourRule(BehaviourRule br)
 	{
 		Identifier condition = br.getCondition();
+		String moveActionVal =(br.getMoveActionValue().replace("choose", ""));
+		String fightActionVal =(br.getFightActionValue().replace("choose", ""));
 		
-		if(!dt.moveActions.contains(br.getMoveAction())) {
+		if(!dt.moveActions.contains(moveActionVal)) {
+			System.out.println(moveActionVal);
 			return false;
 		}
 
-		else if(!dt.fightActions.contains(br.getFightAction())) {
+		if(!dt.fightActions.contains(fightActionVal)) {
 			return false;
 		}
 			
@@ -40,8 +43,12 @@ public class FighterChecker extends FighterVisitor {
 	
 	public void visit(Personality personality) 
 	{
-		String persVal = personality.getId().getValue();
-		if(!dt.personalities.contains(persVal)) {
+		String persId = personality.getId();
+		Integer persVal = personality.getValue();
+		
+		if(!dt.personalities.contains(persId)) {
+			errorList.add("Personality key '" + persId + "' is not valid");
+		} else if(persVal < 0 || persVal > 9) {
 			errorList.add("Personality value '" + persVal + "' is not valid");
 		}
 	}

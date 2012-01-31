@@ -1,8 +1,8 @@
 JackieChan {
 	kickPower = 7
-	plop = 12
 	punchPower = 5
 	kickReach = 3
 	punchReach = 9
-	fard[run_tsxowards pudnch_high]
+	far[run_towards punch_high]
+    near[choose(stand crouch) kick_high]
 }

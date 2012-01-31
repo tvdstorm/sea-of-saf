@@ -127,40 +127,60 @@ FighterNode fighterPersonalityRule() :
 FighterNode fighterBehaviourRule() :
 {
   	Identifier cond;
-  	Identifier fg;
-  	Identifier mv;
-  	Action fight;
   	Action move;
+  	Action fight;
 }
 {
 	cond = conditionType() 
 	< LIST_OPEN > 
-	fg = actionType() { 		fight = new Action("fight", fg.getValue());
-	}
-	mv = actionType() {
-		move = new Action("move", mv.getValue());
-	}
-	< LIST_CLOSE >	{		return (FighterNode) new BehaviourRule(cond, move, fight);
+	move = actionType() 
+	fight = actionType() 
+	< LIST_CLOSE >	{		return ((FighterNode) new BehaviourRule(cond, move, fight));
 	}
 	  
 }
 
 Identifier conditionType() :{
-  Identifier i;}{
-  	//LOOKAHEAD(2)
-  	//i = Identifier() < AND > Identifier()
-  	//| i = Identifier() < OR > Identifier()
-  	i = Identifier() {		return i;
+  Identifier i;
+  Identifier i2;
+  Token t;}{
+  	
+    LOOKAHEAD(3)
+	(	  i =Identifier()
+	  t = < AND >
+	  i2 = Identifier()) {
+	  return new Identifier(i.getValue() + t.image + i2.getValue());
+	}	|
+    LOOKAHEAD(3)
+	(
+	  i =Identifier()
+	  t = < OR >
+	  i2 = Identifier()) {
+	  return new Identifier(i.getValue() + t.image + i2.getValue());	}  	|
+  	i = Identifier() {				return i;
 	}}
 
-Identifier actionType():
+Action actionType():
 {
-	Identifier i; 
+	Identifier i;
+	Identifier i2;
+	Action act1;
+    Action act2;
 }
 {
- 	 < CHOOSE > "(" Identifier() Identifier() ")" //@TODO 	|
+  	(  	  
+ 	 < CHOOSE > "("
+	 	i =Identifier() {;
+	 	  act1 = new Action(i.getValue());	 	}
+	 	i2 =Identifier(){
+          act2 = new Action(i.getValue());
+        }
+ 	")"
+ 	){
+	  return new Action(act1, act2);
+	} 	|
  	i = Identifier() 	{
- 	  return i;	}
+ 	  return new Action(i.getValue());	}
  	  
  	
 }
