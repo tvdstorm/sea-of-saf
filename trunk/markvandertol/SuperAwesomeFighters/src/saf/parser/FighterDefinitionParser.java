@@ -1,6 +1,5 @@
 package saf.parser;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,8 +16,6 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
 import saf.ast.FighterDefinition;
 
 public class FighterDefinitionParser {
-
-
 	public FighterDefinition parseFighterDefinition(File file) throws IOException, BotDefinitionMalformedException {
 		FileInputStream stream = null;
 		try {

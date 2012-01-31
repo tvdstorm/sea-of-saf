@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <project name="SuperAwesomeFighters" default="cleanAndDist" basedir=".">
     <description>
         Build file for SuperAwesomeFighters
@@ -50,8 +51,5 @@
 		<delete dir="${dist}" />
 	</target>
 	
-	<target name="cleanAndDist" depends="clean,dist">
-	
-	</target>
-
+	<target name="cleanAndDist" depends="clean,dist" />
 </project>

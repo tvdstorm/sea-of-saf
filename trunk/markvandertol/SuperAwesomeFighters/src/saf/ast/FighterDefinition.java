@@ -15,7 +15,7 @@ public class FighterDefinition {
 	private static final String PUNCH_POWER = "punchPower";
 	private static final String PUNCH_REACH = "punchReach";
 
-	private final int DefaultValue = 5;
+	private final static int DefaultPropertyValue = 5;
 
 	private String name;
 
@@ -26,7 +26,7 @@ public class FighterDefinition {
 	
 	private int getProperty(String property) {
 		Integer result = properties.get(property);
-		return (result != null) ? result : DefaultValue;
+		return (result != null) ? result : DefaultPropertyValue;
 	}
 
 	public String getName() {

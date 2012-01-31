@@ -22,8 +22,6 @@ public class Fighter {
 	private MoveAction lastMoveAction;
 	
 	private Stance currentStance = Stance.standing;
-
-	private int movesPending = 0;
 	
 	public Fighter(FighterDefinition definition) {
 		this.definition = definition;
