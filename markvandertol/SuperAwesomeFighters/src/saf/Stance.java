@@ -6,7 +6,6 @@ public enum Stance {
 	standing(0.75f);
 	
 	private final float multiplier;
-
 	
 	Stance(float multiplier) {
 		this.multiplier = multiplier;

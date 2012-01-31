@@ -15,12 +15,12 @@ final class SafFileFilter extends FileFilter {
 		return "saf".equalsIgnoreCase(getExtension(file));
 	}
 
-	private String getExtension(File f) {
-	    String name = f.getName();
-	    int i = name.lastIndexOf('.');
+	private String getExtension(File file) {
+	    String name = file.getName();
+	    int lastIndex = name.lastIndexOf('.');
 
-	    if (i > 0 &&  i < name.length() - 1)
-	        return name.substring(i+1);
+	    if (lastIndex > 0 &&  lastIndex < name.length() - 1)
+	        return name.substring(lastIndex+1);
 	    
 	    return null;
 	}

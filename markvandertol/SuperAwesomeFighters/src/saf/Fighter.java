@@ -77,7 +77,7 @@ public class Fighter {
 	}
 	
 	public List<BehaviourRule> getBeheaviourRules(Set<State> filter) {
-		return definition.getBehaviourRules(filter);
+		return definition.findBehaviourRulesForStates(filter);
 	}
 	
 	public int getPuchReach() {

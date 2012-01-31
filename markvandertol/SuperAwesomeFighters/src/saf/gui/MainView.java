@@ -1,6 +1,5 @@
 package saf.gui;
 
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -93,13 +92,23 @@ public class MainView extends JFrame {
 		JPanel buttonPanel = new JPanel();
 		
 		JButton loadFighter1 = new JButton("Load fighter 1");
-		loadFighter1.addMouseListener(new LoadFighterClickHandler(this, 0));
+		loadFighter1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadFigter(0);
+			}
+		});
 		buttonPanel.add(loadFighter1);
 		
 		buttonPanel.add(Box.createHorizontalStrut(150));
 		
 		JButton loadFighter2 = new JButton("Load fighter 2");
-		loadFighter2.addMouseListener(new LoadFighterClickHandler(this, 1));
+		loadFighter2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				loadFigter(1);
+			}
+		});
 		buttonPanel.add(loadFighter2);
 		
 		
@@ -144,29 +153,18 @@ public class MainView extends JFrame {
 		return buttonPanel;
 	}
 	
-	private class LoadFighterClickHandler extends MouseAdapter {		
-		private final int index;
-		private final Component parent;
+	private void loadFigter(int index) {
+		JFileChooser fc = new JFileChooser();
 		
-		public LoadFighterClickHandler(Component parent, int index) {
-			this.parent = parent;
-			this.index = index;
-		}
-		
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			JFileChooser fc = new JFileChooser();
+		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fc.addChoosableFileFilter(new SafFileFilter());
+		if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String result = arena.openBotDefinition(index, fc.getSelectedFile());
 			
-			fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			fc.addChoosableFileFilter(new SafFileFilter());
-			if (fc.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
-				String result = arena.openBotDefinition(index, fc.getSelectedFile());
-				
-				if (result == null)
-					updateView();
-				else
-					JOptionPane.showMessageDialog(parent, result, TITLE, JOptionPane.WARNING_MESSAGE);
-			}
+			if (result == null)
+				updateView();
+			else
+				JOptionPane.showMessageDialog(this, result, TITLE, JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }
