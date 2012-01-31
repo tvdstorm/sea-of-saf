@@ -49,6 +49,14 @@ public class Fighter {
 		this.name = name;
 	}
 	
+	public int getPunchPower() {
+		return punchPower;
+	}
+
+	public void setPunchPower(int punchPower) {
+		this.punchPower = punchPower;
+	}
+
 	/**
 	 * @return The name of the {@link Fighter}.
 	 */
@@ -62,7 +70,8 @@ public class Fighter {
 	public String toString(){
 		String className = this.getClass().getSimpleName();
 		StringBuilder sb = new StringBuilder("<" + className + "| ");
-		sb.append("name: " + getName());
+		sb.append("name: " + getName() + ", ");
+		sb.append("punchPower: " + getPunchPower() + ", ");
 		sb.append("|>");
 		return sb.toString();
 	}
