@@ -23,6 +23,7 @@ public class Saf implements Validator {
 
 	@Override
 	public boolean validate() {
+		boolean hasAlwaysRule = false;
 		for(Strength s : getStrengths()) {
 			if (!s.validate()) {
 				return false;
@@ -32,6 +33,14 @@ public class Saf implements Validator {
 			if (!b.validate()) {
 				return false;
 			}
+			if (b.getCondition().getType() == ConditionAtom.Type.ALWAYS) {
+				hasAlwaysRule = true;
+			}
+		}
+		
+		if (!hasAlwaysRule) {
+			System.out.println("Saf definition does not contain 'always rule'.");
+			return false;
 		}
 		return true;
 	}
@@ -59,5 +68,25 @@ public class Saf implements Validator {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getStrength(Strength.Type type) {
+		for(Strength s : getStrengths()) {
+			if (s.getType() == type) {
+				return s.getValue();
+			}
+		}
+		return 5;
+	}
 
+	public double getWeight() {
+		return (getStrength(Strength.Type.PUNCHPOWER) + getStrength(Strength.Type.KICKPOWER)) / 2;
+	}
+
+	public double getHeight() {
+		return (getStrength(Strength.Type.PUNCHREACH) + getStrength(Strength.Type.KICKREACH)) / 2;
+	}
+	
+	public int getSpeed() {
+		return (int) Math.round( Math.abs(0.5 * (getHeight() - getWeight()) ));
+	}
 }

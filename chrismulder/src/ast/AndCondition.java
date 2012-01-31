@@ -8,8 +8,12 @@ public class AndCondition extends BooleanCondition {
 	}
 
 	@Override
-	public boolean evaluate(HashMap<ConditionAtom, Boolean> state) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean evaluate(HashMap<ConditionAtom.Type, Boolean> state) {
+		for(Condition c : conditions) {
+			if (!c.evaluate(state)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

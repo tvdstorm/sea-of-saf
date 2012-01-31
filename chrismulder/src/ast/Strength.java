@@ -1,36 +1,47 @@
 package ast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-
 public class Strength implements Validator {
-	private String type;
+	private String typeName;
+	private Type type;
 	private int value;
-	public static final ArrayList<String> TYPES = new ArrayList<String>(Arrays.asList(
-		"punchReach",
-		"kickReach",
-		"kickPower",
-		"punchPower"
-	));
+
+	public static enum Type {
+		PUNCHREACH,
+		KICKREACH,
+		KICKPOWER,
+		PUNCHPOWER
+	}
 	
 	public Strength(String type, int value) {
-		this.type = type;
+		this.typeName = type;
 		this.value= value;
 	}
 
 	@Override
 	public boolean validate() {
-		if (!TYPES.contains(type)) {
+		try {
+			type = Type.valueOf(typeName.toUpperCase());
+		} catch (IllegalArgumentException e) {
+			System.out.println(typeName + " is not a valid strength.");
 			return false;
 		}
+		
 		if (value < 1 || value > 10) {
+			System.out.println(value + " is not a valid strength value. Must be between 1 and 10.");
 			return false;
 		}
 		return true;
 	}
 	
 	public String toString() {
-		return type + ":" + value;
+		return typeName + ":" + value;
+	}
+	
+	public Type getType() {
+		return type;
+	}
+
+	public int getValue() {
+		return value;
 	}
 }
