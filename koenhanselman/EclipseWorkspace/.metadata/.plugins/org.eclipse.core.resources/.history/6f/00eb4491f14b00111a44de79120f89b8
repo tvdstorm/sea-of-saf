@@ -1,0 +1,22 @@
+grammar Sample;
+
+options {
+  language = Java;
+}
+
+@header {
+  package a.b.c;
+}
+
+@lexer::header {
+  package a.b.c;
+}
+
+program
+	:	'program' IDENT '='
+		'begin'
+		'end' IDENT '.'
+	;
+	
+IDENT : 'a'..'z'+;
+WS : {' ' | '\t' | '\n' | '\r' | '\f'}+;

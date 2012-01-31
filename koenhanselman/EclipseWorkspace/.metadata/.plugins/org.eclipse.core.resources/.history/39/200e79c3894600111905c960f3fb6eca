@@ -1,0 +1,11 @@
+package saf.interpret;
+
+public enum move_action_type {
+	walk_towards,
+	walk_away,
+	run_towards,
+	run_away,
+	jump,
+	crouch,
+	stand
+}

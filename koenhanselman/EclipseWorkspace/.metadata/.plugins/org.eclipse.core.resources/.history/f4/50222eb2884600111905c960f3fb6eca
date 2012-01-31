@@ -1,0 +1,14 @@
+/* The interpreter for the SAF language */ 
+package saf.interpret; 
+  
+import saf.node.* ; 
+import saf.analysis.* ; 
+import java.lang.System;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+  
+public class Interpreter extends DepthFirstAdapter { 
+  
+	
+}

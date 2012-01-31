@@ -1,0 +1,35 @@
+/* saf.grammar - A grammar the SAF language */ 
+Package saf ; 
+     
+Helpers 
+    space = ' ' ;
+    tab = 9 ;
+    blank = 10 | 10 13 | 9 ;
+      
+Tokens 
+	digit = ['0' .. '9'] ;
+    letter = [['a' .. 'z'] + ['A' .. 'Z']] ;
+    blank = (space | tab | nl)+ ;
+    left_curly = '{' ;
+    right_curly = '}' ;
+    left_bracket = '[' ;
+    right_bracket = ']' ;
+    left_paren = '(' ;
+    right_paren = ')' ;
+    equals = '=' ;
+    
+Ignored Tokens
+	blank;
+  
+Productions 
+    program = program_header program_personality program_behaviour program_footer ;
+    program_header = letter+ left_curly ;
+    program_footer = nl right_curly ;
+    
+    program_personality = program_characteristic+ ; 
+    program_characteristic = nl letter+ equals digit ;
+    
+    program_behaviour = program_rule+ ;
+    program_rule = nl letter+ left_bracket program_action program_action right_bracket ;
+    
+    program_action = letter+ left_paren letter+ right_paren ;
