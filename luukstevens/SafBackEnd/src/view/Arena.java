@@ -1,20 +1,21 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import model.Bot;
-import model.enums.MoveType;
+import model.move.*;
 
 public class Arena extends JPanel {
 	
 	//Constants
+	private static final int X_POSITION = 40;
+	private static final int Y_POSITION = 40;
+	
 	private static final int WIDTH = 400;
 	private static final int HIGHT = 300;
 	
@@ -27,28 +28,23 @@ public class Arena extends JPanel {
 	//Instance variables
 	private Bot left;
 	private Bot right;
-	private Graphics g;
 	
 	public Arena(Bot left, Bot right) {
 		this.left = left;
 		this.right = right;
 		
+		setBounds(X_POSITION, Y_POSITION, WIDTH, HEIGHT);
 		setSize(WIDTH, HIGHT);
 	}
 	
     public void paint(Graphics g) {
-    	this.g = g;
+    	g.clearRect(X_POSITION, Y_POSITION, WIDTH, HIGHT);
     	drawLeftBot(g, left);
     	drawRightBot(g, right);
     }
 	
 	public void update() {
-		if(g != null) {
-			g.clearRect(0, 0, WIDTH, HIGHT);
-			drawLeftBot(g, left);
-	    	drawRightBot(g, right);
-		    repaint();
-		}
+		repaint();
 	}
     
     private void drawLeftBot(Graphics g, Bot bot) {
@@ -61,7 +57,7 @@ public class Arena extends JPanel {
 			e.printStackTrace();
 		}
 		
-    	g.drawImage(image, LEFT_BOT_XPOS, LEFT_BOT_YPOS, null); 
+    	bot.getCurrentMove().draw(g, image, LEFT_BOT_XPOS, LEFT_BOT_YPOS);
     }
     
     private void drawRightBot(Graphics g, Bot bot) {
@@ -74,6 +70,6 @@ public class Arena extends JPanel {
 			e.printStackTrace();
 		}
 		
-    	g.drawImage(image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS, null); 
+    	bot.getCurrentMove().draw(g, image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS);
     }
 }
