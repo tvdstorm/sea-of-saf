@@ -6,6 +6,7 @@
 import ast.object.Fighter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Set;
 
 public class SAFParser{  public static void main(String args []) throws ParseException  {
     FileReader input = initFile();
@@ -79,6 +80,9 @@ public class SAFParser{  public static void main(String args []) throws ParseE
   }
   }PARSER_END(SAFParser)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{  < PLUS : "+" >| < MINUS : "-" >| < MULTIPLY : "*" >| < DIVIDE : "/" >}TOKEN :{  < CONSTANT : (< DIGIT >)+ >| < #DIGIT : [ "0"-"9" ] >
 | < ID : (["a"-"z", "A" - "Z", "0"-"9"])+ >
+
+
+/*
 | < FIGHTER : < ID > "{" <FIGHTER_PROPS> "}" >
 | < #FIGHTER_PROPS : (<FIGHTER_PROP>)* >
 | < FIGHTER_PROP : <FIGHT_CHAR> >
@@ -88,12 +92,45 @@ public class SAFParser{  public static void main(String args []) throws ParseE
 | < #KICKPOWER : "kickPower" >
 | < #PUNCHPOWER : "punchPower" >
 | < #KICKREACH : "kickReach" >
-| < #PUNCHREACH : "punchReach" >}
+| < #PUNCHREACH : "punchReach" >
+*/}
 
 Fighter getFighter():
 {
-  Token t;
+    Token t;
 }
-{  t = < FIGHTER > (";" | <EOF>)  {
-    return new Fighter(t.image);  }
+{  t = <ID>  {
+    Set fighterProps = fighterProps();
+    Fighter fighter = new Fighter(t.image);
+    fighter.setPunchPower(5);
+    return fighter;  }
+}
+
+void fighter():
+{}
+{
+    <ID> fighterProps()
+}
+
+Set fighterProps():
+{}
+{
+    (fighterProp())*
+    {return null;}
+}
+
+void fighterProp():
+{}
+{
+    <ID>
+}
+
+
+String getFighterName():
+{
+    Token t;
+}
+{
+    t = <ID>
+    {return t.image;}
 }int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}
