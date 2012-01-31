@@ -13,12 +13,12 @@ public class Personality implements FighterNode {
 		this.value = value;
 	}
 	
-	public Identifier getId() {
-		return id;
+	public String getId() {
+		return id.getValue();
 	}
 
-	public Identifier getValue() {
-		return value;
+	public Integer getValue() {
+		return Integer.parseInt(value.getValue());
 	}
 	
 	public void accept(FighterVisitor v) {

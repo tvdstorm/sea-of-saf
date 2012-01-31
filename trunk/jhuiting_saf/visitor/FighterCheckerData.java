@@ -31,10 +31,21 @@ public class FighterCheckerData {
 		"kick_high"
 	};
 	
+	protected String[] conditionVals = {
+		"always",			
+		"near",
+		"far",
+		"much_stronger",
+		"stronger",
+		"even",
+		"weakers",
+		"much_weaker"
+	};
 	
 	public List<String> personalities;
 	public List<String> moveActions;
 	public List<String> fightActions;
+	public List<String> conditions;
 	
 
 	public FighterCheckerData()
@@ -42,6 +53,7 @@ public class FighterCheckerData {
 		this.personalities = Arrays.asList(this.personalyCharacteristics);
 		this.moveActions = Arrays.asList(this.moveActionVals);
 		this.fightActions = Arrays.asList(this.fightActionVals);
+		this.conditions = Arrays.asList(this.conditionVals);
 	}
 
 
