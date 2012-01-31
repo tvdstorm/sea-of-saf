@@ -48,4 +48,22 @@ public class Fighter {
 	public Fighter(String name){
 		this.name = name;
 	}
+	
+	/**
+	 * @return The name of the {@link Fighter}.
+	 */
+	private String getName(){
+		return this.name;
+	}
+	
+	/**
+	 * @return A {@link String} representation of the {@link Fighter}.
+	 */
+	public String toString(){
+		String className = this.getClass().getSimpleName();
+		StringBuilder sb = new StringBuilder("<" + className + "| ");
+		sb.append("name: " + getName());
+		sb.append("|>");
+		return sb.toString();
+	}
 }
