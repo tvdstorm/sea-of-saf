@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import model.attack.*;
 import model.condition.*;
 import model.enums.*;
+import model.move.*;
 
 @XmlRootElement(name = "bot")
 public class Bot {
@@ -31,12 +32,12 @@ public class Bot {
 	@XmlElement(name = "behaviourRule")
 	private List<BehaviourRule> behaviourRules;
 	
-	private MoveType currentMove;
+	private Move currentMove;
 	private Attack currentAttack;
 	private int health;
 	
 	public Bot() {
-		currentMove = MoveType.STAND;
+		currentMove = new Stand();
 		currentAttack = new BlockHigh();
 		health = 100;
 	}
@@ -49,11 +50,11 @@ public class Bot {
 		return behaviourRules;
 	}
 	
-	public MoveType getCurrentMove() {
+	public Move getCurrentMove() {
 		return currentMove;
 	}
 
-	public void setCurrentMove(MoveType currentMove) {
+	public void setCurrentMove(Move currentMove) {
 		this.currentMove = currentMove;
 	}
 

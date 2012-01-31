@@ -6,7 +6,7 @@ import view.Arena;
 import view.Main;
 import model.Bot;
 import model.attack.*;
-import model.enums.MoveType;
+import model.move.*;
 
 public class Program {
 
@@ -29,7 +29,8 @@ public class Program {
 			Thread.sleep(100);
 			mainView.update();
 			left.setCurrentAttack(new KickLow());
-			left.setCurrentMove(MoveType.CROUCH);
+			left.setCurrentMove(new Crouch());
+			right.setCurrentMove(new Stand());
 			Thread.sleep(100);
 			right.setCurrentAttack(new KickLow());
 			Thread.sleep(100);
@@ -37,7 +38,8 @@ public class Program {
 			left.setCurrentAttack(new PunchLow());
 			Thread.sleep(100);
 			right.setCurrentAttack(new PunchLow());
-			left.setCurrentMove(MoveType.JUMP);
+			right.setCurrentMove(new Jump());
+			left.setCurrentMove(new Stand());
 			Thread.sleep(100);
 			mainView.update();
 			left.reduceHealth(10);
