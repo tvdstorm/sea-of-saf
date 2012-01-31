@@ -1,15 +1,27 @@
 package ast;
 
 public abstract class Atom {
-	private String type;
+	protected String typeName;
+	protected AtomType type;
 	
-	public Atom(String type) {
-		this.type = type;
+	public Atom(String typeName) {
+		this.typeName = typeName;
 	}
 
-	protected abstract boolean validateType(String type);
-	
+	public abstract void setTypeFromTypeName() throws IllegalArgumentException;
+
 	public boolean validate() {
-		return validateType(type);
+		try {
+			setTypeFromTypeName();
+		} catch (IllegalArgumentException e) {
+			System.out.println(typeName + " is not a valid value for " + this.getClass() + ".");
+			return false;
+		}
+		return true;
 	}
+
+	public AtomType getType() {
+		return type;
+	}
+	
 }

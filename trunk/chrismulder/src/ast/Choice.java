@@ -15,4 +15,11 @@ public class Choice implements Validator {
 		return c1.validate() && c2.validate();
 	}
 
+	public AtomType getType() {
+		if (Math.random() < 0.5) {
+			return c1.getType();
+		} else {
+			return c2.getType();
+		}
+	}
 }

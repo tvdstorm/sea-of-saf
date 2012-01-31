@@ -3,7 +3,7 @@ package ast;
 import java.util.ArrayList;
 
 public abstract class BooleanCondition implements Condition {
-	private ArrayList<Condition> conditions;
+	protected ArrayList<Condition> conditions;
 	
 	public BooleanCondition() {
 		conditions = new ArrayList<Condition>();
@@ -20,5 +20,9 @@ public abstract class BooleanCondition implements Condition {
 			}
 		}
 		return true;
+	}
+	
+	public ConditionAtom.Type getType() {
+		return conditions.get(0).getType();
 	}
 }

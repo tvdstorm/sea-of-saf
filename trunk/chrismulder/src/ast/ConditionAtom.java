@@ -1,33 +1,35 @@
 package ast;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
+
 public class ConditionAtom extends Atom implements Condition {
-	public static final ArrayList<String> TYPES = new ArrayList<String>(Arrays.asList(
-		"stronger",
-		"weaker",
-		"much_stronger",
-		"much_weaker",
-		"even",
-		"near",
-		"far",
-		"always"
-	));
+	public static enum Type implements AtomType {
+		STRONGER,
+		WEAKER,
+		MUCH_STRONGER,
+		MUCH_WEAKER,
+		EVEN,
+		NEAR,
+		FAR,
+		ALWAYS
+	}
 	
 	public ConditionAtom(String type) {
 		super(type);
 	}
 
 	@Override
-	public boolean validateType(String type) {
-		return TYPES.contains(type);
+	public void setTypeFromTypeName() {
+		type = Type.valueOf(typeName.toUpperCase());
 	}
 
 	@Override
-	public boolean evaluate(HashMap<ConditionAtom, Boolean> state) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean evaluate(HashMap<ConditionAtom.Type, Boolean> state) {
+		return state.get(type);
+	}
+	
+	public Type getType() {
+		return (Type) type;
 	}
 }
