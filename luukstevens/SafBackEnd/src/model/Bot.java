@@ -20,6 +20,7 @@ import model.move.*;
 @XmlRootElement(name = "bot")
 public class Bot {
 	private static final int DEFAULT_CHARACTERISTIC_VALUE = 5;
+	private static final int DEFAULT_HEALTH = 100;
 	
 	@XmlAttribute
 	private String name;
@@ -35,11 +36,13 @@ public class Bot {
 	private Move currentMove;
 	private Attack currentAttack;
 	private int health;
+	private boolean walkedOrRunnedAway;
 	
 	public Bot() {
 		currentMove = new Stand();
 		currentAttack = new BlockHigh();
-		health = 100;
+		health = DEFAULT_HEALTH;
+		setWalkedOrRunnedAway(false);
 	}
 
 	public String getName() {
@@ -55,6 +58,16 @@ public class Bot {
 	}
 
 	public void setCurrentMove(Move currentMove) {
+		if(currentMove.isMove(new WalkTowards()) || currentMove.isMove(new RunTowards())) {
+			setWalkedOrRunnedAway(false);
+		}
+		
+		if(currentMove.isMove(new WalkAway()) || currentMove.isMove(new RunAway())) {
+			setWalkedOrRunnedAway(true);
+		}
+		
+		System.out.println(walkedOrRunnedAway);
+		
 		this.currentMove = currentMove;
 	}
 
@@ -68,6 +81,14 @@ public class Bot {
 
 	public int getHealth() {
 		return health;
+	}
+	
+	public boolean getWalkedOrRunnedAway() {
+		return walkedOrRunnedAway;
+	}
+
+	public void setWalkedOrRunnedAway(boolean walkedOrRunnedAway) {
+		this.walkedOrRunnedAway = walkedOrRunnedAway;
 	}
 
 	public void reduceHealth(int health) {
@@ -96,6 +117,14 @@ public class Bot {
 		}
 		
 		return DEFAULT_CHARACTERISTIC_VALUE;
+	}
+	
+	public void update(List<ConditionType> conditions) {
+		for(BehaviourRule behaviourRule : getBehaviourRules()) {
+			if(behaviourRule.evaluate(conditions)) {
+				
+			}
+		}
 	}
 	
 	public static Bot deserialize(String fileLocation) throws JAXBException, FileNotFoundException {
