@@ -1,15 +1,6 @@
 package nodes;
 
-public class Specification
+public abstract class Specification implements Node
 {
-	public Specification()
-	{
-		
-	}
-	
-	public void tg()
-	{
-		System.out.println("NU_MI PLACE JAVA");		
-	}
 	
 }

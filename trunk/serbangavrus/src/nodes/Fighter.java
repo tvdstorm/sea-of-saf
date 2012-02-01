@@ -6,10 +6,11 @@ import java.util.Iterator;
 public class Fighter
 {
 	ArrayList<Specification> specs = new ArrayList<Specification>();
+	String name;
 	
 	public Fighter(String name)
 	{
-		System.out.println(name);
+		this.name = name;
 	}
 	
 	public void addSpec(Specification s)
@@ -17,24 +18,18 @@ public class Fighter
 		specs.add(s);
 	}
 	
-	public void test()
+	public boolean consistencyCheck()
 	{
 		Iterator<Specification> itr = specs.iterator();
+		boolean consistent = true;
 		while (itr.hasNext()) {
 	      Specification element = itr.next();
-	      if(element instanceof Personality)
+	      if(!element.consistencyCheck())
 	      {
-	    	  System.out.println("PERS: " + ((Personality)element).getStrength());
-	      }
-	      else if(element instanceof Behaviour)
-	      {
-	    	  System.out.println("BEH");
-	      }
-	      else
-	      {
-	    	  System.out.println(element);	    	  
+	    	  consistent = false;
 	      }
 	    }
+		return consistent;
 	}
 	
 }

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Master\\Software Construction\\ANTLR\\SAF.g 2012-01-30 20:35:19
+// $ANTLR 3.4 D:\\Master\\Software Construction\\ANTLR\\SAF.g 2012-01-31 13:04:55
 
 	package antlrgenerated;
 	import nodes.*;
@@ -289,49 +289,50 @@ public class SAFLexer extends Lexer {
         try {
             int _type = NUMBER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:139:2: ( '0' .. '9' | '10' )
-            int alt1=2;
-            int LA1_0 = input.LA(1);
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:141:2: ( ( '0' .. '9' )+ )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:141:4: ( '0' .. '9' )+
+            {
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:141:4: ( '0' .. '9' )+
+            int cnt1=0;
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
 
-            if ( (LA1_0=='1') ) {
-                int LA1_1 = input.LA(2);
-
-                if ( (LA1_1=='0') ) {
-                    alt1=2;
-                }
-                else {
+                if ( ((LA1_0 >= '0' && LA1_0 <= '9')) ) {
                     alt1=1;
                 }
+
+
+                switch (alt1) {
+            	case 1 :
+            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:
+            	    {
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt1 >= 1 ) break loop1;
+                        EarlyExitException eee =
+                            new EarlyExitException(1, input);
+                        throw eee;
+                }
+                cnt1++;
+            } while (true);
+
+
             }
-            else if ( (LA1_0=='0'||(LA1_0 >= '2' && LA1_0 <= '9')) ) {
-                alt1=1;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 1, 0, input);
 
-                throw nvae;
-
-            }
-            switch (alt1) {
-                case 1 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:139:4: '0' .. '9'
-                    {
-                    matchRange('0','9'); 
-
-                    }
-                    break;
-                case 2 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:140:4: '10'
-                    {
-                    match("10"); 
-
-
-
-                    }
-                    break;
-
-            }
             state.type = _type;
             state.channel = _channel;
         }
@@ -346,10 +347,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:144:2: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:144:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:145:2: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:145:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:144:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:145:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             int cnt2=0;
             loop2:
             do {
@@ -406,10 +407,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:148:2: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+ )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:148:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:149:2: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+ )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:149:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
             {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:148:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:149:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -462,381 +463,7 @@ public class SAFLexer extends Lexer {
     public void mTokens() throws RecognitionException {
         // D:\\Master\\Software Construction\\ANTLR\\SAF.g:1:8: ( AND | CHOOSE | CONDITION | OR | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | NUMBER | WHITESPACE | STRING )
         int alt4=14;
-        switch ( input.LA(1) ) {
-        case 'a':
-            {
-            int LA4_1 = input.LA(2);
-
-            if ( (LA4_1=='n') ) {
-                int LA4_16 = input.LA(3);
-
-                if ( (LA4_16=='d') ) {
-                    int LA4_22 = input.LA(4);
-
-                    if ( (LA4_22=='-'||(LA4_22 >= '0' && LA4_22 <= '9')||(LA4_22 >= 'A' && LA4_22 <= 'Z')||LA4_22=='_'||(LA4_22 >= 'a' && LA4_22 <= 'z')) ) {
-                        alt4=14;
-                    }
-                    else {
-                        alt4=1;
-                    }
-                }
-                else {
-                    alt4=14;
-                }
-            }
-            else {
-                alt4=14;
-            }
-            }
-            break;
-        case 'c':
-            {
-            int LA4_2 = input.LA(2);
-
-            if ( (LA4_2=='h') ) {
-                int LA4_17 = input.LA(3);
-
-                if ( (LA4_17=='o') ) {
-                    int LA4_23 = input.LA(4);
-
-                    if ( (LA4_23=='o') ) {
-                        int LA4_27 = input.LA(5);
-
-                        if ( (LA4_27=='s') ) {
-                            int LA4_29 = input.LA(6);
-
-                            if ( (LA4_29=='e') ) {
-                                int LA4_31 = input.LA(7);
-
-                                if ( (LA4_31=='-'||(LA4_31 >= '0' && LA4_31 <= '9')||(LA4_31 >= 'A' && LA4_31 <= 'Z')||LA4_31=='_'||(LA4_31 >= 'a' && LA4_31 <= 'z')) ) {
-                                    alt4=14;
-                                }
-                                else {
-                                    alt4=2;
-                                }
-                            }
-                            else {
-                                alt4=14;
-                            }
-                        }
-                        else {
-                            alt4=14;
-                        }
-                    }
-                    else {
-                        alt4=14;
-                    }
-                }
-                else {
-                    alt4=14;
-                }
-            }
-            else {
-                alt4=14;
-            }
-            }
-            break;
-        case 'C':
-            {
-            int LA4_3 = input.LA(2);
-
-            if ( (LA4_3=='O') ) {
-                int LA4_18 = input.LA(3);
-
-                if ( (LA4_18=='N') ) {
-                    int LA4_24 = input.LA(4);
-
-                    if ( (LA4_24=='D') ) {
-                        int LA4_28 = input.LA(5);
-
-                        if ( (LA4_28=='I') ) {
-                            int LA4_30 = input.LA(6);
-
-                            if ( (LA4_30=='T') ) {
-                                int LA4_32 = input.LA(7);
-
-                                if ( (LA4_32=='I') ) {
-                                    int LA4_34 = input.LA(8);
-
-                                    if ( (LA4_34=='O') ) {
-                                        int LA4_35 = input.LA(9);
-
-                                        if ( (LA4_35=='N') ) {
-                                            int LA4_36 = input.LA(10);
-
-                                            if ( (LA4_36=='-'||(LA4_36 >= '0' && LA4_36 <= '9')||(LA4_36 >= 'A' && LA4_36 <= 'Z')||LA4_36=='_'||(LA4_36 >= 'a' && LA4_36 <= 'z')) ) {
-                                                alt4=14;
-                                            }
-                                            else {
-                                                alt4=3;
-                                            }
-                                        }
-                                        else {
-                                            alt4=14;
-                                        }
-                                    }
-                                    else {
-                                        alt4=14;
-                                    }
-                                }
-                                else {
-                                    alt4=14;
-                                }
-                            }
-                            else {
-                                alt4=14;
-                            }
-                        }
-                        else {
-                            alt4=14;
-                        }
-                    }
-                    else {
-                        alt4=14;
-                    }
-                }
-                else {
-                    alt4=14;
-                }
-            }
-            else {
-                alt4=14;
-            }
-            }
-            break;
-        case 'o':
-            {
-            int LA4_4 = input.LA(2);
-
-            if ( (LA4_4=='r') ) {
-                int LA4_19 = input.LA(3);
-
-                if ( (LA4_19=='-'||(LA4_19 >= '0' && LA4_19 <= '9')||(LA4_19 >= 'A' && LA4_19 <= 'Z')||LA4_19=='_'||(LA4_19 >= 'a' && LA4_19 <= 'z')) ) {
-                    alt4=14;
-                }
-                else {
-                    alt4=4;
-                }
-            }
-            else {
-                alt4=14;
-            }
-            }
-            break;
-        case '(':
-            {
-            alt4=5;
-            }
-            break;
-        case ')':
-            {
-            alt4=6;
-            }
-            break;
-        case '=':
-            {
-            alt4=7;
-            }
-            break;
-        case '[':
-            {
-            alt4=8;
-            }
-            break;
-        case ']':
-            {
-            alt4=9;
-            }
-            break;
-        case '{':
-            {
-            alt4=10;
-            }
-            break;
-        case '}':
-            {
-            alt4=11;
-            }
-            break;
-        case '1':
-            {
-            switch ( input.LA(2) ) {
-            case '0':
-                {
-                int LA4_20 = input.LA(3);
-
-                if ( (LA4_20=='-'||(LA4_20 >= '0' && LA4_20 <= '9')||(LA4_20 >= 'A' && LA4_20 <= 'Z')||LA4_20=='_'||(LA4_20 >= 'a' && LA4_20 <= 'z')) ) {
-                    alt4=14;
-                }
-                else {
-                    alt4=12;
-                }
-                }
-                break;
-            case '-':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-            case 'G':
-            case 'H':
-            case 'I':
-            case 'J':
-            case 'K':
-            case 'L':
-            case 'M':
-            case 'N':
-            case 'O':
-            case 'P':
-            case 'Q':
-            case 'R':
-            case 'S':
-            case 'T':
-            case 'U':
-            case 'V':
-            case 'W':
-            case 'X':
-            case 'Y':
-            case 'Z':
-            case '_':
-            case 'a':
-            case 'b':
-            case 'c':
-            case 'd':
-            case 'e':
-            case 'f':
-            case 'g':
-            case 'h':
-            case 'i':
-            case 'j':
-            case 'k':
-            case 'l':
-            case 'm':
-            case 'n':
-            case 'o':
-            case 'p':
-            case 'q':
-            case 'r':
-            case 's':
-            case 't':
-            case 'u':
-            case 'v':
-            case 'w':
-            case 'x':
-            case 'y':
-            case 'z':
-                {
-                alt4=14;
-                }
-                break;
-            default:
-                alt4=12;
-            }
-
-            }
-            break;
-        case '0':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            {
-            int LA4_13 = input.LA(2);
-
-            if ( (LA4_13=='-'||(LA4_13 >= '0' && LA4_13 <= '9')||(LA4_13 >= 'A' && LA4_13 <= 'Z')||LA4_13=='_'||(LA4_13 >= 'a' && LA4_13 <= 'z')) ) {
-                alt4=14;
-            }
-            else {
-                alt4=12;
-            }
-            }
-            break;
-        case '\t':
-        case '\n':
-        case '\f':
-        case '\r':
-        case ' ':
-            {
-            alt4=13;
-            }
-            break;
-        case '-':
-        case 'A':
-        case 'B':
-        case 'D':
-        case 'E':
-        case 'F':
-        case 'G':
-        case 'H':
-        case 'I':
-        case 'J':
-        case 'K':
-        case 'L':
-        case 'M':
-        case 'N':
-        case 'O':
-        case 'P':
-        case 'Q':
-        case 'R':
-        case 'S':
-        case 'T':
-        case 'U':
-        case 'V':
-        case 'W':
-        case 'X':
-        case 'Y':
-        case 'Z':
-        case '_':
-        case 'b':
-        case 'd':
-        case 'e':
-        case 'f':
-        case 'g':
-        case 'h':
-        case 'i':
-        case 'j':
-        case 'k':
-        case 'l':
-        case 'm':
-        case 'n':
-        case 'p':
-        case 'q':
-        case 'r':
-        case 's':
-        case 't':
-        case 'u':
-        case 'v':
-        case 'w':
-        case 'x':
-        case 'y':
-        case 'z':
-            {
-            alt4=14;
-            }
-            break;
-        default:
-            NoViableAltException nvae =
-                new NoViableAltException("", 4, 0, input);
-
-            throw nvae;
-
-        }
-
+        alt4 = dfa4.predict(input);
         switch (alt4) {
             case 1 :
                 // D:\\Master\\Software Construction\\ANTLR\\SAF.g:1:10: AND
@@ -956,6 +583,100 @@ public class SAFLexer extends Lexer {
     }
 
 
+    protected DFA4 dfa4 = new DFA4(this);
+    static final String DFA4_eotS =
+        "\1\uffff\4\16\7\uffff\1\23\2\uffff\3\16\1\27\1\uffff\1\30\2\16\2"+
+        "\uffff\4\16\1\37\1\16\1\uffff\2\16\1\43\1\uffff";
+    static final String DFA4_eofS =
+        "\44\uffff";
+    static final String DFA4_minS =
+        "\1\11\1\156\1\150\1\117\1\162\7\uffff\1\55\2\uffff\1\144\1\157\1"+
+        "\116\1\55\1\uffff\1\55\1\157\1\104\2\uffff\1\163\1\111\1\145\1\124"+
+        "\1\55\1\111\1\uffff\1\117\1\116\1\55\1\uffff";
+    static final String DFA4_maxS =
+        "\1\175\1\156\1\150\1\117\1\162\7\uffff\1\172\2\uffff\1\144\1\157"+
+        "\1\116\1\172\1\uffff\1\172\1\157\1\104\2\uffff\1\163\1\111\1\145"+
+        "\1\124\1\172\1\111\1\uffff\1\117\1\116\1\172\1\uffff";
+    static final String DFA4_acceptS =
+        "\5\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\uffff\1\15\1\16\4\uffff"+
+        "\1\14\3\uffff\1\4\1\1\6\uffff\1\2\3\uffff\1\3";
+    static final String DFA4_specialS =
+        "\44\uffff}>";
+    static final String[] DFA4_transitionS = {
+            "\2\15\1\uffff\2\15\22\uffff\1\15\7\uffff\1\5\1\6\3\uffff\1\16"+
+            "\2\uffff\12\14\3\uffff\1\7\3\uffff\2\16\1\3\27\16\1\10\1\uffff"+
+            "\1\11\1\uffff\1\16\1\uffff\1\1\1\16\1\2\13\16\1\4\13\16\1\12"+
+            "\1\uffff\1\13",
+            "\1\17",
+            "\1\20",
+            "\1\21",
+            "\1\22",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\16\2\uffff\12\14\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
+            "",
+            "",
+            "\1\24",
+            "\1\25",
+            "\1\26",
+            "\1\16\2\uffff\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
+            "",
+            "\1\16\2\uffff\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
+            "\1\31",
+            "\1\32",
+            "",
+            "",
+            "\1\33",
+            "\1\34",
+            "\1\35",
+            "\1\36",
+            "\1\16\2\uffff\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
+            "\1\40",
+            "",
+            "\1\41",
+            "\1\42",
+            "\1\16\2\uffff\12\16\7\uffff\32\16\4\uffff\1\16\1\uffff\32\16",
+            ""
+    };
+
+    static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
+    static final short[] DFA4_eof = DFA.unpackEncodedString(DFA4_eofS);
+    static final char[] DFA4_min = DFA.unpackEncodedStringToUnsignedChars(DFA4_minS);
+    static final char[] DFA4_max = DFA.unpackEncodedStringToUnsignedChars(DFA4_maxS);
+    static final short[] DFA4_accept = DFA.unpackEncodedString(DFA4_acceptS);
+    static final short[] DFA4_special = DFA.unpackEncodedString(DFA4_specialS);
+    static final short[][] DFA4_transition;
+
+    static {
+        int numStates = DFA4_transitionS.length;
+        DFA4_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA4_transition[i] = DFA.unpackEncodedString(DFA4_transitionS[i]);
+        }
+    }
+
+    class DFA4 extends DFA {
+
+        public DFA4(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 4;
+            this.eot = DFA4_eot;
+            this.eof = DFA4_eof;
+            this.min = DFA4_min;
+            this.max = DFA4_max;
+            this.accept = DFA4_accept;
+            this.special = DFA4_special;
+            this.transition = DFA4_transition;
+        }
+        public String getDescription() {
+            return "1:1: Tokens : ( AND | CHOOSE | CONDITION | OR | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | NUMBER | WHITESPACE | STRING );";
+        }
+    }
  
 
 }
