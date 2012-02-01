@@ -1,11 +1,11 @@
 package data;
 
-public class AndOperator {
+public class AndStatement {
 
 	//private final Operator operand1;
 	//private final Operator operand2;
 	
-	public AndOperator() {
+	public AndStatement() {
 		
 	}
 	

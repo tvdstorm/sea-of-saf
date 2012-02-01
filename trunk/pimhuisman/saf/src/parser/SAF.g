@@ -3,74 +3,63 @@ grammar SAF;
 
 options {
 	language = Java;
-	output = AST;
-	ASTLabelType = CommonTree;
-}
-
-tokens {
-	FIGHTER;
-	NAME;
-	PERSONALITY;
-	BEHAVIOUR;
-	CHARACTERISTIC;
-	VALUE;
-	CONDITION;
-	CHOOSE;
-	ACTION;
-	AND_OPERATOR;
-	OR_OPERATOR;
 }
 
 @header {
 	package parser;
+	import data.*;
+	import java.util.List;
+	import java.util.LinkedList;
 }
 
 @lexer::header {
 	package parser;
 }
 
-fighter				:	IDENTIFIER '{'
+fighter	returns[Fighter fighter]	
+					:	IDENTIFIER '{'
 							personality
 							behaviour
-						'}' 
-						->	^(FIGHTER
-								^(NAME IDENTIFIER)
-								^(PERSONALITY personality)
-								//^(BEHAVIOUR behaviour)
-							)
+						'}'
+						{ $fighter = new Fighter($IDENTIFIER.text, $personality.value, $behaviour.value); }
 					;
 
-personality			:	characteristic+;
-characteristic		:	IDENTIFIER '=' NUMBER
-						->	^(CHARACTERISTIC
-								^(NAME IDENTIFIER)
-								^(VALUE NUMBER)
-							)
-					;
-
-behaviour			:	rule+;
-rule				:	condition '[' actions ']'
-						->	^(CONDITION condition actions)
+personality	returns[Personality value]
+					@init { List<Characteristic> characteristics = new LinkedList<Characteristic>(); }
+					:	
+						( characteristic { characteristics.add($characteristic.value); } )+
+						{ $value = new Personality(characteristics); }
 					;
 					
-condition			:	IDENTIFIER -> ^(NAME IDENTIFIER)
-					|	andStatement
-					|	orStatement
+characteristic returns[Characteristic value]
+					:	IDENTIFIER '=' NUMBER
+						{ $value = new Characteristic($IDENTIFIER.text, Integer.parseInt($NUMBER.text)); }
 					;
 
-andStatement		:	c1=IDENTIFIER 'and' c2=IDENTIFIER
-						-> ^(AND_OPERATOR ^(NAME $c1) ^(NAME $c2))
+behaviour returns[Behaviour value]
+					:	rule+
+						{ $value = new Behaviour(); }
 					;
-orStatement			:	c1=IDENTIFIER 'or' c2=IDENTIFIER
-						-> ^(OR_OPERATOR ^(NAME $c1) ^(NAME $c2))
+					
+rule				:	condition '[' actions ']'
+					;
+					
+condition			:	andStatement
+					;
+
+andStatement		:	orStatement 'and' condition
+					|	orStatement
+					;
+					
+orStatement			:	IDENTIFIER 'or' IDENTIFIER
+					|	IDENTIFIER
 					;
 					
 actions				:	(action action)
-					| 	'choose' '(' action+ ')' -> ^(CHOOSE action+)
 					;
 
-action				:	IDENTIFIER -> ^(ACTION ^(NAME IDENTIFIER))
-					| 	'choose' '(' IDENTIFIER+ ')' -> ^(CHOOSE IDENTIFIER+)
+action				:	IDENTIFIER
+					| 	'choose' '(' IDENTIFIER+ ')'
 					;
 
 fragment LETTER		:	('a'..'z' | 'A'..'Z');

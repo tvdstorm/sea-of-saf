@@ -2,7 +2,9 @@ package data;
 import java.util.List;
 import java.util.LinkedList;
 
-public class Behaviour {
+import core.BaseTreePrinter;
+
+public class Behaviour extends BaseData {
 
 	private List<Rule> rules;
 	
@@ -20,6 +22,12 @@ public class Behaviour {
 	
 	public List<Rule> getRules() {
 		return rules;
+	}
+
+	@Override
+	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
