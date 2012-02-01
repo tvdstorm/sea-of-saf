@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 import model.condition.Condition;
+import model.enums.ConditionType;
 
 @XmlType(name = "BehaviourRule")
 public class BehaviourRule {
@@ -33,5 +34,10 @@ public class BehaviourRule {
 
 	public Condition getCondition() {
 		return condition;
+	}
+	
+	public boolean evaluate(List<ConditionType> conditions) {
+		if(condition == null) return false;
+		return condition.evaluate(conditions);
 	}
 }
