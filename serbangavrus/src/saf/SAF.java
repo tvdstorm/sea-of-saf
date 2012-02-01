@@ -11,7 +11,6 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
 import antlrgenerated.*;
-import antlrgenerated.SAFParser.fighter_return;
 import nodes.*;
 
 
@@ -22,8 +21,7 @@ public class SAF
 	
 	public static void main(String[] args)
 	{
-		//String file_path = getFighterFile();
-		String file_path = "data/lloyd.txt";
+		String file_path = getFighterFile();
 		try
 		{
 			// Get the CharStream for the file where the data is
@@ -38,10 +36,15 @@ public class SAF
 			// Get the CommonTree
 			SAFParser.fighter_return fr = parser.fighter();
 			Fighter f = fr.f;
-			f.test();
+			if(f.consistencyCheck())
+			{
+				System.out.println("Consistent!");
+			}
+			else
+			{
+				System.out.println("Not consistent!");
+			}
 			
-			//CommonTree tree = (CommonTree)fighter.getTree();
-			//this.tree = tree;
 		}
 		catch(FileNotFoundException e)
 		{
