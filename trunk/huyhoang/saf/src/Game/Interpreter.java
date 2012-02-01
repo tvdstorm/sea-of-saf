@@ -1,16 +1,14 @@
 package Game;
 
 import java.lang.reflect.*;
-
 import saf.ast.*;
-import saf.ast.LogicalExpression.ConditionalOperators;
 
-public class Interpreter 
+public class Interpreter
 {
-	private saf.ast.ASTManager astManager;
+	private saf.ast.Fighter astManager;
 	private FighterBot bot;
 	
-	public Interpreter(ASTManager astManager)
+	public Interpreter(Fighter astManager)
 	{
 		this.astManager = astManager;
 		bot = new FighterBot();
@@ -23,40 +21,21 @@ public class Interpreter
 	{
 		for (Statement statement : astManager.getStatements())
 		{
-			statement.accept(this);
+			//statement.(this);
 		}
 	}
 	
-	/***
-	 * 
-	 * @param statement
-	 * @throws ClassNotFoundException
-	 * @throws NoSuchFieldException
-	 * @throws IllegalAccessException
-	 */
-	public void visit(AssignmentStatement statement) throws ClassNotFoundException, 
+	public void visit(StrengthAssignment statement) throws ClassNotFoundException, 
 															NoSuchFieldException, 
 															IllegalAccessException
 	{
 		Class aClass = Class.forName("Game.FighterBot");
-		Field field = aClass.getField(statement.getVariableName());
+		Field field = aClass.getField(statement.getName());
 		field.setInt(this.bot, new Integer(statement.getValue()));
 	}
-	
-	public void visit(Function statement)
-	{
-		
-	}
-	
-	public void visit(IfStatement statement)
-	{
-	}
 
-	public void visit(LogicalExpression logicalExpression)
-	{
-	}
-	
-	public void visit(BoolExpression booleanExpression)
-	{
+	public boolean evaluate(AndOperator andOperator) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

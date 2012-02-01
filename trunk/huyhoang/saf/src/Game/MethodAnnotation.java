@@ -7,4 +7,5 @@ import java.lang.annotation.*;
 public @interface MethodAnnotation
 {
 	public String safName();
+	public String keywordType();
 }
