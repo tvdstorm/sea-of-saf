@@ -4,11 +4,12 @@ import java.util.*;
 import java.lang.StringBuilder;
 
 /**
- * The ASTManager class holds the AST of a SAF specification. The AST consists of a list of Statement objects.
+ * The FighterAST class holds the AST of a SAF specification, and serves as the entry point.
+ * The AST consists of a list of Statement objects.
  * 
  * @author huyhoang
  */
-public class ASTManager
+public class Fighter
 {
 	private List<Statement> statements;
 	public List<Statement> getStatements()
@@ -16,11 +17,14 @@ public class ASTManager
 		return statements;
 	}
 
-	public ASTManager()
+	public Fighter()
 	{
 		statements = new ArrayList<Statement>();
 	}
 	
+	/**
+	 * Returns the AST as a string representation
+	 */
 	public String toString()
 	{
 		StringBuilder result = new StringBuilder();

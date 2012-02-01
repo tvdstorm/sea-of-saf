@@ -1,20 +1,19 @@
 package saf.ast;
 
 import java.util.*;
-
 import saf.ast.*;
 import saf.checker.*;
 import Game.Interpreter;
 
 /**
- * This class holds a procedure call, and its parameters.
+ * This class holds the keyword "choose", condition, action, etc.	
  * 
  * @author huyhoang
  */
 public class Function implements Statement 
 {
-	List<Variable> parameters;
-	public List<Variable> getParameters()
+	List<Function> parameters;
+	public List<Function> getParameters()
 	{
 		return this.parameters;
 	}
@@ -39,18 +38,13 @@ public class Function implements Statement
 	public Function(String functionName)
 	{
 		this.functionName = functionName;
-		parameters = new ArrayList<Variable>();
+		parameters = new ArrayList<Function>();
 	}
 	
 	// Variable may need to be refactored.
-	public void AddParameter(Variable parameter)
+	public void addParameter(Function parameter)
 	{
 		parameters.add(parameter);
-	}
-	
-	public String toString()
-	{
-		return String.format("Function: %s", this.functionName);
 	}
 	
 	public boolean equals(Object obj)
@@ -67,14 +61,7 @@ public class Function implements Statement
 	}
 
 	@Override
-	public void accept(Checker visitor) 
-	{
-		visitor.visit(this);
-	}
-
-	@Override
-	public void accept(Interpreter visitor) 
-	{
+	public void accept(FighterVisitor visitor) {
 		visitor.visit(this);
 	}
 }

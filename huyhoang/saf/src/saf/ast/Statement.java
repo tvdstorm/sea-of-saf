@@ -1,8 +1,6 @@
 package saf.ast;
-import saf.checker.*;
 
-public interface Statement 
+public interface Statement<T> 
 {
-	public void accept(Checker visitor);
-	public void accept(Game.Interpreter visitor);
+	public void accept(FighterVisitor visitor);
 }

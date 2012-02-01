@@ -1,6 +1,5 @@
 package saf.ast;
 
-/* Please refactor it and call it Identifier. */
 public class Variable 
 {
 	private String name;
