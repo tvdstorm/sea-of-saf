@@ -1,6 +1,7 @@
 package data;
+import core.BaseTreePrinter;
 
-public class Fighter {
+public class Fighter extends BaseData {
 
 	private final String name;
 	private final Personality personality;
@@ -22,6 +23,13 @@ public class Fighter {
 	
 	public Behaviour getBehaviour() {
 		return behaviour;
+	}
+
+	@Override
+	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+		treePrinter.visit(this);
+		personality.acceptTreePrinter(treePrinter);
+		behaviour.acceptTreePrinter(treePrinter);
 	}
 	
 }

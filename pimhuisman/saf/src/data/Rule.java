@@ -2,6 +2,8 @@ package data;
 
 public class Rule {
 
+	private Actions action;
+	
 	/*private MoveActionType moveAction;
 	private FightActionType fightAction;
 	private ConditionType condition;

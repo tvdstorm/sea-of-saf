@@ -1,6 +1,7 @@
 package data;
+import core.BaseTreePrinter;
 
-public class Characteristic {
+public class Characteristic extends BaseData {
 
 	private final String name;
 	private final int value;
@@ -16,6 +17,11 @@ public class Characteristic {
 	
 	public int getValue() {
 		return value;
+	}
+
+	@Override
+	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+		treePrinter.visit(this);
 	}
 	
 }

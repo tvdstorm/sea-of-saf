@@ -1,25 +1,26 @@
 package data;
 import java.util.List;
-import java.util.LinkedList;
 
-public class Personality {
+import core.BaseTreePrinter;
+
+public class Personality extends BaseData {
 
 	private List<Characteristic> characteristics;
 	
-	public Personality() {
-		characteristics = new LinkedList<Characteristic>();
-	}
-	
-	public void clearCharacteristics() {
-		characteristics.clear();
-	}
-	
-	public void addCharacteristic(Characteristic characteristic) {
-		characteristics.add(characteristic);
+	public Personality(List<Characteristic> characteristics) {
+		this.characteristics = characteristics;
 	}
 	
 	public List<Characteristic> getCharacteristics() {
 		return characteristics;
+	}
+
+	@Override
+	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+		treePrinter.visit(this);
+		for ( Characteristic characteristic : characteristics ) {
+			characteristic.acceptTreePrinter(treePrinter);
+		}
 	}
 	
 }
