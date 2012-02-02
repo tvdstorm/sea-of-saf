@@ -17,11 +17,11 @@ tokens{
 }
 
 @parser::header {
-    package saf.fdl;
+    package saf.fighter.fdl;
 }
 
 @lexer::header {
-    package saf.fdl;
+    package saf.fighter.fdl;
 }
 
 // PARSER rules

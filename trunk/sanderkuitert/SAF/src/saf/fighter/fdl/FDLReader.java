@@ -1,4 +1,4 @@
-package saf.fdl;
+package saf.fighter.fdl;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -11,8 +11,8 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 
-import saf.Fighter;
-import saf.SuperAwesomeFighter;
+import saf.fighter.Fighter;
+import saf.fighter.SuperAwesomeFighter;
 
 
 public class FDLReader {
