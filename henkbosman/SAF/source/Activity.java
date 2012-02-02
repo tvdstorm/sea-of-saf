@@ -1,51 +1,22 @@
-import java.util.LinkedList;
-import java.util.List;
-
 public class Activity 
 {
-	private List<Condition> _conditions;
-	public void AddCondition(Condition c)
-	{
-		_conditions.add(c);
-	}
-	
-	private List<Movement> _movements;
-	public void AddMovement(Movement m)
-	{
-		_movements.add(m);
-	}
-	
-	private List<Action> _actions;
-	public void AddAction(Action c)
-	{
-		_actions.add(c);
-	}
+	private Condition _condition;
+	private Movement _movement;
+	private Action _action;
 
-	public Activity()
+	public Activity(Condition c, Movement m, Action a)
 	{
-		_conditions = new LinkedList<Condition>();
-		_movements = new LinkedList<Movement>();
-		_actions = new LinkedList<Action>();
+		_condition=c;
+		_movement=m;
+		_action=a;
 	}
 	
 	public void outputData()
 	{
-		for (Condition c : _conditions)
-		{
-			c.outputData();
-		}
+		_condition.outputData();
 		System.out.print("[");
-		for (Movement m : _movements)
-		{
-			m.outputData();
-		}
-		
-		for (Action a : _actions)
-		{
-			a.outputData();
-		}
+		_movement.outputData();
+		_action.outputData();
 		System.out.println("]");
-		
 	}
-
 }

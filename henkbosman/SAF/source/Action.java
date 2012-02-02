@@ -8,19 +8,15 @@ public class Action
 	}
 
 	private List<Actions> _actions;
-	public Action()
+	public Action(String name)
 	{
 		_actions = new LinkedList<Actions>();
-	}
-	
-	public void AddAction(String name)
-	{
 		_actions.add(Actions.valueOf(name));
-	
 	}
 	
-	public void AddAction(List<String> list)
+	public Action(List<String> list)
 	{
+		_actions = new LinkedList<Actions>();
 		for(String name : list)
 		{
 			_actions.add(Actions.valueOf(name));
