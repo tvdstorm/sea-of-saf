@@ -7,7 +7,7 @@ options {
 }
 
 @header{
-    package saf.fdl;
+    package saf.fighter.fdl;
     
 	import java.util.Arrays;
 	import java.util.Set;

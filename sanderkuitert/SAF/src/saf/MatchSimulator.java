@@ -1,14 +1,14 @@
-package saf.simulator;
+package saf;
 
-import saf.Fighter;
+import saf.fighter.Fighter;
 
 
-public class Duel implements Runnable {
+public class MatchSimulator implements Runnable {
 	
 	private Fighter fighter1;
 	private Fighter fighter2;
 	
-	public Duel(Fighter fighter1, Fighter fighter2) {
+	public MatchSimulator(Fighter fighter1, Fighter fighter2) {
 		this.fighter1 = fighter1;
 		this.fighter2 = fighter2;
 	}

@@ -9,29 +9,26 @@ import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.List;
 
-import saf.fdl.*;
-import saf.simulator.*;
+import saf.fighter.Fighter;
+import saf.fighter.fdl.FDLReader;
 
 
-public class GameSetup {
+public class MatchSetup {
 	
 	public static void main(String[] args) {
 		System.out.println("============[Super Awesome Fighters]==================");
         
 		List<Fighter> fighters = obtainFighters(args);
+		System.out.println("LOG: Read " + fighters.size() + " fighters"); //DEBUG
 		
-		simulate(fighters);
+		if(fighters.size() > 1 && fighters.size() % 2 == 0){
+			simulate(fighters);
+			System.out.println("LOG: Simulation ran"); //DEBUG
+		}else{
+			System.out.println("LOG: Simulation aborted"); //DEBUG
+		}
 		
         System.out.println("======================================================");
-	}
-
-	private static void simulate(List<Fighter> fighters) {
-		if(fighters.size() > 1){
-			Simulator simulator = new Simulator();
-        	simulator.simulate(fighters);
-		}else{
-			System.err.println("Simulation needs more fighters to start!");
-		}
 	}
 
 	private static List<Fighter> obtainFighters(String[] args) {
@@ -68,6 +65,19 @@ public class GameSetup {
 			content+=line;
 		
 		return content;
+	}
+	
+	private static void simulate(List<Fighter> fighters) {
+		assert fighters.size() > 1 : "Matches need at least two valid fighters!";
+		assert fighters.size() % 2 == 0 : "Matches need an even number of fighers";
+		
+		List<MatchSimulator> matches = new LinkedList<MatchSimulator>();
+		for(int i=0;i<fighters.size();i++)
+			for(int j=i+1;j<fighters.size();j++)
+				matches.add(new MatchSimulator(fighters.get(i),fighters.get(j)));
+
+		for(MatchSimulator sim: matches)
+			sim.run(); //TODO in seperate threads?
 	}
 	
 }

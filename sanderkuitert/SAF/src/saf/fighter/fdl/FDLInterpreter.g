@@ -7,11 +7,11 @@ options {
 }
 
 @header{
-    package saf.fdl;
+    package saf.fighter.fdl;
     
     import java.util.LinkedList;
     
-    import saf.Fighter;
+    import saf.fighter.Fighter;
 }
 
 @members {

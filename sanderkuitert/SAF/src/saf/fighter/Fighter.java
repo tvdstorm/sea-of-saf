@@ -1,4 +1,4 @@
-package saf;
+package saf.fighter;
 
 import java.util.List;
 
