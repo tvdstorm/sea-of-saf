@@ -22,6 +22,8 @@ public class Bot {
 	private static final int DEFAULT_CHARACTERISTIC_VALUE = 5;
 	private static final int DEFAULT_HEALTH = 100;
 	
+	public enum Position { LEFT, RIGHT };
+	
 	@XmlAttribute
 	private String name;
 	
@@ -37,8 +39,9 @@ public class Bot {
 	private Attack currentAttack;
 	private int health;
 	private boolean walkedOrRunnedAway;
+	private Position position;
 	
-	public Bot() {
+	private Bot() {
 		currentMove = new Stand();
 		currentAttack = new BlockHigh();
 		health = DEFAULT_HEALTH;
@@ -66,8 +69,6 @@ public class Bot {
 			setWalkedOrRunnedAway(true);
 		}
 		
-		System.out.println(walkedOrRunnedAway);
-		
 		this.currentMove = currentMove;
 	}
 
@@ -89,6 +90,14 @@ public class Bot {
 
 	public void setWalkedOrRunnedAway(boolean walkedOrRunnedAway) {
 		this.walkedOrRunnedAway = walkedOrRunnedAway;
+	}
+	
+	private void setPosition(Position position) {
+		this.position = position;
+	}
+	
+	public Position getPosition() {
+		return position;
 	}
 
 	public void reduceHealth(int health) {
@@ -122,14 +131,19 @@ public class Bot {
 	public void update(List<ConditionType> conditions) {
 		for(BehaviourRule behaviourRule : getBehaviourRules()) {
 			if(behaviourRule.evaluate(conditions)) {
-				
+				setCurrentMove(behaviourRule.getMove());
+				setCurrentAttack(behaviourRule.getAttack());
 			}
 		}
 	}
 	
-	public static Bot deserialize(String fileLocation) throws JAXBException, FileNotFoundException {
+	public static Bot deserialize(String fileLocation, Position position) throws JAXBException, FileNotFoundException {
 		JAXBContext context = JAXBContext.newInstance(Bot.class, And.class, Or.class, Simple.class);
 		Unmarshaller um = context.createUnmarshaller();
-		return (Bot) um.unmarshal(new FileReader(fileLocation));
+		
+		Bot bot = (Bot) um.unmarshal(new FileReader(fileLocation));
+		bot.setPosition(position);
+		
+		return bot;
 	}
 }

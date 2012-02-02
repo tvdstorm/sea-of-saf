@@ -15,6 +15,8 @@ public class Simple extends Condition {
 
     @Override
 	public boolean evaluate(List<ConditionType> conditions) {
+    	if(value.equals(ConditionType.ALWAYS.getText())) return true;
+    	
 		for(ConditionType condition : conditions) {
 			if(condition.getText().equals(value)) return true;
 		}

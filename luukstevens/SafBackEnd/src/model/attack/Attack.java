@@ -9,6 +9,11 @@ import javax.imageio.ImageIO;
 public abstract class Attack {
 	public static final String imageFolder = "data/sprites/";
 	
+	public boolean isMove(Class attack) {
+		System.out.print(getClass().equals(attack));
+		return this.getClass().equals(attack);
+	}
+	
 	public BufferedImage getImage(boolean left) throws IOException {
 		BufferedImage image;
     	String imagePath =  imageFolder + getText();
