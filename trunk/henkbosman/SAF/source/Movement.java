@@ -7,24 +7,21 @@ public class Movement
 		jump,crouch,stand,run_towards,run_away,walk_towards,walk_away
 	}
 	private List<Movements> _movements;
-	public Movement()
+	public Movement(String name)
+	{
+		_movements = new LinkedList<Movements>();
+		_movements.add(Movements.valueOf(name));
+	}
+	
+	public Movement(List<String> list)
 	{
 		_movements = new LinkedList<Movements>();
 		
-	}
-	
-	public void AddMovement(String name)
-	{
-		_movements.add(Movements.valueOf(name));
-	
-	}
-	
-	public void AddMovement(List<String> list)
-	{
 		for(String name : list)
 		{
 			_movements.add(Movements.valueOf(name));
 		}
+		
 	}
 	
 	public void outputData()

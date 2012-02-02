@@ -7,39 +7,49 @@ public class Condition
 		and,or
 	}
 
-	private Conditions _condition; 
-	public Conditions getCondition()
+	private Conditions _condition;
+	private Operators _operator;
+	private Condition _subCondition;
+	private Condition _mainCondition;
+	
+	
+	public Condition(String name)
 	{
-		return _condition;
-	}
-
-	private Operators _operator; 
-	public Operators getOperator()
-	{
-		return _operator;
+		_condition = Conditions.valueOf(name);
 	}
 	
-	public Condition(String condition)
+	public Condition(Condition condition)
 	{
-		_condition = Conditions.valueOf(condition);
+		_mainCondition = condition;
 	}
 	
-	public Condition(String condition, String operator)
+	public void AddSubCondition(String operator, Condition condition)
 	{
-		_condition = Conditions.valueOf(condition);
 		_operator = Operators.valueOf(operator);
+		_subCondition = condition;
 	}
 	
 	public void outputData()
 	{
+		if (_mainCondition!=null)
+		{
+			_mainCondition.outputData();
+		}
+		
+		if (_subCondition!=null)
+		{
+			_subCondition.outputData();
+		}
 		if (_operator!=null)
 		{
-			System.out.print(_operator+" "+_condition+" ");
+			System.out.print(" "+_operator);
 		}
-		else
+		
+		if (_condition!=null)
 		{
-			System.out.print(_condition+" ");
+			System.out.print(" "+_condition);
 		}
+
 	}
 	
 }

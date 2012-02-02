@@ -32,6 +32,8 @@ public class Fighter
 		_name="";
 	}
 	
+	
+	
 	public void outputData()
 	{
 		System.out.println(_name);

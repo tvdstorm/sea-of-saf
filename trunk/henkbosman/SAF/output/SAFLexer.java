@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-01-23 22:35:20
+// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-02-02 21:30:27
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -8,19 +8,19 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFLexer extends Lexer {
     public static final int EOF=-1;
+    public static final int T__10=10;
+    public static final int T__11=11;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int T__15=15;
+    public static final int T__16=16;
     public static final int CHOOSE=4;
-    public static final int CURLYCLOSE=5;
-    public static final int CURLYOPEN=6;
-    public static final int INT=7;
-    public static final int IS=8;
-    public static final int NAME=9;
-    public static final int NEWLINE=10;
-    public static final int OPERATOR=11;
-    public static final int PARENTHESESCLOSE=12;
-    public static final int PARENTHESESOPEN=13;
-    public static final int SQUARECLOSE=14;
-    public static final int SQUAREOPEN=15;
-    public static final int WS=16;
+    public static final int INT=5;
+    public static final int NAME=6;
+    public static final int NEWLINE=7;
+    public static final int OPERATOR=8;
+    public static final int WS=9;
 
     // delegates
     // delegators
@@ -36,6 +36,153 @@ public class SAFLexer extends Lexer {
         super(input,state);
     }
     public String getGrammarFileName() { return "C:\\Antlr\\SAF\\SAF.g"; }
+
+    // $ANTLR start "T__10"
+    public final void mT__10() throws RecognitionException {
+        try {
+            int _type = T__10;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Antlr\\SAF\\SAF.g:7:7: ( '(' )
+            // C:\\Antlr\\SAF\\SAF.g:7:9: '('
+            {
+            match('('); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__10"
+
+    // $ANTLR start "T__11"
+    public final void mT__11() throws RecognitionException {
+        try {
+            int _type = T__11;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Antlr\\SAF\\SAF.g:8:7: ( ')' )
+            // C:\\Antlr\\SAF\\SAF.g:8:9: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__11"
+
+    // $ANTLR start "T__12"
+    public final void mT__12() throws RecognitionException {
+        try {
+            int _type = T__12;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Antlr\\SAF\\SAF.g:9:7: ( '=' )
+            // C:\\Antlr\\SAF\\SAF.g:9:9: '='
+            {
+            match('='); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__12"
+
+    // $ANTLR start "T__13"
+    public final void mT__13() throws RecognitionException {
+        try {
+            int _type = T__13;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Antlr\\SAF\\SAF.g:10:7: ( '[' )
+            // C:\\Antlr\\SAF\\SAF.g:10:9: '['
+            {
+            match('['); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__13"
+
+    // $ANTLR start "T__14"
+    public final void mT__14() throws RecognitionException {
+        try {
+            int _type = T__14;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Antlr\\SAF\\SAF.g:11:7: ( ']' )
+            // C:\\Antlr\\SAF\\SAF.g:11:9: ']'
+            {
+            match(']'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__14"
+
+    // $ANTLR start "T__15"
+    public final void mT__15() throws RecognitionException {
+        try {
+            int _type = T__15;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Antlr\\SAF\\SAF.g:12:7: ( '{' )
+            // C:\\Antlr\\SAF\\SAF.g:12:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__15"
+
+    // $ANTLR start "T__16"
+    public final void mT__16() throws RecognitionException {
+        try {
+            int _type = T__16;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Antlr\\SAF\\SAF.g:13:7: ( '}' )
+            // C:\\Antlr\\SAF\\SAF.g:13:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__16"
 
     // $ANTLR start "INT"
     public final void mINT() throws RecognitionException {
@@ -335,199 +482,45 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "NAME"
 
-    // $ANTLR start "IS"
-    public final void mIS() throws RecognitionException {
-        try {
-            int _type = IS;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Antlr\\SAF\\SAF.g:12:5: ( ( '=' ) )
-            // C:\\Antlr\\SAF\\SAF.g:12:7: ( '=' )
-            {
-            // C:\\Antlr\\SAF\\SAF.g:12:7: ( '=' )
-            // C:\\Antlr\\SAF\\SAF.g:12:8: '='
-            {
-            match('='); 
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "IS"
-
-    // $ANTLR start "SQUAREOPEN"
-    public final void mSQUAREOPEN() throws RecognitionException {
-        try {
-            int _type = SQUAREOPEN;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Antlr\\SAF\\SAF.g:13:12: ( ( '[' ) )
-            // C:\\Antlr\\SAF\\SAF.g:13:14: ( '[' )
-            {
-            // C:\\Antlr\\SAF\\SAF.g:13:14: ( '[' )
-            // C:\\Antlr\\SAF\\SAF.g:13:15: '['
-            {
-            match('['); 
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "SQUAREOPEN"
-
-    // $ANTLR start "SQUARECLOSE"
-    public final void mSQUARECLOSE() throws RecognitionException {
-        try {
-            int _type = SQUARECLOSE;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Antlr\\SAF\\SAF.g:14:13: ( ( ']' ) )
-            // C:\\Antlr\\SAF\\SAF.g:14:15: ( ']' )
-            {
-            // C:\\Antlr\\SAF\\SAF.g:14:15: ( ']' )
-            // C:\\Antlr\\SAF\\SAF.g:14:16: ']'
-            {
-            match(']'); 
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "SQUARECLOSE"
-
-    // $ANTLR start "CURLYOPEN"
-    public final void mCURLYOPEN() throws RecognitionException {
-        try {
-            int _type = CURLYOPEN;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Antlr\\SAF\\SAF.g:15:11: ( ( '{' ) )
-            // C:\\Antlr\\SAF\\SAF.g:15:13: ( '{' )
-            {
-            // C:\\Antlr\\SAF\\SAF.g:15:13: ( '{' )
-            // C:\\Antlr\\SAF\\SAF.g:15:14: '{'
-            {
-            match('{'); 
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "CURLYOPEN"
-
-    // $ANTLR start "CURLYCLOSE"
-    public final void mCURLYCLOSE() throws RecognitionException {
-        try {
-            int _type = CURLYCLOSE;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Antlr\\SAF\\SAF.g:16:12: ( ( '}' ) )
-            // C:\\Antlr\\SAF\\SAF.g:16:14: ( '}' )
-            {
-            // C:\\Antlr\\SAF\\SAF.g:16:14: ( '}' )
-            // C:\\Antlr\\SAF\\SAF.g:16:15: '}'
-            {
-            match('}'); 
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "CURLYCLOSE"
-
-    // $ANTLR start "PARENTHESESOPEN"
-    public final void mPARENTHESESOPEN() throws RecognitionException {
-        try {
-            int _type = PARENTHESESOPEN;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Antlr\\SAF\\SAF.g:17:17: ( ( '(' ) )
-            // C:\\Antlr\\SAF\\SAF.g:17:19: ( '(' )
-            {
-            // C:\\Antlr\\SAF\\SAF.g:17:19: ( '(' )
-            // C:\\Antlr\\SAF\\SAF.g:17:20: '('
-            {
-            match('('); 
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "PARENTHESESOPEN"
-
-    // $ANTLR start "PARENTHESESCLOSE"
-    public final void mPARENTHESESCLOSE() throws RecognitionException {
-        try {
-            int _type = PARENTHESESCLOSE;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Antlr\\SAF\\SAF.g:18:17: ( ( ')' ) )
-            // C:\\Antlr\\SAF\\SAF.g:18:19: ( ')' )
-            {
-            // C:\\Antlr\\SAF\\SAF.g:18:19: ( ')' )
-            // C:\\Antlr\\SAF\\SAF.g:18:20: ')'
-            {
-            match(')'); 
-
-            }
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "PARENTHESESCLOSE"
-
     public void mTokens() throws RecognitionException {
-        // C:\\Antlr\\SAF\\SAF.g:1:8: ( INT | WS | NEWLINE | OPERATOR | CHOOSE | NAME | IS | SQUAREOPEN | SQUARECLOSE | CURLYOPEN | CURLYCLOSE | PARENTHESESOPEN | PARENTHESESCLOSE )
+        // C:\\Antlr\\SAF\\SAF.g:1:8: ( T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | INT | WS | NEWLINE | OPERATOR | CHOOSE | NAME )
         int alt5=13;
         switch ( input.LA(1) ) {
+        case '(':
+            {
+            alt5=1;
+            }
+            break;
+        case ')':
+            {
+            alt5=2;
+            }
+            break;
+        case '=':
+            {
+            alt5=3;
+            }
+            break;
+        case '[':
+            {
+            alt5=4;
+            }
+            break;
+        case ']':
+            {
+            alt5=5;
+            }
+            break;
+        case '{':
+            {
+            alt5=6;
+            }
+            break;
+        case '}':
+            {
+            alt5=7;
+            }
+            break;
         case '0':
         case '1':
         case '2':
@@ -539,71 +532,71 @@ public class SAFLexer extends Lexer {
         case '8':
         case '9':
             {
-            alt5=1;
+            alt5=8;
             }
             break;
         case '\t':
         case ' ':
             {
-            alt5=2;
+            alt5=9;
             }
             break;
         case '\n':
         case '\r':
             {
-            alt5=3;
+            alt5=10;
             }
             break;
         case 'a':
             {
-            int LA5_4 = input.LA(2);
+            int LA5_11 = input.LA(2);
 
-            if ( (LA5_4=='n') ) {
+            if ( (LA5_11=='n') ) {
                 int LA5_15 = input.LA(3);
 
                 if ( (LA5_15=='d') ) {
                     int LA5_18 = input.LA(4);
 
                     if ( ((LA5_18 >= '0' && LA5_18 <= '9')||(LA5_18 >= 'A' && LA5_18 <= 'Z')||LA5_18=='_'||(LA5_18 >= 'a' && LA5_18 <= 'z')) ) {
-                        alt5=6;
+                        alt5=13;
                     }
                     else {
-                        alt5=4;
+                        alt5=11;
                     }
                 }
                 else {
-                    alt5=6;
+                    alt5=13;
                 }
             }
             else {
-                alt5=6;
+                alt5=13;
             }
             }
             break;
         case 'o':
             {
-            int LA5_5 = input.LA(2);
+            int LA5_12 = input.LA(2);
 
-            if ( (LA5_5=='r') ) {
+            if ( (LA5_12=='r') ) {
                 int LA5_16 = input.LA(3);
 
                 if ( ((LA5_16 >= '0' && LA5_16 <= '9')||(LA5_16 >= 'A' && LA5_16 <= 'Z')||LA5_16=='_'||(LA5_16 >= 'a' && LA5_16 <= 'z')) ) {
-                    alt5=6;
+                    alt5=13;
                 }
                 else {
-                    alt5=4;
+                    alt5=11;
                 }
             }
             else {
-                alt5=6;
+                alt5=13;
             }
             }
             break;
         case 'c':
             {
-            int LA5_6 = input.LA(2);
+            int LA5_13 = input.LA(2);
 
-            if ( (LA5_6=='h') ) {
+            if ( (LA5_13=='h') ) {
                 int LA5_17 = input.LA(3);
 
                 if ( (LA5_17=='o') ) {
@@ -619,30 +612,30 @@ public class SAFLexer extends Lexer {
                                 int LA5_23 = input.LA(7);
 
                                 if ( ((LA5_23 >= '0' && LA5_23 <= '9')||(LA5_23 >= 'A' && LA5_23 <= 'Z')||LA5_23=='_'||(LA5_23 >= 'a' && LA5_23 <= 'z')) ) {
-                                    alt5=6;
+                                    alt5=13;
                                 }
                                 else {
-                                    alt5=5;
+                                    alt5=12;
                                 }
                             }
                             else {
-                                alt5=6;
+                                alt5=13;
                             }
                         }
                         else {
-                            alt5=6;
+                            alt5=13;
                         }
                     }
                     else {
-                        alt5=6;
+                        alt5=13;
                     }
                 }
                 else {
-                    alt5=6;
+                    alt5=13;
                 }
             }
             else {
-                alt5=6;
+                alt5=13;
             }
             }
             break;
@@ -697,41 +690,6 @@ public class SAFLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            alt5=6;
-            }
-            break;
-        case '=':
-            {
-            alt5=7;
-            }
-            break;
-        case '[':
-            {
-            alt5=8;
-            }
-            break;
-        case ']':
-            {
-            alt5=9;
-            }
-            break;
-        case '{':
-            {
-            alt5=10;
-            }
-            break;
-        case '}':
-            {
-            alt5=11;
-            }
-            break;
-        case '(':
-            {
-            alt5=12;
-            }
-            break;
-        case ')':
-            {
             alt5=13;
             }
             break;
@@ -745,105 +703,105 @@ public class SAFLexer extends Lexer {
 
         switch (alt5) {
             case 1 :
-                // C:\\Antlr\\SAF\\SAF.g:1:10: INT
+                // C:\\Antlr\\SAF\\SAF.g:1:10: T__10
+                {
+                mT__10(); 
+
+
+                }
+                break;
+            case 2 :
+                // C:\\Antlr\\SAF\\SAF.g:1:16: T__11
+                {
+                mT__11(); 
+
+
+                }
+                break;
+            case 3 :
+                // C:\\Antlr\\SAF\\SAF.g:1:22: T__12
+                {
+                mT__12(); 
+
+
+                }
+                break;
+            case 4 :
+                // C:\\Antlr\\SAF\\SAF.g:1:28: T__13
+                {
+                mT__13(); 
+
+
+                }
+                break;
+            case 5 :
+                // C:\\Antlr\\SAF\\SAF.g:1:34: T__14
+                {
+                mT__14(); 
+
+
+                }
+                break;
+            case 6 :
+                // C:\\Antlr\\SAF\\SAF.g:1:40: T__15
+                {
+                mT__15(); 
+
+
+                }
+                break;
+            case 7 :
+                // C:\\Antlr\\SAF\\SAF.g:1:46: T__16
+                {
+                mT__16(); 
+
+
+                }
+                break;
+            case 8 :
+                // C:\\Antlr\\SAF\\SAF.g:1:52: INT
                 {
                 mINT(); 
 
 
                 }
                 break;
-            case 2 :
-                // C:\\Antlr\\SAF\\SAF.g:1:14: WS
+            case 9 :
+                // C:\\Antlr\\SAF\\SAF.g:1:56: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
-            case 3 :
-                // C:\\Antlr\\SAF\\SAF.g:1:17: NEWLINE
+            case 10 :
+                // C:\\Antlr\\SAF\\SAF.g:1:59: NEWLINE
                 {
                 mNEWLINE(); 
 
 
                 }
                 break;
-            case 4 :
-                // C:\\Antlr\\SAF\\SAF.g:1:25: OPERATOR
+            case 11 :
+                // C:\\Antlr\\SAF\\SAF.g:1:67: OPERATOR
                 {
                 mOPERATOR(); 
 
 
                 }
                 break;
-            case 5 :
-                // C:\\Antlr\\SAF\\SAF.g:1:34: CHOOSE
+            case 12 :
+                // C:\\Antlr\\SAF\\SAF.g:1:76: CHOOSE
                 {
                 mCHOOSE(); 
 
 
                 }
                 break;
-            case 6 :
-                // C:\\Antlr\\SAF\\SAF.g:1:41: NAME
+            case 13 :
+                // C:\\Antlr\\SAF\\SAF.g:1:83: NAME
                 {
                 mNAME(); 
-
-
-                }
-                break;
-            case 7 :
-                // C:\\Antlr\\SAF\\SAF.g:1:46: IS
-                {
-                mIS(); 
-
-
-                }
-                break;
-            case 8 :
-                // C:\\Antlr\\SAF\\SAF.g:1:49: SQUAREOPEN
-                {
-                mSQUAREOPEN(); 
-
-
-                }
-                break;
-            case 9 :
-                // C:\\Antlr\\SAF\\SAF.g:1:60: SQUARECLOSE
-                {
-                mSQUARECLOSE(); 
-
-
-                }
-                break;
-            case 10 :
-                // C:\\Antlr\\SAF\\SAF.g:1:72: CURLYOPEN
-                {
-                mCURLYOPEN(); 
-
-
-                }
-                break;
-            case 11 :
-                // C:\\Antlr\\SAF\\SAF.g:1:82: CURLYCLOSE
-                {
-                mCURLYCLOSE(); 
-
-
-                }
-                break;
-            case 12 :
-                // C:\\Antlr\\SAF\\SAF.g:1:93: PARENTHESESOPEN
-                {
-                mPARENTHESESOPEN(); 
-
-
-                }
-                break;
-            case 13 :
-                // C:\\Antlr\\SAF\\SAF.g:1:109: PARENTHESESCLOSE
-                {
-                mPARENTHESESCLOSE(); 
 
 
                 }

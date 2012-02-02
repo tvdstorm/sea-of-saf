@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-01-23 22:35:20
+// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-02-02 21:30:27
 import java.util.LinkedList;
 
 import org.antlr.runtime.*;
@@ -9,23 +9,23 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "CHOOSE", "CURLYCLOSE", "CURLYOPEN", "INT", "IS", "NAME", "NEWLINE", "OPERATOR", "PARENTHESESCLOSE", "PARENTHESESOPEN", "SQUARECLOSE", "SQUAREOPEN", "WS"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "CHOOSE", "INT", "NAME", "NEWLINE", "OPERATOR", "WS", "'('", "')'", "'='", "'['", "']'", "'{'", "'}'"
     };
 
     public static final int EOF=-1;
+    public static final int T__10=10;
+    public static final int T__11=11;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int T__15=15;
+    public static final int T__16=16;
     public static final int CHOOSE=4;
-    public static final int CURLYCLOSE=5;
-    public static final int CURLYOPEN=6;
-    public static final int INT=7;
-    public static final int IS=8;
-    public static final int NAME=9;
-    public static final int NEWLINE=10;
-    public static final int OPERATOR=11;
-    public static final int PARENTHESESCLOSE=12;
-    public static final int PARENTHESESOPEN=13;
-    public static final int SQUARECLOSE=14;
-    public static final int SQUAREOPEN=15;
-    public static final int WS=16;
+    public static final int INT=5;
+    public static final int NAME=6;
+    public static final int NEWLINE=7;
+    public static final int OPERATOR=8;
+    public static final int WS=9;
 
     // delegates
     public Parser[] getDelegates() {
@@ -48,7 +48,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "fighter"
-    // C:\\Antlr\\SAF\\SAF.g:20:1: fighter returns [Fighter f] : n= NAME NEWLINE CURLYOPEN ( NEWLINE |p= property |c= activity )* CURLYCLOSE ;
+    // C:\\Antlr\\SAF\\SAF.g:13:1: fighter returns [Fighter f] : n= NAME NEWLINE '{' ( NEWLINE |p= property |c= activity )* '}' ;
     public final Fighter fighter() throws RecognitionException {
         Fighter f = null;
 
@@ -61,18 +61,18 @@ public class SAFParser extends Parser {
 
         f = new Fighter();
         try {
-            // C:\\Antlr\\SAF\\SAF.g:23:3: (n= NAME NEWLINE CURLYOPEN ( NEWLINE |p= property |c= activity )* CURLYCLOSE )
-            // C:\\Antlr\\SAF\\SAF.g:23:3: n= NAME NEWLINE CURLYOPEN ( NEWLINE |p= property |c= activity )* CURLYCLOSE
+            // C:\\Antlr\\SAF\\SAF.g:16:3: (n= NAME NEWLINE '{' ( NEWLINE |p= property |c= activity )* '}' )
+            // C:\\Antlr\\SAF\\SAF.g:16:3: n= NAME NEWLINE '{' ( NEWLINE |p= property |c= activity )* '}'
             {
-            n=(Token)match(input,NAME,FOLLOW_NAME_in_fighter214); 
+            n=(Token)match(input,NAME,FOLLOW_NAME_in_fighter151); 
 
             f.Name((n!=null?n.getText():null));
 
-            match(input,NEWLINE,FOLLOW_NEWLINE_in_fighter218); 
+            match(input,NEWLINE,FOLLOW_NEWLINE_in_fighter155); 
 
-            match(input,CURLYOPEN,FOLLOW_CURLYOPEN_in_fighter220); 
+            match(input,15,FOLLOW_15_in_fighter157); 
 
-            // C:\\Antlr\\SAF\\SAF.g:24:3: ( NEWLINE |p= property |c= activity )*
+            // C:\\Antlr\\SAF\\SAF.g:17:3: ( NEWLINE |p= property |c= activity )*
             loop1:
             do {
                 int alt1=4;
@@ -86,17 +86,17 @@ public class SAFParser extends Parser {
                     {
                     int LA1_3 = input.LA(2);
 
-                    if ( (LA1_3==IS) ) {
+                    if ( (LA1_3==12) ) {
                         alt1=2;
                     }
-                    else if ( (LA1_3==NAME||LA1_3==OPERATOR||LA1_3==SQUAREOPEN) ) {
+                    else if ( (LA1_3==OPERATOR||LA1_3==13) ) {
                         alt1=3;
                     }
 
 
                     }
                     break;
-                case OPERATOR:
+                case 10:
                     {
                     alt1=3;
                     }
@@ -106,16 +106,16 @@ public class SAFParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\Antlr\\SAF\\SAF.g:25:6: NEWLINE
+            	    // C:\\Antlr\\SAF\\SAF.g:18:6: NEWLINE
             	    {
-            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_fighter232); 
+            	    match(input,NEWLINE,FOLLOW_NEWLINE_in_fighter169); 
 
             	    }
             	    break;
             	case 2 :
-            	    // C:\\Antlr\\SAF\\SAF.g:26:6: p= property
+            	    // C:\\Antlr\\SAF\\SAF.g:19:6: p= property
             	    {
-            	    pushFollow(FOLLOW_property_in_fighter242);
+            	    pushFollow(FOLLOW_property_in_fighter179);
             	    p=property();
 
             	    state._fsp--;
@@ -126,9 +126,9 @@ public class SAFParser extends Parser {
             	    }
             	    break;
             	case 3 :
-            	    // C:\\Antlr\\SAF\\SAF.g:27:6: c= activity
+            	    // C:\\Antlr\\SAF\\SAF.g:20:6: c= activity
             	    {
-            	    pushFollow(FOLLOW_activity_in_fighter253);
+            	    pushFollow(FOLLOW_activity_in_fighter190);
             	    c=activity();
 
             	    state._fsp--;
@@ -145,7 +145,7 @@ public class SAFParser extends Parser {
             } while (true);
 
 
-            match(input,CURLYCLOSE,FOLLOW_CURLYCLOSE_in_fighter264); 
+            match(input,16,FOLLOW_16_in_fighter201); 
 
 
 
@@ -167,7 +167,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "property"
-    // C:\\Antlr\\SAF\\SAF.g:31:1: property returns [Property p] : n= NAME IS v= INT NEWLINE ;
+    // C:\\Antlr\\SAF\\SAF.g:24:1: property returns [Property p] : n= NAME '=' v= INT NEWLINE ;
     public final Property property() throws RecognitionException {
         Property p = null;
 
@@ -176,16 +176,16 @@ public class SAFParser extends Parser {
         Token v=null;
 
         try {
-            // C:\\Antlr\\SAF\\SAF.g:31:30: (n= NAME IS v= INT NEWLINE )
-            // C:\\Antlr\\SAF\\SAF.g:31:32: n= NAME IS v= INT NEWLINE
+            // C:\\Antlr\\SAF\\SAF.g:24:30: (n= NAME '=' v= INT NEWLINE )
+            // C:\\Antlr\\SAF\\SAF.g:24:32: n= NAME '=' v= INT NEWLINE
             {
-            n=(Token)match(input,NAME,FOLLOW_NAME_in_property279); 
+            n=(Token)match(input,NAME,FOLLOW_NAME_in_property216); 
 
-            match(input,IS,FOLLOW_IS_in_property281); 
+            match(input,12,FOLLOW_12_in_property218); 
 
-            v=(Token)match(input,INT,FOLLOW_INT_in_property285); 
+            v=(Token)match(input,INT,FOLLOW_INT_in_property222); 
 
-            match(input,NEWLINE,FOLLOW_NEWLINE_in_property287); 
+            match(input,NEWLINE,FOLLOW_NEWLINE_in_property224); 
 
             p =new Property((n!=null?n.getText():null), (v!=null?v.getText():null));
 
@@ -207,7 +207,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "activity"
-    // C:\\Antlr\\SAF\\SAF.g:33:1: activity returns [Activity a] : (c= condition )+ SQUAREOPEN m= movement ac= action SQUARECLOSE ;
+    // C:\\Antlr\\SAF\\SAF.g:26:1: activity returns [Activity a] : c= condition '[' m= movement ac= action ']' NEWLINE ;
     public final Activity activity() throws RecognitionException {
         Activity a = null;
 
@@ -219,67 +219,35 @@ public class SAFParser extends Parser {
         Action ac =null;
 
 
-        a = new Activity();
         try {
-            // C:\\Antlr\\SAF\\SAF.g:35:3: ( (c= condition )+ SQUAREOPEN m= movement ac= action SQUARECLOSE )
-            // C:\\Antlr\\SAF\\SAF.g:36:3: (c= condition )+ SQUAREOPEN m= movement ac= action SQUARECLOSE
+            // C:\\Antlr\\SAF\\SAF.g:27:3: (c= condition '[' m= movement ac= action ']' NEWLINE )
+            // C:\\Antlr\\SAF\\SAF.g:28:3: c= condition '[' m= movement ac= action ']' NEWLINE
             {
-            // C:\\Antlr\\SAF\\SAF.g:36:3: (c= condition )+
-            int cnt2=0;
-            loop2:
-            do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+            pushFollow(FOLLOW_condition_in_activity244);
+            c=condition();
 
-                if ( (LA2_0==NAME||LA2_0==OPERATOR) ) {
-                    alt2=1;
-                }
+            state._fsp--;
 
 
-                switch (alt2) {
-            	case 1 :
-            	    // C:\\Antlr\\SAF\\SAF.g:36:4: c= condition
-            	    {
-            	    pushFollow(FOLLOW_condition_in_activity312);
-            	    c=condition();
+            match(input,13,FOLLOW_13_in_activity246); 
 
-            	    state._fsp--;
-
-
-            	    a.AddCondition(c);
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt2 >= 1 ) break loop2;
-                        EarlyExitException eee =
-                            new EarlyExitException(2, input);
-                        throw eee;
-                }
-                cnt2++;
-            } while (true);
-
-
-            match(input,SQUAREOPEN,FOLLOW_SQUAREOPEN_in_activity321); 
-
-            pushFollow(FOLLOW_movement_in_activity325);
+            pushFollow(FOLLOW_movement_in_activity250);
             m=movement();
 
             state._fsp--;
 
 
-            a.AddMovement(m);
-
-            pushFollow(FOLLOW_action_in_activity331);
+            pushFollow(FOLLOW_action_in_activity254);
             ac=action();
 
             state._fsp--;
 
 
-            a.AddAction(ac);
+            match(input,14,FOLLOW_14_in_activity256); 
 
-            match(input,SQUARECLOSE,FOLLOW_SQUARECLOSE_in_activity335); 
+            match(input,NEWLINE,FOLLOW_NEWLINE_in_activity258); 
+
+            a = new Activity(c,m,ac);
 
             }
 
@@ -299,68 +267,99 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "condition"
-    // C:\\Antlr\\SAF\\SAF.g:41:1: condition returns [Condition c] : ( (n= NAME ) | (o= OPERATOR m= NAME ) );
+    // C:\\Antlr\\SAF\\SAF.g:31:1: condition returns [Condition c] : (n= NAME | '(' cc= condition ')' ) (o= OPERATOR sc= condition )? ;
     public final Condition condition() throws RecognitionException {
         Condition c = null;
 
 
         Token n=null;
         Token o=null;
-        Token m=null;
+        Condition cc =null;
+
+        Condition sc =null;
+
 
         try {
-            // C:\\Antlr\\SAF\\SAF.g:42:3: ( (n= NAME ) | (o= OPERATOR m= NAME ) )
-            int alt3=2;
-            int LA3_0 = input.LA(1);
+            // C:\\Antlr\\SAF\\SAF.g:32:2: ( (n= NAME | '(' cc= condition ')' ) (o= OPERATOR sc= condition )? )
+            // C:\\Antlr\\SAF\\SAF.g:33:4: (n= NAME | '(' cc= condition ')' ) (o= OPERATOR sc= condition )?
+            {
+            // C:\\Antlr\\SAF\\SAF.g:33:4: (n= NAME | '(' cc= condition ')' )
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            if ( (LA3_0==NAME) ) {
-                alt3=1;
+            if ( (LA2_0==NAME) ) {
+                alt2=1;
             }
-            else if ( (LA3_0==OPERATOR) ) {
-                alt3=2;
+            else if ( (LA2_0==10) ) {
+                alt2=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 3, 0, input);
+                    new NoViableAltException("", 2, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt3) {
+            switch (alt2) {
                 case 1 :
-                    // C:\\Antlr\\SAF\\SAF.g:43:3: (n= NAME )
+                    // C:\\Antlr\\SAF\\SAF.g:33:5: n= NAME
                     {
-                    // C:\\Antlr\\SAF\\SAF.g:43:3: (n= NAME )
-                    // C:\\Antlr\\SAF\\SAF.g:43:4: n= NAME
-                    {
-                    n=(Token)match(input,NAME,FOLLOW_NAME_in_condition354); 
+                    n=(Token)match(input,NAME,FOLLOW_NAME_in_condition282); 
 
-                    c =new Condition((n!=null?n.getText():null));
-
-                    }
-
+                    c = new Condition((n!=null?n.getText():null));
 
                     }
                     break;
                 case 2 :
-                    // C:\\Antlr\\SAF\\SAF.g:44:3: (o= OPERATOR m= NAME )
+                    // C:\\Antlr\\SAF\\SAF.g:33:45: '(' cc= condition ')'
                     {
-                    // C:\\Antlr\\SAF\\SAF.g:44:3: (o= OPERATOR m= NAME )
-                    // C:\\Antlr\\SAF\\SAF.g:44:4: o= OPERATOR m= NAME
-                    {
-                    o=(Token)match(input,OPERATOR,FOLLOW_OPERATOR_in_condition364); 
+                    match(input,10,FOLLOW_10_in_condition288); 
 
-                    m=(Token)match(input,NAME,FOLLOW_NAME_in_condition368); 
+                    pushFollow(FOLLOW_condition_in_condition292);
+                    cc=condition();
 
-                    c =new Condition((m!=null?m.getText():null), (o!=null?o.getText():null));
+                    state._fsp--;
 
-                    }
 
+                    c = new Condition(cc);
+
+                    match(input,11,FOLLOW_11_in_condition296); 
 
                     }
                     break;
 
             }
+
+
+            // C:\\Antlr\\SAF\\SAF.g:33:93: (o= OPERATOR sc= condition )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
+
+            if ( (LA3_0==OPERATOR) ) {
+                alt3=1;
+            }
+            switch (alt3) {
+                case 1 :
+                    // C:\\Antlr\\SAF\\SAF.g:33:94: o= OPERATOR sc= condition
+                    {
+                    o=(Token)match(input,OPERATOR,FOLLOW_OPERATOR_in_condition302); 
+
+                    pushFollow(FOLLOW_condition_in_condition306);
+                    sc=condition();
+
+                    state._fsp--;
+
+
+                    c.AddSubCondition((o!=null?o.getText():null),sc);
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -377,7 +376,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "movement"
-    // C:\\Antlr\\SAF\\SAF.g:47:1: movement returns [Movement m] : ( (n= NAME ) | (c= choose ) );
+    // C:\\Antlr\\SAF\\SAF.g:38:1: movement returns [Movement m] : ( (n= NAME ) | (c= choose ) );
     public final Movement movement() throws RecognitionException {
         Movement m = null;
 
@@ -386,9 +385,8 @@ public class SAFParser extends Parser {
         List<String> c =null;
 
 
-        m = new Movement();
         try {
-            // C:\\Antlr\\SAF\\SAF.g:49:2: ( (n= NAME ) | (c= choose ) )
+            // C:\\Antlr\\SAF\\SAF.g:39:2: ( (n= NAME ) | (c= choose ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -407,14 +405,14 @@ public class SAFParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // C:\\Antlr\\SAF\\SAF.g:50:2: (n= NAME )
+                    // C:\\Antlr\\SAF\\SAF.g:40:2: (n= NAME )
                     {
-                    // C:\\Antlr\\SAF\\SAF.g:50:2: (n= NAME )
-                    // C:\\Antlr\\SAF\\SAF.g:50:3: n= NAME
+                    // C:\\Antlr\\SAF\\SAF.g:40:2: (n= NAME )
+                    // C:\\Antlr\\SAF\\SAF.g:40:3: n= NAME
                     {
-                    n=(Token)match(input,NAME,FOLLOW_NAME_in_movement392); 
+                    n=(Token)match(input,NAME,FOLLOW_NAME_in_movement328); 
 
-                    m.AddMovement((n!=null?n.getText():null));
+                    m = new Movement((n!=null?n.getText():null));
 
                     }
 
@@ -422,18 +420,18 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C:\\Antlr\\SAF\\SAF.g:51:3: (c= choose )
+                    // C:\\Antlr\\SAF\\SAF.g:41:3: (c= choose )
                     {
-                    // C:\\Antlr\\SAF\\SAF.g:51:3: (c= choose )
-                    // C:\\Antlr\\SAF\\SAF.g:51:4: c= choose
+                    // C:\\Antlr\\SAF\\SAF.g:41:3: (c= choose )
+                    // C:\\Antlr\\SAF\\SAF.g:41:4: c= choose
                     {
-                    pushFollow(FOLLOW_choose_in_movement402);
+                    pushFollow(FOLLOW_choose_in_movement338);
                     c=choose();
 
                     state._fsp--;
 
 
-                    m.AddMovement(c);
+                    m = new Movement(c);
 
                     }
 
@@ -458,7 +456,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "action"
-    // C:\\Antlr\\SAF\\SAF.g:54:1: action returns [Action a] : ( (n= NAME ) | (c= choose ) );
+    // C:\\Antlr\\SAF\\SAF.g:44:1: action returns [Action a] : ( (n= NAME ) | (c= choose ) );
     public final Action action() throws RecognitionException {
         Action a = null;
 
@@ -467,9 +465,8 @@ public class SAFParser extends Parser {
         List<String> c =null;
 
 
-        a = new Action();
         try {
-            // C:\\Antlr\\SAF\\SAF.g:56:2: ( (n= NAME ) | (c= choose ) )
+            // C:\\Antlr\\SAF\\SAF.g:45:2: ( (n= NAME ) | (c= choose ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -488,14 +485,14 @@ public class SAFParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // C:\\Antlr\\SAF\\SAF.g:57:2: (n= NAME )
+                    // C:\\Antlr\\SAF\\SAF.g:46:2: (n= NAME )
                     {
-                    // C:\\Antlr\\SAF\\SAF.g:57:2: (n= NAME )
-                    // C:\\Antlr\\SAF\\SAF.g:57:3: n= NAME
+                    // C:\\Antlr\\SAF\\SAF.g:46:2: (n= NAME )
+                    // C:\\Antlr\\SAF\\SAF.g:46:3: n= NAME
                     {
-                    n=(Token)match(input,NAME,FOLLOW_NAME_in_action427); 
+                    n=(Token)match(input,NAME,FOLLOW_NAME_in_action359); 
 
-                    a.AddAction((n!=null?n.getText():null));
+                    a = new Action((n!=null?n.getText():null));
 
                     }
 
@@ -503,18 +500,18 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // C:\\Antlr\\SAF\\SAF.g:58:3: (c= choose )
+                    // C:\\Antlr\\SAF\\SAF.g:47:3: (c= choose )
                     {
-                    // C:\\Antlr\\SAF\\SAF.g:58:3: (c= choose )
-                    // C:\\Antlr\\SAF\\SAF.g:58:4: c= choose
+                    // C:\\Antlr\\SAF\\SAF.g:47:3: (c= choose )
+                    // C:\\Antlr\\SAF\\SAF.g:47:4: c= choose
                     {
-                    pushFollow(FOLLOW_choose_in_action437);
+                    pushFollow(FOLLOW_choose_in_action369);
                     c=choose();
 
                     state._fsp--;
 
 
-                    a.AddAction(c);
+                    a = new Action(c);
 
                     }
 
@@ -539,7 +536,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "choose"
-    // C:\\Antlr\\SAF\\SAF.g:61:1: choose returns [List<String> s] : CHOOSE PARENTHESESOPEN (n= NAME )+ PARENTHESESCLOSE ;
+    // C:\\Antlr\\SAF\\SAF.g:50:1: choose returns [List<String> s] : CHOOSE '(' (n= NAME )+ ')' ;
     public final List<String> choose() throws RecognitionException {
         List<String> s = null;
 
@@ -548,14 +545,14 @@ public class SAFParser extends Parser {
 
         s = new LinkedList<String>();
         try {
-            // C:\\Antlr\\SAF\\SAF.g:63:2: ( CHOOSE PARENTHESESOPEN (n= NAME )+ PARENTHESESCLOSE )
-            // C:\\Antlr\\SAF\\SAF.g:64:2: CHOOSE PARENTHESESOPEN (n= NAME )+ PARENTHESESCLOSE
+            // C:\\Antlr\\SAF\\SAF.g:52:2: ( CHOOSE '(' (n= NAME )+ ')' )
+            // C:\\Antlr\\SAF\\SAF.g:53:2: CHOOSE '(' (n= NAME )+ ')'
             {
-            match(input,CHOOSE,FOLLOW_CHOOSE_in_choose459); 
+            match(input,CHOOSE,FOLLOW_CHOOSE_in_choose391); 
 
-            match(input,PARENTHESESOPEN,FOLLOW_PARENTHESESOPEN_in_choose461); 
+            match(input,10,FOLLOW_10_in_choose393); 
 
-            // C:\\Antlr\\SAF\\SAF.g:65:2: (n= NAME )+
+            // C:\\Antlr\\SAF\\SAF.g:54:2: (n= NAME )+
             int cnt6=0;
             loop6:
             do {
@@ -569,9 +566,9 @@ public class SAFParser extends Parser {
 
                 switch (alt6) {
             	case 1 :
-            	    // C:\\Antlr\\SAF\\SAF.g:65:3: n= NAME
+            	    // C:\\Antlr\\SAF\\SAF.g:54:3: n= NAME
             	    {
-            	    n=(Token)match(input,NAME,FOLLOW_NAME_in_choose467); 
+            	    n=(Token)match(input,NAME,FOLLOW_NAME_in_choose399); 
 
             	    s.add((n!=null?n.getText():null));
 
@@ -588,7 +585,7 @@ public class SAFParser extends Parser {
             } while (true);
 
 
-            match(input,PARENTHESESCLOSE,FOLLOW_PARENTHESESCLOSE_in_choose475); 
+            match(input,11,FOLLOW_11_in_choose407); 
 
             }
 
@@ -610,32 +607,36 @@ public class SAFParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_NAME_in_fighter214 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_NEWLINE_in_fighter218 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_CURLYOPEN_in_fighter220 = new BitSet(new long[]{0x0000000000000E20L});
-    public static final BitSet FOLLOW_NEWLINE_in_fighter232 = new BitSet(new long[]{0x0000000000000E20L});
-    public static final BitSet FOLLOW_property_in_fighter242 = new BitSet(new long[]{0x0000000000000E20L});
-    public static final BitSet FOLLOW_activity_in_fighter253 = new BitSet(new long[]{0x0000000000000E20L});
-    public static final BitSet FOLLOW_CURLYCLOSE_in_fighter264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NAME_in_property279 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_IS_in_property281 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_INT_in_property285 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_NEWLINE_in_property287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_activity312 = new BitSet(new long[]{0x0000000000008A00L});
-    public static final BitSet FOLLOW_SQUAREOPEN_in_activity321 = new BitSet(new long[]{0x0000000000000210L});
-    public static final BitSet FOLLOW_movement_in_activity325 = new BitSet(new long[]{0x0000000000000210L});
-    public static final BitSet FOLLOW_action_in_activity331 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_SQUARECLOSE_in_activity335 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NAME_in_condition354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OPERATOR_in_condition364 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_NAME_in_condition368 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NAME_in_movement392 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_choose_in_movement402 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_NAME_in_action427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_choose_in_action437 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_choose459 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_PARENTHESESOPEN_in_choose461 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_NAME_in_choose467 = new BitSet(new long[]{0x0000000000001200L});
-    public static final BitSet FOLLOW_PARENTHESESCLOSE_in_choose475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NAME_in_fighter151 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_NEWLINE_in_fighter155 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_fighter157 = new BitSet(new long[]{0x00000000000104C0L});
+    public static final BitSet FOLLOW_NEWLINE_in_fighter169 = new BitSet(new long[]{0x00000000000104C0L});
+    public static final BitSet FOLLOW_property_in_fighter179 = new BitSet(new long[]{0x00000000000104C0L});
+    public static final BitSet FOLLOW_activity_in_fighter190 = new BitSet(new long[]{0x00000000000104C0L});
+    public static final BitSet FOLLOW_16_in_fighter201 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NAME_in_property216 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_property218 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_INT_in_property222 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_NEWLINE_in_property224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_in_activity244 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_activity246 = new BitSet(new long[]{0x0000000000000050L});
+    public static final BitSet FOLLOW_movement_in_activity250 = new BitSet(new long[]{0x0000000000000050L});
+    public static final BitSet FOLLOW_action_in_activity254 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_activity256 = new BitSet(new long[]{0x0000000000000080L});
+    public static final BitSet FOLLOW_NEWLINE_in_activity258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NAME_in_condition282 = new BitSet(new long[]{0x0000000000000102L});
+    public static final BitSet FOLLOW_10_in_condition288 = new BitSet(new long[]{0x0000000000000440L});
+    public static final BitSet FOLLOW_condition_in_condition292 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_condition296 = new BitSet(new long[]{0x0000000000000102L});
+    public static final BitSet FOLLOW_OPERATOR_in_condition302 = new BitSet(new long[]{0x0000000000000440L});
+    public static final BitSet FOLLOW_condition_in_condition306 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NAME_in_movement328 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_choose_in_movement338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_NAME_in_action359 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_choose_in_action369 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_choose391 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_choose393 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_NAME_in_choose399 = new BitSet(new long[]{0x0000000000000840L});
+    public static final BitSet FOLLOW_11_in_choose407 = new BitSet(new long[]{0x0000000000000002L});
 
 }
