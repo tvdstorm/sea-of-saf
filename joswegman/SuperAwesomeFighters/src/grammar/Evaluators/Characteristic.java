@@ -6,18 +6,14 @@ public class Characteristic implements Visitable {
 	
 	public Characteristic(String character, int value) {
 		this.character = character;
-		if ((value >1) & (value <10)){
-			this.value = value;
-		} else {
-			this.value = 5;
-		}
+     	this.value = value;
 	}
 	
-	public String getCharacterName (){
+	public String getCharacterName () {
 		return this.character;
 	}
 	
-	public int getCharacterValue (){
+	public int getCharacterValue () {
 		return this.value;
 	}
 	

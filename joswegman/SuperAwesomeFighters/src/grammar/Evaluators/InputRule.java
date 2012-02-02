@@ -12,8 +12,16 @@ public class InputRule implements Visitable{
 	public String toString () {
 		return "Inputrule: " + this.firstinputrule + " " + this.secondinputrule;
 	}
+	
+    public String getInputrule( boolean firstRule){
+    	if (firstRule) {
+    		return this.firstinputrule;
+    	} else {
+    		return this.secondinputrule;
+    	}
+    }
 
-	@Override
+    @Override
 	public void accept(BotVisit visitor) {
 		visitor.visit(this);
 	}

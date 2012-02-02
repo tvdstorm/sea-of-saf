@@ -13,35 +13,29 @@ import  grammar.Evaluators.*;
 package grammar;
 }
 
-
-
 bot returns [Bot b]
       @init {
         $b = new Bot();
       }
-      : i=ID {$b.setName($i.text);} '{' (c=characteristic {$b.addC(c);})* (r=rule {$b.addR(r);})* '}' 
+      : i=ID {$b.setName($i.text);} '{' (c=characteristic {$b.addC(c);})* (r=rule {$b.addR($r.value);})* '}' 
       ;
-
-conditions returns [Conditions value]
-      @init {
-        $value = new Conditions();
-      }
-      : c=condition+ {$value.addCondition(c);}
-      ; 
 
 condition returns [Condition value]
-      : i=ID {$value = new Const($i.text);} //subclass Condition
-      | b=binairycondition {$value = (b);}
+      : i=ID {$value = new Condition($i.text, null, "const");} 
+      | b=binarycondition {$value = (b);}
       ;
 
-binairycondition returns [Condition value]
-      : i=ID 'and' j=ID  {$value =  new ConAnd($i.text, $j.text);} 
-      | k=ID 'or' l=ID   {$value =  new ConOr($k.text, $l.text);} 
+binarycondition returns [Condition value]
+      : i=ID 'and' j=condition  {$value =  new Condition($i.text, j, "and");} 
+      | k=ID 'or'  l=condition  {$value =  new Condition($k.text, l, "or");} 
       ;
       
-rule returns [Rule value] 
-      : i=conditions '['e=inputRule f=inputRule']' 
-        {$value = new Rule (i, e, f);}
+rule returns [Rule value, ConditionList c]
+       @init {
+        $c= new ConditionList();
+       }
+      : i=condition+ '['m=inputRule f=inputRule']' 
+        {$value = new Rule (i, m, f); $c.addCondition(i);}
       ;
 
 inputRule returns [InputRule value]
@@ -58,7 +52,7 @@ characteristic returns [Characteristic value]
 ID    : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*
       ;
 
-INT   : '1'..'9'|'10'
+INT   : '0'..'9'*
       ;
       
 COMMENT

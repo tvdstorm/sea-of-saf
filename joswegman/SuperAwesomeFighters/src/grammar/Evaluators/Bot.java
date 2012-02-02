@@ -12,7 +12,6 @@ public class Bot implements Visitable {
 
 	}
 	
-	
     public void setName(String name) {
     	this.naam = name;
     }
@@ -21,7 +20,6 @@ public class Bot implements Visitable {
 		super();
 		this.naam = naam;
 	}
-	
 	
 	public  void addC (Characteristic karakterestiek) {
 		this.karakterestieken.add(karakterestiek);
@@ -38,15 +36,13 @@ public class Bot implements Visitable {
 	public List<Characteristic> getCharacteristics (){
 		return this.karakterestieken;
 	}
+	
+	public List<Rule> getRules () {
+		return this.regels;
+	}
+
 	@Override
 	public void accept(BotVisit visitor) {
 		visitor.visit(this);
 	}
-
-
-	
-	
-
-
-	
 }

@@ -29,17 +29,18 @@ public class Test {
 		SafParser parser = new SafParser(tokenStream);
 		//parser.bot();
 		Bot b = parser.bot();
+		b.accept(new BotChecker());
 		System.out.println("done: " + b.toString());
 		System.out.println();
 
 		
 		CharStream charStream1 = new ANTLRStringStream( "Test \n" +
 				"{ \n" +
-				"kickPower = 2 " +
+				"kickPower = 2 \n" +
 				"punchReach = 8 \n" +
-				"near [ walk punch_high] \n" +
+				"near [ walk_towards punch_high] \n" +
 				"stronger [run_away block_low] \n" +
-				"always [ choose (jump stand) kick_high] \n	"+
+				"always and far [ choose (jump stand) kick_high] \n	"+
 				"} \n");
 		SafLexer lexer1 = new SafLexer(charStream1);
 		TokenStream tokenStream1 = new CommonTokenStream(lexer1);
