@@ -1,6 +1,8 @@
 package saf.ast;
 
-public class Attack  extends SafObject{
+import saf.ast.base.BehaviorItem;
+
+public class Attack  extends BehaviorItem{
 	private String name;
 	
 	public Attack(){

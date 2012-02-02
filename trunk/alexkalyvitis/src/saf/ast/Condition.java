@@ -1,6 +1,8 @@
 package saf.ast;
 
-public class Condition extends SafObject{
+import saf.ast.base.BehaviorItem;
+
+public class Condition extends BehaviorItem{
 	private String name;
 	
 	public void setName(String n){ this.name = n; }

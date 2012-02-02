@@ -1,6 +1,8 @@
 package saf.ast;
 
-public class Move extends SafObject {
+import saf.ast.base.BehaviorItem;
+
+public class Move extends BehaviorItem {
 	private String name;
 	
 	public Move(){
