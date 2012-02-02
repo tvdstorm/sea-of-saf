@@ -4,18 +4,30 @@ import grammar.Evaluators.InputRule;
 
 
 public class Rule implements Visitable {
-   private  final Conditions id;	
+   private  final Condition id;	
    private  final InputRule frule;
-   private  final InputRule srule;
+   private  final InputRule mrule;
 
-   public Rule(Conditions id, InputRule frule, InputRule srule) {
+   public Rule(Condition id, InputRule frule, InputRule mrule) {
 	this.id = id;
 	this.frule = frule;
-	this.srule = srule;
+	this.mrule = mrule;
+   }
+   
+   public InputRule getRule (boolean firstRule) {
+	   if (firstRule) {
+		   return this.frule;
+	   } else {
+		   return this.mrule;
+	   }
+   }
+   
+   public Condition getCondition () {
+	   return this.id;
    }
    
    public  String toString () {
-	   return "Rule: " + this.id + " " + this.frule.toString() + " "+ this.srule.toString();
+	   return "Rule: " + this.id + " " + this.frule.toString() + " "+ this.mrule.toString();
    }
 
   @Override
