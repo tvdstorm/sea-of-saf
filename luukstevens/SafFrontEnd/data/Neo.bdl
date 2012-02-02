@@ -1,0 +1,9 @@
+Neo{
+    kickPower = 6
+    punchPower = 6
+    kickReach = 6
+    punchReach = 6
+    far[run_towards punch_high]
+    near[choose(stand crouch) choose(kick_high block_low)]
+    always[choose(run_towards run_away) choose(kick_high block_high)]
+}
