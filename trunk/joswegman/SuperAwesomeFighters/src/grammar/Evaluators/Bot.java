@@ -16,6 +16,10 @@ public class Bot implements Visitable {
     	this.naam = name;
     }
 
+    public String getName(){
+    	return this.naam;
+    }
+    
     public Bot (String naam) {
 		super();
 		this.naam = naam;

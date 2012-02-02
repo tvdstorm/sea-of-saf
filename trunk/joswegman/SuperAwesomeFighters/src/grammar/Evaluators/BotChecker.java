@@ -21,7 +21,7 @@ public class BotChecker implements BotVisit {
 	public void visit(Characteristic character) {
 		List<String>  charItems = Arrays.asList( "punchReach", "punchPower","kickReach","kickPower");
 		boolean error = false;
-		
+
 		if  (!charItems.contains(character.getCharacterName())) {
 			error = true;
 			this.errorMessages.add("Invalid Character : " + character.getCharacterName());
@@ -53,7 +53,6 @@ public class BotChecker implements BotVisit {
 	
 	@Override
 	public void visit(Rule rule) {
-//		System.out.println("Rule printout");
 		checkRule (rule);
 	}
 
@@ -61,8 +60,6 @@ public class BotChecker implements BotVisit {
 		visit(rule.getCondition());
 		visit(rule.getRule(true));
 		visit(rule.getRule(false));
-		
-		
 	}
 	
 	@Override
@@ -75,7 +72,12 @@ public class BotChecker implements BotVisit {
 			visit (i);
 			visit (i.getCondition());
 		}
-		System.out.println(this.toString());
+		
+		if (errorMessages.isEmpty()) {
+			System.out.println(" Bot: "+ bot.getName() + " is valid!!!");
+		}else {
+			System.out.println(this.toString());
+		}
 	}
 
 	@Override
@@ -93,9 +95,6 @@ public class BotChecker implements BotVisit {
 		} else {
 			this.errorMessages.add("Condition: "+ conor.getLeft()+" is not a valid condition");
 		}
-		
-		
-		//System.out.println(conor.getRight().toString());
 	}
 
 	
