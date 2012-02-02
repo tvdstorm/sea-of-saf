@@ -3,6 +3,7 @@ package saf.interpreter;
 import java.util.List;
 
 import saf.ast.*;
+import saf.ast.base.BehaviorItem;
 
 public class SafInterpreter {
 	
@@ -25,6 +26,7 @@ public class SafInterpreter {
 				fighter.setWeight((float)(fighter.getValueOfStrength("punchPower") + fighter.getValueOfStrength("kickPower")) / 2);
 				fighter.setHeight((float)(fighter.getValueOfStrength("punchReach") + fighter.getValueOfStrength("kickReach")) / 2);
 				fighter.setSpeed((float)Math.abs(fighter.getHeight() - fighter.getWeight()) / 2);
+				fighter.setHealth(10);
 			}
 			for (Behavior behavior : fighter.getBehaviors()){
 				if(!identifierIsValid(fighter, behavior.getCondition(), availableConditions)){ return false; }
@@ -35,7 +37,7 @@ public class SafInterpreter {
 		return true;
 	}
 	
-	private boolean identifierIsValid(Fighter fighter, SafObject object, String[] keywords) {
+	private boolean identifierIsValid(Fighter fighter, BehaviorItem object, String[] keywords) {
 		boolean keywordFound = false;
 		for (String keyword : keywords){
 			if (object.getName().equals(keyword)){

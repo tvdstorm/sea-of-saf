@@ -3,11 +3,14 @@ package saf.ast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fighter extends SafObject{
+import saf.ast.base.BehaviorItem;
+
+public class Fighter extends BehaviorItem{
 	
 	private String name;
 	private List<Strength> strengths;
 	private List<Behavior> behaviors;
+	private int health;
 	
 	private float weight;
 	private float height;
@@ -35,6 +38,7 @@ public class Fighter extends SafObject{
 	public void setWeight(float w){ this.weight = w; }
 	public void setHeight(float h){ this.height = h; }
 	public void setSpeed(float s){ this.speed = s; }
+	public void setHealth(int h){ this.health = h; }
 	public void appendName(String n){ this.name += " " + n; }
 	public void addStrength(Strength s){ this.strengths.add(s); }
 	public void addBehavior(Behavior b){ this.behaviors.add(b); }
@@ -46,6 +50,7 @@ public class Fighter extends SafObject{
 	public float getWeight(){ return this.weight; }
 	public float getHeight(){ return this.height; }
 	public float getSpeed(){ return this.speed; }
+	public int getHealth(){ return health; }
 	
 	public int getValueOfStrength(String s){
 		for(Strength strength : strengths){

@@ -1,6 +1,8 @@
 package saf.ast;
 
-public class Strength extends SafObject {
+import saf.ast.base.BehaviorItem;
+
+public class Strength extends BehaviorItem {
 	private String name;
 	private int value;
 	
