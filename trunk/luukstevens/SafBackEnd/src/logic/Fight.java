@@ -3,32 +3,26 @@ package logic;
 import java.util.LinkedList;
 import java.util.List;
 
-import view.Main;
+import view.*;
 import model.*;
-import model.attack.Attack;
-import model.attack.BlockHigh;
-import model.attack.BlockLow;
-import model.attack.KickHigh;
-import model.attack.KickLow;
-import model.attack.PunchHigh;
-import model.attack.PunchLow;
+import model.attack.*;
 import model.enums.*;
+import model.move.Move;
 
 public class Fight {
 	private static final int MUCH_WEAKER_STRONGER_DIFFERENCE = 20;
+	private static final int THRESHOLD_REACH_BOTH_FAR = 10;
+	private static final int THRESHOLD_REACH_ONE_FAR = 5;
 	private static final int DELAY = 500;
-	private static final int KICK_DAMAGE = 5;
-	private static final int PUNCH_DAMAGE = 5;
 	
 	public void start(Bot left, Bot right, Main view) throws InterruptedException {
-		
 		if(left.getPosition().equals(right.getPosition())) {
-			//TODO: Throw error.
+			throw new IllegalArgumentException("A left and right position bot must be argumented.");
 		}
 		
 		while(left.getHealth() > 0 && right.getHealth() > 0) {
 			reduceHealth(left, right);
-			//reduceHealth(right, left);
+			reduceHealth(right, left);
 			updateBotsAndView(left, right, view);
 			
 			Thread.sleep(DELAY);
@@ -36,43 +30,73 @@ public class Fight {
 	}
 	
 	private void reduceHealth(Bot a, Bot b) {
-		//Bots can't hit eachother when far from each other.
-		if(isFarOrNear(a,b).equals(ConditionType.FAR)) return;
-		
 		Attack aAttack = a.getCurrentAttack();
 		Attack bAttack = b.getCurrentAttack();
 		
-		if(aAttack.isMove(PunchHigh.class) && !bAttack.isMove(BlockHigh.class)) {
-			b.reduceHealth(PUNCH_DAMAGE);
-		} 
+		if(aAttack.equals(bAttack) && a.isFaster(b)) {
+			//Same attack. Bot a only does damage if he kicks or punches faster.
+			reduceHealthSameAttack(a, b);
+		} else {
+			//Different attacks
+			retuceHealthDifferentAttack(a, b);
+		}
+	}
+	
+	private void retuceHealthDifferentAttack(Bot a, Bot b) {
+		Attack aAttack = a.getCurrentAttack();
+		Attack bAttack = b.getCurrentAttack();
 		
-		if(aAttack.isMove(KickHigh.class) && !bAttack.isMove(BlockHigh.class)) {
-			b.reduceHealth(KICK_DAMAGE);
-		} 
-
-		if(aAttack.isMove(PunchLow.class) && !bAttack.isMove(BlockLow.class)) {
-			b.reduceHealth(PUNCH_DAMAGE);
-		} 
-		
-		if(aAttack.isMove(KickLow.class) && !bAttack.isMove(BlockLow.class)) {
-			b.reduceHealth(KICK_DAMAGE);
+		if(aAttack.isAttack(KickLow.class) && !bAttack.isAttack(BlockLow.class)) {
+			if(kickCanReach(a, b))
+				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.KICK_POWER));
 		}
 		
-		if(aAttack.isMove(PunchHigh.class) && bAttack.isMove(PunchHigh.class)) {
-			if(a.getSpeed() > b.getSpeed()) b.reduceHealth(PUNCH_DAMAGE);
-		} 
+		if(aAttack.isAttack(PunchLow.class) && !bAttack.isAttack(PunchHigh.class)) {
+			if(punchCanReach(a, b))
+				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.PUNCH_POWER));
+		}
 		
-		if(aAttack.isMove(KickHigh.class) && bAttack.isMove(KickHigh.class)) {
-			if(a.getSpeed() > b.getSpeed()) b.reduceHealth(KICK_DAMAGE);
-		} 
+		if(aAttack.isAttack(KickHigh.class) && !bAttack.isAttack(BlockHigh.class)) {
+			if(kickCanReach(a, b))
+				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.KICK_POWER));
+		}
 		
-		if(aAttack.isMove(PunchLow.class) && bAttack.isMove(PunchLow.class)) {
-			if(a.getSpeed() > b.getSpeed()) b.reduceHealth(PUNCH_DAMAGE);
-		} 
+		if(aAttack.isAttack(PunchHigh.class) && !bAttack.isAttack(BlockHigh.class)) {
+			if(punchCanReach(a, b))
+				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.PUNCH_POWER));
+		}
+	}
+
+	private void reduceHealthSameAttack(Bot a, Bot b) {
+		Attack aAttack = a.getCurrentAttack();
 		
-		if(aAttack.isMove(KickLow.class) && bAttack.isMove(KickLow.class)) {
-			if(a.getSpeed() > b.getSpeed()) b.reduceHealth(KICK_DAMAGE);
-		} 
+		if(aAttack.isAttack(KickHigh.class) || aAttack.isAttack(KickLow.class)) {
+			if(kickCanReach(a, b))
+				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.KICK_POWER));
+		}
+		
+		if(aAttack.isAttack(PunchHigh.class) || aAttack.isAttack(PunchLow.class)) {
+			if(punchCanReach(a, b))
+				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.PUNCH_POWER));
+		}
+	}
+	
+	public boolean punchCanReach(Bot a, Bot b) {
+		if(a.getWalkedOrRunnedAway() && b.getWalkedOrRunnedAway() 
+				&& a.getCharacteristicValue(CharacteristicType.PUNCH_REACH) > THRESHOLD_REACH_BOTH_FAR) return true;
+		if(a.getWalkedOrRunnedAway() || b.getWalkedOrRunnedAway() 
+				&& a.getCharacteristicValue(CharacteristicType.PUNCH_REACH) > THRESHOLD_REACH_ONE_FAR) return true;
+		
+		return false;
+	}
+	
+	public boolean kickCanReach(Bot a, Bot b) {
+		if(a.getWalkedOrRunnedAway() && b.getWalkedOrRunnedAway() 
+				&& a.getCharacteristicValue(CharacteristicType.KICK_REACH) > THRESHOLD_REACH_BOTH_FAR) return true;
+		if(a.getWalkedOrRunnedAway() || b.getWalkedOrRunnedAway() 
+				&& a.getCharacteristicValue(CharacteristicType.KICK_REACH) > THRESHOLD_REACH_ONE_FAR) return true;
+		
+		return false;
 	}
 	
 	

@@ -46,7 +46,7 @@ public class Arena extends JPanel {
     		endGame = true;
     	}
     	
-    	g.setColor(Color.LIGHT_GRAY);
+    	g.setColor(Color.WHITE);
     	g.fillRect(0, 0, WIDTH, HIGHT);
     	drawLeftBot(g, left);
     	drawRightBot(g, right);

@@ -137,6 +137,10 @@ public class Bot {
 		}
 	}
 	
+	public boolean isFaster(Bot opponent) {
+		return getSpeed() > opponent.getSpeed();
+	}
+	
 	public static Bot deserialize(String fileLocation, Position position) throws JAXBException, FileNotFoundException {
 		JAXBContext context = JAXBContext.newInstance(Bot.class, And.class, Or.class, Simple.class);
 		Unmarshaller um = context.createUnmarshaller();

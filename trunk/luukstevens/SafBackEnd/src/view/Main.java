@@ -32,7 +32,7 @@ public class Main extends JFrame {
 		setSize(WIDTH, HEIGHT);
 		setLocation(X_POSITION, Y_POSITION);
 		setVisible(true);
-		setBackground(Color.WHITE);
+		setBackground(Color.LIGHT_GRAY);
 		setLayout(new FlowLayout(FlowLayout.CENTER));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
