@@ -30,17 +30,63 @@ public class FightSimulator extends Frame{
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setStroke(new BasicStroke(2));
 		
-		long timeIsUp = new Date().getTime() + 30 * 100;
+//		// stand_still
+//		g.drawOval(75, 125, 50, 75); // Head
+//		g.drawLine(100, 200, 100, 300); // Body
+//		g.drawLine(75, 225, 100, 225); // Left Arm
+//		g.drawLine(125, 225, 100, 225); // Right Arm
+//		g.drawLine(75, 350, 100, 300); // Left Leg
+//		g.drawLine(125, 350, 100, 300); // Right Leg
+//		
+//		// punch_high
+//		g.drawOval(75, 125, 50, 75); // Head
+//		g.drawLine(100, 200, 100, 300); // Body
+//		g.drawLine(75, 250, 100, 225); // Left Arm
+//		g.drawLine(75, 250, 75, 275); // Left Arm
+//		g.drawLine(75, 275, 100, 250); // Left Arm
+//		g.drawLine(100, 225, 150, 175); // Right Arm
+//		g.drawLine(75, 350, 100, 300); // Left Leg
+//		g.drawLine(125, 350, 100, 300); // Right Leg
+//		
+//		// punch_low
+//		g.drawOval(75, 125, 50, 75); // Head
+//		g.drawLine(100, 200, 100, 300); // Body
+//		g.drawLine(75, 200, 100, 225); // Left Arm
+//		g.drawLine(75, 200, 75, 225); // Left Arm
+//		g.drawLine(75, 225, 100, 250); // Left Arm
+//		g.drawLine(100, 225, 150, 275); // Right Arm
+//		g.drawLine(75, 350, 100, 300); // Left Leg
+//		g.drawLine(125, 350, 100, 300); // Right Leg
 		
-		while(true){
-			fight.nextAction();
+//		// kick_high
+//		g.drawOval(75, 125, 50, 75); // Head
+//		g.drawLine(100, 200, 100, 300); // Body
+//		g.drawLine(75, 225, 100, 225); // Left Arm
+//		g.drawLine(125, 225, 100, 225); // Right Arm
+//		g.drawLine(75, 325, 100, 300); // Left Leg
+//		g.drawLine(75, 325, 75, 350); // Left Leg
+//		g.drawLine(75, 350, 100, 325); // Left Leg
+//		g.drawLine(150, 250, 100, 300); // Right Leg
+		
+		// kick_low
+		g.drawOval(75, 125, 50, 75); // Head
+		g.drawLine(100, 200, 100, 300); // Body
+		g.drawLine(75, 225, 100, 225); // Left Arm
+		g.drawLine(125, 225, 100, 225); // Right Arm
+		g.drawLine(75, 300, 100, 300); // Left Leg
+		g.drawLine(75, 300, 75, 325); // Left Leg
+		g.drawLine(75, 325, 100, 325); // Left Leg
+		g.drawLine(150, 300, 100, 300); // Right Leg
+		
+//		while(true){
+//			fight.nextAction();
 //			fight.delay();
 //			g.fill(fight.drawState());
-			
-			if(fight.getFirstFighter().getHealth() <= 0 || fight.getSecondFighter().getHealth() <= 0 || new Date().getTime() >= timeIsUp){
-				break;
-			}
-		}
+//			
+//			if(fight.getFirstFighter().getHealth() <= 0 || fight.getSecondFighter().getHealth() <= 0 || new Date().getTime() >= timeIsUp){
+//				break;
+//			}
+//		}
     }
 	
 	public void Simulate(){

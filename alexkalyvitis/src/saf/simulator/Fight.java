@@ -1,7 +1,6 @@
 package saf.simulator;
 
 import java.awt.*;
-import java.awt.geom.Path2D;
 import java.util.List;
 
 import saf.ast.Fighter;
@@ -26,16 +25,4 @@ public class Fight {
 	public void nextAction(){
 		
 	}
-	
-//	public Shape drawState(){
-//		// Draw stick figure
-//		Shape s = new Path2D();
-//		
-//		s.drawOval(75, 125, 50, 75); // Head
-//		s.drawLine(100, 200, 100, 300); // Body
-//		s.drawLine(75, 225, 100, 225); // Left Arm
-//		s.drawLine(125, 225, 100, 225); // Right Arm
-//		s.drawLine(75, 350, 100, 300); // Left Leg
-//		s.drawLine(125, 350, 100, 300); // Right Leg
-//	}
 }
