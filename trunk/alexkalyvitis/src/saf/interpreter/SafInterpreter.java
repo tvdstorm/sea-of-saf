@@ -9,11 +9,6 @@ public class SafInterpreter {
 	
 	private List<Fighter> fighters;
 	
-	private static final String[] availableConditions = { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
-	private static final String[] availableMoves = { "jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away" };
-	private static final String[] availableAttacks = { "punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high" };
-	private static final String[] availableStrengths = { "punchReach", "kickReach", "kickPower", "punchPower" };
-	
 	public SafInterpreter(List<Fighter> f){
 		fighters = f;
 	}
@@ -21,7 +16,7 @@ public class SafInterpreter {
 	public boolean interpret(){
 		for (Fighter fighter : fighters){
 			for (Strength strength : fighter.getStrengths()){
-				if(!identifierIsValid(fighter, strength, availableStrengths)){ return false; }
+				if(!identifierIsValid(fighter, strength)){ return false; }
 				if(!valueIsValid(fighter,strength)){ return false; }
 				fighter.setWeight((float)(fighter.getValueOfStrength("punchPower") + fighter.getValueOfStrength("kickPower")) / 2);
 				fighter.setHeight((float)(fighter.getValueOfStrength("punchReach") + fighter.getValueOfStrength("kickReach")) / 2);
@@ -29,17 +24,17 @@ public class SafInterpreter {
 				fighter.setHealth(10);
 			}
 			for (Behavior behavior : fighter.getBehaviors()){
-				if(!identifierIsValid(fighter, behavior.getCondition(), availableConditions)){ return false; }
-				if(!identifierIsValid(fighter, behavior.getMove(), availableMoves)){ return false; }
-				if(!identifierIsValid(fighter, behavior.getAttack(), availableAttacks)){ return false; }
+				if(!identifierIsValid(fighter, behavior.getCondition())){ return false; }
+				if(!identifierIsValid(fighter, behavior.getMove())){ return false; }
+				if(!identifierIsValid(fighter, behavior.getAttack())){ return false; }
 			}
 		}
 		return true;
 	}
 	
-	private boolean identifierIsValid(Fighter fighter, BehaviorItem object, String[] keywords) {
+	private boolean identifierIsValid(Fighter fighter, BehaviorItem object) {
 		boolean keywordFound = false;
-		for (String keyword : keywords){
+		for (String keyword : object.getKeywords()){
 			if (object.getName().equals(keyword)){
 				keywordFound = true;
 				break;

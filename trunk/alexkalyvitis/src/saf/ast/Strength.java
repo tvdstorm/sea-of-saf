@@ -5,6 +5,7 @@ import saf.ast.base.BehaviorItem;
 public class Strength extends BehaviorItem {
 	private String name;
 	private int value;
+	private static final String[] availableStrengths = { "punchReach", "kickReach", "kickPower", "punchPower" };
 	
 	public Strength(){
 		this.name = "";
@@ -23,6 +24,8 @@ public class Strength extends BehaviorItem {
 	
 	public String getName(){ return this.name; }
 	public int getValue(){ return this.value; }
+	
+	public String[] getKeywords() { return availableStrengths; }
 	
 	@Override
 	public String toString(){
