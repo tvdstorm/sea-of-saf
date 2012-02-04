@@ -1,0 +1,12 @@
+JackieChan
+{
+	kickPower = 7
+	punchPower = 5
+	kichReach = 3
+	punchReach = 4
+	far and weaker[run_towards punch_high]
+	near[choose(stand crouch) kick_high]
+	much_stronger[walk_towards punch_low]
+	weaker[run_away choose(block_high block_low)]
+	always[walk_toward block_high]
+}

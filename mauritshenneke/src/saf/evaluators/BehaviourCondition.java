@@ -6,6 +6,9 @@ public class BehaviourCondition {
 	private BehaviourCondition right;
 	private String value;
 	
+	public BehaviourCondition() {
+	}
+
 	public BehaviourCondition(String value) {
 		this.value = value;
 	}
