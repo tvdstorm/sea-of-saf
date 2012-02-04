@@ -18,6 +18,8 @@ public class SAF {
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFParser parser = new SAFParser(tokenStream); 
 		Fighter fighter = parser.fighter();
-		fighter.outputData();
+		Rules rules = new Rules(10,10,10,100);
+		fighter.setRules(rules);
+		fighter.performAction(5, 50);
 	}
 }

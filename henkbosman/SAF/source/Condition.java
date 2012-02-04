@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Condition 
 {
 	public enum Conditions {
@@ -23,33 +25,44 @@ public class Condition
 		_mainCondition = condition;
 	}
 	
-	public void AddSubCondition(String operator, Condition condition)
+	public void addSubCondition(String operator, Condition condition)
 	{
 		_operator = Operators.valueOf(operator);
 		_subCondition = condition;
 	}
 	
-	public void outputData()
+	public boolean checkCondition(List<Condition.Conditions> conditions)
 	{
-		if (_mainCondition!=null)
+		switch (_operator)
 		{
-			_mainCondition.outputData();
-		}
-		
-		if (_subCondition!=null)
-		{
-			_subCondition.outputData();
-		}
-		if (_operator!=null)
-		{
-			System.out.print(" "+_operator);
-		}
-		
-		if (_condition!=null)
-		{
-			System.out.print(" "+_condition);
+			case and:
+				return getFirstCondition(conditions) && getSecondCondition(conditions);
+			case or:
+				return getFirstCondition(conditions) || getSecondCondition(conditions);
 		}
 
+		return true;
 	}
+	
+	private boolean getFirstCondition(List<Condition.Conditions> conditions)
+	{
+		if (_mainCondition!=null)
+			return _mainCondition.checkCondition(conditions);
+		
+		for (Condition.Conditions c : conditions)
+		{
+			if (c.equals(_condition))
+				return true;
+		}
+		
+		return false;
+	}
+	
+	private boolean getSecondCondition(List<Condition.Conditions> conditions)
+	{
+		return _subCondition.checkCondition(conditions);
+	}
+	
+	
 	
 }

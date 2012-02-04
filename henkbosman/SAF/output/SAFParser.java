@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-02-02 21:30:27
+// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-02-04 14:05:20
 import java.util.LinkedList;
 
 import org.antlr.runtime.*;
@@ -66,7 +66,7 @@ public class SAFParser extends Parser {
             {
             n=(Token)match(input,NAME,FOLLOW_NAME_in_fighter151); 
 
-            f.Name((n!=null?n.getText():null));
+            f.name((n!=null?n.getText():null));
 
             match(input,NEWLINE,FOLLOW_NEWLINE_in_fighter155); 
 
@@ -121,7 +121,7 @@ public class SAFParser extends Parser {
             	    state._fsp--;
 
 
-            	    f.AddProperty(p);
+            	    f.addProperty(p);
 
             	    }
             	    break;
@@ -134,7 +134,7 @@ public class SAFParser extends Parser {
             	    state._fsp--;
 
 
-            	    f.AddActivity(c);
+            	    f.addActivity(c);
 
             	    }
             	    break;
@@ -350,7 +350,7 @@ public class SAFParser extends Parser {
                     state._fsp--;
 
 
-                    c.AddSubCondition((o!=null?o.getText():null),sc);
+                    c.addSubCondition((o!=null?o.getText():null),sc);
 
                     }
                     break;

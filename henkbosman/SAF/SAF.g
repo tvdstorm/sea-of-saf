@@ -13,11 +13,11 @@ NAME		:	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 fighter returns [Fighter f]
  @init{$f = new Fighter();}
  
-:	n=NAME {$f.Name($n.text);} NEWLINE '{' 
+:	n=NAME {$f.name($n.text);} NEWLINE '{' 
 		(
 			  NEWLINE 
-			| p=property {$f.AddProperty(p);}
-			| c=activity {$f.AddActivity(c);}
+			| p=property {$f.addProperty(p);}
+			| c=activity {$f.addActivity(c);}
 		)* 
 	'}' {};
 
@@ -30,7 +30,7 @@ activity returns [Activity a]
 
 condition returns [Condition c]
 	:	
-	  (n=NAME {$c = new Condition($n.text);} | '(' cc=condition {$c = new Condition(cc);} ')') (o=OPERATOR sc=condition {$c.AddSubCondition($o.text,sc);})?
+	  (n=NAME {$c = new Condition($n.text);} | '(' cc=condition {$c = new Condition(cc);} ')') (o=OPERATOR sc=condition {$c.addSubCondition($o.text,sc);})?
 ;
 
 
