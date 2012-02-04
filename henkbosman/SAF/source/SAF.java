@@ -1,6 +1,9 @@
-import java.io.IOException;
 
+import java.io.IOException;
 import org.antlr.runtime.*;
+
+import GUI.GameWindow;
+
 
 public class SAF {
 
@@ -20,6 +23,8 @@ public class SAF {
 		Fighter fighter = parser.fighter();
 		Rules rules = new Rules(10,10,10,100);
 		fighter.setRules(rules);
-		fighter.performAction(5, 50);
+
+		
+		GameWindow gameWindows = new GameWindow();
 	}
 }

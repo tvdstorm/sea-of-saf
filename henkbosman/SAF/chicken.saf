@@ -1,4 +1,4 @@
 chicken
 {
-  (near or weaker) or (even and far)[choose(run_towards run_away) kick_low]
+  (near or weaker) or (even and far)[choose(run_towards run_away) choose(kick_low kick_high block_low)]
 }

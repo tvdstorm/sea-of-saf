@@ -65,18 +65,20 @@ public class Fighter
 		_name="";
 	}
 	
-	public void performAction(int enemyDistance, int enemyHealth)
+	public Combatmove performAction(int enemyDistance, int enemyHealth)
 	{
-		//stronger,weaker,much_stronger,much_weaker,even,near,far,always
-		
 		List<Condition.Conditions> actualConditions = new LinkedList<Condition.Conditions>();
 		actualConditions.add(evaluateEnemy(enemyHealth));
 		actualConditions.add(evaluateDistance(enemyDistance));
+		Combatmove combatmove = _behaviour.pickCombatmove(actualConditions, _randomGenerator);
 		
 		if (_status.recover())
 		{
-			_behaviour.pickAction(actualConditions, _randomGenerator);
+			_status.doAction(_speed);
+			return combatmove;
 		}
+		
+		return null;
 	}
 	
 	private Condition.Conditions evaluateEnemy(int enemyHealth)

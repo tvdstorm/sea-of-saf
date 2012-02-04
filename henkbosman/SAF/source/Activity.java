@@ -19,12 +19,12 @@ public class Activity
 		return _condition.checkCondition(conditions);
 	}
 	
-	private Movement.Movements getMovement(Random random)
+	public Movement.Movements getMovement(Random random)
 	{
 		return _movement.getMovement(random);
 	}
 	
-	private Action.Actions getAction(Random random)
+	public Action.Actions getAction(Random random)
 	{
 		return _action.getAction(random);
 	}
