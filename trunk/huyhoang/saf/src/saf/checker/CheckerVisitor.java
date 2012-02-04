@@ -1,36 +1,37 @@
 package saf.checker;
 
-import Game.MethodAnnotation;
 import java.util.*;
-import java.lang.annotation.*;
 import java.lang.reflect.*;
 import saf.ast.*;
+import saf.checker.errors.ActionNotDefined;
+import saf.checker.errors.ConditionNameInvalid;
+import saf.checker.errors.Error;
+import saf.checker.errors.OutOfRange;
+import saf.checker.errors.ParameterCountMismatch;
+import saf.checker.errors.VariableNotDefined;
 import safparser.safgrammar;
 
 // this is the SAF consistency checker
 public class CheckerVisitor implements FighterVisitor
 {
-	private List<EvaluationError> evaluationErrors;
-	private List<Function> listOfReservedKeywords;
+	private List<Error> evaluationErrors;
 	private List<String> listOfAllowedBotActions;
 	private List<String> listOfAllowedBotConditions;
 	private List<String> listOfAllowedBotStrengths;
 	private Fighter fighter;
 	
-    public static void main(String args [])
-    {
+    public static void main(String args []) {
         System.out.println("Reading from standard input...");
         System.out.print("Enter a SAF specification: ");
         safgrammar parser = new safgrammar(System.in);
         parser.Initialize();
-        try
-        {
+        try {
         	parser.Root();
-        	CheckerVisitor evaluation = new CheckerVisitor(parser.getFighter());
+        	CheckerVisitor checker = new CheckerVisitor(parser.getFighter());
+        	checker.visitAllAstStatements();
         	
-        	System.out.println(evaluation.evaluationErrors.size() + " error(s) found");
-        	for ( EvaluationError e : evaluation.evaluationErrors )
-        	{
+        	System.out.println(checker.evaluationErrors.size() + " error(s) found");
+        	for ( Error e : checker.evaluationErrors ) {
         		System.out.println(e.toString());
         	}
         }
@@ -41,27 +42,22 @@ public class CheckerVisitor implements FighterVisitor
         }
     }
 	
-	public CheckerVisitor(Fighter fighter)
-	{
-		this.evaluationErrors = new ArrayList<EvaluationError>();
+	public CheckerVisitor(Fighter fighter) {
+		this.evaluationErrors = new ArrayList<Error>();
 		this.listOfAllowedBotActions = Tool.getSafFunctionsFromClass("Game.FighterBot", "action");
 		this.listOfAllowedBotConditions = Tool.getSafFunctionsFromClass("Game.FighterBot", "condition");
 		this.listOfAllowedBotStrengths = fetchBotStrengths();
 		this.fighter = fighter;
-		
-		this.visitAllAstStatements();
 	}
 	
-	protected void visitAllAstStatements()
-	{
+	public void visitAllAstStatements() {
 		for ( Statement statement : this.fighter.getStatements() )
 		{
 			statement.accept(this);
 		}
 	}
 	
-	public void checkHasAlwaysNode()
-	{
+	public void checkHasAlwaysNode() {
 		
 	}
 
@@ -71,8 +67,7 @@ public class CheckerVisitor implements FighterVisitor
 	 * 
 	 * @return a list of "SAF bot strength"
 	 */
-	protected ArrayList<String> fetchBotStrengths()
-	{
+	protected ArrayList<String> fetchBotStrengths() {
 		ArrayList<String> result = new ArrayList<String>();
 		
 		try {
@@ -92,7 +87,7 @@ public class CheckerVisitor implements FighterVisitor
 
 	protected void checkAssignmentStatementRange(StrengthAssignment statement) {
 		if (statement.getValue() < 1 || statement.getValue() > 10) {
-			evaluationErrors.add(new OutOfRangeError());
+			evaluationErrors.add(new OutOfRange());
 		}
 	}
 	
@@ -103,45 +98,34 @@ public class CheckerVisitor implements FighterVisitor
 	 * 
 	 * @param logicalOperator the assignment statement that we want to evaluate
 	 */
-	public void visit(StrengthAssignment statement)
-	{
+	public void visit(StrengthAssignment statement) {
 		checkAssignmentStatementRange(statement);
 		checkBotStrength(statement);
 	}
 	
-	protected void checkBotStrength(StrengthAssignment statement)
-	{
-		if (!listOfAllowedBotStrengths.contains(statement.getName()))
-		{
-			evaluationErrors.add(new VariableNotDefinedError(statement.getName()));
+	protected void checkBotStrength(StrengthAssignment statement) {
+		if (!listOfAllowedBotStrengths.contains(statement.getName())) {
+			evaluationErrors.add(new VariableNotDefined(statement.getName()));
 		}
 	}
 	
-	protected void checkIsValidAction(Function statement)
-	{
-		if (!listOfAllowedBotActions.contains(statement))
-		{
-			evaluationErrors.add(new MethodNotDefinedError(statement));
+	protected void checkIsValidAction(Function statement) {
+		if (!listOfAllowedBotActions.contains(statement)) {
+			evaluationErrors.add(new ActionNotDefined(statement));
 		}
 	}
 	
-	protected void checkCorrectParameterCount(Function statement)
-	{
-		if (statement.getFunctionName().equals("choose") && statement.getParameters().size() == 0)
-		{
-			//evaluationErrors.add()
-			// choose requires at least 1 action
+	protected void checkCorrectParameterCount(Function statement) {
+		if (statement.getFunctionName().equals("choose") && statement.getParameters().size() == 0) {
+			evaluationErrors.add(new ParameterCountMismatch("choose"));
 		}
-		else if (!statement.getFunctionName().equals("choose") && statement.getParameters().size() > 0)
-		{
-			
+		else if (!statement.getFunctionName().equals("choose") && statement.getParameters().size() > 0) {
+			evaluationErrors.add(new ParameterCountMismatch(statement.getFunctionName()));
 		}
 	}
 	
-	protected void visitFunctionChildren(Function statement)
-	{
-		for (Function function : statement.getParameters())
-		{
+	protected void visitFunctionChildren(Function statement) {
+		for (Function function : statement.getParameters()) {
 			visit(function);
 		}
 	}
@@ -150,8 +134,7 @@ public class CheckerVisitor implements FighterVisitor
 	 * Evaluates a Function object. It checks whether the function exists in the FighterBot class.
 	 * @param statement
 	 */
-	public void visit(Function statement)
-	{
+	public void visit(Function statement) {
 		checkIsValidAction(statement);
 		checkCorrectParameterCount(statement);
 		visitFunctionChildren(statement);
@@ -163,11 +146,9 @@ public class CheckerVisitor implements FighterVisitor
 	 * @param function
 	 * @return
 	 */
-	protected boolean isParameterCountEqualToSafLibrary(Function function)
-	{
+	protected boolean isParameterCountEqualToSafLibrary(Function function) {
 		int indexOfSafFunction = listOfAllowedBotActions.indexOf(function);
-		if (indexOfSafFunction != -1)
-		{
+		if (indexOfSafFunction != -1) {
 			//return function.getParameters().size() == listOfAllowedBotActions.get(indexOfSafFunction).getParameters().size();
 		}
 		return false;
@@ -178,8 +159,7 @@ public class CheckerVisitor implements FighterVisitor
 	 * 
 	 * @param statement
 	 */
-	public void visit(Behaviour statement)
-	{
+	public void visit(Behaviour statement) {
 		statement.getCondition().accept(this);
 		for ( Statement behaviourAction : statement.getStatements())
 		{
@@ -204,7 +184,7 @@ public class CheckerVisitor implements FighterVisitor
 
 	@Override
 	public void visitExpr(State state) {
-		if (!listOfAllowedBotConditions.contains(state)) {
+		if (!listOfAllowedBotConditions.contains(state.getStateName())) {
 			this.evaluationErrors.add(new ConditionNameInvalid(state.getStateName()));
 		}
 	}

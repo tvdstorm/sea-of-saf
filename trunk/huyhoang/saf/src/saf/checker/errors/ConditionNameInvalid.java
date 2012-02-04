@@ -1,6 +1,6 @@
-package saf.checker;
+package saf.checker.errors;
 
-public class ConditionNameInvalid implements EvaluationError {
+public class ConditionNameInvalid implements Error {
 	private String conditionName;
 	
 	public ConditionNameInvalid(String conditionName) {
