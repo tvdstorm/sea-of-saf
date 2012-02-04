@@ -15,7 +15,7 @@ public class Behaviour
 		_activities = new LinkedList<Activity>();
 	}
 	
-	public Activity pickAction(List<Condition.Conditions> conditions, Random random)
+	public Combatmove pickCombatmove(List<Condition.Conditions> conditions, Random random)
 	{
 		List<Activity> possibleCombatmoves = new LinkedList<Activity>();
 		for (Activity a : _activities)
@@ -23,7 +23,11 @@ public class Behaviour
 			if (a.checkCondition(conditions))
 				possibleCombatmoves.add(a);
 		}
-		return possibleCombatmoves.get(random.nextInt(possibleCombatmoves.size()));
+
+		Activity activity = possibleCombatmoves.get(random.nextInt(possibleCombatmoves.size()));
+		Combatmove combatmove = new Combatmove(activity.getMovement(random), activity.getAction(random));
+
+		return combatmove;
 	}
 	
 }
