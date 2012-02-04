@@ -1,11 +1,11 @@
-package saf.checker;
+package saf.checker.errors;
 
 // please rename to strength
-public class VariableNotDefinedError implements EvaluationError
+public class VariableNotDefined implements Error
 {
 	private String variable;
 	
-	public VariableNotDefinedError(String variable)
+	public VariableNotDefined(String variable)
 	{
 		this.variable = variable;
 	}

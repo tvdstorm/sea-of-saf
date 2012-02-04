@@ -1,13 +1,13 @@
-package saf.checker;
+package saf.checker.errors;
 
 import saf.ast.*;
 
-public class TypeMismatchError implements EvaluationError
+public class TypeMismatch implements Error
 {
 	private Function functionCaused;
 	private Class<?> expectedType;
 
-	public TypeMismatchError(Function functionCaused, Class<?> expectedType) 
+	public TypeMismatch(Function functionCaused, Class<?> expectedType) 
 	{
 		this.functionCaused = functionCaused;
 		this.expectedType = expectedType;

@@ -1,8 +1,8 @@
-package saf.checker;
+package saf.checker.errors;
 
-public class OutOfRangeError implements EvaluationError 
+public class OutOfRange implements Error 
 {
-	public OutOfRangeError()
+	public OutOfRange()
 	{
 	}
 
