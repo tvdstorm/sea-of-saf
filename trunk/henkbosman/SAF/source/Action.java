@@ -1,12 +1,14 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+
 
 public class Action
 {
 	public enum Actions 	{	
 		punch_low,punch_high,kick_low,kick_high,block_low,block_high
 	}
-
+	
 	private List<Actions> _actions;
 	public Action(String name)
 	{
@@ -23,22 +25,9 @@ public class Action
 		}
 	}
 	
-	public void outputData()
+	public Actions getAction(Random random)
 	{
-		if (_actions.size()>1)
-		{
-			System.out.print(" choose(");
-		}
-		
-		for (Actions a : _actions)
-		{
-			System.out.print(" "+a);
-		}
-		
-		if (_actions.size()>1)
-		{
-			System.out.print(")");
-		}
-	
+		return _actions.get(random.nextInt(_actions.size()));
 	}
+	
 }

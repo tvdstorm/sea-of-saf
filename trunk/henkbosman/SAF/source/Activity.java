@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Random;
+
 public class Activity 
 {
 	private Condition _condition;
@@ -11,12 +14,18 @@ public class Activity
 		_action=a;
 	}
 	
-	public void outputData()
+	public boolean checkCondition(List<Condition.Conditions> conditions)
 	{
-		_condition.outputData();
-		System.out.print("[");
-		_movement.outputData();
-		_action.outputData();
-		System.out.println("]");
+		return _condition.checkCondition(conditions);
+	}
+	
+	private Movement.Movements getMovement(Random random)
+	{
+		return _movement.getMovement(random);
+	}
+	
+	private Action.Actions getAction(Random random)
+	{
+		return _action.getAction(random);
 	}
 }

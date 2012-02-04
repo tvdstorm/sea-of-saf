@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class Movement
 {
@@ -7,6 +8,7 @@ public class Movement
 		jump,crouch,stand,run_towards,run_away,walk_towards,walk_away
 	}
 	private List<Movements> _movements;
+	
 	public Movement(String name)
 	{
 		_movements = new LinkedList<Movements>();
@@ -21,25 +23,11 @@ public class Movement
 		{
 			_movements.add(Movements.valueOf(name));
 		}
-		
 	}
 	
-	public void outputData()
+	public Movements getMovement(Random random)
 	{
-		if (_movements.size()>1)
-		{
-			System.out.print(" choose(");
-		}
-		
-		for (Movements m : _movements)
-		{
-			System.out.print(" "+m);
-		}
-		
-		if (_movements.size()>1)
-		{
-			System.out.print(")");
-		}
-	
+		return _movements.get(random.nextInt(_movements.size()));
 	}
+	
 }

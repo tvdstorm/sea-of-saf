@@ -5,34 +5,28 @@ public class Property
 	}
 
 	private Properties _type; 
-	public Properties Type()
+	public Properties type()
 	{
 		return _type;
 	}
-	private void Type(String name)
+	private void type(String name)
 	{
 		_type = Properties.valueOf(name);
 	}
 	
 	private int _value = 5; 
-	public int Value()
+	public int value()
 	{
 		return _value;
 	}
-	private void Value(String value)
+	private void value(String value)
 	{
 		_value = Integer.parseInt(value);
 	}
 	
 	public Property(String name, String value)
 	{
-		Type(name);
-		Value(value);
+		type(name);
+		value(value);
 	}
-	
-	public void outputData()
-	{
-		System.out.println(_type +"="+_value);
-	}
-	
 }
