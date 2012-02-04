@@ -1,6 +1,5 @@
 package saf.simulator;
 
-import java.awt.*;
 import java.util.List;
 
 import saf.ast.Fighter;
