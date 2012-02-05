@@ -5,8 +5,7 @@ public class Status
 	{
 		return _health;
 	}
-	private double _recoverTime;
-	
+
 	public Status(int health)
 	{
 		_health = health;
@@ -16,14 +15,16 @@ public class Status
 	public boolean lowerHealth(int damage)
 	{
 		_health -= damage;
-		return _health>0;
+		return _health<1;
 	}
 	
-
-	public boolean recover()
+	private double _recoverTime;
+	public boolean recover(double speed)
 	{
-		_recoverTime -= 1;
-		return _recoverTime<0;
+		_recoverTime -= speed;
+		if (_recoverTime<0)
+			_recoverTime=0;
+		return _recoverTime<=0;
 	}
 	
 	public void doAction(double recoverTime)
