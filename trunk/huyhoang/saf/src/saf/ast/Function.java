@@ -10,7 +10,7 @@ import Game.Interpreter;
  * 
  * @author huyhoang
  */
-public class Function implements Statement 
+public class Function extends Expression implements Statement 
 {
 	List<Function> parameters;
 	public List<Function> getParameters()
@@ -24,15 +24,13 @@ public class Function implements Statement
 		return functionName;
 	}
 	
-	private Class<?> returnType;
-	public Class<?> getReturnType()
-	{
-		return this.returnType;
+	private String keywordType;
+	public String getKeywordType() {
+		return this.keywordType;
 	}
 	
-	public void setReturnType(Class<?> returnType)
-	{
-		this.returnType = returnType;
+	public void setKeywordType(String keywordType) {
+		this.keywordType = keywordType;
 	}
 	
 	public Function(String functionName)

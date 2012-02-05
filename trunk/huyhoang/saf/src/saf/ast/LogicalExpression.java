@@ -1,9 +1,9 @@
 package saf.ast;
 
-public abstract class LogicalExpression implements Statement {
+public abstract class LogicalExpression extends Expression implements Statement {
 	private Statement leftExpression;
 	private Statement rightExpression;
-
+	
 	public Statement getLeftExpression() {
 		return leftExpression;
 	}

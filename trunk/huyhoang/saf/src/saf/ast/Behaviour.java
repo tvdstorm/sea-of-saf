@@ -13,36 +13,32 @@ import Game.Interpreter;
 public class Behaviour implements Statement
 {
 	private Statement condition;
-	public Statement getCondition()
-	{
+	private Statement move;	
+	private Statement attack;
+	
+	public Statement getCondition() {
 		return this.condition;
 	}
 	
-	private List<Statement> statements;
-	public List<Statement> getStatements()
-	{
-		return this.statements;
+	public Function getMove() {
+		return (Function)this.move;
+	}
+	
+	public Function getAttack() {
+		return (Function)this.attack;
 	}
 	
 	// condition = expression
-	public Behaviour(Statement condition, List<Statement> statements)
+	public Behaviour(Statement condition, Statement move, Statement attack)
 	{
 		this.condition = condition;
-		this.statements = statements;
+		this.move = move;
+		this.attack = attack;
 	}
 
 	@Override
 	public void accept(FighterVisitor visitor)
 	{
 		visitor.visit(this);
-		acceptChildren(visitor);
-	}
-	
-	protected void acceptChildren(FighterVisitor visitor)
-	{
-		for (Statement statement : statements)
-		{
-			statement.accept(visitor);
-		}
 	}
 }
