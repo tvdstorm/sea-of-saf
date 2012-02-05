@@ -1,6 +1,6 @@
 package saf.ast;
 
-public interface Statement<T> 
+public interface Statement
 {
 	public void accept(FighterVisitor visitor);
 }

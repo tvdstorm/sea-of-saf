@@ -21,18 +21,4 @@ public class Fighter
 	{
 		statements = new ArrayList<Statement>();
 	}
-	
-	/**
-	 * Returns the AST as a string representation
-	 */
-	public String toString()
-	{
-		StringBuilder result = new StringBuilder();
-		for ( Statement statement : statements )
-		{
-			result.append(statement.toString()).append("\r\n");
-		}
-		
-		return result.toString();
-	}
 }

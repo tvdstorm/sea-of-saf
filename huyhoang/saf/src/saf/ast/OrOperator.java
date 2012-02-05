@@ -10,6 +10,6 @@ public class OrOperator extends LogicalExpression {
 
 	@Override
 	public void accept(FighterVisitor visitor) {
-		visitor.visitExpr(this);
+		visitor.visit(this);
 	}
 }
