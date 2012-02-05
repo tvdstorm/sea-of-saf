@@ -1,1 +1,8 @@
-iwan
+iwan{
+
+punchPower = 8
+kickPower = 9
+far[run_towards punch_high]
+near[choose(stand crouch) kick_high]
+
+}
