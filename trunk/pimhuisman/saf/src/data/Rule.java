@@ -1,8 +1,15 @@
 package data;
 
-public class Rule {
+import core.BaseTreePrinter;
+
+public class Rule extends BaseData {
 
 	private Actions action;
+
+	@Override
+	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+		treePrinter.visit(this);
+	}
 	
 	/*private MoveActionType moveAction;
 	private FightActionType fightAction;

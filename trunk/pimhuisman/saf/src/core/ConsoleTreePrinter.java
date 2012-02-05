@@ -4,6 +4,7 @@ import data.Behaviour;
 import data.Characteristic;
 import data.Fighter;
 import data.Personality;
+import data.Rule;
 
 public class ConsoleTreePrinter extends BaseTreePrinter {
 
@@ -36,6 +37,7 @@ public class ConsoleTreePrinter extends BaseTreePrinter {
 
 	@Override
 	public void visit(Behaviour behaviour) {
+		depth -= 1;
 		printWhitespace();
 		System.out.println("Behaviour");
 		depth += 1;
@@ -45,6 +47,12 @@ public class ConsoleTreePrinter extends BaseTreePrinter {
 	public void visit(Characteristic characteristic) {
 		printWhitespace();
 		System.out.println("Characteristic Name=" + characteristic.getName() + " Value=" + characteristic.getValue());
+	}
+	
+	@Override
+	public void visit(Rule rule) {
+		printWhitespace();
+		System.out.println("Rule");
 	}
 
 }
