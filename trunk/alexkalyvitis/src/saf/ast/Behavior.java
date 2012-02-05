@@ -23,6 +23,6 @@ public class Behavior {
 	
 	@Override
 	public String toString(){
-		return condition.getCondition() + "\n\t\tMove: " + move.getName() + "\n\t\tAttack: " + attack.getName();
+		return condition.toString() + "\n\t\tMove: " + move.getName() + "\n\t\tAttack: " + attack.getName();
 	}
 }

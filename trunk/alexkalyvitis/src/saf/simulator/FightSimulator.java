@@ -17,37 +17,47 @@ public class FightSimulator{
 	}
 
 	public void Simulate(){
-		System.out.println("Simulating...");
+		System.out.print("Simulating...");
 		
 		try {
-			Display.setDisplayMode(new DisplayMode(1024,400));
-			Display.setTitle(fight.getFirstFighter().getName() + " V " + fight.getSecondFighter().getName());
+			Display.setDisplayMode(new DisplayMode(800,400));
+			Display.setTitle(fight.getFirstFighter().getName() + " VS " + fight.getSecondFighter().getName());
 			Display.create();
 		} catch (LWJGLException e) {
-			System.out.println("Simulation Failed...\n " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
 			System.exit(0);
 		}
-		// init OpenGL
-		GL11.glMatrixMode(GL11.GL_PROJECTION);
-		GL11.glLoadIdentity();
-		GL11.glOrtho(0, 1024, 0, 400, 1, -1);
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-		
-		drawBackground();
+		initOpenGL();
+		float x = 0;
+		float y = 0;
 		
 		while (!Display.isCloseRequested()) {
-			// render OpenGL here
-			drawStand(0);
-			drawPunchHigh(175);
-			drawPunchLow(350);
-			drawKickHigh(525);
-			drawKickLow(700);
+			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+			
+			if(fight.hasEnded()){ break; }
+			
+			fight.assess();
+			
+			fight.getFirstFightersNextMove();
+			fight.getSecondFightersNextMove();
+			
+			drawStand(x++);
+			drawPunchHigh((y--) + 175);
+			drawPunchLow(x + 350);
+			drawKickHigh(y + 525);
+			drawKickLow(x + 700);
+			
 			Display.update();
+			Display.sync(60);
 		}
 		Display.destroy();
-		
-		System.out.println("Simulating Finished");
+		System.out.println("..OK");
 	}
+	
+	public void draw(Behavior b){
+		
+	}
+
 	public void drawStand(float initX) {
 		circle(initX + 100, 250, 50); // Head
 		line(initX + 100, 200, initX + 100, 100); // Body
@@ -99,7 +109,7 @@ public class FightSimulator{
 	}
 
 	public void line(float x1, float y1, float x2, float y2){
-		GL11.glLineWidth(5);
+		GL11.glLineWidth(2);
 		GL11.glBegin(GL11.GL_LINES);
 		GL11.glVertex2f(x1,y1);
 		GL11.glVertex2f(x2,y2);
@@ -136,5 +146,13 @@ public class FightSimulator{
 		GL11.glTexCoord2f(0,1);
 		GL11.glVertex2f(0,1);
 		GL11.glEnd();
+	}
+	
+	private void initOpenGL() {
+		GL11.glMatrixMode(GL11.GL_PROJECTION);
+		GL11.glLoadIdentity();
+		GL11.glOrtho(0, 800, 0, 400, 1, -1);
+		GL11.glMatrixMode(GL11.GL_MODELVIEW);
+		GL11.glHint(GL11.GL_POINT_SMOOTH_HINT | GL11.GL_LINE_SMOOTH_HINT | GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_DONT_CARE);
 	}
 }

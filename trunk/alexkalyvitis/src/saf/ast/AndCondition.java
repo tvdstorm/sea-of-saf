@@ -6,8 +6,9 @@ public class AndCondition extends Condition {
 	public void setCondition(String c){ super.setName(c); }
 	public void setAndCondition(String c){ andCondition = c; }
 	
-	public String getAndCond(){ return andCondition; }
-	public String getCondition(){
+	public String getAndCondition(){ return andCondition; }
+	public String getCondition(){ return super.getName(); }
+	public String toString(){
 		return "\n\t\tCondition: " + super.getName() + "\n\t\t\tAnd: " + andCondition;
 	}
 }
