@@ -6,7 +6,7 @@ import java.util.Random;
 public class Action
 {
 	public enum Actions 	{	
-		punch_low,punch_high,kick_low,kick_high,block_low,block_high
+		punch_low,punch_high,kick_low,kick_high,block_low,block_high, nothing
 	}
 	
 	private List<Actions> _actions;

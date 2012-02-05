@@ -33,6 +33,8 @@ public class Condition
 	
 	public boolean checkCondition(List<Condition.Conditions> conditions)
 	{
+		if (_operator==null)
+			return true;
 		switch (_operator)
 		{
 			case and:

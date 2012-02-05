@@ -17,15 +17,12 @@ public class Fighter
 	private double _speed = 0.0;
 	private double speed()
 	{
-		if (_speed>0.0)
-			return _speed;
-		
-		double height = (getPropertyValue(Property.Properties.punchReach) + getPropertyValue(Property.Properties.kickReach)) / 2;
-		double weight = (getPropertyValue(Property.Properties.punchPower) + getPropertyValue(Property.Properties.kickPower)) / 2;
-		_speed = 0.5*(height-weight);
+		double height = ((double)(getPropertyValue(Property.Properties.punchReach) + getPropertyValue(Property.Properties.kickReach))) / 2;
+		double weight = ((double)(getPropertyValue(Property.Properties.punchPower) + getPropertyValue(Property.Properties.kickPower))) / 2;
+		_speed = 0.1+(Math.abs(height-weight)*0.5);
 		return _speed;
 	}
-	private int getPropertyValue(Property.Properties property)
+	public int getPropertyValue(Property.Properties property)
 	{
 		for (Property p : _properties)
 		{
@@ -49,6 +46,14 @@ public class Fighter
 	
 	private Rules _rules;
 	private Status _status;
+	public boolean getDamage(int damage)
+	{
+		return _status.lowerHealth(damage);
+	}
+	public int getHealth()
+	{
+		return (int)(((float)_status.health()/(float)_rules._startingHealth)*100);
+	}
 	public void setRules(Rules rules)
 	{
 		_rules = rules;
@@ -65,6 +70,11 @@ public class Fighter
 		_name="";
 	}
 	
+	public int doMove(Combatmove combatmove)
+	{
+		return _rules.calculateMovement(combatmove);
+	}
+	
 	public Combatmove performAction(int enemyDistance, int enemyHealth)
 	{
 		List<Condition.Conditions> actualConditions = new LinkedList<Condition.Conditions>();
@@ -72,25 +82,25 @@ public class Fighter
 		actualConditions.add(evaluateDistance(enemyDistance));
 		Combatmove combatmove = _behaviour.pickCombatmove(actualConditions, _randomGenerator);
 		
-		if (_status.recover())
+		if (_status.recover(speed()))
 		{
-			_status.doAction(_speed);
+			_status.doAction(_rules.calculateSpeed(speed(), combatmove));
 			return combatmove;
 		}
 		
-		return null;
+		return new Combatmove(Movement.Movements.stand, Action.Actions.nothing);
 	}
 	
 	private Condition.Conditions evaluateEnemy(int enemyHealth)
 	{
-		double range = ((enemyHealth /_rules._startingHealth) * 100) - ((_status.health() /_rules._startingHealth) * 100);
+		double range = enemyHealth - _status.health();
 		
-		if (range<-50)
+		if (range<-40)
 			return Condition.Conditions.much_weaker;
 		if (range<-25)
 			return Condition.Conditions.weaker;
 		
-		if (range>50)
+		if (range>40)
 			return Condition.Conditions.much_stronger;
 		if (range>25)
 			return Condition.Conditions.stronger;
