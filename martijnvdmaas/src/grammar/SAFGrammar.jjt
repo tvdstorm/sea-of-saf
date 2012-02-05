@@ -7,7 +7,10 @@ import java.io.InputStream;
 import elements.*;
 import checker.SAFChecker;
 import logger.ErrorLog;
+import game.FightStart;
+import visitor.SAFElementValidatorVisitor;
 import visitor.SAFElementPrintVisitor;
+import java.awt.Frame;
 
 public class SAFGrammar
 {
@@ -29,11 +32,13 @@ public class SAFGrammar
 			
     		System.out.println("Begin Checking..");
     		
-			SAFChecker safChecker = new SAFChecker(bots);
-			bots = safChecker.check();			
+			//SAFChecker safChecker = new SAFChecker(bots);
+			//	bots = safChecker.check();			
 			System.out.println("Succesful Checking.\n");
-
-			bots.accept(new SAFElementPrintVisitor());			      
+			 new SAFElementPrintVisitor().visit(bots);
+			 
+			bots.accept(new SAFElementValidatorVisitor());
+			new FightStart(bots);      
     	} 
 	    catch (Exception e)
 	    {

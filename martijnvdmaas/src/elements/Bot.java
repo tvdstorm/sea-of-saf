@@ -1,8 +1,11 @@
-package safobjects;
+package elements;
 
 import java.util.ArrayList;
 
-public class Bot 
+import visitor.SAFElement;
+import visitor.SAFElementVisitor;
+
+public class Bot implements SAFElement
 {
 	private ArrayList<Characteristic> characteristics 	= new ArrayList<Characteristic>();
 	private ArrayList<Behaviour> behaviours 			= new ArrayList<Behaviour>();
@@ -21,17 +24,9 @@ public class Bot
 	
 	public String toString() 
 	{
-		String output = "    Name: " + botName + "\n";
-		for(Characteristic characteristic : characteristics) 
-		{
-			output += characteristic.toString();
-		}
-		
-		for(Behaviour behaviour : behaviours) 
-		{
-			output += behaviour.toString();
-		}
-		return "  Class:" + this.getClass().getName() + "\n" +  output;
+		String output = "Class: " + this.getClass().getName();
+
+		return output;
 	}
 	
 	public ArrayList<Characteristic> getCharacteristics() 
@@ -62,5 +57,18 @@ public class Bot
 	public void setBotName(String botName) 
 	{
 		this.botName = botName;
+	}
+
+	@Override
+	public void accept(SAFElementVisitor visitor) throws Exception {
+		for(Characteristic characteristic : characteristics) 
+		{
+			characteristic.accept(visitor);
+		}
+		for(Behaviour behaviour : behaviours) 
+		{
+			behaviour.accept(visitor);
+		}
+		visitor.visit(this);
 	}
 }

@@ -1,6 +1,9 @@
-package safobjects;
+package elements;
 
-public class Characteristic 
+import visitor.SAFElement;
+import visitor.SAFElementVisitor;
+
+public class Characteristic implements SAFElement
 {
 	private String name;
 	private int value;
@@ -42,5 +45,10 @@ public class Characteristic
 	public void setValue(int value) 
 	{
 		this.value = value;
+	}
+
+	@Override
+	public void accept(SAFElementVisitor visitor) throws Exception {
+		visitor.visit(this);
 	}
 }
