@@ -26,7 +26,7 @@ class Fighter extends SafObject{
 		m_Name=(StringValue)name;
 	}
 	String toJavaCode(){
-		String response= "class "+m_Name.toJavaCode()+"{public "+m_Name.toJavaCode()+"(){";
+		StringBuffer response=new StringBuffer( "class "+m_Name.toJavaCode()+"{public "+m_Name.toJavaCode()+"(){");
 		if(m_Statement!=null){
 			List<Statement> actions=new ArrayList<Statement>();
 			List<Statement> declarations=new ArrayList<Statement>();;
@@ -41,11 +41,16 @@ class Fighter extends SafObject{
 				}
 				
 			}while((st=st.getNext())!=null);
-			
-			
+			for (Statement s : declarations) {
+				response.append( s.toJavaCode());
+			}
+			response.append("} public List<ActionPair> doSomething(){List<ActionPair> list=new List<ActionPair>();");
+			for (Statement s : actions) {
+				response.append( s.toJavaCode());
+			}
 		}
-		
-
+		response.append("}}");
+		return response.toString();
 	}
 	private String toCode(List<Statement> actions,List<Statement> declarations){
 		StringBuffer result=new StringBuffer();
@@ -57,6 +62,7 @@ class Fighter extends SafObject{
 		for(Statement s:actions){
 			result.append(s.toJavaCode());
 		}
+		return result.toString();
 	}
 }
 
@@ -122,7 +128,7 @@ class ActionStatement extends Statement{
 		return m_Cond;
 	}
 	String toJavaCode(){
-		
+		return "if("+m_Cond.toJavaCode()+"){list.add(new ActionPair("+m_Action1.toJavaCode()+","+m_Action2.toJavaCode()+"))";
 	}
 }
 abstract class IAction extends SafObject{

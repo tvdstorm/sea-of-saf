@@ -34,7 +34,7 @@ public class JavaCompiler implements SafVisitor{
 	@Override
 	public void visit(ChooseAction a) {
 		// TODO Auto-generated method stub
-		m_Actions.append(arg0)
+
 	}
 
 	@Override
