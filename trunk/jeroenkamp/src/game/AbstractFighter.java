@@ -1,5 +1,7 @@
 package game;
 
+import java.util.List;
+
 import common.*;
 
 public abstract class AbstractFighter {
@@ -21,7 +23,7 @@ public abstract class AbstractFighter {
 	public void setOpponent(AbstractFighter fighter){
 		m_Opponent=fighter;
 	}
-	public abstract void doSomething();
+	public abstract List<ActionPair> doSomething();
 	
 	public boolean isNear(){
 		return false;
