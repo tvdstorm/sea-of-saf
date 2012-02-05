@@ -1,8 +1,11 @@
-package safobjects;
+package elements;
 
 import java.util.ArrayList;
 
-public class ConditionChoices 
+import visitor.SAFElement;
+import visitor.SAFElementVisitor;
+
+public class ConditionChoices implements SAFElement
 {
 	private ArrayList<ConditionGroup> conditionGroups;
 	
@@ -24,13 +27,7 @@ public class ConditionChoices
 	
 	public String toString() 
 	{
-		String output ="";
-		for(ConditionGroup conditionGroup : conditionGroups) 
-		{
-			output += conditionGroup.toString();
-		}
-		
-		return "      Class: " + this.getClass().getName() + "\n" + output ;
+		return "Class: " + this.getClass().getName();
 	}
 	
 	public ArrayList<ConditionGroup> getConditionGroups() 
@@ -41,5 +38,14 @@ public class ConditionChoices
 	public void setConditionGroups(ArrayList<ConditionGroup> conditionGroups) 
 	{
 		this.conditionGroups = conditionGroups;
+	}
+
+	@Override
+	public void accept(SAFElementVisitor visitor) throws Exception {
+		for(ConditionGroup conditionGroup : conditionGroups) 
+		{
+			conditionGroup.accept(visitor);
+		}
+		visitor.visit(this);
 	}
 }
