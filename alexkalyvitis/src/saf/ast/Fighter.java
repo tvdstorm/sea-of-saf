@@ -51,7 +51,7 @@ public class Fighter extends BehaviorItem{
 	public float getHeight(){ return this.height; }
 	public float getSpeed(){ return this.speed; }
 	public int getHealth(){ return health; }
-	
+
 	public int getValueOfStrength(String s){
 		for(Strength strength : strengths){
 			if(strength.getName().equals(s)){

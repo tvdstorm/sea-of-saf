@@ -34,24 +34,20 @@ public class SafMain {
 
 	        Saf parser = new Saf(stream);
 
-	        System.out.println("Parsing...");
+	        System.out.print("Parsing...");
 	        
 			List<Fighter> fighters = parser.Parse(); // Parse
-			System.out.println("Parsing Succeeded");
+			System.out.println(".....OK");
 
-			System.out.println("Interpreting...");
+			System.out.print("Interpreting...");
 
 			SafInterpreter interpreter = new SafInterpreter(fighters);
 			if (interpreter.interpret()) {
-				System.out.println("Interpreting Succeeded");
-				// Print AST
-				/*for(Fighter fighter : fighters){
-					fighter.print();
-				}*/
+				System.out.println("OK");
 				FightSimulator fightSimulator = new FightSimulator(fighters);
 				fightSimulator.Simulate();
 			} else {
-			    System.out.println("Interpreting Failed");
+			    System.out.println("FAIL");
 			}
 	    }
 		catch(ParseException e){

@@ -21,7 +21,7 @@ public class SafInterpreter {
 				fighter.setWeight((float)(fighter.getValueOfStrength("punchPower") + fighter.getValueOfStrength("kickPower")) / 2);
 				fighter.setHeight((float)(fighter.getValueOfStrength("punchReach") + fighter.getValueOfStrength("kickReach")) / 2);
 				fighter.setSpeed((float)Math.abs(fighter.getHeight() - fighter.getWeight()) / 2);
-				fighter.setHealth(10);
+				fighter.setHealth(100);
 			}
 			for (Behavior behavior : fighter.getBehaviors()){
 				if(!identifierIsValid(fighter, behavior.getCondition())){ return false; }
