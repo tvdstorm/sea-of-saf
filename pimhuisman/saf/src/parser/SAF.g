@@ -37,11 +37,14 @@ characteristic returns[Characteristic value]
 					;
 
 behaviour returns[Behaviour value]
-					:	rule+
-						{ $value = new Behaviour(); }
+					@init { List<Rule> rules = new LinkedList<Rule>(); }
+					:	( rule { rules.add($rule.value); } )+
+						{ $value = new Behaviour(rules); }
 					;
 					
-rule				:	condition '[' actions ']'
+rule returns[Rule value]
+					:	condition '[' actions ']'
+						{ $value = new Rule(); }
 					;
 					
 condition			:	andStatement

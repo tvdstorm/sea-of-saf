@@ -1,6 +1,5 @@
 package data;
 import java.util.List;
-import java.util.LinkedList;
 
 import core.BaseTreePrinter;
 
@@ -8,16 +7,8 @@ public class Behaviour extends BaseData {
 
 	private List<Rule> rules;
 	
-	public Behaviour() {
-		rules = new LinkedList<Rule>();
-	}
-	
-	public void clearRules() {
-		rules.clear();
-	}
-	
-	public void addRule(Rule rule) {
-		rules.add(rule);
+	public Behaviour(List<Rule> rules) {
+		this.rules = rules;
 	}
 	
 	public List<Rule> getRules() {
@@ -26,8 +17,10 @@ public class Behaviour extends BaseData {
 
 	@Override
 	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
-		// TODO Auto-generated method stub
-		
+		treePrinter.visit(this);
+		for ( Rule rule : rules ) {
+			rule.acceptTreePrinter(treePrinter);
+		}
 	}
 	
 }

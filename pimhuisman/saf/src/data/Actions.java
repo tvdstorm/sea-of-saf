@@ -1,6 +1,7 @@
 package data;
 
 import java.util.List;
+import java.util.Random;
 
 public class Actions {
 
@@ -18,6 +19,23 @@ public class Actions {
 	
 	public List<String> getAttackOptions() {
 		return attackOptions;
+	}
+	
+	public String getRandomMoveOption() {
+		return getRandomOption(moveOptions);
+	}
+	
+	public String getRandomAttackOption() {
+		return getRandomOption(attackOptions);
+	}
+	
+	private String getRandomOption(List<String> options) {
+		if ( options.size() > 0 ) {
+			Random random = new Random();
+			int randomOption = random.nextInt(options.size());
+			return options.get(randomOption);
+		}
+		return "";
 	}
 	
 }
