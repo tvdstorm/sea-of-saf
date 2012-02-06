@@ -15,15 +15,15 @@ public class Fight {
 	private static final int THRESHOLD_REACH_ONE_FAR = 5;
 	private static final int DELAY = 500;
 	
-	public void start(Bot left, Bot right, Main view) throws InterruptedException {
-		if(left.getPosition().equals(right.getPosition())) {
-			throw new IllegalArgumentException("A left and right position bot must be argumented.");
+	public void start(Bot a, Bot b, Main view) throws InterruptedException {
+		if(a.getPosition().equals(b.getPosition())) {
+			throw new IllegalArgumentException("A left and right positioned bot must be argumented.");
 		}
 		
-		while(left.getHealth() > 0 && right.getHealth() > 0) {
-			reduceHealth(left, right);
-			reduceHealth(right, left);
-			updateBotsAndView(left, right, view);
+		while(a.getHealth() > 0 && b.getHealth() > 0) {
+			reduceHealth(a, b);
+			reduceHealth(b, a);
+			updateBotsAndView(a, b, view);
 			
 			Thread.sleep(DELAY);
 		}
