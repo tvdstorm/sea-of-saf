@@ -1,3 +1,6 @@
 - I choose to add the characteristics of a fighter as Fighter instance variables instead
 as a set of attributes since they have a default value and, because of that, have to be
 defined anyway.
+
+- Why do I have operatorws as objects in my AST? Is it better fit for the job then the
+Composite Pattern?
