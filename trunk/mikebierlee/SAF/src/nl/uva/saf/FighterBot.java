@@ -20,24 +20,24 @@ package nl.uva.saf;
 
 import java.util.HashMap;
 
-import nl.uva.saf.fdl.AttributeExtractor;
+import nl.uva.saf.fdl.CharacteristicExtractor;
 import nl.uva.saf.fdl.ast.ITreeNode;
 
-class FighterBot {
-	private HashMap<String, Integer> attributes;
+public class FighterBot {
+	private HashMap<String, Integer> characteristics;
 	protected final int default_value = 5;	
 	
 	public FighterBot(ITreeNode fighter) {
-		AttributeExtractor extractor = new AttributeExtractor(fighter);
-		attributes = extractor.extract();
+		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
+		characteristics = extractor.extract();
 	}	
 
 	public void setAttribute(String name, int value) {
-		attributes.put(name, value);
+		characteristics.put(name, value);
 	}
 	
 	public int getAttribute(String name) {
-		Integer value = attributes.get(name);
+		Integer value = characteristics.get(name);
 		return value == null ? default_value : value;
 	}
 }

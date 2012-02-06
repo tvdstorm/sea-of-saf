@@ -32,7 +32,10 @@ public class Main {
 		Fighter fighter = (Fighter) loader.loadFighter("data/unbeatabledude.saf");
 		
 		TreeValidator validator = new TreeValidator(fighter);
-		ValidationReport validationReport = validator.validate();
+		ValidationReport validationReport = validator.validate();	
+		
+		TreeVisualizer visualizer = new TreeVisualizer();
+		visualizer.printTree(fighter);
 		
 		for(String warning : validationReport.getWarnings()) {
 			System.out.println("Warning: " + warning);
@@ -41,9 +44,6 @@ public class Main {
 		for(String error : validationReport.getErrors()) {
 			System.err.println("Error: " + error);
 		}
-		
-		TreeVisualizer visualizer = new TreeVisualizer();
-		visualizer.printTree(fighter);
 
 		System.out.println("Loaded \"" + fighter.getName() + "\" - " + validationReport.getWarnings().size() + " warning(s), " + validationReport.getErrors().size() + " error(s).");
 	}
