@@ -3,6 +3,6 @@ import core.BaseTreeVisitor;
 
 public abstract class BaseData {
 
-	public abstract void acceptTreePrinter(BaseTreeVisitor treePrinter);
+	public abstract void acceptTreeVisitor(BaseTreeVisitor treePrinter);
 	
 }

@@ -16,32 +16,44 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 		errors = new LinkedList<String>();
 	}
 	
+	public List<String>getErrors() {
+		return errors;
+	}
+	
+	public void printErrorsInConsole() {
+		for ( String error : errors ) {
+			System.err.println(error);
+		}
+	}
+	
 	@Override
 	public void visit(Fighter fighter) {
-		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void visit(Personality personality) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void visit(Behaviour behaviour) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void visit(Characteristic characteristic) {
-		// TODO Auto-generated method stub
-
+		String name = characteristic.getName();
+		int value = characteristic.getValue();
+		if ( value < 0 ) {
+			errors.add("Characteristic value may not be below zero for: "+name+" (actual value: "+value+")");
+		} else if ( value > 9 ) {
+			errors.add("Characteristic value may not be above nine for: "+name+" (actual value: "+value+")");
+		}
 	}
 
 	@Override
 	public void visit(Rule rule) {
-		// TODO Auto-generated method stub
 
 	}
 
