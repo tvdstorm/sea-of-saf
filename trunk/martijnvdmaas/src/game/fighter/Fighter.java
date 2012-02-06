@@ -1,5 +1,9 @@
 package game.fighter;
 
+import java.util.ArrayList;
+
+import elements.Behaviour;
+
 public class Fighter {
 
 	private int weight;
@@ -14,6 +18,13 @@ public class Fighter {
 	
 	private int health;
 	private String fighterName;
+	public ArrayList<Behaviour> getBehaviours() {
+		return behaviours;
+	}
+
+	private String currentAttack;
+	private String currentMove;
+	private ArrayList<Behaviour> behaviours;
 
 	public Fighter(String fighterName) {
 		this.health = 100;
@@ -91,4 +102,26 @@ public class Fighter {
 	public void setFighterName(String fighterName) {
 		this.fighterName = fighterName;
 	}
+
+	public String getCurrentAttack() {
+		return currentAttack;
+	}
+
+	public void setCurrentAttack(String currentAttack) {
+		this.currentAttack = currentAttack;
+	}
+
+	public String getCurrentMove() {
+		return currentMove;
+	}
+
+	public void setCurrentMove(String currentMove) {
+		this.currentMove = currentMove;
+	}
+
+	public void setBehaviours(ArrayList<Behaviour> behaviours) {
+		this.behaviours = behaviours;
+	}
+	
+
 }

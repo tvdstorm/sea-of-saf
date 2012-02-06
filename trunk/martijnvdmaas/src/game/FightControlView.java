@@ -26,6 +26,7 @@ public class FightControlView extends JPanel {
 
 		button = new JButton("Next step");
 		button.setSize(new Dimension(100,10));
+		button.addActionListener(fightControlController);
 		add(button);
 	}
 

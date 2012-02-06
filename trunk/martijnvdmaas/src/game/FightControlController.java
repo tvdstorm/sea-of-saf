@@ -15,9 +15,10 @@ public class FightControlController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "(Re) Start":
-			fightEngine.doStep();
+			fightEngine.reStart();
 			break;
-
+		case "Next step": 
+			fightEngine.doStep();
 		default:
 			break;
 		}
