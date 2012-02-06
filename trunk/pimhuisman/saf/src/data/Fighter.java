@@ -26,10 +26,10 @@ public class Fighter extends BaseData {
 	}
 
 	@Override
-	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
+	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
-		personality.acceptTreePrinter(treePrinter);
-		behaviour.acceptTreePrinter(treePrinter);
+		personality.acceptTreeVisitor(treePrinter);
+		behaviour.acceptTreeVisitor(treePrinter);
 	}
 	
 }

@@ -26,10 +26,10 @@ public class Personality extends BaseData {
 	}
 
 	@Override
-	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
+	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 		for ( Characteristic characteristic : characteristics ) {
-			characteristic.acceptTreePrinter(treePrinter);
+			characteristic.acceptTreeVisitor(treePrinter);
 		}
 	}
 	

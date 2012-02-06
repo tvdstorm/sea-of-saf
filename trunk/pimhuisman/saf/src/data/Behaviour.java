@@ -16,10 +16,10 @@ public class Behaviour extends BaseData {
 	}
 
 	@Override
-	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
+	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 		for ( Rule rule : rules ) {
-			rule.acceptTreePrinter(treePrinter);
+			rule.acceptTreeVisitor(treePrinter);
 		}
 	}
 	

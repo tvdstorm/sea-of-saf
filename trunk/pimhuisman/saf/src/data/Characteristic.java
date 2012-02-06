@@ -20,7 +20,7 @@ public class Characteristic extends BaseData {
 	}
 
 	@Override
-	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
+	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 	}
 	

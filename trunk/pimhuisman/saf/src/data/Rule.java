@@ -7,7 +7,7 @@ public class Rule extends BaseData {
 	private Actions action;
 
 	@Override
-	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
+	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 	}
 	

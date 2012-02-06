@@ -69,7 +69,7 @@ fragment LETTER		:	('a'..'z' | 'A'..'Z');
 fragment DIGIT		:	'0'..'9';
 
 IDENTIFIER			:	LETTER (LETTER | '_' | '-')* LETTER;
-NUMBER				:	DIGIT+;
+NUMBER				:	'-'? DIGIT+;
 WHITESPACE			:	(' '|'\t'|'\f'|'\n'|'\r')+ { $channel = HIDDEN; };
 SINGLELINE_COMMENT	:	'//' .* ('\n' | '\r') { $channel = HIDDEN; };
 MULTILINE_COMMENT	:	'/*' .* '*/' { $channel = HIDDEN; };
