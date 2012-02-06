@@ -6,12 +6,12 @@ options {
 }
 
 @header { 
-  package generated;
+  package saf.parser; 
   import saf.structure.*;
 }
-@lexer::header
+@lexer::header 
 {
-  package generated;
+  package saf.parser;
 }
 
 bots returns [Bots bots] :              {     $bots = new Bots();
@@ -19,7 +19,7 @@ bots returns [Bots bots] :              {     $bots = new Bots();
   (b=bot                                {     $bots.getBots().add(b.bot); 
                                         }
   )*;
-bot returns [Bot bot]: 
+bot returns [Bot bot]:
   n=name                                {     $bot = new Bot(n.name); 
                                         }
     '{' 
