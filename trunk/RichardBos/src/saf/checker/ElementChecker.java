@@ -145,7 +145,7 @@ public class ElementChecker implements ElementVisitor{
 	public void visit(Behavior behavior)
 	{
 		behavior.getCondition().accept(this);
-		
+		System.out.println("test");
 		try
 		{
 			behavior.getFightAction().accept(this);
