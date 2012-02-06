@@ -31,8 +31,8 @@ public class Main {
 		IFighterLoader loader = new ANTLFighterLoader();
 		Fighter fighter = (Fighter) loader.loadFighter("data/unbeatabledude.saf");
 		
-		TreeValidator validator = new TreeValidator();
-		ValidationReport validationReport = validator.validate(fighter);
+		TreeValidator validator = new TreeValidator(fighter);
+		ValidationReport validationReport = validator.validate();
 		
 		for(String warning : validationReport.getWarnings()) {
 			System.out.println("Warning: " + warning);

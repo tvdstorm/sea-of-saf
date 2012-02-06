@@ -15,21 +15,17 @@ import nl.uva.saf.fdl.ast.FighterAttribute;
 import nl.uva.saf.fdl.ast.MoveChoice;
 import nl.uva.saf.fdl.ast.Rule;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class TreeValidatorTest {
 	private TreeValidator validator;
 
-	@Before
-	public void setUp() throws Exception {
-		validator = new TreeValidator();
-	}
-
 	@Test
 	public void treeLacksAlwaysBehaviourTest() {	
 		Fighter fighter = new Fighter("fighter", new ArrayList<FighterAttribute>());
-		ValidationReport report = validator.validate(fighter);
+		
+		validator = new TreeValidator(fighter);
+		ValidationReport report = validator.validate();
 
 		boolean containsAlwaysError = false;
 		for (String error : report.getErrors()) {
@@ -50,7 +46,8 @@ public class TreeValidatorTest {
 		fighterAttributes.add(new Behaviour(new ConditionAlways(), new Rule(new MoveChoice(new ArrayList<Action>()), new FightChoice(fightChoices))));
 		Fighter fighter = new Fighter("emptyChoiceClauseTest", fighterAttributes);
 				
-		ValidationReport report = validator.validate(fighter);
+		validator = new TreeValidator(fighter);
+		ValidationReport report = validator.validate();
 
 		boolean containsEmptyChoiceError = false;
 		for (String error : report.getErrors()) {
@@ -70,7 +67,8 @@ public class TreeValidatorTest {
 		fighterAttributes.add(testCharacteristic);		
 		Fighter fighter = new Fighter("characteristicValueOutOfBoundsTest", fighterAttributes);
 		
-		ValidationReport report = validator.validate(fighter);
+		validator = new TreeValidator(fighter);
+		ValidationReport report = validator.validate();
 		
 		boolean containsOutOfBoundsError = false;
 		for (String error : report.getErrors()) {
@@ -82,8 +80,8 @@ public class TreeValidatorTest {
 		
 		assert(containsOutOfBoundsError);
 		
-		//testCharacteristic.setValue(0);
-		report = validator.validate(fighter);
+		validator = new TreeValidator(fighter);
+		report = validator.validate();
 		
 		containsOutOfBoundsError = false;
 		for (String error : report.getErrors()) {
