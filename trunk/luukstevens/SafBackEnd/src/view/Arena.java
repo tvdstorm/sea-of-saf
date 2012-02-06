@@ -21,10 +21,10 @@ public class Arena extends JPanel {
 	private static final int WIDTH = 450;
 	private static final int HIGHT = 250;
 	
-	private static final int LEFT_BOT_XPOS = 100;
+	private static final int LEFT_BOT_XPOS = 145;
 	private static final int LEFT_BOT_YPOS = 75;
 	
-	private static final int RIGHT_BOT_XPOS = 300;
+	private static final int RIGHT_BOT_XPOS = 255;
 	private static final int RIGHT_BOT_YPOS = 75;
 	
 	//Instance variables

@@ -133,6 +133,7 @@ public class Bot {
 			if(behaviourRule.evaluate(conditions)) {
 				setCurrentMove(behaviourRule.getMove());
 				setCurrentAttack(behaviourRule.getAttack());
+				break;
 			}
 		}
 	}
