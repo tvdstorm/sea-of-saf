@@ -127,24 +127,32 @@ Set fighterProps():
 }
 
 void fighterProp():
-{}
+{
+    String t;
+}
 {
     LOOKAHEAD(2)
     (fightId() "=" fightPower())
     |
-    (condition()"["action()"]")
+    (t = condition()"["action()"]")
+    {System.out.println(t);}
 }
 
-void condition():
-{}
+String condition():
+{
+    String s;
+}
 {   
     LOOKAHEAD(2)
-    (<ID> <AND> condition())
+    (<ID> <OR> s = condition())
+    {return "1" + s;}
     |
     LOOKAHEAD(2)
-    (<ID> <OR> condition())
+    (<ID> <AND> s = condition())
+    {return "2" + s;}
     |
     <ID>
+    {return "3";}
 }
 
 void action():
