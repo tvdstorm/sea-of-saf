@@ -30,7 +30,7 @@ public class SafMain {
 	        String path  = new java.io.File(".").getCanonicalPath();
 			String safFile = "fighters.saf";
 
-	        InputStream stream = new FileInputStream(path + "/src/saf/fighters/" + safFile);
+	        InputStream stream = new FileInputStream(path + "/src/saf/source/" + safFile);
 
 	        Saf parser = new Saf(stream);
 

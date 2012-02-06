@@ -41,6 +41,9 @@ public class Fight {
 		
 		firstFighterConditions = new ArrayList<String>();
 		secondFighterConditions = new ArrayList<String>();
+		
+		firstFighterLocation = 150;
+		secondFighterLocation = 800 - 150;
 	}
 	
 	private long getTimeInSecs() { return System.currentTimeMillis() / 1000; }
@@ -112,11 +115,15 @@ public class Fight {
 		return null;
 	}
 
-	public Behavior getFirstFightersNextMove(){
-		return firstFighterNextMove;
+	public Behavior flushFirstFightersNextMove(){
+		Behavior temp = firstFighterNextMove;
+		firstFighterNextMove = null;
+		return temp;
 	}
 	
-	public Behavior getSecondFightersNextMove(){
-		return secondFighterNextMove;
+	public Behavior flushSecondFightersNextMove(){
+		Behavior temp = secondFighterNextMove;
+		secondFighterNextMove = null;
+		return temp;
 	}
 }

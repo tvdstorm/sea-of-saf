@@ -27,9 +27,8 @@ public class FightSimulator{
 			System.out.println("Error: " + e.getMessage());
 			System.exit(0);
 		}
+		
 		initOpenGL();
-		float x = 0;
-		float y = 0;
 		
 		while (!Display.isCloseRequested()) {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
@@ -38,24 +37,24 @@ public class FightSimulator{
 			
 			fight.assess();
 			
-			fight.getFirstFightersNextMove();
-			fight.getSecondFightersNextMove();
-			
-			drawStand(x++);
-			drawPunchHigh((y--) + 175);
-			drawPunchLow(x + 350);
-			drawKickHigh(y + 525);
-			drawKickLow(x + 700);
+			draw(fight.flushFirstFightersNextMove());
+			draw(fight.flushSecondFightersNextMove());
 			
 			Display.update();
-			Display.sync(60);
+			Display.sync(50);
 		}
 		Display.destroy();
 		System.out.println("..OK");
 	}
 	
 	public void draw(Behavior b){
-		
+		if(b == null){
+			// TODO Continue Animation
+		} else {
+			fight.getFirstFighter().getKeywords();
+			b.getMove();
+			b.getAttack();
+		}
 	}
 
 	public void drawStand(float initX) {
