@@ -1,0 +1,6 @@
+saf.structure.intelligence?
+	is het handig om de intelligentie hier in te maken?
+	of kan dit beter in de structure klassen?
+
+saf.game.gui
+	is deze manier van een controller handig om de gegenereerde form te besturen?
