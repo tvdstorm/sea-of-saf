@@ -1,4 +1,0 @@
-ChuckNorris
-{
-	always[choose(walk_towards walk_away run_towards) choose(block_high block_low)]
-}
