@@ -1,13 +1,13 @@
 package data;
 
-import core.BaseTreePrinter;
+import core.BaseTreeVisitor;
 
 public class Rule extends BaseData {
 
 	private Actions action;
 
 	@Override
-	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 	}
 	

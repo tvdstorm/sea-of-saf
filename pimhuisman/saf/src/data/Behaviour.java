@@ -1,7 +1,7 @@
 package data;
 import java.util.List;
 
-import core.BaseTreePrinter;
+import core.BaseTreeVisitor;
 
 public class Behaviour extends BaseData {
 
@@ -16,7 +16,7 @@ public class Behaviour extends BaseData {
 	}
 
 	@Override
-	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 		for ( Rule rule : rules ) {
 			rule.acceptTreePrinter(treePrinter);

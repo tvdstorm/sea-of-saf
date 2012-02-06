@@ -6,11 +6,11 @@ import data.Fighter;
 import data.Personality;
 import data.Rule;
 
-public class ConsoleTreePrinter extends BaseTreePrinter {
+public class ConsoleTreeVisitor extends BaseTreeVisitor {
 
 	private int depth;
 	
-	public ConsoleTreePrinter() {
+	public ConsoleTreeVisitor() {
 		depth = 0;
 	}
 	

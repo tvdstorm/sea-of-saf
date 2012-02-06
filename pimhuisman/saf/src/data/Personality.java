@@ -1,10 +1,11 @@
 package data;
 import java.util.List;
 
-import core.BaseTreePrinter;
+import core.BaseTreeVisitor;
 
 public class Personality extends BaseData {
 
+	private final static int DEFAULT_VALUE = 5;
 	private List<Characteristic> characteristics;
 	
 	public Personality(List<Characteristic> characteristics) {
@@ -14,9 +15,18 @@ public class Personality extends BaseData {
 	public List<Characteristic> getCharacteristics() {
 		return characteristics;
 	}
+	
+	public Characteristic getCharacteristic(String name) {
+		for ( Characteristic characteristic : characteristics ) {
+			if ( characteristic.getName() == name ) {
+				return characteristic;
+			}
+		}
+		return new Characteristic(name, DEFAULT_VALUE);
+	}
 
 	@Override
-	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 		for ( Characteristic characteristic : characteristics ) {
 			characteristic.acceptTreePrinter(treePrinter);
