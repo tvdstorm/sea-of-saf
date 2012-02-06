@@ -26,18 +26,19 @@ import nl.uva.saf.fdl.ast.ITreeNode;
 
 public class TreeValidator extends TreeVisitor {
 	private ValidationReport report = null;
-	boolean alwaysConditionPresent = false;
+	private boolean alwaysConditionPresent = false;
+	private final ITreeNode tree;
+	
+	public TreeValidator(ITreeNode tree) {
+		this.tree = tree;
+	}
 		
 	/**
 	 * Validates a syntax tree, executing general type checking.
 	 * @param tree Reference to a FDL AST. Cannot be null.
 	 * @return Returns an instance of a validation report.
 	 */
-	public ValidationReport validate(ITreeNode tree) {
-		if (tree == null) {
-			throw new IllegalArgumentException("Tree reference cannot be null");
-		}
-		
+	public ValidationReport validate() {			
 		report = new ValidationReport();
 		alwaysConditionPresent = false;
 		
