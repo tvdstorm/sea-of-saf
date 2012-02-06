@@ -31,7 +31,7 @@ public class SafInterpreter {
 		}
 		return true;
 	}
-	
+
 	private boolean identifierIsValid(Fighter fighter, BehaviorItem object) {
 		boolean keywordFound = false;
 		for (String keyword : object.getKeywords()){
