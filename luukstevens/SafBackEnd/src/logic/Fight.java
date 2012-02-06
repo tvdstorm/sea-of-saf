@@ -7,7 +7,7 @@ import view.*;
 import model.*;
 import model.attack.*;
 import model.enums.*;
-import model.move.Move;
+import model.move.*;
 
 public class Fight {
 	private static final int MUCH_WEAKER_STRONGER_DIFFERENCE = 20;
@@ -33,7 +33,7 @@ public class Fight {
 		Attack aAttack = a.getCurrentAttack();
 		Attack bAttack = b.getCurrentAttack();
 		
-		if(aAttack.equals(bAttack) && a.isFaster(b)) {
+		if(aAttack.equals(bAttack) && (a.getSpeed() > b.getSpeed())) {
 			//Same attack. Bot a only does damage if he kicks or punches faster.
 			reduceHealthSameAttack(a, b);
 		} else {
@@ -47,22 +47,22 @@ public class Fight {
 		Attack bAttack = b.getCurrentAttack();
 		
 		if(aAttack.isAttack(KickLow.class) && !bAttack.isAttack(BlockLow.class)) {
-			if(kickCanReach(a, b))
+			if(canReach(a, b))
 				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.KICK_POWER));
 		}
 		
 		if(aAttack.isAttack(PunchLow.class) && !bAttack.isAttack(PunchHigh.class)) {
-			if(punchCanReach(a, b))
+			if(canReach(a, b))
 				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.PUNCH_POWER));
 		}
 		
 		if(aAttack.isAttack(KickHigh.class) && !bAttack.isAttack(BlockHigh.class)) {
-			if(kickCanReach(a, b))
+			if(canReach(a, b))
 				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.KICK_POWER));
 		}
 		
 		if(aAttack.isAttack(PunchHigh.class) && !bAttack.isAttack(BlockHigh.class)) {
-			if(punchCanReach(a, b))
+			if(canReach(a, b))
 				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.PUNCH_POWER));
 		}
 	}
@@ -71,34 +71,39 @@ public class Fight {
 		Attack aAttack = a.getCurrentAttack();
 		
 		if(aAttack.isAttack(KickHigh.class) || aAttack.isAttack(KickLow.class)) {
-			if(kickCanReach(a, b))
+			if(canReach(a, b))
 				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.KICK_POWER));
 		}
 		
 		if(aAttack.isAttack(PunchHigh.class) || aAttack.isAttack(PunchLow.class)) {
-			if(punchCanReach(a, b))
+			if(canReach(a, b))
 				b.reduceHealth(a.getCharacteristicValue(CharacteristicType.PUNCH_POWER));
 		}
 	}
 	
-	public boolean punchCanReach(Bot a, Bot b) {
-		if(a.getWalkedOrRunnedAway() && b.getWalkedOrRunnedAway() 
-				&& a.getCharacteristicValue(CharacteristicType.PUNCH_REACH) > THRESHOLD_REACH_BOTH_FAR) return true;
-		if(a.getWalkedOrRunnedAway() || b.getWalkedOrRunnedAway() 
-				&& a.getCharacteristicValue(CharacteristicType.PUNCH_REACH) > THRESHOLD_REACH_ONE_FAR) return true;
+	public boolean canReach(Bot a, Bot b) {
+		if(a.getCurrentAttack().isAttack(KickLow.class) 
+				&& b.getCurrentMove().isMove(Jump.class)) return false;
+		
+		if(a.getCurrentAttack().isAttack(PunchHigh.class) 
+				&& b.getCurrentMove().isMove(Crouch.class)) return false;
+		
+		if(a.getCurrentAttack().isAttack(PunchLow.class) || a.getCurrentAttack().isAttack(PunchHigh.class)) {
+			if(a.getWalkedOrRunnedAway() && b.getWalkedOrRunnedAway() 
+					&& a.getCharacteristicValue(CharacteristicType.PUNCH_REACH) > THRESHOLD_REACH_BOTH_FAR) return true;
+			if(a.getWalkedOrRunnedAway() || b.getWalkedOrRunnedAway() 
+					&& a.getCharacteristicValue(CharacteristicType.PUNCH_REACH) > THRESHOLD_REACH_ONE_FAR) return true;
+		}
+		
+		if(a.getCurrentAttack().isAttack(KickLow.class) || a.getCurrentAttack().isAttack(KickHigh.class)) {
+			if(a.getWalkedOrRunnedAway() && b.getWalkedOrRunnedAway() 
+					&& a.getCharacteristicValue(CharacteristicType.KICK_REACH) > THRESHOLD_REACH_BOTH_FAR) return true;
+			if(a.getWalkedOrRunnedAway() || b.getWalkedOrRunnedAway() 
+					&& a.getCharacteristicValue(CharacteristicType.KICK_REACH) > THRESHOLD_REACH_ONE_FAR) return true;
+		}
 		
 		return false;
 	}
-	
-	public boolean kickCanReach(Bot a, Bot b) {
-		if(a.getWalkedOrRunnedAway() && b.getWalkedOrRunnedAway() 
-				&& a.getCharacteristicValue(CharacteristicType.KICK_REACH) > THRESHOLD_REACH_BOTH_FAR) return true;
-		if(a.getWalkedOrRunnedAway() || b.getWalkedOrRunnedAway() 
-				&& a.getCharacteristicValue(CharacteristicType.KICK_REACH) > THRESHOLD_REACH_ONE_FAR) return true;
-		
-		return false;
-	}
-	
 	
 	private void updateBotsAndView(Bot left, Bot right, Main view) {
 		List<ConditionType> leftBotConditions = new LinkedList<ConditionType>();

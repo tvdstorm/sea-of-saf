@@ -8,18 +8,18 @@ import model.Bot;
 
 public class Program {
 
-	/**
-	 * @param args
-	 * @throws JAXBException 
-	 * @throws FileNotFoundException 
-	 * @throws InterruptedException 
-	 */
-	public static void main(String[] args) throws FileNotFoundException, JAXBException, InterruptedException {
-		Bot left = Bot.deserialize("/Users/luukstevens/jack.xml", Bot.Position.LEFT);
-		Bot right = Bot.deserialize("/Users/luukstevens/neo.xml", Bot.Position.RIGHT);
-		Main view = new Main(left, right);
+	public static void main(String[] args) {
 		
-		Fight fight = new Fight();
-		fight.start(left, right, view);
+		try {
+			Bot left = Bot.deserialize(args[0], Bot.Position.LEFT);
+			Bot right = Bot.deserialize(args[1], Bot.Position.RIGHT);
+			Main view = new Main(left, right);
+			Fight fight = new Fight();
+			
+			fight.start(left, right, view);
+		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	
 	}
 }

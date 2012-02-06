@@ -1,7 +1,6 @@
 package model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlType(name = "action")
 public class Action {

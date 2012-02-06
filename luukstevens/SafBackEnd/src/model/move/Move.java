@@ -3,16 +3,12 @@ package model.move;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Move {
-	public boolean isMove(Move move) {
-		return this.getClass().equals(move.getClass());
+import model.Bot;
+
+public abstract class Move {
+	public boolean isMove(Class move) {
+		return this.getClass().equals(move);
 	}
 	
-	public void draw(Graphics g, BufferedImage image, int baseX, int baseY) {
-		g.drawImage(image, baseX, baseY, null); 
-	}
-	
-	public void draw(Graphics g, BufferedImage image, int baseX, int baseY, boolean left) {
-		draw(g, image, baseX, baseY);
-	}
+	public abstract void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY);
 }

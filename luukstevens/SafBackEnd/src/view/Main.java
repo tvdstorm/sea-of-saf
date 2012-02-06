@@ -1,9 +1,7 @@
 package view;
 
-import java.awt.Color;
-import java.awt.FlowLayout;
-
-import javax.swing.JFrame;
+import java.awt.*;
+import javax.swing.*;
 
 import model.Bot;
 
@@ -13,21 +11,18 @@ public class Main extends JFrame {
 	
 	private static final int X_POSITION = 100;
 	private static final int Y_POSITION = 100;
-	
-	//Subcomponents of the main view.
+
 	private Arena arena;
 	private Health health;
 	
 	public Main(Bot left, Bot right) {
 		
-		//Add components
 		arena = new Arena(left, right);
 		add(arena);
 		
 		health = new Health(left, right);
 		add(health);
-		
-		//Frame properties
+
 		setTitle("Super Awesome Fighters");
 		setSize(WIDTH, HEIGHT);
 		setLocation(X_POSITION, Y_POSITION);
@@ -38,7 +33,7 @@ public class Main extends JFrame {
 	}
 	
 	public void update() {
-		arena.update();
+		arena.repaint();
 		health.update();
 	}
 }

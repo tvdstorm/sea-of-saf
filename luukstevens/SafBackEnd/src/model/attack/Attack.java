@@ -6,23 +6,25 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import model.Bot;
+
 public abstract class Attack {
-	public static final String imageFolder = "data/sprites/";
+	public static final String IMAGE_FOLDER = "data/sprites/";
+	public static final String EXTENSION = ".png";
+	public static final String LEFT_SUFFIX = "_left";
 	
 	public boolean isAttack(Class attack) {
-		System.out.print(getClass().equals(attack));
 		return this.getClass().equals(attack);
 	}
 	
-	public BufferedImage getImage(boolean left) throws IOException {
-		BufferedImage image;
-    	String imagePath =  imageFolder + getText();
+	public BufferedImage getImage(Bot bot) throws IOException {
+    	String imagePath =  IMAGE_FOLDER + getText();
     	
-    	if(left) {
-    		imagePath += "_left";
+    	if(bot.getPosition().equals(Bot.Position.LEFT)) {
+    		imagePath += LEFT_SUFFIX;
     	}
     	
-    	imagePath += ".png";           
+    	imagePath += EXTENSION;           
     	return ImageIO.read(new File(imagePath));
 	}
 	
