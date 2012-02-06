@@ -10,11 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Bot;
+import model.attack.Attack;
 import model.move.*;
 
 public class Arena extends JPanel {
-	
-	//Constants
 	private static final int X_POSITION = 75;
 	private static final int Y_POSITION = 40;
 	
@@ -27,7 +26,6 @@ public class Arena extends JPanel {
 	private static final int RIGHT_BOT_XPOS = 255;
 	private static final int RIGHT_BOT_YPOS = 75;
 	
-	//Instance variables
 	private Bot left;
 	private Bot right;
 	private boolean endGame = false;
@@ -48,17 +46,13 @@ public class Arena extends JPanel {
     	
     	g.setColor(Color.WHITE);
     	g.fillRect(0, 0, WIDTH, HIGHT);
-    	drawLeftBot(g, left);
-    	drawRightBot(g, right);
+    	drawBot(g, left);
+    	drawBot(g, right);
     	 
     	if(endGame) {
     		addWinsText(g, left, right, WIDTH, HEIGHT);
     	}
     }
-    
-	public void update() {
-		repaint();
-	}
     
 	private void addWinsText(Graphics g, Bot left, Bot right, int arenaWith, int arenaHeight) {
 		g.setColor(Color.RED);
@@ -66,43 +60,37 @@ public class Arena extends JPanel {
     	g.setFont(font);
     	
     	if(left.getHealth() <= 0) {
-    		addCenteredString(g, right.getName() + " WINS!", arenaWith, arenaHeight, 130);
+    		addCenteredText(g, right.getName() + " WINS!", arenaWith, arenaHeight, 130);
     	}
     	
     	if(right.getHealth() <= 0) {
-    		addCenteredString(g, left.getName() + " WINS!", arenaWith, arenaHeight, 130);
+    		addCenteredText(g, left.getName() + " WINS!", arenaWith, arenaHeight, 130);
     	}
 	}
 	
-	private void addCenteredString(Graphics g, String s, int width, int XPos, int YPos){  
+	private void addCenteredText(Graphics g, String s, int width, int XPos, int YPos){  
         int stringLen = (int) g.getFontMetrics().getStringBounds(s, g).getWidth();  
         int start = width/2 - stringLen/2;  
         g.drawString(s, start + XPos, YPos);  
 	} 
 	
-    private void drawLeftBot(Graphics g, Bot bot) {
+    private void drawBot(Graphics g, Bot bot) {
     	BufferedImage image = null;
+    	Attack attack = bot.getCurrentAttack();
 		
     	try {
-			image = bot.getCurrentAttack().getImage(true);
+			image = attack.getImage(bot);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-    	bot.getCurrentMove().draw(g, image, LEFT_BOT_XPOS, LEFT_BOT_YPOS, true);
-    }
-    
-    private void drawRightBot(Graphics g, Bot bot) {
-    	BufferedImage image = null;
-		
-    	try {
-			image = bot.getCurrentAttack().getImage(false);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-    	bot.getCurrentMove().draw(g, image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS, false);
+    	Move move = bot.getCurrentMove();
+    	
+    	if(bot.getPosition().equals(Bot.Position.LEFT)) {
+    		move.draw(bot, g, image, LEFT_BOT_XPOS, LEFT_BOT_YPOS);
+    	} else {
+    		move.draw(bot, g, image, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS);
+    	}
     }
 }
