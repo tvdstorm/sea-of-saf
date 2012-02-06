@@ -30,28 +30,14 @@ public class ANTLRFighterLoader implements FighterLoader {
 
 			try {
 				Fighter fighter = parser.fighter();
-				fighter.acceptTreePrinter(new ConsoleTreePrinter());
+				return fighter;
 			} catch (RecognitionException exc) {
 				exc.printStackTrace();
 			}
 		} catch (IOException exc) {
 			exc.printStackTrace();
 		}
-		return new Fighter("NotWorkingYet", null, null);
-		
-	}
-	
-	private static void printTree(CommonTree tree, int level) {
-		
-		if ( tree != null ) {
-			for (int i = 0; i < level; i++) {
-				System.out.print("  ");
-			}
-			System.out.println(" -> " + tree.getText());
-			for (int i=0; i<tree.getChildCount(); i++) {
-		    	printTree((CommonTree)tree.getChild(i), level + 1);
-		    }
-		}
+		return null;
 		
 	}
 

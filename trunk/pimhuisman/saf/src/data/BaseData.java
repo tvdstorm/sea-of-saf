@@ -1,8 +1,8 @@
 package data;
-import core.BaseTreePrinter;
+import core.BaseTreeVisitor;
 
 public abstract class BaseData {
 
-	public abstract void acceptTreePrinter(BaseTreePrinter treePrinter);
+	public abstract void acceptTreePrinter(BaseTreeVisitor treePrinter);
 	
 }

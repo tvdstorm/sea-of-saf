@@ -5,7 +5,7 @@ import data.Behaviour;
 import data.Characteristic;
 import data.Rule;
 
-public abstract class BaseTreePrinter {
+public abstract class BaseTreeVisitor {
 
 	public abstract void visit(Fighter fighter);
 	public abstract void visit(Personality personality);

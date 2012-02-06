@@ -1,5 +1,5 @@
 package data;
-import core.BaseTreePrinter;
+import core.BaseTreeVisitor;
 
 public class Characteristic extends BaseData {
 
@@ -20,7 +20,7 @@ public class Characteristic extends BaseData {
 	}
 
 	@Override
-	public void acceptTreePrinter(BaseTreePrinter treePrinter) {
+	public void acceptTreePrinter(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
 	}
 	

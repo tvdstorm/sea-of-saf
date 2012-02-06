@@ -68,7 +68,7 @@ action				:	IDENTIFIER
 fragment LETTER		:	('a'..'z' | 'A'..'Z');
 fragment DIGIT		:	'0'..'9';
 
-IDENTIFIER			:	LETTER (LETTER | '_' | '-')+ LETTER;
+IDENTIFIER			:	LETTER (LETTER | '_' | '-')* LETTER;
 NUMBER				:	DIGIT+;
 WHITESPACE			:	(' '|'\t'|'\f'|'\n'|'\r')+ { $channel = HIDDEN; };
 SINGLELINE_COMMENT	:	'//' .* ('\n' | '\r') { $channel = HIDDEN; };
