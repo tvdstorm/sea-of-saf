@@ -2,6 +2,8 @@ package nl.uva.saf.test;
 
 import java.util.ArrayList;
 
+import junit.framework.Assert;
+
 import nl.uva.saf.fdl.TreeValidator;
 import nl.uva.saf.fdl.ValidationReport;
 import nl.uva.saf.fdl.ast.Action;
@@ -35,7 +37,7 @@ public class TreeValidatorTest {
 			}
 		}
 
-		assert (containsAlwaysError);
+		Assert.assertTrue(containsAlwaysError);
 	}
 
 	@Test
@@ -57,7 +59,7 @@ public class TreeValidatorTest {
 			}
 		}
 
-		assert (containsEmptyChoiceError);
+		Assert.assertTrue(containsEmptyChoiceError);
 	}
 	
 	@Test
@@ -78,7 +80,7 @@ public class TreeValidatorTest {
 			}
 		}
 		
-		assert(containsOutOfBoundsError);
+		Assert.assertTrue(containsOutOfBoundsError);
 		
 		validator = new TreeValidator(fighter);
 		report = validator.validate();
@@ -91,7 +93,7 @@ public class TreeValidatorTest {
 			}
 		}	
 		
-		assert(containsOutOfBoundsError);
+		Assert.assertTrue(containsOutOfBoundsError);
 	}
 	
 }
