@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import saf.ast.Action;
-import saf.enums.*;
 import saf.state.Game;
 import saf.variable.IEnums;
 import saf.variable.ISettings;

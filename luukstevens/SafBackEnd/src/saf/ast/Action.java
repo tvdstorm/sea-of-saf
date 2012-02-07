@@ -2,7 +2,6 @@ package saf.ast;
 
 import javax.xml.bind.annotation.*;
 
-import saf.enums.*;
 import saf.variable.IEnums;
 
 @XmlType(name = "action")
