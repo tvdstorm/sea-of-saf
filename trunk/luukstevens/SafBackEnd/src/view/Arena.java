@@ -13,9 +13,6 @@ import state.Game;
 
 import ast.Bot;
 
-import model.attack.Attack;
-import model.move.*;
-
 public class Arena extends JPanel {
 	private static final int X_POSITION = 75;
 	private static final int Y_POSITION = 40;
