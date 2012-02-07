@@ -7,6 +7,7 @@ anno loc BehaviourRule@location;
 anno loc Condition@location;
 anno loc MoveAction@location;
 anno loc FightAction@location;
+anno loc Bot@location;
 
 data Bot            = bot(str name, list[Characteristic] characteristics, list[BehaviourRule] behaviourRules);
 
