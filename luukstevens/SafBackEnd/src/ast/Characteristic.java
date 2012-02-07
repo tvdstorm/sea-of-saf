@@ -1,4 +1,4 @@
-package model;
+package ast;
 
 import javax.xml.bind.annotation.*;
 

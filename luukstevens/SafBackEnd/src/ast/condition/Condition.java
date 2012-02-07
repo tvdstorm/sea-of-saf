@@ -1,4 +1,4 @@
-package model.condition;
+package ast.condition;
 
 public abstract class Condition implements Evaluable {
 	

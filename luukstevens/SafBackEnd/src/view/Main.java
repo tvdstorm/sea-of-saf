@@ -3,7 +3,10 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
-import model.Bot;
+import state.Game;
+
+import ast.Bot;
+
 
 public class Main extends JFrame {
 	private static final int WIDTH = 600;
@@ -15,12 +18,12 @@ public class Main extends JFrame {
 	private Arena arena;
 	private Health health;
 	
-	public Main(Bot left, Bot right) {
+	public Main(Game game, Bot left, Bot right) {
 		
-		arena = new Arena(left, right);
+		arena = new Arena(game, left, right);
 		add(arena);
 		
-		health = new Health(left, right);
+		health = new Health(game, left, right);
 		add(health);
 
 		setTitle("Super Awesome Fighters");

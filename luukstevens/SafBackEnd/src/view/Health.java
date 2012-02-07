@@ -2,16 +2,21 @@ package view;
 
 import javax.swing.*;
 
-import model.Bot;
+import state.Game;
+
+import ast.Bot;
+
 
 public class Health extends JPanel {	
-	private Bot left;
-	private Bot right;
-	
 	private JProgressBar leftHealthBar;
 	private JProgressBar rightHealthBar;
 	
-	public Health(Bot left, Bot right) {
+	private Game game;
+	private Bot left;
+	private Bot right;
+	
+	public Health(Game game, Bot left, Bot right) {
+		this.game = game;
 		this.left = left;
 		this.right = right;
 		
@@ -19,8 +24,8 @@ public class Health extends JPanel {
 	}
 	
 	public void update() {
-		leftHealthBar.setValue(left.getHealth());
-		rightHealthBar.setValue(right.getHealth());
+		leftHealthBar.setValue(game.getLeftBot().getHealth());
+		rightHealthBar.setValue(game.getRightBot().getHealth());
 	}
 	
 	private void addComponents() {

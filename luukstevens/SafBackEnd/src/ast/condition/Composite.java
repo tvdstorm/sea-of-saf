@@ -1,4 +1,4 @@
-package model.condition;
+package ast.condition;
 
 import javax.xml.bind.annotation.*;
 

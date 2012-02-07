@@ -1,6 +1,6 @@
-package model.enums;
+package enums;
 
-public enum ConditionType {
+public enum Condition {
 	ALWAYS("always"),
 	NEAR("near"), 
 	FAR("far"), 
@@ -12,7 +12,7 @@ public enum ConditionType {
 
 	private String text;
 	
-	ConditionType(String text) {
+	Condition(String text) {
 		this.text = text;
 	}
 
