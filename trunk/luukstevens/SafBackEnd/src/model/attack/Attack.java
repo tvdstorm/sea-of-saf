@@ -6,7 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import model.Bot;
+import ast.Bot;
+
 
 public abstract class Attack {
 	public static final String IMAGE_FOLDER = "data/sprites/";
@@ -20,9 +21,9 @@ public abstract class Attack {
 	public BufferedImage getImage(Bot bot) throws IOException {
     	String imagePath =  IMAGE_FOLDER + getText();
     	
-    	if(bot.getPosition().equals(Bot.Position.LEFT)) {
-    		imagePath += LEFT_SUFFIX;
-    	}
+//    	if(bot.getPosition().equals(ast.Position.LEFT)) {
+//    		imagePath += LEFT_SUFFIX;
+//    	}
     	
     	imagePath += EXTENSION;           
     	return ImageIO.read(new File(imagePath));

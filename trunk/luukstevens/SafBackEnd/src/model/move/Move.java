@@ -3,7 +3,8 @@ package model.move;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import model.Bot;
+import ast.Bot;
+
 
 public abstract class Move {
 	public boolean isMove(Class move) {
