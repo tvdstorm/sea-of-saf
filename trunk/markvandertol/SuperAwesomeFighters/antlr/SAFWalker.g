@@ -9,15 +9,13 @@ options {
 	package saf.parser;
 	
 	import saf.ast.*;
-	import java.util.Stack;
-	import java.util.List;
+	import java.util.Map;
+	import java.util.HashMap;
+	import java.util.AbstractMap;
 }
 
 @members {
-	private FighterDefinition fighter = new FighterDefinition();
-	
 	private List<String> errorList;
-	private Stack<Condition> conditions = new Stack<Condition>();
 	
 	public void setErrorList(List<String> errorList) {
 		this.errorList = errorList;
@@ -26,56 +24,40 @@ options {
 	@Override
 	public void emitErrorMessage(String msg) {
 		errorList.add("Walker error: " + msg);
-	}
-	
-	public FighterDefinition getFighterDefinition() {
-		return fighter;
-	}
-	
-	private void createAction(String move, String attack) {	
-		BehaviourRule behaviourRule = new BehaviourRule();
-		try {
-			MoveAction moveAction = MoveAction.valueOf(move);
-			behaviourRule.setMoveAction(moveAction);
-		} catch(IllegalArgumentException ex) {
-			emitErrorMessage("Unknown move action: " + move);
-		}
-		
-		try {
-			FightAction fightAction = FightAction.valueOf(attack);
-			behaviourRule.setFightAction(fightAction);
-		} catch(IllegalArgumentException ex) {
-			emitErrorMessage("Unknown fight action: " + attack);
-		}
-		behaviourRule.setCondition(conditions.pop());
-		fighter.getBehaviourRules().add(behaviourRule);
-	}
-	
-	private void createCondition(String state) {
-		try {
-			State s = State.valueOf(state);
-			conditions.push(new ConcreteCondition(s));
-		} catch(IllegalArgumentException ex) {
-			emitErrorMessage("Unknown state: " + state);
-		}
-	}
-	
-	private void createCombinedCondition(boolean requireBoth) {
-		conditions.push(new CombinedCondition(conditions.pop(), conditions.pop(), requireBoth));
-	}
-	
+	}	
 }
 
 
-fighter 	:	^(FIGHTER name=IDENTIFIER assignment* action*) { fighter.setName($name.text);};
+fighter returns [FighterDefinition f]
+@init {
+	Map<String, Integer> assignments = new HashMap<String, Integer>();
+	List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
+}
+	:	^(FIGHTER name=IDENTIFIER (a=assignment {assignments.put(a.getKey(), a.getValue());})* (b=rule {behaviourRules.add(b);})*)
+		{ $f = new FighterDefinition($name.text, assignments, behaviourRules);};
 
-assignment
-	:	^(ASSIGNMENT key=IDENTIFIER value=DIGIT) { fighter.setProperty($key.text, Integer.parseInt($value.text)); };
+assignment returns [AbstractMap.SimpleEntry<String, Integer> a]
+	:	^(ASSIGNMENT key=IDENTIFIER value=DIGIT)
+		{ $a = new AbstractMap.SimpleEntry<String, Integer>($key.text, Integer.parseInt($value.text)); };
 
-action 	:	^(ACTION condition move=IDENTIFIER attack=IDENTIFIER) { createAction($move.text, $attack.text);};
+rule returns [BehaviourRule r] 	
+	:	^(RULE con=condition move=moves attack=attacks)
+		{ $r = new BehaviourRule(con, move, attack);};
+		
+moves returns [List<String> l]
+@init {
+	l = new ArrayList<String>();
+}
+	:	^(MOVES (move=IDENTIFIER { l.add($move.text); })+);
+	
+attacks returns [List<String> l]
+@init {
+	l = new ArrayList<String>();
+}
+	:	^(ATTACKS (attack=IDENTIFIER { l.add($attack.text); })+);
 
-condition 
-	:	^(RCONDITION c=condition) { /* No action */ }
-	|	^(ANDCONDITION condition condition) { createCombinedCondition(true); }
-	|	^(ORCONDITION condition condition) { createCombinedCondition(false); }
-	|	^(CONDITION c2=IDENTIFIER) { createCondition($c2.text); };
+condition returns [Condition cresult]
+	:	^(RCONDITION c=condition) { $cresult = c; }
+	|	^(ANDCONDITION andc1=condition andc2=condition) { $cresult = new CombinedCondition(andc1, andc2, true); }
+	|	^(ORCONDITION orc1=condition orc2=condition) { $cresult = new CombinedCondition(orc1, orc2, false); }
+	|	^(CONDITION c2=IDENTIFIER) { $cresult = new ConcreteCondition($c2.text); };

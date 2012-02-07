@@ -14,13 +14,13 @@ import saf.ast.MoveAction;
 import saf.ast.State;
 import saf.parser.BotDefinitionMalformedException;
 import saf.parser.FighterDefinitionParser;
+import saf.util.RandomHelper;
 
 /**
  * Hosts the fight between two Fighters. Contains the game logic.
  */
 public class Arena {
 	private final FighterDefinitionParser fighterParser = new FighterDefinitionParser();
-	private final Random random = new Random();
 	
 	private FighterDefinition[] playerDefinitions = new FighterDefinition[2];
 	
@@ -88,8 +88,11 @@ public class Arena {
 	private void selectActions(Fighter currentPlayer, Fighter opponent) {
 		BehaviourRule behaviourRule = pickRule(currentPlayer, opponent);
 		
-		currentPlayer.setLastFightAction(behaviourRule.getFightAction());
-		currentPlayer.setLastMoveAction(behaviourRule.getMoveAction());
+		FightAction fightAction = RandomHelper.getElementFromList(behaviourRule.getFightActions());
+		MoveAction moveAction = RandomHelper.getElementFromList(behaviourRule.getMoveActions());
+		
+		currentPlayer.setLastFightAction(fightAction);
+		currentPlayer.setLastMoveAction(moveAction);
 	}
 	
 	public float getDistanceBetweenBots() {
@@ -176,8 +179,7 @@ public class Arena {
 		currentStates.add(getStrengthComparison(currentPlayer, opponent));
 		
 		List<BehaviourRule> rules = currentPlayer.getBeheaviourRules(currentStates);
-		int index = random.nextInt(rules.size());
-		return rules.get(index);
+		return RandomHelper.getElementFromList(rules);
 	}
 
 	private State getNearOrFar(Fighter currentPlayer) {

@@ -1,5 +1,6 @@
 package saf.ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,39 +9,65 @@ import java.util.List;
 
 public class BehaviourRule {
 
-	private FightAction fightAction;
-	private MoveAction moveAction;
-	private Condition condition;
+	private final List<String> fightActions;	
+	private final List<String> moveActions;
+	private final Condition condition;
+
+	public BehaviourRule(Condition condition, List<String> moveActions, List<String> fightActions) {
+		this.fightActions = fightActions;
+		this.moveActions = moveActions;
+		this.condition = condition;
+	}
 	
-	public FightAction getFightAction() {
-		return fightAction;
+	public List<FightAction> getFightActions() {
+		List<FightAction> result = new ArrayList<FightAction>();
+		for (String fightAction : fightActions) {
+			result.add(getFightAction(fightAction));
+		}
+		return result;
+	}
+	
+	public List<MoveAction> getMoveActions() {
+		List<MoveAction> result = new ArrayList<MoveAction>();
+		for (String moveAction : moveActions) {
+			result.add(getMoveAction(moveAction));
+		}
+		return result;
 	}
 
-	public void setFightAction(FightAction fightAction) {
-		this.fightAction = fightAction;
+	private FightAction getFightAction(String fightAction) {	
+		try {
+			return FightAction.valueOf(fightAction);
+		} catch(IllegalArgumentException ex) {
+			return null;
+		}
+
 	}
 
-	public MoveAction getMoveAction() {
-		return moveAction;
+	private MoveAction getMoveAction(String moveAction) {
+		try {
+			return MoveAction.valueOf(moveAction);
+		} catch(IllegalArgumentException ex) {
+			return null;
+		}
 	}
 
-	public void setMoveAction(MoveAction moveAction) {
-		this.moveAction = moveAction;
-	}
 	
 	public Condition getCondition() {
 		return condition;
 	}
 
-	public void setCondition(Condition condition) {
-		this.condition = condition;
-	}
 	
 	public void validate(List<String> errorList) {
-		if (fightAction == null)
-			errorList.add("Fightaction not set");
-		if (moveAction == null)
-			errorList.add("Moveaction not set");
+		for (String fightAction : fightActions) {
+			if (getFightAction(fightAction) == null)
+				errorList.add("Unknown fight action: " + fightAction);
+		}
+		for (String moveAction : moveActions) {
+			if (getMoveAction(moveAction) == null)
+				errorList.add("Unknown move action: " + moveAction);
+		}
+		
 		if (condition == null)
 			errorList.add("Condition not set");
 		else

@@ -56,8 +56,10 @@ public class FighterDefinitionParser {
 
 		SAFWalker walker = new SAFWalker(nodes);
 		walker.setErrorList(errorList);
+		
+		FighterDefinition fighter;
 		try {
-			walker.fighter();
+			fighter = walker.fighter();
 		} catch (RecognitionException e) {
 			throw new BotDefinitionMalformedException(e);
 		}
@@ -66,7 +68,7 @@ public class FighterDefinitionParser {
 			throw new BotDefinitionMalformedException("Errors during walking.", errorList);
 		}
 		
-		FighterDefinition fighter = walker.getFighterDefinition();
+		
 		
 		fighter.validate(errorList);
 		if (!errorList.isEmpty()) {

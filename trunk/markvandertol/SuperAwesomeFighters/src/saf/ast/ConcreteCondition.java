@@ -9,9 +9,9 @@ import java.util.Set;
 
 public class ConcreteCondition extends Condition {
 
-	private State state;
+	private final String state;
 	
-	public ConcreteCondition(State state) {
+	public ConcreteCondition(String state) {
 		this.state = state;
 	}
 
@@ -20,20 +20,21 @@ public class ConcreteCondition extends Condition {
 	 */
 	@Override
 	public boolean matched(Set<State> currentStates) {
-		return currentStates.contains(state);
+		return currentStates.contains(getState());
 	}
 
 	public State getState() {
-		return state;
+		try {
+			return State.valueOf(state);
+		} catch(IllegalArgumentException ex) {
+			return null;
+		}
 	}
 
-	public void setState(State state) {
-		this.state = state;
-	}
 
 	@Override
 	public void validate(List<String> errorList) {
-		if (state == null)
-			errorList.add("condition not set");
+		if (getState() == null)
+			errorList.add("Unknown condition: " + state);
 	}
 }
