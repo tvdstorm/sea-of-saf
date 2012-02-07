@@ -6,8 +6,8 @@ import state.Game;
 
 import ast.Bot;
 
-
 public class Health extends JPanel {	
+	
 	private JProgressBar leftHealthBar;
 	private JProgressBar rightHealthBar;
 	
@@ -16,6 +16,7 @@ public class Health extends JPanel {
 	private Bot right;
 	
 	public Health(Game game, Bot left, Bot right) {
+		
 		this.game = game;
 		this.left = left;
 		this.right = right;
@@ -24,11 +25,13 @@ public class Health extends JPanel {
 	}
 	
 	public void update() {
+		
 		leftHealthBar.setValue(game.getLeftBot().getHealth());
 		rightHealthBar.setValue(game.getRightBot().getHealth());
 	}
 	
 	private void addComponents() {
+		
 		JLabel leftBotName = new JLabel(left.getName());
 		add(leftBotName);
 		

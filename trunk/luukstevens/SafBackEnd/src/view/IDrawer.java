@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import state.Bot;
 
-public interface Drawer {
+public interface IDrawer {
+	
 	void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY);
 }

@@ -4,6 +4,6 @@ import java.util.List;
 
 import enums.Condition;
 
-public interface Evaluable {
+public interface IEvaluable {
 	boolean evaluate(List<Condition> conditions);
 }

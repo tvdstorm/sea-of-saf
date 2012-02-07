@@ -1,9 +1,7 @@
 
-import java.io.FileNotFoundException;
 import java.util.LinkedList;
-import java.util.List;
 
-import javax.xml.bind.JAXBException;
+import enums.Condition;
 
 import ast.Bot;
 
@@ -20,13 +18,13 @@ public class Program {
 			Bot right = Bot.deserialize(args[1]);
 			Game game = new Game();
 			
-			game.getLeftBot().update(left.getBehaviourRules(), new LinkedList());
-			game.getRightBot().update(right.getBehaviourRules(), new LinkedList());
+			//Update the bots according to their behaviour rules for the first time.
+			game.getLeftBot().update(left.getBehaviourRules(), new LinkedList<Condition>());
+			game.getRightBot().update(right.getBehaviourRules(), new LinkedList<Condition>());
 			
 			Main view = new Main(game, left, right);
 			
 			Fight.start(game, left, right, view);
-		
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}	

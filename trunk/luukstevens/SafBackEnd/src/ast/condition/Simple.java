@@ -17,7 +17,6 @@ public class Simple extends Condition {
     @Override
 	public boolean evaluate(List<enums.Condition> conditions) {
     	if(value == null) return false;
-    	
     	if(value.equals(enums.Condition.ALWAYS.getText())) return true;
   	
 		for(enums.Condition condition : conditions) {

@@ -20,6 +20,7 @@ public class Action {
 	}
 	
 	public boolean isMove(Move move) {
+		if(getMove() == null) return false;
 		return move.equals(getMove());
 	}
 	

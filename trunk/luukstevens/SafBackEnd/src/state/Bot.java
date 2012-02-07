@@ -20,10 +20,11 @@ public class Bot {
 	private Position position;
 	
 	public Bot(Position position) {
+		
 		this.position = position;
 
 		setHealth(DEFAULT_HEALTH);
-		setWalkedOrRunnedAway(false);
+		walkedOrRunnedAway = false;
 	}
 
 	public Action getCurrentMove() {
@@ -31,12 +32,13 @@ public class Bot {
 	}
 
 	public void setCurrentMove(Action currentMove) {
+		
 		if(currentMove.isMove(enums.Move.WALK_TOWARDS) || currentMove.isMove(enums.Move.RUN_TOWARDS)) {
-			setWalkedOrRunnedAway(false);
+			walkedOrRunnedAway = false;
 		}
 		
 		if(currentMove.isMove(enums.Move.WALK_AWAY) || currentMove.isMove(enums.Move.RUN_AWAY)) {
-			setWalkedOrRunnedAway(true);
+			walkedOrRunnedAway = true;
 		}
 		
 		this.currentMove = currentMove;
@@ -62,15 +64,12 @@ public class Bot {
 		return walkedOrRunnedAway;
 	}
 
-	public void setWalkedOrRunnedAway(boolean walkedOrRunnedAway) {
-		this.walkedOrRunnedAway = walkedOrRunnedAway;
-	}
-
 	public Position getPosition() {
 		return position;
 	}
 	
 	public void update(List<BehaviourRule> behaviourRules, List<Condition> conditions) {
+		
 		for(BehaviourRule behaviourRule : behaviourRules) {
 			if(behaviourRule.getCondition().evaluate(conditions)) {
 				setCurrentMove(getRandom(behaviourRule.getMoveActions()));
@@ -85,6 +84,7 @@ public class Bot {
 	}
 	
 	private Action getRandom(List<Action> actions) {
+		
 		Random random = new Random();
 		int index = random.nextInt(actions.size());
 		return actions.get(index);

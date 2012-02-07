@@ -3,10 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import state.Game;
@@ -33,6 +31,7 @@ public class Arena extends JPanel {
 	private boolean endGame = false;
 	
 	public Arena(Game game, Bot left, Bot right) {
+		
 		this.game = game;
 		this.left = left;
 		this.right = right;
@@ -45,20 +44,21 @@ public class Arena extends JPanel {
 	}
 	
     public void paint(Graphics g) {
+    	
     	if(game.getLeftBot().getHealth() <= 0 || game.getRightBot().getHealth() <= 0) {
     		endGame = true;
     	}
     	
     	g.setColor(Color.WHITE);
     	g.fillRect(0, 0, WIDTH, HIGHT);
+    	
     	try {
     		botDrawer.draw(g, game.getLeftBot(), LEFT_BOT_XPOS, LEFT_BOT_YPOS);
     		botDrawer.draw(g, game.getRightBot(), RIGHT_BOT_XPOS, RIGHT_BOT_YPOS);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// Can't add trowsclause so print stacktrace.
 			e.printStackTrace();
 		}
-
     	 
     	if(endGame) {
     		addWinsText(g, game, left, right, WIDTH, HEIGHT);
@@ -66,6 +66,7 @@ public class Arena extends JPanel {
     }
     
 	private void addWinsText(Graphics g, Game game, Bot left, Bot right, int arenaWith, int arenaHeight) {
+		
 		g.setColor(Color.RED);
     	Font font = new Font("Calibri", Font.BOLD, 35);
     	g.setFont(font);
@@ -80,7 +81,8 @@ public class Arena extends JPanel {
 	}
 	
 	private void addCenteredText(Graphics g, String s, int width, int XPos, int YPos){  
-        int stringLen = (int) g.getFontMetrics().getStringBounds(s, g).getWidth();  
+        
+		int stringLen = (int) g.getFontMetrics().getStringBounds(s, g).getWidth();  
         int start = width/2 - stringLen/2;  
         g.drawString(s, start + XPos, YPos);  
 	} 

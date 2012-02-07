@@ -3,14 +3,8 @@ package logic;
 import java.util.LinkedList;
 import java.util.List;
 
-import enums.Attack;
-import enums.Characteristic;
-import enums.Condition;
-import enums.Move;
-
+import enums.*;
 import ast.Action;
-import ast.Bot;
-
 import state.Game;
 import view.*;
 
@@ -21,6 +15,7 @@ public class Fight {
 	private static final int DELAY = 500;
 	
 	public static void start(Game game, ast.Bot left, ast.Bot right, Main view) throws InterruptedException {		
+		
 		while(game.getLeftBot().getHealth() > 0 && game.getRightBot().getHealth() > 0) {
 			reduceHealth(left, game.getLeftBot(), right, game.getRightBot());
 			reduceHealth(right, game.getRightBot(), left, game.getLeftBot());
@@ -30,76 +25,77 @@ public class Fight {
 		}
 	}
 	
-	private static void reduceHealth(ast.Bot a, state.Bot aState,  ast.Bot b, state.Bot bState) {
+	private static void reduceHealth(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
 		
-		if(aState.getCurrentAttack().equals(bState.getCurrentAttack()) && (a.getSpeed() > b.getSpeed())) {
-			reduceHealthSameAttack(a, aState, b,  bState);
+		if(stateA.getCurrentAttack().equals(stateB.getCurrentAttack()) && (botA.getSpeed() > botB.getSpeed())) {
+			reduceHealthSameAttack(botA, stateA, botB,  stateB);
 		} else {
-			retuceHealthDifferentAttack(a, aState, b, bState);
+			retuceHealthDifferentAttack(botA, stateA, botB, stateB);
 		}
 	}
 	
-	private static void reduceHealthSameAttack(ast.Bot a, state.Bot aState,  ast.Bot b, state.Bot bState) {
-		Action aAttack = aState.getCurrentAttack();
+	private static void reduceHealthSameAttack(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
+		
+		Action aAttack = stateA.getCurrentAttack();
+		
+		if(!canReach(botA, stateA, botB, stateB)) return;
 		
 		if(aAttack.isAttack(Attack.KICK_HIGH) || aAttack.isAttack(Attack.KICK_LOW)) {
-			if(canReach(a, aState, b, bState))
-				bState.reduceHealth(a.getCharacteristicValue(Characteristic.KICK_POWER));
+			stateB.reduceHealth(botA.getCharacteristicValue(Characteristic.KICK_POWER));
 		}
 		
 		if(aAttack.isAttack(Attack.PUNCH_HIGH) || aAttack.isAttack(Attack.PUNCH_LOW)) {
-			if(canReach(a, aState, b, bState))
-				bState.reduceHealth(a.getCharacteristicValue(Characteristic.PUNCH_POWER));
+			stateB.reduceHealth(botA.getCharacteristicValue(Characteristic.PUNCH_POWER));
 		}
 	}
 	
-	private static void retuceHealthDifferentAttack(ast.Bot a, state.Bot aState,  ast.Bot b, state.Bot bState) {
-		Action aAttack = aState.getCurrentAttack();
-		Action bAttack = bState.getCurrentAttack();
+	private static void retuceHealthDifferentAttack(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
+		
+		Action aAttack = stateA.getCurrentAttack();
+		Action bAttack = stateB.getCurrentAttack();
+		
+		if(!canReach(botA, stateA, botB, stateB)) return;
 		
 		if(aAttack.isAttack(Attack.KICK_LOW) && !bAttack.isAttack(Attack.BLOCK_LOW)) {
-			if(canReach(a, aState, b, bState))
-				bState.reduceHealth(a.getCharacteristicValue(Characteristic.KICK_POWER));
+			stateB.reduceHealth(botA.getCharacteristicValue(Characteristic.KICK_POWER));
 		}
 		
 		if(aAttack.isAttack(Attack.PUNCH_LOW) && !bAttack.isAttack(Attack.PUNCH_HIGH)) {
-			if(canReach(a, aState, b, bState))
-				bState.reduceHealth(a.getCharacteristicValue(Characteristic.PUNCH_POWER));
+			stateB.reduceHealth(botA.getCharacteristicValue(Characteristic.PUNCH_POWER));
 		}
 		
 		if(aAttack.isAttack(Attack.KICK_HIGH) && !bAttack.isAttack(Attack.BLOCK_HIGH)) {
-			if(canReach(a, aState, b, bState))
-				bState.reduceHealth(a.getCharacteristicValue(Characteristic.KICK_POWER));
+			stateB.reduceHealth(botA.getCharacteristicValue(Characteristic.KICK_POWER));
 		}
 		
 		if(aAttack.isAttack(Attack.PUNCH_HIGH) && !bAttack.isAttack(Attack.BLOCK_HIGH)) {
-			if(canReach(a, aState, b, bState))
-				bState.reduceHealth(a.getCharacteristicValue(Characteristic.PUNCH_POWER));
+			stateB.reduceHealth(botA.getCharacteristicValue(Characteristic.PUNCH_POWER));
 		}
 	}
 	
-	public static boolean canReach(ast.Bot a, state.Bot aState,  ast.Bot b, state.Bot bState) {
-		if(aState.getCurrentAttack().isAttack(Attack.KICK_LOW) 
-				&& bState.getCurrentMove().isMove(Move.JUMP)) return false;
+	public static boolean canReach(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
 		
-		if(aState.getCurrentAttack().isAttack(Attack.PUNCH_HIGH) 
-				&& bState.getCurrentMove().isMove(Move.CROUCH)) return false;
+		if(stateA.getCurrentAttack().isAttack(Attack.KICK_LOW) 
+				&& stateB.getCurrentMove().isMove(Move.JUMP)) return false;
 		
-		if(aState.getCurrentAttack().isAttack(Attack.PUNCH_LOW) || aState.getCurrentAttack().isAttack(Attack.PUNCH_HIGH)) {
-			if(aState.getWalkedOrRunnedAway() && bState.getWalkedOrRunnedAway() 
-					&& a.getCharacteristicValue(Characteristic.PUNCH_REACH) > THRESHOLD_REACH_BOTH_FAR) 
+		if(stateA.getCurrentAttack().isAttack(Attack.PUNCH_HIGH) 
+				&& stateB.getCurrentMove().isMove(Move.CROUCH)) return false;
+		
+		if(stateA.getCurrentAttack().isAttack(Attack.PUNCH_LOW) || stateA.getCurrentAttack().isAttack(Attack.PUNCH_HIGH)) {
+			if(stateA.getWalkedOrRunnedAway() && stateB.getWalkedOrRunnedAway() 
+					&& botA.getCharacteristicValue(Characteristic.PUNCH_REACH) > THRESHOLD_REACH_BOTH_FAR) 
 						return true;
-			if(aState.getWalkedOrRunnedAway() || bState.getWalkedOrRunnedAway() 
-					&& a.getCharacteristicValue(Characteristic.PUNCH_REACH) > THRESHOLD_REACH_ONE_FAR) 
+			if(stateA.getWalkedOrRunnedAway() || stateB.getWalkedOrRunnedAway() 
+					&& botA.getCharacteristicValue(Characteristic.PUNCH_REACH) > THRESHOLD_REACH_ONE_FAR) 
 						return true;
 		}
 		
-		if(aState.getCurrentAttack().isAttack(Attack.KICK_LOW) || aState.getCurrentAttack().isAttack(Attack.KICK_HIGH)) {
-			if(aState.getWalkedOrRunnedAway() && bState.getWalkedOrRunnedAway() 
-					&& a.getCharacteristicValue(Characteristic.KICK_REACH) > THRESHOLD_REACH_BOTH_FAR) 
+		if(stateA.getCurrentAttack().isAttack(Attack.KICK_LOW) || stateA.getCurrentAttack().isAttack(Attack.KICK_HIGH)) {
+			if(stateA.getWalkedOrRunnedAway() && stateB.getWalkedOrRunnedAway() 
+					&& botA.getCharacteristicValue(Characteristic.KICK_REACH) > THRESHOLD_REACH_BOTH_FAR) 
 						return true;
-			if(aState.getWalkedOrRunnedAway() || bState.getWalkedOrRunnedAway() 
-					&& a.getCharacteristicValue(Characteristic.KICK_REACH) > THRESHOLD_REACH_ONE_FAR) 
+			if(stateA.getWalkedOrRunnedAway() || stateB.getWalkedOrRunnedAway() 
+					&& botA.getCharacteristicValue(Characteristic.KICK_REACH) > THRESHOLD_REACH_ONE_FAR) 
 						return true;
 		}
 		
@@ -129,24 +125,24 @@ public class Fight {
 		view.update();
 	}
 
-	private static Condition isWeakerStrongerEven(state.Bot a, state.Bot b) {
-		if(a.getHealth() > b.getHealth()) return Condition.STRONGER;
-		if(a.getHealth() < b.getHealth()) return Condition.WEAKER;
+	private static Condition isWeakerStrongerEven(state.Bot botA, state.Bot botB) {
+		if(botA.getHealth() > botB.getHealth()) return Condition.STRONGER;
+		if(botA.getHealth() < botB.getHealth()) return Condition.WEAKER;
 		
 		return Condition.EVEN;
 	}
 
-	private static Condition isMuchWeakerStronger(state.Bot a, state.Bot b) {
-		if((a.getHealth() +  MUCH_WEAKER_STRONGER_DIFFERENCE) > b.getHealth()) 
+	private static Condition isMuchWeakerStronger(state.Bot botA, state.Bot botB) {
+		if((botA.getHealth() +  MUCH_WEAKER_STRONGER_DIFFERENCE) > botB.getHealth()) 
 			return Condition.MUCH_STRONGER;
-		if((a.getHealth() - MUCH_WEAKER_STRONGER_DIFFERENCE) < b.getHealth()) 
+		if((botA.getHealth() - MUCH_WEAKER_STRONGER_DIFFERENCE) < botB.getHealth()) 
 			return Condition.MUCH_WEAKER;
 		
 		return null;
 	}
 
-	private static Condition isFarOrNear(state.Bot a, state.Bot b) {
-		if(a.getWalkedOrRunnedAway() && b.getWalkedOrRunnedAway()) return Condition.FAR;
+	private static Condition isFarOrNear(state.Bot botA, state.Bot botB) {
+		if(botA.getWalkedOrRunnedAway() && botB.getWalkedOrRunnedAway()) return Condition.FAR;
 		
 		return Condition.NEAR;
 	}

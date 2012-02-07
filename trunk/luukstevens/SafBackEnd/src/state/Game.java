@@ -7,6 +7,7 @@ public class Game {
 	private Bot rightBot;
 	
 	public Game() {
+		
 		setLeftBot(new Bot(Position.LEFT));
 		setRightBot(new Bot(Position.RIGHT));
 	}
