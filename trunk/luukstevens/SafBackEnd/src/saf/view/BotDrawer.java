@@ -13,11 +13,9 @@ import java.util.Map;
 
 import saf.enums.Move;
 import saf.state.Bot;
+import saf.variable.ISettings;
 
-public class BotDrawer {
-	public static final String IMAGE_FOLDER = "data/sprites/";
-	public static final String EXTENSION = ".png";
-	public static final String LEFT_SUFFIX = "_left";
+public class BotDrawer implements ISettings {
 
 	public final Map<Move, IDrawer> moveDrawers;
 
@@ -42,13 +40,13 @@ public class BotDrawer {
 
 	private BufferedImage getAttackImage(Bot bot) throws IOException {
 		
-		String imagePath = IMAGE_FOLDER + bot.getCurrentAttack().getValue();
+		String imagePath = SPRITE_FOLDER + bot.getCurrentAttack().getValue();
 
 		if (bot.getPosition().equals(Bot.Position.LEFT)) {
-			imagePath += LEFT_SUFFIX;
+			imagePath += SPRITE_LEFT_SUFFIX;
 		}
 
-		imagePath += EXTENSION;
+		imagePath += SPRITE_EXTENSION;
 		return ImageIO.read(new File(imagePath));
 	}
 

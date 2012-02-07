@@ -6,8 +6,6 @@ import javax.xml.bind.annotation.*;
 
 import saf.ast.condition.Condition;
 
-
-
 @XmlType(name = "BehaviourRule")
 public class BehaviourRule {
 	

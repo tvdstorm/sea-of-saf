@@ -6,12 +6,9 @@ import java.util.Random;
 import saf.ast.Action;
 import saf.ast.BehaviourRule;
 import saf.enums.Condition;
+import saf.variable.ISettings;
 
-
-
-public class Bot {
-	private static final int DEFAULT_HEALTH = 100;
-	
+public class Bot implements ISettings {
 	public enum Position { LEFT, RIGHT };
 	
 	private Action currentMove;

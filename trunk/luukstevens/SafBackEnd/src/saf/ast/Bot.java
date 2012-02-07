@@ -10,11 +10,10 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import saf.ast.condition.*;
-
+import saf.variable.ISettings;
 
 @XmlRootElement(name = "bot")
-public class Bot {
-	private static final int DEFAULT_CHARACTERISTIC_VALUE = 5;
+public class Bot implements ISettings {
 	
 	@XmlAttribute
 	private String name;

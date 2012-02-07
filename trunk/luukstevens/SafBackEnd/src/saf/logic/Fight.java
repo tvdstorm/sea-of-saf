@@ -6,13 +6,10 @@ import java.util.List;
 import saf.ast.Action;
 import saf.enums.*;
 import saf.state.Game;
+import saf.variable.ISettings;
 import saf.view.*;
 
-public class Fight {
-	private static final int MUCH_WEAKER_STRONGER_DIFFERENCE = 20;
-	private static final int THRESHOLD_REACH_BOTH_FAR = 10;
-	private static final int THRESHOLD_REACH_ONE_FAR = 5;
-	private static final int DELAY = 500;
+public class Fight implements ISettings {
 	
 	public static void start(Game game, saf.ast.Bot left, saf.ast.Bot right, Main view) throws InterruptedException {		
 		
@@ -133,9 +130,9 @@ public class Fight {
 	}
 
 	private static Condition isMuchWeakerStronger(saf.state.Bot botA, saf.state.Bot botB) {
-		if((botA.getHealth() +  MUCH_WEAKER_STRONGER_DIFFERENCE) > botB.getHealth()) 
+		if((botA.getHealth() +  THRESHOLD_MUCH_WEAKER_STRONGER) > botB.getHealth()) 
 			return Condition.MUCH_STRONGER;
-		if((botA.getHealth() - MUCH_WEAKER_STRONGER_DIFFERENCE) < botB.getHealth()) 
+		if((botA.getHealth() - THRESHOLD_MUCH_WEAKER_STRONGER) < botB.getHealth()) 
 			return Condition.MUCH_WEAKER;
 		
 		return null;
