@@ -1,13 +1,14 @@
+package saf;
 
 import java.util.LinkedList;
 
-import enums.Condition;
 
-import ast.Bot;
 
-import state.Game;
-import view.Main;
-import logic.Fight;
+import saf.ast.Bot;
+import saf.enums.Condition;
+import saf.logic.Fight;
+import saf.state.Game;
+import saf.view.Main;
 
 public class Program {
 

@@ -1,10 +1,11 @@
-package ast;
+package saf.ast;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-import ast.condition.Condition;
+import saf.ast.condition.Condition;
+
 
 
 @XmlType(name = "BehaviourRule")

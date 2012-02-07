@@ -1,9 +1,9 @@
-package view;
+package saf.view;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import state.Bot;
+import saf.state.Bot;
 
 public interface IDrawer {
 	

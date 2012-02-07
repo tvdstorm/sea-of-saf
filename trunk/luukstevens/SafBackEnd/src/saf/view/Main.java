@@ -1,11 +1,11 @@
-package view;
+package saf.view;
 
 import java.awt.*;
 import javax.swing.*;
 
-import state.Game;
+import saf.ast.Bot;
+import saf.state.Game;
 
-import ast.Bot;
 
 public class Main extends JFrame {
 	

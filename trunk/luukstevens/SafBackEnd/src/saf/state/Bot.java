@@ -1,12 +1,13 @@
-package state;
+package saf.state;
 
 import java.util.List;
 import java.util.Random;
 
-import enums.Condition;
+import saf.ast.Action;
+import saf.ast.BehaviourRule;
+import saf.enums.Condition;
 
-import ast.Action;
-import ast.BehaviourRule;
+
 
 public class Bot {
 	private static final int DEFAULT_HEALTH = 100;
@@ -33,11 +34,11 @@ public class Bot {
 
 	public void setCurrentMove(Action currentMove) {
 		
-		if(currentMove.isMove(enums.Move.WALK_TOWARDS) || currentMove.isMove(enums.Move.RUN_TOWARDS)) {
+		if(currentMove.isMove(saf.enums.Move.WALK_TOWARDS) || currentMove.isMove(saf.enums.Move.RUN_TOWARDS)) {
 			walkedOrRunnedAway = false;
 		}
 		
-		if(currentMove.isMove(enums.Move.WALK_AWAY) || currentMove.isMove(enums.Move.RUN_AWAY)) {
+		if(currentMove.isMove(saf.enums.Move.WALK_AWAY) || currentMove.isMove(saf.enums.Move.RUN_AWAY)) {
 			walkedOrRunnedAway = true;
 		}
 		

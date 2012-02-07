@@ -1,4 +1,4 @@
-package ast.condition;
+package saf.ast.condition;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ public class Simple extends Condition {
     }
     
     @Override
-	public boolean evaluate(List<enums.Condition> conditions) {
+	public boolean evaluate(List<saf.enums.Condition> conditions) {
     	if(value == null) return false;
-    	if(value.equals(enums.Condition.ALWAYS.getText())) return true;
+    	if(value.equals(saf.enums.Condition.ALWAYS.getText())) return true;
   	
-		for(enums.Condition condition : conditions) {
+		for(saf.enums.Condition condition : conditions) {
 			if(condition.getText().equals(value)) return true;
 		}
 		

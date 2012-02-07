@@ -1,10 +1,10 @@
-package view;
+package saf.view;
 
 import javax.swing.*;
 
-import state.Game;
+import saf.ast.Bot;
+import saf.state.Game;
 
-import ast.Bot;
 
 public class Health extends JPanel {	
 	

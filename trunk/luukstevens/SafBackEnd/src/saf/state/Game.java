@@ -1,6 +1,6 @@
-package state;
+package saf.state;
 
-import state.Bot.Position;
+import saf.state.Bot.Position;
 
 public class Game {
 	private Bot leftBot;

@@ -1,4 +1,4 @@
-package enums;
+package saf.enums;
 
 public enum Characteristic {
 	KICK_POWER("kickPower"), 

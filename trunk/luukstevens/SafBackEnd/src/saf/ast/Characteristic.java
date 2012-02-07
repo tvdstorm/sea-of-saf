@@ -1,4 +1,4 @@
-package ast;
+package saf.ast;
 
 import javax.xml.bind.annotation.*;
 
