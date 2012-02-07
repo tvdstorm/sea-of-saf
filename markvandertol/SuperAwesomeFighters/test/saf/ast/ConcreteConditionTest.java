@@ -24,10 +24,10 @@ public class ConcreteConditionTest {
 
 	@Test
 	public void testMatched() {
-		ConcreteCondition condition1 = new ConcreteCondition(State.always);
+		ConcreteCondition condition1 = new ConcreteCondition("always");
 		assertTrue(condition1.matched(testSet));
 		
-		ConcreteCondition condition2 = new ConcreteCondition(State.far);
+		ConcreteCondition condition2 = new ConcreteCondition("far");
 		assertFalse(condition2.matched(testSet));
 	}
 	

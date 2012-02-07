@@ -38,15 +38,15 @@ public class FighterComponent extends JComponent {
 		graphics.setColor(Color.white);
 		graphics.fillRect(0, 0, width, height);
 		
-		Fighter fighter = arena.getFighter(fighterIndex);
-		if (fighter == null)
+		Fighter player = arena.getFighter(fighterIndex);
+		if (player == null)
 			return;
 		
-		paintStickMan(graphics, fighter.getLastFightAction());
+		paintStickMan(graphics, player.getLastFightAction());
 		
-		boolean near = fighter.getSpeed() > arena.getDistanceBetweenBots();
-		String move = (fighter.getLastMoveAction() != null) ? fighter.getLastMoveAction().toString() : "";
-		paintStats(graphics, fighter.getName(), move, fighter.getHealth(), near, fighter.hasWonRound(), fighter.getCurrentStance());
+		boolean near = player.getSpeed() > arena.getDistanceBetweenBots();
+		String move = (player.getLastMoveAction() != null) ? player.getLastMoveAction().toString() : "";
+		paintStats(graphics, player.getName(), move, player.getHealth(), near, player.hasWonRound(), player.getCurrentStance());
 	}
 	
 	private void paintStats(Graphics2D g, String name, String move, int health, boolean near, boolean winner, Stance stance) {

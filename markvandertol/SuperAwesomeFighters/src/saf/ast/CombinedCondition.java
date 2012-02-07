@@ -5,13 +5,12 @@ import java.util.Set;
 
 public class CombinedCondition extends Condition {
 	
-	private Condition condition1;
-	private Condition condition2;
+	private final Condition condition1;
+	private final Condition condition2;
 	
-	private boolean requireBoth;
+	private final boolean requireBoth;
 	
-	public CombinedCondition(Condition condition1, Condition condition2,
-			boolean requireBoth) {
+	public CombinedCondition(Condition condition1, Condition condition2, boolean requireBoth) {
 		this.condition1 = condition1;
 		this.condition2 = condition2;
 		this.requireBoth = requireBoth;

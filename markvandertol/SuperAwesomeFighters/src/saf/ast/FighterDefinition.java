@@ -1,9 +1,9 @@
 package saf.ast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -17,13 +17,19 @@ public class FighterDefinition {
 
 	private final static int DefaultPropertyValue = 5;
 
-	private String name;
+	private final String name;
 
-	private HashMap<String, Integer> properties = new HashMap<String, Integer>();
+	private final Map<String, Integer> properties;
 	
-	private List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
+	private final List<BehaviourRule> behaviourRules;
 	private final String[] propertyNames = {PUNCH_REACH, PUNCH_POWER, KICK_REACH, KICK_POWER};
 	
+	public FighterDefinition(String name, Map<String, Integer> properties, List<BehaviourRule> behaviourRules) {
+		this.name = name;
+		this.properties = properties;
+		this.behaviourRules = behaviourRules;
+	}
+
 	private int getProperty(String property) {
 		Integer result = properties.get(property);
 		return (result != null) ? result : DefaultPropertyValue;
@@ -31,10 +37,6 @@ public class FighterDefinition {
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getPunchReach() {

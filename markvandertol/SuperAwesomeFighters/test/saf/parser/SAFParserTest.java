@@ -72,7 +72,7 @@ public class SAFParserTest {
 			for (FightAction fightAction : fightActions) {
 				for (String format : formats) {
 					SAFParser parser = getParser(String.format(format, condition, moveAction.toString(), fightAction.toString()));
-					SAFParser.action_return result = parser.action();
+					SAFParser.rule_return result = parser.rule();
 					
 					Tree tree = (Tree) result.getTree();
 					assertEquals(3, tree.getChildCount());

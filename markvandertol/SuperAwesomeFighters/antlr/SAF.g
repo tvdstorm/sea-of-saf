@@ -7,7 +7,9 @@ options {
 tokens {
   FIGHTER;
   ASSIGNMENT;
-  ACTION;
+  RULE;
+  MOVES;
+  ATTACKS;
   CONDITION;
   ANDCONDITION;
   ORCONDITION;
@@ -16,12 +18,10 @@ tokens {
 
 @header {
 package saf.parser;
-import java.util.List;
 }
 
 @lexer::header {
 package saf.parser;
-import java.util.List;
 }
 
 @members{
@@ -50,25 +50,26 @@ import java.util.List;
 	}
 }
 
-fighter	:	ws? IDENTIFIER ws? '{' ws (assignment endline ws?)* (action endline ws?)*
-		'}' ws? -> ^(FIGHTER IDENTIFIER assignment* action*);
+fighter	: IDENTIFIER '{'  assignment*  rule* '}' -> ^(FIGHTER IDENTIFIER assignment* rule*);
 
 assignment
-	:	IDENTIFIER ws? '=' ws? DIGIT
+	:	IDENTIFIER '=' DIGIT
 	 	-> ^(ASSIGNMENT IDENTIFIER DIGIT);
 
-action 	:	condition ws? '[' ws? move=IDENTIFIER ws attack=IDENTIFIER ws? ']'
-		-> ^(ACTION condition $move $attack);
-
-ws	:	(NEWLINE | WS)+;
-endline :	WS* NEWLINE;
+rule 	:	condition '[' moves attacks ']'
+		-> ^(RULE condition moves attacks);
+		
+moves 	:	move=IDENTIFIER -> ^(MOVES $move)
+		|	'(' (move=IDENTIFIER)+ ')' -> ^(MOVES $move+);
+		
+attacks :	attack=IDENTIFIER -> ^(ATTACKS $attack)
+		|	'(' (attack=IDENTIFIER)+ ')' -> ^(ATTACKS $attack+);
 
 condition 
-	:	first=andcondition (WS+ 'or' WS+ second=condition -> ^(ORCONDITION $first $second) | -> ^(RCONDITION $first));
-
+	:	first=andcondition ( 'or' second=condition -> ^(ORCONDITION $first $second) | -> ^(RCONDITION $first));
 	
 andcondition
-	:	first=pcondition (WS+ 'and' WS+ second=andcondition -> ^(ANDCONDITION $first $second) | -> ^(RCONDITION $first));
+	:	first=pcondition ( 'and' second=andcondition -> ^(ANDCONDITION $first $second) | -> ^(RCONDITION $first));
 	
 
 pcondition 
@@ -78,8 +79,7 @@ pcondition
 
 /* Tokens: */
 
-NEWLINE :	'\r'? '\n';
-WS 	:	( ' ' | '\t')+;
+WS 	:	( ' ' | '\t' | '\r' | '\n')+ {$channel=HIDDEN;};
 IDENTIFIER	:	('a'..'z'|'A'..'Z'|'_')('a' .. 'z'| 'A'..'Z'| '0' .. '9' | '_' | '-')+;
 DIGIT	:	('0' .. '9')+;
 
