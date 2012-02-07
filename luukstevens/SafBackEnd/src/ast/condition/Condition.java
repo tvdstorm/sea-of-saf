@@ -1,5 +1,5 @@
 package ast.condition;
 
-public abstract class Condition implements Evaluable {
+public abstract class Condition implements IEvaluable {
 	
 }

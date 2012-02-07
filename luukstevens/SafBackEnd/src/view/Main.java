@@ -7,8 +7,8 @@ import state.Game;
 
 import ast.Bot;
 
-
 public class Main extends JFrame {
+	
 	private static final int WIDTH = 600;
 	private static final int HEIGHT = 350; 
 	
@@ -36,6 +36,7 @@ public class Main extends JFrame {
 	}
 	
 	public void update() {
+		
 		arena.repaint();
 		health.update();
 	}
