@@ -4,7 +4,6 @@ import javax.xml.bind.annotation.*;
 
 import saf.enums.*;
 
-
 @XmlType(name = "action")
 public class Action {
 	

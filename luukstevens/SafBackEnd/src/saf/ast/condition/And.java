@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import saf.enums.Condition;
 
-
 @XmlRootElement(name = "andCondition")
 public class And extends Composite {
 	

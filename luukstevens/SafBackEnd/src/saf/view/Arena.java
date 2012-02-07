@@ -9,20 +9,9 @@ import javax.swing.JPanel;
 
 import saf.ast.Bot;
 import saf.state.Game;
+import saf.variable.ISettings;
 
-
-public class Arena extends JPanel {
-	private static final int X_POSITION = 75;
-	private static final int Y_POSITION = 40;
-	
-	private static final int WIDTH = 450;
-	private static final int HIGHT = 250;
-	
-	private static final int LEFT_BOT_XPOS = 145;
-	private static final int LEFT_BOT_YPOS = 75;
-	
-	private static final int RIGHT_BOT_XPOS = 255;
-	private static final int RIGHT_BOT_YPOS = 75;
+public class Arena extends JPanel implements ISettings {
 	
 	private Game game;
 	private Bot left;
@@ -38,8 +27,8 @@ public class Arena extends JPanel {
 	
 		botDrawer = new BotDrawer();
 		
-		setBounds(X_POSITION, Y_POSITION, WIDTH, HEIGHT);
-		setSize(WIDTH, HIGHT);
+		setBounds(ARENA_X_POSITION, ARENA_Y_POSITION, ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
+		setSize(ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
 		setOpaque(false);
 	}
 	
@@ -50,7 +39,7 @@ public class Arena extends JPanel {
     	}
     	
     	g.setColor(Color.WHITE);
-    	g.fillRect(0, 0, WIDTH, HIGHT);
+    	g.fillRect(0, 0, ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
     	
     	try {
     		botDrawer.draw(g, game.getLeftBot(), LEFT_BOT_XPOS, LEFT_BOT_YPOS);
@@ -61,7 +50,7 @@ public class Arena extends JPanel {
 		}
     	 
     	if(endGame) {
-    		addWinsText(g, game, left, right, WIDTH, HEIGHT);
+    		addWinsText(g, game, left, right, ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
     	}
     }
     

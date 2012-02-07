@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import saf.enums.Condition;
 
-
 @XmlRootElement(name = "orCondition")
 public class Or extends Composite {
 

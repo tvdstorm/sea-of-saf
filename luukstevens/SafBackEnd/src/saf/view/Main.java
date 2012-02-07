@@ -5,16 +5,10 @@ import javax.swing.*;
 
 import saf.ast.Bot;
 import saf.state.Game;
+import saf.variable.ISettings;
 
-
-public class Main extends JFrame {
+public class Main extends JFrame implements ISettings {
 	
-	private static final int WIDTH = 600;
-	private static final int HEIGHT = 350; 
-	
-	private static final int X_POSITION = 100;
-	private static final int Y_POSITION = 100;
-
 	private Arena arena;
 	private Health health;
 	
@@ -27,8 +21,8 @@ public class Main extends JFrame {
 		add(health);
 
 		setTitle("Super Awesome Fighters");
-		setSize(WIDTH, HEIGHT);
-		setLocation(X_POSITION, Y_POSITION);
+		setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+		setLocation(APPLICATION_X_POSITION, APPLICATION_Y_POSITION);
 		setVisible(true);
 		setBackground(Color.LIGHT_GRAY);
 		setLayout(new FlowLayout(FlowLayout.CENTER));
