@@ -1,9 +1,7 @@
 JackieChan{
-    kickPower = 7
-    punchPower = 5
-    kickReach = 3
-    punchReach = 9
-    far[run_towards punch_high]
-    near[choose(stand crouch) choose(kick_high block_high)]
-    always[choose(run_towards run_away) kick_high]
+    kickPower = 10
+    punchPower = 7
+    kickReach = 7
+    punchReach = 7
+    far or (near or much_weaker)[walk_towards kick_high]
 }

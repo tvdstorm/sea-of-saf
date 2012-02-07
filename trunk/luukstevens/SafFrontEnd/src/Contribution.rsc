@@ -5,11 +5,12 @@ import util::Prompt;
 import ParseTree;
 import IO;
 import String;
+import lang::xml::DOM;
 
 import Language;
 import Ast;
 import XmlSerialization;
-import lang::xml::DOM;
+import Validation;
 
 public Contribution exportXml() {
     action = action("Export to XML", performExport);
@@ -23,5 +24,10 @@ public void performExport(Tree tree, loc selection) {
     xmlFileLocation.uri = xmlStringLocation;
 
     Bot ast = implode(#Bot, tree);
-    serializeBot(ast, xmlFileLocation);
+    
+    if(validate(ast) == {}) {
+        serializeBot(ast, xmlFileLocation);
+    } else {
+        alert("Export failed. File contains errors.");
+    }
 }

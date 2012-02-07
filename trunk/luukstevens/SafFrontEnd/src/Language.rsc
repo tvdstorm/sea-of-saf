@@ -38,8 +38,9 @@ syntax BehaviourRule
 
 syntax Condition 
     = simpleCondition : ConditionId condition
+    | bracket "(" Condition ")"
     | left andCondition : Condition firstCondition "and" Condition secondCondition  
-    > left orCondition : Condition firstCondition "or" Condition secondCondition; 
+    > left orCondition : Condition firstCondition "or" Condition secondCondition;
     
 syntax MoveAction
     = simpleMoveAction : MoveId moveAction

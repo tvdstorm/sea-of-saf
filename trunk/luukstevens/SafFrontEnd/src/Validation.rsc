@@ -16,6 +16,7 @@ private str unknownConditionMessage = "Unknown condition: ";
 private str unknownMoveActionMessage = "Unknown move action: ";
 private str unknownFightActionMessage = "Unknown fight action: ";
 private str unknownCharacteristicMessage = "Unknown characteristic: ";
+private str alwaysOmittedMessage = "One of the characteristics must start with an always condition.";
 private str invalidCharacteristicValueMessage = 
     "Invalid characteristic value (<characteristicMinimum> - <characteristicMaximum> allowed): ";
 
@@ -31,7 +32,19 @@ public set[Message] validate(Bot bot) {
         }
     };
     
+    validationMessages += validateAlways(bot);
+    
     return validationMessages;
+}
+
+private set[Message] validateAlways(Bot bot) {
+    visit(bot) {
+        case simpleCondition(str condition): { 
+            if(condition == "always") return {};
+        }
+    }
+    
+    return { error(alwaysOmittedMessage, bot@location) };
 }
 
 private set[Message] validateCharacteristic(Characteristic characteristic) {
