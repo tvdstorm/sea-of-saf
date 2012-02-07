@@ -3,9 +3,10 @@ package saf.ast;
 import javax.xml.bind.annotation.*;
 
 import saf.enums.*;
+import saf.variable.IEnums;
 
 @XmlType(name = "action")
-public class Action {
+public class Action implements IEnums {
 	
 	@XmlAttribute
 	private String value;
@@ -25,7 +26,7 @@ public class Action {
 	}
 	
 	public Attack getAttack() {
-		for(Attack attack : saf.enums.Attack.values()) {
+		for(Attack attack : IEnums.Attack.values()) {
 			if(attack.getText().equals(value)) return attack;
 		}
 		
@@ -33,7 +34,7 @@ public class Action {
 	}
 	
 	public Move getMove() {
-		for(Move move : saf.enums.Move.values()) {
+		for(Move move : IEnums.Move.values()) {
 			if(move.getText().equals(value)) return move;
 		}
 		

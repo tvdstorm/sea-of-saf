@@ -2,8 +2,8 @@ package saf.ast.condition;
 
 import java.util.List;
 
-import saf.enums.Condition;
+import saf.variable.IEnums;
 
-public interface IEvaluable {
+public interface IEvaluable extends IEnums {
 	boolean evaluate(List<Condition> conditions);
 }

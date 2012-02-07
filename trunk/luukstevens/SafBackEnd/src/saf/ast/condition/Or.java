@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import saf.enums.Condition;
+import saf.variable.IEnums;
 
 @XmlRootElement(name = "orCondition")
-public class Or extends Composite {
+public class Or extends Composite implements IEnums {
 
 	@Override
 	public boolean evaluate(List<Condition> conditions) {

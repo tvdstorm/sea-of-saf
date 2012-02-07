@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
+import saf.variable.IEnums;
+
 @XmlRootElement(name = "simpleCondition")
-public class Simple extends Condition {
+public class Simple extends Condition implements IEnums {
 
     @XmlAttribute
     String value;
@@ -15,11 +17,11 @@ public class Simple extends Condition {
     }
     
     @Override
-	public boolean evaluate(List<saf.enums.Condition> conditions) {
+	public boolean evaluate(List<IEnums.Condition> conditions) {
     	if(value == null) return false;
-    	if(value.equals(saf.enums.Condition.ALWAYS.getText())) return true;
+    	if(value.equals(IEnums.Condition.ALWAYS.getText())) return true;
   	
-		for(saf.enums.Condition condition : conditions) {
+		for(IEnums.Condition condition : conditions) {
 			if(condition.getText().equals(value)) return true;
 		}
 		

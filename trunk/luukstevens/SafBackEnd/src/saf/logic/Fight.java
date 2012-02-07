@@ -6,10 +6,11 @@ import java.util.List;
 import saf.ast.Action;
 import saf.enums.*;
 import saf.state.Game;
+import saf.variable.IEnums;
 import saf.variable.ISettings;
 import saf.view.*;
 
-public class Fight implements ISettings {
+public class Fight implements ISettings, IEnums {
 	
 	public static void start(Game game, saf.ast.Bot left, saf.ast.Bot right, Main view) throws InterruptedException {		
 		

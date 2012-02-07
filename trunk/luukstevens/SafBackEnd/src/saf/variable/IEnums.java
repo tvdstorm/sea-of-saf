@@ -1,6 +1,6 @@
 package saf.variable;
 
-public interface Enums {
+public interface IEnums {
 	public enum Attack {
 		BLOCK_HIGH("block_high"), 
 		BLOCK_LOW("block_low"),
