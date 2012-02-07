@@ -1,4 +1,4 @@
-package ast;
+package saf.ast;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,7 +9,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import ast.condition.*;
+import saf.ast.condition.*;
+
 
 @XmlRootElement(name = "bot")
 public class Bot {
@@ -42,8 +43,8 @@ public class Bot {
 		return 	Math.abs((0.5 * (getHeight() - getWeight())));	
 	}
 	
-	public int getCharacteristicValue(enums.Characteristic characteristicType) {
-		for(ast.Characteristic characteristic : characteristics) {
+	public int getCharacteristicValue(saf.enums.Characteristic characteristicType) {
+		for(saf.ast.Characteristic characteristic : characteristics) {
 			if(characteristicType.getText().equals(characteristic.getName())) {
 				return characteristic.getValue();
 			}
@@ -60,12 +61,12 @@ public class Bot {
 	}
 	
 	private double getWeight() {
-		return 	(getCharacteristicValue(enums.Characteristic.PUNCH_POWER) + 
-			getCharacteristicValue(enums.Characteristic.KICK_POWER)) / 2;
+		return 	(getCharacteristicValue(saf.enums.Characteristic.PUNCH_POWER) + 
+			getCharacteristicValue(saf.enums.Characteristic.KICK_POWER)) / 2;
 	}
 	
 	private double getHeight() {
-		return 	(getCharacteristicValue(enums.Characteristic.PUNCH_REACH) + 
-			getCharacteristicValue(enums.Characteristic.KICK_REACH)) / 2;
+		return 	(getCharacteristicValue(saf.enums.Characteristic.PUNCH_REACH) + 
+			getCharacteristicValue(saf.enums.Characteristic.KICK_REACH)) / 2;
 	}
 }

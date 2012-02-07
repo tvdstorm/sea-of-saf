@@ -1,17 +1,18 @@
-package ast.condition;
+package saf.ast.condition;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import enums.Condition;
+import saf.enums.Condition;
 
-@XmlRootElement(name = "andCondition")
-public class And extends Composite {
-	
+
+@XmlRootElement(name = "orCondition")
+public class Or extends Composite {
+
 	@Override
 	public boolean evaluate(List<Condition> conditions) {
-		return this.getFirstCondition().evaluate(conditions) && 
+		return this.getFirstCondition().evaluate(conditions) || 
 				this.getSecondCondition().evaluate(conditions);
 	}
 }

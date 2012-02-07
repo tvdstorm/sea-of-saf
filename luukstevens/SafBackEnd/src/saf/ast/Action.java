@@ -1,8 +1,9 @@
-package ast;
+package saf.ast;
 
 import javax.xml.bind.annotation.*;
 
-import enums.*;
+import saf.enums.*;
+
 
 @XmlType(name = "action")
 public class Action {
@@ -25,7 +26,7 @@ public class Action {
 	}
 	
 	public Attack getAttack() {
-		for(Attack attack : enums.Attack.values()) {
+		for(Attack attack : saf.enums.Attack.values()) {
 			if(attack.getText().equals(value)) return attack;
 		}
 		
@@ -33,7 +34,7 @@ public class Action {
 	}
 	
 	public Move getMove() {
-		for(Move move : enums.Move.values()) {
+		for(Move move : saf.enums.Move.values()) {
 			if(move.getText().equals(value)) return move;
 		}
 		

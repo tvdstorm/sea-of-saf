@@ -1,4 +1,4 @@
-package view;
+package saf.view;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,9 +7,9 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import state.Game;
+import saf.ast.Bot;
+import saf.state.Game;
 
-import ast.Bot;
 
 public class Arena extends JPanel {
 	private static final int X_POSITION = 75;

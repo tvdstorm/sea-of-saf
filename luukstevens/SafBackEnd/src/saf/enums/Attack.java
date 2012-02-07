@@ -1,4 +1,4 @@
-package enums;
+package saf.enums;
 
 public enum Attack {
 	BLOCK_HIGH("block_high"), 

@@ -1,12 +1,12 @@
-package logic;
+package saf.logic;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import enums.*;
-import ast.Action;
-import state.Game;
-import view.*;
+import saf.ast.Action;
+import saf.enums.*;
+import saf.state.Game;
+import saf.view.*;
 
 public class Fight {
 	private static final int MUCH_WEAKER_STRONGER_DIFFERENCE = 20;
@@ -14,7 +14,7 @@ public class Fight {
 	private static final int THRESHOLD_REACH_ONE_FAR = 5;
 	private static final int DELAY = 500;
 	
-	public static void start(Game game, ast.Bot left, ast.Bot right, Main view) throws InterruptedException {		
+	public static void start(Game game, saf.ast.Bot left, saf.ast.Bot right, Main view) throws InterruptedException {		
 		
 		while(game.getLeftBot().getHealth() > 0 && game.getRightBot().getHealth() > 0) {
 			reduceHealth(left, game.getLeftBot(), right, game.getRightBot());
@@ -25,7 +25,7 @@ public class Fight {
 		}
 	}
 	
-	private static void reduceHealth(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
+	private static void reduceHealth(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
 		
 		if(stateA.getCurrentAttack().equals(stateB.getCurrentAttack()) && (botA.getSpeed() > botB.getSpeed())) {
 			reduceHealthSameAttack(botA, stateA, botB,  stateB);
@@ -34,7 +34,7 @@ public class Fight {
 		}
 	}
 	
-	private static void reduceHealthSameAttack(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
+	private static void reduceHealthSameAttack(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
 		
 		Action aAttack = stateA.getCurrentAttack();
 		
@@ -49,7 +49,7 @@ public class Fight {
 		}
 	}
 	
-	private static void retuceHealthDifferentAttack(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
+	private static void retuceHealthDifferentAttack(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
 		
 		Action aAttack = stateA.getCurrentAttack();
 		Action bAttack = stateB.getCurrentAttack();
@@ -73,7 +73,7 @@ public class Fight {
 		}
 	}
 	
-	public static boolean canReach(ast.Bot botA, state.Bot stateA,  ast.Bot botB, state.Bot stateB) {
+	public static boolean canReach(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
 		
 		if(stateA.getCurrentAttack().isAttack(Attack.KICK_LOW) 
 				&& stateB.getCurrentMove().isMove(Move.JUMP)) return false;
@@ -102,7 +102,7 @@ public class Fight {
 		return false;
 	}
 	
-	private static void updateBotsAndView(Game game, ast.Bot left, ast.Bot right, Main view) {
+	private static void updateBotsAndView(Game game, saf.ast.Bot left, saf.ast.Bot right, Main view) {
 		List<Condition> leftBotConditions = new LinkedList<Condition>();
 		List<Condition> rightBotConditions = new LinkedList<Condition>();
 		
@@ -125,14 +125,14 @@ public class Fight {
 		view.update();
 	}
 
-	private static Condition isWeakerStrongerEven(state.Bot botA, state.Bot botB) {
+	private static Condition isWeakerStrongerEven(saf.state.Bot botA, saf.state.Bot botB) {
 		if(botA.getHealth() > botB.getHealth()) return Condition.STRONGER;
 		if(botA.getHealth() < botB.getHealth()) return Condition.WEAKER;
 		
 		return Condition.EVEN;
 	}
 
-	private static Condition isMuchWeakerStronger(state.Bot botA, state.Bot botB) {
+	private static Condition isMuchWeakerStronger(saf.state.Bot botA, saf.state.Bot botB) {
 		if((botA.getHealth() +  MUCH_WEAKER_STRONGER_DIFFERENCE) > botB.getHealth()) 
 			return Condition.MUCH_STRONGER;
 		if((botA.getHealth() - MUCH_WEAKER_STRONGER_DIFFERENCE) < botB.getHealth()) 
@@ -141,7 +141,7 @@ public class Fight {
 		return null;
 	}
 
-	private static Condition isFarOrNear(state.Bot botA, state.Bot botB) {
+	private static Condition isFarOrNear(saf.state.Bot botA, saf.state.Bot botB) {
 		if(botA.getWalkedOrRunnedAway() && botB.getWalkedOrRunnedAway()) return Condition.FAR;
 		
 		return Condition.NEAR;

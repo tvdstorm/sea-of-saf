@@ -1,4 +1,4 @@
-package view;
+package saf.view;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -7,12 +7,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import enums.Move;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import state.Bot;
+import saf.enums.Move;
+import saf.state.Bot;
 
 public class BotDrawer {
 	public static final String IMAGE_FOLDER = "data/sprites/";
