@@ -5,10 +5,10 @@ import java.util.Random;
 
 import saf.ast.Action;
 import saf.ast.BehaviourRule;
-import saf.enums.Condition;
+import saf.variable.IEnums;
 import saf.variable.ISettings;
 
-public class Bot implements ISettings {
+public class Bot implements ISettings, IEnums {
 	public enum Position { LEFT, RIGHT };
 	
 	private Action currentMove;
@@ -31,11 +31,11 @@ public class Bot implements ISettings {
 
 	public void setCurrentMove(Action currentMove) {
 		
-		if(currentMove.isMove(saf.enums.Move.WALK_TOWARDS) || currentMove.isMove(saf.enums.Move.RUN_TOWARDS)) {
+		if(currentMove.isMove(IEnums.Move.WALK_TOWARDS) || currentMove.isMove(IEnums.Move.RUN_TOWARDS)) {
 			walkedOrRunnedAway = false;
 		}
 		
-		if(currentMove.isMove(saf.enums.Move.WALK_AWAY) || currentMove.isMove(saf.enums.Move.RUN_AWAY)) {
+		if(currentMove.isMove(IEnums.Move.WALK_AWAY) || currentMove.isMove(IEnums.Move.RUN_AWAY)) {
 			walkedOrRunnedAway = true;
 		}
 		

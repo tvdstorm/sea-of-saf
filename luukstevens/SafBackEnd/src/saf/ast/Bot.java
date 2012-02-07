@@ -10,17 +10,18 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import saf.ast.condition.*;
+import saf.variable.IEnums;
 import saf.variable.ISettings;
 
 @XmlRootElement(name = "bot")
-public class Bot implements ISettings {
+public class Bot implements ISettings, IEnums {
 	
 	@XmlAttribute
 	private String name;
 	
 	@XmlElementWrapper(name = "characteristics")
 	@XmlElement(name = "characteristic")
-	private List<Characteristic> characteristics;
+	private List<saf.ast.Characteristic> characteristics;
 	
 	@XmlElementWrapper(name = "behaviourRules")
 	@XmlElement(name = "behaviourRule")
@@ -30,7 +31,7 @@ public class Bot implements ISettings {
 		return name;
 	}
 	
-	public List<Characteristic> getCharacteristics() {
+	public List<saf.ast.Characteristic> getCharacteristics() {
 		return characteristics;
 	}
 
@@ -42,8 +43,8 @@ public class Bot implements ISettings {
 		return 	Math.abs((0.5 * (getHeight() - getWeight())));	
 	}
 	
-	public int getCharacteristicValue(saf.enums.Characteristic characteristicType) {
-		for(saf.ast.Characteristic characteristic : characteristics) {
+	public int getCharacteristicValue(IEnums.Characteristic characteristicType) {
+		for(saf.ast.Characteristic characteristic : getCharacteristics()) {
 			if(characteristicType.getText().equals(characteristic.getName())) {
 				return characteristic.getValue();
 			}
@@ -60,12 +61,12 @@ public class Bot implements ISettings {
 	}
 	
 	private double getWeight() {
-		return 	(getCharacteristicValue(saf.enums.Characteristic.PUNCH_POWER) + 
-			getCharacteristicValue(saf.enums.Characteristic.KICK_POWER)) / 2;
+		return 	(getCharacteristicValue(IEnums.Characteristic.PUNCH_POWER) + 
+			getCharacteristicValue(IEnums.Characteristic.KICK_POWER)) / 2;
 	}
 	
 	private double getHeight() {
-		return 	(getCharacteristicValue(saf.enums.Characteristic.PUNCH_REACH) + 
-			getCharacteristicValue(saf.enums.Characteristic.KICK_REACH)) / 2;
+		return 	(getCharacteristicValue(IEnums.Characteristic.PUNCH_REACH) + 
+			getCharacteristicValue(IEnums.Characteristic.KICK_REACH)) / 2;
 	}
 }

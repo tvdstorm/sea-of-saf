@@ -1,5 +1,7 @@
 package saf.ast.condition;
 
-public abstract class Condition implements IEvaluable {
+import saf.variable.IEnums;
+
+public abstract class Condition implements IEvaluable, IEnums {
 	
 }

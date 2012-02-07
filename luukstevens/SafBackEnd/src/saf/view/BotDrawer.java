@@ -11,11 +11,11 @@ import javax.imageio.ImageIO;
 import java.util.HashMap;
 import java.util.Map;
 
-import saf.enums.Move;
 import saf.state.Bot;
+import saf.variable.IEnums;
 import saf.variable.ISettings;
 
-public class BotDrawer implements ISettings {
+public class BotDrawer implements ISettings, IEnums {
 
 	public final Map<Move, IDrawer> moveDrawers;
 
