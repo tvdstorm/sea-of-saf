@@ -35,7 +35,6 @@ public class Rule implements INodeVisitable {
 	@Override
 	public void accept(INodeVisitor v) {
 		v.visit(this);
-
 	}
-
+	
 }

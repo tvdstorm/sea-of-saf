@@ -10,7 +10,7 @@ grammar SAF;
 
 bot 
 	:	IDENT '{' 
-			(characterstics | rule)*
+			(characterstics | rules)*
 	 	'}'
 	;
 
@@ -19,38 +19,50 @@ characterstics
 		IDENT '=' INTEGER
 	;		
 	
+rules
+	:
+	rule (operator rule)*
+	;
+
 rule
 	:
-	function (operator function)* (ruleExpression)* 
+	action
+	|'(' rules* ')'
 	;
-	
-ruleExpression:
-	operator '(' rule ')'
+
+action
+	:
+	IDENT 
+	|function
+	|choose
 	;
-	
+			
 operator
 	:
 	'and'	
 	|'or'
 	;
-		
+
+	
 function
 	:
 	IDENT '[' parameters ']'
 	;
-	
+
+choose
+	:
+	'choose(' IDENT IDENT ')'
+	;
+		
 parameters
 	:
 	IDENT IDENT
 	|choose IDENT
 	|IDENT choose
+	|choose choose
 	;
 	
-choose
-	:
-	'choose(' IDENT IDENT ')'
-	;
-	
+
 INTEGER : '0'..'9'+;
 IDENT : ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9'| '_')*;
 WS : (' ' | '\t' | '\n' | '\r' | '\f')+ {$channel = HIDDEN;};
