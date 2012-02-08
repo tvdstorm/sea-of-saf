@@ -8,17 +8,16 @@ import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
-import saf.DebugFunctions;
 import saf.checker.ElementChecker;
 import saf.game.event.NewBotEvent;
-import saf.game.event.listener.iGameEventListener;
+import saf.game.event.iEventListener;
 import saf.game.gui.GameController;
 import saf.parser.SAFLexer;
 import saf.parser.SAFParser;
 import saf.parser.SAFParser.bots_return;
 import saf.structure.Bots;
 
-public class GameEventListener implements iGameEventListener {
+public class GameEventListener implements iEventListener {
 
 	private final GameController gameController;
 	private final GameMain gameMain;
@@ -36,14 +35,12 @@ public class GameEventListener implements iGameEventListener {
 		try {
 			lexer = new SAFLexer(new ANTLRFileStream(e.getPath()));
 		} catch (IOException e1) {
-			gameController.DisplayMessage("Invalid file selected, please select a valid bot file.");
+			gameController.displayMessage("Invalid file selected, please select a valid bot file.");
 			return;
 		}
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		SAFParser parser = new SAFParser(tokens);
-
-		DebugFunctions DF = new DebugFunctions();
 
 		try {
 			bots_return _bots = parser.bots();
@@ -58,12 +55,13 @@ public class GameEventListener implements iGameEventListener {
 				for (String error : errors) {
 					errorString += "\n" + error;
 				}
-				gameController.DisplayMessage(errorString);
-			} else if (bots.getBots().size() > 1)
-				gameController.DisplayMessage("Only one bot is allowed.");
+				gameController.displayMessage(errorString);
+			} 
+			else if (bots.getBots().size() > 1)
+				gameController.displayMessage("Only one bot is allowed.");
 			else {
-				gameMain.NewBot(bots.getBots().get(0), e.isBotOne());
-				// DF.PrintAST(bots);
+				BotState botState = new BotState(bots.getBots().get(0), e.getSide(),gameController);
+				gameMain.NewBot(botState);
 			}
 
 		} catch (RecognitionException ex) {

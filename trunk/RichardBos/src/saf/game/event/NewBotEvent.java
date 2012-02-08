@@ -4,17 +4,17 @@ import java.util.EventObject;
 
 @SuppressWarnings("serial")
 public class NewBotEvent extends EventObject {
-	public NewBotEvent(Object source, String Path, boolean botOne) {
+	public NewBotEvent(Object source, String Path, String side) {
 		super(source);
 		this.path = Path;
-		this.BotOne = botOne;
+		this.side = side;
 	}
-	private final boolean BotOne;
+	private final String side;
 	private final String path;
 	public String getPath() {
 		return path;
 	}
-	public boolean isBotOne() {
-		return BotOne;
+	public String getSide() {
+		return side;
 	}
 }

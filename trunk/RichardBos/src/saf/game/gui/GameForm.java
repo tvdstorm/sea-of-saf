@@ -31,29 +31,29 @@ public class GameForm extends javax.swing.JFrame {
 		jPanelBotOne1 = new javax.swing.JPanel();
 		jLabel6 = new javax.swing.JLabel();
 		jLabel7 = new javax.swing.JLabel();
-		jLabelBotTwoName = new javax.swing.JLabel();
+		jLabelBotRightName = new javax.swing.JLabel();
 		jScrollPane3 = new javax.swing.JScrollPane();
-		jListBotTwoChars = new javax.swing.JList();
+		jListBotRightChars = new javax.swing.JList();
 		jScrollPane4 = new javax.swing.JScrollPane();
-		jListBotTwoBehaviors = new javax.swing.JList();
+		jListBotRightBehaviors = new javax.swing.JList();
 		jLabel8 = new javax.swing.JLabel();
 		jLabel9 = new javax.swing.JLabel();
-		jButtonBotTwoLoad = new javax.swing.JButton();
+		jButtonBotRightLoad = new javax.swing.JButton();
 		jPanelBotOne = new javax.swing.JPanel();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
-		jLabelBotOneName = new javax.swing.JLabel();
+		jLabelBotLeftName = new javax.swing.JLabel();
 		jScrollPane1 = new javax.swing.JScrollPane();
-		jListBotOneChars = new javax.swing.JList();
+		jListBotLeftChars = new javax.swing.JList();
 		jScrollPane2 = new javax.swing.JScrollPane();
-		jListBotOneBehaviors = new javax.swing.JList();
+		jListBotLeftBehaviors = new javax.swing.JList();
 		jLabel4 = new javax.swing.JLabel();
 		jLabel5 = new javax.swing.JLabel();
-		jButtonBotOneLoad = new javax.swing.JButton();
+		jButtonBotLeftLoad = new javax.swing.JButton();
 		jPanelGameArea = new javax.swing.JPanel();
 		jPanelGameButtons = new javax.swing.JPanel();
 		jButtonStart = new javax.swing.JButton();
-		jPanelArea = new saf.game.gui.component.GameArena();
+		jPanelGameArena = new saf.game.gui.component.GameArena();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setMinimumSize(new java.awt.Dimension(800, 500));
@@ -72,23 +72,21 @@ public class GameForm extends javax.swing.JFrame {
 
 		jLabel7.setText("Name");
 
-		jLabelBotTwoName.setText("Example Name");
-
-		jListBotTwoChars
+		jListBotRightChars
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jListBotTwoChars.setPreferredSize(new java.awt.Dimension(150, 100));
-		jScrollPane3.setViewportView(jListBotTwoChars);
+		jListBotRightChars.setPreferredSize(new java.awt.Dimension(150, 100));
+		jScrollPane3.setViewportView(jListBotRightChars);
 
-		jListBotTwoBehaviors
+		jListBotRightBehaviors
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jListBotTwoBehaviors.setPreferredSize(new java.awt.Dimension(0, 100));
-		jScrollPane4.setViewportView(jListBotTwoBehaviors);
+		jListBotRightBehaviors.setPreferredSize(new java.awt.Dimension(0, 100));
+		jScrollPane4.setViewportView(jListBotRightBehaviors);
 
 		jLabel8.setText("Characteristics");
 
 		jLabel9.setText("Behaviors");
 
-		jButtonBotTwoLoad.setText("Load fighter");
+		jButtonBotRightLoad.setText("Load fighter");
 
 		javax.swing.GroupLayout jPanelBotOne1Layout = new javax.swing.GroupLayout(
 				jPanelBotOne1);
@@ -123,13 +121,13 @@ public class GameForm extends javax.swing.JFrame {
 																												18,
 																												18)
 																										.addComponent(
-																												jLabelBotTwoName)))
+																												jLabelBotRightName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				322,
+																				399,
 																				Short.MAX_VALUE)
 																		.addComponent(
-																				jButtonBotTwoLoad))
+																				jButtonBotRightLoad))
 														.addGroup(
 																jPanelBotOne1Layout
 																		.createSequentialGroup()
@@ -155,7 +153,7 @@ public class GameForm extends javax.swing.JFrame {
 																						.addComponent(
 																								jScrollPane4,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								283,
+																								281,
 																								Short.MAX_VALUE))))
 										.addContainerGap()));
 		jPanelBotOne1Layout
@@ -184,9 +182,9 @@ public class GameForm extends javax.swing.JFrame {
 																						.addComponent(
 																								jLabel7)
 																						.addComponent(
-																								jLabelBotTwoName)))
+																								jLabelBotRightName)))
 														.addComponent(
-																jButtonBotTwoLoad))
+																jButtonBotRightLoad))
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
@@ -222,23 +220,21 @@ public class GameForm extends javax.swing.JFrame {
 
 		jLabel3.setText("Name");
 
-		jLabelBotOneName.setText("Example Name");
-
-		jListBotOneChars
+		jListBotLeftChars
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jListBotOneChars.setPreferredSize(new java.awt.Dimension(150, 100));
-		jScrollPane1.setViewportView(jListBotOneChars);
+		jListBotLeftChars.setPreferredSize(new java.awt.Dimension(150, 100));
+		jScrollPane1.setViewportView(jListBotLeftChars);
 
-		jListBotOneBehaviors
+		jListBotLeftBehaviors
 				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jListBotOneBehaviors.setPreferredSize(new java.awt.Dimension(0, 100));
-		jScrollPane2.setViewportView(jListBotOneBehaviors);
+		jListBotLeftBehaviors.setPreferredSize(new java.awt.Dimension(0, 100));
+		jScrollPane2.setViewportView(jListBotLeftBehaviors);
 
 		jLabel4.setText("Characteristics");
 
 		jLabel5.setText("Behaviors");
 
-		jButtonBotOneLoad.setText("Load fighter");
+		jButtonBotLeftLoad.setText("Load fighter");
 
 		javax.swing.GroupLayout jPanelBotOneLayout = new javax.swing.GroupLayout(
 				jPanelBotOne);
@@ -280,7 +276,7 @@ public class GameForm extends javax.swing.JFrame {
 																						.addComponent(
 																								jScrollPane2,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								259,
+																								261,
 																								Short.MAX_VALUE)))
 														.addGroup(
 																jPanelBotOneLayout
@@ -300,13 +296,13 @@ public class GameForm extends javax.swing.JFrame {
 																												18,
 																												18)
 																										.addComponent(
-																												jLabelBotOneName)))
+																												jLabelBotLeftName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				298,
+																				379,
 																				Short.MAX_VALUE)
 																		.addComponent(
-																				jButtonBotOneLoad)))
+																				jButtonBotLeftLoad)))
 										.addContainerGap()));
 		jPanelBotOneLayout
 				.setVerticalGroup(jPanelBotOneLayout
@@ -335,7 +331,7 @@ public class GameForm extends javax.swing.JFrame {
 																						.addComponent(
 																								jLabel3)
 																						.addComponent(
-																								jLabelBotOneName))
+																								jLabelBotLeftName))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 																				javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -349,7 +345,7 @@ public class GameForm extends javax.swing.JFrame {
 																						.addComponent(
 																								jLabel5)))
 														.addComponent(
-																jButtonBotOneLoad))
+																jButtonBotLeftLoad))
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addGroup(
@@ -396,15 +392,15 @@ public class GameForm extends javax.swing.JFrame {
 										javax.swing.GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)));
 
-		javax.swing.GroupLayout jPanelAreaLayout = new javax.swing.GroupLayout(
-				jPanelArea);
-		jPanelArea.setLayout(jPanelAreaLayout);
-		jPanelAreaLayout.setHorizontalGroup(jPanelAreaLayout
+		javax.swing.GroupLayout jPanelGameArenaLayout = new javax.swing.GroupLayout(
+				jPanelGameArena);
+		jPanelGameArena.setLayout(jPanelGameArenaLayout);
+		jPanelGameArenaLayout.setHorizontalGroup(jPanelGameArenaLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGap(0, 1105, Short.MAX_VALUE));
-		jPanelAreaLayout.setVerticalGroup(jPanelAreaLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 299,
-				Short.MAX_VALUE));
+		jPanelGameArenaLayout.setVerticalGroup(jPanelGameArenaLayout
+				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.addGap(0, 286, Short.MAX_VALUE));
 
 		javax.swing.GroupLayout jPanelGameAreaLayout = new javax.swing.GroupLayout(
 				jPanelGameArea);
@@ -423,7 +419,7 @@ public class GameForm extends javax.swing.JFrame {
 														.createParallelGroup(
 																javax.swing.GroupLayout.Alignment.TRAILING)
 														.addComponent(
-																jPanelArea,
+																jPanelGameArena,
 																javax.swing.GroupLayout.Alignment.LEADING,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -451,7 +447,7 @@ public class GameForm extends javax.swing.JFrame {
 										.addPreferredGap(
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
-												jPanelArea,
+												jPanelGameArena,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)
@@ -502,9 +498,7 @@ public class GameForm extends javax.swing.JFrame {
 						.addGroup(
 								jPanelContentLayout
 										.createSequentialGroup()
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
+										.addContainerGap()
 										.addGroup(
 												jPanelContentLayout
 														.createParallelGroup(
@@ -526,9 +520,12 @@ public class GameForm extends javax.swing.JFrame {
 												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(
 												jPanelGameArea,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)));
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addContainerGap(
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
@@ -570,8 +567,8 @@ public class GameForm extends javax.swing.JFrame {
 
 	//GEN-BEGIN:variables
 	// Variables declaration - do not modify
-	protected javax.swing.JButton jButtonBotOneLoad;
-	protected javax.swing.JButton jButtonBotTwoLoad;
+	protected javax.swing.JButton jButtonBotLeftLoad;
+	protected javax.swing.JButton jButtonBotRightLoad;
 	private javax.swing.JButton jButtonStart;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
@@ -581,18 +578,18 @@ public class GameForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel7;
 	private javax.swing.JLabel jLabel8;
 	private javax.swing.JLabel jLabel9;
-	protected javax.swing.JLabel jLabelBotOneName;
-	protected javax.swing.JLabel jLabelBotTwoName;
+	protected javax.swing.JLabel jLabelBotLeftName;
+	protected javax.swing.JLabel jLabelBotRightName;
 	public javax.swing.JLabel jLabelHeader;
-	protected javax.swing.JList jListBotOneBehaviors;
-	protected javax.swing.JList jListBotOneChars;
-	protected javax.swing.JList jListBotTwoBehaviors;
-	protected javax.swing.JList jListBotTwoChars;
-	public javax.swing.JPanel jPanelArea;
+	protected javax.swing.JList jListBotLeftBehaviors;
+	protected javax.swing.JList jListBotLeftChars;
+	protected javax.swing.JList jListBotRightBehaviors;
+	protected javax.swing.JList jListBotRightChars;
 	private javax.swing.JPanel jPanelBotOne;
 	private javax.swing.JPanel jPanelBotOne1;
 	private javax.swing.JPanel jPanelContent;
 	public javax.swing.JPanel jPanelGameArea;
+	public javax.swing.JPanel jPanelGameArena;
 	private javax.swing.JPanel jPanelGameButtons;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;

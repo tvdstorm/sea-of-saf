@@ -5,69 +5,77 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import saf.game.BotState;
 import saf.game.GameEventListener;
-import saf.game.event.source.EventSource;
+import saf.game.event.EventSource;
+import saf.game.gui.component.GameArena;
 import saf.structure.Behavior;
-import saf.structure.Bot;
 import saf.structure.Characteristic;
 import saf.structure.intelligence.BehaviorIntelligence;
 
 public class GameController {
 
-	public GameController() {
+	private static final String CONST_LEFT = "left";
+	private static final String CONST_RIGHT = "right";
+	private String side;
+	
+	private final GameForm gameForm;
+	private final GameArena gameArena;
+	private final EventSource eventSource;
+	private final DefaultListModel botLeftCharModel;
+	private final DefaultListModel botLeftBehaviorModel;
+	private final DefaultListModel botRightBehaviorModel;
+	private final DefaultListModel botRightCharModel;
+
+	
+	public GameController(GameEventListener gameEventListener)
+	{
 		gameForm = new GameForm();
+		gameForm.setVisible(true);
 		
-		botOneCharModel = new DefaultListModel();
-		gameForm.jListBotOneChars.setModel(botOneCharModel);
+		gameArena = (GameArena)gameForm.jPanelGameArena;
+				
+		botLeftCharModel = new DefaultListModel();
+		gameForm.jListBotLeftChars.setModel(botLeftCharModel);
 
-		botOneBehaviorModel = new DefaultListModel();
-		gameForm.jListBotOneBehaviors.setModel(botOneBehaviorModel);
+		botLeftBehaviorModel = new DefaultListModel();
+		gameForm.jListBotLeftBehaviors.setModel(botLeftBehaviorModel);
 
-		botTwoCharModel = new DefaultListModel();
-		gameForm.jListBotTwoChars.setModel(botTwoCharModel);
+		botRightCharModel = new DefaultListModel();
+		gameForm.jListBotRightChars.setModel(botRightCharModel);
 		
-		botTwoBehaviorModel = new DefaultListModel();
-		gameForm.jListBotTwoBehaviors.setModel(botTwoBehaviorModel);
-		
+		botRightBehaviorModel = new DefaultListModel();
+		gameForm.jListBotRightBehaviors.setModel(botRightBehaviorModel);
 		
 		eventSource = new EventSource();
+		eventSource.addEventListener(gameEventListener);
 		
-		gameForm.jButtonBotOneLoad.addActionListener(new ActionListener() {
+		gameForm.jButtonBotLeftLoad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BotFileActionPerformed(true);
+				botFileActionPerformed(CONST_LEFT);
 			}
 		});
 		
-		gameForm.jButtonBotTwoLoad.addActionListener(new ActionListener() {
+		gameForm.jButtonBotRightLoad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BotFileActionPerformed(false);
+				botFileActionPerformed(CONST_RIGHT);
 			}
 		});
 		
 	}
-
 	
-	
-	private final GameForm gameForm;
-	private final EventSource eventSource;
-	private final DefaultListModel botOneCharModel;
-	private final DefaultListModel botOneBehaviorModel;
-	private final DefaultListModel botTwoBehaviorModel;
-	private final DefaultListModel botTwoCharModel;
-
-	private void BotFileActionPerformed(boolean IsBotOne)
+	private void botFileActionPerformed(String side)
 	{
 		JFileChooser jFileChooser = new JFileChooser();
 		jFileChooser.showOpenDialog(null);
 		File botfile = jFileChooser.getSelectedFile();
 		if(botfile != null)
-			eventSource.fireEvent(botfile.getPath(), false);
+			eventSource.fireEvent(botfile.getPath(), side);
 	}
 	
 	public void addGameEventListener(GameEventListener gameEventListener)
@@ -75,43 +83,64 @@ public class GameController {
 		eventSource.addEventListener(gameEventListener);
 	}
 	
-	public void DisplayMessage(String Msg)
+	public void displayMessage(String Msg)
 	{
 		JOptionPane.showMessageDialog(null, Msg);
 	}
 
-	public void setBotOne(Bot bot) {
-		gameForm.jLabelBotOneName.setText(bot.getName());
+	public void setBot(BotState botState) {
+		side = botState.getSide();
 		
-		botOneCharModel.clear();
-		for (Characteristic character : bot.getCharacteristics()) {
-			botOneCharModel.addElement(character.getName() + " = " + character.getValue());				
+		if(side.equals(CONST_LEFT)) 
+			gameForm.jLabelBotLeftName.setText(botState.getBot().getName());
+		else
+			gameForm.jLabelBotRightName.setText(botState.getBot().getName());
+		
+		botLeftCharModel.clear();
+		for (Characteristic character : botState.getBot().getCharacteristics()) {
+			if(side.equals(CONST_LEFT))
+				botLeftCharModel.addElement(character.getName() + " = " + character.getValue());	
+			else
+				botRightCharModel.addElement(character.getName() + " = " + character.getValue());		
 		}
 		
-		botOneBehaviorModel.clear();
-		for (Behavior behavior : bot.getBehaviors()) {
-			botOneBehaviorModel.addElement(BehaviorIntelligence.ToString(behavior));	
-		}
-		
-		InitBot();
-	}
-
-	public void setBotTwo(Bot bot) {
-		gameForm.jLabelBotTwoName.setText(bot.getName());
-		
-		botTwoCharModel.clear();
-		for (Characteristic character : bot.getCharacteristics()) {
-			botTwoCharModel.addElement(character.getName() + " = " + character.getValue());				
-		}
-		
-		botTwoBehaviorModel.clear();
-		for (Behavior behavior : bot.getBehaviors()) {
-			botTwoBehaviorModel.addElement(BehaviorIntelligence.ToString(behavior));	
+		botLeftBehaviorModel.clear();
+		for (Behavior behavior : botState.getBot().getBehaviors()) {
+			if(side.equals(CONST_LEFT))
+				botLeftBehaviorModel.addElement(BehaviorIntelligence.ToString(behavior));
+			else
+				botRightBehaviorModel.addElement(BehaviorIntelligence.ToString(behavior));
 		}
 	}
 
-	public void InitBot()
-	{
-		ImageIcon imageIcon = new ImageIcon("Sprites/Light/block_high.png");
+	public void addBotState(BotState botState) {
+		side = botState.getSide();
+		
+		setBot(botState);
+		gameArena.createNewBot(side);
+//		gameForm.repaint();
 	}
+
+	public void setJumping(BotState botState) {
+		side = botState.getSide();
+		
+	}
+
+	public void setHitpoints(BotState botState) {
+		side = botState.getSide();
+		
+	}
+	
+	public void setDistance(int distance) {
+		
+		
+	}
+	
+
+	
+//	public void initBot(boolean isBotLeft)
+//	{
+//		ImageIcon imageIcon = new ImageIcon("Sprites/Light/block_high.png");
+//		
+//	}
 }
