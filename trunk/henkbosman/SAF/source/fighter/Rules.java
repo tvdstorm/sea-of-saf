@@ -20,13 +20,13 @@ public class Rules
 		switch(combatmove._movement)
 		{
 			case run_towards:
-				return -10;
+				return -30;
 			case run_away:
-				return +7;
+				return +20;
 			case walk_towards:
-				return -4;
+				return -10;
 			case walk_away:
-				return -3;
+				return -7;
 		}
 		return 0;
 	}

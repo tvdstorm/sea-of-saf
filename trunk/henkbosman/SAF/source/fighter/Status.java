@@ -1,6 +1,20 @@
 package fighter;
 public class Status 
 {
+	private int _position;
+	public int position()
+	{
+		return _position;
+	}
+	public void movePosition(int pos)
+	{
+		_position+=pos;
+		if (_position<20)
+			_position=20;
+		if (_position>360)
+			_position=360;
+	}
+	
 	private int _health;
 	public int health()
 	{
@@ -11,6 +25,7 @@ public class Status
 	{
 		_health = health;
 		_recoverTime=0;
+		_position=0;
 	}
 	
 	public boolean lowerHealth(int damage)

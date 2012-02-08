@@ -16,6 +16,8 @@ import javax.swing.border.BevelBorder;
 
 import org.antlr.runtime.RecognitionException;
 
+import arena.Engine.Fighters;
+
 
 import fighter.Combatmove;
 
@@ -129,12 +131,10 @@ public class Gamescreen extends JFrame implements ActionListener{
 		panel.setLayout(null);
 		
 		_fighter1 = new JLabel();
-		//_fighter1.setIcon(_graphics.getImage(new Combatmove(Movement.Movements.stand, Action.Actions.nothing), 1));
 		_fighter1.setBounds(10, 10, 63, 48);
 		panel.add(_fighter1);
 		
 		_fighter2 = new JLabel();
-		//_fighter2.setIcon(_graphics.getImage(new Combatmove(Movement.Movements.stand, Action.Actions.nothing), 2));
 		_fighter2.setBounds(10, 10, 63, 48);
 		panel.add(_fighter2);
 	
@@ -148,12 +148,12 @@ public class Gamescreen extends JFrame implements ActionListener{
 		switch (fighter)
 		{
 			case 1:
-				_fighter1.setIcon(_graphics.getImage(combatmove, 1));
-				_fighter1.setBounds(_engine.getPosition(1)-12, 100, 63, 48);
+				_fighter1.setIcon(_graphics.getImage(combatmove, Fighters.FighterA));
+				_fighter1.setBounds(_engine.getPosition(Fighters.FighterA)-12, 100, 63, 48);
 				break;
 			case 2:
-				_fighter2.setIcon(_graphics.getImage(combatmove, 2));
-				_fighter2.setBounds(_engine.getPosition(2)+12, 100, 63, 48);
+				_fighter2.setIcon(_graphics.getImage(combatmove, Fighters.FighterB));
+				_fighter2.setBounds(_engine.getPosition(Fighters.FighterB)+12, 100, 63, 48);
 				break;
 		}
 		
@@ -170,12 +170,12 @@ public class Gamescreen extends JFrame implements ActionListener{
 	{
 		if (!_engine.doMoves())
 		{
-			label.setText(_engine.getHealth(1)+"%");
-			label_1.setText(_engine.getHealth(2)+"%");
+			label.setText(_engine.getHealth(Fighters.FighterA)+"%");
+			label_1.setText(_engine.getHealth(Fighters.FighterB)+"%");
 		}
 		else
 		{
-			if (_engine.getHealth(1)<1)
+			if (_engine.getHealth(Fighters.FighterA)<1)
 			{
 				label.setText("LOST");
 				drawFighter(null,1);
@@ -189,8 +189,8 @@ public class Gamescreen extends JFrame implements ActionListener{
 			contentPane.repaint();
 			return;
 		}
-		drawFighter(_engine.getCombatmove(1),1);
-		drawFighter(_engine.getCombatmove(2),2);
+		drawFighter(_engine.getCombatmove(Fighters.FighterA),1);
+		drawFighter(_engine.getCombatmove(Fighters.FighterB),2);
 		contentPane.repaint();
 	}
 }

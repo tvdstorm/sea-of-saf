@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import arena.Engine.Fighters;
 import behaviours.Action;
 import behaviours.Activity;
 import behaviours.Behaviour;
@@ -20,6 +21,16 @@ public class Fighter
 	public void name(String name)
 	{
 		_name=name;
+	}
+	
+	public int getPosition()
+	{
+		return _status.position();
+	}
+	
+	public void movePosition(int pos)
+	{
+		_status.movePosition(pos);
 	}
 	
 	private double _speed = 0.0;
@@ -78,9 +89,17 @@ public class Fighter
 		_name="";
 	}
 	
-	public int doMove(Combatmove combatmove)
+	public void doMove(Combatmove combatmove, Fighters fighterType)
 	{
-		return _rules.calculateMovement(combatmove);
+		switch(fighterType)
+		{
+		case FighterA:
+			_status.movePosition(-(_rules.calculateMovement(combatmove)));
+			break;
+		case FighterB:
+			_status.movePosition((_rules.calculateMovement(combatmove)));
+			break;
+		}
 	}
 	
 	public Combatmove performAction(int enemyDistance, int enemyHealth)

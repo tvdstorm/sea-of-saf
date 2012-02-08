@@ -19,10 +19,12 @@ import parser.SAFParser;
 
 public class Engine 
 {
+	public enum Fighters 	{	
+		FighterA, FighterB
+	}
+	
 	private Fighter _fighterA;
 	private Fighter _fighterB;
-	private int _posFighterA;
-	private int _posFighterB;
 	
 	private Combatmove _lastCombatmoveA;
 	private Combatmove _lastCombatmoveB;
@@ -31,8 +33,8 @@ public class Engine
 	{
 		_fighterA = loadFighter(filea);
 		_fighterB = loadFighter(fileb);
-		_posFighterA=180;
-		_posFighterB=220;
+		_fighterA.movePosition(20);
+		_fighterB.movePosition(360);
 	}
 	
 	private Fighter loadFighter(String file) throws IOException, RecognitionException
@@ -50,19 +52,19 @@ public class Engine
 	
 	public boolean doMoves()
 	{
-		int distance = Math.abs(_posFighterA-_posFighterB);
+		int distance = Math.abs(_fighterA.getPosition()-_fighterB.getPosition());
 		Combatmove combatmoveA = _fighterA.performAction(distance, _fighterB.getHealth());
 		Combatmove combatmoveB = _fighterB.performAction(distance, _fighterA.getHealth());
-
-		_posFighterA+=_fighterA.doMove(combatmoveA);
-		_posFighterB+=_fighterB.doMove(combatmoveB);
-		if (_posFighterA>=_posFighterB)
+		_lastCombatmoveA = combatmoveA;
+		_lastCombatmoveB = combatmoveB;
+		
+		_fighterA.doMove(combatmoveA, Fighters.FighterA);
+		_fighterB.doMove(combatmoveB, Fighters.FighterB);
+		
+		while (_fighterA.getPosition()>=_fighterB.getPosition())
 		{
-			_posFighterB=_posFighterA+1;
-		}
-		if (_posFighterB>=_posFighterA)
-		{
-			_posFighterA=_posFighterB+1;
+			_fighterA.movePosition(-1);
+			_fighterB.movePosition(1);
 		}
 		
 		boolean a = _fighterA.getDamage(doDamage(_fighterB, combatmoveB, combatmoveA, distance));
@@ -70,20 +72,17 @@ public class Engine
 		System.out.println("Fighter A: "+combatmoveA._movement+" "+combatmoveA._action);
 		System.out.println("Fighter B: "+combatmoveB._movement+" "+combatmoveB._action);
 		
-		_lastCombatmoveA = combatmoveA;
-		_lastCombatmoveB = combatmoveB;
-		
 		return a||b;
 
 	}
 	
-	public Combatmove getCombatmove(int fighter)
+	public Combatmove getCombatmove(Fighters fighter)
 	{
 		switch (fighter)
 		{
-			case 1:
+			case FighterA:
 				return _lastCombatmoveA;
-			case 2:
+			case FighterB:
 				return _lastCombatmoveB;
 		}
 		return new Combatmove(Movement.Movements.stand, Action.Actions.nothing);
@@ -127,26 +126,26 @@ public class Engine
 		return 0;
 	}
 	
-	public int getHealth(int fighter)
+	public int getHealth(Fighters fighter)
 	{
 		switch (fighter)
 		{
-			case 1:
+			case FighterA:
 				return _fighterA.getHealth();
-			case 2:
+			case FighterB:
 				return _fighterB.getHealth();
 		}
 		return 0;
 	}
 	
-	public int getPosition(int fighter)
+	public int getPosition(Fighters fighter)
 	{
 		switch (fighter)
 		{
-			case 1:
-				return _posFighterA;
-			case 2:
-				return _posFighterB;
+			case FighterA:
+				return _fighterA.getPosition();
+			case FighterB:
+				return _fighterB.getPosition();
 		}
 		return 0;
 	}
