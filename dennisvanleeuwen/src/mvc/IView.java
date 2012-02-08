@@ -1,5 +1,5 @@
 package mvc;
 
-public interface FightView {
+public interface IView {
 	public void render();
 }

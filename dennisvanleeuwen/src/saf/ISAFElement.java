@@ -1,5 +1,5 @@
 package saf;
 
 public interface ISAFElement {
-	public void accept(ISAFElementVisitor visitor);
+	public abstract void accept(ISAFElementVisitor visitor);
 }

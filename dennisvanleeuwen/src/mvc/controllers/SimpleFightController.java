@@ -3,46 +3,57 @@ package mvc.controllers;
 import java.util.ArrayList;
 import java.util.List;
 import saf.astelements.*;
-import mvc.FightController;
+import mvc.IController;
 import mvc.models.FighterModel;
 import mvc.models.Pair;
 import mvc.views.SimpleFightView;
 
-public class SimpleFightController implements FightController{
-	private FighterModel fighter1;
-	private FighterModel fighter2; 
+public class SimpleFightController implements IController{
+	List<FighterModel> curFighterModels;
 	private SimpleFightView curFightView;
 	
 	public SimpleFightController(FighterModel model1, FighterModel model2, SimpleFightView fightView){
-		this.fighter1 = model1;
-		this.fighter2 = model2;
+		this.curFighterModels = new ArrayList<FighterModel>();
+		this.curFighterModels.add(model1);
+		this.curFighterModels.add(model2);
 		this.curFightView = fightView;	
 	}
 	
 	public void run(){
-		List<FighterModel> curFighterModels = new ArrayList<FighterModel>();
-		curFighterModels.add(this.fighter1);
-		curFighterModels.add(this.fighter2);
-		
-		int i = 0;
-		
-		while(!this.isFighterDeath()){
-			//Fighter1 is gonna do something, now determine what it will do.
-			Pair<IAction, IAction> pairOfActions = curFighterModels.get(i).getActionsAgainstEnemy(fighter2);
-			if(pairOfActions != null){
-				pairOfActions.getFirst().applyActionOn(curFighterModels.get((i+1)%2));
-				pairOfActions.getSecond().applyActionOn(curFighterModels.get((i+1)%2));	
+		while(!this.isAnyFighterDeath()){
+			this.resetFighterModels();
+			
+			int i = 0;
+			for(FighterModel curFighterModel: this.curFighterModels){
+				//Fighter1 is gonna do something, now determine what it will do.
+				Pair<IAction, IAction> pairOfActions = curFighterModel.getActionsAgainstEnemy(curFighterModels.get((i+1)%2));
+				if(pairOfActions != null){
+					pairOfActions.getFirst().applyActionOn(curFighterModel, curFighterModels.get((i+1)%2));
+					pairOfActions.getSecond().applyActionOn(curFighterModel, curFighterModels.get((i+1)%2));	
+				}
+				i = (i+1)%2;
 			}
 			
-			i = (i+1)%2;
-			curFightView.render();
+//			for(FighterModel curFighterModel: curFighterModels){
+//				if(curFighterModel.getFrontArm() == Position.NORMAL)
+//					System.out.println("error..");
+//			}
 			
-			for(FighterModel model: curFighterModels)
-				model.resetMovements();
+			curFightView.render();
 		}
 	}
 	
-	private Boolean isFighterDeath(){
-		return !(fighter1.getHealth() > 0 && fighter2.getHealth() > 0);
+	private void resetFighterModels(){
+		for(FighterModel curFighterModel: this.curFighterModels){
+			curFighterModel.resetMovements();
+		}
+	}
+	
+	private Boolean isAnyFighterDeath(){
+		for(FighterModel curFighterModel: this.curFighterModels){
+			if(curFighterModel.getHealth() <= 0)
+				return true;
+		}
+		return false;
 	}
 }
