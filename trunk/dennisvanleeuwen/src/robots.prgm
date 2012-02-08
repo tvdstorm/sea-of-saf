@@ -4,7 +4,7 @@ chicken
 	punchReach = 1
 	kickPower  = 2
 	punchPower = 2
-	always [crouch choose(punch_low punch_high)]
+	always [crouch choose(kick_high kick_low punch_high punch_low)]
 }
 
 JackieChan
@@ -13,5 +13,5 @@ JackieChan
 	punchPower = 5
 	kickReach = 3
 	punchReach = 9
-	always [crouch choose(punch_low punch_high)]
+	always[stand choose(kick_high kick_low punch_high punch_low)]
 }

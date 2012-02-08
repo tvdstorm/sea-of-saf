@@ -29,7 +29,6 @@ public class FighterModel {
 	private Boolean jumping;
 
 	private int x;
-	private int y;
 	private int health;
 
 	private int kickReach; 
@@ -43,9 +42,8 @@ public class FighterModel {
 	private int weight;
 	private int height;
 	
-	public FighterModel(int x, int y, int kickReach, int kickPower, int punchReach, int punchPower, int health, List<Rule> rules){
+	public FighterModel(int x, int kickReach, int kickPower, int punchReach, int punchPower, int health, List<Rule> rules){
 		this.x = x;
-		this.y = y;
 		this.kickReach = kickReach;
 		this.kickPower = kickPower;
 		this.punchReach = punchReach;
@@ -60,12 +58,16 @@ public class FighterModel {
 		this.block = Block.NONE;
 		this.frontArm = Position.NORMAL;
 		this.frontLeg = Position.NORMAL;
+		this.crouching = false;
+		this.jumping = false;
 	}
 	
 	public void resetMovements(){
 		this.block = Block.NONE;
 		this.frontArm = Position.NORMAL;
 		this.frontLeg = Position.NORMAL;
+		this.crouching = false;
+		this.jumping = false;
 	}
 		
 	public int getHealth() {
@@ -83,21 +85,13 @@ public class FighterModel {
 	public int getHeight() {
 		return this.height;
 	}
-
-	public int getY() {
-		return this.y;
-	}
-	
-	public void setY(int y) {
-		//this.y = y;
-	}
 	
 	public int getX() {
 		return this.x;
 	}
 	
 	public void setX(int x) {
-		//this.x = x;
+		this.x = x;
 	}
 	
 	public int getKickReach() {
@@ -157,7 +151,6 @@ public class FighterModel {
 		for(Rule rule: this.rules){
 			if(rule.getCondition().isTrueInModel(this, fighterModelEnemy))
 				validRules.add(rule);
-			
 		}
 		
 		Random generator = new Random(923754773);
@@ -166,7 +159,7 @@ public class FighterModel {
 	}
 	
 	//TODO: refactor??? Factory method
-	static public FighterModel createFighterModel(String name, List<Characteristic> characteristics, List<Rule> rules, int x, int y){
+	static public FighterModel createFighterModel(String name, List<Characteristic> characteristics, List<Rule> rules, int x){
 		int punchReach = 0, punchPower = 0, kickReach = 0, kickPower = 0;
 		for(Characteristic characteristic: characteristics){
 			if(characteristic.item == "punchReach"){
@@ -179,7 +172,7 @@ public class FighterModel {
 				kickPower = characteristic.value;
 			}
 		}
-		return new FighterModel(x, y, kickReach, kickPower, punchReach, punchPower, 100, rules);
+		return new FighterModel(x, kickReach, kickPower, punchReach, punchPower, 100, rules);
 	}
 
 	public Boolean getCrouching() {
