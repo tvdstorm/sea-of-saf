@@ -1,11 +1,12 @@
 package arena;
 import javax.swing.ImageIcon;
+
+import arena.Engine.Fighters;
 import fighter.Combatmove;
 
 public class Graphics 
 {
-
-	public ImageIcon _deadA;
+	private ImageIcon _deadA;
 	private ImageIcon _punchhighA;
 	private ImageIcon _punchlowA;
 	private ImageIcon _kickhighA;
@@ -14,7 +15,7 @@ public class Graphics
 	private ImageIcon _blockhighA;
 	private ImageIcon _standA;
 	
-	public ImageIcon _deadB;
+	private ImageIcon _deadB;
 	private ImageIcon _punchhighB;
 	private ImageIcon _punchlowB;
 	private ImageIcon _kickhighB;
@@ -48,9 +49,9 @@ public class Graphics
 	    return new ImageIcon(fileName);
 	}
 	
-	public ImageIcon getImage(Combatmove combatmove, int fighter)
+	public ImageIcon getImage(Combatmove combatmove, Fighters fighter)
 	{
-		if (fighter==1)
+		if (fighter.equals(Fighters.FighterA))
 		{
 			if (combatmove == null)
 				return _deadA;
