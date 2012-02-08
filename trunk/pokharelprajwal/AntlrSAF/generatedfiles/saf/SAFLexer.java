@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g 2012-01-28 17:48:52
+// $ANTLR 3.4 D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g 2012-02-08 00:45:37
 
   package saf; 
 
@@ -261,10 +261,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:54:9: ( ( '0' .. '9' )+ )
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:54:11: ( '0' .. '9' )+
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:66:9: ( ( '0' .. '9' )+ )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:66:11: ( '0' .. '9' )+
             {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:54:11: ( '0' .. '9' )+
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:66:11: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -319,8 +319,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:55:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:55:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:67:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:67:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -332,7 +332,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:55:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:67:30: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop2:
             do {
                 int alt2=2;
@@ -382,10 +382,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:56:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:56:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:68:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:68:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:56:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // D:\\SAF\\AntlrSAF\\src\\saf\\SAF.g:68:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             int cnt3=0;
             loop3:
             do {
