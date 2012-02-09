@@ -53,6 +53,9 @@ public class GameForm extends javax.swing.JFrame {
 		jPanelGameArea = new javax.swing.JPanel();
 		jPanelGameButtons = new javax.swing.JPanel();
 		jButtonStart = new javax.swing.JButton();
+		jPanel1 = new javax.swing.JPanel();
+		jLabel1 = new javax.swing.JLabel();
+		jLabelDistance = new javax.swing.JLabel();
 		jPanelGameArena = new saf.game.gui.component.GameArena();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -124,7 +127,7 @@ public class GameForm extends javax.swing.JFrame {
 																												jLabelBotRightName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				399,
+																				221,
 																				Short.MAX_VALUE)
 																		.addComponent(
 																				jButtonBotRightLoad))
@@ -153,7 +156,7 @@ public class GameForm extends javax.swing.JFrame {
 																						.addComponent(
 																								jScrollPane4,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								281,
+																								103,
 																								Short.MAX_VALUE))))
 										.addContainerGap()));
 		jPanelBotOne1Layout
@@ -276,7 +279,7 @@ public class GameForm extends javax.swing.JFrame {
 																						.addComponent(
 																								jScrollPane2,
 																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								261,
+																								84,
 																								Short.MAX_VALUE)))
 														.addGroup(
 																jPanelBotOneLayout
@@ -299,7 +302,7 @@ public class GameForm extends javax.swing.JFrame {
 																												jLabelBotLeftName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				379,
+																				202,
 																				Short.MAX_VALUE)
 																		.addComponent(
 																				jButtonBotLeftLoad)))
@@ -372,32 +375,82 @@ public class GameForm extends javax.swing.JFrame {
 
 		jButtonStart.setText("Start duel");
 
+		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
+				jPanel1);
+		jPanel1.setLayout(jPanel1Layout);
+		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 232,
+				Short.MAX_VALUE));
+		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 29,
+				Short.MAX_VALUE));
+
+		jLabel1.setText("Distance");
+
 		javax.swing.GroupLayout jPanelGameButtonsLayout = new javax.swing.GroupLayout(
 				jPanelGameButtons);
 		jPanelGameButtons.setLayout(jPanelGameButtonsLayout);
-		jPanelGameButtonsLayout.setHorizontalGroup(jPanelGameButtonsLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						jPanelGameButtonsLayout.createSequentialGroup()
-								.addContainerGap().addComponent(jButtonStart)
-								.addContainerGap(1008, Short.MAX_VALUE)));
-		jPanelGameButtonsLayout.setVerticalGroup(jPanelGameButtonsLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(
-						jPanelGameButtonsLayout
-								.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(jButtonStart)
-								.addContainerGap(
-										javax.swing.GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
+		jPanelGameButtonsLayout
+				.setHorizontalGroup(jPanelGameButtonsLayout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanelGameButtonsLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(jButtonStart)
+										.addGap(154, 154, 154)
+										.addComponent(jLabel1)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jLabelDistance)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(
+												jPanel1,
+												javax.swing.GroupLayout.PREFERRED_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(210, Short.MAX_VALUE)));
+		jPanelGameButtonsLayout
+				.setVerticalGroup(jPanelGameButtonsLayout
+						.createParallelGroup(
+								javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanelGameButtonsLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												jPanelGameButtonsLayout
+														.createParallelGroup(
+																javax.swing.GroupLayout.Alignment.TRAILING)
+														.addComponent(
+																jPanel1,
+																javax.swing.GroupLayout.Alignment.LEADING,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE)
+														.addGroup(
+																javax.swing.GroupLayout.Alignment.LEADING,
+																jPanelGameButtonsLayout
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.BASELINE)
+																		.addComponent(
+																				jButtonStart)
+																		.addComponent(
+																				jLabel1)
+																		.addComponent(
+																				jLabelDistance)))
+										.addContainerGap(
+												javax.swing.GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 
 		javax.swing.GroupLayout jPanelGameArenaLayout = new javax.swing.GroupLayout(
 				jPanelGameArena);
 		jPanelGameArena.setLayout(jPanelGameArenaLayout);
 		jPanelGameArenaLayout.setHorizontalGroup(jPanelGameArenaLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 1105, Short.MAX_VALUE));
+				.addGap(0, 750, Short.MAX_VALUE));
 		jPanelGameArenaLayout.setVerticalGroup(jPanelGameArenaLayout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGap(0, 286, Short.MAX_VALUE));
@@ -535,7 +588,7 @@ public class GameForm extends javax.swing.JFrame {
 				.addGroup(
 						layout.createSequentialGroup().addContainerGap()
 								.addComponent(jLabelHeader)
-								.addContainerGap(377, Short.MAX_VALUE))
+								.addContainerGap(22, Short.MAX_VALUE))
 				.addComponent(jPanelContent,
 						javax.swing.GroupLayout.Alignment.TRAILING,
 						javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -570,6 +623,7 @@ public class GameForm extends javax.swing.JFrame {
 	protected javax.swing.JButton jButtonBotLeftLoad;
 	protected javax.swing.JButton jButtonBotRightLoad;
 	private javax.swing.JButton jButtonStart;
+	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JLabel jLabel4;
@@ -580,11 +634,13 @@ public class GameForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel9;
 	protected javax.swing.JLabel jLabelBotLeftName;
 	protected javax.swing.JLabel jLabelBotRightName;
+	public javax.swing.JLabel jLabelDistance;
 	public javax.swing.JLabel jLabelHeader;
 	protected javax.swing.JList jListBotLeftBehaviors;
 	protected javax.swing.JList jListBotLeftChars;
 	protected javax.swing.JList jListBotRightBehaviors;
 	protected javax.swing.JList jListBotRightChars;
+	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanelBotOne;
 	private javax.swing.JPanel jPanelBotOne1;
 	private javax.swing.JPanel jPanelContent;
