@@ -24,21 +24,25 @@ public class SAFTest {
                      "punchReach = 10" + 
                      "kickPower  = 1" + 
                      "punchPower = 10" + 
+                     "punchPower = 8" + 
                      "far [run_towards choose (kick_low punch_high)]" + 
                      "near and much_stronger[choose(run_away stand) kick_low]" + 
                      "near or far [crouch punch_low]" + 
+                     "far [run_towards punch_high]" + 
                      "}";
         SAFLexer lexer = new SAFLexer(new ANTLRStringStream(src));
         SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
         CommonTree tree = (CommonTree)(parser.fighter().getTree());
-        //DOTTreeGenerator gen = new DOTTreeGenerator();
-        //StringTemplate st = gen.toDOT(tree);
-        //System.out.println(st);
-        //printTree(tree, 4);
-        //
-        FighterExtractor fighter = new FighterExtractor((CommonTree)tree);
-        fighter.extractTree();
-        fighter.print();
+
+        // Get the fighter from the AST
+        FighterExtractor fExtractor = new FighterExtractor(tree);
+        Fighter fighter = fExtractor.extractFighterFromTree();
+        
+        // Check consistency
+        ConsistencyChecker checker = new ConsistencyChecker(tree, fighter);
+        checker.check();
+        
+        fExtractor.getFighter().print();
     }
     
     

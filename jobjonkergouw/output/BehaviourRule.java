@@ -1,10 +1,14 @@
+package SAF;
+
+
 import java.io.*;
+
 /**
  * This class contains all properties of a behaviour rule of a fighter bot
  **/
 public class BehaviourRule {
 //////////// interface ///////////////    
-    void print() {
+    public void print() {
         // print condition
         System.out.print(condition1 + " ");
         if (!logicalOperator.isEmpty()) {
@@ -24,6 +28,16 @@ public class BehaviourRule {
             System.out.print("fight = " + fightAction1 + "");
         }
         System.out.print("\n");
+    }
+
+    // check if two rules have the same conditions
+    public boolean equalCondition(BehaviourRule rule) {
+        if (condition1.equals(rule.condition1) &&
+            condition2.equals(rule.condition2) &&
+            logicalOperator.equals(rule.logicalOperator)) {
+            return true;
+        }
+        return false;
     }
     
 //////////// constructor ///////////////    
