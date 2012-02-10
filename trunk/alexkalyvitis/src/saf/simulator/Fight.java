@@ -5,13 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 import saf.ast.*;
+import saf.simulator.enums.*;
 
 public class Fight {
 	private Fighter firstFighter;
 	private Fighter secondFighter;
-	
-	private FighterStatus firstFighterStatus;
-	private FighterStatus secondFighterStatus;
 	
 	private float firstFighterLocation;
 	private float secondFighterLocation;
@@ -21,8 +19,8 @@ public class Fight {
 	private List<String> firstFighterConditions;
 	private List<String> secondFighterConditions;
 	
-	private Behavior firstFighterNextMove;
-	private Behavior secondFighterNextMove;
+	private Behavior firstFighterMove;
+	private Behavior secondFighterMove;
 	
 	private String winner;
 	
@@ -59,6 +57,7 @@ public class Fight {
 		firstFighterConditions.clear();
 		secondFighterConditions.clear();
 		
+		// Assess distance : near,far
 		float distanceX = Math.abs(firstFighterLocation - secondFighterLocation);
 		if(distanceX < 400){
 			firstFighterConditions.add("near");
@@ -66,6 +65,28 @@ public class Fight {
 		} else {
 			firstFighterConditions.add("far");
 			secondFighterConditions.add("far");
+		}
+		
+		// Assess strength : weaker, much_weaker, stronger, much_stronger
+		if (firstFighter.getTotalStrength() > secondFighter.getTotalStrength()){
+			if (firstFighter.getTotalStrength() > secondFighter.getTotalStrength() + 10){
+				firstFighterConditions.add("much_stronger");
+				secondFighterConditions.add("much_weaker");
+			} else {
+				firstFighterConditions.add("stronger");
+				secondFighterConditions.add("weaker");
+			}
+		} else if (firstFighter.getTotalStrength() < secondFighter.getTotalStrength()){
+			if (firstFighter.getTotalStrength() < secondFighter.getTotalStrength() - 10){
+				firstFighterConditions.add("much_weaker");
+				secondFighterConditions.add("much_stronger");
+			} else {
+				firstFighterConditions.add("weaker");
+				secondFighterConditions.add("stronger");
+			}
+		} else {
+			firstFighterConditions.add("even");
+			secondFighterConditions.add("even");
 		}
 		
 		if(firstFighter.getHealth() <= 0){
@@ -81,11 +102,11 @@ public class Fight {
 			end = true;
 		}
 		
-		if(firstFighterStatus == FighterStatus.Ready){
-			firstFighterNextMove = calculateNextMove(firstFighter, firstFighterConditions);
+		if(firstFighter.getStatus() == FighterStatus.READY){
+			firstFighterMove = calculateNextMove(firstFighter, firstFighterConditions);
 		}
-		if(secondFighterStatus == FighterStatus.Ready){
-			secondFighterNextMove = calculateNextMove(secondFighter, secondFighterConditions);
+		if(secondFighter.getStatus() == FighterStatus.READY){
+			secondFighterMove = calculateNextMove(secondFighter, secondFighterConditions);
 		}
 	}
 	
@@ -116,14 +137,14 @@ public class Fight {
 	}
 
 	public Behavior flushFirstFightersNextMove(){
-		Behavior temp = firstFighterNextMove;
-		firstFighterNextMove = null;
+		Behavior temp = firstFighterMove;
+		firstFighterMove = null;
 		return temp;
 	}
 	
 	public Behavior flushSecondFightersNextMove(){
-		Behavior temp = secondFighterNextMove;
-		secondFighterNextMove = null;
+		Behavior temp = secondFighterMove;
+		secondFighterMove = null;
 		return temp;
 	}
 }

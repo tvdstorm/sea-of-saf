@@ -1,0 +1,24 @@
+Eric Cartman
+{
+	kickReach = 6
+	kickPower = 7
+	punchReach = 5
+	punchPower = 3
+	near [crouch punch_low]
+	far [run_towards kick_high]
+	stronger or much_stronger [walk_towards kick_low]
+	weaker or much_weaker [run_towards kick_high]
+	always [walk_towards punch_low]
+}
+Kyle Broflovski
+{
+	kickReach = 4
+	kickPower = 6
+	punchReach = 8
+	punchPower = 7
+	near and weaker [jump kick_high]
+	far [choose(run_towards walk_towards) kick_high]
+	stronger or much_stronger [walk_towards punch_low]
+	weaker or much_weaker [run_towards punch_high]
+	always [walk_towards punch_low]
+}

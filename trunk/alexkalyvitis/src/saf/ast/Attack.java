@@ -4,7 +4,6 @@ import saf.ast.base.BehaviorItem;
 
 public class Attack  extends BehaviorItem{
 	private String name;
-	private String[] availableAttacks = { "punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high" };
 	
 	public Attack(){
 		this.name = "";
@@ -16,5 +15,13 @@ public class Attack  extends BehaviorItem{
 	
 	public String getName(){ return this.name; }
 	
-	public String[] getKeywords() { return availableAttacks; }
+	@Override
+	public boolean keywordIsValid() {
+		try {
+			saf.ast.enums.AvailableAttacks.valueOf(name.toUpperCase());
+		} catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
 }

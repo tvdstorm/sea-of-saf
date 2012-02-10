@@ -4,7 +4,6 @@ import saf.ast.base.BehaviorItem;
 
 public class Condition extends BehaviorItem{
 	private String name;
-	private static final String[] availableConditions = { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
 	
 	public void setName(String n){ this.name = n; }
 	
@@ -13,5 +12,13 @@ public class Condition extends BehaviorItem{
 		return "\n\t\tCondition: " + name; 
 	}
 	
-	public String[] getKeywords() { return availableConditions; }
+	@Override
+	public boolean keywordIsValid() {
+		try {
+			saf.ast.enums.AvailableConditions.valueOf(name.toUpperCase());
+		} catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
 }
