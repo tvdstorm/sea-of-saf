@@ -13,9 +13,8 @@ public class GameState {
 	}
 	
 	private List<BotState> listBotStates;
-	private int Distance;
 	private GameController gameController;
-	
+	private int Distance;
 	
 	public int getDistance() {
 		return Distance;

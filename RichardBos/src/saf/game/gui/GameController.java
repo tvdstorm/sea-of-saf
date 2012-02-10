@@ -147,4 +147,9 @@ public class GameController {
 		gameForm.jLabelDistance.setText(Integer.toString(distance));
 	}
 
+	public void displayWinnerMessage(String result) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
