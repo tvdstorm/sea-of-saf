@@ -60,6 +60,7 @@ public class GameForm extends javax.swing.JFrame {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setMinimumSize(new java.awt.Dimension(800, 500));
+		setResizable(false);
 
 		jLabelHeader.setFont(new java.awt.Font("Segoe UI", 0, 36));
 		jLabelHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -622,7 +623,7 @@ public class GameForm extends javax.swing.JFrame {
 	// Variables declaration - do not modify
 	protected javax.swing.JButton jButtonBotLeftLoad;
 	protected javax.swing.JButton jButtonBotRightLoad;
-	private javax.swing.JButton jButtonStart;
+	protected javax.swing.JButton jButtonStart;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;

@@ -9,11 +9,11 @@ import saf.structure.ConditionSimple;
 
 public class BehaviorIntelligence {
 	
-	public static String ToString(Behavior behavior)
+	public static String toString(Behavior behavior)
 	{
 		String strReturn = getConditionName(behavior.getCondition());
-		strReturn += " [" + ActionIntelligence.ToString(behavior.getMoveAction()) + " ";
-		strReturn += ActionIntelligence.ToString(behavior.getFightAction()) + "]";
+		strReturn += " [" + ActionIntelligence.toString(behavior.getMoveAction()) + " ";
+		strReturn += ActionIntelligence.toString(behavior.getFightAction()) + "]";
 		return strReturn;
 	}
 	

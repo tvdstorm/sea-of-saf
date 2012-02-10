@@ -25,7 +25,7 @@ public class Main {
 //		
 //		gameArena.createNewBot("left");
 
-		GameMain.Start();
+		GameMain.start();
     }
 	
 	

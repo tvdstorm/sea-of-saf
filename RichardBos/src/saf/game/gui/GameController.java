@@ -64,6 +64,12 @@ public class GameController {
 				botFileActionPerformed(CONST_RIGHT);
 			}
 		});
+		gameForm.jButtonStart.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				eventSource.fireGameStartEvent();
+			}
+		});
+		
 
 	}
 
@@ -72,7 +78,7 @@ public class GameController {
 		jFileChooser.showOpenDialog(null);
 		File botfile = jFileChooser.getSelectedFile();
 		if (botfile != null)
-			eventSource.fireEvent(botfile.getPath(), side);
+			eventSource.fireNewBotEvent(botfile.getPath(), side);
 	}
 
 	public void addGameEventListener(GameEventListener gameEventListener) {
@@ -108,12 +114,12 @@ public class GameController {
 		if (side.equals(CONST_LEFT)) {
 			botLeftBehaviorModel.clear();
 			for (Behavior behavior : botState.getBot().getBehaviors()) {
-			botLeftBehaviorModel.addElement(BehaviorIntelligence.ToString(behavior));
+			botLeftBehaviorModel.addElement(BehaviorIntelligence.toString(behavior));
 			}
 		} else {
 			botRightBehaviorModel.clear();
 			for (Behavior behavior : botState.getBot().getBehaviors()) {
-			botRightBehaviorModel.addElement(BehaviorIntelligence.ToString(behavior));
+			botRightBehaviorModel.addElement(BehaviorIntelligence.toString(behavior));
 			}
 		}
 		
@@ -141,9 +147,4 @@ public class GameController {
 		gameForm.jLabelDistance.setText(Integer.toString(distance));
 	}
 
-	// public void initBot(boolean isBotLeft)
-	// {
-	// ImageIcon imageIcon = new ImageIcon("Sprites/Light/block_high.png");
-	//
-	// }
 }
