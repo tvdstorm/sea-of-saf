@@ -36,6 +36,9 @@ public class GameMain {
 			return;
 		}
 		
+		GameEngine gameEngine = new GameEngine(gameState);
+		String losingSide = gameEngine.battle();
+		gameController.displayWinnerMessage(losingSide);
 	}
 	private boolean checkLoadedBots()
 	{

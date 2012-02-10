@@ -1,9 +1,9 @@
 package saf.checker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import saf.game.GameConstant;
 import saf.structure.Action;
 import saf.structure.Behavior;
 import saf.structure.Bot;
@@ -28,17 +28,6 @@ public class ElementChecker implements ElementVisitor {
 	}
 
 	private final List<String> Errors;
-
-	private static final String CONDITION_ALWAYS = "always";
-	private static final List<String> ConditionTypes = Arrays.asList("always",
-			"near", "far", "much_stronger", "stronger", "even", "weaker",
-			"much_weaker");
-	private static final List<String> MoveTypes = Arrays.asList("walk_towards",
-			"walk_away", "run_towards", "run_away", "jump", "crouch", "stand");
-	private static final List<String> FightTypes = Arrays.asList("block_low",
-			"block_high", "punch_low", "punch_high", "kick_low", "kick_high");
-	private static final List<String> CharacteristicTypes = Arrays.asList(
-			"punchReach", "punchPower", "kickReach", "kickPower");
 
 	public void visit(Bots bots) {
 		if (bots.getBots().size() == 0)
@@ -75,7 +64,7 @@ public class ElementChecker implements ElementVisitor {
 	}
 
 	public void visit(Characteristic characteristic) {
-		if (!CharacteristicTypes.contains(characteristic.getName()))
+		if (!GameConstant.CharacteristicTypes.contains(characteristic.getName()))
 			Errors.add("The characteristic '" + characteristic.getName()
 					+ "' is invalid.");
 
@@ -90,11 +79,11 @@ public class ElementChecker implements ElementVisitor {
 	public void visit(Behavior behavior) {
 		
 		for (Action action : behavior.getFightAction()) {
-			if (!FightTypes.contains(action.getValue()))
+			if (!GameConstant.FightTypes.contains(action.getValue()))
 				Errors.add("Unknown Fightaction found:'" + action + "'.");
 		}
 		for (Action action : behavior.getMoveAction()) {
-			if (!MoveTypes.contains(action.getValue()))
+			if (!GameConstant.MoveTypes.contains(action.getValue()))
 				Errors.add("Unknown Moveaction found:'" + action + "'.");
 		}
 		
@@ -110,7 +99,7 @@ public class ElementChecker implements ElementVisitor {
 	}
 
 	public void visit(ConditionSimple conditionSimple) {
-		if (!ConditionTypes.contains(conditionSimple.getValue()))
+		if (!GameConstant.ConditionTypes.contains(conditionSimple.getValue()))
 			Errors.add("The behavior condition '" + conditionSimple.getValue() + "' is invalid.");
 	}
 
@@ -130,7 +119,7 @@ public class ElementChecker implements ElementVisitor {
 	{
 		if(condition instanceof ConditionSimple)
 		{
-			if( CONDITION_ALWAYS.equalsIgnoreCase(((ConditionSimple)condition).getValue()) )
+			if( GameConstant.CONDITION_ALWAYS.equalsIgnoreCase(((ConditionSimple)condition).getValue()) )
 				return true;
 			else
 				return false;
