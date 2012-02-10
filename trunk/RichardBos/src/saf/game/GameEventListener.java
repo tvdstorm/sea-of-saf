@@ -61,11 +61,16 @@ public class GameEventListener implements iEventListener {
 				gameController.displayMessage("Only one bot is allowed.");
 			else {
 				BotState botState = new BotState(bots.getBots().get(0), e.getSide(),gameController);
-				gameMain.NewBot(botState);
+				gameMain.newBot(botState);
 			}
 
 		} catch (RecognitionException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	@Override
+	public void handleStartGame() {
+		gameMain.startGame();
 	}
 }

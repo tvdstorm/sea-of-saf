@@ -6,7 +6,7 @@ import saf.structure.Action;
 
 public class ActionIntelligence {
 
-	public static String ToString(List<Action> actions)
+	public static String toString(List<Action> actions)
 	{
 		if(actions.size() == 1)
 		{

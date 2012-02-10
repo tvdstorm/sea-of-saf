@@ -8,7 +8,7 @@ public class GameMain {
 	
 	private GameState gameState;
 	
-	public static void Start()
+	public static void start()
 	{
 		new GameMain();
 	}
@@ -23,9 +23,23 @@ public class GameMain {
 		return gameController;
 	}
 	
-	public void NewBot(BotState botState)
+	public void newBot(BotState botState)
 	{
 		gameState.addBot(botState);
+	}
+	
+	public void startGame()
+	{
+		if(checkLoadedBots())
+		{
+			gameController.displayMessage("Load two bots before starting.");
+			return;
+		}
+		
+	}
+	private boolean checkLoadedBots()
+	{
+		return gameState.getListBotStates().size() != 2;
 	}
 	
 }

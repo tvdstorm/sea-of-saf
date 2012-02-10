@@ -7,23 +7,26 @@ import java.util.List;
 
 public class EventSource {
 
-	private List<iEventListener> _listeners = new ArrayList<iEventListener>();
+	private List<iEventListener> listEventListeners = new ArrayList<iEventListener>();
 
 	public synchronized void addEventListener(iEventListener listener) {
-		_listeners.add(listener);
+		listEventListeners.add(listener);
 	}
 
 	public synchronized void removeEventListener(iEventListener listener) {
-		_listeners.remove(listener);
+		listEventListeners.remove(listener);
 	}
 
-	// call this method whenever you want to notify
-	// the event listeners of the particular event
-	public synchronized void fireEvent(String Path, String side) {
+	public synchronized void fireGameStartEvent() {
+		for (iEventListener eventListener : listEventListeners) {
+			eventListener.handleStartGame();
+		}
+	}
+	
+	public synchronized void fireNewBotEvent(String Path, String side) {
 		NewBotEvent event = new NewBotEvent(this,Path, side);
-		Iterator<iEventListener> i = _listeners.iterator();
-		while (i.hasNext()) {
-			((iEventListener) i.next()).handleNewBot(event);
+		for (iEventListener eventListener : listEventListeners) {
+			eventListener.handleNewBot(event);
 		}
 	}
 }
