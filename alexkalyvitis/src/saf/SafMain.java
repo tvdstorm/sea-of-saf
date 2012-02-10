@@ -24,8 +24,10 @@ public class SafMain {
 	 * Reads a (.saf) file from inside the saf.fighters package and:
 	 * 1) Parses it and generates an abstract syntax tree (see package saf.ast)
 	 * 2) Interprets the abstract syntax tree.
+	 * 3) Simulates a fight between two fighters.
 	 */
 	public static void main(String[] args){
+
 		try{
 	        String path  = new java.io.File(".").getCanonicalPath();
 			String safFile = "fighters.saf";
@@ -34,20 +36,20 @@ public class SafMain {
 
 	        Saf parser = new Saf(stream);
 
-	        System.out.print("Parsing...");
+	        System.out.println("Parsing...");
 	        
-			List<Fighter> fighters = parser.Parse(); // Parse
-			System.out.println(".....OK");
+			List<Fighter> fighters = parser.Parse();
+			System.out.println("Parsing OK");
 
-			System.out.print("Interpreting...");
+			System.out.println("Interpreting...");
 
 			SafInterpreter interpreter = new SafInterpreter(fighters);
 			if (interpreter.interpret()) {
-				System.out.println("OK");
+				System.out.println("Interpreting OK");
 				FightSimulator fightSimulator = new FightSimulator(fighters);
 				fightSimulator.Simulate();
 			} else {
-			    System.out.println("FAIL");
+			    System.out.println("Interpreting FAILED");
 			}
 	    }
 		catch(ParseException e){
@@ -58,5 +60,4 @@ public class SafMain {
 	        e.printStackTrace();
 	    }
 	}
-
 }

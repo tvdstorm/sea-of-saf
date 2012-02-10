@@ -4,7 +4,6 @@ import saf.ast.base.BehaviorItem;
 
 public class Move extends BehaviorItem {
 	private String name;
-	private static final String[] availableMoves = { "jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away" };
 	
 	public Move(){
 		this.name = "";
@@ -16,5 +15,13 @@ public class Move extends BehaviorItem {
 	
 	public String getName(){ return this.name; }
 	
-	public String[] getKeywords() { return availableMoves; }
+	@Override
+	public boolean keywordIsValid() {
+		try {
+			saf.ast.enums.AvailableMoves.valueOf(name.toUpperCase());
+		} catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
 }

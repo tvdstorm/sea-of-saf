@@ -33,14 +33,7 @@ public class SafInterpreter {
 	}
 
 	private boolean identifierIsValid(Fighter fighter, BehaviorItem object) {
-		boolean keywordFound = false;
-		for (String keyword : object.getKeywords()){
-			if (object.getName().equals(keyword)){
-				keywordFound = true;
-				break;
-			}
-		}
-		if (!keywordFound){
+		if (!object.keywordIsValid()){
 			System.out.println("ERROR: \"" + object.getName() + "\" is not a recognised SAF behavior attribute. \nFighter: " + fighter.getName());
 			return false;
 		}

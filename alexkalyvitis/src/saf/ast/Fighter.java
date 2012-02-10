@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import saf.ast.base.BehaviorItem;
+import saf.simulator.enums.*;
 
 public class Fighter extends BehaviorItem{
 	
 	private String name;
 	private List<Strength> strengths;
 	private List<Behavior> behaviors;
+	
 	private int health;
 	
 	private float weight;
 	private float height;
 	private float speed;
+	
+	private FighterStatus status;
+	private FighterLocation location;
 	
 	public Fighter(){
 		this.name = "";
@@ -28,30 +33,94 @@ public class Fighter extends BehaviorItem{
 		this.behaviors = new ArrayList<Behavior>();
 	}
 	
-	public Fighter(Fighter f){
-		name = f.name;
-		strengths = f.strengths;
-		behaviors = f.behaviors;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	public void setName(String n){ this.name = n; }
-	public void setWeight(float w){ this.weight = w; }
-	public void setHeight(float h){ this.height = h; }
-	public void setSpeed(float s){ this.speed = s; }
-	public void setHealth(int h){ this.health = h; }
-	public void appendName(String n){ this.name += " " + n; }
-	public void addStrength(Strength s){ this.strengths.add(s); }
-	public void addBehavior(Behavior b){ this.behaviors.add(b); }
-	public void addBehaviors(List<Behavior> b){ this.behaviors.addAll(b); }
-	
-	public String getName(){ return this.name; }
-	public List<Strength> getStrengths(){ return this.strengths; }
-	public List<Behavior> getBehaviors(){ return this.behaviors; }
-	public float getWeight(){ return this.weight; }
-	public float getHeight(){ return this.height; }
-	public float getSpeed(){ return this.speed; }
-	public int getHealth(){ return health; }
+	public void appendName(String name) {
+		this.name = this.name + " " + name;
+	}
 
+	public List<Strength> getStrengths() {
+		return strengths;
+	}
+
+	public void setStrengths(List<Strength> strengths) {
+		this.strengths = strengths;
+	}
+	
+	public void addStrength(Strength strength){
+		this.strengths.add(strength);
+	}
+
+	public List<Behavior> getBehaviors() {
+		return behaviors;
+	}
+
+	public void addBehaviors(List<Behavior> behaviors) {
+		this.behaviors.addAll(behaviors);
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public float getWeight() {
+		return weight;
+	}
+
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public FighterStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(FighterStatus status) {
+		this.status = status;
+	}
+
+	public FighterLocation getLocation() {
+		return location;
+	}
+
+	public void setLocation(FighterLocation location) {
+		this.location = location;
+	}
+	
+	public int getTotalStrength(){ 
+		int sumStrength = 0;
+		for(Strength s : strengths) { 
+			sumStrength += s.getValue(); 
+		}
+		return sumStrength;
+	}
+	
 	public int getValueOfStrength(String s){
 		for(Strength strength : strengths){
 			if(strength.getName().equals(s)){

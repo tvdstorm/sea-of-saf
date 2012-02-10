@@ -4,5 +4,8 @@ public abstract class BehaviorItem {
 	private String name;
 	
 	public String getName() { return name; }
-	public String[] getKeywords() { return null; }
+	
+	public boolean keywordIsValid(){
+		return false;
+	}
 }
