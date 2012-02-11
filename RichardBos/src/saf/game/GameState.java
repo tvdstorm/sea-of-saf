@@ -29,7 +29,7 @@ public class GameState {
 		gameController.setDistance(Distance);
 	}	
 
-	public List<BotState> getListBotStates()
+	public List<BotState> getBotStates()
 	{
 		return this.listBotStates;
 	}
