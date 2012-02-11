@@ -1,10 +1,17 @@
+
+
 import java.io.*;
-//import org.antlr.runtime.*;
-import org.antlr.runtime.Token;
-import org.antlr.runtime.TokenRewriteStream;
-import org.antlr.runtime.ANTLRFileStream;
+
+import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 import org.antlr.stringtemplate.*;
+
+import antlr.CommonAST;
+import antlr.DumpASTVisitor;
+
+import org.antlr.stringtemplate.*;
+
+import saf.*;
 
 public class Fight {
 
@@ -13,19 +20,29 @@ public class Fight {
 			return new CommonTree(payload);
 		}
 	};
-
+	
     public static void main(String[] args) throws Exception {
+    	
     	ANTLRFileStream fs = new ANTLRFileStream("expendables/Statham.saf");
     	safLexer lex = new safLexer(fs);
+    	
     	TokenRewriteStream tokens = new TokenRewriteStream(lex);
     	safParser grammar = new safParser(tokens);
     	
-    	grammar.setTreeAdaptor(adaptor);
-    	safParser.saf_return ret = grammar.saf();
-    	CommonTree tree = (CommonTree)ret.getTree();
+    	Saf s = grammar.saf();
+        System.out.println(s.getName());
     	
-    	String treeString = generateStringDotTree(tree);
-    	saveDotFile("output/fighter_ast.dot", treeString);
+    	
+    	//grammar.setTreeAdaptor(adaptor);
+    	//safParser.saf_return ret = grammar.saf();
+    	//CommonTree tree = (CommonTree)ret.getTree();
+    	
+    	//String treeString = generateStringDotTree(tree);
+    	//saveDotFile("output/fighter_ast.dot", treeString);
+        
+        //CommonAST ast = (CommonAST)parser.getAST(); 
+        //DumpASTVisitor visitor = new DumpASTVisitor();
+        //visitor.visit(ast);
     }
     
     // print the AST as DOT specification 
@@ -47,6 +64,7 @@ public class Fight {
         }
     }
     
+    // print tree in console
     public static void printTree(CommonTree t, int indent) {
     	if ( t != null ) {
     		StringBuffer sb = new StringBuffer(indent);
