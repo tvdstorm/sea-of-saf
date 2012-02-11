@@ -71,6 +71,10 @@ public class BotState {
 	{
 		return this.credits;
 	}
+	public void updateCredits()
+	{
+		this.credits += this.speed;
+	}
 	public void updateCredits(double dAmount)
 	{
 		this.credits += dAmount;
@@ -93,7 +97,7 @@ public class BotState {
 	
 	private int loadCharacteristic(String name)
 	{
-		Characteristic characteristic =BotIntelligence.getCharacteristic(bot, name); 
+		Characteristic characteristic = BotIntelligence.getCharacteristic(bot, name); 
 		return characteristic.getValue();
 	}
 }

@@ -1,5 +1,6 @@
 package saf.structure.intelligence;
 
+import saf.game.GameState;
 import saf.structure.Behavior;
 import saf.structure.Condition;
 import saf.structure.ConditionAnd;
@@ -9,6 +10,15 @@ import saf.structure.ConditionSimple;
 
 public class BehaviorIntelligence {
 	
+	
+	public static boolean checkBehaviorInGameState(Behavior behavior, GameState gameState)
+	{
+		
+//		behavior.getCondition().
+		
+		return true;
+	}	
+ 
 	public static String toString(Behavior behavior)
 	{
 		String strReturn = getConditionName(behavior.getCondition());
@@ -19,6 +29,7 @@ public class BehaviorIntelligence {
 	
 	private static String getConditionName(Condition condition) {
 
+		// TODO refactor met "double dispatch" ~~
 		if (condition instanceof ConditionSimple)
 
 			return ((ConditionSimple) condition).getValue();
