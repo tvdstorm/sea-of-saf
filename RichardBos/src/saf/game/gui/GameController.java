@@ -1,5 +1,6 @@
 package saf.game.gui;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -114,12 +115,12 @@ public class GameController {
 		if (side.equals(CONST_LEFT)) {
 			botLeftBehaviorModel.clear();
 			for (Behavior behavior : botState.getBot().getBehaviors()) {
-			botLeftBehaviorModel.addElement(BehaviorIntelligence.toString(behavior));
+			botLeftBehaviorModel.addElement(behavior.toString());
 			}
 		} else {
 			botRightBehaviorModel.clear();
 			for (Behavior behavior : botState.getBot().getBehaviors()) {
-			botRightBehaviorModel.addElement(BehaviorIntelligence.toString(behavior));
+			botRightBehaviorModel.addElement(behavior.toString());
 			}
 		}
 		
@@ -133,23 +134,23 @@ public class GameController {
 		// gameForm.repaint();
 	}
 
-	public void setJumping(BotState botState) {
-		side = botState.getSide();
-
-	}
 
 	public void setHitpoints(BotState botState) {
 		side = botState.getSide();
-
+		String HP = Integer.toString(botState.getHitpoints());
+		if(side.equals(CONST_LEFT))
+			gameForm.jLabelFighterLeftHP.setText(HP);
+		else
+			gameForm.jLabelFighterRightHP.setText(HP);
 	}
 
 	public void setDistance(int distance) {
 		gameForm.jLabelDistance.setText(Integer.toString(distance));
 	}
 
-	public void displayWinnerMessage(String result) {
-		// TODO Auto-generated method stub
-		
+	
+	public void executeActions(String side, Point dPosition, String fightAction)
+	{
+		this.gameArena.updateBot(side, dPosition, fightAction);
 	}
-
 }

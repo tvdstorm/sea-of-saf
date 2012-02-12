@@ -11,5 +11,4 @@ public abstract class ConditionClause extends Condition {
 	public Condition getSecondCondition() {
 		return secondCondition;
 	}
-	
 }

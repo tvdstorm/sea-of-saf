@@ -2,8 +2,7 @@ package saf.game;
 
 import saf.game.gui.GameController;
 import saf.structure.Bot;
-import saf.structure.Characteristic;
-import saf.structure.intelligence.BotIntelligence;
+import saf.structure.intelligence.BehaviorIntelligence;
 
 public class BotState {
 	
@@ -13,36 +12,41 @@ public class BotState {
 		this.bot = bot;
 		this.side = side;
 		this.hitpoints = 100;
-		this.jumping = false;
 		this.winner = false;
 		this.speed = calculateSpeed(bot);
+		this.distanceFromWall = 50;
+		this.lastFightAction = "";
+		this.lastMoveAction = "stand";
 	}
 	
 	private GameController gameController;
 	private Bot bot;
 	private String side;
 	private int hitpoints;
-	private boolean jumping;
 	private boolean winner;
 	private double speed;
-	
+	private int distanceFromWall;
 	private double credits;
-	
+	private String lastFightAction;
+	private String lastMoveAction;
+
 	public int getHitpoints() {
 		return hitpoints;
 	}
 	public void setHitpoints(int hitpoints) {
 		this.hitpoints = hitpoints;
-		gameController.setHitpoints(this);
+		this.gameController.setHitpoints(this);
+	}
+	public void updateHitpoints(double attackPower) {
+		this.hitpoints = (int)(this.hitpoints - attackPower);
+		this.gameController.setHitpoints(this);
 	}
 	
 	public boolean isJumping() {
-		return jumping;
+		return lastMoveAction.equals(GameConstant.MOVETYPE_JUMP);
 	}
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
-		gameController.setJumping(this);
-	}
+	
+	
 	public Bot getBot() {
 		return bot;
 	}
@@ -79,25 +83,46 @@ public class BotState {
 	{
 		this.credits += dAmount;
 	}
-	
-	
-	private double calculateSpeed(Bot bot) {
-		int punchPower = loadCharacteristic(GameConstant.Characteristic_punchPower);
-		int kickPower = loadCharacteristic(GameConstant.Characteristic_kickPower);
 		
-		int punchReach = loadCharacteristic(GameConstant.Characteristic_punchReach);
-		int kickReach = loadCharacteristic(GameConstant.Characteristic_kickReach);
+	public int getDistanceFromWall() {
+		return distanceFromWall;
+	}
+	public void setDistanceFromWall(int distanceFromWall) {
+		this.distanceFromWall = distanceFromWall;
+	}
+	public void updateDistanceFromWall(int dAmount)
+	{
+		this.distanceFromWall += dAmount;
+	}
+	
+	public String getLastFightAction() {
+		return lastFightAction;
+	}
+	public void setLastFightAction(String lastFightAction) {
+		this.lastFightAction = lastFightAction;
+	}	
+		
+	private double calculateSpeed(Bot bot) {
+		
+		int punchPower = BehaviorIntelligence.getCharacteristic(bot,GameConstant.Characteristic_punchPower);
+		int kickPower = BehaviorIntelligence.getCharacteristic(bot, GameConstant.Characteristic_kickPower);
+		
+		int punchReach = BehaviorIntelligence.getCharacteristic(bot, GameConstant.Characteristic_punchReach);
+		int kickReach = BehaviorIntelligence.getCharacteristic(bot, GameConstant.Characteristic_kickReach);
 		
 		//Formula as noted on blackboard.
 		double weight = (punchPower + kickPower) / 2;
 		double height = (punchReach + kickReach) / 2;
-		this.speed = 0.5 * (height-weight);
-		return 0;
+		
+		return 0.5 * (height-weight);
+	}
+
+	public String getLastMoveAction() {
+		return lastMoveAction;
+	}
+	public void setLastMoveAction(String lastMoveAction) {
+		this.lastMoveAction = lastMoveAction;
 	}
 	
-	private int loadCharacteristic(String name)
-	{
-		Characteristic characteristic = BotIntelligence.getCharacteristic(bot, name); 
-		return characteristic.getValue();
-	}
+
 }

@@ -73,18 +73,18 @@ behavior returns [Behavior behavior]:
   ']';
 
 condition returns [Condition condition]:
-   cr1=conditionRule                    {     $condition = $cr1.condition;
+   cr=conditionRule                     {     $condition = $cr.condition;
                                         }
-   ( OR cr2=conditionRule               {     $condition = new ConditionOr($cr1.condition, $cr2.condition);
+   ( OR c=condition                     {     $condition = new ConditionOr($cr.condition, $c.condition);
                                         }
-   )*;
+   )?;
    
 conditionRule returns [Condition condition]:
-   v1=var                               {     $condition = $v1.condition;
+   v=var                                {     $condition = $v.condition;
                                         }
-   ( AND v2=var                         {     $condition = new ConditionAnd($v1.condition, $v2.condition);   
+   ( AND c=conditionRule                {     $condition = new ConditionAnd($v.condition, $c.condition);   
 							                          }
-   )*;
+   )?;
    
 var returns [Condition condition]:
    ID                                   {     $condition = new ConditionSimple($ID.text);   

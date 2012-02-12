@@ -1,51 +1,21 @@
 package saf.structure.intelligence;
 
+import saf.game.BotState;
 import saf.game.GameState;
 import saf.structure.Behavior;
-import saf.structure.Condition;
-import saf.structure.ConditionAnd;
-import saf.structure.ConditionClause;
-import saf.structure.ConditionOr;
-import saf.structure.ConditionSimple;
+import saf.structure.Bot;
+import saf.structure.Characteristic;
 
-public class BehaviorIntelligence {
-	
-	
-	public static boolean checkBehaviorInGameState(Behavior behavior, GameState gameState)
+public abstract class BehaviorIntelligence {
+
+	public static boolean checkBehaviorInGameState(Behavior behavior, BotState botState, GameState gameState) {
+
+		return behavior.getCondition().checkCondition(botState, gameState);
+	}
+
+	public static int getCharacteristic(Bot bot, String name)
 	{
-		
-//		behavior.getCondition().
-		
-		return true;
+		Characteristic characteristic = BotIntelligence.getCharacteristic(bot, name); 
+		return characteristic.getValue();
 	}	
- 
-	public static String toString(Behavior behavior)
-	{
-		String strReturn = getConditionName(behavior.getCondition());
-		strReturn += " [" + ActionIntelligence.toString(behavior.getMoveAction()) + " ";
-		strReturn += ActionIntelligence.toString(behavior.getFightAction()) + "]";
-		return strReturn;
-	}
-	
-	private static String getConditionName(Condition condition) {
-
-		// TODO refactor met "double dispatch" ~~
-		if (condition instanceof ConditionSimple)
-
-			return ((ConditionSimple) condition).getValue();
-
-		else {
-
-			ConditionClause conditionClause = (ConditionClause) condition;
-			String returnString = getConditionName(conditionClause.getFirstCondition());
-
-			if (conditionClause instanceof ConditionAnd)
-				returnString += " and ";
-			else if (conditionClause instanceof ConditionOr)
-				returnString += " or ";
-
-			returnString += getConditionName(conditionClause.getSecondCondition());
-			return returnString;
-		}
-	}
 }

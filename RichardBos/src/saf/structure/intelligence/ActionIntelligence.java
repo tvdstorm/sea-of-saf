@@ -4,7 +4,7 @@ import java.util.List;
 
 import saf.structure.Action;
 
-public class ActionIntelligence {
+public abstract class ActionIntelligence {
 
 	public static String toString(List<Action> actions)
 	{
@@ -16,9 +16,9 @@ public class ActionIntelligence {
 		{
 			String strReturn = "choose(";
 			for (Action action : actions) {
-				strReturn += " " + action.getValue();
+				strReturn += " " + action.toString();
 			}
-			return strReturn.trim() + ")";
+			return strReturn + ")";
 		}
 	}
 	
