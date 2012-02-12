@@ -19,12 +19,15 @@ import saf.structure.Bots;
 
 public class GameEventListener implements iEventListener {
 
-	private final GameController gameController;
+
+
 	private final GameMain gameMain;
 
 	public GameEventListener(GameMain gameMain) {
 		this.gameMain = gameMain;
-		this.gameController = gameMain.getGameController();
+	}
+	private GameController getGameController() {
+		return gameMain.getGameController();
 	}
 
 	@Override
@@ -35,7 +38,7 @@ public class GameEventListener implements iEventListener {
 		try {
 			lexer = new SAFLexer(new ANTLRFileStream(e.getPath()));
 		} catch (IOException e1) {
-			gameController.displayMessage("Invalid file selected, please select a valid bot file.");
+			getGameController().displayMessage("Invalid file selected, please select a valid bot file.");
 			return;
 		}
 
@@ -55,12 +58,12 @@ public class GameEventListener implements iEventListener {
 				for (String error : errors) {
 					errorString += "\n" + error;
 				}
-				gameController.displayMessage(errorString);
+				getGameController().displayMessage(errorString);
 			} 
 			else if (bots.getBots().size() > 1)
-				gameController.displayMessage("Only one bot is allowed.");
+				getGameController().displayMessage("Only one bot is allowed.");
 			else {
-				BotState botState = new BotState(bots.getBots().get(0), e.getSide(),gameController);
+				BotState botState = new BotState(bots.getBots().get(0), e.getSide(),getGameController());
 				gameMain.newBot(botState);
 			}
 

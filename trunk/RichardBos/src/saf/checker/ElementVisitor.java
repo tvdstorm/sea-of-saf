@@ -11,5 +11,4 @@ public interface ElementVisitor {
 	void visit(ConditionSimple conditionSimple);
 	void visit(ConditionOr conditionOr);
 	void visit(ConditionAnd conditionAnd);
-	
 }

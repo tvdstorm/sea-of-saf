@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g 2012-02-06 15:37:16
+// $ANTLR 3.4 C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g 2012-02-11 14:31:03
  
   package saf.parser; 
   import saf.structure.*;
@@ -59,7 +59,7 @@ public TreeAdaptor getTreeAdaptor() {
     return adaptor;
 }
     public String[] getTokenNames() { return SAFParser.tokenNames; }
-    public String getGrammarFileName() { return "C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g"; }
+    public String getGrammarFileName() { return "C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g"; }
 
 
     public static class bots_return extends ParserRuleReturnScope {
@@ -70,7 +70,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "bots"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:17:1: bots returns [Bots bots] : (b= bot )* ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:1: bots returns [Bots bots] : (b= bot )* ;
     public final SAFParser.bots_return bots() throws RecognitionException {
         SAFParser.bots_return retval = new SAFParser.bots_return();
         retval.start = input.LT(1);
@@ -83,8 +83,8 @@ public TreeAdaptor getTreeAdaptor() {
 
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:17:26: ( (b= bot )* )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:17:41: (b= bot )*
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:26: ( (b= bot )* )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:41: (b= bot )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -92,7 +92,7 @@ public TreeAdaptor getTreeAdaptor() {
                  retval.bots = new Bots();
                                                     
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:19:3: (b= bot )*
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:19:3: (b= bot )*
             loop1:
             do {
                 int alt1=2;
@@ -105,7 +105,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:19:4: b= bot
+            	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:19:4: b= bot
             	    {
             	    pushFollow(FOLLOW_bot_in_bots79);
             	    b=bot();
@@ -158,7 +158,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "bot"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:22:1: bot returns [Bot bot] : n= name '{' (b= behavior |c= characteristic )+ '}' ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:22:1: bot returns [Bot bot] : n= name '{' (b= behavior |c= characteristic )+ '}' ;
     public final SAFParser.bot_return bot() throws RecognitionException {
         SAFParser.bot_return retval = new SAFParser.bot_return();
         retval.start = input.LT(1);
@@ -179,8 +179,8 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree char_literal2_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:22:22: (n= name '{' (b= behavior |c= characteristic )+ '}' )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:23:3: n= name '{' (b= behavior |c= characteristic )+ '}'
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:22:22: (n= name '{' (b= behavior |c= characteristic )+ '}' )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:23:3: n= name '{' (b= behavior |c= characteristic )+ '}'
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -202,7 +202,7 @@ public TreeAdaptor getTreeAdaptor() {
             adaptor.addChild(root_0, char_literal1_tree);
 
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:26:7: (b= behavior |c= characteristic )+
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:26:7: (b= behavior |c= characteristic )+
             int cnt2=0;
             loop2:
             do {
@@ -228,7 +228,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:26:9: b= behavior
+            	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:26:9: b= behavior
             	    {
             	    pushFollow(FOLLOW_behavior_in_bot183);
             	    b=behavior();
@@ -243,7 +243,7 @@ public TreeAdaptor getTreeAdaptor() {
             	    }
             	    break;
             	case 2 :
-            	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:28:9: c= characteristic
+            	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:28:9: c= characteristic
             	    {
             	    pushFollow(FOLLOW_characteristic_in_bot218);
             	    c=characteristic();
@@ -307,7 +307,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "name"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:33:1: name returns [String name] : ID (sn= subname )* ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:33:1: name returns [String name] : ID (sn= subname )* ;
     public final SAFParser.name_return name() throws RecognitionException {
         SAFParser.name_return retval = new SAFParser.name_return();
         retval.start = input.LT(1);
@@ -322,8 +322,8 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree ID3_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:33:27: ( ID (sn= subname )* )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:34:3: ID (sn= subname )*
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:33:27: ( ID (sn= subname )* )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:34:3: ID (sn= subname )*
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -338,7 +338,7 @@ public TreeAdaptor getTreeAdaptor() {
                  retval.name = (ID3!=null?ID3.getText():null);
                                                     
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:36:3: (sn= subname )*
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:36:3: (sn= subname )*
             loop3:
             do {
                 int alt3=2;
@@ -351,7 +351,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt3) {
             	case 1 :
-            	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:36:4: sn= subname
+            	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:36:4: sn= subname
             	    {
             	    pushFollow(FOLLOW_subname_in_name311);
             	    sn=subname();
@@ -404,7 +404,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "subname"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:39:1: subname returns [String name] : ( ID | INT ) ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:39:1: subname returns [String name] : ( ID | INT ) ;
     public final SAFParser.subname_return subname() throws RecognitionException {
         SAFParser.subname_return retval = new SAFParser.subname_return();
         retval.start = input.LT(1);
@@ -419,13 +419,13 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree INT5_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:39:30: ( ( ID | INT ) )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:40:3: ( ID | INT )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:39:30: ( ( ID | INT ) )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:40:3: ( ID | INT )
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:40:3: ( ID | INT )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:40:3: ( ID | INT )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -444,7 +444,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt4) {
                 case 1 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:40:5: ID
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:40:5: ID
                     {
                     ID4=(Token)match(input,ID,FOLLOW_ID_in_subname358); 
                     ID4_tree = 
@@ -459,7 +459,7 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:42:5: INT
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:42:5: INT
                     {
                     INT5=(Token)match(input,INT,FOLLOW_INT_in_subname399); 
                     INT5_tree = 
@@ -509,7 +509,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "characteristic"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:46:1: characteristic returns [Characteristic character] : ( ID )+ '=' INT ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:46:1: characteristic returns [Characteristic character] : ( ID )+ '=' INT ;
     public final SAFParser.characteristic_return characteristic() throws RecognitionException {
         SAFParser.characteristic_return retval = new SAFParser.characteristic_return();
         retval.start = input.LT(1);
@@ -526,13 +526,13 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree INT8_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:46:50: ( ( ID )+ '=' INT )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:47:3: ( ID )+ '=' INT
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:46:50: ( ( ID )+ '=' INT )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:47:3: ( ID )+ '=' INT
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:47:3: ( ID )+
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:47:3: ( ID )+
             int cnt5=0;
             loop5:
             do {
@@ -546,7 +546,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt5) {
             	case 1 :
-            	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:47:3: ID
+            	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:47:3: ID
             	    {
             	    ID6=(Token)match(input,ID,FOLLOW_ID_in_characteristic450); 
             	    ID6_tree = 
@@ -617,7 +617,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "behavior"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:50:1: behavior returns [Behavior behavior] : c= condition '[' (id1= ID | CHOOSE '(' (c1= ID )* ')' ) (id2= ID | CHOOSE '(' (c2= ID )* ')' ) ']' ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:50:1: behavior returns [Behavior behavior] : c= condition '[' (id1= ID | CHOOSE '(' (c1= ID )* ')' ) (id2= ID | CHOOSE '(' (c2= ID )* ')' ) ']' ;
     public final SAFParser.behavior_return behavior() throws RecognitionException {
         SAFParser.behavior_return retval = new SAFParser.behavior_return();
         retval.start = input.LT(1);
@@ -654,8 +654,8 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree char_literal16_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:50:37: (c= condition '[' (id1= ID | CHOOSE '(' (c1= ID )* ')' ) (id2= ID | CHOOSE '(' (c2= ID )* ')' ) ']' )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:51:3: c= condition '[' (id1= ID | CHOOSE '(' (c1= ID )* ')' ) (id2= ID | CHOOSE '(' (c2= ID )* ')' ) ']'
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:50:37: (c= condition '[' (id1= ID | CHOOSE '(' (c1= ID )* ')' ) (id2= ID | CHOOSE '(' (c2= ID )* ')' ) ']' )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:51:3: c= condition '[' (id1= ID | CHOOSE '(' (c1= ID )* ')' ) (id2= ID | CHOOSE '(' (c2= ID )* ')' ) ']'
             {
             root_0 = (CommonTree)adaptor.nil();
 
@@ -677,7 +677,7 @@ public TreeAdaptor getTreeAdaptor() {
                  retval.behavior = new Behavior((c!=null?c.condition:null));
                                                     
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:54:3: (id1= ID | CHOOSE '(' (c1= ID )* ')' )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:54:3: (id1= ID | CHOOSE '(' (c1= ID )* ')' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -696,7 +696,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt7) {
                 case 1 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:54:5: id1= ID
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:54:5: id1= ID
                     {
                     id1=(Token)match(input,ID,FOLLOW_ID_in_behavior575); 
                     id1_tree = 
@@ -711,7 +711,7 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:56:5: CHOOSE '(' (c1= ID )* ')'
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:56:5: CHOOSE '(' (c1= ID )* ')'
                     {
                     CHOOSE10=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_behavior610); 
                     CHOOSE10_tree = 
@@ -727,7 +727,7 @@ public TreeAdaptor getTreeAdaptor() {
                     adaptor.addChild(root_0, char_literal11_tree);
 
 
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:57:17: (c1= ID )*
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:57:17: (c1= ID )*
                     loop6:
                     do {
                         int alt6=2;
@@ -740,7 +740,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:58:19: c1= ID
+                    	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:58:19: c1= ID
                     	    {
                     	    c1=(Token)match(input,ID,FOLLOW_ID_in_behavior656); 
                     	    c1_tree = 
@@ -774,7 +774,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
 
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:64:3: (id2= ID | CHOOSE '(' (c2= ID )* ')' )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:64:3: (id2= ID | CHOOSE '(' (c2= ID )* ')' )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -793,7 +793,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt9) {
                 case 1 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:64:5: id2= ID
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:64:5: id2= ID
                     {
                     id2=(Token)match(input,ID,FOLLOW_ID_in_behavior722); 
                     id2_tree = 
@@ -808,7 +808,7 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:66:5: CHOOSE '(' (c2= ID )* ')'
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:66:5: CHOOSE '(' (c2= ID )* ')'
                     {
                     CHOOSE13=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_behavior757); 
                     CHOOSE13_tree = 
@@ -824,7 +824,7 @@ public TreeAdaptor getTreeAdaptor() {
                     adaptor.addChild(root_0, char_literal14_tree);
 
 
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:67:17: (c2= ID )*
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:67:17: (c2= ID )*
                     loop8:
                     do {
                         int alt8=2;
@@ -837,7 +837,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:68:19: c2= ID
+                    	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:68:19: c2= ID
                     	    {
                     	    c2=(Token)match(input,ID,FOLLOW_ID_in_behavior804); 
                     	    c2_tree = 
@@ -910,7 +910,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "condition"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:75:1: condition returns [Condition condition] : cr1= conditionRule ( OR cr2= conditionRule )* ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:75:1: condition returns [Condition condition] : cr= conditionRule ( OR c= condition )? ;
     public final SAFParser.condition_return condition() throws RecognitionException {
         SAFParser.condition_return retval = new SAFParser.condition_return();
         retval.start = input.LT(1);
@@ -919,69 +919,62 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree root_0 = null;
 
         Token OR17=null;
-        SAFParser.conditionRule_return cr1 =null;
+        SAFParser.conditionRule_return cr =null;
 
-        SAFParser.conditionRule_return cr2 =null;
+        SAFParser.condition_return c =null;
 
 
         CommonTree OR17_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:75:40: (cr1= conditionRule ( OR cr2= conditionRule )* )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:76:4: cr1= conditionRule ( OR cr2= conditionRule )*
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:75:40: (cr= conditionRule ( OR c= condition )? )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:76:4: cr= conditionRule ( OR c= condition )?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
             pushFollow(FOLLOW_conditionRule_in_condition877);
-            cr1=conditionRule();
+            cr=conditionRule();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, cr1.getTree());
+            adaptor.addChild(root_0, cr.getTree());
 
-                 retval.condition = (cr1!=null?cr1.condition:null);
+                 retval.condition = (cr!=null?cr.condition:null);
                                                     
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:78:4: ( OR cr2= conditionRule )*
-            loop10:
-            do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:78:4: ( OR c= condition )?
+            int alt10=2;
+            int LA10_0 = input.LA(1);
 
-                if ( (LA10_0==OR) ) {
-                    alt10=1;
-                }
-
-
-                switch (alt10) {
-            	case 1 :
-            	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:78:6: OR cr2= conditionRule
-            	    {
-            	    OR17=(Token)match(input,OR,FOLLOW_OR_in_condition905); 
-            	    OR17_tree = 
-            	    (CommonTree)adaptor.create(OR17)
-            	    ;
-            	    adaptor.addChild(root_0, OR17_tree);
+            if ( (LA10_0==OR) ) {
+                alt10=1;
+            }
+            switch (alt10) {
+                case 1 :
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:78:6: OR c= condition
+                    {
+                    OR17=(Token)match(input,OR,FOLLOW_OR_in_condition906); 
+                    OR17_tree = 
+                    (CommonTree)adaptor.create(OR17)
+                    ;
+                    adaptor.addChild(root_0, OR17_tree);
 
 
-            	    pushFollow(FOLLOW_conditionRule_in_condition909);
-            	    cr2=conditionRule();
+                    pushFollow(FOLLOW_condition_in_condition910);
+                    c=condition();
 
-            	    state._fsp--;
+                    state._fsp--;
 
-            	    adaptor.addChild(root_0, cr2.getTree());
+                    adaptor.addChild(root_0, c.getTree());
 
-            	         retval.condition = new ConditionOr((cr1!=null?cr1.condition:null), (cr2!=null?cr2.condition:null));
-            	                                            
+                         retval.condition = new ConditionOr((cr!=null?cr.condition:null), (c!=null?c.condition:null));
+                                                            
 
-            	    }
-            	    break;
+                    }
+                    break;
 
-            	default :
-            	    break loop10;
-                }
-            } while (true);
+            }
 
 
             }
@@ -1016,7 +1009,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "conditionRule"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:82:1: conditionRule returns [Condition condition] : v1= var ( AND v2= var )* ;
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:82:1: conditionRule returns [Condition condition] : v= var ( AND c= conditionRule )? ;
     public final SAFParser.conditionRule_return conditionRule() throws RecognitionException {
         SAFParser.conditionRule_return retval = new SAFParser.conditionRule_return();
         retval.start = input.LT(1);
@@ -1025,69 +1018,62 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree root_0 = null;
 
         Token AND18=null;
-        SAFParser.var_return v1 =null;
+        SAFParser.var_return v =null;
 
-        SAFParser.var_return v2 =null;
+        SAFParser.conditionRule_return c =null;
 
 
         CommonTree AND18_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:82:44: (v1= var ( AND v2= var )* )
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:83:4: v1= var ( AND v2= var )*
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:82:44: (v= var ( AND c= conditionRule )? )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:83:4: v= var ( AND c= conditionRule )?
             {
             root_0 = (CommonTree)adaptor.nil();
 
 
-            pushFollow(FOLLOW_var_in_conditionRule950);
-            v1=var();
+            pushFollow(FOLLOW_var_in_conditionRule957);
+            v=var();
 
             state._fsp--;
 
-            adaptor.addChild(root_0, v1.getTree());
+            adaptor.addChild(root_0, v.getTree());
 
-                 retval.condition = (v1!=null?v1.condition:null);
+                 retval.condition = (v!=null?v.condition:null);
                                                     
 
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:85:4: ( AND v2= var )*
-            loop11:
-            do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:85:4: ( AND c= conditionRule )?
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-                if ( (LA11_0==AND) ) {
-                    alt11=1;
-                }
-
-
-                switch (alt11) {
-            	case 1 :
-            	    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:85:6: AND v2= var
-            	    {
-            	    AND18=(Token)match(input,AND,FOLLOW_AND_in_conditionRule989); 
-            	    AND18_tree = 
-            	    (CommonTree)adaptor.create(AND18)
-            	    ;
-            	    adaptor.addChild(root_0, AND18_tree);
+            if ( (LA11_0==AND) ) {
+                alt11=1;
+            }
+            switch (alt11) {
+                case 1 :
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:85:6: AND c= conditionRule
+                    {
+                    AND18=(Token)match(input,AND,FOLLOW_AND_in_conditionRule997); 
+                    AND18_tree = 
+                    (CommonTree)adaptor.create(AND18)
+                    ;
+                    adaptor.addChild(root_0, AND18_tree);
 
 
-            	    pushFollow(FOLLOW_var_in_conditionRule993);
-            	    v2=var();
+                    pushFollow(FOLLOW_conditionRule_in_conditionRule1001);
+                    c=conditionRule();
 
-            	    state._fsp--;
+                    state._fsp--;
 
-            	    adaptor.addChild(root_0, v2.getTree());
+                    adaptor.addChild(root_0, c.getTree());
 
-            	         retval.condition = new ConditionAnd((v1!=null?v1.condition:null), (v2!=null?v2.condition:null));   
-            	    							                          
+                         retval.condition = new ConditionAnd((v!=null?v.condition:null), (c!=null?c.condition:null));   
+                    							                          
 
-            	    }
-            	    break;
+                    }
+                    break;
 
-            	default :
-            	    break loop11;
-                }
-            } while (true);
+            }
 
 
             }
@@ -1122,7 +1108,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "var"
-    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:89:1: var returns [Condition condition] : ( ID | '(' c= condition ')' );
+    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:89:1: var returns [Condition condition] : ( ID | '(' c= condition ')' );
     public final SAFParser.var_return var() throws RecognitionException {
         SAFParser.var_return retval = new SAFParser.var_return();
         retval.start = input.LT(1);
@@ -1141,7 +1127,7 @@ public TreeAdaptor getTreeAdaptor() {
         CommonTree char_literal21_tree=null;
 
         try {
-            // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:89:34: ( ID | '(' c= condition ')' )
+            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:89:34: ( ID | '(' c= condition ')' )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1160,12 +1146,12 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt12) {
                 case 1 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:90:4: ID
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:90:4: ID
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    ID19=(Token)match(input,ID,FOLLOW_ID_in_var1042); 
+                    ID19=(Token)match(input,ID,FOLLOW_ID_in_var1041); 
                     ID19_tree = 
                     (CommonTree)adaptor.create(ID19)
                     ;
@@ -1178,26 +1164,26 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // C:\\Dropbox\\EclipseWorkSpace\\SuperAwesomeFighters\\SuperAwesomeFighters\\Grammar\\SAF.g:92:6: '(' c= condition ')'
+                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:92:6: '(' c= condition ')'
                     {
                     root_0 = (CommonTree)adaptor.nil();
 
 
-                    char_literal20=(Token)match(input,12,FOLLOW_12_in_var1085); 
+                    char_literal20=(Token)match(input,12,FOLLOW_12_in_var1084); 
                     char_literal20_tree = 
                     (CommonTree)adaptor.create(char_literal20)
                     ;
                     adaptor.addChild(root_0, char_literal20_tree);
 
 
-                    pushFollow(FOLLOW_condition_in_var1089);
+                    pushFollow(FOLLOW_condition_in_var1088);
                     c=condition();
 
                     state._fsp--;
 
                     adaptor.addChild(root_0, c.getTree());
 
-                    char_literal21=(Token)match(input,13,FOLLOW_13_in_var1091); 
+                    char_literal21=(Token)match(input,13,FOLLOW_13_in_var1090); 
                     char_literal21_tree = 
                     (CommonTree)adaptor.create(char_literal21)
                     ;
@@ -1264,14 +1250,14 @@ public TreeAdaptor getTreeAdaptor() {
     public static final BitSet FOLLOW_13_in_behavior853 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_16_in_behavior861 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_conditionRule_in_condition877 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_OR_in_condition905 = new BitSet(new long[]{0x0000000000001100L});
-    public static final BitSet FOLLOW_conditionRule_in_condition909 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_var_in_conditionRule950 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_AND_in_conditionRule989 = new BitSet(new long[]{0x0000000000001100L});
-    public static final BitSet FOLLOW_var_in_conditionRule993 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ID_in_var1042 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_var1085 = new BitSet(new long[]{0x0000000000001100L});
-    public static final BitSet FOLLOW_condition_in_var1089 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_var1091 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OR_in_condition906 = new BitSet(new long[]{0x0000000000001100L});
+    public static final BitSet FOLLOW_condition_in_condition910 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_var_in_conditionRule957 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_AND_in_conditionRule997 = new BitSet(new long[]{0x0000000000001100L});
+    public static final BitSet FOLLOW_conditionRule_in_conditionRule1001 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_var1041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_var1084 = new BitSet(new long[]{0x0000000000001100L});
+    public static final BitSet FOLLOW_condition_in_var1088 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_var1090 = new BitSet(new long[]{0x0000000000000002L});
 
 }

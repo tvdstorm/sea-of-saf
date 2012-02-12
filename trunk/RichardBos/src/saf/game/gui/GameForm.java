@@ -53,9 +53,12 @@ public class GameForm extends javax.swing.JFrame {
 		jPanelGameArea = new javax.swing.JPanel();
 		jPanelGameButtons = new javax.swing.JPanel();
 		jButtonStart = new javax.swing.JButton();
-		jPanel1 = new javax.swing.JPanel();
 		jLabel1 = new javax.swing.JLabel();
+		jLabel10 = new javax.swing.JLabel();
+		jLabel11 = new javax.swing.JLabel();
 		jLabelDistance = new javax.swing.JLabel();
+		jLabelFighterLeftHP = new javax.swing.JLabel();
+		jLabelFighterRightHP = new javax.swing.JLabel();
 		jPanelGameArena = new saf.game.gui.component.GameArena();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -66,23 +69,19 @@ public class GameForm extends javax.swing.JFrame {
 		jLabelHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		jLabelHeader.setText("Welcome to the Super Awesome Fighters game!");
 		jLabelHeader.setFocusable(false);
-		jLabelHeader
-				.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+		jLabelHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-		jPanelBotOne1.setBorder(javax.swing.BorderFactory
-				.createLineBorder(new java.awt.Color(153, 153, 153)));
+		jPanelBotOne1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
 		jLabel6.setText("Fighter 2");
 
 		jLabel7.setText("Name");
 
-		jListBotRightChars
-				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		jListBotRightChars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jListBotRightChars.setPreferredSize(new java.awt.Dimension(150, 100));
 		jScrollPane3.setViewportView(jListBotRightChars);
 
-		jListBotRightBehaviors
-				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		jListBotRightBehaviors.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jListBotRightBehaviors.setPreferredSize(new java.awt.Dimension(0, 100));
 		jScrollPane4.setViewportView(jListBotRightBehaviors);
 
@@ -92,21 +91,21 @@ public class GameForm extends javax.swing.JFrame {
 
 		jButtonBotRightLoad.setText("Load fighter");
 
-		javax.swing.GroupLayout jPanelBotOne1Layout = new javax.swing.GroupLayout(
-				jPanelBotOne1);
+		javax.swing.GroupLayout jPanelBotOne1Layout = new javax.swing.GroupLayout(jPanelBotOne1);
 		jPanelBotOne1.setLayout(jPanelBotOne1Layout);
 		jPanelBotOne1Layout
 				.setHorizontalGroup(jPanelBotOne1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanelBotOne1Layout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
 												jPanelBotOne1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(jScrollPane4,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 429,
+																Short.MAX_VALUE)
 														.addGroup(
 																jPanelBotOne1Layout
 																		.createSequentialGroup()
@@ -114,123 +113,73 @@ public class GameForm extends javax.swing.JFrame {
 																				jPanelBotOne1Layout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								jLabel6)
+																						.addComponent(jLabel6)
 																						.addGroup(
 																								jPanelBotOne1Layout
 																										.createSequentialGroup()
 																										.addComponent(
 																												jLabel7)
-																										.addGap(18,
-																												18,
+																										.addGap(18, 18,
 																												18)
 																										.addComponent(
 																												jLabelBotRightName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				221,
-																				Short.MAX_VALUE)
-																		.addComponent(
-																				jButtonBotRightLoad))
+																				282, Short.MAX_VALUE)
+																		.addComponent(jButtonBotRightLoad))
+														.addComponent(jLabel9)
 														.addGroup(
-																jPanelBotOne1Layout
-																		.createSequentialGroup()
-																		.addGroup(
-																				jPanelBotOne1Layout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								jScrollPane3,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE)
-																						.addComponent(
-																								jLabel8))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				jPanelBotOne1Layout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								jLabel9)
-																						.addComponent(
-																								jScrollPane4,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								103,
-																								Short.MAX_VALUE))))
-										.addContainerGap()));
+																jPanelBotOne1Layout.createSequentialGroup()
+																		.addComponent(jLabel8).addGap(188, 188, 188))
+														.addComponent(jScrollPane3,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 429,
+																Short.MAX_VALUE)).addContainerGap()));
 		jPanelBotOne1Layout
 				.setVerticalGroup(jPanelBotOne1Layout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanelBotOne1Layout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
 												jPanelBotOne1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 														.addGroup(
 																jPanelBotOne1Layout
 																		.createSequentialGroup()
-																		.addComponent(
-																				jLabel6)
+																		.addComponent(jLabel6)
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																		.addGroup(
 																				jPanelBotOne1Layout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								jLabel7)
+																						.addComponent(jLabel7)
 																						.addComponent(
 																								jLabelBotRightName)))
-														.addComponent(
-																jButtonBotRightLoad))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												jPanelBotOne1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
-														.addComponent(jLabel8)
-														.addComponent(jLabel9))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												jPanelBotOne1Layout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																jScrollPane3,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																jScrollPane4,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+														.addComponent(jButtonBotRightLoad))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jLabel8)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 69,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jLabel9)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 96,
+												Short.MAX_VALUE).addContainerGap()));
 
-		jPanelBotOne.setBorder(javax.swing.BorderFactory
-				.createLineBorder(new java.awt.Color(153, 153, 153)));
+		jPanelBotOne.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
 		jLabel2.setText("Fighter 1");
 
 		jLabel3.setText("Name");
 
-		jListBotLeftChars
-				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		jListBotLeftChars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jListBotLeftChars.setPreferredSize(new java.awt.Dimension(150, 100));
 		jScrollPane1.setViewportView(jListBotLeftChars);
 
-		jListBotLeftBehaviors
-				.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		jListBotLeftBehaviors.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		jListBotLeftBehaviors.setPreferredSize(new java.awt.Dimension(0, 100));
 		jScrollPane2.setViewportView(jListBotLeftBehaviors);
 
@@ -240,21 +189,25 @@ public class GameForm extends javax.swing.JFrame {
 
 		jButtonBotLeftLoad.setText("Load fighter");
 
-		javax.swing.GroupLayout jPanelBotOneLayout = new javax.swing.GroupLayout(
-				jPanelBotOne);
+		javax.swing.GroupLayout jPanelBotOneLayout = new javax.swing.GroupLayout(jPanelBotOne);
 		jPanelBotOne.setLayout(jPanelBotOneLayout);
 		jPanelBotOneLayout
 				.setHorizontalGroup(jPanelBotOneLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanelBotOneLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
 												jPanelBotOneLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(jScrollPane2,
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 288,
+																Short.MAX_VALUE)
+														.addComponent(jScrollPane1,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 288,
+																Short.MAX_VALUE)
 														.addGroup(
 																jPanelBotOneLayout
 																		.createSequentialGroup()
@@ -262,347 +215,190 @@ public class GameForm extends javax.swing.JFrame {
 																				jPanelBotOneLayout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								jLabel4)
-																						.addComponent(
-																								jScrollPane1,
-																								javax.swing.GroupLayout.PREFERRED_SIZE,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								javax.swing.GroupLayout.PREFERRED_SIZE))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addGroup(
-																				jPanelBotOneLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								jLabel5)
-																						.addComponent(
-																								jScrollPane2,
-																								javax.swing.GroupLayout.DEFAULT_SIZE,
-																								84,
-																								Short.MAX_VALUE)))
-														.addGroup(
-																jPanelBotOneLayout
-																		.createSequentialGroup()
-																		.addGroup(
-																				jPanelBotOneLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								jLabel2)
+																						.addComponent(jLabel2)
 																						.addGroup(
 																								jPanelBotOneLayout
 																										.createSequentialGroup()
 																										.addComponent(
 																												jLabel3)
-																										.addGap(18,
-																												18,
+																										.addGap(18, 18,
 																												18)
 																										.addComponent(
 																												jLabelBotLeftName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				202,
-																				Short.MAX_VALUE)
-																		.addComponent(
-																				jButtonBotLeftLoad)))
-										.addContainerGap()));
+																				141, Short.MAX_VALUE)
+																		.addComponent(jButtonBotLeftLoad))
+														.addComponent(jLabel4).addComponent(jLabel5)).addContainerGap()));
 		jPanelBotOneLayout
 				.setVerticalGroup(jPanelBotOneLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
 								jPanelBotOneLayout
 										.createSequentialGroup()
 										.addContainerGap()
 										.addGroup(
 												jPanelBotOneLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 														.addGroup(
 																jPanelBotOneLayout
 																		.createSequentialGroup()
-																		.addComponent(
-																				jLabel2)
+																		.addComponent(jLabel2)
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																		.addGroup(
 																				jPanelBotOneLayout
 																						.createParallelGroup(
 																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								jLabel3)
-																						.addComponent(
-																								jLabelBotLeftName))
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)
-																		.addGroup(
-																				jPanelBotOneLayout
-																						.createParallelGroup(
-																								javax.swing.GroupLayout.Alignment.BASELINE)
-																						.addComponent(
-																								jLabel4)
-																						.addComponent(
-																								jLabel5)))
-														.addComponent(
-																jButtonBotLeftLoad))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addGroup(
-												jPanelBotOneLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.LEADING)
-														.addComponent(
-																jScrollPane1,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE)
-														.addComponent(
-																jScrollPane2,
-																javax.swing.GroupLayout.PREFERRED_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.PREFERRED_SIZE))
-										.addContainerGap()));
+																						.addComponent(jLabel3)
+																						.addComponent(jLabelBotLeftName)))
+														.addComponent(jButtonBotLeftLoad))
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jLabel4)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jLabel5)
+										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 95,
+												Short.MAX_VALUE).addContainerGap()));
 
-		jPanelGameArea.setBorder(javax.swing.BorderFactory
-				.createLineBorder(new java.awt.Color(153, 153, 153)));
+		jPanelGameArea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-		jPanelGameButtons.setBorder(javax.swing.BorderFactory
-				.createLineBorder(new java.awt.Color(153, 153, 153)));
+		jPanelGameButtons.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
 		jButtonStart.setText("Start duel");
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(
-				jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 232,
-				Short.MAX_VALUE));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 29,
-				Short.MAX_VALUE));
+		jLabel1.setText("Distance:");
 
-		jLabel1.setText("Distance");
+		jLabel10.setText("Fighter 1 HP:");
 
-		javax.swing.GroupLayout jPanelGameButtonsLayout = new javax.swing.GroupLayout(
-				jPanelGameButtons);
+		jLabel11.setText("Fighter 2 HP:");
+
+		jLabelDistance.setText("350");
+
+		jLabelFighterLeftHP.setText("100");
+
+		jLabelFighterRightHP.setText("100");
+
+		javax.swing.GroupLayout jPanelGameButtonsLayout = new javax.swing.GroupLayout(jPanelGameButtons);
 		jPanelGameButtons.setLayout(jPanelGameButtonsLayout);
-		jPanelGameButtonsLayout
-				.setHorizontalGroup(jPanelGameButtonsLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		jPanelGameButtonsLayout.setHorizontalGroup(jPanelGameButtonsLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelGameButtonsLayout.createSequentialGroup().addContainerGap().addComponent(jButtonStart)
+						.addGap(154, 154, 154).addComponent(jLabel1)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jLabelDistance).addGap(41, 41, 41).addComponent(jLabel10)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jLabelFighterLeftHP).addGap(37, 37, 37).addComponent(jLabel11)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jLabelFighterRightHP).addContainerGap(162, Short.MAX_VALUE)));
+		jPanelGameButtonsLayout.setVerticalGroup(jPanelGameButtonsLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelGameButtonsLayout
+						.createSequentialGroup()
+						.addContainerGap()
 						.addGroup(
-								jPanelGameButtonsLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(jButtonStart)
-										.addGap(154, 154, 154)
-										.addComponent(jLabel1)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jLabelDistance)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												jPanel1,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addContainerGap(210, Short.MAX_VALUE)));
-		jPanelGameButtonsLayout
-				.setVerticalGroup(jPanelGameButtonsLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								jPanelGameButtonsLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												jPanelGameButtonsLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																jPanel1,
-																javax.swing.GroupLayout.Alignment.LEADING,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addGroup(
-																javax.swing.GroupLayout.Alignment.LEADING,
-																jPanelGameButtonsLayout
-																		.createParallelGroup(
-																				javax.swing.GroupLayout.Alignment.BASELINE)
-																		.addComponent(
-																				jButtonStart)
-																		.addComponent(
-																				jLabel1)
-																		.addComponent(
-																				jLabelDistance)))
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+								jPanelGameButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+										.addComponent(jButtonStart).addComponent(jLabel1).addComponent(jLabel10)
+										.addComponent(jLabel11).addComponent(jLabelDistance)
+										.addComponent(jLabelFighterLeftHP).addComponent(jLabelFighterRightHP))
+						.addContainerGap(17, Short.MAX_VALUE)));
 
-		javax.swing.GroupLayout jPanelGameArenaLayout = new javax.swing.GroupLayout(
-				jPanelGameArena);
+		javax.swing.GroupLayout jPanelGameArenaLayout = new javax.swing.GroupLayout(jPanelGameArena);
 		jPanelGameArena.setLayout(jPanelGameArenaLayout);
-		jPanelGameArenaLayout.setHorizontalGroup(jPanelGameArenaLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 750, Short.MAX_VALUE));
-		jPanelGameArenaLayout.setVerticalGroup(jPanelGameArenaLayout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGap(0, 286, Short.MAX_VALUE));
+		jPanelGameArenaLayout.setHorizontalGroup(jPanelGameArenaLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 750, Short.MAX_VALUE));
+		jPanelGameArenaLayout.setVerticalGroup(jPanelGameArenaLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 286, Short.MAX_VALUE));
 
-		javax.swing.GroupLayout jPanelGameAreaLayout = new javax.swing.GroupLayout(
-				jPanelGameArea);
+		javax.swing.GroupLayout jPanelGameAreaLayout = new javax.swing.GroupLayout(jPanelGameArea);
 		jPanelGameArea.setLayout(jPanelGameAreaLayout);
-		jPanelGameAreaLayout
-				.setHorizontalGroup(jPanelGameAreaLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								jPanelGameAreaLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												jPanelGameAreaLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																jPanelGameArena,
-																javax.swing.GroupLayout.Alignment.LEADING,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																jPanelGameButtons,
-																javax.swing.GroupLayout.Alignment.LEADING,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE))
-										.addContainerGap()));
-		jPanelGameAreaLayout
-				.setVerticalGroup(jPanelGameAreaLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		jPanelGameAreaLayout.setHorizontalGroup(jPanelGameAreaLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				javax.swing.GroupLayout.Alignment.TRAILING,
+				jPanelGameAreaLayout
+						.createSequentialGroup()
+						.addContainerGap()
 						.addGroup(
 								jPanelGameAreaLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addComponent(
-												jPanelGameButtons,
-												javax.swing.GroupLayout.PREFERRED_SIZE,
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+										.addComponent(jPanelGameArena, javax.swing.GroupLayout.Alignment.LEADING,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												jPanelGameArena,
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(jPanelGameButtons, javax.swing.GroupLayout.Alignment.LEADING,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addContainerGap()));
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addContainerGap()));
+		jPanelGameAreaLayout.setVerticalGroup(jPanelGameAreaLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelGameAreaLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(jPanelGameButtons, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelGameArena, javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
 
-		javax.swing.GroupLayout jPanelContentLayout = new javax.swing.GroupLayout(
-				jPanelContent);
+		javax.swing.GroupLayout jPanelContentLayout = new javax.swing.GroupLayout(jPanelContent);
 		jPanelContent.setLayout(jPanelContentLayout);
-		jPanelContentLayout
-				.setHorizontalGroup(jPanelContentLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
-						.addGroup(
-								javax.swing.GroupLayout.Alignment.TRAILING,
-								jPanelContentLayout
-										.createSequentialGroup()
-										.addContainerGap()
-										.addGroup(
-												jPanelContentLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING)
-														.addComponent(
-																jPanelGameArea,
-																javax.swing.GroupLayout.Alignment.LEADING,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addGroup(
-																jPanelContentLayout
-																		.createSequentialGroup()
-																		.addComponent(
-																				jPanelBotOne,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)
-																		.addPreferredGap(
-																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-																		.addComponent(
-																				jPanelBotOne1,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				javax.swing.GroupLayout.DEFAULT_SIZE,
-																				Short.MAX_VALUE)))
-										.addContainerGap()));
-		jPanelContentLayout
-				.setVerticalGroup(jPanelContentLayout
-						.createParallelGroup(
-								javax.swing.GroupLayout.Alignment.LEADING)
+		jPanelContentLayout.setHorizontalGroup(jPanelContentLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelContentLayout
+						.createSequentialGroup()
+						.addContainerGap()
 						.addGroup(
 								jPanelContentLayout
-										.createSequentialGroup()
-										.addContainerGap()
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 										.addGroup(
 												jPanelContentLayout
-														.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.TRAILING,
-																false)
-														.addComponent(
-																jPanelBotOne1,
-																javax.swing.GroupLayout.Alignment.LEADING,
+														.createSequentialGroup()
+														.addComponent(jPanelBotOne,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jPanelBotOne1,
 																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE)
-														.addComponent(
-																jPanelBotOne,
-																javax.swing.GroupLayout.Alignment.LEADING,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																javax.swing.GroupLayout.DEFAULT_SIZE,
-																Short.MAX_VALUE))
-										.addPreferredGap(
-												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(
-												jPanelGameArea,
+																javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+										.addComponent(jPanelGameArea, javax.swing.GroupLayout.Alignment.TRAILING,
 												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addContainerGap(
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addContainerGap()));
+		jPanelContentLayout.setVerticalGroup(jPanelContentLayout.createParallelGroup(
+				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				jPanelContentLayout
+						.createSequentialGroup()
+						.addContainerGap()
+						.addGroup(
+								jPanelContentLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addComponent(jPanelBotOne1, javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(jPanelBotOne, javax.swing.GroupLayout.DEFAULT_SIZE,
+												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jPanelGameArea, javax.swing.GroupLayout.DEFAULT_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
-				getContentPane());
+		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
-						layout.createSequentialGroup().addContainerGap()
-								.addComponent(jLabelHeader)
+						layout.createSequentialGroup().addContainerGap().addComponent(jLabelHeader)
 								.addContainerGap(22, Short.MAX_VALUE))
-				.addComponent(jPanelContent,
-						javax.swing.GroupLayout.Alignment.TRAILING,
-						javax.swing.GroupLayout.DEFAULT_SIZE,
-						javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-		layout.setVerticalGroup(layout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
+				.addComponent(jPanelContent, javax.swing.GroupLayout.Alignment.TRAILING,
+						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				layout.createSequentialGroup()
 						.addComponent(jLabelHeader)
 						.addGap(18, 18, 18)
-						.addComponent(jPanelContent,
-								javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE).addContainerGap()));
+						.addComponent(jPanelContent, javax.swing.GroupLayout.PREFERRED_SIZE,
+								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		pack();
 	}// </editor-fold>
@@ -625,6 +421,8 @@ public class GameForm extends javax.swing.JFrame {
 	protected javax.swing.JButton jButtonBotRightLoad;
 	protected javax.swing.JButton jButtonStart;
 	private javax.swing.JLabel jLabel1;
+	private javax.swing.JLabel jLabel10;
+	private javax.swing.JLabel jLabel11;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JLabel jLabel4;
@@ -635,13 +433,14 @@ public class GameForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel9;
 	protected javax.swing.JLabel jLabelBotLeftName;
 	protected javax.swing.JLabel jLabelBotRightName;
-	public javax.swing.JLabel jLabelDistance;
+	protected javax.swing.JLabel jLabelDistance;
+	protected javax.swing.JLabel jLabelFighterLeftHP;
+	protected javax.swing.JLabel jLabelFighterRightHP;
 	public javax.swing.JLabel jLabelHeader;
 	protected javax.swing.JList jListBotLeftBehaviors;
 	protected javax.swing.JList jListBotLeftChars;
 	protected javax.swing.JList jListBotRightBehaviors;
 	protected javax.swing.JList jListBotRightChars;
-	private javax.swing.JPanel jPanel1;
 	private javax.swing.JPanel jPanelBotOne;
 	private javax.swing.JPanel jPanelBotOne1;
 	private javax.swing.JPanel jPanelContent;

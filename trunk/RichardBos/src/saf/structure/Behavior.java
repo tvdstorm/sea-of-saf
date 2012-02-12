@@ -5,6 +5,7 @@ import java.util.List;
 
 import saf.checker.Element;
 import saf.checker.ElementVisitor;
+import saf.structure.intelligence.ActionIntelligence;
 
 
 public class Behavior implements Element {
@@ -39,7 +40,6 @@ public class Behavior implements Element {
 	public List<Action>  getFightAction() {
 		return fightActions;
 	}
-		
 	public void addMoveAction(Action moveAction) {
 		this.moveActions.add(moveAction);
 	}
@@ -47,36 +47,10 @@ public class Behavior implements Element {
 		this.fightActions.add(fightAction);
 	}
 	
-	/*
-	public enum MoveType
-	{
-		walk_towards,
-		walk_away,
-		run_towards,
-		run_away,
-		jump,
-		crouch,
-		stand
+	public String toString() {
+		String strReturn = this.getCondition().toString();
+		strReturn += " [" + ActionIntelligence.toString(this.getMoveAction()) + " ";
+		strReturn += ActionIntelligence.toString(this.getFightAction()) + "]";
+		return strReturn;
 	}
-	public enum FightType
-	{
-		block_low,
-		block_high,
-		punch_low,
-		punch_high,
-		kick_low,
-		kick_high
-	}
-	public enum ConditionType
-	{
-		always,
-		near,
-		far,
-		much_stronger,
-		stronger,
-		even,
-		weaker,
-		much_weaker
-	}
-	*/
 }
