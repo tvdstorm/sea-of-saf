@@ -1,6 +1,6 @@
 package grammar.test;
 
-import elements.Bot;
+import astelements.Bot;
 import junit.framework.TestCase;
 
 public class InvalidBehaviourTest extends TestCase {

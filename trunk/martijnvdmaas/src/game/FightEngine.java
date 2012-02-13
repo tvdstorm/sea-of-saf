@@ -1,16 +1,17 @@
 package game;
 
-import elements.Behaviour;
-import elements.Bot;
-import elements.Bots;
-import elements.Characteristic;
-import elements.ConditionChoices;
-import elements.ConditionGroup;
 import game.fighter.Fighter;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
+
+import astelements.Behaviour;
+import astelements.Bot;
+import astelements.Bots;
+import astelements.Characteristic;
+import astelements.ConditionChoices;
+import astelements.ConditionGroup;
 
 
 public class FightEngine extends Observable {

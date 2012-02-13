@@ -1,4 +1,4 @@
-package elements;
+package astelements;
 
 import visitor.SAFElement;
 import visitor.SAFElementVisitor;

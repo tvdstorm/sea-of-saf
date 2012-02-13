@@ -29,8 +29,9 @@ import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
-import elements.Bot;
-import elements.Bots;
+import astelements.Bot;
+import astelements.Bots;
+
 
 
 
