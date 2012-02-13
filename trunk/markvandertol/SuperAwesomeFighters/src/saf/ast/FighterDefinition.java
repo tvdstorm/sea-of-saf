@@ -55,22 +55,14 @@ public class FighterDefinition {
 		return getProperty(KICK_POWER);
 	}
 	
-	public void setProperty(String key, int value) {
-		properties.put(key, value);
-	}
-	
-	public List<BehaviourRule> getBehaviourRules() {
-		return behaviourRules;
-	}
-	
 	public void validate(List<String> errorList) {
+		validateName(errorList);
 		validateProperties(errorList);		
 		validateBehaviourRules(errorList);	
-		validateName(errorList);
 	}
 
 	private void validateName(List<String> errorList) {
-		if (name == null | name.equals(""))
+		if (name == null || name.equals(""))
 			errorList.add("Name not set");
 	}
 

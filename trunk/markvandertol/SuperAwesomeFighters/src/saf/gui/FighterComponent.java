@@ -38,7 +38,7 @@ public class FighterComponent extends JComponent {
 		graphics.setColor(Color.white);
 		graphics.fillRect(0, 0, width, height);
 		
-		Fighter player = arena.getFighter(playerIndex);
+		Fighter player = arena.getFighterOfPlayer(playerIndex);
 		if (player == null)
 			return;
 		
@@ -115,7 +115,7 @@ public class FighterComponent extends JComponent {
 			
 		if (FightAction.block_high.equals(state))
 			g.setColor(Color.orange);
-		if (FightAction.punch_high.equals(state) || FightAction.punch_low.equals(state))
+		if (state.isPunch())
 			g.setColor(Color.red);
 		
 		g.drawLine(center, armYOffset, center + armWidth, armYOffset + armDiag);	
@@ -127,9 +127,9 @@ public class FighterComponent extends JComponent {
 		
 		boolean legHigh = FightAction.block_low.equals(state) || FightAction.kick_high.equals(state);
 		
-		if (FightAction.block_low.equals(state))
+		if (state.isBlock())
 			g.setColor(Color.orange);
-		if (FightAction.kick_high.equals(state) || FightAction.kick_low.equals(state))
+		if (state.isKick())
 			g.setColor(Color.red);
 		g.drawLine(center, legYOffset, center + legWidth, legYOffset + ((legHigh) ? -legHeight /2 : legHeight));
 	}
