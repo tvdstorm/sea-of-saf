@@ -30,11 +30,6 @@ public class SAFElementPrintVisitor implements SAFElementVisitor {
 	}
 
 	@Override
-	public void visit(ConditionChoices conditionChoices) {
-		System.out.println("Visiting conditionChoices: " + conditionChoices.toString());
-	}
-
-	@Override
 	public void visit(ConditionGroup conditionGroup) {
 		System.out.println("Visiting conditionGroup: " + conditionGroup.toString());
 	}

@@ -18,14 +18,32 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
 	private String[] validConditions 		= { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
 	
 	@Override
-	public void visit(Behaviour behaviour) {
-		
+	public void visit(Behaviour botBehaviour) throws Exception {
+		if(botBehaviour.getMoveChoices().isEmpty()) {
+			throw new Exception("Behaviour found without moves");
+		}
+		for(String behaviourMoveOption : botBehaviour.getMoveChoices()) {
+			if(!Arrays.asList(validMoves).contains(behaviourMoveOption)) {
+				throw new Exception("Invalid behaviour move detected: " + behaviourMoveOption);
+			}
+		}
 	}
 
 	@Override
 	public void visit(Bot bot) throws Exception {
 		if(bot.getBotName().isEmpty() || bot.getBotName() == null) {
 			throw new Exception("Botname is empty or null");
+		}
+		
+		boolean hasAlwaysRule = false;
+		
+		for(Behaviour behaviour : bot.getBehaviours()) {
+			if(conditionChoiceHasAlwaysRule(behaviour.getConditionChoices())) {
+				hasAlwaysRule = true;
+			}
+		}
+		if(!hasAlwaysRule) {
+			throw new Exception("Bot \"" + bot.getBotName() + "\" does not have an always rule.");
 		}
 	}
 
@@ -59,24 +77,19 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
  	 	}	
 	}
 
-	@Override
-	public void visit(ConditionChoices conditionChoices) throws Exception {
-		boolean validCondition = false;
+	public boolean conditionChoiceHasAlwaysRule(ConditionChoices conditionChoices) {
+		boolean alwaysCondition = false;
 		for(ConditionGroup conditionGroup : conditionChoices.getConditionGroups()) 
 		{
 			if(conditionGroup.getConditionTypes().size() == 1) 
 			{
-				System.err.println(conditionGroup.getConditionTypes().get(0));
 				if(conditionGroup.getConditionTypes().get(0).equals("always")) {
-					validCondition = true;
+					alwaysCondition = true;
 				}
 			}
 		}
-
-		System.err.println("nu");
-		if(validCondition == false) {
-			//throw new Exception("There should be at least one \"always\" rule in a bot.");
-		}
+		
+		return alwaysCondition;
 	}
 
 	@Override

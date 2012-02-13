@@ -4,9 +4,9 @@ chicken
   punchReach = 4
   kickPower  = 2
   punchPower = 8
-  far or near or always  [run_towards kick_low]
-  near [run_away kick_low]
-  near [crouch punch_low]
+  far or near or far  [run_towards kick_low]
+  far or always [run_away kick_low]
+  far [crouch punch_low]
 }
 chuck
 {
@@ -15,5 +15,5 @@ chuck
   kickPower  = 6
   punchPower = 2
   far or near  or far [choose(crouch walk_towards) choose(block_high punch_low)]
-  always [crouch2 punch_low]
+  always [crouch punch_low]
 }

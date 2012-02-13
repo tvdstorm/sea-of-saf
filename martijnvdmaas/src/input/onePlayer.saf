@@ -1,0 +1,10 @@
+chicken
+{
+  kickReach  = 8
+  punchReach = 4
+  kickPower  = 2
+  punchPower = 8
+  far or near or always  [run_towards kick_low]
+  near [run_away kick_low]
+  near [crouch punch_low]
+}
