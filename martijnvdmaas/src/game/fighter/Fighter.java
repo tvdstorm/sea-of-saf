@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 import elements.Behaviour;
 
+
+
 public class Fighter {
 
 	private int weight;
 	private int height;
 	private int speed;
 	
-	//characteristics
+	//characteristics:
 	private int punchReach;
 	private int punchPower;
 	private int kickReach;
@@ -27,7 +29,7 @@ public class Fighter {
 	private ArrayList<Behaviour> behaviours;
 
 	public Fighter(String fighterName) {
-		this.health = 100;
+		setHealth(100);
 		setFighterName(fighterName);
 	}
 	
