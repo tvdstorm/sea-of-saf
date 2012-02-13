@@ -1,11 +1,11 @@
-grammar FDL;
+grammar FDL; //Fighter Description Language
 
 options {
     language = Java;
     output = AST;
 }
 
-tokens{
+tokens{ //TODO experiment with moving these to the lexer rules
     L_CURLY_BRACKET =   '{';
     R_CURLY_BRACKET =   '}';    
     L_BRACKET =         '[';
