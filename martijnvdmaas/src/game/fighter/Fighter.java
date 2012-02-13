@@ -76,6 +76,7 @@ public class Fighter {
 	}
 
 	public void setKickReach(int kickReach) {
+
 		this.kickReach = kickReach;
 	}
 
