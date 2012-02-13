@@ -12,6 +12,5 @@ public interface SAFElementVisitor {
 	void visit(Bot bot) throws Exception;
 	void visit(Bots bots) throws Exception;
 	void visit(Characteristic characteristic)  throws Exception;
-	void visit(ConditionChoices conditionChoices)  throws Exception;
 	void visit(ConditionGroup conditionGroup)  throws Exception;
 }

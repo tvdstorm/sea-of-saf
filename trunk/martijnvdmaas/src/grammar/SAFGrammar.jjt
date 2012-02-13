@@ -22,22 +22,20 @@ public class SAFGrammar
 	    try
 	    { 
 			String projectPath  = new java.io.File(".").getCanonicalPath();
-			String fileName = "input.saf";
+			String fileName = "validInput.saf";
 			  
 			InputStream inputStream = new FileInputStream(projectPath + "/src/input/" + fileName);
 			
 			new SAFGrammar(inputStream);
 			Bots bots = SAFGrammar.Start();
-			System.out.println("Succesful Parsing.");
 			
+			System.out.println("Succesful Parsing.");
     		System.out.println("Begin Checking..");
     		
-			//SAFChecker safChecker = new SAFChecker(bots);
-			//	bots = safChecker.check();			
-			System.out.println("Succesful Checking.\n");
-			 new SAFElementPrintVisitor().visit(bots);
-			 
 			bots.accept(new SAFElementValidatorVisitor());
+			
+			System.out.println("Succesful Checking.\n");
+			 
 			new FightStart(bots);      
     	} 
 	    catch (Exception e)
@@ -230,7 +228,7 @@ void MoveAction(Behaviour behaviour) :
 {
 	(
 	  	MoveType(behaviour) 
-| 		LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > MoveType(behaviour) MoveType(behaviour) < CLOSEBRACKET >	
+| 		LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > (MoveType(behaviour))+ < CLOSEBRACKET >	
 		 
 	)
 }
@@ -254,7 +252,7 @@ void AttackAction(Behaviour behaviour) :
 {
 	(
 	  	AttackType(behaviour)
-| 		LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > AttackType(behaviour) AttackType(behaviour) < CLOSEBRACKET > 
+| 		LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > (AttackType(behaviour))+ < CLOSEBRACKET > 
 		
 	)
 }

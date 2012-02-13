@@ -1,6 +1,7 @@
 package elements;
 
 import java.util.ArrayList;
+
 import visitor.SAFElement;
 import visitor.SAFElementVisitor;
 
@@ -79,7 +80,10 @@ public class Behaviour implements SAFElement
 
 	@Override
 	public void accept(SAFElementVisitor visitor) throws Exception {
-		conditionChoices.accept(visitor);		
+		for (ConditionGroup conditionGroup : conditionChoices.getConditionGroups()) {
+			conditionGroup.accept(visitor);
+		}
+		
 		visitor.visit(this);
 	}
 	
