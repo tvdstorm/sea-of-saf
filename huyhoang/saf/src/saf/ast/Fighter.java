@@ -3,9 +3,9 @@ package saf.ast;
 import java.util.*;
 
 public class Fighter {
-	private List<ASTNode> statements;
-	public List<ASTNode> getStatements() {
-		return statements;
+	private List<ASTNode> definitions;
+	public List<ASTNode> getDefinitions() {
+		return definitions;
 	}
 	
 	private String name;
@@ -15,6 +15,6 @@ public class Fighter {
 
 	public Fighter(String name) {
 		this.name = name;
-		statements = new ArrayList<ASTNode>();
+		definitions = new ArrayList<ASTNode>();
 	}
 }

@@ -18,7 +18,7 @@ public class Interpreter implements FighterVisitor
 	protected void Evaluate(Fighter fighter, Bot bot) {
 		this.bot = bot;
 		satisfiedBehaviours = new ArrayList<Behaviour>();
-		for (ASTNode statement : fighter.getStatements()) {
+		for (ASTNode statement : fighter.getDefinitions()) {
 			statement.accept(this);
 		}
 		randomlyExecuteSatisfiedBehaviour();
