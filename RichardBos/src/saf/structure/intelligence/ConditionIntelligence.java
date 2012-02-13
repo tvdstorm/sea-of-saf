@@ -62,7 +62,7 @@ public class ConditionIntelligence implements GameConstant {
 		// HP > much_stronger
 		// HP > stronger
 		if (value.equals(CONDITION_TYPE_MUCHSTRONGER) || value.equals(CONDITION_TYPE_STRONGER))
-			return hpDifference > CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
+			return hpDifference >= CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
 
 		// weaker >= HP <= stronger
 		if (value.equals(CONDITION_TYPE_EVEN))
@@ -72,7 +72,7 @@ public class ConditionIntelligence implements GameConstant {
 		// HP < weaker
 		// HP < much_weaker
 		if (value.equals(CONDITION_TYPE_WEAKER) || value.equals(CONDITION_TYPE_MUCHWEAKER))
-			return hpDifference >= CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
+			return hpDifference <= CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
 
 		return false;
 	}
