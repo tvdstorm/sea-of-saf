@@ -76,8 +76,8 @@ public class SAFParserTest {
 					
 					Tree tree = (Tree) result.getTree();
 					assertEquals(3, tree.getChildCount());
-					assertEquals(moveAction.toString(), tree.getChild(1).getText());
-					assertEquals(fightAction.toString(), tree.getChild(2).getText());
+					assertEquals(moveAction.toString(), tree.getChild(1).getChild(0).getText());
+					assertEquals(fightAction.toString(), tree.getChild(2).getChild(0).getText());
 				}
 			}
 		}

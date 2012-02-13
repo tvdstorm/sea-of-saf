@@ -85,7 +85,7 @@ public class MainView extends JFrame {
 		fighters[0].repaint();
 		fighters[1].repaint();
 		
-		distanceLabel.setText("Distance: " + Math.round(arena.getDistanceBetweenBots()));
+		distanceLabel.setText("Distance: " + Math.round(arena.getDistanceBetweenPlayers()));
 	}
 	
 	private JPanel getLoadButtons() {
@@ -159,7 +159,7 @@ public class MainView extends JFrame {
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		fc.addChoosableFileFilter(new SafFileFilter());
 		if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			String result = arena.openBotDefinition(index, fc.getSelectedFile());
+			String result = arena.openFighterDefinition(index, fc.getSelectedFile());
 			
 			if (result == null)
 				updateView();

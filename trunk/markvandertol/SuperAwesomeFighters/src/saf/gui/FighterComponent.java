@@ -16,18 +16,18 @@ import saf.Stance;
 import saf.ast.FightAction;
 
 public class FighterComponent extends JComponent {
-	private final int fighterIndex;
+	private final int playerIndex;
 	private final Arena arena;
 	
 	private final int width = 250;
 	private final int height = 300;
 	
-	private final boolean mirror;
+	private final boolean mirrorImage;
 	
-	public FighterComponent(Arena arena, int index, boolean mirror) {
-		this.fighterIndex = index;
+	public FighterComponent(Arena arena, int playerIndex, boolean mirrorImage) {
+		this.playerIndex = playerIndex;
 		this.arena = arena;
-		this.mirror = mirror;
+		this.mirrorImage = mirrorImage;
 		
 		setPreferredSize(new Dimension(width, height));
 	}
@@ -38,15 +38,15 @@ public class FighterComponent extends JComponent {
 		graphics.setColor(Color.white);
 		graphics.fillRect(0, 0, width, height);
 		
-		Fighter player = arena.getFighter(fighterIndex);
+		Fighter player = arena.getFighter(playerIndex);
 		if (player == null)
 			return;
 		
 		paintStickMan(graphics, player.getLastFightAction());
 		
-		boolean near = player.getSpeed() > arena.getDistanceBetweenBots();
+		boolean near = player.getSpeed() > arena.getDistanceBetweenPlayers();
 		String move = (player.getLastMoveAction() != null) ? player.getLastMoveAction().toString() : "";
-		paintStats(graphics, player.getName(), move, player.getHealth(), near, player.hasWonRound(), player.getCurrentStance());
+		paintStats(graphics, player.getName(), move, player.getHealth(), near, player.hasWonRound(), player.getStance());
 	}
 	
 	private void paintStats(Graphics2D g, String name, String move, int health, boolean near, boolean winner, Stance stance) {
@@ -90,9 +90,9 @@ public class FighterComponent extends JComponent {
 		final int headSize = 75;
 		final int bodyLength = 125;
 		final int bodyYOffset = offsetTop + headSize;
-		final int armWidth = (mirror) ? -40 : 40;
+		final int armWidth = (mirrorImage) ? -40 : 40;
 		final int armYOffset = offsetTop + headSize + 30;
-		final int legWidth = (mirror) ? -35 : 35;
+		final int legWidth = (mirrorImage) ? -35 : 35;
 		final int legHeight = 35;
 		final int legYOffset =  offsetTop + headSize + bodyLength;
 		
