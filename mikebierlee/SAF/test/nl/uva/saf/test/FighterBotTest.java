@@ -7,7 +7,7 @@ import junit.framework.Assert;
 import nl.uva.saf.fdl.ast.Characteristic;
 import nl.uva.saf.fdl.ast.Fighter;
 import nl.uva.saf.fdl.ast.FighterAttribute;
-import nl.uva.saf.FighterBot;
+import nl.uva.saf.simulation.FighterBot;
 
 import org.junit.Test;
 

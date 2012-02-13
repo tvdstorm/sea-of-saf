@@ -16,36 +16,28 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.uva.saf;
+package nl.uva.saf.simulation;
 
-import java.io.IOException;
+import java.util.HashMap;
 
-import nl.uva.saf.fdl.TreeValidator;
-import nl.uva.saf.fdl.TreeVisualizer;
-import nl.uva.saf.fdl.ValidationReport;
-import nl.uva.saf.fdl.ast.Fighter;
+import nl.uva.saf.fdl.CharacteristicExtractor;
+import nl.uva.saf.fdl.ast.ITreeNode;
 
-public class Main {
+public class FighterBot {
+	private HashMap<String, Integer> characteristics;
+	protected final int default_value = 5;	
 	
-	public static void main(String[] args) throws IOException {
-		IFighterLoader loader = new ANTLFighterLoader();
-		Fighter fighter = (Fighter) loader.loadFighter("data/unbeatabledude.saf");
-		
-		TreeValidator validator = new TreeValidator(fighter);
-		ValidationReport validationReport = validator.validate();	
-		
-		TreeVisualizer visualizer = new TreeVisualizer();
-		visualizer.printTree(fighter);
-		
-		for(String warning : validationReport.getWarnings()) {
-			System.out.println("Warning: " + warning);
-		}
-		
-		for(String error : validationReport.getErrors()) {
-			System.err.println("Error: " + error);
-		}
+	public FighterBot(ITreeNode fighter) {
+		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
+		characteristics = extractor.extract();
+	}	
 
-		System.out.println("Loaded \"" + fighter.getName() + "\" - " + validationReport.getWarnings().size() + " warning(s), " + validationReport.getErrors().size() + " error(s).");
+	public void setAttribute(String name, int value) {
+		characteristics.put(name, value);
 	}
-
+	
+	public int getAttribute(String name) {
+		Integer value = characteristics.get(name);
+		return value == null ? default_value : value;
+	}
 }

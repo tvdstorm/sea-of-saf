@@ -16,28 +16,33 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.uva.saf;
+package nl.uva.saf.simulation;
 
-import java.util.HashMap;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import nl.uva.saf.fdl.CharacteristicExtractor;
-import nl.uva.saf.fdl.ast.ITreeNode;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.KeyEvent;
 
-public class FighterBot {
-	private HashMap<String, Integer> characteristics;
-	protected final int default_value = 5;	
-	
-	public FighterBot(ITreeNode fighter) {
-		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
-		characteristics = extractor.extract();
-	}	
+public class TitleWindow extends JFrame {
+	private static final long serialVersionUID = -3819287376567286263L;
 
-	public void setAttribute(String name, int value) {
-		characteristics.put(name, value);
-	}
-	
-	public int getAttribute(String name) {
-		Integer value = characteristics.get(name);
-		return value == null ? default_value : value;
+	public TitleWindow() {
+		setTitle("Super Awesome Fighters");
+		setSize(new Dimension(854, 480));
+		setPreferredSize(new Dimension(854, 480));
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(TitleWindow.class.getResource("/nl/uva/saf/simulation/title.png")));
+		getContentPane().add(label, BorderLayout.CENTER);
+		
+		JButton btnStart = new JButton("Start");
+		btnStart.setMnemonic(KeyEvent.VK_S);
+		getContentPane().add(btnStart, BorderLayout.SOUTH);
 	}
 }
