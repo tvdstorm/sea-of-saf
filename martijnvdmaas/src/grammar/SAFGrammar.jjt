@@ -2,7 +2,7 @@ PARSER_BEGIN(SAFGrammar)
 
 package grammar;
 
-import elements.*;
+import astelements.*;
 
 public class SAFGrammar
 {
