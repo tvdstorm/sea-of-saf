@@ -38,7 +38,7 @@ public class CheckerVisitor implements FighterVisitor
 	}
 	
 	public void visitAllAstStatements() {
-		for (ASTNode statement : this.fighter.getStatements()) {
+		for (ASTNode statement : this.fighter.getDefinitions()) {
 			statement.accept(this);
 		}
 		

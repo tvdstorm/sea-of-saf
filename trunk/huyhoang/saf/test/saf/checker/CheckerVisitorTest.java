@@ -5,12 +5,12 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import saf.checker.CheckerVisitor;
 import saf.ast.*;
-import safparser.Parser;
-import safparser.ParseException;
+import saf.parser.Parser;
+import saf.parser.ParseException;
 import saf.ast.definition.Strength;
 
 public class CheckerVisitorTest {
-	protected CheckerVisitor checkParsedSpecification(String specification) {
+	private CheckerVisitor checkParsedSpecification(String specification) {
 		ByteArrayInputStream input = new ByteArrayInputStream(specification.getBytes());
 		Parser parser = new Parser(input);
 		try {
@@ -55,6 +55,15 @@ public class CheckerVisitorTest {
 		CheckerVisitor visitor = checkParsedSpecification(specification);
 		assertEquals(1, visitor.getErrors().size());
 		assertTrue(visitor.getErrors().get(0).matches("The choose keyword requires at least 1 action"));
+	}
+	
+	@Test
+	public void testCheckerVisitor_InvalidActionOrder() {
+		String specification = "Huy { always [ punch_high jump ] }";
+		CheckerVisitor visitor = checkParsedSpecification(specification);
+		assertEquals(2, visitor.getErrors().size());
+		assertTrue(visitor.getErrors().get(0).matches("'punch_high' is a 'attack' keyword. A 'choose' keyword or 'move' keyword was expected"));
+		assertTrue(visitor.getErrors().get(1).matches("'jump' is a 'move' keyword. A 'choose' keyword or 'attack' keyword was expected"));
 	}
 	
 	@Test
