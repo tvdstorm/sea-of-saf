@@ -4,6 +4,8 @@ import javax.swing.UIManager;
 
 import elements.Bots;
 
+
+
 public class FightStart {
 
 	public FightStart(Bots fightOpponents) {

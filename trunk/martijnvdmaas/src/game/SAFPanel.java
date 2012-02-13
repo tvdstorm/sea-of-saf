@@ -31,7 +31,8 @@ import javax.swing.JPanel;
 
 import elements.Bot;
 import elements.Bots;
-import game.graphics.SAFFighterNormal;
+
+
 
 public class SAFPanel extends JPanel {
 	

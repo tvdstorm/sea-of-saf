@@ -1,7 +1,5 @@
 package game;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,8 +12,6 @@ public class FightProgressView extends JPanel implements Observer {
 	private JProgressBar rightFighterHealth;
 
 	public FightProgressView(FightEngine fightEngine) {
-		JPanel progressbars = new JPanel();
-		progressbars.setLayout(new FlowLayout());
 		
 		fightEngine.addObserver(this);
 
@@ -27,13 +23,11 @@ public class FightProgressView extends JPanel implements Observer {
 		rightFighterHealth.setValue(100);
 		rightFighterHealth.setStringPainted(true);
 
-		progressbars.add(new JLabel("Left player:"));
-		progressbars.add(leftFighterHealth);
-		
-		progressbars.add(new JLabel("Right player:"));
-		progressbars.add(rightFighterHealth);
-		
-		add(progressbars);
+		this.add(new JLabel("Left player:"));
+		this.add(leftFighterHealth);
+
+		this.add(new JLabel("Right player:"));
+		this.add(rightFighterHealth);
 	}
 
 	@Override
