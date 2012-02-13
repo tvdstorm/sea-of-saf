@@ -1,0 +1,180 @@
+package data;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Collections;
+class Behaviour
+{
+    protected List<Tactic> tactics;
+
+    public Behaviour(List<Tactic> tactics)
+    {
+        this.tactics = tactics;
+    }
+
+    public String toString()
+    {
+        String s = "";
+        for (Tactic tactic : tactics)
+        {
+            s += "    " + tactic + "\n";
+        }
+
+        return s;
+    }
+}
+
+class Tactic
+{
+    protected Logic condition;
+    protected Action action;
+
+    public Tactic(Logic condition, Action action)
+    {
+        this.condition = condition;
+        this.action = action;
+    }
+
+    public String toString()
+    {
+        return condition + " [" + action + "]";
+    }
+}
+
+interface Logic
+{
+}
+
+abstract class LogicOperator implements Logic
+{
+    protected Logic operand1;
+    protected Logic operand2;
+
+    public LogicOperator(Logic operand1, Logic operand2)
+    {
+        this.operand1 = operand1;
+        this.operand2 = operand2;
+    }
+}
+
+class LogicAnd extends LogicOperator
+{
+    public LogicAnd(Logic operand1, Logic operand2)
+    {
+        super(operand1, operand2);
+    }
+
+    public String toString()
+    {
+        return "(" + operand1 + " and " + operand2 + ")";
+    }
+}
+
+class LogicOr extends LogicOperator
+{
+    public LogicOr(Logic operand1, Logic operand2)
+    {
+        super(operand1, operand2);
+    }
+
+    public String toString()
+    {
+        return "(" + operand1 + " or " + operand2 + ")";
+    }
+}
+
+class Condition implements Logic
+{
+    public static final List<String> REQUIRED = Collections.unmodifiableList(
+            Arrays.asList("always")
+    );
+
+    public static final List<String> LEGAL = Collections.unmodifiableList(
+            Arrays.asList("stronger",
+                          "much_stronger",
+                          "weaker",
+                          "much_weaker",
+                          "even",
+                          "near",
+                          "far")
+    );
+
+    protected String name;
+
+    public Condition(String name)
+    {
+        this.name = name;
+    }
+
+    public String toString()
+    {
+        return name;
+    }
+}
+
+class Action
+{
+    protected Move move;
+    protected Attack attack;
+
+    public Action(Move move, Attack attack)
+    {
+        this.move = move;
+        this.attack = attack;
+    }
+
+    public String toString()
+    {
+        return move + " " + attack;
+    }
+}
+
+class Move
+{
+    public static final List<String> LEGAL = Collections.unmodifiableList(
+            Arrays.asList("jump",
+                          "crouch",
+                          "stand",
+                          "walk_towards",
+                          "run_towards",
+                          "walk_away",
+                          "run_away")
+    );
+
+    protected String name;
+
+    public Move(String name)
+    {
+        this.name = name;
+    }
+
+    public String toString()
+    {
+        return name;
+    }
+}
+
+class Attack
+{
+    public static final List<String> LEGAL = Collections.unmodifiableList(
+            Arrays.asList("punch_low",
+                          "punch_high",
+                          "kick_low",
+                          "kick_high",
+                          "block_low",
+                          "block_high")
+    );
+
+    protected String name;
+
+    public Attack(String name)
+    {
+        this.name = name;
+    }
+
+    public String toString()
+    {
+        return name;
+    }
+}
+
