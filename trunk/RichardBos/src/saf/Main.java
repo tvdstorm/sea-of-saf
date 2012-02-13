@@ -1,11 +1,7 @@
 package saf;
 
-import java.util.List;
-import java.util.Random;
-
 import javax.swing.UIManager;
 
-import saf.game.BotState;
 import saf.game.GameMain;
 
 public class Main {

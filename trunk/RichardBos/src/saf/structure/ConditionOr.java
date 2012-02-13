@@ -2,8 +2,8 @@ package saf.structure;
 
 import saf.checker.Element;
 import saf.checker.ElementVisitor;
-import saf.game.BotState;
-import saf.game.GameState;
+import saf.game.state.BotState;
+import saf.game.state.GameState;
 
 public class ConditionOr extends ConditionClause implements Element {
 	public ConditionOr(Condition firstCondition, Condition secondCondition)

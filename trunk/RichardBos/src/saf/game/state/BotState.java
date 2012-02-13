@@ -1,20 +1,24 @@
-package saf.game;
+package saf.game.state;
 
+import saf.game.GameConstant;
 import saf.game.gui.GameController;
 import saf.structure.Bot;
 import saf.structure.intelligence.BehaviorIntelligence;
 
-public class BotState {
+public class BotState implements GameConstant {
 	
+	private static final int CONST_DISTANCEFROMWALL = 50;
+	private static final int CONST_HITPOINTS = 100;
+
 	public BotState(Bot bot, String side, GameController gameController)
 	{
 		this.gameController = gameController;
 		this.bot = bot;
 		this.side = side;
-		this.hitpoints = 100;
+		this.hitpoints = CONST_HITPOINTS;
 		this.winner = false;
 		this.speed = calculateSpeed(bot);
-		this.distanceFromWall = 50;
+		this.distanceFromWall = CONST_DISTANCEFROMWALL;
 		this.lastFightAction = "";
 		this.lastMoveAction = "stand";
 	}
@@ -43,7 +47,7 @@ public class BotState {
 	}
 	
 	public boolean isJumping() {
-		return lastMoveAction.equals(GameConstant.MOVETYPE_JUMP);
+		return lastMoveAction.equals(MOVE_TYPE_JUMP);
 	}
 	
 	
@@ -104,11 +108,11 @@ public class BotState {
 		
 	private double calculateSpeed(Bot bot) {
 		
-		int punchPower = BehaviorIntelligence.getCharacteristic(bot,GameConstant.Characteristic_punchPower);
-		int kickPower = BehaviorIntelligence.getCharacteristic(bot, GameConstant.Characteristic_kickPower);
+		int punchPower = BehaviorIntelligence.getCharacteristic(bot,CHAR_TYPE_PUNCHPOWER);
+		int kickPower = BehaviorIntelligence.getCharacteristic(bot, CHAR_TYPE_KICKPOWER);
 		
-		int punchReach = BehaviorIntelligence.getCharacteristic(bot, GameConstant.Characteristic_punchReach);
-		int kickReach = BehaviorIntelligence.getCharacteristic(bot, GameConstant.Characteristic_kickReach);
+		int punchReach = BehaviorIntelligence.getCharacteristic(bot, CHAR_TYPE_PUNCHREACH);
+		int kickReach = BehaviorIntelligence.getCharacteristic(bot, CHAR_TYPE_KICKREACH);
 		
 		//Formula as noted on blackboard.
 		double weight = (punchPower + kickPower) / 2;

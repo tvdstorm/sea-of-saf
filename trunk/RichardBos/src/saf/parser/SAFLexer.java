@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g 2012-02-11 14:31:03
+// $ANTLR 3.4 C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g 2012-02-13 10:42:47
 
   package saf.parser;
 
@@ -40,15 +40,15 @@ public class SAFLexer extends Lexer {
     public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g"; }
+    public String getGrammarFileName() { return "C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:7: ( '(' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:9: '('
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:7: ( '(' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:11:9: '('
             {
             match('('); 
 
@@ -68,8 +68,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:7: ( ')' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:9: ')'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:7: ( ')' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:12:9: ')'
             {
             match(')'); 
 
@@ -89,8 +89,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:7: ( '=' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:9: '='
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:7: ( '=' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:13:9: '='
             {
             match('='); 
 
@@ -110,8 +110,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:7: ( '[' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:9: '['
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:7: ( '[' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:14:9: '['
             {
             match('['); 
 
@@ -131,8 +131,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:7: ( ']' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:9: ']'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:7: ( ']' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:15:9: ']'
             {
             match(']'); 
 
@@ -152,8 +152,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:7: ( '{' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:9: '{'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:7: ( '{' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:16:9: '{'
             {
             match('{'); 
 
@@ -173,8 +173,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:7: ( '}' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:9: '}'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:7: ( '}' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:17:9: '}'
             {
             match('}'); 
 
@@ -194,10 +194,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:11: ( ( 'or' | 'OR' ) )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:13: ( 'or' | 'OR' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:11: ( ( 'or' | 'OR' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:13: ( 'or' | 'OR' )
             {
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:13: ( 'or' | 'OR' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:13: ( 'or' | 'OR' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -216,7 +216,7 @@ public class SAFLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:14: 'or'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:14: 'or'
                     {
                     match("or"); 
 
@@ -225,7 +225,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:21: 'OR'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:98:21: 'OR'
                     {
                     match("OR"); 
 
@@ -253,10 +253,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:11: ( ( 'and' | 'AND' | '&&' ) )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:13: ( 'and' | 'AND' | '&&' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:11: ( ( 'and' | 'AND' | '&&' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:13: ( 'and' | 'AND' | '&&' )
             {
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:13: ( 'and' | 'AND' | '&&' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:13: ( 'and' | 'AND' | '&&' )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 'a':
@@ -284,7 +284,7 @@ public class SAFLexer extends Lexer {
 
             switch (alt2) {
                 case 1 :
-                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:14: 'and'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:14: 'and'
                     {
                     match("and"); 
 
@@ -293,7 +293,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:22: 'AND'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:22: 'AND'
                     {
                     match("AND"); 
 
@@ -302,7 +302,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:30: '&&'
+                    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:99:30: '&&'
                     {
                     match("&&"); 
 
@@ -330,8 +330,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = CHOOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:100:11: ( 'choose' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:100:13: 'choose'
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:100:11: ( 'choose' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:100:13: 'choose'
             {
             match("choose"); 
 
@@ -353,10 +353,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:11: ( ( CHAR | '_' )+ )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:13: ( CHAR | '_' )+
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:11: ( ( CHAR | '_' )+ )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:13: ( CHAR | '_' )+
             {
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:13: ( CHAR | '_' )+
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:101:13: ( CHAR | '_' )+
             int cnt3=0;
             loop3:
             do {
@@ -370,7 +370,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            	    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
             	    {
             	    if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -411,10 +411,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:11: ( ( DIGIT )+ )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:13: ( DIGIT )+
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:11: ( ( DIGIT )+ )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:13: ( DIGIT )+
             {
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:13: ( DIGIT )+
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:102:13: ( DIGIT )+
             int cnt4=0;
             loop4:
             do {
@@ -428,7 +428,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            	    // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -469,8 +469,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:103:11: ( ( ' ' | '\\t' | '\\u000C' | '\\r' | '\\n' ) )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:103:13: ( ' ' | '\\t' | '\\u000C' | '\\r' | '\\n' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:103:11: ( ( ' ' | '\\t' | '\\u000C' | '\\r' | '\\n' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:103:13: ( ' ' | '\\t' | '\\u000C' | '\\r' | '\\n' )
             {
             if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' ' ) {
                 input.consume();
@@ -499,8 +499,8 @@ public class SAFLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:106:21: ( '0' .. '9' )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:106:21: ( '0' .. '9' )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
                 input.consume();
@@ -525,8 +525,8 @@ public class SAFLexer extends Lexer {
     // $ANTLR start "CHAR"
     public final void mCHAR() throws RecognitionException {
         try {
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:107:21: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-            // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:107:21: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -549,7 +549,7 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "CHAR"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | OR | AND | CHOOSE | ID | INT | WS )
+        // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | OR | AND | CHOOSE | ID | INT | WS )
         int alt5=13;
         switch ( input.LA(1) ) {
         case '(':
@@ -814,7 +814,7 @@ public class SAFLexer extends Lexer {
 
         switch (alt5) {
             case 1 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:10: T__12
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:10: T__12
                 {
                 mT__12(); 
 
@@ -822,7 +822,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:16: T__13
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:16: T__13
                 {
                 mT__13(); 
 
@@ -830,7 +830,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:22: T__14
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:22: T__14
                 {
                 mT__14(); 
 
@@ -838,7 +838,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:28: T__15
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:28: T__15
                 {
                 mT__15(); 
 
@@ -846,7 +846,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:34: T__16
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:34: T__16
                 {
                 mT__16(); 
 
@@ -854,7 +854,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:40: T__17
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:40: T__17
                 {
                 mT__17(); 
 
@@ -862,7 +862,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:46: T__18
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:46: T__18
                 {
                 mT__18(); 
 
@@ -870,7 +870,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:52: OR
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:52: OR
                 {
                 mOR(); 
 
@@ -878,7 +878,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:55: AND
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:55: AND
                 {
                 mAND(); 
 
@@ -886,7 +886,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:59: CHOOSE
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:59: CHOOSE
                 {
                 mCHOOSE(); 
 
@@ -894,7 +894,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:66: ID
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:66: ID
                 {
                 mID(); 
 
@@ -902,7 +902,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:69: INT
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:69: INT
                 {
                 mINT(); 
 
@@ -910,7 +910,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // C:\\Users\\Richard\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:73: WS
+                // C:\\Dropbox\\EclipseWorkSpace\\SAF\\SuperAwesomeFighters\\Grammar\\SAF.g:1:73: WS
                 {
                 mWS(); 
 

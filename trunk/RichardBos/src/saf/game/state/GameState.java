@@ -1,15 +1,20 @@
-package saf.game;
+package saf.game.state;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import saf.game.GameMain;
 import saf.game.gui.GameController;
 
 public class GameState {
+	private static final int CONST_DISTANCE = 350;
+
 	public GameState(GameMain gameMain, GameController gameController) {
 		this.gameController = gameController;
 		this.listBotStates = new ArrayList<BotState>();
-		this.distance = 350;
+		this.distance = CONST_DISTANCE;
+		
+		gameController.setDistance(distance);
 	}
 
 	private List<BotState> listBotStates;
@@ -41,9 +46,18 @@ public class GameState {
 				break;
 			}
 		}
-		System.out.println(listBotStates.size());
 		this.listBotStates.add(botState);
 		gameController.addBotState(botState);
+	}
+
+	public void PrepareBattle() {
+		//Reload the botstates
+		List<BotState> copyBotStates = new ArrayList<BotState>(listBotStates);
+		
+		for (BotState botState : copyBotStates) {
+			addBot(new BotState(botState.getBot(), botState.getSide(), this.gameController));
+		}
+		
 	}
 
 }
