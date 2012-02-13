@@ -8,7 +8,7 @@ import java.util.Random;
 
 import saf.ast.Fighter;
 import saf.checker.CheckerVisitor;
-import safparser.*;
+import saf.parser.*;
 
 public class Arena extends Observable {
 	private List<Bot> bots;
