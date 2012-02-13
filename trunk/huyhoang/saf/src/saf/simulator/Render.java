@@ -44,11 +44,6 @@ public class Render extends Canvas implements Observer {
 	    return myImage;
 	}
 
-	public void paint(Graphics g) {
-		//Graphics2D g2d = (Graphics2D) g;
-		System.out.println("repaint");
-	}
-	
 	private void paintBot2(Bot bot, String action) {
 		try {
 			BufferedImage image = loadImage("/Users/huyhoang/Downloads/SF2HD/Ryu/" + action + ".png");
@@ -71,7 +66,5 @@ public class Render extends Canvas implements Observer {
 		for (Bot bot : ((Arena)arg0).getBots()) {
 			paintBot2(bot, bot.getLastAction());
 		}
-		
-		System.out.println("update2");
 	}
 }

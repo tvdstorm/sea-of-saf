@@ -14,7 +14,7 @@ import saf.ast.definition.Strength;
 import saf.interpreter.Bot;
 import saf.util.MethodAnnotation;
 import saf.util.Tool;
-import safparser.Parser;
+import saf.parser.Parser;
 
 public class CheckerVisitor implements FighterVisitor
 {
