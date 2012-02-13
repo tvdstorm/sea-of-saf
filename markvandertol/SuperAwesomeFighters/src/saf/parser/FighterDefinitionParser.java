@@ -37,11 +37,35 @@ public class FighterDefinitionParser {
 	private FighterDefinition parseFighterDefinition(InputStream stream) throws IOException {		
 		ANTLRInputStream input = new ANTLRInputStream(stream);
 		
+		CommonTokenStream tokens = lexSAF(input);
+
+		SAFParser.fighter_return fighterTree = parseSAF(tokens); 
+		
+		if (!errorList.isEmpty() || fighterTree == null)
+			return null;
+		
+		FighterDefinition fighter = walkSAF(tokens, fighterTree);
+		
+		if (!errorList.isEmpty())
+			return null;
+		
+		
+		fighter.validate(errorList);
+		if (!errorList.isEmpty())
+			return null;
+		
+		return fighter;		
+	}
+
+	private CommonTokenStream lexSAF(ANTLRInputStream input) {
 		SAFLexer lexer = new SAFLexer(input);
 		lexer.setErrorList(errorList);
 		
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		return tokens;
+	}
 
+	private SAFParser.fighter_return parseSAF(CommonTokenStream tokens) {
 		SAFParser parser = new SAFParser(tokens);
 		parser.setErrorList(errorList);
 
@@ -51,15 +75,13 @@ public class FighterDefinitionParser {
 		} catch (RecognitionException e) {
 			errorList.add("Exception in parser: " + e.getMessage());
 			return null;
-		} 
-		
-		if (!errorList.isEmpty()) {
-			return null;
 		}
+		return fighterTree;
+	}
+	
+	private FighterDefinition walkSAF(CommonTokenStream tokens, SAFParser.fighter_return fighterTree) {
 		CommonTreeNodeStream nodes = new CommonTreeNodeStream(fighterTree.getTree());
 		nodes.setTokenStream(tokens);
-
-		
 
 		SAFWalker walker = new SAFWalker(nodes);
 		walker.setErrorList(errorList);
@@ -70,16 +92,7 @@ public class FighterDefinitionParser {
 		} catch (RecognitionException e) {
 			errorList.add("Exception in walker: " + e.getMessage());
 		}
-		
-		if (!errorList.isEmpty()) {
-			return null;
-		}
-		
-		fighter.validate(errorList);
-		if (!errorList.isEmpty()) {
-			return null;
-		}
-		return fighter;		
+		return fighter;
 	}
 
 	public FighterDefinition getDefinition() {
