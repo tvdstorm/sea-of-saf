@@ -59,22 +59,19 @@ public class FighterDefinitionParser {
 
 	private CommonTokenStream lexSAF(ANTLRInputStream input) {
 		SAFLexer lexer = new SAFLexer(input);
-		lexer.setErrorList(errorList);
-		
-		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		return tokens;
+		lexer.setErrorList(errorList);		
+		return new CommonTokenStream(lexer);
 	}
 
 	private SAFParser.fighter_return parseSAF(CommonTokenStream tokens) {
 		SAFParser parser = new SAFParser(tokens);
 		parser.setErrorList(errorList);
 
-		SAFParser.fighter_return fighterTree;
+		SAFParser.fighter_return fighterTree = null;
 		try {
 			fighterTree = parser.fighter();
 		} catch (RecognitionException e) {
 			errorList.add("Exception in parser: " + e.getMessage());
-			return null;
 		}
 		return fighterTree;
 	}
