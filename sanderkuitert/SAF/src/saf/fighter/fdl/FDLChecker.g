@@ -17,7 +17,7 @@ options {
 
 @members {
     
-    //TODO when SuperAwesomeFighter is implemented: share the following checks?
+    //TODO when SuperAwesomeFighter is implemented: move the following checks
     private Set<String> characteristics = new HashSet<String>(Arrays.asList(
             "punchReach","punchPower","kickReach","kickPower"));
     private static final int lowerBound = 1;  //inclusive
@@ -69,7 +69,7 @@ options {
 
 fighter:            name attributes;
 
-name:               TEXT;
+name:               TEXT; //TODO change TEXT into: property
 attributes:         (characteristic | behaviour_rule)*;
 
 characteristic:     property value;
