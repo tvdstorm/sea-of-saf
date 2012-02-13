@@ -2,8 +2,8 @@ package saf.structure;
 
 import saf.checker.Element;
 import saf.checker.ElementVisitor;
-import saf.game.BotState;
-import saf.game.GameState;
+import saf.game.state.BotState;
+import saf.game.state.GameState;
 import saf.structure.intelligence.ConditionIntelligence;
 
 public class ConditionSimple extends Condition implements Element {

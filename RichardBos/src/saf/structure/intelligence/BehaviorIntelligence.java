@@ -1,7 +1,7 @@
 package saf.structure.intelligence;
 
-import saf.game.BotState;
-import saf.game.GameState;
+import saf.game.state.BotState;
+import saf.game.state.GameState;
 import saf.structure.Behavior;
 import saf.structure.Bot;
 import saf.structure.Characteristic;

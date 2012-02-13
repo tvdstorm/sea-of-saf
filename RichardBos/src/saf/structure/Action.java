@@ -1,7 +1,5 @@
 package saf.structure;
 
-import java.util.List;
-
 import saf.checker.Element;
 import saf.checker.ElementVisitor;
 

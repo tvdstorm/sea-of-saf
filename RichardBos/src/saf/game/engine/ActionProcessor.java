@@ -1,64 +1,91 @@
 package saf.game.engine;
 
-import saf.game.BotState;
 import saf.game.GameConstant;
+import saf.game.state.BotState;
 import saf.structure.intelligence.BehaviorIntelligence;
 
-public abstract class ActionProcessor {
+public class ActionProcessor implements GameConstant {
 	private static final double FIGHTACTION_BASERANGE = 5;
 	private static final double FIGHTACTION_BASEPOWER = 5;
 
-	public static double processFightAction(BotState botState, BotState otherBotState, int distance, String moveAction, String fightAction) {
+	private final BotState botState;
+	private final BotState otherBotState;
+	private final int distance;
+	private final String moveAction;
+	private final String fightAction;
 
-		if (fightAction.contains(GameConstant.CONST_BLOCK)) {
+	private double attackPower = FIGHTACTION_BASEPOWER;
+	private double attackReach = FIGHTACTION_BASERANGE;
+
+	private final double outcome;
+
+	public ActionProcessor(BotState botState, BotState otherBotState, int distance, String moveAction,
+			String fightAction) {
+		this.botState = botState;
+		this.otherBotState = otherBotState;
+		this.distance = distance;
+		this.moveAction = moveAction;
+		this.fightAction = fightAction;
+
+		this.outcome = processFightAction();
+	}
+
+	public double getOutcome() {
+		return this.outcome;
+	}
+
+	private double processFightAction() {
+
+		if (fightAction.contains(FIGHT_TYPE_BLOCK)) {
 			return 0.0;
 		}
 
-		double attackPower = FIGHTACTION_BASEPOWER;
-		double attackRange = FIGHTACTION_BASERANGE;
-		boolean botJumping = moveAction.equals(GameConstant.MOVETYPE_JUMP);
-		
-		int punchRange = getCharacteristicValue(botState, GameConstant.Characteristic_punchReach);
-		int punchPower = getCharacteristicValue(botState, GameConstant.Characteristic_punchPower);
-		int kickRange = getCharacteristicValue(botState, GameConstant.Characteristic_kickReach);
-		int kickPower = getCharacteristicValue(botState, GameConstant.Characteristic_kickPower);
+		boolean botJumping = moveAction.equals(MOVE_TYPE_JUMP);
 
-		if (fightAction.contains(GameConstant.CONST_PUNCH)) {
-			attackRange *= punchRange;
-			attackPower *= punchPower;
-		}
-		if (fightAction.contains(GameConstant.CONST_KICK)) {
-			attackRange *= kickRange;
-			attackPower *= kickPower;
-		}
+		calcPowerAndReach();
 
-		if (attackRange <= distance)
+		if (attackReach <= distance)
 			return 0.0;
 
-		if (fightAction.contains(GameConstant.CONST_HIGH)) {
+		if (fightAction.contains(FIGHT_TYPE_HIGH)) {
+
 			if (!botJumping && otherBotState.isJumping()) {
-				if (otherBotState.getLastFightAction().equals(GameConstant.FIGHTTYPE_BLOCK_LOW))
+				
+				if (otherBotState.getLastFightAction().equals(FIGHT_TYPE_BLOCKLOW))
+					
 					return 0.0;
+				
 			} else if (botJumping && !otherBotState.isJumping()) {
+				
 				return 0.0; // missed
+				
 			} else { // Both are jumping or there is no jumping
-				if (otherBotState.getLastMoveAction().equals(GameConstant.MOVETYPE_CROUCH)
-						|| otherBotState.getLastFightAction().equals(GameConstant.FIGHTTYPE_BLOCK_HIGH)
-						|| otherBotState.getLastFightAction().equals(GameConstant.FIGHTTYPE_BLOCK_LOW))
+				
+				if (otherBotState.getLastMoveAction().equals(MOVE_TYPE_CROUCH)	
+						|| otherBotState.getLastFightAction().equals(FIGHT_TYPE_BLOCKHIGH)
+						|| otherBotState.getLastFightAction().equals(FIGHT_TYPE_BLOCKLOW))
+					
 					return 0.0; // missed
+				
 			}
-		}
 
-		if (fightAction.contains(GameConstant.CONST_LOW)) {
+		} else if (fightAction.contains(FIGHT_TYPE_LOW)) {
 
 			if (!botJumping && otherBotState.isJumping()) {
+
 				return 0.0; // missed
+
 			} else if (botJumping && !otherBotState.isJumping()) {
-				if (otherBotState.getLastMoveAction().equals(GameConstant.MOVETYPE_CROUCH)
-						|| otherBotState.getLastFightAction().equals(GameConstant.FIGHTTYPE_BLOCK_HIGH))
+
+				if (otherBotState.getLastMoveAction().equals(MOVE_TYPE_CROUCH)
+						|| otherBotState.getLastFightAction().equals(FIGHT_TYPE_BLOCKHIGH))
+
 					return 0.0; // missed
+
 			} else { // Both are jumping or there is no jumping
-				if (otherBotState.getLastFightAction().equals(GameConstant.FIGHTTYPE_BLOCK_LOW))
+
+				if (otherBotState.getLastFightAction().equals(FIGHT_TYPE_BLOCKLOW))
+
 					return 0.0; // missed
 			}
 		}
@@ -66,7 +93,23 @@ public abstract class ActionProcessor {
 		return attackPower;
 	}
 
-	private static int getCharacteristicValue(BotState botState, String name) {
+	private void calcPowerAndReach() {
+
+		if (fightAction.contains(FIGHT_TYPE_PUNCH)) {
+			
+			attackReach *= getCharacteristicValue(CHAR_TYPE_PUNCHREACH);
+			attackPower *= getCharacteristicValue(CHAR_TYPE_PUNCHPOWER);
+			
+		} else if (fightAction.contains(FIGHT_TYPE_KICK)) {
+			
+			attackReach *= getCharacteristicValue(CHAR_TYPE_KICKREACH);
+			attackPower *= getCharacteristicValue(CHAR_TYPE_KICKPOWER);
+			
+		}
+
+	}
+
+	private int getCharacteristicValue(String name) {
 		return BehaviorIntelligence.getCharacteristic(botState.getBot(), name);
 	}
 

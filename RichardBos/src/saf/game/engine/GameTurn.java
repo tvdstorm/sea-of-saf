@@ -8,19 +8,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
-import saf.game.BotState;
 import saf.game.GameConstant;
-import saf.game.GameState;
 import saf.game.gui.GameController;
+import saf.game.state.BotState;
+import saf.game.state.GameState;
 import saf.structure.Action;
 import saf.structure.Behavior;
 import saf.structure.intelligence.BehaviorIntelligence;
-import saf.structure.intelligence.BotIntelligence;
 
-public class GameTurn {
+public class GameTurn implements GameConstant {
 
+	private static final int CONST_JUMP_PIXELS = 80;
 	private static final Map<String, Integer> MOVEACTION_DISTANCE;
 	static {
 		Map<String, Integer> initMap = new HashMap<String, Integer>();
@@ -43,8 +41,6 @@ public class GameTurn {
 		this.gameController = gameController;
 		doTurn();
 	}
-
-	private Action tmp;
 
 	private void doTurn() {
 		processTurnCost();
@@ -111,9 +107,9 @@ public class GameTurn {
 		int dXDistance = 0;
 		int dYDistance = 0;
 
-		if (moveAction.equals(GameConstant.MOVETYPE_WALK_TOWARDS) || moveAction.equals(GameConstant.MOVETYPE_WALK_AWAY)
-				|| moveAction.equals(GameConstant.MOVETYPE_RUN_TOWARDS)
-				|| moveAction.equals(GameConstant.MOVETYPE_RUN_AWAY)) {
+		if (moveAction.equals(MOVE_TYPE_WALKTOWARDS) || moveAction.equals(MOVE_TYPE_WALKAWAY)
+				|| moveAction.equals(MOVE_TYPE_RUNTOWARDS)
+				|| moveAction.equals(MOVE_TYPE_RUNAWAY)) {
 			dXDistance = MOVEACTION_DISTANCE.get(moveAction);
 		}
 
@@ -121,17 +117,17 @@ public class GameTurn {
 		if (gameState.getDistance() < dXDistance)
 			dXDistance = gameState.getDistance();
 
-		if (moveAction.equals(GameConstant.MOVETYPE_JUMP)) {
+		if (moveAction.equals(MOVE_TYPE_JUMP)) {
 			if (!botState.isJumping())
-				dYDistance = 80;
+				dYDistance = CONST_JUMP_PIXELS;
 		} else {
 			if (botState.isJumping())
-				dYDistance = -80;
+				dYDistance = -CONST_JUMP_PIXELS;
 		}
 
-		if (moveAction.equals(GameConstant.MOVETYPE_STAND)) {
+		if (moveAction.equals(MOVE_TYPE_STAND)) {
 			if (botState.isJumping())
-				dYDistance = -80;
+				dYDistance = -CONST_JUMP_PIXELS;
 		}
 
 		// NOTE: Crouch doesnt have a move
@@ -151,9 +147,11 @@ public class GameTurn {
 			}
 		}
 
-		double attackPower = ActionProcessor.processFightAction(botState, otherBotState, gameState.getDistance(), moveAction, fightAction);
+		ActionProcessor actionProcessor = new ActionProcessor(otherBotState, otherBotState, gameState.getDistance(), moveAction, fightAction);
+		double attackPower = actionProcessor.getOutcome();
 
-		if (attackPower > 0) {
+		
+		if (DEBUG_STATUS && attackPower > 0) {
 			System.out.println();
 			System.out.println(botState.getBot().getName() + ", " + moveAction + " - " + fightAction);
 			System.out.println("vs " + otherBotState.getLastMoveAction() + " - " + otherBotState.getLastFightAction());

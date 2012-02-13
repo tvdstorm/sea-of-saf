@@ -3,12 +3,13 @@ package saf.game;
 import saf.game.engine.GameEngine;
 import saf.game.event.NewBotEvent;
 import saf.game.gui.GameController;
+import saf.game.state.BotState;
+import saf.game.state.GameState;
 
-public class GameMain {
+public class GameMain implements GameConstant {
 	private GameController gameController;
 	private GameEventListener gameEventListener;
 	private GameState gameState;
-	private boolean GamePlayedBefore = false;;
 
 	public static void start()
 	{
@@ -20,12 +21,12 @@ public class GameMain {
 		gameController = new GameController(gameEventListener);
 		gameState = new GameState(this, gameController);
 		
-		if(GameConstant.DEBUG_STATUS)
+		if(DEBUG_STATUS)
 		{
-			NewBotEvent e = new NewBotEvent(this, "C:\\Users\\Richard\\Documents\\AAwesome BOTS\\chicken.txt", "left");
+			NewBotEvent e = new NewBotEvent(this, "\\\\Srv-file\\users\\r.bos\\Documenten\\Bots\\chicken.txt", "left");
 			gameEventListener.handleNewBot(e);
 			
-			e = new NewBotEvent(this, "C:\\Users\\Richard\\Documents\\AAwesome BOTS\\ChuckNorris.txt", "right");
+			e = new NewBotEvent(this, "\\\\Srv-file\\users\\r.bos\\Documenten\\Bots\\ChuckNorris.txt", "right");
 			gameEventListener.handleNewBot(e);
 		}
 		
@@ -42,20 +43,14 @@ public class GameMain {
 	
 	public void startGame()
 	{
-		if(GamePlayedBefore)
-		{
-			return;
-		}
-		
 		if(checkLoadedBots())
 		{
 			gameController.displayMessage("Load two bots before starting.");
 			return;
 		}
-
+		gameController.disableButtons();
 		GameEngine gameEngine = new GameEngine(gameState, gameController,this);
 		gameEngine.battle();
-		GamePlayedBefore = true;
 	}
 	private boolean checkLoadedBots()
 	{
@@ -64,7 +59,7 @@ public class GameMain {
 	
 	public void battleOver(String winnerName)
 	{
-		gameController.displayMessage(GameConstant.WINNER_MESSAGE + winnerName);
+		gameController.displayMessage(WINNER_MESSAGE + winnerName);
 	}
 	
 }

@@ -9,13 +9,12 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import saf.game.BotState;
 import saf.game.GameEventListener;
 import saf.game.event.EventSource;
 import saf.game.gui.component.GameArena;
+import saf.game.state.BotState;
 import saf.structure.Behavior;
 import saf.structure.Characteristic;
-import saf.structure.intelligence.BehaviorIntelligence;
 
 public class GameController {
 
@@ -24,7 +23,7 @@ public class GameController {
 	private String side;
 
 	private final GameForm gameForm;
-	private final GameArena gameArena;
+	private GameArena gameArena;
 	private final EventSource eventSource;
 	private final DefaultListModel botLeftCharModel;
 	private final DefaultListModel botLeftBehaviorModel;
@@ -73,7 +72,6 @@ public class GameController {
 		
 
 	}
-
 	private void botFileActionPerformed(String side) {
 		JFileChooser jFileChooser = new JFileChooser();
 		jFileChooser.showOpenDialog(null);
@@ -90,37 +88,39 @@ public class GameController {
 		JOptionPane.showMessageDialog(null, Msg);
 	}
 
-	public void setBot(BotState botState) {
+	private void setBot(BotState botState) {
 		side = botState.getSide();
 
 		if (side.equals(CONST_LEFT))
+		{
 			gameForm.jLabelBotLeftName.setText(botState.getBot().getName());
-		else
-			gameForm.jLabelBotRightName.setText(botState.getBot().getName());
-
-		if (side.equals(CONST_LEFT)) {
+			gameForm.jProgressBarLeftHP.setValue(botState.getHitpoints());
+			
 			botLeftCharModel.clear();
 			for (Characteristic character : botState.getBot().getCharacteristics()) 
 			{
 				botLeftCharModel.addElement(character.getName() + " = " + character.getValue());
 			}
-		} else {
+			
+			botLeftBehaviorModel.clear();
+			for (Behavior behavior : botState.getBot().getBehaviors()) {
+				botLeftBehaviorModel.addElement(behavior.toString());
+			}
+		}
+		else
+		{
+			gameForm.jLabelBotRightName.setText(botState.getBot().getName());
+			gameForm.jProgressBarRightHP.setValue(botState.getHitpoints());
+			
 			botRightCharModel.clear();
 			for (Characteristic character : botState.getBot().getCharacteristics()) 
 			{
 				botRightCharModel.addElement(character.getName() + " = " + character.getValue());
 			}
-		}
-
-		if (side.equals(CONST_LEFT)) {
-			botLeftBehaviorModel.clear();
-			for (Behavior behavior : botState.getBot().getBehaviors()) {
-			botLeftBehaviorModel.addElement(behavior.toString());
-			}
-		} else {
+			
 			botRightBehaviorModel.clear();
 			for (Behavior behavior : botState.getBot().getBehaviors()) {
-			botRightBehaviorModel.addElement(behavior.toString());
+				botRightBehaviorModel.addElement(behavior.toString());
 			}
 		}
 		
@@ -131,26 +131,31 @@ public class GameController {
 
 		setBot(botState);
 		gameArena.createNewBot(side);
-		// gameForm.repaint();
 	}
 
 
 	public void setHitpoints(BotState botState) {
 		side = botState.getSide();
-		String HP = Integer.toString(botState.getHitpoints());
+		
 		if(side.equals(CONST_LEFT))
-			gameForm.jLabelFighterLeftHP.setText(HP);
+			gameForm.jProgressBarLeftHP.setValue(botState.getHitpoints());
 		else
-			gameForm.jLabelFighterRightHP.setText(HP);
+			gameForm.jProgressBarRightHP.setValue(botState.getHitpoints());
 	}
 
 	public void setDistance(int distance) {
-		gameForm.jLabelDistance.setText(Integer.toString(distance));
+		gameForm.jProgressBarDistance.setValue(distance);
 	}
-
 	
 	public void executeActions(String side, Point dPosition, String fightAction)
 	{
 		this.gameArena.updateBot(side, dPosition, fightAction);
 	}
+	public void disableButtons() {
+		gameForm.jButtonBotLeftLoad.setEnabled(false);
+		gameForm.jButtonBotRightLoad.setEnabled(false);
+		gameForm.jButtonStart.setEnabled(false);
+		
+	}
+
 }

@@ -12,6 +12,10 @@ package saf.game.gui;
  */
 public class GameForm extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** Creates new form Form */
 	public GameForm() {
 		initComponents();
@@ -56,9 +60,15 @@ public class GameForm extends javax.swing.JFrame {
 		jLabel1 = new javax.swing.JLabel();
 		jLabel10 = new javax.swing.JLabel();
 		jLabel11 = new javax.swing.JLabel();
-		jLabelDistance = new javax.swing.JLabel();
-		jLabelFighterLeftHP = new javax.swing.JLabel();
-		jLabelFighterRightHP = new javax.swing.JLabel();
+		jProgressBarDistance = new javax.swing.JProgressBar();
+		jProgressBarLeftHP = new javax.swing.JProgressBar();
+		jProgressBarRightHP = new javax.swing.JProgressBar();
+		jLabel12 = new javax.swing.JLabel();
+		jLabel13 = new javax.swing.JLabel();
+		jLabel14 = new javax.swing.JLabel();
+		jLabel15 = new javax.swing.JLabel();
+		jLabel16 = new javax.swing.JLabel();
+		jLabelMaxDistance = new javax.swing.JLabel();
 		jPanelGameArena = new saf.game.gui.component.GameArena();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,7 +114,11 @@ public class GameForm extends javax.swing.JFrame {
 												jPanelBotOne1Layout
 														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 														.addComponent(jScrollPane4,
-																javax.swing.GroupLayout.DEFAULT_SIZE, 429,
+																javax.swing.GroupLayout.Alignment.TRAILING,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 432,
+																Short.MAX_VALUE)
+														.addComponent(jScrollPane3,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 432,
 																Short.MAX_VALUE)
 														.addGroup(
 																jPanelBotOne1Layout
@@ -125,15 +139,12 @@ public class GameForm extends javax.swing.JFrame {
 																												jLabelBotRightName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				282, Short.MAX_VALUE)
+																				285, Short.MAX_VALUE)
 																		.addComponent(jButtonBotRightLoad))
-														.addComponent(jLabel9)
 														.addGroup(
 																jPanelBotOne1Layout.createSequentialGroup()
 																		.addComponent(jLabel8).addGap(188, 188, 188))
-														.addComponent(jScrollPane3,
-																javax.swing.GroupLayout.DEFAULT_SIZE, 429,
-																Short.MAX_VALUE)).addContainerGap()));
+														.addComponent(jLabel9)).addContainerGap()));
 		jPanelBotOne1Layout
 				.setVerticalGroup(jPanelBotOne1Layout
 						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,13 +172,14 @@ public class GameForm extends javax.swing.JFrame {
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(jLabel8)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 69,
+										.addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(jLabel9)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 96,
-												Short.MAX_VALUE).addContainerGap()));
+										.addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 66,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		jPanelBotOne.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -203,10 +215,10 @@ public class GameForm extends javax.swing.JFrame {
 														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 														.addComponent(jScrollPane2,
 																javax.swing.GroupLayout.Alignment.TRAILING,
-																javax.swing.GroupLayout.DEFAULT_SIZE, 288,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 293,
 																Short.MAX_VALUE)
 														.addComponent(jScrollPane1,
-																javax.swing.GroupLayout.DEFAULT_SIZE, 288,
+																javax.swing.GroupLayout.DEFAULT_SIZE, 293,
 																Short.MAX_VALUE)
 														.addGroup(
 																jPanelBotOneLayout
@@ -227,7 +239,7 @@ public class GameForm extends javax.swing.JFrame {
 																												jLabelBotLeftName)))
 																		.addPreferredGap(
 																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-																				141, Short.MAX_VALUE)
+																				146, Short.MAX_VALUE)
 																		.addComponent(jButtonBotLeftLoad))
 														.addComponent(jLabel4).addComponent(jLabel5)).addContainerGap()));
 		jPanelBotOneLayout
@@ -256,13 +268,14 @@ public class GameForm extends javax.swing.JFrame {
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(jLabel4)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70,
+										.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 51,
 												javax.swing.GroupLayout.PREFERRED_SIZE)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 										.addComponent(jLabel5)
 										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 95,
-												Short.MAX_VALUE).addContainerGap()));
+										.addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 64,
+												javax.swing.GroupLayout.PREFERRED_SIZE)
+										.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		jPanelGameArea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -276,40 +289,173 @@ public class GameForm extends javax.swing.JFrame {
 
 		jLabel11.setText("Fighter 2 HP:");
 
-		jLabelDistance.setText("350");
+		jProgressBarDistance.setMaximum(450);
 
-		jLabelFighterLeftHP.setText("100");
+		jLabel12.setText("0");
 
-		jLabelFighterRightHP.setText("100");
+		jLabel13.setText("0");
+
+		jLabel14.setText("0");
+
+		jLabel15.setText("100");
+
+		jLabel16.setText("100");
+
+		jLabelMaxDistance.setText("450");
 
 		javax.swing.GroupLayout jPanelGameButtonsLayout = new javax.swing.GroupLayout(jPanelGameButtons);
 		jPanelGameButtons.setLayout(jPanelGameButtonsLayout);
 		jPanelGameButtonsLayout.setHorizontalGroup(jPanelGameButtonsLayout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				jPanelGameButtonsLayout.createSequentialGroup().addContainerGap().addComponent(jButtonStart)
-						.addGap(154, 154, 154).addComponent(jLabel1)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jLabelDistance).addGap(41, 41, 41).addComponent(jLabel10)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jLabelFighterLeftHP).addGap(37, 37, 37).addComponent(jLabel11)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jLabelFighterRightHP).addContainerGap(162, Short.MAX_VALUE)));
-		jPanelGameButtonsLayout.setVerticalGroup(jPanelGameButtonsLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
 				jPanelGameButtonsLayout
 						.createSequentialGroup()
 						.addContainerGap()
+						.addComponent(jButtonStart)
 						.addGroup(
-								jPanelGameButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-										.addComponent(jButtonStart).addComponent(jLabel1).addComponent(jLabel10)
-										.addComponent(jLabel11).addComponent(jLabelDistance)
-										.addComponent(jLabelFighterLeftHP).addComponent(jLabelFighterRightHP))
-						.addContainerGap(17, Short.MAX_VALUE)));
+								jPanelGameButtonsLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(
+												jPanelGameButtonsLayout
+														.createSequentialGroup()
+														.addGap(18, 18, 18)
+														.addComponent(jLabel14)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jProgressBarDistance,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE))
+										.addGroup(
+												jPanelGameButtonsLayout.createSequentialGroup().addGap(81, 81, 81)
+														.addComponent(jLabel1)))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addGroup(
+								jPanelGameButtonsLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+										.addGroup(
+												jPanelGameButtonsLayout
+														.createSequentialGroup()
+														.addGap(5, 5, 5)
+														.addComponent(jLabelMaxDistance)
+														.addGap(26, 26, 26)
+														.addComponent(jLabel13)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jProgressBarLeftHP,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE).addGap(5, 5, 5)
+														.addComponent(jLabel16).addGap(29, 29, 29))
+										.addGroup(
+												javax.swing.GroupLayout.Alignment.TRAILING,
+												jPanelGameButtonsLayout
+														.createSequentialGroup()
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+														.addComponent(jLabel10).addGap(92, 92, 92)))
+						.addGroup(
+								jPanelGameButtonsLayout
+										.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+										.addGroup(
+												jPanelGameButtonsLayout
+														.createSequentialGroup()
+														.addComponent(jLabel12)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jProgressBarRightHP,
+																javax.swing.GroupLayout.PREFERRED_SIZE,
+																javax.swing.GroupLayout.DEFAULT_SIZE,
+																javax.swing.GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(
+																javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+														.addComponent(jLabel15))
+										.addGroup(
+												jPanelGameButtonsLayout.createSequentialGroup().addGap(46, 46, 46)
+														.addComponent(jLabel11))).addGap(15, 15, 15)));
+		jPanelGameButtonsLayout
+				.setVerticalGroup(jPanelGameButtonsLayout
+						.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanelGameButtonsLayout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addGroup(
+												jPanelGameButtonsLayout
+														.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+														.addComponent(jButtonStart)
+														.addGroup(
+																jPanelGameButtonsLayout
+																		.createParallelGroup(
+																				javax.swing.GroupLayout.Alignment.TRAILING)
+																		.addGroup(
+																				jPanelGameButtonsLayout
+																						.createSequentialGroup()
+																						.addComponent(jLabel1)
+																						.addPreferredGap(
+																								javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																						.addGroup(
+																								jPanelGameButtonsLayout
+																										.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.TRAILING)
+																										.addComponent(
+																												jLabel14)
+																										.addComponent(
+																												jProgressBarDistance,
+																												javax.swing.GroupLayout.PREFERRED_SIZE,
+																												javax.swing.GroupLayout.DEFAULT_SIZE,
+																												javax.swing.GroupLayout.PREFERRED_SIZE)))
+																		.addGroup(
+																				jPanelGameButtonsLayout
+																						.createSequentialGroup()
+																						.addGroup(
+																								jPanelGameButtonsLayout
+																										.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.BASELINE)
+																										.addComponent(
+																												jLabel10)
+																										.addComponent(
+																												jLabel11))
+																						.addPreferredGap(
+																								javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																						.addGroup(
+																								jPanelGameButtonsLayout
+																										.createParallelGroup(
+																												javax.swing.GroupLayout.Alignment.LEADING)
+																										.addComponent(
+																												jLabel12)
+																										.addGroup(
+																												jPanelGameButtonsLayout
+																														.createParallelGroup(
+																																javax.swing.GroupLayout.Alignment.TRAILING)
+																														.addComponent(
+																																jLabel15)
+																														.addComponent(
+																																jProgressBarRightHP,
+																																javax.swing.GroupLayout.PREFERRED_SIZE,
+																																javax.swing.GroupLayout.DEFAULT_SIZE,
+																																javax.swing.GroupLayout.PREFERRED_SIZE))
+																										.addGroup(
+																												jPanelGameButtonsLayout
+																														.createParallelGroup(
+																																javax.swing.GroupLayout.Alignment.TRAILING)
+																														.addComponent(
+																																jLabel13)
+																														.addComponent(
+																																jProgressBarLeftHP,
+																																javax.swing.GroupLayout.PREFERRED_SIZE,
+																																javax.swing.GroupLayout.DEFAULT_SIZE,
+																																javax.swing.GroupLayout.PREFERRED_SIZE))
+																										.addComponent(
+																												jLabel16)
+																										.addComponent(
+																												jLabelMaxDistance)))))
+										.addContainerGap(17, Short.MAX_VALUE)));
 
 		javax.swing.GroupLayout jPanelGameArenaLayout = new javax.swing.GroupLayout(jPanelGameArena);
 		jPanelGameArena.setLayout(jPanelGameArenaLayout);
 		jPanelGameArenaLayout.setHorizontalGroup(jPanelGameArenaLayout.createParallelGroup(
-				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 750, Short.MAX_VALUE));
+				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 758, Short.MAX_VALUE));
 		jPanelGameArenaLayout.setVerticalGroup(jPanelGameArenaLayout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addGap(0, 286, Short.MAX_VALUE));
 
@@ -328,8 +474,7 @@ public class GameForm extends javax.swing.JFrame {
 												javax.swing.GroupLayout.DEFAULT_SIZE,
 												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 										.addComponent(jPanelGameButtons, javax.swing.GroupLayout.Alignment.LEADING,
-												javax.swing.GroupLayout.DEFAULT_SIZE,
-												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+												javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE))
 						.addContainerGap()));
 		jPanelGameAreaLayout.setVerticalGroup(jPanelGameAreaLayout.createParallelGroup(
 				javax.swing.GroupLayout.Alignment.LEADING).addGroup(
@@ -381,7 +526,7 @@ public class GameForm extends javax.swing.JFrame {
 												javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(jPanelGameArea, javax.swing.GroupLayout.DEFAULT_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
+								javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -389,7 +534,7 @@ public class GameForm extends javax.swing.JFrame {
 				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(
 						layout.createSequentialGroup().addContainerGap().addComponent(jLabelHeader)
-								.addContainerGap(22, Short.MAX_VALUE))
+								.addContainerGap(30, Short.MAX_VALUE))
 				.addComponent(jPanelContent, javax.swing.GroupLayout.Alignment.TRAILING,
 						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
@@ -423,6 +568,11 @@ public class GameForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel10;
 	private javax.swing.JLabel jLabel11;
+	private javax.swing.JLabel jLabel12;
+	private javax.swing.JLabel jLabel13;
+	private javax.swing.JLabel jLabel14;
+	private javax.swing.JLabel jLabel15;
+	private javax.swing.JLabel jLabel16;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
 	private javax.swing.JLabel jLabel4;
@@ -433,10 +583,8 @@ public class GameForm extends javax.swing.JFrame {
 	private javax.swing.JLabel jLabel9;
 	protected javax.swing.JLabel jLabelBotLeftName;
 	protected javax.swing.JLabel jLabelBotRightName;
-	protected javax.swing.JLabel jLabelDistance;
-	protected javax.swing.JLabel jLabelFighterLeftHP;
-	protected javax.swing.JLabel jLabelFighterRightHP;
 	public javax.swing.JLabel jLabelHeader;
+	private javax.swing.JLabel jLabelMaxDistance;
 	protected javax.swing.JList jListBotLeftBehaviors;
 	protected javax.swing.JList jListBotLeftChars;
 	protected javax.swing.JList jListBotRightBehaviors;
@@ -447,6 +595,9 @@ public class GameForm extends javax.swing.JFrame {
 	public javax.swing.JPanel jPanelGameArea;
 	public javax.swing.JPanel jPanelGameArena;
 	private javax.swing.JPanel jPanelGameButtons;
+	protected javax.swing.JProgressBar jProgressBarDistance;
+	protected javax.swing.JProgressBar jProgressBarLeftHP;
+	protected javax.swing.JProgressBar jProgressBarRightHP;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JScrollPane jScrollPane3;

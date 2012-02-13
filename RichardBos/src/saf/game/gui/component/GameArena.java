@@ -1,14 +1,10 @@
 package saf.game.gui.component;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
