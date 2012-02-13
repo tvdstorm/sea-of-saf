@@ -1,8 +1,11 @@
-package Game;
+package saf.interpreter;
 
 import java.lang.reflect.*;
 import saf.ast.*;
-import saf.checker.Tool;
+import saf.ast.condition.*;
+import saf.ast.definition.*;
+import saf.util.Tool;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,24 +15,18 @@ public class Interpreter implements FighterVisitor
 	private List<Behaviour> satisfiedBehaviours;
 	private Bot bot;
 	
-	/***
-	 * Start interpreting the AST
-	 */
-	protected void Evaluate(Fighter fighter, Bot bot)
-	{
+	protected void Evaluate(Fighter fighter, Bot bot) {
 		this.bot = bot;
 		satisfiedBehaviours = new ArrayList<Behaviour>();
-		for (Statement statement : fighter.getStatements())
-		{
+		for (ASTNode statement : fighter.getStatements()) {
 			statement.accept(this);
 		}
 		randomlyExecuteSatisfiedBehaviour();
 	}
 	
-	public void visit(StrengthAssignment statement) {
+	public void visit(Strength statement) {
 		try {
-			Class aClass = Class.forName("Game.Bot");
-			Field field = aClass.getField(statement.getName());
+			Field field = Bot.class.getField(statement.getName());
 			field.setInt(this.bot, new Integer(statement.getValue()));
 		} catch (Exception ex) {
 			System.out.println("Unable to set strength: " + ex.getMessage());
@@ -38,46 +35,44 @@ public class Interpreter implements FighterVisitor
 
 	@Override
 	public void visit(AndOperator andOperator) {
-		Expression leftExpression = (Expression)andOperator.getLeftExpression();
-		Expression rightExpression = (Expression)andOperator.getRightExpression();
+		Condition leftExpression = andOperator.getLeftExpression();
+		Condition rightExpression = andOperator.getRightExpression();
 		
-		andOperator.setExpressionValue(leftExpression.getExpressionValue() && rightExpression.getExpressionValue());
+		andOperator.setValue(leftExpression.getValue() && rightExpression.getValue());
 	}
 
 	@Override
 	public void visit(OrOperator orOperator) {
-		Expression leftExpression = (Expression)orOperator.getLeftExpression();
-		Expression rightExpression = (Expression)orOperator.getRightExpression();
+		Condition leftExpression = orOperator.getLeftExpression();
+		Condition rightExpression = orOperator.getRightExpression();
 		
-		orOperator.setExpressionValue(leftExpression.getExpressionValue() || rightExpression.getExpressionValue());
+		orOperator.setValue(leftExpression.getValue() || rightExpression.getValue());
 	}
 
 	@Override
 	public void visit(Condition state) {
-		boolean value = (Boolean)this.bot.invokeMethod(state.getConditionName());
-		state.setCurrentState(value);
-		state.setExpressionValue(value);
+		boolean value = (Boolean)this.bot.invokeMethod(state.getName());
+		state.setValue(value);
 	}
 
 	@Override
 	public void visit(Behaviour behaviour) {
 		behaviour.getCondition().accept(this);
 		
-		Expression condition = (Expression)behaviour.getCondition();
-		if (condition.getExpressionValue()) {
+		if (behaviour.getCondition().getValue()) {
 			this.satisfiedBehaviours.add(behaviour);
 		}
 	}
 
 	@Override
-	public void visit(Function function) {
-		if (function.getFunctionName().equals("choose")) {
+	public void visit(Action function) {
+		if (function.getName().equals("choose")) {
 			Random random = new Random();
 			int index = random.nextInt(function.getParameters().size());
-			Function randomFunction = function.getParameters().get(index);
+			Action randomFunction = function.getParameters().get(index);
 			visit(randomFunction);
 		} else {
-			bot.invokeMethod(function.getFunctionName());
+			bot.invokeMethod(function.getName());
 		}
 	}
 	

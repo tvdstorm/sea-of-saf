@@ -1,6 +1,5 @@
 package saf.ast;
 
-public interface Statement
-{
+public interface ASTNode {
 	public void accept(FighterVisitor visitor);
 }
