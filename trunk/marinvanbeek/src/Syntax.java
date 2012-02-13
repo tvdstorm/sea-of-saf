@@ -60,7 +60,7 @@ class Fighter implements SyntaxCheck
     public Action act(State state)
     {
         return new Action(new Move("illegal_name"), 
-                             new Attack("illegal_name"));
+                          new Attack("illegal_name"));
     }
 
     public void setParseErrors(int nr)
