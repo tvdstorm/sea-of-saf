@@ -98,11 +98,11 @@ public class Fighter {
 		return definition.getName();
 	}
 	
-	public Stance getCurrentStance() {
+	public Stance getStance() {
 		return currentStance;
 	}
 	
-	public void setCurrentStance(Stance currentStance) {
+	public void setStance(Stance currentStance) {
 		this.currentStance = currentStance;
 	}
 }

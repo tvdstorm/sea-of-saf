@@ -9,7 +9,8 @@ public class RandomHelper {
 	public static <T> T getElementFromList(List<T> list) {
 		if (list.size() == 0)
 			return null;
-		return list.get(random.nextInt(list.size()));
+		int index = random.nextInt(list.size());
+		return list.get(index);
 	}
 
 }
