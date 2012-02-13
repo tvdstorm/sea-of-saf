@@ -2,12 +2,13 @@ package visitor;
 
 import java.util.Arrays;
 
-import elements.Behaviour;
-import elements.Bot;
-import elements.Bots;
-import elements.Characteristic;
-import elements.ConditionChoices;
-import elements.ConditionGroup;
+import astelements.Behaviour;
+import astelements.Bot;
+import astelements.Bots;
+import astelements.Characteristic;
+import astelements.ConditionChoices;
+import astelements.ConditionGroup;
+
 
 
 

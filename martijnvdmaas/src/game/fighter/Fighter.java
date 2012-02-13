@@ -2,7 +2,8 @@ package game.fighter;
 
 import java.util.ArrayList;
 
-import elements.Behaviour;
+import astelements.Behaviour;
+
 
 
 

@@ -2,7 +2,8 @@ package game;
 
 import javax.swing.UIManager;
 
-import elements.Bots;
+import astelements.Bots;
+
 
 
 
