@@ -18,6 +18,11 @@ import saf.util.RandomHelper;
  * Hosts the fight between two Fighters. Contains the game logic.
  */
 public class Arena {
+	private static final float WALK_SPEED = 1.5f;
+	private static final float RUN_SPEED_FACTOR = 2.0f;
+
+	private static final float BASE_SPEED = 1.0f;
+
 	private static final float STRONGER_DIFFERENCE = 0.5f;
 
 	private static final float MUCH_STRONGER_DIFFERENCE = 3.0f;
@@ -27,7 +32,7 @@ public class Arena {
 	private final Fighter[] player = new Fighter[2];
 	private float distanceBetweenPlayers;
 	
-	public Fighter getFighter(int playerIndex) {
+	public Fighter getFighterOfPlayer(int playerIndex) {
 		return player[playerIndex];
 	}
 	
@@ -106,15 +111,15 @@ public class Arena {
 	}
 	
 	private void performMoveAction(Fighter currentPlayer) {
-		float walkspeed = 1.5f * (1.0f + currentPlayer.getSpeed()) * currentPlayer.getStance().getMultiplier();
-		float runspeed = 3.0f * (1.0f + currentPlayer.getSpeed()) * currentPlayer.getStance().getMultiplier();
+		float walkspeed = WALK_SPEED * (BASE_SPEED + currentPlayer.getSpeed()) * currentPlayer.getStance().getMultiplier();
 		
 		float diff = 0.0f;
 		MoveAction moveAction = currentPlayer.getLastMoveAction();
-		if (moveAction.isRun())
-			diff = runspeed;
-		else if (moveAction.isWalk())
+		
+		if (moveAction.isWalk())
 			diff = walkspeed;
+		else if (moveAction.isRun())
+			diff = walkspeed * RUN_SPEED_FACTOR;
 		
 		if (moveAction.isAway())
 			diff = -diff;

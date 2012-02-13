@@ -26,7 +26,7 @@ public class MainView extends JFrame {
 	private final Arena arena;
 	
 	private final JLabel distanceLabel;
-	private JCheckBox checkbox;
+	private JCheckBox autoMoveCheckbox;
 	
 	public MainView(Arena arena) {
 		this.arena = arena;
@@ -64,16 +64,16 @@ public class MainView extends JFrame {
 		add(getMenuButtons());
 		pack();
 		setVisible(true);
-		setTimer();
+		setAutoMoveTimer();
 	}
 	
-	private void setTimer()
+	private void setAutoMoveTimer()
 	{
 		new Timer(1000, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (checkbox.isSelected()) {
+				if (autoMoveCheckbox.isSelected()) {
 					arena.doMoves();
 					updateView();
 				}
@@ -95,7 +95,7 @@ public class MainView extends JFrame {
 		loadFighter1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				loadFigter(0);
+				loadFighter(0);
 			}
 		});
 		buttonPanel.add(loadFighter1);
@@ -106,7 +106,7 @@ public class MainView extends JFrame {
 		loadFighter2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				loadFigter(1);
+				loadFighter(1);
 			}
 		});
 		buttonPanel.add(loadFighter2);
@@ -118,8 +118,8 @@ public class MainView extends JFrame {
 	private JPanel getMenuButtons() {
 		JPanel buttonPanel = new JPanel();
 		
-		checkbox = new JCheckBox("Step automaticly");
-		buttonPanel.add(checkbox);
+		autoMoveCheckbox = new JCheckBox("Step automaticly");
+		buttonPanel.add(autoMoveCheckbox);
 		
 		JButton stepButton = new JButton("Do step");
 		stepButton.addMouseListener(new MouseAdapter() {
@@ -153,13 +153,13 @@ public class MainView extends JFrame {
 		return buttonPanel;
 	}
 	
-	private void loadFigter(int index) {
-		JFileChooser fc = new JFileChooser();
+	private void loadFighter(int index) {
+		JFileChooser safChooser = new JFileChooser();
 		
-		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		fc.addChoosableFileFilter(new SafFileFilter());
-		if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			String result = arena.openFighterDefinition(index, fc.getSelectedFile());
+		safChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		safChooser.addChoosableFileFilter(new SafFileFilter());
+		if (safChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+			String result = arena.openFighterDefinition(index, safChooser.getSelectedFile());
 			
 			if (result == null)
 				updateView();
