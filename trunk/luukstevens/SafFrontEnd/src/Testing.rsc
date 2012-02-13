@@ -1,4 +1,4 @@
-module Test
+module Testing
 
 import ParseTree;
 import Set;
@@ -21,7 +21,6 @@ public test bool minimumAst() {
 
 public test bool astWithCharacteristic() {
     ast1 = getAst("Test{ kickPower = 5 }");
-         
     ast2 = Ast::bot("Test", [] + characteristic("kickPower", 5), []);
     
     return ast1 == ast2;

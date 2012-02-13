@@ -56,10 +56,10 @@ node outline(FightAction fightAction) = {
 private str simplifyCondition(Condition condition) {
     switch(condition) {
         case andCondition(Condition firstCondition, Condition secondCondition): {
-            return simplifyCondition(firstCondition) + " and " + simplifyCondition(secondCondition);
+            return "(" + simplifyCondition(firstCondition) + " and " + simplifyCondition(secondCondition) + ")";
         }
         case orCondition(Condition firstCondition, Condition secondCondition): {
-            return simplifyCondition(firstCondition) + " or " + simplifyCondition(secondCondition);
+            return "(" + simplifyCondition(firstCondition) + " or " + simplifyCondition(secondCondition) + ")";
         }
         case sc:simpleCondition(str condition): {
             return condition;
