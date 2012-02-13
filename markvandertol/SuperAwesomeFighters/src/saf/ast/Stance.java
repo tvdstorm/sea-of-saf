@@ -1,4 +1,4 @@
-package saf;
+package saf.ast;
 
 public enum Stance {
 	jumping(1.25f),

@@ -7,6 +7,7 @@ import saf.ast.BehaviourRule;
 import saf.ast.FightAction;
 import saf.ast.FighterDefinition;
 import saf.ast.MoveAction;
+import saf.ast.Stance;
 import saf.ast.State;
 
 /**

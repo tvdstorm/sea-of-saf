@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g 2012-02-07 12:31:05
+// $ANTLR 3.4 C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g 2012-02-13 14:05:43
 
 	package saf.parser;
 	
@@ -76,7 +76,7 @@ public class SAFWalker extends TreeParser {
 
 
     // $ANTLR start "fighter"
-    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:31:1: fighter returns [FighterDefinition f] : ^( FIGHTER name= IDENTIFIER (a= assignment )* (b= rule )* ) ;
+    // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:31:1: fighter returns [FighterDefinition f] : ^( FIGHTER name= IDENTIFIER (a= assignment )+ (b= rule )+ ) ;
     public final FighterDefinition fighter() throws RecognitionException {
         FighterDefinition f = null;
 
@@ -92,15 +92,16 @@ public class SAFWalker extends TreeParser {
         	List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
 
         try {
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:2: ( ^( FIGHTER name= IDENTIFIER (a= assignment )* (b= rule )* ) )
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:4: ^( FIGHTER name= IDENTIFIER (a= assignment )* (b= rule )* )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:2: ( ^( FIGHTER name= IDENTIFIER (a= assignment )+ (b= rule )+ ) )
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:4: ^( FIGHTER name= IDENTIFIER (a= assignment )+ (b= rule )+ )
             {
             match(input,FIGHTER,FOLLOW_FIGHTER_in_fighter53); 
 
             match(input, Token.DOWN, null); 
             name=(CommonTree)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_fighter57); 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:30: (a= assignment )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:30: (a= assignment )+
+            int cnt1=0;
             loop1:
             do {
                 int alt1=2;
@@ -127,12 +128,17 @@ public class SAFWalker extends TreeParser {
             	    break;
 
             	default :
-            	    break loop1;
+            	    if ( cnt1 >= 1 ) break loop1;
+                        EarlyExitException eee =
+                            new EarlyExitException(1, input);
+                        throw eee;
                 }
+                cnt1++;
             } while (true);
 
 
-            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:91: (b= rule )*
+            // C:\\Users\\mark\\jworkspace\\SuperAwesomeFighters\\antlr/SAFWalker.g:36:91: (b= rule )+
+            int cnt2=0;
             loop2:
             do {
                 int alt2=2;
@@ -159,8 +165,12 @@ public class SAFWalker extends TreeParser {
             	    break;
 
             	default :
-            	    break loop2;
+            	    if ( cnt2 >= 1 ) break loop2;
+                        EarlyExitException eee =
+                            new EarlyExitException(2, input);
+                        throw eee;
                 }
+                cnt2++;
             } while (true);
 
 
@@ -586,8 +596,8 @@ public class SAFWalker extends TreeParser {
  
 
     public static final BitSet FOLLOW_FIGHTER_in_fighter53 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_IDENTIFIER_in_fighter57 = new BitSet(new long[]{0x0000000000004028L});
-    public static final BitSet FOLLOW_assignment_in_fighter62 = new BitSet(new long[]{0x0000000000004028L});
+    public static final BitSet FOLLOW_IDENTIFIER_in_fighter57 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_assignment_in_fighter62 = new BitSet(new long[]{0x0000000000004020L});
     public static final BitSet FOLLOW_rule_in_fighter71 = new BitSet(new long[]{0x0000000000004008L});
     public static final BitSet FOLLOW_ASSIGNMENT_in_assignment94 = new BitSet(new long[]{0x0000000000000004L});
     public static final BitSet FOLLOW_IDENTIFIER_in_assignment98 = new BitSet(new long[]{0x0000000000000100L});

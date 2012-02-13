@@ -33,7 +33,7 @@ fighter returns [FighterDefinition f]
 	Map<String, Integer> assignments = new HashMap<String, Integer>();
 	List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>();
 }
-	:	^(FIGHTER name=IDENTIFIER (a=assignment {assignments.put(a.getKey(), a.getValue());})* (b=rule {behaviourRules.add(b);})*)
+	:	^(FIGHTER name=IDENTIFIER (a=assignment {assignments.put(a.getKey(), a.getValue());})+ (b=rule {behaviourRules.add(b);})+)
 		{ $f = new FighterDefinition($name.text, assignments, behaviourRules);};
 
 assignment returns [AbstractMap.SimpleEntry<String, Integer> a]
