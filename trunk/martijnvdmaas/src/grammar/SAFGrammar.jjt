@@ -2,47 +2,11 @@ PARSER_BEGIN(SAFGrammar)
 
 package grammar;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import elements.*;
-import checker.SAFChecker;
-import logger.ErrorLog;
-import game.FightStart;
-import visitor.SAFElementValidatorVisitor;
-import visitor.SAFElementPrintVisitor;
-import java.awt.Frame;
 
 public class SAFGrammar
 {
-	private static final String ERROR_PREFIX = "Parser error: ";
-	
-	public static void main(String args []) 
-  	{ 
-    	System.out.println("Begin parsing..");
-	    try
-	    { 
-			String projectPath  = new java.io.File(".").getCanonicalPath();
-			String fileName = "validInput.saf";
-			  
-			InputStream inputStream = new FileInputStream(projectPath + "/src/input/" + fileName);
-			
-			new SAFGrammar(inputStream);
-			Bots bots = SAFGrammar.Start();
-			
-			System.out.println("Succesful Parsing.");
-    		System.out.println("Begin Checking..");
-    		
-			bots.accept(new SAFElementValidatorVisitor());
-			
-			System.out.println("Succesful Checking.\n");
-			 
-			new FightStart(bots);      
-    	} 
-	    catch (Exception e)
-	    {
-	      	new ErrorLog(ERROR_PREFIX + e); 
-	    }
-  	}
+
 }
 
 PARSER_END(SAFGrammar)

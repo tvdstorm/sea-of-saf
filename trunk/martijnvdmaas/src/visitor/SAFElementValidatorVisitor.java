@@ -9,6 +9,8 @@ import elements.Characteristic;
 import elements.ConditionChoices;
 import elements.ConditionGroup;
 
+
+
 public class SAFElementValidatorVisitor implements SAFElementVisitor {
 
 	

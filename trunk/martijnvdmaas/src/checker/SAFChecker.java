@@ -11,6 +11,8 @@ import elements.Characteristic;
 import elements.ConditionChoices;
 import elements.ConditionGroup;
 
+
+
 import logger.ErrorLog;
 
 
