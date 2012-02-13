@@ -12,8 +12,8 @@ import javax.swing.JComponent;
 
 import saf.Arena;
 import saf.Fighter;
-import saf.Stance;
 import saf.ast.FightAction;
+import saf.ast.Stance;
 
 public class FighterComponent extends JComponent {
 	private final int playerIndex;

@@ -8,7 +8,7 @@ public class RandomHelper {
 	
 	public static <T> T getElementFromList(List<T> list) {
 		if (list.size() == 0)
-			return null;
+			throw new IllegalArgumentException("List cannot be empty");
 		int index = random.nextInt(list.size());
 		return list.get(index);
 	}

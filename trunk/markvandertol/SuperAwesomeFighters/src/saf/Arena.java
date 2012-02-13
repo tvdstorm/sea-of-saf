@@ -22,9 +22,9 @@ public class Arena {
 
 	private static final float MUCH_STRONGER_DIFFERENCE = 3.0f;
 
-	private FighterDefinition[] playerDefinitions = new FighterDefinition[2];
+	private final FighterDefinition[] playerDefinitions = new FighterDefinition[2];
 	
-	private Fighter[] player = new Fighter[2];
+	private final Fighter[] player = new Fighter[2];
 	private float distanceBetweenPlayers;
 	
 	public Fighter getFighter(int playerIndex) {

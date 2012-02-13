@@ -1,6 +1,5 @@
 package saf.ast;
 
-import saf.Stance;
 
 /**
  * Move actions a fighter can perform.

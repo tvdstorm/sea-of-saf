@@ -11,7 +11,6 @@ import java.util.List;
 import org.antlr.runtime.ANTLRInputStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 
 import saf.ast.FighterDefinition;
@@ -53,18 +52,19 @@ public class FighterDefinitionParser {
 			errorList.add("Exception in parser: " + e.getMessage());
 			return null;
 		} 
-
-		CommonTreeNodeStream nodes = new CommonTreeNodeStream((CommonTree) fighterTree.getTree());
-		nodes.setTokenStream(tokens);
-
+		
 		if (!errorList.isEmpty()) {
 			return null;
 		}
+		CommonTreeNodeStream nodes = new CommonTreeNodeStream(fighterTree.getTree());
+		nodes.setTokenStream(tokens);
+
+		
 
 		SAFWalker walker = new SAFWalker(nodes);
 		walker.setErrorList(errorList);
 		
-		FighterDefinition fighter = null;;
+		FighterDefinition fighter = null;
 		try {
 			fighter = walker.fighter();
 		} catch (RecognitionException e) {
