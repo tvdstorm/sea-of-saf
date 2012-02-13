@@ -29,8 +29,10 @@ public class FightSimulator{
 	private int secondFighterCurrentX = SECOND_FIGHTER_INITIAL_X;
 	
 	public static final int FIGHTER_INITIAL_Y = FIGHTER_OFFSET_Y;
+	public static final int FIGHTER_JUMP_Y = FIGHTER_OFFSET_Y - 100;
 	
-	private int fighterCurrentY = FIGHTER_INITIAL_Y;
+	private int firstFighterCurrentY = FIGHTER_INITIAL_Y;
+	private int secondFighterCurrentY = FIGHTER_INITIAL_Y;
 	
 	private Fight fight;
 	
@@ -40,23 +42,21 @@ public class FightSimulator{
 
 	public void Simulate(){
 		System.out.println("Simulating...");
-		
 		try {
 			Display.setDisplayMode(new DisplayMode(FightSimulator.WINDOW_WIDTH,FightSimulator.WINDOW_HEIGHT));
 			Display.setTitle(fight.getFirstFighter().getName() + " VS " + fight.getSecondFighter().getName());
 			Display.create();
 		} catch (LWJGLException e) {
-			System.out.println("Error: " + e.getMessage());
+			System.out.println("ERROR: " + e.getMessage());
 			System.exit(0);
 		}
 		
-		initOpenGL();
+		initializeOpenGL();
 		
 		while (!Display.isCloseRequested() && !fight.hasEnded()) {
-			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			
+			clearScreen();
 			fight.assess();
-			
 			draw();
 			
 			Display.update();
@@ -65,21 +65,34 @@ public class FightSimulator{
 		Display.destroy();
 		System.out.println("Simulating OK");
 	}
-	
+
 	public void draw(){
-//		Behavior behavior = fight.flushFirstFightersNextMove();
-//		
-//		AvailableMoves move = AvailableMoves.valueOf(behavior.getMove().getName());
-//		AvailableAttacks attack = AvailableAttacks.valueOf(behavior.getAttack().getName());
 		
-		animate(AvailableMoves.RUN_TOWARDS, AvailableAttacks.PUNCH_HIGH, FighterLocation.LEFT);
-		animate(AvailableMoves.WALK_TOWARDS, AvailableAttacks.KICK_HIGH, FighterLocation.RIGHT);
+//		Behavior firstFightersBehavior = fight.getFirstFightersMove(); 
+//		try{
+//			AvailableMoves ffmove = AvailableMoves.valueOf(firstFightersBehavior.getMove().getName());
+//			AvailableAttacks ffattack = AvailableAttacks.valueOf(firstFightersBehavior.getAttack().getName());
+//			// TODO Change to ffmove and ffattack
+			animate(AvailableMoves.JUMP, AvailableAttacks.KICK_HIGH, FighterLocation.LEFT);
+//		} catch (Exception e) {
+//			System.out.println("ERROR: " + e.getMessage());
+//			System.exit(0);
+//		}
+//		
+//		Behavior secondFightersBehavior = fight.getSecondFightersMove(); 
+//		try{
+//			AvailableMoves sfmove = AvailableMoves.valueOf(secondFightersBehavior.getMove().getName());
+//			AvailableAttacks sfattack = AvailableAttacks.valueOf(secondFightersBehavior.getAttack().getName());
+//			// TODO Change to sfmove and sfattack
+			animate(AvailableMoves.RUN_TOWARDS, AvailableAttacks.KICK_LOW, FighterLocation.RIGHT);
+//		} catch (Exception e) {
+//			System.out.println("ERROR: " + e.getMessage());
+//			System.exit(0);
+//		}
 		return;
 	}
 	
 	private void animate(AvailableMoves move, AvailableAttacks attack, FighterLocation location) {
-		// drawMove returns false if it reached the desired X or Y
-		// so that drawAttack can be drawn
 		if(!drawMove(location, move)){
 			drawAttack(location, attack);
 		}
@@ -102,15 +115,27 @@ public class FightSimulator{
 		switch(attack) {
 		case PUNCH_LOW		: drawPunchLow(location) ; break;
 		case PUNCH_HIGH		: drawPunchHigh(location); break; 
-		case KICK_LOW		: drawPunchHigh(location); break;
-		case KICK_HIGH		: drawKickHigh(location); break;
-		case BLOCK_LOW		: drawPunchHigh(location); break;
-		case BLOCK_HIGH		: drawPunchHigh(location); break;
+		case KICK_LOW		: drawKickLow(location); break;
+		case KICK_HIGH		: drawKickHigh(location);  break;
+		case BLOCK_LOW		: drawBlockLow(location); break;
+		case BLOCK_HIGH		: drawBlockHigh(location); break;
 		}
 	}
-	
+
 	private boolean animateJump(FighterLocation loc) {
-		return false;
+		switch(loc){
+		case LEFT:
+			if(firstFighterCurrentY <= FIGHTER_JUMP_Y) return false;
+			drawStand(loc);
+			firstFighterCurrentY -= (fight.getFirstFighter().getSpeed() + 1);
+			break;
+		case RIGHT:
+			if(secondFighterCurrentY <= FIGHTER_JUMP_Y) return false;
+			drawStand(loc);
+			secondFighterCurrentY -= (fight.getSecondFighter().getSpeed() + 1);
+			break;
+		}
+		return true;
 	}
 
 	private boolean animateCrouch(FighterLocation loc) {
@@ -124,12 +149,10 @@ public class FightSimulator{
 	private boolean animateRunTowards(FighterLocation loc) {
 		switch(loc){
 		case LEFT	:
-			if (firstFighterCurrentX >= FIRST_FIGHTER_MAX_X) 
-				return false;
+			if (firstFighterCurrentX >= FIRST_FIGHTER_MAX_X) return false;
 			drawStand(loc);
 			firstFighterCurrentX += 2 * (fight.getFirstFighter().getSpeed() + 1);
 			break;
-			
 		case RIGHT	:
 			if (secondFighterCurrentX <= SECOND_FIGHTER_MAX_X) return false;
 			drawStand(loc);
@@ -150,8 +173,7 @@ public class FightSimulator{
 	public boolean animateWalkTowards(FighterLocation loc) {
 		switch(loc){
 		case LEFT	:
-			if (firstFighterCurrentX >= FIRST_FIGHTER_MAX_X) 
-				return false;
+			if (firstFighterCurrentX >= FIRST_FIGHTER_MAX_X) return false;
 			drawStand(loc);
 			firstFighterCurrentX += fight.getFirstFighter().getSpeed() + 1;
 			break;
@@ -168,78 +190,176 @@ public class FightSimulator{
 	public void drawPunchHigh(FighterLocation loc) {
 		switch(loc){
 		case LEFT	:
-			circle(firstFighterCurrentX + 0, fighterCurrentY + 100, 50); // Head
-			line(firstFighterCurrentX +   0, fighterCurrentY + 150, firstFighterCurrentX +   0, fighterCurrentY + 250); // Body
+			circle(firstFighterCurrentX + 0, firstFighterCurrentY + 100, 50); // Head
+			line(firstFighterCurrentX +   0, firstFighterCurrentY + 150, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Body
 			
-			line(firstFighterCurrentX -  25, fighterCurrentY + 175, firstFighterCurrentX +  75, fighterCurrentY + 150); // Left arm
-			line(firstFighterCurrentX -  25, fighterCurrentY + 175, firstFighterCurrentX -  25, fighterCurrentY + 200); // Left arm
-			line(firstFighterCurrentX -  25, fighterCurrentY + 200, firstFighterCurrentX +   0, fighterCurrentY + 200); // Right arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX +  75, firstFighterCurrentY + 150); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX -  25, firstFighterCurrentY + 200); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 200, firstFighterCurrentX +   0, firstFighterCurrentY + 200); // Right arm
 			
-			line(firstFighterCurrentX -  50, fighterCurrentY + 300, firstFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
-			line(firstFighterCurrentX +  50, fighterCurrentY + 300, firstFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
+			line(firstFighterCurrentX -  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			line(firstFighterCurrentX +  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
 			break;
 		case RIGHT	:
-			circle(secondFighterCurrentX + 0, fighterCurrentY + 100 , 50); // Head
-			line(secondFighterCurrentX +   0, fighterCurrentY + 150, secondFighterCurrentX +   0, fighterCurrentY + 250); // Body
+			circle(secondFighterCurrentX + 0, secondFighterCurrentY + 100 , 50); // Head
+			line(secondFighterCurrentX +   0, secondFighterCurrentY + 150, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Body
 			
-			line(secondFighterCurrentX +  25, fighterCurrentY + 175, secondFighterCurrentX -  75, fighterCurrentY + 150); // Right arm
-			line(secondFighterCurrentX +  25, fighterCurrentY + 175, secondFighterCurrentX +  25, fighterCurrentY + 200); // Right arm
-			line(secondFighterCurrentX +  25, fighterCurrentY + 200, secondFighterCurrentX -   0, fighterCurrentY + 200); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX -  75, secondFighterCurrentY + 150); // Right arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX +  25, secondFighterCurrentY + 200); // Right arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 200, secondFighterCurrentX -   0, secondFighterCurrentY + 200); // Left arm
 			
-			line(secondFighterCurrentX -  50, fighterCurrentY + 300, secondFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
-			line(secondFighterCurrentX +  50, fighterCurrentY + 300, secondFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			line(secondFighterCurrentX +  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
 			break;
 		}
 	}
 
 	public void drawPunchLow(FighterLocation loc) {
-		
+		switch(loc){
+		case LEFT	:
+			circle(firstFighterCurrentX + 0, firstFighterCurrentY + 100, 50); // Head
+			line(firstFighterCurrentX +   0, firstFighterCurrentY + 150, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Body
+			
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX +  75, firstFighterCurrentY + 200); // Both arms
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX -  25, firstFighterCurrentY + 200); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 200, firstFighterCurrentX +   0, firstFighterCurrentY + 200); // Left arm
+			
+			line(firstFighterCurrentX -  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			line(firstFighterCurrentX +  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Right leg
+			break;
+		case RIGHT	:
+			circle(secondFighterCurrentX + 0, secondFighterCurrentY + 100 , 50); // Head
+			line(secondFighterCurrentX +   0, secondFighterCurrentY + 150, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Body
+			
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX -  75, secondFighterCurrentY + 200); // Both arms
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX +  25, secondFighterCurrentY + 200); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 200, secondFighterCurrentX -   0, secondFighterCurrentY + 200); // Left arm
+			
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			line(secondFighterCurrentX +  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			break;
+		}
 	}
 
 	public void drawKickHigh(FighterLocation loc) {
 		switch(loc){
 		case LEFT	:
-			circle(firstFighterCurrentX + 0, fighterCurrentY + 100, 50); // Head
-			line(firstFighterCurrentX +   0, fighterCurrentY + 150, firstFighterCurrentX +   0, fighterCurrentY + 250); // Body
+			circle(firstFighterCurrentX + 0, firstFighterCurrentY + 100, 50); // Head
+			line(firstFighterCurrentX +   0, firstFighterCurrentY + 150, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Body
 			
-			line(firstFighterCurrentX -  35, fighterCurrentY + 175, firstFighterCurrentX +  35, fighterCurrentY + 175); // Both arms
-			line(firstFighterCurrentX -  35, fighterCurrentY + 275, firstFighterCurrentX +  75, fighterCurrentY + 200); // Left & Right leg
-			line(firstFighterCurrentX -  35, fighterCurrentY + 275, firstFighterCurrentX -  35, fighterCurrentY + 300); // Left leg
-			line(firstFighterCurrentX -  35, fighterCurrentY + 300, firstFighterCurrentX +   0, fighterCurrentY + 275); // Left leg
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 175, firstFighterCurrentX +  35, firstFighterCurrentY + 175); // Both arms
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 275, firstFighterCurrentX +  75, firstFighterCurrentY + 200); // Left & Right leg
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 275, firstFighterCurrentX -  35, firstFighterCurrentY + 300); // Left leg
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 275); // Left leg
 			break;
 		case RIGHT	:
-			circle(secondFighterCurrentX + 0, fighterCurrentY + 100 , 50); // Head
-			line(secondFighterCurrentX +   0, fighterCurrentY + 150, secondFighterCurrentX +   0, fighterCurrentY + 250); // Body
+			circle(secondFighterCurrentX + 0, secondFighterCurrentY + 100 , 50); // Head
+			line(secondFighterCurrentX +   0, secondFighterCurrentY + 150, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Body
 			
-			line(secondFighterCurrentX +  35, fighterCurrentY + 175, secondFighterCurrentX -  35, fighterCurrentY + 175); // Both arms
-			line(secondFighterCurrentX +  35, fighterCurrentY + 275, secondFighterCurrentX -  75, fighterCurrentY + 200); // Left & Right leg
-			line(secondFighterCurrentX +  35, fighterCurrentY + 275, secondFighterCurrentX +  35, fighterCurrentY + 300); // Left leg
-			line(secondFighterCurrentX +  35, fighterCurrentY + 300, secondFighterCurrentX -   0, fighterCurrentY + 275); // Left leg
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 175, secondFighterCurrentX -  35, secondFighterCurrentY + 175); // Both arms
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 275, secondFighterCurrentX -  75, secondFighterCurrentY + 200); // Left & Right leg
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 275, secondFighterCurrentX +  35, secondFighterCurrentY + 300); // Left leg
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 300, secondFighterCurrentX -   0, secondFighterCurrentY + 275); // Left leg
 			break;
 		}
 	}
 
 	public void drawKickLow(FighterLocation loc) {
-		
-	}
-	
-	public void drawStand(FighterLocation loc){
 		switch(loc){
 		case LEFT	:
-			circle(firstFighterCurrentX + 0, fighterCurrentY + 100 , 50); // Head
-			line(firstFighterCurrentX +   0, fighterCurrentY + 150, firstFighterCurrentX +   0, fighterCurrentY + 250); // Body
-			line(firstFighterCurrentX -  50, fighterCurrentY + 175, firstFighterCurrentX +  50, fighterCurrentY + 175); // Both arms
-			line(firstFighterCurrentX -  50, fighterCurrentY + 300, firstFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
-			line(firstFighterCurrentX +  50, fighterCurrentY + 300, firstFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
-			firstFighterCurrentX += fight.getFirstFighter().getSpeed() + 1;
+			circle(firstFighterCurrentX + 0, firstFighterCurrentY + 100, 50); // Head
+			line(firstFighterCurrentX +   0, firstFighterCurrentY + 150, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Body
+			
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 175, firstFighterCurrentX +  35, firstFighterCurrentY + 175); // Both arms
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 250, firstFighterCurrentX +  75, firstFighterCurrentY + 250); // Left & Right leg
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 250, firstFighterCurrentX -  35, firstFighterCurrentY + 275); // Left leg
+			line(firstFighterCurrentX -  35, firstFighterCurrentY + 275, firstFighterCurrentX +   0, firstFighterCurrentY + 275); // Left leg
 			break;
 		case RIGHT	:
-			circle(secondFighterCurrentX + 0, fighterCurrentY + 100 , 50); // Head
-			line(secondFighterCurrentX +   0, fighterCurrentY + 150, secondFighterCurrentX +   0, fighterCurrentY + 250); // Body
-			line(secondFighterCurrentX -  50, fighterCurrentY + 175, secondFighterCurrentX +  50, fighterCurrentY + 175); // Both arms
-			line(secondFighterCurrentX -  50, fighterCurrentY + 300, secondFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
-			line(secondFighterCurrentX +  50, fighterCurrentY + 300, secondFighterCurrentX +   0, fighterCurrentY + 250); // Left leg
-			secondFighterCurrentX -= fight.getSecondFighter().getSpeed() + 1;
+			circle(secondFighterCurrentX + 0, secondFighterCurrentY + 100 , 50); // Head
+			line(secondFighterCurrentX +   0, secondFighterCurrentY + 150, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Body
+			
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 175, secondFighterCurrentX -  35, secondFighterCurrentY + 175); // Both arms
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 250, secondFighterCurrentX -  75, secondFighterCurrentY + 250); // Left & Right leg
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 250, secondFighterCurrentX +  35, secondFighterCurrentY + 275); // Left leg
+			line(secondFighterCurrentX +  35, secondFighterCurrentY + 275, secondFighterCurrentX -   0, secondFighterCurrentY + 275); // Left leg
+			break;
+		}
+	}
+	
+	public void drawStand(FighterLocation location){
+		switch(location){
+		case LEFT	:
+			circle(firstFighterCurrentX + 0, firstFighterCurrentY + 100 , 50); // Head
+			line(firstFighterCurrentX +   0, firstFighterCurrentY + 150, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Body
+			line(firstFighterCurrentX -  50, firstFighterCurrentY + 175, firstFighterCurrentX +  50, firstFighterCurrentY + 175); // Both arms
+			line(firstFighterCurrentX -  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			line(firstFighterCurrentX +  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			break;
+		case RIGHT	:
+			circle(secondFighterCurrentX + 0, secondFighterCurrentY + 100 , 50); // Head
+			line(secondFighterCurrentX +   0, secondFighterCurrentY + 150, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Body
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 175, secondFighterCurrentX +  50, secondFighterCurrentY + 175); // Both arms
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			line(secondFighterCurrentX +  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			break;
+		}
+	}
+	
+	private void drawBlockHigh(FighterLocation location) {
+		switch(location){
+		case LEFT	:
+			circle(firstFighterCurrentX + 0, firstFighterCurrentY + 100, 50); // Head
+			line(firstFighterCurrentX +   0, firstFighterCurrentY + 150, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Body
+			
+			line(firstFighterCurrentX +  50, firstFighterCurrentY + 175, firstFighterCurrentX +  50, firstFighterCurrentY + 140); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX +  50, firstFighterCurrentY + 175); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX -  25, firstFighterCurrentY + 200); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 200, firstFighterCurrentX +   0, firstFighterCurrentY + 200); // Right arm
+			
+			line(firstFighterCurrentX -  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			line(firstFighterCurrentX +  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			break;
+		case RIGHT	:
+			circle(secondFighterCurrentX + 0, secondFighterCurrentY + 100 , 50); // Head
+			line(secondFighterCurrentX +   0, secondFighterCurrentY + 150, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Body
+			
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 175, secondFighterCurrentX -  50, secondFighterCurrentY + 140); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX -  50, secondFighterCurrentY + 175); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX +  25, secondFighterCurrentY + 200); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 200, secondFighterCurrentX -   0, secondFighterCurrentY + 200); // Right arm
+			
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			line(secondFighterCurrentX +  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			break;
+		}
+	}
+
+	private void drawBlockLow(FighterLocation location) {
+		switch(location){
+		case LEFT	:
+			circle(firstFighterCurrentX + 0, firstFighterCurrentY + 100, 50); // Head
+			line(firstFighterCurrentX +   0, firstFighterCurrentY + 150, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Body
+			
+			line(firstFighterCurrentX +  50, firstFighterCurrentY + 175, firstFighterCurrentX +  50, firstFighterCurrentY + 210); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX +  50, firstFighterCurrentY + 175); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 175, firstFighterCurrentX -  25, firstFighterCurrentY + 200); // Left arm
+			line(firstFighterCurrentX -  25, firstFighterCurrentY + 200, firstFighterCurrentX +   0, firstFighterCurrentY + 200); // Right arm
+			
+			line(firstFighterCurrentX -  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			line(firstFighterCurrentX +  50, firstFighterCurrentY + 300, firstFighterCurrentX +   0, firstFighterCurrentY + 250); // Left leg
+			break;
+		case RIGHT	:
+			circle(secondFighterCurrentX + 0, secondFighterCurrentY + 100 , 50); // Head
+			line(secondFighterCurrentX +   0, secondFighterCurrentY + 150, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Body
+			
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 175, secondFighterCurrentX -  50, secondFighterCurrentY + 210); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX -  50, secondFighterCurrentY + 175); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 175, secondFighterCurrentX +  25, secondFighterCurrentY + 200); // Left arm
+			line(secondFighterCurrentX +  25, secondFighterCurrentY + 200, secondFighterCurrentX -   0, secondFighterCurrentY + 200); // Right arm
+			
+			line(secondFighterCurrentX -  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
+			line(secondFighterCurrentX +  50, secondFighterCurrentY + 300, secondFighterCurrentX +   0, secondFighterCurrentY + 250); // Left leg
 			break;
 		}
 	}
@@ -271,11 +391,21 @@ public class FightSimulator{
         GL11.glEnd();
 	}
 	
-	private void initOpenGL() {
+	private void initializeOpenGL() {
 		GL11.glMatrixMode(GL11.GL_PROJECTION);
 		GL11.glLoadIdentity();
 		GL11.glOrtho(0, FightSimulator.WINDOW_WIDTH, FightSimulator.WINDOW_HEIGHT, 0, 1, -1);
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		GL11.glHint(GL11.GL_POINT_SMOOTH_HINT | GL11.GL_LINE_SMOOTH_HINT | GL11.GL_POLYGON_SMOOTH_HINT, GL11.GL_DONT_CARE);
 	}
+	
+	private void clearScreen() {
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+	}
+	/*
+	private void resetFighterY(){
+		firstFighterCurrentY = FIGHTER_INITIAL_Y; 
+		secondFighterCurrentY = FIGHTER_INITIAL_Y;
+	}
+	*/
 }

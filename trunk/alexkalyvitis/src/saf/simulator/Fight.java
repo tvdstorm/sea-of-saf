@@ -19,8 +19,8 @@ public class Fight {
 	private List<String> firstFighterConditions;
 	private List<String> secondFighterConditions;
 	
-	private Behavior firstFighterMove;
-	private Behavior secondFighterMove;
+	private Behavior firstFightersMove;
+	private Behavior secondFightersMove;
 	
 	private String winner;
 	
@@ -103,10 +103,10 @@ public class Fight {
 		}
 		
 		if(firstFighter.getStatus() == FighterStatus.READY){
-			firstFighterMove = calculateNextMove(firstFighter, firstFighterConditions);
+			firstFightersMove = calculateNextMove(firstFighter, firstFighterConditions);
 		}
 		if(secondFighter.getStatus() == FighterStatus.READY){
-			secondFighterMove = calculateNextMove(secondFighter, secondFighterConditions);
+			secondFightersMove = calculateNextMove(secondFighter, secondFighterConditions);
 		}
 	}
 	
@@ -136,15 +136,11 @@ public class Fight {
 		return null;
 	}
 
-	public Behavior flushFirstFightersNextMove(){
-		Behavior temp = firstFighterMove;
-		firstFighterMove = null;
-		return temp;
+	public Behavior getFirstFightersMove(){
+		return firstFightersMove;
 	}
 	
-	public Behavior flushSecondFightersNextMove(){
-		Behavior temp = secondFighterMove;
-		secondFighterMove = null;
-		return temp;
+	public Behavior getSecondFightersMove(){
+		return secondFightersMove;
 	}
 }
