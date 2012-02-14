@@ -12,12 +12,12 @@ private set[str] conditions = {"always", "near", "far", "much_stronger", "strong
 private int characteristicMinimum = 0;
 private int characteristicMaximum = 15;
 
-private str unknownConditionMessage = "Unknown condition: ";
-private str unknownMoveActionMessage = "Unknown move action: ";
-private str unknownFightActionMessage = "Unknown fight action: ";
-private str unknownCharacteristicMessage = "Unknown characteristic: ";
-private str alwaysOmittedMessage = "One of the characteristics must start with an always condition.";
-private str invalidCharacteristicValueMessage = 
+public str unknownConditionMessage = "Unknown condition: ";
+public str unknownMoveActionMessage = "Unknown move action: ";
+public str unknownFightActionMessage = "Unknown fight action: ";
+public str unknownCharacteristicMessage = "Unknown characteristic: ";
+public str alwaysOmittedMessage = "One of the characteristics must start with an always condition.";
+public str invalidCharacteristicValueMessage = 
     "Invalid characteristic value (<characteristicMinimum> - <characteristicMaximum> allowed): ";
 
 public set[Message] validate(Bot bot) {
@@ -39,9 +39,7 @@ public set[Message] validate(Bot bot) {
 
 private set[Message] validateAlways(Bot bot) {
     visit(bot) {
-        case simpleCondition(str condition): { 
-            if(condition == "always") return {};
-        }
+        case simpleCondition("always"): return {};
     }
     
     return { error(alwaysOmittedMessage, bot@location) };
@@ -66,7 +64,9 @@ private set[Message] validateBehaviourRule(BehaviourRule behaviourRule) {
     
     visit(behaviourRule) {
         case sc:simpleCondition(str condition): 
-            if(!(condition in conditions)) validationMessages += error(unknownConditionMessage + condition, sc@location);
+            if(!(condition in conditions)) {
+                validationMessages += error(unknownConditionMessage + condition, sc@location);
+            }
         case cma:chooseMoveAction(list[str] chooseMoveActions): 
             validationMessages += validateMoveActions(chooseMoveActions, cma@location);
         case sma:simpleMoveAction(str moveAction): 
@@ -80,26 +80,10 @@ private set[Message] validateBehaviourRule(BehaviourRule behaviourRule) {
     return validationMessages;
 }
 
-private set[Message] validateMoveActions(list[str] checkMoveActions, loc location) {
-   set[Message] validationMessages = {};
-   
-   for(str checkMoveAction <- checkMoveActions) {
-        if(!(checkMoveAction in moveActions)) {
-            validationMessages += error(unknownMoveActionMessage + checkMoveAction, location);
-        }
-    } 
-    
-    return validationMessages;
-}
+private set[Message] validateMoveActions(list[str] checkMoveActions, loc location) = 
+   { error(unknownMoveActionMessage + checkMoveAction, location) 
+        | str checkMoveAction <- checkMoveActions, !(checkMoveAction in moveActions) };
 
-private set[Message] validateFightActions(list[str] checkFightActions, loc location) {
-    set[Message] validationMessages = {};
-    
-    for(str checkFightAction <- checkFightActions) {
-        if(!(checkFightAction in fightActions)) {
-            validationMessages += error(unknownFightActionMessage + checkFightAction, location);
-        }
-    }
-    
-    return validationMessages;
-}
+private set[Message] validateFightActions(list[str] checkFightActions, loc location) =
+    { error(unknownFightActionMessage + checkFightAction, location) 
+        | str checkFightAction <- checkFightActions, !(checkFightAction in fightActions) };
