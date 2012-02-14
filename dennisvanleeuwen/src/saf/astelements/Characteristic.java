@@ -1,9 +1,9 @@
 package saf.astelements;
 
-import saf.ISAFElement;
-import saf.ISAFElementVisitor;
+import saf.ISAFNode;
+import saf.ISAFNodeVisitor;
 
-public class Characteristic implements ISAFElement{
+public class Characteristic implements ISAFNode{
 	public String item;
 	public int value;
 	
@@ -21,7 +21,7 @@ public class Characteristic implements ISAFElement{
 	}
 
 	@Override
-	public void accept(ISAFElementVisitor visitor){
+	public void accept(ISAFNodeVisitor visitor){
 		visitor.visit(this);		
 	}
 }

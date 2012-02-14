@@ -1,6 +1,6 @@
 package saf.astelements.conditions;
 
-import saf.ISAFElementVisitor;
+import saf.ISAFNodeVisitor;
 import saf.astelements.ICondition;
 
 public class ORConditionComposite extends ConnectiveConditionComposite{
@@ -9,13 +9,14 @@ public class ORConditionComposite extends ConnectiveConditionComposite{
 	}
 	
 	@Override
-	public void accept(ISAFElementVisitor visitor){
+	public void accept(ISAFNodeVisitor visitor){
 		visitor.visit(this);
 	}
 
 	@Override
 	public Boolean isConditionNodeActive(ICondition con) {
-		return this.getLhsCondition().isConditionNodeActive(con) || this.getRhsCondition().isConditionNodeActive(con);
+		return this.getLhsCondition().isConditionNodeActive(con) || 
+			   this.getRhsCondition().isConditionNodeActive(con);
 	}
 
 	@Override

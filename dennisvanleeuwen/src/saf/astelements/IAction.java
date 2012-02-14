@@ -1,6 +1,7 @@
 package saf.astelements;
 
-import saf.ISAFElement;
+import saf.ISAFNode;
 
-public interface IAction extends ISAFElement{
+public interface IAction extends ISAFNode{
+	public String getNodeName();
 }

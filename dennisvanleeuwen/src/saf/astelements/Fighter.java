@@ -2,10 +2,10 @@ package saf.astelements;
 
 import java.util.List;
 
-import saf.ISAFElement;
-import saf.ISAFElementVisitor;
+import saf.ISAFNode;
+import saf.ISAFNodeVisitor;
 
-public class Fighter implements ISAFElement{
+public class Fighter implements ISAFNode{
 	private String name;
 	private List<Characteristic> characteristics;
 	private List<Rule> rules;
@@ -29,7 +29,7 @@ public class Fighter implements ISAFElement{
 	}
 	
 	@Override
-	public void accept(ISAFElementVisitor visitor){
+	public void accept(ISAFNodeVisitor visitor){
 		visitor.visit(this);		
 	}
 }
