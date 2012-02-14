@@ -1,4 +1,6 @@
-package game;
+package game.view;
+
+import game.FightEngine;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -14,7 +16,10 @@ public class FightProgressView extends JPanel implements Observer {
 	public FightProgressView(FightEngine fightEngine) {
 		
 		fightEngine.addObserver(this);
-
+		initializeGUI();
+	}
+	
+	private void initializeGUI() {
 		leftFighterHealth = new JProgressBar(0, 100);
 		leftFighterHealth.setValue(100);
 		leftFighterHealth.setStringPainted(true);
@@ -37,7 +42,4 @@ public class FightProgressView extends JPanel implements Observer {
 		leftFighterHealth.setValue(fightEngineObservable.getLeftHealth());
 		rightFighterHealth.setValue(fightEngineObservable.getRightHealth());
 	}
-	
-	
-
 }

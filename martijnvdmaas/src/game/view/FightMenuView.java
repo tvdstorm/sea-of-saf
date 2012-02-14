@@ -1,4 +1,6 @@
-package game;
+package game.view;
+
+import game.controller.FightMenuViewController;
 
 import java.awt.event.KeyEvent;
 
