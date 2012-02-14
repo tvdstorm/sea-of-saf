@@ -1,5 +1,6 @@
 package saf.variable;
 
+//Enum types must be the upercase of the given text value.
 public interface IEnums {
 	public enum Attack {
 		BLOCK_HIGH("block_high"), 

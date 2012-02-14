@@ -8,22 +8,25 @@ import java.io.IOException;
 import javax.swing.JPanel;
 
 import saf.ast.Bot;
-import saf.state.Game;
+import saf.state.BotState;
 import saf.variable.ISettings;
 
+@SuppressWarnings("serial")
 public class Arena extends JPanel implements ISettings {
 	
-	private Game game;
 	private Bot left;
+	private BotState leftState;
 	private Bot right;
+	private BotState rightState;
 	private BotDrawer botDrawer;
 	private boolean endGame = false;
 	
-	public Arena(Game game, Bot left, Bot right) {
+	public Arena(Bot left, BotState leftState, Bot right, BotState rightState) {
 		
-		this.game = game;
 		this.left = left;
+		this.leftState = leftState;
 		this.right = right;
+		this.rightState = rightState;
 	
 		botDrawer = new BotDrawer();
 		
@@ -34,7 +37,7 @@ public class Arena extends JPanel implements ISettings {
 	
     public void paint(Graphics g) {
     	
-    	if(game.getLeftBot().getHealth() <= 0 || game.getRightBot().getHealth() <= 0) {
+    	if(leftState.getHealth() <= 0 || rightState.getHealth() <= 0) {
     		endGame = true;
     	}
     	
@@ -42,11 +45,10 @@ public class Arena extends JPanel implements ISettings {
     	g.fillRect(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
     	
     	try {
-    		botDrawer.draw(g, game.getLeftBot(), LEFT_BOT_XPOS, LEFT_BOT_YPOS);
-    		botDrawer.draw(g, game.getRightBot(), RIGHT_BOT_XPOS, RIGHT_BOT_YPOS);
+    		botDrawer.draw(g, leftState, LEFT_BOT_XPOS, LEFT_BOT_YPOS);
+    		botDrawer.draw(g, rightState, RIGHT_BOT_XPOS, RIGHT_BOT_YPOS);
 		} catch (IOException e) {
-			// Can't add trowsclause so print stacktrace.
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
     	 
     	if(endGame) {
@@ -62,11 +64,11 @@ public class Arena extends JPanel implements ISettings {
     	
     	String text = "";
     	
-    	if(game.getLeftBot().getHealth() <= 0) {
+    	if(leftState.getHealth() <= 0) {
     		text += right.getName();
     	}
     	
-    	if(game.getRightBot().getHealth() <= 0) {
+    	if(rightState.getHealth() <= 0) {
     		text += left.getName();
     	}
     	

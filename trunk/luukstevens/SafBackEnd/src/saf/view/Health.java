@@ -3,30 +3,31 @@ package saf.view;
 import javax.swing.*;
 
 import saf.ast.Bot;
-import saf.state.Game;
+import saf.state.BotState;
 
+@SuppressWarnings("serial")
 public class Health extends JPanel {	
 	
 	private JProgressBar leftHealthBar;
 	private JProgressBar rightHealthBar;
-	
-	private Game game;
 	private Bot left;
+	private BotState leftState;
 	private Bot right;
+	private BotState rightState;
 	
-	public Health(Game game, Bot left, Bot right) {
-		
-		this.game = game;
+	public Health(Bot left, BotState leftState, Bot right, BotState rightState) {
 		this.left = left;
+		this.leftState = leftState;
 		this.right = right;
+		this.rightState = rightState;
 		
 		addComponents();
 	}
 	
 	public void update() {
 		
-		leftHealthBar.setValue(game.getLeftBot().getHealth());
-		rightHealthBar.setValue(game.getRightBot().getHealth());
+		leftHealthBar.setValue(leftState.getHealth());
+		rightHealthBar.setValue(rightState.getHealth());
 	}
 	
 	private void addComponents() {

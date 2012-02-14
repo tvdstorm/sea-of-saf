@@ -4,25 +4,40 @@ import java.util.LinkedList;
 import java.util.List;
 
 import saf.ast.Action;
-import saf.state.Game;
+import saf.ast.Bot;
+import saf.state.BotState;
 import saf.variable.IEnums;
 import saf.variable.ISettings;
 import saf.view.*;
 
 public class Fight implements ISettings, IEnums {
 	
-	public static void start(Game game, saf.ast.Bot left, saf.ast.Bot right, Main view) throws InterruptedException {		
+	private Bot left;
+	private BotState leftState;
+	private Bot right;
+	private BotState rightState;
+	private Main view;
+	
+	public Fight(Bot left, BotState leftState, Bot right, BotState rightState, Main view) {
+		this.left = left;
+		this.leftState = leftState;
+		this.right = right;
+		this.rightState = rightState;
+		this.view = view;
+	}
+	
+	public void start() throws InterruptedException {		
 		
-		while(game.getLeftBot().getHealth() > 0 && game.getRightBot().getHealth() > 0) {
-			reduceHealth(left, game.getLeftBot(), right, game.getRightBot());
-			reduceHealth(right, game.getRightBot(), left, game.getLeftBot());
-			updateBotsAndView(game, left, right, view);
+		while(leftState.getHealth() > 0 && rightState.getHealth() > 0) {
+			reduceHealth(left, leftState, right, rightState);
+			reduceHealth(right, rightState, left, leftState);
+			updateBotsAndView();
 			
 			Thread.sleep(DELAY);
 		}
 	}
 	
-	private static void reduceHealth(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
+	private void reduceHealth(Bot botA, BotState stateA, Bot botB, BotState stateB) {
 		
 		if(stateA.getCurrentAttack().equals(stateB.getCurrentAttack()) && (botA.getSpeed() > botB.getSpeed())) {
 			reduceHealthSameAttack(botA, stateA, botB,  stateB);
@@ -31,7 +46,7 @@ public class Fight implements ISettings, IEnums {
 		}
 	}
 	
-	private static void reduceHealthSameAttack(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
+	private void reduceHealthSameAttack(Bot botA, BotState stateA, Bot botB, BotState stateB) {
 		
 		Action aAttack = stateA.getCurrentAttack();
 		
@@ -46,7 +61,7 @@ public class Fight implements ISettings, IEnums {
 		}
 	}
 	
-	private static void retuceHealthDifferentAttack(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
+	private void retuceHealthDifferentAttack(Bot botA, BotState stateA, Bot botB, BotState stateB) {
 		
 		Action aAttack = stateA.getCurrentAttack();
 		Action bAttack = stateB.getCurrentAttack();
@@ -70,7 +85,7 @@ public class Fight implements ISettings, IEnums {
 		}
 	}
 	
-	public static boolean canReach(saf.ast.Bot botA, saf.state.Bot stateA,  saf.ast.Bot botB, saf.state.Bot stateB) {
+	public boolean canReach(Bot botA, BotState stateA, Bot botB, BotState stateB) {
 		
 		if(stateA.getCurrentAttack().isAttack(Attack.KICK_LOW) 
 				&& stateB.getCurrentMove().isMove(Move.JUMP)) return false;
@@ -79,19 +94,19 @@ public class Fight implements ISettings, IEnums {
 				&& stateB.getCurrentMove().isMove(Move.CROUCH)) return false;
 		
 		if(stateA.getCurrentAttack().isAttack(Attack.PUNCH_LOW) || stateA.getCurrentAttack().isAttack(Attack.PUNCH_HIGH)) {
-			if(stateA.getWalkedOrRunnedAway() && stateB.getWalkedOrRunnedAway() 
+			if(stateA.getWalkedOrRanAway() && stateB.getWalkedOrRanAway() 
 					&& botA.getCharacteristicValue(Characteristic.PUNCH_REACH) > THRESHOLD_REACH_BOTH_FAR) 
 						return true;
-			if(stateA.getWalkedOrRunnedAway() || stateB.getWalkedOrRunnedAway() 
+			if(stateA.getWalkedOrRanAway() || stateB.getWalkedOrRanAway() 
 					&& botA.getCharacteristicValue(Characteristic.PUNCH_REACH) > THRESHOLD_REACH_ONE_FAR) 
 						return true;
 		}
 		
 		if(stateA.getCurrentAttack().isAttack(Attack.KICK_LOW) || stateA.getCurrentAttack().isAttack(Attack.KICK_HIGH)) {
-			if(stateA.getWalkedOrRunnedAway() && stateB.getWalkedOrRunnedAway() 
+			if(stateA.getWalkedOrRanAway() && stateB.getWalkedOrRanAway() 
 					&& botA.getCharacteristicValue(Characteristic.KICK_REACH) > THRESHOLD_REACH_BOTH_FAR) 
 						return true;
-			if(stateA.getWalkedOrRunnedAway() || stateB.getWalkedOrRunnedAway() 
+			if(stateA.getWalkedOrRanAway() || stateB.getWalkedOrRanAway() 
 					&& botA.getCharacteristicValue(Characteristic.KICK_REACH) > THRESHOLD_REACH_ONE_FAR) 
 						return true;
 		}
@@ -99,38 +114,38 @@ public class Fight implements ISettings, IEnums {
 		return false;
 	}
 	
-	private static void updateBotsAndView(Game game, saf.ast.Bot left, saf.ast.Bot right, Main view) {
+	private void updateBotsAndView() {
 		
 		List<Condition> leftBotConditions = new LinkedList<Condition>();
 		List<Condition> rightBotConditions = new LinkedList<Condition>();
 		
-		leftBotConditions.add(isWeakerStrongerEven(game.getLeftBot(), game.getRightBot()));
-		rightBotConditions.add(isWeakerStrongerEven(game.getRightBot(), game.getLeftBot()));
+		leftBotConditions.add(isWeakerStrongerEven(leftState, rightState));
+		rightBotConditions.add(isWeakerStrongerEven(rightState, leftState));
 		
-		Condition farOrNear = isFarOrNear(game.getLeftBot(), game.getRightBot());
+		Condition farOrNear = isFarOrNear(leftState, rightState);
 		
 		leftBotConditions.add(farOrNear);
 		rightBotConditions.add(farOrNear);
 		
-		Condition leftMuchWeakerStronger = isMuchWeakerStronger(game.getLeftBot(), game.getRightBot());
-		Condition rightMuchWeakerStronger = isMuchWeakerStronger(game.getRightBot(), game.getLeftBot());
+		Condition leftMuchWeakerStronger = isMuchWeakerStronger(leftState, rightState);
+		Condition rightMuchWeakerStronger = isMuchWeakerStronger(rightState, leftState);
 		
 		if(leftMuchWeakerStronger != null) leftBotConditions.add(leftMuchWeakerStronger);
 		if(rightMuchWeakerStronger != null) rightBotConditions.add(rightMuchWeakerStronger);
 		
-		game.getLeftBot().update(left.getBehaviourRules(), leftBotConditions);
-		game.getRightBot().update(right.getBehaviourRules(), rightBotConditions);
+		leftState.update(leftBotConditions);
+		rightState.update(rightBotConditions);
 		view.update();
 	}
 
-	private static Condition isWeakerStrongerEven(saf.state.Bot botA, saf.state.Bot botB) {
+	private Condition isWeakerStrongerEven(saf.state.BotState botA, saf.state.BotState botB) {
 		if(botA.getHealth() > botB.getHealth()) return Condition.STRONGER;
 		if(botA.getHealth() < botB.getHealth()) return Condition.WEAKER;
 		
 		return Condition.EVEN;
 	}
 
-	private static Condition isMuchWeakerStronger(saf.state.Bot botA, saf.state.Bot botB) {
+	private Condition isMuchWeakerStronger(saf.state.BotState botA, saf.state.BotState botB) {
 		if((botA.getHealth() +  THRESHOLD_MUCH_WEAKER_STRONGER) > botB.getHealth()) 
 			return Condition.MUCH_STRONGER;
 		if((botA.getHealth() - THRESHOLD_MUCH_WEAKER_STRONGER) < botB.getHealth()) 
@@ -139,8 +154,8 @@ public class Fight implements ISettings, IEnums {
 		return null;
 	}
 
-	private static Condition isFarOrNear(saf.state.Bot botA, saf.state.Bot botB) {
-		if(botA.getWalkedOrRunnedAway() && botB.getWalkedOrRunnedAway()) return Condition.FAR;
+	private Condition isFarOrNear(saf.state.BotState botA, saf.state.BotState botB) {
+		if(botA.getWalkedOrRanAway() && botB.getWalkedOrRanAway()) return Condition.FAR;
 		
 		return Condition.NEAR;
 	}
