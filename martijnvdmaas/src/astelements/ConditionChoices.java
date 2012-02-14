@@ -2,9 +2,6 @@ package astelements;
 
 import java.util.ArrayList;
 
-import visitor.SAFElement;
-import visitor.SAFElementVisitor;
-
 public class ConditionChoices
 {
 	private ArrayList<ConditionGroup> conditionGroups;
