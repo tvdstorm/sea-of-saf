@@ -14,20 +14,15 @@ public Node toXmlNodeTree(Bot bot) {
 }
 
 private Node characteristicToXmlNode(list[Characteristic] characteristics) {
-    list[Node] characteristicNodes = [];
-    
-    for(Characteristic characteristic <- characteristics) {
-        characteristicNodes += element("characteristic", [attribute("name", characteristic.name), 
-            attribute("value", "<characteristic.val>")]);
-    }
+    list[Node] characteristicNodes = [ element("characteristic", [attribute("name", characteristic.name), 
+            attribute("value", "<characteristic.val>")]) | Characteristic characteristic <- characteristics ];
     
     return element("characteristics", characteristicNodes);
 }
 
 private Node behaviourToXmlNode(Bot bot) {
-   list[Node] behaviourRuleNodes = [];
    
-   for(BehaviourRule behaviourRule <- bot.behaviourRules) {
+   behaviourRuleNodes = for(BehaviourRule behaviourRule <- bot.behaviourRules) {
         Node moveActionNode = element("moveActions", 
             convertListToNodes("action", getMoveActions(behaviourRule.moveAction)));
         
@@ -36,41 +31,26 @@ private Node behaviourToXmlNode(Bot bot) {
         
         Node condition = conditionsToXmlNodeTree(behaviourRule.condition);
    
-        behaviourRuleNodes += element("behaviourRule", [condition, moveActionNode, fightActionNode]);
+        append element("behaviourRule", [condition, moveActionNode, fightActionNode]);
    }
    
    return element("behaviourRules", behaviourRuleNodes);
 }
 
-public Node conditionsToXmlNodeTree(Ast::Condition condition) {
-    switch(condition) {
-        case andCondition(Condition firstCondition, Condition secondCondition): {
-            return element("andCondition", 
-                [conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
-        }
-        case orCondition(Condition firstCondition, Condition secondCondition): {
-            return element("orCondition", 
-                [conditionsToXmlNodeTree(firstCondition), conditionsToXmlNodeTree(secondCondition)]);
-        }
-        case simpleCondition(str condition): {
-            return element("simpleCondition", [attribute("value", condition)]);
-        }
-    }
-}
+private Node conditionsToXmlNodeTree(andCondition(a, b)) =
+    element("andCondition", [conditionsToXmlNodeTree(a), conditionsToXmlNodeTree(b)]);
+    
+private Node conditionsToXmlNodeTree(orCondition(a, b)) =
+    element("orCondition", [conditionsToXmlNodeTree(a), conditionsToXmlNodeTree(b)]);
 
-private list[str] getMoveActions(MoveAction moveAction) {
-    switch(moveAction) {
-        case simpleMoveAction(str moveAction): return [moveAction];
-        case chooseMoveAction(list[str] moveActions): return moveActions;
-    }
-}
+private Node conditionsToXmlNodeTree(simpleCondition(str condition)) =
+    element("simpleCondition", [attribute("value", condition)]);
 
-private list[str] getFightActions(FightAction moveAction) {
-    switch(moveAction) {
-        case simpleFightAction(str fightAction): return [fightAction];
-        case chooseFightAction(list[str] fightActions): return fightActions;
-    }
-}
+private list[str] getMoveActions(simpleMoveAction(str moveAction)) = [moveAction];
+private list[str] getMoveActions(chooseMoveAction(list[str] moveActions)) = moveActions;
+
+private list[str] getFightActions(simpleFightAction(str fightAction)) = [fightAction];
+private list[str] getFightActions(chooseFightAction(list[str] fightActions)) = fightActions;
 
 private list[Node] convertListToNodes(str nodeName, list[str] items) =
     [ element(nodeName, [attribute("value", item)]) | item <- items ];

@@ -3,6 +3,7 @@ module Testing
 import ParseTree;
 import Set;
 import lang::xml::DOM;
+import Message;
 
 import Language;
 import Ast;
@@ -123,8 +124,10 @@ public test bool valid() {
 
 public test bool alwaysOmittedBot() {
      ast = getAst("Test{}");
-     messages = validate(ast);
-     return size(messages) == 1; //1 error message, because always is omitted
+     if (m <- validate(ast)) {
+       return m.msg == alwaysOmittedMessage;
+     }
+     return false;
 }
 
 public test bool invalidCharacteristic() {
@@ -133,8 +136,10 @@ public test bool invalidCharacteristic() {
                 x = 10
                 always[run_away kick_high] 
             }");
-     messages = validate(ast);
-     return size(messages) == 1;
+     if (m <- validate(ast)) {
+       return m.msg == unknownCharacteristicMessage + "x";
+     }
+     return false;
 }
 
 public test bool invalidCondition() {
@@ -143,20 +148,26 @@ public test bool invalidCondition() {
                 x[run_away kick_high]
                 always[run_away kick_high] 
             }");
-     messages = validate(ast);
-     return size(messages) == 1;
+     if (m <- validate(ast)) {
+       return m.msg == unknownConditionMessage + "x";
+     }
+     return false;
 }
 
 public test bool invalidMove() {
      ast = getAst("Test{ always[x kick_high] }");
-     messages = validate(ast);
-     return size(messages) == 1;
+     if (m <- validate(ast)) {
+       return m.msg == unknownMoveActionMessage + "x";
+     }
+     return false;
 }
 
 public test bool invalidAttack() {
      ast = getAst("Test{ always[run_away x] }");
-     messages = validate(ast);
-     return size(messages) == 1;
+     if (m <- validate(ast)) {
+       return m.msg == unknownFightActionMessage + "x";
+     }
+     return false;
 }
 
 //Serialization tests

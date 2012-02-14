@@ -22,48 +22,32 @@ node outline(BehaviourRule behaviourRule) =
     outline(behaviourRule.fightAction)])[@label="Rule"][@\loc=behaviourRule@location];
 
 node outline(Condition condition) = { 
-    str conditionText = simplifyCondition(condition);
+    str conditionText = prettyPrintCondition(condition);
     "Condition"()[@label= "Condition: " + conditionText][@\loc=condition@location];
 };
 
 node outline(MoveAction moveAction) = { 
-    str moveText = "";
-
-    switch(moveAction) {
-        case chooseMoveAction(list[str] moveActions): {
-            moveText = "choose( " + intercalate(" ", moveActions) + ")";
-        }
-        case simpleMoveAction(str moveAction): moveText = moveAction;
-    }
-    
+    str moveText = prettyPrintMove(moveAction);
     "MoveAction"()[@label= "Move action: " + moveText][@\loc=moveAction@location]; 
 };
 
 node outline(FightAction fightAction) = { 
-    str fightText = "";
-
-    switch(fightAction) {
-        case chooseFightAction(list[str] fightActions): {
-            fightText = "choose( " + intercalate(" ", fightActions) + ")";
-        }
-        case simpleFightAction(str fightAction): fightText = fightAction;
-    }
-    
+    str fightText = prettyPrintFight(fightAction);
     "FightAction"()[@label= "Fight action: " + fightText][@\loc=fightAction@location]; 
 };
 
-//Compose a string of the condition nodes recursively.
-private str simplifyCondition(Condition condition) {
-    switch(condition) {
-        case andCondition(Condition firstCondition, Condition secondCondition): {
-            return "(" + simplifyCondition(firstCondition) + " and " + simplifyCondition(secondCondition) + ")";
-        }
-        case orCondition(Condition firstCondition, Condition secondCondition): {
-            return "(" + simplifyCondition(firstCondition) + " or " + simplifyCondition(secondCondition) + ")";
-        }
-        case sc:simpleCondition(str condition): {
-            return condition;
-        }
-    }
-}
+private str prettyPrintMove(chooseMoveAction(actions)) = "choose( " + intercalate(" ", actions) + ")";
+private str prettyPrintMove(simpleMoveAction(action)) = action;
+    
+private str prettyPrintFight(chooseFightAction(actions)) = "choose( " + intercalate(" ", actions) + ")";   
+private str prettyPrintFight(simpleFightAction(action)) = action;
+
+private str prettyPrintCondition(andCondition(a, b)) 
+    =  "(" + prettyPrintCondition(a) + " and " + prettyPrintCondition(b) + ")";
+    
+private str prettyPrintCondition(orCondition(a, b)) 
+    =  "(" + prettyPrintCondition(a) + " or " + prettyPrintCondition(b) + ")";
+
+private str prettyPrintCondition(simpleCondition(a)) =  a;
+    
 
