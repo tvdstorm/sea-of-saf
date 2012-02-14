@@ -226,26 +226,25 @@ public class FightEngine extends Observable implements SAFConstants {
 			break;
 		case "punch_low":
 			if (!attackedFighter.getCurrentAttack().equals("block_low")) {
-				damageAmount = attackingFighter.getPunchPower() + 5;
+				damageAmount = attackingFighter.getPunchPower();
 			}
 			break;
 		case "punch_high":
 			if (!attackedFighter.getCurrentAttack().equals("block_high")) {
-				damageAmount = attackingFighter.getPunchPower() + 5;
+				damageAmount = attackingFighter.getPunchPower();
 			}
 			break;
 		case "kick_low":
 			if (!attackedFighter.getCurrentAttack().equals("block_low")) {
-				damageAmount = attackingFighter.getKickPower() + 5;
+				damageAmount = attackingFighter.getKickPower();
 			}
 			break;
 		case "kick_high":
 			if (!attackedFighter.getCurrentAttack().equals("block_high")) {
-				damageAmount = attackingFighter.getKickPower() + 5;
+				damageAmount = attackingFighter.getKickPower();
 			}
 			break;
 		}
-		System.out.println(attackingFighter.getCurrentAttack() + damageAmount);
 		return damageAmount;
 	}
 

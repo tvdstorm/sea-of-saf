@@ -44,7 +44,7 @@ public class FightView extends JFrame implements Observer {
 		FighterDetailsView firstFighterDetailsView = new FighterDetailsView(fightEngine.getLeftFighter());
 		add(firstFighterDetailsView, BorderLayout.WEST);
 		
-		FighterDetailsView secondFighterDetailsView = new FighterDetailsView(fightEngine.getLeftFighter());
+		FighterDetailsView secondFighterDetailsView = new FighterDetailsView(fightEngine.getRightFighter());
 		add(secondFighterDetailsView, BorderLayout.EAST);
 
 		FightArenaView fightArenaView = new FightArenaView(fightEngine);

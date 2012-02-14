@@ -4,7 +4,6 @@ import game.FightEngine;
 
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -20,20 +19,18 @@ public class FightProgressView extends JPanel implements Observer {
 	}
 	
 	private void initializeGUI(FightEngine fightEngine) {
-		leftFighterHealth 	= createProgressBar(); 
-		rightFighterHealth 	= createProgressBar(); 
-
-		this.add(new JLabel(fightEngine.getLeftFighter().getFighterName() + ": "));
-		this.add(leftFighterHealth);
-
-		this.add(new JLabel(fightEngine.getRightFighter().getFighterName() + ": "));
-		this.add(rightFighterHealth);
+		leftFighterHealth 	= createProgressBar(fightEngine.getLeftPlayerName()); 
+		rightFighterHealth 	= createProgressBar(fightEngine.getRightPlayerName());
 	}
 
-	private JProgressBar createProgressBar() {
+	private JProgressBar createProgressBar(String playerName) {
 		JProgressBar progressBar = new JProgressBar(0, 100);
 		progressBar.setValue(100);
 		progressBar.setStringPainted(true);
+		
+		add(new JLabel(playerName + ": "));
+		add(progressBar);
+		
 		return progressBar;
 	}
 
