@@ -1,9 +1,9 @@
 package saf.fighter;
 
-import java.util.List;
 
-public interface AST {
+interface AST {
 	
-	public List<AST> children();
+	public String validPropertyValues();
+	public boolean isValid(String attribute);
 	
 }

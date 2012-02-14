@@ -9,76 +9,79 @@ options {
 @header{
     package saf.fighter.fdl;
     
-	import java.util.Arrays;
-	import java.util.Set;
-	import java.util.HashSet;
-	import java.security.InvalidParameterException;
+    import java.util.LinkedList;
+    
 }
 
 @members {
     
-    //TODO when SuperAwesomeFighter is implemented: move the following checks
-    private Set<String> characteristics = new HashSet<String>(Arrays.asList(
-            "punchReach","punchPower","kickReach","kickPower"));
-    private static final int lowerBound = 1;  //inclusive
-    private static final int upperBound = 10; //inclusive
-    private static final Set<String> conditions = new HashSet<String>(Arrays.asList(
-    "always","near","far","much_stronger","stronger","even","weaker","much_weaker"));    
-    private static final Set<String> moves = new HashSet<String>(Arrays.asList(
-    "walk_towards","walk_away","run_towards","run_away","jump","crouch","stand"));
-    private static final Set<String> attacks = new HashSet<String>(Arrays.asList(
-    "block_low","block_high","punch_low","punch_high","kick_low","kick_high"));
+    private DescribableFighter fighter;
+    private List<InvalidAttributeMessage> failMsgs;
     
-    // InvalidParameterException is used instead of RecognitionException, 
-    //      since ANTLR catches the former.
-    private void checkCharacteristic(String characteristic) throws InvalidParameterException {
-        if(!characteristics.contains(characteristic))
-            throw new InvalidParameterException(characteristic+" is invalid! "+
-                                                  "Valid characteristics: "+characteristics);
-    }
-    
-    private void checkCharacteristicRange(String valueText) throws InvalidParameterException {
-        int value = -1;
-        try{
-            value = Integer.parseInt(valueText);
-        }catch (NumberFormatException nfe){
-            assert false; //the parser should only provide numbers
-            throw new InvalidParameterException(valueText + " is not a number!");
-        }
+    public List<InvalidAttributeMessage> check(DescribableFighter fighter)
+                                                            throws RecognitionException {
+        this.fighter = fighter;
+        this.failMsgs = new LinkedList<InvalidAttributeMessage>();
         
-        if(value < lowerBound || value > upperBound)
-            throw new InvalidParameterException(value+" is invalid! Valid values:"+lowerBound+"-"+upperBound);
+        fighter(); //start checking
+        
+        return failMsgs;
     }
     
-    private void checkCondition(String condition) throws InvalidParameterException {
-        if(!conditions.contains(condition))
-            throw new InvalidParameterException(condition+" is invalid! Valid conditions: "+conditions);
+    private void checkName(CommonTree node){
+        if(!fighter.isValidName(node.getText()))
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validNames()));
     }
     
-    private void checkMove(String move)  throws InvalidParameterException {
-        if(!moves.contains(move))
-            throw new InvalidParameterException(move+" is invalid! Valid moves: "+moves);
+    private void checkProperty(CommonTree node){
+        if(!fighter.isValidProperty(node.getText()))
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validCharacteristics()));
     }
     
-    private void checkAttack(String attack) throws InvalidParameterException {
-        if(!attacks.contains(attack))
-            throw new InvalidParameterException(attack+" is invalid! Valid moves: "+attacks);
+    private void checkPropertyRange(CommonTree node){
+        if(!fighter.isValidPropertyValue(parseNumber(node.getText())))
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validCharacteristics()));
     }
     
+    private void checkCondition(CommonTree node){
+        if(!fighter.isValidCondition(node.getText()))
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
+    }
+    
+    private void checkMove(CommonTree node){
+        if(!fighter.isValidMove(node.getText()))
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
+    }
+    
+    private void checkAttack(CommonTree node){
+        if(!fighter.isValidAttack(node.getText()))
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
+    }
+    
+    private int parseNumber(String number){
+        try{
+            return Integer.parseInt(number);
+        }catch (NumberFormatException nfe){
+            assert false: "The parser should only provide numbers";
+            System.err.println(number + " is not a number!");
+            return Integer.MIN_VALUE;
+        }
+    }
 }
 
 fighter:            name attributes;
 
-name:               TEXT; //TODO change TEXT into: property
+//TODO name: change TEXT into property?
+name:               TEXT                   {checkName($TEXT);};
 attributes:         (characteristic | behaviour_rule)*;
 
 characteristic:     property value;
 behaviour_rule:     condition move attack;
 
-property:           TEXT                    {checkCharacteristic($TEXT.text);};
-value:              NUMBER                  {checkCharacteristicRange($NUMBER.text);};
-condition:          TEXT                    {checkCondition($TEXT.text);};
-move:               TEXT                    {checkMove($TEXT.text);}
-                  | CHOOSE t1=TEXT t2=TEXT  {checkMove($t1.text); checkMove($t2.text);};
-attack:             TEXT                    {checkAttack($TEXT.text);}
-                  | CHOOSE t1=TEXT t2=TEXT  {checkAttack($t1.text); checkAttack($t2.text);};
+property:           TEXT                    {checkProperty($TEXT);};
+value:              NUMBER                  {checkPropertyRange($NUMBER);};
+condition:          TEXT                    {checkCondition($TEXT);};
+move:               TEXT                    {checkMove($TEXT);}
+                  | CHOOSE t1=TEXT t2=TEXT  {checkMove($t1); checkMove($t2);};
+attack:             TEXT                    {checkAttack($TEXT);}
+                  | CHOOSE t1=TEXT t2=TEXT  {checkAttack($t1); checkAttack($t2);};
