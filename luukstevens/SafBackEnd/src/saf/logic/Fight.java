@@ -6,11 +6,11 @@ import java.util.List;
 import saf.ast.Action;
 import saf.ast.Bot;
 import saf.state.BotState;
-import saf.variable.IEnums;
-import saf.variable.ISettings;
+import saf.variable.Options;
+import saf.variable.Settings;
 import saf.view.*;
 
-public class Fight implements ISettings, IEnums {
+public class Fight implements Settings, Options {
 	
 	private Bot left;
 	private BotState leftState;

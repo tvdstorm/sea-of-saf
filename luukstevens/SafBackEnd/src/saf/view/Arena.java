@@ -9,10 +9,10 @@ import javax.swing.JPanel;
 
 import saf.ast.Bot;
 import saf.state.BotState;
-import saf.variable.ISettings;
+import saf.variable.Settings;
 
 @SuppressWarnings("serial")
-public class Arena extends JPanel implements ISettings {
+public class Arena extends JPanel implements Settings {
 	
 	private Bot left;
 	private BotState leftState;

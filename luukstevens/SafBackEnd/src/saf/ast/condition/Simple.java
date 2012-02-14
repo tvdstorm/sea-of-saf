@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-import saf.variable.IEnums;
+import saf.variable.Options;
 
 @XmlRootElement(name = "simpleCondition")
-public class Simple extends Condition implements IEnums {
+public class Simple extends Condition implements Options {
 
     @XmlAttribute
     String value;
@@ -18,12 +18,12 @@ public class Simple extends Condition implements IEnums {
     
     @Override
     //TODO: Logic to bot state
-	public boolean evaluate(List<IEnums.Condition> conditions) {
+	public boolean evaluate(List<Options.Condition> conditions) {
     	assert(value != null): "Condition is null.";
     	
-    	if(value.equals(IEnums.Condition.ALWAYS.getText())) return true;
+    	if(value.equals(Options.Condition.ALWAYS.getText())) return true;
   	
-		for(IEnums.Condition condition : conditions) {
+		for(Options.Condition condition : conditions) {
 			if(condition.getText().equals(value)) return true;
 		}
 		
