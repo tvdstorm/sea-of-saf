@@ -2,12 +2,9 @@ package main;
 
 import grammar.ParseException;
 import grammar.SAFGrammar;
-
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import astelements.Bots;
 
 public class Parser {

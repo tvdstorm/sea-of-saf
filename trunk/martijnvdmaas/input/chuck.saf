@@ -1,4 +1,4 @@
-chicken
+chuck
 {
   kickReach  = 5
   punchReach = 4
@@ -9,11 +9,7 @@ chicken
 }
 goose
 {
-  kickReach  = 8
-  punchReach = 4
-  kickPower  = 4
-  punchPower = 8
-  far or near or far  [run_towards kick_low]
-  far or always [run_away kick_low]
-  far [crouch punch_low]
-}
+	punchReach=9
+	even[choose(crouch walk_towards) choose(block_high punch_low)]
+	always[crouch block_low]
+ }

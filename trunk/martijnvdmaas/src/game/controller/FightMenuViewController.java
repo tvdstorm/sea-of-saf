@@ -5,7 +5,6 @@ import game.view.FightView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileFilter;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -24,16 +23,16 @@ public class FightMenuViewController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "Import players":
-			JFileChooser fileopen = new JFileChooser();
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			JFileChooser fileOpener = new JFileChooser();
+			FileNameExtensionFilter safFileFilter = new FileNameExtensionFilter(
 					"SAF Files", "saf");
-			fileopen.setFileFilter(filter);
+			fileOpener.setFileFilter(safFileFilter);
 
-			int ret = fileopen.showDialog(null, "Open file");
+			int selectedChooserOption = fileOpener.showDialog(null, "Open file");
 
-			if (ret == JFileChooser.APPROVE_OPTION) {
+			if (selectedChooserOption == JFileChooser.APPROVE_OPTION) {
 				fightView.setVisible(false);
-				File file = fileopen.getSelectedFile();
+				File file = fileOpener.getSelectedFile();
 				new Main();
 				Main.startGame(file.toString(), true);
 			}
