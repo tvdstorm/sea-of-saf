@@ -1,4 +1,6 @@
-package game;
+package game.controller;
+
+import game.FightEngine;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

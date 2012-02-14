@@ -1,4 +1,9 @@
-package game;
+package game.view;
+
+import game.FightEngine;
+import game.controller.FightControlController;
+import game.controller.FightMenuViewController;
+import game.controller.FighterDetailsViewController;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -24,7 +29,7 @@ public class FightView extends JFrame implements Observer {
 		fightEngine.addObserver(this);
 		addComponentsToPane(this.getContentPane(), fightEngine);
 		
-		setSize(new Dimension(550, 400));
+		setSize(new Dimension(650, 400));
 		setLocationRelativeTo(getRootPane()); //centers frame in the middle
 		setResizable(false);
 		setVisible(true);

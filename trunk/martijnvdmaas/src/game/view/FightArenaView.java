@@ -1,4 +1,6 @@
-package game;
+package game.view;
+
+import game.FightEngine;
 
 import java.awt.Color;
 import java.awt.Dimension;

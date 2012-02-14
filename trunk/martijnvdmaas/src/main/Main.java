@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+
 import astelements.Bots;
 
 import visitor.SAFElementValidatorVisitor;
@@ -8,7 +10,7 @@ import game.FightStart;
 import grammar.ParseException;
 public class Main {
 
-	public static void main(String args[]) throws ParseException {
+	public static void main(String args[]) throws ParseException, IOException {
 		Bots bots = new Parser("validInput.saf", false).getBots();
 		validateBots(bots);
 		new FightStart(bots);

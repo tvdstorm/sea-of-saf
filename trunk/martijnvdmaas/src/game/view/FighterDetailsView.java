@@ -1,5 +1,6 @@
-package game;
+package game.view;
 
+import game.controller.FighterDetailsViewController;
 import game.fighter.Fighter;
 
 import javax.swing.JPanel;

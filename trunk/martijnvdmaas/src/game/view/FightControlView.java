@@ -1,4 +1,6 @@
-package game;
+package game.view;
+
+import game.controller.FightControlController;
 
 import java.awt.Dimension;
 

@@ -15,7 +15,7 @@ public class Parser {
 	private Bots bots;
 	private boolean reinit;
 
-	public Parser(String inputFile, boolean reinit) throws ParseException {
+	public Parser(String inputFile, boolean reinit) throws ParseException, IOException {
 		this.reinit = reinit;
 		InputStream fileContent = getInputFileStream(inputFile);
 		setBots(parseFileContent(fileContent));
@@ -31,19 +31,13 @@ public class Parser {
 		}
 	}
 
-	private InputStream getInputFileStream(String fileName) {
+	private InputStream getInputFileStream(String fileName) throws IOException {
 		InputStream fileContent;
-		try {
 			String projectPath = new java.io.File(".").getCanonicalPath();
 
-			fileContent = new FileInputStream(projectPath + "/src/input/"
+			fileContent = new FileInputStream(projectPath + "/input/"
 					+ fileName);
 			return fileContent;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
 	}
 
 	public Bots getBots() {
