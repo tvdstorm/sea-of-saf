@@ -9,6 +9,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import saf.game.GameConstant;
 import saf.game.GameEventListener;
 import saf.game.event.EventSource;
 import saf.game.gui.component.GameArena;
@@ -16,10 +17,8 @@ import saf.game.state.BotState;
 import saf.structure.Behavior;
 import saf.structure.Characteristic;
 
-public class GameController {
+public class GameController implements GameConstant {
 
-	private static final String CONST_LEFT = "left";
-	private static final String CONST_RIGHT = "right";
 	private String side;
 
 	private final GameForm gameForm;
@@ -51,6 +50,8 @@ public class GameController {
 		eventSource = new EventSource();
 		eventSource.addEventListener(gameEventListener);
 
+		setDistance(CONST_STARTING_DISTANCE);
+		
 		gameForm.jButtonBotLeftLoad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

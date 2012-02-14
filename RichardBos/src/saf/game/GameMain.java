@@ -1,65 +1,84 @@
 package saf.game;
 
+import java.util.List;
+
+import saf.checker.ElementChecker;
 import saf.game.engine.GameEngine;
 import saf.game.event.NewBotEvent;
 import saf.game.gui.GameController;
 import saf.game.state.BotState;
 import saf.game.state.GameState;
+import saf.parser.FileParser;
+import saf.structure.Bots;
 
 public class GameMain implements GameConstant {
 	private GameController gameController;
 	private GameEventListener gameEventListener;
 	private GameState gameState;
 
-	public static void start()
-	{
+	public static void start() {
 		new GameMain();
 	}
-	
+
 	private GameMain() {
 		gameEventListener = new GameEventListener(this);
 		gameController = new GameController(gameEventListener);
-		gameState = new GameState(this, gameController);
+		gameState = new GameState(CONST_STARTING_DISTANCE);
 		
-		if(DEBUG_STATUS)
-		{
-			NewBotEvent e = new NewBotEvent(this, "\\\\Srv-file\\users\\r.bos\\Documenten\\Bots\\chicken.txt", "left");
+		if (DEBUG_STATUS) {
+			NewBotEvent e = new NewBotEvent(this,
+					"src\\saf\\tests\\ChuckNorris.txt", CONST_LEFT);
 			gameEventListener.handleNewBot(e);
-			
-			e = new NewBotEvent(this, "\\\\Srv-file\\users\\r.bos\\Documenten\\Bots\\ChuckNorris.txt", "right");
+
+			e = new NewBotEvent(this, "src\\saf\\tests\\ChuckNorris.txt",
+					CONST_RIGHT);
 			gameEventListener.handleNewBot(e);
 		}
-		
+
 	}
 
-	public GameController getGameController() {
-		return gameController;
-	}
-	
-	public void newBot(BotState botState)
-	{
+	public void newBot(NewBotEvent e) {
+		Bots bots = null;
+
+		bots = FileParser.consume(e.getPath());
+
+		List<String> errors = ElementChecker.check(bots);
+
+		if (errors.size() != 0) {
+
+			String errorString = "The following errors have been found:";
+			for (String error : errors) {
+				errorString += "\n" + error;
+			}
+			gameController.displayMessage(errorString);
+			return;
+		} else if (bots.getBots().size() > 1) {
+			gameController.displayMessage("Only one bot is allowed.");
+			return;
+		}
+
+		BotState botState = new BotState(bots.getBots().get(0), e.getSide());
+
 		gameState.addBot(botState);
+		gameController.addBotState(botState);
 	}
-	
-	public void startGame()
-	{
-		if(checkLoadedBots())
-		{
+
+	public void startGame() {
+		if (checkLoadedBots()) {
 			gameController.displayMessage("Load two bots before starting.");
 			return;
 		}
 		gameController.disableButtons();
-		GameEngine gameEngine = new GameEngine(gameState, gameController,this);
+		GameEngine gameEngine = new GameEngine(gameState, gameController, this);
 		gameEngine.battle();
 	}
-	private boolean checkLoadedBots()
-	{
+
+	private boolean checkLoadedBots() {
 		return gameState.getBotStates().size() != 2;
 	}
-	
-	public void battleOver(String winnerName)
-	{
+
+	public void battleOver(String winnerName) {
 		gameController.displayMessage(WINNER_MESSAGE + winnerName);
 	}
-	
+
 }

@@ -10,9 +10,8 @@ public class BotState implements GameConstant {
 	private static final int CONST_DISTANCEFROMWALL = 50;
 	private static final int CONST_HITPOINTS = 100;
 
-	public BotState(Bot bot, String side, GameController gameController)
+	public BotState(Bot bot, String side)
 	{
-		this.gameController = gameController;
 		this.bot = bot;
 		this.side = side;
 		this.hitpoints = CONST_HITPOINTS;
@@ -23,7 +22,6 @@ public class BotState implements GameConstant {
 		this.lastMoveAction = "stand";
 	}
 	
-	private GameController gameController;
 	private Bot bot;
 	private String side;
 	private int hitpoints;
@@ -39,11 +37,10 @@ public class BotState implements GameConstant {
 	}
 	public void setHitpoints(int hitpoints) {
 		this.hitpoints = hitpoints;
-		this.gameController.setHitpoints(this);
 	}
+	
 	public void updateHitpoints(double attackPower) {
 		this.hitpoints = (int)(this.hitpoints - attackPower);
-		this.gameController.setHitpoints(this);
 	}
 	
 	public boolean isJumping() {

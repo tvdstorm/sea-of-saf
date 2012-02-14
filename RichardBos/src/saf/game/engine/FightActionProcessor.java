@@ -1,46 +1,51 @@
 package saf.game.engine;
 
+import java.awt.Point;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import saf.game.GameConstant;
 import saf.game.state.BotState;
 import saf.structure.intelligence.BehaviorIntelligence;
 
-public class ActionProcessor implements GameConstant {
-	private static final double FIGHTACTION_BASERANGE = 5;
-	private static final double FIGHTACTION_BASEPOWER = 5;
+public class FightActionProcessor implements GameConstant {
 
-	private final BotState botState;
+
 	private final BotState otherBotState;
 	private final int distance;
-	private final String moveAction;
 	private final String fightAction;
-
+	private final Boolean isJumping;
+	private final double outcome;
+	private final BotState botState;
+	
 	private double attackPower = FIGHTACTION_BASEPOWER;
 	private double attackReach = FIGHTACTION_BASERANGE;
 
-	private final double outcome;
-
-	public ActionProcessor(BotState botState, BotState otherBotState, int distance, String moveAction,
-			String fightAction) {
+	
+	public FightActionProcessor(BotState botState, BotState otherBotState, int distance, String fightAction, boolean isJumping) {
 		this.botState = botState;
 		this.otherBotState = otherBotState;
 		this.distance = distance;
-		this.moveAction = moveAction;
 		this.fightAction = fightAction;
-
+		this.isJumping = isJumping;
+		
 		this.outcome = processFightAction();
 	}
 
-	public double getOutcome() {
+	public double getOutcome()
+	{
 		return this.outcome;
 	}
 
 	private double processFightAction() {
+		
+		if(fightAction.isEmpty() || otherBotState == null || isJumping == null)
+			throw new IllegalArgumentException();
 
 		if (fightAction.contains(FIGHT_TYPE_BLOCK)) {
 			return 0.0;
 		}
-
-		boolean botJumping = moveAction.equals(MOVE_TYPE_JUMP);
 
 		calcPowerAndReach();
 
@@ -49,13 +54,13 @@ public class ActionProcessor implements GameConstant {
 
 		if (fightAction.contains(FIGHT_TYPE_HIGH)) {
 
-			if (!botJumping && otherBotState.isJumping()) {
+			if (!isJumping && otherBotState.isJumping()) {
 				
 				if (otherBotState.getLastFightAction().equals(FIGHT_TYPE_BLOCKLOW))
 					
 					return 0.0;
 				
-			} else if (botJumping && !otherBotState.isJumping()) {
+			} else if (isJumping && !otherBotState.isJumping()) {
 				
 				return 0.0; // missed
 				
@@ -71,11 +76,11 @@ public class ActionProcessor implements GameConstant {
 
 		} else if (fightAction.contains(FIGHT_TYPE_LOW)) {
 
-			if (!botJumping && otherBotState.isJumping()) {
+			if (!isJumping && otherBotState.isJumping()) {
 
 				return 0.0; // missed
 
-			} else if (botJumping && !otherBotState.isJumping()) {
+			} else if (isJumping && !otherBotState.isJumping()) {
 
 				if (otherBotState.getLastMoveAction().equals(MOVE_TYPE_CROUCH)
 						|| otherBotState.getLastFightAction().equals(FIGHT_TYPE_BLOCKHIGH))

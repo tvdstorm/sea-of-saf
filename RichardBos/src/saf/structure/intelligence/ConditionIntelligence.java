@@ -12,19 +12,6 @@ import saf.structure.ConditionSimple;
 
 public class ConditionIntelligence implements GameConstant {
 
-	private static final int CONDITION_NEAR_DISTANCE = 50;
-
-	private static final Map<String, Integer> CONDITION_STRENGHTS_HP_DIFFERENCE;
-	static {
-		Map<String, Integer> initMap = new HashMap<String, Integer>();
-		initMap.put("much_stronger", 40);
-		initMap.put("stronger", 10);
-		// even is between stronger and weaker
-		initMap.put("weaker", -10);
-		initMap.put("much_weaker", -40);
-		CONDITION_STRENGHTS_HP_DIFFERENCE = Collections.unmodifiableMap(initMap);
-	}
-
 	public static boolean checkConditionForAlways(Condition condition) {
 		if (condition instanceof ConditionSimple) {
 			if (CONDITION_TYPE_ALWAYS.equalsIgnoreCase(((ConditionSimple) condition).getValue()))

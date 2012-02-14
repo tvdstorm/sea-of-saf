@@ -19,37 +19,9 @@ public class GameEventListener implements iEventListener {
 		this.gameMain = gameMain;
 	}
 
-	private GameController getGameController() {
-		return gameMain.getGameController();
-	}
-
 	@Override
 	public void handleNewBot(NewBotEvent e) {
-
-		Bots bots = null;
-
-		try {
-			bots = FileParser.consume(e.getPath());
-		} catch (IOException ex) {
-			getGameController().displayMessage("An error occured while parsing the file: \n" + e.getPath());
-			getGameController().displayMessage(ex.toString());
-			ex.printStackTrace();
-		}
-
-		List<String> errors = ElementChecker.check(bots);
-
-		if (errors.size() != 0) {
-
-			String errorString = "The following errors have been found:";
-			for (String error : errors) {
-				errorString += "\n" + error;
-			}
-			getGameController().displayMessage(errorString);
-		} else if (bots.getBots().size() > 1)
-			getGameController().displayMessage("Only one bot is allowed.");
-
-		BotState botState = new BotState(bots.getBots().get(0), e.getSide(), getGameController());
-		gameMain.newBot(botState);
+		gameMain.newBot(e);
 	}
 
 	@Override

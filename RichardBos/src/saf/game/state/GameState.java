@@ -7,18 +7,13 @@ import saf.game.GameMain;
 import saf.game.gui.GameController;
 
 public class GameState {
-	private static final int CONST_DISTANCE = 350;
-
-	public GameState(GameMain gameMain, GameController gameController) {
-		this.gameController = gameController;
+	
+	public GameState(int startingDistance) {
 		this.listBotStates = new ArrayList<BotState>();
-		this.distance = CONST_DISTANCE;
-		
-		gameController.setDistance(distance);
+		this.distance = startingDistance;
 	}
 
 	private List<BotState> listBotStates;
-	private GameController gameController;
 	private int distance;
 
 	public int getDistance() {
@@ -27,12 +22,10 @@ public class GameState {
 
 	public void setDistance(int distance) {
 		this.distance = distance;
-		gameController.setDistance(distance);
 	}
 
 	public void updateDistance(int dAmount) {
 		distance += dAmount;
-		gameController.setDistance(distance);
 	}
 
 	public List<BotState> getBotStates() {
@@ -47,17 +40,6 @@ public class GameState {
 			}
 		}
 		this.listBotStates.add(botState);
-		gameController.addBotState(botState);
-	}
-
-	public void PrepareBattle() {
-		//Reload the botstates
-		List<BotState> copyBotStates = new ArrayList<BotState>(listBotStates);
-		
-		for (BotState botState : copyBotStates) {
-			addBot(new BotState(botState.getBot(), botState.getSide(), this.gameController));
-		}
-		
 	}
 
 }
