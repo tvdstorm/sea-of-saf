@@ -1,8 +1,8 @@
 package saf.astelements;
 
-import saf.ISAFElement;
+import saf.ISAFNode;
 
-public interface ICondition extends ISAFElement{
+public interface ICondition extends ISAFNode{
 	public Boolean isConditionNodeActive(ICondition con);
 	public String getNodeName();
 }

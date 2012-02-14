@@ -1,9 +1,9 @@
 package saf.astelements;
 
-import saf.ISAFElement;
-import saf.ISAFElementVisitor;
+import saf.ISAFNode;
+import saf.ISAFNodeVisitor;
 
-public class Rule implements ISAFElement {
+public class Rule implements ISAFNode {
 	private ICondition condition;
 	private IAction moveAction;
 	private IAction fightAction;
@@ -27,7 +27,7 @@ public class Rule implements ISAFElement {
 	}
 
 	@Override
-	public void accept(ISAFElementVisitor visitor){
+	public void accept(ISAFNodeVisitor visitor){
 		visitor.visit(this);		
 	}
 }

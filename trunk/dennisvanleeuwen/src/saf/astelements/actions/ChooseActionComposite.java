@@ -3,7 +3,7 @@ package saf.astelements.actions;
 import java.util.ArrayList;
 import java.util.List;
 
-import saf.ISAFElementVisitor;
+import saf.ISAFNodeVisitor;
 import saf.astelements.IAction;
 
 public class ChooseActionComposite implements IAction{
@@ -19,7 +19,12 @@ public class ChooseActionComposite implements IAction{
 	}
 
 	@Override
-	public void accept(ISAFElementVisitor visitor){
+	public void accept(ISAFNodeVisitor visitor){
 		visitor.visit(this);	
+	}
+
+	@Override
+	public String getNodeName() {
+		return "choose";
 	}
 }
