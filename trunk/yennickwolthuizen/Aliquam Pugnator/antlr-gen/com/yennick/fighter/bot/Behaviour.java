@@ -1,18 +1,19 @@
 package com.yennick.fighter.bot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Behaviour {
-	private String condition;
+//	private Condition condition;
+	private final List<Condition> condition;
 //	private Action action;
 	
-	public Behaviour(String condition){
-		this.setCondition(condition);
+	public Behaviour(){
+		this.condition = new ArrayList<Condition>();
 	}
 	
-	public String getCondition() {
-		return condition;
-	}
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void addCondition(Condition condition) {
+		this.condition.add(condition);
 	}
 	
 	public String toString(){

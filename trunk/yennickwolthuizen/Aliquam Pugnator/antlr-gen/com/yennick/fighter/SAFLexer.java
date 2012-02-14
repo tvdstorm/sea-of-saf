@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g 2012-01-30 17:29:54
+// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g 2012-02-08 11:15:08
 
   package com.yennick.fighter;
 
@@ -11,17 +11,21 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFLexer extends Lexer {
     public static final int EOF=-1;
-    public static final int T__8=8;
-    public static final int T__9=9;
     public static final int T__10=10;
     public static final int T__11=11;
     public static final int T__12=12;
     public static final int T__13=13;
     public static final int T__14=14;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
     public static final int CHOOSE=4;
-    public static final int IDENT=5;
-    public static final int VALUE=6;
-    public static final int WHITESPACE=7;
+    public static final int COMMENT=5;
+    public static final int IDENT=6;
+    public static final int MULTI_COMMENT=7;
+    public static final int VALUE=8;
+    public static final int WHITESPACE=9;
 
     // delegates
     // delegators
@@ -61,57 +65,15 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "CHOOSE"
 
-    // $ANTLR start "T__8"
-    public final void mT__8() throws RecognitionException {
-        try {
-            int _type = T__8;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:12:6: ( '(' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:12:8: '('
-            {
-            match('('); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__8"
-
-    // $ANTLR start "T__9"
-    public final void mT__9() throws RecognitionException {
-        try {
-            int _type = T__9;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:13:6: ( ')' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:13:8: ')'
-            {
-            match(')'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "T__9"
-
     // $ANTLR start "T__10"
     public final void mT__10() throws RecognitionException {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:14:7: ( '=' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:14:9: '='
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:12:7: ( '(' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:12:9: '('
             {
-            match('='); 
+            match('('); 
 
             }
 
@@ -129,10 +91,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:15:7: ( '[' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:15:9: '['
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:13:7: ( ')' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:13:9: ')'
             {
-            match('['); 
+            match(')'); 
 
             }
 
@@ -150,10 +112,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:16:7: ( ']' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:16:9: ']'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:14:7: ( '=' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:14:9: '='
             {
-            match(']'); 
+            match('='); 
 
             }
 
@@ -171,10 +133,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:17:7: ( '{' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:17:9: '{'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:15:7: ( '[' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:15:9: '['
             {
-            match('{'); 
+            match('['); 
 
             }
 
@@ -192,10 +154,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:18:7: ( '}' )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:18:9: '}'
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:16:7: ( ']' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:16:9: ']'
             {
-            match('}'); 
+            match(']'); 
 
             }
 
@@ -208,13 +170,101 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "T__14"
 
+    // $ANTLR start "T__15"
+    public final void mT__15() throws RecognitionException {
+        try {
+            int _type = T__15;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:17:7: ( 'and' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:17:9: 'and'
+            {
+            match("and"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__15"
+
+    // $ANTLR start "T__16"
+    public final void mT__16() throws RecognitionException {
+        try {
+            int _type = T__16;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:18:7: ( 'or' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:18:9: 'or'
+            {
+            match("or"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__16"
+
+    // $ANTLR start "T__17"
+    public final void mT__17() throws RecognitionException {
+        try {
+            int _type = T__17;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:19:7: ( '{' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:19:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__17"
+
+    // $ANTLR start "T__18"
+    public final void mT__18() throws RecognitionException {
+        try {
+            int _type = T__18;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:20:7: ( '}' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:20:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__18"
+
     // $ANTLR start "IDENT"
     public final void mIDENT() throws RecognitionException {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:57:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )* )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:57:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:68:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )* )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:68:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -226,7 +276,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:57:29: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:68:29: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
             loop1:
             do {
                 int alt1=2;
@@ -276,10 +326,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = VALUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:58:7: ( ( '0' .. '9' )+ )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:58:9: ( '0' .. '9' )+
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:69:7: ( ( '0' .. '9' )+ )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:69:9: ( '0' .. '9' )+
             {
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:58:9: ( '0' .. '9' )+
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:69:9: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -334,10 +384,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:60:12: ( ( '\\t' | ' ' | '\\r' | '\\n' )* )
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:60:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:71:12: ( ( '\\t' | ' ' | '\\r' | '\\n' )* )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:71:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
             {
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:60:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:71:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
             loop3:
             do {
                 int alt3=2;
@@ -384,90 +434,266 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "WHITESPACE"
 
+    // $ANTLR start "COMMENT"
+    public final void mCOMMENT() throws RecognitionException {
+        try {
+            int _type = COMMENT;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:73:9: ( '//' ( . )* ( '\\n' | '\\r' ) )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:73:11: '//' ( . )* ( '\\n' | '\\r' )
+            {
+            match("//"); 
+
+
+
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:73:16: ( . )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
+
+                if ( (LA4_0=='\n'||LA4_0=='\r') ) {
+                    alt4=2;
+                }
+                else if ( ((LA4_0 >= '\u0000' && LA4_0 <= '\t')||(LA4_0 >= '\u000B' && LA4_0 <= '\f')||(LA4_0 >= '\u000E' && LA4_0 <= '\uFFFF')) ) {
+                    alt4=1;
+                }
+
+
+                switch (alt4) {
+            	case 1 :
+            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:73:16: .
+            	    {
+            	    matchAny(); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
+                }
+            } while (true);
+
+
+            if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
+                input.consume();
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;
+            }
+
+
+             _channel = HIDDEN; 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "COMMENT"
+
+    // $ANTLR start "MULTI_COMMENT"
+    public final void mMULTI_COMMENT() throws RecognitionException {
+        try {
+            int _type = MULTI_COMMENT;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:74:15: ( '/*' ( . )* '*/' )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:74:17: '/*' ( . )* '*/'
+            {
+            match("/*"); 
+
+
+
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:74:22: ( . )*
+            loop5:
+            do {
+                int alt5=2;
+                int LA5_0 = input.LA(1);
+
+                if ( (LA5_0=='*') ) {
+                    int LA5_1 = input.LA(2);
+
+                    if ( (LA5_1=='/') ) {
+                        alt5=2;
+                    }
+                    else if ( ((LA5_1 >= '\u0000' && LA5_1 <= '.')||(LA5_1 >= '0' && LA5_1 <= '\uFFFF')) ) {
+                        alt5=1;
+                    }
+
+
+                }
+                else if ( ((LA5_0 >= '\u0000' && LA5_0 <= ')')||(LA5_0 >= '+' && LA5_0 <= '\uFFFF')) ) {
+                    alt5=1;
+                }
+
+
+                switch (alt5) {
+            	case 1 :
+            	    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:74:22: .
+            	    {
+            	    matchAny(); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop5;
+                }
+            } while (true);
+
+
+            match("*/"); 
+
+
+
+             _channel = HIDDEN; 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "MULTI_COMMENT"
+
     public void mTokens() throws RecognitionException {
-        // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:8: ( CHOOSE | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | IDENT | VALUE | WHITESPACE )
-        int alt4=11;
+        // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:8: ( CHOOSE | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | IDENT | VALUE | WHITESPACE | COMMENT | MULTI_COMMENT )
+        int alt6=15;
         switch ( input.LA(1) ) {
         case 'c':
             {
-            int LA4_1 = input.LA(2);
+            int LA6_1 = input.LA(2);
 
-            if ( (LA4_1=='h') ) {
-                int LA4_12 = input.LA(3);
+            if ( (LA6_1=='h') ) {
+                int LA6_15 = input.LA(3);
 
-                if ( (LA4_12=='o') ) {
-                    int LA4_13 = input.LA(4);
+                if ( (LA6_15=='o') ) {
+                    int LA6_20 = input.LA(4);
 
-                    if ( (LA4_13=='o') ) {
-                        int LA4_14 = input.LA(5);
+                    if ( (LA6_20=='o') ) {
+                        int LA6_23 = input.LA(5);
 
-                        if ( (LA4_14=='s') ) {
-                            int LA4_15 = input.LA(6);
+                        if ( (LA6_23=='s') ) {
+                            int LA6_25 = input.LA(6);
 
-                            if ( (LA4_15=='e') ) {
-                                int LA4_16 = input.LA(7);
+                            if ( (LA6_25=='e') ) {
+                                int LA6_26 = input.LA(7);
 
-                                if ( ((LA4_16 >= 'A' && LA4_16 <= 'Z')||LA4_16=='_'||(LA4_16 >= 'a' && LA4_16 <= 'z')) ) {
-                                    alt4=9;
+                                if ( ((LA6_26 >= 'A' && LA6_26 <= 'Z')||LA6_26=='_'||(LA6_26 >= 'a' && LA6_26 <= 'z')) ) {
+                                    alt6=11;
                                 }
                                 else {
-                                    alt4=1;
+                                    alt6=1;
                                 }
                             }
                             else {
-                                alt4=9;
+                                alt6=11;
                             }
                         }
                         else {
-                            alt4=9;
+                            alt6=11;
                         }
                     }
                     else {
-                        alt4=9;
+                        alt6=11;
                     }
                 }
                 else {
-                    alt4=9;
+                    alt6=11;
                 }
             }
             else {
-                alt4=9;
+                alt6=11;
             }
             }
             break;
         case '(':
             {
-            alt4=2;
+            alt6=2;
             }
             break;
         case ')':
             {
-            alt4=3;
+            alt6=3;
             }
             break;
         case '=':
             {
-            alt4=4;
+            alt6=4;
             }
             break;
         case '[':
             {
-            alt4=5;
+            alt6=5;
             }
             break;
         case ']':
             {
-            alt4=6;
+            alt6=6;
+            }
+            break;
+        case 'a':
+            {
+            int LA6_7 = input.LA(2);
+
+            if ( (LA6_7=='n') ) {
+                int LA6_16 = input.LA(3);
+
+                if ( (LA6_16=='d') ) {
+                    int LA6_21 = input.LA(4);
+
+                    if ( ((LA6_21 >= 'A' && LA6_21 <= 'Z')||LA6_21=='_'||(LA6_21 >= 'a' && LA6_21 <= 'z')) ) {
+                        alt6=11;
+                    }
+                    else {
+                        alt6=7;
+                    }
+                }
+                else {
+                    alt6=11;
+                }
+            }
+            else {
+                alt6=11;
+            }
+            }
+            break;
+        case 'o':
+            {
+            int LA6_8 = input.LA(2);
+
+            if ( (LA6_8=='r') ) {
+                int LA6_17 = input.LA(3);
+
+                if ( ((LA6_17 >= 'A' && LA6_17 <= 'Z')||LA6_17=='_'||(LA6_17 >= 'a' && LA6_17 <= 'z')) ) {
+                    alt6=11;
+                }
+                else {
+                    alt6=8;
+                }
+            }
+            else {
+                alt6=11;
+            }
             }
             break;
         case '{':
             {
-            alt4=7;
+            alt6=9;
             }
             break;
         case '}':
             {
-            alt4=8;
+            alt6=10;
             }
             break;
         case 'A':
@@ -496,7 +722,6 @@ public class SAFLexer extends Lexer {
         case 'X':
         case 'Y':
         case 'Z':
-        case 'a':
         case 'b':
         case 'd':
         case 'e':
@@ -509,7 +734,6 @@ public class SAFLexer extends Lexer {
         case 'l':
         case 'm':
         case 'n':
-        case 'o':
         case 'p':
         case 'q':
         case 'r':
@@ -522,7 +746,7 @@ public class SAFLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            alt4=9;
+            alt6=11;
             }
             break;
         case '0':
@@ -536,14 +760,33 @@ public class SAFLexer extends Lexer {
         case '8':
         case '9':
             {
-            alt4=10;
+            alt6=12;
+            }
+            break;
+        case '/':
+            {
+            int LA6_14 = input.LA(2);
+
+            if ( (LA6_14=='/') ) {
+                alt6=14;
+            }
+            else if ( (LA6_14=='*') ) {
+                alt6=15;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 6, 14, input);
+
+                throw nvae;
+
+            }
             }
             break;
         default:
-            alt4=11;
+            alt6=13;
         }
 
-        switch (alt4) {
+        switch (alt6) {
             case 1 :
                 // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:10: CHOOSE
                 {
@@ -553,81 +796,113 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:17: T__8
-                {
-                mT__8(); 
-
-
-                }
-                break;
-            case 3 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:22: T__9
-                {
-                mT__9(); 
-
-
-                }
-                break;
-            case 4 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:27: T__10
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:17: T__10
                 {
                 mT__10(); 
 
 
                 }
                 break;
-            case 5 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:33: T__11
+            case 3 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:23: T__11
                 {
                 mT__11(); 
 
 
                 }
                 break;
-            case 6 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:39: T__12
+            case 4 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:29: T__12
                 {
                 mT__12(); 
 
 
                 }
                 break;
-            case 7 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:45: T__13
+            case 5 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:35: T__13
                 {
                 mT__13(); 
 
 
                 }
                 break;
-            case 8 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:51: T__14
+            case 6 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:41: T__14
                 {
                 mT__14(); 
 
 
                 }
                 break;
+            case 7 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:47: T__15
+                {
+                mT__15(); 
+
+
+                }
+                break;
+            case 8 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:53: T__16
+                {
+                mT__16(); 
+
+
+                }
+                break;
             case 9 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:57: IDENT
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:59: T__17
+                {
+                mT__17(); 
+
+
+                }
+                break;
+            case 10 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:65: T__18
+                {
+                mT__18(); 
+
+
+                }
+                break;
+            case 11 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:71: IDENT
                 {
                 mIDENT(); 
 
 
                 }
                 break;
-            case 10 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:63: VALUE
+            case 12 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:77: VALUE
                 {
                 mVALUE(); 
 
 
                 }
                 break;
-            case 11 :
-                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:69: WHITESPACE
+            case 13 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:83: WHITESPACE
                 {
                 mWHITESPACE(); 
+
+
+                }
+                break;
+            case 14 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:94: COMMENT
+                {
+                mCOMMENT(); 
+
+
+                }
+                break;
+            case 15 :
+                // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:1:102: MULTI_COMMENT
+                {
+                mMULTI_COMMENT(); 
 
 
                 }

@@ -32,15 +32,26 @@ fighter returns [Bot fighter]
 	;
 
 behaviour returns [Behaviour behaviour]
-	:	IDENT '[' a1=action a2=action ']'
-		{
-			$behaviour = new Behaviour($IDENT.text); 
+	:
+	 {
+			$behaviour = new Behaviour(); 
 		}
+		(condition {$behaviour.addCondition($condition.condition);} )
+		 '[' a1=action a2=action ']'
+		
 	;
+
+
+condition returns [Condition condition]
+	: IDENT { $condition = new Condition($IDENT.text); }
+		| IDENT 'or' condition 
+		| IDENT 'and' condition 
+	;
+
 
 action returns [Action action]
 	:	(
-		CHOOSE '(' a1=IDENT a2=IDENT ')' 
+		'choose' '(' a1=IDENT a2=IDENT ')' 
 		| act=IDENT
 		)
  	;
@@ -58,3 +69,6 @@ IDENT	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'_')*;
 VALUE	: '0'..'9'+;
 
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n' )*   { $channel = HIDDEN; } ;
+
+COMMENT : '//' .* ('\n'|'\r')   { $channel = HIDDEN; } ;
+MULTI_COMMENT : '/*' .* '*/'   { $channel = HIDDEN; } ;
