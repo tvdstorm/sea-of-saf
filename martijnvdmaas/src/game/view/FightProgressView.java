@@ -16,23 +16,25 @@ public class FightProgressView extends JPanel implements Observer {
 	public FightProgressView(FightEngine fightEngine) {
 		
 		fightEngine.addObserver(this);
-		initializeGUI();
+		initializeGUI(fightEngine);
 	}
 	
-	private void initializeGUI() {
-		leftFighterHealth = new JProgressBar(0, 100);
-		leftFighterHealth.setValue(100);
-		leftFighterHealth.setStringPainted(true);
-		
-		rightFighterHealth = new JProgressBar(0, 100);
-		rightFighterHealth.setValue(100);
-		rightFighterHealth.setStringPainted(true);
+	private void initializeGUI(FightEngine fightEngine) {
+		leftFighterHealth 	= createProgressBar(); 
+		rightFighterHealth 	= createProgressBar(); 
 
-		this.add(new JLabel("Left player:"));
+		this.add(new JLabel(fightEngine.getLeftFighter().getFighterName() + ": "));
 		this.add(leftFighterHealth);
 
-		this.add(new JLabel("Right player:"));
+		this.add(new JLabel(fightEngine.getRightFighter().getFighterName() + ": "));
 		this.add(rightFighterHealth);
+	}
+
+	private JProgressBar createProgressBar() {
+		JProgressBar progressBar = new JProgressBar(0, 100);
+		progressBar.setValue(100);
+		progressBar.setStringPainted(true);
+		return progressBar;
 	}
 
 	@Override

@@ -13,10 +13,10 @@ public class FightControlView extends JPanel {
 	
 	public FightControlView(FightControlController fightControlController) {
 		this.fightControlController = fightControlController;
-		createGUIElements();
+		initializeGUI();
 	}
 
-	private void createGUIElements() {
+	private void initializeGUI() {
 		JButton button = new JButton("(Re) Start");
 		button.setSize(new Dimension(100,10));
 		button.addActionListener(fightControlController);

@@ -1,7 +1,5 @@
 package visitor;
 
-import java.util.Arrays;
-
 import constants.SAFConstants;
 
 import astelements.Behaviour;
@@ -10,9 +8,6 @@ import astelements.Bots;
 import astelements.Characteristic;
 import astelements.ConditionChoices;
 import astelements.ConditionGroup;
-
-
-
 
 public class SAFElementValidatorVisitor implements SAFElementVisitor {
 	
@@ -25,14 +20,14 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
 		
 		/* Only moves from SAFConstants are allowed */
 		for(String behaviourMoveOption : botBehaviour.getMoveChoices()) {
-			if(!Arrays.asList(SAFConstants.validMoves).contains(behaviourMoveOption)) {
+			if(!SAFConstants.MoveTypes.contains(behaviourMoveOption)) {
 				throw new Exception("Invalid behaviour move detected: " + behaviourMoveOption);
 			}
 		}
 		
 		/* Only attacks from SAFConstants are allowed */
 		for(String behaviourAttackOption : botBehaviour.getAttackChoices()) {
-			if(!Arrays.asList(SAFConstants.validAttacks).contains(behaviourAttackOption)) {
+			if(!SAFConstants.AttackTypes.contains(behaviourAttackOption)) {
 				throw new Exception("Invalid behaviour attack detected: " + behaviourAttackOption);
 			}
 		}
@@ -77,7 +72,7 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
 		}
 		
 		/* Only characteristics with values from SAFConstants are allowed */
-		if(!Arrays.asList(SAFConstants.validCharacteristics).contains(characteristic.getName())) {
+		if(!SAFConstants.CharacteristicTypes.contains(characteristic.getName())) {
 			throw new Exception("Invalid characteristic name: " + characteristic.getName());
 		}
 		
@@ -113,7 +108,7 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
 		/* Only conditions from SAFConstants are allowed */
 		for(String condition : conditionGroup.getConditionTypes()) 
 		{
-			if(!Arrays.asList(SAFConstants.validConditions).contains(condition)) {
+			if(!SAFConstants.ConditionTypes.contains(condition)) {
 				throw new Exception("Invalid condition: " + condition);
 			}
 		}

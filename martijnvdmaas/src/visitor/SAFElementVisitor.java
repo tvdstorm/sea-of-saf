@@ -4,7 +4,6 @@ import astelements.Behaviour;
 import astelements.Bot;
 import astelements.Bots;
 import astelements.Characteristic;
-import astelements.ConditionChoices;
 import astelements.ConditionGroup;
 
 public interface SAFElementVisitor {
