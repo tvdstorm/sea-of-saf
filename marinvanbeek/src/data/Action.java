@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Random;
+
 public class Action
 {
     public Move move;
@@ -14,6 +16,12 @@ public class Action
     public String toString()
     {
         return move + " " + attack;
+    }
+
+    public static Action getRandom(Random random)
+    {
+        return new Action(Move.getRandom(random),
+                          Attack.getRandom(random));
     }
 }
 

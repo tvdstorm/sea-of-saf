@@ -1,6 +1,7 @@
 package data;
 
 import java.util.List;
+import java.util.Random;
 
 public class Behaviour
 {
@@ -20,6 +21,11 @@ public class Behaviour
         }
 
         return s;
+    }
+
+    public static Behaviour getRandom(Random random)
+    {
+        return new Behaviour(Tactic.getRandomList(random));
     }
 }
 
