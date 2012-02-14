@@ -5,7 +5,6 @@ import javax.swing.*;
 import saf.ast.Bot;
 import saf.state.Game;
 
-
 public class Health extends JPanel {	
 	
 	private JProgressBar leftHealthBar;

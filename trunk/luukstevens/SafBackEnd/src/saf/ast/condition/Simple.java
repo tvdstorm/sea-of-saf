@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 import saf.variable.IEnums;
 
 @XmlRootElement(name = "simpleCondition")
-public class Simple extends Condition implements IEnums {
+public class Simple extends Condition {
 
     @XmlAttribute
     String value;
