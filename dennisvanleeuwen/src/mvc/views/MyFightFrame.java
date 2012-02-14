@@ -16,15 +16,7 @@ public class MyFightFrame extends JApplet{
 	
 	public void paint (Graphics g) {
 	    g.clearRect( 0, 0, this.getWidth(), this.getHeight());
-		if(fighter1 != null && fighter2 != null){
-		    fighter1.draw(g);
-			fighter2.draw(g);
-		}
-		
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} 
+	    fighter1.draw(g);
+		fighter2.draw(g);
 	}
 }

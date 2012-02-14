@@ -12,13 +12,12 @@ public interface ISAFElementVisitor {
 	public void visit(Characteristic element);
 	public void visit(Rule ruleElement);	
 
-	public void visit(ICondition ruleElement);
-	public void visit(ORConditionComposite element);
-	public void visit(ANDConditionComposite element);
+	public void visit(ORConditionComposite orElement);
+	public void visit(ANDConditionComposite andElement);
+	public void visit(saf.astelements.conditions.Simple simpleConditionElement);
+	
+	public void visit(ChooseActionComposite chooseActionElement);	
+	public void visit(saf.astelements.actions.Simple simpleActionElement);
 
-	public void visit(IAction ruleElement);	
-	public void visit(ChooseActionComposite ruleElement);	
-	public void visit(IMove element);
-	public void visit(IFight element);
 	
 }

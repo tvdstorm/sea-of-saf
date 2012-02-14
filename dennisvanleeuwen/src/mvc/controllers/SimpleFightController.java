@@ -5,8 +5,8 @@ import java.util.List;
 import saf.astelements.*;
 import mvc.IController;
 import mvc.models.FighterModel;
-import mvc.models.Pair;
 import mvc.views.SimpleFightView;
+import mylib.Pair;
 
 public class SimpleFightController implements IController{
 	List<FighterModel> curFighterModels;
@@ -26,20 +26,21 @@ public class SimpleFightController implements IController{
 			int i = 0;
 			for(FighterModel curFighterModel: this.curFighterModels){
 				//Fighter1 is gonna do something, now determine what it will do.
-				Pair<IAction, IAction> pairOfActions = curFighterModel.getActionsAgainstEnemy(curFighterModels.get((i+1)%2));
-				if(pairOfActions != null){
-					pairOfActions.getFirst().applyActionOn(curFighterModel, curFighterModels.get((i+1)%2));
-					pairOfActions.getSecond().applyActionOn(curFighterModel, curFighterModels.get((i+1)%2));	
-				}
-				i = (i+1)%2;
+//				Pair<IAction, IAction> pairOfActions = curFighterModel.getActionsAgainstEnemy(curFighterModels.get((i+1)%2));
+//				if(pairOfActions != null){
+////					pairOfActions.getFirst().applyActionOn(curFighterModel, curFighterModels.get((i+1)%2));
+////					pairOfActions.getSecond().applyActionOn(curFighterModel, curFighterModels.get((i+1)%2));	
+//				}
+//				i = (i+1)%2;
 			}
 			
-//			for(FighterModel curFighterModel: curFighterModels){
-//				if(curFighterModel.getFrontArm() == Position.NORMAL)
-//					System.out.println("error..");
-//			}
-			
 			curFightView.render();
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} 
 		}
 	}
 	
