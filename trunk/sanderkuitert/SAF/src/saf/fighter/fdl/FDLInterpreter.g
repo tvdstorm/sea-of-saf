@@ -15,7 +15,7 @@ options {
 
 @members {
 
-    private DescribableFighter fighter = null;    
+    private DescribableFighter fighter = null;
     private String lastProperty = null;
     private String lastCondition = null;
     private String lastMove = null;
@@ -32,13 +32,12 @@ options {
     }
     
     private void addCharacteristic(String property, String valueText){
-        int value = -1;
+        int value;
         try{
             value = Integer.parseInt(valueText);
         }catch (NumberFormatException nfe){
-            assert false;           //this should already have occurred in the checker
-            nfe.printStackTrace();
-            System.exit(1);
+            assert false: "NumberFormatException should already have occurred in the checker";
+            return;
         }
         
         fighter.addCharacteristic(property,value);
@@ -48,13 +47,11 @@ options {
 
           List<String> moves   = new LinkedList<String>();
           moves.add(move1);
-          if(move2!=null)
-            moves.add(move2);
+          if(move2!=null){ moves.add(move2); }
           
           List<String> attacks = new LinkedList<String>();
           attacks.add(attack1);
-          if(attack2!=null)
-            attacks.add(attack2);
+          if(attack2!=null){ attacks.add(attack2); }
             
           fighter.addBehaviour(condition, moves, attacks);
     }

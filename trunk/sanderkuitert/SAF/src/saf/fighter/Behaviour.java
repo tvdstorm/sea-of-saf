@@ -1,36 +1,45 @@
 package saf.fighter;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
-public class Behaviour {
+class Behaviour implements AST {
 
-	private final static Set<String> validConditions = new HashSet<String>(Arrays.asList(
+	private Map<Condition, Action> behaviours;
+	
+	//TODO move
+	private Set<String> validConditions = new HashSet<String>(Arrays.asList(
     	    "always","near","far","much_stronger","stronger","even","weaker","much_weaker"
     ));    
-	private final static Set<String> validMoves = new HashSet<String>(Arrays.asList(
+	private Set<String> validMoves = new HashSet<String>(Arrays.asList(
     	    "walk_towards","walk_away","run_towards","run_away","jump","crouch","stand"
     ));
-	private final static Set<String> validAttacks = new HashSet<String>(Arrays.asList(
+	private Set<String> validAttacks = new HashSet<String>(Arrays.asList(
     	    "block_low","block_high","punch_low","punch_high","kick_low","kick_high"
     ));
 	
+	public Behaviour() {
+//		behaviours = new HashMap<Condition, Action>();
+	}
+	
 	public Behaviour(String condition, List<String> moves, List<String> attacks) {
-		// TODO Auto-generated constructor stub
+		this();
+//		behaviours.put(new Condition(... TODO
 	}
 
-	public static String validValues(){
+	public String validPropertyValues(){
 		return "The only valid behaviours have one of the following conditions: "+validConditions+
 			   ", one of the following moves: "+validMoves+
 			   ", and one of those attacks: "+validAttacks;
 	}
 	
-	public static boolean isValid(String condition, List<String> moves, List<String> attacks) {
-		return 	validConditions.contains(condition) && 
-				validMoves.containsAll(moves) && 
-				validAttacks.containsAll(attacks);
+	public boolean isValid(String condition) {
+//		return behaviours.get(condition).isValid();
+		return true; //TODO
 	}
 
 }

@@ -3,26 +3,26 @@ package saf.fighter.fdl;
 
 import org.antlr.runtime.tree.CommonTree;
 
-public class InvalidAttributeMessage {
+class InvalidAttributeMessage {
 	
-	CommonTree invalidAttribute;
-	String note;
-	
-	public InvalidAttributeMessage(CommonTree invalidAttribute, String note) {
+	private CommonTree invalidAttribute;
+	private String possibleAttributes;
+
+	/** @require invalidAttribute != null */
+	public InvalidAttributeMessage(CommonTree invalidAttribute, String possibleAttributes) {
 		assert invalidAttribute != null: "Specifying invalidAttribute is required!";
-		
 		this.invalidAttribute = invalidAttribute;
-		this.note = note;
+		this.possibleAttributes = possibleAttributes;
 	}
 	
-	public String getMessage(){
+	public String toString(){
 		
-		String noteMessage = "";
-		if(note!=null && !note.equals("")){
-			noteMessage = " ("+note+")";
+		String alternativesMessage = "";
+		if(possibleAttributes!=null && !possibleAttributes.equals("")){
+			alternativesMessage = "\n"+possibleAttributes;
 		}
 		
-		return invalidAttribute.getText()+" is invalid!"+noteMessage;
+		return invalidAttribute.getText()+" is invalid!"+alternativesMessage;
 	}
 	
 }
