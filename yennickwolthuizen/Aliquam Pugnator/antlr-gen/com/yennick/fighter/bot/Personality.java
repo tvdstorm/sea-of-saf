@@ -1,30 +1,22 @@
 package com.yennick.fighter.bot;
 
 public class Personality {
-	private String characteristic;
-	private int value;
+	private final String characteristic;
+	private final int value;
 	
 	public Personality(String characteristic, int value){
-		setCharacteristic(characteristic);
-		setValue(value);
+		this.characteristic = characteristic;
+		this.value = value;
 	}
 
 	public int getValue() {
 		return value;
 	}
 
-	public void setValue(int value) {
-		this.value = value;
-	}
-
 	public String getCharacteristic() {
 		return characteristic;
 	}
 
-	public void setCharacteristic(String characteristic) {
-		this.characteristic = characteristic;
-	}
-	
 	public String toString(){
 		return characteristic + " = " + value + "\n";
 	}

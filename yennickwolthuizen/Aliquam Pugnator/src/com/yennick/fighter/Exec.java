@@ -12,7 +12,7 @@ import com.yennick.fighter.SAFLexer;
 import com.yennick.fighter.SAFParser;
 
 
-public class Test {
+public class Exec {
 
 	public static void main(String[] args) throws RecognitionException, IOException {
 		CharStream charStream = new ANTLRFileStream("src/JackieChan.txt");
