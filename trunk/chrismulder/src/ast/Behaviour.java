@@ -1,5 +1,9 @@
 package ast;
 
+import java.util.HashMap;
+
+import ast.ConditionAtom.Type;
+
 public class Behaviour implements Validator {
 	private Condition c;
 	private Move m;
@@ -38,6 +42,10 @@ public class Behaviour implements Validator {
 
 	public void setAttack(Attack a) {
 		this.a = a;
+	}
+	
+	public boolean isMatching(HashMap<Type, Boolean> conditions) {
+		return c.evaluate(conditions);
 	}
 
 }

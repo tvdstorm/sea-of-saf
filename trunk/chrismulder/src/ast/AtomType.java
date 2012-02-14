@@ -1,5 +1,6 @@
 package ast;
 
-public interface AtomType {
+public interface AtomType  {
+	public int ordinal();
 
 }

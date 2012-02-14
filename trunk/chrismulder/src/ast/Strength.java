@@ -4,6 +4,8 @@ public class Strength implements Validator {
 	private String typeName;
 	private Type type;
 	private int value;
+	
+	public static int DEFAULT_VALUE = 5;
 
 	public static enum Type {
 		PUNCHREACH,

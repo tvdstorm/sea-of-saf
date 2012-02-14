@@ -1,6 +1,10 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+
+import ast.ConditionAtom.Type;
 
 public class Saf implements Validator {
 	private String name;
@@ -75,7 +79,7 @@ public class Saf implements Validator {
 				return s.getValue();
 			}
 		}
-		return 5;
+		return Strength.DEFAULT_VALUE;
 	}
 
 	public double getWeight() {
@@ -88,5 +92,17 @@ public class Saf implements Validator {
 	
 	public int getSpeed() {
 		return (int) Math.round( Math.abs(0.5 * (getHeight() - getWeight()) ));
+	}
+	
+	public Behaviour getMatchingBehaviour(HashMap<Type, Boolean> conditions) {
+		ArrayList<Behaviour> matchingBehaviours = new ArrayList<Behaviour>();
+		for (Behaviour b : getBehaviours()) {
+			if (b.isMatching(conditions)) {
+				matchingBehaviours.add(b);
+			}
+		}
+
+		int random = new Random().nextInt(matchingBehaviours.size());
+		return matchingBehaviours.get(random);
 	}
 }
