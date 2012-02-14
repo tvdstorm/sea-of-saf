@@ -1,19 +1,19 @@
 chicken
 {
-  kickReach  = 8
-  punchReach = 4
-  kickPower  = 2
-  punchPower = 8
-  far or near or far  [run_towards kick_low]
-  far or always [run_away kick_low]
-  far [crouch punch_low]
-}
-chuck
-{
   kickReach  = 5
   punchReach = 4
   kickPower  = 6
   punchPower = 2
   far or near  or far [choose(crouch walk_towards) choose(block_high punch_low)]
   always [crouch punch_low]
+}
+chuck
+{
+  kickReach  = 8
+  punchReach = 4
+  kickPower  = 4
+  punchPower = 8
+  far or near or far  [run_towards kick_low]
+  far or always [run_away kick_low]
+  far [crouch punch_low]
 }

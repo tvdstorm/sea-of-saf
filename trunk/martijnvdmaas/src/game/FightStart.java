@@ -7,12 +7,18 @@ import javax.swing.UIManager;
 import astelements.Bots;
 
 public class FightStart {
+	
+	FightEngine fightEngine;
 
 	public FightStart(Bots fightOpponents) {
 		setNativeLookAndFeel();
-		FightEngine fightEngine = new FightEngine(fightOpponents);
+		fightEngine = new FightEngine(fightOpponents);
 
 		new FightView(fightEngine);
+	}
+	
+	public FightEngine getFightEngine() {
+		return fightEngine;
 	}
 
 	public static void setNativeLookAndFeel() {

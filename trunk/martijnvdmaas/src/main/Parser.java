@@ -32,11 +32,7 @@ public class Parser {
 	}
 
 	private InputStream getInputFileStream(String fileName) throws IOException {
-		InputStream fileContent;
-			String projectPath = new java.io.File(".").getCanonicalPath();
-
-			fileContent = new FileInputStream(projectPath + "/input/"
-					+ fileName);
+			InputStream fileContent = new FileInputStream(fileName);
 			return fileContent;
 	}
 
