@@ -1,52 +1,57 @@
 package saf.state;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import saf.ast.Action;
+import saf.ast.FightAction;
 import saf.ast.BehaviourRule;
+import saf.ast.MoveAction;
 import saf.variable.IEnums;
 import saf.variable.ISettings;
 
-public class Bot implements ISettings, IEnums {
+public class BotState implements ISettings, IEnums {
 	public enum Position { LEFT, RIGHT };
 	
 	private Action currentMove;
 	private Action currentAttack;
 	private int health;
-	private boolean walkedOrRunnedAway;
+	private boolean walkedOrRanAway;
 	private Position position;
+	private List<BehaviourRule> behaviourRules;
 	
-	public Bot(Position position) {
-		
+	public BotState(Position position, List<BehaviourRule> behaviourRules) {
 		this.position = position;
-
+		this.behaviourRules = behaviourRules;
+		
 		setHealth(DEFAULT_HEALTH);
-		walkedOrRunnedAway = false;
+		walkedOrRanAway = false;
+		
+		update();
 	}
 
-	public Action getCurrentMove() {
-		return currentMove;
+	public MoveAction getCurrentMove() {
+		return (MoveAction) currentMove;
 	}
 
-	public void setCurrentMove(Action currentMove) {
+	public void setCurrentMove(MoveAction currentMove) {
 		
 		if(currentMove.isMove(IEnums.Move.WALK_TOWARDS) || currentMove.isMove(IEnums.Move.RUN_TOWARDS)) {
-			walkedOrRunnedAway = false;
+			walkedOrRanAway = false;
 		}
 		
 		if(currentMove.isMove(IEnums.Move.WALK_AWAY) || currentMove.isMove(IEnums.Move.RUN_AWAY)) {
-			walkedOrRunnedAway = true;
+			walkedOrRanAway = true;
 		}
 		
 		this.currentMove = currentMove;
 	}
 
-	public Action getCurrentAttack() {
-		return currentAttack;
+	public FightAction getCurrentAttack() {
+		return (FightAction)currentAttack;
 	}
 
-	public void setCurrentAttack(Action currentAttack) {
+	public void setCurrentAttack(FightAction currentAttack) {
 		this.currentAttack = currentAttack;
 	}
 
@@ -58,20 +63,24 @@ public class Bot implements ISettings, IEnums {
 		this.health = health;
 	}
 	
-	public boolean getWalkedOrRunnedAway() {
-		return walkedOrRunnedAway;
+	public boolean getWalkedOrRanAway() {
+		return walkedOrRanAway;
 	}
 
 	public Position getPosition() {
 		return position;
 	}
 	
-	public void update(List<BehaviourRule> behaviourRules, List<Condition> conditions) {
+	public void update() {
+		update(new LinkedList<Condition>());
+	}
+	
+	public void update(List<Condition> conditions) {
 		
 		for(BehaviourRule behaviourRule : behaviourRules) {
 			if(behaviourRule.getCondition().evaluate(conditions)) {
-				setCurrentMove(getRandom(behaviourRule.getMoveActions()));
-				setCurrentAttack(getRandom(behaviourRule.getFightActions()));
+				setCurrentMove(behaviourRule.chooseAction(behaviourRule.getMoveActions()));
+				setCurrentAttack(behaviourRule.chooseAction(behaviourRule.getFightActions()));
 				break;
 			}
 		}
@@ -79,12 +88,5 @@ public class Bot implements ISettings, IEnums {
 	
 	public void reduceHealth(int health) {
 		this.health -= health;
-	}
-	
-	private Action getRandom(List<Action> actions) {
-		
-		Random random = new Random();
-		int index = random.nextInt(actions.size());
-		return actions.get(index);
 	}
 }

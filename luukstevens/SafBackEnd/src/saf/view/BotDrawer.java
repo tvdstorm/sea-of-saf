@@ -11,16 +11,15 @@ import javax.imageio.ImageIO;
 import java.util.HashMap;
 import java.util.Map;
 
-import saf.state.Bot;
+import saf.state.BotState;
 import saf.variable.IEnums;
 import saf.variable.ISettings;
 
 public class BotDrawer implements ISettings, IEnums {
 
-	public final Map<Move, IDrawer> moveDrawers;
+	private static final Map<Move, IDrawer> moveDrawers;
 
-	public BotDrawer() {
-		
+	static {
 		moveDrawers = new HashMap<Move, IDrawer>();
 
 		moveDrawers.put(Move.CROUCH, new CrouchDrawer());
@@ -32,17 +31,17 @@ public class BotDrawer implements ISettings, IEnums {
 		moveDrawers.put(Move.WALK_TOWARDS, new WalkTowardsDrawer());
 	}
 
-	public void draw(Graphics g, Bot bot, int baseX, int baseY) throws IOException {
+	public void draw(Graphics g, BotState bot, int baseX, int baseY) throws IOException {
 		
 		BufferedImage attack = getAttackImage(bot);
 		drawMove(g, attack, bot, baseX, baseY);
 	}
 
-	private BufferedImage getAttackImage(Bot bot) throws IOException {
+	private BufferedImage getAttackImage(BotState bot) throws IOException {
 		
 		String imagePath = SPRITE_FOLDER + bot.getCurrentAttack().getValue();
 
-		if (bot.getPosition().equals(Bot.Position.LEFT)) {
+		if (bot.getPosition().equals(BotState.Position.LEFT)) {
 			imagePath += SPRITE_LEFT_SUFFIX;
 		}
 
@@ -50,7 +49,7 @@ public class BotDrawer implements ISettings, IEnums {
 		return ImageIO.read(new File(imagePath));
 	}
 
-	private void drawMove(Graphics g, BufferedImage image, Bot bot, int baseX, int baseY) {
+	private void drawMove(Graphics g, BufferedImage image, BotState bot, int baseX, int baseY) {
 		
 		Move move = bot.getCurrentMove().getMove();
 		IDrawer drawer = moveDrawers.get(move);
@@ -59,13 +58,13 @@ public class BotDrawer implements ISettings, IEnums {
 	
 	private interface IDrawer {
 		
-		void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY);
+		void draw(BotState bot, Graphics g, BufferedImage image, int baseX, int baseY);
 	}
 
-	private class CrouchDrawer implements IDrawer {
+	private static class CrouchDrawer implements IDrawer {
 
 		@Override
-		public void draw(Bot bot, Graphics g, BufferedImage image, int baseX,
+		public void draw(BotState bot, Graphics g, BufferedImage image, int baseX,
 				int baseY) {
 			int newHeight = image.getHeight() / 2;
 			g.drawImage(image, baseX, baseY + newHeight, image.getWidth(),
@@ -74,25 +73,25 @@ public class BotDrawer implements ISettings, IEnums {
 		}
 	}
 
-	private class JumpDrawer implements IDrawer {
+	private static class JumpDrawer implements IDrawer {
 
 		public static final int DISTANCE = 50;
 
 		@Override
-		public void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY) {
+		public void draw(BotState bot, Graphics g, BufferedImage image, int baseX, int baseY) {
 			
 			g.drawImage(image, baseX, baseY - DISTANCE, null);
 		}
 	}
 
-	private class RunAwayDrawer implements IDrawer {
+	private static class RunAwayDrawer implements IDrawer {
 
 		private static final int DISTANCE = 30;
 
 		@Override
-		public void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY) {
+		public void draw(BotState bot, Graphics g, BufferedImage image, int baseX, int baseY) {
 			
-			if (bot.getPosition().equals(Bot.Position.LEFT)) {
+			if (bot.getPosition().equals(BotState.Position.LEFT)) {
 				g.drawImage(image, baseX - DISTANCE, baseY, null);
 			} else {
 				g.drawImage(image, baseX + DISTANCE, baseY, null);
@@ -100,13 +99,13 @@ public class BotDrawer implements ISettings, IEnums {
 		}
 	}
 
-	private class RunTowardsDrawer implements IDrawer {
+	private static class RunTowardsDrawer implements IDrawer {
 		private static final int DISTANCE = 30;
 
 		@Override
-		public void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY) {
+		public void draw(BotState bot, Graphics g, BufferedImage image, int baseX, int baseY) {
 			
-			if (bot.getPosition().equals(Bot.Position.LEFT)) {
+			if (bot.getPosition().equals(BotState.Position.LEFT)) {
 				g.drawImage(image, baseX + DISTANCE, baseY, null);
 			} else {
 				g.drawImage(image, baseX - DISTANCE, baseY, null);
@@ -114,23 +113,23 @@ public class BotDrawer implements ISettings, IEnums {
 		}
 	}
 
-	private class StandDrawer implements IDrawer {
+	private static class StandDrawer implements IDrawer {
 
 		@Override
-		public void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY) {
+		public void draw(BotState bot, Graphics g, BufferedImage image, int baseX, int baseY) {
 			
 			g.drawImage(image, baseX, baseY, null);
 		}
 	}
 
-	private class WalkAwayDrawer implements IDrawer {
+	private static class WalkAwayDrawer implements IDrawer {
 		
 		private static final int DISTANCE = 20;
 
 		@Override
-		public void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY) {
+		public void draw(BotState bot, Graphics g, BufferedImage image, int baseX, int baseY) {
 			
-			if (bot.getPosition().equals(Bot.Position.LEFT)) {
+			if (bot.getPosition().equals(BotState.Position.LEFT)) {
 				g.drawImage(image, baseX + DISTANCE, baseY, null);
 			} else {
 				g.drawImage(image, baseX - DISTANCE, baseY, null);
@@ -138,14 +137,14 @@ public class BotDrawer implements ISettings, IEnums {
 		}
 	}
 
-	private class WalkTowardsDrawer implements IDrawer {
+	private static class WalkTowardsDrawer implements IDrawer {
 
 		private static final int DISTANCE = 20;
 
 		@Override
-		public void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY) {
+		public void draw(BotState bot, Graphics g, BufferedImage image, int baseX, int baseY) {
 			
-			if (bot.getPosition().equals(Bot.Position.LEFT)) {
+			if (bot.getPosition().equals(BotState.Position.LEFT)) {
 				g.drawImage(image, baseX - DISTANCE, baseY, null);
 			} else {
 				g.drawImage(image, baseX + DISTANCE, baseY, null);

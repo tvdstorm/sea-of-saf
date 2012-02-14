@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 import saf.variable.IEnums;
 
 @XmlRootElement(name = "simpleCondition")
-public class Simple extends Condition {
+public class Simple extends Condition implements IEnums {
 
     @XmlAttribute
     String value;
@@ -17,8 +17,10 @@ public class Simple extends Condition {
     }
     
     @Override
+    //TODO: Logic to bot state
 	public boolean evaluate(List<IEnums.Condition> conditions) {
-    	if(value == null) return false;
+    	assert(value != null): "Condition is null.";
+    	
     	if(value.equals(IEnums.Condition.ALWAYS.getText())) return true;
   	
 		for(IEnums.Condition condition : conditions) {

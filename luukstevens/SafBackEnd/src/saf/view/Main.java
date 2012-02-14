@@ -4,20 +4,21 @@ import java.awt.*;
 import javax.swing.*;
 
 import saf.ast.Bot;
-import saf.state.Game;
+import saf.state.BotState;
 import saf.variable.ISettings;
 
+@SuppressWarnings("serial")
 public class Main extends JFrame implements ISettings {
 	
 	private Arena arena;
 	private Health health;
 	
-	public Main(Game game, Bot left, Bot right) {
+	public Main(Bot left, BotState leftState, Bot right, BotState rightState) {
 		
-		arena = new Arena(game, left, right);
+		arena = new Arena(left, leftState, right, rightState);
 		add(arena);
 		
-		health = new Health(game, left, right);
+		health = new Health(left, leftState, right, rightState);
 		add(health);
 
 		setTitle("Super Awesome Fighters");

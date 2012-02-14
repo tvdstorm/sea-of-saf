@@ -1,6 +1,7 @@
 package saf.ast;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.xml.bind.annotation.*;
 
@@ -14,21 +15,28 @@ public class BehaviourRule {
 	
 	@XmlElementWrapper(name = "moveActions")
 	@XmlElement(name = "action")
-	private List<Action> moveActions; 
+	private List<MoveAction> moveActions; 
 	
 	@XmlElementWrapper(name = "fightActions")
 	@XmlElement(name = "action")
-	private List<Action> fightActions;
+	private List<FightAction> fightActions;
 
 	public Condition getCondition() {
 		return condition;
 	}
 	
-	public List<Action> getMoveActions() {
+	public List<MoveAction> getMoveActions() {
 		return moveActions;
 	}
 
-	public List<Action> getFightActions() {
+	public List<FightAction> getFightActions() {
 		return fightActions;
+	}
+	
+	public <T extends Action> T chooseAction(List<T> actions) {
+		
+		Random random = new Random();
+		int index = random.nextInt(actions.size());
+		return actions.get(index);
 	}
 }
