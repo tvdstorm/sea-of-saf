@@ -2,6 +2,8 @@ package visitor;
 
 import java.util.Arrays;
 
+import constants.SAFConstants;
+
 import astelements.Behaviour;
 import astelements.Bot;
 import astelements.Bots;
@@ -13,33 +15,39 @@ import astelements.ConditionGroup;
 
 
 public class SAFElementValidatorVisitor implements SAFElementVisitor {
-
-	
-	private String[] validCharacteristics  	= { "kickReach", "kickPower", "punchReach", "punchPower" };
-	private String[] validMoves  			= { "jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away" };
-	private String[] validAttacks 			= { "punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high" };
-	private String[] validConditions 		= { "stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always" };
 	
 	@Override
 	public void visit(Behaviour botBehaviour) throws Exception {
+		/* The amount of moves in a behaviour should not be empty */
 		if(botBehaviour.getMoveChoices().isEmpty()) {
 			throw new Exception("Behaviour found without moves");
 		}
+		
+		/* Only moves from SAFConstants are allowed */
 		for(String behaviourMoveOption : botBehaviour.getMoveChoices()) {
-			if(!Arrays.asList(validMoves).contains(behaviourMoveOption)) {
+			if(!Arrays.asList(SAFConstants.validMoves).contains(behaviourMoveOption)) {
 				throw new Exception("Invalid behaviour move detected: " + behaviourMoveOption);
+			}
+		}
+		
+		/* Only attacks from SAFConstants are allowed */
+		for(String behaviourAttackOption : botBehaviour.getAttackChoices()) {
+			if(!Arrays.asList(SAFConstants.validAttacks).contains(behaviourAttackOption)) {
+				throw new Exception("Invalid behaviour attack detected: " + behaviourAttackOption);
 			}
 		}
 	}
 
 	@Override
 	public void visit(Bot bot) throws Exception {
+		/* Botname should not be empty */
 		if(bot.getBotName().isEmpty() || bot.getBotName() == null) {
 			throw new Exception("Botname is empty or null");
 		}
 		
 		boolean hasAlwaysRule = false;
 		
+		/* Each bot should at least have one Always rule */
 		for(Behaviour behaviour : bot.getBehaviours()) {
 			if(conditionChoiceHasAlwaysRule(behaviour.getConditionChoices())) {
 				hasAlwaysRule = true;
@@ -52,6 +60,7 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
 
 	@Override
 	public void visit(Bots bots) throws Exception {
+		/* Firstbot and Secondbot should be instantiated */
 		if(bots.getFirstBot() == null) {
 			throw new Exception("First bot is not instantiated");
 		}
@@ -62,14 +71,17 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
 
 	@Override
 	public void visit(Characteristic characteristic) throws Exception {
+		/* Each characteristic should have a name */
 		if(characteristic.getName().isEmpty() || characteristic.getName() == null) {
 			throw new Exception("Characteristic found with empty or null name");
 		}
 		
-		if(!Arrays.asList(validCharacteristics).contains(characteristic.getName())) {
+		/* Only characteristics with values from SAFConstants are allowed */
+		if(!Arrays.asList(SAFConstants.validCharacteristics).contains(characteristic.getName())) {
 			throw new Exception("Invalid characteristic name: " + characteristic.getName());
 		}
 		
+		/* Characteristics should have a value in between 1 and 10 */
 		if (characteristic.getValue() < 1) 
  		{
 			throw new Exception("Characteristic \"" + characteristic.getName() + "\" has too low value: " +characteristic.getValue() + ". Should be in between 1/10");
@@ -80,6 +92,7 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
  	 	}	
 	}
 
+	/* Function for check whether a conditionchoice contains an always rule */
 	public boolean conditionChoiceHasAlwaysRule(ConditionChoices conditionChoices) {
 		boolean alwaysCondition = false;
 		for(ConditionGroup conditionGroup : conditionChoices.getConditionGroups()) 
@@ -97,9 +110,10 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor {
 
 	@Override
 	public void visit(ConditionGroup conditionGroup) throws Exception {
+		/* Only conditions from SAFConstants are allowed */
 		for(String condition : conditionGroup.getConditionTypes()) 
 		{
-			if(!Arrays.asList(validConditions).contains(condition)) {
+			if(!Arrays.asList(SAFConstants.validConditions).contains(condition)) {
 				throw new Exception("Invalid condition: " + condition);
 			}
 		}
