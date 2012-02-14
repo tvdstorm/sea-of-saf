@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bot name="Bot">
+  <characteristics>
+    <characteristic name="kickPower" value="5" />
+  </characteristics>
+  <behaviourRules>
+    <behaviourRule>
+      <simpleCondition value="always" />
+      <moveActions>
+        <action value="run_towards" />
+      </moveActions>
+      <fightActions>
+        <action value="kick_high" />
+      </fightActions>
+    </behaviourRule>
+  </behaviourRules>
+</bot>

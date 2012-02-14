@@ -16,7 +16,7 @@ public interface ISettings {
 	static final int THRESHOLD_MUCH_WEAKER_STRONGER = 20;
 	static final int THRESHOLD_REACH_BOTH_FAR = 10;
 	static final int THRESHOLD_REACH_ONE_FAR = 5;
-	static final int DELAY = 500;
+	static final int DELAY = 300;
 	
 	//View
 	static final int APPLICATION_WIDTH = 600;

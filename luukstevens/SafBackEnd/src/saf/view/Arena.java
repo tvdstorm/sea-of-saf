@@ -27,8 +27,8 @@ public class Arena extends JPanel implements ISettings {
 	
 		botDrawer = new BotDrawer();
 		
-		setBounds(ARENA_X_POSITION, ARENA_Y_POSITION, ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
-		setSize(ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
+		setBounds(ARENA_X_POSITION, ARENA_Y_POSITION, ARENA_WIDTH, ARENA_HEIGHT);
+		setSize(ARENA_WIDTH, ARENA_HEIGHT);
 		setOpaque(false);
 	}
 	
@@ -39,7 +39,7 @@ public class Arena extends JPanel implements ISettings {
     	}
     	
     	g.setColor(Color.WHITE);
-    	g.fillRect(0, 0, ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
+    	g.fillRect(0, 0, ARENA_WIDTH, ARENA_HEIGHT);
     	
     	try {
     		botDrawer.draw(g, game.getLeftBot(), LEFT_BOT_XPOS, LEFT_BOT_YPOS);
@@ -50,29 +50,36 @@ public class Arena extends JPanel implements ISettings {
 		}
     	 
     	if(endGame) {
-    		addWinsText(g, game, left, right, ISettings.ARENA_WIDTH, ISettings.ARENA_HEIGHT);
+    		addWinsText(g);
     	}
     }
     
-	private void addWinsText(Graphics g, Game game, Bot left, Bot right, int arenaWith, int arenaHeight) {
+	private void addWinsText(Graphics g) {
 		
 		g.setColor(Color.RED);
     	Font font = new Font("Calibri", Font.BOLD, 35);
     	g.setFont(font);
     	
+    	String text = "";
+    	
     	if(game.getLeftBot().getHealth() <= 0) {
-    		addCenteredText(g, right.getName() + " WINS!", arenaWith, arenaHeight, 130);
+    		text += right.getName();
     	}
     	
     	if(game.getRightBot().getHealth() <= 0) {
-    		addCenteredText(g, left.getName() + " WINS!", arenaWith, arenaHeight, 130);
+    		text += left.getName();
+    	}
+    	
+    	if(!text.equals("")) {
+    		text += " wins!";
+    		addCenteredText(g, text, 0, ARENA_WIDTH / 2, ARENA_HEIGHT / 2);
     	}
 	}
 	
 	private void addCenteredText(Graphics g, String s, int width, int XPos, int YPos){  
         
-		int stringLen = (int) g.getFontMetrics().getStringBounds(s, g).getWidth();  
-        int start = width/2 - stringLen/2;  
+		int stringLength = (int) g.getFontMetrics().getStringBounds(s, g).getWidth();  
+        int start = width/2 - stringLength/2;  
         g.drawString(s, start + XPos, YPos);  
 	} 
 }

@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import saf.ast.Bot;
 import saf.logic.Fight;
 import saf.state.Game;
-import saf.variable.IEnums;
 import saf.view.Main;
 
 public class Program {
@@ -25,7 +24,7 @@ public class Program {
 			
 			Fight.start(game, left, right, view);
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}	
 	}
 }

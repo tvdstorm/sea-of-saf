@@ -100,6 +100,7 @@ public class Fight implements ISettings, IEnums {
 	}
 	
 	private static void updateBotsAndView(Game game, saf.ast.Bot left, saf.ast.Bot right, Main view) {
+		
 		List<Condition> leftBotConditions = new LinkedList<Condition>();
 		List<Condition> rightBotConditions = new LinkedList<Condition>();
 		

@@ -56,6 +56,11 @@ public class BotDrawer implements ISettings, IEnums {
 		IDrawer drawer = moveDrawers.get(move);
 		drawer.draw(bot, g, image, baseX, baseY);
 	}
+	
+	private interface IDrawer {
+		
+		void draw(Bot bot, Graphics g, BufferedImage image, int baseX, int baseY);
+	}
 
 	private class CrouchDrawer implements IDrawer {
 
