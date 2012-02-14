@@ -10,11 +10,15 @@ import saf.parser.SAFParser.bots_return;
 import saf.structure.Bots;
 
 public class FileParser {
-	public static Bots consume(String path) throws IOException
+	public static Bots consume(String path)
 	{
-		SAFLexer lexer;
+		SAFLexer lexer = null;
 
-		lexer = new SAFLexer(new ANTLRFileStream(path));
+		try {
+			lexer = new SAFLexer(new ANTLRFileStream(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		

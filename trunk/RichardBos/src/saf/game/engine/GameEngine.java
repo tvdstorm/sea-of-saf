@@ -10,7 +10,7 @@ import saf.game.state.GameState;
 
 public class GameEngine {
 	private static final int CONST_MIN_ACTIONCOST = 9;
-	private static final int CONST_TIMER_MS = 125;
+	private static final int CONST_TIMER_MS = 75;
 
 	public GameEngine(GameState gameState, GameController gameController, GameMain gameMain) {
 		this.gameMain = gameMain;

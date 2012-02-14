@@ -9,18 +9,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import saf.game.GameConstant;
+
 @SuppressWarnings("serial")
-public class GameArena extends JPanel {
+public class GameArena extends JPanel implements GameConstant {
 	
-	private static final String SPRITE_BACKGROUND = "Sprites/background.png";
-	private static final String SPRITE_LEFT = "Sprites/Left/";
-	private static final String SPRITE_RIGHT = "Sprites/Right/";
-	private static final String SPRITES_IDLE = "idle.png";
-
-	private static final String CONST_LEFT = "left";
-	private static final Point CONST_LEFTBOTSTART = new Point(100, 80);
-	private static final Point CONST_RIGHTBOTSTART = new Point(450, 80);
-
 	public GameArena() {
 		this.backGround = loadSprite(SPRITE_BACKGROUND);
 	}
