@@ -5,10 +5,10 @@ import javax.swing.*;
 
 import saf.ast.Bot;
 import saf.state.BotState;
-import saf.variable.ISettings;
+import saf.variable.Settings;
 
 @SuppressWarnings("serial")
-public class Main extends JFrame implements ISettings {
+public class Main extends JFrame implements Settings {
 	
 	private Arena arena;
 	private Health health;

@@ -10,11 +10,11 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import saf.ast.condition.*;
-import saf.variable.IEnums;
-import saf.variable.ISettings;
+import saf.variable.Options;
+import saf.variable.Settings;
 
 @XmlRootElement(name = "bot")
-public class Bot implements ISettings, IEnums {
+public class Bot implements Settings, Options {
 	
 	@XmlAttribute
 	private String name;
@@ -43,7 +43,7 @@ public class Bot implements ISettings, IEnums {
 		return 	Math.abs((0.5 * (getHeight() - getWeight())));	
 	}
 	
-	public int getCharacteristicValue(IEnums.Characteristic characteristicType) {
+	public int getCharacteristicValue(Options.Characteristic characteristicType) {
 		for(saf.ast.Characteristic characteristic : getCharacteristics()) {
 			if(characteristicType.getText().equals(characteristic.getName())) {
 				return characteristic.getValue();
@@ -61,12 +61,12 @@ public class Bot implements ISettings, IEnums {
 	}
 	
 	private double getWeight() {
-		return 	(getCharacteristicValue(IEnums.Characteristic.PUNCH_POWER) + 
-			getCharacteristicValue(IEnums.Characteristic.KICK_POWER)) / 2;
+		return 	(getCharacteristicValue(Options.Characteristic.PUNCH_POWER) + 
+			getCharacteristicValue(Options.Characteristic.KICK_POWER)) / 2;
 	}
 	
 	private double getHeight() {
-		return 	(getCharacteristicValue(IEnums.Characteristic.PUNCH_REACH) + 
-			getCharacteristicValue(IEnums.Characteristic.KICK_REACH)) / 2;
+		return 	(getCharacteristicValue(Options.Characteristic.PUNCH_REACH) + 
+			getCharacteristicValue(Options.Characteristic.KICK_REACH)) / 2;
 	}
 }

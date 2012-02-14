@@ -1,8 +1,5 @@
 package saf.ast;
 
-import saf.variable.IEnums.Attack;
-import saf.variable.IEnums.Move;
-
 public class MoveAction extends Action {
 	public boolean isAttack(Attack attack) {	
 		return false;

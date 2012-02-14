@@ -2,10 +2,10 @@ package saf.ast;
 
 import javax.xml.bind.annotation.*;
 
-import saf.variable.IEnums;
+import saf.variable.Options;
 
 @XmlType(name = "action")
-public abstract class Action implements IEnums {
+public abstract class Action implements Options {
 	
 	@XmlAttribute
 	private String value;

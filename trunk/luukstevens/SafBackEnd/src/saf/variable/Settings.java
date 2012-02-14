@@ -1,6 +1,6 @@
 package saf.variable;
 
-public interface ISettings {
+public interface Settings {
 	
 	//Bot
 	static final int LEFT_BOT_XPOS = 145;

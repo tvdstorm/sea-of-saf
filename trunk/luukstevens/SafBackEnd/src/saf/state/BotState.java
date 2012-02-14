@@ -7,10 +7,10 @@ import saf.ast.Action;
 import saf.ast.FightAction;
 import saf.ast.BehaviourRule;
 import saf.ast.MoveAction;
-import saf.variable.IEnums;
-import saf.variable.ISettings;
+import saf.variable.Options;
+import saf.variable.Settings;
 
-public class BotState implements ISettings, IEnums {
+public class BotState implements Settings, Options {
 	public enum Position { LEFT, RIGHT };
 	
 	private Action currentMove;
@@ -36,11 +36,11 @@ public class BotState implements ISettings, IEnums {
 
 	public void setCurrentMove(MoveAction currentMove) {
 		
-		if(currentMove.isMove(IEnums.Move.WALK_TOWARDS) || currentMove.isMove(IEnums.Move.RUN_TOWARDS)) {
+		if(currentMove.isMove(Options.Move.WALK_TOWARDS) || currentMove.isMove(Options.Move.RUN_TOWARDS)) {
 			walkedOrRanAway = false;
 		}
 		
-		if(currentMove.isMove(IEnums.Move.WALK_AWAY) || currentMove.isMove(IEnums.Move.RUN_AWAY)) {
+		if(currentMove.isMove(Options.Move.WALK_AWAY) || currentMove.isMove(Options.Move.RUN_AWAY)) {
 			walkedOrRanAway = true;
 		}
 		

@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import saf.state.BotState;
-import saf.variable.IEnums;
-import saf.variable.ISettings;
+import saf.variable.Options;
+import saf.variable.Settings;
 
-public class BotDrawer implements ISettings, IEnums {
+public class BotDrawer implements Settings, Options {
 
 	private static final Map<Move, IDrawer> moveDrawers;
 
