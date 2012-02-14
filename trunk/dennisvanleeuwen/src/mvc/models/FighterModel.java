@@ -2,7 +2,9 @@ package mvc.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import mylib.MyRandomizer;
+import mylib.Pair;
 
 import saf.astelements.Characteristic;
 import saf.astelements.IAction;
@@ -72,6 +74,10 @@ public class FighterModel {
 		
 	public int getHealth() {
 		return health;
+	}
+	
+	public void setHealth(int health) {
+		this.health = health;
 	}
 	
 	public int getSpeed() {
@@ -146,17 +152,16 @@ public class FighterModel {
 		this.block = Block.LOW;
 	}
 	
-	public Pair<IAction, IAction> getActionsAgainstEnemy(FighterModel fighterModelEnemy){
-		List<Rule> validRules = new ArrayList<Rule>();
-		for(Rule rule: this.rules){
-			if(rule.getCondition().isTrueInModel(this, fighterModelEnemy))
-				validRules.add(rule);
-		}
-		
-		Random generator = new Random(923754773);
-		Rule chosenRule = validRules.get(generator.nextInt() % validRules.size());
-		return new Pair<IAction, IAction>(chosenRule.getMoveAction(), chosenRule.getFightAction());
-	}
+//	public Pair<IAction, IAction> getActionsAgainstEnemy(FighterModel fighterModelEnemy){
+//		List<Rule> validRules = new ArrayList<Rule>();
+//		for(Rule rule: this.rules){
+//			if(rule.getCondition().isTrueInModel(this, fighterModelEnemy))
+//				validRules.add(rule);
+//		}
+//		
+//		Rule chosenRule = validRules.get(MyRandomizer.generateRandomNumber(validRules.size()));
+//		return new Pair<IAction, IAction>(chosenRule.getMoveAction(), chosenRule.getFightAction());
+//	}
 	
 	//TODO: refactor??? Factory method
 	static public FighterModel createFighterModel(String name, List<Characteristic> characteristics, List<Rule> rules, int x){
