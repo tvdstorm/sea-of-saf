@@ -3,6 +3,7 @@ package data;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class Attack
 {
@@ -25,6 +26,13 @@ public class Attack
     public String toString()
     {
         return name;
+    }
+
+    public static Attack getRandom(Random random)
+    {
+        int randomIndex = random.nextInt(LEGAL.size());
+
+        return new Attack(new String(LEGAL.get(randomIndex)));
     }
 }
 

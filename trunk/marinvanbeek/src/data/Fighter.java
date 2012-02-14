@@ -2,6 +2,7 @@ package data;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Fighter
 {
@@ -31,6 +32,13 @@ public class Fighter
         stringRep += behaviour + "}\n";
 
         return stringRep;
+    }
+
+    public static Fighter getRandom(Random random)
+    {
+        return new Fighter(random.toString(),
+                           Attribute.getRandomList(random),
+                           Behaviour.getRandom(random));
     }
 }
 

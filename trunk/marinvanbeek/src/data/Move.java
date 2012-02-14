@@ -3,6 +3,7 @@ package data;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Random;
 
 public class Move
 {
@@ -26,6 +27,13 @@ public class Move
     public String toString()
     {
         return name;
+    }
+
+    public static Move getRandom(Random random)
+    {
+        int randomIndex = random.nextInt(LEGAL.size());
+
+        return new Move(new String(LEGAL.get(randomIndex)));
     }
 }
 
