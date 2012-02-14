@@ -1,26 +1,19 @@
 package main;
 
-import java.io.IOException;
-
-import astelements.Bots;
+import constants.SAFConstants;
+import game.FightStart;
 
 import visitor.SAFElementValidatorVisitor;
-
-import game.FightStart;
-import grammar.ParseException;
+import astelements.Bots;
 public class Main {
 
-	public static void main(String args[]) throws ParseException, IOException {
+	public static void main(String args[]) throws Exception {
+		/* Parse input */
 		Bots bots = new Parser("validInput.saf", false).getBots();
-		validateBots(bots);
-		new FightStart(bots);
-	}
+		/* Validate input */
+		bots.accept(new SAFElementValidatorVisitor());
 
-	private static void validateBots(Bots bots) {
-		try {
-			bots.accept(new SAFElementValidatorVisitor());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		/* Open FightView */
+		new FightStart(bots);
 	}
 }
