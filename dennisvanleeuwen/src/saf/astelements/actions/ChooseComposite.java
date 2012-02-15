@@ -6,10 +6,10 @@ import java.util.List;
 import saf.ISAFNodeVisitor;
 import saf.astelements.IAction;
 
-public class ChooseActionComposite implements IAction{
+public class ChooseComposite implements IAction{
 	private List<IAction> actions;
 	
-	public ChooseActionComposite(List<IAction> actions){
+	public ChooseComposite(List<IAction> actions){
 		this.actions = new ArrayList<IAction>();
 		this.actions = actions;
 	}
@@ -19,12 +19,12 @@ public class ChooseActionComposite implements IAction{
 	}
 
 	@Override
-	public void accept(ISAFNodeVisitor visitor){
-		visitor.visit(this);	
+	public String getNodeName() {
+		return "choose";
 	}
 
 	@Override
-	public String getNodeName() {
-		return "choose";
+	public void accept(ISAFNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 }

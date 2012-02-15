@@ -3,10 +3,10 @@ package saf.astelements.actions;
 import saf.ISAFNodeVisitor;
 import saf.astelements.IAction;
 
-public class StringLeaf implements IAction{
+public class Simple implements IAction{
 	private String nodeName;
 	
-	public StringLeaf(String nodeName){
+	public Simple(String nodeName){
 		this.nodeName = nodeName;
 	}
 	

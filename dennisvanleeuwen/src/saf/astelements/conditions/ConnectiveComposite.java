@@ -2,11 +2,11 @@ package saf.astelements.conditions;
 
 import saf.astelements.ICondition;
 
-public abstract class ConnectiveConditionComposite implements ICondition{
+public abstract class ConnectiveComposite implements ICondition{
 	private ICondition lhsCondition;
 	private ICondition rhsCondition;
 	
-	public ConnectiveConditionComposite(ICondition lhsCondition, ICondition rhsCondition){
+	public ConnectiveComposite(ICondition lhsCondition, ICondition rhsCondition){
 		this.lhsCondition = lhsCondition;
 		this.rhsCondition = rhsCondition;
 	}
