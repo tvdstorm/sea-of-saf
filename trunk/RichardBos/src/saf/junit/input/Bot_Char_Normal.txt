@@ -1,0 +1,10 @@
+chicken
+{
+  kickReach  = 9
+  punchReach = 1
+  kickPower  = 5
+  punchPower = 6
+  near and far or weaker[choose(walk_towards walk_away) choose(block_low block_high)]
+  much_weaker or far[walk_towards kick_low]
+  always[stand block_high]
+}
