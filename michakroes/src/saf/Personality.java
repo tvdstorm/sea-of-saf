@@ -10,7 +10,7 @@ public class Personality {
 		System.out.println("Personality created");
 	}
 	
-	public Personality(List strenghts) {
+	public Personality(List<Strength> strenghts) {
 		this.strenghts = strenghts;
 	}
 }
