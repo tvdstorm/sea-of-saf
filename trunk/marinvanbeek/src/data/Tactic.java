@@ -27,15 +27,15 @@ public class Tactic
                 Logic.RandomLogicGenerator.getRandomList(random);
         List<Tactic> randomTactics = new ArrayList<Tactic>();
 
-        for (Condition requiredCondition : requiredConditions)
-        {
-            randomTactics.add(new Tactic(requiredCondition, 
-                                         Action.getRandom(random)));
-        }
-
         for (Logic randomLogic : randomLogics)
         {
             randomTactics.add(new Tactic(randomLogic, 
+                                         Action.getRandom(random)));
+        }
+
+        for (Condition requiredCondition : requiredConditions)
+        {
+            randomTactics.add(new Tactic(requiredCondition, 
                                          Action.getRandom(random)));
         }
 

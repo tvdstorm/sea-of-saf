@@ -15,7 +15,8 @@ import java.util.ArrayList;
 
 public class ParseTest
 {
-    private static final String LOG_FILE = "test_results.txt";
+    private static final String LOG_FILE = "parse_test_results.txt";
+    private static final String TEST_FILES_LOCATION = "src/tests/safs/";
 
     @BeforeClass
     public static void redirect()
@@ -27,7 +28,7 @@ public class ParseTest
             System.setErr(logFile);
         } catch (FileNotFoundException e)
         {
-            System.err.println("Couldn't open log file" + e.getMessage());
+            System.err.println("Couldn't open log file\n" + e.getMessage());
         }
     }
 
@@ -86,7 +87,8 @@ public class ParseTest
     {
         System.out.println("Testing " + fileName + ">");
 
-        ANTLRFileStream input = new ANTLRFileStream("tests/safs/" + fileName);
+        ANTLRFileStream input = new ANTLRFileStream(TEST_FILES_LOCATION + 
+                                                    fileName);
         SAFLexer lexer = new SAFLexer(input);
         SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
         parser.parse();
