@@ -1,21 +1,38 @@
 package fighter;
 
-import java.awt.Desktop.Action;
-
 import fighter.action.*;
+import fighter.checker.Visitor;
 import fighter.condition.ICondition;
 
-public class Rule {
+public class Rule implements ASTNode{
 
 	private ICondition condition;
-	private Actions<MoveActionType> moveAction;
-	private Actions<FightActionType> fightAction;
+	private Actions<MoveActionType> moveActions;
+	private Actions<FightActionType> fightActions;
 
 	public Rule(ICondition condition, Actions<MoveActionType> moveActions,
-		Actions<FightActionType> fightAction) {
+			Actions<FightActionType> fightActions) {
 		this.condition = condition;
-		this.moveAction = moveAction;
-		this.fightAction = fightAction;
+		this.moveActions = moveActions;
+		this.fightActions = fightActions;
+	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+		
 	}
 
+	public ICondition getCondition() {
+		return condition;
+	}
+
+	public Actions<MoveActionType> getMoveActions() {
+		return moveActions;
+	}
+
+	public Actions<FightActionType> getFightActions() {
+		return fightActions;
+	}
+	
 }

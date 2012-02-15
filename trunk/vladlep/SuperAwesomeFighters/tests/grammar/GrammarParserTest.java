@@ -48,17 +48,16 @@ public class GrammarParserTest {
 		Bot fighter = parser.fighter();
 		assertEquals("JackieChan", fighter.getName());
 	}
-	
+
 	@Test
-	public void testCaracteristic() throws RecognitionException
-	{
+	public void testCaracteristic() throws RecognitionException {
 		Bot fighter = parser.fighter();
 		Personality personality = fighter.getPersonality();
-		
+
 		assertEquals(7, personality.getKickPower());
 		assertEquals(3, personality.getKickReach());
 		assertEquals(5, personality.getPunchPower());
 		assertEquals(9, personality.getPunchReach());
-		
+
 	}
 }

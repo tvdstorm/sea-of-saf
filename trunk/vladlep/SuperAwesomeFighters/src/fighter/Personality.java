@@ -1,11 +1,9 @@
 package fighter;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import fighter.checker.Visitor;
 import main.Config;
 
-public class Personality {
+public class Personality implements ASTNode {
 
 	private int punchReach;
 	private int punchPower;
@@ -49,6 +47,12 @@ public class Personality {
 
 	public int getKickPower() {
 		return kickPower;
+	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+
 	}
 
 }
