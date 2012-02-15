@@ -25,13 +25,13 @@ public class GameSetup {
 	public void startGame(String[] args){
         
 		List<Fighter> fighters = obtainFighters(args);
-		System.out.println("LOG: Read " + fighters.size() + " fighters"); //DEBUG
+		System.out.println("LOG: Correctly read " + fighters.size() + " fighters"); //DEBUG
 		
-		if(fighters.size() > 1 && fighters.size() % 2 == 0){
+		if(fighters.size() > 1){
 			simulate(fighters);
 			System.out.println("LOG: Simulation ran"); //DEBUG
 		}else{
-			System.out.println("LOG: Simulation aborted (not an even number of fighters)"); //DEBUG
+			System.out.println("LOG: Simulation aborted (not enough fighters available)"); //DEBUG
 		}
 		
 	}
@@ -48,10 +48,9 @@ public class GameSetup {
 				System.err.println(e.getMessage());
 			} catch (IOException e) {
 				System.err.println("Failed to extract fighter from "+source);
-				System.err.println(e.getMessage());
 			} catch (InvalidParameterException e){
-				System.err.println("Misformed FDL:");
-				System.err.println(e.getMessage());
+				System.out.flush();
+				System.err.println(source+": "+e.getMessage());
 			}
 		}
 		
@@ -64,17 +63,18 @@ public class GameSetup {
 		String line;
 		BufferedReader reader = new BufferedReader(new FileReader(new File(source)));
 		while((line = reader.readLine()) != null)
-			content+=line;
+			content+=line+"\n";
 		
 		return content;
 	}
 	
 	private  void simulate(List<Fighter> fighters) {
 		assert fighters.size() > 1 : "Matches need at least two valid fighters!";
-		assert fighters.size() % 2 == 0 : "Matches need an even number of fighters!";
+//		assert fighters.size() % 2 == 0 : "Matches need an even number of fighters!";
 		
+		//Matches against every other fighter
 		List<MatchSimulator> matches = new LinkedList<MatchSimulator>();
-		for(int i=0;i<fighters.size();i++)
+		for(int i=0;i<fighters.size()-1;i++)
 			for(int j=i+1;j<fighters.size();j++)
 				matches.add(new MatchSimulator(fighters.get(i),fighters.get(j)));
 		

@@ -1,9 +1,10 @@
 package saf.fighter;
 
 import java.security.InvalidParameterException;
-import java.util.LinkedList;
+import java.util.List;
 
 import saf.fighter.fdl.FDLReader;
+import saf.fighter.fdl.InvalidAttributeMessage;
 
 
 public class SuperAwesomeFighter extends AbstractDescribableFighter implements Fighter {
@@ -15,8 +16,16 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 	public SuperAwesomeFighter (String fdl) throws InvalidParameterException {
 		this();
 		
-		FDLReader attributeSource = new FDLReader(fdl); //parse		
-		attributeSource.applyAttributes(this);			//check & apply
+		FDLReader attributeSource = new FDLReader(fdl);
+		List<InvalidAttributeMessage> failMsgs = attributeSource.applyAttributes(this);
+
+		if(failMsgs!=null) {
+			String failMsg = "No attributes have been applied, as some were invalid.\n";
+			for(InvalidAttributeMessage msg: failMsgs){
+				failMsg += msg+"\n";
+			}
+			throw new InvalidParameterException(failMsg);
+		}
 	}
 	
 	public String getName(){

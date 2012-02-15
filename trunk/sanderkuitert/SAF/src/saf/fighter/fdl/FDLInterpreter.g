@@ -39,7 +39,7 @@ options {
         try{
             value = Integer.parseInt(valueText);
         }catch (NumberFormatException nfe){
-            assert false: "NumberFormatException should already have occurred in the checker";
+            assert false: "The parser should only provide numbers";
             return;
         }
         
@@ -60,6 +60,13 @@ options {
     }
     
 }
+
+@rulecatch {
+    catch (RecognitionException e) { 
+        throw e; //Forward exceptions for custom error handling
+    } 
+}
+
 
 fighter:            name attributes;
 

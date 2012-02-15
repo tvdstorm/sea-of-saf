@@ -22,9 +22,10 @@ public class FDLReader {
 	 * @require fdl != null
 	 */
 	public FDLReader(String fdl) throws InvalidParameterException {
-		if(fdl == null)
+		if(fdl == null) {
 			throw new NullPointerException("Parameter fdl is null!");
-		
+		}
+	
 		this.ast = parse(lex(fdl));
 	}
 	
@@ -33,21 +34,18 @@ public class FDLReader {
 	 * @return true iff fdl was applied
 	 * @require fighter != null
 	 */ 
-	public boolean applyAttributes(DescribableFighter fighter) {
-		if(fighter == null)
+	public List<InvalidAttributeMessage> applyAttributes(DescribableFighter fighter) {
+		if(fighter == null) {
 			throw new NullPointerException("Parameter fighter is null!");
+		}
 		
-		List<InvalidAttributeMessage> failMsgs = check(fighter);
-		
+		List<InvalidAttributeMessage> failMsgs = check(fighter);		
 		if (failMsgs.size() == 0){
-			return apply(fighter);
+			apply(fighter);
+			return null;
 		}
 		
-		System.err.println("As the given FDL was invalid, no attributes have been applied.");
-		for(InvalidAttributeMessage msg: failMsgs){
-			System.err.println(msg);
-		}
-		return false;
+		return failMsgs;
 	}
 	
 	/** Returns the ast from the parsed fdl */
@@ -64,7 +62,7 @@ public class FDLReader {
 		}catch (IOException e){
 			assert false: "A string should never give an IOException";
 			return null;
-		}		
+		}
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		
 		return tokens;
@@ -78,8 +76,9 @@ public class FDLReader {
 			ast = parser.parse();
 		} catch (RecognitionException e) {
 			//Rethrow as ANTLR-library-independent exception
-			throw new InvalidParameterException(e.getMessage());
-		}
+			throw new InvalidParameterException("FDL has invalid syntax after \""+e.token.getText()+"\" "+
+									"(line "+e.token.getLine()+", column "+e.token.getCharPositionInLine()+")");
+		}		
 		
 		return ast;
 	}
