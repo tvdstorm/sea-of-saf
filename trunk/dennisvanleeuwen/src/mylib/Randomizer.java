@@ -2,7 +2,7 @@ package mylib;
 
 import java.util.Random;
 
-public class MyRandomizer {
+public class Randomizer {
 	static private final Random randomGenerator = new Random(923754773);
 	
 	static public int generateRandomNumber(){

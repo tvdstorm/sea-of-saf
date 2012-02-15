@@ -2,8 +2,8 @@ package saf;
 
 import saf.astelements.*;
 import saf.astelements.actions.*;
-import saf.astelements.conditions.ANDConditionComposite;
-import saf.astelements.conditions.ORConditionComposite;
+import saf.astelements.conditions.ANDConnective;
+import saf.astelements.conditions.ORConnective;
 
 public interface ISAFNodeVisitor {
 	public void visit(Arena arenaNode);
@@ -12,10 +12,10 @@ public interface ISAFNodeVisitor {
 	public void visit(Characteristic characteristicNode);
 	public void visit(Rule ruleNode);	
 
-	public void visit(ORConditionComposite orNode);
-	public void visit(ANDConditionComposite andNode);
-	public void visit(saf.astelements.conditions.StringLeaf stringLeafConditionNode);
+	public void visit(ORConnective orNode);
+	public void visit(ANDConnective andNode);
+	public void visit(saf.astelements.conditions.Simple simpleNode);
 	
-	public void visit(ChooseActionComposite chooseActionNode);	
-	public void visit(saf.astelements.actions.StringLeaf stringLeafActionNode);
+	public void visit(ChooseComposite chooseActionNode);	
+	public void visit(saf.astelements.actions.Simple simpleNode);
 }

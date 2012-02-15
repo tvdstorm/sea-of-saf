@@ -1,4 +1,4 @@
-package saf;
+package saf.configuration;
 
 import java.util.Arrays;
 import java.util.List;

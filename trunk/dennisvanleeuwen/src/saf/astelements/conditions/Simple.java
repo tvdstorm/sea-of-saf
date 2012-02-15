@@ -1,18 +1,15 @@
 package saf.astelements.conditions;
 
+import java.util.List;
+
 import saf.astelements.ICondition;
 import saf.ISAFNodeVisitor;
 
-public class StringLeaf implements ICondition{
+public class Simple implements ICondition{
 	private String nodeName;
 	
-	public StringLeaf(String nodeName){
+	public Simple(String nodeName){
 		this.nodeName = nodeName;
-	}
-	
-	@Override
-	public Boolean isConditionNodeActive(ICondition con){
-		return this.getNodeName().equals(con.getNodeName());
 	}
 	
 	@Override

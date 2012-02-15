@@ -1,5 +1,5 @@
-package mvc;
-
-public interface IView {
-	public void render();
-}
+//package mvc;
+//
+//public interface IView {
+//	public void render();
+//}
