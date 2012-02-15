@@ -9,10 +9,10 @@ public class Saf {
 	
 	public Saf() {}
 	
-	public Saf(String name, Personality p) {
+	public Saf(String name, Personality p, Behaviour b) {
         this.name = name;
-        //this.b = b;
         this.p = p; 
+        this.b = b;
 	} 
 
 	public String getName() {

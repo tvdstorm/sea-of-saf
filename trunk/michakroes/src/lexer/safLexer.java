@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g 2012-02-13 16:42:59
+// $ANTLR 3.4 /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g 2012-02-15 10:02:40
 
   package lexer;
 
@@ -38,13 +38,36 @@ public class safLexer extends Lexer {
     }
     public String getGrammarFileName() { return "/Users/michakroes/Documents/workspace/saf/src/lexer/saf.g"; }
 
+    // $ANTLR start "CHOOSE"
+    public final void mCHOOSE() throws RecognitionException {
+        try {
+            int _type = CHOOSE;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:11:8: ( 'choose' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:11:10: 'choose'
+            {
+            match("choose"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "CHOOSE"
+
     // $ANTLR start "T__8"
     public final void mT__8() throws RecognitionException {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:11:6: ( '(' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:11:8: '('
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:12:6: ( '(' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:12:8: '('
             {
             match('('); 
 
@@ -64,8 +87,8 @@ public class safLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:12:6: ( ')' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:12:8: ')'
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:13:6: ( ')' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:13:8: ')'
             {
             match(')'); 
 
@@ -85,8 +108,8 @@ public class safLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:13:7: ( '=' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:13:9: '='
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:14:7: ( '=' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:14:9: '='
             {
             match('='); 
 
@@ -106,8 +129,8 @@ public class safLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:14:7: ( '[' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:14:9: '['
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:15:7: ( '[' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:15:9: '['
             {
             match('['); 
 
@@ -127,8 +150,8 @@ public class safLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:15:7: ( ']' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:15:9: ']'
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:16:7: ( ']' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:16:9: ']'
             {
             match(']'); 
 
@@ -148,8 +171,8 @@ public class safLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:16:7: ( '{' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:16:9: '{'
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:17:7: ( '{' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:17:9: '{'
             {
             match('{'); 
 
@@ -169,8 +192,8 @@ public class safLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:17:7: ( '}' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:17:9: '}'
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:18:7: ( '}' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:18:9: '}'
             {
             match('}'); 
 
@@ -185,74 +208,27 @@ public class safLexer extends Lexer {
     }
     // $ANTLR end "T__14"
 
-    // $ANTLR start "CHOOSE"
-    public final void mCHOOSE() throws RecognitionException {
-        try {
-            int _type = CHOOSE;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:21:9: ( ( 'choose' )* )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:21:11: ( 'choose' )*
-            {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:21:11: ( 'choose' )*
-            loop1:
-            do {
-                int alt1=2;
-                int LA1_0 = input.LA(1);
-
-                if ( (LA1_0=='c') ) {
-                    alt1=1;
-                }
-
-
-                switch (alt1) {
-            	case 1 :
-            	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:21:12: 'choose'
-            	    {
-            	    match("choose"); 
-
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop1;
-                }
-            } while (true);
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        	// do for sure before leaving
-        }
-    }
-    // $ANTLR end "CHOOSE"
-
     // $ANTLR start "INT"
     public final void mINT() throws RecognitionException {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:22:5: ( ( '0' .. '9' )+ )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:22:7: ( '0' .. '9' )+
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:25:5: ( ( '0' .. '9' )+ )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:25:7: ( '0' .. '9' )+
             {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:22:7: ( '0' .. '9' )+
-            int cnt2=0;
-            loop2:
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:25:7: ( '0' .. '9' )+
+            int cnt1=0;
+            loop1:
             do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
+                int alt1=2;
+                int LA1_0 = input.LA(1);
 
-                if ( ((LA2_0 >= '0' && LA2_0 <= '9')) ) {
-                    alt2=1;
+                if ( ((LA1_0 >= '0' && LA1_0 <= '9')) ) {
+                    alt1=1;
                 }
 
 
-                switch (alt2) {
+                switch (alt1) {
             	case 1 :
             	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:
             	    {
@@ -270,12 +246,12 @@ public class safLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt2 >= 1 ) break loop2;
+            	    if ( cnt1 >= 1 ) break loop1;
                         EarlyExitException eee =
-                            new EarlyExitException(2, input);
+                            new EarlyExitException(1, input);
                         throw eee;
                 }
-                cnt2++;
+                cnt1++;
             } while (true);
 
 
@@ -295,8 +271,8 @@ public class safLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:23:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:23:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:26:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:26:7: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -308,18 +284,18 @@ public class safLexer extends Lexer {
             }
 
 
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:23:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
-            loop3:
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:26:31: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            loop2:
             do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
+                int alt2=2;
+                int LA2_0 = input.LA(1);
 
-                if ( ((LA3_0 >= '0' && LA3_0 <= '9')||(LA3_0 >= 'A' && LA3_0 <= 'Z')||LA3_0=='_'||(LA3_0 >= 'a' && LA3_0 <= 'z')) ) {
-                    alt3=1;
+                if ( ((LA2_0 >= '0' && LA2_0 <= '9')||(LA2_0 >= 'A' && LA2_0 <= 'Z')||LA2_0=='_'||(LA2_0 >= 'a' && LA2_0 <= 'z')) ) {
+                    alt2=1;
                 }
 
 
-                switch (alt3) {
+                switch (alt2) {
             	case 1 :
             	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:
             	    {
@@ -337,7 +313,7 @@ public class safLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop3;
+            	    break loop2;
                 }
             } while (true);
 
@@ -358,8 +334,8 @@ public class safLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:24:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:24:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:27:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:27:9: ( ' ' | '\\t' | '\\r' | '\\n' )
             {
             if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
                 input.consume();
@@ -385,70 +361,238 @@ public class safLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:8: ( T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | CHOOSE | INT | ID | WS )
-        int alt4=11;
-        alt4 = dfa4.predict(input);
-        switch (alt4) {
+        // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:8: ( CHOOSE | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | INT | ID | WS )
+        int alt3=11;
+        switch ( input.LA(1) ) {
+        case 'c':
+            {
+            int LA3_1 = input.LA(2);
+
+            if ( (LA3_1=='h') ) {
+                int LA3_12 = input.LA(3);
+
+                if ( (LA3_12=='o') ) {
+                    int LA3_13 = input.LA(4);
+
+                    if ( (LA3_13=='o') ) {
+                        int LA3_14 = input.LA(5);
+
+                        if ( (LA3_14=='s') ) {
+                            int LA3_15 = input.LA(6);
+
+                            if ( (LA3_15=='e') ) {
+                                int LA3_16 = input.LA(7);
+
+                                if ( ((LA3_16 >= '0' && LA3_16 <= '9')||(LA3_16 >= 'A' && LA3_16 <= 'Z')||LA3_16=='_'||(LA3_16 >= 'a' && LA3_16 <= 'z')) ) {
+                                    alt3=10;
+                                }
+                                else {
+                                    alt3=1;
+                                }
+                            }
+                            else {
+                                alt3=10;
+                            }
+                        }
+                        else {
+                            alt3=10;
+                        }
+                    }
+                    else {
+                        alt3=10;
+                    }
+                }
+                else {
+                    alt3=10;
+                }
+            }
+            else {
+                alt3=10;
+            }
+            }
+            break;
+        case '(':
+            {
+            alt3=2;
+            }
+            break;
+        case ')':
+            {
+            alt3=3;
+            }
+            break;
+        case '=':
+            {
+            alt3=4;
+            }
+            break;
+        case '[':
+            {
+            alt3=5;
+            }
+            break;
+        case ']':
+            {
+            alt3=6;
+            }
+            break;
+        case '{':
+            {
+            alt3=7;
+            }
+            break;
+        case '}':
+            {
+            alt3=8;
+            }
+            break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            {
+            alt3=9;
+            }
+            break;
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+        case 'F':
+        case 'G':
+        case 'H':
+        case 'I':
+        case 'J':
+        case 'K':
+        case 'L':
+        case 'M':
+        case 'N':
+        case 'O':
+        case 'P':
+        case 'Q':
+        case 'R':
+        case 'S':
+        case 'T':
+        case 'U':
+        case 'V':
+        case 'W':
+        case 'X':
+        case 'Y':
+        case 'Z':
+        case '_':
+        case 'a':
+        case 'b':
+        case 'd':
+        case 'e':
+        case 'f':
+        case 'g':
+        case 'h':
+        case 'i':
+        case 'j':
+        case 'k':
+        case 'l':
+        case 'm':
+        case 'n':
+        case 'o':
+        case 'p':
+        case 'q':
+        case 'r':
+        case 's':
+        case 't':
+        case 'u':
+        case 'v':
+        case 'w':
+        case 'x':
+        case 'y':
+        case 'z':
+            {
+            alt3=10;
+            }
+            break;
+        case '\t':
+        case '\n':
+        case '\r':
+        case ' ':
+            {
+            alt3=11;
+            }
+            break;
+        default:
+            NoViableAltException nvae =
+                new NoViableAltException("", 3, 0, input);
+
+            throw nvae;
+
+        }
+
+        switch (alt3) {
             case 1 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:10: T__8
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:10: CHOOSE
+                {
+                mCHOOSE(); 
+
+
+                }
+                break;
+            case 2 :
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:17: T__8
                 {
                 mT__8(); 
 
 
                 }
                 break;
-            case 2 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:15: T__9
+            case 3 :
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:22: T__9
                 {
                 mT__9(); 
 
 
                 }
                 break;
-            case 3 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:20: T__10
+            case 4 :
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:27: T__10
                 {
                 mT__10(); 
 
 
                 }
                 break;
-            case 4 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:26: T__11
+            case 5 :
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:33: T__11
                 {
                 mT__11(); 
 
 
                 }
                 break;
-            case 5 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:32: T__12
+            case 6 :
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:39: T__12
                 {
                 mT__12(); 
 
 
                 }
                 break;
-            case 6 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:38: T__13
+            case 7 :
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:45: T__13
                 {
                 mT__13(); 
 
 
                 }
                 break;
-            case 7 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:44: T__14
+            case 8 :
+                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:51: T__14
                 {
                 mT__14(); 
-
-
-                }
-                break;
-            case 8 :
-                // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:1:50: CHOOSE
-                {
-                mCHOOSE(); 
 
 
                 }
@@ -483,77 +627,6 @@ public class safLexer extends Lexer {
     }
 
 
-    protected DFA4 dfa4 = new DFA4(this);
-    static final String DFA4_eotS =
-        "\1\11\7\uffff\1\13\4\uffff\4\13\1\11\1\13";
-    static final String DFA4_eofS =
-        "\23\uffff";
-    static final String DFA4_minS =
-        "\1\11\7\uffff\1\150\4\uffff\2\157\1\163\1\145\1\60\1\150";
-    static final String DFA4_maxS =
-        "\1\175\7\uffff\1\150\4\uffff\2\157\1\163\1\145\1\172\1\150";
-    static final String DFA4_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\uffff\1\10\1\11\1\12\1\13"+
-        "\6\uffff";
-    static final String DFA4_specialS =
-        "\23\uffff}>";
-    static final String[] DFA4_transitionS = {
-            "\2\14\2\uffff\1\14\22\uffff\1\14\7\uffff\1\1\1\2\6\uffff\12"+
-            "\12\3\uffff\1\3\3\uffff\32\13\1\4\1\uffff\1\5\1\uffff\1\13\1"+
-            "\uffff\2\13\1\10\27\13\1\6\1\uffff\1\7",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\15",
-            "",
-            "",
-            "",
-            "",
-            "\1\16",
-            "\1\17",
-            "\1\20",
-            "\1\21",
-            "\12\13\7\uffff\32\13\4\uffff\1\13\1\uffff\2\13\1\22\27\13",
-            "\1\15"
-    };
-
-    static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
-    static final short[] DFA4_eof = DFA.unpackEncodedString(DFA4_eofS);
-    static final char[] DFA4_min = DFA.unpackEncodedStringToUnsignedChars(DFA4_minS);
-    static final char[] DFA4_max = DFA.unpackEncodedStringToUnsignedChars(DFA4_maxS);
-    static final short[] DFA4_accept = DFA.unpackEncodedString(DFA4_acceptS);
-    static final short[] DFA4_special = DFA.unpackEncodedString(DFA4_specialS);
-    static final short[][] DFA4_transition;
-
-    static {
-        int numStates = DFA4_transitionS.length;
-        DFA4_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA4_transition[i] = DFA.unpackEncodedString(DFA4_transitionS[i]);
-        }
-    }
-
-    class DFA4 extends DFA {
-
-        public DFA4(BaseRecognizer recognizer) {
-            this.recognizer = recognizer;
-            this.decisionNumber = 4;
-            this.eot = DFA4_eot;
-            this.eof = DFA4_eof;
-            this.min = DFA4_min;
-            this.max = DFA4_max;
-            this.accept = DFA4_accept;
-            this.special = DFA4_special;
-            this.transition = DFA4_transition;
-        }
-        public String getDescription() {
-            return "1:1: Tokens : ( T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | CHOOSE | INT | ID | WS );";
-        }
-    }
  
 
 }

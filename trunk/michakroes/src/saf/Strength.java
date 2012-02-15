@@ -8,7 +8,7 @@ public class Strength {
 	public Strength(String c, String v) {
 		this.characteristic = c;
 		this.value = v;
-		System.out.println("Strength created");
+		System.out.println(c + ": "  + v.toString());
 	}
 	
 	public String getCharacteristic() {

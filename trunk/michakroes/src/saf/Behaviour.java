@@ -7,7 +7,7 @@ public class Behaviour {
 	
 	private List<BehaviourRule> behaviourrules;
 	
-	public Behaviour(List behaviourrules) {
+	public Behaviour(List<BehaviourRule> behaviourrules) {
 		this.behaviourrules = behaviourrules;
 	}
 }
