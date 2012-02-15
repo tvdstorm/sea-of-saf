@@ -16,9 +16,9 @@ public class Fight implements Settings, Options {
 	private BotState leftState;
 	private Bot right;
 	private BotState rightState;
-	private Main view;
+	private MainView view;
 	
-	public Fight(Bot left, BotState leftState, Bot right, BotState rightState, Main view) {
+	public Fight(Bot left, BotState leftState, Bot right, BotState rightState, MainView view) {
 		this.left = left;
 		this.leftState = leftState;
 		this.right = right;

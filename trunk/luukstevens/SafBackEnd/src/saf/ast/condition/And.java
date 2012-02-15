@@ -1,15 +1,15 @@
 package saf.ast.condition;
 
-import java.util.List;
-
 import javax.xml.bind.annotation.XmlRootElement;
+
+import saf.state.BotState;
 
 @XmlRootElement(name = "andCondition")
 public class And extends Composite {
 	
 	@Override
-	public boolean evaluate(List<Condition> conditions) {
-		return this.getFirstCondition().evaluate(conditions) && 
-				this.getSecondCondition().evaluate(conditions);
+	public boolean evaluate(BotState botState) {
+		return this.getFirstCondition().evaluate(botState) && 
+				this.getSecondCondition().evaluate(botState);
 	}
 }

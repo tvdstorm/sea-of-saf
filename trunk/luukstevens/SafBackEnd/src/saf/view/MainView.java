@@ -8,12 +8,12 @@ import saf.state.BotState;
 import saf.variable.Settings;
 
 @SuppressWarnings("serial")
-public class Main extends JFrame implements Settings {
+public class MainView extends JFrame implements Settings {
 	
 	private Arena arena;
 	private Health health;
 	
-	public Main(Bot left, BotState leftState, Bot right, BotState rightState) {
+	public MainView(Bot left, BotState leftState, Bot right, BotState rightState) {
 		
 		arena = new Arena(left, leftState, right, rightState);
 		add(arena);
