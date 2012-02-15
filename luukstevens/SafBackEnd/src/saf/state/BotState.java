@@ -19,6 +19,7 @@ public class BotState implements Settings, Options {
 	private boolean walkedOrRanAway;
 	private Position position;
 	private List<BehaviourRule> behaviourRules;
+	private List<Condition> currentFightConditions;
 	
 	public BotState(Position position, List<BehaviourRule> behaviourRules) {
 		this.position = position;
@@ -71,14 +72,19 @@ public class BotState implements Settings, Options {
 		return position;
 	}
 	
+	public List<Condition> getCurrentFightConditions() {
+		return currentFightConditions;
+	}
+	
 	public void update() {
 		update(new LinkedList<Condition>());
 	}
 	
-	public void update(List<Condition> conditions) {
+	public void update(List<Condition> newFightConditions) {
+		currentFightConditions = newFightConditions;
 		
 		for(BehaviourRule behaviourRule : behaviourRules) {
-			if(behaviourRule.getCondition().evaluate(conditions)) {
+			if(behaviourRule.getCondition().evaluate(this)) {
 				setCurrentMove(behaviourRule.chooseAction(behaviourRule.getMoveActions()));
 				setCurrentAttack(behaviourRule.chooseAction(behaviourRule.getFightActions()));
 				break;
