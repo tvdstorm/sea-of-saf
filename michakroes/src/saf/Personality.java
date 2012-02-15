@@ -2,7 +2,10 @@ package saf;
 
 import java.util.List;
 
-public class Personality {
+import test.SafInterface;
+import test.SafVisitor;
+
+public class Personality implements SafInterface {
 	
 	private List<Strength> strenghts;
 
@@ -12,5 +15,10 @@ public class Personality {
 	
 	public Personality(List<Strength> strenghts) {
 		this.strenghts = strenghts;
+	}
+	
+	@Override
+	public void accept(SafVisitor visitor) {
+		 visitor.visit(this);
 	}
 }
