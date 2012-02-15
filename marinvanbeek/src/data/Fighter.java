@@ -34,9 +34,11 @@ public class Fighter
         return stringRep;
     }
 
-    public static Fighter getRandom(Random random)
+    public static Fighter getRandom(int seed)
     {
-        return new Fighter(random.toString(),
+        Random random = new Random(seed);
+
+        return new Fighter(seed + "",
                            Attribute.getRandomList(random),
                            Behaviour.getRandom(random));
     }

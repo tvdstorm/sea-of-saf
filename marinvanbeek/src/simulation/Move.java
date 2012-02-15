@@ -8,5 +8,10 @@ public class Move extends data.Move
     {
         super(new String(moveData.name));
     }
+
+    public static int determineDistance(Move move)
+    {
+        return 0;
+    }
 }
 

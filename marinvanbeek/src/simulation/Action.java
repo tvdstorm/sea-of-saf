@@ -8,5 +8,10 @@ public class Action extends data.Action {
         super(new Move(actionData.move),
               new Attack(actionData.attack));
     }
+
+    public Action(Move move, Attack attack)
+    {
+        super(move, attack);
+    }
 }
 

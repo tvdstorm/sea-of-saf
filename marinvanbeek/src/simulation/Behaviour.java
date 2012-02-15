@@ -8,5 +8,10 @@ public class Behaviour extends data.Behaviour
     {
         super(Tactic.convertDataList(behaviourData.tactics));
     }
+
+    public Action determineAction(State state)
+    {
+        return new Action(new Move("stand"), new Attack("kick_high"));
+    }
 }
 

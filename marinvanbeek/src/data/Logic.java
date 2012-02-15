@@ -10,7 +10,7 @@ public interface Logic
     {
         public static Logic getRandom(Random random)
         {
-            int logicTreeDepth = random.nextInt(2);
+            int logicTreeDepth = random.nextInt(3);
 
             return getRandom(random, logicTreeDepth);
         }
