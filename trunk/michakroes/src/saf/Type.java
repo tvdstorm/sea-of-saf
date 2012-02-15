@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Iterator;
 
-abstract class Type {
+import test.SafInterface;
+import test.SafVisitor;
+
+public abstract class Type implements SafInterface {
 	private String type;
 	private List<String> types;
 	private Random randomGenerator;
@@ -38,5 +41,11 @@ abstract class Type {
 	// not used
 	public void setMove(String t) {
 		this.type = t;
+	}
+	
+	@Override
+	public void accept(SafVisitor visitor) {
+		//this.condition.accept(visitor);
+		visitor.visit(this);
 	}
 }
