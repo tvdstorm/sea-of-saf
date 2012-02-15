@@ -7,6 +7,7 @@ options {
 @header {
 package reader.antlr;
   import fighter.*;
+  import fighter.condition.*;
 }
 
 @lexer::header {
@@ -27,22 +28,20 @@ personality returns [Personality personality]
   
    {
     personality = new Personality();
-    Caracteristic caracteristic = new Caracteristic();
-    personality.addCaracteristic(caracteristic);
    }
-  (STRENGTHS '=' TWODIGITS 
+  (STRENGTHS '=' INTEGER 
                            {
                             if ($STRENGTHS.getText().equals("punchReach")) {
-                                              	caracteristic.setPunchReach(Integer.parseInt($TWODIGITS.text));
+                                              	personality.setPunchReach(Integer.parseInt($INTEGER.text));
                             }
                             if ($STRENGTHS.text.equals("punchPower")) {
-                            	caracteristic.setPunchPower(Integer.parseInt($TWODIGITS.text));
+                            	personality.setPunchPower(Integer.parseInt($INTEGER.text));
                             }
                             if ($STRENGTHS.text.equals("kickReach")) {
-                            	caracteristic.setKickReach(Integer.parseInt($TWODIGITS.text));
+                            	personality.setKickReach(Integer.parseInt($INTEGER.text));
                             }
                             if ($STRENGTHS.text.equals( "kickPower")) {
-                            	caracteristic.setKickPower(Integer.parseInt($TWODIGITS.text));
+                            	personality.setKickPower(Integer.parseInt($INTEGER.text));
                             }
                             ;
                            })*
@@ -54,25 +53,51 @@ behaviour returns [Behaviour behaviour]
   behaviour = new Behaviour();
   }
   (
-    (
-      (CONDITIONS
-      | (CONDITIONS 'and' CONDITIONS)
-      | (CONDITIONS 'or' CONDITIONS))*
-    )
+   cond
     '['
     (
       MOVES
-      | ('choose(' MOVES MOVES ')')
+      | ('choose(' MOVES+ ')')
     )
     (
       ATTACKS
-      | 'choose(' ATTACKS ATTACKS ')'
+      | 'choose(' ATTACKS+ ')'
     )
     ']'
   )*
   'always' '[' MOVES ATTACKS ']'
   ;
-
+cond returns [ ICondition condition]
+	:	
+	 (
+    //maybe + instead of *
+    //factorizez pt a merge and multiplu.
+      (orCond {condition = $orCond.condition;}
+      )
+    )
+	;
+condSimple returns [ ICondition condition]
+	:
+	
+	(CONDITIONS 
+		{condition = new SimpleCondition($CONDITIONS.text);} 
+	 )
+	| ('(' cond')' {condition = $cond.condition;})
+	;
+andCond returns  [ ICondition condition]
+	:
+	cond1 = condSimple { condition = $cond1.condition;}
+	('and' cond2 = condSimple { condition = new AndCondition(condition, $cond2.condition); 
+	})*
+	;
+orCond returns  [ ICondition condition]
+	:
+	cond1 = andCond { condition = $cond1.condition;}
+	('or' cond2 = andCond
+	{ condition = new OrCondition(condition, $cond2.condition);
+	}
+	)*
+	;
 CONDITIONS: ('stronger' | 'weaker'|' much_stronger'|'much_weaker' | 'even' | 'near' | 'far' | 'always');
 MOVES: ('jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away');
 ATTACKS : ('punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high');
@@ -80,9 +105,9 @@ STRENGTHS : ('punchReach' | 'kickReach' | 'kickPower' | 'punchPower');
 
 IDENT : ('A'..'Z'|'a'..'z')('0'..'9'|'A'..'Z'|'a'..'z')*;
 
-TWODIGITS
-  :
-  '0'..'9' ('0'..'9')?
+// errror handling -> better for integer
+INTEGER
+  : ('0'..'9')+
   ;
 
 //parse comments and whitespaces to a hidden channel
