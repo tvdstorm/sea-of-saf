@@ -11,12 +11,21 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 	protected List<Characteristic> characteristics;
 	protected List<Behaviour> behaviours;
 	
+	
 	public AbstractDescribableFighter(){	
 		this.name = "Anonymous";
 		this.characteristics = new LinkedList<Characteristic>();
 		this.behaviours = new LinkedList<Behaviour>();
 	}
 	
+	public AbstractDescribableFighter(String name, List<Characteristic> characteristics, 
+															List<Behaviour> behaviours) {
+		this.name = name;
+		this.characteristics = characteristics;
+		this.behaviours = behaviours;
+	}
+
+
 	//--- AST
 	public String validPropertyValues() {
 		return validNames()+"\n"+
@@ -76,35 +85,16 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 		this.name = name;
 	}
 	
-	/** @require isValidProperty(property) && isValidPropertyValue(value) */
+	/** @require new Characteristic().isValid(property) */
 	public void addCharacteristic(String property, int value) {
-		assert isValidProperty(property) && isValidPropertyValue(value): 
-										"Characteristic requirement broken";
+		assert new Characteristic().isValid(property): "Characteristic requirement broken";
 		this.characteristics.add(new Characteristic(property,value));
 	}
 	
-	/** @require isValidCondition(condition) && 
-	 * 		for each move: isValidMove(move) &&
-	 * 		for each attack: isValidAttack(attack) */
+	/** @require new Behaviour().isValid(condition) */
 	public void addBehaviour(String condition, List<String> moves, List<String> attacks) {
-		assert isValidCondition(condition) && validMoves(moves) && validAttacks(attacks):
-											"Behaviour requirement broken";
+		assert new Behaviour().isValid(condition): "Behaviour requirement broken";
 		this.behaviours.add(new Behaviour(condition, moves, attacks));
 	}
 	
-	//---Only used in addBehaviour-assert: 
-	//TODO remove in final?
-	private boolean validMoves(List<String> moves) {
-		for(String move: moves)
-			if(!isValidMove(move))
-				return false;
-		return true;
-	}
-	
-	private boolean validAttacks(List<String> attacks) {
-		for(String attack: attacks)
-			if(!isValidAttack(attack))
-				return false;
-		return true;
-	}
 }
