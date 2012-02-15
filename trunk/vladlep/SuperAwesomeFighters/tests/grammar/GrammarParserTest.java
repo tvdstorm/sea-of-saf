@@ -13,7 +13,6 @@ import org.antlr.runtime.TokenStream;
 import org.junit.Test;
 
 import fighter.Bot;
-import fighter.Caracteristic;
 import fighter.Personality;
 
 import reader.antlr.SAFLexer;
@@ -55,11 +54,11 @@ public class GrammarParserTest {
 	{
 		Bot fighter = parser.fighter();
 		Personality personality = fighter.getPersonality();
-		Caracteristic caracteristic  = personality.getCaracteristics().get(0); // should use iterators;
-		assertEquals(7, caracteristic.getKickPower());
-		assertEquals(3, caracteristic.getKickReach());
-		assertEquals(5, caracteristic.getPunchPower());
-		assertEquals(9, caracteristic.getPunchReach());
+		
+		assertEquals(7, personality.getKickPower());
+		assertEquals(3, personality.getKickReach());
+		assertEquals(5, personality.getPunchPower());
+		assertEquals(9, personality.getPunchReach());
 		
 	}
 }
