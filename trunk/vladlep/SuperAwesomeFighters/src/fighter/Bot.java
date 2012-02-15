@@ -1,6 +1,6 @@
 package fighter;
 
-public class Bot {
+public class Bot implements ASTNode {
 
 	private String name;
 	private Behaviour behaviour;
@@ -26,6 +26,11 @@ public class Bot {
 	public Personality getPersonality()
 	{
 		return personality;
+	}
+	
+	public void accept(Visitor visitor)
+	{
+		visitor.visit(this);
 	}
 	
 }
