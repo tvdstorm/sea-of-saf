@@ -7,6 +7,7 @@ options {
 @header {
 package reader.antlr;
   import fighter.*;
+  import fighter.action.*;
   import fighter.condition.*;
 }
 
@@ -53,17 +54,48 @@ behaviour returns [Behaviour behaviour]
   behaviour = new Behaviour();
   }
   (
+  {Rule rule;}
    cond
     '['
+    {
+    Actions<MoveActionType> moveActions = new Actions<MoveActionType>();
+    Actions<FightActionType> fightActions = new Actions<FightActionType>();
+    ;}
+    
     (
-      MOVES
-      | ('choose(' MOVES+ ')')
+      (
+      	move1 = MOVES
+      	{
+      	moveActions.add(MoveActionType.valueOf($move1.text));
+      	}
+      )
+      | ('choose(' (
+	      move2 = MOVES
+	      {
+	      moveActions.add(MoveActionType.valueOf($move2.text));
+	      }
+      )+ ')')
     )
     (
-      ATTACKS
-      | 'choose(' ATTACKS+ ')'
+    
+     (
+     	attack1=  ATTACKS 
+     	{
+     	fightActions.add(FightActionType.valueOf($attack1.text));
+     	}
+     )
+      | 'choose(' (
+      	attack2 = ATTACKS
+	      {
+	      fightActions.add(FightActionType.valueOf($attack1.text));
+	      }
+      )+ ')'
     )
     ']'
+  {
+  	rule = new Rule($cond.condition, moveActions, fightActions); 
+  	behaviour.add(rule);
+  }
   )*
   'always' '[' MOVES ATTACKS ']'
   ;
@@ -98,7 +130,7 @@ orCond returns  [ ICondition condition]
 	}
 	)*
 	;
-CONDITIONS: ('stronger' | 'weaker'|' much_stronger'|'much_weaker' | 'even' | 'near' | 'far' | 'always');
+CONDITIONS: ('stronger' | 'weaker'|'much_stronger'|'much_weaker' | 'even' | 'near' | 'far' | 'always');
 MOVES: ('jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away');
 ATTACKS : ('punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high');
 STRENGTHS : ('punchReach' | 'kickReach' | 'kickPower' | 'punchPower');
