@@ -6,7 +6,7 @@ import saf.state.BotState.Position;
 import saf.state.BotState;
 import saf.view.MainView;
 
-public class Program {
+public class Main {
 
 	public static void main(String[] args) {
 		
