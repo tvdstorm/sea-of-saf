@@ -11,5 +11,10 @@ class Condition implements AST {
 		// TODO Auto-generated method stub
 		return true;
 	}
+
+	public String getAlwaysCondition() {
+		// TODO Auto-generated method stub
+		return "always";
+	}
 	
 }

@@ -19,18 +19,26 @@ options {
     
     private DescribableFighter fighter;
     private List<InvalidAttributeMessage> failMsgs;
+    private boolean alwaysConditionExists;
+    private CommonTree name;
     
     /** Returns a message for every attribute in the AST that the given fighter considers invalid */
     public List<InvalidAttributeMessage> check(DescribableFighter fighter) throws RecognitionException {
         this.fighter = fighter;
         this.failMsgs = new LinkedList<InvalidAttributeMessage>();
+        this.alwaysConditionExists = false;
         
         fighter(); //start checking at root
+        
+        if(!alwaysConditionExists){
+            failMsgs.add(new InvalidAttributeMessage(name,"Please add an "+fighter.getAlwaysCondition()+"-rule."));
+        }
         
         return failMsgs;
     }
     
-    private void checkName(CommonTree node){        
+    private void checkName(CommonTree node){
+        name = node;
         if(!fighter.isValidName(node.getText()))
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validNames()));
     }
@@ -46,8 +54,11 @@ options {
     }
     
     private void checkCondition(CommonTree node){
-        if(!fighter.isValidCondition(node.getText()))
+        if(!fighter.isValidCondition(node.getText())){
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
+        }else if(node.getText().equals(fighter.getAlwaysCondition())){
+            alwaysConditionExists = true;
+        }
     }
     
     private void checkMove(CommonTree node){
@@ -70,6 +81,13 @@ options {
         }
     }
 }
+
+@rulecatch {
+    catch (RecognitionException e) { 
+        throw e; //Forward exceptions for custom error handling
+    } 
+}
+
 
 fighter:            name attributes;
 

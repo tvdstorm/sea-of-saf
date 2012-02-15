@@ -55,6 +55,7 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 		return new Condition().isValid(condition);
 	}
 	
+	
 	public boolean isValidMove(String move) {
 		return new Action().new Move().isValid(move);
 	}
@@ -77,6 +78,9 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 		return new Behaviour().validPropertyValues();
 	}
 	
+	public String getAlwaysCondition() {
+		return new Condition().getAlwaysCondition();
+	}
 	
 	//--- Set values:
 	/** @require isValidName(name) */

@@ -3,11 +3,12 @@ package saf.fighter.fdl;
 
 import org.antlr.runtime.tree.CommonTree;
 
-class InvalidAttributeMessage {
+public class InvalidAttributeMessage {
 	
 	private CommonTree invalidAttribute;
 	private String possibleAttributes;
 
+	
 	/** @require invalidAttribute != null */
 	public InvalidAttributeMessage(CommonTree invalidAttribute, String possibleAttributes) {
 		assert invalidAttribute != null: "Specifying invalidAttribute is required!";
@@ -15,6 +16,14 @@ class InvalidAttributeMessage {
 		this.possibleAttributes = possibleAttributes;
 	}
 	
+	public CommonTree getInvalidAttribute() {
+		return this.invalidAttribute;
+	}
+
+	public String getPossibleAttributes() {
+		return this.possibleAttributes;
+	}
+
 	public String toString(){
 		
 		//Only include a newline when possible attributes follow
@@ -25,6 +34,11 @@ class InvalidAttributeMessage {
 		
 		return invalidAttribute.getText()+"(line "+invalidAttribute.getLine()+")"+
 															" is invalid!"+possibilities;
+	}
+
+	public boolean equals(InvalidAttributeMessage other) {
+		return invalidAttribute.getText().equals(other.getInvalidAttribute().getText()) && 
+					invalidAttribute.getLine() == other.getInvalidAttribute().getLine();
 	}
 	
 }

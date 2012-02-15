@@ -30,6 +30,13 @@ tokens{
     package saf.fighter.fdl;
 }
 
+@rulecatch {
+    catch (RecognitionException e) { 
+        throw e; //Forward exceptions for custom error handling
+    } 
+}
+
+
 // PARSER rules
 fighter:            name attributes;
 
