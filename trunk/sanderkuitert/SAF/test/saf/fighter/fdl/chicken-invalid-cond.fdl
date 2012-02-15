@@ -6,6 +6,6 @@ chicken
   punchPower = 2
   far [run_towards kick_low]
   
-  near [run_away kick_low]
+  nar [run_away kick_low]
   always [crouch punch_low]
 }
