@@ -1,11 +1,11 @@
-grammar FDL; //Fighter Description Language
+grammar FDL; //Grammar if the Fighter Description Language
 
 options {
     language = Java;
     output = AST;
 }
 
-tokens{ //TODO experiment with moving these to the lexer rules
+tokens{
     L_CURLY_BRACKET =   '{';
     R_CURLY_BRACKET =   '}';    
     L_BRACKET =         '[';
@@ -18,6 +18,12 @@ tokens{ //TODO experiment with moving these to the lexer rules
 
 @parser::header {
     package saf.fighter.fdl;
+}
+
+@parser::members {
+    public CommonTree parse() throws RecognitionException {
+        return (CommonTree) fighter().getTree(); //start parsing at root
+    }
 }
 
 @lexer::header {
@@ -43,10 +49,11 @@ choose:             CHOOSE L_PAREN! TEXT TEXT R_PAREN!;
 
 // LEXER rules
 TEXT:               LETTER (LETTER | UNDERSCORE | DIGIT)*;
-NUMBER:             DIGIT+;
+NUMBER:             DIGIT+; //(MINUS | DIGIT) DIGIT*;
 WHITESPACE:         WHITE_CHAR+     { $channel = HIDDEN; };
 
-fragment DIGIT:     ('0'..'9');
 fragment LETTER:    ('a'..'z' | 'A'..'Z');
 fragment UNDERSCORE:('_');
+fragment DIGIT:     ('0'..'9');
+//fragment MINUS:     ('-');
 fragment WHITE_CHAR:(' ' | '\t' | '\r' | '\n' | '\u000C');

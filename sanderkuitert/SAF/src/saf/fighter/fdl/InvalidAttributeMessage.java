@@ -17,12 +17,14 @@ class InvalidAttributeMessage {
 	
 	public String toString(){
 		
-		String alternativesMessage = "";
+		//Only include a newline when possible attributes follow
+		String possibilities = "";
 		if(possibleAttributes!=null && !possibleAttributes.equals("")){
-			alternativesMessage = "\n"+possibleAttributes;
+			possibilities = "\n"+possibleAttributes;
 		}
 		
-		return invalidAttribute.getText()+" is invalid!"+alternativesMessage;
+		return invalidAttribute.getText()+"(line "+invalidAttribute.getLine()+")"+
+															" is invalid!"+possibilities;
 	}
 	
 }

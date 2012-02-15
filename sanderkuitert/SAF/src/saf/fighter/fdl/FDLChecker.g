@@ -1,4 +1,4 @@
-tree grammar FDLChecker;
+tree grammar FDLChecker; //Treewalker that checks Fighter Description Language
 
 options {
     language = Java;
@@ -13,22 +13,24 @@ options {
     
 }
 
+//MAINTENANCE NOTE: keep these simple linking methods here in @members (don't extract them)
+//  For they are intimately part of the checker and should evolve together with the tree walker
 @members {
     
     private DescribableFighter fighter;
     private List<InvalidAttributeMessage> failMsgs;
     
-    public List<InvalidAttributeMessage> check(DescribableFighter fighter)
-                                                            throws RecognitionException {
+    /** Returns a message for every attribute in the AST that the given fighter considers invalid */
+    public List<InvalidAttributeMessage> check(DescribableFighter fighter) throws RecognitionException {
         this.fighter = fighter;
         this.failMsgs = new LinkedList<InvalidAttributeMessage>();
         
-        fighter(); //start checking
+        fighter(); //start checking at root
         
         return failMsgs;
     }
     
-    private void checkName(CommonTree node){
+    private void checkName(CommonTree node){        
         if(!fighter.isValidName(node.getText()))
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validNames()));
     }
@@ -71,8 +73,7 @@ options {
 
 fighter:            name attributes;
 
-//TODO name: change TEXT into property?
-name:               TEXT                   {checkName($TEXT);};
+name:               TEXT                    {checkName($TEXT);};
 attributes:         (characteristic | behaviour_rule)*;
 
 characteristic:     property value;

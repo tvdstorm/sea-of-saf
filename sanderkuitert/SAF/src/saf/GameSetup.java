@@ -21,8 +21,8 @@ public class GameSetup {
         System.out.println("======================================================");
 	}
 
-	//Obtain fighters, and when we've got enough, simulate them
-	private void startGame(String[] args){
+	/** Load fighters from args, and simulate as many matches as possible */
+	public void startGame(String[] args){
         
 		List<Fighter> fighters = obtainFighters(args);
 		System.out.println("LOG: Read " + fighters.size() + " fighters"); //DEBUG
@@ -44,14 +44,14 @@ public class GameSetup {
 				String fdl = readFileContent(source);
 				Fighter fighter = new SuperAwesomeFighter(fdl);
 				fighters.add(fighter);
-			} catch (FileNotFoundException e1){
-				System.err.println(e1.getMessage());
-			} catch (IOException e2) {
+			} catch (FileNotFoundException e){
+				System.err.println(e.getMessage());
+			} catch (IOException e) {
 				System.err.println("Failed to extract fighter from "+source);
-				System.err.println(e2.getMessage());
-			} catch (InvalidParameterException e3){
+				System.err.println(e.getMessage());
+			} catch (InvalidParameterException e){
 				System.err.println("Misformed FDL:");
-				System.err.println(e3.getMessage());
+				System.err.println(e.getMessage());
 			}
 		}
 		
@@ -77,7 +77,7 @@ public class GameSetup {
 		for(int i=0;i<fighters.size();i++)
 			for(int j=i+1;j<fighters.size();j++)
 				matches.add(new MatchSimulator(fighters.get(i),fighters.get(j)));
-
+		
 		for(MatchSimulator sim: matches)
 			sim.run(); //TODO in seperate threads?
 		
