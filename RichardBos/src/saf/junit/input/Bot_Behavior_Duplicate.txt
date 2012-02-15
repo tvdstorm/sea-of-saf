@@ -1,0 +1,8 @@
+chicken
+{
+  kickReach  = 9
+  punchReach = 1
+  kickPower  = 5
+  punchPower = 6
+  always[walk_towards choose(kick_low kick_low kick_high)]
+}

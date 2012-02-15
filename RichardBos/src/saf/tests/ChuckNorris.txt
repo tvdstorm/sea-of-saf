@@ -1,0 +1,8 @@
+ChuckNorris
+{
+  punchReach = 9
+  near[stand punch_low]
+  far[run_towards kick_high]
+  near[jump punch_high]
+  always[walk_away block_high]
+}
