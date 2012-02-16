@@ -51,10 +51,10 @@ public class CharacteristicTest implements GameConstant {
 		
 		assertEquals(Error_Base + TestHelpers.convertToReadableString(botNormalErrors), 0, botNormalErrors.size());
 		
-		assertEquals(Error_Base + "loading " + CHAR_TYPE_KICKREACH + " Characteristic value", 9, BotIntelligence.getCharacteristic(botNormal, CHAR_TYPE_KICKREACH).getValue());
-		assertEquals(Error_Base + "loading " + CHAR_TYPE_KICKPOWER + " Characteristics value", 5, BotIntelligence.getCharacteristic(botNormal, CHAR_TYPE_KICKPOWER).getValue());
-		assertEquals(Error_Base + "loading " + CHAR_TYPE_PUNCHPOWER + " Characteristics value", 6, BotIntelligence.getCharacteristic(botNormal, CHAR_TYPE_PUNCHPOWER).getValue());
-		assertEquals(Error_Base + "loading " + CHAR_TYPE_PUNCHREACH + " Characteristics value", 1, BotIntelligence.getCharacteristic(botNormal, CHAR_TYPE_PUNCHREACH).getValue());
+		assertEquals(Error_Base + "loading " + CHARACTERISTIC_KICKREACH + " Characteristic value", 9, BotIntelligence.getCharacteristic(botNormal, CHARACTERISTIC_KICKREACH).getValue());
+		assertEquals(Error_Base + "loading " + CHARACTERISTIC_KICKPOWER + " Characteristics value", 5, BotIntelligence.getCharacteristic(botNormal, CHARACTERISTIC_KICKPOWER).getValue());
+		assertEquals(Error_Base + "loading " + CHARACTERISTIC_PUNCHPOWER + " Characteristics value", 6, BotIntelligence.getCharacteristic(botNormal, CHARACTERISTIC_PUNCHPOWER).getValue());
+		assertEquals(Error_Base + "loading " + CHARACTERISTIC_PUNCHREACH + " Characteristics value", 1, BotIntelligence.getCharacteristic(botNormal, CHARACTERISTIC_PUNCHREACH).getValue());
 	}
 	
 	@Test

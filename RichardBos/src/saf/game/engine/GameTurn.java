@@ -15,11 +15,15 @@ import saf.structure.intelligence.BehaviorIntelligence;
 
 public class GameTurn implements GameConstant {
 
+	protected BotState botState;
+	protected GameState gameState;
+	
 	private Random random;
-	private BotState botState;
-	private GameState gameState;
 	private GameController gameController;
-
+	
+	protected GameTurn()
+	{ /*used in GameTurnTest*/ }
+	
 	public GameTurn(BotState botState, GameState gameState, GameController gameController) {
 		this.botState = botState;
 		this.gameState = gameState;
@@ -46,7 +50,7 @@ public class GameTurn implements GameConstant {
 	}
 
 	private void processTurnCost() {
-		// TODO define a diff cost for all actions
+		// TODO wish: define a different cost for all actions
 		botState.updateCredits(-10);
 	}
 
@@ -54,9 +58,8 @@ public class GameTurn implements GameConstant {
 		return (int) (random.nextDouble() * size);
 	}
 
-	private List<Behavior> collectValidBehaviors() {
+	protected List<Behavior> collectValidBehaviors() {
 
-		// TODO test this for all cases
 
 		List<Behavior> validBehaviors = new ArrayList<Behavior>();
 
@@ -100,16 +103,9 @@ public class GameTurn implements GameConstant {
 			}
 		}
 
-		FightActionProcessor actionProcessor = new FightActionProcessor(botState, otherBotState, gameState.getDistance(), fightAction, moveAction.equals(MOVE_TYPE_JUMP));
+		FightActionProcessor actionProcessor = new FightActionProcessor(botState, otherBotState, gameState.getDistance(), fightAction, moveAction.equals(MOVE_ACTION_JUMP));
 		double attackPower = actionProcessor.getOutcome();
 
-		
-		if (DEBUG_STATUS && attackPower > 0) {
-			System.out.println();
-			System.out.println(botState.getBot().getName() + ", " + moveAction + " - " + fightAction);
-			System.out.println("vs " + otherBotState.getLastMoveAction() + " - " + otherBotState.getLastFightAction());
-		}
-		
 		otherBotState.updateHitpoints(attackPower);
 		gameController.setHitpoints(otherBotState);
 	}

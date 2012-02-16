@@ -3,14 +3,15 @@ package saf.game.state;
 import java.util.ArrayList;
 import java.util.List;
 
-import saf.game.GameMain;
-import saf.game.gui.GameController;
+import saf.game.GameConstant;
+import saf.structure.Bot;
+import saf.structure.Bots;
 
-public class GameState {
+public class GameState implements GameConstant {
 	
-	public GameState(int startingDistance) {
+	public GameState() {
 		this.listBotStates = new ArrayList<BotState>();
-		this.distance = startingDistance;
+		this.distance = CONST_STARTING_DISTANCE;
 	}
 
 	private List<BotState> listBotStates;
@@ -40,6 +41,12 @@ public class GameState {
 			}
 		}
 		this.listBotStates.add(botState);
+	}
+
+	public void resetGame()
+	{
+		this.listBotStates.clear();
+		this.distance = CONST_STARTING_DISTANCE;
 	}
 
 }

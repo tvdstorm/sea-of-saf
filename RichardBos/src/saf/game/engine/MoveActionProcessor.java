@@ -30,9 +30,10 @@ public class MoveActionProcessor implements GameConstant {
 		int dXDistance = 0;
 		int dYDistance = 0;
 
-		if (moveAction.equals(MOVE_TYPE_WALKTOWARDS) || moveAction.equals(MOVE_TYPE_WALKAWAY)
-				|| moveAction.equals(MOVE_TYPE_RUNTOWARDS)
-				|| moveAction.equals(MOVE_TYPE_RUNAWAY)) {
+		if (moveAction.equals(MOVE_ACTION_WALKTOWARDS) 
+				|| moveAction.equals(MOVE_ACTION_WALKAWAY)
+				|| moveAction.equals(MOVE_ACTION_RUNTOWARDS)
+				|| moveAction.equals(MOVE_ACTION_RUNAWAY)) {
 			dXDistance = MOVEACTION_DISTANCE.get(moveAction);
 		}
 
@@ -40,7 +41,7 @@ public class MoveActionProcessor implements GameConstant {
 		if (distance < dXDistance)
 			dXDistance = distance;
 
-		if (moveAction.equals(MOVE_TYPE_JUMP)) {
+		if (moveAction.equals(MOVE_ACTION_JUMP)) {
 			if (!isJumping)
 				dYDistance = CONST_JUMP_PIXELS;
 		} else {
@@ -48,8 +49,8 @@ public class MoveActionProcessor implements GameConstant {
 				dYDistance = -CONST_JUMP_PIXELS;
 		}
 
-		if (moveAction.equals(MOVE_TYPE_STAND) || 
-			moveAction.equals(MOVE_TYPE_CROUCH)) {
+		if (moveAction.equals(MOVE_ACTION_STAND) || 
+			moveAction.equals(MOVE_ACTION_CROUCH)) {
 			if (isJumping)
 				dYDistance = -CONST_JUMP_PIXELS;
 		}

@@ -63,7 +63,7 @@ public class ElementChecker implements ElementVisitor, GameConstant {
 	}
 
 	public void visit(Characteristic characteristic) {
-		if (!CHAR_TYPES.contains(characteristic.getName()))
+		if (!CHARACTERISTIC_TYPES.contains(characteristic.getName()))
 			checkerErrors.add("The characteristic '" + characteristic.getName() + "' is invalid.");
 
 		int value = characteristic.getValue();
@@ -76,11 +76,11 @@ public class ElementChecker implements ElementVisitor, GameConstant {
 	public void visit(Behavior behavior) {
 
 		for (Action action : behavior.getFightAction()) {
-			if (!FIGHT_TYPES.contains(action.getValue()))
+			if (!FIGHT_ACTION_TYPES.contains(action.getValue()))
 				checkerErrors.add("Unknown Fightaction found:'" + action + "'.");
 		}
 		for (Action action : behavior.getMoveAction()) {
-			if (!MOVE_TYPES.contains(action.getValue()))
+			if (!MOVE_ACTION_TYPES.contains(action.getValue()))
 				checkerErrors.add("Unknown Moveaction found:'" + action + "'.");
 		}
 
@@ -95,7 +95,7 @@ public class ElementChecker implements ElementVisitor, GameConstant {
 	}
 
 	public void visit(ConditionSimple conditionSimple) {
-		if (!ConditionTypes.contains(conditionSimple.getValue()))
+		if (!CONDITION_TYPES.contains(conditionSimple.getValue()))
 			checkerErrors.add("The behavior condition '" + conditionSimple.getValue() + "' is invalid.");
 	}
 

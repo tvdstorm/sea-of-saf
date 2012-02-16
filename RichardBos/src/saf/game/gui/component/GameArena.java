@@ -67,4 +67,19 @@ public class GameArena extends JPanel implements GameConstant {
 		return sprite;
 	}
 
+	public void resetGame() {
+		
+		Point a = new Point(100, 80);
+		Point b = new Point(450, 80);
+		leftBotPosition = a;
+		rightBotPosition = b;
+		
+// TODO	Dit werkt niet?!?!?!
+//		leftBotPosition = CONST_LEFTBOTSTART;
+//		rightBotPosition = CONST_RIGHTBOTSTART;
+		leftBot = null;
+		rightBot = null;
+		this.repaint();
+	}
+
 }

@@ -19,6 +19,8 @@ import saf.structure.Characteristic;
 
 public class GameController implements GameConstant {
 
+
+
 	private String side;
 
 	private final GameForm gameForm;
@@ -152,11 +154,27 @@ public class GameController implements GameConstant {
 	{
 		this.gameArena.updateBot(side, dPosition, fightAction);
 	}
-	public void disableButtons() {
-		gameForm.jButtonBotLeftLoad.setEnabled(false);
-		gameForm.jButtonBotRightLoad.setEnabled(false);
-		gameForm.jButtonStart.setEnabled(false);
+	public void setButtonsEnabled(boolean newstate) {
+		gameForm.jButtonBotLeftLoad.setEnabled(newstate);
+		gameForm.jButtonBotRightLoad.setEnabled(newstate);
+		gameForm.jButtonStart.setEnabled(newstate);
 		
+	}
+	
+	public void resetGame() {
+		gameArena.resetGame();
+		
+		gameForm.jProgressBarDistance.setValue(CONST_STARTING_DISTANCE);
+		
+		gameForm.jLabelBotLeftName.setText("");
+		gameForm.jProgressBarLeftHP.setValue(CONST_STARTING_HITPOINTS);
+		botLeftCharModel.clear();
+		botLeftBehaviorModel.clear();
+		
+		gameForm.jLabelBotRightName.setText("");
+		gameForm.jProgressBarRightHP.setValue(CONST_STARTING_HITPOINTS);
+		botRightCharModel.clear();
+		botRightBehaviorModel.clear();
 	}
 
 }
