@@ -1,0 +1,5 @@
+Logic {
+  far and weaker [walk_towards punch_high]
+  near or stronger [run_away block_low]
+  always [crouch punch_low]
+}

@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cd classes
+java -cp .:../lib/antlr-3.4-complete.jar saf/Main ../data/Nested.saf ../data/JackieChan.saf ../data/Logic.saf

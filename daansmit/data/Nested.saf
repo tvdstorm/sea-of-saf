@@ -1,0 +1,7 @@
+Nested {
+ far and stronger [run_away block_low]
+ far or stronger [run_away block_high]
+ far and stronger or weaker [run_away punch_low]
+ far and stronger or weaker and near [run_away punch_high]
+ always [run_away kick_low]
+}
