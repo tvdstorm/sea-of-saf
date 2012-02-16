@@ -2,16 +2,13 @@ package simulation;
 
 import data.*;
 
-public class Behaviour extends data.Behaviour
+public abstract class Behaviour
 {
-    public Behaviour(data.Behaviour behaviourData)
+    public static data.Action determineAction(data.Behaviour behaviour, 
+                                              State state)
     {
-        super(Tactic.convertDataList(behaviourData.tactics));
-    }
-
-    public Action determineAction(State state)
-    {
-        return new Action(new Move("stand"), new Attack("kick_high"));
+        return new data.Action(new data.Move("stand"), 
+                               new data.Attack("kick_high"));
     }
 }
 
