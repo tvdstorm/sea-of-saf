@@ -40,7 +40,7 @@ public class Test extends Applet {
 		
 		//Image img = getImage(getCodeBAse(),filename);
 		
-		/*
+		
 		ANTLRFileStream fileStream = new ANTLRFileStream ("/home/jos/workspace/SuperAwesomeFighters/src/program/Sample.saf");
 		SafLexer lexer = new SafLexer(fileStream);
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -54,7 +54,8 @@ public class Test extends Applet {
 		SafParser parser1 = new SafParser(tokenStream1);
 		Bot b1 = parser1.bot();
 		b1.accept(new BotChecker());
-		*/
+		b1.toString();
+		
 	}
 
 }

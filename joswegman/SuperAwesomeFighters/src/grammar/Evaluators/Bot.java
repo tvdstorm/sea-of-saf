@@ -4,45 +4,45 @@ import java.util.*;
 
 
 public class Bot implements Visitable {
-	final private List <Characteristic> karakterestieken = new LinkedList<Characteristic>();
-	final private List <Rule>regels = new LinkedList<Rule>();
-	private String naam;
+	final private List <Characteristic> characteristics = new LinkedList<Characteristic>();
+	final private List <Rule>rules = new LinkedList<Rule>();
+	private String name;
 	
 	public Bot() {
 
 	}
 	
     public void setName(String name) {
-    	this.naam = name;
+    	this.name = name;
     }
 
     public String getName(){
-    	return this.naam;
+    	return this.name;
     }
     
-    public Bot (String naam) {
+    public Bot (String name) {
 		super();
-		this.naam = naam;
+		this.name = name;
 	}
 	
 	public  void addC (Characteristic karakterestiek) {
-		this.karakterestieken.add(karakterestiek);
+		this.characteristics.add(karakterestiek);
 	}
 
 	public  void addR (Rule regel) {
-		this.regels.add(regel);
+		this.rules.add(regel);
 	}
 
 	public String toString () {
-		return "Bot: "+this.naam + this.karakterestieken.toString() + " "+ this.regels.toString();
+		return "Bot: "+this.name + this.characteristics.toString() + " "+ this.rules.toString();
 	}
 
 	public List<Characteristic> getCharacteristics (){
-		return this.karakterestieken;
+		return this.characteristics;
 	}
 	
 	public List<Rule> getRules () {
-		return this.regels;
+		return this.rules;
 	}
 
 	@Override

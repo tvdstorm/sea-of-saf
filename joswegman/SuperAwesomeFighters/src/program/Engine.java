@@ -25,32 +25,69 @@ public class Engine {
 	 *  block over kick
 	 *  punch over block
 	 *  
-	 *  Eerst afstand bepalen en geteldheid tov de tegenstander.
+	 *  Eerst afstand bepalen en gesteldheid tov de tegenstander.
 	 * 
 	*/
 	public Engine(Fight fight) {
 		this.fight = fight;
-		this.distance = fight.positionRight - fight.positionLeft;
-		berekenleven();
-		System.out.println(String.valueOf(this.distance));
+		this.distance = this.fight.getPositionRight() - this.fight.getPositionLeft();
+		calculateLife();
+		//System.out.println(String.valueOf(this.distance));
 	}
 	
-	private void berekenleven(){
-		int lifeLeft = fight.lifeLeft;
-		int lifeRight = fight.lifeRight;
+	
+	
+	public void doAction() {
+		this.fight.setLifeLeft(this.fight.getLifeLeft() + 10);
+		this.fight.setLifeRight(this.fight.getLifeRight() - 10);
+		calculateLife();
+		System.out.println(String.valueOf(Integer.toString(this.fight.getLifeLeft()) + "  "+ Integer.toString(this.fight.getLifeRight())));
+	}
+	
+	
+
+	private void calculateLife(){
+		int lifeLeft = this.fight.getLifeLeft();
+		int lifeRight = this.fight.getLifeRight();
 		
 		if (lifeLeft > lifeRight) {
 			int restLife = lifeLeft - lifeRight;
-			if ((restLife < 20) & (restLife > 0 )){leftStatus = "even"; rightStatus = "even";};
-			if ((restLife >=20) & (restLife < 40)){leftStatus = "stronger"; rightStatus = "weaker";};
-			if (restLife >=40) {leftStatus = "much stronger"; rightStatus = "much weaker";};
+			if ((restLife < 20) & (restLife > 0 )){this.fight.setStatusLeft("even");this.fight.setStatusRight("even");};
+			if ((restLife >= 20) & (restLife < 40)){this.fight.setStatusLeft("stronger"); this.fight.setStatusRight("weaker");};
+			if (restLife >= 40) {this.fight.setStatusLeft("much stronger"); this.fight.setStatusRight("much weaker");};
 		} else {
 			int restLife = lifeRight - lifeLeft;
-			if ((restLife < 20) & (restLife > 0 )){rightStatus = "even"; leftStatus = "even";};
-			if ((restLife >=20) & (restLife < 40)){rightStatus = "stronger"; leftStatus = "weaker";};
-			if (restLife >=40) {rightStatus = "much stronger"; leftStatus = "much weaker";};
+			if ((restLife < 20) & (restLife > 0 )){this.fight.setStatusRight("even"); this.fight.setStatusLeft("even");};
+			if ((restLife >=20) & (restLife < 40)){this.fight.setStatusRight("stronger");this.fight.setStatusLeft("weaker");};
+			if (restLife >=40) {this.fight.setStatusRight("much stronger"); this.fight.setStatusLeft("much weaker");};
 		}
-		
+	}
+
+	public boolean stillAlive() {
+		if (this.fight.getLifeLeft() <= 0 || this.fight.getLifeRight() <= 0 ){
+			return false;
+		} else {
+			return true;
+		}	
 	}
 	
+	public int getLifeLeft(){
+		return this.fight.getLifeLeft();
+	}
+	
+	public int getLifeRight(){
+		return this.fight.getLifeRight();
+	}
+	
+	public int getPositionLeft(){
+		return this.fight.getPositionLeft();
+	}
+	
+	public int getPositionRight(){
+		return this.fight.getPositionRight();
+	}
+	
+	
 }
+	
+
