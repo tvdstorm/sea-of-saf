@@ -39,5 +39,20 @@ public class CharacteristicExtractorTest {
 		Assert.assertTrue(extractedCharacteristics.get("punchPower") == null);
 		Assert.assertTrue(extractedCharacteristics.get("kickReach") == null);
 	}
+	
+	@Test
+	public void extractWithStaticMethod() {
+		ArrayList<FighterAttribute> attributes = new ArrayList<FighterAttribute>();
+		attributes.add(new Characteristic("punchReach", 10));
+		attributes.add(new Characteristic("punchPower", 1));
+		Fighter fighter = new Fighter("extractPunchCharacteristicsTest", attributes);	
+		
+		HashMap<String, Integer> extractedCharacteristics =  CharacteristicExtractor.getCharacteristics(fighter);
+		
+		Assert.assertTrue(extractedCharacteristics.size() > 0);
+		Assert.assertTrue(extractedCharacteristics.get("punchReach") == 10);
+		Assert.assertTrue(extractedCharacteristics.get("punchPower") == 1);
+		Assert.assertTrue(extractedCharacteristics.get("kickPower") == null);
+	}
 }
  

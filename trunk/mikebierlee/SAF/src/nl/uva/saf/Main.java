@@ -16,11 +16,17 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.uva.saf.simulation;
+package nl.uva.saf;
 
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
+
+import nl.uva.saf.simulation.FightSimulator;
+import nl.uva.saf.simulation.IFightSimulator;
+import nl.uva.saf.simulation.IRenderer;
+import nl.uva.saf.simulation.Renderer;
+import nl.uva.saf.simulation.UI.MainWindow;
 
 public class Main {
 	
@@ -44,14 +50,23 @@ public class Main {
 
 		System.out.println("Loaded \"" + fighter.getName() + "\" - " + validationReport.getWarnings().size() + " warning(s), " + validationReport.getErrors().size() + " error(s).");*/
 		
+		final IFightSimulator simulator = new FightSimulator();
+		final IRenderer renderer = new Renderer(simulator, 60);
+		
 		SwingUtilities.invokeLater(new Runnable() {
-
 			@Override
-			public void run() {
-				TitleWindow mainWindow = new TitleWindow();
+			public void run() {	
+				MainWindow mainWindow = new MainWindow(simulator, renderer);
 				mainWindow.setVisible(true);
+				renderer.start();
 			}
 		});
+		
+		while(!simulator.isDisposed()) {
+			simulator.update();
+		}
+		
+		// Teardown
+		renderer.stop();
 	}
-
 }
