@@ -33,7 +33,6 @@ import saf.syntax.*;
 
 @parser::members {
     public Fighter fighter;
-    private Evaluable currentExpression;
 
     public static Fighter parseFromString(String input)
         throws RecognitionException
@@ -87,16 +86,11 @@ import saf.syntax.*;
 parse : fighter ;
 
 fighter
-    :   STRING {this.fighter = new Fighter($STRING.getText());} LCURLY personality behaviour RCURLY
+    :   STRING LCURLY personality behaviour RCURLY
         {
-            for (Characteristic c : $personality.characteristics)
-            {
-                this.fighter.addCharacteristic(c);
-            }
-            for (Action a : $behaviour.actions)
-            {
-                this.fighter.addAction(a);
-            }
+            this.fighter = new Fighter($STRING.getText(),
+                                       $personality.characteristics,
+                                       $behaviour.actions);
         }
     ;
 
