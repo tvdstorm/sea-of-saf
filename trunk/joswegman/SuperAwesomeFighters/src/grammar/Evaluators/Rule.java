@@ -1,38 +1,54 @@
 package grammar.Evaluators;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import grammar.Evaluators.InputRule;
 
 
 public class Rule implements Visitable {
-   private  final Condition id;	
-   private  final InputRule frule;
-   private  final InputRule mrule;
+   private  final List <Condition> conditionList = new LinkedList<Condition>();	
+   private InputRule frule;
+   private InputRule mrule;
 
-   public Rule(Condition id, InputRule frule, InputRule mrule) {
-	this.id = id;
-	this.frule = frule;
-	this.mrule = mrule;
+   public Rule(){
+	   this.frule = null;
+	   this.mrule = null;
    }
    
-   public InputRule getRule (boolean firstRule) {
-	   if (firstRule) {
-		   return this.frule;
-	   } else {
-		   return this.mrule;
-	   }
+   public InputRule getFightRule(){
+	   return frule;
    }
    
-   public Condition getCondition () {
-	   return this.id;
-   }
-   
-   public  String toString () {
-	   return "Rule: " + this.id + " " + this.frule.toString() + " "+ this.mrule.toString();
+   public InputRule getMoveRule(){
+	   return mrule;
    }
 
-  @Override
-  public void accept(BotVisit visitor) {
+   public void setInputFRule(InputRule f) {
+	  this.frule = f;
+   }
+
+   public void setInputMRule(InputRule m) {
+	  this.mrule = m;
+   }
+
+   public void addCondition(Condition c){
+	   this.conditionList.add(c);
+   }
+   
+   public List<Condition> getConditionList() {
+	return this.conditionList;
+   }
+   
+   @Override
+   public void accept(BotVisit visitor) {
 	  	visitor.visit(this);
-  }
-   
+   }
+
+  
+   @Override
+   public String toString() {
+	  return "Rule [conditionList=" + conditionList + ", frule=" + frule
+  			+ ", mrule=" + mrule + "]";
+   }   
 }

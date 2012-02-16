@@ -1,21 +1,13 @@
 package program;
 
-import java.io.IOException;
-
-import org.antlr.runtime.ANTLRFileStream;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.TokenStream;
-
-import grammar.SafLexer;
-import grammar.SafParser;
 import grammar.Evaluators.*;
 
 
 public class Fight {
 	Bot botLeft, botRight;
-	int lifeLeft, lifeRight;
-	int positionLeft, positionRight;
+	private int lifeLeft, lifeRight;
+	private int positionLeft, positionRight;
+	private String statusLeft, statusRight;
 	
 	
    
@@ -28,8 +20,30 @@ public class Fight {
 		this.positionRight = 90;
 	}
 
+	public int getPositionLeft() {
+		return positionLeft;
+	}
+
+	public void setPositionLeft(int positionLeft) {
+		this.positionLeft = positionLeft;
+	}
+
+	public int getPositionRight() {
+		return positionRight;
+	}
+
+	public void setPositionRight(int positionRight) {
+		this.positionRight = positionRight;
+	}
+
+
+	
 	public int getLifeRight(){
-		return this.lifeRight;
+		if (this.lifeRight > 0){
+			return this.lifeRight;
+		}else{
+			return 0;
+		}
 	}
 	
 	public void setLifeRight(int value) {
@@ -37,7 +51,11 @@ public class Fight {
 	}
 	
 	public int getLifeLeft(){
-		return this.lifeLeft;
+		if (this.lifeLeft > 0){
+			return this.lifeLeft;
+		}else{
+			return 0;
+		}
 	}
 	
 	public void setLifeLeft(int value) {
@@ -45,24 +63,21 @@ public class Fight {
 	}
 	
 	
-	public static void main(String[] args) throws RecognitionException, IOException{
-		ANTLRFileStream fileStreamLeft = new ANTLRFileStream ("/home/jos/workspace/SuperAwesomeFighters/src/program/Sample.saf");
-		SafLexer lexerLeft = new SafLexer(fileStreamLeft);
-		TokenStream tokenStreamLeft = new CommonTokenStream(lexerLeft);
-		SafParser parserLeft = new SafParser(tokenStreamLeft);
-		Bot bLeft = parserLeft.bot();
-		bLeft.accept(new BotChecker());
-		
-		ANTLRFileStream fileStreamRight = new ANTLRFileStream("/home/jos/workspace/SuperAwesomeFighters/src/program/Test.saf");
-		SafLexer lexerRight = new SafLexer(fileStreamRight);
-		TokenStream tokenStreamRight = new CommonTokenStream(lexerRight);
-		SafParser parserRight = new SafParser(tokenStreamRight);
-		Bot bRight = parserRight.bot();
-		bRight.accept(new BotChecker());
-		
-		Fight fight = new Fight (bLeft,bRight);
-		Engine engine = new Engine (fight); 
-
+	public String getStatusLeft() {
+		return statusLeft;
 	}
 
+	public void setStatusLeft(String statusLeft) {
+		this.statusLeft = statusLeft;
+	}
+
+	public String getStatusRight() {
+		return statusRight;
+	}
+
+	public void setStatusRight(String statusRight) {
+		this.statusRight = statusRight;
+	}
+
+	
 }

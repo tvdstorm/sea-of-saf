@@ -30,12 +30,11 @@ binarycondition returns [Condition value]
       | k=ID 'or'  l=condition  {$value =  new Condition($k.text, l, "or");} 
       ;
       
-rule returns [Rule value, ConditionList c]
+rule returns [Rule value]
        @init {
-        $c= new ConditionList();
+        $value = new Rule();
        }
-      : i=condition+ '['m=inputRule f=inputRule']' 
-        {$value = new Rule (i, m, f); $c.addCondition(i);}
+      : i=condition+ {$value.addCondition(i);}'['m=inputRule {$value.setInputMRule(m);} f=inputRule {$value.setInputFRule(f);}']' 
       ;
 
 inputRule returns [InputRule value]

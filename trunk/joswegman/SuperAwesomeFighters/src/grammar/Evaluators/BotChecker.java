@@ -21,17 +21,14 @@ public class BotChecker implements BotVisit {
 	public void visit(Characteristic character) {
 		List<String>  charItems = Arrays.asList( "punchReach", "punchPower","kickReach","kickPower");
 		boolean error = false;
-
 		if  (!charItems.contains(character.getCharacterName())) {
 			error = true;
 			this.errorMessages.add("Invalid Character : " + character.getCharacterName());
 		}
-		
 		if (!(character.getCharacterValue()<0) && (character.getCharacterValue()>10)){
 			error = true;
 			this.errorMessages.add("Character value : " + character.getCharacterName() + " = " + String.valueOf(character.getCharacterValue())+" is not within range!");
 		}
-		
 		if (!error) {
 			this.initMessages.add("Character : " + character.getCharacterName() + " = " + String.valueOf(character.getCharacterValue()));
 		}
@@ -57,9 +54,11 @@ public class BotChecker implements BotVisit {
 	}
 
 	public void checkRule (Rule rule) {
-		visit(rule.getCondition());
-		visit(rule.getRule(true));
-		visit(rule.getRule(false));
+		visit(rule.getFightRule());
+		visit(rule.getMoveRule());
+		for ( Condition r:rule.getConditionList()){
+			visit(r);
+		}
 	}
 	
 	@Override
@@ -68,9 +67,9 @@ public class BotChecker implements BotVisit {
 		for (Characteristic c : bot.getCharacteristics()) {
 			visit(c);	
 		}
+
 		for (Rule i : bot.getRules()) {
 			visit (i);
-			visit (i.getCondition());
 		}
 		
 		if (errorMessages.isEmpty()) {
@@ -79,33 +78,31 @@ public class BotChecker implements BotVisit {
 			System.out.println(this.toString());
 		}
 	}
-
+	
+	public List<String> getErrorMessages (){
+		return errorMessages;
+	}
+	
 	@Override
-	public void visit(Condition conor) { 
-		if (this.operatorList.contains(conor.getType())||(conor.getType().contains("const"))){
-			this.initMessages.add(conor.getType());
+	public void visit(Condition condition) { 
+		if (this.operatorList.contains(condition.getType())||(condition.getType().contains("const"))){
+			this.initMessages.add(condition.getType());
 		} else {
-			this.errorMessages.add("Type: "+ conor.getType()+" is not a valid type");
+			this.errorMessages.add("Type: "+ condition.getType()+" is not a valid type");
 		}
-		if (this.operatorList.contains(conor.getType())){
-		  visit (conor.getRight());
+		if (this.operatorList.contains(condition.getType())){
+		  visit (condition.getRight());
 		}
-		if (this.conditionTypes.contains(conor.getLeft())) {
-			this.initMessages.add(conor.getLeft());
+		if (this.conditionTypes.contains(condition.getLeft())) {
+			this.initMessages.add(condition.getLeft());
 		} else {
-			this.errorMessages.add("Condition: "+ conor.getLeft()+" is not a valid condition");
+			this.errorMessages.add("Condition: "+ condition.getLeft()+" is not a valid condition");
 		}
 	}
 
-	
 	@Override
 	public void visit(ConditionList conditionlist) {
-	/*	for (Condition c : conditionlist.getList()) {
-			visit (c.getRight());
-			System.out.println("ConOr printout");
-		}
-		System.out.println("Condition printout1  "+ conditionlist.toString());
-		*/
+		System.out.println("Condition printout  "+ conditionlist.toString());
 	}
 
 	@Override
