@@ -21,23 +21,29 @@ package nl.uva.saf.simulation;
 import java.util.HashMap;
 
 import nl.uva.saf.fdl.CharacteristicExtractor;
+import nl.uva.saf.fdl.NameExtractor;
 import nl.uva.saf.fdl.ast.ITreeNode;
 
 public class FighterBot {
 	private HashMap<String, Integer> characteristics;
-	protected final int default_value = 5;	
-	
+	protected final int default_value = 5;
+	private String name;
+
 	public FighterBot(ITreeNode fighter) {
-		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
-		characteristics = extractor.extract();
-	}	
+		name = NameExtractor.getName(fighter);
+		characteristics = CharacteristicExtractor.getCharacteristics(fighter);
+	}
 
 	public void setAttribute(String name, int value) {
 		characteristics.put(name, value);
 	}
-	
+
 	public int getAttribute(String name) {
 		Integer value = characteristics.get(name);
 		return value == null ? default_value : value;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

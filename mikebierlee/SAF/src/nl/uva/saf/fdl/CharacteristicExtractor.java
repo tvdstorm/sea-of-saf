@@ -28,4 +28,9 @@ public class CharacteristicExtractor extends TreeVisitor {
 		extractedCharacteristics.put(node.getType(), node.getValue()); // TODO(mike): unit tests
 		super.visit(node);
 	}
+	
+	public static HashMap<String, Integer> getCharacteristics(ITreeNode fighter) {
+		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
+		return extractor.extract();
+	}
 }

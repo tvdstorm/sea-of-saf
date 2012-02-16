@@ -38,7 +38,7 @@ public class Fighter extends TreeNode {
 	}
 
 	public List<FighterAttribute> getAttributes() {
-		return Collections.unmodifiableList(attributes);
+		return attributes != null ? Collections.unmodifiableList(attributes) : new ArrayList<FighterAttribute>();
 	}
 	
 	public void addAttribute(FighterAttribute attribute) {
