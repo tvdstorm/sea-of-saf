@@ -40,36 +40,29 @@ public class BehaviorTest {
 	@Test
 	public void alwaysConditionTest()
 	{
-		if(listNoAlwaysError.size() == 0)
-			fail("Error in " + this.getClass().getSimpleName() + ", error not found in 'alwaysConditionTest'" );
-		
-		assertEquals("Error not found in alwaysTest. ", "Behavior condition 'always' was not found. Atleast one behavior with condition 'always' is required.", listNoAlwaysError.get(0));
+		assertEquals("Error found in alwaysTest. ", 1, listNoAlwaysError.size());
+		assertEquals("Error found in alwaysTest. ", "Behavior condition 'always' was not found. Atleast one behavior with condition 'always' is required.", listNoAlwaysError.get(0));
 	}
 	
 	@Test
 	public void invalidActionTest()
 	{
-		if(listInvalidError.size() == 0)
-			fail("Error in " + this.getClass().getSimpleName() + ", error not found in 'invalidActionTest'" );
-		
-		assertEquals("Error not found in invalidAction. ", "Unknown Moveaction found:'wrongone'.", listInvalidError.get(0));
-		assertEquals("Error not found in invalidAction. ", "Unknown Fightaction found:'wrongtwo'.", listInvalidError.get(1));
+		assertEquals("Error found in invalidAction. ", 0, listInvalidError.size());
+		assertEquals("Error found in invalidAction. ", "Unknown Moveaction found:'wrongone'.", listInvalidError.get(0));
+		assertEquals("Error found in invalidAction. ", "Unknown Fightaction found:'wrongtwo'.", listInvalidError.get(1));
 	}
 	
 	@Test
 	public void duplicateActionTest()
 	{
-		if(listDuplicateError.size() == 0)
-			fail("Error in " + this.getClass().getSimpleName() + ", error not found in 'duplicateActionTest'" );
-		
-		assertEquals("Error not found in invalidAction. ", "Duplicate Fightaction found in choose clause: 'kick_low', please remove the duplicates.", listDuplicateError.get(0));
+		assertEquals("Error not found in duplicateAction. ", 0, listDuplicateError.size());
+		assertEquals("Error not found in duplicateAction. ", "Duplicate Fightaction found in choose clause: 'kick_low', please remove the duplicates.", listDuplicateError.get(0));
 	}
 	
 	@Test
 	public void conditionTest()
 	{
-		if(listConditionError.size() == 0)
-			fail("Error in " + this.getClass().getSimpleName() + ", 'Invalid Conditon' error not found in 'checkConditionTest'" );
+		assertEquals("Error not found in checkCondition. ", 0,listConditionError.size());
 		
 		assertEquals("Error not found in checkCondition. ", "The behavior condition 'wrong' is invalid.", listConditionError.get(0));
 		assertEquals("Error not found in checkCondition. ", "Invalid behavior condition found, 'always' is not a valid option in a clause.", listConditionError.get(1));

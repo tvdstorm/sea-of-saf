@@ -23,12 +23,4 @@ public class Characteristic implements Element {
 	public int getValue() {
 		return value;
 	}
-	
-	/*public enum CharacteristicType
-	{
-		punchReach,
-		punchPower,
-		kickReach,
-		kickPower
-	}*/
 }

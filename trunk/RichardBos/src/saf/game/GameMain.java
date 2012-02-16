@@ -9,6 +9,7 @@ import saf.game.gui.GameController;
 import saf.game.state.BotState;
 import saf.game.state.GameState;
 import saf.parser.FileParser;
+import saf.structure.Bot;
 import saf.structure.Bots;
 
 public class GameMain implements GameConstant {
@@ -23,7 +24,7 @@ public class GameMain implements GameConstant {
 	private GameMain() {
 		gameEventListener = new GameEventListener(this);
 		gameController = new GameController(gameEventListener);
-		gameState = new GameState(CONST_STARTING_DISTANCE);
+		gameState = new GameState();
 		
 		if (DEBUG_STATUS) {
 			NewBotEvent e = new NewBotEvent(this,
@@ -57,6 +58,7 @@ public class GameMain implements GameConstant {
 			return;
 		}
 
+		//We're sure it has one, and only one.
 		BotState botState = new BotState(bots.getBots().get(0), e.getSide());
 
 		gameState.addBot(botState);
@@ -68,7 +70,7 @@ public class GameMain implements GameConstant {
 			gameController.displayMessage("Load two bots before starting.");
 			return;
 		}
-		gameController.disableButtons();
+		gameController.setButtonsEnabled(false);
 		GameEngine gameEngine = new GameEngine(gameState, gameController, this);
 		gameEngine.battle();
 	}
@@ -79,6 +81,21 @@ public class GameMain implements GameConstant {
 
 	public void battleOver(String winnerName) {
 		gameController.displayMessage(WINNER_MESSAGE + winnerName);
+		gameController.resetGame();
+		
+		//remember the current bots
+		BotState[] botStates = {};
+		botStates = gameState.getBotStates().toArray(botStates);
+		gameState.resetGame();
+		
+		for (BotState botState : botStates) {
+			BotState newBotState = new BotState(botState.getBot(), botState.getSide());
+
+			gameState.addBot(newBotState);
+			gameController.addBotState(newBotState);
+		}
+		
+		gameController.setButtonsEnabled(true);
 	}
 
 }

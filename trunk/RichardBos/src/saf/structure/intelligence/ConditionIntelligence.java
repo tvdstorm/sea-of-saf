@@ -14,7 +14,7 @@ public class ConditionIntelligence implements GameConstant {
 
 	public static boolean checkConditionForAlways(Condition condition) {
 		if (condition instanceof ConditionSimple) {
-			if (CONDITION_TYPE_ALWAYS.equalsIgnoreCase(((ConditionSimple) condition).getValue()))
+			if (CONDITION_ALWAYS.equalsIgnoreCase(((ConditionSimple) condition).getValue()))
 				return true;
 			else
 				return false;
@@ -37,29 +37,29 @@ public class ConditionIntelligence implements GameConstant {
 
 		int distance = gameState.getDistance();
 
-		if (value.equals(CONDITION_TYPE_ALWAYS))
+		if (value.equals(CONDITION_ALWAYS))
 			return true;
 
-		if (value.equals(CONDITION_TYPE_FAR))
+		if (value.equals(CONDITION_FAR))
 			return distance >= CONDITION_NEAR_DISTANCE;
 
-		if (value.equals(CONDITION_TYPE_NEAR))
+		if (value.equals(CONDITION_NEAR))
 			return distance < CONDITION_NEAR_DISTANCE;
 
 		// HP > much_stronger
 		// HP > stronger
-		if (value.equals(CONDITION_TYPE_MUCHSTRONGER) || value.equals(CONDITION_TYPE_STRONGER))
-			return hpDifference >= CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
+		if (value.equals(CONDITION_MUCHSTRONGER) || value.equals(CONDITION_STRONGER))
+			return hpDifference > CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
 
 		// weaker >= HP <= stronger
-		if (value.equals(CONDITION_TYPE_EVEN))
-			return hpDifference >= CONDITION_STRENGHTS_HP_DIFFERENCE.get(CONDITION_TYPE_WEAKER)
-					&& hpDifference <= CONDITION_STRENGHTS_HP_DIFFERENCE.get(CONDITION_TYPE_STRONGER);
+		if (value.equals(CONDITION_EVEN))
+			return hpDifference >= CONDITION_STRENGHTS_HP_DIFFERENCE.get(CONDITION_WEAKER)
+					&& hpDifference <= CONDITION_STRENGHTS_HP_DIFFERENCE.get(CONDITION_STRONGER);
 
 		// HP < weaker
 		// HP < much_weaker
-		if (value.equals(CONDITION_TYPE_WEAKER) || value.equals(CONDITION_TYPE_MUCHWEAKER))
-			return hpDifference <= CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
+		if (value.equals(CONDITION_WEAKER) || value.equals(CONDITION_MUCHWEAKER))
+			return hpDifference < CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
 
 		return false;
 	}
