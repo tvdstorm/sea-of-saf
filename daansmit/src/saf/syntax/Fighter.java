@@ -6,22 +6,14 @@ import java.util.List;
 public class Fighter
 {
     private final String name;
-    private final List<Characteristic> personality = new ArrayList<Characteristic>();
-    private final List<Action> behaviour = new ArrayList<Action>();
+    private final List<Characteristic> personality;
+    private final List<Action> behaviour;
 
-    public Fighter(String name)
+    public Fighter(String name, List<Characteristic> personality, List<Action> behaviour)
     {
         this.name = name;
-    }
-
-    public void addCharacteristic(Characteristic characteristic)
-    {
-        personality.add(characteristic);
-    }
-
-    public void addAction(Action action)
-    {
-        behaviour.add(action);
+        this.personality = personality;
+        this.behaviour = behaviour;
     }
 
     public String toString()
