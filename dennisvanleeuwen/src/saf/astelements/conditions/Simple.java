@@ -1,7 +1,5 @@
 package saf.astelements.conditions;
 
-import java.util.List;
-
 import saf.astelements.ICondition;
 import saf.ISAFNodeVisitor;
 
