@@ -2,18 +2,12 @@ package simulation;
 
 import data.*;
 
-public class LogicAnd extends data.LogicAnd implements Logic
+public abstract class LogicAnd
 {
-    public LogicAnd (data.LogicAnd logicAndData)
+    public static boolean isTrue(data.LogicAnd and, State state)
     {
-        super(Converter.convertLogic(logicAndData.operand1),
-              Converter.convertLogic(logicAndData.operand2));
-    }
-
-    public boolean isTrue(State state)
-    {
-        return ((Logic)operand1).isTrue(state) && 
-               ((Logic)operand2).isTrue(state);
+        return Logic.isTrue(and.operand1, state) && 
+               Logic.isTrue(and.operand2, state);
     }
 }
 

@@ -2,18 +2,12 @@ package simulation;
 
 import data.*;
 
-public class LogicOr extends data.LogicOr implements Logic
+public abstract class LogicOr
 {
-    public LogicOr (data.LogicOr logicOrData)
+    public static boolean isTrue(data.LogicOr or, State state)
     {
-        super(Converter.convertLogic(logicOrData.operand1),
-              Converter.convertLogic(logicOrData.operand2));
-    }
-
-    public boolean isTrue(State state)
-    {
-        return ((Logic)operand1).isTrue(state) || 
-               ((Logic)operand2).isTrue(state);
+        return Logic.isTrue(or.operand1, state) || 
+               Logic.isTrue(or.operand2, state);
     }
 }
 

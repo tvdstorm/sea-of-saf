@@ -2,14 +2,9 @@ package simulation;
 
 import data.*;
 
-public class Condition extends data.Condition implements Logic
+public abstract class Condition 
 {
-    public Condition (data.Condition conditionData)
-    {
-        super(new String(conditionData.name));
-    }
-
-    public boolean isTrue(State state)
+    public static boolean isTrue(data.Condition condition, State state)
     {
         /* Determine what is close and what is stronger. */
         return true;

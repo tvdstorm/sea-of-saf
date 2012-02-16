@@ -33,12 +33,12 @@ public class Simulator {
             leftFighter.tick();
             if (leftFighter.mayAct())
             {
-                Action a = leftFighter.act(new State());
+                State leftState = State.getState(leftFighter, rightFighter);
+                State rightState = State.getState(rightFighter, leftFighter);
+                data.Action a = leftFighter.act(leftState);
                 leftFighter.move(a.move);
-                rightFighter.defend(a.attack);
+                rightFighter.defend(a.attack, rightState);
             }
-
-            break;
         }
     }
 }

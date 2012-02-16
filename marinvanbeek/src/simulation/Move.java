@@ -2,14 +2,9 @@ package simulation;
 
 import data.*;
 
-public class Move extends data.Move
+public abstract class Move
 {
-    public Move (data.Move moveData)
-    {
-        super(new String(moveData.name));
-    }
-
-    public static int determineDistance(Move move)
+    public static int determineMoveDistance(data.Move move)
     {
         return 0;
     }
