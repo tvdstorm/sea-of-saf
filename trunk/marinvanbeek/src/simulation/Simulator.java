@@ -13,10 +13,10 @@ public class Simulator {
         Random random = new Random(0);
 
         data.Fighter leftData = data.Fighter.getRandom(random.nextInt());
-        this.leftFighter = new Fighter(leftData);
+        this.leftFighter = new Fighter(leftData, 10);
 
         data.Fighter rightData = data.Fighter.getRandom(random.nextInt());
-        this.rightFighter = new Fighter(rightData);
+        this.rightFighter = new Fighter(rightData, 35);
     }
 
     public Simulator(String leftFileName, String rightFileName)

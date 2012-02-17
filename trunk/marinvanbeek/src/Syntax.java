@@ -57,12 +57,6 @@ class Fighter implements SyntaxCheck
         return wellFormed;
     }
 
-    public Action act(State state)
-    {
-        return new Action(new Move("illegal_name"), 
-                          new Attack("illegal_name"));
-    }
-
     public void setParseErrors(int nr)
     {
         nrParseErrors = nr;
@@ -146,12 +140,6 @@ class Behaviour implements SyntaxCheck
         this.tactics = tactics;
     }
 
-    public Action chooseAction(State state)
-    {
-        return new Action(new Move("illegal_name"), 
-                             new Attack("illegal_name"));
-    }
-
     public boolean isWellFormed(List<String> errorMessages)
     {
         boolean wellFormed = true;
@@ -226,7 +214,6 @@ class Tactic implements SyntaxCheck
 
 interface Logic extends SyntaxCheck
 {
-    public boolean isTrue(State state);
     public boolean hasCondition(String condition);
 }
 
@@ -259,12 +246,6 @@ class LogicAnd extends LogicOperator
         super(operand1, operand2);
     }
 
-    public boolean isTrue(State state)
-    {
-        return operand1.isTrue(state) && 
-               operand2.isTrue(state);
-    }
-
     public String toString()
     {
         return "(" + operand1 + " and " + operand2 + ")";
@@ -276,12 +257,6 @@ class LogicOr extends LogicOperator
     public LogicOr(Logic operand1, Logic operand2)
     {
         super(operand1, operand2);
-    }
-
-    public boolean isTrue(State state)
-    {
-        return operand1.isTrue(state) || 
-               operand2.isTrue(state);
     }
 
     public String toString()
@@ -311,11 +286,6 @@ class Condition implements Logic
     public Condition(String name)
     {
         this.name = name;
-    }
-
-    public boolean isTrue(State state)
-    {
-        return true;
     }
 
     public boolean hasCondition(String condition)

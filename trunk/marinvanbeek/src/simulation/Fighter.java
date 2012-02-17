@@ -5,36 +5,33 @@ import data.*;
 // FIXME temp for Constructor(java.lang.String)
 import java.util.ArrayList;
 
-class Fighter {
+public class Fighter {
     data.Fighter fighterData;
 
-    int position;
+    public int position;
     int healthPoints;
     int timeToNextMove;
     /* FIXME speed and strength shouldn't be static. */
     int speed = 10;
     int strength = 10;
 
-    public Fighter(data.Fighter fighterData)
+    public data.Action currentAction = null;
+
+    public Fighter(data.Fighter fighterData, int initialPosition)
     {
         this.fighterData = fighterData;
         timeToNextMove = speed;
         healthPoints = data.Fighter.MAX_HEALTH;
-        position = 0;
+        position = initialPosition;
     }
-//
-//    public Fighter(String blah)
-//    {
-//        super(new String(blah),
-//              new ArrayList<data.Attribute>(),
-//              new data.Behaviour(new ArrayList<data.Tactic>()));
-//    }
 
     public data.Action act(State state)
     {
         timeToNextMove = speed;
+        currentAction = Behaviour.determineAction(fighterData.behaviour, 
+                                                  state);
 
-        return Behaviour.determineAction(fighterData.behaviour, state);
+        return currentAction;
     }
 
     public void move(data.Move moveAction)
