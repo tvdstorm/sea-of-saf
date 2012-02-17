@@ -1,18 +1,18 @@
 package saf.tests;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.* ;
 
 import parser.SAFParser;
 
-import saf.astelements.Arena;
 import saf.astelements.Fighter;
 import saf.astvisitors.Printer;
-import saf.astvisitors.Validator;
 
 import static org.junit.Assert.* ;
 
@@ -39,14 +39,14 @@ public class PrinterTest {
 			InputStream inputStream = new FileInputStream(file);
 			parser = new SAFParser(inputStream);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			assertTrue(false);
 		}
 		assertTrue(parser != null);
 		return parser;
 	}
 	
 	private String readFile(String file) throws IOException {
+		//Uses Filereader and buffered because this way reading can be done by getting each line instead of character.
 	    BufferedReader reader = new BufferedReader(new FileReader(file));
 	    String line  = null;
 	    StringBuilder stringBuilder = new StringBuilder();

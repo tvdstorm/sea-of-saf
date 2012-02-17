@@ -6,7 +6,6 @@ import saf.astelements.conditions.ANDConnective;
 import saf.astelements.conditions.ORConnective;
 
 public interface ISAFNodeVisitor {
-	public void visit(Arena arenaNode);
 	public void visit(Fighter fighterNode);
 	
 	public void visit(Characteristic characteristicNode);
