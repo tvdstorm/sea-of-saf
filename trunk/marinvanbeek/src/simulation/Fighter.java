@@ -25,6 +25,18 @@ public class Fighter {
         position = initialPosition;
     }
 
+    /*
+     * Constructor provided for animation testing, where both the action and
+     * the position are animated.
+     */
+    public Fighter(data.Fighter fighterData, int initialPosition, 
+                   data.Action initialAction)
+    {
+        this(fighterData, initialPosition);
+
+        this.currentAction = initialAction;
+    }
+
     public data.Action act(State state)
     {
         timeToNextMove = speed;

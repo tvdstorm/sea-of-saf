@@ -1,3 +1,6 @@
+JC                  = javac
+JC_FLAGS            = -g -Xlint -d build
+
 DATA_SOURCES        = src/data/*.java
 DATA_CLASSES        = $(subst src,build,$(DATA_SOURCES:.java=.class))
 
@@ -45,16 +48,16 @@ $(GRAMMAR_OUTPUT): $(GRAMMAR)
 	java -cp $(ANTLR_LIB) org.antlr.Tool -fo build $(GRAMMAR)
 
 $(DATA_CLASSES): $(DATA_SOURCES)
-	javac -cp .:build -d build $(DATA_SOURCES)
+	$(JC) $(JC_FLAGS) -cp .:build $(DATA_SOURCES)
 
 $(TEST_CLASSES): $(TEST_SOURCES)
-	javac -g -cp build:$(ANTLR_LIB):$(JUNIT_LIB) -d build $(TEST_SOURCES)
+	$(JC) $(JC_FLAGS) -cp build:$(ANTLR_LIB):$(JUNIT_LIB) $(TEST_SOURCES)
 
 $(ANIMATION_CLASSES): $(ANIMATION_SOURCES)
-	javac -cp .:build -d build $(ANIMATION_SOURCES)
+	$(JC) $(JC_FLAGS) -cp .:build $(ANIMATION_SOURCES)
 
 $(SIMULATION_CLASSES): $(SIMULATION_SOURCES)
-	javac -cp .:build -d build $(SIMULATION_SOURCES)
+	$(JC) $(JC_FLAGS) -cp .:build $(SIMULATION_SOURCES)
 
 
 clean:
