@@ -18,11 +18,17 @@ public class ParseTest
     private static final String LOG_FILE = "parse_test_results.txt";
     private static final String TEST_FILES_LOCATION = "src/tests/safs/";
 
+    private static PrintStream stdout;
+    private static PrintStream stderr;
+
     @BeforeClass
     public static void redirect()
     {
         try
         {
+            stdout = System.out;
+            stderr = System.err;
+
             PrintStream logFile = new PrintStream(LOG_FILE);
             System.setOut(logFile);
             System.setErr(logFile);
@@ -30,6 +36,13 @@ public class ParseTest
         {
             System.err.println("Couldn't open log file\n" + e.getMessage());
         }
+    }
+
+    @AfterClass
+    public static void unRedirect()
+    {
+        System.setOut(stdout);
+        System.setErr(stderr);
     }
 
     @Before
