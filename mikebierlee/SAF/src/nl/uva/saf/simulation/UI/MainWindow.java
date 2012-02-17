@@ -20,11 +20,11 @@ import java.awt.event.WindowEvent;
 
 public class MainWindow extends JFrame implements WindowListener {
 	private static final long serialVersionUID = 8456781004070435366L;
-	private final IFightSimulator simulator;
+	private final IFightSimulator fightSimulator;
 	private RenderSurface rendereSurface;
 
 	public MainWindow(IFightSimulator simulator, IRenderer renderer) {
-		this.simulator = simulator;
+		this.fightSimulator = simulator;
 
 		setSize(new Dimension(854, 480));
 		setPreferredSize(new Dimension(854, 480));
@@ -44,6 +44,25 @@ public class MainWindow extends JFrame implements WindowListener {
 		mntmNewFight.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 				InputEvent.CTRL_MASK));
 		mnFile.add(mntmNewFight);
+		
+		JMenuItem mntmStopFight = new JMenuItem("Stop Fight");
+		mntmStopFight.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent event) {
+				fightSimulator.stop();
+			}
+		});
+		
+		JMenuItem mntmRestartFight = new JMenuItem("Restart Fight");
+		mntmRestartFight.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent event) {
+				fightSimulator.stop();
+				fightSimulator.start();
+			}
+		});
+		mnFile.add(mntmRestartFight);
+		mnFile.add(mntmStopFight);
 
 		JMenuItem menuItem = new JMenuItem("-");
 		mnFile.add(menuItem);
@@ -76,7 +95,7 @@ public class MainWindow extends JFrame implements WindowListener {
 
 	@Override
 	public void windowClosed(WindowEvent event) {
-		simulator.dispose();
+		fightSimulator.dispose();
 		rendereSurface.unbindRenderer();
 	}
 

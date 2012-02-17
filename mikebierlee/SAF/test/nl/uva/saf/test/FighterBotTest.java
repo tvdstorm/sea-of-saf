@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import nl.uva.saf.fdl.ast.Characteristic;
 import nl.uva.saf.fdl.ast.Fighter;
 import nl.uva.saf.fdl.ast.FighterAttribute;
+import nl.uva.saf.fdl.types.CharacteristicType;
 import nl.uva.saf.simulation.FighterBot;
 
 import org.junit.Test;
@@ -20,8 +21,7 @@ public class FighterBotTest {
 		Fighter fighter = new Fighter("getAttributesTest", attributes);		
 		FighterBot bot = new FighterBot(fighter);
 		
-		Assert.assertEquals(bot.getAttribute("punchPower"), 2);
-		Assert.assertEquals(bot.getAttribute("kickPower"), 5);
+		Assert.assertEquals(bot.getAttribute(CharacteristicType.punchPower), 2);
+		Assert.assertEquals(bot.getAttribute(CharacteristicType.kickPower), 5);
 	}
-
 }
