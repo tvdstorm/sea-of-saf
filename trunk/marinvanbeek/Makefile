@@ -37,8 +37,8 @@ animation: simulation data $(ANIMATION_CLASSES)
 tests: parser data simulation animation $(TEST_CLASSES) 
 
     
-check: junit_tests
-	java -cp tests:build:$(ANTLR_LIB):$(JUNIT_LIB) org.junit.runner.JUnitCore ParseTest
+check: tests
+	java -cp tests:build:$(ANTLR_LIB):$(JUNIT_LIB) org.junit.runner.JUnitCore ParseTest FightTest AnimationTest
 
 a_check: all
 	java -cp tests:build:$(ANTLR_LIB):$(JUNIT_LIB) org.junit.runner.JUnitCore $(A)

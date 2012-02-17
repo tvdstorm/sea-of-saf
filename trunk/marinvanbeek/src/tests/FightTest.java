@@ -13,11 +13,17 @@ public class FightTest
 {
     private static final String LOG_FILE = "fight_test_results.txt";
 
+    private static PrintStream systemStdout;
+    private static PrintStream systemStderr;
+
     @BeforeClass
     public static void redirect()
     {
         try
         {
+            systemStdout = System.out;
+            systemStderr = System.err;
+
             PrintStream logFile = new PrintStream(LOG_FILE);
             System.setOut(logFile);
             System.setErr(logFile);
@@ -25,6 +31,13 @@ public class FightTest
         {
             System.err.println("Couldn't open log file\n" + e.getMessage());
         }
+    }
+
+    @AfterClass
+    public static void unRedirect()
+    {
+        System.setOut(systemStdout);
+        System.setErr(systemStderr);
     }
 
     @Before
