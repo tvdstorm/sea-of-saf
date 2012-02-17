@@ -1,0 +1,13 @@
+AllStatementsTest{
+	kickReach  = 9
+	punchReach = 1
+	kickPower  = 2
+	punchPower = 2
+	far[run_towards punch_high]
+	near[choose(stand crouch) kick_high]
+	much_stronger [walk_towards choose(block_low block_high)]
+	much_weaker [run_towards kick_low]
+	stronger [walk_away punch_low]
+	weaker [choose(run_away even) punch_high]
+	always [ choose(crouch jump) choose(block_low block_high)]
+}

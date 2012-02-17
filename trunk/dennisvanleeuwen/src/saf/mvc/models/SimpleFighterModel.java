@@ -11,7 +11,7 @@ public class SimpleFighterModel extends FighterModel{
 	
 	public int findCharacteristicValue(String characteristicItem){
 		for(Characteristic fighterChar: this.getFighterNode().getCharacteristics()){
-			if(fighterChar.item == characteristicItem)
+			if(fighterChar.item.equals(characteristicItem))
 				return fighterChar.value;
 		}
 		return 5;//Default value;
