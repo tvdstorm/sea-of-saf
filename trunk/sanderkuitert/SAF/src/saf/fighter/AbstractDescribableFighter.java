@@ -1,93 +1,68 @@
 package saf.fighter;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import saf.fighter.fdl.DescribableFighter;
 
 abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 
 	protected String name;
-	protected Map<Aspect, Aspect.Value> properties;
-	protected Map<Condition, Action> behaviours;
+	protected List<Property> properties;
+	protected List<Condition> behaviours;
 	
 	
 	public AbstractDescribableFighter(){	
 		this.name = "Anonymous";
-		this.properties = new HashMap<Aspect, Aspect.Value>();
-		this.behaviours = new HashMap<Condition, Action>();
-	}
-	
-	public AbstractDescribableFighter(String name, Map<Aspect, Aspect.Value> properties, 
-													Map<Condition, Action> behaviours) {
-		this.name = name;
-		this.properties = properties;
-		this.behaviours = behaviours;
+		this.properties = new LinkedList<Property>();
+		this.behaviours = new LinkedList<Condition>();
 	}
 
-	//--- Implementing AST ---
-	public String getValue() {
-		return name;
-	}
-	
-	//TODO ugly
-	public List<AST> getChildren() {
-		LinkedList<AST> result = new LinkedList<AST>();
-		for(Entry<Aspect, Aspect.Value> entry: properties.entrySet()) {
-			result.add(entry.getKey());
-			result.add(entry.getValue());
-		}
-		for(Entry<Condition, Action> entry: behaviours.entrySet()) {
-			result.add(entry.getKey());
-			result.add(entry.getValue());
-		}
-		return result;
-	}
-	
-	public String describeValidValues() {
-		return validNames()+"\n"+
-				validProperties()+"\n"+
-				validBehaviour();
-	}
-	
-	public boolean isValidValue(String name) {
-		return isValidName(name);
-	}
 	
 	public boolean equals(Object other) {
 		if(other instanceof AbstractDescribableFighter) {
-			return this.name.equals(((AbstractDescribableFighter)other).getValue());
-//				&& this.getChildren().equals(((AbstractDescribableFighter)other).getChildren()); //TODO
+			return this.name.equals(((AbstractDescribableFighter)other).getName()) &&
+						this.getChildren().equals(((AbstractDescribableFighter)other).getChildren());
 		}
 		return false;
 	}
-
+	
+	//--- Implementing AST ---
+	public String getName() {
+		return name;
+	}
+	
+	public List<AST> getChildren() {
+		List<AST> result = new LinkedList<AST>();
+		result.addAll(properties);
+		result.addAll(behaviours);
+		return result;
+	}
+	
+	//--- Implementing DescribableFighter ---
 	//Attribute validity
 	public boolean isValidName(String name) {
 		return true;
 	}
 	
 	public boolean isValidAspect(String aspect) {
-		return Aspect.isValidValue(aspect);
+		return VALID_ASPECTS.contains(aspect);
 	}
 	
 	public boolean isValidPropertyValue(String aspect, int value) {
-		return Aspect.Value.isValidValue(aspect, value);
+		return new Property(aspect).isValidValue(value);
 	}
 	
 	public boolean isValidCondition(String condition) {
-		return Condition.isValidValue(condition);
+		return VALID_CONDITIONS.contains(condition);
 	}
 	
 	public boolean isValidMove(String move) {
-		return Move.isValidValue(move);
+		return VALID_MOVES.contains(move);
 	}
 	
 	public boolean isValidAttack(String attack) {
-		return Attack.isValidValue(attack);
+		return VALID_ATTACKS.contains(attack);
 	}
 	
 	
@@ -97,19 +72,19 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 	}
 	
 	public String validProperties() {
-		return "Properties consist of an aspect and value.\n"+
-				Aspect.describeValidValues();
+		return "Valid properties are: "+VALID_ASPECTS+". By default, these range between "+
+					DEFAULT_PROPERTY_MIN+" and "+DEFAULT_PROPERTY_MAX+".";
 	}
 	
 	public String validBehaviour() {
 		return "Behaviours consist of a condition, moves and attacks.\n"+
-				Condition.describeValidValues()+"\n"+
-				Move.describeValidValues()+"\n"+
-				Attack.describeValidValues()+"\n";
+					"Valid conditions are: "+VALID_CONDITIONS+"\n"+
+					"Valid moves are: "+VALID_MOVES+"\n"+
+					"Valid attacks are: "+VALID_ATTACKS+"\n";
 	}
 	
 	public String getAlwaysCondition() {
-		return Condition.getAlwaysCondition();
+		return ALWAYS_CONDITION;
 	}
 	
 	//Attribute addition
@@ -121,34 +96,44 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 	
 	/** @require isValidAspect(aspect) && isValidAspectValue(aspect, value) */
 	public void addProperty(String aspect, int value) {
-		assert isValidAspect(aspect) && isValidPropertyValue(aspect, value): "Requirement broken";
-		this.properties.put(new Aspect(aspect), new Aspect.Value(value));
+		assert isValidAspect(aspect) && isValidPropertyValue(aspect, value): "Aspect requirement broken";
+		this.properties.add(new Property(aspect, value));
 	}
 	
-	/** @require isValidBehaviour(conditions, moves, attacks) */
-	public void addBehaviour(List<String> conditions, List<String> moves, List<String> attacks) {
-		assert isValidBehaviour(conditions, moves, attacks): "Requirement broken";
-		this.behaviours.put(new Condition(conditions), new Action(moves, attacks));
-	}
-	
-	//Only used in addBehaviour() assertion
-	private boolean isValidBehaviour(List<String> conditions, List<String> moves, List<String> attacks) {
-		for(String condition: conditions) {
-			if(!isValidCondition(condition)) {
-				return false;
+	/** 
+	 * @require non-empty lists with valid members 
+	 */
+	public void addBehaviour(List<String> postOrderConditionTree, List<String> moves, List<String> attacks) {
+		Condition condition;
+		
+		//Create condition hierarchy
+		Condition orCondition = null;
+		Condition andCondition = null;
+		List<Condition> atomicConditions = new LinkedList<Condition>();
+		for(String element: postOrderConditionTree) {
+			if(element.equals("or")) {
+				atomicConditions.add(andCondition); //combine
+				orCondition = new Condition.CompoundCondition(false, atomicConditions);
+				andCondition = null;
+				atomicConditions.clear();
+			} else if(element.equals("and")) {
+				andCondition = new Condition.CompoundCondition(true, atomicConditions);
+				atomicConditions.clear();
+			} else {
+				atomicConditions.add(new Condition(element, new Action(moves, attacks)));
 			}
 		}
-		for(String move: moves) {
-			if(!isValidMove(move)) {
-				return false;
-			}
+		
+		//Select toplevel condition
+		if(atomicConditions.size()>0) {
+			condition=atomicConditions.get(0);
+		} else if(andCondition != null) {
+			condition=andCondition;
+		} else {
+			condition = orCondition;
 		}
-		for(String attack: attacks) {
-			if(!isValidAttack(attack)) {
-				return false;
-			}
-		}
-		return true;
+		
+		this.behaviours.add(condition);
 	}
 	
 }

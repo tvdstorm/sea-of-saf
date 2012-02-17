@@ -16,9 +16,8 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 	public SuperAwesomeFighter (){
 		super();
 		
-		int defProp = Aspect.Value.getDefault();
-		this.weight = calcWeight(defProp, defProp);
-		this.height = calcHeight(defProp, defProp);
+		this.weight = calcWeight(DEFAULT_PROPERTY_VALUE, DEFAULT_PROPERTY_VALUE);
+		this.height = calcHeight(DEFAULT_PROPERTY_VALUE, DEFAULT_PROPERTY_VALUE);
 		this.speed = calcSpeed(weight, height);
 	}
 	
@@ -36,18 +35,14 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 			throw new InvalidParameterException(failMsg);
 		}
 		
-		this.weight = calcWeight(getTrait("punchPower"), getTrait("kickPower"));
-		this.height = calcHeight(getTrait("punchReach"), getTrait("kickReach"));
+		this.weight = calcWeight(getProperty("punchPower"), getProperty("kickPower"));
+		this.height = calcHeight(getProperty("punchReach"), getProperty("kickReach"));
 		this.speed = calcSpeed(weight, height);
 	}
 	
-	//--- Implementing Fighter ---
-	public int getTrait(String aspect) {
-		if(properties.get(aspect) != null) {
-			return properties.get(aspect).getIntValue();
-		} else {
-			return Aspect.Value.getDefault();
-		}
+	
+	public double getSpeed() {
+		return speed;
 	}
 	
 	private double calcWeight(int punchPower, int kickPower){
@@ -60,6 +55,16 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 	
 	private double calcSpeed(double height, double weight) {
 		return Math.abs(0.5*(height-weight));
+	}
+	
+	//--- Implementing Fighter ---
+	public int getProperty(String aspect) {
+		for(Property prop: properties) {
+			if(prop.getName().equals(aspect)) {
+				return prop.getValue();
+			}
+		}
+		return DEFAULT_PROPERTY_VALUE;
 	}
 	
 }
