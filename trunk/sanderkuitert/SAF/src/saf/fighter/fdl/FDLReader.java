@@ -11,6 +11,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 
+
 /** Reads and applies Fighter Description Language */
 public class FDLReader {
 
@@ -22,9 +23,7 @@ public class FDLReader {
 	 * @require fdl != null
 	 */
 	public FDLReader(String fdl) throws InvalidParameterException {
-		if(fdl == null) {
-			throw new NullPointerException("Parameter fdl is null!");
-		}
+		assert fdl != null: "Parameter fdl is null!";
 	
 		this.ast = parse(lex(fdl));
 	}
@@ -35,9 +34,7 @@ public class FDLReader {
 	 * @require fighter != null
 	 */ 
 	public List<InvalidAttributeMessage> applyAttributes(DescribableFighter fighter) {
-		if(fighter == null) {
-			throw new NullPointerException("Parameter fighter is null!");
-		}
+		assert fighter != null: "Parameter fighter is null!";
 		
 		List<InvalidAttributeMessage> failMsgs = check(fighter);		
 		if (failMsgs.size() == 0){
@@ -71,6 +68,7 @@ public class FDLReader {
 	private CommonTree parse(CommonTokenStream tokens) throws InvalidParameterException {
 		
 		FDLParser parser = new FDLParser(tokens);
+		
 		CommonTree ast;
 		try {
 			ast = parser.parse();
@@ -78,7 +76,7 @@ public class FDLReader {
 			//Rethrow as ANTLR-library-independent exception
 			throw new InvalidParameterException("FDL has invalid syntax after \""+e.token.getText()+"\" "+
 									"(line "+e.token.getLine()+", column "+e.token.getCharPositionInLine()+")");
-		}		
+		}
 		
 		return ast;
 	}

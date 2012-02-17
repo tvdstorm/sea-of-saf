@@ -13,20 +13,28 @@ options {
     
 }
 
-//MAINTENANCE NOTE: keep these simple linking methods here in @members (don't extract them)
-//  For they are intimately part of the checker and should evolve together with the tree walker
+//MAINTENANCE NOTE: keep these methods here in @members (don't extract them)
+//  For they are intimately part of the checker, and are only used by the checker
+//
+//  Putting them in a seperate class will make a subroutine-class, and allows outside access:
+//  which is bad abstraction and may increase coupling. The grammar should be interleaved with 
+//  as little Java as possible, but the checks itself should be as close to it as possible.
+//
+//  (Eclipse's missing features can be mitigated by saving more often, and checking the generated java file)
 @members {
     
     private DescribableFighter fighter;
     private List<InvalidAttributeMessage> failMsgs;
     private boolean alwaysConditionExists;
-    private CommonTree name;
+    private CommonTree name, lastAspect;
     
     /** Returns a message for every attribute in the AST that the given fighter considers invalid */
     public List<InvalidAttributeMessage> check(DescribableFighter fighter) throws RecognitionException {
         this.fighter = fighter;
         this.failMsgs = new LinkedList<InvalidAttributeMessage>();
         this.alwaysConditionExists = false;
+        this.name = null;
+        this.lastAspect = null;
         
         fighter(); //start checking at root
         
@@ -37,20 +45,34 @@ options {
         return failMsgs;
     }
     
+   	private int toInt(String number){
+        try{
+            return Integer.parseInt(number);
+        }catch (NumberFormatException nfe){
+            assert false: "The parser should only provide numbers";
+            System.err.println(number + " is not a number!");
+            return Integer.MIN_VALUE;
+        }
+    }
+    
     private void checkName(CommonTree node){
-        name = node;
-        if(!fighter.isValidName(node.getText()))
+        if(!fighter.isValidName(node.getText())){
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validNames()));
+        }
+        name = node;
     }
     
-    private void checkProperty(CommonTree node){
-        if(!fighter.isValidProperty(node.getText()))
-            failMsgs.add(new InvalidAttributeMessage(node, fighter.validCharacteristics()));
+    private void checkAspect(CommonTree node){
+        if(!fighter.isValidAspect(node.getText())){
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validProperties()));
+        }
+        lastAspect = node;
     }
     
-    private void checkPropertyRange(CommonTree node){
-        if(!fighter.isValidPropertyValue(parseNumber(node.getText())))
-            failMsgs.add(new InvalidAttributeMessage(node, fighter.validCharacteristics()));
+    private void checkValue(CommonTree node){
+        if(!fighter.isValidPropertyValue(lastAspect.getText(), toInt(node.getText()))){
+            failMsgs.add(new InvalidAttributeMessage(node, fighter.validProperties()));
+        }
     }
     
     private void checkCondition(CommonTree node){
@@ -62,22 +84,14 @@ options {
     }
     
     private void checkMove(CommonTree node){
-        if(!fighter.isValidMove(node.getText()))
+        if(!fighter.isValidMove(node.getText())){
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
+        }
     }
     
     private void checkAttack(CommonTree node){
-        if(!fighter.isValidAttack(node.getText()))
+        if(!fighter.isValidAttack(node.getText())){
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
-    }
-    
-    private int parseNumber(String number){
-        try{
-            return Integer.parseInt(number);
-        }catch (NumberFormatException nfe){
-            assert false: "The parser should only provide numbers";
-            System.err.println(number + " is not a number!");
-            return Integer.MIN_VALUE;
         }
     }
 }
@@ -91,16 +105,19 @@ options {
 
 fighter:            name attributes;
 
-name:               TEXT                    {checkName($TEXT);};
-attributes:         (characteristic | behaviour_rule)*;
+name:               IDENTIFIER                              {checkName($IDENTIFIER);};
+attributes:         (property | behaviour)*;
 
-characteristic:     property value;
-behaviour_rule:     condition move attack;
+property:           aspect value;
+behaviour:          condition move attack;
 
-property:           TEXT                    {checkProperty($TEXT);};
-value:              NUMBER                  {checkPropertyRange($NUMBER);};
-condition:          TEXT                    {checkCondition($TEXT);};
-move:               TEXT                    {checkMove($TEXT);}
-                  | CHOOSE t1=TEXT t2=TEXT  {checkMove($t1); checkMove($t2);};
-attack:             TEXT                    {checkAttack($TEXT);}
-                  | CHOOSE t1=TEXT t2=TEXT  {checkAttack($t1); checkAttack($t2);};
+aspect:             IDENTIFIER                              {checkAspect($IDENTIFIER);};
+value:              NUMBER                                  {checkValue($NUMBER);};
+condition:          andCondition (OR andCondition)*;
+move:               IDENTIFIER                              {checkMove($IDENTIFIER);}
+                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER      {checkMove($i1); checkMove($i2);};
+attack:             IDENTIFIER                              {checkAttack($IDENTIFIER);}
+                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER      {checkAttack($i1); checkAttack($i2);};
+                  
+andCondition:       atomicCondition (AND atomicCondition)*;
+atomicCondition:    L_PAREN condition R_PAREN | IDENTIFIER  {checkCondition($IDENTIFIER);};

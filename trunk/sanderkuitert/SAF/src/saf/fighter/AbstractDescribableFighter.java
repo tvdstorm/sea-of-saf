@@ -1,104 +1,154 @@
 package saf.fighter;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import saf.fighter.fdl.DescribableFighter;
 
 abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 
 	protected String name;
-	protected List<Characteristic> characteristics;
-	protected List<Behaviour> behaviours;
+	protected Map<Aspect, Aspect.Value> properties;
+	protected Map<Condition, Action> behaviours;
 	
 	
 	public AbstractDescribableFighter(){	
 		this.name = "Anonymous";
-		this.characteristics = new LinkedList<Characteristic>();
-		this.behaviours = new LinkedList<Behaviour>();
+		this.properties = new HashMap<Aspect, Aspect.Value>();
+		this.behaviours = new HashMap<Condition, Action>();
 	}
 	
-	public AbstractDescribableFighter(String name, List<Characteristic> characteristics, 
-															List<Behaviour> behaviours) {
+	public AbstractDescribableFighter(String name, Map<Aspect, Aspect.Value> properties, 
+													Map<Condition, Action> behaviours) {
 		this.name = name;
-		this.characteristics = characteristics;
+		this.properties = properties;
 		this.behaviours = behaviours;
 	}
 
-
-	//--- AST
-	public String validPropertyValues() {
+	//--- Implementing AST ---
+	public String getValue() {
+		return name;
+	}
+	
+	//TODO ugly
+	public List<AST> getChildren() {
+		LinkedList<AST> result = new LinkedList<AST>();
+		for(Entry<Aspect, Aspect.Value> entry: properties.entrySet()) {
+			result.add(entry.getKey());
+			result.add(entry.getValue());
+		}
+		for(Entry<Condition, Action> entry: behaviours.entrySet()) {
+			result.add(entry.getKey());
+			result.add(entry.getValue());
+		}
+		return result;
+	}
+	
+	public String describeValidValues() {
 		return validNames()+"\n"+
-				validCharacteristics()+"\n"+
+				validProperties()+"\n"+
 				validBehaviour();
 	}
 	
-	public boolean isValid(String name) {
+	public boolean isValidValue(String name) {
 		return isValidName(name);
 	}
 	
-	//--- Describable Fighter
-	//--- Validity tests:
+	public boolean equals(Object other) {
+		if(other instanceof AbstractDescribableFighter) {
+			return this.name.equals(((AbstractDescribableFighter)other).getValue());
+//				&& this.getChildren().equals(((AbstractDescribableFighter)other).getChildren()); //TODO
+		}
+		return false;
+	}
+
+	//Attribute validity
 	public boolean isValidName(String name) {
 		return true;
 	}
 	
-	public boolean isValidProperty(String property) {
-		return new Property().isValid(property);
+	public boolean isValidAspect(String aspect) {
+		return Aspect.isValidValue(aspect);
 	}
 	
-	public boolean isValidPropertyValue(int value) {
-		return new Property().isValid(value);
+	public boolean isValidPropertyValue(String aspect, int value) {
+		return Aspect.Value.isValidValue(aspect, value);
 	}
 	
 	public boolean isValidCondition(String condition) {
-		return new Condition().isValid(condition);
+		return Condition.isValidValue(condition);
 	}
 	
-	
 	public boolean isValidMove(String move) {
-		return new Action().new Move().isValid(move);
+		return Move.isValidValue(move);
 	}
 	
 	public boolean isValidAttack(String attack) {
-		return new Action().new Attack().isValid(attack);
+		return Attack.isValidValue(attack);
 	}
 	
 	
-	//--- Attribute possibilities:
+	//Attribute possibilities
 	public String validNames() {
 		return "Any name is valid.";
 	}
 	
-	public String validCharacteristics() {
-		return new Characteristic().validPropertyValues();
+	public String validProperties() {
+		return "Properties consist of an aspect and value.\n"+
+				Aspect.describeValidValues();
 	}
 	
 	public String validBehaviour() {
-		return new Behaviour().validPropertyValues();
+		return "Behaviours consist of a condition, moves and attacks.\n"+
+				Condition.describeValidValues()+"\n"+
+				Move.describeValidValues()+"\n"+
+				Attack.describeValidValues()+"\n";
 	}
 	
 	public String getAlwaysCondition() {
-		return new Condition().getAlwaysCondition();
+		return Condition.getAlwaysCondition();
 	}
 	
-	//--- Set values:
+	//Attribute addition
 	/** @require isValidName(name) */
 	public void setName(String name) {
 		assert isValidName(name): "Name requirement broken";
 		this.name = name;
 	}
 	
-	/** @require new Characteristic().isValid(property) */
-	public void addCharacteristic(String property, int value) {
-		assert new Characteristic().isValid(property): "Characteristic requirement broken";
-		this.characteristics.add(new Characteristic(property,value));
+	/** @require isValidAspect(aspect) && isValidAspectValue(aspect, value) */
+	public void addProperty(String aspect, int value) {
+		assert isValidAspect(aspect) && isValidPropertyValue(aspect, value): "Requirement broken";
+		this.properties.put(new Aspect(aspect), new Aspect.Value(value));
 	}
 	
-	/** @require new Behaviour().isValid(condition) */
-	public void addBehaviour(String condition, List<String> moves, List<String> attacks) {
-		assert new Behaviour().isValid(condition): "Behaviour requirement broken";
-		this.behaviours.add(new Behaviour(condition, moves, attacks));
+	/** @require isValidBehaviour(conditions, moves, attacks) */
+	public void addBehaviour(List<String> conditions, List<String> moves, List<String> attacks) {
+		assert isValidBehaviour(conditions, moves, attacks): "Requirement broken";
+		this.behaviours.put(new Condition(conditions), new Action(moves, attacks));
+	}
+	
+	//Only used in addBehaviour() assertion
+	private boolean isValidBehaviour(List<String> conditions, List<String> moves, List<String> attacks) {
+		for(String condition: conditions) {
+			if(!isValidCondition(condition)) {
+				return false;
+			}
+		}
+		for(String move: moves) {
+			if(!isValidMove(move)) {
+				return false;
+			}
+		}
+		for(String attack: attacks) {
+			if(!isValidAttack(attack)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }

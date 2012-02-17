@@ -13,6 +13,8 @@ tokens{
     L_PAREN =           '(';
     R_PAREN =           ')';
     IS =                '=';
+    AND =               'and';
+    OR =                'or';
     CHOOSE =            'choose';
 }
 
@@ -38,29 +40,32 @@ tokens{
 
 
 // PARSER rules
-fighter:            name attributes;
+fighter:            name attributes EOF!;
 
-name:               TEXT;
-attributes:         L_CURLY_BRACKET! (characteristic | behaviour_rule)* R_CURLY_BRACKET!;
+name:               IDENTIFIER;
+attributes:         L_CURLY_BRACKET! (property | behaviour)* R_CURLY_BRACKET!;
 
-characteristic:     property IS! value;
-behaviour_rule:     condition L_BRACKET! move attack R_BRACKET!;
+property:           aspect IS! value;
+behaviour:          condition L_BRACKET! move attack R_BRACKET!;
 
-property:           TEXT;
+aspect:             IDENTIFIER;
 value:              NUMBER;
-condition:          TEXT;
-move:               TEXT | choose;
-attack:             TEXT | choose;
+condition:          andCondition (OR andCondition)*;
+move:               IDENTIFIER | choice;
+attack:             IDENTIFIER | choice;
 
-choose:             CHOOSE L_PAREN! TEXT TEXT R_PAREN!;
+choice:             CHOOSE L_PAREN! IDENTIFIER IDENTIFIER R_PAREN!;
+andCondition:       atomicCondition (AND atomicCondition)*;
+
+atomicCondition:    L_PAREN! condition R_PAREN! | IDENTIFIER;
+
 
 // LEXER rules
-TEXT:               LETTER (LETTER | UNDERSCORE | DIGIT)*;
-NUMBER:             DIGIT+; //(MINUS | DIGIT) DIGIT*;
+IDENTIFIER:         LETTER (LETTER | UNDERSCORE | DIGIT)*;
+NUMBER:             DIGIT+;
 WHITESPACE:         WHITE_CHAR+     { $channel = HIDDEN; };
 
 fragment LETTER:    ('a'..'z' | 'A'..'Z');
 fragment UNDERSCORE:('_');
 fragment DIGIT:     ('0'..'9');
-//fragment MINUS:     ('-');
 fragment WHITE_CHAR:(' ' | '\t' | '\r' | '\n' | '\u000C');
