@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g 2012-02-08 11:15:07
+// $ANTLR 3.4 /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g 2012-02-17 17:17:59
 
   package com.yennick.fighter;
   import com.yennick.fighter.bot.*;
@@ -177,7 +177,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
 
-            			System.out.println("FighterName:  " + retval.fighter.toString()); 
+            			System.out.println( retval.fighter.toString()); 
             		
 
             }
@@ -286,6 +286,8 @@ public TreeAdaptor getTreeAdaptor() {
             adaptor.addChild(root_0, char_literal8_tree);
 
 
+            retval.behaviour.addAction((a1!=null?a1.action:null),(a2!=null?a2.action:null));
+
             }
 
             retval.stop = input.LT(-1);
@@ -318,7 +320,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "condition"
-    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:45:1: condition returns [Condition condition] : ( IDENT | IDENT 'or' condition | IDENT 'and' condition );
+    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:45:1: condition returns [Condition condition] : ( IDENT |first= IDENT 'or' second= IDENT |first= IDENT 'and' second= IDENT );
     public final SAFParser.condition_return condition() throws RecognitionException {
         SAFParser.condition_return retval = new SAFParser.condition_return();
         retval.start = input.LT(1);
@@ -326,24 +328,20 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
+        Token first=null;
+        Token second=null;
         Token IDENT9=null;
-        Token IDENT10=null;
+        Token string_literal10=null;
         Token string_literal11=null;
-        Token IDENT13=null;
-        Token string_literal14=null;
-        SAFParser.condition_return condition12 =null;
 
-        SAFParser.condition_return condition15 =null;
-
-
+        Object first_tree=null;
+        Object second_tree=null;
         Object IDENT9_tree=null;
-        Object IDENT10_tree=null;
+        Object string_literal10_tree=null;
         Object string_literal11_tree=null;
-        Object IDENT13_tree=null;
-        Object string_literal14_tree=null;
 
         try {
-            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:46:2: ( IDENT | IDENT 'or' condition | IDENT 'and' condition )
+            // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:46:2: ( IDENT |first= IDENT 'or' second= IDENT |first= IDENT 'and' second= IDENT )
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -387,7 +385,7 @@ public TreeAdaptor getTreeAdaptor() {
                     root_0 = (Object)adaptor.nil();
 
 
-                    IDENT9=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition163); 
+                    IDENT9=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition165); 
                     IDENT9_tree = 
                     (Object)adaptor.create(IDENT9)
                     ;
@@ -399,60 +397,64 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:47:5: IDENT 'or' condition
+                    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:47:5: first= IDENT 'or' second= IDENT
                     {
                     root_0 = (Object)adaptor.nil();
 
 
-                    IDENT10=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition171); 
-                    IDENT10_tree = 
-                    (Object)adaptor.create(IDENT10)
+                    first=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition175); 
+                    first_tree = 
+                    (Object)adaptor.create(first)
                     ;
-                    adaptor.addChild(root_0, IDENT10_tree);
+                    adaptor.addChild(root_0, first_tree);
 
 
-                    string_literal11=(Token)match(input,16,FOLLOW_16_in_condition173); 
+                    string_literal10=(Token)match(input,16,FOLLOW_16_in_condition177); 
+                    string_literal10_tree = 
+                    (Object)adaptor.create(string_literal10)
+                    ;
+                    adaptor.addChild(root_0, string_literal10_tree);
+
+
+                    second=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition181); 
+                    second_tree = 
+                    (Object)adaptor.create(second)
+                    ;
+                    adaptor.addChild(root_0, second_tree);
+
+
+                     retval.condition = new Condition((first!=null?first.getText():null),(second!=null?second.getText():null),"or"); 
+
+                    }
+                    break;
+                case 3 :
+                    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:48:5: first= IDENT 'and' second= IDENT
+                    {
+                    root_0 = (Object)adaptor.nil();
+
+
+                    first=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition191); 
+                    first_tree = 
+                    (Object)adaptor.create(first)
+                    ;
+                    adaptor.addChild(root_0, first_tree);
+
+
+                    string_literal11=(Token)match(input,15,FOLLOW_15_in_condition193); 
                     string_literal11_tree = 
                     (Object)adaptor.create(string_literal11)
                     ;
                     adaptor.addChild(root_0, string_literal11_tree);
 
 
-                    pushFollow(FOLLOW_condition_in_condition175);
-                    condition12=condition();
-
-                    state._fsp--;
-
-                    adaptor.addChild(root_0, condition12.getTree());
-
-                    }
-                    break;
-                case 3 :
-                    // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:48:5: IDENT 'and' condition
-                    {
-                    root_0 = (Object)adaptor.nil();
-
-
-                    IDENT13=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition182); 
-                    IDENT13_tree = 
-                    (Object)adaptor.create(IDENT13)
+                    second=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition197); 
+                    second_tree = 
+                    (Object)adaptor.create(second)
                     ;
-                    adaptor.addChild(root_0, IDENT13_tree);
+                    adaptor.addChild(root_0, second_tree);
 
 
-                    string_literal14=(Token)match(input,15,FOLLOW_15_in_condition184); 
-                    string_literal14_tree = 
-                    (Object)adaptor.create(string_literal14)
-                    ;
-                    adaptor.addChild(root_0, string_literal14_tree);
-
-
-                    pushFollow(FOLLOW_condition_in_condition186);
-                    condition15=condition();
-
-                    state._fsp--;
-
-                    adaptor.addChild(root_0, condition15.getTree());
+                     retval.condition = new Condition((first!=null?first.getText():null),(second!=null?second.getText():null),"and"); 
 
                     }
                     break;
@@ -499,16 +501,16 @@ public TreeAdaptor getTreeAdaptor() {
         Token a1=null;
         Token a2=null;
         Token act=null;
-        Token string_literal16=null;
-        Token char_literal17=null;
-        Token char_literal18=null;
+        Token string_literal12=null;
+        Token char_literal13=null;
+        Token char_literal14=null;
 
         Object a1_tree=null;
         Object a2_tree=null;
         Object act_tree=null;
-        Object string_literal16_tree=null;
-        Object char_literal17_tree=null;
-        Object char_literal18_tree=null;
+        Object string_literal12_tree=null;
+        Object char_literal13_tree=null;
+        Object char_literal14_tree=null;
 
         try {
             // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:53:2: ( ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT ) )
@@ -538,52 +540,56 @@ public TreeAdaptor getTreeAdaptor() {
                 case 1 :
                     // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:54:3: 'choose' '(' a1= IDENT a2= IDENT ')'
                     {
-                    string_literal16=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_action207); 
-                    string_literal16_tree = 
-                    (Object)adaptor.create(string_literal16)
+                    string_literal12=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_action219); 
+                    string_literal12_tree = 
+                    (Object)adaptor.create(string_literal12)
                     ;
-                    adaptor.addChild(root_0, string_literal16_tree);
+                    adaptor.addChild(root_0, string_literal12_tree);
 
 
-                    char_literal17=(Token)match(input,10,FOLLOW_10_in_action209); 
-                    char_literal17_tree = 
-                    (Object)adaptor.create(char_literal17)
+                    char_literal13=(Token)match(input,10,FOLLOW_10_in_action221); 
+                    char_literal13_tree = 
+                    (Object)adaptor.create(char_literal13)
                     ;
-                    adaptor.addChild(root_0, char_literal17_tree);
+                    adaptor.addChild(root_0, char_literal13_tree);
 
 
-                    a1=(Token)match(input,IDENT,FOLLOW_IDENT_in_action213); 
+                    a1=(Token)match(input,IDENT,FOLLOW_IDENT_in_action225); 
                     a1_tree = 
                     (Object)adaptor.create(a1)
                     ;
                     adaptor.addChild(root_0, a1_tree);
 
 
-                    a2=(Token)match(input,IDENT,FOLLOW_IDENT_in_action217); 
+                    a2=(Token)match(input,IDENT,FOLLOW_IDENT_in_action229); 
                     a2_tree = 
                     (Object)adaptor.create(a2)
                     ;
                     adaptor.addChild(root_0, a2_tree);
 
 
-                    char_literal18=(Token)match(input,11,FOLLOW_11_in_action219); 
-                    char_literal18_tree = 
-                    (Object)adaptor.create(char_literal18)
+                    char_literal14=(Token)match(input,11,FOLLOW_11_in_action231); 
+                    char_literal14_tree = 
+                    (Object)adaptor.create(char_literal14)
                     ;
-                    adaptor.addChild(root_0, char_literal18_tree);
+                    adaptor.addChild(root_0, char_literal14_tree);
 
+
+                     retval.action = new Action((a1!=null?a1.getText():null), (a2!=null?a2.getText():null),true); 
 
                     }
                     break;
                 case 2 :
                     // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:55:5: act= IDENT
                     {
-                    act=(Token)match(input,IDENT,FOLLOW_IDENT_in_action228); 
+                    act=(Token)match(input,IDENT,FOLLOW_IDENT_in_action241); 
                     act_tree = 
                     (Object)adaptor.create(act)
                     ;
                     adaptor.addChild(root_0, act_tree);
 
+
+                     retval.action = new Action((act!=null?act.getText():null)); 
 
                     }
                     break;
@@ -631,13 +637,13 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        Token IDENT19=null;
-        Token char_literal20=null;
-        Token VALUE21=null;
+        Token IDENT15=null;
+        Token char_literal16=null;
+        Token VALUE17=null;
 
-        Object IDENT19_tree=null;
-        Object char_literal20_tree=null;
-        Object VALUE21_tree=null;
+        Object IDENT15_tree=null;
+        Object char_literal16_tree=null;
+        Object VALUE17_tree=null;
 
         try {
             // /Volumes/Data/yennick/Documents/Studie/Construction/Workspace/Aliquam Pugnator/src/com/yennick/fighter/SAF.g:61:2: ( IDENT '=' VALUE )
@@ -646,29 +652,29 @@ public TreeAdaptor getTreeAdaptor() {
             root_0 = (Object)adaptor.nil();
 
 
-            IDENT19=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality251); 
-            IDENT19_tree = 
-            (Object)adaptor.create(IDENT19)
+            IDENT15=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality266); 
+            IDENT15_tree = 
+            (Object)adaptor.create(IDENT15)
             ;
-            adaptor.addChild(root_0, IDENT19_tree);
+            adaptor.addChild(root_0, IDENT15_tree);
 
 
-            char_literal20=(Token)match(input,12,FOLLOW_12_in_personality253); 
-            char_literal20_tree = 
-            (Object)adaptor.create(char_literal20)
+            char_literal16=(Token)match(input,12,FOLLOW_12_in_personality268); 
+            char_literal16_tree = 
+            (Object)adaptor.create(char_literal16)
             ;
-            adaptor.addChild(root_0, char_literal20_tree);
+            adaptor.addChild(root_0, char_literal16_tree);
 
 
-            VALUE21=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality255); 
-            VALUE21_tree = 
-            (Object)adaptor.create(VALUE21)
+            VALUE17=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality270); 
+            VALUE17_tree = 
+            (Object)adaptor.create(VALUE17)
             ;
-            adaptor.addChild(root_0, VALUE21_tree);
+            adaptor.addChild(root_0, VALUE17_tree);
 
 
 
-            			retval.personality = new Personality((IDENT19!=null?IDENT19.getText():null),Integer.parseInt((VALUE21!=null?VALUE21.getText():null))); 
+            			retval.personality = new Personality((IDENT15!=null?IDENT15.getText():null),Integer.parseInt((VALUE17!=null?VALUE17.getText():null))); 
             		
 
             }
@@ -709,21 +715,21 @@ public TreeAdaptor getTreeAdaptor() {
     public static final BitSet FOLLOW_action_in_behaviour138 = new BitSet(new long[]{0x0000000000000050L});
     public static final BitSet FOLLOW_action_in_behaviour142 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_14_in_behaviour144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_condition163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_condition171 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_condition173 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_condition_in_condition175 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_condition182 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_condition184 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_condition_in_condition186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_action207 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_action209 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_IDENT_in_action213 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_IDENT_in_action217 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_action219 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_action228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_personality251 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_personality253 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_VALUE_in_personality255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_condition165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_condition175 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_condition177 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_IDENT_in_condition181 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_condition191 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_condition193 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_IDENT_in_condition197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_action219 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_action221 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_IDENT_in_action225 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_IDENT_in_action229 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_action231 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_action241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_personality266 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_personality268 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_VALUE_in_personality270 = new BitSet(new long[]{0x0000000000000002L});
 
 }

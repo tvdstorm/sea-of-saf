@@ -6,18 +6,24 @@ import java.util.List;
 public class Behaviour {
 //	private Condition condition;
 	private final List<Condition> condition;
+	private final List<Action> action;
 //	private Action action;
 	
 	public Behaviour(){
 		this.condition = new ArrayList<Condition>();
+		this.action = new ArrayList<Action>();
 	}
 	
 	public void addCondition(Condition condition) {
 		this.condition.add(condition);
 	}
 	
+	public void addAction(Action action,Action action2) {
+		this.action.add(action);
+	}
+	
 	public String toString(){
-		return condition + "\n";
+		return condition +"["+ action + "]\n";
 	}
 	
 }
