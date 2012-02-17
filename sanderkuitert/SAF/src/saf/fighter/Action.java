@@ -2,45 +2,56 @@ package saf.fighter;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 
 class Action implements AST {
 
-	Move move;
-	Attack attack;
+	List<Move> moves;
+	List<Attack> attacks;
 
 	public Action(List<String> moves, List<String> attacks) {
-		if(moves.size()==1) {
-			this.move = new Move(moves.get(0));
-		} else {
-			this.move = new Move.UndecidedMove(moves);
+		this.moves = new LinkedList<Move>();
+		this.attacks = new LinkedList<Attack>();
+		for(String move: moves) {
+			this.moves.add(new Move(move));
 		}
-		if(attacks.size()==1) {
-			this.attack = new Attack(attacks.get(0));
-		} else {
-			this.attack = new Attack.UndecidedAttack(attacks);
+		for(String attack: attacks) {
+			this.attacks.add(new Attack(attack));
 		}
 	}
+	
+	/** Get random move and attack */
+	public MoveAndAttack getAction() {
+		assert moves.size()>0 && attacks.size()>0;
+		
+		Move move = moves.get(new Random().nextInt(moves.size()));
+		Attack attack = attacks.get(new Random().nextInt(attacks.size()));
+		
+		return new MoveAndAttack(move, attack);
+	}
 
-	public String getValue() {
-		return move.getValue() + ", " + attack.getValue(); //TODO ugly
+	public String getName() {
+		return "<"+moves+", "+attacks+">";
 	}
 
 	public List<AST> getChildren() {
 		LinkedList<AST> result = new LinkedList<AST>();
-		result.add(move);
-		result.add(attack);
+		result.addAll(moves);
+		result.addAll(attacks);
 		return result;
 	}
-	
-	public boolean isValidValue(String action) {
-		assert false: "Action can't be invalid";
-		return false;
-	}
 
-	public String describeValidValues() {
-		assert false: "Action doesn't have valid values";
-		return "";
+	
+	//=== Inner class ========================================================
+	public static class MoveAndAttack {
+		public final Move move;
+		public final Attack attack;
+		
+		public MoveAndAttack(Move move, Attack attack) {
+			this.move = move;
+			this.attack = attack;
+		}
 	}
 	
 }

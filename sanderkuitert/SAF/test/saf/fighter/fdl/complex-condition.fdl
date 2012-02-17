@@ -1,0 +1,4 @@
+ComplexCondition {
+	always [crouch punch_low]
+	(((weaker))) or (near or far) and (much_weaker or much_weaker or much_weaker) and much_stronger and near [crouch punch_low]
+}

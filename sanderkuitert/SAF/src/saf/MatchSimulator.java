@@ -14,7 +14,9 @@ public class MatchSimulator implements Runnable {
 	}
 
 	public void run() {
-		//TODO
+		assert fighter1 != null && fighter2 != null: "Fighters not initialized";
+		
+		
 	}
 	
 }

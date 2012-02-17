@@ -64,6 +64,7 @@ public class FDLReaderTest {
 	
 	@Test
 	public void testApplyAttributes_CheckCorrect() {
+		assertNull(testApplyAttributes("complex-condition.fdl"));
 		assertNull(testApplyAttributes("chicken.fdl"));
 		assertNull(testApplyAttributes("chuck.fdl"));
 		assertNull(testApplyAttributes("challenging.fdl"));
