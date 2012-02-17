@@ -29,7 +29,7 @@ public class SimpleArenaEngine implements IArenaEngine{
 	
 	public Boolean isTheCase(ICondition condition){//TODO: refactor with map: string -> Object/Class
 		if(condition.getNodeName().equals("far"))
-			return this.calculateDistance() > 10;
+			return this.calculateDistance() > 20;
 		else if(condition.getNodeName().equals("near"))
 			return this.calculateDistance() < 5;
 		/* Put the much_..... conditons before the .... conditions because of priority! */
@@ -60,13 +60,13 @@ public class SimpleArenaEngine implements IArenaEngine{
 		}
 		else{
 			if(action.getNodeName().equals("run_away")){
-				this.doMoveIfPossible(-2);
+				this.doMoveIfPossible(-7);
 			}else if(action.getNodeName().equals("walk_away")){
-				this.doMoveIfPossible(-1);
+				this.doMoveIfPossible(-2);
 			}else if(action.getNodeName().equals("walk_towards")){
-				this.doMoveIfPossible(1);
-			}else if(action.getNodeName().equals("run_towards")){
 				this.doMoveIfPossible(2);
+			}else if(action.getNodeName().equals("run_towards")){
+				this.doMoveIfPossible(7);
 			}
 			//if there is no 'special' MOVE action, so move action is will become stand.
 			this.currentFighter.setCurrentMoveState("stand");
@@ -110,6 +110,9 @@ public class SimpleArenaEngine implements IArenaEngine{
 //				
 //			}
 		}
+		
+		if(this.enemyFighter.getHealth() < 0)
+			this.enemyFighter.setHealth(0);
 		
 		this.currentFighter.setCurrentFightState(action.getNodeName());
 	}
