@@ -1,0 +1,376 @@
+/**
+ * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options{  JDK_VERSION = "1.5";  static = true;}PARSER_BEGIN(eg2)package SAFchecker;
+
+public class eg2{  public static void main(String args [])  {    System.out.println("Reading from standard input...");
+    System.out.println("Enter a SAF character description :");  
+    new eg2(System.in);
+    try
+    {
+      SimpleNode n = eg2.Start();
+      n.dump("");
+      System.out.println("Thank you.");
+    }
+    catch (Exception e)
+    {
+      System.out.println("Oops.");
+      System.out.println(e.getMessage());
+    }
+  }
+}
+
+PARSER_END(eg2)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| < "//" (~[ "\n", "\r" ])*
+    (
+      "\n"
+    | "\r"
+    | "\r\n"
+    ) >
+| < "/*" (~[ "*" ])* "*"
+    (
+      ~[ "/" ] (~[ "*" ])* "*"
+    )*
+    "/" >
+}
+
+TOKEN :
+{
+  < MOVE_ACTION :
+ 	 < MOVE_ACTION_TYPE >
+  >
+}
+
+TOKEN : /* LITERALS */
+{
+  < MOVE_ACTION_TYPE :
+  	 < WALK_TO > |
+  	 < WALK_AW > |
+  	 < RUN_TO >  |
+  	 < RUN_AW >  |
+  	 < JUMP >    |
+  	 < CROUCH >  |
+  	 < STAND >  
+	 
+  >
+| < #WALK_TO: "walk_towards" >
+| < #WALK_AW: "walk_away" >
+| < #RUN_TO:  "run_towards" >
+| < #RUN_AW:  "run_away" >
+| < #JUMP:    "jump" >
+| < #CROUCH:  "crouch" >
+| < #STAND:   "stand" >
+
+}
+
+TOKEN :
+{
+  < FIGHT_ACTION :
+ 	 < FIGHT_ACTION_TYPE >
+  >
+}
+
+TOKEN : /* LITERALS */
+{
+  < FIGHT_ACTION_TYPE :
+  	 < BLOCK_LOW >  |
+  	 < BLOCK_HIGH > |
+  	 < PUNCH_LOW >  |
+  	 < PUNCH_HIGH > |
+  	 < KICK_LOW >   |
+  	 < KICK_HIGH >  
+  	 
+  >
+| < #BLOCK_LOW:  "block_low" >
+| < #BLOCK_HIGH: "block_high" >
+| < #PUNCH_LOW:  "punch_low" >
+| < #PUNCH_HIGH: "punch_high" >
+| < #KICK_LOW:   "kick_low" >
+| < #KICK_HIGH:  "kick_high" >
+
+}
+
+TOKEN :
+{
+  < CONDITIONS :
+ 	 < CONDITION_TYPE >
+  >
+}
+
+TOKEN :
+{
+  < CONDITION_TYPE:
+     < ALWAYS >   |
+ 	 < NEAR >     |
+  	 < FAR >      |
+  	 < MUCH_STR > |
+  	 < STRONGER >  |
+  	 < EVEN >     |
+  	 < WEAKER >   |
+  	 < MUCH_WEA >
+
+ >
+| < #ALWAYS: "always" >
+| < #NEAR: "near" >
+| < #FAR: "far" >
+| < #MUCH_STR: "much_stronger" >
+| < #STRONGER: "stronger" >
+| < #EVEN: "even" >
+| < #WEAKER: "weaker" >
+| < #MUCH_WEA: "much_weaker" >
+}
+
+TOKEN : 
+{
+  < NUMBER :
+    < NUM >
+  >
+| < #NUM : [ "0"-"9" ] >
+}
+
+TOKEN :
+{
+	< CHARACTERISTICS:
+		< PUNCH_REACH >   |
+		< PUNCH_POWER >   |
+		< KICK_REACH >    |
+		< KICK_POWER >
+	>
+
+| <  #PUNCH_REACH: "punchReach" >
+| <  #PUNCH_POWER: "punchPower" >
+| <  #KICK_REACH: "kickReach" >
+| <  #KICK_POWER: "kickPower" >
+	
+}
+
+TOKEN :
+{
+	< CHOOSE:
+	< CH_WRD>
+	>
+| <  #CH_WRD: "choose" >
+}
+
+TOKEN :
+{
+	< AND:
+	< AND_WRD> 
+	>
+| <  #AND_WRD: "and" >
+
+}
+
+TOKEN :
+{
+	< OR:
+	< OR_WRD> 
+	>
+| <  #OR_WRD: "or" >
+
+}
+
+TOKEN :
+{
+	<LEFT_PARENTHESIS :
+	< LEFT_PAR >
+	>
+| <  #LEFT_PAR: ["("] >
+}
+TOKEN :
+{
+	<RIGHT_PARENTHESIS :
+	< RIGHT_PAR >
+	>
+| <  #RIGHT_PAR: [")"] >
+}
+
+TOKEN :
+{
+	<LEFT_SQBRACKET :
+	< LEFT_SQBR >
+	>
+| <  #LEFT_SQBR: ["["] >
+}
+TOKEN :
+{
+	<RIGHT_SQBRACKET :
+	< RIGHT_SQBR >
+	>
+| <  #RIGHT_SQBR: ["]"] >
+}
+
+TOKEN :
+{
+	<LEFT_CURLBRACKET :
+	< LEFT_CURLBR >
+	>
+| <  #LEFT_CURLBR: ["{"] >
+}
+TOKEN :
+{
+	<RIGHT_CURLBRACKET :
+	< RIGHT_CURLBR >
+	>
+| <  #RIGHT_CURLBR: ["}"] >
+}	
+
+TOKEN : /* IDENTIFIERS */
+{
+  < IDENTIFIER :
+    < LETTER >
+    (
+      < LETTER >
+    | < DIGIT >
+    )* >
+| < #LETTER : [ "_", "a"-"z", "A"-"Z" ] >
+| < #DIGIT : [ "0"-"9" ] >
+}
+
+SimpleNode Start() :
+{}
+{
+  Expression()
+  {
+    return jjtThis;
+  }
+}
+
+void Expression() :
+{}
+{
+  Identifier() LeftCURLBR() (Personality())* (Behaviour())* RightCURLBR() 
+}
+
+void Behaviour() :
+{}
+{
+	  conditionsWithAndOr() LeftSQBR() (MoveAction()|ChooseMoveAction()) (FightAction() | ChooseFightAction()) RightSQBR()
+}
+
+void Personality() :
+{}
+{
+	  Characteristics() "=" Number0_9()
+}
+
+void ChooseMoveAction() :
+{}
+{
+	 Choose() LeftParenthesis() MoveAction() MoveAction() RightParenthesis()
+}
+
+void ChooseFightAction() :
+{}
+{
+	 Choose() LeftParenthesis() FightAction() FightAction() RightParenthesis()
+}
+
+void Identifier() :
+{}
+{
+  < IDENTIFIER >
+}
+
+void MoveAction() :
+{}
+{
+  < MOVE_ACTION >
+}
+
+void FightAction() :
+{}
+{
+  < FIGHT_ACTION >
+}
+
+void Choose() :
+{}
+{
+  < CHOOSE >
+}
+
+void And() :
+{}
+{
+  < AND >
+}
+
+void Or() :
+{}
+{
+  < OR >
+}
+
+void Conditions():
+{}
+{
+  < CONDITIONS >
+}
+
+void conditiondAndOr():
+{}
+{
+	( ( Or() | And() ) Conditions() )*
+}
+
+void conditionsWithAndOr():
+{}
+{
+	Conditions() conditiondAndOr()
+}
+
+void Number0_9():
+{}
+{
+  < NUMBER >
+}
+
+
+void LeftParenthesis():
+{}
+{
+  < LEFT_PARENTHESIS >
+}
+
+void RightParenthesis():
+{}
+{
+  < RIGHT_PARENTHESIS >
+}
+
+void LeftSQBR():
+{}
+{
+  < LEFT_SQBRACKET >
+}
+
+void RightSQBR():
+{}
+{
+  < RIGHT_SQBRACKET >
+}
+
+void LeftCURLBR():
+{}
+{
+  < LEFT_CURLBRACKET >
+}
+
+void RightCURLBR():
+{}
+{
+  < RIGHT_CURLBRACKET >
+}
+
+void Characteristics():
+{}
+{
+  < CHARACTERISTICS >
+}
