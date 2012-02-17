@@ -1,18 +1,32 @@
 package com.yennick.fighter.bot;
 
 public class Condition {
-	private final String condition;
+	private final String first;
+	private final String second;
+	private final String type;
 	
-	public Condition(String condition){
-		this.condition = condition;
+	public Condition(String first,String second,String type){
+		this.first = first;
+		this.second = second;
+		this.type = type;
 	}
 	
-	public String getCondition(){
-		return condition;
+	public Condition(){
+		this.first = "";
+		this.second = null;
+		this.type = null;
+	}
+	public Condition(String first){
+		this.first = first;
+		this.second = null;
+		this.type = null;
+	}
+	public String getFirst(){
+		return first;
 	}
 	
 	public String toString(){
-		return condition + "\n";		
+		return (type != null)?first + " - "+ type +" - " + second + "\n" : first +"\n";		
 	}
 
 }

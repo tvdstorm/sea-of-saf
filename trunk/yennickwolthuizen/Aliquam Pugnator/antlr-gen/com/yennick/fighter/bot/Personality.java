@@ -8,7 +8,7 @@ public class Personality {
 		this.characteristic = characteristic;
 		this.value = value;
 	}
-
+	
 	public int getValue() {
 		return value;
 	}

@@ -27,14 +27,33 @@ public class Bot{
 		this.behaviour.add(behaviour);
 	}
 	
-//	private String getAllPersonalities 
+	private int getPersonality(String getP) {
+		for(Personality pers: this.personality){
+			if(pers.getCharacteristic() == getP)
+				return pers.getValue();
+		}
+		return 5;
+	}
+
+	private double getWeight(){
+		return (this.getPersonality("punchPower")+this.getPersonality("kickPower")) /2;
+	}
+	
+	private double getHeight(){
+		return (this.getPersonality("puchReach")+this.getPersonality("kickReach")) /2;
+	}
+	
+	public double getSpeed(){
+		return 0.5*(getHeight() - getWeight()) ;
+	}
+
+	
+	
 	public String toString(){
 		return fighterName + "\n" +
 				this.personality.toString()  + "\n" +
-				this.behaviour.toString()
-				;
-		
-		
+				this.behaviour.toString();
 	}
+
 	
 }

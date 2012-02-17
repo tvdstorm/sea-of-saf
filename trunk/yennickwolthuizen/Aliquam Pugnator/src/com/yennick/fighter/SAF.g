@@ -27,7 +27,7 @@ fighter returns [Bot fighter]
 			|behaviour {$fighter.addBehaviour($behaviour.behaviour);})* 
 		'}'
 		{
-			System.out.println("FighterName:  " + $fighter.toString()); 
+			System.out.println( $fighter.toString()); 
 		}
 	;
 
@@ -37,22 +37,22 @@ behaviour returns [Behaviour behaviour]
 			$behaviour = new Behaviour(); 
 		}
 		(condition {$behaviour.addCondition($condition.condition);} )
-		 '[' a1=action a2=action ']'
+		 '[' a1=action a2=action ']' {$behaviour.addAction($a1.action,$a2.action);}
 		
 	;
 
 
 condition returns [Condition condition]
 	: IDENT { $condition = new Condition($IDENT.text); }
-		| IDENT 'or' condition 
-		| IDENT 'and' condition 
+		| first=IDENT 'or' second=IDENT { $condition = new Condition($first.text,$second.text,"or"); }
+		| first=IDENT 'and' second=IDENT { $condition = new Condition($first.text,$second.text,"and"); }
 	;
 
 
 action returns [Action action]
 	:	(
-		'choose' '(' a1=IDENT a2=IDENT ')' 
-		| act=IDENT
+		'choose' '(' a1=IDENT a2=IDENT ')' { $action = new Action($a1.text, $a2.text,true); }
+		| act=IDENT { $action = new Action($act.text); }
 		)
  	;
 	
