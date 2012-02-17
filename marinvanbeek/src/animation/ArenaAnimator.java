@@ -17,6 +17,8 @@ import javax.swing.ImageIcon;
 
 public class ArenaAnimator extends JFrame
 {
+    public static final long serialVersionUID = 1L;
+
     public static final int ARENA_WIDTH = 256;
     public static final int ARENA_HEIGHT = 256;
     public static final int ANIMATION_DELAY_MS = 500;
@@ -48,6 +50,8 @@ public class ArenaAnimator extends JFrame
             leftAnimator.animateNext();
             rightAnimator.animateNext();
 
+            System.out.print(">");
+
             try
             {
                 Thread.currentThread().sleep(ANIMATION_DELAY_MS);
@@ -58,6 +62,7 @@ public class ArenaAnimator extends JFrame
                                    e.getMessage());
             }
         }
+        System.out.println();
     }
 
     public void bufferTimeStep(Fighter leftFighter, Fighter rightFighter)

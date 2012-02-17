@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 
 public class FighterSprites
 {
-    public static final String RESOURCE_LOCATION = "../../resources/";
+    public static final String RESOURCE_LOCATION = "resources/";
     public static final String IMG_EXTENSION = ".png";
     public static final List<String> IMG_NAMES = Collections.unmodifiableList(
             Arrays.asList("start.png",
