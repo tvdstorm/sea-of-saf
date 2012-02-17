@@ -1,9 +1,14 @@
 package saf.fighter;
 
+import java.util.List;
+
 
 interface AST {
-	
-	public String validPropertyValues();
-	public boolean isValid(String attribute); //TODO don't limit arguments?
+
+	public String getValue(); //All nodes should at least have a String representation
+	public List<AST> getChildren();
+
+//	public String describeValidValues();			//now static
+//	public boolean isValidValue(String attribute);	//now static
 	
 }
