@@ -1,6 +1,7 @@
 package saf.interpreter;
 
 import java.lang.reflect.*;
+
 import saf.ast.*;
 import saf.ast.condition.*;
 import saf.ast.definition.*;
@@ -68,9 +69,9 @@ public class Interpreter implements FighterVisitor
 	public void visit(Action function) {
 		if (function.getName().equals("choose")) {
 			Random random = new Random();
-			int index = random.nextInt(function.getParameters().size());
-			Action randomFunction = function.getParameters().get(index);
-			visit(randomFunction);
+			int index = random.nextInt(function.getProcedures().size());
+			Procedure randomFunction = function.getProcedures().get(index);
+			randomFunction.accept(this);
 		} else {
 			bot.invokeMethod(function.getName());
 		}
@@ -82,5 +83,17 @@ public class Interpreter implements FighterVisitor
 		Behaviour behaviour = this.satisfiedBehaviours.get(index);
 		behaviour.getMove().accept(this);
 		behaviour.getAttack().accept(this);
+	}
+
+	@Override
+	public void visit(Choose choose) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Method method) {
+		// TODO Auto-generated method stub
+		
 	}
 }

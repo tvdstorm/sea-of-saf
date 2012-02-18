@@ -1,15 +1,8 @@
 package saf.ast.definition;
 
-import java.util.*;
 import saf.ast.*;
-import saf.checker.*;
-import saf.interpreter.*;
 
-public class Action implements ASTNode {
-	List<Action> parameters;
-	public List<Action> getParameters() {
-		return this.parameters;
-	}
+public class Action extends Procedure {
 	
 	private String name;
 	public String getName() {
@@ -27,7 +20,6 @@ public class Action implements ASTNode {
 	
 	public Action(String name) {
 		this.name = name;
-		parameters = new ArrayList<Action>();
 	}
 	
 	public boolean equals(Object obj) {

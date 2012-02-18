@@ -65,7 +65,7 @@ public class Arena extends Observable {
 		this.initializeBots();
 		for (Bot bot : bots) {
 			CheckerVisitor checker = new CheckerVisitor(bot.getFighter());
-			checker.visitAllAstStatements();
+			checker.visitAllASTNodes();
 			if (checker.getErrors().size() > 0) {
 				System.out.println("Saf specification contains errors...");
 				for ( String error : checker.getErrors() ) {
