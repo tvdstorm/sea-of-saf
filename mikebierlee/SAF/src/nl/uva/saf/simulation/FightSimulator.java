@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.uva.saf.fdl.types.FightActionType;
 import nl.uva.saf.fdl.types.MoveActionType;
 
 public class FightSimulator implements IFightSimulator {
@@ -23,17 +24,22 @@ public class FightSimulator implements IFightSimulator {
 			return;
 		}
 
-		Vector2d bluePosition = blueContestant.getPosition();
-		Vector2d redPosition = redContestant.getPosition();
+		if (fightInProgress) {
+			Vector2d bluePosition = blueContestant.getPosition();
+			Vector2d redPosition = redContestant.getPosition();
 
-		bluePosition.add(new Vector2d(0.5, 0));
-		redPosition.substract(new Vector2d(0.5, 0));
+			bluePosition.add(new Vector2d(0.5, 0));
+			redPosition.substract(new Vector2d(0.5, 0));
 
-		blueContestant.deductHealth(2);
-		redContestant.deductHealth(1);
-		
-		blueContestant.setMoveAction(MoveActionType.jump);
-		redContestant.setMoveAction(MoveActionType.crouch);
+			blueContestant.deductHealth(2);
+			redContestant.deductHealth(1);
+
+			blueContestant.setMoveAction(MoveActionType.crouch);
+			redContestant.setMoveAction(MoveActionType.stand);
+
+			blueContestant.setFightAction(FightActionType.block_low);
+			redContestant.setFightAction(FightActionType.block_high);
+		}
 	}
 
 	@Override
