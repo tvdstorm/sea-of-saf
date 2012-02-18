@@ -69,8 +69,6 @@ public class Engine
 		
 		boolean a = _fighterA.getDamage(doDamage(_fighterB, combatmoveB, combatmoveA, distance));
 		boolean b = _fighterB.getDamage(doDamage(_fighterA, combatmoveA, combatmoveB, distance));
-		System.out.println("Fighter A: "+combatmoveA._movement+" "+combatmoveA._action);
-		System.out.println("Fighter B: "+combatmoveB._movement+" "+combatmoveB._action);
 		
 		return a||b;
 
