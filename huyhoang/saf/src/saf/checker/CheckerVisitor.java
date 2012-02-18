@@ -91,7 +91,6 @@ public class CheckerVisitor implements FighterVisitor
 	
 	private void checkVisitedFunctionsForKeywordValidity(String expected) {
 		for ( Action action : visitedActions ) {
-			System.out.println(action.getClass());
 			if (action.getKeywordType() != null && !action.getKeywordType().equals(expected)) {
 				getErrors().add(String.format("'%s' is a '%s' keyword. A 'choose' keyword or '%s' keyword was expected",
 										 	  action.getName(),

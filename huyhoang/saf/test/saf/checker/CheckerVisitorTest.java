@@ -7,6 +7,10 @@ import saf.checker.CheckerVisitor;
 import saf.ast.*;
 import saf.parser.Parser;
 import saf.parser.ParseException;
+import saf.ast.condition.Condition;
+import saf.ast.definition.Action;
+import saf.ast.definition.Behaviour;
+import saf.ast.definition.Procedure;
 import saf.ast.definition.Strength;
 
 public class CheckerVisitorTest {
@@ -106,5 +110,24 @@ public class CheckerVisitorTest {
 				assertEquals(2, checker.getErrors().size());
 			}
 		}
+	}
+	
+	@Test
+	public void testInvalidActionNode() {
+		Fighter fighter = new Fighter("TerranGhost");
+		
+		Condition condition = new Condition("always");
+		Procedure move = new Action("jump");
+		move.getProcedures().add(new Action("very high"));
+		Procedure attack = new Action("kickHigh");
+		Behaviour behaviour = new Behaviour(condition, move, attack);
+		fighter.getDefinitions().add(behaviour);
+		
+		CheckerVisitor checker = new CheckerVisitor(fighter);
+		checker.visitAllASTNodes();
+		
+		assertEquals(1, checker.getErrors().size());
+		
+		assertTrue(checker.getErrors().get(0).matches("The action 'jump' does not accept any parameters"));
 	}
 }
