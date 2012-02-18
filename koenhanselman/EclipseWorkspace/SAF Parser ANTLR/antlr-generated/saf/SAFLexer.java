@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g 2012-01-31 13:27:02
+// $ANTLR 3.4 C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g 2012-02-17 02:38:24
 
   package saf;
 
@@ -11,18 +11,20 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFLexer extends Lexer {
     public static final int EOF=-1;
-    public static final int T__14=14;
-    public static final int T__15=15;
-    public static final int DIGIT=4;
-    public static final int IDENT=5;
-    public static final int LEFT_BRACK=6;
-    public static final int LEFT_CURLY=7;
-    public static final int LEFT_PAREN=8;
-    public static final int LETTER=9;
-    public static final int RIGHT_BRACK=10;
-    public static final int RIGHT_CURLY=11;
-    public static final int RIGHT_PAREN=12;
-    public static final int WS=13;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int AND=4;
+    public static final int DIGIT=5;
+    public static final int IDENT=6;
+    public static final int LEFT_BRACK=7;
+    public static final int LEFT_CURLY=8;
+    public static final int LEFT_PAREN=9;
+    public static final int LETTER=10;
+    public static final int OR=11;
+    public static final int RIGHT_BRACK=12;
+    public static final int RIGHT_CURLY=13;
+    public static final int RIGHT_PAREN=14;
+    public static final int WS=15;
 
     // delegates
     // delegators
@@ -39,10 +41,10 @@ public class SAFLexer extends Lexer {
     }
     public String getGrammarFileName() { return "C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g"; }
 
-    // $ANTLR start "T__14"
-    public final void mT__14() throws RecognitionException {
+    // $ANTLR start "T__16"
+    public final void mT__16() throws RecognitionException {
         try {
-            int _type = T__14;
+            int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:11:7: ( '=' )
             // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:11:9: '='
@@ -58,12 +60,12 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__14"
+    // $ANTLR end "T__16"
 
-    // $ANTLR start "T__15"
-    public final void mT__15() throws RecognitionException {
+    // $ANTLR start "T__17"
+    public final void mT__17() throws RecognitionException {
         try {
-            int _type = T__15;
+            int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:12:7: ( 'choose' )
             // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:12:9: 'choose'
@@ -81,15 +83,15 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__15"
+    // $ANTLR end "T__17"
 
     // $ANTLR start "LEFT_CURLY"
     public final void mLEFT_CURLY() throws RecognitionException {
         try {
             int _type = LEFT_CURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:43:12: ( '{' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:43:14: '{'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:85:12: ( '{' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:85:14: '{'
             {
             match('{'); 
 
@@ -109,8 +111,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = RIGHT_CURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:44:13: ( '}' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:44:15: '}'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:86:13: ( '}' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:86:15: '}'
             {
             match('}'); 
 
@@ -130,8 +132,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = LEFT_BRACK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:45:12: ( '[' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:45:14: '['
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:87:12: ( '[' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:87:14: '['
             {
             match('['); 
 
@@ -151,8 +153,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = RIGHT_BRACK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:46:13: ( ']' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:46:15: ']'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:88:13: ( ']' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:88:15: ']'
             {
             match(']'); 
 
@@ -172,8 +174,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = LEFT_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:47:12: ( '(' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:47:14: '('
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:89:12: ( '(' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:89:14: '('
             {
             match('('); 
 
@@ -193,8 +195,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = RIGHT_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:48:13: ( ')' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:48:15: ')'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:90:13: ( ')' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:90:15: ')'
             {
             match(')'); 
 
@@ -214,7 +216,7 @@ public class SAFLexer extends Lexer {
         try {
             int _type = LETTER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:50:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:92:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
             // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -243,7 +245,7 @@ public class SAFLexer extends Lexer {
         try {
             int _type = DIGIT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:51:7: ( '0' .. '9' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:93:7: ( '0' .. '9' )
             // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:
             {
             if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
@@ -267,18 +269,64 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "DIGIT"
 
+    // $ANTLR start "AND"
+    public final void mAND() throws RecognitionException {
+        try {
+            int _type = AND;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:95:5: ( 'and' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:95:7: 'and'
+            {
+            match("and"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "AND"
+
+    // $ANTLR start "OR"
+    public final void mOR() throws RecognitionException {
+        try {
+            int _type = OR;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:96:4: ( 'or' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:96:6: 'or'
+            {
+            match("or"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "OR"
+
     // $ANTLR start "IDENT"
     public final void mIDENT() throws RecognitionException {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:53:7: ( LETTER ( LETTER | DIGIT | '_' )* )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:53:9: LETTER ( LETTER | DIGIT | '_' )*
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:98:7: ( LETTER ( LETTER | DIGIT | '_' )* )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:98:9: LETTER ( LETTER | DIGIT | '_' )*
             {
             mLETTER(); 
 
 
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:53:16: ( LETTER | DIGIT | '_' )*
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:98:16: ( LETTER | DIGIT | '_' )*
             loop1:
             do {
                 int alt1=2;
@@ -328,10 +376,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:54:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:54:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:99:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:99:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             {
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:54:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:99:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             int cnt2=0;
             loop2:
             do {
@@ -370,7 +418,7 @@ public class SAFLexer extends Lexer {
             } while (true);
 
 
-            _channel = HIDDEN;
+             _channel = HIDDEN; 
 
             }
 
@@ -384,8 +432,8 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:8: ( T__14 | T__15 | LEFT_CURLY | RIGHT_CURLY | LEFT_BRACK | RIGHT_BRACK | LEFT_PAREN | RIGHT_PAREN | LETTER | DIGIT | IDENT | WS )
-        int alt3=12;
+        // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:8: ( T__16 | T__17 | LEFT_CURLY | RIGHT_CURLY | LEFT_BRACK | RIGHT_BRACK | LEFT_PAREN | RIGHT_PAREN | LETTER | DIGIT | AND | OR | IDENT | WS )
+        int alt3=14;
         switch ( input.LA(1) ) {
         case '=':
             {
@@ -397,41 +445,41 @@ public class SAFLexer extends Lexer {
             switch ( input.LA(2) ) {
             case 'h':
                 {
-                int LA3_12 = input.LA(3);
+                int LA3_14 = input.LA(3);
 
-                if ( (LA3_12=='o') ) {
-                    int LA3_15 = input.LA(4);
+                if ( (LA3_14=='o') ) {
+                    int LA3_19 = input.LA(4);
 
-                    if ( (LA3_15=='o') ) {
-                        int LA3_16 = input.LA(5);
+                    if ( (LA3_19=='o') ) {
+                        int LA3_22 = input.LA(5);
 
-                        if ( (LA3_16=='s') ) {
-                            int LA3_17 = input.LA(6);
+                        if ( (LA3_22=='s') ) {
+                            int LA3_24 = input.LA(6);
 
-                            if ( (LA3_17=='e') ) {
-                                int LA3_18 = input.LA(7);
+                            if ( (LA3_24=='e') ) {
+                                int LA3_25 = input.LA(7);
 
-                                if ( ((LA3_18 >= '0' && LA3_18 <= '9')||(LA3_18 >= 'A' && LA3_18 <= 'Z')||LA3_18=='_'||(LA3_18 >= 'a' && LA3_18 <= 'z')) ) {
-                                    alt3=11;
+                                if ( ((LA3_25 >= '0' && LA3_25 <= '9')||(LA3_25 >= 'A' && LA3_25 <= 'Z')||LA3_25=='_'||(LA3_25 >= 'a' && LA3_25 <= 'z')) ) {
+                                    alt3=13;
                                 }
                                 else {
                                     alt3=2;
                                 }
                             }
                             else {
-                                alt3=11;
+                                alt3=13;
                             }
                         }
                         else {
-                            alt3=11;
+                            alt3=13;
                         }
                     }
                     else {
-                        alt3=11;
+                        alt3=13;
                     }
                 }
                 else {
-                    alt3=11;
+                    alt3=13;
                 }
                 }
                 break;
@@ -498,7 +546,7 @@ public class SAFLexer extends Lexer {
             case 'y':
             case 'z':
                 {
-                alt3=11;
+                alt3=13;
                 }
                 break;
             default:
@@ -537,6 +585,201 @@ public class SAFLexer extends Lexer {
             alt3=8;
             }
             break;
+        case 'a':
+            {
+            switch ( input.LA(2) ) {
+            case 'n':
+                {
+                int LA3_17 = input.LA(3);
+
+                if ( (LA3_17=='d') ) {
+                    int LA3_20 = input.LA(4);
+
+                    if ( ((LA3_20 >= '0' && LA3_20 <= '9')||(LA3_20 >= 'A' && LA3_20 <= 'Z')||LA3_20=='_'||(LA3_20 >= 'a' && LA3_20 <= 'z')) ) {
+                        alt3=13;
+                    }
+                    else {
+                        alt3=11;
+                    }
+                }
+                else {
+                    alt3=13;
+                }
+                }
+                break;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'E':
+            case 'F':
+            case 'G':
+            case 'H':
+            case 'I':
+            case 'J':
+            case 'K':
+            case 'L':
+            case 'M':
+            case 'N':
+            case 'O':
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+            case 'T':
+            case 'U':
+            case 'V':
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+            case '_':
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'd':
+            case 'e':
+            case 'f':
+            case 'g':
+            case 'h':
+            case 'i':
+            case 'j':
+            case 'k':
+            case 'l':
+            case 'm':
+            case 'o':
+            case 'p':
+            case 'q':
+            case 'r':
+            case 's':
+            case 't':
+            case 'u':
+            case 'v':
+            case 'w':
+            case 'x':
+            case 'y':
+            case 'z':
+                {
+                alt3=13;
+                }
+                break;
+            default:
+                alt3=9;
+            }
+
+            }
+            break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            {
+            alt3=10;
+            }
+            break;
+        case 'o':
+            {
+            switch ( input.LA(2) ) {
+            case 'r':
+                {
+                int LA3_18 = input.LA(3);
+
+                if ( ((LA3_18 >= '0' && LA3_18 <= '9')||(LA3_18 >= 'A' && LA3_18 <= 'Z')||LA3_18=='_'||(LA3_18 >= 'a' && LA3_18 <= 'z')) ) {
+                    alt3=13;
+                }
+                else {
+                    alt3=12;
+                }
+                }
+                break;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            case 'A':
+            case 'B':
+            case 'C':
+            case 'D':
+            case 'E':
+            case 'F':
+            case 'G':
+            case 'H':
+            case 'I':
+            case 'J':
+            case 'K':
+            case 'L':
+            case 'M':
+            case 'N':
+            case 'O':
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+            case 'T':
+            case 'U':
+            case 'V':
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+            case '_':
+            case 'a':
+            case 'b':
+            case 'c':
+            case 'd':
+            case 'e':
+            case 'f':
+            case 'g':
+            case 'h':
+            case 'i':
+            case 'j':
+            case 'k':
+            case 'l':
+            case 'm':
+            case 'n':
+            case 'o':
+            case 'p':
+            case 'q':
+            case 's':
+            case 't':
+            case 'u':
+            case 'v':
+            case 'w':
+            case 'x':
+            case 'y':
+            case 'z':
+                {
+                alt3=13;
+                }
+                break;
+            default:
+                alt3=9;
+            }
+
+            }
+            break;
         case 'A':
         case 'B':
         case 'C':
@@ -563,7 +806,6 @@ public class SAFLexer extends Lexer {
         case 'X':
         case 'Y':
         case 'Z':
-        case 'a':
         case 'b':
         case 'd':
         case 'e':
@@ -576,7 +818,6 @@ public class SAFLexer extends Lexer {
         case 'l':
         case 'm':
         case 'n':
-        case 'o':
         case 'p':
         case 'q':
         case 'r':
@@ -589,28 +830,14 @@ public class SAFLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            int LA3_9 = input.LA(2);
+            int LA3_12 = input.LA(2);
 
-            if ( ((LA3_9 >= '0' && LA3_9 <= '9')||(LA3_9 >= 'A' && LA3_9 <= 'Z')||LA3_9=='_'||(LA3_9 >= 'a' && LA3_9 <= 'z')) ) {
-                alt3=11;
+            if ( ((LA3_12 >= '0' && LA3_12 <= '9')||(LA3_12 >= 'A' && LA3_12 <= 'Z')||LA3_12=='_'||(LA3_12 >= 'a' && LA3_12 <= 'z')) ) {
+                alt3=13;
             }
             else {
                 alt3=9;
             }
-            }
-            break;
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            {
-            alt3=10;
             }
             break;
         case '\t':
@@ -619,7 +846,7 @@ public class SAFLexer extends Lexer {
         case '\r':
         case ' ':
             {
-            alt3=12;
+            alt3=14;
             }
             break;
         default:
@@ -632,17 +859,17 @@ public class SAFLexer extends Lexer {
 
         switch (alt3) {
             case 1 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:10: T__14
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:10: T__16
                 {
-                mT__14(); 
+                mT__16(); 
 
 
                 }
                 break;
             case 2 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:16: T__15
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:16: T__17
                 {
-                mT__15(); 
+                mT__17(); 
 
 
                 }
@@ -712,15 +939,31 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:104: IDENT
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:104: AND
+                {
+                mAND(); 
+
+
+                }
+                break;
+            case 12 :
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:108: OR
+                {
+                mOR(); 
+
+
+                }
+                break;
+            case 13 :
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:111: IDENT
                 {
                 mIDENT(); 
 
 
                 }
                 break;
-            case 12 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:110: WS
+            case 14 :
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:117: WS
                 {
                 mWS(); 
 
