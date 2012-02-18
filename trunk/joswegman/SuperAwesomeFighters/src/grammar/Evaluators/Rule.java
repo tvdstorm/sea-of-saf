@@ -37,7 +37,7 @@ public class Rule implements Visitable {
    }
    
    public List<Condition> getConditionList() {
-	return this.conditionList;
+	   return this.conditionList;
    }
    
    @Override
