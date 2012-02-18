@@ -12,7 +12,7 @@ public class Characteristic extends Check {
 	}
 
 	//Power
-	private int power;
+	private final int power;
 		
 	public int getPower() {
 		return power;
