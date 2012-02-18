@@ -14,7 +14,7 @@ public class Bot implements Visitable {
 	}
 	
 	public double getSpeed(){
-		return speed;
+		return this.speed;
 	}
 	public void setSpeed(double speed){
 		this.speed = speed;

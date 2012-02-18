@@ -16,12 +16,6 @@ import org.junit.Test;
 
 public class BotParseTest {
 
-	@Test
-	public void test() {
-		assert(true);
-		//fail(" Is implemented");
-	}
-	
 	
 	@Test
 	public void testCheckerVisitor_MissingAlwaysKeyword() throws IOException, RecognitionException {

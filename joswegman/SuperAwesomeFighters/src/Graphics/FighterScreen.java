@@ -215,8 +215,10 @@ public class FighterScreen extends JFrame implements ActionListener{
 		bRight = getBot(txtBotRight.getText());
 		lblLifeBotLeft.setText("100 %");
 		lblLifeBotRight.setText("100 %");
+		if( !(bLeft == null)&& !(bRight== null)) {
 		fight = new Fight (bLeft,bRight);
 		timer.start();
+		}
 	}
 
 	private void doFight(Bot bLeft,Bot bRight){
@@ -243,9 +245,7 @@ public class FighterScreen extends JFrame implements ActionListener{
 	
 	private void drawFighters(Fight fight){
 		fighterLeft.setIcon(fightimages.getImage(fight.getCurrentFightAction(true)+"Left"));
-		System.out.println(fighterLeft.getIcon().toString());
 		fighterRight.setIcon(fightimages.getImage(fight.getCurrentFightAction(false)+"Right"));
-		System.out.println(fighterRight.getIcon().toString());
 		
 		fighterLeft.setBounds(fight.getPositionLeft(),10,166,379);
 		if (fight.getPositionLeft()+ 166 > fight.getPositionRight()){

@@ -200,9 +200,9 @@ public class Fight {
 		this.setStatusLeft(calculateStrengthDif(this.lifeLeft,this.lifeRight));
 		this.setStatusRight(calculateStrengthDif(this.lifeRight,this.lifeLeft));
 		this.distance = this.positionRight - this.positionLeft;
-		this.currentMoveLeft = getAction(botLeft,this.statusLeft,true);
-		this.currentMoveRight = getAction(botRight,this.statusRight, true);
-		this.currentFightLeft = getAction(botLeft,this.statusLeft, false);
+		this.currentMoveLeft   = getAction(botLeft,this.statusLeft,true);
+		this.currentMoveRight  = getAction(botRight,this.statusRight, true);
+		this.currentFightLeft  = getAction(botLeft,this.statusLeft, false);
 		this.currentFightRight = getAction(botRight, this.statusRight, false);
 		calculateLife(this.currentFightLeft, this.currentFightRight);
 		calculatePositions(this.currentMoveLeft,this.currentMoveRight);
@@ -210,10 +210,10 @@ public class Fight {
 	
 	public void calculateLife(InputRule irl, InputRule irr){
 		if (this.distance <= 10) {
-			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("kick"))) { this.lifeLeft -= 5 * this.botLeft.getSpeed() ;}
-			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft -= 3 * this.botLeft.getSpeed();}
-			if ((irl.getInputrule(true).contains("block"))  && (irr.getInputrule(true).contains("kick"))) { this.lifeLeft -= 3 * this.botLeft.getSpeed();}
-			if ((irl.getInputrule(true).contains("block"))  && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft -= 1 * this.botLeft.getSpeed();}
+			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("kick"))) { this.lifeLeft  -= 5 * this.botLeft.getSpeed() ;}
+			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft  -= 3 * this.botLeft.getSpeed();}
+			if ((irl.getInputrule(true).contains("block"))  && (irr.getInputrule(true).contains("kick"))) { this.lifeLeft  -= 3 * this.botLeft.getSpeed();}
+			if ((irl.getInputrule(true).contains("block"))  && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft  -= 1 * this.botLeft.getSpeed();}
 			if ((!irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("kick"))) { this.lifeRight -= 5 * this.botRight.getSpeed();}
 			if ((!irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("punch"))){ this.lifeRight -= 3 * this.botRight.getSpeed();}
 			if ((irr.getInputrule(true).contains("block"))  && (irl.getInputrule(true).contains("kick"))) { this.lifeRight -= 3 * this.botRight.getSpeed();}
@@ -222,7 +222,7 @@ public class Fight {
 	}
 	
 	public void calculatePositions(InputRule irl, InputRule irr){
-		this.positionLeft  = this.positionLeft +  calcMove(irl.getInputrule(true));
+		this.positionLeft  = this.positionLeft  + calcMove(irl.getInputrule(true));
 		this.positionRight = this.positionRight - calcMove(irr.getInputrule(true));
 	}
 	
