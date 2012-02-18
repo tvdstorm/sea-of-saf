@@ -11,7 +11,7 @@ public class Personality extends Check  {
 	}
 	
 	//Behaviour
-	private List<Characteristic> personality;
+	private final List<Characteristic> personality;
 	
 	public List<Characteristic> getBehaviour() {
 		return personality;

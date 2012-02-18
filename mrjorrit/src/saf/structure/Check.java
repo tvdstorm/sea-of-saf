@@ -21,4 +21,18 @@ public abstract class Check {
 	{
 		this.errors.addAll(errors);
 	}
+	
+	public boolean hasErrors()
+	{
+		errors = check();
+		if(errors.size() == 0)
+			return false;
+		
+		for(String error : errors)
+		{
+			System.out.println(error);
+		}
+		
+		return true;
+	}
 }

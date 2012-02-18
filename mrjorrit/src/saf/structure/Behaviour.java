@@ -10,7 +10,7 @@ public class Behaviour extends Check {
 	}
 	
 	//Behaviour
-	private List<Rule> behaviour;
+	private final List<Rule> behaviour;
 	
 	public List<Rule> getBehaviour() {
 		return behaviour;

@@ -1,8 +1,7 @@
 ChuckNorris{
-	instantWin = true
 	kickPower = 10
 	punchPower = 10
 	kickReach = 10
 	punchReach = 10
-	always[walk_towards roundhouse_kick]
+	always[walk_towards punch_high]
 }

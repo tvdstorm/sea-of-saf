@@ -3,8 +3,14 @@ package saf.structure;
 import java.util.List;
 
 public abstract class LogicalClause extends Logical {
-	protected Logical leftHandSide = null;
-	protected Logical rightHandSide = null;
+	private final Logical leftHandSide;
+	private final Logical rightHandSide;
+	
+	protected LogicalClause(Logical leftHandSide, Logical rightHandSide)
+	{
+		this.leftHandSide = leftHandSide;
+		this.rightHandSide = rightHandSide;
+	}
 	
 	public Logical getLeftHandSide() {
 		return leftHandSide;
