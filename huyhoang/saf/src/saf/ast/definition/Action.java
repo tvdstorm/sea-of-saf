@@ -21,18 +21,6 @@ public class Action extends Procedure {
 	public Action(String name) {
 		this.name = name;
 	}
-	
-	public boolean equals(Object obj) {
-		if (obj instanceof Action)
-		{
-			Action function = (Action)obj;
-			return this.name.equals(function.name);
-		}
-		else
-		{
-			return false;
-		}
-	}
 
 	@Override
 	public void accept(FighterVisitor visitor) {
