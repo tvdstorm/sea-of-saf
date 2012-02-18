@@ -10,16 +10,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 
+import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-//import javax.swing.Timer;
+import javax.swing.Timer;
 
 import java.awt.Component;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,9 +50,9 @@ public class FighterScreen extends JFrame implements ActionListener{
 	private Bot bLeft;
 	private Bot bRight;
 	
-	//private Timer _timer;
+	private Timer timer;
 	FightImages fightimages = new FightImages();
-	
+	Fight fight;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -65,12 +67,13 @@ public class FighterScreen extends JFrame implements ActionListener{
 	}
 
 	public FighterScreen() {
+		timer = new Timer(100,this);
 		FightImages fightimages = new FightImages();
 		setTitle("Super Fighters");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		cPanel = new JPanel();
-		//cPanel.setBorder(new EmptyBorder(10, 20, 10, 10));
+		cPanel.setBorder(new EmptyBorder(10, 20, 10, 10));
 		setContentPane(cPanel);
 		cPanel.setLayout(null);
 		
@@ -125,13 +128,13 @@ public class FighterScreen extends JFrame implements ActionListener{
 		lblLifeBotRight.setBounds(153, 83, 46, 20);
 		cPanel.add(lblLifeBotRight);
 		
-		//Component horizontalStrut = Box.createHorizontalStrut(20);
-		//horizontalStrut.setBounds(10, 58, 422, 0);
-		//cPanel.add(horizontalStrut);
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		horizontalStrut.setBounds(10, 58, 422, 0);
+		cPanel.add(horizontalStrut);
 		
-		//Component verticalGlue_1 = Box.createVerticalGlue();
-		//verticalGlue_1.setBounds(431, 252, 1, -143);
-		//cPanel.add(verticalGlue_1);
+		Component verticalGlue_1 = Box.createVerticalGlue();
+		verticalGlue_1.setBounds(431, 252, 1, -143);
+		cPanel.add(verticalGlue_1);
 		
 		panel = new JPanel();
 		panel.setLayout(null);
@@ -212,24 +215,24 @@ public class FighterScreen extends JFrame implements ActionListener{
 		bRight = getBot(txtBotRight.getText());
 		lblLifeBotLeft.setText("100 %");
 		lblLifeBotRight.setText("100 %");
+		fight = new Fight (bLeft,bRight);
+		timer.start();
 	}
 
-	private String doFight(Bot bLeft,Bot bRight){
-		Fight fight = new Fight (bLeft,bRight);
-		while (fight.stillAlive()) {
+	private void doFight(Bot bLeft,Bot bRight){
+		if (fight.stillAlive()) {
 			fight.doAction();
 			drawFighters(fight);
 			drawLive(fight);
-			panel.repaint();
-			wait (5000);
-		}
-		if ( fight.getLifeLeft() == 0 ){
-			fighterLeft.setIcon(fightimages.getImage("deadLeft"));
-			return "Fighter rechts heeft gewonnen!";
-			
-		}else {
-			fighterLeft.setIcon(fightimages.getImage("deadRight"));
-			return "Fighter links heeft gewonnen!";
+		}else{
+			timer.stop();
+			if ( fight.getLifeLeft() == 0 ){
+				fighterLeft.setIcon(fightimages.getImage("deadLeft"));
+				JOptionPane.showMessageDialog(null, "Fighter "+ bLeft.getName() +" heeft verloren!", "Fight end",JOptionPane.INFORMATION_MESSAGE);
+			}else {
+				fighterRight.setIcon(fightimages.getImage("deadRight"));
+				JOptionPane.showMessageDialog(null, "Fighter "+ bRight.getName() +" heeft verloren!", "Fight end",JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 	}
 	
@@ -239,34 +242,24 @@ public class FighterScreen extends JFrame implements ActionListener{
 	}
 	
 	private void drawFighters(Fight fight){
-	/*	
-		panel.remove(fighterLeft);
-		panel.remove(fighterRight);
-		panel.repaint();
-		fighterLeft = new JLabel();
-		
-		fighterRight = new JLabel();
-		
 		fighterLeft.setIcon(fightimages.getImage(fight.getCurrentFightAction(true)+"Left"));
 		System.out.println(fighterLeft.getIcon().toString());
-		System.out.println(fight.getLifeLeft());
 		fighterRight.setIcon(fightimages.getImage(fight.getCurrentFightAction(false)+"Right"));
 		System.out.println(fighterRight.getIcon().toString());
-		System.out.println(fight.getLifeRight());
-		fighterLeft.setBounds(fight.getPositionLeft(), 10, 166, 379);
-		*/
-		if (fight.getPositionLeft()+ 166< fight.getPositionRight()){
+		
+		fighterLeft.setBounds(fight.getPositionLeft(),10,166,379);
+		if (fight.getPositionLeft()+ 166 > fight.getPositionRight()){
 			fighterRight.setBounds(fight.getPositionLeft()+166, 10, 166, 379);
 		} else{
 			fighterRight.setBounds(fight.getPositionRight(), 10, 166, 379);
 		}
-	//	panel.add(fighterLeft);
-	//	panel.add(fighterRight);
-	//	panel.repaint();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==timer){
+			doFight( bLeft,bRight);
+		}
 		if (e.getSource()==btnBotRight){
 			txtBotRight.setText(actionFileChooser());
 			checkStart();
@@ -278,8 +271,8 @@ public class FighterScreen extends JFrame implements ActionListener{
 		if (e.getSource()==btnStart){
 			prepareFight();
 			if (!(bLeft == null ) && !(bRight == null)){
-				  String end = doFight(bLeft, bRight);
-				   JOptionPane.showMessageDialog(null, end, "Fight end",JOptionPane.INFORMATION_MESSAGE);
+				  doFight(bLeft, bRight);
+				   
 				}
 		}
 		 cPanel.repaint();
@@ -293,9 +286,5 @@ public class FighterScreen extends JFrame implements ActionListener{
 		}
 	}
 	
-	private void wait (int seconds){
-		for (int i=0 ; i <= seconds *100000; i++){
-			double j =	Math.PI * Math.PI;
-		}
-	}
+	
 }
