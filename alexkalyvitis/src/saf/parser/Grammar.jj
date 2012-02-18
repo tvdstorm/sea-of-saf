@@ -43,6 +43,7 @@ TOKEN :
 |   < CLOSECURLYBRACKET : "}" >
 |   < OPENSQAREBRACKET : "[" >
 |   < CLOSESQAREBRACKET : "]" >
+|   < INVALIDCHAR : ~[] >
 }
 
 List<Fighter> Parse() :

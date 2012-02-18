@@ -34,6 +34,8 @@ public interface SafConstants {
   int OPENSQAREBRACKET = 16;
   /** RegularExpression Id. */
   int CLOSESQAREBRACKET = 17;
+  /** RegularExpression Id. */
+  int INVALIDCHAR = 18;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -58,6 +60,7 @@ public interface SafConstants {
     "\"}\"",
     "\"[\"",
     "\"]\"",
+    "<INVALIDCHAR>",
   };
 
 }

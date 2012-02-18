@@ -13,6 +13,8 @@ import saf.ast.enums.*;
 import saf.simulator.enums.*;
 
 public class FightSimulator{
+	public static final int FPS = 50;
+	
 	public static final int WINDOW_HEIGHT = 400;
 	public static final int WINDOW_WIDTH = 800;
 	
@@ -37,7 +39,7 @@ public class FightSimulator{
 	private Fight fight;
 	
 	public FightSimulator(List<Fighter> fighters){
-		fight = new Fight(fighters);
+		fight = new Fight(fighters,FIRST_FIGHTER_INITIAL_X,SECOND_FIGHTER_INITIAL_X);
 	}
 
 	public void Simulate(){
@@ -56,48 +58,60 @@ public class FightSimulator{
 		while (!Display.isCloseRequested() && !fight.hasEnded()) {
 			
 			clearScreen();
+			fight.updateFighterLocations(firstFighterCurrentX,secondFighterCurrentX);
 			fight.assess();
 			draw();
 			
 			Display.update();
-			Display.sync(50);
+			Display.sync(FPS);
 		}
+		
+		System.out.println("And the winner is: " + fight.getWinner());
+		
 		Display.destroy();
-		System.out.println("Simulating OK");
+		System.out.println("Simulation Finished");
 	}
 
 	public void draw(){
+		System.out.println("1: " + fight.getFirstFightersMove() + "\n2: " + fight.getSecondFightersMove());
+		Behavior firstFightersBehavior = fight.getFirstFightersMove(); 
+		try{
+			AvailableMoves ffmove = AvailableMoves.valueOf(firstFightersBehavior.getMove().getName().toUpperCase());
+			AvailableAttacks ffattack = AvailableAttacks.valueOf(firstFightersBehavior.getAttack().getName().toUpperCase());
+			animate(ffmove, ffattack, FighterLocation.LEFT);
+		} catch (Exception e) {
+			System.out.println("ERROR: " + e.getMessage());
+			System.exit(0);
+		}
 		
-//		Behavior firstFightersBehavior = fight.getFirstFightersMove(); 
-//		try{
-//			AvailableMoves ffmove = AvailableMoves.valueOf(firstFightersBehavior.getMove().getName());
-//			AvailableAttacks ffattack = AvailableAttacks.valueOf(firstFightersBehavior.getAttack().getName());
-//			// TODO Change to ffmove and ffattack
-			animate(AvailableMoves.JUMP, AvailableAttacks.KICK_HIGH, FighterLocation.LEFT);
-//		} catch (Exception e) {
-//			System.out.println("ERROR: " + e.getMessage());
-//			System.exit(0);
-//		}
-//		
-//		Behavior secondFightersBehavior = fight.getSecondFightersMove(); 
-//		try{
-//			AvailableMoves sfmove = AvailableMoves.valueOf(secondFightersBehavior.getMove().getName());
-//			AvailableAttacks sfattack = AvailableAttacks.valueOf(secondFightersBehavior.getAttack().getName());
-//			// TODO Change to sfmove and sfattack
-			animate(AvailableMoves.RUN_TOWARDS, AvailableAttacks.KICK_LOW, FighterLocation.RIGHT);
-//		} catch (Exception e) {
-//			System.out.println("ERROR: " + e.getMessage());
-//			System.exit(0);
-//		}
+		Behavior secondFightersBehavior = fight.getSecondFightersMove(); 
+		try{
+			AvailableMoves sfmove = AvailableMoves.valueOf(secondFightersBehavior.getMove().getName().toUpperCase());
+			AvailableAttacks sfattack = AvailableAttacks.valueOf(secondFightersBehavior.getAttack().getName().toUpperCase());
+			animate(sfmove, sfattack, FighterLocation.RIGHT);
+		} catch (Exception e) {
+			System.out.println("ERROR: " + e.getMessage());
+			System.exit(0);
+		}
 		return;
 	}
 	
 	private void animate(AvailableMoves move, AvailableAttacks attack, FighterLocation location) {
-		if(!drawMove(location, move)){
+		/*
+		 * drawMove() returns true if the fighter moved.
+		 * if so the fighter is occupied so he shouldn't calculate a new move
+		 * 
+		 * drawMove() returns false if the fighter couldn't move any longer because he reached the desired location
+		 * if so the fighter should perform his attack and then set his status to ready so that fight can assess() a new move for him
+		 */
+		if(drawMove(location, move)){
+			setFighterStatus(location, FighterStatus.OCCUPIED);
+		} else {
 			drawAttack(location, attack);
+			setFighterStatus(location, FighterStatus.READY);
 		}
 	}
-	
+
 	public boolean drawMove(FighterLocation locaton, AvailableMoves move){
 		switch(move) {
 		case JUMP			: return animateJump(locaton);
@@ -163,11 +177,36 @@ public class FightSimulator{
 	}
 
 	private boolean animateRunAway(FighterLocation loc) {
-		return false;
+		switch(loc){
+		case LEFT	:
+			if (firstFighterCurrentX <= FIRST_FIGHTER_INITIAL_X) return false;
+			drawStand(loc);
+			firstFighterCurrentX -= 2 * (fight.getFirstFighter().getSpeed() + 1);
+			break;
+		case RIGHT	:
+			if (secondFighterCurrentX >= SECOND_FIGHTER_INITIAL_X) return false;
+			drawStand(loc);
+			secondFighterCurrentX += 2 * (fight.getSecondFighter().getSpeed() + 1);
+			break;
+		}
+		return true;
 	}
 
 	private boolean animateWalkAway(FighterLocation loc) {
-		return false;
+		switch(loc){
+		case LEFT	:
+			if (firstFighterCurrentX <= FIRST_FIGHTER_INITIAL_X) return false;
+			drawStand(loc);
+			firstFighterCurrentX -= fight.getFirstFighter().getSpeed() + 1;
+			break;
+			
+		case RIGHT	:
+			if (secondFighterCurrentX >= SECOND_FIGHTER_INITIAL_X) return false;
+			drawStand(loc);
+			secondFighterCurrentX += fight.getSecondFighter().getSpeed() + 1;
+			break;
+		}
+		return true;
 	}
 
 	public boolean animateWalkTowards(FighterLocation loc) {
@@ -401,6 +440,13 @@ public class FightSimulator{
 	
 	private void clearScreen() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+	}
+	
+	private void setFighterStatus(FighterLocation location, FighterStatus status) {
+		switch(location){
+		case LEFT  : fight.getFirstFighter().setStatus(status); break;
+		case RIGHT : fight.getSecondFighter().setStatus(status); break; 
+		}
 	}
 	/*
 	private void resetFighterY(){

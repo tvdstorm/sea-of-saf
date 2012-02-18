@@ -48,12 +48,10 @@ public class SafMain {
 				System.out.println("Interpreting OK");
 				FightSimulator fightSimulator = new FightSimulator(fighters);
 				fightSimulator.Simulate();
-			} else {
-			    System.out.println("Interpreting FAILED");
 			}
 	    }
 		catch(ParseException e){
-			System.out.println("ERROR: " + e.getMessage());
+			System.out.println("Parsing FAILED \n\n" + e.getMessage());
 		}
 	    catch(Exception e) {
 	        System.out.println("ERROR: " + e.getMessage());

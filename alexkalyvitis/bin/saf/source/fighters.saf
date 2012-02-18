@@ -7,7 +7,7 @@ Eric Cartman
 	near [crouch punch_low]
 	far [run_towards kick_high]
 	stronger or much_stronger [walk_towards kick_low]
-	weaker or much_weaker [run_towards kick_high]
+	weaker or much_weaker [run_away kick_high]
 	always [walk_towards punch_low]
 }
 Kyle Broflovski
@@ -20,5 +20,5 @@ Kyle Broflovski
 	far [choose(run_towards walk_towards) kick_high]
 	stronger or much_stronger [walk_towards punch_low]
 	weaker or much_weaker [run_towards punch_high]
-	always [walk_towards punch_low]
+	always [walk_away block_low]
 }
