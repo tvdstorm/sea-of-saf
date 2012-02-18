@@ -8,6 +8,7 @@ public class Condition extends BehaviorItem{
 	public void setName(String n){ this.name = n; }
 	
 	public String getName(){ return this.name; }
+	
 	public String toString() {
 		return "\n\t\tCondition: " + name; 
 	}

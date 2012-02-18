@@ -247,12 +247,6 @@ public class Saf implements SafConstants {
     finally { jj_save(2, xla); }
   }
 
-  private boolean jj_3_2() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    if (jj_scan_token(AND)) return true;
-    return false;
-  }
-
   private boolean jj_3R_7() {
     if (jj_scan_token(IDENTIFIER)) return true;
     if (jj_scan_token(OR)) return true;
@@ -277,6 +271,12 @@ public class Saf implements SafConstants {
     jj_scanpos = xsp;
     if (jj_3R_7()) return true;
     }
+    return false;
+  }
+
+  private boolean jj_3_2() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    if (jj_scan_token(AND)) return true;
     return false;
   }
 
@@ -483,7 +483,7 @@ public class Saf implements SafConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[18];
+    boolean[] la1tokens = new boolean[19];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -497,7 +497,7 @@ public class Saf implements SafConstants {
         }
       }
     }
-    for (int i = 0; i < 18; i++) {
+    for (int i = 0; i < 19; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

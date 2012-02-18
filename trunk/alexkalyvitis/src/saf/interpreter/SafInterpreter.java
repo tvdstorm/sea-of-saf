@@ -34,6 +34,7 @@ public class SafInterpreter {
 
 	private boolean identifierIsValid(Fighter fighter, BehaviorItem object) {
 		if (!object.keywordIsValid()){
+			System.out.println("Interpreting FAILED\n");
 			System.out.println("ERROR: \"" + object.getName() + "\" is not a recognised SAF behavior attribute. \nFighter: " + fighter.getName());
 			return false;
 		}
@@ -42,6 +43,7 @@ public class SafInterpreter {
 	
 	private boolean valueIsValid(Fighter f, Strength s){
 		if(s.getValue() > 10 || s.getValue() < 1){
+			System.out.println("Interpreting FAILED\n");
 			System.out.println("ERROR: Strength value must be between 1 and 10 inclusive. \nFighter: " + f.getName() + "\nStrength: " + s.getName());
 			return false;
 		}

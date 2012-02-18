@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import saf.ast.*;
+import saf.ast.enums.*;
 import saf.simulator.enums.*;
 
 public class Fight {
@@ -16,8 +17,8 @@ public class Fight {
 	
 	private long endTime;
 	
-	private List<String> firstFighterConditions;
-	private List<String> secondFighterConditions;
+	private List<AvailableConditions> firstFighterConditions;
+	private List<AvailableConditions> secondFighterConditions;
 	
 	private Behavior firstFightersMove;
 	private Behavior secondFightersMove;
@@ -26,22 +27,25 @@ public class Fight {
 	
 	private boolean end;
 	
-	public Fight(List<Fighter> fighters){
-		int firstFighterPosition = (int)((Math.random() * 10) % fighters.size() -1);
-		firstFighter = fighters.get(firstFighterPosition);
-		fighters.remove(firstFighterPosition);
+	public Fight(List<Fighter> fighters, int firstFighterX, int secondFighterX){
+		int firstFighterRandPosition = (int)((Math.random() * 10) % fighters.size() -1);
+		firstFighter = fighters.get(firstFighterRandPosition);
+		fighters.remove(firstFighterRandPosition);
 		
-		int secondFighterPosition = (int)((Math.random() * 10) % fighters.size() -1);
-		secondFighter = fighters.get(secondFighterPosition);
-		fighters.remove(secondFighterPosition);
+		int secondFighterRandPosition = (int)((Math.random() * 10) % fighters.size() -1);
+		secondFighter = fighters.get(secondFighterRandPosition);
+		fighters.remove(secondFighterRandPosition);
 		
 		endTime = getTimeInSecs() + 30;
 		
-		firstFighterConditions = new ArrayList<String>();
-		secondFighterConditions = new ArrayList<String>();
+		firstFighterConditions = new ArrayList<AvailableConditions>();
+		secondFighterConditions = new ArrayList<AvailableConditions>();
 		
-		firstFighterLocation = 150;
-		secondFighterLocation = 800 - 150;
+		firstFighterLocation = firstFighterX;
+		secondFighterLocation = secondFighterX;
+		
+		firstFighter.setStatus(FighterStatus.READY);
+		secondFighter.setStatus(FighterStatus.READY);
 	}
 	
 	private long getTimeInSecs() { return System.currentTimeMillis() / 1000; }
@@ -59,34 +63,34 @@ public class Fight {
 		
 		// Assess distance : near,far
 		float distanceX = Math.abs(firstFighterLocation - secondFighterLocation);
-		if(distanceX < 400){
-			firstFighterConditions.add("near");
-			secondFighterConditions.add("near");
+		if(distanceX < 200){
+			firstFighterConditions.add(AvailableConditions.NEAR);
+			secondFighterConditions.add(AvailableConditions.NEAR);
 		} else {
-			firstFighterConditions.add("far");
-			secondFighterConditions.add("far");
+			firstFighterConditions.add(AvailableConditions.FAR);
+			secondFighterConditions.add(AvailableConditions.FAR);
 		}
 		
 		// Assess strength : weaker, much_weaker, stronger, much_stronger
 		if (firstFighter.getTotalStrength() > secondFighter.getTotalStrength()){
 			if (firstFighter.getTotalStrength() > secondFighter.getTotalStrength() + 10){
-				firstFighterConditions.add("much_stronger");
-				secondFighterConditions.add("much_weaker");
+				firstFighterConditions.add(AvailableConditions.MUCH_STRONGER);
+				secondFighterConditions.add(AvailableConditions.MUCH_WEAKER);
 			} else {
-				firstFighterConditions.add("stronger");
-				secondFighterConditions.add("weaker");
+				firstFighterConditions.add(AvailableConditions.STRONGER);
+				secondFighterConditions.add(AvailableConditions.WEAKER);
 			}
 		} else if (firstFighter.getTotalStrength() < secondFighter.getTotalStrength()){
 			if (firstFighter.getTotalStrength() < secondFighter.getTotalStrength() - 10){
-				firstFighterConditions.add("much_weaker");
-				secondFighterConditions.add("much_stronger");
+				firstFighterConditions.add(AvailableConditions.MUCH_WEAKER);
+				secondFighterConditions.add(AvailableConditions.MUCH_STRONGER);
 			} else {
-				firstFighterConditions.add("weaker");
-				secondFighterConditions.add("stronger");
+				firstFighterConditions.add(AvailableConditions.WEAKER);
+				secondFighterConditions.add(AvailableConditions.STRONGER);
 			}
 		} else {
-			firstFighterConditions.add("even");
-			secondFighterConditions.add("even");
+			firstFighterConditions.add(AvailableConditions.EVEN);
+			secondFighterConditions.add(AvailableConditions.EVEN);
 		}
 		
 		if(firstFighter.getHealth() <= 0){
@@ -102,34 +106,34 @@ public class Fight {
 			end = true;
 		}
 		
-		if(firstFighter.getStatus() == FighterStatus.READY){
+		if(firstFighter.getStatus().equals(FighterStatus.READY)){
 			firstFightersMove = calculateNextMove(firstFighter, firstFighterConditions);
 		}
-		if(secondFighter.getStatus() == FighterStatus.READY){
+		if(secondFighter.getStatus().equals(FighterStatus.READY)){
 			secondFightersMove = calculateNextMove(secondFighter, secondFighterConditions);
 		}
 	}
 	
-	private Behavior calculateNextMove(Fighter f, List<String> conditions) {
+	private Behavior calculateNextMove(Fighter f, List<AvailableConditions> conditions) {
 		List<Behavior> behaviors = f.getBehaviors();
 		Collections.shuffle(behaviors);
 		
 		for(Behavior b : behaviors){
 			Condition c = b.getCondition();
-			if (conditions.contains(c)){
-				if(c.getClass() == AndCondition.class){
-					if(conditions.contains(((AndCondition)c).getAndCondition())){
+			if (conditions.contains(AvailableConditions.valueOf(c.getName().toUpperCase()))){
+				if(c instanceof AndCondition){
+					if(conditions.contains(AvailableConditions.valueOf(((AndCondition)c).getAndCondition().toUpperCase()))){
 						return b;
 					}
 				} else {
 					return b;
 				}
 			}
-			else if(c.getClass() == OrCondition.class){
-				if(conditions.contains(((OrCondition)c).getOrCondition()))
+			else if(c instanceof OrCondition){
+				if(conditions.contains(AvailableConditions.valueOf(((OrCondition)c).getOrCondition().toUpperCase())))
 					return b;
 			}
-			else if(conditions.contains("always")){
+			else if(conditions.contains(AvailableConditions.ALWAYS)){
 				return b;
 			}
 		}
@@ -142,5 +146,10 @@ public class Fight {
 	
 	public Behavior getSecondFightersMove(){
 		return secondFightersMove;
+	}
+
+	public void updateFighterLocations(int firstFighterCurrentX, int secondFighterCurrentX) {
+		firstFighterLocation = firstFighterCurrentX;
+		secondFighterLocation = secondFighterCurrentX;
 	}
 }
