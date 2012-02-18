@@ -45,17 +45,17 @@ personality returns[Personality p]
 ; 
 strength returns[Strength s]
   : ID '=' INT
-  { $s = new Strength($ID.text, $INT.text); }
+  { $s = new Strength($ID.text, $INT.int); }
 ;
 behaviour returns[Behaviour b]
-  @init { List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>(); }
+  @init { ArrayList<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>(); }
   : (behaviourrule { behaviourRules.add($behaviourrule.br); })+ 
   { $b = new Behaviour(behaviourRules); }
 ; 
 behaviourrule returns[BehaviourRule br]
   : ID '[' walkAction fightAction ']'
   { $br = new BehaviourRule(new Condition($ID.text), $walkAction.wa, $fightAction.fa); }
-;  
+;   
 walkAction returns[WalkAction wa]
   @init { List<String> walks = new ArrayList<String>(); }
   : (
