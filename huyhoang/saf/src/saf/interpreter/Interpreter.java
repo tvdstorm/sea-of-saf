@@ -90,9 +90,8 @@ public class Interpreter implements FighterVisitor
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
-	public void visit(Method method) {
+	public void visit(Procedure procedure) {
 		// TODO Auto-generated method stub
 		
 	}
