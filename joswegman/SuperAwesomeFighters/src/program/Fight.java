@@ -3,7 +3,7 @@ package program;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
+import java.lang.Math;
 import grammar.Evaluators.*;
 
 /* regels van het gevecht
@@ -50,7 +50,7 @@ public class Fight {
 		this.botRight = botRight;
 		this.lifeRight = 100;
 		this.positionLeft = 10;
-		this.positionRight = 90;
+		this.positionRight = 500;
 		this.statusLeft = "even";
 		this.statusRight = "even";
 		this.botLeft.setSpeed(calcSpeed (botLeft));
@@ -176,65 +176,54 @@ public class Fight {
 		return distance;
 	}
 	
-	public InputRule getMove(Bot b, String sd){
-		List<InputRule> moveAction = new LinkedList<InputRule>();
+	public InputRule getAction(Bot b, String sd, boolean move){
+		List<InputRule> action = new LinkedList<InputRule>();
 		for (Rule r:b.getRules()){
 			for(Condition c: r.getConditionList()){
 				if ((c.getLeft().equalsIgnoreCase(sd))||(c.getLeft().equalsIgnoreCase(getDistanceString()))){
-					moveAction.add(r.getMoveRule());
+					if (move){
+						action.add(r.getMoveRule());
+					}else{
+						action.add(r.getFightRule());
+					}
 				}
 			}
 		}
-		if (moveAction.size() == 0 ) {
-			return getMove(b , "always");
+		if (action.size() == 0 ) {
+			return getAction(b , "always", move);
 		} 
-		return moveAction.get(RANDOM.nextInt(moveAction.size()));
+		return action.get(RANDOM.nextInt(action.size()));
 	}
 	
-	public InputRule getFight(Bot b, String sd){
-		List<InputRule> moveAction = new LinkedList<InputRule>();
-		for (Rule r:b.getRules()){
-			for(Condition c: r.getConditionList()){
-				if ((c.getLeft().equalsIgnoreCase(sd))||(c.getLeft().equalsIgnoreCase(getDistanceString()))){
-					moveAction.add(r.getFightRule());
-				}
-			}
-		}
-		if (moveAction.size() == 0 ) {
-			return getMove(b , "always");
-		} 
-		return moveAction.get(RANDOM.nextInt(moveAction.size()));
-	}
 	
 	public void doAction() {
 		this.setStatusLeft(calculateStrengthDif(this.lifeLeft,this.lifeRight));
 		this.setStatusRight(calculateStrengthDif(this.lifeRight,this.lifeLeft));
 		this.distance = this.positionRight - this.positionLeft;
-		this.currentMoveLeft = getMove(botLeft,this.statusLeft);
-		this.currentMoveRight = getMove(botRight,this.statusRight);
-		this.currentFightLeft = getFight(botLeft,this.statusLeft);
-		this.currentFightRight = getFight(botRight, this.statusRight);
+		this.currentMoveLeft = getAction(botLeft,this.statusLeft,true);
+		this.currentMoveRight = getAction(botRight,this.statusRight, true);
+		this.currentFightLeft = getAction(botLeft,this.statusLeft, false);
+		this.currentFightRight = getAction(botRight, this.statusRight, false);
 		calculateLife(this.currentFightLeft, this.currentFightRight);
 		calculatePositions(this.currentMoveLeft,this.currentMoveRight);
 	}
 	
 	public void calculateLife(InputRule irl, InputRule irr){
-		if (this.distance < 10) {
-			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("kick"))){ this.lifeLeft -= 10;}
-			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft -= 5;}
-			if ((irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("kick"))){ this.lifeLeft -= 5;}
-			if ((irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft -= 2;}
-			if ((!irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("kick"))){ this.lifeLeft -= 10;}
-			if ((!irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("punch"))){ this.lifeLeft -= 5;}
-			if ((irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("kick"))){ this.lifeLeft -= 5;}
-			if ((irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("punch"))){ this.lifeLeft -= 2;}
+		if (this.distance <= 10) {
+			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("kick"))) { this.lifeLeft -= 5 * this.botLeft.getSpeed() ;}
+			if ((!irl.getInputrule(true).contains("block")) && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft -= 3 * this.botLeft.getSpeed();}
+			if ((irl.getInputrule(true).contains("block"))  && (irr.getInputrule(true).contains("kick"))) { this.lifeLeft -= 3 * this.botLeft.getSpeed();}
+			if ((irl.getInputrule(true).contains("block"))  && (irr.getInputrule(true).contains("punch"))){ this.lifeLeft -= 1 * this.botLeft.getSpeed();}
+			if ((!irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("kick"))) { this.lifeRight -= 5 * this.botRight.getSpeed();}
+			if ((!irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("punch"))){ this.lifeRight -= 3 * this.botRight.getSpeed();}
+			if ((irr.getInputrule(true).contains("block"))  && (irl.getInputrule(true).contains("kick"))) { this.lifeRight -= 3 * this.botRight.getSpeed();}
+			if ((irr.getInputrule(true).contains("block"))  && (irl.getInputrule(true).contains("punch"))){ this.lifeRight -= 1 * this.botRight.getSpeed();}
 		}
 	}
 	
 	public void calculatePositions(InputRule irl, InputRule irr){
-		this.positionLeft += calcMove(irl.getInputrule(true));
-		this.positionRight -= calcMove(irr.getInputrule(true));
-		//if (this.positionRight < this.positionLeft+166){this.positionRight = this.positionLeft + 166;}
+		this.positionLeft  = this.positionLeft +  calcMove(irl.getInputrule(true));
+		this.positionRight = this.positionRight - calcMove(irr.getInputrule(true));
 	}
 	
 	public int calcMove (String m){
