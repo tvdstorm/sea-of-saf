@@ -6,12 +6,12 @@ import java.util.List;
 
 public abstract class Attribute
 {
-    public static boolean isWellFormed(List<data.Attribute> attributeDatas,
+    public static boolean isWellFormed(List<saf.data.Attribute> attributeDatas,
                                        List<String> errorMessages)
     {
         boolean wellFormed = true;
 
-        for (data.Attribute attributeData : attributeDatas)
+        for (saf.data.Attribute attributeData : attributeDatas)
         {
             wellFormed &= checkAttribute(attributeData, errorMessages);
         }
@@ -19,15 +19,15 @@ public abstract class Attribute
         return wellFormed;
     }
 
-    private static boolean checkAttribute(data.Attribute attributeData, 
+    private static boolean checkAttribute(saf.data.Attribute attributeData, 
                                           List<String> errorMessages)
     {
         boolean wellFormed = true;
 
-        List<String> legalNames = data.Attribute.LEGAL;
+        List<String> legalNames = saf.data.Attribute.LEGAL;
         String attributeName = attributeData.getName();
 
-        int maxValue = data.Attribute.MAX_VALUE
+        int maxValue = saf.data.Attribute.MAX_VALUE;
         int attributeValue = attributeData.getValue();
 
         if (!legalNames.contains(attributeName))

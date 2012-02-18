@@ -17,11 +17,16 @@ public class Move
                           "run_away")
     );
 
-    private String name;
+    private ChooseConstruct possibleNames;
 
     public Move(String name)
     {
-        this.name = name;
+        this.possibleNames = new ChooseConstruct(name);
+    }
+
+    public Move(List<String> possibleNames)
+    {
+        this.possibleNames = new ChooseConstruct(possibleNames);
     }
 
     public static Move getRandom(Random random)
@@ -33,9 +38,13 @@ public class Move
 
     public String toString()
     {
-        return name;
+        return possibleNames.toString();
     }
     
-    public String getName() { return name; }
+    public String getName() { return possibleNames.getName(); }
+    public List<String> getAllPossibilities() 
+    { 
+        return possibleNames.getAllPossibilities(); 
+    }
 }
 
