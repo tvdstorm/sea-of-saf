@@ -10,22 +10,15 @@ import astelements.Bots;
 public class Parser {
 
 	private Bots bots;
-	private boolean reinit;
 
-	public Parser(String inputFile, boolean reinit) throws ParseException, IOException {
-		this.reinit = reinit;
+	public Parser(String inputFile) throws ParseException, IOException {
 		InputStream fileContent = getInputFileStream(inputFile);
 		setBots(parseFileContent(fileContent));
 	}
 
 	private Bots parseFileContent(InputStream fileContent) throws ParseException {
-		if (!reinit) {
-			new SAFGrammar(fileContent);
-			return SAFGrammar.Start();
-		} else {
-			SAFGrammar.ReInit(fileContent);
-			return SAFGrammar.Start();
-		}
+		SAFGrammar grammer = new SAFGrammar(fileContent);
+		return grammer.Start();
 	}
 
 	private InputStream getInputFileStream(String fileName) throws IOException {

@@ -34,7 +34,7 @@ public class FightMenuViewController implements ActionListener {
 				fightView.setVisible(false);
 				File file = fileOpener.getSelectedFile();
 				new Main();
-				Main.startGame(file.toString(), true);
+				Main.startGame(file.toString());
 			}
 			break;
 		case "Quit":

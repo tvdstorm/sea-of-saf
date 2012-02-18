@@ -1,11 +1,7 @@
 package game.fighter;
 
 import java.util.ArrayList;
-
 import astelements.Behaviour;
-
-
-
 
 public class Fighter {
 
@@ -14,10 +10,10 @@ public class Fighter {
 	private int speed;
 	
 	//characteristics:
-	private int punchReach;
-	private int punchPower;
-	private int kickReach;
-	private int kickPower;
+	private int punchReach = 5;
+	private int punchPower = 5;
+	private int kickReach = 5;
+	private int kickPower = 5;
 	
 	private int health;
 	private String fighterName;
@@ -126,6 +122,4 @@ public class Fighter {
 	public void setBehaviours(ArrayList<Behaviour> behaviours) {
 		this.behaviours = behaviours;
 	}
-	
-
 }

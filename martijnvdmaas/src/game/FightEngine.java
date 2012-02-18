@@ -17,9 +17,15 @@ import astelements.ConditionGroup;
 
 public class FightEngine extends Observable implements SAFConstants
 {
-	private final int START_HORIZONTAL_DISTANCE = 50;
-	private final int MAX_HORIZONTAL_DISTANCE = 200;
-	private final int MAX_HEALTH = 100;
+	private static final int START_HORIZONTAL_DISTANCE = 5;
+	private static final int MAX_HORIZONTAL_DISTANCE = 10;
+	private static final int CROUCH_STEP_DISTANCE = 1;
+	private static final int WALK_STEP_DISTANCE = 2;
+	private static final int RUN_STEP_DISTANCE = 3;
+	private static final int LONG_DISTANCE = 20;
+	private static final int SHORT_DISTANCE = 10;
+	private static final int MAX_HEALTH = 100;
+	private static final int MUCH_WEAKER_AMOUNT = 15;
 
 	private Fighter leftFighter;
 	private Fighter rightFighter;
@@ -27,7 +33,7 @@ public class FightEngine extends Observable implements SAFConstants
 	private Random randomInt;
 	private int distance;
 	private boolean isPlaying;
-	private String winner;
+	private String winner = "";
 
 	public FightEngine(Bots bots)
 	{
@@ -101,10 +107,15 @@ public class FightEngine extends Observable implements SAFConstants
 				setPlaying(false);
 				if (currentLeftHealth < currentRightHealth)
 				{
+					getRightFighter().setCurrentAttack(ATTACK_TYPE_WINNER);
+					getLeftFighter().setCurrentAttack(ATTACK_TYPE_DEAD);
 					setWinner(getRightFighter().getFighterName());
 				}
 				else
 				{
+
+					getRightFighter().setCurrentAttack(ATTACK_TYPE_DEAD);
+					getLeftFighter().setCurrentAttack(ATTACK_TYPE_WINNER);
 					setWinner(getLeftFighter().getFighterName());
 				}
 			}
@@ -123,10 +134,10 @@ public class FightEngine extends Observable implements SAFConstants
 	private void setNextBehaviour(Fighter fighter, Behaviour inflictedBehaviour)
 	{
 		ArrayList<String> attackChoices = inflictedBehaviour.getAttackChoices();
-		ArrayList<String> moveChoices 	= inflictedBehaviour.getMoveChoices();
+		ArrayList<String> moveChoices = inflictedBehaviour.getMoveChoices();
 
-		int randomAttackIndex 	= randomInt.nextInt(attackChoices.size());
-		int randomMoveIndex 	= randomInt.nextInt(moveChoices.size());
+		int randomAttackIndex = randomInt.nextInt(attackChoices.size());
+		int randomMoveIndex = randomInt.nextInt(moveChoices.size());
 
 		fighter.setCurrentAttack(attackChoices.get(randomAttackIndex));
 		fighter.setCurrentMove(moveChoices.get(randomMoveIndex));
@@ -139,20 +150,21 @@ public class FightEngine extends Observable implements SAFConstants
 		case MOVE_TYPE_JUMP:
 			break;
 		case MOVE_TYPE_CROUCH:
+			distance = ((distance - CROUCH_STEP_DISTANCE) < 0) ? 0 : distance - CROUCH_STEP_DISTANCE;
 			break;
 		case MOVE_TYPE_STAND: // do nothing
 			break;
 		case MOVE_TYPE_RUN_TOWARDS:
-			distance = ((distance - 20) < 0) ? 0 : distance - 20;
+			distance = ((distance - RUN_STEP_DISTANCE) < 0) ? 0 : distance - RUN_STEP_DISTANCE;
 			break;
 		case MOVE_TYPE_RUN_AWAY:
-			distance = ((distance + 20) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + 20;
+			distance = ((distance + RUN_STEP_DISTANCE) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + RUN_STEP_DISTANCE;
 			break;
 		case MOVE_TYPE_WALK_TOWARDS:
-			distance = ((distance - 10) < 0) ? 0 : distance - 10;
+			distance = ((distance - WALK_STEP_DISTANCE) < 0) ? 0 : distance - WALK_STEP_DISTANCE;
 			break;
 		case MOVE_TYPE_WALK_AWAY:
-			distance = ((distance + 10) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + 10;
+			distance = ((distance + WALK_STEP_DISTANCE) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + WALK_STEP_DISTANCE;
 			break;
 		}
 	}
@@ -161,7 +173,7 @@ public class FightEngine extends Observable implements SAFConstants
 	{
 		int damageAmount = 0;
 		String attack = attackingFighter.getCurrentAttack();
-
+		
 		switch (attack)
 		{
 		case ATTACK_TYPE_BLOCK_LOW:
@@ -195,7 +207,7 @@ public class FightEngine extends Observable implements SAFConstants
 			}
 			break;
 		}
-		
+
 		return damageAmount;
 	}
 
@@ -212,7 +224,6 @@ public class FightEngine extends Observable implements SAFConstants
 		}
 
 		int randomIndex = randomInt.nextInt(possibleBehaviours.size());
-
 		return possibleBehaviours.get(randomIndex);
 	}
 
@@ -236,25 +247,25 @@ public class FightEngine extends Observable implements SAFConstants
 		switch (condition)
 		{
 		case CONDITION_TYPE_STRONGER:
-			if ((currentFighter.getHealth() - opponentHealth) < 20) return true;
+			if (currentFighter.getHealth() > opponentHealth) return true;
 			break;
 		case CONDITION_TYPE_WEAKER:
-			if ((opponentHealth - currentFighter.getHealth()) < 20) return true;
+			if (opponentHealth < currentFighter.getHealth()) return true;
 			break;
 		case CONDITION_TYPE_MUCHSTRONGER:
-			if ((currentFighter.getHealth() - opponentHealth) < 50) return true;
+			if (currentFighter.getHealth() > (opponentHealth + MUCH_WEAKER_AMOUNT)) return true;
 			break;
 		case CONDITION_TYPE_MUCHWEAKER:
-			if ((opponentHealth - currentFighter.getHealth()) < 50) return true;
+			if (opponentHealth > (currentFighter.getHealth() + MUCH_WEAKER_AMOUNT)) return true;
 			break;
 		case CONDITION_TYPE_EVEN:
 			if (opponentHealth == currentFighter.getHealth()) return true;
 			break;
 		case CONDITION_TYPE_NEAR:
-			if (playerDistance > 10) return true;
+			if (playerDistance >= SHORT_DISTANCE) return true;
 			break;
 		case CONDITION_TYPE_FAR:
-			if (playerDistance < 50) return true;
+			if (playerDistance < LONG_DISTANCE) return true;
 			break;
 		case CONDITION_TYPE_ALWAYS:
 			return true;
@@ -266,14 +277,17 @@ public class FightEngine extends Observable implements SAFConstants
 	/* Reinitializes the game: */
 	public void reStart()
 	{
+		
 		setLeftHealth(MAX_HEALTH);
 		setRightHealth(MAX_HEALTH);
+		getLeftFighter().setCurrentAttack(ATTACK_TYPE_STAND);
+		getRightFighter().setCurrentAttack(ATTACK_TYPE_STAND);
 		setPlaying(true);
 
 		setChanged();
 		notifyObservers();
 	}
-	
+
 	/* Getters and Setters: */
 
 	public Fighter getLeftFighter()
