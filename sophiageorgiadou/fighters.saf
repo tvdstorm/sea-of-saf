@@ -1,0 +1,18 @@
+Roger_Fed
+{
+	kickReach = 2
+	kickPower = 5
+	punchReach = 4
+	punchPower = 8
+	near [crouch punch_low]
+	far [run_towards kick_high]
+}
+Rafael_Nad
+{
+	kickReach = 4
+	kickPower = 8
+	punchReach = 2
+	punchPower = 6
+	near and weaker [jump kick_high]
+	far [choose(run_towards walk_towards) kick_high]
+}
