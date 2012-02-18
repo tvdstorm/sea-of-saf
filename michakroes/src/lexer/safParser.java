@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g 2012-02-15 10:02:40
+// $ANTLR 3.4 /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g 2012-02-18 12:32:05
  
   package lexer;
   
@@ -200,7 +200,7 @@ public class safParser extends Parser {
 
             INT6=(Token)match(input,INT,FOLLOW_INT_in_strength240); 
 
-             s = new Strength((ID5!=null?ID5.getText():null), (INT6!=null?INT6.getText():null)); 
+             s = new Strength((ID5!=null?ID5.getText():null), (INT6!=null?Integer.valueOf(INT6.getText()):0)); 
 
             }
 
@@ -228,7 +228,7 @@ public class safParser extends Parser {
         BehaviourRule behaviourrule7 =null;
 
 
-         List<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>(); 
+         ArrayList<BehaviourRule> behaviourRules = new ArrayList<BehaviourRule>(); 
         try {
             // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:52:3: ( ( behaviourrule )+ )
             // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:52:5: ( behaviourrule )+
@@ -377,7 +377,7 @@ public class safParser extends Parser {
                 case 1 :
                     // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:62:7: w1= ID
                     {
-                    w1=(Token)match(input,ID,FOLLOW_ID_in_walkAction334); 
+                    w1=(Token)match(input,ID,FOLLOW_ID_in_walkAction335); 
 
                      walks.add((w1!=null?w1.getText():null)); 
 
@@ -386,9 +386,9 @@ public class safParser extends Parser {
                 case 2 :
                     // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:63:7: CHOOSE '(' (w2= ID )+ ')'
                     {
-                    match(input,CHOOSE,FOLLOW_CHOOSE_in_walkAction347); 
+                    match(input,CHOOSE,FOLLOW_CHOOSE_in_walkAction348); 
 
-                    match(input,8,FOLLOW_8_in_walkAction349); 
+                    match(input,8,FOLLOW_8_in_walkAction350); 
 
                     // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:63:18: (w2= ID )+
                     int cnt3=0;
@@ -406,7 +406,7 @@ public class safParser extends Parser {
                     	case 1 :
                     	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:63:19: w2= ID
                     	    {
-                    	    w2=(Token)match(input,ID,FOLLOW_ID_in_walkAction356); 
+                    	    w2=(Token)match(input,ID,FOLLOW_ID_in_walkAction357); 
 
                     	     walks.add((w2!=null?w2.getText():null)); 
 
@@ -423,7 +423,7 @@ public class safParser extends Parser {
                     } while (true);
 
 
-                    match(input,9,FOLLOW_9_in_walkAction363); 
+                    match(input,9,FOLLOW_9_in_walkAction364); 
 
                     }
                     break;
@@ -485,7 +485,7 @@ public class safParser extends Parser {
                 case 1 :
                     // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:70:7: f1= ID
                     {
-                    f1=(Token)match(input,ID,FOLLOW_ID_in_fightAction407); 
+                    f1=(Token)match(input,ID,FOLLOW_ID_in_fightAction408); 
 
                      fights.add((f1!=null?f1.getText():null)); 
 
@@ -494,9 +494,9 @@ public class safParser extends Parser {
                 case 2 :
                     // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:71:7: CHOOSE '(' (f2= ID )+ ')'
                     {
-                    match(input,CHOOSE,FOLLOW_CHOOSE_in_fightAction420); 
+                    match(input,CHOOSE,FOLLOW_CHOOSE_in_fightAction421); 
 
-                    match(input,8,FOLLOW_8_in_fightAction422); 
+                    match(input,8,FOLLOW_8_in_fightAction423); 
 
                     // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:71:18: (f2= ID )+
                     int cnt5=0;
@@ -514,7 +514,7 @@ public class safParser extends Parser {
                     	case 1 :
                     	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:71:19: f2= ID
                     	    {
-                    	    f2=(Token)match(input,ID,FOLLOW_ID_in_fightAction429); 
+                    	    f2=(Token)match(input,ID,FOLLOW_ID_in_fightAction430); 
 
                     	     fights.add((f2!=null?f2.getText():null)); 
 
@@ -531,7 +531,7 @@ public class safParser extends Parser {
                     } while (true);
 
 
-                    match(input,9,FOLLOW_9_in_fightAction436); 
+                    match(input,9,FOLLOW_9_in_fightAction437); 
 
                     }
                     break;
@@ -577,15 +577,15 @@ public class safParser extends Parser {
     public static final BitSet FOLLOW_walkAction_in_behaviourrule292 = new BitSet(new long[]{0x0000000000000030L});
     public static final BitSet FOLLOW_fightAction_in_behaviourrule294 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_12_in_behaviourrule296 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_walkAction334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_walkAction347 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_walkAction349 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_walkAction356 = new BitSet(new long[]{0x0000000000000220L});
-    public static final BitSet FOLLOW_9_in_walkAction363 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_fightAction407 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_fightAction420 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_fightAction422 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_fightAction429 = new BitSet(new long[]{0x0000000000000220L});
-    public static final BitSet FOLLOW_9_in_fightAction436 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_walkAction335 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_walkAction348 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_walkAction350 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_walkAction357 = new BitSet(new long[]{0x0000000000000220L});
+    public static final BitSet FOLLOW_9_in_walkAction364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_fightAction408 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_fightAction421 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_fightAction423 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_fightAction430 = new BitSet(new long[]{0x0000000000000220L});
+    public static final BitSet FOLLOW_9_in_fightAction437 = new BitSet(new long[]{0x0000000000000002L});
 
 }
