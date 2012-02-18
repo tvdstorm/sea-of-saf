@@ -33,4 +33,16 @@ public class Behaviour
 		return combatmove;
 	}
 	
+	public List<String> getErrors()
+	{
+		List<String> list = new LinkedList<String>();
+		
+		for (Activity a : _activities)
+		{
+			list.addAll(a.getErrors());
+		}
+		
+		return list;
+	}
+	
 }

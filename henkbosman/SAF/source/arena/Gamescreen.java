@@ -31,8 +31,8 @@ public class Gamescreen extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 3204571424404600487L;
 	private JPanel contentPane;
 	private JPanel panel;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldA;
+	private JTextField textFieldB;
 	private JLabel healthLabelA;
 	private JLabel healthLabelB;
 	private JLabel actionLabelA;
@@ -75,19 +75,19 @@ public class Gamescreen extends JFrame implements ActionListener{
 		lblFighterA.setBounds(10, 11, 66, 14);
 		contentPane.add(lblFighterA);
 		
-		textField = new JTextField();
-		textField.setBounds(86, 8, 247, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldA = new JTextField();
+		textFieldA.setBounds(86, 8, 247, 20);
+		contentPane.add(textFieldA);
+		textFieldA.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Fighter B");
 		lblNewLabel.setBounds(10, 36, 66, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(86, 33, 247, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldB = new JTextField();
+		textFieldB.setBounds(86, 33, 247, 20);
+		contentPane.add(textFieldB);
+		textFieldB.setColumns(10);
 		
 		_fightButton = new JButton("Fight!");
 		_fightButton.addActionListener(this);
@@ -181,10 +181,22 @@ public class Gamescreen extends JFrame implements ActionListener{
 	
 	private void beginFight() throws IOException, RecognitionException
 	{
-		_engine = new Engine(textField.getText(), textField_1.getText());
+		_engine = new Engine(textFieldA.getText(), textFieldB.getText());
+		Popupscreen popupScreen = new Popupscreen();
+		if (!_engine.getErrors(Fighters.FighterA).isEmpty())
+			popupScreen.addMessage(_engine.getErrors(Fighters.FighterA));
+		if (!_engine.getErrors(Fighters.FighterB).isEmpty())
+			popupScreen.addMessage(_engine.getErrors(Fighters.FighterB));
+
+		if (popupScreen.hasMessages())
+		{
+			popupScreen.setVisible(true);
+			return;
+		}
+
 		_timer.start();
 	}
-
+	
 	private void doFightMove()
 	{
 		if (_engine.doMoves())
@@ -215,11 +227,17 @@ public class Gamescreen extends JFrame implements ActionListener{
 			try {
 				beginFight();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				Popupscreen popupScreen = new Popupscreen();
+				popupScreen.addMessage("IOException:");
+				popupScreen.addMessage(e1.getMessage());
+				System.out.println(e1.getMessage());
+				popupScreen.setVisible(true);
 			} catch (RecognitionException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				Popupscreen popupScreen = new Popupscreen();
+				popupScreen.addMessage("RecognitionException:");
+				popupScreen.addMessage(e1.getMessage());
+				System.out.println(e1.getMessage());
+				popupScreen.setVisible(true);
 			}
 		}
 		contentPane.repaint();
