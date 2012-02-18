@@ -5,9 +5,7 @@ package grammar;
 import astelements.*;
 
 public class SAFGrammar
-{
-
-}
+{}
 
 PARSER_END(SAFGrammar)
 
@@ -100,7 +98,8 @@ void Content(Bot bot) :
 
 void addCharacteristic(Bot bot) :
 {
-  	Token name = new Token(); Token value = new Token();}
+  	Token name 	= new Token();
+  	Token value = new Token();}
 {
   	(
     	  name =  < IDENTIFIER >
