@@ -1,0 +1,4 @@
+chicken{kickReach=9
+far [run_away choose(kick_low kick_high)]}
+Alex{kickReach=5
+far AND near [run_towards kick_high]}

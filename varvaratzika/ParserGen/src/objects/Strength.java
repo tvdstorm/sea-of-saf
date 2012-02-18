@@ -1,8 +1,14 @@
 package objects;
 
-public class Strength {
+public class Strength {	
 	private String StrenghtName = new String() ;
 	private int StrenghtValue = 5;
+	
+	public Strength(String strengthName,int strengValue)
+	{
+		this.setStrengthName(strengthName.toString());
+		this.setStrenghtValue(strengValue);
+	}
 
 	public void setStrengthName(String StrenghtName)
 	   {

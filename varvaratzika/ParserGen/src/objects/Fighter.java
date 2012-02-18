@@ -1,15 +1,24 @@
 package objects;
-
 import java.util.ArrayList;
+import java.util.List;
 
 
 
-public class Fighter {
+public class Fighter{
 	 private String fighterName = new String();
-	 private ArrayList<Strength> strengths = new ArrayList<Strength>();
-     private ArrayList<Condition> condition = new ArrayList<Condition>();
+	 private List<Strength> strengths = new ArrayList<Strength>();
+     private List<Condition> condition = new ArrayList<Condition>();
+     private double weight=0.0;
+     private double height=0.0;
+     private double speed=0.0;
+     private int location=0;
+     private int life=100;
+     private int lifeStr=100;
    
-   
+     public Fighter(String name)
+     {
+    	 this.fighterName = name;
+     }
      
      public void setFighterName(String fighter1)
      {
@@ -23,16 +32,43 @@ public class Fighter {
      {
          this.condition.add(c);
      }
+     public void setConditions(ArrayList <Condition> c)
+     {
+         this.condition.addAll(c);
+     }
      public String getFighterName()
      {
          return fighterName;
      }
-     public ArrayList<Strength> getStrength()
+     public List <Strength> getStrength()
      {
          return strengths;
      }
-     public ArrayList<Condition> getCondition()
+     public List <Condition> getCondition()
      {
          return condition;
      }
+     public void setWeight(double w)
+     {
+    		 this.weight=w;
+     }
+     public void setHeight(double h)
+     {
+    		 this.height=h;
+     }
+     public void setSpeed(double s)
+     {
+    		 this.speed=s;
+     }
+
+
+	public int getStrLife() {
+		// TODO Auto-generated method stub
+		return this.lifeStr;
+	}
+	public int getLocation()
+	{
+		return this.location;
+	}	
 }
+
