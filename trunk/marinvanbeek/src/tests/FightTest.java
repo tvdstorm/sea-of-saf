@@ -1,8 +1,8 @@
 //import org.testng.annotations.*;
 import org.junit.*;
 
-import data.*;
-import simulation.*;
+import saf.data.*;
+import saf.simulation.*;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -51,7 +51,8 @@ public class FightTest
     {
         Random seedGenerator = new Random();
 
-        System.out.println(data.Fighter.getRandom(seedGenerator.nextInt()));
+        System.out.println(
+                saf.data.Fighter.getRandom(seedGenerator.nextInt()));
     }
 
     @Test

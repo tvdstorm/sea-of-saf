@@ -1,9 +1,9 @@
 //import org.testng.annotations.*;
 import org.junit.*;
 
-import data.*;
-import simulation.*;
-import animation.*;
+import saf.data.*;
+import saf.simulation.*;
+import saf.animation.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ public class AnimationTest
     @Test
     public void testPredefinedActions()
     {
-        List<simulation.Fighter> fighters = getCompleteFighters();
+        List<saf.simulation.Fighter> fighters = getCompleteFighters();
         ArenaAnimator animator = new ArenaAnimator("bison", "bison");
 
         System.out.println();
-        for (simulation.Fighter fighter : fighters)
+        for (saf.simulation.Fighter fighter : fighters)
         {
             animator.bufferTimeStep(fighter, fighter);
             System.out.print("<");
@@ -32,25 +32,28 @@ public class AnimationTest
      * Returns a list of simulated Fighters, where every move and every attack
      * is guaranteed to appear and where the Fighter's position changes.
      */
-    private List<simulation.Fighter> getCompleteFighters()
+    private List<saf.simulation.Fighter> getCompleteFighters()
     {
         /* This data Fighter is needed for the simulation Fighter, but not used
          * in the actual animation. */
-        data.Fighter generalFighter = data.Fighter.getRandom(0);
-        data.Action generalAction = new data.Action(new data.Move("stand"), 
-                                            new data.Attack("punch_high"));
-        List<data.Action> actions = getCompleteActions();
-        List<simulation.Fighter> fighters = new ArrayList<simulation.Fighter>();
+        saf.data.Fighter generalFighter = saf.data.Fighter.getRandom(0);
+        saf.data.Action generalAction = 
+                new saf.data.Action(new saf.data.Move("stand"), 
+                                    new saf.data.Attack("punch_high"));
+        List<saf.data.Action> actions = getCompleteActions();
+        List<saf.simulation.Fighter> fighters = 
+                new ArrayList<saf.simulation.Fighter>();
 
-        for (data.Action action : actions)
+        for (saf.data.Action action : actions)
         {
-            fighters.add(new simulation.Fighter(generalFighter, 0, action));
+            fighters.add(
+                    new saf.simulation.Fighter(generalFighter, 0, action));
         }
 
         for (int i = 0; i < 10; i++)
         {
-            fighters.add(new simulation.Fighter(generalFighter, i*3,
-                                                generalAction));
+            fighters.add(new saf.simulation.Fighter(generalFighter, i*3,
+                                                    generalAction));
         }
 
         return fighters;
@@ -60,23 +63,25 @@ public class AnimationTest
      * Returns a list of actions, where every move and every attack is
      * guaranteed to appear.
      */
-    private List<data.Action> getCompleteActions()
+    private List<saf.data.Action> getCompleteActions()
     {
-        List<String> moves = data.Move.LEGAL;
-        List<String> attacks = data.Attack.LEGAL;
+        List<String> moves = saf.data.Move.LEGAL;
+        List<String> attacks = saf.data.Attack.LEGAL;
 
-        List<data.Action> actions = new ArrayList<data.Action>();
+        List<saf.data.Action> actions = new ArrayList<saf.data.Action>();
 
         for (String move : moves)
         {
-            actions.add(new data.Action(new data.Move(move), 
-                                        new data.Attack(attacks.get(0))));
+            actions.add(
+                    new saf.data.Action(new saf.data.Move(move), 
+                                        new saf.data.Attack(attacks.get(0))));
         }
 
         for (String attack : attacks)
         {
-            actions.add(new data.Action(new data.Move(moves.get(0)), 
-                                        new data.Attack(attack)));
+            actions.add(
+                    new saf.data.Action(new saf.data.Move(moves.get(0)), 
+                                        new saf.data.Attack(attack)));
         }
 
         return actions;
