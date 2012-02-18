@@ -1,15 +1,16 @@
-chuck
+goose
 {
   kickReach  = 5
   punchReach = 4
   kickPower  = 6
   punchPower = 2
-  far or near  or far [choose(crouch walk_towards) choose(block_high punch_low)]
-  always [crouch punch_low]
+  far [choose(crouch walk_towards) choose(block_high block_low)]
+  near or weaker [crouch block_low]
+  always [run_towards punch_low]
 }
-goose
+chuck
 {
-	punchReach=9
-	even[choose(crouch walk_towards) choose(block_high punch_low)]
-	always[crouch block_low]
+	punchReach = 9
+	even [choose(crouch walk_towards) choose(block_high punch_low)]
+	always [crouch block_low]
  }
