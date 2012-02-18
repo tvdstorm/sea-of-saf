@@ -25,6 +25,7 @@ public class GameSetup {
 	public void startGame(String[] args){
         
 		List<Fighter> fighters = obtainFighters(args);
+		System.err.flush();//DEBUG
 		System.out.println("LOG: Correctly read " + fighters.size() + " fighters"); //DEBUG
 		
 		if(fighters.size() > 1){
@@ -79,7 +80,7 @@ public class GameSetup {
 				matches.add(new MatchSimulator(fighters.get(i),fighters.get(j)));
 		
 		for(MatchSimulator sim: matches)
-			sim.run(); //TODO in seperate threads?
+			sim.run();
 		
 	}
 	

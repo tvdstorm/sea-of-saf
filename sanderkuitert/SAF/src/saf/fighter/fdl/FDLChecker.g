@@ -26,24 +26,21 @@ options {
     private DescribableFighter fighter;
     private List<InvalidAttributeMessage> failMsgs;
     private boolean alwaysConditionExists;
-    private CommonTree name, lastAspect;
+    private CommonTree lastAspect;
+    
     
     /** Returns a message for every attribute in the AST that the given fighter considers invalid */
     public List<InvalidAttributeMessage> check(DescribableFighter fighter) throws RecognitionException {
         this.fighter = fighter;
         this.failMsgs = new LinkedList<InvalidAttributeMessage>();
         this.alwaysConditionExists = false;
-        this.name = null;
         this.lastAspect = null;
         
         fighter(); //start checking at root
         
-        if(!alwaysConditionExists){
-            failMsgs.add(new InvalidAttributeMessage(name,"Please add an "+fighter.getAlwaysCondition()+"-rule."));
-        }
-        
         return failMsgs;
     }
+    
     
    	private int toInt(String number){
         try{
@@ -59,7 +56,6 @@ options {
         if(!fighter.isValidName(node.getText())){
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validNames()));
         }
-        name = node;
     }
     
     private void checkAspect(CommonTree node){
@@ -78,7 +74,8 @@ options {
     private void checkCondition(CommonTree node){
         if(!fighter.isValidCondition(node.getText())){
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
-        }else if(node.getText().equals(fighter.getAlwaysCondition())){
+        }
+        if(node.getText().equals(fighter.getAlwaysCondition())){
             alwaysConditionExists = true;
         }
     }
@@ -94,6 +91,18 @@ options {
             failMsgs.add(new InvalidAttributeMessage(node, fighter.validBehaviour()));
         }
     }
+    
+    private void checkChoice(CommonTree option1, CommonTree option2){
+        if(option1.getText().equals(option2.getText())){
+            failMsgs.add(new InvalidAttributeMessage("Warning: use of choose with equal options "+option1.getText()));
+        }
+    }
+    
+    private void checkAlwaysRule(){
+        if(!this.alwaysConditionExists){
+            failMsgs.add(new InvalidAttributeMessage("Please add an "+fighter.getAlwaysCondition()+"-rule."));
+        }
+    }
 }
 
 @rulecatch {
@@ -103,21 +112,21 @@ options {
 }
 
 
-fighter:            name attributes;
+fighter:            name attributes                        {checkAlwaysRule();};
 
-name:               IDENTIFIER                              {checkName($IDENTIFIER);};
+name:               IDENTIFIER                             {checkName($IDENTIFIER);};
 attributes:         (property | behaviour)*;
 
 property:           aspect value;
 behaviour:          condition move attack;
 
-aspect:             IDENTIFIER                              {checkAspect($IDENTIFIER);};
-value:              NUMBER                                  {checkValue($NUMBER);};
+aspect:             IDENTIFIER                             {checkAspect($IDENTIFIER);};
+value:              NUMBER                                 {checkValue($NUMBER);};
 condition:          andCondition (OR andCondition)*;
-move:               IDENTIFIER                              {checkMove($IDENTIFIER);}
-                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER      {checkMove($i1); checkMove($i2);};
-attack:             IDENTIFIER                              {checkAttack($IDENTIFIER);}
-                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER      {checkAttack($i1); checkAttack($i2);};
+move:               IDENTIFIER                             {checkMove($IDENTIFIER);}
+                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER     {checkMove($i1); checkMove($i2); checkChoice($i1,$i2);};
+attack:             IDENTIFIER                             {checkAttack($IDENTIFIER);}
+                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER     {checkAttack($i1);checkAttack($i2); checkChoice($i1,$i2);};
                   
 andCondition:       atomicCondition (AND atomicCondition)*;
-atomicCondition:    L_PAREN condition R_PAREN | IDENTIFIER  {checkCondition($IDENTIFIER);};
+atomicCondition:    L_PAREN condition R_PAREN | IDENTIFIER {checkCondition($IDENTIFIER);};

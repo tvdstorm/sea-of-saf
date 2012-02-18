@@ -12,7 +12,7 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 	protected List<Condition> behaviours;
 	
 	
-	public AbstractDescribableFighter(){	
+	protected AbstractDescribableFighter(){	
 		this.name = "Anonymous";
 		this.properties = new LinkedList<Property>();
 		this.behaviours = new LinkedList<Condition>();
@@ -100,40 +100,26 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 		this.properties.add(new Property(aspect, value));
 	}
 	
-	/** 
-	 * @require non-empty lists with valid members 
+	/**
+	 * @require non-empty lists with valid members
 	 */
-	public void addBehaviour(List<String> postOrderConditionTree, List<String> moves, List<String> attacks) {
-		Condition condition;
-		
-		//Create condition hierarchy
+	public void addBehaviour(List<String> postOrderTree, List<String> moves, List<String> attacks) {
 		Condition orCondition = null;
-		Condition andCondition = null;
+		List<Condition> andConditions = new LinkedList<Condition>();
 		List<Condition> atomicConditions = new LinkedList<Condition>();
-		for(String element: postOrderConditionTree) {
+		for(String element: postOrderTree) {
 			if(element.equals("or")) {
-				atomicConditions.add(andCondition); //combine
-				orCondition = new Condition.CompoundCondition(false, atomicConditions);
-				andCondition = null;
-				atomicConditions.clear();
+				orCondition = Condition.newOrCondition(andConditions);
+				andConditions.clear();
 			} else if(element.equals("and")) {
-				andCondition = new Condition.CompoundCondition(true, atomicConditions);
+				andConditions.add(Condition.newAndCondition(atomicConditions));
 				atomicConditions.clear();
 			} else {
 				atomicConditions.add(new Condition(element, new Action(moves, attacks)));
 			}
 		}
 		
-		//Select toplevel condition
-		if(atomicConditions.size()>0) {
-			condition=atomicConditions.get(0);
-		} else if(andCondition != null) {
-			condition=andCondition;
-		} else {
-			condition = orCondition;
-		}
-		
-		this.behaviours.add(condition);
+		this.behaviours.add(orCondition);
 	}
-	
+
 }

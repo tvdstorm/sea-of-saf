@@ -10,6 +10,7 @@ class Action implements AST {
 	List<Move> moves;
 	List<Attack> attacks;
 
+	
 	public Action(List<String> moves, List<String> attacks) {
 		this.moves = new LinkedList<Move>();
 		this.attacks = new LinkedList<Attack>();
@@ -20,19 +21,10 @@ class Action implements AST {
 			this.attacks.add(new Attack(attack));
 		}
 	}
-	
-	/** Get random move and attack */
-	public MoveAndAttack getAction() {
-		assert moves.size()>0 && attacks.size()>0;
-		
-		Move move = moves.get(new Random().nextInt(moves.size()));
-		Attack attack = attacks.get(new Random().nextInt(attacks.size()));
-		
-		return new MoveAndAttack(move, attack);
-	}
 
+	
 	public String getName() {
-		return "<"+moves+", "+attacks+">";
+		return "{ "+moves+", "+attacks+" }";
 	}
 
 	public List<AST> getChildren() {
@@ -41,17 +33,16 @@ class Action implements AST {
 		result.addAll(attacks);
 		return result;
 	}
-
 	
-	//=== Inner class ========================================================
-	public static class MoveAndAttack {
-		public final Move move;
-		public final Attack attack;
+	public Fighter.ActionEffect getEffectFromRandomChoice(List<Property> properties) {
+		Move move = moves.get(new Random().nextInt(moves.size()));
+		Attack attack = attacks.get(new Random().nextInt(attacks.size()));
 		
-		public MoveAndAttack(Move move, Attack attack) {
-			this.move = move;
-			this.attack = attack;
-		}
+		String animationName = move.getName()+"-"+attack.getName();
+		int physicalEffect = attack.getPhysicalEffect(properties);
+		int range = attack.getRange(properties);
+		
+		return new Fighter.ActionEffect(animationName, physicalEffect, range);
 	}
 	
 }

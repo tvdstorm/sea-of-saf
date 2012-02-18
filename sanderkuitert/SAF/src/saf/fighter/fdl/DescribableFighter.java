@@ -2,6 +2,7 @@ package saf.fighter.fdl;
 
 import java.util.List;
 
+
 /** Fighters that can obtain valid attributes from FDL */
 public interface DescribableFighter {
 	
