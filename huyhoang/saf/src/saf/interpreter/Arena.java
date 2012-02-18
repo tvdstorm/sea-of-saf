@@ -17,7 +17,7 @@ public class Arena extends Observable {
 		return bots;
 	}
 	
-	private Interpreter interpreter;
+	private InterpreterVisitor interpreter;
 	
 	public static void main(String args []) {
         System.out.println("Arena");
@@ -77,7 +77,7 @@ public class Arena extends Observable {
 	}
 	
 	public void EvaluateBots() {
-		interpreter = new Interpreter();
+		interpreter = new InterpreterVisitor();
 		for (int counter=0; counter<2; counter++) {
 			interpreter.Evaluate(bots.get(counter).getFighter(), bots.get(counter));
 		}

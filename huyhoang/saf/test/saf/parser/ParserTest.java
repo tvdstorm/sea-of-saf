@@ -3,6 +3,7 @@ package saf.parser;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import saf.AllTests;
 import saf.ast.ASTNode;
 import saf.ast.Fighter;
 import saf.ast.condition.AndOperator;
@@ -41,7 +42,7 @@ public class ParserTest {
 							   "				   choose(fight(kick punch block) superhero(fly crawl))]\r\n" +
 							   "}";
 		
-		Fighter fighter = getFighterAst(specification);
+		Fighter fighter = AllTests.getFighterAst(specification);
 		
 		assertEquals(4, fighter.getDefinitions().size());
 		

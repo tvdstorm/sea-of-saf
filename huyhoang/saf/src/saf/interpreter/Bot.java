@@ -50,6 +50,7 @@ public class Bot extends Observable
 		return this.botOnTheLeft;
 	}
 	
+	// check, and remove this!
 	private Fighter fighter;
 	public Fighter getFighter() {
 		return fighter;
@@ -117,6 +118,7 @@ public class Bot extends Observable
 	
 	@MethodAnnotation(safName = "even", keywordType = "condition")
 	public boolean isEven() {
+		System.out.println("isEven called");
 		return this.getNumberOfStrongerStrengths() == this.getNumberOfWeakerStrengths();
 	}
 	
