@@ -12,17 +12,9 @@ import org.antlr.runtime.tree.CommonTree;
 
 import safcr.antlr.SAFGrammarLexer;
 import safcr.antlr.SAFGrammarParser;
+import safcr.ast.*;
 
 public class Test {
-	
-	 private static void traverse(CommonTree tree, int indent) {
-		    if(tree == null) return;
-		    for(int i = 0; i < indent; i++) System.out.print("|   ");
-		    System.out.println("|--> " + tree.getText());
-		    for(int i = 0; i < tree.getChildCount(); i++) {
-		      traverse((CommonTree)tree.getChild(i), indent + 1);
-		    }
-		  }
 
 	public static void main(String[] args) throws RecognitionException, IOException {
 		String testFile = System.getProperty("user.dir") + "\\src\\safcr\\test\\test.saf";
@@ -32,8 +24,8 @@ public class Test {
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFGrammarParser parser = new SAFGrammarParser(tokenStream);
 			
-		CommonTree saf = (CommonTree) parser.saf().getTree();
-		traverse(saf, 0);
+		Node tree = parser.saf();
+		System.out.println(tree.toTreeString(""));
 	}
 
 }
