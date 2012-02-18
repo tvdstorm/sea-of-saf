@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -36,13 +35,11 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 
-import program.Engine;
 import program.Fight;
 
 public class FighterScreen extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
-	//FightImages fightimages;
 	private JPanel cPanel,panel;
 	private JTextField txtBotLeft,txtBotRight;
 	private JLabel lblBotLeft, lblBotRight;
@@ -51,9 +48,8 @@ public class FighterScreen extends JFrame implements ActionListener{
 	private JLabel lblLifeBotLeft, lblLifeBotRight;
 	private JLabel fighterLeft;
 	private JLabel fighterRight;
-	//private Engine _engine;
 	//private Timer _timer;
-	//private Graphics _graphics;
+	FightImages fightimages = new FightImages();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -69,8 +65,6 @@ public class FighterScreen extends JFrame implements ActionListener{
 	}
 
 	public FighterScreen() {
-		//_timer = new Timer(1000, this);
-		//_graphics = new Graphics();
 		FightImages fightimages = new FightImages();
 		setTitle("Super Fighters");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,7 +78,7 @@ public class FighterScreen extends JFrame implements ActionListener{
 		btnStart.setEnabled(false);
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				startFight();
+				prepareFight();
 			}
 		});
 		btnStart.setBounds(10, 8, 89, 46);
@@ -116,7 +110,6 @@ public class FighterScreen extends JFrame implements ActionListener{
 				checkStart();
 			}
 		});
-
 		btnBotLeft.setBounds(485, 8, 45, 20);
 		cPanel.add(btnBotLeft);
 		
@@ -155,7 +148,6 @@ public class FighterScreen extends JFrame implements ActionListener{
 		cPanel.add(verticalGlue_1);
 		
 		panel = new JPanel();
-		
 		panel.setLayout(null);
 		
 		fighterLeft = new JLabel();
@@ -171,12 +163,11 @@ public class FighterScreen extends JFrame implements ActionListener{
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(10, 110, 780, 554);
 		cPanel.add(panel);
-		
 	}
 
 	
 	private String actionFileChooser (){
-		String filename = File.separator+"home/jos/workspace/SuperAwesomeFighters/src/program";
+		String filename = File.separator+"home/jos/workspace/SuperAwesomeFighters/src/safs";
 		Component frame = new JFrame();
 		JFileChooser fc = new JFileChooser(new File(filename));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(".saf files", "saf");
@@ -213,7 +204,15 @@ public class FighterScreen extends JFrame implements ActionListener{
 		if (!bCheck.getErrorMessages().isEmpty()){
 			botEnable = false;
 			List<String> st=bCheck.getErrorMessages();
-			JOptionPane.showMessageDialog(null,st);
+			String ms = "";
+			for (String s: st){
+				ms += s + "\n";
+			}
+			JOptionPane.showMessageDialog(null,ms,btmp.getName(),JOptionPane.ERROR_MESSAGE);
+		}
+		if (!bCheck.getWarningMessages().isEmpty()){
+			List<String> st=bCheck.getWarningMessages();
+			JOptionPane.showMessageDialog(null,st,btmp.getName()+" warning", JOptionPane.WARNING_MESSAGE);
 		}
 		if (botEnable) {
 			return btmp;
@@ -222,46 +221,71 @@ public class FighterScreen extends JFrame implements ActionListener{
 		}
 	}
 	
-	
-	private void startFight(){
+	private void prepareFight(){
 		Bot bLeft = getBot(txtBotLeft.getText());
 		Bot bRight = getBot(txtBotRight.getText());
-		 
+		lblLifeBotLeft.setText("100 %");
+		lblLifeBotRight.setText("100 %");
+		
+		//FightImages fightimages = new FightImages();
+		fighterLeft.setIcon(fightimages.getImage("stanceLeft"));
+		System.out.println(fighterLeft.getIcon().toString());
+		fighterRight.setIcon(fightimages.getImage("stanceRight"));
+		System.out.println(fighterRight.getIcon().toString());
+		fighterLeft.setBounds(10, 10, 166, 379);
+		fighterRight.setBounds(500, 10, 166, 379);
+		panel.repaint();
+		cPanel.repaint();
+	
+		
 		if (!(bLeft == null ) && !(bRight == null)){
 		  String end = doFight(bLeft, bRight);
-		   JOptionPane.showMessageDialog(null, end);
+		   JOptionPane.showMessageDialog(null, end, "Fight end",JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
-	 
-	
-	
 	private String doFight(Bot bLeft,Bot bRight){
 		Fight fight = new Fight (bLeft,bRight);
-		Engine engine = new Engine (fight);
-		while (engine.stillAlive()) {
-			engine.doAction();
-			lblLifeBotLeft.setText(Integer.toString(engine.getLifeLeft()) + " %");
-			lblLifeBotRight.setText(Integer.toString(engine.getLifeRight())+ " %");
-			drawFighters();
-			
+		while (fight.stillAlive()) {
+			fight.doAction();
+			drawFighters(fight);
+			drawLive(fight);
+			panel.repaint();
+			cPanel.repaint();
+			wait (5000);
 		}
-		if ( engine.getLifeLeft() == 0 ){
+		if ( fight.getLifeLeft() == 0 ){
+			fighterLeft.setIcon(fightimages.getImage("deadLeft"));
 			return "Fighter rechts heeft gewonnen!";
+			
 		}else {
+			fighterLeft.setIcon(fightimages.getImage("deadRight"));
 			return "Fighter links heeft gewonnen!";
 		}
 	}
 	
-	private void drawFighters(){
-		FightImages fightimages = new FightImages();
-		fighterLeft.setIcon(fightimages.getImages(new Random().nextInt(18)));
-		fighterRight.setIcon(fightimages.getImages(new Random().nextInt(18)));
+	private void drawLive(Fight fight){
+		lblLifeBotLeft.setText(Integer.toString(fight.getLifeLeft()) + " %");
+		lblLifeBotRight.setText(Integer.toString(fight.getLifeRight())+ " %");
+	}
+	
+	private void drawFighters(Fight fight){
+		
+		fighterLeft.setIcon(fightimages.getImage(fight.getCurrentFightAction(true)+"Left"));
+		System.out.println(fighterLeft.getIcon().toString());
+		System.out.println(fight.getLifeLeft());
+		fighterRight.setIcon(fightimages.getImage(fight.getCurrentFightAction(false)+"Right"));
+		System.out.println(fighterRight.getIcon().toString());
+		System.out.println(fight.getLifeRight());
+		fighterLeft.setBounds(fight.getPositionLeft(), 10, 166, 379);
+		fighterRight.setBounds(fight.getPositionRight(), 10, 166, 379);
+		
+		panel.repaint();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 
+		 cPanel.repaint();
 	}
 	
 	private void checkStart(){
@@ -272,4 +296,10 @@ public class FighterScreen extends JFrame implements ActionListener{
 		}
 	}
 
+	
+	private void wait (int seconds){
+		for (int i=0 ; i <= seconds *100000; i++){
+			double j =	Math.PI * Math.PI;
+		}
+	}
 }

@@ -1,0 +1,8 @@
+Test
+{
+kickPower = 2
+punchReach = 8
+near [ walk_towards punch_high]
+stronger [run_away block_low]
+always and far [ choose (jump stand) kick_high]
+}

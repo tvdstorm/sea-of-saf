@@ -11,10 +11,12 @@ public class BotChecker implements BotVisit {
 	
 	private List <String> errorMessages = new LinkedList<String>();
 	private List <String> initMessages = new LinkedList<String>();
+	private List <String> warningMessages = new LinkedList<String>();
 	
 	public BotChecker () {
 		this.errorMessages.clear();
 		this.initMessages.clear();
+		this.warningMessages.clear();
 	}
 	
 	@Override
@@ -46,6 +48,11 @@ public class BotChecker implements BotVisit {
 		}else {
 			this.errorMessages.add("Inputrule:  "+ inputrule.getInputrule(firstrule) + "  is not valid!");
 		}
+		if (inputrule.getInputrule(true).equalsIgnoreCase(inputrule.getInputrule(false))){
+			if (!warningMessages.contains("Both rules, "+ inputrule.getInputrule(true) +", are the same!")){
+				this.warningMessages.add("Both rules, "+ inputrule.getInputrule(true) +", are the same!");
+			}
+		}
 	}
 	
 	@Override
@@ -67,12 +74,22 @@ public class BotChecker implements BotVisit {
 		for (Characteristic c : bot.getCharacteristics()) {
 			visit(c);	
 		}
-
-		for (Rule i : bot.getRules()) {
-			visit (i);
+		boolean always = false;
+		for (Rule r : bot.getRules()) {
+			for (Condition c :r.getConditionList()){
+				if (c.getLeft().equalsIgnoreCase("always")){
+					always = true;
+				}
+			}
+			visit (r);
 		}
-		
-		if (errorMessages.isEmpty()) {
+		if (!always){
+			this.errorMessages.add("There is no always condition");
+		}
+		if (this.errorMessages.isEmpty()) {
+			if (!this.warningMessages.isEmpty()){
+				System.out.println(this.warningMessages.toString());
+			}
 			System.out.println(" Bot: "+ bot.getName() + " is valid!!!");
 		}else {
 			System.out.println(this.toString());
@@ -80,7 +97,11 @@ public class BotChecker implements BotVisit {
 	}
 	
 	public List<String> getErrorMessages (){
-		return errorMessages;
+		return this.errorMessages;
+	}
+	
+	public List<String> getWarningMessages(){
+		return this.warningMessages;
 	}
 	
 	@Override
