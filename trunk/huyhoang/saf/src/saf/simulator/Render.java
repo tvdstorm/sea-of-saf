@@ -45,6 +45,7 @@ public class Render extends Canvas implements Observer {
 	}
 
 	private void paintBot2(Bot bot, String action) {
+		if (action.equals("")) return;
 		try {
 			BufferedImage image = loadImage("/Users/huyhoang/Downloads/SF2HD/Ryu/" + action + ".png");
 			Graphics2D g2d = (Graphics2D) this.getGraphics();
@@ -64,6 +65,8 @@ public class Render extends Canvas implements Observer {
 		this.getGraphics().fillRect(0, 0, 1024, 768);
 		
 		for (Bot bot : ((Arena)arg0).getBots()) {
+			System.out.println("bot.getLastAction:" + bot.getLastAction());
+			
 			paintBot2(bot, bot.getLastAction());
 		}
 	}
