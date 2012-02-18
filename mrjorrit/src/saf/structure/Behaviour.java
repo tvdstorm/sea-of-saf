@@ -1,28 +1,40 @@
 package saf.structure;
 
-import java.util.Vector;
+import java.util.List;
 
 public class Behaviour extends Check {
 	
-	public Behaviour(Vector<Rule> behaviour)
+	public Behaviour(List<Rule> behaviour)
 	{
 		this.behaviour = behaviour;
 	}
 	
 	//Behaviour
-	private Vector<Rule> behaviour;
+	private List<Rule> behaviour;
 	
-	public Vector<Rule> getBehaviour() {
+	public List<Rule> getBehaviour() {
 		return behaviour;
 	}
 
 	@Override
-	public void check(){
-		//TODO: check if always is implemented
-		//boolean alwaysImplemented = false;
+	public List<String> check(){
+		boolean alwaysImplemented = false;
+		
+		if(this.behaviour.size() == 0)
+			addError("There aren't any rules specified to define behaviour");
+		
 		for(Rule rule : behaviour)
 		{
-			rule.check();
+			addErrors(rule.check());
+			if(rule.getLogical() instanceof LogicalSimple && ((LogicalSimple) rule.getLogical()).getCondition() == Condition.always)
+			{
+				alwaysImplemented = true;
+			}
 		}
+		
+		if(!alwaysImplemented)
+			addError("A Rule with 'always' isn't implemented, this is required");
+		
+		return getErrors();
 	}
 }

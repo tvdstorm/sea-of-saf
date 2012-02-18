@@ -1,5 +1,7 @@
 package saf.structure;
 
+import java.util.List;
+
 public class Fighter extends Check {
 	
 	//Constructor
@@ -7,10 +9,12 @@ public class Fighter extends Check {
 		this.name = name;
 		this.personality = personality;
 		this.behaviour = behaviour;
+		this.health = 100;
+		
 	}
 	
 	//Name
-	private String name = null;
+	private final String name;
 	
 	public String getName() {
 		return name;
@@ -18,27 +22,41 @@ public class Fighter extends Check {
 
 	
 	//Personality
-	private Personality personality;
+	private final Personality personality;
 	
 	public Personality getPersonality() {
 		return personality;
 	}
 	
 	//Behaviour
-	private Behaviour behaviour;
+	private final Behaviour behaviour;
 	
 	public Behaviour getBehaviour() {
 		return behaviour;
 	}
+	
+	//Health
+	private float health;
+	
+	public float getHealth()
+	{
+		return health;
+	}
+	
+	public void doDamage(float damage)
+	{
+		health -= damage;
+	}
 
 	@Override
-	public void check(){
+	public List<String> check(){
 		if(name == null || name.isEmpty())
 		{
-			String test = "sd";
+			addError("A fighter needs a name!");
 		}
-		personality.check();
-		behaviour.check();
+		addErrors(personality.check());
+		addErrors(behaviour.check());
+		return getErrors();
 	}
 
 }

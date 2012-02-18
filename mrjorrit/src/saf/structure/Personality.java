@@ -1,23 +1,34 @@
 package saf.structure;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Personality extends Check  {
 	
-	public Personality(Vector<Characteristic> personality)
+	public Personality(List<Characteristic> personality)
 	{
 		this.personality = personality;
 	}
 	
 	//Behaviour
-	private Vector<Characteristic> personality;
+	private List<Characteristic> personality;
 	
-	public Vector<Characteristic> getBehaviour() {
+	public List<Characteristic> getBehaviour() {
 		return personality;
 	}
 
 	@Override
-	public void check(){
-		for(Characteristic character : personality) character.check();
+	public List<String> check(){
+		
+		List<Attribute> foundAttributes = new ArrayList<Attribute>(); 
+		for(Characteristic character : personality)
+		{
+			addErrors(character.check());
+			if(foundAttributes.contains(character.getAttribute()))
+				addError("'" + character.getAttribute().toString() + "' already defined, this is a dupe.");
+			else
+				foundAttributes.add(character.getAttribute());
+		}
+		return getErrors();
 	}
 }

@@ -1,9 +1,11 @@
 package saf.structure;
 
+import java.util.List;
+
 public class Characteristic extends Check {
 	
 	//Attribute
-	private Attribute attribute;
+	private final Attribute attribute;
 
 	public Attribute getAttribute() {
 		return attribute;
@@ -18,25 +20,29 @@ public class Characteristic extends Check {
 
 	public Characteristic(String attribute, int power)
 	{
+		Attribute attribute2;
+		
 		try
 		{
-			this.attribute = Attribute.valueOf(attribute);
+			attribute2 = Attribute.valueOf(attribute);
 		}
 		catch(Exception e)
 		{
 			//Set to default attribute
-			this.attribute = Attribute.kickPower;
-			addError("Illegal attribute:" + attribute + ", default attribute set: = kickPower");
+			attribute2 = null;
+			addError("Illegal attribute: '" + attribute + "'");
 		}
+		this.attribute = attribute2;
 		this.power = power;
 	}
 
 	@Override
-	public void check(){
+	public List<String> check(){
 		if(power < 1 || power > 10) 
 		{
-			
+			addError("The power: '" + power + "', is invalid for: '" + attribute.toString() + "'. Power should be in the range of 1-10.");
 		}
+		return getErrors();
 	}
 	
 }
