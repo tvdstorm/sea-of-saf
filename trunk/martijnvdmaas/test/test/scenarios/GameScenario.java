@@ -12,20 +12,18 @@ import test.jbehave.JUnitReportingRunner;
 import test.jbehave.UseConfiguration;
 import test.jbehave.UseSteps;
 
-
-
 @RunWith(JUnitReportingRunner.class)
-@UseSteps(InitializeSteps.class)
-@UseConfiguration(InitializeScenario.MyJBehaveConfiguration.class)
-public class InitializeScenario extends JUnitScenario {
+@UseSteps(GameSteps.class)
+@UseConfiguration(GameScenario.MyJBehaveConfiguration.class)
+public class GameScenario extends JUnitScenario {
 
-    public InitializeScenario(final ScenarioReporter reporter) {
+    public GameScenario(final ScenarioReporter reporter) {
 	super(new MyJBehaveConfiguration() {
 	    @Override
 	    public ScenarioReporter forReportingScenarios() {
 	        return reporter;
 	    }
-	}, new InitializeSteps());
+	}, new GameSteps());
     }
     
     

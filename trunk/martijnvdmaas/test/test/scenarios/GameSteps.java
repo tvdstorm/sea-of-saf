@@ -18,12 +18,12 @@ import org.jbehave.scenario.annotations.When;
 import org.jbehave.scenario.steps.Steps;
 import astelements.Bots;
 
-public class InitializeSteps extends Steps {
-    Bots bots;
-    String leftBot;
-    String unbeatablePlayer;
-    String rightBot;
-    FightEngine fightEngine;
+public class GameSteps extends Steps {
+	private Bots bots;
+	private String leftBot;
+	private String unbeatablePlayer;
+	private String rightBot;
+	private FightEngine fightEngine;
 
     @Given("an unbeatable fighter file with value $value")
     public void anUnbeatableFighterFileWithValue(String name) throws ParseException, IOException 

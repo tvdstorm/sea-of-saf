@@ -10,7 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.MockitoAnnotations.Mock;
 
 import test.jbehave.JUnitReportingRunner;
-import test.scenarios.InitializeScenario;
+import test.scenarios.GameScenario;
 
 public class JUnitReportingRunnerTest {
     
@@ -24,7 +24,7 @@ public class JUnitReportingRunnerTest {
     
     @Test
     public void runUpExampleScenarioAndCheckNotifications() {
-	JUnitReportingRunner runner = new JUnitReportingRunner(InitializeScenario.class);
+	JUnitReportingRunner runner = new JUnitReportingRunner(GameScenario.class);
 	Description description = runner.getDescription();
 	runner.run(notifier);
 	verifyAllChildDescriptionsFired(description);
