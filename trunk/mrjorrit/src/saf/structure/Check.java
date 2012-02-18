@@ -1,13 +1,13 @@
 package saf.structure;
 
 import java.util.List;
-import java.util.Vector;
+import java.util.ArrayList;
 
 public abstract class Check {
 	
-	public abstract void check();
+	public abstract List<String> check();
 	
-	private List<String> errors = new Vector<String>();
+	private List<String> errors = new ArrayList<String>();
 	public List<String> getErrors()
 	{
 		return errors;
@@ -15,5 +15,10 @@ public abstract class Check {
 	public void addError(String error)
 	{
 		errors.add(error);
+	}
+	
+	public void addErrors(List<String> errors)
+	{
+		this.errors.addAll(errors);
 	}
 }

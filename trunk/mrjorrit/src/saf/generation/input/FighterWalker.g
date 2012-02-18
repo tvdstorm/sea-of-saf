@@ -10,7 +10,7 @@ options {
 {
   package saf.generation.output;
   import saf.structure.*;
-  import java.util.Vector;
+  import java.util.ArrayList;
 }
 
 fighter returns [Fighter fighter]
@@ -18,15 +18,15 @@ fighter returns [Fighter fighter]
   ;
 
 personality returns [Personality personality]
-  : {Vector<Characteristic> personalityVector = new Vector<Characteristic>();}
-    ^(PERSONALITY (chara=characteristic {personalityVector.add(chara);})*)
-    {personality = new Personality(personalityVector);}
+  : {ArrayList<Characteristic> personalityArrayList = new ArrayList<Characteristic>();}
+    ^(PERSONALITY (chara=characteristic {personalityArrayList.add(chara);})*)
+    {personality = new Personality(personalityArrayList);}
   ;
   
 behaviour returns [Behaviour behaviour]
-  : {Vector<Rule> behaviourVector = new Vector<Rule>();}
-    ^(BEHAVIOUR (rul=rule {behaviourVector.add(rul);})*)
-    {behaviour = new Behaviour(behaviourVector);}
+  : {ArrayList<Rule> behaviourArrayList = new ArrayList<Rule>();}
+    ^(BEHAVIOUR (rul=rule {behaviourArrayList.add(rul);})*)
+    {behaviour = new Behaviour(behaviourArrayList);}
   ;
   
 characteristic returns [Characteristic characteristic]
@@ -44,33 +44,33 @@ rule returns [Rule rule]
 condition returns [Logical logical]
   :
     (s=IDENT) {logical = new LogicalSimple(s.getText());}
-  | (and=AND left=condition right=condition) {logical= new LogicalAnd(left,right);}
-  | (or=OR left=condition right=condition) {logical= new LogicalOr(left,right);}
+  | ^(and=AND left=condition right=condition) {logical= new LogicalAnd(left,right);}
+  | ^(or=OR left=condition right=condition) {logical= new LogicalOr(left,right);}
   ;
 
-moveActionTypes returns [Vector<MoveAction> moveActions]
-  :{moveActions = new Vector<MoveAction>();}
+moveActionTypes returns [ArrayList<MoveAction> moveActions]
+  :{moveActions = new ArrayList<MoveAction>();}
   (
     mov=IDENT {moveActions.add(new MoveAction(mov.getText()));}
     | movs=chooseMoveActionType {moveActions = movs;}
   )
   ;
 
-fightActionTypes returns [Vector<FightAction> fightActions]
-  :{fightActions = new Vector<FightAction>();}
+fightActionTypes returns [ArrayList<FightAction> fightActions]
+  :{fightActions = new ArrayList<FightAction>();}
   (
     fight=IDENT {fightActions.add(new FightAction(fight.getText()));}
     | fights=chooseFightActionType {fightActions = fights;}
   )
   ;
   
-chooseMoveActionType returns [Vector<MoveAction> moveActions]
-  : {moveActions = new Vector<MoveAction>();}
+chooseMoveActionType returns [ArrayList<MoveAction> moveActions]
+  : {moveActions = new ArrayList<MoveAction>();}
     ^(CHOOSE (mov=IDENT {moveActions.add(new MoveAction(mov.getText()));})+)
   ;
 
-chooseFightActionType returns [Vector<FightAction> fightActions]
-  : {fightActions = new Vector<FightAction>();}
+chooseFightActionType returns [ArrayList<FightAction> fightActions]
+  : {fightActions = new ArrayList<FightAction>();}
     ^(CHOOSE (fight=IDENT {fightActions.add(new FightAction(fight.getText()));})+)
   ;
   

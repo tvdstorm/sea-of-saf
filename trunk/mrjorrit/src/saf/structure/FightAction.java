@@ -1,5 +1,7 @@
 package saf.structure;
 
+import java.util.List;
+
 public class FightAction extends Check {
 
 	//Constructor
@@ -13,8 +15,8 @@ public class FightAction extends Check {
 		catch(Exception e)
 		{
 			//set to default value
-			fightActionType2  = FightActionType.block_high;
-			addError("Illegal condition");
+			fightActionType2  = null;
+			addError("Illegal FightAction: '" + fightAction + "'");
 		}
 		this.fightActionType = fightActionType2;
 	}
@@ -27,8 +29,8 @@ public class FightAction extends Check {
 	}
 	
 	@Override
-	public void check() {
+	public List<String> check() {
 		// TODO Auto-generated method stub
-		
+		return getErrors();
 	}
 }

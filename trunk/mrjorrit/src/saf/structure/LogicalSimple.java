@@ -1,5 +1,7 @@
 package saf.structure;
 
+import java.util.List;
+
 public class LogicalSimple extends Logical{
 	
 	private final Condition condition;
@@ -17,14 +19,14 @@ public class LogicalSimple extends Logical{
 		catch(Exception e)
 		{
 			//set to default value
-			condition2  = Condition.always;
-			addError("Illegal condition");
+			condition2  = null;
+			addError("Illegal condition: " + condition);
 		}
 		this.condition = condition2;
 	}
 	
 	@Override
-	public void check(){
-
+	public List<String> check(){
+		return getErrors();
 	}
 }

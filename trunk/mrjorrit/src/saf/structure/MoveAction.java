@@ -1,5 +1,7 @@
 package saf.structure;
 
+import java.util.List;
+
 public class MoveAction extends Check {
 
 	//Constructor
@@ -14,7 +16,7 @@ public class MoveAction extends Check {
 		{
 			//set to default value
 			moveActionType2  = MoveActionType.crouch;
-			addError("Illegal condition");
+			addError("Illegal MoveAction: '" + moveAction + "'");
 		}
 		this.moveActionType = moveActionType2;
 	}
@@ -27,8 +29,8 @@ public class MoveAction extends Check {
 	}
 	
 	@Override
-	public void check() {
+	public List<String> check() {
 		// TODO Auto-generated method stub
-		
+		return getErrors();
 	}
 }

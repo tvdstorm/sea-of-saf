@@ -23,11 +23,16 @@ public class Program {
 		FDLParser parser = new FDLParser(new CommonTokenStream(lexer));
 		FDLParser.fighter_return r = parser.fighter();
 		CommonTree tree = (CommonTree)r.getTree();
-		System.out.println(tree.toStringTree());
 		writeDot(tree);
 		
 		FighterWalker walker = new FighterWalker(new CommonTreeNodeStream(tree));
 		Fighter fighter = walker.fighter();
+		
+		for(String error : fighter.check())
+		{
+			System.out.println(error);
+		}
+		
 		System.out.println("ok!");
 	}
 		

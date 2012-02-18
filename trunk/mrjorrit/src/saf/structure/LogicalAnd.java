@@ -5,9 +5,4 @@ public class LogicalAnd extends LogicalClause {
 		this.leftHandSide = leftHandSide;
 		this.rightHandSide = rightHandSide;
 	}
-	
-	@Override
-	public void check(){
-
-	}
 }
