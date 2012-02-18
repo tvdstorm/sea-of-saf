@@ -1,4 +1,4 @@
-tree grammar FDLInterpreter; //Treewalker that interprets Fighter Description Language, adding atributes
+tree grammar FDLInterpreter; //Treewalker that interprets Fighter Description Language, adding atributes to a fighter
 
 options {
     language = Java;
@@ -32,6 +32,7 @@ options {
         fighter(); //start interpreting at root
     }
     
+    
     private int toInt(String number){
         try{
             return Integer.parseInt(number);
@@ -41,7 +42,6 @@ options {
             return Integer.MIN_VALUE;
         }
     }
-    
 }
 
 @rulecatch {
@@ -53,20 +53,20 @@ options {
 
 fighter:            name attributes;
 
-name:               IDENTIFIER                          {fighter.setName($IDENTIFIER.text);};
+name:               IDENTIFIER                              {fighter.setName($IDENTIFIER.text);};
 attributes:         (property | behaviour)*;
 
 property:           aspect value;
-behaviour:          condition move attack               {conditions.clear();};
+behaviour:          condition move attack                   {conditions.clear();};
 
-aspect:             IDENTIFIER                          {lastAspect=$IDENTIFIER.text;};
-value:              NUMBER                              {fighter.addProperty(lastAspect,toInt($NUMBER.text));};
-condition:          andCondition (OR andCondition)*     { if($OR!=null){conditions.add($OR.text);} };
-move:               i1=IDENTIFIER                       {lastMoves = Arrays.asList($i1.text);}
-                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER  {lastMoves = Arrays.asList($i1.text,$i2.text);};
-attack:             i1=IDENTIFIER                       {fighter.addBehaviour(conditions,lastMoves,Arrays.asList($i1.text));}
-                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER  {fighter.addBehaviour(conditions,lastMoves,Arrays.asList($i1.text,$i2.text));};
+aspect:             IDENTIFIER                              {lastAspect=$IDENTIFIER.text;};
+value:              NUMBER                                  {fighter.addProperty(lastAspect,toInt($NUMBER.text));};
+condition:          andCondition (OR andCondition)*         {conditions.add(OR_ENCODING); };
+move:               i1=IDENTIFIER                           {lastMoves = Arrays.asList($i1.text);}
+                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER      {lastMoves = Arrays.asList($i1.text,$i2.text);};
+attack:             i1=IDENTIFIER                           {fighter.addBehaviour(conditions,lastMoves,Arrays.asList($i1.text));}
+                  | CHOOSE i1=IDENTIFIER i2=IDENTIFIER      {fighter.addBehaviour(conditions,lastMoves,Arrays.asList($i1.text,$i2.text));};
                   
-andCondition:       atomicCondition (AND atomicCondition)*  { if($AND!=null){conditions.add($AND.text);} };
+andCondition:       atomicCondition (AND atomicCondition)*  {conditions.add(AND_ENCODING);};
 atomicCondition:    L_PAREN condition R_PAREN 
-                  | IDENTIFIER                          {conditions.add($IDENTIFIER.text);};
+                  | IDENTIFIER                              {conditions.add($IDENTIFIER.text);};

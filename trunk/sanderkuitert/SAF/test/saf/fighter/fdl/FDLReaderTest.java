@@ -1,8 +1,6 @@
 package saf.fighter.fdl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -87,28 +85,28 @@ public class FDLReaderTest {
 	public void testApplyAttributes_CheckErrorMsgs() {
 		testApplyAttributes_CheckIncorrect(); //to ensure error messages exist
 		
-		assertEquals(8, testApplyAttributes("all-wrong.fdl").size());
-		assertEquals("nar", testApplyAttributes("chicken-invalid-cond.fdl").get(0).getInvalidAttribute().getText());
-		assertEquals("walk_twards", testApplyAttributes("chuck-invalid-move.fdl").get(0).getInvalidAttribute().getText());
-		assertEquals("15", testApplyAttributes("challenging-outofbounds.fdl").get(0).getInvalidAttribute().getText());
-		assertEquals("bock_low", testApplyAttributes("jackie-invalid-fight.fdl").get(0).getInvalidAttribute().getText());
-		assertEquals("Kicking", testApplyAttributes("kicking-no-always.fdl").get(0).getInvalidAttribute().getText());
+		assertEquals(9, testApplyAttributes("all-wrong.fdl").size());
+		assertTrue(testApplyAttributes("all-wrong.fdl").get(3).toString().startsWith("Warning: use of choose"));
+		assertEquals("nar", testApplyAttributes("chicken-invalid-cond.fdl").get(0).getInvalidAttributeName());
+		assertEquals("walk_twards", testApplyAttributes("chuck-invalid-move.fdl").get(0).getInvalidAttributeName());
+		assertEquals("15", testApplyAttributes("challenging-outofbounds.fdl").get(0).getInvalidAttributeName());
+		assertEquals("bock_low", testApplyAttributes("jackie-invalid-fight.fdl").get(0).getInvalidAttributeName());
+		assertEquals("Please add an always-rule.", testApplyAttributes("kicking-no-always.fdl").get(0).toString());
 	}
 	
 	@Test
 	public void testApplyAttributes_Interpret(){
-		DescribableFighter manualChicken = new SuperAwesomeFighter();
+		SuperAwesomeFighter manualChicken = new SuperAwesomeFighter();
 		manualChicken.setName("chicken");
 		manualChicken.addProperty("kickReach", 9);
 		manualChicken.addProperty("punchReach", 1);
 		manualChicken.addProperty("kickPower", 2);
 		manualChicken.addProperty("punchPower", 2);
-		manualChicken.addBehaviour(Arrays.asList("far"), Arrays.asList("run_towards"), Arrays.asList("kick_low"));
-		manualChicken.addBehaviour(Arrays.asList("near"), Arrays.asList("run_away"), Arrays.asList("kick_low"));
-		manualChicken.addBehaviour(Arrays.asList("always"), Arrays.asList("crouch"), Arrays.asList("punch_low"));
+		manualChicken.addBehaviour(Arrays.asList("far","and","or"), Arrays.asList("run_towards"), Arrays.asList("kick_low"));
+		manualChicken.addBehaviour(Arrays.asList("near","and","or"), Arrays.asList("run_away"), Arrays.asList("kick_low"));
+		manualChicken.addBehaviour(Arrays.asList("always","and","or"), Arrays.asList("crouch"), Arrays.asList("punch_low"));
 		
-		DescribableFighter readChicken = new SuperAwesomeFighter();
-		new FDLReader(fdls.get("chicken.fdl")).applyAttributes(readChicken);
+		SuperAwesomeFighter readChicken = new SuperAwesomeFighter(fdls.get("chicken.fdl"));
 		
 		assertEquals(manualChicken, readChicken);
 	}

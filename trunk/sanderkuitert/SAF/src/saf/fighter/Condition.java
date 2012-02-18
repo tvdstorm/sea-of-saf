@@ -1,9 +1,9 @@
 package saf.fighter;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 class Condition implements AST {
 	
@@ -11,7 +11,7 @@ class Condition implements AST {
 	private Action action;
 	
 	
-	// For use in the local class CompoundCondition
+	// Only the local classes may set condition to null 
 	private Condition() {
 		this.condition = null;
 		this.action = null;
@@ -19,18 +19,33 @@ class Condition implements AST {
 	
 	/** @require isValidValue(condition)*/
 	public Condition(String condition, Action action) {
-		assert VALID_CONDITIONS.contains(condition): "Requirement broken";
+		assert VALID_CONDITIONS.contains(condition): "Requirement broken ("+condition+")";
 		
 		this.condition = condition;
 		this.action = action;
 	}
 	
+	public static Condition newAndCondition(List<Condition> children) {
+		if(children.size()==1) {
+			return children.get(0);
+		}else {
+			return new AndCondition(children);
+		}
+	}
 	
-	public Action getAction(Condition context) {
+	public static Condition newOrCondition(List<Condition> children) {
+		if(children.size()==1) {
+			return children.get(0);
+		}else {
+			return new OrCondition(children);
+		}
+	}
+
+	public List<Action> getActions(Condition context) {
 		if(condition.equals(ALWAYS_CONDITION) || context.entails(this)) {
-			return action;
+			return new LinkedList<Action> (Arrays.asList(action));
 		} else {
-			return null;
+			return Collections.emptyList();
 		}
 	}
 	
@@ -55,33 +70,72 @@ class Condition implements AST {
 	}
 	
 	
-	//=== Inner class ========================================================
-	public static class CompoundCondition extends Condition {
+	//=== Inner classes ========================================================
+	private abstract static class CompoundCondition extends Condition {
 		
-		private boolean andOperator;
-		private List<Condition> conditions;
+		protected List<Condition> conditions;
 		
-		/** 
-		 * @param andOperator 	signals whether this condition requires ALL child conditions to hold (true),
-		 * 							or at least ONE (false)
-		 */
-		public CompoundCondition(boolean andOperator, List<Condition> conditions) {
+		public CompoundCondition(List<Condition> conditions) {
 			super();
-			this.andOperator = andOperator;
 			this.conditions = conditions;
 		}
 		
-		public boolean isAndCompound() {
-			return andOperator;
+		public abstract boolean entails(Condition condition);
+		public abstract List<Action> getActions(Condition context);
+		public abstract boolean equals(Object object);
+		
+		//--- Overriding AST methods ---
+		public String getName() {
+			return this.getClass().getSimpleName();
+		}
+		
+		public List<AST> getChildren() {
+			return new LinkedList<AST>(conditions);
+		}
+	}
+	
+	// Conditions combined with AND
+	protected static class AndCondition extends CompoundCondition {
+
+		public AndCondition(List<Condition> conditions) {
+			super(conditions);
+		}
+		
+		public boolean entails(Condition condition) {
+			for(Condition child: conditions) {
+				if(!child.entails(condition)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		public List<Action> getActions(Condition context) {
+			List<Action> actions = new LinkedList<Action>();
+			for(Condition child: conditions) {
+				actions.addAll(child.getActions(context));
+			}
+
+			if(actions.size() == conditions.size()) {
+				return actions;
+			}
+			return Collections.emptyList();
 		}
 		
 		public boolean equals(Object object) {
-			if(object instanceof CompoundCondition) {
-				CompoundCondition other = (CompoundCondition) object;
-				return other.isAndCompound() == this.isAndCompound() && 
-							other.getChildren().equals(this.getChildren());
+			if(object instanceof AndCondition) {
+				return ((AndCondition) object).getChildren().equals(this.getChildren());
 			}
 			return false;
+		}
+		
+	}
+	
+	// Conditions combined with OR
+	protected static class OrCondition extends CompoundCondition {
+
+		public OrCondition(List<Condition> conditions) {
+			super(conditions);
 		}
 		
 		public boolean entails(Condition condition) {
@@ -93,48 +147,23 @@ class Condition implements AST {
 			return false;
 		}
 		
-		public Action getAction(Condition context) {
-			int minimumValidActions; 
-			if(andOperator) {
-				minimumValidActions = conditions.size();
-			} else {
-				minimumValidActions = 1;
-			}
-			
-			// Select actions from all possibilities; 
-			//		hence don't stop looking when you got the minimum required
+		public List<Action> getActions(Condition context) {
 			List<Action> actions = new LinkedList<Action>();
 			for(Condition child: conditions) {
-				Action action = child.getAction(context);
-				if(action!=null) {
-					actions.add(action);
-				}
+				actions.addAll(child.getActions(context));
 			}
 
-			if(actions.size() >= minimumValidActions) {
-				return selectRandom(actions);
+			if(actions.size() >= 1) {
+				return actions;
 			}
-			
-			return null;
+			return Collections.emptyList();
 		}
 		
-		// @require actions.size() > 0
-		private Action selectRandom(List<Action> actions) {
-			assert actions.size() > 0: "Requirement broken!";
-			return actions.get(new Random().nextInt(actions.size()));
-		}
-		
-		//--- Overriding AST methods ---
-		public String getValue() {
-			String result = andOperator ? "AND-condition:\n" : "OR-condition:\n";
-			for(Condition child: conditions) {
-				result += child + "\n";
+		public boolean equals(Object object) {
+			if(object instanceof OrCondition) {
+				return ((OrCondition) object).getChildren().equals(this.getChildren());
 			}
-			return result;
-		}
-		
-		public List<AST> getChildren() {
-			return new LinkedList<AST>(conditions);
+			return false;
 		}
 		
 	}
