@@ -13,8 +13,15 @@ public class InterpreterVisitor implements FighterVisitor
 	private List<Behaviour> satisfiedBehaviours;
 	private Bot bot;
 	
-	protected void Evaluate(Fighter fighter, Bot bot) {
+	public Bot getBot() {
+		return bot;
+	}
+	
+	public void setBot(Bot bot) {
 		this.bot = bot;
+	}
+	
+	protected void Evaluate(Fighter fighter) {
 		satisfiedBehaviours = new ArrayList<Behaviour>();
 		for (ASTNode nodes : fighter.getDefinitions()) {
 			nodes.accept(this);
@@ -56,7 +63,7 @@ public class InterpreterVisitor implements FighterVisitor
 	@Override
 	public void visit(Condition condition) {
 		System.out.println("condition:" + condition.getName());
-		boolean value = (Boolean)this.bot.invokeMethod(condition.getName());
+		boolean value = (Boolean)this.bot.performAction(condition.getName());
 		condition.setValue(value);
 	}
 
@@ -71,7 +78,7 @@ public class InterpreterVisitor implements FighterVisitor
 
 	@Override
 	public void visit(Action function) {
-		bot.invokeMethod(function.getName());
+		bot.performAction(function.getName());
 	}
 	
 	public void randomlyExecuteSatisfiedBehaviour() {

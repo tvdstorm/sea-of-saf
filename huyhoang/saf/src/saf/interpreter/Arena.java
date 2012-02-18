@@ -79,7 +79,8 @@ public class Arena extends Observable {
 	public void EvaluateBots() {
 		interpreter = new InterpreterVisitor();
 		for (int counter=0; counter<2; counter++) {
-			interpreter.Evaluate(bots.get(counter).getFighter(), bots.get(counter));
+			interpreter.setBot(bots.get(counter));
+			interpreter.Evaluate(bots.get(counter).getFighter());
 		}
 		
 		this.setChanged();

@@ -64,7 +64,6 @@ public class Bot extends Observable
 	
 	private Bot opponentBot;
 	private boolean botOnTheLeft;
-	
 	private int moveStepsLeft;
 	
 	public Bot(Fighter fighter, int initialPosition) {
@@ -86,8 +85,9 @@ public class Bot extends Observable
 		return (punchReach + kickReach) / 2;
 	}
 	
-	public float speed() {
-		return (float) (0.5 * (height() - weight()));
+	public int speed() {
+		// Do a factor 10 because I don't want to deal with floating point.
+		return (5 * (height() - weight()));
 	}
 	
 	private void notifySubscribers(String action) {
@@ -139,7 +139,7 @@ public class Bot extends Observable
 	
 	@MethodAnnotation(safName = "jump", keywordType = "move")
 	public void jump() {
-//		moveStepsLeft = (Int)(this.speed*10);
+		moveStepsLeft = this.speed(); 
 	}
 	
 	@MethodAnnotation(safName = "stand", keywordType = "move")
@@ -159,14 +159,12 @@ public class Bot extends Observable
 	@MethodAnnotation(safName = "run_away", keywordType = "move")
 	public void runAway() {
 		this.setPosition(this.getPosition() - getMoveDirection());
-		System.out.println(String.format("%s is running away", this.getFighter().getName()));
 		this.notifySubscribers("run_away");
 	}
 	
 	@MethodAnnotation(safName = "walk_towards", keywordType = "move")
 	public void walkTowards() {
-		this.setPosition(this.getPosition() - getMoveDirection());
-		System.out.println(this.toString() + " is walking towards...");
+		this.setPosition(this.getPosition() + getMoveDirection());
 		this.notifySubscribers("walk_towards");
 	}
 	
@@ -184,31 +182,26 @@ public class Bot extends Observable
 	
 	@MethodAnnotation(safName = "punch_high", keywordType = "attack")
 	public void punchHigh() {
-//		System.out.println(String.format("%s is punching high", this.getFighter().getName()));
 		this.notifySubscribers("punch_high");
 	}
 	
 	@MethodAnnotation(safName = "kick_low", keywordType = "attack")
 	public void kickLow() {
-//		System.out.println(String.format("%s is kicking low", this.getFighter().getName()));
 		this.notifySubscribers("kick_low");
 	}
 	
 	@MethodAnnotation(safName = "kick_high", keywordType = "attack")
 	public void kickHigh() {
-//		System.out.println(String.format("%s is kicking high", this.getFighter().getName()));
 		this.notifySubscribers("kick_high");
 	}
 	
 	@MethodAnnotation(safName = "block_low", keywordType = "attack")
 	public void blockLow() {
-		System.out.println(String.format("%s is blocking low", this.getFighter().getName()));
 		this.notifySubscribers("block_low");
 	}
 	
 	@MethodAnnotation(safName = "block_high", keywordType = "attack")
 	public void blockHigh() {
-//		System.out.println(String.format("%s is blocking high", this.getFighter().getName()));
 		this.notifySubscribers("block_high");
 	}
 	
@@ -220,7 +213,7 @@ public class Bot extends Observable
 		return this.getOpponentDistance() <= this.punchReach;
 	}
 	
-	public Object invokeMethod(String safName) {
+	private Object invokeMethod(String safName) {
 		try {
 			for (Method method : this.getClass().getMethods()) {
 				MethodAnnotation annotation = method.getAnnotation(MethodAnnotation.class);
@@ -255,14 +248,14 @@ public class Bot extends Observable
 		return result;
 	}
 	
-	public void processGameTick() {
+	public Object performAction(String safName) {
 		if (moveStepsLeft > 0) {
 			moveStepsLeft--;
+			return null;
 		}
-	}
-	
-	public boolean isReadyForNewMove() {
-		return moveStepsLeft == 0;
+		else {
+			return this.invokeMethod(safName);
+		}
 	}
 	
 	private int getMoveDirection() {
