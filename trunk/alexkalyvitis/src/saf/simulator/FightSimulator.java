@@ -56,9 +56,14 @@ public class FightSimulator{
 		initializeOpenGL();
 		
 		while (!Display.isCloseRequested() && !fight.hasEnded()) {
+			updateTimeInTitle();
 			
 			clearScreen();
-			fight.updateFighterLocations(firstFighterCurrentX,secondFighterCurrentX);
+			
+			drawHealth();
+			
+			fight.syncFighterLocations(firstFighterCurrentX,secondFighterCurrentX);
+			
 			fight.assess();
 			draw();
 			
@@ -73,7 +78,7 @@ public class FightSimulator{
 	}
 
 	public void draw(){
-		System.out.println("1: " + fight.getFirstFightersMove() + "\n2: " + fight.getSecondFightersMove());
+		//System.out.println("1: " + fight.getFirstFightersMove() + "\n2: " + fight.getSecondFightersMove());
 		Behavior firstFightersBehavior = fight.getFirstFightersMove(); 
 		try{
 			AvailableMoves ffmove = AvailableMoves.valueOf(firstFightersBehavior.getMove().getName().toUpperCase());
@@ -108,6 +113,7 @@ public class FightSimulator{
 			setFighterStatus(location, FighterStatus.OCCUPIED);
 		} else {
 			drawAttack(location, attack);
+			setFighterHealth(location, attack);
 			setFighterStatus(location, FighterStatus.READY);
 		}
 	}
@@ -402,17 +408,44 @@ public class FightSimulator{
 			break;
 		}
 	}
+	
+	private void updateTimeInTitle() {
+		Display.setTitle(fight.getFirstFighter().getName() + " VS " + fight.getSecondFighter().getName() + " " + fight.getCountDown());
+	}
 
+	private void drawHealth() {
+		
+		drawRectangle(20, 20, fight.getFirstFighter().getHealth(), 10);
+		drawRectangle(WINDOW_WIDTH - 20, 20, -fight.getSecondFighter().getHealth(), 10);
+	}
+
+	public void drawRectangle(float x, float y, float width, float height){
+		GL11.glColor3f(1.0f, 0.1f, 0.1f);
+
+		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glVertex2f(x,y);
+		GL11.glVertex2f(x + width, y);
+		GL11.glVertex2f(x + width, y + height);
+		GL11.glVertex2f(x, y + height);
+		GL11.glEnd();
+	}
+	
 	public void line(float x1, float y1, float x2, float y2){
+		GL11.glColor3f(1.0f, 1.0f, 1.0f);
+		
 		GL11.glLineWidth(2);
 		GL11.glBegin(GL11.GL_LINES);
 		GL11.glVertex2f(x1,y1);
 		GL11.glVertex2f(x2,y2);
 		GL11.glEnd();
 	}
+	
 	public void circle(float x, float y, float r) {
 	    double inc = Math.PI / 12;
 	    double max = 2 * Math.PI;
+	    
+	    GL11.glColor3f(1.0f, 1.0f, 1.0f);
+	    
 	    GL11.glBegin(GL11.GL_LINE_LOOP);
 	    for(double d = 0; d < max; d += inc) {
 	    	GL11.glVertex2f((float)Math.cos(d) * r + x, (float)Math.sin(d) * r + y);
@@ -440,6 +473,33 @@ public class FightSimulator{
 	
 	private void clearScreen() {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+	}
+	
+	private void setFighterHealth(FighterLocation location, AvailableAttacks attack){
+		
+		
+		switch(location){
+		case LEFT		: 
+			switch(attack){
+			case PUNCH_LOW	: ; break;
+			case PUNCH_HIGH	: ; break;
+			case KICK_LOW	: ; break;
+			case KICK_HIGH	: ; break;
+			case BLOCK_LOW	: ; break;
+			case BLOCK_HIGH	: ; break;
+			} 
+			break;
+		case RIGHT		:
+			switch(attack){
+			case PUNCH_LOW	: ; break;
+			case PUNCH_HIGH	: ; break;
+			case KICK_LOW	: ; break;
+			case KICK_HIGH	: ; break;
+			case BLOCK_LOW	: ; break;
+			case BLOCK_HIGH	: ; break;
+			}
+			break;
+		}
 	}
 	
 	private void setFighterStatus(FighterLocation location, FighterStatus status) {

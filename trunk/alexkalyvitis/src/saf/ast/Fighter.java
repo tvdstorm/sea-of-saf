@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import saf.ast.base.BehaviorItem;
+import saf.ast.enums.*;
 import saf.simulator.enums.*;
 
 public class Fighter extends BehaviorItem{
@@ -47,6 +48,10 @@ public class Fighter extends BehaviorItem{
 
 	public List<Strength> getStrengths() {
 		return strengths;
+	}
+	
+	public int getStrengthValue(AvailableStrengths strength){
+		return strengths.get(strengths.indexOf(new Strength(strength.toString().toLowerCase()))).getValue();
 	}
 
 	public void setStrengths(List<Strength> strengths) {

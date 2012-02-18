@@ -57,6 +57,10 @@ public class Fight {
 	
 	public String getWinner(){ return winner; }
 	
+	public long getCountDown(){
+		return endTime - getTimeInSecs(); 
+	}
+	
 	public void assess(){
 		firstFighterConditions.clear();
 		secondFighterConditions.clear();
@@ -148,7 +152,7 @@ public class Fight {
 		return secondFightersMove;
 	}
 
-	public void updateFighterLocations(int firstFighterCurrentX, int secondFighterCurrentX) {
+	public void syncFighterLocations(int firstFighterCurrentX, int secondFighterCurrentX) {
 		firstFighterLocation = firstFighterCurrentX;
 		secondFighterLocation = secondFighterCurrentX;
 	}
