@@ -16,7 +16,7 @@ public class CheckerVisitorTest {
 		try {
 			parser.Root();
 			CheckerVisitor visitor = new CheckerVisitor(parser.getFighter());
-			visitor.visitAllAstStatements();
+			visitor.visitAllASTNodes();
 			return visitor;
 		}
 		catch (ParseException ex) {
@@ -54,7 +54,7 @@ public class CheckerVisitorTest {
 		String specification = "Huy { always [ choose punch_high ] }";
 		CheckerVisitor visitor = checkParsedSpecification(specification);
 		assertEquals(1, visitor.getErrors().size());
-		assertTrue(visitor.getErrors().get(0).matches("The choose keyword requires at least 1 action"));
+		assertTrue(visitor.getErrors().get(0).matches("The 'choose' keyword requires at least 1 action as its parameter"));
 	}
 	
 	@Test
@@ -97,7 +97,7 @@ public class CheckerVisitorTest {
 		
 		for (int strength = 0; strength < 12; strength++) {
 			Strength strengthAssignment = new Strength("invariant", strength);
-			checker.checkAssignmentStatementRange(strengthAssignment);
+			checker.checkAssignmentRange(strengthAssignment);
 			
 			if (strength < 11) {
 				assertEquals(1, checker.getErrors().size());

@@ -10,31 +10,13 @@ import saf.ast.condition.Condition;
 import saf.ast.condition.LogicalCondition;
 import saf.ast.condition.OrOperator;
 import saf.ast.definition.Behaviour;
+import saf.ast.definition.Choose;
 import saf.ast.definition.Strength;
+import saf.ast.definition.Action;
 import safparser.*;
 import java.io.*;
 
 public class ParserTest {
-
-	@Test
-	public void testWellformedSpecification() {
-		String specification = "JackieChan {\r\n" +
-							   "	someStrength = 0\r\n" +
-							   "	anotherStrength = 11\r\n" +
-							   "	someCondition [someMoveAction someFightAction]\r\n" +
-							   "	someCondition [someAction(someAction1 someAction2 someAction3)" +
-							   "				   moreAction(fight(kick punch block) superhero(fly crawl))]\r\n" +
-							   "}";
-		ByteArrayInputStream input = new ByteArrayInputStream(specification.getBytes());
-		Parser parser = new Parser(input);
-		
-		try {
-			parser.Root();
-		}
-		catch ( ParseException ex ) {
-			fail("ParseException should not have occurred");
-		}
-	}
 
 	private Fighter getFighterAst(String specification) {
 		ByteArrayInputStream input = new ByteArrayInputStream(specification.getBytes());
@@ -46,6 +28,46 @@ public class ParserTest {
 		catch (ParseException exception) {
 			fail("ParseException not expected");
 			return null;
+		}
+	}
+
+	@Test
+	public void testWellformedSpecification() {
+		String specification = "JackieChan {\r\n" +
+							   "	someStrength = 0\r\n" +
+							   "	anotherStrength = 11\r\n" +
+							   "	someCondition [someMoveAction someFightAction]\r\n" +
+							   "	someCondition [someAction(someAction1 someAction2 someAction3)" +
+							   "				   choose(fight(kick punch block) superhero(fly crawl))]\r\n" +
+							   "}";
+		
+		Fighter fighter = getFighterAst(specification);
+		
+		assertEquals(4, fighter.getDefinitions().size());
+		
+		for (int counter=0; counter<2; counter++)
+			assertEquals(Strength.class, fighter.getDefinitions().get(counter).getClass());
+		
+		for (int counter=2; counter<4; counter++)
+			assertEquals(Behaviour.class, fighter.getDefinitions().get(counter).getClass());
+		
+		Behaviour behaviour = (Behaviour)fighter.getDefinitions().get(3);
+		assertEquals(Action.class, behaviour.getMove().getClass());
+		assertEquals(3, behaviour.getMove().getProcedures().size());
+		assertEquals(Choose.class, behaviour.getAttack().getClass());
+		assertEquals(2, behaviour.getAttack().getProcedures().size());
+	}
+	
+	@Test
+	public void testParserError() {
+		String specification =	"ChuckNorris { strong and weak }";
+		ByteArrayInputStream input = new ByteArrayInputStream(specification.getBytes());
+		Parser parser = new Parser(input);
+		try {
+			parser.Root();
+			fail("ParseException expected");
+		}
+		catch (ParseException exception) {
 		}
 	}
 	
