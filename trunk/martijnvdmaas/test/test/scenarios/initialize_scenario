@@ -1,0 +1,14 @@
+Scenario: players are initialized
+
+Given a SAF file with value validInput.saf
+When I start a game
+And I play till the game is finished
+Then there should be a winner
+
+Scenario: unbeatable player wins 
+
+Given an unbeatable fighter file with value chuck.saf
+And the name of the unbeatable player is chuck
+When I start a game
+And I play till the game is finished
+Then the name of the winner should be chuck

@@ -4,7 +4,9 @@
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="src" path="input"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="lib/jbehave-core-3.2.jar"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="lib" path="lib/jbehave-core-2.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-all-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
