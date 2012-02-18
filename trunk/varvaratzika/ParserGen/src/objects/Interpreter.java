@@ -2,9 +2,8 @@ package objects;
 
 import java.util.ArrayList;
 
-public class Interpreter 
-{
-	private String[] conditions = new String[]{"stronger","weaker"," much_stronger","much_weaker","even","near","far","always"};
+public class Interpreter{
+	private final static String[] conditions = new String[]{"stronger","weaker"," much_stronger","much_weaker","even","near","far","always"};
 	private String[] moves = new String[]{"jump", "crouch","stand","run_towards","run_away","walk_towards","walk_away"};
 	private String[] attacks = new String[]{"punch_low","punch_high","kick_low","kick_high","block_low","block_high"};
 	private String[] strengths = new String[]{"punchReach","kickReach","kickPower","punchPower"};
@@ -22,68 +21,43 @@ public class Interpreter
 		{
 			for (Condition condition : fighter.getCondition())
 			{
-				for(String oneOfConditions : this.conditions)
-				{
-					if(condition.getConditionName().equals(oneOfConditions))
-					{
-						System.out.println("one Of Conditions: ok");
-						break;
-					}
-				
+				checkForInputWords(conditions,condition.getConditionName());
+				checkForInputWords(moves,condition.getMovesName());
+				checkForInputWords(attacks,condition.getAttacksName());
 				}
-				for(String oneOfMoves : this.moves)
-				{
-					if(condition.getMovesName().equals(oneOfMoves))
-					{
-						System.out.println("one Of Moves: ok" );
-						break;
-					}
-				
-				}
-				for(String oneOfAttacks : this.moves)
-				{
-					if(condition.getAttacksName().equals(oneOfAttacks))
-					{
-						System.out.println("one Of Attacks: ok");
-						break;
-					}
-				
-				}
-			}
-			for (Strength strength : fighter.getStrength())
-			{
-				for(String oneOfStrength : this.strengths)
-				{
-					if(strength.getStrenghtName().equals(oneOfStrength))
-					{
-						System.out.println("one Of Strength: ok");
-						break;
-					}
-				
-				}
-					
-			}
+			
 			
 			for (Strength strength : fighter.getStrength())
 			{
-				for(String oneOfStrength : this.strengths)
+				checkForInputWords(strengths,strength.getStrenghtName());
+				if((strength.getStrenghtValue()<=10)&&(strength.getStrenghtValue()>=0))
 				{
-					if(strength.getStrenghtName().equals(oneOfStrength))
-					{
-						System.out.println("one Of Strength: ok");
-						break;
-					}
+					System.out.println("Strength value between 0-10 : ok");
+					break;
+					
 				}
-				for(String oneOfAttacks : this.attacks)
-				{
-					if((strength.getStrenghtValue()<=10)&&(strength.getStrenghtValue()>=0))
-					{
-						System.out.println("Strength value between 0-10 : ok");
-						break;
-					}
-				}	
 			}
 		}
 	}
+	public void checkForInputWords (String[] searchingList,String checkThisWord )
+	{
+		int flag=0;
+		for(String oneOfList: searchingList)
+		{
+			if(checkThisWord.equals(oneOfList))
+			{
+				System.out.println(checkThisWord+": ok");
+				flag=1;
+				break;
+			}
+		
+		}
+		if (flag==0)
+		{
+			System.out.println(checkThisWord+" has error");
+		}
+		
+	}
+	
 }
 
