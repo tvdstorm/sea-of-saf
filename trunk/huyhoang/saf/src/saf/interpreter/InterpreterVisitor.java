@@ -1,17 +1,14 @@
 package saf.interpreter;
 
 import java.lang.reflect.*;
-
 import saf.ast.*;
 import saf.ast.condition.*;
 import saf.ast.definition.*;
-import saf.util.Tool;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Interpreter implements FighterVisitor
+public class InterpreterVisitor implements FighterVisitor
 {
 	private List<Behaviour> satisfiedBehaviours;
 	private Bot bot;
@@ -19,16 +16,16 @@ public class Interpreter implements FighterVisitor
 	protected void Evaluate(Fighter fighter, Bot bot) {
 		this.bot = bot;
 		satisfiedBehaviours = new ArrayList<Behaviour>();
-		for (ASTNode statement : fighter.getDefinitions()) {
-			statement.accept(this);
+		for (ASTNode nodes : fighter.getDefinitions()) {
+			nodes.accept(this);
 		}
 		randomlyExecuteSatisfiedBehaviour();
 	}
 	
-	public void visit(Strength statement) {
+	public void visit(Strength strength) {
 		try {
-			Field field = Bot.class.getField(statement.getName());
-			field.setInt(this.bot, new Integer(statement.getValue()));
+			Field field = Bot.class.getField(strength.getName());
+			field.setInt(this.bot, new Integer(strength.getValue()));
 		} catch (Exception ex) {
 			System.out.println("Unable to set strength: " + ex.getMessage());
 		}
@@ -39,6 +36,9 @@ public class Interpreter implements FighterVisitor
 		Condition leftExpression = andOperator.getLeftExpression();
 		Condition rightExpression = andOperator.getRightExpression();
 		
+		leftExpression.accept(this);
+		rightExpression.accept(this);
+		
 		andOperator.setValue(leftExpression.getValue() && rightExpression.getValue());
 	}
 
@@ -47,13 +47,17 @@ public class Interpreter implements FighterVisitor
 		Condition leftExpression = orOperator.getLeftExpression();
 		Condition rightExpression = orOperator.getRightExpression();
 		
+		leftExpression.accept(this);
+		rightExpression.accept(this);
+		
 		orOperator.setValue(leftExpression.getValue() || rightExpression.getValue());
 	}
 
 	@Override
-	public void visit(Condition state) {
-		boolean value = (Boolean)this.bot.invokeMethod(state.getName());
-		state.setValue(value);
+	public void visit(Condition condition) {
+		System.out.println("condition:" + condition.getName());
+		boolean value = (Boolean)this.bot.invokeMethod(condition.getName());
+		condition.setValue(value);
 	}
 
 	@Override
@@ -67,32 +71,28 @@ public class Interpreter implements FighterVisitor
 
 	@Override
 	public void visit(Action function) {
-		if (function.getName().equals("choose")) {
-			Random random = new Random();
-			int index = random.nextInt(function.getProcedures().size());
-			Procedure randomFunction = function.getProcedures().get(index);
-			randomFunction.accept(this);
-		} else {
-			bot.invokeMethod(function.getName());
-		}
+		bot.invokeMethod(function.getName());
 	}
 	
 	public void randomlyExecuteSatisfiedBehaviour() {
-		Random random = new Random();
-		int index = random.nextInt(this.satisfiedBehaviours.size());
-		Behaviour behaviour = this.satisfiedBehaviours.get(index);
-		behaviour.getMove().accept(this);
-		behaviour.getAttack().accept(this);
+		if (this.satisfiedBehaviours.size() > 0) {
+			Random random = new Random();
+			int index = random.nextInt(this.satisfiedBehaviours.size());
+			Behaviour behaviour = this.satisfiedBehaviours.get(index);
+			behaviour.getMove().accept(this);
+			behaviour.getAttack().accept(this);
+		}
 	}
 
 	@Override
 	public void visit(Choose choose) {
-		// TODO Auto-generated method stub
-		
+		Random random = new Random();
+		int index = random.nextInt(choose.getProcedures().size());
+		Procedure randomFunction = choose.getProcedures().get(index);
+		randomFunction.accept(this);
 	}
+
 	@Override
 	public void visit(Procedure procedure) {
-		// TODO Auto-generated method stub
-		
 	}
 }
