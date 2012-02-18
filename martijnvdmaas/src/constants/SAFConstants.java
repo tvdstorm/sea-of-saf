@@ -29,6 +29,8 @@ public interface SAFConstants {
 
 
 	public static final String ATTACK_TYPE_STAND				= "stand"; 	
+	public static final String ATTACK_TYPE_DEAD					= "dead"; 	
+	public static final String ATTACK_TYPE_WINNER				= "winner"; 	
 	public static final String ATTACK_TYPE_PUNCH_LOW			= "punch_low"; 
 	public static final String ATTACK_TYPE_PUNCH_HIGH			= "punch_high"; 
 	public static final String ATTACK_TYPE_KICK_LOW				= "kick_low"; 
