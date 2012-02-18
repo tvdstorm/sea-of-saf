@@ -4,11 +4,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import saf.ast.Fighter;
 import saf.util.MethodAnnotation;
 
-public class Bot extends Observable
+public class Bot extends Observable implements Observer
 {
 	private int position;
 	public int getPosition() {
@@ -17,7 +18,10 @@ public class Bot extends Observable
 	
 	private String lastAction;
 	public String getLastAction() {
-		return lastAction;
+		if (lastAction == null)
+			return "";
+		else
+			return lastAction;
 	}
 	
 	public static ArrayList<String> fetchBotStrengths() {
@@ -65,45 +69,56 @@ public class Bot extends Observable
 	private Bot opponentBot;
 	private boolean botOnTheLeft;
 	private int moveStepsLeft;
+	private int hitpoints;
+	public int getHitpoints() {
+		return hitpoints;
+	}
 	
 	public Bot(Fighter fighter, int initialPosition) {
 		this.fighter = fighter;
 		this.position = initialPosition;
+		this.hitpoints = 100;
+	}
+	
+	public Bot getOpponentBot() {
+		return this.opponentBot;
 	}
 	
 	public void setOpponentBot(Bot opponentBot) {
 		this.opponentBot = opponentBot;
 		this.botOnTheLeft = this.position < opponentBot.getPosition();
 		this.opponentBot.opponentBot = this;
+		this.opponentBot.addObserver(this);
+		this.addObserver(opponentBot);
 	}
 	
-	public int weight() {
+	public int getWeight() {
 		return (punchPower + kickPower) / 2;
 	}
 	
-	public int height() {
+	public int getHeight() {
 		return (punchReach + kickReach) / 2;
 	}
 	
-	public int speed() {
+	public int getSpeed() {
 		// Do a factor 10 because I don't want to deal with floating point.
-		return (5 * (height() - weight()));
+		return (5 * (getHeight() - getWeight()));
 	}
 	
 	private void notifySubscribers(String action) {
-		//this.setChanged();
-		//this.notifyObservers(action);
+		this.setChanged();
+		this.notifyObservers(action);
 		this.lastAction = action;
 	}
 	
 	@MethodAnnotation(safName = "stronger", keywordType = "condition")
 	public boolean isStronger() {
-		return	this.getNumberOfWeakerStrengths() < this.getNumberOfStrongerStrengths();
+		return this.getNumberOfWeakerStrengths() < this.getNumberOfStrongerStrengths();
 	}
 	
 	@MethodAnnotation(safName = "weaker", keywordType = "condition")
 	public boolean isWeaker() {
-		return	this.getNumberOfWeakerStrengths() > this.getNumberOfStrongerStrengths();
+		return this.getNumberOfWeakerStrengths() > this.getNumberOfStrongerStrengths();
 	}
 	
 	@MethodAnnotation(safName = "much_stronger", keywordType = "condition")
@@ -139,20 +154,17 @@ public class Bot extends Observable
 	
 	@MethodAnnotation(safName = "jump", keywordType = "move")
 	public void jump() {
-		moveStepsLeft = this.speed(); 
+		moveStepsLeft = this.getSpeed(); 
 	}
 	
 	@MethodAnnotation(safName = "stand", keywordType = "move")
 	public void stand() {
+		this.notifySubscribers("stand");
 	}
 	
 	@MethodAnnotation(safName = "run_towards", keywordType = "move")
 	public void runTowards() {
 		this.setPosition(this.getPosition() + getMoveDirection());
-		System.out.println(String.format("%s is running towards opponent. %d / %d", 
-										 this.getFighter().getName(), 
-										 this.getPosition(), 
-										 this.opponentBot.getPosition()));
 		this.notifySubscribers("run_towards");
 	}
 	
@@ -176,23 +188,42 @@ public class Bot extends Observable
 
 	@MethodAnnotation(safName = "punch_low", keywordType = "attack")
 	public void punchLow() {
-//		System.out.println(String.format("%s is punching low", this.getFighter().getName()));
+		if (isPunchInReach() && !this.opponentBot.getLastAction().equals("block_low"))
+			this.notifySubscribers("hit");
+		
 		this.notifySubscribers("punch_low");
+		
+		this.moveStepsLeft += 5;
 	}
 	
 	@MethodAnnotation(safName = "punch_high", keywordType = "attack")
 	public void punchHigh() {
+		if (isPunchInReach() && !this.opponentBot.getLastAction().equals("block_high"))
+			this.notifySubscribers("hit");
+
 		this.notifySubscribers("punch_high");
+
+		this.moveStepsLeft += 5;
 	}
 	
 	@MethodAnnotation(safName = "kick_low", keywordType = "attack")
 	public void kickLow() {
+		if (isKickInReach() && !this.opponentBot.getLastAction().equals("block_low"))
+			this.notifySubscribers("hit");
+
 		this.notifySubscribers("kick_low");
+
+		this.moveStepsLeft += 5;
 	}
 	
 	@MethodAnnotation(safName = "kick_high", keywordType = "attack")
 	public void kickHigh() {
+		if (isKickInReach() && !this.opponentBot.getLastAction().equals("block_high"))
+			this.notifySubscribers("hit");
+		
 		this.notifySubscribers("kick_high");
+
+		this.moveStepsLeft += 5;
 	}
 	
 	@MethodAnnotation(safName = "block_low", keywordType = "attack")
@@ -211,6 +242,10 @@ public class Bot extends Observable
 	
 	protected boolean isPunchInReach() {
 		return this.getOpponentDistance() <= this.punchReach;
+	}
+	
+	protected boolean isKickInReach() {
+		return this.getOpponentDistance() <= this.kickReach;
 	}
 	
 	private Object invokeMethod(String safName) {
@@ -248,22 +283,50 @@ public class Bot extends Observable
 		return result;
 	}
 	
-	public Object performAction(String safName) {
-		if (moveStepsLeft > 0) {
+	protected boolean isAllowedToPerformAction() {
+		return moveStepsLeft == 0 && !this.isKnockedOut() && !this.opponentBot.isKnockedOut();
+	}
+	
+	public void performAction(String safName) {
+		if (!isAllowedToPerformAction()) {
 			moveStepsLeft--;
-			return null;
+			if (!this.isKnockedOut())
+				this.stand();
 		}
 		else {
-			return this.invokeMethod(safName);
+			System.out.println("invoking:" + safName);
+			this.invokeMethod(safName);
 		}
 	}
 	
+	public boolean getCondition(String safName) {
+		System.out.println("invoking condition:" + safName);
+		return (Boolean)this.invokeMethod(safName);
+	}
+	
 	private int getMoveDirection() {
-		if (this.opponentBot.getPosition() - this.getPosition() >= 0) {
+		if (this.opponentBot.getPosition() - this.getPosition() >= 0)
 			return 1;
-		}
-		else {
+		else
 			return -1;
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if (arg0.equals(this.opponentBot)) {
+			if (arg1.equals("hit")) {
+				this.hitpoints -= 10;
+				this.moveStepsLeft = this.getSpeed() / 5;
+				System.out.println("hit! left:" + this.hitpoints);
+				if (this.isKnockedOut()) {
+					System.out.println("K.O.");
+					this.notifySubscribers("knockout");
+				}
+			}
 		}
+	}
+	
+	public boolean isKnockedOut() {
+		return (this.hitpoints <= 0);
 	}
 }

@@ -62,8 +62,7 @@ public class InterpreterVisitor implements FighterVisitor
 
 	@Override
 	public void visit(Condition condition) {
-		System.out.println("condition:" + condition.getName());
-		boolean value = (Boolean)this.bot.performAction(condition.getName());
+		boolean value = this.bot.getCondition(condition.getName());
 		condition.setValue(value);
 	}
 
