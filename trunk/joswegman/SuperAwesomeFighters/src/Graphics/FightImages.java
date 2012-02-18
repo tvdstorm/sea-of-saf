@@ -22,44 +22,84 @@ public class FightImages{
 	private ImageIcon stanceLeft;
 	private ImageIcon stanceRight;
 	
+	public enum fightimages{
+		stance,blockhigh,blocklow,kickhigh,kicklow,punchhigh,punchlow,crawl,dead
+	}
+	
 	public FightImages(){
-		/*
-		blockhighLeft   = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_block_high.jpg");
-		blockhighRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_block_high.jpg");
-		blocklowLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_block_low.jpg");
-		blocklowRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_block_low.jpg");
-		crawlLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_crawl.jpg");
-		crawlRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_crawl.jpg");
-		kickhighRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_kick_high.jpg");
-		kickhighLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_kick_high.jpg");
-		kicklowRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_kick_low.jpg");
-		kicklowLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_kick_low.jpg");
-		punchhighRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_punch_high.jpg");
-		punchhighLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_punch_high.jpg");
-		punchlowRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_punch_low.jpg");
-		punchlowLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_punch_low.jpg");
-		deadRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_r_dead.jpg");
-		deadLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_pictures/bot_l_dead.jpg");
-		*/
-		stanceLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/stance_left.gif");
-		stanceRight =  new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/stance_right_red.gif");
-		blockhighLeft   = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/block_high.gif");
-		blockhighRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/block_high_right_red.gif");
-		blocklowLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/block_low.gif");
-		blocklowRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/block_low_right_red.gif");
-		crawlLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/crouch.gif");
-		crawlRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/crouch_right_red.gif");
-		kickhighRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/kick_high_right_red.gif");
-		kickhighLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/kick_high.gif");
-		kicklowRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/kick_low_right_red.gif");
-		kicklowLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/kick_low.gif");
-		punchhighRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/punch_high_right_red.gif");
-		punchhighLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/punch_high.gif");
-		punchlowRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/punch_low_right_red.gif");
-		punchlowLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/punch_low.gif");
-		deadRight = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/dead_right_red.gif");
-		deadLeft = new ImageIcon ("/home/jos/workspace/SuperAwesomeFighters/bot_sprites/dead_left.gif");
+		String defaultpath = "/home/jos/workspace/SuperAwesomeFighters/bot_sprites/";
+		//left
+		stanceLeft      = new ImageIcon (defaultpath + "stance_left.gif");
+		blockhighLeft   = new ImageIcon (defaultpath + "block_high.gif");
+		blocklowLeft    = new ImageIcon (defaultpath + "block_low.gif");
+		crawlLeft       = new ImageIcon (defaultpath + "crouch.gif");
+		kickhighLeft    = new ImageIcon (defaultpath + "kick_high.gif");
+		kicklowLeft     = new ImageIcon (defaultpath + "kick_low.gif");
+		punchhighLeft   = new ImageIcon (defaultpath + "punch_high.gif");
+		punchlowLeft    = new ImageIcon (defaultpath + "punch_low.gif");
+		deadLeft        = new ImageIcon (defaultpath + "dead_left.gif");
+		//right
+		stanceRight     =  new ImageIcon (defaultpath + "stance_right_red.gif");
+		blockhighRight  = new ImageIcon (defaultpath + "block_high_right_red.gif");
+		blocklowRight   = new ImageIcon (defaultpath + "block_low_right_red.gif");
+		crawlRight      = new ImageIcon (defaultpath + "crouch_right_red.gif");
+		kickhighRight   = new ImageIcon (defaultpath + "kick_high_right_red.gif");
+		kicklowRight    = new ImageIcon (defaultpath + "kick_low_right_red.gif");
+		punchhighRight  = new ImageIcon (defaultpath + "punch_high_right_red.gif");
+		deadRight       = new ImageIcon (defaultpath + "dead_right_red.gif");
 		
+	}
+	
+	public ImageIcon getImage(String name){
+		if (name.contentEquals("standLeft") ){return stanceLeft;}
+		if (name.contentEquals("block_highLeft") ){return blockhighLeft;}
+		if (name.contentEquals("block_lowLeft") ){return blocklowLeft;}
+		if (name.contentEquals("kick_highLeft") ){return kickhighLeft;}
+		if (name.contentEquals("kick_lowLeft") ){return kicklowLeft;}
+		if (name.contentEquals("punch_lowLeft") ){return punchlowLeft;}
+		if (name.contentEquals("punch_highLeft") ){return punchhighLeft;}
+		if (name.contentEquals("crouchLeft") ){return crawlLeft;}
+		if (name.contentEquals("deadLeft") ){return deadLeft;}
+		
+		if (name.contentEquals("standRight") ){return stanceRight;}
+		if (name.contentEquals("block_highRight") ){return blockhighRight;}
+		if (name.contentEquals("block_lowRight") ){return blocklowRight;}
+		if (name.contentEquals("kick_highRight") ){return kickhighRight;}
+		if (name.contentEquals("kick_lowRight") ){return kicklowRight;}
+		if (name.contentEquals("punch_lowRight") ){return punchlowRight;}
+		if (name.contentEquals("punch_highRight") ){return punchhighRight;}
+		if (name.contentEquals("crouchRight") ){return crawlRight;}
+		if (name.contentEquals("deadRight") ){return deadRight;}
+		return stanceRight;
+		
+	}
+	
+	public ImageIcon getImage1(fightimages f, boolean left){
+		if (left){
+			switch(f){
+				case blockhigh: return blockhighLeft;
+				case blocklow:  return blocklowLeft;
+				case kickhigh:  return kickhighLeft;
+				case kicklow:   return kicklowLeft;
+				case punchhigh: return punchhighLeft;
+				case punchlow:  return punchlowLeft;
+				case crawl:     return crawlLeft;
+				case dead:      return deadLeft;
+			}
+			return stanceLeft;
+		}else {
+			switch(f){
+				case blockhigh: return blockhighRight;
+				case blocklow:  return blocklowRight;
+				case kickhigh:  return kickhighRight;
+				case kicklow:   return kicklowRight;
+				case punchhigh: return punchhighRight;
+				case punchlow:  return punchlowRight;
+				case crawl:     return crawlRight;
+				case dead:      return deadRight;
+			}
+			return stanceRight;
+		}
 	}
 	
 	public ImageIcon getImages (int welke){

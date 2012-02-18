@@ -7,9 +7,17 @@ public class Bot implements Visitable {
 	final private List <Characteristic> characteristics = new LinkedList<Characteristic>();
 	final private List <Rule>rules = new LinkedList<Rule>();
 	private String name;
+	private double speed;
 	
 	public Bot() {
 
+	}
+	
+	public double getSpeed(){
+		return speed;
+	}
+	public void setSpeed(double speed){
+		this.speed = speed;
 	}
 	
     public void setName(String name) {
