@@ -71,28 +71,6 @@ public class CheckerVisitorTest {
 	}
 	
 	@Test
-	public void testWellformedSpecification() {
-		String specification = "JackieChan {\r\n" +
-				   "	kickPower = 10\r\n" +
-				   "	always [ jump punch_high ]\r\n" +
-				   "	always or always [ jump punch_high ]\r\n" +
-				   "}";
-		
-		ByteArrayInputStream input = new ByteArrayInputStream(specification.getBytes());
-		Parser parser = new Parser(input);
-		
-		try {
-			parser.Root();
-		}
-		catch (ParseException ex) {
-			fail("ParseException should not have occurred");
-		}
-		
-		CheckerVisitor visitor = new CheckerVisitor(parser.getFighter());
-		assertEquals(0, visitor.getErrors().size());
-	}
-	
-	@Test
 	public void testCheckAssignmentStatementRange() {
 		Fighter fighter = new Fighter("JackieChan");
 		CheckerVisitor checker = new CheckerVisitor(fighter);
