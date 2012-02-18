@@ -1,7 +1,6 @@
 package saf.checker;
 
 import java.util.*;
-import java.lang.reflect.*;
 
 import saf.ast.*;
 import saf.ast.condition.AndOperator;
@@ -11,6 +10,7 @@ import saf.ast.condition.OrOperator;
 import saf.ast.definition.Behaviour;
 import saf.ast.definition.Action;
 import saf.ast.definition.Choose;
+import saf.ast.definition.Procedure;
 import saf.ast.definition.Strength;
 import saf.interpreter.Bot;
 import saf.util.MethodAnnotation;
@@ -90,11 +90,12 @@ public class CheckerVisitor implements FighterVisitor
 	}
 	
 	private void checkVisitedFunctionsForKeywordValidity(String expected) {
-		for ( Action function : visitedActions ) {
-			if (function.getKeywordType() != null && !function.getKeywordType().equals(expected)) {
+		for ( Action action : visitedActions ) {
+			System.out.println(action.getClass());
+			if (action.getKeywordType() != null && !action.getKeywordType().equals(expected)) {
 				getErrors().add(String.format("'%s' is a '%s' keyword. A 'choose' keyword or '%s' keyword was expected",
-										 	  function.getName(),
-										 	  function.getKeywordType(),
+										 	  action.getName(),
+										 	  action.getKeywordType(),
 										 	  expected));
 			}
 		}
@@ -141,6 +142,6 @@ public class CheckerVisitor implements FighterVisitor
 	}
 
 	@Override
-	public void visit(Method method) {
+	public void visit(Procedure procedure) {
 	}
 }
