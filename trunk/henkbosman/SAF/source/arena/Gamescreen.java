@@ -33,8 +33,11 @@ public class Gamescreen extends JFrame implements ActionListener{
 	private JPanel panel;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JLabel label;
-	private JLabel label_1;
+	private JLabel healthLabelA;
+	private JLabel healthLabelB;
+	private JLabel actionLabelA;
+	private JLabel actionLabelB;
+	private JButton _fightButton;
 	private JLabel _fighter1;
 	private JLabel _fighter2;
 	private Engine _engine;
@@ -54,13 +57,14 @@ public class Gamescreen extends JFrame implements ActionListener{
 		});
 	}
 
-	public Gamescreen() {
-		
-		_timer = new Timer(1000, this);
+	public Gamescreen() 
+	{
+		_timer = new Timer(500, this);
 		_graphics = new Graphics();
 		
 		setTitle("Super Awesome Fighter Arena");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,55 +72,51 @@ public class Gamescreen extends JFrame implements ActionListener{
 		contentPane.setLayout(null);
 		
 		JLabel lblFighterA = new JLabel("Fighter A");
-		lblFighterA.setBounds(10, 11, 46, 14);
+		lblFighterA.setBounds(10, 11, 66, 14);
 		contentPane.add(lblFighterA);
 		
 		textField = new JTextField();
-		textField.setBounds(66, 8, 267, 20);
+		textField.setBounds(86, 8, 247, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Fighter B");
-		lblNewLabel.setBounds(10, 36, 46, 14);
+		lblNewLabel.setBounds(10, 36, 66, 14);
 		contentPane.add(lblNewLabel);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(66, 33, 267, 20);
+		textField_1.setBounds(86, 33, 247, 20);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Fight!");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					beginFight();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (RecognitionException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-		btnNewButton.setBounds(343, 8, 89, 46);
-		contentPane.add(btnNewButton);
+		_fightButton = new JButton("Fight!");
+		_fightButton.addActionListener(this);
+		_fightButton.setBounds(343, 8, 89, 46);
+		contentPane.add(_fightButton);
 		
 		JLabel lblHealthFighterA = new JLabel("Fighter A");
-		lblHealthFighterA.setBounds(10, 69, 83, 14);
+		lblHealthFighterA.setBounds(10, 69, 100, 14);
 		contentPane.add(lblHealthFighterA);
 		
 		JLabel lblHealthFighterB = new JLabel("Fighter B");
-		lblHealthFighterB.setBounds(10, 83, 83, 14);
+		lblHealthFighterB.setBounds(10, 83, 100, 14);
 		contentPane.add(lblHealthFighterB);
 		
-		label = new JLabel("100%");
-		label.setBounds(103, 69, 46, 14);
-		contentPane.add(label);
+		healthLabelA = new JLabel("100%");
+		healthLabelA.setBounds(103, 69, 46, 14);
+		contentPane.add(healthLabelA);
 		
-		label_1 = new JLabel("100%");
-		label_1.setBounds(103, 83, 46, 14);
-		contentPane.add(label_1);
+		healthLabelB = new JLabel("100%");
+		healthLabelB.setBounds(103, 83, 46, 14);
+		contentPane.add(healthLabelB);
+		
+		actionLabelA = new JLabel("Waiting");
+		actionLabelA.setBounds(143, 69, 250, 14);
+		contentPane.add(actionLabelA);
+		
+		actionLabelB = new JLabel("Waiting");
+		actionLabelB.setBounds(143, 83, 250, 14);
+		contentPane.add(actionLabelB);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(10, 58, 422, 0);
@@ -143,17 +143,37 @@ public class Gamescreen extends JFrame implements ActionListener{
 		contentPane.add(panel);
 	}
 	
-	private void drawFighter(Combatmove combatmove, int fighter)
+	private void drawFighter(Combatmove combatmove, Fighters fighter)
 	{
 		switch (fighter)
 		{
-			case 1:
+			case FighterA:
 				_fighter1.setIcon(_graphics.getImage(combatmove, Fighters.FighterA));
 				_fighter1.setBounds(_engine.getPosition(Fighters.FighterA)-12, 100, 63, 48);
+				if (combatmove!=null)
+				{
+					actionLabelA.setText(combatmove._movement + " " + combatmove._action);
+					healthLabelA.setText(_engine.getHealth(Fighters.FighterA)+"%");
+				}
+				else
+				{
+					actionLabelA.setText("DEAD");
+					healthLabelA.setText("LOST");
+				}
 				break;
-			case 2:
+			case FighterB:
 				_fighter2.setIcon(_graphics.getImage(combatmove, Fighters.FighterB));
 				_fighter2.setBounds(_engine.getPosition(Fighters.FighterB)+12, 100, 63, 48);
+				if (combatmove!=null)
+				{
+					actionLabelB.setText(combatmove._movement + " " + combatmove._action);
+					healthLabelB.setText(_engine.getHealth(Fighters.FighterB)+"%");
+				}
+				else
+				{
+					actionLabelB.setText("DEAD");
+					healthLabelB.setText("LOST");
+				}
 				break;
 		}
 		
@@ -165,32 +185,43 @@ public class Gamescreen extends JFrame implements ActionListener{
 		_timer.start();
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) 
+	private void doFightMove()
 	{
-		if (!_engine.doMoves())
-		{
-			label.setText(_engine.getHealth(Fighters.FighterA)+"%");
-			label_1.setText(_engine.getHealth(Fighters.FighterB)+"%");
-		}
-		else
+		if (_engine.doMoves())
 		{
 			if (_engine.getHealth(Fighters.FighterA)<1)
 			{
-				label.setText("LOST");
-				drawFighter(null,1);
+				drawFighter(null,Fighters.FighterA);
 			}
 			else
 			{
-				label_1.setText("LOST");
-				drawFighter(null,2);
+				drawFighter(null,Fighters.FighterB);
 			}
 			_timer.stop();
 			contentPane.repaint();
 			return;
 		}
-		drawFighter(_engine.getCombatmove(Fighters.FighterA),1);
-		drawFighter(_engine.getCombatmove(Fighters.FighterB),2);
+		drawFighter(_engine.getCombatmove(Fighters.FighterA),Fighters.FighterA);
+		drawFighter(_engine.getCombatmove(Fighters.FighterB),Fighters.FighterB);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if (e.getSource().equals(_timer))
+			doFightMove();
+		if (e.getSource().equals(_fightButton))
+		{
+			try {
+				beginFight();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (RecognitionException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 		contentPane.repaint();
 	}
 }
