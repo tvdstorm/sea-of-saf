@@ -25,10 +25,14 @@ public class Renderer implements IRenderer {
 	private final int fps;
 	private final IFightSimulator simulator;
 	private Image titleScreenImage;
-	private Image blueFighter, blueIdleFeet, blueLowKickFeet, blueHighKickFeet;
-	private Image redFighter, redIdleFeet, redLowKickFeet, redHighKickFeet;
+	private Image blueFighter, blueIdleFeet, blueLowKickFeet, blueHighKickFeet,
+			blueIdleHands, blueLowPunchHands, blueHighPunchHands,
+			blueBlockLowHands, blueBlockHighHands;
+	private Image redFighter, redIdleFeet, redLowKickFeet, redHighKickFeet,
+			redIdleHands, redLowPunchHands, redHighPunchHands,
+			redBlockLowHands, redBlockHighHands;
 	private volatile boolean stopRunning;
-	
+
 	private Color healthBarColor;
 
 	private volatile Dimension drawArea;
@@ -48,7 +52,7 @@ public class Renderer implements IRenderer {
 	 */
 	public Renderer(IFightSimulator simulator, int fps) {
 		healthBarColor = new Color(0, 210, 0);
-		
+
 		this.fps = fps;
 		this.simulator = simulator;
 
@@ -58,7 +62,7 @@ public class Renderer implements IRenderer {
 		renderThread.setName("Renderer");
 	}
 
-	private void loadContent() {		
+	private void loadContent() {
 		titleScreenImage = Toolkit.getDefaultToolkit().createImage(
 				Renderer.class.getResource("/nl/uva/saf/data/Title.png"));
 
@@ -66,21 +70,86 @@ public class Renderer implements IRenderer {
 				Renderer.class.getResource("/nl/uva/saf/data/FighterBlue.png"));
 		redFighter = Toolkit.getDefaultToolkit().createImage(
 				Renderer.class.getResource("/nl/uva/saf/data/FighterRed.png"));
-		
+
 		blueIdleFeet = Toolkit.getDefaultToolkit().createImage(
-				Renderer.class.getResource("/nl/uva/saf/data/FighterBlueNoKick.png"));
+				Renderer.class
+						.getResource("/nl/uva/saf/data/FighterBlueNoKick.png"));
 		redIdleFeet = Toolkit.getDefaultToolkit().createImage(
-				Renderer.class.getResource("/nl/uva/saf/data/FighterRedNoKick.png"));
-		
-		blueLowKickFeet = Toolkit.getDefaultToolkit().createImage(
-				Renderer.class.getResource("/nl/uva/saf/data/FighterBlueLowKick.png"));
+				Renderer.class
+						.getResource("/nl/uva/saf/data/FighterRedNoKick.png"));
+
+		blueLowKickFeet = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterBlueLowKick.png"));
 		redLowKickFeet = Toolkit.getDefaultToolkit().createImage(
-				Renderer.class.getResource("/nl/uva/saf/data/FighterRedLowKick.png"));
-		
-		blueHighKickFeet = Toolkit.getDefaultToolkit().createImage(
-				Renderer.class.getResource("/nl/uva/saf/data/FighterBlueHighKick.png"));
-		redHighKickFeet = Toolkit.getDefaultToolkit().createImage(
-				Renderer.class.getResource("/nl/uva/saf/data/FighterRedHighKick.png"));
+				Renderer.class
+						.getResource("/nl/uva/saf/data/FighterRedLowKick.png"));
+
+		blueHighKickFeet = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterBlueHighKick.png"));
+		redHighKickFeet = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterRedHighKick.png"));
+
+		blueIdleHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterBlueNoPunch.png"));
+		redIdleHands = Toolkit.getDefaultToolkit().createImage(
+				Renderer.class
+						.getResource("/nl/uva/saf/data/FighterRedNoPunch.png"));
+
+		blueLowPunchHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterBlueLowPunch.png"));
+		redLowPunchHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterRedLowPunch.png"));
+
+		blueHighPunchHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterBlueHighPunch.png"));
+		redHighPunchHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterRedHighPunch.png"));
+
+		blueBlockLowHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterBlueBlockLow.png"));
+		redBlockLowHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterRedBlockLow.png"));
+
+		blueBlockHighHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterBlueBlockHigh.png"));
+		redBlockHighHands = Toolkit
+				.getDefaultToolkit()
+				.createImage(
+						Renderer.class
+								.getResource("/nl/uva/saf/data/FighterRedBlockHigh.png"));
 	}
 
 	@Override
@@ -179,8 +248,7 @@ public class Renderer implements IRenderer {
 			drawPosition.y -= 20;
 		}
 
-		Image feetTexture = chooseFeetTexture(currentPlayer, fighter);
-		playerTextures.add(feetTexture);
+		chooseTextures(currentPlayer, fighter, playerTextures);
 
 		for (Image texture : playerTextures) {
 			g.drawImage(texture, (int) drawPosition.x, (int) drawPosition.y,
@@ -188,9 +256,11 @@ public class Renderer implements IRenderer {
 		}
 	}
 
-	private Image chooseFeetTexture(int currentPlayer, FighterBot fighter) {
-		Image feetTexture;
+	private void chooseTextures(int currentPlayer, FighterBot fighter,
+			List<Image> playerTextures) {
+		Image feetTexture, handsTexture;
 		FightActionType playerFightAction = fighter.getFightAction();
+
 		switch (playerFightAction) {
 		case kick_low:
 			feetTexture = currentPlayer == 1 ? blueLowKickFeet : redLowKickFeet;
@@ -203,8 +273,31 @@ public class Renderer implements IRenderer {
 			feetTexture = currentPlayer == 1 ? blueIdleFeet : redIdleFeet;
 			break;
 		}
-		
-		return feetTexture;
+
+		switch (playerFightAction) {
+		case punch_low:
+			handsTexture = currentPlayer == 1 ? blueLowPunchHands
+					: redLowPunchHands;
+			break;
+		case punch_high:
+			handsTexture = currentPlayer == 1 ? blueHighPunchHands
+					: redHighPunchHands;
+			break;
+		case block_low:
+			handsTexture = currentPlayer == 1 ? blueBlockLowHands
+					: redBlockLowHands;
+			break;
+		case block_high:
+			handsTexture = currentPlayer == 1 ? blueBlockHighHands
+					: redBlockHighHands;
+			break;
+		default:
+			handsTexture = currentPlayer == 1 ? blueIdleHands : redIdleHands;
+			break;
+		}
+
+		playerTextures.add(feetTexture);
+		playerTextures.add(handsTexture);
 	}
 
 	private void drawHealthbar(Graphics g, int currentPlayer, FighterBot fighter) {
@@ -258,7 +351,7 @@ public class Renderer implements IRenderer {
 	public void join() throws InterruptedException {
 		renderThread.join();
 	}
-	
+
 	@Override
 	public JComponent getSurface() {
 		return surface;

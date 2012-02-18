@@ -27,10 +27,11 @@ import nl.uva.saf.fdl.ITreeVisitor;
 public class Fighter extends TreeNode {
 	private final String name;
 	private final ArrayList<FighterAttribute> attributes;
-	
+
 	public Fighter(String name, ArrayList<FighterAttribute> attributes) {
 		this.name = name == null ? "" : name;
-		this.attributes = attributes;
+		this.attributes = attributes != null ? attributes
+				: new ArrayList<FighterAttribute>(0);
 	}
 
 	public String getName() {
@@ -38,9 +39,9 @@ public class Fighter extends TreeNode {
 	}
 
 	public List<FighterAttribute> getAttributes() {
-		return attributes != null ? Collections.unmodifiableList(attributes) : new ArrayList<FighterAttribute>();
+		return Collections.unmodifiableList(attributes);
 	}
-	
+
 	public void addAttribute(FighterAttribute attribute) {
 		if (attributes != null) {
 			attributes.add(attribute);
@@ -49,6 +50,6 @@ public class Fighter extends TreeNode {
 
 	@Override
 	public void accept(ITreeVisitor visitor) {
-		visitor.visit(this);		
+		visitor.visit(this);
 	}
 }

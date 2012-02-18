@@ -6,13 +6,15 @@ import nl.uva.saf.fdl.ast.ConditionAlways;
 import nl.uva.saf.fdl.ast.ConditionAnd;
 import nl.uva.saf.fdl.ast.ConditionOr;
 import nl.uva.saf.fdl.ast.ITreeNode;
+import nl.uva.saf.fdl.types.ConditionType;
+import nl.uva.saf.fdl.types.TypeTranslator;
 
 public class ExpressionEvaluator extends TreeVisitor {
 	private final ITreeNode expression;
-	private HashMap<String, Boolean> truthTable;
+	private HashMap<ConditionType, Boolean> truthTable;
 	private boolean evaluation;
 	
-	public ExpressionEvaluator(ITreeNode expression, HashMap<String, Boolean> truthTable) {
+	public ExpressionEvaluator(ITreeNode expression, HashMap<ConditionType, Boolean> truthTable) {
 		if (expression == null) {
 			throw new IllegalArgumentException("expression");
 		}
@@ -36,7 +38,7 @@ public class ExpressionEvaluator extends TreeVisitor {
 		evaluation = true;
 		
 		for(String operand : node.getOperands()) {
-			Boolean truth = truthTable.get(operand);
+			Boolean truth = truthTable.get(TypeTranslator.getConditionType(operand));
 			if (truth == null || truth.booleanValue() == false) {
 				evaluation = false;
 				break;
