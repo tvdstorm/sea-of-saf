@@ -62,8 +62,12 @@ public class FightView extends JFrame implements Observer {
 	public void update(Observable fightEngine, Object arg1) {
 		FightEngine fightEngineObserverable = (FightEngine) fightEngine;
 		if (!fightEngineObserverable.isPlaying()) {
-			JOptionPane.showMessageDialog(this, "Player " + fightEngineObserverable.getWinner() + " has won");
+			showFinishMessage(fightEngineObserverable.getWinner());
 		}
+	}
+	
+	public void showFinishMessage(String winner) {
+		JOptionPane.showMessageDialog(this, "Player " + winner + " has won");
 	}
 
 }
