@@ -11,8 +11,8 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.antlr.runtime.tree.DOTTreeGenerator;
 import org.antlr.stringtemplate.StringTemplate;
 
-import saf.game.Arena;
 import saf.generation.output.*;
+import saf.simulation.Arena;
 import saf.structure.*;
 
 public class Program {

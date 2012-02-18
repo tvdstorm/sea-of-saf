@@ -1,4 +1,4 @@
-package saf.game;
+package saf.simulation;
 import saf.structure.*;
 
 public class Arena {
