@@ -2,20 +2,25 @@ package saf.syntax;
 
 import saf.data.*;
 
+import java.util.List;
+
 public abstract class Move
 {
-    public boolean isWellFormed(data.Move moveData,
-                                List<String> errorMessages)
+    public static boolean isWellFormed(saf.data.Move moveData,
+                                       List<String> errorMessages)
     {
         boolean wellFormed = true;
 
-        List<String> legalMoves = data.Move.LEGAL;
-        String moveName = moveData.getName();
+        List<String> legalMoves = saf.data.Move.LEGAL;
+        List<String> possibleNames = moveData.getAllPossibilities();
 
-        if (!legalMoves.contains(moveName))
+        for (String moveName : possibleNames)
         {
-            errorMessages.add("Illegal move: '" + moveName + "'.");
-            wellFormed = false;
+            if (!legalMoves.contains(moveName))
+            {
+                errorMessages.add("Illegal move: '" + moveName + "'.");
+                wellFormed = false;
+            }
         }
 
         return wellFormed;

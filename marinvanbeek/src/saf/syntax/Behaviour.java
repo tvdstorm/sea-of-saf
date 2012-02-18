@@ -6,18 +6,18 @@ import java.util.List;
 
 public abstract class Behaviour
 {
-    public static boolean isWellFormed(data.Behaviour behaviourData, 
+    public static boolean isWellFormed(saf.data.Behaviour behaviourData, 
                                        List<String> errorMessages)
     {
         boolean wellFormed = true;
 
-        List<data.Tactic> tacticDatas = behaviourData.getTactics();
+        List<saf.data.Tactic> tacticDatas = behaviourData.getTactics();
 
         boolean hasRequired = false;
-        for (String requiredCondition : data.Condition.REQUIRED)
+        for (String requiredCondition : saf.data.Condition.REQUIRED)
         {
             hasRequired = false;
-            for (data.Tactic tacticData : tacticDatas)
+            for (saf.data.Tactic tacticData : tacticDatas)
             {
                 if (Tactic.hasCondition(tacticData, requiredCondition))
                 {
@@ -33,7 +33,7 @@ public abstract class Behaviour
             }
         }
 
-        for (dataTactic tacticData : tacticDatas)
+        for (saf.data.Tactic tacticData : tacticDatas)
         {
             wellFormed &= Tactic.isWellFormed(tacticData, errorMessages);
         }

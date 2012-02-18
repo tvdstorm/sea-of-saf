@@ -2,12 +2,14 @@ package saf.syntax;
 
 import saf.data.*;
 
-class Fighter implements SyntaxCheck
+import java.util.List;
+
+public class Fighter implements SyntaxCheck
 {
     private int nrParseErrors = 0;
-    private data.Fighter fighterData;
+    private saf.data.Fighter fighterData;
 
-    public Fighter(data.Fighter fighterData)
+    public Fighter(saf.data.Fighter fighterData)
     {
         this.fighterData = fighterData;
     }
@@ -22,8 +24,10 @@ class Fighter implements SyntaxCheck
             wellFormed = false;
         }
 
-        Attribute.isWellFormed(fighterData.getAttributes(), errorMessages);
-        Behaviour.isWellFormed(fighterdata.getBehaviour(), errorMessages);
+        wellFormed &= Attribute.isWellFormed(fighterData.getAttributes(), 
+                                             errorMessages);
+        wellFormed &= Behaviour.isWellFormed(fighterData.getBehaviour(), 
+                                             errorMessages);
 
         return wellFormed;
     }
@@ -31,6 +35,11 @@ class Fighter implements SyntaxCheck
     public void setParseErrors(int nr)
     {
         nrParseErrors = nr;
+    }
+
+    public void printResult()
+    {
+        System.out.println(fighterData);
     }
 }
 

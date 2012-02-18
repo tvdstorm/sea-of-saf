@@ -4,7 +4,7 @@ legal_maximum
     punch_reach = 4
     kick_power = 8
     kick_reach = 5
-    far and weaker [choose(run_towards walk_towards) choose(kick_high punch_low)]
-    near and stronger or much_stronger [run_away block_low] 
+    (far and weaker) [choose(run_towards walk_towards) choose(kick_high punch_low)]
+    ((near and stronger) or much_stronger) [run_away block_low] 
     always [walk_towards punch_low]
 }

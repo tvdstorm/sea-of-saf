@@ -16,11 +16,16 @@ public class Attack
                           "block_high")
     );
 
-    private String name;
+    private ChooseConstruct possibleNames;
 
     public Attack(String name)
     {
-        this.name = name;
+        this.possibleNames = new ChooseConstruct(name);
+    }
+
+    public Attack(List<String> possibleNames)
+    {
+        this.possibleNames = new ChooseConstruct(possibleNames);
     }
 
     public static Attack getRandom(Random random)
@@ -32,9 +37,13 @@ public class Attack
 
     public String toString()
     {
-        return name;
+        return possibleNames.toString();
     }
-
-    public String getName() { return name; }
+    
+    public String getName() { return possibleNames.getName(); }
+    public List<String> getAllPossibilities() 
+    { 
+        return possibleNames.getAllPossibilities(); 
+    }
 }
 

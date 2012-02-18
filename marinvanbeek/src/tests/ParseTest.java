@@ -1,5 +1,11 @@
-//import org.testng.annotations.*;
-//import org.testng.Reporter;
+package tests;
+
+import saf.data.*;
+import saf.syntax.*;
+
+import saf.parser.SAFLexer;
+import saf.parser.SAFParser;
+
 import org.junit.*;
 
 import org.antlr.runtime.*;
@@ -64,17 +70,6 @@ public class ParseTest
             safFilesTest(fileName, true);
         }
     }
-//
-//    @Test(expected = NumberFormatException.class)
-//    public void illegalNumberTest()
-//    {
-//        String[] illegalFiles = new String[] {"illegal_attribute_value.saf"};
-//
-//        for (String fileName : illegalFiles)
-//        {
-//            safFilesTest(fileName, false);
-//        }
-//    }
 
     @Test
     public void illegalFilesTest()
@@ -103,26 +98,33 @@ public class ParseTest
         ANTLRFileStream input = new ANTLRFileStream(TEST_FILES_LOCATION + 
                                                     fileName);
         SAFLexer lexer = new SAFLexer(input);
-        SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
+        SAFParser parser = 
+                new SAFParser(new CommonTokenStream(lexer));
         parser.parse();
-        Fighter fighter = parser.fighter;
+        saf.syntax.SyntaxCheck syntaxCheck = parser.getSyntaxCheck();
 
         List<String> syntaxErrors = new ArrayList<String>();
 
-        boolean wellFormed = fighter.isWellFormed(syntaxErrors);
-        System.out.println("Reported errors:");
-        for (String error : syntaxErrors)
+        boolean wellFormed = syntaxCheck.isWellFormed(syntaxErrors);
+        if (syntaxErrors.size() > 0)
         {
-            System.out.println(" -- " + error);
+            System.out.println("Reported errors:");
+            for (String error : syntaxErrors)
+            {
+                System.out.println(" -- " + error);
+            }
+            System.out.println();
+        }
+        else if (wellFormed)
+        {
+            System.out.println("Passed; parsed result:");
+            syntaxCheck.printResult();
+        } 
+        else
+        {
+            System.out.println("No syntax errors, but didn't pass either.");
         }
         Assert.assertEquals(passes, wellFormed);
-
-        if (passes)
-            System.out.println(fighter);
-
-        System.out.println("<passed (fighter.isWellFormed() = " + passes + 
-                           ").");
-        System.out.println();
     }
 }
 
