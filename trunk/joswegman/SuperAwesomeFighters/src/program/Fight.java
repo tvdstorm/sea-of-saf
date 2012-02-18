@@ -215,15 +215,7 @@ public class Fight {
 		this.currentFightLeft = getFight(botLeft,this.statusLeft);
 		this.currentFightRight = getFight(botRight, this.statusRight);
 		calculateLife(this.currentFightLeft, this.currentFightRight);
-		
-		
-//		this.setLifeLeft(this.getLifeLeft() + 10);
-//		this.setLifeRight(this.getLifeRight() - 10);
 		calculatePositions(this.currentMoveLeft,this.currentMoveRight);
-		
-		//InputRule aktie = this.getFight(this.botLeft,this.calculateStrengthDif(this.getLifeLeft(), this.getLifeRight()));
-		//System.out.println(aktie.getInputrule(true).toString());
-		//System.out.println(String.valueOf(Integer.toString(this.getLifeLeft()) + "  "+ Integer.toString(this.getLifeRight())));
 	}
 	
 	public void calculateLife(InputRule irl, InputRule irr){
@@ -242,6 +234,7 @@ public class Fight {
 	public void calculatePositions(InputRule irl, InputRule irr){
 		this.positionLeft += calcMove(irl.getInputrule(true));
 		this.positionRight -= calcMove(irr.getInputrule(true));
+		//if (this.positionRight < this.positionLeft+166){this.positionRight = this.positionLeft + 166;}
 	}
 	
 	public int calcMove (String m){
