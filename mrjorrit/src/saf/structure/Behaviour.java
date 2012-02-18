@@ -1,8 +1,8 @@
-package saf.classes;
+package saf.structure;
 
 import java.util.Vector;
 
-public class Behaviour implements Strict {
+public class Behaviour extends Check {
 	
 	public Behaviour(Vector<Rule> behaviour)
 	{
@@ -17,7 +17,7 @@ public class Behaviour implements Strict {
 	}
 
 	@Override
-	public void check() throws Exception {
+	public void check(){
 		//TODO: check if always is implemented
 		//boolean alwaysImplemented = false;
 		for(Rule rule : behaviour)

@@ -1,6 +1,6 @@
-package saf.classes;
+package saf.structure;
 
-public class Fighter implements Strict {
+public class Fighter extends Check {
 	
 	//Constructor
 	public Fighter(String name, Personality personality, Behaviour behaviour) {
@@ -32,8 +32,11 @@ public class Fighter implements Strict {
 	}
 
 	@Override
-	public void check() throws Exception{
-		if(name == null || name.isEmpty()) throw new Exception("Undefined name!");
+	public void check(){
+		if(name == null || name.isEmpty())
+		{
+			String test = "sd";
+		}
 		personality.check();
 		behaviour.check();
 	}

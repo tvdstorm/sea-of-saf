@@ -37,17 +37,38 @@ behaviour
 
 rule
 	: 	(
-			conditionTypes
+			or
 			LEFT_BRACKET
 				moveActionTypes fightActionTypes
 			RIGHT_BRACKET
-			) -> ^(RULE conditionTypes moveActionTypes fightActionTypes)
+			) -> ^(RULE or moveActionTypes fightActionTypes)
 	;
 	
-conditionTypes
-  : IDENT 
-  | (IDENT (LOGICAL^ IDENT)+)
+//expressions
+
+condition
+  : single
+  | explicit
   ;
+  
+single
+  : IDENT^
+  ;
+
+explicit
+  : LEFT_PAREN! or^ RIGHT_PAREN!
+  ;
+  
+and
+  : condition (AND^ condition)*
+  ;
+
+or
+  : and (OR^ and)*
+  ;
+  
+  
+
 
 moveActionTypes
   : IDENT | chooseMoveActionType
@@ -78,8 +99,8 @@ BEHAVIOUR : 'Behaviour' ;
 CHARACTERISTIC : 'Characteristic';
 RULE : 'Rule';
 
-LOGICAL : ('and' | 'or');
-
+OR : ('or' | 'OR' | '||');
+AND : ('and'| 'AND' | '&&');
 
 CHOOSE : 'choose' ;
 IDENT : ('a' .. 'z' | 'A' .. 'Z')('a' .. 'z' | 'A' .. 'Z' | '0'..'9' | '_')*;

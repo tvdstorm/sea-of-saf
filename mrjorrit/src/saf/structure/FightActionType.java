@@ -1,4 +1,4 @@
-package saf.classes;
+package saf.structure;
 
 public enum FightActionType {
 	block_low,
