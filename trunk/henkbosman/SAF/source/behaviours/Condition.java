@@ -1,4 +1,5 @@
 package behaviours;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Condition 
@@ -10,6 +11,8 @@ public class Condition
 		and,or
 	}
 
+	private List<String> _errorList;
+	
 	private Conditions _condition;
 	private Operators _operator;
 	private Condition _subCondition;
@@ -18,17 +21,41 @@ public class Condition
 	
 	public Condition(String name)
 	{
-		_condition = Conditions.valueOf(name);
+		_errorList = new LinkedList<String>();
+		
+		try
+		{
+			_condition = Conditions.valueOf(name);
+		} catch (IllegalArgumentException e) {
+			String msg = "Error parsing \""+name+"\". Possible options:";
+			for (Conditions c : Conditions.values())
+			{
+				msg+=" "+c+" ";
+			}
+			_errorList.add(msg);
+		}
 	}
 	
 	public Condition(Condition condition)
 	{
+		_errorList = new LinkedList<String>();
 		_mainCondition = condition;
 	}
 	
 	public void addSubCondition(String operator, Condition condition)
 	{
-		_operator = Operators.valueOf(operator);
+		try
+		{
+			_operator = Operators.valueOf(operator);
+		} catch (IllegalArgumentException e) {
+			String msg = "Error parsing \""+operator+"\". Possible options:";
+			for (Operators o : Operators.values())
+			{
+				msg+=" "+o+" ";
+			}
+			_errorList.add(msg);
+		}
+
 		_subCondition = condition;
 	}
 	
@@ -66,6 +93,18 @@ public class Condition
 		return _subCondition.checkCondition(conditions);
 	}
 	
+	public List<String> getErrors()
+	{
+		List<String> list = new LinkedList<String>();
+		if (_subCondition!=null)
+			list.addAll(_subCondition.getErrors());
+		if (_mainCondition!=null)
+			list.addAll(_mainCondition.getErrors());
+		list.addAll(_errorList);
+		
+		return list;
+
+	}
 	
 	
 }

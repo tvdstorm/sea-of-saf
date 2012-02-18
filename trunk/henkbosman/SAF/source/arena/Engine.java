@@ -1,6 +1,8 @@
 package arena;
 
 import java.io.IOException;
+import java.util.List;
+
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
@@ -146,5 +148,18 @@ public class Engine
 				return _fighterB.getPosition();
 		}
 		return 0;
+	}
+	
+	public List<String> getErrors(Fighters fighter)
+	{
+		switch (fighter)
+		{
+			case FighterA:
+				return _fighterA.getErrors();
+			case FighterB:
+				return _fighterB.getErrors();
+		}
+		
+		return null;
 	}
 }

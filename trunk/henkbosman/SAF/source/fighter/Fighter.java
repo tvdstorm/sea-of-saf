@@ -144,6 +144,23 @@ public class Fighter
 		
 	}
 	
+	public List<String> getErrors()
+	{
+		List<String> list = new LinkedList<String>();
+		
+		for (Property p : _properties)
+		{
+			list.addAll(p.getErrors());
+		}
+		list.addAll(_behaviour.getErrors());
+		
+		
+		if (!list.isEmpty())
+			list.add(0, "\nFighter: "+_name);
+		
+		return list;
+	}
+	
 	
 	
 }

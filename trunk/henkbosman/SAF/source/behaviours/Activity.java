@@ -1,4 +1,5 @@
 package behaviours;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,4 +30,17 @@ public class Activity
 	{
 		return _action.getAction(random);
 	}
+	
+	public List<String> getErrors()
+	{
+		List<String> list = new LinkedList<String>();
+		if (_condition!=null)
+			list.addAll(_condition.getErrors());
+		if (_movement!=null)
+			list.addAll(_movement.getErrors());
+		if (_action!=null)
+			list.addAll(_action.getErrors());
+		return list;
+	}
+	
 }
