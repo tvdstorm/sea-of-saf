@@ -1,6 +1,6 @@
-package saf.classes;
+package saf.structure;
 
-public enum ConditionType {
+public enum Condition {
 	always,
 	near,
 	far,

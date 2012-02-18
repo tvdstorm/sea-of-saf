@@ -14,7 +14,7 @@ import org.antlr.runtime.tree.TreeAdaptor;
 import org.antlr.stringtemplate.StringTemplate;
 
 import saf.generation.output.*;
-import saf.classes.*;
+import saf.structure.*;
 
 public class Program {
 
@@ -30,10 +30,6 @@ public class Program {
 		Fighter fighter = walker.fighter();
 		System.out.println("ok!");
 	}
-	
-
-	
-
 		
 		public static void writeDot(CommonTree tree)
 		{

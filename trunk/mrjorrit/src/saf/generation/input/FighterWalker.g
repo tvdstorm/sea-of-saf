@@ -9,7 +9,7 @@ options {
 @header
 {
   package saf.generation.output;
-  import saf.classes.*;
+  import saf.structure.*;
   import java.util.Vector;
 }
 
@@ -30,57 +30,47 @@ behaviour returns [Behaviour behaviour]
   ;
   
 characteristic returns [Characteristic characteristic]
-  : ^(CHARACTERISTIC att=IDENT pow=DIGIT) {characteristic = new Characteristic(Attribute.valueOf(att.getText()), Integer.parseInt(pow.getText()));}
+  : ^(CHARACTERISTIC att=IDENT pow=DIGIT) {characteristic = new Characteristic(att.getText(), Integer.parseInt(pow.getText()));}
   ;
   
 rule returns [Rule rule]
   : 
-    ^(RULE con=conditionTypes mov=moveActionTypes fight=fightActionTypes)
+    ^(RULE con=condition mov=moveActionTypes fight=fightActionTypes)
     {
       rule = new Rule(con, mov, fight);
     }
   ;
-
-conditionTypes returns [ConditionTypeOperator conditionType]
-  : 
-    (
-    con=IDENT {conditionType = new ConditionTypeOperator(ConditionType.valueOf(con.getText()));}
-    |
-    ^(log=LOGICAL rec=conditionTypes con=IDENT )
-      {
-        conditionType = new ConditionTypeOperator(
-        ConditionType.valueOf(con.getText()),
-        LogicalOperators.valueOf(log.getText()),
-        rec
-        );
-        
-      }
-    )
+  
+condition returns [Logical logical]
+  :
+    (s=IDENT) {logical = new LogicalSimple(s.getText());}
+  | (and=AND left=condition right=condition) {logical= new LogicalAnd(left,right);}
+  | (or=OR left=condition right=condition) {logical= new LogicalOr(left,right);}
   ;
 
-moveActionTypes returns [Vector<MoveActionType> moveActionTypes]
-  :{moveActionTypes = new Vector<MoveActionType>();}
+moveActionTypes returns [Vector<MoveAction> moveActions]
+  :{moveActions = new Vector<MoveAction>();}
   (
-    mov=IDENT {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));}
-    | movs=chooseMoveActionType {moveActionTypes = movs;}
+    mov=IDENT {moveActions.add(new MoveAction(mov.getText()));}
+    | movs=chooseMoveActionType {moveActions = movs;}
   )
   ;
 
-fightActionTypes returns [Vector<FightActionType> fightActionTypes]
-  :{fightActionTypes = new Vector<FightActionType>();}
+fightActionTypes returns [Vector<FightAction> fightActions]
+  :{fightActions = new Vector<FightAction>();}
   (
-    fight=IDENT {fightActionTypes.add(FightActionType.valueOf(fight.getText()));}
-    | fights=chooseFightActionType {fightActionTypes = fights;}
+    fight=IDENT {fightActions.add(new FightAction(fight.getText()));}
+    | fights=chooseFightActionType {fightActions = fights;}
   )
   ;
   
-chooseMoveActionType returns [Vector<MoveActionType> moveActionTypes]
-  : {moveActionTypes = new Vector<MoveActionType>();}
-    ^(CHOOSE (mov=IDENT {moveActionTypes.add(MoveActionType.valueOf(mov.getText()));})+)
+chooseMoveActionType returns [Vector<MoveAction> moveActions]
+  : {moveActions = new Vector<MoveAction>();}
+    ^(CHOOSE (mov=IDENT {moveActions.add(new MoveAction(mov.getText()));})+)
   ;
 
-chooseFightActionType returns [Vector<FightActionType> fightActionTypes]
-  : {fightActionTypes = new Vector<FightActionType>();}
-    ^(CHOOSE (fight=IDENT {fightActionTypes.add(FightActionType.valueOf(fight.getText()));})+)
+chooseFightActionType returns [Vector<FightAction> fightActions]
+  : {fightActions = new Vector<FightAction>();}
+    ^(CHOOSE (fight=IDENT {fightActions.add(new FightAction(fight.getText()));})+)
   ;
   

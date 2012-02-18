@@ -1,8 +1,8 @@
-package saf.classes;
+package saf.structure;
 
 import java.util.Vector;
 
-public class Personality implements Strict  {
+public class Personality extends Check  {
 	
 	public Personality(Vector<Characteristic> personality)
 	{
@@ -17,7 +17,7 @@ public class Personality implements Strict  {
 	}
 
 	@Override
-	public void check() throws Exception {
+	public void check(){
 		for(Characteristic character : personality) character.check();
 	}
 }
