@@ -7,9 +7,12 @@ public class BehaviourActionType {
 		this.name = name;
 	}
 
-	@Override
-	public String toString() {
-		return "BehaviourActionType [name=" + name + "]\n";
+	public String getName() {
+		return name;
+	}
+
+	public Boolean nameEquals(String nameValue) {
+		return name.equals(nameValue);
 	}
 
 }

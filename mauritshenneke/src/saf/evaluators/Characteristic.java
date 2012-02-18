@@ -9,9 +9,12 @@ public class Characteristic {
 		this.value = value;
 	}
 
-	@Override
-	public String toString() {
-		return "Characteristic [name=" + name + ", value=" + value + "]\n";
+	public String getName() {
+		return name;
+	}
+	
+	public Integer getValue(){
+		return value;
 	}
 	
 }
