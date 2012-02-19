@@ -37,25 +37,30 @@ public class FighterBot {
 	private volatile int health;
 	private volatile Vector2d position;
 	private volatile Vector2d origin;
-	
+
 	private int speed;
-	
+
 	private int nextTurn;
-	
+
 	private volatile FightActionType fightAction = FightActionType.unknown;
 	private volatile MoveActionType moveAction = MoveActionType.unknown;
 
 	public FighterBot(ITreeNode fighter) {
 		fighterNode = fighter;
 		nextTurn = 0;
-		
+
 		position = new Vector2d();
 		spawnPosition = new Vector2d();
 		origin = new Vector2d(100, 150);
-		health = 100;
+		health = 100;		
 
-		name = NameExtractor.getName(fighter);
-		characteristics = CharacteristicExtractor.getCharacteristics(fighter);
+		if (fighterNode != null) {
+			name = NameExtractor.getName(fighterNode);
+			characteristics = CharacteristicExtractor.getCharacteristics(fighterNode);
+		} else {
+			name = "";
+			characteristics =  new HashMap<CharacteristicType, Integer>();
+		}
 
 		calculateSpeed();
 	}
@@ -70,13 +75,14 @@ public class FighterBot {
 		double height = (punchReach + kickReach) / 2;
 		speed = (int) Math.abs(0.5 * (height - weight));
 	}
-	
+
 	public int getSpeed() {
 		return speed;
 	}
 
 	public void setAttribute(CharacteristicType name, int value) {
 		characteristics.put(name, value);
+		calculateSpeed();
 	}
 
 	public int getAttribute(CharacteristicType name) {
@@ -91,15 +97,15 @@ public class FighterBot {
 	public Vector2d getPosition() {
 		return position;
 	}
-	
+
 	public void resetHealth() {
 		health = 100;
 	}
-	
+
 	public int getNextTurn() {
 		return nextTurn;
 	}
-	
+
 	public void setNextTurn(int turns) {
 		if (turns >= 0) {
 			this.nextTurn = turns;
@@ -147,7 +153,7 @@ public class FighterBot {
 	public boolean isJumping() {
 		return moveAction == MoveActionType.jump;
 	}
-	
+
 	public ITreeNode getFighterNode() {
 		return fighterNode;
 	}
@@ -159,11 +165,11 @@ public class FighterBot {
 	public void setFightAction(FightActionType fightAction) {
 		this.fightAction = fightAction;
 	}
-	
+
 	public MoveActionType getMoveAction() {
 		return moveAction;
 	}
-	
+
 	public void setMoveAction(MoveActionType moveAction) {
 		this.moveAction = moveAction;
 	}

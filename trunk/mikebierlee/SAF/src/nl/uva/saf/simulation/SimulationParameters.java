@@ -18,29 +18,40 @@
 
 package nl.uva.saf.simulation;
 
-import java.awt.Dimension;
-import java.util.List;
+import java.util.Random;
 
-public interface IFightSimulator {	
-	public void update();
+import nl.uva.saf.fdl.ActionSelector;
 
-	public void addContestant(FighterBot bot) throws PlayfieldFullException;
+/**
+ * Simulation parameters allow you to assign different strategies to the
+ * simulator by influencing it's evaluation and execution objects.
+ */
+public class SimulationParameters {
+	private final ActionSelector actionSelector;
+	private final IConditionSemantics conditionSemantics;
+	private final IActionExecutor actionExecutor;
 
-	public void clearContestants() throws FightInProgressException;
+	public SimulationParameters() {
+		actionSelector = new ActionSelector(new Random());
+		conditionSemantics = new ConditionSemantics();
+		actionExecutor = new ActionExecutor();
+	}
 
-	public void dispose();
+	public SimulationParameters(ActionSelector actionSelector, IConditionSemantics conditionSemantics, IActionExecutor actionExecutor) {
+		this.actionSelector = actionSelector;
+		this.conditionSemantics = conditionSemantics;
+		this.actionExecutor = actionExecutor;
+	}
 
-	public boolean isDisposed();
+	public ActionSelector getActionSelector() {
+		return actionSelector;
+	}
 
-	public void start();
+	public IConditionSemantics getConditionSemantics() {
+		return conditionSemantics;
+	}
 
-	public void stop();
-
-	public boolean isRunning();
-
-	public List<FighterBot> getContestants();
-
-	Dimension getPlayFieldSize();
-
-	void setPlayFieldSize(Dimension playFieldSize);
+	public IActionExecutor getActionExecutor() {
+		return actionExecutor;
+	}
 }

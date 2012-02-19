@@ -37,30 +37,33 @@ import nl.uva.saf.fdl.types.MoveActionType;
 import nl.uva.saf.fdl.types.TypeTranslator;
 
 public class ActionSelector extends TreeVisitor {
-	private final ITreeNode fighter;
+	private ITreeNode fighter;
 	private MoveActionType moveAction;
 	private FightActionType fightAction;
 	private HashMap<ConditionType, Boolean> truthTable;
 	private List<Behaviour> candidateBehaviours;
 	private final Random numberGenerator;
 
-	public ActionSelector(ITreeNode fighterNode, Random numberGenerator) {
-		if (fighterNode == null) {
-			throw new IllegalArgumentException("fighterNode");
-		}
+	public ActionSelector(Random numberGenerator) {
+		
 
 		if (numberGenerator == null) {
 			throw new IllegalArgumentException("numberGenerator");
 		}
 
-		this.fighter = fighterNode;
+		
 		this.numberGenerator = numberGenerator;
 		moveAction = MoveActionType.unknown;
 		fightAction = FightActionType.unknown;
 		candidateBehaviours = new ArrayList<Behaviour>();
 	}
 
-	public void selectActions(HashMap<ConditionType, Boolean> truthTable) {
+	public void selectActions(ITreeNode fighterNode, HashMap<ConditionType, Boolean> truthTable) {
+		if (fighterNode == null) {
+			throw new IllegalArgumentException("fighterNode");
+		}
+		
+		this.fighter = fighterNode;
 		this.truthTable = truthTable;
 		fighter.accept(this);
 
@@ -102,5 +105,11 @@ public class ActionSelector extends TreeVisitor {
 		if (evaluator.evaluate() == true) {
 			candidateBehaviours.add(node);
 		}
+	}
+
+	public void selectAlways(ITreeNode fighterNode) {
+		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
+		truthTable.put(ConditionType.always, true);
+		selectActions(fighterNode, truthTable);
 	}
 }

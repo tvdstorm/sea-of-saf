@@ -23,54 +23,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
-
 import nl.uva.saf.fdl.ActionSelector;
 import nl.uva.saf.fdl.types.ConditionType;
 import nl.uva.saf.fdl.types.FightActionType;
 import nl.uva.saf.fdl.types.MoveActionType;
 
 public class FightSimulator implements IFightSimulator {
-	private boolean fightInProgress = false;
-	private volatile boolean disposed = false;
 	private List<FighterBot> contestants;
+	private volatile boolean disposed = false;
+	private boolean fightInProgress = false;
+
+	private final ActionSelector actionSelector;
+	private final IConditionSemantics conditionSemantics;
+	private final IActionExecutor actionExecutor;
 
 	private Dimension playFieldSize;
 
 	public FightSimulator() {
-		playFieldSize = new Dimension(200, 100);
-		contestants = new ArrayList<FighterBot>(2);
+		this(new SimulationParameters());
 	}
 
-	@Override
-	public void update() {
-		if (disposed) {
-			return;
-		}
+	public FightSimulator(SimulationParameters parameters) {
+		actionSelector = parameters.getActionSelector();
+		conditionSemantics = parameters.getConditionSemantics();
+		actionExecutor = parameters.getActionExecutor();
 
-		if (fightInProgress) {
-			for (FighterBot contestant : contestants) {
-				//Vector2d position = contestant.getPosition();
-
-				HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
-
-				if (contestant.getNextTurn() == 0) {
-					ActionSelector selector = new ActionSelector(contestant.getFighterNode(), new Random());
-					selector.selectActions(truthTable);
-
-					if (selector.getFightAction() == FightActionType.unknown
-							|| selector.getMoveAction() == MoveActionType.unknown) {
-						stop();
-						return;
-					}
-
-					contestant.setMoveAction(selector.getMoveAction());
-					contestant.setFightAction(selector.getFightAction());
-				} else {
-					contestant.setNextTurn(contestant.getNextTurn() - 1);
-				}
-			}
-		}
+		playFieldSize = new Dimension(200, 100);
+		contestants = new ArrayList<FighterBot>(2);
 	}
 
 	@Override
@@ -85,11 +64,6 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
-	public List<FighterBot> getContestants() {
-		return Collections.unmodifiableList(contestants);
-	}
-
-	@Override
 	public void clearContestants() throws FightInProgressException {
 		if (fightInProgress) {
 			throw new FightInProgressException();
@@ -99,8 +73,18 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
-	public boolean isRunning() {
-		return fightInProgress;
+	public void dispose() {
+		disposed = true;
+	}
+
+	@Override
+	public List<FighterBot> getContestants() {
+		return Collections.unmodifiableList(contestants);
+	}
+
+	@Override
+	public Dimension getPlayFieldSize() {
+		return playFieldSize;
 	}
 
 	@Override
@@ -109,15 +93,33 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
-	public void dispose() {
-		disposed = true;
+	public boolean isRunning() {
+		return fightInProgress;
+	}
+
+	private void selectActions(FighterBot contestant, HashMap<ConditionType, Boolean> truthTable) {
+		actionSelector.selectActions(contestant.getFighterNode(), truthTable);
+
+		if (actionSelector.getFightAction() == FightActionType.unknown
+				|| actionSelector.getMoveAction() == MoveActionType.unknown) {
+			stop();
+		}
+
+		contestant.setMoveAction(actionSelector.getMoveAction());
+		contestant.setFightAction(actionSelector.getFightAction());
+	}
+
+	@Override
+	public void setPlayFieldSize(Dimension playFieldSize) {
+		this.playFieldSize = playFieldSize;
 	}
 
 	@Override
 	public void start() {
 		for (FighterBot contestant : contestants) {
-			contestant.setPosition(contestant.getSpawnPosition());
+			contestant.setPosition(new Vector2d(contestant.getSpawnPosition()));
 			contestant.resetHealth();
+			contestant.setNextTurn(0);
 		}
 
 		fightInProgress = true;
@@ -129,12 +131,26 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
-	public Dimension getPlayFieldSize() {
-		return playFieldSize;
-	}
+	public void update() {
+		if (disposed) {
+			return;
+		}
 
-	@Override
-	public void setPlayFieldSize(Dimension playFieldSize) {
-		this.playFieldSize = playFieldSize;
+		if (fightInProgress) {
+			for (FighterBot contestant : contestants) {
+				HashMap<ConditionType, Boolean> truthTable = conditionSemantics.getConditionStates(contestant,
+						contestants);
+
+				if (contestant.getNextTurn() == 0) {
+					selectActions(contestant, truthTable);
+					actionExecutor.executeFighterActions(contestant, contestants, truthTable);
+					contestant.setNextTurn(actionExecutor.getTurnCost());
+					
+					//TODO: Prevent fighters from leaving the playfield
+				} else {
+					contestant.setNextTurn(contestant.getNextTurn() - 1);
+				}
+			}
+		}
 	}
 }

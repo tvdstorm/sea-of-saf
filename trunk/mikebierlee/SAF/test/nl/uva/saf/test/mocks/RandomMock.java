@@ -22,16 +22,32 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
 
+/**
+ * Removes the random factor from the random number generator to produce
+ * testable facts.
+ */
 public class RandomMock extends Random {
 	private static final long serialVersionUID = 6029252354710961782L;
 
 	private final List<Integer> expected;
 	private int currentIndex = 0;
 
+	/**
+	 * Constructs instance of the random mock.
+	 * 
+	 * @param expected
+	 *            List of expected returned random numbers in order. Will loop
+	 *            around if more requests are made than the list contains.
+	 */
 	public RandomMock(List<Integer> expected) {
 		this.expected = expected;
 	}
 
+	/**
+	 * Constructs instance of the random mock. This instance will return the
+	 * number 0 at every call.
+	 * 
+	 */
 	public RandomMock() {
 		expected = new ArrayList<Integer>();
 		expected.add(0);
