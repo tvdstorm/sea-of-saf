@@ -2,14 +2,12 @@ grammar SAF;
 
 options {
   language = Java;
-  output = AST;
-  ASTLabelType = CommenTree;
 }
 
 @header {
   package saf;
   import saf.evaluators.*;
-  import saf.objecttypes.*;
+  import saf.models.*;
 }
 
 @lexer::header {
@@ -22,17 +20,17 @@ options {
     List<Rule> behaviour = new ArrayList<Rule>();
 }
 
-fighter
+fighter returns [Fighter fighter]
 	:	IDENT LEFT_CURLY
 			personality
 			behaviour
 		RIGHT_CURLY
 		{ 
 	        String fightername = $IDENT.text;
-	        Personality personality = new Personality(personality);
-	        Behaviour behaviour = new Behaviour(behaviour);
+	        Personality personality = new Personality(this.personality);
+	        Behaviour behaviour = new Behaviour(this.behaviour);
 	        
-	        Fighter fighter = new Fighter(fightername, personality, behaviour);
+	        $fighter = new Fighter(fightername, personality, behaviour);
         }
 	;
 
@@ -44,7 +42,7 @@ characteristic
 	:	IDENT '=' DIGIT
 		{
 	        Characteristic characteristic = new Characteristic($IDENT.text, Integer.parseInt($DIGIT.text));
-	        personality.add(characteristic);
+	        this.personality.add(characteristic);
 	    }
 	;
 
@@ -53,33 +51,47 @@ behaviour
 	;
 	
 rule
-	:	condition LEFT_BRACK a1=action a2=action RIGHT_BRACK
+	:	condition LEFT_BRACK a1=actions a2=actions RIGHT_BRACK
 		{
 	        Rule rule = new Rule($condition.condition,
-	        					new Move($a1.text), 
-	                            new Attack($a2.text));
-	        behaviour.add(rule);
+	        					new Move($a1.actions), 
+	                            new Attack($a2.actions));
+	        this.behaviour.add(rule);
 	    }
 	;
 	
-action
-	:	'choose' LEFT_PAREN i1=IDENT i2=IDENT+ RIGHT_PAREN
-	|	IDENT
+actions returns [List<String> actions]
+	:	{
+			$actions = new ArrayList<String>();
+		}
+		'choose' LEFT_PAREN i1=action[$actions] i2=action[$actions]+ RIGHT_PAREN
+	|	a=IDENT
+		{
+			$actions = new ArrayList<String>();
+			$actions.add($a.text);
+		}
 	;
-	
+
+action [List<String> actions]
+	:	a=IDENT
+		{
+			$actions.add($a.text);
+		}
+	;
+
 condition returns [Condition condition]
     :	'(' c1=condition (op=AND | op=OR) c2=condition ')'
 	    {
 	        if ($op.text.equals("and"))
 	        {
-	            $condition = new ConditionAnd($l1.condition, $l2.condition);
+	            $condition = new ConditionAnd($c1.condition, $c2.condition);
 	        } 
 	        else
 	        {
-	            $condition = new ConditionOr($l1.condition, $l2.condition);
+	            $condition = new ConditionOr($c1.condition, $c2.condition);
 	        }
 	    }
-    | IDENT { $condition = new Condition($IDENT.text); }
+    | IDENT { $condition = new ConditionSingle($IDENT.text); }
     ;
 	
 LEFT_CURLY : '{';
@@ -90,7 +102,7 @@ LEFT_PAREN : '(';
 RIGHT_PAREN : ')';
 
 LETTER : ('a'..'z' | 'A'..'Z');
-DIGIT : '0'..'9';
+DIGIT : '0'..'9' | '10';
 
 AND : 'and';
 OR : 'or';
