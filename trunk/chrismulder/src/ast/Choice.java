@@ -12,18 +12,17 @@ public class Choice implements Validator {
 		this.c2 = c2;
 	}
 
-	@Override
-	public List<String> validate(List<String> messages) {
-		messages = c1.validate(messages); 
-		messages = c2.validate(messages); 
-		return messages;
-	}
-
 	public AtomType getType() {
 		if (Math.random() < 0.5) {
 			return c1.getType();
 		} else {
 			return c2.getType();
 		}
+	}
+
+	@Override
+	public void validate(List<String> messages) {
+		c1.validate(messages); 
+		c2.validate(messages); 
 	}
 }

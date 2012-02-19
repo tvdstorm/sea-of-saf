@@ -1,11 +1,9 @@
 package ast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
-
-import ast.ConditionAtom.Type;
 
 public class Saf implements Validator {
 	private String name;
@@ -18,36 +16,36 @@ public class Saf implements Validator {
 		behaviours = new ArrayList<Behaviour>();
 	}
 
-	public void addStrength(Strength n) {
-		strengths.add(n);
-	}
-
 	public void addBehaviour(Behaviour n) {
 		behaviours.add(n);
 	}
 
-	@Override
-	public List<String> validate(List<String> messages) {
-		boolean hasAlwaysRule = false;
-		
-		for(Strength s : strengths) {
-			messages = s.validate(messages);
-		}
-		for(Behaviour b : behaviours) {
-			messages = b.validate(messages);
-			if (b.getCondition().getType() == ConditionAtom.Type.ALWAYS) {
-				hasAlwaysRule = true;
+	public void addStrength(Strength n) {
+		strengths.add(n);
+	}
+
+	public double getHeight() {
+		return (getStrength(Strength.Type.PUNCHREACH) + getStrength(Strength.Type.KICKREACH)) / 2;
+	}
+
+	public Behaviour getMatchingBehaviour(Map<AtomType, Boolean> conditions) {
+		ArrayList<Behaviour> matchingBehaviours = new ArrayList<Behaviour>();
+		for (Behaviour b : behaviours) {
+			if (b.isMatching(conditions)) {
+				matchingBehaviours.add(b);
 			}
 		}
-		
-		if (!hasAlwaysRule) {
-			messages.add("Saf definition does not contain 'always rule'.");
-		}
-		return messages;
+
+		int random = new Random().nextInt(matchingBehaviours.size());
+		return matchingBehaviours.get(random);
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public int getSpeed() {
+		return (int) Math.round( Math.abs(0.5 * (getHeight() - getWeight()) ));
 	}
 
 	public int getStrength(Strength.Type type) {
@@ -58,28 +56,27 @@ public class Saf implements Validator {
 		}
 		return Strength.DEFAULT_VALUE;
 	}
-
+	
 	public double getWeight() {
 		return (getStrength(Strength.Type.PUNCHPOWER) + getStrength(Strength.Type.KICKPOWER)) / 2;
 	}
-
-	public double getHeight() {
-		return (getStrength(Strength.Type.PUNCHREACH) + getStrength(Strength.Type.KICKREACH)) / 2;
-	}
 	
-	public int getSpeed() {
-		return (int) Math.round( Math.abs(0.5 * (getHeight() - getWeight()) ));
-	}
-	
-	public Behaviour getMatchingBehaviour(HashMap<Type, Boolean> conditions) {
-		ArrayList<Behaviour> matchingBehaviours = new ArrayList<Behaviour>();
-		for (Behaviour b : behaviours) {
-			if (b.isMatching(conditions)) {
-				matchingBehaviours.add(b);
+	@Override
+	public void validate(List<String> messages) {
+		boolean hasAlwaysRule = false;
+		
+		for(Strength s : strengths) {
+			s.validate(messages);
+		}
+		for(Behaviour b : behaviours) {
+			b.validate(messages);
+			if (b.getCondition().getType() == ConditionAtom.Type.ALWAYS) {
+				hasAlwaysRule = true;
 			}
 		}
-
-		int random = new Random().nextInt(matchingBehaviours.size());
-		return matchingBehaviours.get(random);
+		
+		if (!hasAlwaysRule) {
+			messages.add("Saf definition does not contain 'always rule'.");
+		}
 	}
 }

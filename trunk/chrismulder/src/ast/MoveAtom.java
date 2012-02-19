@@ -16,12 +16,12 @@ public class MoveAtom extends Atom implements Move {
 	}
 
 	@Override
-	public void setTypeFromTypeName() {
-		type = Type.valueOf(typeName.toUpperCase());
+	public Type getType() {
+		return (Type) type;
 	}
 
 	@Override
-	public Type getType() {
-		return (Type) type;
+	public void setTypeFromTypeName() {
+		type = Type.valueOf(typeName.toUpperCase());
 	}
 }

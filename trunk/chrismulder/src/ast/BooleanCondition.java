@@ -14,14 +14,15 @@ public abstract class BooleanCondition implements Condition {
 		conditions.add(c);
 	}
 	
-	public List<String> validate(List<String> messages) {
-		for(Condition c : conditions) {
-			messages = c.validate(messages);
-		}
-		return messages;
-	}
-	
+	@Override
 	public ConditionAtom.Type getType() {
 		return conditions.get(0).getType();
+	}
+	
+	@Override
+	public void validate(List<String> messages) {
+		for(Condition c : conditions) {
+			c.validate(messages);
+		}
 	}
 }

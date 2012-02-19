@@ -1,7 +1,9 @@
 package game;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import ast.AtomType;
 import ast.Attack;
 import ast.AttackAtom;
 import ast.Behaviour;
@@ -13,15 +15,9 @@ import ast.Strength;
 
 
 public class SafState {
-	public enum PlayerType {
-		P1,
-		P2
-	}
-
-	public enum Posture {
-		CROUCHING,
-		STANDING,
-		JUMPING
+	public enum Direction {
+		LEFT,
+		RIGHT
 	}
 
 	public enum Level {
@@ -29,13 +25,19 @@ public class SafState {
 		LOW,
 		HIGH
 	}
-	
-	public enum Direction {
-		LEFT,
-		RIGHT
+
+	public enum PlayerType {
+		P1,
+		P2
 	}
 	
-	public static final int ARENA_SIZE = 30;
+	public enum Posture {
+		CROUCHING,
+		STANDING,
+		JUMPING
+	}
+	
+	public static final int ARENA_SIZE = 18;
 	
 	private static final int RUN_DISTANCE = 4;
 	private static final int WALK_DISTANCE = 2;
@@ -78,66 +80,13 @@ public class SafState {
 		actionOrdinal = 0;
 	}
 	
-	public Direction getDirection() {
-		return direction;
+	private void decreaseHealth(int strength) {
+		health = Math.max(0, health - strength);
 	}
 	
-	public boolean isAlive() {
-		return getHealth() > 0;
-	}
-	
-	public HashMap<ConditionAtom.Type, Boolean> getConditions(SafState otherState) {
-		HashMap<ConditionAtom.Type, Boolean> conditions = new HashMap<ConditionAtom.Type, Boolean>();
-		
-		conditions.put(ConditionAtom.Type.STRONGER, false);
-		conditions.put(ConditionAtom.Type.WEAKER, false);
-		conditions.put(ConditionAtom.Type.MUCH_STRONGER, false);
-		conditions.put(ConditionAtom.Type.MUCH_WEAKER, false);
-		conditions.put(ConditionAtom.Type.EVEN, false);
-
-		conditions.put(ConditionAtom.Type.NEAR, false);
-		conditions.put(ConditionAtom.Type.FAR, false);
-		
-		conditions.put(ConditionAtom.Type.ALWAYS, true);
-		
-		if (getHealth() > otherState.getHealth()) {
-			if (getHealth() - otherState.getHealth() > MAX_HEALTH / 2) {
-				conditions.put(ConditionAtom.Type.MUCH_STRONGER, true);
-			} else {
-				conditions.put(ConditionAtom.Type.STRONGER, true);
-			}
-		} else if (getHealth() < otherState.getHealth()) {
-			if (otherState.getHealth() - getHealth() > MAX_HEALTH / 2) {
-				conditions.put(ConditionAtom.Type.MUCH_WEAKER, true);
-			} else {
-				conditions.put(ConditionAtom.Type.WEAKER, true);
-			}			
-		} else {
-			conditions.put(ConditionAtom.Type.EVEN, true);
-		}
-		
-		if (Math.abs(getPosition() - otherState.getPosition()) < NEAR_DISTANCE) {
-			conditions.put(ConditionAtom.Type.NEAR, true);
-		} else {
-			conditions.put(ConditionAtom.Type.FAR, true);
-		}
-		return conditions;
-	}
-	
-	public void nextStep(SafState otherState) {
-		if (timeToAct == 0) {
-			executeBehaviour(otherState);
-			nextBehaviour = saf.getMatchingBehaviour(getConditions(otherState));
-			timeToAct = MAX_TIME - saf.getSpeed();
-		} 
-		if (getPosture() == Posture.JUMPING) {
-			timeInAir++;
-			if (timeInAir == JUMP_TIME) {
-				posture = Posture.STANDING;
-				timeInAir = 0;
-			}
-		}
-		timeToAct--;
+	private void decreaseX(int delta) {
+		delta = getCorrectedDistance(delta);
+		position = Math.max(getPosition() - delta, 0);
 	}
 
 	private void executeBehaviour(SafState otherState) {
@@ -160,37 +109,29 @@ public class SafState {
 				break;
 			case RUN_TOWARDS:
 				if (getPosition() < otherState.getPosition()) {
-					direction = Direction.RIGHT;
 					increaseX(RUN_DISTANCE);
 				} else {
-					direction = Direction.LEFT;
 					decreaseX(RUN_DISTANCE);
 				}
 				break;
 			case RUN_AWAY:
 				if (getPosition() < otherState.getPosition()) {
-					direction = Direction.RIGHT;
 					decreaseX(RUN_DISTANCE);
 				} else {
-					direction = Direction.LEFT;
 					increaseX(RUN_DISTANCE);
 				}
 				break;
 			case WALK_TOWARDS:
 				if (getPosition() < otherState.getPosition()) {
-					direction = Direction.RIGHT;
 					increaseX(WALK_DISTANCE);
 				} else {
-					direction = Direction.LEFT;
 					decreaseX(WALK_DISTANCE);
 				}
 				break;
 			case WALK_AWAY:
 				if (getPosition() < otherState.getPosition()) {
-					direction = Direction.RIGHT;
 					decreaseX(WALK_DISTANCE);
 				} else {
-					direction = Direction.LEFT;
 					increaseX(WALK_DISTANCE);
 				}
 				break;
@@ -238,13 +179,86 @@ public class SafState {
 		actionOrdinal = attack.getType().ordinal();
 	}
 	
+
+	public int getActionOrdinal() {
+		return actionOrdinal;
+	}
 	
-	private void decreaseHealth(int strength) {
-		health = Math.max(0, health - strength);
+	private Map<AtomType, Boolean> getConditions(SafState otherState) {
+		Map<AtomType, Boolean> conditions = new HashMap<AtomType, Boolean>();
+		
+		conditions.put(ConditionAtom.Type.ALWAYS, true);
+		
+		if (getHealth() > otherState.getHealth()) {
+			if (getHealth() - otherState.getHealth() > MAX_HEALTH / 2) {
+				conditions.put(ConditionAtom.Type.MUCH_STRONGER, true);
+			} else {
+				conditions.put(ConditionAtom.Type.STRONGER, true);
+			}
+		} else if (getHealth() < otherState.getHealth()) {
+			if (otherState.getHealth() - getHealth() > MAX_HEALTH / 2) {
+				conditions.put(ConditionAtom.Type.MUCH_WEAKER, true);
+			} else {
+				conditions.put(ConditionAtom.Type.WEAKER, true);
+			}			
+		} else {
+			conditions.put(ConditionAtom.Type.EVEN, true);
+		}
+		
+		if (Math.abs(getPosition() - otherState.getPosition()) < NEAR_DISTANCE) {
+			conditions.put(ConditionAtom.Type.NEAR, true);
+		} else {
+			conditions.put(ConditionAtom.Type.FAR, true);
+		}
+		return conditions;
+	}
+	
+	
+	private int getCorrectedDistance(int distance) {
+		double factor;
+		if (getPosture() == Posture.CROUCHING) {
+			factor = 1;
+		} else {
+			factor = 0.5;
+		}
+		return (int) Math.round(distance * factor);
+	}
+
+	public Direction getDirection() {
+		return direction;
 	}
 
 	private int getDistance(SafState otherState) {
 		return Math.abs(getPosition() - otherState.getPosition());
+	}
+
+	public int getHealth() {
+		return health;
+	}
+	
+	public PlayerType getPlayerType() {
+		return playerType;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public Posture getPosture() {
+		return posture;
+	}
+
+	public int getPostureOrdinal() {
+		return posture.ordinal();
+	}
+
+	private void increaseX(int delta) {
+		delta = getCorrectedDistance(delta);
+		position = Math.min(getPosition() + delta, ARENA_SIZE - 1);
+	}
+
+	public boolean isAlive() {
+		return getHealth() > 0;
 	}
 
 	private boolean isVulnerable(Level level) {
@@ -262,48 +276,26 @@ public class SafState {
 		
 		return true;
 	}
-
-	private int getCorrectedDistance(int distance) {
-		double factor;
-		if (getPosture() == Posture.CROUCHING) {
-			factor = 1;
+	
+	public void nextStep(SafState otherState) {
+		if (getPosition() < otherState.getPosition()) {
+			direction = Direction.RIGHT;
 		} else {
-			factor = 0.5;
+			direction = Direction.LEFT;
 		}
-		return (int) Math.round(distance * factor);
-	}
-	
-	private void increaseX(int delta) {
-		delta = getCorrectedDistance(delta);
-		position = Math.min(getPosition() + delta, ARENA_SIZE);
-	}
-
-	private void decreaseX(int delta) {
-		delta = getCorrectedDistance(delta);
-		position = Math.max(getPosition() - delta, 0);
-	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public int getPosition() {
-		return position;
-	}
-
-	public Posture getPosture() {
-		return posture;
-	}
-
-	public int getPostureOrdinal() {
-		return posture.ordinal();
-	}
-
-	public int getActionOrdinal() {
-		return actionOrdinal;
-	}
-	
-	public PlayerType getPlayerType() {
-		return playerType;
+		
+		if (timeToAct == 0) {
+			executeBehaviour(otherState);
+			nextBehaviour = saf.getMatchingBehaviour(getConditions(otherState));
+			timeToAct = MAX_TIME - saf.getSpeed();
+		} 
+		if (getPosture() == Posture.JUMPING) {
+			timeInAir++;
+			if (timeInAir == JUMP_TIME) {
+				posture = Posture.STANDING;
+				timeInAir = 0;
+			}
+		}
+		timeToAct--;
 	}
 }

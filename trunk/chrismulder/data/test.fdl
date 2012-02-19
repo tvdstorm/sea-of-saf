@@ -5,6 +5,6 @@ test
   kickPower = 1  
   punchPower  = 1 
   always [crouch punch_low]
-  always [run_towards punch_low]
+  always [run_away punch_low]
   near [run_towards punch_high]
 }

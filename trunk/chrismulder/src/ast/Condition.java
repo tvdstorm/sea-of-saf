@@ -1,8 +1,9 @@
 package ast;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface Condition extends Validator {
-	public boolean evaluate(HashMap<ConditionAtom.Type, Boolean> state);
+	boolean evaluate(Map<AtomType, Boolean> state);
+	//public boolean evaluate(Map<Type, Boolean> conditions);
 	public ConditionAtom.Type getType();
 }

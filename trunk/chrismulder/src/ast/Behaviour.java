@@ -1,9 +1,7 @@
 package ast;
 
-import java.util.HashMap;
 import java.util.List;
-
-import ast.ConditionAtom.Type;
+import java.util.Map;
 
 public class Behaviour implements Validator {
 	private Condition c;
@@ -16,40 +14,39 @@ public class Behaviour implements Validator {
 		this.setAttack(a);
 	}
 
-	@Override
-	public List<String> validate(List<String> messages) {
-		messages = getCondition().validate(messages);
-		messages = getMove().validate(messages);
-		messages = getAttack().validate(messages);
-		return messages;
+	public Attack getAttack() {
+		return a;
 	}
 
 	public Condition getCondition() {
 		return c;
 	}
 
-	public void setCondition(Condition c) {
-		this.c = c;
-	}
-
 	public Move getMove() {
 		return m;
 	}
 
-	public void setMove(Move m) {
-		this.m = m;
-	}
-
-	public Attack getAttack() {
-		return a;
+	public boolean isMatching(Map<AtomType, Boolean> conditions) {
+		return c.evaluate(conditions);
 	}
 
 	public void setAttack(Attack a) {
 		this.a = a;
 	}
+
+	public void setCondition(Condition c) {
+		this.c = c;
+	}
+
+	public void setMove(Move m) {
+		this.m = m;
+	}
 	
-	public boolean isMatching(HashMap<Type, Boolean> conditions) {
-		return c.evaluate(conditions);
+	@Override
+	public void validate(List<String> messages) {
+		getCondition().validate(messages);
+		getMove().validate(messages);
+		getAttack().validate(messages);
 	}
 
 }

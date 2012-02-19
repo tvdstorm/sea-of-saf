@@ -3,5 +3,5 @@ package ast;
 import java.util.List;
 
 public interface Validator  {
-	public List<String> validate(List<String> messages);
+	public void validate(List<String> messages);
 }

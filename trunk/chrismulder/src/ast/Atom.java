@@ -10,19 +10,18 @@ public abstract class Atom {
 		this.typeName = typeName;
 	}
 
+	public AtomType getType() {
+		return type;
+	}
+
 	public abstract void setTypeFromTypeName() throws IllegalArgumentException;
 
-	public List<String> validate(List<String> messages) {
+	public void validate(List<String> messages) {
 		try {
 			setTypeFromTypeName();
 		} catch (IllegalArgumentException e) {
-			messages.add(typeName + " is not a valid value for " + this.getClass() + ".");
+			messages.add("'" + typeName + "' is not a valid value for " + this.getClass() + ".");
 		}
-		return messages;
-	}
-
-	public AtomType getType() {
-		return type;
 	}
 	
 }
