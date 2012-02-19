@@ -22,7 +22,7 @@ public class GameTurn implements GameConstant {
 	private GameController gameController;
 	
 	protected GameTurn()
-	{ /*used in GameTurnTest*/ }
+	{ /*used in GameTurnTest unit test*/ }
 	
 	public GameTurn(BotState botState, GameState gameState, GameController gameController) {
 		this.botState = botState;

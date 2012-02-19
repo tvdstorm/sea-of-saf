@@ -2,15 +2,11 @@ package saf.junit.game;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import saf.game.GameConstant;
-import saf.game.GameMain;
 import saf.game.engine.GameEngine;
-import saf.game.gui.GameController;
 import saf.game.state.BotState;
-import saf.game.state.GameState;
 import saf.parser.FileParser;
 import saf.structure.Bot;
 import saf.structure.Bots;

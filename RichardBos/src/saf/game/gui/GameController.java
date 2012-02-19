@@ -19,10 +19,6 @@ import saf.structure.Characteristic;
 
 public class GameController implements GameConstant {
 
-
-
-	private String side;
-
 	private final GameForm gameForm;
 	private GameArena gameArena;
 	private final EventSource eventSource;
@@ -53,7 +49,7 @@ public class GameController implements GameConstant {
 		eventSource.addEventListener(gameEventListener);
 
 		setDistance(CONST_STARTING_DISTANCE);
-		
+
 		gameForm.jButtonBotLeftLoad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -67,14 +63,14 @@ public class GameController implements GameConstant {
 				botFileActionPerformed(CONST_RIGHT);
 			}
 		});
-		gameForm.jButtonStart.addActionListener(new ActionListener(){
+		gameForm.jButtonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				eventSource.fireGameStartEvent();
 			}
 		});
-		
 
 	}
+
 	private void botFileActionPerformed(String side) {
 		JFileChooser jFileChooser = new JFileChooser();
 		jFileChooser.showOpenDialog(null);
@@ -92,55 +88,53 @@ public class GameController implements GameConstant {
 	}
 
 	private void setBot(BotState botState) {
-		side = botState.getSide();
+		String side = botState.getSide();
 
-		if (side.equals(CONST_LEFT))
-		{
+		if (side.equals(CONST_LEFT)) {
 			gameForm.jLabelBotLeftName.setText(botState.getBot().getName());
 			gameForm.jProgressBarLeftHP.setValue(botState.getHitpoints());
-			
+
 			botLeftCharModel.clear();
-			for (Characteristic character : botState.getBot().getCharacteristics()) 
-			{
-				botLeftCharModel.addElement(character.getName() + " = " + character.getValue());
+			for (Characteristic character : botState.getBot()
+					.getCharacteristics()) {
+				botLeftCharModel.addElement(character.getName() + " = "
+						+ character.getValue());
 			}
-			
+
 			botLeftBehaviorModel.clear();
 			for (Behavior behavior : botState.getBot().getBehaviors()) {
 				botLeftBehaviorModel.addElement(behavior.toString());
 			}
-		}
-		else
-		{
+		} else {
 			gameForm.jLabelBotRightName.setText(botState.getBot().getName());
 			gameForm.jProgressBarRightHP.setValue(botState.getHitpoints());
-			
+
 			botRightCharModel.clear();
-			for (Characteristic character : botState.getBot().getCharacteristics()) 
-			{
-				botRightCharModel.addElement(character.getName() + " = " + character.getValue());
+			for (Characteristic character : botState.getBot()
+					.getCharacteristics()) {
+				botRightCharModel.addElement(character.getName() + " = "
+						+ character.getValue());
 			}
-			
+
 			botRightBehaviorModel.clear();
 			for (Behavior behavior : botState.getBot().getBehaviors()) {
 				botRightBehaviorModel.addElement(behavior.toString());
 			}
 		}
-		
+
 	}
 
 	public void addBotState(BotState botState) {
-		side = botState.getSide();
+		String side = botState.getSide();
 
 		setBot(botState);
 		gameArena.createNewBot(side);
 	}
 
-
 	public void setHitpoints(BotState botState) {
-		side = botState.getSide();
-		
-		if(side.equals(CONST_LEFT))
+		String side = botState.getSide();
+
+		if (side.equals(CONST_LEFT))
 			gameForm.jProgressBarLeftHP.setValue(botState.getHitpoints());
 		else
 			gameForm.jProgressBarRightHP.setValue(botState.getHitpoints());
@@ -149,28 +143,27 @@ public class GameController implements GameConstant {
 	public void setDistance(int distance) {
 		gameForm.jProgressBarDistance.setValue(distance);
 	}
-	
-	public void executeActions(String side, Point dPosition, String fightAction)
-	{
+
+	public void executeActions(String side, Point dPosition, String fightAction) {
 		this.gameArena.updateBot(side, dPosition, fightAction);
 	}
+
 	public void setButtonsEnabled(boolean newstate) {
 		gameForm.jButtonBotLeftLoad.setEnabled(newstate);
 		gameForm.jButtonBotRightLoad.setEnabled(newstate);
 		gameForm.jButtonStart.setEnabled(newstate);
-		
 	}
-	
+
 	public void resetGame() {
 		gameArena.resetGame();
-		
+
 		gameForm.jProgressBarDistance.setValue(CONST_STARTING_DISTANCE);
-		
+
 		gameForm.jLabelBotLeftName.setText("");
 		gameForm.jProgressBarLeftHP.setValue(CONST_STARTING_HITPOINTS);
 		botLeftCharModel.clear();
 		botLeftBehaviorModel.clear();
-		
+
 		gameForm.jLabelBotRightName.setText("");
 		gameForm.jProgressBarRightHP.setValue(CONST_STARTING_HITPOINTS);
 		botRightCharModel.clear();

@@ -2,7 +2,6 @@ package saf.game.event;
 
 import java.util.EventObject;
 
-@SuppressWarnings("serial")
 public class NewBotEvent extends EventObject {
 	public NewBotEvent(Object source, String Path, String side) {
 		super(source);

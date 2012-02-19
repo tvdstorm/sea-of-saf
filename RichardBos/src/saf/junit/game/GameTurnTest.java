@@ -34,48 +34,52 @@ public class GameTurnTest extends GameTurn implements GameConstant {
 	public void collectValidBehaviorsTest() {
 		List<Behavior> behaviors = null;
 		
+		String behaviorError = "Error in collectValidBehaviors";
+		String behaviorCollectingError = "Error in collectValidBehaviors; ";
+		
 		prepareBotState(100, 0);
 		behaviors = collectValidBehaviors();
-		assertEquals("Error in collectValidBehaviors; " + TestHelpers.convertToReadableString(behaviors), 8, behaviors.size());
-		assertEquals("Error in collectValidBehaviors", "always [stand kick_low]", behaviors.get(0).toString());
-		assertEquals("Error in collectValidBehaviors", "near [stand kick_low]", behaviors.get(1).toString());
-		assertEquals("Error in collectValidBehaviors", "much_stronger [stand kick_low]", behaviors.get(2).toString());
-		assertEquals("Error in collectValidBehaviors", "stronger [stand kick_low]", behaviors.get(3).toString());
-		assertEquals("Error in collectValidBehaviors", "stronger or weaker [stand kick_low]", behaviors.get(4).toString());
-		assertEquals("Error in collectValidBehaviors", "much_stronger or (far and even) [stand kick_low]", behaviors.get(5).toString());
-		assertEquals("Error in collectValidBehaviors", "(far and even) or much_stronger [stand kick_low]", behaviors.get(6).toString());
-		assertEquals("Error in collectValidBehaviors", "near or far or weaker [stand kick_low]", behaviors.get(7).toString());
+		assertEquals(behaviorCollectingError + TestHelpers.convertListToReadableString(behaviors), 8, behaviors.size());
+		assertEquals(behaviorError, "always [stand kick_low]", behaviors.get(0).toString());
+		assertEquals(behaviorError, "near [stand kick_low]", behaviors.get(1).toString());
+		assertEquals(behaviorError, "much_stronger [stand kick_low]", behaviors.get(2).toString());
+		assertEquals(behaviorError, "stronger [stand kick_low]", behaviors.get(3).toString());
+		assertEquals(behaviorError, "stronger or weaker [stand kick_low]", behaviors.get(4).toString());
+		assertEquals(behaviorError, "much_stronger or (far and even) [stand kick_low]", behaviors.get(5).toString());
+		assertEquals(behaviorError, "(far and even) or much_stronger [stand kick_low]", behaviors.get(6).toString());
+		assertEquals(behaviorError, "near or far or weaker [stand kick_low]", behaviors.get(7).toString());
+		
 		
 		prepareBotState(65, 0);
 		behaviors = collectValidBehaviors();
 		//3 less then the previous assert batch, the much_stronger behaviors are gone.
-		assertEquals("Error in collectValidBehaviors; " + TestHelpers.convertToReadableString(behaviors), 5, behaviors.size());
+		assertEquals(behaviorCollectingError + TestHelpers.convertListToReadableString(behaviors), 5, behaviors.size());
 		
 		
 		prepareBotState(50, 50);
 		behaviors = collectValidBehaviors();
-		assertEquals("Error in collectValidBehaviors; " + TestHelpers.convertToReadableString(behaviors), 7, behaviors.size());
-		assertEquals("Error in collectValidBehaviors", "far [stand kick_low]", behaviors.get(1).toString());
-		assertEquals("Error in collectValidBehaviors", "even [stand kick_low]", behaviors.get(2).toString());
-		assertEquals("Error in collectValidBehaviors", "(far and even) [stand kick_low]", behaviors.get(3).toString());
-		assertEquals("Error in collectValidBehaviors", "much_stronger or (far and even) [stand kick_low]", behaviors.get(4).toString());
-		assertEquals("Error in collectValidBehaviors", "(far and even) or much_stronger [stand kick_low]", behaviors.get(5).toString());
-		assertEquals("Error in collectValidBehaviors", "near or far or weaker [stand kick_low]", behaviors.get(6).toString());
+		assertEquals(behaviorCollectingError + TestHelpers.convertListToReadableString(behaviors), 7, behaviors.size());
+		assertEquals(behaviorError, "far [stand kick_low]", behaviors.get(1).toString());
+		assertEquals(behaviorError, "even [stand kick_low]", behaviors.get(2).toString());
+		assertEquals(behaviorError, "(far and even) [stand kick_low]", behaviors.get(3).toString());
+		assertEquals(behaviorError, "much_stronger or (far and even) [stand kick_low]", behaviors.get(4).toString());
+		assertEquals(behaviorError, "(far and even) or much_stronger [stand kick_low]", behaviors.get(5).toString());
+		assertEquals(behaviorError, "near or far or weaker [stand kick_low]", behaviors.get(6).toString());
 		
 		
 		prepareBotState(0, 0);
 		behaviors = collectValidBehaviors();
-		assertEquals("Error in collectValidBehaviors; " + TestHelpers.convertToReadableString(behaviors), 7, behaviors.size());
-		assertEquals("Error in collectValidBehaviors", "weaker [stand kick_low]", behaviors.get(2).toString());
-		assertEquals("Error in collectValidBehaviors", "much_weaker [stand kick_low]", behaviors.get(3).toString());
-		assertEquals("Error in collectValidBehaviors", "stronger or weaker [stand kick_low]", behaviors.get(4).toString());
-		assertEquals("Error in collectValidBehaviors", "near or far or weaker [stand kick_low]", behaviors.get(5).toString());
-		assertEquals("Error in collectValidBehaviors", "(near and (weaker and much_weaker)) [stand kick_low]", behaviors.get(6).toString());
+		assertEquals(behaviorCollectingError + TestHelpers.convertListToReadableString(behaviors), 7, behaviors.size());
+		assertEquals(behaviorError, "weaker [stand kick_low]", behaviors.get(2).toString());
+		assertEquals(behaviorError, "much_weaker [stand kick_low]", behaviors.get(3).toString());
+		assertEquals(behaviorError, "stronger or weaker [stand kick_low]", behaviors.get(4).toString());
+		assertEquals(behaviorError, "near or far or weaker [stand kick_low]", behaviors.get(5).toString());
+		assertEquals(behaviorError, "(near and (weaker and much_weaker)) [stand kick_low]", behaviors.get(6).toString());
 		
 		prepareBotState(35, 0);
 		behaviors = collectValidBehaviors();
 		//2 less then the previous assert batch, the much_weaker behaviors are gone.
-		assertEquals("Error in collectValidBehaviors; " + TestHelpers.convertToReadableString(behaviors), 5, behaviors.size());
+		assertEquals(behaviorCollectingError + TestHelpers.convertListToReadableString(behaviors), 5, behaviors.size());
 		
 	}	
 

@@ -1,7 +1,6 @@
 package saf.game.state;
 
 import saf.game.GameConstant;
-import saf.game.gui.GameController;
 import saf.structure.Bot;
 import saf.structure.intelligence.BehaviorIntelligence;
 

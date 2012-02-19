@@ -1,10 +1,5 @@
 package saf.game.engine;
 
-import java.awt.Point;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import saf.game.GameConstant;
 import saf.game.state.BotState;
 import saf.structure.intelligence.BehaviorIntelligence;
@@ -21,7 +16,8 @@ public class FightActionProcessor implements GameConstant {
 	private double attackPower = FIGHTACTION_BASEPOWER;
 	private double attackReach = FIGHTACTION_BASERANGE;
 
-	public FightActionProcessor(BotState botState, BotState otherBotState, int distance, String fightAction, boolean isJumping) {
+	public FightActionProcessor(BotState botState, BotState otherBotState,
+			int distance, String fightAction, boolean isJumping) {
 		this.botState = botState;
 		this.otherBotState = otherBotState;
 		this.distance = distance;
@@ -86,7 +82,7 @@ public class FightActionProcessor implements GameConstant {
 
 		} else if (isJumping && !otherBotState.isJumping()) {
 
-			return 0.0; // missed
+			return 0.0;
 
 		} else { // Both are jumping or there is no jumping
 
@@ -96,30 +92,32 @@ public class FightActionProcessor implements GameConstant {
 					|| otherBotState.getLastFightAction().equals(
 							FIGHT_ACTION_BLOCKLOW))
 
-				return 0.0; // missed
+				return 0.0;
 		}
 
 		return attackPower;
 	}
 
 	private double checkFightActionLow() {
-		
+
 		if (!isJumping && otherBotState.isJumping()) {
 
-			return 0.0; // missed
+			return 0.0;
 
 		} else if (isJumping && !otherBotState.isJumping()) {
 
 			if (otherBotState.getLastMoveAction().equals(MOVE_ACTION_CROUCH)
-				|| otherBotState.getLastFightAction().equals(FIGHT_ACTION_BLOCKHIGH))
+					|| otherBotState.getLastFightAction().equals(
+							FIGHT_ACTION_BLOCKHIGH))
 
-				return 0.0; // missed
+				return 0.0;
 
 		} else { // Both are jumping or there is no jumping
 
-			if (otherBotState.getLastFightAction().equals(FIGHT_ACTION_BLOCKLOW))
+			if (otherBotState.getLastFightAction()
+					.equals(FIGHT_ACTION_BLOCKLOW))
 
-				return 0.0; // missed
+				return 0.0;
 		}
 		return attackPower;
 	}

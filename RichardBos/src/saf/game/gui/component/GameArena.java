@@ -18,13 +18,6 @@ public class GameArena extends JPanel implements GameConstant {
 		this.backGround = loadSprite(SPRITE_BACKGROUND);
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		g.drawImage(backGround, 0, -80, null);
-		g.drawImage(leftBot, leftBotPosition.x, leftBotPosition.y, null);
-		g.drawImage(rightBot, rightBotPosition.x, rightBotPosition.y, null);
-	}
-
 	private BufferedImage backGround = null;
 	private BufferedImage leftBot = null;
 	private BufferedImage rightBot = null;
@@ -32,6 +25,13 @@ public class GameArena extends JPanel implements GameConstant {
 	private Point leftBotPosition = CONST_LEFTBOTSTART;
 	private Point rightBotPosition = CONST_RIGHTBOTSTART;
 
+	@Override
+	public void paint(Graphics g) {
+		g.drawImage(backGround, 0, -80, null);
+		g.drawImage(leftBot, leftBotPosition.x, leftBotPosition.y, null);
+		g.drawImage(rightBot, rightBotPosition.x, rightBotPosition.y, null);
+	}
+	
 	public void createNewBot(String side) {
 		if (side.equals(CONST_LEFT))
 			leftBot = loadSprite(SPRITE_LEFT + SPRITES_IDLE);
@@ -49,7 +49,7 @@ public class GameArena extends JPanel implements GameConstant {
 		}
 		else
 		{
-			//Reverse the dPosition for Right bot 
+			//Reverse the dPosition for Right bot
 			rightBotPosition.translate(-dPosition.x, -dPosition.y);
 			rightBot = loadSprite(SPRITE_RIGHT + fightAction + ".png");
 		}
@@ -77,6 +77,7 @@ public class GameArena extends JPanel implements GameConstant {
 // TODO	Dit werkt niet?!?!?!
 //		leftBotPosition = CONST_LEFTBOTSTART;
 //		rightBotPosition = CONST_RIGHTBOTSTART;
+		
 		leftBot = null;
 		rightBot = null;
 		this.repaint();
