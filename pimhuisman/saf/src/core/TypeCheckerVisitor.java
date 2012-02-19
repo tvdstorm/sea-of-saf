@@ -2,11 +2,15 @@ package core;
 import java.util.List;
 import java.util.LinkedList;
 
+import data.Actions;
+import data.AndStatement;
 import data.Behaviour;
 import data.Characteristic;
 import data.Fighter;
+import data.OrStatement;
 import data.Personality;
 import data.Rule;
+import data.SingleCondition;
 
 public class TypeCheckerVisitor extends BaseTreeVisitor {
 
@@ -55,6 +59,26 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 	@Override
 	public void visit(Rule rule) {
 
+	}
+	
+	@Override
+	public void visit(AndStatement andStatement) {
+		
+	}
+	
+	@Override
+	public void visit(OrStatement orStatement) {
+		
+	}
+
+	@Override
+	public void visit(SingleCondition condition) {
+				
+	}
+
+	@Override
+	public void visit(Actions action) {
+		
 	}
 
 }

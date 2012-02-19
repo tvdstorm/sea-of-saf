@@ -44,21 +44,30 @@ behaviour returns[Behaviour value]
 					
 rule returns[Rule value]
 					:	condition '[' actions ']'
-						{ $value = new Rule(); }
+						{ $value = new Rule($condition.value, $actions.value); }
 					;
 					
-condition			:	andStatement
+condition returns[Condition value]
+					:	andStatement
+						{ $value = $andStatement.value; }
 					;
 
-andStatement		:	orStatement 'and' condition
+andStatement returns[Condition value]
+					:	orStatement 'and' condition
+						{ $value = new AndStatement($orStatement.value, $condition.value); }
 					|	orStatement
+						{ $value = $orStatement.value; }
 					;
 					
-orStatement			:	IDENTIFIER 'or' IDENTIFIER
+orStatement	returns[Condition value]
+					:	id1=IDENTIFIER 'or' id2=IDENTIFIER
+						{ $value = new OrStatement(new SingleCondition($id1.text), new SingleCondition($id2.text)); }
 					|	IDENTIFIER
+						{ $value = new SingleCondition($IDENTIFIER.text); }
 					;
 					
-actions				:	(action action)
+actions returns[Actions value]
+					:	(action action) { $value = null; }
 					;
 
 action				:	IDENTIFIER
