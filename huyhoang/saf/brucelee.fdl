@@ -4,6 +4,6 @@ brucelee
 	kickPower = 10
 	punchReach = 8
 	kickReach = 10
-	near [ walk_away choose(block punch_high punch_low) ]
-	always [ walk_towards choose(block kick_high) ]
+	near [ walk_away choose(block_high punch_high punch_low) ]
+	always [ walk_towards choose(block_low kick_high) ]
 }

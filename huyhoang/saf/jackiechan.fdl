@@ -1,9 +1,9 @@
 jackiechan 
 {
 	kickPower = 1
-	kickReach = 1
+	kickReach = 2
 	punchPower = 10
-	punchReach = 1
-	near [ walk_towards choose(adsfj punchHigh punchLow) ]
-	always [ choose(run_away walk_away) choose(block_high kick_high) ]
+	punchReach = 2
+	near [ walk_towards choose(punch_high punch_low) ]
+	always [ choose(stand walk_towards) choose(block_high block_low) ]
 }

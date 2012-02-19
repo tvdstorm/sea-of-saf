@@ -152,4 +152,28 @@ public class BotTest {
 		assertEquals(100, jackieChan.getHitpoints());
 		assertTrue(bruceLee.isAllowedToPerformAction());
 	}
+	
+	@Test
+	public void testPunchReducesHitpoints() {
+		Bot bruceLee = new Bot(null, 0);
+		Bot jackieChan = new Bot(null, 2);
+		bruceLee.setOpponentBot(jackieChan);
+		
+		bruceLee.kickPower = 1;
+		bruceLee.kickReach = 1;
+		bruceLee.punchPower = 1;
+		bruceLee.punchReach = 1;
+		bruceLee.performAction("punch_high");
+		assertEquals(100, jackieChan.getHitpoints());
+		assertEquals(100, bruceLee.getHitpoints());
+		
+		// has two wait 3 steps before he can continue with a new move (this is the pause after each move)
+		for (int counter=0; counter<3; counter++)
+			bruceLee.performAction("");
+		
+		bruceLee.performAction("walk_towards");
+		bruceLee.performAction("punch_high");
+		assertEquals(95, jackieChan.getHitpoints());
+		assertEquals(100, bruceLee.getHitpoints());
+	}
 }
