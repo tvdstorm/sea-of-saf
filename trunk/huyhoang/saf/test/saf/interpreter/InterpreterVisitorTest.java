@@ -80,30 +80,4 @@ public class InterpreterVisitorTest {
 		interpreter.Evaluate(jackieChanAst);
 		assertTrue(behaviour.getCondition().getValue());
 	}
-	
-	@Test
-	public void testFight() {
-		List<Fighter> fighters = new ArrayList<Fighter>();
-		
-		fighters.add(AllTests.getFighterAst("BruceLee {" +
-											"	always [ walk_towards kick_high ]" +
-											"}"));
-
-		fighters.add(AllTests.getFighterAst("JackieChan {" +
-											"	always [ walk_towards punch_low ]" +
-											"}"));
-
-		List<Bot> bots = new ArrayList<Bot>();
-		bots.add(new Bot(fighters.get(0), 0));
-		bots.add(new Bot(fighters.get(1), 1));
-		
-		bots.get(0).setOpponentBot(bots.get(1));
-		
-		InterpreterVisitor interpreter = new InterpreterVisitor();
-		interpreter.setBot(bots.get(0));
-		interpreter.Evaluate(bots.get(0).getFighter());
-		assertEquals(90, bots.get(1).getHitpoints());
-		interpreter.setBot(bots.get(1));
-		interpreter.Evaluate(bots.get(1).getFighter());
-	}
 }

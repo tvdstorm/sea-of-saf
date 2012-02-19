@@ -3,6 +3,8 @@ package saf.checker;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import java.io.ByteArrayInputStream;
+
+import saf.AllTests;
 import saf.checker.CheckerVisitor;
 import saf.ast.*;
 import saf.parser.Parser;
@@ -10,6 +12,7 @@ import saf.parser.ParseException;
 import saf.ast.condition.Condition;
 import saf.ast.definition.Action;
 import saf.ast.definition.Behaviour;
+import saf.ast.definition.Choose;
 import saf.ast.definition.Procedure;
 import saf.ast.definition.Strength;
 
@@ -89,23 +92,18 @@ public class CheckerVisitorTest {
 			}
 		}
 	}
-	
+
 	@Test
 	public void testInvalidActionNode() {
-		Fighter fighter = new Fighter("TerranGhost");
-		
-		Condition condition = new Condition("always");
-		Procedure move = new Action("jump");
-		move.getProcedures().add(new Action("very high"));
-		Procedure attack = new Action("kickHigh");
-		Behaviour behaviour = new Behaviour(condition, move, attack);
-		fighter.getDefinitions().add(behaviour);
+		Fighter fighter = AllTests.getFighterAst("TerranGhost { always [ jump(very high) choose(nuke invisible) ] }");
 		
 		CheckerVisitor checker = new CheckerVisitor(fighter);
 		checker.visitAllASTNodes();
 		
-		assertEquals(1, checker.getErrors().size());
+		assertEquals(3, checker.getErrors().size());
 		
 		assertTrue(checker.getErrors().get(0).matches("The action 'jump' does not accept any parameters"));
+		assertTrue(checker.getErrors().get(1).matches("'nuke' is an invalid action"));
+		assertTrue(checker.getErrors().get(2).matches("'invisible' is an invalid action"));
 	}
 }

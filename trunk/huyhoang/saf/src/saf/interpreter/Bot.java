@@ -18,10 +18,10 @@ public class Bot extends Observable implements Observer
 	
 	private String lastState;
 	public String getLastState() {
-		if (lastState == null)
+		if (this.lastState == null)
 			return "";
 		else
-			return lastState;
+			return this.lastState;
 	}
 	
 	public static ArrayList<String> fetchBotStrengths() {
@@ -48,19 +48,12 @@ public class Bot extends Observable implements Observer
 		else if (!this.botOnTheLeft && getPosition() <= this.opponentBot.getPosition()) {
 			this.position = this.opponentBot.getPosition() + 1;
 		}
-		
-		if (this.position < 0)
-			this.position = 0;
-		
-		if (this.position > 10)
-			this.position = 10;
 	}
 	
 	public boolean isStandingLeft() {
 		return this.botOnTheLeft;
 	}
 	
-	// check, and remove this!
 	private Fighter fighter;
 	public Fighter getFighter() {
 		return fighter;
@@ -74,7 +67,7 @@ public class Bot extends Observable implements Observer
 	
 	private Bot opponentBot;
 	private boolean botOnTheLeft;
-	private int moveStepsLeft;
+	private int remainingActionSteps;
 	private int hitpoints;
 	public int getHitpoints() {
 		return hitpoints;
@@ -93,9 +86,11 @@ public class Bot extends Observable implements Observer
 	public void setOpponentBot(Bot opponentBot) {
 		this.opponentBot = opponentBot;
 		this.botOnTheLeft = this.position < opponentBot.getPosition();
-		this.opponentBot.opponentBot = this;
 		this.opponentBot.addObserver(this);
 		this.addObserver(opponentBot);
+		
+		if (opponentBot.getOpponentBot() == null)
+			opponentBot.setOpponentBot(this);
 	}
 	
 	public int getWeight() {
@@ -107,7 +102,8 @@ public class Bot extends Observable implements Observer
 	}
 	
 	public int getSpeed() {
-		return (int)(0.5 * (getHeight() - getWeight()));
+		// added 3 because I don't want to work with negative numbers
+		return (int)(0.5 * (getHeight() - getWeight())) + 3;
 	}
 	
 	private void notifySubscribers(String action) {
@@ -158,7 +154,7 @@ public class Bot extends Observable implements Observer
 	
 	@MethodAnnotation(safName = "jump", keywordType = "move")
 	public void jump() {
-		moveStepsLeft = this.getSpeed(); 
+		remainingActionSteps = this.getSpeed(); 
 	}
 	
 	@MethodAnnotation(safName = "stand", keywordType = "move")
@@ -189,7 +185,7 @@ public class Bot extends Observable implements Observer
 		this.setPosition(this.getPosition() - getMoveDirection());
 		//this.notifySubscribers("walk_away");
 	}
-
+	
 	@MethodAnnotation(safName = "punch_low", keywordType = "attack")
 	public void punchLow() {
 		if (isPunchInReach() && !this.opponentBot.getLastState().equals("block_low"))
@@ -197,7 +193,7 @@ public class Bot extends Observable implements Observer
 		
 		this.notifySubscribers("punch_low");
 		
-		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
+		this.remainingActionSteps = this.getSpeed();
 	}
 	
 	@MethodAnnotation(safName = "punch_high", keywordType = "attack")
@@ -207,7 +203,7 @@ public class Bot extends Observable implements Observer
 		
 		this.notifySubscribers("punch_high");
 
-		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
+		this.remainingActionSteps = this.getSpeed();
 	}
 	
 	@MethodAnnotation(safName = "kick_low", keywordType = "attack")
@@ -217,7 +213,7 @@ public class Bot extends Observable implements Observer
 		
 		this.notifySubscribers("kick_low");
 
-		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
+		this.remainingActionSteps = this.getSpeed();
 	}
 	
 	@MethodAnnotation(safName = "kick_high", keywordType = "attack")
@@ -227,17 +223,19 @@ public class Bot extends Observable implements Observer
 
 		this.notifySubscribers("kick_high");
 
-		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
+		this.remainingActionSteps = this.getSpeed();
 	}
 	
 	@MethodAnnotation(safName = "block_low", keywordType = "attack")
 	public void blockLow() {
 		this.notifySubscribers("block_low");
+		this.remainingActionSteps = this.getSpeed();
 	}
 	
 	@MethodAnnotation(safName = "block_high", keywordType = "attack")
 	public void blockHigh() {
 		this.notifySubscribers("block_high");
+		this.remainingActionSteps = this.getSpeed();
 	}
 	
 	protected int getOpponentDistance() {
@@ -288,12 +286,12 @@ public class Bot extends Observable implements Observer
 	}
 	
 	protected boolean isAllowedToPerformAction() {
-		return moveStepsLeft == 0 && !this.isKnockedOut() && !this.opponentBot.isKnockedOut();
+		return remainingActionSteps == 0 && !this.isKnockedOut() && !this.opponentBot.isKnockedOut();
 	}
 	
 	public void performAction(String safName) {
 		if (!isAllowedToPerformAction()) {
-			moveStepsLeft--;
+			this.remainingActionSteps--;
 			if (!this.isKnockedOut() && !this.getLastState().equals("hit"))
 				this.stand();
 		}
@@ -315,11 +313,10 @@ public class Bot extends Observable implements Observer
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if (arg0.equals(this.opponentBot)) {
+		if (arg0.equals(this.getOpponentBot())) {
 			if (arg1.equals("hitopponent")) {
 				this.hitpoints -= 5;
-				this.moveStepsLeft = 1;
-				System.out.println("hit");
+				this.remainingActionSteps = 1;
 				if (this.isKnockedOut())
 					this.notifySubscribers("knockout");
 				else
