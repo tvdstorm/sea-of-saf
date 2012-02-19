@@ -15,54 +15,43 @@ import javax.swing.ImageIcon;
 
 public class FighterAnimator
 {
-    private int movementDirection;
-    private int fixDistance;
     private FighterSprites sprites;
     private JLabel label;
+    private ImageIcon startIcon;
+    private int xOffset;
     private Queue<FighterAnimationStep> animationQueue = 
             new ArrayDeque<FighterAnimationStep>();
 
-    public FighterAnimator(Position initialPosition, int movementDirection, 
-                           String fighterName, Container contentPane)
+    public FighterAnimator(String fighterName, Container contentPane)
     {
-        this(initialPosition, new FighterSprites(fighterName), contentPane);
-
-        this.movementDirection = movementDirection;
-        this.fixDistance = 0;
+        this(new FighterSprites(fighterName), contentPane);
+        xOffset = 0;
     }
 
-    public FighterAnimator(Position initialPosition, int movementDirection, 
-                           String fighterName, Container contentPane, 
+    public FighterAnimator(String fighterName, Container contentPane, 
                            boolean flipped)
     {
-        this(initialPosition, new FighterSprites(fighterName, flipped), 
+        this(new FighterSprites(fighterName, flipped), 
              contentPane);
-
-        this.movementDirection = movementDirection;
-        this.fixDistance = ArenaAnimator.ARENA_WIDTH;
+        xOffset = 80;
     }
 
-    private FighterAnimator(Position initialPosition, FighterSprites sprites, 
-                            Container contentPane)
+    private FighterAnimator(FighterSprites sprites, Container contentPane)
     {
         this.sprites = sprites;
+        startIcon = sprites.getImageByName("start");
 
-        ImageIcon startImage = sprites.getImageByName("start");
-        this.label = new JLabel(startImage);
-        contentPane.add(label);
-        setPosition(initialPosition, startImage.getIconWidth(),
-                    startImage.getIconHeight());
-
+        this.label = new JLabel();
         label.setHorizontalTextPosition(JLabel.CENTER);
         label.setVerticalTextPosition(JLabel.CENTER);
         label.setForeground(Color.white);
 
-        label.repaint();
+        contentPane.add(label);
     }
 
     private void setPosition(Position position, int width, int height)
     {
-        int x = fixDistance + (movementDirection * position.getX());
+        int x = position.getX() + xOffset;
         int y = position.getY();
 
         label.setBounds(x, y, width, height);
@@ -84,6 +73,19 @@ public class FighterAnimator
         {
             return true;
         }
+    }
+
+    public void animateFirst()
+    {
+        /* Use the first animation to determine the starting position and
+         * health. */
+        FighterAnimationStep assistAnimation = animationQueue.peek();
+
+        label.setIcon(startIcon);
+        label.setText(Integer.toString(assistAnimation.getHealth()));
+        setPosition(assistAnimation.getPosition(), startIcon.getIconWidth(),
+                    startIcon.getIconHeight());
+        label.repaint();
     }
 
     public void animateNext()

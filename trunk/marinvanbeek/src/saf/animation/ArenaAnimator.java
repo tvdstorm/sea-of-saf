@@ -20,10 +20,9 @@ public class ArenaAnimator extends JFrame
 {
     public static final long serialVersionUID = 1L;
 
-    public static final int STARTING_POSITION = 100;
     public static final int ARENA_WIDTH = 512;
     public static final int ARENA_HEIGHT = 512;
-    public static final int ANIMATION_DELAY_MS = 500;
+    public static final int ANIMATION_DELAY_MS = 100;
 
     private FighterAnimator leftAnimator;
     private FighterAnimator rightAnimator;
@@ -34,14 +33,8 @@ public class ArenaAnimator extends JFrame
 
         Container contentPane = getContentPane();
 
-        Position leftStartingPosition = new Position(STARTING_POSITION, 0);
-        Position rightStartingPosition = 
-                new Position(ARENA_WIDTH - STARTING_POSITION, 0);
-
-        leftAnimator = new FighterAnimator(leftStartingPosition, 1, 
-                                           leftFileName, contentPane);
-        rightAnimator = new FighterAnimator(rightStartingPosition, -1, 
-                                            rightFileName, contentPane, true);
+        leftAnimator = new FighterAnimator(leftFileName, contentPane);
+        rightAnimator = new FighterAnimator(rightFileName, contentPane, true);
     }
 
     public void setupArena()
@@ -53,19 +46,20 @@ public class ArenaAnimator extends JFrame
 
     public void runAnimation()
     {
+        leftAnimator.animateFirst();
+        rightAnimator.animateFirst();
+        sleepDelay();
+
         while (leftAnimator.hasAnimations() &&
                rightAnimator.hasAnimations())
         {
-            /* Start with a delay, to show the start image. */
-            sleepDelay();
-
             leftAnimator.animateNext();
             rightAnimator.animateNext();
 
             System.out.print(">");
+            sleepDelay();
         }
         System.out.println();
-        sleepDelay();
     }
 
     public void sleepDelay()
