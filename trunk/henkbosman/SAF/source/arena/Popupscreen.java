@@ -50,6 +50,4 @@ public class Popupscreen extends JFrame
 
 		contentPane.add(textArea, BorderLayout.CENTER);
 	}
-	
-	
 }

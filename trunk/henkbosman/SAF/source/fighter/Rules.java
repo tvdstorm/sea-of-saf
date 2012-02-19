@@ -2,14 +2,12 @@ package fighter;
 
 public class Rules
 {
-	protected double _defaultActionSpeed;
-	protected double _defaultMovementSpeed;
+	protected int _defaultMovementSpeed;
 	protected int _defaultMovementDistance;
 	protected int _startingHealth;
 	
-	public Rules(double defaultActionSpeed, double defaultMovementSpeed, int defaultMovementDistance, int startingHealth)
+	public Rules(int defaultMovementSpeed, int defaultMovementDistance, int startingHealth)
 	{
-		_defaultActionSpeed = defaultActionSpeed;
 		_defaultMovementSpeed = defaultMovementSpeed;
 		_defaultMovementDistance = defaultMovementDistance;
 		_startingHealth = startingHealth;
@@ -20,13 +18,13 @@ public class Rules
 		switch(combatmove._movement)
 		{
 			case run_towards:
-				return -30;
+				return (_defaultMovementDistance*_defaultMovementSpeed*-3);
 			case run_away:
-				return +20;
+				return (_defaultMovementDistance*_defaultMovementSpeed*2);
 			case walk_towards:
-				return -10;
+				return (_defaultMovementDistance*_defaultMovementSpeed*-1);
 			case walk_away:
-				return -7;
+				return (_defaultMovementDistance*_defaultMovementSpeed*-1);
 		}
 		return 0;
 	}
@@ -38,22 +36,22 @@ public class Rules
 		switch(combatmove._movement)
 		{
 			case run_away:
-				cSpeed=speed+0.2;
+				cSpeed+=speed+0.2;
 				break;
 			case run_towards:
-				cSpeed=speed+0.1;
+				cSpeed+=speed+0.1;
 				break;
 			case jump:
-				cSpeed=speed+0.2;
+				cSpeed+=speed+0.2;
 				break;
 			case crouch:
-				cSpeed=speed+0.3;
+				cSpeed+=speed+0.3;
 				break;
 			case stand: 
 				cSpeed=0;
 				break;
 			default:
-				cSpeed=speed;
+				cSpeed+=speed;
 				break;
 		}
 		
