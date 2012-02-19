@@ -12,6 +12,7 @@ import org.antlr.runtime.tree.DOTTreeGenerator;
 import org.antlr.stringtemplate.StringTemplate;
 
 import saf.generation.output.*;
+import saf.presentation.ArenaPresentation;
 import saf.simulation.Arena;
 import saf.structure.*;
 
@@ -31,8 +32,8 @@ public class Program {
 			return;
 		}
 			
-		new Arena(lhsf, rhsf);
-		System.out.println("ok!");
+		ArenaPresentation arenaPresen = new ArenaPresentation (new Arena(lhsf, rhsf));
+		arenaPresen.runPresentation();
 	}
 		
 //		public static void writeDot(CommonTree tree)
