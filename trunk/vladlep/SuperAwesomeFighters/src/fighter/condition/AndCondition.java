@@ -28,16 +28,15 @@ public class AndCondition implements ICondition, ASTNode {
 	@Override
 	public String toString() {
 
-		return firstCondition.toString() + " AND "
-				+ secondCondition.toString();
+		return "(" + firstCondition.toString() + " AND "
+				+ secondCondition.toString() + ")";
 	}
-	
-	public ICondition getFirstCond()
-	{
+
+	public ICondition getFirstCond() {
 		return firstCondition;
 	}
-	public ICondition getSecondCond()
-	{
+
+	public ICondition getSecondCond() {
 		return secondCondition;
 	}
 }

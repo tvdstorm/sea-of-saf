@@ -2,8 +2,6 @@ package fighter.action;
 
 import java.util.ArrayList;
 
-import org.antlr.grammar.v3.ANTLRParser.action_return;
-
 import fighter.ASTNode;
 import fighter.checker.Visitor;
 

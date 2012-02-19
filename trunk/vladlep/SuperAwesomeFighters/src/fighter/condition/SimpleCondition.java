@@ -16,15 +16,15 @@ public class SimpleCondition implements ICondition, ASTNode {
 	public boolean testCondition() {
 		return false;
 	}
-	
+
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
-		
+
 	}
-	
-	public String toString()
-	{
+
+	@Override
+	public String toString() {
 		return condition.toString();
 	}
 }

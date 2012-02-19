@@ -48,7 +48,7 @@ public class Personality implements ASTNode {
 	public int getKickPower() {
 		return kickPower;
 	}
-	
+
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);

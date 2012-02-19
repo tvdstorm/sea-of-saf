@@ -1,0 +1,11 @@
+ Semantic{
+ kickPower = 7
+ punchPower = 5
+ kickReach = 0
+ punchReach = 12
+ far or near and weaker[run_towards punch_high]
+ far and near or weaker[choose(stand crouch) kick_high]
+ far or near and weaker or much_stronger[walk_towards punch_low]
+ (far or near) and (weaker or much_stronger)[run_away choose(block_high block_high block_low)]
+ always[walk_towards block_high]
+ }

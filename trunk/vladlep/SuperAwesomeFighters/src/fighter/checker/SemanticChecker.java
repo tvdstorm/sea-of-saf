@@ -33,9 +33,10 @@ public class SemanticChecker implements Visitor {
 		}
 	}
 
+	@Override
 	public void visit(Bot bot) {
-		bot.getBehaviour().accept(this); // beh visitor
-		bot.getPersonality().accept(this); // pers visitor
+		bot.getBehaviour().accept(this);
+		bot.getPersonality().accept(this);
 	}
 
 	@Override
@@ -52,11 +53,12 @@ public class SemanticChecker implements Visitor {
 		if (isAlways == false) {
 			messageList.add(new Error("No always rule for fighter behaviour."));
 		}
+
 	}
 
 	@Override
 	public void visit(Personality personality) {
-
+		System.out.println("in pers");
 		if (personality.getKickPower() > Config.MAX_STRENGTH) {
 			messageList.add(new Error("Kick Power exceeds uper limit"));
 		}
@@ -88,7 +90,7 @@ public class SemanticChecker implements Visitor {
 		if (personality.getPunchReach() < Config.MIN_STRENGTH) {
 			messageList.add(new Error("Punch Reach exceeds lower limit"));
 		}
-
+		System.out.println("out pers");
 	}
 
 	@Override

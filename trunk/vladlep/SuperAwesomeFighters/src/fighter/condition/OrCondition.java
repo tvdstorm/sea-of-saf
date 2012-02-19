@@ -17,25 +17,25 @@ public class OrCondition implements ICondition, ASTNode {
 		return firstCondition.testCondition()
 				|| secondCondition.testCondition();
 	}
-	
+
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
 
-		return firstCondition.toString() + " OR " + secondCondition.toString();
+		return "(" + firstCondition.toString() + " OR "
+				+ secondCondition.toString() + ")";
 	}
-	
-	public ICondition getFirstCond()
-	{
+
+	public ICondition getFirstCond() {
 		return firstCondition;
 	}
-	public ICondition getSecondCond()
-	{
+
+	public ICondition getSecondCond() {
 		return secondCondition;
 	}
 }
