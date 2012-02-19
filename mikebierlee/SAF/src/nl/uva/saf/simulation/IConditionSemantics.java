@@ -18,29 +18,11 @@
 
 package nl.uva.saf.simulation;
 
-import java.awt.Dimension;
+import java.util.HashMap;
 import java.util.List;
 
-public interface IFightSimulator {	
-	public void update();
+import nl.uva.saf.fdl.types.ConditionType;
 
-	public void addContestant(FighterBot bot) throws PlayfieldFullException;
-
-	public void clearContestants() throws FightInProgressException;
-
-	public void dispose();
-
-	public boolean isDisposed();
-
-	public void start();
-
-	public void stop();
-
-	public boolean isRunning();
-
-	public List<FighterBot> getContestants();
-
-	Dimension getPlayFieldSize();
-
-	void setPlayFieldSize(Dimension playFieldSize);
+public interface IConditionSemantics {
+	public HashMap<ConditionType, Boolean> getConditionStates(FighterBot fighter, List<FighterBot> players);
 }

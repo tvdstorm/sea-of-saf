@@ -20,7 +20,6 @@ package nl.uva.saf;
 
 import java.awt.Dimension;
 import java.io.IOException;
-
 import javax.swing.SwingUtilities;
 
 import nl.uva.saf.fdl.ast.Fighter;
@@ -54,8 +53,8 @@ public class Main {
 		 * System.out.println("Loaded \"" + fighter.getName() + "\" - " +
 		 * validationReport.getWarnings().size() + " warning(s), " +
 		 * validationReport.getErrors().size() + " error(s).");
-		 */
-
+		 */		
+		
 		final IFightSimulator simulator = new FightSimulator();
 		simulator.setPlayFieldSize(new Dimension(825, 350));
 

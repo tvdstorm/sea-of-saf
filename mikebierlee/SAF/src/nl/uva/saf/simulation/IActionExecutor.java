@@ -18,29 +18,24 @@
 
 package nl.uva.saf.simulation;
 
-import java.awt.Dimension;
+import java.util.HashMap;
 import java.util.List;
 
-public interface IFightSimulator {	
-	public void update();
+import nl.uva.saf.fdl.types.ConditionType;
 
-	public void addContestant(FighterBot bot) throws PlayfieldFullException;
-
-	public void clearContestants() throws FightInProgressException;
-
-	public void dispose();
-
-	public boolean isDisposed();
-
-	public void start();
-
-	public void stop();
-
-	public boolean isRunning();
-
-	public List<FighterBot> getContestants();
-
-	Dimension getPlayFieldSize();
-
-	void setPlayFieldSize(Dimension playFieldSize);
+public interface IActionExecutor {
+	/**
+	 * Executes the actions of a fighter and calculates turn cost.
+	 * 
+	 * @param fighter
+	 *            The fighter that executes the turn.
+	 * @param players
+	 *            The other players in the field.
+	 * @param truthTable
+	 *            The truth table describing the current simulation state.
+	 */
+	public void executeFighterActions(FighterBot fighter, List<FighterBot> players,
+			HashMap<ConditionType, Boolean> truthTable);
+	
+	public int getTurnCost();
 }
