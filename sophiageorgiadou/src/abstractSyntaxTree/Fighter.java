@@ -1,6 +1,6 @@
 package abstractSyntaxTree;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 public class Fighter {
 	
@@ -12,9 +12,16 @@ public class Fighter {
 	private double height;
 	private double speed;
 	
-	private int health; //10 full life - 0 dead
+	private String currentAttack=new String();
+	private int currentAttackPower;
+	private int currentAttackReach;
 	
-	private Location location;
+	private String currentMove;
+	
+	private int health; //100 full life - 0 dead	
+	private int location;
+	private String powerCondition;
+	private String locationCondition;
 	
 	public Fighter(){
 		this.name="";
@@ -24,6 +31,9 @@ public class Fighter {
 		this.weight=0.0;
 		this.height=0.0;
 		this.speed=0.0;
+		this.health=100;
+		setLocationCondition("far");
+		setPowerCondition("even");
 	}
 	
 	public void addPersonality(Personality personality){
@@ -131,21 +141,14 @@ public class Fighter {
 	public void setHealth(int health) {
 		this.health = health;
 	}
-
-	/**
-	 * @return the location
-	 */
-	public Location getLocation() {
-		return location;
-	}
-
-	/**
-	 * @param location the location to set
-	 */
-	public void setLocation(Location location) {
-		this.location = location;
-	}
 		
+	public void calibrateAttributes(){
+		this.personality.calibrateAttributes();
+		this.weight=(this.personality.getPunchPower()+this.personality.getKickPower())/2;
+		this.height=(this.personality.getPunchReach()+this.personality.getKickReach())/2;
+		this.speed=Math.abs(0.5 * (height-weight));
+	}
+	
 	public String toString(){
 		String temp="Name: "+this.name+"\n" +
 				"Personality: "+this.personality+"\n" +
@@ -155,5 +158,121 @@ public class Fighter {
 				"Speed: "+this.speed+"\n" +
 				"Health: "+this.health+"\n";	
 		return temp;
+	}
+
+	/**
+	 * @return the currentAttack
+	 */
+	public String getCurrentAttack() {
+		return currentAttack;
+	}
+	
+	/**
+	 * @param currentAttack the currentAttack to set
+	 */
+	public void calculateCurrentAttackandMove() {
+		Random generator=new Random();
+		int max=this.behavior.validAttacks.size();
+		int rand=generator.nextInt(max);
+		this.currentAttack=new String(this.behavior.validAttacks.get(rand));
+		this.setCurrentMove(new String(this.behavior.validMoves.get(rand)));
+		
+		if(this.currentAttack.equals("punch_low") || this.currentAttack.equals("punch_high")){
+			this.setCurrentAttackPower(personality.getPunchPower());
+			this.setCurrentAttackReach(personality.getPunchReach());
+		}
+		else if(this.currentAttack.equals("kick_high") || this.currentAttack.equals("kick_low")){
+			this.setCurrentAttackPower(personality.getKickPower());
+			this.setCurrentAttackReach(personality.getKickReach());			
+		}
+		else if(this.currentAttack.equals("block_high") || this.currentAttack.equals("block_low")){
+			this.setCurrentAttackPower(0);
+			this.setCurrentAttackReach(0);			
+		}
+	}
+
+	/**
+	 * @return the currentAttackPower
+	 */
+	public int getCurrentAttackPower() {
+		return currentAttackPower;
+	}
+
+	/**
+	 * @param currentAttackPower the currentAttackPower to set
+	 */
+	public void setCurrentAttackPower(int currentAttackPower) {
+		this.currentAttackPower = currentAttackPower;
+	}
+
+	/**
+	 * @return the currentAttackReach
+	 */
+	public int getCurrentAttackReach() {
+		return currentAttackReach;
+	}
+
+	/**
+	 * @param currentAttackReach the currentAttackReach to set
+	 */
+	public void setCurrentAttackReach(int currentAttackReach) {
+		this.currentAttackReach = currentAttackReach;
+	}
+
+
+	/**
+	 * @return the currentMove
+	 */
+	public String getCurrentMove() {
+		return currentMove;
+	}
+
+	/**
+	 * @param currentMove the currentMove to set
+	 */
+	public void setCurrentMove(String currentMove) {
+		this.currentMove = currentMove;
+	}
+
+	/**
+	 * @return the location
+	 */
+	public int getLocation() {
+		return location;
+	}
+
+	/**
+	 * @param location the location to set
+	 */
+	public void setLocation(int location) {
+		this.location = location;
+	}
+
+	/**
+	 * @return the locationCondition
+	 */
+	public String getLocationCondition() {
+		return locationCondition;
+	}
+
+	/**
+	 * @param locationCondition the locationCondition to set
+	 */
+	public void setLocationCondition(String locationCondition) {
+		this.locationCondition = locationCondition;
+	}
+
+	/**
+	 * @return the powerCondition
+	 */
+	public String getPowerCondition() {
+		return powerCondition;
+	}
+
+	/**
+	 * @param powerCondition the powerCondition to set
+	 */
+	public void setPowerCondition(String powerCondition) {
+		this.powerCondition = powerCondition;
 	}
 }

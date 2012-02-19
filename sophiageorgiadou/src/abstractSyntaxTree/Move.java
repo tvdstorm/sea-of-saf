@@ -17,7 +17,7 @@ public class Move {
 	public void setMoves(ArrayList<String> moves) {
 		this.moves = moves;
 	}
-
+	
 	public String toString(){
 		String temp="Moves: ";
 		
