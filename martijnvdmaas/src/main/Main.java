@@ -48,7 +48,7 @@ public class Main
 	public static String getRelativeProjectPath()
 	{
 		File relativePathFile = new File("");
-		String relativePath = relativePathFile.getAbsolutePath();
-		return relativePath + '\\';
+		String relativePath = relativePathFile.getAbsolutePath() + '\\';
+		return relativePath;
 	}
 }

@@ -4,7 +4,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface SAFConstants {
-
+	
+	/* Fight engine constants */
+	
+	public static final int START_HORIZONTAL_DISTANCE 	= 5;
+	public static final int MAX_HORIZONTAL_DISTANCE 	= 10;
+	public static final int CROUCH_STEP_DISTANCE 		= 1;
+	public static final int WALK_STEP_DISTANCE 			= 2;
+	public static final int RUN_STEP_DISTANCE 			= 3;
+	public static final int LONG_DISTANCE 				= 20;
+	public static final int SHORT_DISTANCE 				= 10;
+	public static final int MAX_HEALTH 					= 100;
+	public static final int MUCH_WEAKER_AMOUNT 			= 15;
+	
+	
+	/* Fighter constants */
+	
 	public static final String CONDITION_TYPE_ALWAYS 			= "always"; 
 	public static final String CONDITION_TYPE_NEAR 				= "near";
 	public static final String CONDITION_TYPE_FAR 				= "far"; 

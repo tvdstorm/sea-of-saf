@@ -17,16 +17,6 @@ import astelements.ConditionGroup;
 
 public class FightEngine extends Observable implements SAFConstants
 {
-	private static final int START_HORIZONTAL_DISTANCE = 5;
-	private static final int MAX_HORIZONTAL_DISTANCE = 10;
-	private static final int CROUCH_STEP_DISTANCE = 1;
-	private static final int WALK_STEP_DISTANCE = 2;
-	private static final int RUN_STEP_DISTANCE = 3;
-	private static final int LONG_DISTANCE = 20;
-	private static final int SHORT_DISTANCE = 10;
-	private static final int MAX_HEALTH = 100;
-	private static final int MUCH_WEAKER_AMOUNT = 15;
-
 	private Fighter leftFighter;
 	private Fighter rightFighter;
 
@@ -90,17 +80,17 @@ public class FightEngine extends Observable implements SAFConstants
 	{
 		if (isPlaying)
 		{
-			Behaviour nextLeftBehaviour = getNextBehaviour(getLeftFighter(), getRightFighter().getHealth());
-			Behaviour nextRightBehaviour = getNextBehaviour(getRightFighter(), getLeftFighter().getHealth());
-			
+			Behaviour nextLeftBehaviour = getNextRandomApplicableBehaviour(getLeftFighter(), getRightFighter().getHealth());
+			Behaviour nextRightBehaviour = getNextRandomApplicableBehaviour(getRightFighter(), getLeftFighter().getHealth());
+
 			setNextBehaviour(leftFighter, nextLeftBehaviour);
 			setNextBehaviour(rightFighter, nextRightBehaviour);
 
-			int leftInflictedDamage = inflictAttack(leftFighter, rightFighter);
-			int rightInflictedDamage = inflictAttack(rightFighter, leftFighter);
+			int leftInflictedDamage = calculateDamageBasedOnCurrentAttacks(leftFighter, rightFighter);
+			int rightInflictedDamage = calculateDamageBasedOnCurrentAttacks(rightFighter, leftFighter);
 
-			int currentLeftHealth 	= getLeftFighter().getHealth() 	- rightInflictedDamage;
-			int currentRightHealth 	= getRightFighter().getHealth() - leftInflictedDamage;
+			int currentLeftHealth = getLeftFighter().getHealth() - rightInflictedDamage;
+			int currentRightHealth = getRightFighter().getHealth() - leftInflictedDamage;
 
 			if (currentLeftHealth <= 0 || currentRightHealth <= 0)
 			{
@@ -119,9 +109,9 @@ public class FightEngine extends Observable implements SAFConstants
 					setWinner(getLeftFighter().getFighterName());
 				}
 			}
-			
-			makeMove(leftFighter);
-			makeMove(rightFighter);
+
+			calculatePlayerDistanceBasedOnMove(leftFighter);
+			calculatePlayerDistanceBasedOnMove(rightFighter);
 
 			getLeftFighter().setHealth(currentLeftHealth);
 			getRightFighter().setHealth(currentRightHealth);
@@ -143,16 +133,12 @@ public class FightEngine extends Observable implements SAFConstants
 		fighter.setCurrentMove(moveChoices.get(randomMoveIndex));
 	}
 
-	private void makeMove(Fighter movingFighter)
+	private void calculatePlayerDistanceBasedOnMove(Fighter movingFighter)
 	{
 		switch (movingFighter.getCurrentMove())
 		{
-		case MOVE_TYPE_JUMP:
-			break;
 		case MOVE_TYPE_CROUCH:
 			distance = ((distance - CROUCH_STEP_DISTANCE) < 0) ? 0 : distance - CROUCH_STEP_DISTANCE;
-			break;
-		case MOVE_TYPE_STAND: // do nothing
 			break;
 		case MOVE_TYPE_RUN_TOWARDS:
 			distance = ((distance - RUN_STEP_DISTANCE) < 0) ? 0 : distance - RUN_STEP_DISTANCE;
@@ -169,11 +155,11 @@ public class FightEngine extends Observable implements SAFConstants
 		}
 	}
 
-	public int inflictAttack(Fighter attackingFighter, Fighter attackedFighter)
+	public int calculateDamageBasedOnCurrentAttacks(Fighter attackingFighter, Fighter attackedFighter)
 	{
 		int damageAmount = 0;
 		String attack = attackingFighter.getCurrentAttack();
-		
+
 		switch (attack)
 		{
 		case ATTACK_TYPE_BLOCK_LOW:
@@ -211,7 +197,7 @@ public class FightEngine extends Observable implements SAFConstants
 		return damageAmount;
 	}
 
-	private Behaviour getNextBehaviour(Fighter currentFighter, int opponentHealth)
+	private Behaviour getNextRandomApplicableBehaviour(Fighter currentFighter, int opponentHealth)
 	{
 		ArrayList<Behaviour> possibleBehaviours = new ArrayList<Behaviour>();
 
@@ -277,7 +263,7 @@ public class FightEngine extends Observable implements SAFConstants
 	/* Reinitializes the game: */
 	public void reStart()
 	{
-		
+
 		setLeftHealth(MAX_HEALTH);
 		setRightHealth(MAX_HEALTH);
 		getLeftFighter().setCurrentAttack(ATTACK_TYPE_STAND);
