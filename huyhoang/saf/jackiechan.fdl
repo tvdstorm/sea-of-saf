@@ -1,0 +1,8 @@
+jackiechan
+{
+	kickPower = 4
+	kickReach = 3
+	punchReach = 3
+	punchPower = 7
+	always [ run_towards punchLow ]
+}
