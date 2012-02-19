@@ -3,19 +3,28 @@
  */
 package ast.condition;
 
-import ast.ASTNode;
+import ast.Visitor;
+
 
 /**
  * @author iwan
  *
  */
-public class Leaf extends ASTNode {
+public class Leaf extends Condition {
+	
+	private String id;
 
 	/**
 	 * 
 	 */
-	public Leaf() {
-		// TODO Auto-generated constructor stub
+	public Leaf(String id) {
+		this.id = id;
+	}
+
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+		
 	}
 
 }
