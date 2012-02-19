@@ -55,13 +55,23 @@ behaviour returns [Behaviour behaviour]
   }
   (
   {Rule rule;}
-   cond
-    '['
-    {
-    Actions<MoveActionType> moveActions = new Actions<MoveActionType>();
-    Actions<FightActionType> fightActions = new Actions<FightActionType>();
-    ;}
-    
+   cond   '['    moveGen = move   attackGen = atack   ']'
+  {
+  	rule = new Rule($cond.condition, $moveGen.moveActions, $attackGen.fightActions); 
+  	behaviour.add(rule);
+  }
+  )*
+  'always' '[' moveAlw =  move attackAlw=atack ']'
+  {
+  Rule rule;
+  rule = new Rule($cond.condition, $moveAlw.moveActions, $attackAlw.fightActions); 
+  behaviour.add(rule);
+  }
+  ;
+  
+move returns [Actions<MoveActionType> moveActions ]: 
+ 	{    moveActions = new Actions<MoveActionType>();
+ 	}
     (
       (
       	move1 = MOVES
@@ -69,15 +79,21 @@ behaviour returns [Behaviour behaviour]
       	moveActions.add(MoveActionType.valueOf($move1.text));
       	}
       )
-      | ('choose(' (
+      | 
+      ('choose(' (
 	      move2 = MOVES
 	      {
 	      moveActions.add(MoveActionType.valueOf($move2.text));
 	      }
-      )+ ')')
+	      )+ ')'
+      )
     )
+	;
+atack returns [ Actions<FightActionType> fightActions] : 
+  	{ 
+     fightActions = new Actions<FightActionType>();
+    }   
     (
-    
      (
      	attack1=  ATTACKS 
      	{
@@ -87,18 +103,11 @@ behaviour returns [Behaviour behaviour]
       | 'choose(' (
       	attack2 = ATTACKS
 	      {
-	      fightActions.add(FightActionType.valueOf($attack1.text));
+	      fightActions.add(FightActionType.valueOf($attack2.text));
 	      }
       )+ ')'
     )
-    ']'
-  {
-  	rule = new Rule($cond.condition, moveActions, fightActions); 
-  	behaviour.add(rule);
-  }
-  )*
-  'always' '[' MOVES ATTACKS ']'
-  ;
+	;  
 cond returns [ ICondition condition]
 	:	
 	 (

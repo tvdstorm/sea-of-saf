@@ -4,7 +4,6 @@ import fighter.Behaviour;
 import fighter.Bot;
 import fighter.Personality;
 import fighter.Rule;
-import fighter.action.ActionType;
 import fighter.action.Actions;
 import fighter.condition.AndCondition;
 import fighter.condition.OrCondition;

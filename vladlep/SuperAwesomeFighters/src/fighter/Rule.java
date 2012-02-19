@@ -4,7 +4,7 @@ import fighter.action.*;
 import fighter.checker.Visitor;
 import fighter.condition.ICondition;
 
-public class Rule implements ASTNode{
+public class Rule implements ASTNode {
 
 	private ICondition condition;
 	private Actions<MoveActionType> moveActions;
@@ -16,11 +16,11 @@ public class Rule implements ASTNode{
 		this.moveActions = moveActions;
 		this.fightActions = fightActions;
 	}
-	
+
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
-		
+
 	}
 
 	public ICondition getCondition() {
@@ -34,5 +34,5 @@ public class Rule implements ASTNode{
 	public Actions<FightActionType> getFightActions() {
 		return fightActions;
 	}
-	
+
 }
