@@ -48,6 +48,12 @@ public class Bot extends Observable implements Observer
 		else if (!this.botOnTheLeft && getPosition() <= this.opponentBot.getPosition()) {
 			this.position = this.opponentBot.getPosition() + 1;
 		}
+		
+		if (this.position < 0)
+			this.position = 0;
+		
+		if (this.position > 10)
+			this.position = 10;
 	}
 	
 	public boolean isStandingLeft() {
