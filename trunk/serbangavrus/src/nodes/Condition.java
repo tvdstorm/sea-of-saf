@@ -3,6 +3,8 @@ package nodes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import saf.Logger;
+
 public class Condition implements Node
 {
 	protected static final ArrayList<String> validconditions = new ArrayList<String>()
@@ -52,11 +54,17 @@ public class Condition implements Node
 		Iterator<String> itr = conditions.iterator();
 		boolean valid = true;
 		while (itr.hasNext()) {
-	      if(!isConditionValid(itr.next()))
+			
+		  String cond = itr.next();
+			
+		  // Is this condition valid?
+	      if(!isConditionValid(cond))
 	      {
 	    	  valid = false;
 	      }
+	      
 	    }
+		
 		return valid;
 	}
 	
@@ -68,9 +76,23 @@ public class Condition implements Node
 		}
 		else
 		{
-			System.out.println("Invalid condition \"" + condition + "\".");
+			Logger.staticLog("Invalid condition \"" + condition + "\".");
 			return false;
 		}
+	}
+	
+	// Returns true if this condition contains "always"
+	public boolean hasAlways()
+	{
+		for(String c : conditions)
+		{
+			if(c.equals("always"))
+			{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	public String toString()

@@ -2,15 +2,15 @@ package saf.Attacks;
 
 import saf.Bot;
 
-public class PunchLow extends BotAttack{
+public class PunchHigh extends BotAttack{
 
-	public PunchLow(Bot b) {
+	public PunchHigh(Bot b) {
 		super(b);
 	}
 	
 	protected void setAttackProp()
 	{
-		bot.setPunchLow(true);
+		bot.setPunchHigh(true);
 	}
 	
 	protected void calculateDamage()
@@ -21,12 +21,12 @@ public class PunchLow extends BotAttack{
 	
 	protected boolean affectsOpponent()
 	{
-		return bot.isOpponentWithinPunchReach()  && !bot.opponentBlockLow();
+		return bot.isOpponentWithinPunchReach() && !bot.opponentBlockHigh();
 	}
 	
 	public String toString()
 	{
-		return "PunchLow";
+		return "PunchHigh";
 	}
 
 }

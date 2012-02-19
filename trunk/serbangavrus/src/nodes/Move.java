@@ -3,6 +3,8 @@ package nodes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import saf.Logger;
+
 public class Move implements Node
 {
 	private ArrayList<String> moves = new ArrayList<String>();
@@ -30,6 +32,11 @@ public class Move implements Node
 		moves.add(move);
 	}
 
+	public ArrayList<String> getMoves()
+	{
+		return moves;
+	}
+	
 	@Override
 	public boolean consistencyCheck()
 	{
@@ -52,7 +59,7 @@ public class Move implements Node
 		}
 		else
 		{
-			System.out.println("Invalid move \"" + move + "\".");
+			Logger.staticLog("Invalid move \"" + move + "\".");
 			return false;
 		}
 	}

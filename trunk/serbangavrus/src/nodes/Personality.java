@@ -2,6 +2,8 @@ package nodes;
 
 import java.util.ArrayList;
 
+import saf.Logger;
+
 public class Personality extends Specification
 {
 	private String strength = "";
@@ -49,7 +51,7 @@ public class Personality extends Specification
 	{
 		if(!this.validstrengths.contains(strength))
 		{
-			System.out.println("Invalid strength:" + strength);
+			Logger.staticLog("Invalid strength:" + strength);
 			return false;
 		}
 		else
@@ -61,7 +63,7 @@ public class Personality extends Specification
 	{
 		if(val < 0 || val > 9)
 		{
-			System.out.println("Invalid strength value for \"" + strength + "\", must be a number between 1-9.");
+			Logger.staticLog("Invalid strength value for \"" + strength + "\", must be a number between 1-9.");
 			return false;
 		}
 		else

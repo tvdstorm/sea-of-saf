@@ -7,4 +7,5 @@ chicken
   far and stronger[run_towards kick_low]
   near [run_away kick_low]
   far and even [crouch punch_low]
+  always [run_towards kick_high]
 }

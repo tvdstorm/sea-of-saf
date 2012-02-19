@@ -8,7 +8,8 @@ import nodes.*;
 public class Bot {
 	
 	private Bot opponent;
-		
+	private String botName = "";
+	
 	// The Fighter object contains the personality and tactics of the fighter collected from the SAF specifications 
 	private Fighter fighter;
 	
@@ -29,9 +30,17 @@ public class Bot {
 
 	// The bot's position in the arena
 	private int position;
+	
+	// This value indicates what distance from the opponent is considered safe
+	private int awayPositions;
+	
+	// This value indicates what distance from the opponent is considered near
+	private int nearPositions;
 
 	// Bot's strengths
 	private int punchReach, kickReach, kickPower, punchPower, speed;
+	
+	private Logger logger;
 
 	public Bot(Fighter f, int position)
 	{
@@ -49,6 +58,8 @@ public class Bot {
 		punchPower = bp.getPunchPower();
 		
 		speed = this.calculateSpeed();
+		botName	= f.getName();
+		logger = new Logger(botName);
 	}
 
 	// Set's the currentmove and currentattack based on the opponent's properties
@@ -64,15 +75,15 @@ public class Bot {
 	
 	public void doTactic()
 	{
-		Logger.log("Move is " + currentmove);
+		logger.log("Move is " + currentmove);
 		resetMoves();
 		currentmove.doMove();
 		
-		Logger.log("Attacking with " + currentattack);
+		logger.log("Attacking with " + currentattack);
 		resetAttacks();
 		currentattack.doAttack();
 		
-		Logger.log("Health is: " + health);
+		logger.log("Health is: " + health);
 	}
 	
 	public void damageOpponent(int damage)
@@ -116,9 +127,14 @@ public class Bot {
 		return (int)Math.round(Math.abs(0.5*(height-weight)));
 	}
 	
+	// Sets the opponent and calculates the values dependant on it
 	public void addOpponent(Bot opponent)
 	{
 		this.opponent = opponent;
+		
+		// Calculate what distance is considered safe from the opponent, respectively near the opponent
+		awayPositions = Math.max(opponent.getPunchReach(), opponent.getKickReach());
+		nearPositions = Math.min(getPunchReach(), getKickReach());
 	}
 	
 	public int getPosition()
@@ -136,33 +152,7 @@ public class Bot {
 		position = newPosition;
 	}
 	
-	// Returns weather or not the bot is positioned next to it's opponent
-	public boolean isNextToOpponent()
-	{
-		if(Math.abs(position - opponent.getPosition()) > 1)
-		{
-			return false;
-		}
-		else
-		{
-			return true;
-		}
-	}
-	
-	// Returns weather or not the bot is positioned away from it's opponent
-	// A bot is away from it's opponent if the distance between them is at least 4 positions
-	public boolean isAwayFromOpponent()
-	{
-		if(Math.abs(position - opponent.getPosition()) >= 4)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
+
 	public int getOpponentPosition()
 	{
 		return opponent.getPosition();
@@ -193,18 +183,47 @@ public class Bot {
 		health = health - damage;
 	}
 	
-	// Sets the state of the Bot that are related to Attack
-	public void setPunchLow()
+	public void setPunchLow(Boolean val)
 	{
-		resetAttacks();
-		punchLow = true;
+		punchLow = val;
 	}
 	
-	// Returns weather or not the opponent is far
-	// Far means distance greater than 4 positions
+	public void setPunchHigh(Boolean val)
+	{
+		punchHigh = val;
+	}
+	
+	public void setKickHigh(Boolean val)
+	{
+		kickHigh = val;
+	}
+	
+	public void setKickLow(Boolean val)
+	{
+		kickLow = val;
+	}
+	
+	public void setBlockLow(Boolean val)
+	{
+		blockLow = val;
+	}
+	
+	public void setBlockHigh(Boolean val)
+	{
+		blockHigh = val;
+	}
+	
+	// Returns the distance between the bot and it's opponent
+	public int opponentDistance()
+	{
+		return Math.abs(getPosition() - getOpponentPosition()); 
+	}
+	
+	// Returns weather or not the opponent is Far
+	// Far means distance greater that the opponent's reach
 	public boolean isOpponentFar()
 	{
-		if(Math.abs(getPosition() - getOpponentPosition()) > 4)
+		if(opponentDistance() > awayPositions)
 		{
 			return true;
 		}
@@ -214,11 +233,11 @@ public class Bot {
 		}
 	}
 	
-	// Returns weather or not the opponent is far
-	// Far means distance greater than 4 positions
+	// Returns weather or not the opponent is Near
+	// Near means distance within the Bot's reach
 	public boolean isOpponentNear()
 	{
-		if(Math.abs(getPosition() - getOpponentPosition()) < 4)
+		if(opponentDistance() <= nearPositions)
 		{
 			return true;
 		}
@@ -313,9 +332,9 @@ public class Bot {
 	{
 		int newPosition = position + positionsToMove;
 		// Make sure the Bot does not get out of the arena
-		if(newPosition > 9)
+		if(!Arena.isPositionInArena(newPosition))
 		{
-			position = 9;
+			position = Arena.getEastmostPosition();
 		}
 		else
 		{
@@ -328,9 +347,9 @@ public class Bot {
 	{
 		int newPosition = position - positionsToMove;
 		// Make sure the Bot does not get out of the arena
-		if(newPosition < 0)
+		if(!Arena.isPositionInArena(newPosition))
 		{
-			position = 0;
+			position = Arena.getWestmostPosition();
 		}
 		else
 		{
@@ -340,7 +359,7 @@ public class Bot {
 	
 	public boolean isAtArenaMargin()
 	{
-		if(position == 0 || position == 9)
+		if(position == Arena.getWestmostPosition() || position == Arena.getEastmostPosition())
 		{
 			return true;
 		}
@@ -387,6 +406,71 @@ public class Bot {
 	public int getPunchPower()
 	{
 		return punchPower;
+	}
+	
+	public int getPunchReach()
+	{
+		return punchReach;
+	}
+	
+	public int getKickPower()
+	{
+		return kickPower;
+	}
+	
+	public int getKickReach()
+	{
+		return kickReach;
+	}
+	
+	public boolean getBlockLow()
+	{
+		return blockLow;
+	}
+	
+	public boolean getBlockHigh()
+	{
+		return blockHigh;
+	}
+	
+	public boolean opponentBlockHigh()
+	{
+		return opponent.getBlockHigh();
+	}
+	
+	public boolean opponentBlockLow()
+	{
+		return opponent.getBlockLow();
+	}
+	
+	public void log(String msg)
+	{
+		logger.log(msg);
+	}
+	
+	public int getNearPositions()
+	{
+		return nearPositions;
+	}
+	
+	public int getAwayPositions()
+	{
+		return awayPositions;
+	}
+	
+	public boolean isOpponentWithinKickReach()
+	{
+		return opponentDistance() <= kickReach;
+	}
+	
+	public boolean isOpponentWithinPunchReach()
+	{
+		return opponentDistance() <= punchReach;
+	}
+	
+	public String getBotName()
+	{
+		return botName;
 	}
 	
 }

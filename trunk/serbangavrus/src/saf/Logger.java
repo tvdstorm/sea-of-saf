@@ -2,14 +2,20 @@ package saf;
 
 public class Logger {
 	
-	private Logger()
+	private String entity;
+	public Logger(String en)
 	{
-		
+		entity = en;
 	}
 	
-	public static void log(String message)
+	public void log(String message)
 	{
-		System.out.println("FR. " + message);
+		System.out.println(entity + ": " + message);
+	}
+	
+	static public void staticLog(String message)
+	{
+		System.out.println(message);
 	}
 	
 }

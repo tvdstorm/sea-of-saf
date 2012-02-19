@@ -18,36 +18,33 @@ public class SAF
 {
 	// Name of the folder where the files that hold the fighter definitions are
 	private static final String PATH_PRE = "data/";
+	private static Logger logger = new Logger("Main");
 	
 	public static void main(String[] args)
 	{
-		String filepath1 = "data/chicken.txt";//getFighterFile();
-		String filepath2 = "data/lloyd.txt";//getFighterFile();
+		// Get the files where the SAF specifications are
+		String filepath1 = "data/lloyd.txt";//getFighterFile();
+		String filepath2 = "data/chicken.txt";//getFighterFile();
+		
+		// Create fighters from these specifications
 		Fighter f1 = getFighter(filepath1);
 		Fighter f2 = getFighter(filepath2);
 		
-		if(f1.consistencyCheck())
+		// If any of the fighters are null, it means there were errors while creating them
+		if(f1 != null && f2 != null)
 		{
-			Logger.log("Fighter 1 is consistent!");
+			// Check if the fighters' specifications are valid
+			boolean f1Valid = f1.isValid(); 
+			boolean f2Valid = f2.isValid();
 			
-			if(f2.consistencyCheck())
+			if(f1Valid && f2Valid)
 			{
-				Logger.log("Fighter 2 is consistent!");
-				
-				Bot bot1 = new Bot(f1, 0);
-				Bot bot2 = new Bot(f2, 9);
+				// Both fighters are valid, create the bots and start the fight
+				Bot bot1 = new Bot(f1, Arena.getBot1StartPosition());
+				Bot bot2 = new Bot(f2, Arena.getBot2StartPosition());
 				Cronos cronos = new Cronos(bot1, bot2);
-				cronos.startFight();
-				
+				cronos.fight();
 			}
-			else
-			{
-				Logger.log("Fighter 2 is not consistent!");
-			}
-		}
-		else
-		{
-			Logger.log("Fighter 1 is not consistent!");
 		}
 	}
 	
@@ -74,15 +71,15 @@ public class SAF
 		}
 		catch(FileNotFoundException e)
 		{
-			Logger.log("File not found.");
+			logger.log("File not found.");
 		}
 		catch (IOException e)
 		{
-			Logger.log("Error reading fighter file.");
+			logger.log("Error reading fighter file.");
 		}
 		catch (RecognitionException e)
 	    {
-			Logger.log("Antlr exception thrown: " + e.getMessage());
+			logger.log("Antlr exception thrown: " + e.getMessage());
 	    }
 		
 		return null;
@@ -94,7 +91,7 @@ public class SAF
 	private static String getFighterFile()
 	{
 		String file_path = "";
-		System.out.println("Enter fighter data filename:");
+		logger.log("Enter fighter data filename:");
 		
 		try
 		{
@@ -104,7 +101,7 @@ public class SAF
 		}
 		catch(IOException e)
 		{
-			System.out.println("Error while reading input.");
+			logger.log("Error while reading input.");
 		}
 		
 		return file_path;		
