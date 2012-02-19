@@ -20,10 +20,7 @@ Terminator{
 	near[choose(stand crouch) kick_high]
 	and
 	much_stronger[walk_towards punch_low]
-	or
-	weaker[run_away choose(block_high block_low)]
-	and
-	always[walk_towards block_high]
+
 }
 
 Bob0000001{

@@ -12,7 +12,8 @@ public class Condition implements Node{
 	
 	@Override
 	public String toTreeString(String indent) {
-		return '\n' + indent + type;
+		return '\n' + indent + "condition" + 
+			   '\n' + indent + "  " + type;
 	}
 	
 }
