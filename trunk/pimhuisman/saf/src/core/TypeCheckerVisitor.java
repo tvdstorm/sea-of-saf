@@ -32,7 +32,12 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 	
 	@Override
 	public void visit(Fighter fighter) {
-
+		if ( fighter.getPersonality() == null ) {
+			errors.add("The personality of a fighter must be specified.");
+		}
+		if ( fighter.getBehaviour() == null ) {
+			errors.add("The behaviour of a fighter must be specified.");
+		}
 	}
 
 	@Override
