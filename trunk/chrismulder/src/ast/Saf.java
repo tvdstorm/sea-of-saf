@@ -2,6 +2,7 @@ package ast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import ast.ConditionAtom.Type;
@@ -12,69 +13,45 @@ public class Saf implements Validator {
 	private ArrayList<Behaviour> behaviours;
 	
 	public Saf(String name) {
-		this.setName(name);
-		setStrengths(new ArrayList<Strength>());
-		setBehaviours(new ArrayList<Behaviour>());
+		this.name = name;
+		strengths =  new ArrayList<Strength>();
+		behaviours = new ArrayList<Behaviour>();
 	}
 
 	public void addStrength(Strength n) {
-		getStrengths().add(n);
+		strengths.add(n);
 	}
 
 	public void addBehaviour(Behaviour n) {
-		getBehaviours().add(n);
+		behaviours.add(n);
 	}
 
 	@Override
-	public boolean validate() {
+	public List<String> validate(List<String> messages) {
 		boolean hasAlwaysRule = false;
-		for(Strength s : getStrengths()) {
-			if (!s.validate()) {
-				return false;
-			}
+		
+		for(Strength s : strengths) {
+			messages = s.validate(messages);
 		}
-		for(Behaviour b : getBehaviours()) {
-			if (!b.validate()) {
-				return false;
-			}
+		for(Behaviour b : behaviours) {
+			messages = b.validate(messages);
 			if (b.getCondition().getType() == ConditionAtom.Type.ALWAYS) {
 				hasAlwaysRule = true;
 			}
 		}
 		
 		if (!hasAlwaysRule) {
-			System.out.println("Saf definition does not contain 'always rule'.");
-			return false;
+			messages.add("Saf definition does not contain 'always rule'.");
 		}
-		return true;
-	}
-
-	public ArrayList<Strength> getStrengths() {
-		return strengths;
-	}
-
-	public void setStrengths(ArrayList<Strength> strengths) {
-		this.strengths = strengths;
-	}
-
-	public ArrayList<Behaviour> getBehaviours() {
-		return behaviours;
-	}
-
-	public void setBehaviours(ArrayList<Behaviour> behaviours) {
-		this.behaviours = behaviours;
+		return messages;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	public int getStrength(Strength.Type type) {
-		for(Strength s : getStrengths()) {
+		for(Strength s : strengths) {
 			if (s.getType() == type) {
 				return s.getValue();
 			}
@@ -96,7 +73,7 @@ public class Saf implements Validator {
 	
 	public Behaviour getMatchingBehaviour(HashMap<Type, Boolean> conditions) {
 		ArrayList<Behaviour> matchingBehaviours = new ArrayList<Behaviour>();
-		for (Behaviour b : getBehaviours()) {
+		for (Behaviour b : behaviours) {
 			if (b.isMatching(conditions)) {
 				matchingBehaviours.add(b);
 			}

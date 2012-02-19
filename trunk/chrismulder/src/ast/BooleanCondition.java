@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BooleanCondition implements Condition {
 	protected ArrayList<Condition> conditions;
@@ -13,13 +14,11 @@ public abstract class BooleanCondition implements Condition {
 		conditions.add(c);
 	}
 	
-	public boolean validate() {
+	public List<String> validate(List<String> messages) {
 		for(Condition c : conditions) {
-			if (!c.validate()) {
-				return false;
-			}
+			messages = c.validate(messages);
 		}
-		return true;
+		return messages;
 	}
 	
 	public ConditionAtom.Type getType() {

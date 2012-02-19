@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public abstract class Atom {
 	protected String typeName;
 	protected AtomType type;
@@ -10,14 +12,13 @@ public abstract class Atom {
 
 	public abstract void setTypeFromTypeName() throws IllegalArgumentException;
 
-	public boolean validate() {
+	public List<String> validate(List<String> messages) {
 		try {
 			setTypeFromTypeName();
 		} catch (IllegalArgumentException e) {
-			System.out.println(typeName + " is not a valid value for " + this.getClass() + ".");
-			return false;
+			messages.add(typeName + " is not a valid value for " + this.getClass() + ".");
 		}
-		return true;
+		return messages;
 	}
 
 	public AtomType getType() {

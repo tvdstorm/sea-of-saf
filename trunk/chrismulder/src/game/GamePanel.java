@@ -63,13 +63,13 @@ public class GamePanel extends JPanel implements ActionListener {
     	URL url;
     	switch (state.getPlayerType()) {
     		case P1:
-    			url = ClassLoader.getSystemResource("white.png");
+    			url = ClassLoader.getSystemResource("resources/white.png");
     			break;
     		case P2:
-    			url = ClassLoader.getSystemResource("grey.png");
+    			url = ClassLoader.getSystemResource("resources/grey.png");
     			break;
 			default:
-				url = ClassLoader.getSystemResource("white.png");
+				url = ClassLoader.getSystemResource("resources/white.png");
 				break;
     	}
     	
@@ -118,31 +118,40 @@ public class GamePanel extends JPanel implements ActionListener {
     
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button) {
-			if (button.getText() == "pause") {
-				timer.stop();
-				button.setText("play");
-			} else if (button.getText() == "play") {
-				timer.start();
-				button.setText("pause");
-			} else if (button.getText() == "replay") {
-				this.p1state = new SafState(SafState.PlayerType.P1, p1);
-				this.p2state = new SafState(SafState.PlayerType.P2, p2);
-				healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
-				
-				timer.start();
-				
-			}
+			handleButtonEvent(e);
 		} else if (e.getSource() == timer) {
-			p1state.nextStep(p2state);
-			p2state.nextStep(p1state);
-			healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
-			
-		    repaint();
-		    
-		    if (!p1state.isAlive() || !p2state.isAlive()) {
-				timer.stop();
-				button.setText("replay");
-		    }
+			handleTimerEvent(e);
 		}
     }
+	
+	private void handleButtonEvent(ActionEvent e) {
+		if (button.getText() == "pause") {
+			timer.stop();
+			button.setText("play");
+		} else if (button.getText() == "play") {
+			timer.start();
+			button.setText("pause");
+		} else if (button.getText() == "replay") {
+			
+			this.p1state = new SafState(SafState.PlayerType.P1, p1);
+			this.p2state = new SafState(SafState.PlayerType.P2, p2);
+			healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
+			
+			timer.start();
+			button.setText("pause");
+		}
+	}
+	
+	private void handleTimerEvent(ActionEvent e) {
+		p1state.nextStep(p2state);
+		p2state.nextStep(p1state);
+		healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
+		
+	    repaint();
+	    
+	    if (!p1state.isAlive() || !p2state.isAlive()) {
+			timer.stop();
+			button.setText("replay");
+	    }
+	}
 }

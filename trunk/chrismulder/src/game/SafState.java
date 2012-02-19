@@ -249,21 +249,17 @@ public class SafState {
 
 	private boolean isVulnerable(Level level) {
 		if (level == block) {
-			System.out.println(playerType + " blocked.");
 			return false;
 		}
 		
 		if (getPosture() == Posture.CROUCHING && level == Level.HIGH) {
-			System.out.println(playerType + " duck.");
 			return false;
 		}
 
 		if (getPosture() == Posture.JUMPING && level == Level.LOW) {
-			System.out.println(playerType + " jumped.");
 			return false;
 		}
 		
-		System.out.println(playerType + " hit.");
 		return true;
 	}
 

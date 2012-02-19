@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public class Choice implements Validator {
 
 	protected Atom c1;
@@ -11,8 +13,10 @@ public class Choice implements Validator {
 	}
 
 	@Override
-	public boolean validate() {
-		return c1.validate() && c2.validate();
+	public List<String> validate(List<String> messages) {
+		messages = c1.validate(messages); 
+		messages = c2.validate(messages); 
+		return messages;
 	}
 
 	public AtomType getType() {

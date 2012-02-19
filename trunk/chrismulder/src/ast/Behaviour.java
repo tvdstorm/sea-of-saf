@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.HashMap;
+import java.util.List;
 
 import ast.ConditionAtom.Type;
 
@@ -16,8 +17,11 @@ public class Behaviour implements Validator {
 	}
 
 	@Override
-	public boolean validate() {
-		return getCondition().validate() && getMove().validate() && getAttack().validate();
+	public List<String> validate(List<String> messages) {
+		messages = getCondition().validate(messages);
+		messages = getMove().validate(messages);
+		messages = getAttack().validate(messages);
+		return messages;
 	}
 
 	public Condition getCondition() {

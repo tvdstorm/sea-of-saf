@@ -1,6 +1,8 @@
 package game;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -14,15 +16,29 @@ import ast.Saf;
 
 
 public class Main extends JFrame {
+	private Saf p1, p2;
+	
 	public Main() {
-		final Saf p1 = loadSaf("/data/test.fdl");
-		final Saf p2 = loadSaf("/data/chicken.fdl");
 
-		if (!p1.validate() || !p2.validate()) {
-			System.out.println("Goodbye.");
+		p1 = loadSaf("/data/all-wrong.saf");
+		p2 = loadSaf("/data/chicken.fdl");
+
+		List<String> messages = new ArrayList<String>();
+		List<String> p1messages = p1.validate(messages);
+		messages = new ArrayList<String>();
+		List<String> p2messages = p2.validate(messages);
+		
+		for (String message : p1messages) {
+			System.out.println(message);
+		}
+		
+		for (String message : p2messages) {
+			System.out.println(message);
+		}
+		
+		if (!p1messages.isEmpty() || !p2messages.isEmpty()) {
 			return;
 		}
-			
 		
 		add(new GamePanel(p1, p2));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,6 +51,8 @@ public class Main extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		
+		
 	    new Main();
 	}
     
