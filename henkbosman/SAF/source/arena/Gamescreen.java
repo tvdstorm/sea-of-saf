@@ -205,7 +205,7 @@ public class Gamescreen extends JFrame implements ActionListener{
 			{
 				drawFighter(null,Fighters.FighterA);
 			}
-			else
+			if (_engine.getHealth(Fighters.FighterB)<1)
 			{
 				drawFighter(null,Fighters.FighterB);
 			}

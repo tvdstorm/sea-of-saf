@@ -1,14 +1,4 @@
 chicken
 {
-  kickReach  = 7
-  punchReach = 3
-  kickPower  = 5
-  punchPower = 4
-  far and (weaker or much_weaker)[choose(run_towards walk_towards) choose(kick_low punch_high)]
-  near and (weaker or much_weaker)[stand choose(kick_high kick_low)]
-  far and stronger [choose(run_towards walk_towards) choose(kick_low punch_high block_low block_high)]
-  near and stronger [stand choose(kick_high kick_low block_low block_high)]
-  far and much_stronger [choose(run_towards walk_towards) choose(kick_low punch_high block_low block_high)]
-  near and much_stronger [choose(jump crouch) choose(kick_high kick_low block_low block_high)]
-  even [choose(run_towards walk_towards) choose(kick_low punch_high block_low block_high)]
+always[crouch block_low]
 }
