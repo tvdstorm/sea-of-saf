@@ -11,8 +11,13 @@ public class MatchSimulatorGUI extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 
 	public void update(Observable o, Object arg) {
-		// TODO implement
+		assert arg instanceof MatchSimulator.Player: "Invalid parameter: "+arg;
 		
+		MatchSimulator.Player player = (MatchSimulator.Player) arg;
+	
+		// TODO implement
+		System.out.println("Imagine "+player.fighter.getName()+" "+player.lastAction.moveName+" and "+
+				player.lastAction.attackName);
 	}
 
 }

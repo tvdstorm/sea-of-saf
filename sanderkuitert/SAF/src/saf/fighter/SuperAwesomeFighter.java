@@ -50,7 +50,7 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 		return DEFAULT_PROPERTY_VALUE;
 	}
 	
-	private Condition getState(double distance, double strengthDifference) {
+	protected Condition getState(double distance, double strengthDifference) {
 		List<Condition> possibleStates = new LinkedList<Condition>();
 		
 		if(distance < NEAR_ZONE_DISTANCE) {
@@ -78,7 +78,7 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 		return new Condition.OrCondition(possibleStates);
 	}
 	
-	private List<Action> getPossibleActions(Condition context) {
+	protected List<Action> getPossibleActions(Condition context) {
 		List<Action> actions = new LinkedList<Action>();
 		for(Condition condition: behaviours) {
 			actions.addAll(condition.getActions(context));
@@ -89,7 +89,7 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 	}
 	
 	// @require actions.size() > 0
-	private Action selectRandom(List<Action> actions) {
+	protected Action selectRandom(List<Action> actions) {
 		assert actions.size() > 0: "Requirement broken!";
 		return actions.get(new Random().nextInt(actions.size()));
 	}
