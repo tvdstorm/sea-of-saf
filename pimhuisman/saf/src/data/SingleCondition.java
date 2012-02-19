@@ -22,7 +22,7 @@ public class SingleCondition extends BaseData implements Condition {
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
-		System.out.println("single condition: "+name);
+		treePrinter.visit(this);
 	}
 	
 }
