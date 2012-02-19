@@ -7,8 +7,6 @@ import java.util.Random;
 public class Behavior {
 
 	private ArrayList<BehaviorRule> behaviorRules;
-	private String actualMove;
-	private String actualAttack;
 	ArrayList<String> validMoves;
 	ArrayList<String> validAttacks;
 
@@ -48,7 +46,7 @@ public class Behavior {
 
 		validMoves = new ArrayList<String>();
 		validAttacks = new ArrayList<String>();
-		
+
 		int rand = 0;
 		Random generator = new Random();
 		boolean flag = false;
@@ -120,26 +118,28 @@ public class Behavior {
 				if (behaviorRules.get(i).getMove().getMoves().size() == 1) {
 					validMoves.add(behaviorRules.get(i).getMove().getMoves()
 							.get(0));
-					System.out.println("Move: "+behaviorRules.get(i).getMove().getMoves()
-							.get(0));
+					System.out.println("Move: "
+							+ behaviorRules.get(i).getMove().getMoves().get(0));
 				} else {
 					rand = generator.nextInt(2);
 					validMoves.add(behaviorRules.get(i).getMove().getMoves()
 							.get(rand));
-					System.out.println("Move: "+behaviorRules.get(i).getMove().getMoves()
-							.get(0));
+					System.out.println("Move: "
+							+ behaviorRules.get(i).getMove().getMoves().get(rand));
 				}
-				if (behaviorRules.get(i).getMove().getMoves().size() == 1) {
+				if (behaviorRules.get(i).getAttack().getAttacks().size() == 1) {
 					validAttacks.add(behaviorRules.get(i).getAttack()
 							.getAttacks().get(0));
-					System.out.println("Attack: "+behaviorRules.get(i).getAttack()
-							.getAttacks().get(0));
+					System.out.println("Attack: "
+							+ behaviorRules.get(i).getAttack().getAttacks()
+									.get(0));
 				} else {
 					rand = generator.nextInt(2);
 					validAttacks.add(behaviorRules.get(i).getAttack()
 							.getAttacks().get(rand));
-					System.out.println("Attack: "+behaviorRules.get(i).getAttack()
-							.getAttacks().get(rand));
+					System.out.println("Attack: "
+							+ behaviorRules.get(i).getAttack().getAttacks()
+									.get(rand));
 				}
 				flag = false;
 			}
@@ -153,12 +153,12 @@ public class Behavior {
 						.size()) {
 					if (temp.equals("always")) {
 						if (behaviorRules.get(i).getMove().getMoves().size() == 1) {
-							validMoves.add(behaviorRules.get(i).getMove().getMoves()
-									.get(0));
+							validMoves.add(behaviorRules.get(i).getMove()
+									.getMoves().get(0));
 						} else {
 							rand = generator.nextInt(2);
-							validMoves.add(behaviorRules.get(i).getMove().getMoves()
-									.get(rand));
+							validMoves.add(behaviorRules.get(i).getMove()
+									.getMoves().get(rand));
 						}
 						if (behaviorRules.get(i).getMove().getMoves().size() == 1) {
 							validAttacks.add(behaviorRules.get(i).getAttack()

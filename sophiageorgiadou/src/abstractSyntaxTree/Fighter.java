@@ -13,10 +13,12 @@ public class Fighter {
 	private double speed;
 	
 	private String currentAttack=new String();
+	private String currentMove=new String();
+		
 	private int currentAttackPower;
 	private int currentAttackReach;
 	
-	private String currentMove;
+
 	
 	private int health; //100 full life - 0 dead	
 	private int location;
@@ -170,9 +172,28 @@ public class Fighter {
 	/**
 	 * @param currentAttack the currentAttack to set
 	 */
-	public void calculateCurrentAttackandMove() {
+	public boolean calculateCurrentAttackandMove() {
+		boolean exit=false;
+		
 		Random generator=new Random();
 		int max=this.behavior.validAttacks.size();
+		
+		int maxMove=this.behavior.validMoves.size();
+		//If no attacks
+		if(max==0){
+			this.currentAttack="none";
+			exit=true;
+		}
+		//If no moves
+		if(maxMove==0){
+			this.currentMove="none";
+			exit=true;
+		}
+		
+		if(exit){
+			return false;
+		}
+		
 		int rand=generator.nextInt(max);
 		this.currentAttack=new String(this.behavior.validAttacks.get(rand));
 		this.setCurrentMove(new String(this.behavior.validMoves.get(rand)));
@@ -189,6 +210,8 @@ public class Fighter {
 			this.setCurrentAttackPower(0);
 			this.setCurrentAttackReach(0);			
 		}
+		
+		return true;
 	}
 
 	/**

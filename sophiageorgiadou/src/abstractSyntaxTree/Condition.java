@@ -19,11 +19,11 @@ public class Condition {
 	}
 	
 	public String toString(){
-		String temp="Conditions: ";
+		String temp="\nConditions: ";
 		
 		for(int i=0;i<this.conditions.size();i++){
 			temp+=this.conditions.get(i)+",";
 		}
-		return temp+="\n";
+		return temp;
 	}
 }
