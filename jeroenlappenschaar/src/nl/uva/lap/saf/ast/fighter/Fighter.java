@@ -10,11 +10,13 @@ public class Fighter extends ASTNode
 {
 	private final String name;
 	private List<Personality> personalities = new ArrayList<Personality>();
+	private List<Behaviour> behaviours = new ArrayList<Behaviour>();
 
 	public Fighter(String name, List<Personality> personalities, List<Behaviour> behaviours)
 	{
 		this.name = name;
 		this.personalities = personalities;
+		this.behaviours = behaviours;
 	}
 
 	public String getName()
@@ -36,5 +38,10 @@ public class Fighter extends ASTNode
 	public List<Personality> getPersonalities()
 	{
 		return personalities;
+	}
+	
+	public List<Behaviour> getBehaviours()
+	{
+		return behaviours;
 	}
 }
