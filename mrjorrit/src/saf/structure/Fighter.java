@@ -2,7 +2,8 @@ package saf.structure;
 
 import java.util.List;
 
-public class Fighter extends Check {
+public class Fighter extends Check 
+{
 	
 	//Constructor
 	public Fighter(String name, Personality personality, Behaviour behaviour) {
@@ -10,7 +11,6 @@ public class Fighter extends Check {
 		this.personality = personality;
 		this.behaviour = behaviour;
 		this.health = 100;
-		
 	}
 	
 	//Name
@@ -46,6 +46,7 @@ public class Fighter extends Check {
 	public void doDamage(float damage)
 	{
 		health -= damage;
+		notifyObservers();
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package saf.structure;
 import java.util.List;
 import java.util.ArrayList;
 
-public abstract class Check {
+public abstract class Check extends Subject {
 	
 	public abstract List<String> check();
 	
