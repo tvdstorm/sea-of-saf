@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import saf.game.GameConstant;
 import saf.game.GameEventListener;
@@ -49,7 +50,7 @@ public class GameController implements GameConstant {
 		eventSource.addEventListener(gameEventListener);
 
 		setDistance(CONST_STARTING_DISTANCE);
-
+		
 		gameForm.jButtonBotLeftLoad.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -68,9 +69,21 @@ public class GameController implements GameConstant {
 				eventSource.fireGameStartEvent();
 			}
 		});
-
+		
+		setApplicationLookAndFeel();
+		
 	}
-
+	
+	private void setApplicationLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			System.out.println("Unable to set look and feel.");
+			e.printStackTrace();
+			displayMessage("Unable to set look and feel.");
+		}
+	}
+	
 	private void botFileActionPerformed(String side) {
 		JFileChooser jFileChooser = new JFileChooser();
 		jFileChooser.showOpenDialog(null);
