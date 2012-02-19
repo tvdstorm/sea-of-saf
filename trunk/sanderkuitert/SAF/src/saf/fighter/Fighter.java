@@ -4,9 +4,10 @@ package saf.fighter;
 public interface Fighter {
 	
 	public final static double NEAR_ZONE_DISTANCE = 0.1;
-	public final static double LITTLE_STRENGHT_DISTINGUISHABLE = 1.0;
-	public final static double MUCH_STRENGHT_DISTINGUISHABLE = 5.0;
+	public final static double LITTLE_STRENGTH_DIFFERENCE = 1.0;
+	public final static double MUCH_STRENGTH_DIFFERENCE = 5.0;
 	
+	public String getName();
 	public double getRelativeSpeed(); 		//adjusts the frequency that act(...)  is called
 	public double getRelativeStrength();	//determines strengthDifference status
 	public ActionEffect act(double distance, double strengthDifference);

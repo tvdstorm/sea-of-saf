@@ -15,6 +15,8 @@ import saf.fighter.SuperAwesomeFighter;
 
 public class GameSetup {
 	
+	private ThreadGroup simulations;
+	
 	public static void main(String[] args) {
 		System.out.println("============[Super Awesome Fighters]==================");
 		new GameSetup().startGame(args);
@@ -63,25 +65,25 @@ public class GameSetup {
 		
 		String line;
 		BufferedReader reader = new BufferedReader(new FileReader(new File(source)));
-		while((line = reader.readLine()) != null)
+		while((line = reader.readLine()) != null) {
 			content+=line+"\n";
+		}
 		
 		return content;
 	}
 	
-	private  void simulate(List<Fighter> fighters) {
+	private void simulate(List<Fighter> fighters) {
 		assert fighters.size() > 1 : "Matches need at least two valid fighters!";
 //		assert fighters.size() % 2 == 0 : "Matches need an even number of fighters!";
 		
 		//Matches against every other fighter
-		List<MatchSimulator> matches = new LinkedList<MatchSimulator>();
-		for(int i=0;i<fighters.size()-1;i++)
-			for(int j=i+1;j<fighters.size();j++)
-				matches.add(new MatchSimulator(fighters.get(i),fighters.get(j)));
-		
-		for(MatchSimulator sim: matches)
-			sim.run();
-		
+		simulations = new ThreadGroup("simulations");
+		for(int i=0;i<fighters.size()-1;i++) {
+			for(int j=i+1;j<fighters.size();j++) {
+				MatchSimulator match = new MatchSimulator(fighters.get(i),fighters.get(j));
+				new Thread(simulations, match).start();
+			}
+		}
 	}
 	
 }
