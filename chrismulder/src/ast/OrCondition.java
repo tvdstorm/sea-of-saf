@@ -1,6 +1,6 @@
 package ast;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class OrCondition extends BooleanCondition {
 	public OrCondition() {
@@ -8,7 +8,7 @@ public class OrCondition extends BooleanCondition {
 	}
 
 	@Override
-	public boolean evaluate(HashMap<ConditionAtom.Type, Boolean> state) {
+	public boolean evaluate(Map<AtomType, Boolean> state) {
 		for(Condition c : conditions) {
 			if (c.evaluate(state)) {
 				return true;

@@ -20,7 +20,7 @@ import ast.Saf;
 
 public class GamePanel extends JPanel implements ActionListener {
 
-	private static int PLAYER_WIDTH = 85, PLAYER_HEIGHT = 150;
+	private static int PLAYER_WIDTH = 40, PLAYER_HEIGHT = 70;
 	
 	private Timer timer;
 	private Saf p1, p2;
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private HealthPanel healthPanel;
 	private JButton button;
 
-    public GamePanel(Saf p1, Saf p2) {
+    public GamePanel(Saf p1, Saf p2, int stepTime) {
     	this.p1 = p1; 
     	this.p2 = p2; 
 		this.p1state = new SafState(SafState.PlayerType.P1, p1);
@@ -44,12 +44,55 @@ public class GamePanel extends JPanel implements ActionListener {
         button.addActionListener(this);
         add(button);
 
-        timer = new Timer(20, this);
+        timer = new Timer(stepTime, this);
         timer.start();
     }
 
 
-    public void paint(Graphics g) {
+    @Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == button) {
+			handleButtonEvent(e);
+		} else if (e.getSource() == timer) {
+			handleTimerEvent(e);
+		}
+    }
+
+
+    private void handleButtonEvent(ActionEvent e) {
+		if (button.getText() == "pause") {
+			timer.stop();
+			button.setText("play");
+		} else if (button.getText() == "play") {
+			timer.start();
+			button.setText("pause");
+		} else if (button.getText() == "replay") {
+			
+			this.p1state = new SafState(SafState.PlayerType.P1, p1);
+			this.p2state = new SafState(SafState.PlayerType.P2, p2);
+			healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
+			
+			timer.start();
+			button.setText("pause");
+		}
+	}
+
+    
+	private void handleTimerEvent(ActionEvent e) {
+		p1state.nextStep(p2state);
+		p2state.nextStep(p1state);
+		healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
+		
+	    repaint();
+
+	    if (!p1state.isAlive() || !p2state.isAlive()) {
+			timer.stop();
+			button.setText("replay");
+	    }
+	}
+	
+	@Override
+	public void paint(Graphics g) {
         super.paint(g);
 
         paintSaf(g, p1state);
@@ -57,9 +100,8 @@ public class GamePanel extends JPanel implements ActionListener {
         
         g.dispose();
     }
-
-
-    private void paintSaf(Graphics g, SafState state) {
+	
+	private void paintSaf(Graphics g, SafState state) {
     	URL url;
     	switch (state.getPlayerType()) {
     		case P1:
@@ -113,45 +155,5 @@ public class GamePanel extends JPanel implements ActionListener {
 		,	im);
         Toolkit.getDefaultToolkit().sync();
 		
-	}
-
-    
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == button) {
-			handleButtonEvent(e);
-		} else if (e.getSource() == timer) {
-			handleTimerEvent(e);
-		}
-    }
-	
-	private void handleButtonEvent(ActionEvent e) {
-		if (button.getText() == "pause") {
-			timer.stop();
-			button.setText("play");
-		} else if (button.getText() == "play") {
-			timer.start();
-			button.setText("pause");
-		} else if (button.getText() == "replay") {
-			
-			this.p1state = new SafState(SafState.PlayerType.P1, p1);
-			this.p2state = new SafState(SafState.PlayerType.P2, p2);
-			healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
-			
-			timer.start();
-			button.setText("pause");
-		}
-	}
-	
-	private void handleTimerEvent(ActionEvent e) {
-		p1state.nextStep(p2state);
-		p2state.nextStep(p1state);
-		healthPanel.updateHealth(p1state.getHealth(), p2state.getHealth());
-		
-	    repaint();
-	    
-	    if (!p1state.isAlive() || !p2state.isAlive()) {
-			timer.stop();
-			button.setText("replay");
-	    }
 	}
 }

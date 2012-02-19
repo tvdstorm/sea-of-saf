@@ -1,0 +1,6 @@
+boolchecker
+{
+  near or far [run_towards kick_low]
+  much_weaker and weaker [crouch kick_high]
+  even or stronger and much_weaker [jump punch_low] 
+}
