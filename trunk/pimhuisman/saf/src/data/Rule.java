@@ -4,33 +4,28 @@ import core.BaseTreeVisitor;
 
 public class Rule extends BaseData {
 
+	private Condition condition;
 	private Actions action;
+	
+	public Rule(Condition condition, Actions action) {
+		this.condition = condition;
+		this.action = action;
+	}
+	
+	public Condition getCondition() {
+		return condition;
+	}
+	
+	public Actions getAction() {
+		return action;
+	}
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
 		treePrinter.visit(this);
+		condition.acceptTreeVisitor(treePrinter);
+		//action.acc
+		//treePrinter.visit(action);
 	}
-	
-	/*private MoveActionType moveAction;
-	private FightActionType fightAction;
-	private ConditionType condition;
-	
-	public Rule(MoveActionType moveAction, FightActionType fightAction, ConditionType condition) {
-		this.moveAction = moveAction;
-		this.fightAction = fightAction;
-		this.condition = condition;
-	}
-	
-	public MoveActionType getMoveAction() {
-		return moveAction;
-	}
-	
-	public FightActionType getFightAction() {
-		return fightAction;
-	}
-	
-	public ConditionType getCondition() {
-		return condition;
-	}*/
 	
 }
