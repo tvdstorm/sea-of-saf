@@ -30,6 +30,7 @@ public class Engine
 	
 	private Combatmove _lastCombatmoveA;
 	private Combatmove _lastCombatmoveB;
+	private int _fatigue;
 	
 	public Engine(String filea, String fileb) throws IOException, RecognitionException
 	{
@@ -37,6 +38,7 @@ public class Engine
 		_fighterB = loadFighter(fileb);
 		_fighterA.movePosition(20);
 		_fighterB.movePosition(360);
+		_fatigue=50;
 	}
 	
 	private Fighter loadFighter(String file) throws IOException, RecognitionException
@@ -71,8 +73,22 @@ public class Engine
 		
 		boolean a = _fighterA.getDamage(doDamage(_fighterB, combatmoveB, combatmoveA, distance));
 		boolean b = _fighterB.getDamage(doDamage(_fighterA, combatmoveA, combatmoveB, distance));
+		fatigue();
 		
 		return a||b;
+	}
+	
+	private void fatigue()
+	{
+		if (_fatigue>0)
+		{
+			_fatigue-=1;
+		}
+		else
+		{
+			_fighterA.getDamage(1);
+			_fighterB.getDamage(1);
+		}
 	}
 	
 	public Combatmove getCombatmove(Fighters fighter)
@@ -89,6 +105,7 @@ public class Engine
 	
 	private int doDamage(Fighter f, Combatmove combatmoveA, Combatmove combatmoveB, int distance)
 	{
+		
 		if (distance<=f.getPropertyValue(Property.Properties.punchReach))
 		{
 			switch (combatmoveA._action)
