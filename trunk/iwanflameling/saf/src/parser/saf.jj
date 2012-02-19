@@ -4,6 +4,10 @@
 PARSER_BEGIN(SAFParser)package parser;
 
 import ast.object.Fighter;
+import ast.fighter.prop.Id;
+import ast.condition.*;
+import ast.Printer;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Set;
@@ -70,6 +74,7 @@ public class SAFParser{  public static void main(String args []) throws ParseE
       {
         System.out.println("NOK.");
         System.out.println(e.getMessage());
+        e.printStackTrace();
         if(useSystemIn) parser.ReInit(System.in);
       }
       catch (Error e)
@@ -128,31 +133,41 @@ Set fighterProps():
 
 void fighterProp():
 {
-    String t;
+    Condition condition;
 }
 {
     LOOKAHEAD(2)
     (fightId() "=" fightPower())
     |
-    (t = condition()"["action()"]")
-    {System.out.println(t);}
+    (condition = condition()"["action()"]")
+    {System.out.println(Printer.print(condition));}
 }
 
-String condition():
+Condition condition():
 {
-    String s;
+    Condition lhs;
+    Condition rhs;
+    String id;
 }
 {   
     LOOKAHEAD(2)
-    (<ID> <OR> s = condition())
-    {return "1" + s;}
+    (id = <ID>.image <OR> rhs = condition())
+    {
+        lhs = new Leaf(id);
+        return new Or(lhs, rhs);
+    }
     |
     LOOKAHEAD(2)
-    (<ID> <AND> s = condition())
-    {return "2" + s;}
+    (id = <ID>.image <AND> rhs = condition())
+    {
+        lhs = new Leaf(id);
+        return new And(lhs, rhs);
+    }
     |
-    <ID>
-    {return "3";}
+    id = <ID>.image
+    {
+        return new Leaf(id);
+    }
 }
 
 void action():
