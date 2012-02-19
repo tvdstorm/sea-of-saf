@@ -33,7 +33,7 @@ public class GameEngineTest extends GameEngine implements GameConstant {
 		
 		awardCredits();
 		
-		assertEquals("Error in awardCredits", 6.5, gameState.getBotStates().get(0).getCredits(),1); 
+		assertEquals("Error in awardCredits", 5.0, gameState.getBotStates().get(0).getCredits(),1); 
 	}
 	
 }

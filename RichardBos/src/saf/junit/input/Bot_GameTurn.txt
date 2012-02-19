@@ -1,0 +1,21 @@
+chicken
+{
+  kickReach  = 9
+  punchReach = 1
+  kickPower  = 5
+  punchPower = 6
+  always[stand kick_low]
+  near[stand kick_low]
+  far[stand kick_low]
+  much_stronger[stand kick_low]
+  stronger[stand kick_low]
+  even[stand kick_low]
+  weaker[stand kick_low]
+  much_weaker[stand kick_low]
+  stronger or weaker[stand kick_low]
+  far and even[stand kick_low]
+  much_stronger or far and even[stand kick_low]
+  far and even or much_stronger[stand kick_low]
+  near or far or weaker[stand kick_low]
+  near and weaker and much_weaker[stand kick_low]
+}
