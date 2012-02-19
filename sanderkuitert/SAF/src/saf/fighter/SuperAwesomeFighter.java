@@ -59,19 +59,19 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 			possibleStates.add(new Condition("far", null));
 		}
 		
-		if(Math.abs(strengthDifference) < LITTLE_STRENGHT_DISTINGUISHABLE) {
+		if(Math.abs(strengthDifference) < LITTLE_STRENGTH_DIFFERENCE) {
 			possibleStates.add(new Condition("even", null));
 		}
-		if(strengthDifference > LITTLE_STRENGHT_DISTINGUISHABLE) {
+		if(strengthDifference > LITTLE_STRENGTH_DIFFERENCE) {
 			possibleStates.add(new Condition("stronger", null));
 		}
-		if(strengthDifference > MUCH_STRENGHT_DISTINGUISHABLE) {
+		if(strengthDifference > MUCH_STRENGTH_DIFFERENCE) {
 			possibleStates.add(new Condition("much_stronger", null));	//entails "stronger"
 		}
-		if(strengthDifference < LITTLE_STRENGHT_DISTINGUISHABLE) {
+		if(strengthDifference < LITTLE_STRENGTH_DIFFERENCE) {
 			possibleStates.add(new Condition("weaker", null));
 		}
-		if(strengthDifference < -MUCH_STRENGHT_DISTINGUISHABLE) {
+		if(strengthDifference < -MUCH_STRENGTH_DIFFERENCE) {
 			possibleStates.add(new Condition("much_weaker", null)); 	//entails "weaker"
 		}
 		
