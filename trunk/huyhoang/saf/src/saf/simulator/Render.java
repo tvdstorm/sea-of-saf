@@ -19,6 +19,9 @@ import saf.interpreter.Game;
 import saf.interpreter.Bot;
 
 public class Render extends Canvas implements Observer {
+	/**
+	 * 
+	 */
 	private static AffineTransform transform;
 	private List<Bot> botsToDraw = new ArrayList<Bot>();
 
@@ -74,9 +77,6 @@ public class Render extends Canvas implements Observer {
 	}
 	
 	private void paintBot2(Bot bot, String action) {
-		if (action.equals("")) return;
-		System.out.println("render action: " + action);
-		
 		try {
 			BufferedImage image = loadImage("/Users/huyhoang/Downloads/SF2HD/Ryu/" + action + ".png");
 			Graphics2D g2d = (Graphics2D) this.getGraphics();
@@ -87,7 +87,6 @@ public class Render extends Canvas implements Observer {
 		    g2d.drawImage(image, null, bot.getPosition() * 60, this.getHeight() - image.getHeight());
 		}
 		catch (Exception ex) {
-			System.out.println("action:" + action);
 		}
 	}	
 	

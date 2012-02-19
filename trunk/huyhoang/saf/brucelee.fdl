@@ -1,0 +1,9 @@
+brucelee
+{
+	kickPower = 9
+	kickReach = 9
+	punchReach = 7
+	punchPower = 9
+	near [ choose(stand walk_away) choose(kickHigh kickLow) ]
+	always [ run_towards punchHigh ]
+}
