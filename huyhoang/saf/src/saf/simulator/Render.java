@@ -1,5 +1,6 @@
 package saf.simulator;
 
+import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,16 +10,17 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
 import javax.imageio.ImageIO;
-
-import saf.interpreter.Arena;
+import saf.interpreter.Game;
 import saf.interpreter.Bot;
 
 public class Render extends Canvas implements Observer {
 	private static AffineTransform transform;
+	private List<Bot> botsToDraw = new ArrayList<Bot>();
 
 	private BufferedImage loadImage(String filename) {
 		File file = new File(filename);
@@ -32,6 +34,18 @@ public class Render extends Canvas implements Observer {
 		}
 	}
 	
+	public void paint(Graphics g) {
+	    int width = getWidth();
+	    int height = getHeight();
+	    g.setColor(Color.black);
+	    g.fillRect(0, 0, width, height);
+
+	    for (Bot bot: this.botsToDraw) {
+			paintBot2(bot, bot.getLastState());
+			paintHitpointBars(bot);
+	    }
+	}
+	
 	private BufferedImage getFlippedImage(BufferedImage myImage) {
 	    Graphics gb = myImage.getGraphics();
 	    gb.drawImage(myImage, 0, 0, null);
@@ -43,9 +57,26 @@ public class Render extends Canvas implements Observer {
 	    myImage = op.filter(myImage, null);
 	    return myImage;
 	}
-
+	
+	private void paintHitpointBars(Bot bot) {
+		Graphics2D g2d = (Graphics2D) this.getGraphics();
+		
+		int x = (bot.isStandingLeft() ? 10 : this.getWidth() - 110);
+		
+		g2d.setColor(Color.green);
+		g2d.setStroke(new BasicStroke(3));
+		g2d.drawRect(x, 10, 100, 20);
+		
+		g2d.setColor(new Color(0, 200, 0));
+		g2d.fillRect(x + 2, 12, bot.getHitpoints() - 3, 17);
+		
+		g2d.drawString(bot.getFighter().getName(), x, 50);
+	}
+	
 	private void paintBot2(Bot bot, String action) {
 		if (action.equals("")) return;
+		System.out.println("render action: " + action);
+		
 		try {
 			BufferedImage image = loadImage("/Users/huyhoang/Downloads/SF2HD/Ryu/" + action + ".png");
 			Graphics2D g2d = (Graphics2D) this.getGraphics();
@@ -53,7 +84,7 @@ public class Render extends Canvas implements Observer {
 			if (!bot.isStandingLeft())
 				image = getFlippedImage(image);
 			
-		    g2d.drawImage(image, null, bot.getPosition() * 75, 300 - image.getHeight());
+		    g2d.drawImage(image, null, bot.getPosition() * 60, this.getHeight() - image.getHeight());
 		}
 		catch (Exception ex) {
 			System.out.println("action:" + action);
@@ -62,12 +93,11 @@ public class Render extends Canvas implements Observer {
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		this.getGraphics().fillRect(0, 0, 1024, 768);
-		
-		for (Bot bot : ((Arena)arg0).getBots()) {
-			System.out.println("bot.getLastAction:" + bot.getLastAction());
-			
-			paintBot2(bot, bot.getLastAction());
+		for (Bot bot : ((Game)arg0).getBots()) {
+			if (!this.botsToDraw.contains(bot)) {
+				this.botsToDraw.add(bot);
+			}
 		}
+		this.repaint();
 	}
 }

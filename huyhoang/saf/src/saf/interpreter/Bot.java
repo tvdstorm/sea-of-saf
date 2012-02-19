@@ -16,12 +16,12 @@ public class Bot extends Observable implements Observer
 		return position;
 	}
 	
-	private String lastAction;
-	public String getLastAction() {
-		if (lastAction == null)
+	private String lastState;
+	public String getLastState() {
+		if (lastState == null)
 			return "";
 		else
-			return lastAction;
+			return lastState;
 	}
 	
 	public static ArrayList<String> fetchBotStrengths() {
@@ -101,14 +101,13 @@ public class Bot extends Observable implements Observer
 	}
 	
 	public int getSpeed() {
-		// Do a factor 10 because I don't want to deal with floating point.
-		return (5 * (getHeight() - getWeight()));
+		return (int)(0.5 * (getHeight() - getWeight()));
 	}
 	
 	private void notifySubscribers(String action) {
 		this.setChanged();
 		this.notifyObservers(action);
-		this.lastAction = action;
+		this.lastState = action;
 	}
 	
 	@MethodAnnotation(safName = "stronger", keywordType = "condition")
@@ -133,7 +132,6 @@ public class Bot extends Observable implements Observer
 	
 	@MethodAnnotation(safName = "even", keywordType = "condition")
 	public boolean isEven() {
-		System.out.println("isEven called");
 		return this.getNumberOfStrongerStrengths() == this.getNumberOfWeakerStrengths();
 	}
 	
@@ -165,65 +163,65 @@ public class Bot extends Observable implements Observer
 	@MethodAnnotation(safName = "run_towards", keywordType = "move")
 	public void runTowards() {
 		this.setPosition(this.getPosition() + getMoveDirection());
-		this.notifySubscribers("run_towards");
+		//this.notifySubscribers("run_towards");
 	}
 	
 	@MethodAnnotation(safName = "run_away", keywordType = "move")
 	public void runAway() {
 		this.setPosition(this.getPosition() - getMoveDirection());
-		this.notifySubscribers("run_away");
+		//this.notifySubscribers("run_away");
 	}
 	
 	@MethodAnnotation(safName = "walk_towards", keywordType = "move")
 	public void walkTowards() {
 		this.setPosition(this.getPosition() + getMoveDirection());
-		this.notifySubscribers("walk_towards");
+		//this.notifySubscribers("walk_towards");
 	}
 	
 	@MethodAnnotation(safName = "walk_away", keywordType = "move")
 	public void walkAway() {
 		this.setPosition(this.getPosition() - getMoveDirection());
-		this.notifySubscribers("walk_away");
+		//this.notifySubscribers("walk_away");
 	}
 
 	@MethodAnnotation(safName = "punch_low", keywordType = "attack")
 	public void punchLow() {
-		if (isPunchInReach() && !this.opponentBot.getLastAction().equals("block_low"))
-			this.notifySubscribers("hit");
+		if (isPunchInReach() && !this.opponentBot.getLastState().equals("block_low"))
+			this.notifySubscribers("hitopponent");
 		
 		this.notifySubscribers("punch_low");
 		
-		this.moveStepsLeft += 5;
+		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
 	}
 	
 	@MethodAnnotation(safName = "punch_high", keywordType = "attack")
 	public void punchHigh() {
-		if (isPunchInReach() && !this.opponentBot.getLastAction().equals("block_high"))
-			this.notifySubscribers("hit");
-
+		if (isPunchInReach() && !this.opponentBot.getLastState().equals("block_high"))
+			this.notifySubscribers("hitopponent");
+		
 		this.notifySubscribers("punch_high");
 
-		this.moveStepsLeft += 5;
+		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
 	}
 	
 	@MethodAnnotation(safName = "kick_low", keywordType = "attack")
 	public void kickLow() {
-		if (isKickInReach() && !this.opponentBot.getLastAction().equals("block_low"))
-			this.notifySubscribers("hit");
-
+		if (isKickInReach() && !this.opponentBot.getLastState().equals("block_low"))
+			this.notifySubscribers("hitopponent");
+		
 		this.notifySubscribers("kick_low");
 
-		this.moveStepsLeft += 5;
+		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
 	}
 	
 	@MethodAnnotation(safName = "kick_high", keywordType = "attack")
 	public void kickHigh() {
-		if (isKickInReach() && !this.opponentBot.getLastAction().equals("block_high"))
-			this.notifySubscribers("hit");
-		
+		if (isKickInReach() && !this.opponentBot.getLastState().equals("block_high"))
+			this.notifySubscribers("hitopponent");
+
 		this.notifySubscribers("kick_high");
 
-		this.moveStepsLeft += 5;
+		this.moveStepsLeft = (Math.abs(this.getSpeed()) + 1) * 2;
 	}
 	
 	@MethodAnnotation(safName = "block_low", keywordType = "attack")
@@ -290,17 +288,15 @@ public class Bot extends Observable implements Observer
 	public void performAction(String safName) {
 		if (!isAllowedToPerformAction()) {
 			moveStepsLeft--;
-			if (!this.isKnockedOut())
+			if (!this.isKnockedOut() && !this.getLastState().equals("hit"))
 				this.stand();
 		}
 		else {
-			System.out.println("invoking:" + safName);
 			this.invokeMethod(safName);
 		}
 	}
 	
 	public boolean getCondition(String safName) {
-		System.out.println("invoking condition:" + safName);
 		return (Boolean)this.invokeMethod(safName);
 	}
 	
@@ -314,14 +310,14 @@ public class Bot extends Observable implements Observer
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg0.equals(this.opponentBot)) {
-			if (arg1.equals("hit")) {
-				this.hitpoints -= 10;
-				this.moveStepsLeft = this.getSpeed() / 5;
-				System.out.println("hit! left:" + this.hitpoints);
-				if (this.isKnockedOut()) {
-					System.out.println("K.O.");
+			if (arg1.equals("hitopponent")) {
+				this.hitpoints -= 5;
+				this.moveStepsLeft = 1;
+				System.out.println("hit");
+				if (this.isKnockedOut())
 					this.notifySubscribers("knockout");
-				}
+				else
+					this.notifySubscribers("hit");
 			}
 		}
 	}

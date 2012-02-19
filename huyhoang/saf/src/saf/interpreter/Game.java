@@ -10,7 +10,7 @@ import saf.ast.Fighter;
 import saf.checker.CheckerVisitor;
 import saf.parser.*;
 
-public class Arena extends Observable {
+public class Game extends Observable {
 	private List<Bot> bots;
 	
 	public List<Bot> getBots() {
@@ -18,12 +18,21 @@ public class Arena extends Observable {
 	}
 	
 	private InterpreterVisitor interpreter;
-	
-	public static void main(String args []) {
-        System.out.println("Arena");
-        Arena arena = new Arena();
-        arena.EvaluateBots();
-    }
+
+	public Game() {
+		this.initializeBots();
+		for (Bot bot : bots) {
+			CheckerVisitor checker = new CheckerVisitor(bot.getFighter());
+			checker.visitAllASTNodes();
+			if (checker.getErrors().size() > 0) {
+				System.out.println("Saf specification contains errors...");
+				for ( String error : checker.getErrors() ) {
+					System.out.println(error);
+				}
+				return;
+			}
+		}
+	}
 	
 	// replace later with a real function to load from file
 	protected Fighter loadFighterFromFile(String fileName) {
@@ -32,10 +41,10 @@ public class Arena extends Observable {
 		String specification = "";
 		
 		if (fileName == "1") {
-			specification = "jackiechan { punchPower = 5 weaker [ run_away block_low ] always [ run_towards punch_high ] }";
+			specification = "jackiechan { punchPower = 5 weaker [ run_towards block_low ] always [ run_towards punch_high ] }";
 		}
 		if (fileName == "2") {
-			specification = "brucelee { kickPower = 10 stronger [ run_towards kick_high ] always [ crouch block_high ] }";
+			specification = "brucelee { kickPower = 10 stronger [ run_towards choose(block_low punch_low) ] always [ run_towards choose(block kick_high) ] }";
 		}
 
 		ByteArrayInputStream input = new ByteArrayInputStream(specification.getBytes());
@@ -52,28 +61,13 @@ public class Arena extends Observable {
 		bots = new ArrayList<Bot>();
 
 		Random random = new Random();
-		Bot firstBot = new Bot(loadFighterFromFile("1"), 5);
+		Bot firstBot = new Bot(loadFighterFromFile("1"), 0);
 		Bot secondBot = new Bot(loadFighterFromFile("2"), 10);
 		firstBot.setOpponentBot(secondBot);
 		secondBot.setOpponentBot(firstBot);
 		
 		bots.add(firstBot);
 		bots.add(secondBot);
-	}
-	
-	public Arena() {
-		this.initializeBots();
-		for (Bot bot : bots) {
-			CheckerVisitor checker = new CheckerVisitor(bot.getFighter());
-			checker.visitAllASTNodes();
-			if (checker.getErrors().size() > 0) {
-				System.out.println("Saf specification contains errors...");
-				for ( String error : checker.getErrors() ) {
-					System.out.println(error);
-				}
-				return;
-			}
-		}
 	}
 	
 	public void EvaluateBots() {
