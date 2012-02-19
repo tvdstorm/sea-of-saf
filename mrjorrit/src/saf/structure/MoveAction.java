@@ -2,6 +2,8 @@ package saf.structure;
 
 import java.util.List;
 
+import saf.Checker.Check;
+
 public class MoveAction extends Check {
 
 	//Constructor

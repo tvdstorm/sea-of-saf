@@ -19,6 +19,8 @@ public abstract class LogicalClause extends Logical {
 		return rightHandSide;
 	}
 	
+	public abstract boolean computeClause(boolean left, boolean right);
+	
 	@Override
 	public List<String> check(){
 		

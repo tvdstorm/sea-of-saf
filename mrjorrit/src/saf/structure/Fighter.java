@@ -2,6 +2,9 @@ package saf.structure;
 
 import java.util.List;
 
+import saf.Checker.Check;
+import saf.simulation.Arena;
+
 public class Fighter extends Check 
 {
 	
@@ -10,7 +13,6 @@ public class Fighter extends Check
 		this.name = name;
 		this.personality = personality;
 		this.behaviour = behaviour;
-		this.health = 100;
 	}
 	
 	//Name
@@ -20,7 +22,6 @@ public class Fighter extends Check
 		return name;
 	}
 
-	
 	//Personality
 	private final Personality personality;
 	
@@ -33,22 +34,8 @@ public class Fighter extends Check
 	
 	public Behaviour getBehaviour() {
 		return behaviour;
-	}
+	}	
 	
-	//Health
-	private float health;
-	
-	public float getHealth()
-	{
-		return health;
-	}
-	
-	public void doDamage(float damage)
-	{
-		health -= damage;
-		notifyObservers();
-	}
-
 	@Override
 	public List<String> check(){
 		if(name == null || name.isEmpty())

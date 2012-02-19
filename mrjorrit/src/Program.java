@@ -1,19 +1,5 @@
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-
 import javax.swing.JOptionPane;
-
-import org.antlr.runtime.*;
-
-import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.CommonTreeNodeStream;
-import org.antlr.runtime.tree.DOTTreeGenerator;
-import org.antlr.stringtemplate.StringTemplate;
-
-import saf.generation.output.*;
-import saf.presentation.ArenaPresentation;
-import saf.simulation.Arena;
+import saf.presentation.ArenaGUI;
 import saf.structure.*;
 
 public class Program {
@@ -32,8 +18,8 @@ public class Program {
 			return;
 		}
 			
-		ArenaPresentation arenaPresen = new ArenaPresentation (new Arena(lhsf, rhsf));
-		arenaPresen.runPresentation();
+		ArenaGUI arenaPresen = new ArenaGUI (lhsf, rhsf);
+		arenaPresen.Fight(); //Ready? Fight!
 	}
 		
 //		public static void writeDot(CommonTree tree)
