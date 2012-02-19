@@ -19,9 +19,7 @@ import saf.structure.intelligence.BotIntelligence;
 public class CharacteristicTest implements GameConstant {
 	
 	private Bot botNormal;
-	private Bot botDouble;
-	private Bot botInvalid;
-	
+
 	private List<String> botNormalErrors;
 	private List<String> botDuplicateErrors;
 	private List<String> botInvalidErrors;
@@ -36,11 +34,9 @@ public class CharacteristicTest implements GameConstant {
 		botNormalErrors = ElementChecker.check(bots);
 		
 		bots = FileParser.consume("src\\saf\\junit\\input\\Bot_Char_Double.txt");
-		this.botDouble = bots.getBots().get(0);
 		botDuplicateErrors = ElementChecker.check(bots);
 		
 		bots = FileParser.consume("src\\saf\\junit\\input\\Bot_Char_Invalid.txt");
-		this.botInvalid = bots.getBots().get(0);
 		botInvalidErrors = ElementChecker.check(bots);
 	}
 	

@@ -94,6 +94,6 @@ public interface GameConstant {
 	public static final double FIGHTACTION_BASEPOWER = 5;
 	public static final int CONDITION_NEAR_DISTANCE = 50;
 	public static final int CONST_MIN_ACTIONCOST = 9;
-	public static final int CONST_TIMER_MS = 75;
+	public static final int CONST_TIMER_MS = 150;
 	
 }
