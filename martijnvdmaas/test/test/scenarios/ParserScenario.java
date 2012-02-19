@@ -1,6 +1,17 @@
 package test.scenarios;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import main.Main;
+
 import org.jbehave.scenario.JUnitScenario;
+import org.jbehave.scenario.MostUsefulConfiguration;
 import org.jbehave.scenario.PropertyBasedConfiguration;
 import org.jbehave.scenario.parser.ClasspathScenarioDefiner;
 import org.jbehave.scenario.parser.PatternScenarioParser;
@@ -27,14 +38,15 @@ public class ParserScenario extends JUnitScenario {
     }
     
     
-    public static class MyJBehaveConfiguration extends PropertyBasedConfiguration {
+    public static class MyJBehaveConfiguration extends MostUsefulConfiguration {
         @Override
         public ClasspathScenarioDefiner forDefiningScenarios() {
-            ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        	
+        	ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        	System.out.println(contextClassLoader.toString());
             
             return new ClasspathScenarioDefiner(new UnderscoredCamelCaseResolver(), new PatternScenarioParser(this),
                     contextClassLoader);
         }
     }
-
 }
