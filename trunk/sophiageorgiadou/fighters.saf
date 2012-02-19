@@ -5,7 +5,7 @@ Roger_Fed
 	punchReach = 4
 	punchPower = 8
 	near [crouch punch_low]
-	far [run_towards kick_high]
+	far and even [run_towards kick_high]
 }
 Rafael_Nad
 {
@@ -13,6 +13,6 @@ Rafael_Nad
 	kickPower = 8
 	punchReach = 2
 	punchPower = 6
-	near and weaker [jump kick_high]
-	far [choose(run_towards walk_towards) kick_high]
+	near and even [jump kick_high]
+	far [choose(run_towards walk_towards) kick_low]
 }
