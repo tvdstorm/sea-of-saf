@@ -20,21 +20,18 @@ public class GameSetup {
 	public static void main(String[] args) {
 		System.out.println("============[Super Awesome Fighters]==================");
 		new GameSetup().startGame(args);
-        System.out.println("======================================================");
 	}
 
-	/** Load fighters from args, and simulate as many matches as possible */
+	/** Load fighters from args, and simulate matches between all of them */
 	public void startGame(String[] args){
         
 		List<Fighter> fighters = obtainFighters(args);
-		System.err.flush();//DEBUG
-		System.out.println("LOG: Correctly read " + fighters.size() + " fighters"); //DEBUG
+		System.err.flush();	System.out.println("> Correctly read " + fighters.size() + " fighters");//DEBUG
 		
 		if(fighters.size() > 1){
-			simulate(fighters);
-			System.out.println("LOG: Simulation ran"); //DEBUG
+			startTournament(fighters);
 		}else{
-			System.out.println("LOG: Simulation aborted (not enough fighters available)"); //DEBUG
+			System.out.println("LOG: Simulation aborted (not enough fighters available)"); 			//DEBUG
 		}
 		
 	}
@@ -72,15 +69,16 @@ public class GameSetup {
 		return content;
 	}
 	
-	private void simulate(List<Fighter> fighters) {
+	private void startTournament(List<Fighter> fighters) {
 		assert fighters.size() > 1 : "Matches need at least two valid fighters!";
 //		assert fighters.size() % 2 == 0 : "Matches need an even number of fighters!";
 		
-		//Matches against every other fighter
-		simulations = new ThreadGroup("simulations");
-		for(int i=0;i<fighters.size()-1;i++) {
-			for(int j=i+1;j<fighters.size();j++) {
-				MatchSimulator match = new MatchSimulator(fighters.get(i),fighters.get(j));
+		//Start matches between every fighter
+		simulations = new ThreadGroup("Tournament with "+fighters.size());
+		for(int i=0; i < fighters.size()-1; i++) {
+			for(int j=i+1; j < fighters.size(); j++) {
+				String matchName = fighters.get(i).getName()+" vs "+fighters.get(j).getName()+"\t\t";
+				MatchSimulator match = new MatchSimulator(matchName,fighters.get(i),fighters.get(j));
 				new Thread(simulations, match).start();
 			}
 		}
