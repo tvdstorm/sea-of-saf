@@ -7,18 +7,18 @@ import java.util.ArrayList;
 
 public abstract class Attribute
 {
-//    public static List<data.Attribute> convertDataList(List<data.Attribute>
-//                                                       attributes)
-//    {
-//        List<data.Attribute> convertedAttributes = 
-//                new ArrayList<data.Attribute>();
-//
-//        for (data.Attribute attribute : attributes)
-//        {
-//            convertedAttributes.add(new Attribute(attribute));
-//        }
-//
-//        return convertedAttributes;
-//    }
+    public static int getValueByName(List<saf.data.Attribute> attributes, 
+                                     String name)
+    {
+        for (saf.data.Attribute attribute : attributes)
+        {
+            if (attribute.getName().equals(name))
+            {
+                return attribute.getValue();
+            }
+        }
+
+        return saf.data.Attribute.DEFAULT_VALUE;
+    }
 }
 

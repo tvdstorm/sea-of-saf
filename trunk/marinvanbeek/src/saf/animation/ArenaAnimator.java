@@ -1,6 +1,7 @@
 package saf.animation;
 
 import saf.simulation.Fighter;
+import saf.data.Position;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,20 +20,28 @@ public class ArenaAnimator extends JFrame
 {
     public static final long serialVersionUID = 1L;
 
-    public static final int ARENA_WIDTH = 256;
-    public static final int ARENA_HEIGHT = 256;
+    public static final int STARTING_POSITION = 100;
+    public static final int ARENA_WIDTH = 512;
+    public static final int ARENA_HEIGHT = 512;
     public static final int ANIMATION_DELAY_MS = 500;
 
     private FighterAnimator leftAnimator;
     private FighterAnimator rightAnimator;
 
-    public ArenaAnimator(String leftName, String rightName)
+    public ArenaAnimator(String leftFileName, String rightFileName)
     {
         setupArena();
 
         Container contentPane = getContentPane();
-        leftAnimator = new FighterAnimator(leftName, contentPane);
-        rightAnimator = new FighterAnimator(rightName, contentPane, true);
+
+        Position leftStartingPosition = new Position(STARTING_POSITION, 0);
+        Position rightStartingPosition = 
+                new Position(ARENA_WIDTH - STARTING_POSITION, 0);
+
+        leftAnimator = new FighterAnimator(leftStartingPosition, 1, 
+                                           leftFileName, contentPane);
+        rightAnimator = new FighterAnimator(rightStartingPosition, -1, 
+                                            rightFileName, contentPane, true);
     }
 
     public void setupArena()
@@ -47,22 +56,29 @@ public class ArenaAnimator extends JFrame
         while (leftAnimator.hasAnimations() &&
                rightAnimator.hasAnimations())
         {
+            /* Start with a delay, to show the start image. */
+            sleepDelay();
+
             leftAnimator.animateNext();
             rightAnimator.animateNext();
 
             System.out.print(">");
-
-            try
-            {
-                Thread.currentThread().sleep(ANIMATION_DELAY_MS);
-            }
-            catch (InterruptedException e)
-            {
-                System.out.println("The Animation sleep was interrupted: " +
-                                   e.getMessage());
-            }
         }
         System.out.println();
+        sleepDelay();
+    }
+
+    public void sleepDelay()
+    {
+        try
+        {
+            Thread.currentThread().sleep(ANIMATION_DELAY_MS);
+        }
+        catch (InterruptedException e)
+        {
+            System.out.println("The Animation sleep was interrupted: " +
+                               e.getMessage());
+        }
     }
 
     public void bufferTimeStep(Fighter leftFighter, Fighter rightFighter)

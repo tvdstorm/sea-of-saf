@@ -22,9 +22,9 @@ ANIMATION_SOURCES   = src/saf/animation/*.java
 ANIMATION_CLASSES   = $(subst src,build,$(ANIMATION_SOURCES:.java=.class))
 
 TEST_SOURCES        = src/tests/*.java
-TEST_CLASSES        = $(subst src,build,$(TEST_SOURCES:.java=.class))
+TEST_CLASSES        = $(subst src/tests,build,$(TEST_SOURCES:.java=.class))
 TEST_NAMES          = ParseTest FightTest AnimationTest
-TEST                = AnimationTest
+TEST                = FightTest
 
 ANTLR_LIB           = lib/antlrworks-1.4.3.jar
 JUNIT_LIB           = lib/junit-4.10.jar

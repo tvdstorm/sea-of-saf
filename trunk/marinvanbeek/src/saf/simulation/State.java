@@ -26,45 +26,52 @@ public class State {
     private static saf.data.Condition getRelativeStrength(Fighter fighter, 
                                                       Fighter opponent)
     {
+        saf.data.Condition relativeStrength;
         int strengthDifference = fighter.getStrength() - 
                                  opponent.getStrength();
 
         if (strengthDifference < -2)
         {
-            return new saf.data.Condition("much_weaker");
+            relativeStrength = new saf.data.Condition("much_weaker");
         }
         else if (strengthDifference < 0)
         {
-            return new saf.data.Condition("weaker");
+            relativeStrength = new saf.data.Condition("weaker");
         }
         else if (strengthDifference == 0)
         {
-            return new saf.data.Condition("even");
+            relativeStrength = new saf.data.Condition("even");
         }
         else if (strengthDifference > 2)
         {
-            return new saf.data.Condition("much_stronger");
+            relativeStrength = new saf.data.Condition("much_stronger");
         }
         else /* if (strengthDifference > 0) */
         {
-            return new saf.data.Condition("stronger");
+            relativeStrength = new saf.data.Condition("stronger");
         }
+
+        return relativeStrength;
     }
 
     private static saf.data.Condition getDistanceToOpponent(Fighter fighter,
                                                             Fighter opponent)
     {
-        int distanceToFighter2 = Math.abs(fighter.getPosition() -
-                                          opponent.getPosition());
+        saf.data.Condition distance;
+        int fighterPosition = fighter.getPosition().getX();
+        int opponentPosition = opponent.getPosition().getX();
+        int distanceToOpponent = Math.abs(fighterPosition - opponentPosition);
 
-        if (distanceToFighter2 < 10)
+        if (distanceToOpponent < saf.data.Move.RUN_DISTANCE)
         {
-            return new saf.data.Condition("near");
+            distance = new saf.data.Condition("near");
         }
         else
         {
-            return new saf.data.Condition("far");
+            distance = new saf.data.Condition("far");
         }
+
+        return distance;
     }
 
     public saf.data.Condition getRelativeStrength() 

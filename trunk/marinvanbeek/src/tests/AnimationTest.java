@@ -14,13 +14,14 @@ public class AnimationTest
     @Test
     public void testPredefinedActions()
     {
-        List<saf.simulation.Fighter> fighters = getCompleteFighters();
+        List<saf.simulation.Fighter> leftFighters = getCompleteFighters(0);
+        List<saf.simulation.Fighter> rightFighters = getCompleteFighters(100);
         ArenaAnimator animator = new ArenaAnimator("bison", "bison");
 
         System.out.println();
-        for (saf.simulation.Fighter fighter : fighters)
+        for (int i = 0; i < leftFighters.size(); i++)
         {
-            animator.bufferTimeStep(fighter, fighter);
+            animator.bufferTimeStep(leftFighters.get(i), rightFighters.get(i));
             System.out.print("<");
         }
         System.out.println();
@@ -32,7 +33,7 @@ public class AnimationTest
      * Returns a list of simulated Fighters, where every move and every attack
      * is guaranteed to appear and where the Fighter's position changes.
      */
-    private List<saf.simulation.Fighter> getCompleteFighters()
+    private List<saf.simulation.Fighter> getCompleteFighters(int position)
     {
         /* This data Fighter is needed for the simulation Fighter, but not used
          * in the actual animation. */
@@ -46,13 +47,14 @@ public class AnimationTest
 
         for (saf.data.Action action : actions)
         {
-            fighters.add(
-                    new saf.simulation.Fighter(generalFighter, 0, action));
+            fighters.add(new saf.simulation.Fighter(generalFighter, position, 
+                                                    action));
         }
 
         for (int i = 0; i < 10; i++)
         {
-            fighters.add(new saf.simulation.Fighter(generalFighter, i*3,
+            fighters.add(new saf.simulation.Fighter(generalFighter,
+                                                    i*3+position,
                                                     generalAction));
         }
 
