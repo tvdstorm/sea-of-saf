@@ -20,7 +20,7 @@ public class BotsTest {
 		
 		List<String> errors = ElementChecker.check(bots);
 		
-		assertEquals("Errors found in loading bot: " + TestHelpers.convertToReadableString(errors), 0, errors.size());
+		assertEquals("Errors found in loading bot: " + TestHelpers.convertListToReadableString(errors), 0, errors.size());
 		assertEquals("Error in loading number of bots", 1, bots.getBots().size());
 
 		bots = FileParser.consume("src\\saf\\junit\\input\\Bot_Empty.txt");

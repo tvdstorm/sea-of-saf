@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import saf.game.GameConstant;
-import saf.structure.Bot;
-import saf.structure.Bots;
 
 public class GameState implements GameConstant {
 	

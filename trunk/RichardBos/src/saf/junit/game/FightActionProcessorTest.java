@@ -30,29 +30,31 @@ public class FightActionProcessorTest implements GameConstant {
 	
 	@Test
 	public void processFightActionTest() {
+		String fightActionError = "Error in FightActionProcessor";
+		
 		prepareStateForTest(MOVE_ACTION_STAND, FIGHT_ACTION_KICKHIGH, 200);
-		assertEquals("Error in FightActionProcessor", 0,  getFightActionPower(FIGHT_ACTION_KICKHIGH, false), 5);
+		assertEquals(fightActionError, 0,  getFightActionPower(FIGHT_ACTION_KICKHIGH, false), 5);
 		
 		prepareStateForTest(MOVE_ACTION_STAND, FIGHT_ACTION_KICKHIGH, 0);
-		assertEquals("Error in FightActionProcessor", 30, getFightActionPower(FIGHT_ACTION_PUNCHHIGH, false), 5);
+		assertEquals(fightActionError, 30, getFightActionPower(FIGHT_ACTION_PUNCHHIGH, false), 5);
 		
 		prepareStateForTest(MOVE_ACTION_JUMP, FIGHT_ACTION_KICKHIGH, 15);
-		assertEquals("Error in FightActionProcessor", 0, getFightActionPower(FIGHT_ACTION_KICKLOW, false), 5);
+		assertEquals(fightActionError, 0, getFightActionPower(FIGHT_ACTION_KICKLOW, false), 5);
 		
 		prepareStateForTest(MOVE_ACTION_RUNAWAY, FIGHT_ACTION_KICKHIGH, 0);
-		assertEquals("Error in FightActionProcessor", 0, getFightActionPower(FIGHT_ACTION_KICKHIGH, true), 5);
+		assertEquals(fightActionError, 0, getFightActionPower(FIGHT_ACTION_KICKHIGH, true), 5);
 		
 		prepareStateForTest(MOVE_ACTION_JUMP, FIGHT_ACTION_BLOCKHIGH, 5);
-		assertEquals("Error in FightActionProcessor", 25, getFightActionPower(FIGHT_ACTION_KICKLOW, true), 5);
+		assertEquals(fightActionError, 25, getFightActionPower(FIGHT_ACTION_KICKLOW, true), 5);
 		
 		prepareStateForTest(MOVE_ACTION_STAND, FIGHT_ACTION_BLOCKHIGH, 10);
-		assertEquals("Error in FightActionProcessor", 0,  getFightActionPower(FIGHT_ACTION_KICKHIGH, false), 5);
+		assertEquals(fightActionError, 0,  getFightActionPower(FIGHT_ACTION_KICKHIGH, false), 5);
 		
 		prepareStateForTest(MOVE_ACTION_STAND, FIGHT_ACTION_BLOCKLOW, 10);
-		assertEquals("Error in FightActionProcessor", 0,  getFightActionPower(FIGHT_ACTION_PUNCHLOW, false), 5);
+		assertEquals(fightActionError, 0,  getFightActionPower(FIGHT_ACTION_PUNCHLOW, false), 5);
 		
 		prepareStateForTest(MOVE_ACTION_CROUCH, FIGHT_ACTION_KICKLOW, 10);
-		assertEquals("Error in FightActionProcessor", 0,  getFightActionPower(FIGHT_ACTION_KICKHIGH, false), 5);
+		assertEquals(fightActionError, 0,  getFightActionPower(FIGHT_ACTION_KICKHIGH, false), 5);
 	}
 	
 	private void prepareStateForTest(String lastMoveAction, String lastFightAction, int distance)

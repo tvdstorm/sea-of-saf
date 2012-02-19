@@ -3,7 +3,6 @@ package saf.game.event;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class EventSource {
 
 	private List<iEventListener> listEventListeners = new ArrayList<iEventListener>();

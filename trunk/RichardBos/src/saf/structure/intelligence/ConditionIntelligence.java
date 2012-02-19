@@ -1,9 +1,5 @@
 package saf.structure.intelligence;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
 import saf.game.GameConstant;
 import saf.game.state.BotState;
 import saf.game.state.GameState;
@@ -46,18 +42,13 @@ public class ConditionIntelligence implements GameConstant {
 		if (value.equals(CONDITION_NEAR))
 			return distance < CONDITION_NEAR_DISTANCE;
 
-		// HP > much_stronger
-		// HP > stronger
 		if (value.equals(CONDITION_MUCHSTRONGER) || value.equals(CONDITION_STRONGER))
 			return hpDifference > CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
 
-		// weaker >= HP <= stronger
 		if (value.equals(CONDITION_EVEN))
 			return hpDifference >= CONDITION_STRENGHTS_HP_DIFFERENCE.get(CONDITION_WEAKER)
 					&& hpDifference <= CONDITION_STRENGHTS_HP_DIFFERENCE.get(CONDITION_STRONGER);
 
-		// HP < weaker
-		// HP < much_weaker
 		if (value.equals(CONDITION_WEAKER) || value.equals(CONDITION_MUCHWEAKER))
 			return hpDifference < CONDITION_STRENGHTS_HP_DIFFERENCE.get(value);
 

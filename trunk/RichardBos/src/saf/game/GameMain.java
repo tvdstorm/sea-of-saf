@@ -9,7 +9,6 @@ import saf.game.gui.GameController;
 import saf.game.state.BotState;
 import saf.game.state.GameState;
 import saf.parser.FileParser;
-import saf.structure.Bot;
 import saf.structure.Bots;
 
 public class GameMain implements GameConstant {
@@ -25,17 +24,6 @@ public class GameMain implements GameConstant {
 		gameEventListener = new GameEventListener(this);
 		gameController = new GameController(gameEventListener);
 		gameState = new GameState();
-		
-		if (DEBUG_STATUS) {
-			NewBotEvent e = new NewBotEvent(this,
-					"src\\saf\\tests\\ChuckNorris.txt", CONST_LEFT);
-			gameEventListener.handleNewBot(e);
-
-			e = new NewBotEvent(this, "src\\saf\\tests\\ChuckNorris.txt",
-					CONST_RIGHT);
-			gameEventListener.handleNewBot(e);
-		}
-
 	}
 
 	public void newBot(NewBotEvent e) {
@@ -58,7 +46,7 @@ public class GameMain implements GameConstant {
 			return;
 		}
 
-		//We're sure it has one, and only one.
+		// We're sure it has one, and only one.
 		BotState botState = new BotState(bots.getBots().get(0), e.getSide());
 
 		gameState.addBot(botState);
@@ -82,19 +70,20 @@ public class GameMain implements GameConstant {
 	public void battleOver(String winnerName) {
 		gameController.displayMessage(WINNER_MESSAGE + winnerName);
 		gameController.resetGame();
-		
-		//remember the current bots
+
+		// remember the current bots, reload them after the reset.
 		BotState[] botStates = {};
 		botStates = gameState.getBotStates().toArray(botStates);
 		gameState.resetGame();
-		
+
 		for (BotState botState : botStates) {
-			BotState newBotState = new BotState(botState.getBot(), botState.getSide());
+			BotState newBotState = new BotState(botState.getBot(),
+					botState.getSide());
 
 			gameState.addBot(newBotState);
 			gameController.addBotState(newBotState);
 		}
-		
+
 		gameController.setButtonsEnabled(true);
 	}
 

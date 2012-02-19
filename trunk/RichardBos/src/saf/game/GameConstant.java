@@ -73,9 +73,6 @@ public interface GameConstant {
 	
 	public static final String WINNER_MESSAGE = "And the winner of the awesome battle is ";
 	
-	public static final boolean DEBUG_STATUS = true;
-	
-	
 	//GUI CONSTANTS
 	public static final String SPRITE_BACKGROUND = "Sprites/background.png";
 	public static final String SPRITE_LEFT = "Sprites/Left/";
