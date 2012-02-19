@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import saf.logic.*;
 
 public class Bot {
 	private static final int MAX_PASSIVICITY = 5;

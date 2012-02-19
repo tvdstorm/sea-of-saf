@@ -1,6 +1,8 @@
-package saf.evaluators;
+package saf.logic;
 
 import java.util.HashMap;
+
+import saf.evaluators.BehaviourCondition;
 
 public class BehaviourConditionIntelligence {
 //	 public static final String[] behaviourConditionNames = new String[] {

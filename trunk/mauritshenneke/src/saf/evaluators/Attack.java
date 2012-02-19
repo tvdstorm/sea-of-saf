@@ -1,5 +1,8 @@
 package saf.evaluators;
 
+import saf.logic.FightActionIntelligence;
+import saf.logic.MoveActionIntelligence;
+
 public class Attack {
 	private MoveActionIntelligence moveActionIntelligence;
 	private FightActionIntelligence fightActionIntelligence;

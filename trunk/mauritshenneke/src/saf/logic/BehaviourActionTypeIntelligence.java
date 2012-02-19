@@ -1,4 +1,6 @@
-package saf.evaluators;
+package saf.logic;
+
+import saf.evaluators.BehaviourActionType;
 
 abstract public class BehaviourActionTypeIntelligence {
 	protected String actionTypeName;
