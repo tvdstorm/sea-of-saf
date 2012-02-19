@@ -3,6 +3,8 @@ package nodes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import saf.Logger;
+
 public class Attack implements Node
 {
 	private ArrayList<String> attacks = new ArrayList<String>();
@@ -49,9 +51,14 @@ public class Attack implements Node
 		}
 		else
 		{
-			System.out.println("Invalid attack \"" + attack + "\".");
+			Logger.staticLog("Invalid attack \"" + attack + "\".");
 			return false;
 		}
+	}
+	
+	public ArrayList<String> getAttacks()
+	{
+		return attacks;
 	}
 	
 }

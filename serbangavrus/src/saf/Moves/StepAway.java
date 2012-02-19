@@ -16,20 +16,27 @@ abstract public class StepAway extends BotMove{
 	
 	public void doMove()
 	{
-		// TODO check if you can remove this first if
-		if(bot.isAwayFromOpponent() || bot.isAtArenaMargin())
+		// Don't execute this move if it's completed
+		if(!isComplete())
+		{
+			stepAway();
+			// We moved away, check if the move is now completed
+			isComplete();
+		}
+	}
+	
+	// Checks if the move is complete, if it is, it set the complete flag to true
+	private boolean isComplete()
+	{
+		if(bot.isOpponentFar() || bot.isAtArenaMargin())
 		{
 			// The bot is next to it's opponent, move completed
 			completed = true;
+			return true;
 		}
 		else
 		{
-			stepAway();
-			if(bot.isAwayFromOpponent() || bot.isAtArenaMargin())
-			{
-				// The bot is next to it's opponent, move completed
-				completed = true;
-			}
+			return false;
 		}
 	}
 	

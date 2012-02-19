@@ -16,22 +16,29 @@ abstract public class StepTowards extends BotMove{
 	
 	public void doMove()
 	{
-		// TODO check if you can remove this first if
-		if(bot.isNextToOpponent())
+		// Don't execute this move if it's completed
+		if(!isComplete())
+		{
+			stepTowards();
+			// We moved away, check if the move is now completed
+			isComplete();
+		}
+		
+	}
+	
+	// Checks if the move is complete, if it is, it set the complete flag to true
+	private boolean isComplete()
+	{
+		if(bot.isOpponentNear())
 		{
 			// The bot is next to it's opponent, move completed
 			completed = true;
+			return true;
 		}
 		else
 		{
-			stepTowards();
-			if(bot.isNextToOpponent())
-			{
-				// The bot is next to it's opponent, move completed
-				completed = true;
-			}
+			return false;
 		}
-		
 	}
 	
 	// Move the Bot's position closer to the opponent

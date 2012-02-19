@@ -60,4 +60,9 @@ public class Behaviour extends Specification
 	{
 		return prop.consistencyCheck();
 	}
+	
+	public boolean hasAlways()
+	{
+		return condition.hasAlways();
+	}
 }

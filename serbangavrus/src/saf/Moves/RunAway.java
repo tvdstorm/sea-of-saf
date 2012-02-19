@@ -10,4 +10,10 @@ public class RunAway extends StepAway{
 		super(b);
 		positionsPerTick = bot.getSpeed();
 	}
+	
+	public String toString()
+	{
+		return "RunAway";
+	}
+	
 }

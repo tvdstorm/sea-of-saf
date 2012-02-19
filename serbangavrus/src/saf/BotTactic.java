@@ -24,7 +24,7 @@ public class BotTactic {
 	// Returns the Move the Fighter should do against the opponent 
 	public BotMove getBotMove()
 	{
-		if(botmove == null)
+		if(botmove == null || botmove.isCompleted())
 		{
 			calculateMoveAndAttack();
 		}
@@ -46,7 +46,7 @@ public class BotTactic {
 	{
 		ArrayList<Behaviour> relevantBehaviours = getRelevantBehaviours();
 		// Select a behaviour at random
-		Behaviour selectedBehaviour = getRandomElement(relevantBehaviours);
+		Behaviour selectedBehaviour = relevantBehaviours.get(getRandomIndex(relevantBehaviours));
 		Move move = selectedBehaviour.getMove();
 		Attack attack = selectedBehaviour.getAttack();
 		
@@ -57,26 +57,87 @@ public class BotTactic {
 	// Transforms a Node.Move to a BotMove
 	public BotMove moveToBotMove(Move move)
 	{
-		// TODO
-		return new RunTowards(bot);
+		ArrayList<String> moves = move.getMoves();
+		String moveStr = moves.get(getRandomIndex(moves));
+		BotMove m;
+		
+		if(moveStr.equals("jump"))
+		{
+			m = new Jump(bot);
+		}
+		else if(moveStr.equals("crouch"))
+		{
+			m = new Crouch(bot);
+		}
+		else if(moveStr.equals("stand"))
+		{
+			m = new Stand(bot);
+		}
+		else if(moveStr.equals("run_towards"))
+		{
+			m = new RunTowards(bot);
+		}
+		else if(moveStr.equals("run_away"))
+		{
+			m = new RunAway(bot);
+		}
+		else if(moveStr.equals("walk_towards"))
+		{
+			m = new WalkTowards(bot);
+		}
+		else if(moveStr.equals("walk_away"))
+		{
+			m = new WalkAway(bot);
+		}
+		else
+		{
+			// Default to Stand
+			m = new Stand(bot);
+		}
+		
+		return m;
 	}
 	
 	// Transforms a Node.Attack to a BotAttack
 	public BotAttack attackToBotAttack(Attack attack)
 	{
-		// TODO
-		return new PunchLow(bot);
+		ArrayList<String> attacks = attack.getAttacks();
+		String attackStr = attacks.get(getRandomIndex(attacks));
+		BotAttack a;
+		
+		if(attackStr.equals("punch_low"))
+		{
+			a = new PunchLow(bot);
+		}
+		else if(attackStr.equals("punch_high"))
+		{
+			a = new PunchHigh(bot);
+		}
+		else if(attackStr.equals("kick_low"))
+		{
+			a = new KickLow(bot);
+		}
+		else if(attackStr.equals("kick_low"))
+		{
+			a = new KickHigh(bot);
+		}
+		else if(attackStr.equals("block_low"))
+		{
+			a = new BlockLow(bot);
+		}
+		else if(attackStr.equals("block_high"))
+		{
+			a = new BlockHigh(bot);
+		}
+		else
+		{
+			// Default to BlockHigh
+			a = new BlockHigh(bot);
+		}
+
+		return a;
 	}
 
-	// Returns a random element from the ArrayList
-	public Behaviour getRandomElement(ArrayList<Behaviour> al)
-	{
-		Random randomGenerator = new Random();
-		int index = randomGenerator.nextInt(al.size());
-        Behaviour beh = al.get(index);
-        return beh;
-	}
-	
 	// Returns the behaviours who's condition is true
 	public ArrayList<Behaviour> getRelevantBehaviours()
 	{
@@ -171,11 +232,17 @@ public class BotTactic {
 		}
 		else
 		{
-			// TODO remove
-			System.out.println("Should never get here: " + cond);
 			return false;
 		}
 		
+	}
+	
+	// Returns a random element from the ArrayList
+	public int getRandomIndex(ArrayList al)
+	{
+		Random randomGenerator = new Random();
+		int index = randomGenerator.nextInt(al.size());
+        return index;
 	}
 
 }

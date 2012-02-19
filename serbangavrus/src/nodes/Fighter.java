@@ -3,6 +3,8 @@ package nodes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import saf.Logger;
+
 public class Fighter
 {
 	ArrayList<Specification> specs = new ArrayList<Specification>();
@@ -50,6 +52,44 @@ public class Fighter
 	}
 	
 	
+	// Returns true is the Fighter specifications are valid
+	public boolean isValid()
+	{
+		boolean ha = hasAlways();
+		boolean consistent = consistencyCheck();
+		
+		if(!ha || !consistent)
+		{
+			Logger.staticLog(name + " is not consistent!");
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	
+	// Checks if this fighter's behaviours have at least one condition with Always
+	public boolean hasAlways()
+	{
+		ArrayList<Behaviour> bh = getBehaviour();
+		
+		for(Behaviour beh : bh)
+		{
+			if(beh.hasAlways())
+			{
+				return true;
+			}
+		}
+		
+		Logger.staticLog(name + " does not have \"always\" condition.");
+		
+		return false;
+		
+	}
+	
+	// Checks the fighter's specifications for consistency 
 	public boolean consistencyCheck()
 	{
 		Iterator<Specification> itr = specs.iterator();
@@ -62,6 +102,12 @@ public class Fighter
 	      }
 	    }
 		return consistent;
+	}
+	
+	
+	public String getName()
+	{
+		return name;
 	}
 	
 }
