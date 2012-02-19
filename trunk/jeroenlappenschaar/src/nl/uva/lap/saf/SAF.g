@@ -51,15 +51,21 @@ behaviourStatement : cond=conditions '[' action1=actionStatement action2=actionS
 	};
 
 simpleCondition returns [Condition simple] : cond=IDENT {$simple=new SimpleCondition($cond.text);};
-bracketConnectorCondition returns [Condition mixed]: s1=simpleCondition{mixed=s1;} | s2=bracketCondition{mixed=s2;}; //tool for capturing rhs who is in brackets
-bracketCondition returns [Condition bracket] : '(' cond=conditions ')' {bracket=cond;};
-andCondition returns[Condition and] : lhs=simpleCondition 'and' rhs=bracketConnectorCondition {and = new And(lhs, rhs);};
-orCondition returns[Condition or] : lhs=simpleCondition 'or' rhs=bracketConnectorCondition {or = new Or(lhs, rhs);};
+connectCondition returns[Condition connect] :	(
+		'(' lhs=conditions ')' op=('and'|'or') rhs=conditions
+		| lhs=simpleCondition op=('and'|'or') '(' rhs=conditions ')'
+		| lhs=simpleCondition op=('and'|'or') rhs=simpleCondition)
+	{	
+		if($op.text.equals("and"))
+			connect = new And(lhs, rhs);
+		else
+			connect = new Or(lhs, rhs);
+	};
+
 conditions returns [Condition cond]
 	: simpleCondition {cond=$simpleCondition.simple;}
-	| bracketCondition conditions? {cond=$bracketCondition.bracket;}
-	| andCondition {cond=$andCondition.and;}
-	| orCondition {cond=$orCondition.or;};
+	| connectCondition {cond=$connectCondition.connect;};
+
 
 
 simpleAction returns [Action simple]: action=IDENT {simple = new SimpleAction($action.text);}; 

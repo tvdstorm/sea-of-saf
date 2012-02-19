@@ -14,7 +14,7 @@ public class Test
 	private static String pietje = "" + 
 			"pietje{\r\n" + 
 			"	kickPower = 7\r\n" + 
-			"(near and far) and (near and far) [crouch]" + 
+			"far and (near and (near or near)) [crouch]" + 
 			"}";
 	
 	@SuppressWarnings("unused")
