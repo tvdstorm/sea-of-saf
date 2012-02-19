@@ -18,6 +18,38 @@ public class Fighter
 		specs.add(s);
 	}
 	
+	public ArrayList<Personality> getPersonality()
+	{
+		ArrayList<Personality> pers = new ArrayList<Personality>();
+		
+		for(Specification s : specs)
+		{
+			if(s instanceof Personality)
+			{
+				pers.add((Personality)s);
+			}
+		}
+		
+		return pers;
+	}
+	
+	
+	public ArrayList<Behaviour> getBehaviour()
+	{
+		ArrayList<Behaviour> beh = new ArrayList<Behaviour>();
+		
+		for(Specification s : specs)
+		{
+			if(s instanceof Behaviour)
+			{
+				beh.add((Behaviour)s);
+			}
+		}
+		
+		return beh;
+	}
+	
+	
 	public boolean consistencyCheck()
 	{
 		Iterator<Specification> itr = specs.iterator();

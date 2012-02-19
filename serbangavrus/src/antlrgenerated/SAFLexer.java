@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Master\\Software Construction\\ANTLR\\SAF.g 2012-01-31 13:04:55
+// $ANTLR 3.4 D:\\Master\\Software Construction\\ANTLR\\SAF.g 2012-02-18 14:34:18
 
 	package antlrgenerated;
 	import nodes.*;
@@ -289,10 +289,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = NUMBER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:141:2: ( ( '0' .. '9' )+ )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:141:4: ( '0' .. '9' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:142:2: ( ( '0' .. '9' )+ )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:142:4: ( '0' .. '9' )+
             {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:141:4: ( '0' .. '9' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:142:4: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -347,10 +347,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:145:2: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:145:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:146:2: ( ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+ )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:146:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:145:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:146:4: ( '\\t' | ' ' | '\\r' | '\\n' | '\\u000C' )+
             int cnt2=0;
             loop2:
             do {
@@ -407,10 +407,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:149:2: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+ )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:149:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:150:2: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+ )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:150:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
             {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:149:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:150:4: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Master\\Software Construction\\ANTLR\\SAF.g 2012-01-31 13:04:55
+// $ANTLR 3.4 D:\\Master\\Software Construction\\ANTLR\\SAF.g 2012-02-18 14:34:18
 
 	package antlrgenerated;
 	import nodes.*;
@@ -72,7 +72,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "fighter"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:31:1: fighter returns [Fighter f] : STRING '{' (s= spec )+ '}' -> ^( STRING ( spec )+ ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:31:1: fighter returns [Fighter f] : STRING '{' (s= spec )+ '}' -> ^( STRING ( spec )+ ) '{' ;
     public final SAFParser.fighter_return fighter() throws RecognitionException {
         SAFParser.fighter_return retval = new SAFParser.fighter_return();
         retval.start = input.LT(1);
@@ -94,7 +94,7 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleTokenStream stream_STRING=new RewriteRuleTokenStream(adaptor,"token STRING");
         RewriteRuleSubtreeStream stream_spec=new RewriteRuleSubtreeStream(adaptor,"rule spec");
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:32:2: ( STRING '{' (s= spec )+ '}' -> ^( STRING ( spec )+ ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:32:2: ( STRING '{' (s= spec )+ '}' -> ^( STRING ( spec )+ ) '{' )
             // D:\\Master\\Software Construction\\ANTLR\\SAF.g:32:4: STRING '{' (s= spec )+ '}'
             {
             STRING1=(Token)match(input,STRING,FOLLOW_STRING_in_fighter95);  
@@ -152,7 +152,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
             // AST REWRITE
-            // elements: spec, STRING
+            // elements: 19, STRING, spec
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -162,7 +162,7 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 37:2: -> ^( STRING ( spec )+ )
+            // 37:2: -> ^( STRING ( spec )+ ) '{'
             {
                 // D:\\Master\\Software Construction\\ANTLR\\SAF.g:37:5: ^( STRING ( spec )+ )
                 {
@@ -182,6 +182,10 @@ public TreeAdaptor getTreeAdaptor() {
 
                 adaptor.addChild(root_0, root_1);
                 }
+
+                adaptor.addChild(root_0, 
+                stream_19.nextNode()
+                );
 
             }
 
@@ -220,7 +224,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "spec"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:40:1: spec returns [Specification s] : (p= personality |b= behaviour ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:41:1: spec returns [Specification s] : (p= personality |b= behaviour ) ;
     public final SAFParser.spec_return spec() throws RecognitionException {
         SAFParser.spec_return retval = new SAFParser.spec_return();
         retval.start = input.LT(1);
@@ -235,13 +239,13 @@ public TreeAdaptor getTreeAdaptor() {
 
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:41:2: ( (p= personality |b= behaviour ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:41:3: (p= personality |b= behaviour )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:42:2: ( (p= personality |b= behaviour ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:42:3: (p= personality |b= behaviour )
             {
             root_0 = (Object)adaptor.nil();
 
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:41:3: (p= personality |b= behaviour )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:42:3: (p= personality |b= behaviour )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -271,9 +275,9 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:41:4: p= personality
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:42:4: p= personality
                     {
-                    pushFollow(FOLLOW_personality_in_spec144);
+                    pushFollow(FOLLOW_personality_in_spec147);
                     p=personality();
 
                     state._fsp--;
@@ -286,9 +290,9 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:43:4: b= behaviour
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:44:4: b= behaviour
                     {
-                    pushFollow(FOLLOW_behaviour_in_spec155);
+                    pushFollow(FOLLOW_behaviour_in_spec158);
                     b=behaviour();
 
                     state._fsp--;
@@ -336,7 +340,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "personality"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:48:1: personality returns [Personality p] : s= strength '=' n= NUMBER -> ^( PERSONALITY strength NUMBER ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:49:1: personality returns [Personality p] : s= strength '=' n= NUMBER -> ^( PERSONALITY strength NUMBER ) ;
     public final SAFParser.personality_return personality() throws RecognitionException {
         SAFParser.personality_return retval = new SAFParser.personality_return();
         retval.start = input.LT(1);
@@ -355,21 +359,21 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleTokenStream stream_NUMBER=new RewriteRuleTokenStream(adaptor,"token NUMBER");
         RewriteRuleSubtreeStream stream_strength=new RewriteRuleSubtreeStream(adaptor,"rule strength");
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:49:2: (s= strength '=' n= NUMBER -> ^( PERSONALITY strength NUMBER ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:49:4: s= strength '=' n= NUMBER
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:50:2: (s= strength '=' n= NUMBER -> ^( PERSONALITY strength NUMBER ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:50:4: s= strength '=' n= NUMBER
             {
-            pushFollow(FOLLOW_strength_in_personality179);
+            pushFollow(FOLLOW_strength_in_personality182);
             s=strength();
 
             state._fsp--;
 
             stream_strength.add(s.getTree());
 
-            char_literal4=(Token)match(input,16,FOLLOW_16_in_personality181);  
+            char_literal4=(Token)match(input,16,FOLLOW_16_in_personality184);  
             stream_16.add(char_literal4);
 
 
-            n=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_personality185);  
+            n=(Token)match(input,NUMBER,FOLLOW_NUMBER_in_personality188);  
             stream_NUMBER.add(n);
 
 
@@ -377,7 +381,7 @@ public TreeAdaptor getTreeAdaptor() {
             					
 
             // AST REWRITE
-            // elements: NUMBER, strength
+            // elements: strength, NUMBER
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -387,9 +391,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 51:2: -> ^( PERSONALITY strength NUMBER )
+            // 52:2: -> ^( PERSONALITY strength NUMBER )
             {
-                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:51:5: ^( PERSONALITY strength NUMBER )
+                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:52:5: ^( PERSONALITY strength NUMBER )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(
@@ -442,7 +446,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "behaviour"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:54:1: behaviour returns [Behaviour b] : c= condition '[' m= move a= attack ']' -> ^( BEHAVIOUR condition move attack ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:55:1: behaviour returns [Behaviour b] : c= condition '[' m= move a= attack ']' -> ^( BEHAVIOUR condition move attack ) ;
     public final SAFParser.behaviour_return behaviour() throws RecognitionException {
         SAFParser.behaviour_return retval = new SAFParser.behaviour_return();
         retval.start = input.LT(1);
@@ -467,46 +471,46 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleSubtreeStream stream_attack=new RewriteRuleSubtreeStream(adaptor,"rule attack");
         RewriteRuleSubtreeStream stream_move=new RewriteRuleSubtreeStream(adaptor,"rule move");
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:55:2: (c= condition '[' m= move a= attack ']' -> ^( BEHAVIOUR condition move attack ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:55:4: c= condition '[' m= move a= attack ']'
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:56:2: (c= condition '[' m= move a= attack ']' -> ^( BEHAVIOUR condition move attack ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:56:4: c= condition '[' m= move a= attack ']'
             {
-            pushFollow(FOLLOW_condition_in_behaviour217);
+            pushFollow(FOLLOW_condition_in_behaviour220);
             c=condition();
 
             state._fsp--;
 
             stream_condition.add(c.getTree());
 
-            char_literal5=(Token)match(input,17,FOLLOW_17_in_behaviour219);  
+            char_literal5=(Token)match(input,17,FOLLOW_17_in_behaviour222);  
             stream_17.add(char_literal5);
 
 
-            pushFollow(FOLLOW_move_in_behaviour223);
+            pushFollow(FOLLOW_move_in_behaviour226);
             m=move();
 
             state._fsp--;
 
             stream_move.add(m.getTree());
 
-            pushFollow(FOLLOW_attack_in_behaviour227);
+            pushFollow(FOLLOW_attack_in_behaviour230);
             a=attack();
 
             state._fsp--;
 
             stream_attack.add(a.getTree());
 
-            char_literal6=(Token)match(input,18,FOLLOW_18_in_behaviour229);  
+            char_literal6=(Token)match(input,18,FOLLOW_18_in_behaviour232);  
             stream_18.add(char_literal6);
 
 
             	retval.b = new Behaviour();
-            							retval.b.addCondition((c!=null?c.cond:null));
-            							retval.b.addMove((m!=null?m.move:null));
-            							retval.b.addAttack((a!=null?a.attack:null));
+            							retval.b.setCondition((c!=null?c.cond:null));
+            							retval.b.setMove((m!=null?m.move:null));
+            							retval.b.setAttack((a!=null?a.attack:null));
             						
 
             // AST REWRITE
-            // elements: move, condition, attack
+            // elements: condition, attack, move
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -516,9 +520,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 60:2: -> ^( BEHAVIOUR condition move attack )
+            // 61:2: -> ^( BEHAVIOUR condition move attack )
             {
-                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:60:5: ^( BEHAVIOUR condition move attack )
+                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:61:5: ^( BEHAVIOUR condition move attack )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(
@@ -571,7 +575,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "strength"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:63:1: strength returns [String str] : STRING ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:64:1: strength returns [String str] : STRING ;
     public final SAFParser.strength_return strength() throws RecognitionException {
         SAFParser.strength_return retval = new SAFParser.strength_return();
         retval.start = input.LT(1);
@@ -584,13 +588,13 @@ public TreeAdaptor getTreeAdaptor() {
         Object STRING7_tree=null;
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:64:2: ( STRING )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:64:4: STRING
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:65:2: ( STRING )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:65:4: STRING
             {
             root_0 = (Object)adaptor.nil();
 
 
-            STRING7=(Token)match(input,STRING,FOLLOW_STRING_in_strength259); 
+            STRING7=(Token)match(input,STRING,FOLLOW_STRING_in_strength262); 
             STRING7_tree = 
             (Object)adaptor.create(STRING7)
             ;
@@ -632,7 +636,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "condition"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:68:1: condition returns [Condition cond] : (c_o= condition_or |c_a= condition_and | STRING ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:69:1: condition returns [Condition cond] : (c_o= condition_or |c_a= condition_and | STRING ) ;
     public final SAFParser.condition_return condition() throws RecognitionException {
         SAFParser.condition_return retval = new SAFParser.condition_return();
         retval.start = input.LT(1);
@@ -649,13 +653,13 @@ public TreeAdaptor getTreeAdaptor() {
         Object STRING8_tree=null;
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:69:2: ( (c_o= condition_or |c_a= condition_and | STRING ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:69:4: (c_o= condition_or |c_a= condition_and | STRING )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:70:2: ( (c_o= condition_or |c_a= condition_and | STRING ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:70:4: (c_o= condition_or |c_a= condition_and | STRING )
             {
             root_0 = (Object)adaptor.nil();
 
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:69:4: (c_o= condition_or |c_a= condition_and | STRING )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:70:4: (c_o= condition_or |c_a= condition_and | STRING )
             int alt3=3;
             int LA3_0 = input.LA(1);
 
@@ -694,9 +698,9 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:69:5: c_o= condition_or
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:70:5: c_o= condition_or
                     {
-                    pushFollow(FOLLOW_condition_or_in_condition282);
+                    pushFollow(FOLLOW_condition_or_in_condition285);
                     c_o=condition_or();
 
                     state._fsp--;
@@ -709,9 +713,9 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:71:4: c_a= condition_and
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:72:4: c_a= condition_and
                     {
-                    pushFollow(FOLLOW_condition_and_in_condition293);
+                    pushFollow(FOLLOW_condition_and_in_condition296);
                     c_a=condition_and();
 
                     state._fsp--;
@@ -724,9 +728,9 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 3 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:73:4: STRING
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:74:4: STRING
                     {
-                    STRING8=(Token)match(input,STRING,FOLLOW_STRING_in_condition301); 
+                    STRING8=(Token)match(input,STRING,FOLLOW_STRING_in_condition304); 
                     STRING8_tree = 
                     (Object)adaptor.create(STRING8)
                     ;
@@ -775,7 +779,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "condition_or"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:79:1: condition_or returns [Condition cond] :s1= STRING ( OR s2= STRING )+ -> ^( OR ( STRING )+ ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:80:1: condition_or returns [Condition cond] :s1= STRING ( OR s2= STRING )+ -> ^( OR ( STRING )+ ) ;
     public final SAFParser.condition_or_return condition_or() throws RecognitionException {
         SAFParser.condition_or_return retval = new SAFParser.condition_or_return();
         retval.start = input.LT(1);
@@ -794,20 +798,20 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleTokenStream stream_OR=new RewriteRuleTokenStream(adaptor,"token OR");
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:80:2: (s1= STRING ( OR s2= STRING )+ -> ^( OR ( STRING )+ ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:80:7: s1= STRING ( OR s2= STRING )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:81:2: (s1= STRING ( OR s2= STRING )+ -> ^( OR ( STRING )+ ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:81:7: s1= STRING ( OR s2= STRING )+
             {
             	retval.cond = new ConditionOr();
             					
 
-            s1=(Token)match(input,STRING,FOLLOW_STRING_in_condition_or331);  
+            s1=(Token)match(input,STRING,FOLLOW_STRING_in_condition_or334);  
             stream_STRING.add(s1);
 
 
             	retval.cond.addCondition((s1!=null?s1.getText():null));
             					
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:84:2: ( OR s2= STRING )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:85:2: ( OR s2= STRING )+
             int cnt4=0;
             loop4:
             do {
@@ -821,13 +825,13 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt4) {
             	case 1 :
-            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:84:3: OR s2= STRING
+            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:85:3: OR s2= STRING
             	    {
-            	    OR9=(Token)match(input,OR,FOLLOW_OR_in_condition_or339);  
+            	    OR9=(Token)match(input,OR,FOLLOW_OR_in_condition_or342);  
             	    stream_OR.add(OR9);
 
 
-            	    s2=(Token)match(input,STRING,FOLLOW_STRING_in_condition_or343);  
+            	    s2=(Token)match(input,STRING,FOLLOW_STRING_in_condition_or346);  
             	    stream_STRING.add(s2);
 
 
@@ -858,9 +862,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 87:2: -> ^( OR ( STRING )+ )
+            // 88:2: -> ^( OR ( STRING )+ )
             {
-                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:87:5: ^( OR ( STRING )+ )
+                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:88:5: ^( OR ( STRING )+ )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(
@@ -918,7 +922,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "condition_and"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:90:1: condition_and returns [Condition cond] :s1= STRING ( AND s2= STRING )+ -> ^( AND ( STRING )+ ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:91:1: condition_and returns [Condition cond] :s1= STRING ( AND s2= STRING )+ -> ^( AND ( STRING )+ ) ;
     public final SAFParser.condition_and_return condition_and() throws RecognitionException {
         SAFParser.condition_and_return retval = new SAFParser.condition_and_return();
         retval.start = input.LT(1);
@@ -937,20 +941,20 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleTokenStream stream_STRING=new RewriteRuleTokenStream(adaptor,"token STRING");
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:91:2: (s1= STRING ( AND s2= STRING )+ -> ^( AND ( STRING )+ ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:91:7: s1= STRING ( AND s2= STRING )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:92:2: (s1= STRING ( AND s2= STRING )+ -> ^( AND ( STRING )+ ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:92:7: s1= STRING ( AND s2= STRING )+
             {
             	retval.cond = new ConditionAnd();
             					
 
-            s1=(Token)match(input,STRING,FOLLOW_STRING_in_condition_and385);  
+            s1=(Token)match(input,STRING,FOLLOW_STRING_in_condition_and388);  
             stream_STRING.add(s1);
 
 
             	retval.cond.addCondition((s1!=null?s1.getText():null));
             					
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:95:2: ( AND s2= STRING )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:96:2: ( AND s2= STRING )+
             int cnt5=0;
             loop5:
             do {
@@ -964,13 +968,13 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt5) {
             	case 1 :
-            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:95:3: AND s2= STRING
+            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:96:3: AND s2= STRING
             	    {
-            	    AND10=(Token)match(input,AND,FOLLOW_AND_in_condition_and393);  
+            	    AND10=(Token)match(input,AND,FOLLOW_AND_in_condition_and396);  
             	    stream_AND.add(AND10);
 
 
-            	    s2=(Token)match(input,STRING,FOLLOW_STRING_in_condition_and397);  
+            	    s2=(Token)match(input,STRING,FOLLOW_STRING_in_condition_and400);  
             	    stream_STRING.add(s2);
 
 
@@ -1001,9 +1005,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 98:2: -> ^( AND ( STRING )+ )
+            // 99:2: -> ^( AND ( STRING )+ )
             {
-                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:98:5: ^( AND ( STRING )+ )
+                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:99:5: ^( AND ( STRING )+ )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(
@@ -1061,7 +1065,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "move"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:101:1: move returns [Move move] : (c_m= choose_move | STRING ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:102:1: move returns [Move move] : (c_m= choose_move | STRING ) ;
     public final SAFParser.move_return move() throws RecognitionException {
         SAFParser.move_return retval = new SAFParser.move_return();
         retval.start = input.LT(1);
@@ -1076,13 +1080,13 @@ public TreeAdaptor getTreeAdaptor() {
         Object STRING11_tree=null;
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:102:2: ( (c_m= choose_move | STRING ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:102:4: (c_m= choose_move | STRING )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:103:2: ( (c_m= choose_move | STRING ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:103:4: (c_m= choose_move | STRING )
             {
             root_0 = (Object)adaptor.nil();
 
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:102:4: (c_m= choose_move | STRING )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:103:4: (c_m= choose_move | STRING )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1101,9 +1105,9 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt6) {
                 case 1 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:102:5: c_m= choose_move
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:103:5: c_m= choose_move
                     {
-                    pushFollow(FOLLOW_choose_move_in_move433);
+                    pushFollow(FOLLOW_choose_move_in_move436);
                     c_m=choose_move();
 
                     state._fsp--;
@@ -1116,9 +1120,9 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:104:4: STRING
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:105:4: STRING
                     {
-                    STRING11=(Token)match(input,STRING,FOLLOW_STRING_in_move441); 
+                    STRING11=(Token)match(input,STRING,FOLLOW_STRING_in_move444); 
                     STRING11_tree = 
                     (Object)adaptor.create(STRING11)
                     ;
@@ -1167,7 +1171,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "choose_move"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:110:1: choose_move returns [Move move] : CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:111:1: choose_move returns [Move move] : CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) ;
     public final SAFParser.choose_move_return choose_move() throws RecognitionException {
         SAFParser.choose_move_return retval = new SAFParser.choose_move_return();
         retval.start = input.LT(1);
@@ -1190,21 +1194,21 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleTokenStream stream_STRING=new RewriteRuleTokenStream(adaptor,"token STRING");
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:111:2: ( CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:111:7: CHOOSE '(' ( STRING )+ ')'
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:112:2: ( CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:112:7: CHOOSE '(' ( STRING )+ ')'
             {
             	retval.move = new Move();
             					
 
-            CHOOSE12=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_choose_move469);  
+            CHOOSE12=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_choose_move472);  
             stream_CHOOSE.add(CHOOSE12);
 
 
-            char_literal13=(Token)match(input,14,FOLLOW_14_in_choose_move471);  
+            char_literal13=(Token)match(input,14,FOLLOW_14_in_choose_move474);  
             stream_14.add(char_literal13);
 
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:113:13: ( STRING )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:114:13: ( STRING )+
             int cnt7=0;
             loop7:
             do {
@@ -1218,9 +1222,9 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt7) {
             	case 1 :
-            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:113:14: STRING
+            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:114:14: STRING
             	    {
-            	    STRING14=(Token)match(input,STRING,FOLLOW_STRING_in_choose_move474);  
+            	    STRING14=(Token)match(input,STRING,FOLLOW_STRING_in_choose_move477);  
             	    stream_STRING.add(STRING14);
 
 
@@ -1240,7 +1244,7 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            char_literal15=(Token)match(input,15,FOLLOW_15_in_choose_move483);  
+            char_literal15=(Token)match(input,15,FOLLOW_15_in_choose_move486);  
             stream_15.add(char_literal15);
 
 
@@ -1255,9 +1259,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 116:2: -> ^( CHOOSE ( STRING )+ )
+            // 117:2: -> ^( CHOOSE ( STRING )+ )
             {
-                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:116:5: ^( CHOOSE ( STRING )+ )
+                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:117:5: ^( CHOOSE ( STRING )+ )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(
@@ -1315,7 +1319,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "attack"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:119:1: attack returns [Attack attack] : (c_a= choose_attack | STRING ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:120:1: attack returns [Attack attack] : (c_a= choose_attack | STRING ) ;
     public final SAFParser.attack_return attack() throws RecognitionException {
         SAFParser.attack_return retval = new SAFParser.attack_return();
         retval.start = input.LT(1);
@@ -1330,13 +1334,13 @@ public TreeAdaptor getTreeAdaptor() {
         Object STRING16_tree=null;
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:120:2: ( (c_a= choose_attack | STRING ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:120:4: (c_a= choose_attack | STRING )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:121:2: ( (c_a= choose_attack | STRING ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:121:4: (c_a= choose_attack | STRING )
             {
             root_0 = (Object)adaptor.nil();
 
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:120:4: (c_a= choose_attack | STRING )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:121:4: (c_a= choose_attack | STRING )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1355,9 +1359,9 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt8) {
                 case 1 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:120:6: c_a= choose_attack
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:121:6: c_a= choose_attack
                     {
-                    pushFollow(FOLLOW_choose_attack_in_attack512);
+                    pushFollow(FOLLOW_choose_attack_in_attack515);
                     c_a=choose_attack();
 
                     state._fsp--;
@@ -1370,9 +1374,9 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:122:4: STRING
+                    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:123:4: STRING
                     {
-                    STRING16=(Token)match(input,STRING,FOLLOW_STRING_in_attack520); 
+                    STRING16=(Token)match(input,STRING,FOLLOW_STRING_in_attack523); 
                     STRING16_tree = 
                     (Object)adaptor.create(STRING16)
                     ;
@@ -1421,7 +1425,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "choose_attack"
-    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:128:1: choose_attack returns [Attack attack] : CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) ;
+    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:129:1: choose_attack returns [Attack attack] : CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) ;
     public final SAFParser.choose_attack_return choose_attack() throws RecognitionException {
         SAFParser.choose_attack_return retval = new SAFParser.choose_attack_return();
         retval.start = input.LT(1);
@@ -1444,21 +1448,21 @@ public TreeAdaptor getTreeAdaptor() {
         RewriteRuleTokenStream stream_STRING=new RewriteRuleTokenStream(adaptor,"token STRING");
 
         try {
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:129:2: ( CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) )
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:129:7: CHOOSE '(' ( STRING )+ ')'
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:130:2: ( CHOOSE '(' ( STRING )+ ')' -> ^( CHOOSE ( STRING )+ ) )
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:130:7: CHOOSE '(' ( STRING )+ ')'
             {
             	retval.attack = new Attack();
             					
 
-            CHOOSE17=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_choose_attack548);  
+            CHOOSE17=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_choose_attack551);  
             stream_CHOOSE.add(CHOOSE17);
 
 
-            char_literal18=(Token)match(input,14,FOLLOW_14_in_choose_attack550);  
+            char_literal18=(Token)match(input,14,FOLLOW_14_in_choose_attack553);  
             stream_14.add(char_literal18);
 
 
-            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:131:13: ( STRING )+
+            // D:\\Master\\Software Construction\\ANTLR\\SAF.g:132:13: ( STRING )+
             int cnt9=0;
             loop9:
             do {
@@ -1472,9 +1476,9 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt9) {
             	case 1 :
-            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:131:14: STRING
+            	    // D:\\Master\\Software Construction\\ANTLR\\SAF.g:132:14: STRING
             	    {
-            	    STRING19=(Token)match(input,STRING,FOLLOW_STRING_in_choose_attack553);  
+            	    STRING19=(Token)match(input,STRING,FOLLOW_STRING_in_choose_attack556);  
             	    stream_STRING.add(STRING19);
 
 
@@ -1494,12 +1498,12 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            char_literal20=(Token)match(input,15,FOLLOW_15_in_choose_attack562);  
+            char_literal20=(Token)match(input,15,FOLLOW_15_in_choose_attack565);  
             stream_15.add(char_literal20);
 
 
             // AST REWRITE
-            // elements: STRING, CHOOSE
+            // elements: CHOOSE, STRING
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -1509,9 +1513,9 @@ public TreeAdaptor getTreeAdaptor() {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 133:9: -> ^( CHOOSE ( STRING )+ )
+            // 134:9: -> ^( CHOOSE ( STRING )+ )
             {
-                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:133:12: ^( CHOOSE ( STRING )+ )
+                // D:\\Master\\Software Construction\\ANTLR\\SAF.g:134:12: ^( CHOOSE ( STRING )+ )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot(
@@ -1569,37 +1573,37 @@ public TreeAdaptor getTreeAdaptor() {
     public static final BitSet FOLLOW_19_in_fighter102 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_spec_in_fighter107 = new BitSet(new long[]{0x0000000000101000L});
     public static final BitSet FOLLOW_20_in_fighter117 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_personality_in_spec144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_behaviour_in_spec155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_strength_in_personality179 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_personality181 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_NUMBER_in_personality185 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_behaviour217 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_17_in_behaviour219 = new BitSet(new long[]{0x0000000000001040L});
-    public static final BitSet FOLLOW_move_in_behaviour223 = new BitSet(new long[]{0x0000000000001040L});
-    public static final BitSet FOLLOW_attack_in_behaviour227 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_18_in_behaviour229 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_strength259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_or_in_condition282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_and_in_condition293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_condition301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_condition_or331 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_OR_in_condition_or339 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_STRING_in_condition_or343 = new BitSet(new long[]{0x0000000000000402L});
-    public static final BitSet FOLLOW_STRING_in_condition_and385 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_AND_in_condition_and393 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_STRING_in_condition_and397 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_choose_move_in_move433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_move441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_choose_move469 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_choose_move471 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_STRING_in_choose_move474 = new BitSet(new long[]{0x0000000000009000L});
-    public static final BitSet FOLLOW_15_in_choose_move483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_choose_attack_in_attack512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_STRING_in_attack520 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_choose_attack548 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_choose_attack550 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_STRING_in_choose_attack553 = new BitSet(new long[]{0x0000000000009000L});
-    public static final BitSet FOLLOW_15_in_choose_attack562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_personality_in_spec147 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_behaviour_in_spec158 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_strength_in_personality182 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_personality184 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_NUMBER_in_personality188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_in_behaviour220 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_behaviour222 = new BitSet(new long[]{0x0000000000001040L});
+    public static final BitSet FOLLOW_move_in_behaviour226 = new BitSet(new long[]{0x0000000000001040L});
+    public static final BitSet FOLLOW_attack_in_behaviour230 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_behaviour232 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_strength262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_or_in_condition285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_and_in_condition296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_condition304 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_condition_or334 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_OR_in_condition_or342 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_STRING_in_condition_or346 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_STRING_in_condition_and388 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_AND_in_condition_and396 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_STRING_in_condition_and400 = new BitSet(new long[]{0x0000000000000012L});
+    public static final BitSet FOLLOW_choose_move_in_move436 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_move444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_choose_move472 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_choose_move474 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_STRING_in_choose_move477 = new BitSet(new long[]{0x0000000000009000L});
+    public static final BitSet FOLLOW_15_in_choose_move486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_choose_attack_in_attack515 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_STRING_in_attack523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_choose_attack551 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_choose_attack553 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_STRING_in_choose_attack556 = new BitSet(new long[]{0x0000000000009000L});
+    public static final BitSet FOLLOW_15_in_choose_attack565 = new BitSet(new long[]{0x0000000000000002L});
 
 }

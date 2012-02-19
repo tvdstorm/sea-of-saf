@@ -15,18 +15,23 @@ public class Personality extends Specification
 			add("punchReach");
 		}
 	};
-	
+
 	public Personality(String strength, int val)
 	{
 		this.strength = strength;
 		this.val = val;				
 	}
-	
+
 	public String getStrength()
 	{
 		return this.strength;
 	}
 	
+	public int getVal()
+	{
+		return this.val;
+	}
+
 	@Override
 	public boolean consistencyCheck()
 	{
@@ -39,7 +44,7 @@ public class Personality extends Specification
 			return true;
 		}
 	}
-	
+
 	private boolean isValidStrength()
 	{
 		if(!this.validstrengths.contains(strength))
@@ -49,20 +54,24 @@ public class Personality extends Specification
 		}
 		else
 		{
-			return true;
-		}
+			return true;		}
 	}
-	
+
 	private boolean isValidVal()
 	{
-		if(val < 0 || val > 10)
+		if(val < 0 || val > 9)
 		{
-			System.out.println("Invalid strength value for \"" + strength + "\", must be a number between 1-10.");
+			System.out.println("Invalid strength value for \"" + strength + "\", must be a number between 1-9.");
 			return false;
 		}
 		else
 		{
 			return true;
 		}
+	}
+	
+	public String toString()
+	{
+		return strength + " = " + val;
 	}
 }

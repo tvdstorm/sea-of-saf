@@ -20,11 +20,26 @@ public class Condition implements Node
 		}
 	};
 	
-	private ArrayList<String> conditions = new ArrayList<String>();
+	protected ArrayList<String> conditions = new ArrayList<String>();
 			
 	public Condition()
 	{
 		
+	}
+	
+	public ArrayList<String> getConditions()
+	{
+		return conditions;
+	}
+	
+	public boolean isAndCondition()
+	{
+		return false;
+	}
+	
+	public boolean isOrCondition()
+	{
+		return false;
 	}
 	
 	public void addCondition(String cond)
@@ -56,6 +71,11 @@ public class Condition implements Node
 			System.out.println("Invalid condition \"" + condition + "\".");
 			return false;
 		}
+	}
+	
+	public String toString()
+	{
+		return conditions.get(0);
 	}
 	
 }
