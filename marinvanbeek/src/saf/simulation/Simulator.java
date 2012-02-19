@@ -1,12 +1,14 @@
 package saf.simulation;
 
 import saf.data.*;
+import saf.animation.ArenaAnimator;
 
 import java.util.Random;
 
 public class Simulator {
     private Fighter leftFighter;
     private Fighter rightFighter;
+    private ArenaAnimator animator;
 
     public Simulator()
     {
@@ -14,11 +16,14 @@ public class Simulator {
 
         saf.data.Fighter leftData = 
                 saf.data.Fighter.getRandom(random.nextInt());
-        this.leftFighter = new Fighter(leftData, 10);
+        this.leftFighter = new Fighter(leftData, new saf.data.Position(0,0));
 
         saf.data.Fighter rightData =    
                 saf.data.Fighter.getRandom(random.nextInt());
-        this.rightFighter = new Fighter(rightData, 35);
+        this.rightFighter = new Fighter(rightData, 
+                                        new saf.data.Position(100,0));
+
+        this.animator = new ArenaAnimator("bison", "bison");
     }
 
     public Simulator(String leftFileName, String rightFileName)
@@ -32,16 +37,26 @@ public class Simulator {
     {
         while (leftFighter.isAlive() && rightFighter.isAlive())
         {
-            leftFighter.tick();
-            if (leftFighter.mayAct())
-            {
-                State leftState = State.getState(leftFighter, rightFighter);
-                State rightState = State.getState(rightFighter, leftFighter);
-                saf.data.Action action = leftFighter.act(leftState);
-                leftFighter.move(action.getMove());
-                rightFighter.defend(action.getAttack(), rightState);
-            }
+            handleFighter(leftFighter, rightFighter);
+            handleFighter(rightFighter, leftFighter);
+
+            animator.bufferTimeStep(leftFighter, rightFighter);
         }
+
+        animator.runAnimation();
+    }
+
+    private void handleFighter(Fighter fighter, Fighter opponent)
+    {
+        if (fighter.mayAct())
+        {
+            State leftState = State.getState(fighter, opponent);
+            State rightState = State.getState(opponent, fighter);
+            saf.data.Action action = fighter.act(leftState);
+            fighter.move(action.getMove());
+            opponent.defend(action.getAttack(), rightState);
+        }
+        fighter.tick();
     }
 }
 

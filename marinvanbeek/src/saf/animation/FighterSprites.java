@@ -44,7 +44,7 @@ public class FighterSprites
 
     public FighterSprites(String fighterName, boolean flipped)
     {
-        this(flipped ? "flipped/" + fighterName : fighterName);
+        this(flipped ? fighterName + "/flipped" : fighterName);
     }
 
     private static String stripExtension(String fileName)

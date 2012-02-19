@@ -1,5 +1,3 @@
-package tests;
-
 import saf.data.*;
 import saf.syntax.*;
 

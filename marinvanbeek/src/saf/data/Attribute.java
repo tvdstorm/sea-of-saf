@@ -9,6 +9,7 @@ import java.util.Random;
 public class Attribute
 {
     public static final Integer MAX_VALUE = 10;
+    public static final Integer DEFAULT_VALUE = 5;
     public static final List<String> LEGAL = Collections.unmodifiableList(
             Arrays.asList("punch_power", 
                           "punch_reach", 

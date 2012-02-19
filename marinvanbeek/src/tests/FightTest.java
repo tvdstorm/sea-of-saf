@@ -51,7 +51,7 @@ public class FightTest
     {
         Random seedGenerator = new Random();
 
-        System.out.println(
+        System.out.println("Random fighter: " +
                 saf.data.Fighter.getRandom(seedGenerator.nextInt()));
     }
 

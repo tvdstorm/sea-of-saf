@@ -7,6 +7,10 @@ import java.util.Random;
 
 public class Move
 {
+    public static final int WALK_DISTANCE = 10;
+    public static final int RUN_DISTANCE = 20;
+    public static final int JUMP_HEIGHT = 10;
+    public static final int CROUCH_HEIGHT= 5;
     public static final List<String> LEGAL = Collections.unmodifiableList(
             Arrays.asList("jump",
                           "crouch",
