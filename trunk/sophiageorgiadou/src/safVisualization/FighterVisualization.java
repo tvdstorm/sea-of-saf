@@ -10,9 +10,9 @@ import java.util.Random;
  */
 public class FighterVisualization {
 
-	public static final int LOW = 0;
+	public static final int LOW = 0;//For block
 	public static final int HIGH = 1;
-	public static final int JUMP = 2;
+	public static final int JUMP = 2;//For move
 	public static final int CROUCH = 3;
 		
 

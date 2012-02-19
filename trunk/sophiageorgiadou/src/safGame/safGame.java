@@ -200,9 +200,9 @@ public class safGame {
 		
 		System.out.println(fighters);
 
+		//Set location for player1 and 2
 		fighters.get(0).setLocation(0);
 		fighters.get(1).setLocation(90);
-
 
 		Fighter f1=fighters.get(0);
 		Fighter f2=fighters.get(1);
@@ -211,8 +211,6 @@ public class safGame {
 		initScreen();
 		FighterVisualization p1=new FighterVisualization(f1.getHeight(),1,f1.getName(),f1.getLocation());		
 		FighterVisualization p2=new FighterVisualization(f2.getHeight(),2,f2.getName(),f2.getLocation());
-		p1.drawFighter();
-		p2.drawFighter();
 		refreshScreen();
 		StdDraw.setPenColor(StdDraw.MAGENTA);
 		StdDraw.text(1, 9.0, f1.getName());
