@@ -176,4 +176,55 @@ public class BotTest {
 		assertEquals(95, jackieChan.getHitpoints());
 		assertEquals(100, bruceLee.getHitpoints());
 	}
+	
+	@Test
+	public void testPunchingBlock() {
+		Bot bruceLee = new Bot(null, 0);
+		Bot jackieChan = new Bot(null, 4);
+		bruceLee.setOpponentBot(jackieChan);
+		
+		assertEquals(100, bruceLee.getHitpoints());
+		assertTrue(jackieChan.isPunchInReach());
+		bruceLee.performAction("block_high");
+		jackieChan.performAction("punch_high");
+		assertEquals(100, bruceLee.getHitpoints());
+
+		for (int counter=0; counter<3; counter++)
+			jackieChan.performAction("");
+		
+		jackieChan.performAction("punch_low");
+		assertEquals(95, bruceLee.getHitpoints());
+	}
+	
+	@Test
+	public void testKickBlock() {
+		Bot bruceLee = new Bot(null, 0);
+		Bot jackieChan = new Bot(null, 4);
+		bruceLee.setOpponentBot(jackieChan);
+		
+		assertEquals(100, bruceLee.getHitpoints());
+		assertTrue(jackieChan.isKickInReach());
+		bruceLee.performAction("block_low");
+		jackieChan.performAction("kick_low");
+		assertEquals(100, bruceLee.getHitpoints());
+
+		for (int counter=0; counter<3; counter++)
+			jackieChan.performAction("");
+		
+		jackieChan.performAction("kick_high");
+		assertEquals(95, bruceLee.getHitpoints());
+	}
+	
+	@Test
+	public void testIsFarNear() {
+		Bot bruceLee = new Bot(null, 0);
+		Bot jackieChan = new Bot(null, 4);
+		bruceLee.setOpponentBot(jackieChan);
+		
+		assertTrue(bruceLee.isFar());
+		assertFalse(bruceLee.isNear());
+		bruceLee.performAction("walk_towards");
+		assertFalse(bruceLee.isFar());
+		assertTrue(bruceLee.isNear());
+	}
 }

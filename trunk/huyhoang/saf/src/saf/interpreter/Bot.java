@@ -165,25 +165,21 @@ public class Bot extends Observable implements Observer
 	@MethodAnnotation(safName = "run_towards", keywordType = "move")
 	public void runTowards() {
 		this.setPosition(this.getPosition() + getMoveDirection());
-		//this.notifySubscribers("run_towards");
 	}
 	
 	@MethodAnnotation(safName = "run_away", keywordType = "move")
 	public void runAway() {
 		this.setPosition(this.getPosition() - getMoveDirection());
-		//this.notifySubscribers("run_away");
 	}
 	
 	@MethodAnnotation(safName = "walk_towards", keywordType = "move")
 	public void walkTowards() {
 		this.setPosition(this.getPosition() + getMoveDirection());
-		//this.notifySubscribers("walk_towards");
 	}
 	
 	@MethodAnnotation(safName = "walk_away", keywordType = "move")
 	public void walkAway() {
 		this.setPosition(this.getPosition() - getMoveDirection());
-		//this.notifySubscribers("walk_away");
 	}
 	
 	@MethodAnnotation(safName = "punch_low", keywordType = "attack")
