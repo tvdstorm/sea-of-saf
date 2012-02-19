@@ -2,6 +2,11 @@ package abstractSyntaxTree;
 
 import java.util.Random;
 
+/**
+ * This class represent the fighter with his attributes
+ * @author Sofia
+ *
+ */
 public class Fighter {
 	
 	private String name;
@@ -25,6 +30,9 @@ public class Fighter {
 	private String powerCondition;
 	private String locationCondition;
 	
+	/**
+	 * Constructor
+	 */
 	public Fighter(){
 		this.name="";
 		this.personality=new Personality();
@@ -38,10 +46,18 @@ public class Fighter {
 		setPowerCondition("even");
 	}
 	
+	/**
+	 * Add value to personality
+	 * @param personality
+	 */
 	public void addPersonality(Personality personality){
 		this.setPersonality(personality);
 	}
 	
+	/**
+	 * Add value to behavior
+	 * @param behavior
+	 */
 	public void addBehavior(Behavior behavior){
 		this.setBehavior(behavior);
 	}
@@ -144,6 +160,9 @@ public class Fighter {
 		this.health = health;
 	}
 		
+	/**
+	 * Calculate the dynamic attributes
+	 */
 	public void calibrateAttributes(){
 		this.personality.calibrateAttributes();
 		this.weight=(this.personality.getPunchPower()+this.personality.getKickPower())/2;
@@ -170,7 +189,8 @@ public class Fighter {
 	}
 	
 	/**
-	 * @param currentAttack the currentAttack to set
+	 * Calculate the current move and attack
+	 * @return
 	 */
 	public boolean calculateCurrentAttackandMove() {
 		boolean exit=false;

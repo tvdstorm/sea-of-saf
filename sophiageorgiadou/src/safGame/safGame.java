@@ -1,25 +1,27 @@
 package safGame;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-
-import parser.ParseException;
-import parser.Saf;
 import safVisualization.FighterVisualization;
 import safVisualization.StdDraw;
 
 import abstractSyntaxTree.Fighter;
 
+/**
+ * This class simulates the saf game
+ * @author Sofia
+ *
+ */
 public class safGame {
 
 	// arena 0-90
 	int distance = 0;
 	String locationCondition="far";
 	
+	/**
+	 * Initialize the canvas screen
+	 */
 	public void initScreen(){
 		StdDraw.setCanvasSize(800, 600);
 		StdDraw.setXscale(0, 10.0);
@@ -27,11 +29,19 @@ public class safGame {
 		refreshScreen();
 	}
 	
+	/**
+	 * Refreshs the graphics screen
+	 */
 	public void refreshScreen(){
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.filledSquare(0, 0, 20.0);
 	}
 	
+	/**
+	 * Calculates the health of the fighters, considering the attacks and their values
+	 * @param f1
+	 * @param f2
+	 */
 	public void calculateHealth(Fighter f1, Fighter f2) {
 
 		distance = calculateDistance(f1,f2);
@@ -65,6 +75,11 @@ public class safGame {
 		}
 	}
 
+	/**
+	 * Updates the locations of the fighters
+	 * @param f1
+	 * @param f2
+	 */
 	public void updateLocation(Fighter f1, Fighter f2) {
 		
 		int temp=0;
@@ -113,11 +128,22 @@ public class safGame {
 		updateLocationCondition(f1,f2);
 	}
 
+	/**
+	 * Calculates the distance between the two fighters
+	 * @param f1
+	 * @param f2
+	 * @return
+	 */
 	public int calculateDistance(Fighter f1, Fighter f2) {
 		int distance = Math.abs(f1.getLocation() - f2.getLocation());
 		return distance;
 	}
 	
+	/**
+	 * Calculates the location conditions considering the distance
+	 * @param f1
+	 * @param f2
+	 */
 	public void updateLocationCondition(Fighter f1, Fighter f2){
 		int distance=calculateDistance(f1,f2);
 		if(distance>10){
@@ -130,6 +156,11 @@ public class safGame {
 		return;
 	}
 	
+	/**
+	 * Updates the power condition in each fighter
+	 * @param f1
+	 * @param f2
+	 */
 	public void updatePowerCondition(Fighter f1, Fighter f2){
 		if(f1.getHealth()==f2.getHealth()){
 			f1.setPowerCondition("even");
@@ -158,7 +189,8 @@ public class safGame {
 	}
 
 	/**
-	 * @param args
+	 * Starts the simulation, given the ArrayList<Fighter> fighters
+	 * @param fighters
 	 */
 	public void startSimulation(ArrayList<Fighter> fighters) {
 
@@ -265,6 +297,11 @@ public class safGame {
 		}
 	}
 	
+	/**
+	 * Manages the visualization actions and moves
+	 * @param f
+	 * @param fighter
+	 */
 	public void chooseVisualization(FighterVisualization f, Fighter fighter){
 		if(fighter.getCurrentMove().equals("crouch")){
 			f.moveUpDown(FighterVisualization.CROUCH);

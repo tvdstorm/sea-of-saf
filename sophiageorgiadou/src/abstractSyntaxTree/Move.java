@@ -2,10 +2,18 @@ package abstractSyntaxTree;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the move attribute
+ * @author Sofia
+ *
+ */
 public class Move {
 	
 	private ArrayList<String> moves;
 	
+	/**
+	 * Constructor
+	 */
 	public Move(){
 		this.setMoves(new ArrayList<String>());
 	}

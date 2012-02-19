@@ -3,6 +3,11 @@ package safVisualization;
 import java.awt.Color;
 import java.util.Random;
 
+/**
+ * This class represents the visualization of a fighter
+ * @author Sofia
+ *
+ */
 public class FighterVisualization {
 
 	public static final int LOW = 0;
@@ -17,7 +22,6 @@ public class FighterVisualization {
 	double sqrY = 0.0;
 	double sqrHalfWidth = 0.1;
 
-	private int health = 100;
 	private String name = "";
 
 	private double hand1x, hand1y;
@@ -37,6 +41,13 @@ public class FighterVisualization {
 	private double height;
 	private int num;
 
+	/**
+	 * Constructor
+	 * @param h is the height
+	 * @param n is the player number
+	 * @param name is the fighter name
+	 * @param pos is the position in the arena
+	 */
 	public FighterVisualization(double h, int n, String name, int pos) {
 		this.setName(new String(name));
 
@@ -54,6 +65,9 @@ public class FighterVisualization {
 				r.nextInt(127) + 128);
 	}
 
+	/**
+	 * Initialiazes the body,hands and legs on the screen
+	 */
 	public void initializeBodyHandsLegs(){
 		
 		body1y = 0.8;
@@ -77,6 +91,10 @@ public class FighterVisualization {
 		heady = headRadius + body2y;
 	}
 	
+	/**
+	 * Updates the fighter position on the screen to x
+	 * @param x
+	 */
 	public void updateFighterPosition(int x) {
 		body1x = ((double) x/10)+1.0;
 
@@ -86,6 +104,9 @@ public class FighterVisualization {
 		heady = headRadius + body2y;
 	}
 
+	/**
+	 * Presents the fighter on the screen
+	 */
 	public void drawFighter() {
 		// drawbody
 		StdDraw.setPenColor(c);
@@ -103,11 +124,17 @@ public class FighterVisualization {
 		}
 	}
 
+	/**
+	 * Draws a circle tha represents the head
+	 */
 	private void drawHead() {
 		StdDraw.setPenColor(c);
 		StdDraw.filledCircle(headx, heady, headRadius);
 	}
 
+	/**
+	 * Represents a high punch
+	 */
 	public void highPunch() {
 		if (num == 1) {
 			leg1x = body1x - 0.4;
@@ -133,7 +160,10 @@ public class FighterVisualization {
 			hand2y = body1y + 0.8;
 		}
 	}
-
+	
+	/**
+	 * Represents a low punch
+	 */
 	public void lowPunch() {
 		if (num == 1) {
 			leg1x = body1x - 0.4;
@@ -160,6 +190,9 @@ public class FighterVisualization {
 		}
 	}
 
+	/**
+	 * Represents a high kick
+	 */
 	public void highKick() {
 		if (num == 1) {
 			leg1x = leg2x;
@@ -186,6 +219,9 @@ public class FighterVisualization {
 		}
 	}
 
+	/**
+	 * Represents a low kick
+	 */
 	public void lowKick() {
 		if (num == 1) {
 			leg1x = leg2x;
@@ -212,6 +248,10 @@ public class FighterVisualization {
 		}
 	}
 
+	/**
+	 * Represents the block action
+	 * @param b
+	 */
 	public void block(int b) {
 		if (b == FighterVisualization.LOW)
 			lowPunch();
@@ -228,6 +268,10 @@ public class FighterVisualization {
 		sqr = true;
 	}
 	
+	/**
+	 * Represents the jump and crounch actions
+	 * @param move
+	 */
 	public void moveUpDown(int move){
 		if(move==FighterVisualization.JUMP){
 			body1y=1.4;			
