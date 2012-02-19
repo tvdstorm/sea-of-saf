@@ -1,5 +1,7 @@
 package ast;
 
+import java.util.List;
+
 public class Strength implements Validator {
 	private String typeName;
 	private Type type;
@@ -20,19 +22,17 @@ public class Strength implements Validator {
 	}
 
 	@Override
-	public boolean validate() {
+	public List<String> validate(List<String> messages) {
 		try {
 			type = Type.valueOf(typeName.toUpperCase());
 		} catch (IllegalArgumentException e) {
-			System.out.println(typeName + " is not a valid strength.");
-			return false;
+			messages.add(typeName + " is not a valid strength.");
 		}
 		
 		if (value < 1 || value > 10) {
-			System.out.println(value + " is not a valid strength value. Must be between 1 and 10.");
-			return false;
+			messages.add(value + " is not a valid strength value. Must be between 1 and 10.");
 		}
-		return true;
+		return messages;
 	}
 	
 	public String toString() {
