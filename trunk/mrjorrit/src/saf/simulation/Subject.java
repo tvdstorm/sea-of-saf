@@ -1,6 +1,7 @@
-package saf.structure;
+package saf.simulation;
 
 import java.util.List;
+
 
 public abstract class Subject {
 

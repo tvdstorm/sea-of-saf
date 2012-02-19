@@ -1,4 +1,5 @@
-package saf.structure;
+package saf.simulation;
+
 
 public abstract class Observer {
 

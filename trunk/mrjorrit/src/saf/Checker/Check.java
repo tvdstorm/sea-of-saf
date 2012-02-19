@@ -1,9 +1,9 @@
-package saf.structure;
+package saf.Checker;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public abstract class Check extends Subject {
+public abstract class Check {
 	
 	public abstract List<String> check();
 	

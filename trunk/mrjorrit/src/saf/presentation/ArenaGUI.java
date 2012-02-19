@@ -1,26 +1,20 @@
 package saf.presentation;
+import saf.simulation.Arena;
+import saf.simulation.Subject;
 import saf.structure.*;
 
-public class ArenaGUI extends Observer {
-	private Fighter leftFighter;
-	private Fighter rightFighter;
+public class ArenaGUI extends Arena {
 	
-	private View view;
-	
-	public ArenaGUI(Fighter leftFighter, Fighter rightFighter)
-	{
-		this.leftFighter = leftFighter;
-		this.rightFighter = rightFighter;
-		this.view = new View();
-		
-		leftFighter.attach(this);
-		rightFighter.attach(this);
+	public ArenaGUI(Fighter leftFighter, Fighter rightFighter) {
+		super(leftFighter, rightFighter);
 	}
+
+	private View view;
 
 	@Override
 	public void update(Subject changedSubject) {
 		// TODO Auto-generated method stub
-		// get all the states for
+		
 	}
-	
+
 }
