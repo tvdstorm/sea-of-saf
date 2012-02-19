@@ -32,6 +32,7 @@ public class FighterBot {
 	protected final int default_value = 5;
 	private String name;
 	private final ITreeNode fighterNode;
+	private Vector2d spawnPosition;
 
 	private volatile int health;
 	private volatile Vector2d position;
@@ -39,13 +40,17 @@ public class FighterBot {
 	
 	private int speed;
 	
+	private int nextTurn;
+	
 	private volatile FightActionType fightAction = FightActionType.unknown;
 	private volatile MoveActionType moveAction = MoveActionType.unknown;
 
 	public FighterBot(ITreeNode fighter) {
 		fighterNode = fighter;
+		nextTurn = 0;
 		
 		position = new Vector2d();
+		spawnPosition = new Vector2d();
 		origin = new Vector2d(100, 150);
 		health = 100;
 
@@ -89,6 +94,16 @@ public class FighterBot {
 	
 	public void resetHealth() {
 		health = 100;
+	}
+	
+	public int getNextTurn() {
+		return nextTurn;
+	}
+	
+	public void setNextTurn(int turns) {
+		if (turns >= 0) {
+			this.nextTurn = turns;
+		}
 	}
 
 	public void setPosition(Vector2d position) {
@@ -151,5 +166,13 @@ public class FighterBot {
 	
 	public void setMoveAction(MoveActionType moveAction) {
 		this.moveAction = moveAction;
+	}
+
+	public Vector2d getSpawnPosition() {
+		return spawnPosition;
+	}
+
+	public void setSpawnPosition(Vector2d spawnPosition) {
+		this.spawnPosition = spawnPosition;
 	}
 }

@@ -16,7 +16,6 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 package nl.uva.saf.fdl;
 
 import nl.uva.saf.fdl.ast.Behaviour;
@@ -33,49 +32,52 @@ import nl.uva.saf.fdl.ast.MoveAction;
 import nl.uva.saf.fdl.ast.MoveChoice;
 import nl.uva.saf.fdl.ast.Rule;
 
-
 public abstract class TreeVisitor implements ITreeVisitor {
 
 	@Override
-	public void visit(Fighter node) {	
-		for(ITreeNode attribute : node.getAttributes()) {
+	public void visit(Fighter node) {
+		for (ITreeNode attribute : node.getAttributes()) {
 			attribute.accept(this);
 		}
 	}
 
 	@Override
-	public void visit(Characteristic node) {}
+	public void visit(Characteristic node) {
+	}
 
 	@Override
 	public void visit(Behaviour node) {
 		node.getCondition().accept(this);
-		node.getRule().accept(this);		
+		node.getRule().accept(this);
 	}
 
 	@Override
-	public void visit(ConditionAlways node) {}
+	public void visit(ConditionAlways node) {
+	}
 
 	@Override
-	public void visit(FightAction node) {}
+	public void visit(FightAction node) {
+	}
 
 	@Override
 	public void visit(FightChoice node) {
-		visit((Choice)node);		
+		visit((Choice) node);
 	}
 
 	@Override
-	public void visit(MoveAction node) {}
+	public void visit(MoveAction node) {
+	}
 
 	@Override
 	public void visit(MoveChoice node) {
-		visit((Choice)node);		
+		visit((Choice) node);
 	}
-	
+
 	@Override
 	public void visit(Choice node) {
-		for(ITreeNode action : node.getActions()) {
+		for (ITreeNode action : node.getActions()) {
 			action.accept(this);
-		}		
+		}
 	}
 
 	@Override
@@ -86,11 +88,12 @@ public abstract class TreeVisitor implements ITreeVisitor {
 
 	@Override
 	public void visit(ConditionOr node) {
-		for(ITreeNode operand : node.getOperands()) {
+		for (ITreeNode operand : node.getOperands()) {
 			operand.accept(this);
 		}
 	}
-	
+
 	@Override
-	public void visit(ConditionAnd node) {}
+	public void visit(ConditionAnd node) {
+	}
 }

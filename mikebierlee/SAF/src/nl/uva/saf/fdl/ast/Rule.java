@@ -29,11 +29,11 @@ public class Rule extends TreeNode {
 		this.fightChoice = fightChoice;
 	}
 
-	public ITreeNode getFightChoice() {
+	public FightChoice getFightChoice() {
 		return fightChoice;
 	}
 
-	public ITreeNode getMoveChoice() {
+	public MoveChoice getMoveChoice() {
 		return moveChoice;
 	}
 
