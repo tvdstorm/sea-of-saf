@@ -6,27 +6,27 @@ import java.lang.Math;
 import java.util.List;
 
 public class Fighter {
-    public static final Position STARTING_POSITION = new Position(0,0);
-
     private saf.data.Fighter fighterData;
 
     private Position position;
     private int healthPoints;
     private int timeToNextMove;
+    private int movementDirection;
     /* FIXME speed and strength shouldn't be static. */
     private int speed;
     private int strength;
     private saf.data.Action currentAction = null;
 
-    public Fighter(saf.data.Fighter fighterData, Position initialPosition)
+    public Fighter(saf.data.Fighter fighterData, int startingX, 
+                   int movementDirection)
     {
         this.fighterData = fighterData;
-        this.position = initialPosition;
+        this.position = new Position(startingX, 0);
 
         this.speed = calculateSpeed(fighterData.getAttributes());
         this.timeToNextMove = 0;
+        this.movementDirection = movementDirection;
         this.strength = calculateStrength(fighterData.getAttributes());
-
         this.healthPoints = saf.data.Fighter.MAX_HEALTH;
     }
 
@@ -34,11 +34,9 @@ public class Fighter {
      * Constructor provided for animation testing, where both the action and
      * the position are animated.
      */
-    public Fighter(saf.data.Fighter fighterData, Position initialPosition, 
-                   saf.data.Action initialAction)
+    public Fighter(saf.data.Fighter fighterData, saf.data.Action initialAction)
     {
-        this(fighterData, initialPosition);
-
+        this(fighterData, 0, -1);
         this.currentAction = initialAction;
     }
 
@@ -72,9 +70,11 @@ public class Fighter {
         return currentAction;
     }
 
-    public void move(saf.data.Move moveAction)
+    public void move(saf.data.Move moveAction, int min, int max)
     {
-        position.move(Move.determineMoveDistance(moveAction));
+        System.out.println("<sim.Fighter> min, max " + min + ", " + max);
+        position = position.move(Move.determineMoveDistance(moveAction),
+                                 movementDirection, min, max);
     }
 
     public void defend(saf.data.Attack attack, State state)

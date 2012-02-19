@@ -16,12 +16,11 @@ public class Simulator {
 
         saf.data.Fighter leftData = 
                 saf.data.Fighter.getRandom(random.nextInt());
-        this.leftFighter = new Fighter(leftData, new saf.data.Position(0,0));
+        this.leftFighter = new Fighter(leftData, 10, 1);
 
         saf.data.Fighter rightData =    
                 saf.data.Fighter.getRandom(random.nextInt());
-        this.rightFighter = new Fighter(rightData, 
-                                        new saf.data.Position(100,0));
+        this.rightFighter = new Fighter(rightData, 200, -1);
 
         this.animator = new ArenaAnimator("bison", "bison");
     }
@@ -37,8 +36,10 @@ public class Simulator {
     {
         while (leftFighter.isAlive() && rightFighter.isAlive())
         {
-            handleFighter(leftFighter, rightFighter);
-            handleFighter(rightFighter, leftFighter);
+            handleFighter(leftFighter, rightFighter, 
+                          0, rightFighter.getPosition().getX());
+            handleFighter(rightFighter, leftFighter,  
+                          leftFighter.getPosition().getX(), 210);
 
             animator.bufferTimeStep(leftFighter, rightFighter);
         }
@@ -46,14 +47,15 @@ public class Simulator {
         animator.runAnimation();
     }
 
-    private void handleFighter(Fighter fighter, Fighter opponent)
+    private void handleFighter(Fighter fighter, Fighter opponent, int min, 
+                               int max)
     {
         if (fighter.mayAct())
         {
             State leftState = State.getState(fighter, opponent);
             State rightState = State.getState(opponent, fighter);
             saf.data.Action action = fighter.act(leftState);
-            fighter.move(action.getMove());
+            fighter.move(action.getMove(), min, max);
             opponent.defend(action.getAttack(), rightState);
         }
         fighter.tick();

@@ -13,11 +13,26 @@ public class Position
         this.y = y;
     }
 
-    public void move(Position move)
+    public Position move(PositionDifference move, int movementDirection, 
+                         int min, int max)
     {
-        x += move.getX();
+        int newX = x + (move.getX() * movementDirection);
         /* Don't increment y: you shouldn't keep going higher or lower. */
-        y = move.getY();
+        int newY = move.getY();
+
+        if (newX < min)
+        {
+            newX = min;
+        }
+
+        if (newX > max)
+        {
+            newX = max;
+        }
+
+        System.out.println("data.Position, newx, newy, min, max: " + newX + ", " +
+                           newY + ", " + min + ", " + max);
+        return new Position(newX, newY);
     }
 
     public String toString()
