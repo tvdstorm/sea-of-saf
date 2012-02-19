@@ -19,48 +19,48 @@ package safcr.antlr;
 
 saf returns [Node n]
     :   {$n = new Saf();}
-        (bot {$n.addNode($bot.n);})* EOF 
+        (b=bot {$n.addNode($b.n);})* EOF 
     ;
 
 bot returns [Node n]
-    :   i1=ID
+    :   i=ID
         '{'
-        personality
-        behaviour 
+        p=personality
+        b=behaviour 
         '}'
-        {$n = new Bot($i1.text, $personality.n, $behaviour.n);}
+        {$n = new Bot($i.text, $p.n, $b.n);}
     ;
     
 personality returns [Node n]
     :   {$n = new Personality();}
-        (characteristic {$n.addNode($characteristic.n);})* 
+        (c=characteristic {$n.addNode($c.n);})* 
     ;
 
 characteristic returns [Node n]
-    :   i1=ID '=' i2=INT {$n = new Characteristic($i1.text,Integer.parseInt($i2.text));}
+    :   i=ID '=' t=INT {$n = new Characteristic($i.text,Integer.parseInt($t.text));}
     ;
     
 behaviour returns [Node n]
     :   {$n = new Behaviour();}
-        (expression {$n.addNode($expression.n);})*
+        (s=statement {$n.addNode($s.n);})*
     ;
     
-expression returns [Node n]
-    :   and_expr {$n = $and_expr.n;}
+statement returns [Node n]
+    :   o=or_statement {$n = $o.n;}
     ;
     
-and_expr returns [Node n]
-    :   i1=or_expr {$n = $i1.n;}
-        (AND i2=and_expr {$n = new And($n, $i2.n);})*
+or_statement returns [Node n]    
+    :   a=and_statement {$n = $a.n;}
+       (OR o=and_statement {$n = new Or($n, $o.n);})*
     ;
     
-or_expr returns [Node n]
-    :   rule  {$n = $rule.n;}
-        (OR expression {$n = new Or($n, $expression.n);})*
+and_statement returns [Node n]
+    :   r=rule  {$n = $r.n;}
+       (AND o=rule {$n = new And($n, $o.n);})*
     ;
 
 rule returns [Node n]
-    :   condition action {$n = new Rule($condition.n,$action.n);}
+    :   c=condition a=action {$n = new Rule($c.n,$a.n);}
     ;
 
 action returns [Node n]
@@ -71,11 +71,11 @@ action returns [Node n]
     ;
     		
 condition returns [Node n]
-    :   ID {$n = new Condition($ID.text);}
+    :   i=ID {$n = new Condition($i.text);}
     ;
 
 action_type returns [Node n]
-    :   ID {$n = new ActionType($ID.text);}
+    :   i=ID {$n = new ActionType($i.text);}
     |   (CHOOSE '(' i1=ID  i2=ID ')') {$n = new MultiActionType($i1.text,$i2.text);}
     ;
 

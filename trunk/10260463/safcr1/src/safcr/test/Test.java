@@ -8,7 +8,6 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.ANTLRStringStream;
-import org.antlr.runtime.tree.CommonTree;
 
 import safcr.antlr.SAFGrammarLexer;
 import safcr.antlr.SAFGrammarParser;
