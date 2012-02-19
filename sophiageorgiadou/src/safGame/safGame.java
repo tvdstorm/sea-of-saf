@@ -5,16 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import parser.ParseException;
 import parser.Saf;
 import safVisualization.FighterVisualization;
 import safVisualization.StdDraw;
 
 import abstractSyntaxTree.Fighter;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import org.lwjgl.opengl.GL11;
 
 public class safGame {
 
@@ -162,34 +160,7 @@ public class safGame {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		String safInput;
-		InputStream stream = null;
-		ArrayList<Fighter> fighters = null;
-		
-		safGame game=new safGame();
-		
-		try {
-			safInput = "fighters.saf";
-			stream = new FileInputStream(safInput);
-		} catch (IOException e) {
-			System.out.println("Parser status:\nERROR: " + e.getMessage());
-			e.printStackTrace();
-			System.exit(-1);
-		}
-
-		Saf parser = new Saf(stream);
-
-		System.out.println("Parsing...");
-
-		try {
-			fighters = parser.Parse();
-		} catch (ParseException e) {
-			System.out.println("Parser status:\nERROR: " + e.getMessage());
-			e.printStackTrace();
-			System.exit(-1);
-		}
-		System.out.println("Parser status: SUCCEED");
+	public void startSimulation(ArrayList<Fighter> fighters) {
 
 		// Calculate values
 		for (int i = 0; i < fighters.size(); i++)
@@ -205,12 +176,12 @@ public class safGame {
 		Fighter f2=fighters.get(1);
 		
 		//Graphics
-		game.initScreen();
+		initScreen();
 		FighterVisualization p1=new FighterVisualization(f1.getHeight(),1,f1.getName(),f1.getLocation());		
 		FighterVisualization p2=new FighterVisualization(f2.getHeight(),2,f2.getName(),f2.getLocation());
 		p1.drawFighter();
 		p2.drawFighter();
-		game.refreshScreen();
+		refreshScreen();
 		StdDraw.setPenColor(StdDraw.MAGENTA);
 		StdDraw.text(1, 9.0, f1.getName());
 		StdDraw.text(9.0, 9.0, f2.getName());
@@ -230,9 +201,9 @@ public class safGame {
 			f1.calculateCurrentAttackandMove();
 			f2.calculateCurrentAttackandMove();
 			
-			game.calculateHealth(f1, f2);
-			game.updatePowerCondition(f1, f2);
-			game.updateLocation(f1, f2);
+			calculateHealth(f1, f2);
+			updatePowerCondition(f1, f2);
+			updateLocation(f1, f2);
 
 			System.out.println("\n"+f1.getName()+": Health="+f1.getHealth()+": Position="+f1.getLocation());
 			System.out.println("Condition: "+f1.getLocationCondition()+" "+f1.getPowerCondition());
@@ -243,7 +214,7 @@ public class safGame {
 			i++;
 			
 			/**Graphics**/
-			game.refreshScreen();
+			refreshScreen();
 			StdDraw.setPenColor(StdDraw.MAGENTA);
 			StdDraw.text(1, 9.0, f1.getName());
 			StdDraw.text(9.0, 9.0, f2.getName());
@@ -252,8 +223,8 @@ public class safGame {
 			p1.updateFighterPosition(f1.getLocation());
 			p2.updateFighterPosition(f2.getLocation());
 			
-			game.chooseVisualization(p1,f1);
-			game.chooseVisualization(p2,f2);
+			chooseVisualization(p1,f1);
+			chooseVisualization(p2,f2);
 			
 			p1.drawFighter();
 			p2.drawFighter();			
@@ -262,7 +233,7 @@ public class safGame {
 			StdDraw.show(300);
 			p1.initializeBodyHandsLegs();
 			p2.initializeBodyHandsLegs();
-			game.refreshScreen();
+			refreshScreen();
 			StdDraw.setPenColor(StdDraw.MAGENTA);
 			StdDraw.text(1, 9.0, f1.getName());
 			StdDraw.text(9.0, 9.0, f2.getName());
@@ -274,16 +245,22 @@ public class safGame {
 			
 			
 			if(f1.getHealth()<=0 && f2.getHealth()<=0){
+				JOptionPane.showMessageDialog(null,
+						"\n=============\n=IT'S A TIE!=\n=============\n=============\n=GAME OVER ==\n=============\n");
 				System.out.println("\n=============\n=IT'S A TIE!=\n=============\n=============\n=GAME OVER ==\n=============\n");
-				break;//System.exit(1);				
+				System.exit(1);				
 			}
 			if(f1.getHealth()<=0){
+				JOptionPane.showMessageDialog(null,
+						"\n============\n"+f2.getName()+" WON\n============\n============\nGAME OVER ==\n============\n");
 				System.out.println("\n============\n"+f2.getName()+" WON\n============\n============\nGAME OVER ==\n============\n");
-				break;//System.exit(1);
+				System.exit(1);
 			}
 			if(f2.getHealth()<=0){
+				JOptionPane.showMessageDialog(null,
+						"\n============\n"+f1.getName()+" WON\n============\n============\nGAME OVER ==\n============\n");
 				System.out.println("\n============\n"+f1.getName()+" WON\n============\n============\nGAME OVER ==\n============\n");
-				break;//System.exit(1);
+				System.exit(1);
 			}
 		}
 	}
