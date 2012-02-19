@@ -84,7 +84,7 @@ public class Render extends Canvas implements Observer {
 			if (!bot.isStandingLeft())
 				image = getFlippedImage(image);
 			
-		    g2d.drawImage(image, null, bot.getPosition() * 60, this.getHeight() - image.getHeight());
+		    g2d.drawImage(image, null, bot.getPosition() * 75, this.getHeight() - image.getHeight());
 		}
 		catch (Exception ex) {
 		}

@@ -1,9 +1,9 @@
 brucelee
 {
-	kickPower = 9
-	kickReach = 9
-	punchReach = 7
-	punchPower = 9
-	near [ choose(stand walk_away) choose(kickHigh kickLow) ]
-	always [ run_towards punchHigh ]
+	punchPower = 10
+	kickPower = 10
+	punchReach = 8
+	kickReach = 10
+	near [ walk_away choose(block punch_high punch_low) ]
+	always [ walk_towards choose(block kick_high) ]
 }

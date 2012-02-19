@@ -10,7 +10,7 @@ public class Game extends Observable {
 	private List<Bot> bots;
 	
 	public List<Bot> getBots() {
-		return bots;
+		return this.bots;
 	}
 	
 	public Game() {
@@ -18,10 +18,10 @@ public class Game extends Observable {
 	}
 	
 	private Bot getLastOpponent() {
-		if (getBots().size() == 0)
+		if (this.getBots().size() == 0)
 			return null;
 
-		return getBots().get(getBots().size()-1);
+		return this.getBots().get(this.getBots().size()-1);
 	}
 	
 	public void addFighter(Fighter fighter) {
@@ -30,12 +30,13 @@ public class Game extends Observable {
 		
 		Bot opponent = getLastOpponent();
 		if (opponent != null)
-			location += 1 + random.nextInt(3);
+			location += 1 + random.nextInt(7);
 		
 		Bot bot = new Bot(fighter, location);
-		if (opponent != null)
-			bot.setOpponentBot(opponent);
-
+		if (opponent != null) {
+			opponent.setOpponentBot(bot);
+		}
+		
 		this.getBots().add(bot);
 	}
 	

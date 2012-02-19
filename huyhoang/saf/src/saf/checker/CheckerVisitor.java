@@ -91,7 +91,10 @@ public class CheckerVisitor implements FighterVisitor
 	
 	private void checkVisitedFunctionsForKeywordValidity(String expected) {
 		for ( Action action : visitedActions ) {
-			if (action.getKeywordType() != null && !action.getKeywordType().equals(expected)) {
+			if (action.getKeywordType() == null) {
+				getErrors().add(String.format("'%s' is an invalid action", action.getName()));
+			}
+			else if (action.getKeywordType() != null && !action.getKeywordType().equals(expected)) {
 				getErrors().add(String.format("'%s' is a '%s' keyword. A 'choose' keyword or '%s' keyword was expected",
 										 	  action.getName(),
 										 	  action.getKeywordType(),
@@ -138,6 +141,10 @@ public class CheckerVisitor implements FighterVisitor
 	public void visit(Choose choose) {
 		if (choose.getProcedures().size() == 0)
 			getErrors().add("The 'choose' keyword requires at least 1 action as its parameter");
+		
+		for (Procedure procedure : choose.getProcedures()) {
+			procedure.accept(this);
+		}
 	}
 
 	@Override

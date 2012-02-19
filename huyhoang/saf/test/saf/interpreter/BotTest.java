@@ -105,6 +105,16 @@ public class BotTest {
 	}
 	
 	@Test
+	public void testIsStandingLeft_Reversed() {
+		Bot bruceLee = new Bot(null, 4);
+		Bot jackieChan = new Bot(null, 0);
+		bruceLee.setOpponentBot(jackieChan);
+		
+		assertFalse(bruceLee.isStandingLeft());
+		assertTrue(jackieChan.isStandingLeft());
+	}
+	
+	@Test
 	public void testWalkTowards() {
 		Bot bruceLee = new Bot(null, 0);
 		Bot jackieChan = new Bot(null, 4);
@@ -141,20 +151,5 @@ public class BotTest {
 		assertEquals(100, bruceLee.getHitpoints());
 		assertEquals(100, jackieChan.getHitpoints());
 		assertTrue(bruceLee.isAllowedToPerformAction());
-	}
-	
-	@Test
-	public void testFight() {
-		Bot bruceLee = new Bot(null, 0);
-		Bot jackieChan = new Bot(null, 4);
-		bruceLee.setOpponentBot(jackieChan);
-		
-		assertEquals(5, bruceLee.punchReach);
-		assertEquals(100, bruceLee.getHitpoints());
-		assertEquals(100, jackieChan.getHitpoints());
-
-		bruceLee.performAction("punch_high");
-		assertEquals(90, jackieChan.getHitpoints());
-		jackieChan.getLastState().equals("hit");
 	}
 }
