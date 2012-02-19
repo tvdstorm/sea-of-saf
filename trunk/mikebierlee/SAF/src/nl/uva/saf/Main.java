@@ -73,8 +73,8 @@ public class Main {
 		// TODO: move loading to load UI
 		IFighterLoader loader = new ANTLFighterLoader();
 		Fighter blueFighter = (Fighter) loader
-				.loadFighter("data/unbeatabledude.saf");
-		Fighter redFighter = (Fighter) loader.loadFighter("data/chicken.saf");
+				.loadFighter("data/testfighter.saf");
+		Fighter redFighter = (Fighter) loader.loadFighter("data/testfighter.saf");
 
 		// Skipping validation, trusting myself to not screw up.
 

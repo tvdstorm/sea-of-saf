@@ -16,7 +16,6 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 package nl.uva.saf.fdl;
 
 import nl.uva.saf.fdl.ast.Characteristic;
@@ -28,69 +27,70 @@ public class TreeValidator extends TreeVisitor {
 	private ValidationReport report = null;
 	private boolean alwaysConditionPresent = false;
 	private final ITreeNode tree;
-	
+
 	public TreeValidator(ITreeNode tree) {
 		this.tree = tree;
 	}
-		
+
 	/**
 	 * Validates a syntax tree, executing general type checking.
-	 * @param tree Reference to a FDL AST. Cannot be null.
+	 * 
+	 * @param tree
+	 *            Reference to a FDL AST. Cannot be null.
 	 * @return Returns an instance of a validation report.
 	 */
-	public ValidationReport validate() {			
+	public ValidationReport validate() {
 		report = new ValidationReport();
 		alwaysConditionPresent = false;
-		
+
 		tree.accept(this);
-		
+
 		if (!alwaysConditionPresent) {
 			addError("\"always\" behaviour condition not specified.");
 		}
-		
-		return report; 
+
+		return report;
 	}
-	
+
 	@Override
-	public void visit(Characteristic node) {		
+	public void visit(Characteristic node) {
 		String type = node.getType();
-		
-		if (!type.equals("punchReach") &&
-			!type.equals("punchPower") &&
-			!type.equals("kickReach") &&
-			!type.equals("kickPower")) {
+
+		if (!type.equals("punchReach") && !type.equals("punchPower") && !type.equals("kickReach")
+				&& !type.equals("kickPower")) {
 			addWarning(type + ": unrecognized characteristic.");
 		}
-		
+
 		int value = node.getValue();
 		if (value < 1 || value > 10) {
 			addError(type + ": value " + value + " out of bounds (range: 1-10)");
 		}
-		
+
 		super.visit(node);
 	}
-	
+
 	@Override
 	public void visit(ConditionAlways node) {
-		alwaysConditionPresent = true;		
+		alwaysConditionPresent = true;
 		super.visit(node);
 	}
-	
+
 	@Override
 	public void visit(Choice node) {
 		if (node.getActions().size() == 0) {
-			addError("Choice clause contains no choices"); // TODO(mike): Make traceable
+			addError("Choice clause contains no choices"); // TODO(mike): Make
+															// traceable
 		}
-		
+
 		super.visit(node);
 	}
-	
+
 	public void addWarning(String warning) {
 		if (report != null) {
 			report.addWarning(warning);
 		}
 	}
-	
+
 	public void addError(String error) {
 		if (report != null) {
 			report.addError(error);

@@ -16,42 +16,33 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package nl.uva.saf.fdl;
+package nl.uva.saf.test.mocks;
 
-import nl.uva.saf.fdl.ast.Characteristic;
-import nl.uva.saf.fdl.ast.ITreeNode;
-import nl.uva.saf.fdl.types.CharacteristicType;
-import nl.uva.saf.fdl.types.TypeTranslator;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.List;
 
-import java.util.HashMap;
+public class RandomMock extends Random {
+	private static final long serialVersionUID = 6029252354710961782L;
 
-public class CharacteristicExtractor extends TreeVisitor {
+	private final List<Integer> expected;
+	private int currentIndex = 0;
 
-	private ITreeNode fighter;
-	private HashMap<CharacteristicType, Integer> extractedCharacteristics;
-
-	public CharacteristicExtractor(ITreeNode fighter) {
-		if (fighter == null) {
-			throw new IllegalArgumentException("tree");
-		}
-
-		this.fighter = fighter;
+	public RandomMock(List<Integer> expected) {
+		this.expected = expected;
 	}
 
-	public HashMap<CharacteristicType, Integer> extract() {
-		extractedCharacteristics = new HashMap<CharacteristicType, Integer>();
-		fighter.accept(this);
-		return extractedCharacteristics;
+	public RandomMock() {
+		expected = new ArrayList<Integer>();
+		expected.add(0);
 	}
 
 	@Override
-	public void visit(Characteristic node) {
-		extractedCharacteristics.put(TypeTranslator.getCharacteristicType(node.getType()), node.getValue());
-		super.visit(node);
-	}
+	public int nextInt(int n) {
+		if (currentIndex == expected.size()) {
+			currentIndex = 0;
+		}
 
-	public static HashMap<CharacteristicType, Integer> getCharacteristics(ITreeNode fighter) {
-		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
-		return extractor.extract();
+		return expected.get(currentIndex++);
 	}
 }

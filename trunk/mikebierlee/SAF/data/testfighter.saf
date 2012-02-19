@@ -1,0 +1,3 @@
+testman {
+	always [stand punch_high]
+}

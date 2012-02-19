@@ -36,27 +36,27 @@ import nl.uva.saf.fdl.ast.Rule;
 public class TreeVisualizer extends TreeVisitor {
 	String treeString;
 	int level;
-	
+
 	public void printTree(ITreeNode tree) {
 		treeString = new String();
 		level = 0;
 		tree.accept(this);
 		System.out.println(treeString);
 	}
-	
+
 	public void visit(Fighter node) {
 		treeString += getIdentation() + "Fighter(" + node.getName() + ")\n";
 		level++;
-		for(FighterAttribute attribute : node.getAttributes()) {
+		for (FighterAttribute attribute : node.getAttributes()) {
 			attribute.accept(this);
 		}
 		level--;
 	}
-	
+
 	public void visit(Characteristic node) {
 		treeString += getIdentation() + "Characteristic(" + node.getType() + ", " + node.getValue() + ")\n";
 	}
-	
+
 	public void visit(Behaviour node) {
 		treeString += getIdentation() + "Behaviour()\n";
 		level++;
@@ -64,11 +64,11 @@ public class TreeVisualizer extends TreeVisitor {
 		node.getRule().accept(this);
 		level--;
 	}
-	
+
 	public void visit(ConditionAlways node) {
 		treeString += getIdentation() + "Always()\n";
 	}
-	
+
 	public void visit(ConditionOr node) {
 		treeString += getIdentation() + "Or()\n";
 		level++;
@@ -77,57 +77,57 @@ public class TreeVisualizer extends TreeVisitor {
 		}
 		level--;
 	}
-	
+
 	public void visit(ConditionAnd node) {
 		treeString += getIdentation() + "And()\n";
 		level++;
-			for(String operand : node.getOperands()) {
-				treeString += getIdentation() + operand + "\n";
-			}
+		for (String operand : node.getOperands()) {
+			treeString += getIdentation() + operand + "\n";
+		}
 		level--;
 	}
-	
+
 	public void visit(Rule node) {
 		treeString += getIdentation() + "Rule()\n";
 		level++;
-			node.getMoveChoice().accept(this);
-			node.getFightChoice().accept(this);
+		node.getMoveChoice().accept(this);
+		node.getFightChoice().accept(this);
 		level--;
 	}
-	
+
 	public void visit(MoveChoice node) {
 		treeString += getIdentation() + "MoveChoice()\n";
 		level++;
-			for(Action action : node.getActions()) {
-				action.accept(this);
-			}
+		for (Action action : node.getActions()) {
+			action.accept(this);
+		}
 		level--;
 	}
-	
+
 	public void visit(FightChoice node) {
 		treeString += getIdentation() + "FightChoice()\n";
 		level++;
-			for(Action action : node.getActions()) {
-				action.accept(this);
-			}
+		for (Action action : node.getActions()) {
+			action.accept(this);
+		}
 		level--;
 	}
-	
+
 	public void visit(MoveAction node) {
-		treeString += getIdentation() + "MoveAction(" + node.getActionType() + ")\n";		
+		treeString += getIdentation() + "MoveAction(" + node.getActionType() + ")\n";
 	}
-	
+
 	public void visit(FightAction node) {
 		treeString += getIdentation() + "FightAction(" + node.getActionType() + ")\n";
 	}
-	
+
 	private String getIdentation() {
 		String identation = "";
-		
-		for (int i = 0; i < level; i ++) {
+
+		for (int i = 0; i < level; i++) {
 			identation += "\t";
 		}
-		
+
 		return identation;
 	}
 }
