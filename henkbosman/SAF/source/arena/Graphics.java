@@ -98,5 +98,4 @@ public class Graphics
 			return _standB;
 		}
 	}
-
 }

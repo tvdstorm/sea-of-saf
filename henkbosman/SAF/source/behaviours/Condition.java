@@ -105,6 +105,4 @@ public class Condition
 		return list;
 
 	}
-	
-	
 }

@@ -141,7 +141,6 @@ public class Fighter
 			return Condition.Conditions.far;
 		
 		return Condition.Conditions.near;
-		
 	}
 	
 	public List<String> getErrors()
@@ -153,14 +152,10 @@ public class Fighter
 			list.addAll(p.getErrors());
 		}
 		list.addAll(_behaviour.getErrors());
-		
-		
+
 		if (!list.isEmpty())
 			list.add(0, "\nFighter: "+_name);
 		
 		return list;
 	}
-	
-	
-	
 }

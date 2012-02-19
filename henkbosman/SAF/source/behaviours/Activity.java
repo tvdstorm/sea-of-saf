@@ -42,5 +42,4 @@ public class Activity
 			list.addAll(_action.getErrors());
 		return list;
 	}
-	
 }

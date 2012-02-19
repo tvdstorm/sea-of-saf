@@ -46,7 +46,7 @@ public class Engine
 		TokenStream tokenStream = new CommonTokenStream(lexer);
 		SAFParser parser = new SAFParser(tokenStream); 
 		Fighter fighter = parser.fighter();
-		Rules rules = new Rules(10,10,10,50);
+		Rules rules = new Rules(1,10,50);
 		fighter.setRules(rules);
 		
 		return fighter;
@@ -73,7 +73,6 @@ public class Engine
 		boolean b = _fighterB.getDamage(doDamage(_fighterA, combatmoveA, combatmoveB, distance));
 		
 		return a||b;
-
 	}
 	
 	public Combatmove getCombatmove(Fighters fighter)
