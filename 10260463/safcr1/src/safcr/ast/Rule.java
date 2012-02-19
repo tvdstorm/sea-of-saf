@@ -1,8 +1,11 @@
 package safcr.ast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rule implements Node{
-	private Node condition;
-	private Node action;
+	private final Node condition;
+	private final Node action;
 	
 	public Rule(Node ruleCondition, Node ruleAction){
 		condition = ruleCondition;
@@ -19,5 +22,12 @@ public class Rule implements Node{
 				action.toTreeString(indent + "  ");
 	}
 
-	
+	@Override
+	public List<String> getErrors() {
+		List<String> allErrors = new ArrayList<String>();
+		allErrors.addAll(condition.getErrors());
+		allErrors.addAll(action.getErrors());
+		
+		return allErrors;
+	}
 }

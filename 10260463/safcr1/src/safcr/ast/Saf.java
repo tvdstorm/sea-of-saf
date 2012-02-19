@@ -4,24 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Saf implements Node{
-	private List<Node> nodes;
+	private final List<Node> bots;
+	private List<String> errors;
 	
 	public Saf(){
-		nodes = new ArrayList<Node>();
+		bots = new ArrayList<Node>();
+		errors = new ArrayList<String>();
 	}
 	
 	@Override
 	public void addNode(Node n) {
-		nodes.add(n);
+		bots.add(n);
 	}
 
 	@Override
 	public String toTreeString(String indent) {
 		String s = "SAF";
-		for(Node node : nodes){
-			s += node.toTreeString(indent + "  ");
+		for(Node b : bots){
+			s += b.toTreeString(indent + "  ");
 		}
 		
 		return s;
+	}
+	
+	@Override
+	public List<String> getErrors() {
+		List<String> allErrors = new ArrayList<String>();
+		allErrors.addAll(errors);
+		for(Node b : bots){
+			allErrors.addAll(b.getErrors());
+		}
+		
+		return allErrors;
 	}
 }

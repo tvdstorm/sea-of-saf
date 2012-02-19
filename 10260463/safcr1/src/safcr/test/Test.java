@@ -24,7 +24,11 @@ public class Test {
 		SAFGrammarParser parser = new SAFGrammarParser(tokenStream);
 			
 		Node tree = parser.saf();
-		System.out.println(tree.toTreeString(""));
+		//System.out.println(tree.toTreeString(""));
+		
+		for(String error : tree.getErrors()){
+			System.err.println(error);
+		}
 	}
 
 }

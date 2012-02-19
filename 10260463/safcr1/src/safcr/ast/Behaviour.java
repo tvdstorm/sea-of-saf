@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Behaviour implements Node{
-	private List<Node> rules;
+	private final List<Node> rules;
 	
 	public Behaviour(){
 		rules = new ArrayList<Node>();
@@ -23,5 +23,15 @@ public class Behaviour implements Node{
 		}
 		
 		return s;
+	}
+
+	@Override
+	public List<String> getErrors() {
+		List<String> allErrors = new ArrayList<String>();
+		for(Node r : rules){
+			allErrors.addAll(r.getErrors());
+		}
+		
+		return allErrors;
 	}
 }
