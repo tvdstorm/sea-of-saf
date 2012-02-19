@@ -7,7 +7,7 @@ public class CharacteristicIntelligence {
 	
 	public static Integer getValueByCharacteristicsAndName(List<Characteristic> characteristics , String characteristicName) {
 		for (Characteristic characteristic : characteristics) {
-			if(characteristic.getName() == characteristicName){
+			if(characteristic.getName().intern() == characteristicName.intern()){
 				return characteristic.getValue();
 			}
 		}

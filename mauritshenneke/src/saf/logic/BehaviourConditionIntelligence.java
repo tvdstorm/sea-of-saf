@@ -12,13 +12,17 @@ public class BehaviourConditionIntelligence {
 	
 	private HashMap<String, Boolean> behaviourConditionMap;
 	
+	@SuppressWarnings("serial")
 	public BehaviourConditionIntelligence(int healthDifference, int distance){
+		behaviourConditionMap = new HashMap<String, Boolean>(){};
 		behaviourConditionMap.put("much_stronger", healthDifference >= muchHealthDifference);
 		behaviourConditionMap.put("stronger", healthDifference >= equalHealthDifference && healthDifference < muchHealthDifference);
 		behaviourConditionMap.put("weaker", healthDifference < equalHealthDifference && healthDifference > -muchHealthDifference);
 		behaviourConditionMap.put("much_weaker", healthDifference <= -muchHealthDifference);
+		behaviourConditionMap.put("even", healthDifference == equalHealthDifference);
 		behaviourConditionMap.put("far", distance >= distanceDifference);
 		behaviourConditionMap.put("near", distance < distanceDifference);
+		behaviourConditionMap.put("always", true);
 	}
 
 	public boolean IsValidFor(BehaviourCondition behaviorCondition) {

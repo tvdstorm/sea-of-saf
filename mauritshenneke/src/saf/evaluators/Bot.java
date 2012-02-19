@@ -1,28 +1,42 @@
 package saf.evaluators;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import saf.Arena;
-
 public class Bot {
+	private static final int MAX_PASSIVICITY = 5;
 	private String name;
 	private int health;
 	private int position;
-	private Arena arena;
-	private Behaviour alwaysBehaviour;
+	private int fightActionDuration;
+	private int speed;
+	private int recoveryTime = 1;
+	private int moveDirectionCorrection;
+	
+	private HashMap<String, Integer> fightActionCharacteristicCache;
+	
 	private BehaviourActionType currentMoveActionType;
 	private BehaviourActionType currentFightActionType;
 	
 	private final List<Characteristic> characteristics;
 	private final List<Behaviour> behaviours;
+	private String color;
+	private Integer rightWallPosition;
+	private Integer leftWallPosition;
+	private int passivityCount;
 	
+	@SuppressWarnings("serial")
 	public Bot() {
 		this.characteristics = new ArrayList<Characteristic>();
 		this.behaviours = new ArrayList<Behaviour>();
+		fightActionCharacteristicCache = new HashMap<String, Integer>(){};
+		currentMoveActionType = MoveActionIntelligence.getDefaultActionType();
+		currentFightActionType = FightActionIntelligence.getDefaultActionType();
+		passivityCount = 0;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -36,15 +50,22 @@ public class Bot {
 	}
 	
 	public void addBehaviour(Behaviour behaviour) {
-		BehaviourCondition behaviourCondition = behaviour.getBehaviourCondition();
-		
-		if(behaviourCondition.isAlways()){
-			alwaysBehaviour = behaviour;
-		}else{
-			this.behaviours.add(behaviour);
-		};
+		this.behaviours.add(behaviour);
 	}
 
+	public void init(){
+		invokeFightActionCharacteristicCache();
+		calculateSpeed();
+	}
+	
+	public void setHealth(Integer value){
+		health = value;
+	}
+	
+	public void setMoveDirectionCorrection(Integer moveDirectionCorrection){
+		this.moveDirectionCorrection = moveDirectionCorrection;
+	}
+	
 	public boolean hasHealth() {
 		return health > 0;
 	}
@@ -52,19 +73,22 @@ public class Bot {
 	public boolean lost() {
 		return !hasHealth();
 	}
-
-	public void setArena(Arena iArena){
-		arena = iArena;
-	}
 	
-	public void setPosition(int iPosition) {
-		position = iPosition;
+	public void setPosition(int position) {
+		this.position = position;
 	}
 	
 	public int getPosition() {
 		return position;
 	}
 
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
+	public String getColor(){
+		return color;
+	}
 	public BehaviourActionType getCurrentMoveActionType(){
 		return currentMoveActionType;
 	}
@@ -78,20 +102,51 @@ public class Bot {
 	}
 
 	public Attack attack(Bot opponent) {
-		
+		if(this.inFightAction() || lost()){
+			setFightActionDuration(this.fightActionDuration - recoveryTime);
+			return new Attack();
+		}
 		
 		setCurrentActionTypes(opponent);
-		doMoveAction();
+		doMoveAction(opponent);
 		
-		return new Attack(this);
+		Attack attack = new Attack(this);
+		
+		doPassivityCheck(attack);
+		if(isToPassive()){
+			attack.beOffensive();
+		}
+		setFightActionDuration(speed);
+		return attack;
+	}
+
+	private boolean isToPassive() {
+		return passivityCount >= MAX_PASSIVICITY;
+	}
+
+	private void doPassivityCheck(Attack attack){
+		passivityCount = attack.isDefensive() ? passivityCount + 1 : 0;
+	}
+	
+	private void calculateSpeed() {
+		speed = FightActionIntelligence.calculateSpeed(fightActionCharacteristicCache);
+	}
+	
+	private boolean inFightAction(){
+		return fightActionDuration > 0;
+	}
+	
+	private void setFightActionDuration(int fightActionDuration){
+		this.fightActionDuration = fightActionDuration;
 	}
 	
 	public void changePosition(Integer positionChange) {
+		positionChange *= moveDirectionCorrection;
 		this.setPosition(this.getPosition() + positionChange);		
 	}
 	
 	public void defend(Attack attack) {
-		if(attack.isDefensive()){
+		if(!attack.isAttacking() || attack.isDefensive()){
 			return;
 		}
 		
@@ -106,7 +161,7 @@ public class Bot {
 	}
 	
 	private void takeHitPoints(Integer hitPoints){
-		this.health -= hitPoints;
+		health -= hitPoints;
 	}
 	
 	private void setCurrentActionTypes(Bot opponent){
@@ -115,11 +170,35 @@ public class Bot {
 		currentFightActionType = behaviour.getFigthActionType();
 	}
 	
-	private void doMoveAction(){
+	private void doMoveAction(Bot opponent){
 		MoveActionIntelligence moveActionIntelligence = new MoveActionIntelligence(currentMoveActionType);
-		if(arena.positionChangeAllowed(this, moveActionIntelligence)){
+		FightActionIntelligence fightActionIntelligence = new FightActionIntelligence(currentFightActionType);
+		if(positionChangeAllowed(moveActionIntelligence) && shouldExecuteMove(opponent, moveActionIntelligence, fightActionIntelligence)){
 			this.changePosition(moveActionIntelligence.getPositionChange());
 		}
+	}
+	
+	private boolean shouldExecuteMove(Bot opponent, MoveActionIntelligence moveActionIntelligence, FightActionIntelligence fightActionIntelligence) {
+		int distanceToOpponent = getDistanceToOpponent(opponent);
+		if(fightActionIntelligence.isDefensive()){
+			return moveActionIntelligence.isMovingAway(distanceToOpponent) && !moveActionIntelligence.isOutOfRange(distanceToOpponent);
+		}else{
+			return moveActionIntelligence.isTowardsAway(distanceToOpponent) && moveActionIntelligence.isOutOfRange(distanceToOpponent);
+		}
+	}
+
+	private boolean positionChangeAllowed(MoveActionIntelligence moveActionIntelligence) {
+		int positionChange = moveActionIntelligence.getPositionChange();
+		int newPosition = position + positionChange;
+		return  !(newPosition <= leftWallPosition) || !(newPosition >= rightWallPosition);
+	}
+	
+	public void setRightWallPosition(Integer rightWallPosition){
+		this.rightWallPosition = rightWallPosition;
+	}
+
+	public void setLeftWallPosition(Integer leftWallPosition){
+		this.leftWallPosition = leftWallPosition;
 	}
 	
 	public Behaviour getBehaviour(Bot opponent) {
@@ -127,10 +206,6 @@ public class Bot {
 		List<Behaviour> validBehaviours = getValidBehaviours(opponent);
 		
 		int validBehavioursSize = validBehaviours.size();
-		
-		if(validBehavioursSize == 0){
-			return alwaysBehaviour;
-		}
 		
 		int behaviourIndex = randomIndex.nextInt(validBehavioursSize);
 		return validBehaviours.get(behaviourIndex);
@@ -147,12 +222,12 @@ public class Bot {
 			}
 		}
 		
-		return null;
+		return validBehaviours;
 	}
 	
 	private BehaviourConditionIntelligence getBehaviourConditionMap(Bot opponent) {
-		int strengthDifference = this.getHealthDifference(opponent);
-		int distance = this.getDistanceToOpponent(opponent);
+		int strengthDifference = getHealthDifference(opponent);
+		int distance = getDistanceToOpponent(opponent);
 		
 		return new BehaviourConditionIntelligence(strengthDifference, distance);
 	}
@@ -165,7 +240,7 @@ public class Bot {
 		return this.health - opponent.getHealth();
 	}
 	
-	private int getHealth() {
+	public int getHealth() {
 		return this.health;
 	}
 
@@ -175,7 +250,19 @@ public class Bot {
 
 	public Integer getFightActionStrength(FightActionIntelligence fightActionIntelligence) {
 		String fightActionCharacteristicName = fightActionIntelligence.getFightActionAggressionPowerType();
-		return CharacteristicIntelligence.getValueByCharacteristicsAndName(this.getCharacteristics(), fightActionCharacteristicName);
+		return fightActionCharacteristicCache.get(fightActionCharacteristicName);
 	}
 
+	private void invokeFightActionCharacteristicCache(){
+		List<String> attackPropertyNames = FightActionIntelligence.getAttackPropertyNames();
+		for(String attackPropertyName : attackPropertyNames){
+			resolveFightActionCharacteristicCache(attackPropertyName);
+		}
+	}
+
+	private Integer resolveFightActionCharacteristicCache(String fightActionCharacteristicName) {
+		Integer fightActionCharacteristic = CharacteristicIntelligence.getValueByCharacteristicsAndName(this.getCharacteristics(), fightActionCharacteristicName);
+		fightActionCharacteristicCache.put(fightActionCharacteristicName, fightActionCharacteristic);
+		return fightActionCharacteristic;
+	}
 }
