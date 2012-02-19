@@ -34,6 +34,7 @@ bot returns [Node n]
 personality returns [Node n]
     :   {$n = new Personality();}
         (c=characteristic {$n.addNode($c.n);})* 
+        {$n.addNode(null);}
     ;
 
 characteristic returns [Node n]
@@ -51,12 +52,12 @@ statement returns [Node n]
     
 or_statement returns [Node n]    
     :   a=and_statement {$n = $a.n;}
-       (OR o=and_statement {$n = new Or($n, $o.n);})*
+       (OR o=or_statement {$n = new Or($n, $o.n);})*
     ;
     
 and_statement returns [Node n]
     :   r=rule  {$n = $r.n;}
-       (AND o=rule {$n = new And($n, $o.n);})*
+       (AND o=statement {$n = new And($n, $o.n);})*
     ;
 
 rule returns [Node n]

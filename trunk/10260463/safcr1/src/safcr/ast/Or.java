@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Or implements Node{
-	private List<Node> nodes;
+	private final List<Node> nodes;
 	
 	public Or(Node n1, Node n2){
 		nodes = new ArrayList<Node>();
@@ -24,5 +24,14 @@ public class Or implements Node{
 		
 		return s;
 	}
-
+	
+	@Override
+	public List<String> getErrors() {
+		List<String> allErrors = new ArrayList<String>();
+		for(Node n : nodes){
+			allErrors.addAll(n.getErrors());
+		}
+		
+		return allErrors;
+	}
 }

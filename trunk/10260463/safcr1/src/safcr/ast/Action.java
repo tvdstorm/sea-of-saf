@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Action implements Node{
-	private List<Node> types;
+	private final List<Node> types;
 	
 	public Action(Node actionType){
 		types = new ArrayList<Node>();
@@ -24,5 +24,15 @@ public class Action implements Node{
 		}
 		
 		return s;
+	}
+
+	@Override
+	public List<String> getErrors() {
+		List<String> allErrors = new ArrayList<String>();
+		for(Node type : types){
+			allErrors.addAll(type.getErrors());
+		}
+		
+		return allErrors;
 	}
 }
