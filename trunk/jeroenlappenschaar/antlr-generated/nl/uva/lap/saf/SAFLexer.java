@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-02-17 04:14:57
+// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-02-19 15:30:59
 
   package nl.uva.lap.saf;
 
@@ -14,6 +14,13 @@ public class SAFLexer extends Lexer {
     public static final int T__9=9;
     public static final int T__10=10;
     public static final int T__11=11;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
     public static final int COMMENT=4;
     public static final int IDENT=5;
     public static final int INTEGER=6;
@@ -40,10 +47,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:11:6: ( '=' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:11:8: '='
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:11:6: ( '(' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:11:8: '('
             {
-            match('='); 
+            match('('); 
 
             }
 
@@ -61,10 +68,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:12:7: ( '{' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:12:9: '{'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:12:7: ( ')' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:12:9: ')'
             {
-            match('{'); 
+            match(')'); 
 
             }
 
@@ -82,10 +89,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:13:7: ( '}' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:13:9: '}'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:13:7: ( '=' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:13:9: '='
             {
-            match('}'); 
+            match('='); 
 
             }
 
@@ -98,15 +105,168 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "T__11"
 
+    // $ANTLR start "T__12"
+    public final void mT__12() throws RecognitionException {
+        try {
+            int _type = T__12;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:14:7: ( '[' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:14:9: '['
+            {
+            match('['); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__12"
+
+    // $ANTLR start "T__13"
+    public final void mT__13() throws RecognitionException {
+        try {
+            int _type = T__13;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:7: ( ']' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:15:9: ']'
+            {
+            match(']'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__13"
+
+    // $ANTLR start "T__14"
+    public final void mT__14() throws RecognitionException {
+        try {
+            int _type = T__14;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:16:7: ( 'and' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:16:9: 'and'
+            {
+            match("and"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__14"
+
+    // $ANTLR start "T__15"
+    public final void mT__15() throws RecognitionException {
+        try {
+            int _type = T__15;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:17:7: ( 'choose' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:17:9: 'choose'
+            {
+            match("choose"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__15"
+
+    // $ANTLR start "T__16"
+    public final void mT__16() throws RecognitionException {
+        try {
+            int _type = T__16;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:18:7: ( 'or' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:18:9: 'or'
+            {
+            match("or"); 
+
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__16"
+
+    // $ANTLR start "T__17"
+    public final void mT__17() throws RecognitionException {
+        try {
+            int _type = T__17;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:19:7: ( '{' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:19:9: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__17"
+
+    // $ANTLR start "T__18"
+    public final void mT__18() throws RecognitionException {
+        try {
+            int _type = T__18;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:20:7: ( '}' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:20:9: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        	// do for sure before leaving
+        }
+    }
+    // $ANTLR end "T__18"
+
     // $ANTLR start "INTEGER"
     public final void mINTEGER() throws RecognitionException {
         try {
             int _type = INTEGER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:9: ( ( ( '1' ( '0' )? ) | '2' .. '9' ) )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:11: ( ( '1' ( '0' )? ) | '2' .. '9' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:9: ( ( ( '1' ( '0' )? ) | '2' .. '9' ) )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:11: ( ( '1' ( '0' )? ) | '2' .. '9' )
             {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:11: ( ( '1' ( '0' )? ) | '2' .. '9' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:11: ( ( '1' ( '0' )? ) | '2' .. '9' )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -125,14 +285,14 @@ public class SAFLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:12: ( '1' ( '0' )? )
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:12: ( '1' ( '0' )? )
                     {
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:12: ( '1' ( '0' )? )
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:13: '1' ( '0' )?
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:12: ( '1' ( '0' )? )
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:13: '1' ( '0' )?
                     {
                     match('1'); 
 
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:17: ( '0' )?
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:17: ( '0' )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -141,7 +301,7 @@ public class SAFLexer extends Lexer {
                     }
                     switch (alt1) {
                         case 1 :
-                            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:17: '0'
+                            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:17: '0'
                             {
                             match('0'); 
 
@@ -157,7 +317,7 @@ public class SAFLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:25: '2' .. '9'
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:25: '2' .. '9'
                     {
                     matchRange('2','9'); 
 
@@ -183,10 +343,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:65:7: ( ( '0' .. '9' )* ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '-' | '_' )* )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:65:9: ( '0' .. '9' )* ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '-' | '_' )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:78:7: ( ( '0' .. '9' )* ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '-' | '_' )* )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:78:9: ( '0' .. '9' )* ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '-' | '_' )*
             {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:65:9: ( '0' .. '9' )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:78:9: ( '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -230,7 +390,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:65:41: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '-' | '_' )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:78:41: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '-' | '_' )*
             loop4:
             do {
                 int alt4=2;
@@ -280,10 +440,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:68:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:68:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:81:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:81:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:68:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:81:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             int cnt5=0;
             loop5:
             do {
@@ -340,14 +500,14 @@ public class SAFLexer extends Lexer {
         try {
             int _type = COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:69:9: ( '//' ( . )* ( '\\n' | '\\r' ) )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:69:11: '//' ( . )* ( '\\n' | '\\r' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:82:9: ( '//' ( . )* ( '\\n' | '\\r' ) )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:82:11: '//' ( . )* ( '\\n' | '\\r' )
             {
             match("//"); 
 
 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:69:16: ( . )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:82:16: ( . )*
             loop6:
             do {
                 int alt6=2;
@@ -363,7 +523,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:69:16: .
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:82:16: .
             	    {
             	    matchAny(); 
 
@@ -404,14 +564,14 @@ public class SAFLexer extends Lexer {
         try {
             int _type = MULTICOMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:70:14: ( '/*' ( . )* '*/' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:70:16: '/*' ( . )* '*/'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:83:14: ( '/*' ( . )* '*/' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:83:16: '/*' ( . )* '*/'
             {
             match("/*"); 
 
 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:70:21: ( . )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:83:21: ( . )*
             loop7:
             do {
                 int alt7=2;
@@ -436,7 +596,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:70:21: .
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:83:21: .
             	    {
             	    matchAny(); 
 
@@ -467,22 +627,134 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "MULTICOMMENT"
 
     public void mTokens() throws RecognitionException {
-        // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:8: ( T__9 | T__10 | T__11 | INTEGER | IDENT | WS | COMMENT | MULTICOMMENT )
-        int alt8=8;
+        // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | INTEGER | IDENT | WS | COMMENT | MULTICOMMENT )
+        int alt8=15;
         switch ( input.LA(1) ) {
-        case '=':
+        case '(':
             {
             alt8=1;
             }
             break;
-        case '{':
+        case ')':
             {
             alt8=2;
             }
             break;
-        case '}':
+        case '=':
             {
             alt8=3;
+            }
+            break;
+        case '[':
+            {
+            alt8=4;
+            }
+            break;
+        case ']':
+            {
+            alt8=5;
+            }
+            break;
+        case 'a':
+            {
+            int LA8_6 = input.LA(2);
+
+            if ( (LA8_6=='n') ) {
+                int LA8_16 = input.LA(3);
+
+                if ( (LA8_16=='d') ) {
+                    int LA8_23 = input.LA(4);
+
+                    if ( (LA8_23=='-'||(LA8_23 >= '0' && LA8_23 <= '9')||(LA8_23 >= 'A' && LA8_23 <= 'Z')||LA8_23=='_'||(LA8_23 >= 'a' && LA8_23 <= 'z')) ) {
+                        alt8=12;
+                    }
+                    else {
+                        alt8=6;
+                    }
+                }
+                else {
+                    alt8=12;
+                }
+            }
+            else {
+                alt8=12;
+            }
+            }
+            break;
+        case 'c':
+            {
+            int LA8_7 = input.LA(2);
+
+            if ( (LA8_7=='h') ) {
+                int LA8_17 = input.LA(3);
+
+                if ( (LA8_17=='o') ) {
+                    int LA8_24 = input.LA(4);
+
+                    if ( (LA8_24=='o') ) {
+                        int LA8_27 = input.LA(5);
+
+                        if ( (LA8_27=='s') ) {
+                            int LA8_28 = input.LA(6);
+
+                            if ( (LA8_28=='e') ) {
+                                int LA8_29 = input.LA(7);
+
+                                if ( (LA8_29=='-'||(LA8_29 >= '0' && LA8_29 <= '9')||(LA8_29 >= 'A' && LA8_29 <= 'Z')||LA8_29=='_'||(LA8_29 >= 'a' && LA8_29 <= 'z')) ) {
+                                    alt8=12;
+                                }
+                                else {
+                                    alt8=7;
+                                }
+                            }
+                            else {
+                                alt8=12;
+                            }
+                        }
+                        else {
+                            alt8=12;
+                        }
+                    }
+                    else {
+                        alt8=12;
+                    }
+                }
+                else {
+                    alt8=12;
+                }
+            }
+            else {
+                alt8=12;
+            }
+            }
+            break;
+        case 'o':
+            {
+            int LA8_8 = input.LA(2);
+
+            if ( (LA8_8=='r') ) {
+                int LA8_18 = input.LA(3);
+
+                if ( (LA8_18=='-'||(LA8_18 >= '0' && LA8_18 <= '9')||(LA8_18 >= 'A' && LA8_18 <= 'Z')||LA8_18=='_'||(LA8_18 >= 'a' && LA8_18 <= 'z')) ) {
+                    alt8=12;
+                }
+                else {
+                    alt8=8;
+                }
+            }
+            else {
+                alt8=12;
+            }
+            }
+            break;
+        case '{':
+            {
+            alt8=9;
+            }
+            break;
+        case '}':
+            {
+            alt8=10;
             }
             break;
         case '1':
@@ -490,13 +762,13 @@ public class SAFLexer extends Lexer {
             switch ( input.LA(2) ) {
             case '0':
                 {
-                int LA8_9 = input.LA(3);
+                int LA8_19 = input.LA(3);
 
-                if ( ((LA8_9 >= '0' && LA8_9 <= '9')||(LA8_9 >= 'A' && LA8_9 <= 'Z')||(LA8_9 >= 'a' && LA8_9 <= 'z')) ) {
-                    alt8=5;
+                if ( ((LA8_19 >= '0' && LA8_19 <= '9')||(LA8_19 >= 'A' && LA8_19 <= 'Z')||(LA8_19 >= 'a' && LA8_19 <= 'z')) ) {
+                    alt8=12;
                 }
                 else {
-                    alt8=4;
+                    alt8=11;
                 }
                 }
                 break;
@@ -562,11 +834,11 @@ public class SAFLexer extends Lexer {
             case 'y':
             case 'z':
                 {
-                alt8=5;
+                alt8=12;
                 }
                 break;
             default:
-                alt8=4;
+                alt8=11;
             }
 
             }
@@ -580,13 +852,13 @@ public class SAFLexer extends Lexer {
         case '8':
         case '9':
             {
-            int LA8_5 = input.LA(2);
+            int LA8_12 = input.LA(2);
 
-            if ( ((LA8_5 >= '0' && LA8_5 <= '9')||(LA8_5 >= 'A' && LA8_5 <= 'Z')||(LA8_5 >= 'a' && LA8_5 <= 'z')) ) {
-                alt8=5;
+            if ( ((LA8_12 >= '0' && LA8_12 <= '9')||(LA8_12 >= 'A' && LA8_12 <= 'Z')||(LA8_12 >= 'a' && LA8_12 <= 'z')) ) {
+                alt8=12;
             }
             else {
-                alt8=4;
+                alt8=11;
             }
             }
             break;
@@ -617,9 +889,7 @@ public class SAFLexer extends Lexer {
         case 'X':
         case 'Y':
         case 'Z':
-        case 'a':
         case 'b':
-        case 'c':
         case 'd':
         case 'e':
         case 'f':
@@ -631,7 +901,6 @@ public class SAFLexer extends Lexer {
         case 'l':
         case 'm':
         case 'n':
-        case 'o':
         case 'p':
         case 'q':
         case 'r':
@@ -644,7 +913,7 @@ public class SAFLexer extends Lexer {
         case 'y':
         case 'z':
             {
-            alt8=5;
+            alt8=12;
             }
             break;
         case '\t':
@@ -653,22 +922,22 @@ public class SAFLexer extends Lexer {
         case '\r':
         case ' ':
             {
-            alt8=6;
+            alt8=13;
             }
             break;
         case '/':
             {
-            int LA8_8 = input.LA(2);
+            int LA8_15 = input.LA(2);
 
-            if ( (LA8_8=='/') ) {
-                alt8=7;
+            if ( (LA8_15=='/') ) {
+                alt8=14;
             }
-            else if ( (LA8_8=='*') ) {
-                alt8=8;
+            else if ( (LA8_15=='*') ) {
+                alt8=15;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 8, input);
+                    new NoViableAltException("", 8, 15, input);
 
                 throw nvae;
 
@@ -709,39 +978,95 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:27: INTEGER
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:27: T__12
+                {
+                mT__12(); 
+
+
+                }
+                break;
+            case 5 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:33: T__13
+                {
+                mT__13(); 
+
+
+                }
+                break;
+            case 6 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:39: T__14
+                {
+                mT__14(); 
+
+
+                }
+                break;
+            case 7 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:45: T__15
+                {
+                mT__15(); 
+
+
+                }
+                break;
+            case 8 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:51: T__16
+                {
+                mT__16(); 
+
+
+                }
+                break;
+            case 9 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:57: T__17
+                {
+                mT__17(); 
+
+
+                }
+                break;
+            case 10 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:63: T__18
+                {
+                mT__18(); 
+
+
+                }
+                break;
+            case 11 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:69: INTEGER
                 {
                 mINTEGER(); 
 
 
                 }
                 break;
-            case 5 :
-                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:35: IDENT
+            case 12 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:77: IDENT
                 {
                 mIDENT(); 
 
 
                 }
                 break;
-            case 6 :
-                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:41: WS
+            case 13 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:83: WS
                 {
                 mWS(); 
 
 
                 }
                 break;
-            case 7 :
-                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:44: COMMENT
+            case 14 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:86: COMMENT
                 {
                 mCOMMENT(); 
 
 
                 }
                 break;
-            case 8 :
-                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:52: MULTICOMMENT
+            case 15 :
+                // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:1:94: MULTICOMMENT
                 {
                 mMULTICOMMENT(); 
 

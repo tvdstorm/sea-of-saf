@@ -1,7 +1,5 @@
-package nl.uva.lap.saf.ast.action;
+package nl.uva.lap.saf.ast;
 
-import nl.uva.lap.saf.ast.ASTNode;
-import nl.uva.lap.saf.ast.Visitor;
 
 public class Ident extends ASTNode
 {
