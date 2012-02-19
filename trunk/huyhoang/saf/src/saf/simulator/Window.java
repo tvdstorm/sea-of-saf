@@ -9,12 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import saf.interpreter.Arena;
-import saf.interpreter.Bot;
+import saf.interpreter.Game;
 
 public class Window {
 	private JFrame frame;
-    private Arena arenaLogic;
+    private Game game;
 	
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -32,7 +31,7 @@ public class Window {
     	int delay = 1000; //milliseconds
     	ActionListener taskPerformer = new ActionListener() {
     		public void actionPerformed(ActionEvent evt) {
-    			arenaLogic.EvaluateBots();
+    			game.EvaluateBots();
     		}
     	};
     	new Timer(delay, taskPerformer).start();
@@ -41,12 +40,12 @@ public class Window {
     protected void setupFrame() {
         frame = new JFrame("Super Awesome Fighters");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1024, 768);
+        frame.setSize(1024, 388);
         frame.setVisible(true);
     }
     
     protected void setupGame() {
-    	this.arenaLogic = new Arena();
+    	this.game = new Game();
     }
     
     protected void setupRenderCanvas() {
@@ -55,6 +54,6 @@ public class Window {
 
         Render render = new Render();
         con.add(render); frame.setVisible(true);
-        arenaLogic.addObserver(render);
+        game.addObserver(render);
     }
 }

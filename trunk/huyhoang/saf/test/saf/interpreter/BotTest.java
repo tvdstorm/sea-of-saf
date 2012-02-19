@@ -155,6 +155,6 @@ public class BotTest {
 
 		bruceLee.performAction("punch_high");
 		assertEquals(90, jackieChan.getHitpoints());
-		jackieChan.getLastAction().equals("hit");
+		jackieChan.getLastState().equals("hit");
 	}
 }
