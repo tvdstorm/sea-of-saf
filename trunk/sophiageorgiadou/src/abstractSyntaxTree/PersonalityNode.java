@@ -1,5 +1,10 @@
 package abstractSyntaxTree;
 
+/**
+ * This class represents a personality node
+ * @author Sofia
+ *
+ */
 public class PersonalityNode {
 
 	private String strength;

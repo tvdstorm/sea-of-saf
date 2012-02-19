@@ -1,32 +1,30 @@
 package abstractSyntaxTree;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * This class represents the behaviour attributes
+ * @author Sofia
+ *
+ */
 public class Behavior {
 
 	private ArrayList<BehaviorRule> behaviorRules;
 	ArrayList<String> validMoves;
 	ArrayList<String> validAttacks;
 
-	public static HashSet<String> union(HashSet<String> x, HashSet<String> y) {
-		HashSet<String> t = new HashSet<String>(x);
-		t.addAll(y);
-		return t;
-	}
-
-	public static HashSet<String> intersection(HashSet<String> x,
-			HashSet<String> y) {
-		HashSet<String> t = new HashSet<String>(x);
-		t.retainAll(y);
-		return t;
-	}
-
+	/**
+	 * Constructor
+	 */
 	public Behavior() {
 		behaviorRules = new ArrayList<BehaviorRule>();
 	}
 
+	/**
+	 * Add rule to the list
+	 * @param rule
+	 */
 	public void addRule(BehaviorRule rule) {
 		this.behaviorRules.add(rule);
 	}
@@ -39,6 +37,10 @@ public class Behavior {
 		return temp;
 	}
 
+	/**
+	 * Calculate the valid moves and attacks
+	 * @param nowCondition
+	 */
 	public void calculateActualMoves(String nowCondition) {
 		String tempInput[] = nowCondition.split(" ");
 		String powerCondition = tempInput[0];

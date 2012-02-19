@@ -629,7 +629,6 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         FontMetrics metrics = offscreen.getFontMetrics();
         double xs = scaleX(x);
         double ys = scaleY(y);
-        int ws = metrics.stringWidth(s);
         int hs = metrics.getDescent();
         offscreen.drawString(s, (float) (xs), (float) (ys + hs));
         show();
@@ -651,7 +650,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     public static void show(int t) {
         defer = false;
         draw();
-        try { Thread.currentThread().sleep(t); }
+        try { Thread.sleep(t); }
         catch (InterruptedException e) { System.out.println("Error sleeping"); }
         defer = true;
     }

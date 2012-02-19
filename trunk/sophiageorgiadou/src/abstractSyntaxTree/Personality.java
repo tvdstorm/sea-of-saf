@@ -2,6 +2,11 @@ package abstractSyntaxTree;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the personalite attributes
+ * @author Sofia
+ *
+ */
 public class Personality {
 
 	private ArrayList<PersonalityNode> personality= new ArrayList<PersonalityNode>();
@@ -10,10 +15,17 @@ public class Personality {
 	private int punchReach=0;
 	private int kickReach=0;
 		
+	/**
+	 * add node to personality
+	 * @param node
+	 */
 	public void addNode(PersonalityNode node){
 		this.getPersonality().add(node);
 	}
 
+	/**
+	 * Calculate dynamic attributes
+	 */
 	public void calibrateAttributes(){
 		calculatePower("punchPower");
 		calculatePower("kickPower");
@@ -21,6 +33,10 @@ public class Personality {
 		calculatePower("kickReach");
 	}
 	
+	/**
+	 * Calculate power
+	 * @param type
+	 */
 	public void calculatePower(String type){
 		int sum=0;
 		int x=0;
