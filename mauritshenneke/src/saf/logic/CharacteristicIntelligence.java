@@ -1,6 +1,8 @@
-package saf.evaluators;
+package saf.logic;
 
 import java.util.List;
+
+import saf.evaluators.Characteristic;
 
 public class CharacteristicIntelligence {
 	private static final int defaultStrength = 5;

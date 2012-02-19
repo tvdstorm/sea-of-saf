@@ -1,9 +1,11 @@
-package saf.evaluators;
+package saf.logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+
+import saf.evaluators.BehaviourActionType;
 
 public class FightActionIntelligence extends BehaviourActionTypeIntelligence {
 	private final static String low = "low";

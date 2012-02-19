@@ -1,6 +1,8 @@
-package saf.evaluators;
+package saf.logic;
 
 import java.util.HashMap;
+
+import saf.evaluators.BehaviourActionType;
 
 public class MoveActionIntelligence extends BehaviourActionTypeIntelligence{
 	private final static int positionMoveValue = 5;
