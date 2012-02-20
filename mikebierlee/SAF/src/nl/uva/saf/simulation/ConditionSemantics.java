@@ -44,7 +44,6 @@ public class ConditionSemantics implements IConditionSemantics {
 
 		for (FighterBot enemy : players) {
 			if (enemy != fighter) {
-
 				evaluateDistance(fighter, enemy, truthTable);
 				evaluateStrength(fighter, enemy, truthTable);
 

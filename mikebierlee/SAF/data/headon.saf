@@ -1,0 +1,6 @@
+headoncollider {
+	punchReach = 10
+	punchPower = 10
+	
+	always [run_towards punch_high]
+}

@@ -25,8 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import nl.uva.saf.fdl.ActionSelector;
 import nl.uva.saf.fdl.types.ConditionType;
-import nl.uva.saf.fdl.types.FightActionType;
-import nl.uva.saf.fdl.types.MoveActionType;
 
 public class FightSimulator implements IFightSimulator {
 	private List<FighterBot> contestants;
@@ -99,12 +97,6 @@ public class FightSimulator implements IFightSimulator {
 
 	private void selectActions(FighterBot contestant, HashMap<ConditionType, Boolean> truthTable) {
 		actionSelector.selectActions(contestant.getFighterNode(), truthTable);
-
-		if (actionSelector.getFightAction() == FightActionType.unknown
-				|| actionSelector.getMoveAction() == MoveActionType.unknown) {
-			stop();
-		}
-
 		contestant.setMoveAction(actionSelector.getMoveAction());
 		contestant.setFightAction(actionSelector.getFightAction());
 	}
@@ -146,7 +138,8 @@ public class FightSimulator implements IFightSimulator {
 					actionExecutor.executeFighterActions(contestant, contestants, truthTable);
 					contestant.setNextTurn(actionExecutor.getTurnCost());
 					
-					//TODO: Prevent fighters from leaving the playfield
+					contestant.containInDimension(playFieldSize);
+					
 					//TODO: win condition
 				} else {
 					contestant.setNextTurn(contestant.getNextTurn() - 1);

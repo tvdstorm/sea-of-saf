@@ -1,0 +1,10 @@
+kindergartenkid {
+	punchReach = 10
+	kickReach = 2
+	punchPower = 3
+	kickPower = 7
+	
+	far [choose(run_away run_towards) choose(block_low block_high)]
+	near [run_away choose(block_low block_high)]
+	always [stand block_low] 
+}
