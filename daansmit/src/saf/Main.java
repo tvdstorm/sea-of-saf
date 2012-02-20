@@ -12,6 +12,7 @@ import saf.simulation.event.Event;
 import saf.syntax.Fighter;
 import saf.visualization.Visualizer;
 import saf.visualization.TextVisualizer;
+import saf.visualization.GraphicalVisualizer;
 
 public class Main
 {
@@ -69,13 +70,16 @@ public class Main
         System.out.println("");
 
         Simulation s = new Simulation(left, right);
-        Visualizer v = new TextVisualizer();
+        Visualizer graphics = new GraphicalVisualizer();
+        Visualizer text = new TextVisualizer();
 
         while (s.isRunning())
         {
             for (Event e : s.step())
             {
-                e.visualize(v);
+                System.out.print("event:");
+                e.visualize(graphics);
+                e.visualize(text);
             }
         }
     }

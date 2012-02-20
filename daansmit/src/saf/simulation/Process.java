@@ -50,16 +50,13 @@ public abstract class Process
         if (step == 0)
         {
             first(events);
-            first(events);
         }
         else if (step == duration)
         {
             last(events);
-            last(events);
         }
         else if (step < duration)
         {
-            every(events);
             every(events);
         }
         step++;

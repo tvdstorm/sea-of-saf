@@ -55,7 +55,10 @@ SIMULATION_EVENT_SOURCES=src/saf/simulation/event/ChangeHealth.java \
 	src/saf/simulation/event/Hit.java
 
 VISUALIZATION_SOURCES=src/saf/visualization/Visualizer.java \
+	src/saf/visualization/GraphicalVisualizer.java \
 	src/saf/visualization/TextVisualizer.java
+
+VISUALIZATION_SRC_IMAGES=src/saf/visualization/images/fighter_stand.gif
 
 PARSER_CLASSES=$(PARSER_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
 SYNTAX_CLASSES=$(SYNTAX_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
@@ -63,6 +66,7 @@ CHECK_CLASSES=$(CHECK_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
 SIMULATION_CLASSES=$(SIMULATION_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
 SIMULATION_EVENT_CLASSES=$(SIMULATION_EVENT_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
 VISUALIZATION_CLASSES=$(VISUALIZATION_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
+VISUALIZATION_CLASS_IMAGES=$(VISUALIZATION_SRC_IMAGES:$(SRC_DIR)/%=$(CLASS_DIR)/%)
 
 
 
@@ -72,7 +76,7 @@ VISUALIZATION_CLASSES=$(VISUALIZATION_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.c
 all: $(CLASS_DIR)/saf/Main.class
 
 
-$(CLASS_DIR)/saf/Main.class: $(SRC_DIR)/saf/Main.java parser $(SYNTAX_CLASSES) $(CHECK_CLASSES) $(SIMULATION_CLASSES) $(VISUALIZATION_CLASSES)
+$(CLASS_DIR)/saf/Main.class: $(SRC_DIR)/saf/Main.java parser $(SYNTAX_CLASSES) $(CHECK_CLASSES) $(SIMULATION_CLASSES) $(VISUALIZATION_CLASSES) $(VISUALIZATION_CLASS_IMAGES)
 	$(JC) $(ARGS) $(SRC_DIR)/saf/Main.java
 
 
@@ -100,8 +104,17 @@ $(CLASS_DIR)/saf/simulation/Simulation.class: $(SIMULATION_EVENT_CLASSES)
 $(CLASS_DIR)/saf/simulation/%.class: $(SRC_DIR)/saf/simulation/%.java
 	$(JC) $(ARGS) $<
 
+$(CLASS_DIR)/saf/visualization/GraphicalVisualizer.class: $(SRC_DIR)/saf/visualization/GraphicalVisualizer.java
+	$(JC) $(ARGS) $<
+
 $(CLASS_DIR)/saf/visualization/%.class: $(SRC_DIR)/saf/visualization/%.java
 	$(JC) $(ARGS) $<
+
+$(CLASS_DIR)/saf/visualization/images:
+	mkdir $(CLASS_DIR)/saf/visualization/images
+
+$(CLASS_DIR)/saf/visualization/images/%: $(SRC_DIR)/saf/visualization/images/% $(CLASS_DIR)/saf/visualization/images
+	cp $< $@
 
 clean:
 	rm -R classes/saf src/saf/parser/SAFParser.java src/saf/parser/SAFLexer.java src/saf/parser/SAF.tokens
