@@ -1,0 +1,236 @@
+options {	STATIC = false ;}
+
+PARSER_BEGIN(SAFGrammar)
+
+package grammar;
+
+import astelements.*;
+
+public class SAFGrammar
+{}
+
+PARSER_END(SAFGrammar)
+
+SKIP :
+{
+  	" "
+| 	"\t"
+| 	"\n"
+| 	"\r"
+}
+
+
+TOKEN : /* condition statements */
+{
+	< OR 		: "or" >
+|   < AND		: "and" >
+|   < CHOOSE 	: "choose" >
+}
+
+TOKEN : /* LITERALS */
+{
+  	< INTEGER_LITERAL :
+    < DECIMAL_LITERAL > ([ "l", "L" ])?
+| 	< HEX_LITERAL > ([ "l", "L" ])?
+| 	< OCTAL_LITERAL > ([ "l", "L" ])? >
+| 	< #DECIMAL_LITERAL : [ "1"-"9" ] ([ "0"-"9" ])* >
+| 	< #HEX_LITERAL : "0" [ "x", "X" ] ([ "0"-"9", "a"-"f", "A"-"F" ])+ >
+| 	< #OCTAL_LITERAL : "0" ([ "0"-"7" ])* >
+}
+
+TOKEN : /* IDENTIFIERS */
+{
+  	< IDENTIFIER :
+    	< LETTER >
+    	(
+      		< LETTER >
+    		| < DIGIT >
+    	)* >
+| 	< #LETTER : [ "_", "a"-"z", "A"-"Z" ] >
+| 	< #DIGIT : [ "0"-"9" ] >
+}
+
+TOKEN : /* definition brackets */
+{
+	< OPENACCOLADE 			: "{" >
+|   < CLOSEACCOLADE  		: "}" >
+| 	< OPENBRACKET 			: "(" >
+|   < CLOSEBRACKET  		: ")" >
+|   < OPENSQUAREBRACKET  	: "[" >
+|   < CLOSESQUAREBRACKET  	: "]" >
+|   < ASSIGNMENT : "=" >
+| 	< VALUE : [ "0"-"9" ] >
+}
+
+Bots Start() : 
+{
+  	Bot firstBot;
+  	Bot secondBot;
+}
+{ 
+  	firstBot  = CreateBot()
+  	secondBot = CreateBot()
+  	< EOF >
+	{
+		Bots bots 		= new Bots();
+        bots.setFirstBot(firstBot);
+        bots.setSecondBot(secondBot);
+	    return bots;
+	}
+} 
+
+Bot CreateBot() :
+{
+	Behaviour behaviour;
+	Bot bot = new Bot();
+	Token botName = new Token();
+}
+{
+  	(botName = <  IDENTIFIER >) < OPENACCOLADE > (Content(bot))* < CLOSEACCOLADE >
+  	{ 
+    	bot.setBotName(botName.toString());
+		return bot;
+  	}
+}
+
+void Content(Bot bot) :
+{}{	LOOKAHEAD(2) (addCharacteristic(bot))
+|  	(addBehaviour(bot))
+}
+
+void addCharacteristic(Bot bot) :
+{
+  	Token name 	= new Token();
+  	Token value = new Token();}
+{
+  	(
+    	  name =  < IDENTIFIER >
+  	)
+  	< ASSIGNMENT > (value =  < INTEGER_LITERAL >)
+  
+  	{	
+    	Characteristic characteristic = new Characteristic();
+    	characteristic.setName(name.toString());
+    	characteristic.setValue(Integer.parseInt(value.toString()));
+    	bot.addCharacteristic(characteristic);
+  	}
+}
+
+void addBehaviour(Bot bot) :
+{
+  	Behaviour behaviour = new Behaviour();  
+  	bot.addBehaviour(behaviour);
+}
+{
+  	ConditionRule(behaviour)  < OPENSQUAREBRACKET > MoveAction(behaviour) AttackAction(behaviour) < CLOSESQUAREBRACKET >
+}
+
+void ConditionRule(Behaviour behaviour) :
+{
+  	Token conditionType;
+  	ConditionChoices conditionChoices = new ConditionChoices();
+  	behaviour.setConditionChoices(conditionChoices);
+}
+{
+  	(
+		  conditionType = < IDENTIFIER >
+	)
+	{
+	  ConditionGroup conditionGroup = new ConditionGroup();
+	  conditionGroup.addConditionType(conditionType.toString());
+	  
+	  conditionChoices.addConditionGroup(conditionGroup);
+	}
+	RestCondition(conditionChoices)
+}
+
+void RestCondition(ConditionChoices conditionChoices) :
+{}
+{
+ 	(
+   	< OR >
+	{
+		conditionChoices.addConditionGroup(new ConditionGroup());
+	}
+	Term(conditionChoices))*
+}
+
+void Term(ConditionChoices conditionChoices) :
+{
+	Token conditionChoice;
+}
+{
+  	(
+		  conditionChoice = < IDENTIFIER >
+	)
+	{
+	 	ConditionGroup conditionGroup = conditionChoices.getLastCondition();
+	 	conditionGroup.addConditionType(conditionChoice.toString());
+	}
+	RestTerm(conditionChoices)
+}
+
+void RestTerm(ConditionChoices conditionChoices) :
+{
+  Token conditionChoice;
+}
+{
+	(
+   		< AND >
+   		(
+			  conditionChoice = < IDENTIFIER >
+		)
+		{
+	  		ConditionGroup conditionGroup = conditionChoices.getLastCondition();
+	  		conditionGroup.addConditionType(conditionChoice.toString());
+		}
+	)*
+}
+  
+
+void MoveAction(Behaviour behaviour) : 
+{}
+{
+	(
+	  	MoveType(behaviour) 
+| 		LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > (MoveType(behaviour))+ < CLOSEBRACKET >	
+		 
+	)
+}
+
+void MoveType(Behaviour behaviour) :
+{
+	Token moveType;
+}
+{
+  	(
+  		  moveType = < IDENTIFIER > 
+	)
+	{
+		behaviour.addMove(moveType.toString());
+	}
+}
+
+
+void AttackAction(Behaviour behaviour) :
+{}
+{
+	(
+	  	AttackType(behaviour)
+| 		LOOKAHEAD( 2 ) < CHOOSE > < OPENBRACKET > (AttackType(behaviour))+ < CLOSEBRACKET > 
+		
+	)
+}
+
+void AttackType(Behaviour behaviour) :
+{
+	Token attackType;
+}
+{
+  	(
+	  	  attackType = < IDENTIFIER >
+	)
+	{
+		behaviour.addAttack(attackType.toString());
+	}
+}
