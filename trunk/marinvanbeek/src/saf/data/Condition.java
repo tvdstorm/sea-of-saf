@@ -48,6 +48,13 @@ public class Condition implements Logic
         return requiredConditions;
     }
 
+    public boolean equals(Condition other)
+    {
+        String otherName = other.getName();
+
+        return name.equals(otherName);
+    }
+
     public String toString()
     {
         return name;

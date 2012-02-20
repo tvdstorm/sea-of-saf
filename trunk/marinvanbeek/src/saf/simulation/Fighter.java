@@ -6,6 +6,8 @@ import java.lang.Math;
 import java.util.List;
 
 public class Fighter {
+    public static final int MAX_STRENGTH = saf.data.Attribute.MAX_VALUE * 2;
+
     private saf.data.Fighter fighterData;
 
     private int timeToNextMove;
@@ -24,6 +26,8 @@ public class Fighter {
         this.movementDirection = movementDirection;
         this.strength = calculateStrength(fighterData.getAttributes());
         this.fighterData.setHealth(saf.data.Fighter.MAX_HEALTH);
+
+        System.out.println("<sim.Fighter> strength = " + strength);
     }
 
     /*

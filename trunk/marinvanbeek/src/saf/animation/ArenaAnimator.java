@@ -18,8 +18,8 @@ public class ArenaAnimator extends Animator
 
     public static final int ARENA_WIDTH = 512;
     public static final int ARENA_HEIGHT = 512;
-    public static final int ANIMATION_DELAY_MS = 1;
-    public static final int START_END_DELAY_MS = 500;
+    public static final int ANIMATION_DELAY_MS = 50;
+    public static final int START_END_DELAY_MS = 1500;
 
     private FighterAnimator leftAnimator;
     private FighterAnimator rightAnimator;

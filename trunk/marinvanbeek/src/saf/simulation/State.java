@@ -27,10 +27,11 @@ public class State {
                                                       Fighter opponent)
     {
         saf.data.Condition relativeStrength;
+        int strengthThreshold = Fighter.MAX_STRENGTH / 2;
         int strengthDifference = fighter.getStrength() - 
                                  opponent.getStrength();
 
-        if (strengthDifference < -2)
+        if (strengthDifference < -1 * strengthThreshold)
         {
             relativeStrength = new saf.data.Condition("much_weaker");
         }
@@ -42,7 +43,7 @@ public class State {
         {
             relativeStrength = new saf.data.Condition("even");
         }
-        else if (strengthDifference > 2)
+        else if (strengthDifference > strengthThreshold)
         {
             relativeStrength = new saf.data.Condition("much_stronger");
         }
@@ -62,7 +63,7 @@ public class State {
         int opponentPosition = opponent.getPosition().getX();
         int distanceToOpponent = Math.abs(fighterPosition - opponentPosition);
 
-        if (distanceToOpponent < saf.data.Move.RUN_DISTANCE)
+        if (distanceToOpponent < saf.data.Move.RUN_DISTANCE * 2)
         {
             distance = new saf.data.Condition("near");
         }

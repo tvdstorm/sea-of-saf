@@ -20,12 +20,27 @@ public class IntegrationSimulationAnimationTest extends RedirectOutput
     }
 
     @Test
-    public void testAnimatedFight()
+    public void randomTest()
     {
-        Random seedGenerator = new Random(0);
+        testAnimatedFight(new Random().nextInt());
+    }
+
+    @Test
+    public void pseudoRandomTest()
+    {
+        testAnimatedFight(3);
+    }
+
+    public void testAnimatedFight(int seed)
+    {
+        Random seedGenerator = new Random();
         Fighter leftRandomFighter = Fighter.getRandom(seedGenerator.nextInt());
         Fighter rightRandomFighter = 
                 Fighter.getRandom(seedGenerator.nextInt());
+
+        System.out.println("New fight, generated with seed " + seed);
+        System.out.println("In the left corner: " + leftRandomFighter);
+        System.out.println("In the right corner: " + rightRandomFighter);
             
         SimulationData data = runSimulation(leftRandomFighter, 
                                             rightRandomFighter);
