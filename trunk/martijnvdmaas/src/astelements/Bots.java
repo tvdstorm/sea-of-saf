@@ -8,12 +8,6 @@ public class Bots implements SAFElement
 	private Bot firstBot;
 	private Bot secondBot;
 	
-	
-	public String toString() 
-	{
-		return "Class: " + this.getClass().getName();
-	}
-
 	public Bot getFirstBot() 
 	{
 		return firstBot;

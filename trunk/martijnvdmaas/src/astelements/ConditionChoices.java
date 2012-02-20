@@ -1,10 +1,11 @@
 package astelements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ConditionChoices
 {
-	private ArrayList<ConditionGroup> conditionGroups;
+	private List<ConditionGroup> conditionGroups;
 	
 	public ConditionChoices() 
 	{
@@ -27,12 +28,12 @@ public class ConditionChoices
 		return "Class: " + this.getClass().getName();
 	}
 	
-	public ArrayList<ConditionGroup> getConditionGroups() 
+	public List<ConditionGroup> getConditionGroups() 
 	{
 		return conditionGroups;
 	}
 
-	public void setConditionGroups(ArrayList<ConditionGroup> conditionGroups) 
+	public void setConditionGroups(List<ConditionGroup> conditionGroups) 
 	{
 		this.conditionGroups = conditionGroups;
 	}

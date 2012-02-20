@@ -2,11 +2,25 @@ package game;
 
 import game.fighter.Fighter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
-import constants.SAFConstants;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
+import logger.ErrorLog;
+
+import sun.applet.Main;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 
 import astelements.Behaviour;
 import astelements.Bot;
@@ -14,6 +28,7 @@ import astelements.Bots;
 import astelements.Characteristic;
 import astelements.ConditionChoices;
 import astelements.ConditionGroup;
+import constants.SAFConstants;
 
 public class FightEngine extends Observable implements SAFConstants
 {
@@ -46,7 +61,7 @@ public class FightEngine extends Observable implements SAFConstants
 		return fighter;
 	}
 
-	private void initializeFighterCharacteristics(Fighter safFighter, ArrayList<Characteristic> characteristics)
+	private void initializeFighterCharacteristics(Fighter safFighter, List<Characteristic> characteristics)
 	{
 		for (Characteristic characteristic : characteristics)
 		{
@@ -115,16 +130,28 @@ public class FightEngine extends Observable implements SAFConstants
 
 			getLeftFighter().setHealth(currentLeftHealth);
 			getRightFighter().setHealth(currentRightHealth);
+			
+			playFightSound();
 
 			setChanged();
 			notifyObservers();
 		}
 	}
 
+	private void playFightSound()
+	{
+		File soundDirectory = new File(main.Main.getRelativeProjectPath() + "sounds");
+		File[] soundFiles = soundDirectory.listFiles();
+		
+		int randomSoundIndex = (int) (Math.random() * soundFiles.length);
+		
+		playSound(soundFiles[randomSoundIndex].getAbsolutePath());
+	}
+
 	private void setNextBehaviour(Fighter fighter, Behaviour inflictedBehaviour)
 	{
-		ArrayList<String> attackChoices = inflictedBehaviour.getAttackChoices();
-		ArrayList<String> moveChoices = inflictedBehaviour.getMoveChoices();
+		ArrayList<String> attackChoices = new ArrayList<>(inflictedBehaviour.getAttackChoices());
+		ArrayList<String> moveChoices = new ArrayList<>(inflictedBehaviour.getMoveChoices());
 
 		int randomAttackIndex = randomInt.nextInt(attackChoices.size());
 		int randomMoveIndex = randomInt.nextInt(moveChoices.size());
@@ -218,12 +245,16 @@ public class FightEngine extends Observable implements SAFConstants
 		boolean applicableConditionChoice = false;
 		for (ConditionGroup conditionGroup : choices.getConditionGroups())
 		{
-			boolean applicableCondition = true;
+			boolean isApplicableCondition = true;
 			for (String condition : conditionGroup.getConditionTypes())
 			{
-				conditionApplies(currentFighter, condition, opponentHealth, playerDistance);
+				if(!conditionApplies(currentFighter, condition, opponentHealth, playerDistance))
+				{
+					isApplicableCondition = false;
+				}
 			}
-			if (applicableCondition) applicableConditionChoice = true;
+			
+			if (isApplicableCondition) applicableConditionChoice = true;
 		}
 		return applicableConditionChoice;
 	}
@@ -272,6 +303,26 @@ public class FightEngine extends Observable implements SAFConstants
 
 		setChanged();
 		notifyObservers();
+	}
+
+	public static synchronized void playSound(final String url)
+	{
+		InputStream in;
+		try
+		{
+			in = new FileInputStream(url);
+			AudioStream as = new AudioStream(in);
+
+			AudioPlayer.player.start(as);  
+		}
+		catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			new ErrorLog(e.getMessage());
+		}
 	}
 
 	/* Getters and Setters: */

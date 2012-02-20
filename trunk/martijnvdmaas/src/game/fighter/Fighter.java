@@ -1,6 +1,8 @@
 package game.fighter;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import astelements.Behaviour;
 
 public class Fighter {
@@ -17,17 +19,19 @@ public class Fighter {
 	
 	private int health;
 	private String fighterName;
-	public ArrayList<Behaviour> getBehaviours() {
-		return behaviours;
-	}
 
 	private String currentAttack;
 	private String currentMove;
-	private ArrayList<Behaviour> behaviours;
+	private List<Behaviour> behaviours;
 
 	public Fighter(String fighterName) {
 		setHealth(100);
 		setFighterName(fighterName);
+	}
+	
+
+	public List<Behaviour> getBehaviours() {
+		return behaviours;
 	}
 	
 	public int getWeight() {
@@ -119,7 +123,7 @@ public class Fighter {
 		this.currentMove = currentMove;
 	}
 
-	public void setBehaviours(ArrayList<Behaviour> behaviours) {
+	public void setBehaviours(List<Behaviour> behaviours) {
 		this.behaviours = behaviours;
 	}
 }
