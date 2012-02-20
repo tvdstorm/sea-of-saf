@@ -2,7 +2,7 @@ package nl.tamasja.uva.saf.tree.ast;
 
 import nl.tamasja.uva.saf.tree.IFighterVisitor;
 
-public class Strength implements Property {
+public class Strength implements IProperty {
 	
 	private final String name;
 	private final int value;

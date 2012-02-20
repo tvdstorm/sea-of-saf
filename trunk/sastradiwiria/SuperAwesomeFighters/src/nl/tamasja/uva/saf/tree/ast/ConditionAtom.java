@@ -2,7 +2,7 @@ package nl.tamasja.uva.saf.tree.ast;
 
 import nl.tamasja.uva.saf.tree.IFighterVisitor;
 
-public class ConditionAtom implements Condition {
+public class ConditionAtom implements ICondition {
 
 	private final String name;
 	public ConditionAtom(String name) {
