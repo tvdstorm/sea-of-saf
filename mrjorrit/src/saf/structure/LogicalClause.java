@@ -1,6 +1,6 @@
 package saf.structure;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public abstract class LogicalClause extends Logical {
 	private final Logical leftHandSide;
@@ -22,7 +22,7 @@ public abstract class LogicalClause extends Logical {
 	public abstract boolean computeClause(boolean left, boolean right);
 	
 	@Override
-	public List<String> check(){
+	public ArrayList<String> check(){
 		
 		addErrors(leftHandSide.check());
 		addErrors(rightHandSide.check());

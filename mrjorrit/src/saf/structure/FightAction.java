@@ -1,6 +1,6 @@
 package saf.structure;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import saf.Checker.Check;
 
@@ -31,7 +31,7 @@ public class FightAction extends Check {
 	}
 	
 	@Override
-	public List<String> check() {
+	public ArrayList<String> check() {
 		// TODO Auto-generated method stub
 		return getErrors();
 	}

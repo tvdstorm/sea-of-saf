@@ -1,25 +1,25 @@
 package saf.structure;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import saf.Checker.Check;
 
 public class Behaviour extends Check {
 	
-	public Behaviour(List<Rule> rules)
+	public Behaviour(ArrayList<Rule> rules)
 	{
 		this.rules = rules;
 	}
 	
 	//Behaviour
-	private final List<Rule> rules;
+	private final ArrayList<Rule> rules;
 	
-	public List<Rule> getRules() {
+	public ArrayList<Rule> getRules() {
 		return rules;
 	}
 
 	@Override
-	public List<String> check(){
+	public ArrayList<String> check(){
 		boolean alwaysImplemented = false;
 		
 		if(this.rules.size() == 0)

@@ -1,27 +1,26 @@
 package saf.structure;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import saf.Checker.Check;
 
 public class Personality extends Check  {
 	
-	public Personality(List<Characteristic> characteristics)
+	public Personality(ArrayList<Characteristic> characteristics)
 	{
 		this.characteristics = characteristics;
 	}
 	
-	private final List<Characteristic> characteristics;
+	private final ArrayList<Characteristic> characteristics;
 	
-	public List<Characteristic> getCharacteristics() {
+	public ArrayList<Characteristic> getCharacteristics() {
 		return characteristics;
 	}
 
 	@Override
-	public List<String> check(){
+	public ArrayList<String> check(){
 		
-		List<Attribute> foundAttributes = new ArrayList<Attribute>(); 
+		ArrayList<Attribute> foundAttributes = new ArrayList<Attribute>(); 
 		for(Characteristic character : characteristics)
 		{
 			addErrors(character.check());

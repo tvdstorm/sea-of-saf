@@ -11,11 +11,34 @@ public class Engine {
 	
 	public void start()
 	{
-		while(!arena.getLeftFighterState().fighterLost() && !arena.getRightFighterState().fighterLost())
+		FighterState left = arena.getLeftFighterState();
+		FighterState right = arena.getRightFighterState();
+		
+		while(!left.fighterLost() && !right.fighterLost())
 		{
-			new FighterAI().determineActions(arena.getLeftFighterState(), arena.getRightFighterState());
+			FighterAI.determineAction(left, right);
+			FighterAI.determineAction(right, left);
+			
+			FighterAI.performAction(left, right);
+			FighterAI.performAction(right, left);
+			
+			left.incrementStep();
+			right.incrementStep();
+			wait(1);
 		}
 		
 		//Game Ends
 	}
+	
+	public void wait (int n){
+        
+        long t0, t1;
+
+        t0 =  System.currentTimeMillis();
+
+        do{
+            t1 = System.currentTimeMillis();
+        }
+        while ((t1 - t0) < (n * 10));
+    }
 }

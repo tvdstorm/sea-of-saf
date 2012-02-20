@@ -1,6 +1,6 @@
 package saf.structure;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class LogicalSimple extends Logical{
 	
@@ -26,7 +26,7 @@ public class LogicalSimple extends Logical{
 	}
 	
 	@Override
-	public List<String> check(){
+	public ArrayList<String> check(){
 		return getErrors();
 	}
 }

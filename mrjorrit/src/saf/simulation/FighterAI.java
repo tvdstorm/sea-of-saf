@@ -1,37 +1,21 @@
 package saf.simulation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import saf.structure.Fighter;
-import saf.structure.Rule;
-
 public class FighterAI 
-{
-	private ArrayList<Rule> possibleRules;
-	
-	public FighterAI()
+{	
+	public static void determineAction(FighterState fighterState, FighterState otherFighterState)
 	{
-		possibleRules = new ArrayList<Rule>();
-	}
-	
-	public void determineActions(FighterState left, FighterState right)
-	{
-		determineAction(left, right);
-		determineAction(right, left);
-	}
-	
-	private void determineAction(FighterState fighterState, FighterState otherFighterState)
-	{
-		if(fighterState.getState() == State.standing)
+		if(fighterState.getStep() >= 100)
 		{
-			ArrayList<Rule> rules = (ArrayList<Rule>) fighterState.getFighter().getBehaviour().getRules();
-			for(Rule rule : rules)
-			{
-				if(LogicalAI.computeLogical(fighterState, otherFighterState, rule.getLogical()));
-					possibleRules.add(rule);
-			}
-			
+			RuleAI.setPossibleRule(fighterState, otherFighterState);
+			MoveActionAI.setMoveAction(fighterState);
+			FightActionAI.setFightAction(fighterState);
+			fighterState.setStep(0);
 		}
+	}
+	
+	public static void performAction(FighterState fighterState, FighterState otherFighterState)
+	{
+		MoveActionAI.doMoveAction(fighterState, otherFighterState);
+		FightActionAI.doFightAction(fighterState, otherFighterState);
 	}
 }

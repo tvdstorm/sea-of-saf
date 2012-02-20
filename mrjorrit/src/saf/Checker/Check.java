@@ -1,14 +1,13 @@
 package saf.Checker;
 
-import java.util.List;
 import java.util.ArrayList;
 
 public abstract class Check {
 	
-	public abstract List<String> check();
+	public abstract ArrayList<String> check();
 	
-	private List<String> errors = new ArrayList<String>();
-	public List<String> getErrors()
+	private ArrayList<String> errors = new ArrayList<String>();
+	public ArrayList<String> getErrors()
 	{
 		return errors;
 	}
@@ -17,7 +16,7 @@ public abstract class Check {
 		errors.add(error);
 	}
 	
-	public void addErrors(List<String> errors)
+	public void addErrors(ArrayList<String> errors)
 	{
 		this.errors.addAll(errors);
 	}
