@@ -1,0 +1,14 @@
+Chicken
+{
+  kickReach  = 4
+  punchReach = 5
+  kickPower  = 9
+  punchPower = 9
+  far [run_towards kick_low]
+  near [run_away kick_low]
+  even [choose(crouch walk_towards) choose(block_high punch_low)]
+  always and weaker[crouch block_low] 
+  near [run_away kick_low]
+  even [choose(crouch walk_towards) choose(block_high punch_low)]
+  always [run_towards kick_high]
+}

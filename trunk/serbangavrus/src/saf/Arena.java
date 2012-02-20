@@ -1,14 +1,14 @@
 package saf;
 
 public class Arena {
-	static private final Integer size = 10;
+	static private final Integer size = 20;
 	
 	private Arena()
 	{
 		
 	}
 	
-	public int getSize()
+	static public int getSize()
 	{
 		return size;
 	}

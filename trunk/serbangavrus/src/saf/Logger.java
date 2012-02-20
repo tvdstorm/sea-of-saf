@@ -1,5 +1,6 @@
 package saf;
 
+
 public class Logger {
 	
 	private String entity;

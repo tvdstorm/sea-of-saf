@@ -1,9 +1,8 @@
 package saf;
 
-import saf.Moves.*;
-import saf.Attacks.*;
-import saf.Moves.RunTowards;
-import nodes.*;
+import saf.attacks.*;
+import saf.moves.*;
+import safreader.nodes.*;
 
 public class Bot {
 	
@@ -20,13 +19,13 @@ public class Bot {
 	// BotTactic helps with fetching the move and attack(that appear in the SAF specifications) to be performed by the Bot
 	private BotTactic tactic = null;
 	
-	// Values that describe the state of the bot
+	// Values that describe the body language of the bot
 	private boolean jump = false, crouch = false, stand = false;
 	// Attack related states
 	private boolean punchLow = false, punchHigh = false, kickLow = false, kickHigh = false, blockLow = false, blockHigh = false;
 
 	// The health of the Bot, 100 is maximum. If health is below 0 the Bot is defeated
-	private int health;
+	private int health = 100;
 
 	// The bot's position in the arena
 	private int position;
@@ -40,26 +39,34 @@ public class Bot {
 	// Bot's strengths
 	private int punchReach, kickReach, kickPower, punchPower, speed;
 	
+	// Used to log the important actions of the Bot
 	private Logger logger;
+	
+	// Defines when the difference between the strengths of the bots is high enough
+	// That it's considered that one bot is much weaker than the other
+	private final int WEAKER = 4;
 
 	public Bot(Fighter f, int position)
 	{
-		this.position = position;
 		fighter = f;
-		
-		// Full health is 100
-		health = 100;
+		this.position = position;
 		
 		// Set the strengths
+		setStrengths();
+		
+		speed = this.calculateSpeed();
+		botName	= f.getName();
+		logger = new Logger(botName);
+	}
+	
+	// Sets the Bot's strengths as defined in the SAF personality specifications
+	private void setStrengths()
+	{
 		BotPersonality bp = new BotPersonality(fighter.getPersonality());
 		punchReach = bp.getPunchReach();
 		kickReach = bp.getKickReach();
 		kickPower = bp.getKickPower();
 		punchPower = bp.getPunchPower();
-		
-		speed = this.calculateSpeed();
-		botName	= f.getName();
-		logger = new Logger(botName);
 	}
 
 	// Set's the currentmove and currentattack based on the opponent's properties
@@ -116,7 +123,7 @@ public class Bot {
 	// Instantiates the tactic property
 	private BotTactic getTactic()
 	{
-		return new BotTactic(fighter, this, opponent);
+		return new BotTactic(fighter, this);
 	}
 	
 	// Calculates the Bot's speed based on it's strengths
@@ -188,9 +195,19 @@ public class Bot {
 		punchLow = val;
 	}
 	
+	public boolean getPunchLow()
+	{
+		return punchLow;
+	}
+	
 	public void setPunchHigh(Boolean val)
 	{
 		punchHigh = val;
+	}
+	
+	public boolean getPunchHigh()
+	{
+		return punchHigh;
 	}
 	
 	public void setKickHigh(Boolean val)
@@ -198,9 +215,19 @@ public class Bot {
 		kickHigh = val;
 	}
 	
+	public boolean getKickHigh()
+	{
+		return kickHigh;
+	}
+	
 	public void setKickLow(Boolean val)
 	{
 		kickLow = val;
+	}
+	
+	public boolean getKickLow()
+	{
+		return kickLow;
 	}
 	
 	public void setBlockLow(Boolean val)
@@ -250,27 +277,13 @@ public class Bot {
 	// Returns weather or not the opponent is weaker
 	public boolean isOpponentWeaker()
 	{
-		if(getStrengthDifference() > 0)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return getStrengthDifference() > 0;
 	}
 	
 	// Returns weather or not the opponent is much weaker
 	public boolean isOpponentMuchWeaker()
 	{
-		if(getStrengthDifference() > 4)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return getStrengthDifference() > WEAKER;
 	}
 	
 	// Returns weather or not the opponent is stronger
@@ -401,6 +414,21 @@ public class Bot {
 	public void setStand(boolean s)
 	{
 		stand = s;
+	}
+	
+	public boolean getJump()
+	{
+		return jump;
+	}
+	
+	public boolean getCrouch()
+	{
+		return crouch;
+	}
+	
+	public boolean getStand()
+	{
+		return stand;
 	}
 	
 	public int getPunchPower()

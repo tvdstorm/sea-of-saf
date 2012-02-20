@@ -1,16 +1,26 @@
 package saf;
 
+import animator.Animator;
+
 public class Cronos {
 	private Bot bot1, bot2;
 	private Logger logger = new Logger("Cronos");
+	private Animator animator;
 	
-	public Cronos(Bot b1, Bot b2)
+	public Cronos(Bot b1, Bot b2, Animator a)
 	{
 		bot1 = b1;
 		bot2 = b2;
+		animator = a;
 
 		bot1.addOpponent(b2);
 		bot2.addOpponent(b1);
+	}
+	
+	public void startFight()
+	{
+		animator.init();
+		fight();
 	}
 	
 	public void fight()
@@ -30,8 +40,18 @@ public class Cronos {
 			// Execute the previously decided tactic
 			bot1.doTactic();
 			bot2.doTactic();
+			
+			animator.animate();
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				logger.log("Thread has been interrupted");
+				e.printStackTrace();
+			}
 		}
 		
+		animator.matchFinished();
 		showWinner();
 	}
 	
