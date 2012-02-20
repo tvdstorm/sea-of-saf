@@ -8,13 +8,14 @@ options {
 
 
 @header {
-  package nl.tamasja.uva.saf.tree.ast;
+  package nl.tamasja.uva.saf.grammar;
   import nl.tamasja.uva.saf.tree.ast.*;
   import java.util.ArrayList;
 }
 
 @lexer::header {
-  package nl.tamasja.uva.saf.tree.ast;
+  package nl.tamasja.uva.saf.grammar;
+  
 }
 
 // Ignore whitespaces, tabs, eol, etc by removing it from the default channel.
@@ -33,10 +34,10 @@ fighter returns [Fighter fighter]:
   '}'
 ;
 
-properties returns [ArrayList<Property> properties]
+properties returns [ArrayList<IProperty> properties]
 @init
     {
-      $properties = new ArrayList<Property>();
+      $properties = new ArrayList<IProperty>();
     }
 :
   (strength {$properties.add($strength.strength);}
@@ -53,15 +54,15 @@ behaviour returns [Behaviour behaviour]:
   condition '[' moveAction=action fightAction=action ']' {$behaviour = new Behaviour($condition.condition,$moveAction.action,$fightAction.action);}
 ;
 
-action returns [Action action]: 
+action returns [IAction action]: 
   ident {$action = new ActionAtom($ident.text);}
   | choice {$action = new ChooseAction($choice.actionList);}
 ;
 
-choice returns [ArrayList<Action> actionList]
+choice returns [ArrayList<IAction> actionList]
 @init
     {
-      $actionList = new ArrayList<Action>();
+      $actionList = new ArrayList<IAction>();
     }
 :
   'choose(' (ident {$actionList.add( new ActionAtom($ident.text) );} )+ ')'
@@ -74,19 +75,19 @@ parse2:
 
 
 
-condition returns [Condition condition]:
+condition returns [ICondition condition]:
   orCondition {$condition = $orCondition.condition;}
 ;
 
-orCondition returns [Condition condition]:
+orCondition returns [ICondition condition]:
   lc=andCondition {$condition=$lc.condition;} ('or' rc=andCondition {$condition = new OrCondition($condition,$rc.condition); } )*
 ;
 
-andCondition returns [Condition condition]:
+andCondition returns [ICondition condition]:
   lc=atom {$condition=$lc.condition;} ('and' rc=atom {$condition=new AndCondition($condition,$rc.condition);} )*
 ;
 
-atom returns [Condition condition]:
+atom returns [ICondition condition]:
   ident {$condition = new ConditionAtom($ident.text);} | '('! condition ')'! {$condition = $condition.condition;}
 ;
 

@@ -2,7 +2,8 @@ package nl.tamasja.uva.saf.tree;
 
 import java.io.IOException;
 
-//import nl.tamasja.uva.saf.SAFParser.parse_return;
+import nl.tamasja.uva.saf.grammar.SAFLexer;
+import nl.tamasja.uva.saf.grammar.SAFParser;
 import nl.tamasja.uva.saf.tree.ast.*;
 
 import org.antlr.runtime.ANTLRFileStream;
@@ -10,9 +11,6 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
-
-//import nl.tamasja.uva.saf.SAFParser.parse_return;
-
 
 public class FighterAstLoader {
 	

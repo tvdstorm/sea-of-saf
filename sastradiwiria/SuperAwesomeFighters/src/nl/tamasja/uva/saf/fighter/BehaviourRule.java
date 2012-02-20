@@ -32,14 +32,6 @@ public class BehaviourRule {
 
 		moveAction.execute(self);
 		fightAction.execute(self);
-		
-		//self.behaviour.setCurrentFightAction( (FightAction) fightAction);
-		
-		
-		//return (FightAction) fightAction;
 	}
 	
-	public FightAction_old getFightAction() {
-		return (FightAction_old) fightAction;
-	}
 }
