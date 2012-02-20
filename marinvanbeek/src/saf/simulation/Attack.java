@@ -48,15 +48,16 @@ public abstract class Attack
 
     private static int determineDamage(saf.data.Attack attack)
     {
-        int damage;
+        int damage = 0;
         String attackName = attack.getName();
 
-        if (attackName.equals("high_kick") ||
-            attackName.equals("low_kick"))
+        if (attackName.equals("kick_high") ||
+            attackName.equals("kick_low"))
         {
             damage = saf.data.Fighter.MAX_HEALTH / 2;
         }
-        else
+        else if (attackName.equals("punch_high") ||
+                 attackName.equals("punch_low"))
         {
             damage = saf.data.Fighter.MAX_HEALTH / 3;
         }

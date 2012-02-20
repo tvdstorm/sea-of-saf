@@ -42,6 +42,7 @@ single_check: all
 
 clean:
 	rm -rf build/*
+	rm *results.txt
 
 
 $(DATA_CLASSES): $(DATA_SOURCES)

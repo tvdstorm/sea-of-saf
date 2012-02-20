@@ -17,6 +17,7 @@ public abstract class Animator extends JFrame
     public Animator(String windowName, int width, int height)
     {
         setTitle(windowName);
+        setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(width, height);
         setVisible(true);
