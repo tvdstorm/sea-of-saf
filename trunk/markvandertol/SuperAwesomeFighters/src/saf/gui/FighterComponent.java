@@ -76,8 +76,8 @@ public class FighterComponent extends JComponent {
 		paintHud(g, player, arena);
 	}
 	
-	private int getStringWidth(String str) {
-		FontMetrics fm = getFontMetrics(getFont());
+	private int getStringWidth(Graphics2D g, String str) {
+		FontMetrics fm = getFontMetrics(g.getFont());
 		return fm.stringWidth(str);
 	}
 	
@@ -107,14 +107,14 @@ public class FighterComponent extends JComponent {
 			g.setColor(COLOR_WINTEXT);
 
 
-			int xpos = getWidth() / 2 - getStringWidth(TEXT_PLAYER_WON) / 2;
+			int xpos = getWidth() / 2 - getStringWidth(g, TEXT_PLAYER_WON) / 2;
 			g.drawString(TEXT_PLAYER_WON, xpos , 175);
 		}
 	}
 
 	private void paintHudLastMoveAction(Graphics2D g, Fighter player) {
 		String lastMove = (player.getLastMoveAction() != null) ? player.getLastMoveAction().toString() : "";
-		g.drawString(lastMove , 250 - getStringWidth(lastMove), 275);
+		g.drawString(lastMove , 250 - getStringWidth(g, lastMove) - 25, 275);
 	}
 
 	private void paintHudDistance(Graphics2D g, Fighter player, Arena arena) {
@@ -149,10 +149,12 @@ public class FighterComponent extends JComponent {
 		
 		boolean legHigh = FightAction.block_low.equals(state) || FightAction.kick_high.equals(state);
 		
-		if (state.isBlock())
-			g.setColor(COLOR_STICKMAN_BLOCK);
-		if (state.isKick())
-			g.setColor(COLOR_STICKMAN_ATTACK);
+		if (state != null) {
+			if (state.isBlock())
+				g.setColor(COLOR_STICKMAN_BLOCK);
+			if (state.isKick())
+				g.setColor(COLOR_STICKMAN_ATTACK);
+		}
 		g.drawLine(centerXOffset, Y_OFFSET_LEG, centerXOffset + getTransformedWidth(LEG_WIDTH), Y_OFFSET_LEG + ((legHigh) ? -LEG_HEIGHT /2 : LEG_HEIGHT));
 		g.setColor(restoreColor);
 	}
@@ -169,16 +171,20 @@ public class FighterComponent extends JComponent {
 		Color restoreColor = g.getColor();
 		
 		int armDiag = 0;
-		if (FightAction.punch_high.equals(state))
-			armDiag = -Y_OFFSET_PUNCH;
-		if (FightAction.punch_low.equals(state))
-			armDiag = Y_OFFSET_PUNCH;
+		if (state != null && state.isPunch()) {
+			if (state.isHigh())
+				armDiag = -Y_OFFSET_PUNCH;
+			else
+				armDiag = Y_OFFSET_PUNCH;
+		}
 		g.drawLine(centerXOffset, Y_OFFSET_ARM, centerXOffset - getTransformedWidth(ARM_WIDTH), Y_OFFSET_ARM - armDiag);
 			
-		if (FightAction.block_high.equals(state))
-			g.setColor(COLOR_STICKMAN_BLOCK);
-		if (state.isPunch())
-			g.setColor(COLOR_STICKMAN_ATTACK);
+		if (state != null) {
+			if (state.isBlock() && state.isHigh())
+				g.setColor(COLOR_STICKMAN_BLOCK);
+			if (state.isPunch())
+				g.setColor(COLOR_STICKMAN_ATTACK);
+		}
 		
 		g.drawLine(centerXOffset, Y_OFFSET_ARM, centerXOffset + getTransformedWidth(ARM_WIDTH), Y_OFFSET_ARM + armDiag);	
 		
