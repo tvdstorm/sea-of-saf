@@ -61,7 +61,10 @@ public class Printer implements Visitor
 		builder.append("actions: ");
 		List<Action> actions = behaviour.getActions();
 		for(Action action : actions)
+		{
 			action.accept(this);
+			builder.append(" ");
+		}
 		builder.append("\n");
 	}
 
@@ -70,7 +73,10 @@ public class Printer implements Visitor
 	{
 		builder.append("choose(");
 		for(Action action : choose.getOptions())
+		{
 			action.accept(this);
+			builder.append(" ");
+		}
 		builder.append(")");
 	}
 
