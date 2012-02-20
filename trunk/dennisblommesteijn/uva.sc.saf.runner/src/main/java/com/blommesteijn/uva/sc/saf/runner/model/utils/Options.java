@@ -1,5 +1,6 @@
 package com.blommesteijn.uva.sc.saf.runner.model.utils;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import gnu.getopt.Getopt;
 import gnu.getopt.LongOpt;
 
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.blommesteijn.uva.sc.saf.runner.view.CliMessager;
+import com.blommesteijn.uva.sc.saf.runner.view.CliMessenger;
 import com.blommesteijn.uva.sc.saf.runner.view.ExitCode;
 
 public class Options
@@ -19,6 +20,8 @@ public class Options
 	public static final String VERSION = "version";
 	public static final String GUI = "gui";
 	public static final String COMPILE = "compile";
+	public static final String APP_NAME = "appName";
+	public static final String APP_VERSION = "appVersion";
 
 	
 	private Map<String, List<String>> _arguments = null;
@@ -28,10 +31,13 @@ public class Options
 		this.load(appName, appVersion, args);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void load(String appName, String appVersion, String[] args)
 	{
 		//parsed argument container
 		_arguments = new HashMap<String,List<String>>();
+		_arguments.put(APP_NAME, Arrays.asList(new String[] { appName }));
+		_arguments.put(APP_VERSION, Arrays.asList(new String[] { appVersion }));
 		
 		//long arguments
 		List<LongOpt> longOpts = new LinkedList<LongOpt>();
@@ -55,12 +61,12 @@ public class Options
 							"--"+VERSION+" (-v) version number" +
 							"--"+DEBUG+" (-d) debug output" +
 							"-r runtime options]";
-					CliMessager.exit(ExitCode.EC_OK, msg);
+					CliMessenger.exit(ExitCode.EC_OK, msg);
 					break;
 				//version
 				case 'v':
 					msg = appName + ": " + appVersion;
-					CliMessager.exit(ExitCode.EC_OK, msg);
+					CliMessenger.exit(ExitCode.EC_OK, msg);
 					break;
 				//debug
 				case 'd':
