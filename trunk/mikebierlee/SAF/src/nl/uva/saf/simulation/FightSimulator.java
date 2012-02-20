@@ -35,6 +35,8 @@ public class FightSimulator implements IFightSimulator {
 	private final IConditionSemantics conditionSemantics;
 	private final IActionExecutor actionExecutor;
 
+	private List<IFightEndEventListener> fightEndEventListeners = new ArrayList<IFightEndEventListener>();
+
 	private volatile FighterBot winner;
 
 	private Dimension playFieldSize;
@@ -61,6 +63,27 @@ public class FightSimulator implements IFightSimulator {
 		bot.setSpawnPosition(new Vector2d(new Vector2d(50 + (contestants.size() * (playFieldSize.width - 100)),
 				playFieldSize.height / 2)));
 		contestants.add(bot);
+	}
+
+	@Override
+	public synchronized void addEventListener(IFightEndEventListener listener) {
+		fightEndEventListeners.add(listener);
+	}
+
+	@Override
+	public synchronized void removeEventListener(IFightEndEventListener listener) {
+		fightEndEventListeners.remove(listener);
+	}
+
+	private synchronized void fireEndFightEvent() {
+		if (fightEndEventListeners.size() > 0) {
+			FightEndEvent event = new FightEndEvent(this);
+			event.setWinner(winner);
+
+			for (IFightEndEventListener listener : fightEndEventListeners) {
+				listener.fightEnd(event);
+			}
+		}
 	}
 
 	@Override
@@ -124,7 +147,7 @@ public class FightSimulator implements IFightSimulator {
 	public void stop() {
 		fightInProgress = false;
 	}
-	
+
 	@Override
 	public FighterBot getWinner() {
 		return winner;
@@ -165,6 +188,7 @@ public class FightSimulator implements IFightSimulator {
 					winner = winners.get(0);
 				}
 
+				fireEndFightEvent();
 				stop();
 			}
 		}

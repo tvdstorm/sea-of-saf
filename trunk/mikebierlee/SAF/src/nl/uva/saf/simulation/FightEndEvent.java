@@ -18,35 +18,21 @@
 
 package nl.uva.saf.simulation;
 
-import java.awt.Dimension;
-import java.util.List;
+import java.util.EventObject;
 
-public interface IFightSimulator {
-	public void update();
+public class FightEndEvent extends EventObject {
+	private static final long serialVersionUID = 4496172217813878256L;
+	private FighterBot winner;
 
-	public void addContestant(FighterBot bot) throws PlayfieldFullException;
+	public FightEndEvent(Object source) {
+		super(source);
+	}
 
-	public void clearContestants() throws FightInProgressException;
+	public FighterBot getWinner() {
+		return winner;
+	}
 
-	public void dispose();
-
-	public boolean isDisposed();
-
-	public void start();
-
-	public void stop();
-
-	public boolean isRunning();
-
-	public List<FighterBot> getContestants();
-
-	public Dimension getPlayFieldSize();
-
-	public void setPlayFieldSize(Dimension playFieldSize);
-
-	public FighterBot getWinner();
-
-	public void addEventListener(IFightEndEventListener listener);
-
-	public void removeEventListener(IFightEndEventListener listener);
+	public void setWinner(FighterBot winner) {
+		this.winner = winner;
+	}
 }
