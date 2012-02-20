@@ -75,11 +75,11 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 	public void visit(Bots bots) throws Exception
 	{
 		/* Firstbot and Secondbot should be instantiated */
-		if (bots.getFirstBot() == null)
+		if (bots.getLeftBot() == null)
 		{
 			ErrorLog.throwException(new Exception("First bot is not instantiated"));
 		}
-		if (bots.getSecondBot() == null)
+		if (bots.getRightBot() == null)
 		{
 			ErrorLog.throwException(new Exception("Second bot is not instantiated"));
 		}

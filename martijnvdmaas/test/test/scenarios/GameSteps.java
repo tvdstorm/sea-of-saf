@@ -90,8 +90,8 @@ public class GameSteps extends Steps
 	public void aPlayerXWithNamse(String name) throws ParseException, IOException
 	{
 		bots = new Parser(Main.getRelativeProjectPath() + "input\\" + name).getBots();
-		leftBot = bots.getFirstBot().getBotName();
-		rightBot = bots.getSecondBot().getBotName();
+		leftBot = bots.getLeftBot().getBotName();
+		rightBot = bots.getRightBot().getBotName();
 	}
 
 	@When("I play till the game is finished")

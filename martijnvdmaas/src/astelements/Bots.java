@@ -5,36 +5,36 @@ import visitor.SAFElementVisitor;
 
 public class Bots implements SAFElement
 {
-	private Bot firstBot;
-	private Bot secondBot;
+	private Bot leftBot;
+	private Bot rightBot;
 	
-	public Bot getFirstBot() 
+	public Bot getLeftBot() 
 	{
-		return firstBot;
+		return leftBot;
 	}
 
 
-	public void setFirstBot(Bot firstBot) 
+	public void setLeftBot(Bot leftBot) 
 	{
-		this.firstBot = firstBot;
+		this.leftBot = leftBot;
 	}
 
 
-	public Bot getSecondBot() 
+	public Bot getRightBot() 
 	{
-		return secondBot;
+		return rightBot;
 	}
 
 
-	public void setSecondBot(Bot secondBot) 
+	public void setRightBot(Bot leftBot) 
 	{
-		this.secondBot = secondBot;
+		this.rightBot = leftBot;
 	}
 
 	@Override
 	public void accept(SAFElementVisitor visitor) throws Exception {
-		firstBot.accept(visitor);
-		secondBot.accept(visitor);
+		leftBot.accept(visitor);
+		rightBot.accept(visitor);
 		
 		visitor.visit(this);
 	}
