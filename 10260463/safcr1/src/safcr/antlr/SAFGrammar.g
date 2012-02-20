@@ -43,25 +43,11 @@ characteristic returns [Node n]
     
 behaviour returns [Node n]
     :   {$n = new Behaviour();}
-        (s=statement {$n.addNode($s.n);})*
-    ;
-    
-statement returns [Node n]
-    :   o=or_statement {$n = $o.n;}
-    ;
-    
-or_statement returns [Node n]    
-    :   a=and_statement {$n = $a.n;}
-       (OR o=or_statement {$n = new Or($n, $o.n);})*
-    ;
-    
-and_statement returns [Node n]
-    :   r=rule  {$n = $r.n;}
-       (AND o=statement {$n = new And($n, $o.n);})*
+        (s=rule {$n.addNode($s.n);})*
     ;
 
 rule returns [Node n]
-    :   c=condition a=action {$n = new Rule($c.n,$a.n);}
+    :   c=statement a=action {$n = new Rule($c.n,$a.n);}
     ;
 
 action returns [Node n]
@@ -70,9 +56,24 @@ action returns [Node n]
         (a2=action_type {$n.addNode(a2);})? 
         ']'
     ;
+    
+statement returns [Node n]
+    :   o=or_statement {$n = $o.n;}
+    ;
+    
+or_statement returns [Node n]    
+    :   a1=and_statement {$n = $a1.n;}
+       (OR a2=and_statement {$n = new Or($n, $a2.n);})*
+    ;
+    
+and_statement returns [Node n]
+    :   c1=condition  {$n = $c1.n;}
+       (AND c2=condition {$n = new And($n, $c2.n);})*
+    ;
     		
 condition returns [Node n]
     :   i=ID {$n = new Condition($i.text);}
+    |   '(' s=statement ')'{$n = $s.n;}
     ;
 
 action_type returns [Node n]

@@ -12,6 +12,7 @@ import org.antlr.runtime.ANTLRStringStream;
 import safcr.antlr.SAFGrammarLexer;
 import safcr.antlr.SAFGrammarParser;
 import safcr.ast.*;
+import safcr.check.*;
 
 public class Test {
 
@@ -24,11 +25,15 @@ public class Test {
 		SAFGrammarParser parser = new SAFGrammarParser(tokenStream);
 			
 		Node tree = parser.saf();
-		//System.out.println(tree.toTreeString(""));
+		//tree.accept(new TreePrinter());
 		
-		for(String error : tree.getErrors()){
-			System.err.println(error);
-		}
+		Check check = new Check();
+		CheckVisitor c = new CheckVisitor();
+		
+		c.setCheck(check);
+		tree.accept(c);
+		
+		check.printErrors();
 	}
 
 }
