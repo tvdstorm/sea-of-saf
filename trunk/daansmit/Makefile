@@ -56,9 +56,34 @@ SIMULATION_EVENT_SOURCES=src/saf/simulation/event/ChangeHealth.java \
 
 VISUALIZATION_SOURCES=src/saf/visualization/Visualizer.java \
 	src/saf/visualization/GraphicalVisualizer.java \
-	src/saf/visualization/TextVisualizer.java
+	src/saf/visualization/TextVisualizer.java \
+	src/saf/visualization/Sprite.java \
+	src/saf/visualization/MirrorImageIcon.java
 
-VISUALIZATION_SRC_IMAGES=src/saf/visualization/images/fighter_stand.gif
+VISUALIZATION_SRC_IMAGES=src/saf/visualization/images/jump_punch_high.gif \
+	src/saf/visualization/images/dead.gif \
+	src/saf/visualization/images/jump.gif \
+	src/saf/visualization/images/crouch_punch_low.gif \
+	src/saf/visualization/images/stand_block_high.gif \
+	src/saf/visualization/images/jump_block_high.gif \
+	src/saf/visualization/images/crouch_kick_high.gif \
+	src/saf/visualization/images/stand_punch_low.gif \
+	src/saf/visualization/images/jump_block_low.gif \
+	src/saf/visualization/images/jump_kick_high.gif \
+	src/saf/visualization/images/crouch_kick_low.gif \
+	src/saf/visualization/images/stand_kick_high.gif \
+	src/saf/visualization/images/stand_kick_low.gif \
+	src/saf/visualization/images/crouch.gif \
+	src/saf/visualization/images/crouch_block_low.gif \
+	src/saf/visualization/images/jump_kick_low.gif \
+	src/saf/visualization/images/jump_punch_low.gif \
+	src/saf/visualization/images/crouch_block_high.gif \
+	src/saf/visualization/images/stand_punch_high.gif \
+	src/saf/visualization/images/stand_block_low.gif \
+	src/saf/visualization/images/crouch_punch_high.gif \
+	src/saf/visualization/images/stand.gif \
+	src/saf/visualization/images/background.gif
+
 
 PARSER_CLASSES=$(PARSER_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
 SYNTAX_CLASSES=$(SYNTAX_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)

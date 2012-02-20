@@ -9,7 +9,7 @@ import saf.syntax.Response;
 
 public class Fight extends Process
 {
-    private final static int BASE_REACH = 10;
+    private final static int BASE_REACH = 42;
     private final static int BASE_DAMAGE = 20;
     private final static int BLOCK_REDUCTION = 10;
     private final int punchDamage;

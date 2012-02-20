@@ -1,5 +1,6 @@
 package saf;
 
+import java.lang.Thread;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,10 @@ import saf.visualization.GraphicalVisualizer;
 
 public class Main
 {
+    private static final int MAX_STEPS = 1000;
+
     public static void main(String[] args)
-        throws RecognitionException, java.io.IOException
+        throws RecognitionException, java.io.IOException, InterruptedException
     {
         for (String s : args)
         {
@@ -48,12 +51,14 @@ public class Main
             System.out.println("");
         }
 
-        Fighter left = SAFParser.parseFromString("chicken { "
-                                                 + "punchPower=1 "
-                                                 + "kickPower=1 "
-                                                 + "near [run_away block_low] "
-                                                 + "always [crouch block_low] "
-                                                 + "}");
+        // Fighter left = SAFParser.parseFromString("chicken { "
+        //                                          + "punchPower=1 "
+        //                                          + "kickPower=1 "
+        //                                          + "near [run_away block_low] "
+        //                                          + "always [crouch block_low] "
+        //                                          + "}");
+
+        Fighter left = SAFParser.parseFromFile("../data/JackieChan.saf");
         CheckLog log = new CheckLog();
         left.check(log);
         System.out.println(log.toString());
@@ -64,23 +69,31 @@ public class Main
                                                   + "near [crouch kick_low] "
                                                   + "always [jump kick_high] "
                                                   + "}");
+
         log = new CheckLog();
         right.check(log);
         System.out.println(log.toString());
         System.out.println("");
 
         Simulation s = new Simulation(left, right);
-        Visualizer graphics = new GraphicalVisualizer();
         Visualizer text = new TextVisualizer();
+        Visualizer graphics = new GraphicalVisualizer();
+        int stepCount = 0;
+        Thread thread = Thread.currentThread();
 
         while (s.isRunning())
         {
             for (Event e : s.step())
             {
-                System.out.print("event:");
-                e.visualize(graphics);
                 e.visualize(text);
+                e.visualize(graphics);
             }
+            if (stepCount++ >= MAX_STEPS)
+            {
+                System.out.println("draw");
+                break;
+            }
+            thread.sleep(25);
         }
     }
 }

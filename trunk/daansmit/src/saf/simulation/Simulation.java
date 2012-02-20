@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import saf.simulation.event.Event;
+import saf.simulation.event.Init;
 import saf.syntax.Fighter;
 
 public class Simulation
@@ -15,6 +16,7 @@ public class Simulation
     private final Instance left;
     private final Instance right;
     private boolean running = true;
+    private boolean initialized = false;
 
     public Simulation(Fighter left, Fighter right)
     {
@@ -32,6 +34,12 @@ public class Simulation
         if (!running) { return null; }
 
         List<Event> events = new ArrayList<Event>();
+
+        if (!initialized)
+        {
+            events.add(new Init(left, right));
+            initialized = true;
+        }
 
         left.plan();
         right.plan();
