@@ -47,7 +47,6 @@ public class InterpreterVisitorTest {
 		Bot bruceLeeBot = new Bot(bruceLeeAst, 0);
 		Bot jackieChanBot = new Bot(jackieChanAst, 10);
 		bruceLeeBot.setOpponentBot(jackieChanBot);
-		jackieChanBot.setOpponentBot(bruceLeeBot);
 		InterpreterVisitor interpreter = new InterpreterVisitor();
 
 		ASTNode node;
