@@ -13,13 +13,14 @@ import saf.fighter.Fighter;
 import saf.fighter.SuperAwesomeFighter;
 
 
-public class GameSetup {
+public class StartGame {
 	
 	private ThreadGroup simulations;
 	
+	
 	public static void main(String[] args) {
 		System.out.println("============[Super Awesome Fighters]==================");
-		new GameSetup().startGame(args);
+		new StartGame().startGame(args);
 	}
 
 	/** Load fighters from args, and simulate matches between all of them */
@@ -74,11 +75,10 @@ public class GameSetup {
 //		assert fighters.size() % 2 == 0 : "Matches need an even number of fighters!";
 		
 		//Start matches between every fighter
-		simulations = new ThreadGroup("Tournament with "+fighters.size());
+		simulations = new ThreadGroup("Tournament with "+fighters.size()+" fighters");
 		for(int i=0; i < fighters.size()-1; i++) {
 			for(int j=i+1; j < fighters.size(); j++) {
-				String matchName = fighters.get(i).getName()+" vs "+fighters.get(j).getName()+"\t\t";
-				MatchSimulator match = new MatchSimulator(matchName,fighters.get(i),fighters.get(j));
+				Runnable match = new Match(fighters.get(i),fighters.get(j));
 				new Thread(simulations, match).start();
 			}
 		}

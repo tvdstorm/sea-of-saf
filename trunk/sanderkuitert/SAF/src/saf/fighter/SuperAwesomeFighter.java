@@ -30,7 +30,7 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 		}
 	}
 	
-	public double getRelativeSpeed() {
+	public double getRelativeActSpeed() {
 		double weight = getProperty("punchPower") + getProperty("kickPower") / 2;
 		double height = getProperty("punchReach") + getProperty("kickReach") / 2;
 		return Math.abs(0.5*(height-weight));
