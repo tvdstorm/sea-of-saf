@@ -23,6 +23,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
+import javax.swing.WindowConstants;
 
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -51,9 +52,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FighterLoadDialog extends JDialog {
+	private static final long serialVersionUID = 3769851874203955649L;
+
+	private JList blueFightersList;
+
 	final FighterLoadDialog eventSourceWindow = this;
 
 	private List<FighterBot> loadedFighters;
+
+	private JList redFightersList;
 
 	public FighterLoadDialog() {
 		setProperties();
@@ -97,47 +104,8 @@ public class FighterLoadDialog extends JDialog {
 		panel_1.add(redFightersList, "4, 4, fill, fill");
 	}
 
-	private void setProperties() {
-		setModal(true);
-		setSize(new Dimension(600, 470));
-		setPreferredSize(new Dimension(600, 470));
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setTitle("New Fight");
-		getContentPane().setLayout(new BorderLayout(0, 0));
-	}
-
-	public List<FighterBot> getLoadedFighters() {
-		return loadedFighters;
-	}
-
 	private void addCloseDialogAction(JButton btnStartFightButton) {
 		btnStartFightButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent event) {
-				String blueFighterFile = (String) blueFightersList.getSelectedValue();
-				String redFighterFile = (String) redFightersList.getSelectedValue();
-
-				if (blueFighterFile == null) {
-					JOptionPane.showMessageDialog(eventSourceWindow, "Please select a blue fighter.",
-							"No blue fighter selected", JOptionPane.INFORMATION_MESSAGE);
-				} else if (redFighterFile == null) {
-					JOptionPane.showMessageDialog(eventSourceWindow, "Please select a red fighter.",
-							"No red fighter selected", JOptionPane.INFORMATION_MESSAGE);
-				} else {					
-					FighterBot blue = loadFighter(blueFighterFile);
-					if (blue != null) {
-						loadedFighters.add(blue);	
-					}
-					
-					FighterBot red = loadFighter(redFighterFile);
-					if (red != null) {
-						loadedFighters.add(red);	
-					}
-
-					eventSourceWindow.dispose();
-				}
-			}
-
 			private FighterBot loadFighter(String fighterFileName) {
 				FighterBot loadedBot = null;
 				ANTLFighterLoader loader = new ANTLFighterLoader();
@@ -156,6 +124,32 @@ public class FighterLoadDialog extends JDialog {
 				}
 
 				return loadedBot;
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent event) {
+				String blueFighterFile = (String) blueFightersList.getSelectedValue();
+				String redFighterFile = (String) redFightersList.getSelectedValue();
+
+				if (blueFighterFile == null) {
+					JOptionPane.showMessageDialog(eventSourceWindow, "Please select a blue fighter.",
+							"No blue fighter selected", JOptionPane.INFORMATION_MESSAGE);
+				} else if (redFighterFile == null) {
+					JOptionPane.showMessageDialog(eventSourceWindow, "Please select a red fighter.",
+							"No red fighter selected", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					FighterBot blue = loadFighter(blueFighterFile);
+					if (blue != null) {
+						loadedFighters.add(blue);
+					}
+
+					FighterBot red = loadFighter(redFighterFile);
+					if (red != null) {
+						loadedFighters.add(red);
+					}
+
+					eventSourceWindow.dispose();
+				}
 			}
 		});
 	}
@@ -182,8 +176,15 @@ public class FighterLoadDialog extends JDialog {
 
 		return listModel;
 	}
-
-	private static final long serialVersionUID = 3769851874203955649L;
-	private JList blueFightersList;
-	private JList redFightersList;
+	public List<FighterBot> getLoadedFighters() {
+		return loadedFighters;
+	}
+	private void setProperties() {
+		setModal(true);
+		setSize(new Dimension(600, 470));
+		setPreferredSize(new Dimension(600, 470));
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setTitle("New Fight");
+		getContentPane().setLayout(new BorderLayout(0, 0));
+	}
 }

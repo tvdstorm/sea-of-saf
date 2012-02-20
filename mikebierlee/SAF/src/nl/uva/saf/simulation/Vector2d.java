@@ -19,16 +19,30 @@
 package nl.uva.saf.simulation;
 
 public class Vector2d {
+	public static Vector2d add(Vector2d vec1, Vector2d vec2) {
+		Vector2d resultVector = new Vector2d(vec1);
+		resultVector.add(vec2);
+		return resultVector;
+	}
+
+	public static Vector2d multiply(Vector2d vec, double scalar) {
+		Vector2d resultVector = new Vector2d(vec);
+		resultVector.x *= scalar;
+		resultVector.y *= scalar;
+		return resultVector;
+	}
+
+	public static Vector2d substract(Vector2d vec1, Vector2d vec2) {
+		Vector2d resultVector = new Vector2d(vec1);
+		resultVector.substract(vec2);
+		return resultVector;
+	}
+
 	public double x, y;
 
 	public Vector2d() {
 		x = 0;
 		y = 0;
-	}
-
-	public Vector2d(Vector2d source) {
-		x = source.x;
-		y = source.y;
 	}
 
 	public Vector2d(double components) {
@@ -41,33 +55,18 @@ public class Vector2d {
 		this.y = y;
 	}
 
+	public Vector2d(Vector2d source) {
+		x = source.x;
+		y = source.y;
+	}
+
 	public void add(Vector2d vector) {
 		x += vector.x;
 		y += vector.y;
 	}
 
-	public void substract(Vector2d vector) {
-		x -= vector.x;
-		y -= vector.y;
-	}
-
-	public static Vector2d add(Vector2d vec1, Vector2d vec2) {
-		Vector2d resultVector = new Vector2d(vec1);
-		resultVector.add(vec2);
-		return resultVector;
-	}
-
-	public static Vector2d substract(Vector2d vec1, Vector2d vec2) {
-		Vector2d resultVector = new Vector2d(vec1);
-		resultVector.substract(vec2);
-		return resultVector;
-	}
-
-	public static Vector2d multiply(Vector2d vec, double scalar) {
-		Vector2d resultVector = new Vector2d(vec);
-		resultVector.x *= scalar;
-		resultVector.y *= scalar;
-		return resultVector;
+	public boolean equals(Vector2d vec) {
+		return vec.x == x && vec.y == y;
 	}
 
 	public double length() {
@@ -82,7 +81,8 @@ public class Vector2d {
 		}
 	}
 
-	public boolean equals(Vector2d vec) {
-		return vec.x == x && vec.y == y;
+	public void substract(Vector2d vector) {
+		x -= vector.x;
+		y -= vector.y;
 	}
 }

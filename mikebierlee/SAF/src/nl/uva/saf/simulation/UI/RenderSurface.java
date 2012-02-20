@@ -41,19 +41,6 @@ public class RenderSurface extends JPanel implements ComponentListener {
 	}
 
 	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		if (renderer != null) {
-			renderer.draw(g);
-		}
-	}
-
-	public void unbindRenderer() {
-		renderer.unbindRenderSurface();
-	}
-
-	@Override
 	public void componentHidden(ComponentEvent event) {
 	}
 
@@ -70,5 +57,18 @@ public class RenderSurface extends JPanel implements ComponentListener {
 
 	@Override
 	public void componentShown(ComponentEvent event) {
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		if (renderer != null) {
+			renderer.draw(g);
+		}
+	}
+
+	public void unbindRenderer() {
+		renderer.unbindRenderSurface();
 	}
 }

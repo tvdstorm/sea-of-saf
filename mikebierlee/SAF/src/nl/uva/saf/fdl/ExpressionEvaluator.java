@@ -28,9 +28,9 @@ import nl.uva.saf.fdl.types.ConditionType;
 import nl.uva.saf.fdl.types.TypeTranslator;
 
 public class ExpressionEvaluator extends TreeVisitor {
+	private boolean evaluation;
 	private final ITreeNode expression;
 	private HashMap<ConditionType, Boolean> truthTable;
-	private boolean evaluation;
 
 	public ExpressionEvaluator(ITreeNode expression, HashMap<ConditionType, Boolean> truthTable) {
 		if (expression == null) {
@@ -49,6 +49,11 @@ public class ExpressionEvaluator extends TreeVisitor {
 	public boolean evaluate() {
 		expression.accept(this);
 		return evaluation;
+	}
+
+	@Override
+	public void visit(ConditionAlways node) {
+		evaluation = true;
 	}
 
 	@Override
@@ -76,10 +81,5 @@ public class ExpressionEvaluator extends TreeVisitor {
 				break;
 			}
 		}
-	}
-
-	@Override
-	public void visit(ConditionAlways node) {
-		evaluation = true;
 	}
 }

@@ -34,6 +34,17 @@ import org.junit.Test;
 public class CharacteristicExtractorTest {
 
 	@Test
+	public void extractFromEmptyAttributeListTest() {
+		Fighter fighter = new Fighter("extractFromEmptyAttributeListTest", new ArrayList<FighterAttribute>());
+		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
+		HashMap<CharacteristicType, Integer> extractedCharacteristics = extractor.extract();
+
+		Assert.assertTrue(extractedCharacteristics.size() == 0);
+		Assert.assertTrue(extractedCharacteristics.get(CharacteristicType.punchPower) == null);
+		Assert.assertTrue(extractedCharacteristics.get("kickReach") == null);
+	}
+
+	@Test
 	public void extractPunchCharacteristicsTest() {
 		ArrayList<FighterAttribute> attributes = new ArrayList<FighterAttribute>();
 		attributes.add(new Characteristic("punchReach", 10));
@@ -47,17 +58,6 @@ public class CharacteristicExtractorTest {
 		Assert.assertTrue(extractedCharacteristics.get(CharacteristicType.punchReach) == 10);
 		Assert.assertTrue(extractedCharacteristics.get(CharacteristicType.punchPower) == 1);
 		Assert.assertTrue(extractedCharacteristics.get(CharacteristicType.kickPower) == null);
-	}
-
-	@Test
-	public void extractFromEmptyAttributeListTest() {
-		Fighter fighter = new Fighter("extractFromEmptyAttributeListTest", new ArrayList<FighterAttribute>());
-		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
-		HashMap<CharacteristicType, Integer> extractedCharacteristics = extractor.extract();
-
-		Assert.assertTrue(extractedCharacteristics.size() == 0);
-		Assert.assertTrue(extractedCharacteristics.get(CharacteristicType.punchPower) == null);
-		Assert.assertTrue(extractedCharacteristics.get("kickReach") == null);
 	}
 
 	@Test

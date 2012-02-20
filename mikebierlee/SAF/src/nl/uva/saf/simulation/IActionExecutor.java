@@ -36,6 +36,6 @@ public interface IActionExecutor {
 	 */
 	public void executeFighterActions(FighterBot fighter, List<FighterBot> players,
 			HashMap<ConditionType, Boolean> truthTable);
-	
+
 	public int getTurnCost();
 }

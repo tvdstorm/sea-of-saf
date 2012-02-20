@@ -33,17 +33,6 @@ import org.junit.Test;
 public class FighterBotTest {
 
 	@Test
-	public void getAttributesTest() {
-		ArrayList<FighterAttribute> attributes = new ArrayList<FighterAttribute>();
-		attributes.add(new Characteristic("punchPower", 2));
-		Fighter fighter = new Fighter("getAttributesTest", attributes);
-		FighterBot bot = new FighterBot(fighter);
-
-		Assert.assertEquals(bot.getAttribute(CharacteristicType.punchPower), 2);
-		Assert.assertEquals(bot.getAttribute(CharacteristicType.kickPower), 5);
-	}
-
-	@Test
 	public void calculateSpeedTest() {
 		Fighter fighter = new Fighter("calculateSpeedTest", null);
 		FighterBot bot = new FighterBot(fighter);
@@ -91,5 +80,16 @@ public class FighterBotTest {
 		// But INT, so 1
 
 		Assert.assertEquals(1, bot.getSpeed());
+	}
+
+	@Test
+	public void getAttributesTest() {
+		ArrayList<FighterAttribute> attributes = new ArrayList<FighterAttribute>();
+		attributes.add(new Characteristic("punchPower", 2));
+		Fighter fighter = new Fighter("getAttributesTest", attributes);
+		FighterBot bot = new FighterBot(fighter);
+
+		Assert.assertEquals(bot.getAttribute(CharacteristicType.punchPower), 2);
+		Assert.assertEquals(bot.getAttribute(CharacteristicType.kickPower), 5);
 	}
 }

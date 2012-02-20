@@ -30,7 +30,7 @@ import nl.uva.saf.simulation.UI.MainWindow;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {		
+	public static void main(String[] args) throws IOException {
 		final IFightSimulator simulator = new FightSimulator();
 		simulator.setPlayFieldSize(new Dimension(825, 350));
 		final IRenderer renderer = new Renderer(simulator, 60);
@@ -43,7 +43,7 @@ public class Main {
 				renderer.start(true);
 			}
 		});
-		
+
 		try {
 			while (!simulator.isDisposed()) {
 				simulator.update();

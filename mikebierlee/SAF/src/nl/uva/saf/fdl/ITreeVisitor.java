@@ -16,9 +16,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 package nl.uva.saf.fdl;
-
 
 import nl.uva.saf.fdl.ast.Behaviour;
 import nl.uva.saf.fdl.ast.Characteristic;
@@ -34,16 +32,27 @@ import nl.uva.saf.fdl.ast.MoveChoice;
 import nl.uva.saf.fdl.ast.Rule;
 
 public interface ITreeVisitor {
-	public abstract void visit(Fighter node);
-	public abstract void visit(Characteristic node);
 	public abstract void visit(Behaviour node);
-	public abstract void visit(ConditionAlways node);
-	public abstract void visit(ConditionOr node);
-	public abstract void visit(ConditionAnd node);
-	public abstract void visit(FightAction node);
-	public abstract void visit(FightChoice node);
+
+	public abstract void visit(Characteristic node);
+
 	public abstract void visit(Choice node);
+
+	public abstract void visit(ConditionAlways node);
+
+	public abstract void visit(ConditionAnd node);
+
+	public abstract void visit(ConditionOr node);
+
+	public abstract void visit(FightAction node);
+
+	public abstract void visit(FightChoice node);
+
+	public abstract void visit(Fighter node);
+
 	public abstract void visit(MoveAction node);
+
 	public abstract void visit(MoveChoice node);
+
 	public abstract void visit(Rule node);
 }

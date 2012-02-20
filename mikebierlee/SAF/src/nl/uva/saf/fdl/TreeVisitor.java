@@ -35,10 +35,9 @@ import nl.uva.saf.fdl.ast.Rule;
 public abstract class TreeVisitor implements ITreeVisitor {
 
 	@Override
-	public void visit(Fighter node) {
-		for (ITreeNode attribute : node.getAttributes()) {
-			attribute.accept(this);
-		}
+	public void visit(Behaviour node) {
+		node.getCondition().accept(this);
+		node.getRule().accept(this);
 	}
 
 	@Override
@@ -46,13 +45,25 @@ public abstract class TreeVisitor implements ITreeVisitor {
 	}
 
 	@Override
-	public void visit(Behaviour node) {
-		node.getCondition().accept(this);
-		node.getRule().accept(this);
+	public void visit(Choice node) {
+		for (ITreeNode action : node.getActions()) {
+			action.accept(this);
+		}
 	}
 
 	@Override
 	public void visit(ConditionAlways node) {
+	}
+
+	@Override
+	public void visit(ConditionAnd node) {
+	}
+
+	@Override
+	public void visit(ConditionOr node) {
+		for (ITreeNode operand : node.getOperands()) {
+			operand.accept(this);
+		}
 	}
 
 	@Override
@@ -65,6 +76,13 @@ public abstract class TreeVisitor implements ITreeVisitor {
 	}
 
 	@Override
+	public void visit(Fighter node) {
+		for (ITreeNode attribute : node.getAttributes()) {
+			attribute.accept(this);
+		}
+	}
+
+	@Override
 	public void visit(MoveAction node) {
 	}
 
@@ -74,26 +92,8 @@ public abstract class TreeVisitor implements ITreeVisitor {
 	}
 
 	@Override
-	public void visit(Choice node) {
-		for (ITreeNode action : node.getActions()) {
-			action.accept(this);
-		}
-	}
-
-	@Override
 	public void visit(Rule node) {
 		node.getFightChoice().accept(this);
 		node.getMoveChoice().accept(this);
-	}
-
-	@Override
-	public void visit(ConditionOr node) {
-		for (ITreeNode operand : node.getOperands()) {
-			operand.accept(this);
-		}
-	}
-
-	@Override
-	public void visit(ConditionAnd node) {
 	}
 }

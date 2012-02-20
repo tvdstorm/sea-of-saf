@@ -34,6 +34,17 @@ import org.junit.Test;
 public class ExpressionEvaluatorTest {
 
 	@Test
+	public void evaluateAlwaysCondition() {
+		ConditionAlways expression = new ConditionAlways();
+		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
+		truthTable.put(ConditionType.far, true);
+		truthTable.put(ConditionType.stronger, true);
+
+		ExpressionEvaluator evaluator = new ExpressionEvaluator(expression, truthTable);
+		Assert.assertTrue(evaluator.evaluate());
+	}
+
+	@Test
 	public void evaluateAndConditionSuccessfullyTest() {
 		ArrayList<String> operands = new ArrayList<String>();
 		operands.add("near");
@@ -145,16 +156,5 @@ public class ExpressionEvaluatorTest {
 
 		ExpressionEvaluator evaluator = new ExpressionEvaluator(expression, truthTable);
 		Assert.assertTrue(evaluator.evaluate() == false);
-	}
-
-	@Test
-	public void evaluateAlwaysCondition() {
-		ConditionAlways expression = new ConditionAlways();
-		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
-		truthTable.put(ConditionType.far, true);
-		truthTable.put(ConditionType.stronger, true);
-
-		ExpressionEvaluator evaluator = new ExpressionEvaluator(expression, truthTable);
-		Assert.assertTrue(evaluator.evaluate());
 	}
 }

@@ -22,27 +22,27 @@ import nl.uva.saf.fdl.ITreeVisitor;
 
 public class Characteristic extends FighterAttribute {
 	private final String type;
-	private final int value;	
-	
-	public Characteristic(String type, String value) {
-		this(type, Integer.parseInt(value));
-	}
-	
+	private final int value;
+
 	public Characteristic(String type, int value) {
 		this.type = type == null ? "" : type;
 		this.value = value;
 	}
 
-	public int getValue() {
-		return value;
+	public Characteristic(String type, String value) {
+		this(type, Integer.parseInt(value));
 	}
-	
+
+	@Override
+	public void accept(ITreeVisitor visitor) {
+		visitor.visit(this);
+	}
+
 	public String getType() {
 		return type;
 	}
-	
-	@Override
-	public void accept(ITreeVisitor visitor) {
-		visitor.visit(this);		
-	}	
+
+	public int getValue() {
+		return value;
+	}
 }

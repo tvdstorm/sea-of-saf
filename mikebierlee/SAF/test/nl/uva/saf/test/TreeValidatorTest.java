@@ -41,47 +41,6 @@ public class TreeValidatorTest {
 	private TreeValidator validator;
 
 	@Test
-	public void treeLacksAlwaysBehaviourTest() {
-		Fighter fighter = new Fighter("fighter", new ArrayList<FighterAttribute>());
-
-		validator = new TreeValidator(fighter);
-		ValidationReport report = validator.validate();
-
-		boolean containsAlwaysError = false;
-		for (String error : report.getErrors()) {
-			if (error.equals("\"always\" behaviour condition not specified.")) {
-				containsAlwaysError = true;
-				break;
-			}
-		}
-
-		Assert.assertTrue(containsAlwaysError);
-	}
-
-	@Test
-	public void emptyChoiceClauseTest() {
-		ArrayList<Action> fightChoices = new ArrayList<Action>();
-		fightChoices.add(new FightAction("kick_low"));
-		ArrayList<FighterAttribute> fighterAttributes = new ArrayList<FighterAttribute>();
-		fighterAttributes.add(new Behaviour(new ConditionAlways(), new Rule(new MoveChoice(new ArrayList<Action>()),
-				new FightChoice(fightChoices))));
-		Fighter fighter = new Fighter("emptyChoiceClauseTest", fighterAttributes);
-
-		validator = new TreeValidator(fighter);
-		ValidationReport report = validator.validate();
-
-		boolean containsEmptyChoiceError = false;
-		for (String error : report.getErrors()) {
-			if (error.equals("Choice clause contains no choices")) {
-				containsEmptyChoiceError = true;
-				break;
-			}
-		}
-
-		Assert.assertTrue(containsEmptyChoiceError);
-	}
-
-	@Test
 	public void characteristicValueOutOfBoundsTest() {
 		Characteristic testCharacteristic = new Characteristic("kickPower", 11);
 		ArrayList<FighterAttribute> fighterAttributes = new ArrayList<FighterAttribute>();
@@ -113,6 +72,47 @@ public class TreeValidatorTest {
 		}
 
 		Assert.assertTrue(containsOutOfBoundsError);
+	}
+
+	@Test
+	public void emptyChoiceClauseTest() {
+		ArrayList<Action> fightChoices = new ArrayList<Action>();
+		fightChoices.add(new FightAction("kick_low"));
+		ArrayList<FighterAttribute> fighterAttributes = new ArrayList<FighterAttribute>();
+		fighterAttributes.add(new Behaviour(new ConditionAlways(), new Rule(new MoveChoice(new ArrayList<Action>()),
+				new FightChoice(fightChoices))));
+		Fighter fighter = new Fighter("emptyChoiceClauseTest", fighterAttributes);
+
+		validator = new TreeValidator(fighter);
+		ValidationReport report = validator.validate();
+
+		boolean containsEmptyChoiceError = false;
+		for (String error : report.getErrors()) {
+			if (error.equals("Choice clause contains no choices")) {
+				containsEmptyChoiceError = true;
+				break;
+			}
+		}
+
+		Assert.assertTrue(containsEmptyChoiceError);
+	}
+
+	@Test
+	public void treeLacksAlwaysBehaviourTest() {
+		Fighter fighter = new Fighter("fighter", new ArrayList<FighterAttribute>());
+
+		validator = new TreeValidator(fighter);
+		ValidationReport report = validator.validate();
+
+		boolean containsAlwaysError = false;
+		for (String error : report.getErrors()) {
+			if (error.equals("\"always\" behaviour condition not specified.")) {
+				containsAlwaysError = true;
+				break;
+			}
+		}
+
+		Assert.assertTrue(containsAlwaysError);
 	}
 
 }

@@ -39,21 +39,21 @@ import nl.uva.saf.fdl.types.FightActionType;
  * 
  */
 public class Renderer implements IRenderer {
-	private volatile JComponent surface = null;
-	private final int fps;
-	private final IFightSimulator simulator;
-	private Image titleScreenImage;
 	private Image blueFighter, blueIdleFeet, blueLowKickFeet, blueHighKickFeet, blueIdleHands, blueLowPunchHands,
 			blueHighPunchHands, blueBlockLowHands, blueBlockHighHands;
+	private volatile Dimension drawArea;
+	private final int fps;
+	private Color healthBarColor;
 	private Image redFighter, redIdleFeet, redLowKickFeet, redHighKickFeet, redIdleHands, redLowPunchHands,
 			redHighPunchHands, redBlockLowHands, redBlockHighHands;
+	private Thread renderThread;
+	private final IFightSimulator simulator;
+
 	private volatile boolean stopRunning;
 
-	private Color healthBarColor;
+	private volatile JComponent surface = null;
 
-	private volatile Dimension drawArea;
-
-	private Thread renderThread;
+	private Image titleScreenImage;
 
 	/**
 	 * Creates a new render thread which is tasked to updating the appointed
@@ -73,6 +73,156 @@ public class Renderer implements IRenderer {
 		this.simulator = simulator;
 
 		loadContent();
+	}
+
+	/**
+	 * Binds a component to this renderer, allowing it to render on it. You can
+	 * only bind when the renderer is not active.
+	 * 
+	 * @param surface
+	 *            Render surface to bind.
+	 */
+	@Override
+	public void bindRenderSurface(JComponent surface) throws ConcurrentModificationException {
+		if (renderThread != null && renderThread.isAlive()) {
+			throw new ConcurrentModificationException();
+		}
+
+		this.surface = surface;
+
+		drawArea = this.surface.getSize();
+	}
+
+	private void chooseTextures(int currentPlayer, FighterBot fighter, List<Image> playerTextures) {
+		Image feetTexture, handsTexture;
+		FightActionType playerFightAction = fighter.getFightAction();
+
+		switch (playerFightAction) {
+		case kick_low:
+			feetTexture = currentPlayer == 1 ? blueLowKickFeet : redLowKickFeet;
+			break;
+		case kick_high:
+			feetTexture = currentPlayer == 1 ? blueHighKickFeet : redHighKickFeet;
+			break;
+		default:
+			feetTexture = currentPlayer == 1 ? blueIdleFeet : redIdleFeet;
+			break;
+		}
+
+		switch (playerFightAction) {
+		case punch_low:
+			handsTexture = currentPlayer == 1 ? blueLowPunchHands : redLowPunchHands;
+			break;
+		case punch_high:
+			handsTexture = currentPlayer == 1 ? blueHighPunchHands : redHighPunchHands;
+			break;
+		case block_low:
+			handsTexture = currentPlayer == 1 ? blueBlockLowHands : redBlockLowHands;
+			break;
+		case block_high:
+			handsTexture = currentPlayer == 1 ? blueBlockHighHands : redBlockHighHands;
+			break;
+		default:
+			handsTexture = currentPlayer == 1 ? blueIdleHands : redIdleHands;
+			break;
+		}
+
+		playerTextures.add(feetTexture);
+		playerTextures.add(handsTexture);
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		if (simulator == null || !simulator.isRunning()) {
+			g.drawImage(titleScreenImage, 0, 0, null);
+		} else if (simulator != null && simulator.isRunning()) {
+			drawBackground(g);
+
+			List<FighterBot> fighters = simulator.getContestants();
+
+			if (fighters.size() == 2) {
+				drawBattle(g, fighters);
+			}
+		}
+	}
+
+	private void drawBackground(Graphics g) {
+		g.setColor(Color.white);
+		g.fillRect(0, 0, drawArea.width, drawArea.height);
+	}
+
+	private void drawBattle(Graphics g, List<FighterBot> fighters) {
+		int currentPlayer = 1;
+		for (FighterBot fighter : fighters) {
+			drawName(g, currentPlayer, fighter);
+			drawHealthbar(g, currentPlayer, fighter);
+			drawFighter(g, currentPlayer, fighter);
+
+			currentPlayer++;
+		}
+	}
+
+	private void drawFighter(Graphics g, int currentPlayer, FighterBot fighter) {
+		Vector2d drawPosition = new Vector2d(fighter.getPosition());
+		drawPosition.substract(fighter.getOrigin());
+
+		ArrayList<Image> playerTextures = new ArrayList<Image>(3);
+
+		Vector2d playfieldOffset = new Vector2d((drawArea.getWidth() - simulator.getPlayFieldSize().width) / 2, 75);
+		drawPosition.add(playfieldOffset);
+
+		playerTextures.add(currentPlayer == 1 ? blueFighter : redFighter);
+
+		if (fighter.isCrouching()) {
+			drawPosition.y += 20;
+		}
+
+		if (fighter.isJumping()) {
+			drawPosition.y -= 20;
+		}
+
+		chooseTextures(currentPlayer, fighter, playerTextures);
+
+		for (Image texture : playerTextures) {
+			g.drawImage(texture, (int) drawPosition.x, (int) drawPosition.y, null);
+		}
+	}
+
+	private void drawHealthbar(Graphics g, int currentPlayer, FighterBot fighter) {
+		int playerHealth = fighter.getHealth();
+		int xPosition = currentPlayer == 1 ? 30 : 600;
+		g.setColor(Color.gray);
+		g.fillRect(xPosition, 35, 200, 20);
+
+		g.setColor(healthBarColor);
+		int barWidth = (int) (((double) playerHealth / 100) * 200);
+		g.fillRect(xPosition, 35, barWidth, 20);
+	}
+
+	private void drawName(Graphics g, int currentPlayer, FighterBot fighter) {
+		String name = fighter.getName();
+
+		switch (currentPlayer) {
+		case 1:
+			g.setColor(Color.blue);
+			g.drawString(name, 30, 30);
+			break;
+		case 2:
+			g.setColor(Color.red);
+			g.drawString(name, 600, 30);
+		}
+	}
+
+	@Override
+	public JComponent getSurface() {
+		return surface;
+	}
+
+	@Override
+	public void join() throws InterruptedException {
+		if (renderThread != null) {
+			renderThread.join();
+		}
 	}
 
 	private void loadContent() {
@@ -126,6 +276,13 @@ public class Renderer implements IRenderer {
 	}
 
 	@Override
+	public void redraw() {
+		if (surface != null) {
+			surface.repaint();
+		}
+	}
+
+	@Override
 	public void run() {
 		while (!stopRunning) {
 			if (fps > 0) {
@@ -146,158 +303,6 @@ public class Renderer implements IRenderer {
 				return;
 			}
 		}
-	}
-
-	@Override
-	public void redraw() {
-		if (surface != null) {
-			surface.repaint();
-		}
-	}
-
-	/**
-	 * Binds a component to this renderer, allowing it to render on it. You can
-	 * only bind when the renderer is not active.
-	 * 
-	 * @param surface
-	 *            Render surface to bind.
-	 */
-	@Override
-	public void bindRenderSurface(JComponent surface) throws ConcurrentModificationException {
-		if (renderThread != null && renderThread.isAlive()) {
-			throw new ConcurrentModificationException();
-		}
-
-		this.surface = surface;
-
-		drawArea = this.surface.getSize();
-	}
-
-	@Override
-	public void updateDrawArea() {
-		if (surface != null) {
-			surface.getSize(drawArea);
-		}
-	}
-
-	@Override
-	public void draw(Graphics g) {
-		if (simulator == null || !simulator.isRunning()) {
-			g.drawImage(titleScreenImage, 0, 0, null);
-		} else if (simulator != null && simulator.isRunning()) {
-			drawBackground(g);
-
-			List<FighterBot> fighters = simulator.getContestants();
-
-			if (fighters.size() == 2) {
-				drawBattle(g, fighters);
-			}
-		}
-	}
-
-	private void drawBattle(Graphics g, List<FighterBot> fighters) {
-		int currentPlayer = 1;
-		for (FighterBot fighter : fighters) {
-			drawName(g, currentPlayer, fighter);
-			drawHealthbar(g, currentPlayer, fighter);
-			drawFighter(g, currentPlayer, fighter);
-
-			currentPlayer++;
-		}
-	}
-
-	private void drawFighter(Graphics g, int currentPlayer, FighterBot fighter) {
-		Vector2d drawPosition = new Vector2d(fighter.getPosition());
-		drawPosition.substract(fighter.getOrigin());
-
-		ArrayList<Image> playerTextures = new ArrayList<Image>(3);
-
-		Vector2d playfieldOffset = new Vector2d((drawArea.getWidth() - simulator.getPlayFieldSize().width) / 2, 75);
-		drawPosition.add(playfieldOffset);
-
-		playerTextures.add(currentPlayer == 1 ? blueFighter : redFighter);
-
-		if (fighter.isCrouching()) {
-			drawPosition.y += 20;
-		}
-
-		if (fighter.isJumping()) {
-			drawPosition.y -= 20;
-		}
-
-		chooseTextures(currentPlayer, fighter, playerTextures);
-
-		for (Image texture : playerTextures) {
-			g.drawImage(texture, (int) drawPosition.x, (int) drawPosition.y, null);
-		}
-	}
-
-	private void chooseTextures(int currentPlayer, FighterBot fighter, List<Image> playerTextures) {
-		Image feetTexture, handsTexture;
-		FightActionType playerFightAction = fighter.getFightAction();
-
-		switch (playerFightAction) {
-		case kick_low:
-			feetTexture = currentPlayer == 1 ? blueLowKickFeet : redLowKickFeet;
-			break;
-		case kick_high:
-			feetTexture = currentPlayer == 1 ? blueHighKickFeet : redHighKickFeet;
-			break;
-		default:
-			feetTexture = currentPlayer == 1 ? blueIdleFeet : redIdleFeet;
-			break;
-		}
-
-		switch (playerFightAction) {
-		case punch_low:
-			handsTexture = currentPlayer == 1 ? blueLowPunchHands : redLowPunchHands;
-			break;
-		case punch_high:
-			handsTexture = currentPlayer == 1 ? blueHighPunchHands : redHighPunchHands;
-			break;
-		case block_low:
-			handsTexture = currentPlayer == 1 ? blueBlockLowHands : redBlockLowHands;
-			break;
-		case block_high:
-			handsTexture = currentPlayer == 1 ? blueBlockHighHands : redBlockHighHands;
-			break;
-		default:
-			handsTexture = currentPlayer == 1 ? blueIdleHands : redIdleHands;
-			break;
-		}
-
-		playerTextures.add(feetTexture);
-		playerTextures.add(handsTexture);
-	}
-
-	private void drawHealthbar(Graphics g, int currentPlayer, FighterBot fighter) {
-		int playerHealth = fighter.getHealth();
-		int xPosition = currentPlayer == 1 ? 30 : 600;
-		g.setColor(Color.gray);
-		g.fillRect(xPosition, 35, 200, 20);
-
-		g.setColor(healthBarColor);
-		int barWidth = (int) (((double) playerHealth / 100) * 200);
-		g.fillRect(xPosition, 35, barWidth, 20);
-	}
-
-	private void drawName(Graphics g, int currentPlayer, FighterBot fighter) {
-		String name = fighter.getName();
-
-		switch (currentPlayer) {
-		case 1:
-			g.setColor(Color.blue);
-			g.drawString(name, 30, 30);
-			break;
-		case 2:
-			g.setColor(Color.red);
-			g.drawString(name, 600, 30);
-		}
-	}
-
-	private void drawBackground(Graphics g) {
-		g.setColor(Color.white);
-		g.fillRect(0, 0, drawArea.width, drawArea.height);
 	}
 
 	@Override
@@ -331,14 +336,9 @@ public class Renderer implements IRenderer {
 	}
 
 	@Override
-	public void join() throws InterruptedException {
-		if (renderThread != null) {
-			renderThread.join();
+	public void updateDrawArea() {
+		if (surface != null) {
+			surface.getSize(drawArea);
 		}
-	}
-
-	@Override
-	public JComponent getSurface() {
-		return surface;
 	}
 }

@@ -37,11 +37,36 @@ import nl.uva.saf.simulation.IActionExecutor;
 import nl.uva.saf.simulation.Vector2d;
 
 public class ActionExecutorTest {
+	IActionExecutor actionExecutor;
 	FighterBot bot;
 	FighterBot enemy;
 	List<FighterBot> players;
-	IActionExecutor actionExecutor;
 	HashMap<ConditionType, Boolean> truthTable;
+
+	@Test
+	public void punchEnemyTest() {
+		truthTable.put(ConditionType.near, true);
+
+		bot.setFightAction(FightActionType.punch_low);
+		bot.setAttribute(CharacteristicType.punchReach, 10);
+		bot.setAttribute(CharacteristicType.punchPower, 10);
+		actionExecutor.executeFighterActions(bot, players, truthTable);
+
+		Assert.assertEquals(90, enemy.getHealth());
+	}
+
+	@Test
+	public void runTowardsEnemyTest() {
+		bot.setMoveAction(MoveActionType.run_towards);
+		actionExecutor.executeFighterActions(bot, players, truthTable);
+
+		int speedScale = ((ActionExecutor) actionExecutor).getSpeedScale();
+
+		Vector2d expectedPosition = new Vector2d(20 + ((bot.getSpeed() + 1) * speedScale) * 2, 0);
+		Vector2d botPosition = bot.getPosition();
+
+		Assert.assertTrue(botPosition.equals(expectedPosition));
+	}
 
 	@Before
 	public void setup() {
@@ -70,30 +95,5 @@ public class ActionExecutorTest {
 		Vector2d botPosition = bot.getPosition();
 
 		Assert.assertTrue(botPosition.equals(expectedPosition));
-	}
-
-	@Test
-	public void runTowardsEnemyTest() {
-		bot.setMoveAction(MoveActionType.run_towards);
-		actionExecutor.executeFighterActions(bot, players, truthTable);
-
-		int speedScale = ((ActionExecutor) actionExecutor).getSpeedScale();
-
-		Vector2d expectedPosition = new Vector2d(20 + ((bot.getSpeed() + 1) * speedScale) * 2, 0);
-		Vector2d botPosition = bot.getPosition();
-
-		Assert.assertTrue(botPosition.equals(expectedPosition));
-	}
-
-	@Test
-	public void punchEnemyTest() {
-		truthTable.put(ConditionType.near, true);
-
-		bot.setFightAction(FightActionType.punch_low);
-		bot.setAttribute(CharacteristicType.punchReach, 10);
-		bot.setAttribute(CharacteristicType.punchPower, 10);
-		actionExecutor.executeFighterActions(bot, players, truthTable);
-
-		Assert.assertEquals(90, enemy.getHealth());
 	}
 }

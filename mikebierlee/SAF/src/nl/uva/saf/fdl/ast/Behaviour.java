@@ -23,10 +23,15 @@ import nl.uva.saf.fdl.ITreeVisitor;
 public class Behaviour extends FighterAttribute {
 	private final ConditionAlways condition;
 	private final Rule rule;
-	
+
 	public Behaviour(ConditionAlways condition, Rule rule) {
 		this.condition = condition;
 		this.rule = rule;
+	}
+
+	@Override
+	public void accept(ITreeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 	public ConditionAlways getCondition() {
@@ -35,10 +40,5 @@ public class Behaviour extends FighterAttribute {
 
 	public Rule getRule() {
 		return rule;
-	}
-
-	@Override
-	public void accept(ITreeVisitor visitor) {
-		visitor.visit(this);
 	}
 }

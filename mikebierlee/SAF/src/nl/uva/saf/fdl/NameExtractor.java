@@ -22,8 +22,13 @@ import nl.uva.saf.fdl.ast.Fighter;
 import nl.uva.saf.fdl.ast.ITreeNode;
 
 public class NameExtractor extends TreeVisitor {
-	private String name;
+	public static String getName(ITreeNode fighter) {
+		NameExtractor extractor = new NameExtractor(fighter);
+		return extractor.extract();
+	}
 	private final ITreeNode fighter;
+
+	private String name;
 
 	public NameExtractor(ITreeNode fighter) {
 		this.fighter = fighter;
@@ -38,10 +43,5 @@ public class NameExtractor extends TreeVisitor {
 	public void visit(Fighter node) {
 		name = node.getName();
 		super.visit(node);
-	}
-
-	public static String getName(ITreeNode fighter) {
-		NameExtractor extractor = new NameExtractor(fighter);
-		return extractor.extract();
 	}
 }

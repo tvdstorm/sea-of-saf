@@ -34,92 +34,8 @@ import nl.uva.saf.fdl.ast.MoveChoice;
 import nl.uva.saf.fdl.ast.Rule;
 
 public class TreeVisualizer extends TreeVisitor {
-	String treeString;
 	int level;
-
-	public void printTree(ITreeNode tree) {
-		treeString = new String();
-		level = 0;
-		tree.accept(this);
-		System.out.println(treeString);
-	}
-
-	public void visit(Fighter node) {
-		treeString += getIdentation() + "Fighter(" + node.getName() + ")\n";
-		level++;
-		for (FighterAttribute attribute : node.getAttributes()) {
-			attribute.accept(this);
-		}
-		level--;
-	}
-
-	public void visit(Characteristic node) {
-		treeString += getIdentation() + "Characteristic(" + node.getType() + ", " + node.getValue() + ")\n";
-	}
-
-	public void visit(Behaviour node) {
-		treeString += getIdentation() + "Behaviour()\n";
-		level++;
-		node.getCondition().accept(this);
-		node.getRule().accept(this);
-		level--;
-	}
-
-	public void visit(ConditionAlways node) {
-		treeString += getIdentation() + "Always()\n";
-	}
-
-	public void visit(ConditionOr node) {
-		treeString += getIdentation() + "Or()\n";
-		level++;
-		for (ConditionAnd operand : node.getOperands()) {
-			operand.accept(this);
-		}
-		level--;
-	}
-
-	public void visit(ConditionAnd node) {
-		treeString += getIdentation() + "And()\n";
-		level++;
-		for (String operand : node.getOperands()) {
-			treeString += getIdentation() + operand + "\n";
-		}
-		level--;
-	}
-
-	public void visit(Rule node) {
-		treeString += getIdentation() + "Rule()\n";
-		level++;
-		node.getMoveChoice().accept(this);
-		node.getFightChoice().accept(this);
-		level--;
-	}
-
-	public void visit(MoveChoice node) {
-		treeString += getIdentation() + "MoveChoice()\n";
-		level++;
-		for (Action action : node.getActions()) {
-			action.accept(this);
-		}
-		level--;
-	}
-
-	public void visit(FightChoice node) {
-		treeString += getIdentation() + "FightChoice()\n";
-		level++;
-		for (Action action : node.getActions()) {
-			action.accept(this);
-		}
-		level--;
-	}
-
-	public void visit(MoveAction node) {
-		treeString += getIdentation() + "MoveAction(" + node.getActionType() + ")\n";
-	}
-
-	public void visit(FightAction node) {
-		treeString += getIdentation() + "FightAction(" + node.getActionType() + ")\n";
-	}
+	String treeString;
 
 	private String getIdentation() {
 		String identation = "";
@@ -129,5 +45,100 @@ public class TreeVisualizer extends TreeVisitor {
 		}
 
 		return identation;
+	}
+
+	public void printTree(ITreeNode tree) {
+		treeString = new String();
+		level = 0;
+		tree.accept(this);
+		System.out.println(treeString);
+	}
+
+	@Override
+	public void visit(Behaviour node) {
+		treeString += getIdentation() + "Behaviour()\n";
+		level++;
+		node.getCondition().accept(this);
+		node.getRule().accept(this);
+		level--;
+	}
+
+	@Override
+	public void visit(Characteristic node) {
+		treeString += getIdentation() + "Characteristic(" + node.getType() + ", " + node.getValue() + ")\n";
+	}
+
+	@Override
+	public void visit(ConditionAlways node) {
+		treeString += getIdentation() + "Always()\n";
+	}
+
+	@Override
+	public void visit(ConditionAnd node) {
+		treeString += getIdentation() + "And()\n";
+		level++;
+		for (String operand : node.getOperands()) {
+			treeString += getIdentation() + operand + "\n";
+		}
+		level--;
+	}
+
+	@Override
+	public void visit(ConditionOr node) {
+		treeString += getIdentation() + "Or()\n";
+		level++;
+		for (ConditionAnd operand : node.getOperands()) {
+			operand.accept(this);
+		}
+		level--;
+	}
+
+	@Override
+	public void visit(FightAction node) {
+		treeString += getIdentation() + "FightAction(" + node.getActionType() + ")\n";
+	}
+
+	@Override
+	public void visit(FightChoice node) {
+		treeString += getIdentation() + "FightChoice()\n";
+		level++;
+		for (Action action : node.getActions()) {
+			action.accept(this);
+		}
+		level--;
+	}
+
+	@Override
+	public void visit(Fighter node) {
+		treeString += getIdentation() + "Fighter(" + node.getName() + ")\n";
+		level++;
+		for (FighterAttribute attribute : node.getAttributes()) {
+			attribute.accept(this);
+		}
+		level--;
+	}
+
+	@Override
+	public void visit(MoveAction node) {
+		treeString += getIdentation() + "MoveAction(" + node.getActionType() + ")\n";
+	}
+
+	@Override
+	public void visit(MoveChoice node) {
+		treeString += getIdentation() + "MoveChoice()\n";
+		level++;
+		for (Action action : node.getActions()) {
+			action.accept(this);
+		}
+		level--;
+	}
+
+	@Override
+	public void visit(Rule node) {
+		treeString += getIdentation() + "Rule()\n";
+		level++;
+		node.getMoveChoice().accept(this);
+		node.getFightChoice().accept(this);
+		level--;
 	}
 }

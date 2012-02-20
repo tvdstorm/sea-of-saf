@@ -22,20 +22,12 @@ import java.util.ArrayList;
 
 public class ValidationReport {
 	private final ArrayList<String> errors;
-	private final ArrayList<String> warnings;
 	private String fighterFile;
+	private final ArrayList<String> warnings;
 
 	public ValidationReport() {
 		errors = new ArrayList<String>();
 		warnings = new ArrayList<String>();
-	}
-
-	public ArrayList<String> getErrors() {
-		return errors;
-	}
-
-	public ArrayList<String> getWarnings() {
-		return warnings;
 	}
 
 	public void addError(String error) {
@@ -50,12 +42,20 @@ public class ValidationReport {
 		}
 	}
 
-	public boolean isValid() {
-		return errors.size() == 0 ? true : false;
+	public ArrayList<String> getErrors() {
+		return errors;
 	}
 
 	public String getFighterFile() {
 		return fighterFile;
+	}
+
+	public ArrayList<String> getWarnings() {
+		return warnings;
+	}
+
+	public boolean isValid() {
+		return errors.size() == 0 ? true : false;
 	}
 
 	public void setFighterFile(String fighterFile) {

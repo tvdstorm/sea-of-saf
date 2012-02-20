@@ -19,6 +19,46 @@
 package nl.uva.saf.fdl.types;
 
 public class TypeTranslator {
+	public static CharacteristicType getCharacteristicType(String typeString) {
+		CharacteristicType type = CharacteristicType.unknown;
+
+		if (typeString.equals("punchReach")) {
+			type = CharacteristicType.punchReach;
+		} else if (typeString.equals("punchPower")) {
+			type = CharacteristicType.punchPower;
+		} else if (typeString.equals("kickReach")) {
+			type = CharacteristicType.kickReach;
+		} else if (typeString.equals("kickPower")) {
+			type = CharacteristicType.kickPower;
+		}
+
+		return type;
+	}
+
+	public static ConditionType getConditionType(String typeString) {
+		ConditionType type = ConditionType.unknown;
+
+		if (typeString.equals("always")) {
+			type = ConditionType.always;
+		} else if (typeString.equals("near")) {
+			type = ConditionType.near;
+		} else if (typeString.equals("far")) {
+			type = ConditionType.far;
+		} else if (typeString.equals("much_stronger")) {
+			type = ConditionType.much_stronger;
+		} else if (typeString.equals("stronger")) {
+			type = ConditionType.stronger;
+		} else if (typeString.equals("even")) {
+			type = ConditionType.even;
+		} else if (typeString.equals("weaker")) {
+			type = ConditionType.weaker;
+		} else if (typeString.equals("much_weaker")) {
+			type = ConditionType.much_weaker;
+		}
+
+		return type;
+	}
+
 	public static FightActionType getFightActionType(String typeString) {
 		FightActionType type = FightActionType.unknown;
 
@@ -56,46 +96,6 @@ public class TypeTranslator {
 			type = MoveActionType.crouch;
 		} else if (typeString.equals("stand")) {
 			type = MoveActionType.stand;
-		}
-
-		return type;
-	}
-
-	public static CharacteristicType getCharacteristicType(String typeString) {
-		CharacteristicType type = CharacteristicType.unknown;
-
-		if (typeString.equals("punchReach")) {
-			type = CharacteristicType.punchReach;
-		} else if (typeString.equals("punchPower")) {
-			type = CharacteristicType.punchPower;
-		} else if (typeString.equals("kickReach")) {
-			type = CharacteristicType.kickReach;
-		} else if (typeString.equals("kickPower")) {
-			type = CharacteristicType.kickPower;
-		}
-
-		return type;
-	}
-
-	public static ConditionType getConditionType(String typeString) {
-		ConditionType type = ConditionType.unknown;
-
-		if (typeString.equals("always")) {
-			type = ConditionType.always;
-		} else if (typeString.equals("near")) {
-			type = ConditionType.near;
-		} else if (typeString.equals("far")) {
-			type = ConditionType.far;
-		} else if (typeString.equals("much_stronger")) {
-			type = ConditionType.much_stronger;
-		} else if (typeString.equals("stronger")) {
-			type = ConditionType.stronger;
-		} else if (typeString.equals("even")) {
-			type = ConditionType.even;
-		} else if (typeString.equals("weaker")) {
-			type = ConditionType.weaker;
-		} else if (typeString.equals("much_weaker")) {
-			type = ConditionType.much_weaker;
 		}
 
 		return type;

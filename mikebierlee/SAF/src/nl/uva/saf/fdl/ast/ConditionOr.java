@@ -26,7 +26,7 @@ public class ConditionOr extends BooleanExpression<ConditionAnd> {
 	public ConditionOr(ArrayList<ConditionAnd> operands) {
 		super(operands);
 	}
-	
+
 	@Override
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);

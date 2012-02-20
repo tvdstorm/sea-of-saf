@@ -24,5 +24,5 @@ public class ConditionAlways extends TreeNode {
 	@Override
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);
-	}	
+	}
 }

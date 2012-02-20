@@ -38,20 +38,25 @@ public class ConditionSemantics implements IConditionSemantics {
 		this.muchWeakerDifference = muchWeakerDifference;
 	}
 
-	@Override
-	public HashMap<ConditionType, Boolean> getConditionStates(FighterBot fighter, List<FighterBot> players) {
-		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
+	private void evaluateDistance(FighterBot fighter, FighterBot enemy, HashMap<ConditionType, Boolean> truthTable) {
+		Vector2d enemyPosition = enemy.getPosition();
+		Vector2d fighterPosition = fighter.getPosition();
 
-		for (FighterBot enemy : players) {
-			if (enemy != fighter) {
-				evaluateDistance(fighter, enemy, truthTable);
-				evaluateStrength(fighter, enemy, truthTable);
+		int distance = (int) Math.round(Math.abs(Vector2d.substract(enemyPosition, fighterPosition).x));
+		int punchReach = fighter.getAttribute(CharacteristicType.punchReach);
+		int kickReach = fighter.getAttribute(CharacteristicType.kickReach);
 
-				break;
-			}
+		boolean near = false;
+		boolean far = false;
+
+		if (distance <= punchReach * distanceScale || distance <= kickReach * distanceScale) {
+			near = true;
+		} else {
+			far = true;
 		}
 
-		return truthTable;
+		truthTable.put(ConditionType.near, near);
+		truthTable.put(ConditionType.far, far);
 	}
 
 	private void evaluateStrength(FighterBot fighter, FighterBot enemy, HashMap<ConditionType, Boolean> truthTable) {
@@ -92,25 +97,20 @@ public class ConditionSemantics implements IConditionSemantics {
 		truthTable.put(ConditionType.much_stronger, much_stronger);
 	}
 
-	private void evaluateDistance(FighterBot fighter, FighterBot enemy, HashMap<ConditionType, Boolean> truthTable) {
-		Vector2d enemyPosition = enemy.getPosition();
-		Vector2d fighterPosition = fighter.getPosition();
+	@Override
+	public HashMap<ConditionType, Boolean> getConditionStates(FighterBot fighter, List<FighterBot> players) {
+		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
 
-		int distance = (int) Math.round(Math.abs(Vector2d.substract(enemyPosition, fighterPosition).x));
-		int punchReach = fighter.getAttribute(CharacteristicType.punchReach);
-		int kickReach = fighter.getAttribute(CharacteristicType.kickReach);
+		for (FighterBot enemy : players) {
+			if (enemy != fighter) {
+				evaluateDistance(fighter, enemy, truthTable);
+				evaluateStrength(fighter, enemy, truthTable);
 
-		boolean near = false;
-		boolean far = false;
-
-		if (distance <= punchReach * distanceScale || distance <= kickReach * distanceScale) {
-			near = true;
-		} else {
-			far = true;
+				break;
+			}
 		}
 
-		truthTable.put(ConditionType.near, near);
-		truthTable.put(ConditionType.far, far);
+		return truthTable;
 	}
 
 }
