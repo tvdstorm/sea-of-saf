@@ -4,4 +4,5 @@ ChuckNorris{
 	kickReach = 10
 	punchReach = 10
 	always[walk_towards punch_high]
+	near[crouch kick_high]
 }

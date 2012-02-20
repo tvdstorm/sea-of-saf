@@ -1,6 +1,6 @@
 package saf.structure;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import saf.Checker.Check;
 import saf.simulation.Arena;
@@ -37,7 +37,7 @@ public class Fighter extends Check
 	}	
 	
 	@Override
-	public List<String> check(){
+	public ArrayList<String> check(){
 		if(name == null || name.isEmpty())
 		{
 			addError("A fighter needs a name!");

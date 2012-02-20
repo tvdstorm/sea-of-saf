@@ -1,6 +1,6 @@
 package saf.structure;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import saf.Checker.Check;
 
@@ -39,7 +39,7 @@ public class Characteristic extends Check {
 	}
 
 	@Override
-	public List<String> check(){
+	public ArrayList<String> check(){
 		if(power < 1 || power > 10) 
 		{
 			addError("The power: '" + power + "', is invalid for: '" + attribute.toString() + "'. Power should be in the range of 1-10.");

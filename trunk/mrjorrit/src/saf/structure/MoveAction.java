@@ -1,6 +1,6 @@
 package saf.structure;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import saf.Checker.Check;
 
@@ -17,7 +17,7 @@ public class MoveAction extends Check {
 		catch(Exception e)
 		{
 			//set to default value
-			moveActionType2  = MoveActionType.crouch;
+			moveActionType2  = null;
 			addError("Illegal MoveAction: '" + moveAction + "'");
 		}
 		this.moveActionType = moveActionType2;
@@ -31,7 +31,7 @@ public class MoveAction extends Check {
 	}
 	
 	@Override
-	public List<String> check() {
+	public ArrayList<String> check() {
 		// TODO Auto-generated method stub
 		return getErrors();
 	}

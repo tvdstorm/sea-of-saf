@@ -1,7 +1,6 @@
 package saf.structure;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import saf.Checker.Check;
 
@@ -9,7 +8,7 @@ import saf.Checker.Check;
 public class Rule extends Check  {
 	
 	//Constructor
-	public Rule(Logical logical, List<MoveAction> moveActions, List<FightAction> fightActions)
+	public Rule(Logical logical, ArrayList<MoveAction> moveActions, ArrayList<FightAction> fightActions)
 	{
 		this.logical = logical;
 		this.moveActions = moveActions;
@@ -25,27 +24,27 @@ public class Rule extends Check  {
 	
 	
 	//MoveActionType
-	private final List<MoveAction> moveActions;
+	private final ArrayList<MoveAction> moveActions;
 	
-	public List<MoveAction> getMoveActions() {
+	public ArrayList<MoveAction> getMoveActions() {
 		return moveActions;
 	}
 	
 	//FightActionTypes
-	private final List<FightAction> fightActions;
+	private final ArrayList<FightAction> fightActions;
 	
-	public List<FightAction> getFightActionTypes() {
+	public ArrayList<FightAction> getFightAction() {
 		return fightActions;
 	}
 
 	@Override
-	public List<String> check() {
+	public ArrayList<String> check() {
 		
 		addErrors(logical.check());
 		
 		//Needs refactoring
-		List<MoveActionType> foundMoveActions = new ArrayList<MoveActionType>();
-		List<FightActionType> foundFightActions = new ArrayList<FightActionType>();
+		ArrayList<MoveActionType> foundMoveActions = new ArrayList<MoveActionType>();
+		ArrayList<FightActionType> foundFightActions = new ArrayList<FightActionType>();
 		
 		for(MoveAction moveAction : moveActions)
 		{
