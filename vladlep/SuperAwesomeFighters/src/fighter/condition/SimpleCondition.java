@@ -15,7 +15,7 @@ public class SimpleCondition implements ICondition, ASTNode {
 
 	@Override
 	public boolean testCondition(List<ConditionType> acceptedConditions) {
-		if(acceptedConditions.contains(condition))
+		if (acceptedConditions.contains(condition))
 			return true;
 		return false;
 	}

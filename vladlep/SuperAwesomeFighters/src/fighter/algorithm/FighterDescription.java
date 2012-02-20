@@ -1,11 +1,9 @@
 package fighter.algorithm;
 
-import java.lang.Math;
 import java.util.ArrayList;
 import java.util.List;
 
 import main.Config;
-import fighter.Fighter;
 import fighter.IFighter;
 import fighter.Personality;
 import fighter.Rule;
@@ -15,6 +13,7 @@ public class FighterDescription {
 
 	private IFighter fighter;
 	private FighterState fighterState;
+
 	private List<ConditionType> acceptedConditions;
 
 	public FighterDescription(IFighter fighter) {
@@ -28,7 +27,7 @@ public class FighterDescription {
 		double oponentPower = oponent.getPower();
 		double myPower = fighter.getPersonality().getPower();
 		double percentageDifference = myPower / oponentPower;
-		
+
 		if (percentageDifference < Config.veryUnballacedThreash) {
 			acceptedConditions.add(ConditionType.much_weaker);
 		} else if (percentageDifference < Config.unballacedThreash) {
@@ -42,15 +41,14 @@ public class FighterDescription {
 		}
 	}
 
-	public void updateDistAcceptedCond()
-	{
-		//TODO based on my current poz and my opponent select if I'm far or near from him;
+	public void updateDistAcceptedCond(ConditionType newAcceptedCond) {
+
 		acceptedConditions.remove(ConditionType.near);
 		acceptedConditions.remove(ConditionType.far);
-		
-		acceptedConditions.add(ConditionType.far);
-		acceptedConditions.add(ConditionType.near);
+		acceptedConditions.add(newAcceptedCond);
+
 	}
+
 	public FighterState getFighterState() {
 		return fighterState;
 	}
@@ -60,9 +58,16 @@ public class FighterDescription {
 
 	}
 
-	public void pickNextMoves(){
-		Rule nextRule = fighter.getBehaviour().getNextRule(acceptedConditions);
+	// if he has no move to do he picks a new one, otherwise he does nothing
+	public void calculateNextMove() {
+		if (fighterState.finishedPerformingActions()) {
+			Rule nextRule = fighter.getBehaviour().getNextRule(
+					acceptedConditions);
+
+			fighterState.setSelectedMoveAction(nextRule.getNextMoveAction());
+			fighterState.setSelectedFightAction(nextRule.getNextFightAction());
+		}
 		
-		
+
 	}
 }

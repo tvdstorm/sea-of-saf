@@ -9,44 +9,44 @@ import org.junit.Test;
 
 import reader.antlr.SAFParser;
 import utils.TestUtils;
-import fighter.Bot;
+import fighter.Fighter;
 import fighter.Personality;
 import fighter.checker.SemanticChecker;
 import fighter.messages.Message;
 
 public class CheckerTests {
 
-	private final String inputFile = "semanticTest.txt";
 	private SAFParser parser;
-	private Bot fighter;
+	private Fighter fighter;
 	private List<Message> messages;
 
-	public CheckerTests() throws RecognitionException {
+	public void setUp(String inputFile) throws RecognitionException {
 		parser = TestUtils.getParserForFile(inputFile);
-		System.out.println("ok read ");
 		fighter = parser.fighter();
-		System.out.println("ok parser ");
-		messages = SemanticChecker.checkBot(fighter);
-		System.out.println(" ok checker");
+		messages = SemanticChecker.checkFighter(fighter);
 	}
 
 	@Test
 	public void persoanlityTest() throws RecognitionException {
-		assertEquals("JackieChan", fighter.getName());
+		String inputFile = "semanticTest.txt";
+		setUp(inputFile);
+
+		assertEquals("Semantic", fighter.getName());
 		Personality personality = fighter.getPersonality();
 
 		assertEquals(7, personality.getKickPower());
-		assertEquals(-1, personality.getKickReach());
+		assertEquals(0, personality.getKickReach());
 		assertEquals(5, personality.getPunchPower());
 		assertEquals(12, personality.getPunchReach());
+
+		assertEquals(
+				"WARNING: Action block_high apears multiple times in choose",
+				messages.get(0).toString());
+		assertEquals("ERROR: Kick Reach exceeds lower limit", messages.get(1)
+				.toString());
+		assertEquals("ERROR: Punch Reach exceeds uper limit", messages.get(2)
+				.toString());
+
 	}
 
-	@Test
-	public void personalityErrors() {
-		System.out.println(messages);
-	}
-
-	public static void main(String[] args) throws RecognitionException {
-		new CheckerTests().personalityErrors();
-	}
 }

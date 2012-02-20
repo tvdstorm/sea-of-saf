@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.antlr.runtime.RecognitionException;
 import org.junit.Test;
 
-import fighter.Bot;
+import fighter.Fighter;
 import fighter.Personality;
 import fighter.Rule;
 import fighter.condition.ICondition;
@@ -18,7 +18,7 @@ public class GrammarParserTest {
 
 	private final String inputFile = "operatorsPriority.txt";
 	private SAFParser parser;
-	private Bot fighter;
+	private Fighter fighter;
 
 	public GrammarParserTest() throws RecognitionException {
 		parser = TestUtils.getParserForFile("operatorsPriority.txt");
