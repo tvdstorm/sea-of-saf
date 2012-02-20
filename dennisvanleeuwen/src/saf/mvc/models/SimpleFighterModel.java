@@ -1,12 +1,14 @@
 package saf.mvc.models;
 
-import saf.astelements.Characteristic;
-import saf.astelements.Fighter;
+import saf.astnodes.Characteristic;
+import saf.astnodes.Fighter;
 import saf.mvc.FighterModel;
 
 public class SimpleFighterModel extends FighterModel{
-	public SimpleFighterModel(int x, int y, int health, String startMoveState, String startFightState, Fighter fighterNode){
-		super(x, y, health, startMoveState, startFightState, fighterNode);
+	private static final int DEFAULT_VALUE = 5;
+	
+	public SimpleFighterModel(int x, int health, String startMoveState, String startFightState, Fighter fighterNode){
+		super(x, health, startMoveState, startFightState, fighterNode);
 	}
 	
 	public int findCharacteristicValue(String characteristicItem){
@@ -14,20 +16,18 @@ public class SimpleFighterModel extends FighterModel{
 			if(fighterChar.item.equals(characteristicItem))
 				return fighterChar.value;
 		}
-		return 5;//Default value;
+		System.out.println("Default characteristic!");
+		return DEFAULT_VALUE;
 	}
 	
-	//weight = (punchPower + kickPower) / 2
 	public double getWeight(){
 		return (this.findCharacteristicValue("punchPower") + this.findCharacteristicValue("kickPower")) /2;
 	}
 	
-	//height = (punchReach + kickReach) / 2
 	public double getHeight(){
 		return (this.findCharacteristicValue("punchReach") + this.findCharacteristicValue("kickReach")) /2;
 	}
 	
-	//speed = | 0.5*(height-weight) |
 	public double getSpeed(){
 		return Math.abs(0.5*(this.getHeight() - this.getWeight()));
 	}

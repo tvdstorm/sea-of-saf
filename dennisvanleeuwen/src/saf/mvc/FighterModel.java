@@ -1,6 +1,6 @@
 package saf.mvc;
 
-import saf.astelements.Fighter;
+import saf.astnodes.Fighter;
 
 public abstract class FighterModel{
 	private String currentMoveState;
@@ -8,11 +8,9 @@ public abstract class FighterModel{
 	private Fighter fighterNode;	
 	private int health;
 	private int x;
-	private int y;
 	
-	public FighterModel(int x, int y, int health, String startMoveState, String startFightState, Fighter fighterNode){
+	public FighterModel(int x, int health, String startMoveState, String startFightState, Fighter fighterNode){
 		this.x = x;
-		this.y = y;
 		this.health = health;
 		this.currentMoveState = startMoveState;
 		this.currentFightState = startFightState;
@@ -49,14 +47,6 @@ public abstract class FighterModel{
 
 	public void setX(int x) {
 		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
 	}
 
 	public Fighter getFighterNode() {

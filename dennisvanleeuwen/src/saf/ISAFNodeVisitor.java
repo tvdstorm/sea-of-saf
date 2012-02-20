@@ -1,9 +1,9 @@
 package saf;
 
-import saf.astelements.*;
-import saf.astelements.actions.*;
-import saf.astelements.conditions.ANDConnective;
-import saf.astelements.conditions.ORConnective;
+import saf.astnodes.*;
+import saf.astnodes.actions.*;
+import saf.astnodes.conditions.AndConnective;
+import saf.astnodes.conditions.OrConnective;
 
 public interface ISAFNodeVisitor {
 	public void visit(Fighter fighterNode);
@@ -11,10 +11,10 @@ public interface ISAFNodeVisitor {
 	public void visit(Characteristic characteristicNode);
 	public void visit(Rule ruleNode);	
 
-	public void visit(ORConnective orNode);
-	public void visit(ANDConnective andNode);
-	public void visit(saf.astelements.conditions.Simple simpleNode);
+	public void visit(OrConnective orNode);
+	public void visit(AndConnective andNode);
+	public void visit(saf.astnodes.conditions.Simple simpleNode);
 	
 	public void visit(ChooseComposite chooseActionNode);	
-	public void visit(saf.astelements.actions.Simple simpleNode);
+	public void visit(saf.astnodes.actions.Simple simpleNode);
 }

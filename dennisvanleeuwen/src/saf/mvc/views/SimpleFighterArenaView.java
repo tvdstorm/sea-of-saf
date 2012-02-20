@@ -5,24 +5,24 @@ import javax.swing.*;
 
 import saf.mvc.FighterModel;
 import saf.mvc.IView;
-import saf.mvc.views.twodfighters.IFigtherFigureFactory;
-import saf.mvc.views.twodfighters.fighterfigures.PencilFigure;
+import saf.mvc.views.fighterfigures.PencilDrawnFigure;
 
 public class SimpleFighterArenaView extends JPanel implements IView {
+	private static final long serialVersionUID = -2587487392484802159L;
+	
 	private FighterModel leftFighter;
 	private FighterModel rightFighter;
-	private IFigtherFigureFactory fighterFactory;
+
 	private JFrame f;	
 	
-	static final int APPLICATION_WIDTH = 600;
-	static final int APPLICATION_HEIGHT = 350; 
-	static final int APPLICATION_X_POSITION = 100;
-	static final int APPLICATION_Y_POSITION = 100;
+	private static final int APPLICATION_WIDTH = 600;
+	private static final int APPLICATION_HEIGHT = 350; 
+	private static final int APPLICATION_X_POSITION = 100;
+	private static final int APPLICATION_Y_POSITION = 100;
 	
-	public SimpleFighterArenaView(IFigtherFigureFactory factory, FighterModel leftFighter, FighterModel rightFighter){		
+	public SimpleFighterArenaView(FighterModel leftFighter, FighterModel rightFighter){		
 		this.leftFighter = leftFighter;
 		this.rightFighter = rightFighter;
-		this.fighterFactory = factory;
 		
 		f = new JFrame("SAF Fight Area");
 		f.setTitle("Super Awesome Fighters");
@@ -45,24 +45,29 @@ public class SimpleFighterArenaView extends JPanel implements IView {
 		g.setColor(Color.BLACK);
 		
 		//If one of the fighters disappears out of the window, place them both back in the middle!
-		if((this.leftFighter.getX() < 0 || this.leftFighter.getX()* PencilFigure.WIDTH_BODY > APPLICATION_WIDTH) && 
-		   (this.rightFighter.getX() < 0 || this.rightFighter.getX()* PencilFigure.WIDTH_BODY > APPLICATION_WIDTH)){
+		if((this.leftFighter.getX() < 0 || this.leftFighter.getX()* PencilDrawnFigure.WIDTH_BODY > APPLICATION_WIDTH) && 
+		   (this.rightFighter.getX() < 0 || this.rightFighter.getX()* PencilDrawnFigure.WIDTH_BODY > APPLICATION_WIDTH)){
 			
-			int toMove = APPLICATION_WIDTH /PencilFigure.WIDTH_BODY;//Move half of the size of the window, to get in the middle
+			int toMove = APPLICATION_WIDTH /PencilDrawnFigure.WIDTH_BODY;//Move half of the size of the window, to get in the middle
 			
-			this.leftFighter.setX((this.leftFighter.getX() + toMove)%(APPLICATION_WIDTH/PencilFigure.WIDTH_BODY));
-			this.rightFighter.setX((this.rightFighter.getX() + toMove)%(APPLICATION_WIDTH/PencilFigure.WIDTH_BODY));
+			this.leftFighter.setX((this.leftFighter.getX() + toMove)%(APPLICATION_WIDTH/PencilDrawnFigure.WIDTH_BODY));
+			this.rightFighter.setX((this.rightFighter.getX() + toMove)%(APPLICATION_WIDTH/PencilDrawnFigure.WIDTH_BODY));
 		}
 
-	    this.fighterFactory.createFighterFigure(leftFighter, true).draw(g);
-		this.fighterFactory.createFighterFigure(rightFighter, false).draw(g);
+	    new PencilDrawnFigure(leftFighter.getX(), 
+	    					  leftFighter.getCurrentMoveState(), 
+	    					  leftFighter.getCurrentFightState(), 
+	    					  true).draw(g);
+	    
+	    new PencilDrawnFigure(rightFighter.getX(), 
+				    		  rightFighter.getCurrentMoveState(), 
+				    		  rightFighter.getCurrentFightState(), 
+				    		  false).draw(g);
 		
 		g.drawString("Left Fighter: " + this.leftFighter.getFighterNode().getName(), 100, 250); 
 		g.drawString("Health: " + this.leftFighter.getHealth(), 100, 265);
 
 		g.drawString("Right Fighter: " + this.rightFighter.getFighterNode().getName(), 400, 250); 
 		g.drawString("Health: " + this.rightFighter.getHealth(), 400, 265);
-		
-		System.out.println("rendered!");
 	 }
 }
