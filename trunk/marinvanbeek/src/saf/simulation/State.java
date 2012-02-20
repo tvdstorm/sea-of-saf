@@ -15,7 +15,7 @@ public class State {
         this.distanceToOpponent = distanceToOpponent;
     }
 
-    /* Determine the possible conditions defined in saf.data.Condition from the
+    /* Determine the true conditions (defined in saf.data.Condition) from the
      * perspective of fighter1 (for example, much_stronger + near). */
     public static State getState(Fighter fighter1, Fighter fighter2)
     {

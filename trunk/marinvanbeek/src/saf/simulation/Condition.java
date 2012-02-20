@@ -6,7 +6,7 @@ public abstract class Condition
 {
     public static boolean isTrue(saf.data.Condition condition, State state)
     {
-        /* Determine what is close and what is stronger. */
+        /* FIXME Should determine if 'condition' is true based on 'state'. */
         return true;
     }
 }

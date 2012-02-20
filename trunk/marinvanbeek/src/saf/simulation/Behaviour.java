@@ -42,10 +42,6 @@ public abstract class Behaviour
         {
             return behaviour.getAlwaysAction();
         }
-
-//        return saf.data.Action.getRandom(new Random());
-//        return new saf.data.Action(new saf.data.Move("walk_towards"), 
-//                                   new saf.data.Attack("kick_high"));
     }
 }
 

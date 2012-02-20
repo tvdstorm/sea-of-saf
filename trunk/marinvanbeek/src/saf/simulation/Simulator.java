@@ -11,7 +11,7 @@ public class Simulator {
     public static final int LEFT_START = 50;
     public static final int RIGHT_BORDER = 200;
     public static final int RIGHT_START = 150;
-    public static final int MAXIMUM_STEPS = 300;
+    public static final int MAX_SIMULATION_STEPS = 300;
 
     private Fighter leftFighter;
     private List<saf.data.Fighter> leftSimulationData =
@@ -29,7 +29,7 @@ public class Simulator {
     public void runSimulation()
     {
         int i;
-        for (i = 0; i < MAXIMUM_STEPS; i++)
+        for (i = 0; i < MAX_SIMULATION_STEPS; i++)
         {
             handleFighter(leftFighter, rightFighter, leftSimulationData,
                           LEFT_BORDER, rightFighter.getPosition().getX());
@@ -53,7 +53,7 @@ public class Simulator {
         addData(leftFighter, leftSimulationData);
         addData(rightFighter, rightSimulationData);
 
-        if (i == MAXIMUM_STEPS)
+        if (i == MAX_SIMULATION_STEPS)
         {
             System.out.println("Draw!");
         }
