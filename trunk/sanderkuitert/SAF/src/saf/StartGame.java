@@ -9,7 +9,7 @@ import java.security.InvalidParameterException;
 import java.util.LinkedList;
 import java.util.List;
 
-import saf.fighter.Fighter;
+import saf.fighter.PassiveFighter;
 import saf.fighter.SuperAwesomeFighter;
 
 
@@ -26,24 +26,24 @@ public class StartGame {
 	/** Load fighters from args, and simulate matches between all of them */
 	public void startGame(String[] args){
         
-		List<Fighter> fighters = obtainFighters(args);
-		System.err.flush();	System.out.println("> Correctly read " + fighters.size() + " fighters");//DEBUG
+		List<PassiveFighter> fighters = obtainFighters(args);
+		System.err.flush();	System.out.println("> " + fighters.size() + " fighters joined the game");//DEBUG
 		
 		if(fighters.size() > 1){
 			startTournament(fighters);
 		}else{
-			System.out.println("LOG: Simulation aborted (not enough fighters available)"); 			//DEBUG
+			System.out.println("> Simulation aborted (not enough fighters available)"); 			//DEBUG
 		}
 		
 	}
 
-	private List<Fighter> obtainFighters(String[] args) {
-		List<Fighter> fighters = new LinkedList<Fighter>();
+	private List<PassiveFighter> obtainFighters(String[] args) {
+		List<PassiveFighter> fighters = new LinkedList<PassiveFighter>();
 
 		for(String source : args){
 			try {
 				String fdl = readFileContent(source);
-				Fighter fighter = new SuperAwesomeFighter(fdl);
+				PassiveFighter fighter = new SuperAwesomeFighter(fdl);
 				fighters.add(fighter);
 			} catch (FileNotFoundException e){
 				System.err.println(e.getMessage());
@@ -70,9 +70,8 @@ public class StartGame {
 		return content;
 	}
 	
-	private void startTournament(List<Fighter> fighters) {
+	private void startTournament(List<PassiveFighter> fighters) {
 		assert fighters.size() > 1 : "Matches need at least two valid fighters!";
-//		assert fighters.size() % 2 == 0 : "Matches need an even number of fighters!";
 		
 		//Start matches between every fighter
 		simulations = new ThreadGroup("Tournament with "+fighters.size()+" fighters");

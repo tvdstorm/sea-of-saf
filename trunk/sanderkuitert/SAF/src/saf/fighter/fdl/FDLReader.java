@@ -12,7 +12,7 @@ import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 
 
-/** Reads and applies Fighter Description Language */
+/** Reads and applies PassiveFighter Description Language */
 public class FDLReader {
 
 	private final CommonTree ast;
@@ -29,7 +29,7 @@ public class FDLReader {
 	}
 	
 	/**
-	 * Applies fdl to given fighter iff fdl is valid
+	 * Applies fdl to given DescribableFighter iff fdl is valid
 	 * @return true iff fdl was applied
 	 * @require fighter != null
 	 */ 

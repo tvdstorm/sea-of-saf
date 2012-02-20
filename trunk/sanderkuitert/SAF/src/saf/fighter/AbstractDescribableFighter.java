@@ -19,14 +19,6 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 	}
 
 	
-	public boolean equals(Object other) {
-		if(other instanceof AbstractDescribableFighter) {
-			return this.name.equals(((AbstractDescribableFighter)other).getName()) &&
-						this.getChildren().equals(((AbstractDescribableFighter)other).getChildren());
-		}
-		return false;
-	}
-	
 	//--- Implementing AST ---
 	public String getName() {
 		return name;
@@ -39,8 +31,16 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 		return result;
 	}
 	
+	public boolean equals(Object other) {
+		if(other instanceof AbstractDescribableFighter) {
+			return this.name.equals(((AbstractDescribableFighter)other).getName()) &&
+						this.getChildren().equals(((AbstractDescribableFighter)other).getChildren());
+		}
+		return false;
+	}
+	
+	
 	//--- Implementing DescribableFighter ---
-	//Attribute validity
 	public boolean isValidName(String name) {
 		return true;
 	}
@@ -66,7 +66,6 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 	}
 	
 	
-	//Attribute possibilities
 	public String validNames() {
 		return "Any name is valid.";
 	}
@@ -87,7 +86,6 @@ abstract class AbstractDescribableFighter implements DescribableFighter, AST {
 		return ALWAYS_CONDITION;
 	}
 	
-	//Attribute addition
 	/** @require isValidName(name) */
 	public void setName(String name) {
 		assert isValidName(name): "Name requirement broken";

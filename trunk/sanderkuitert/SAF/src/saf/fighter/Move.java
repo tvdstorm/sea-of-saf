@@ -40,13 +40,13 @@ public class Move implements AST {
 		}
 		
 		if(move.startsWith(WALK)){
-			return WALK_DISTANCE * directionModifier;
+			return WALK_DISTANCE_PERCENTAGE * directionModifier;
 		}
 		if(move.startsWith(RUN)){
-			return RUN_DISTANCE * directionModifier;
+			return RUN_DISTANCE_PERCENTAGE * directionModifier;
 		}
 		if(move.equals(JUMP)) {
-			return JUMP_DISTANCE * directionModifier;
+			return JUMP_DISTANCE_PERCENTAGE * directionModifier;
 		}
 		return 0.0;
 	}

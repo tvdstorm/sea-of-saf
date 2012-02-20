@@ -9,7 +9,7 @@ import saf.fighter.fdl.FDLReader;
 import saf.fighter.fdl.InvalidAttributeMessage;
 
 
-public class SuperAwesomeFighter extends AbstractDescribableFighter implements Fighter {
+public class SuperAwesomeFighter extends AbstractDescribableFighter implements PassiveFighter {
 	
 
 	public SuperAwesomeFighter (){
@@ -53,7 +53,7 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 	protected Condition getState(double distance, double strengthDifference) {
 		List<Condition> possibleStates = new LinkedList<Condition>();
 		
-		if(Math.abs(distance) < NEAR_ZONE_DISTANCE) {
+		if(Math.abs(distance) < NEAR_ZONE_DISTANCE_PERCENTAGE) {
 			possibleStates.add(new Condition("near", null));
 		} else {
 			possibleStates.add(new Condition("far", null));
@@ -95,9 +95,10 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 	}
 	
 
-	//--- Implementing Fighter ---
-	public Fighter.ActionEffect act(double distance, double strengthDifference) {
+	//--- Implementing PassiveFighter ---
+	public PassiveFighter.ActionEffect selectAction(double distance, double strengthDifference) {
 		Action chosenAction = selectRandom(getPossibleActions(getState(distance, strengthDifference)));
+
 		return chosenAction.getEffectFromRandomChoice(this.properties); 
 	}
 
