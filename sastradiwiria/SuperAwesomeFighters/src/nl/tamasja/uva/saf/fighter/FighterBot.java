@@ -1,39 +1,4 @@
-/*
-fighter{
-punchReach=9
-even[choose(crouch walk_towards) choose(block_high
-punch_low)]
-always[crouch block_low]
-}
-
-CrackieJan{
-	kickPower = 7
-	punchPower = 5
-	kickReach = 3
-	punchReach = 9
-	far or even[run_towards punch_high]
-	near and stronger[choose(stand crouch) kick_high]
-	much_stronger[walk_towards punch_low]
-	weaker and far or much_weaker[run_away choose(block_high block_low)]
-	always[walk_towards block_high]
-}
-
-Bot
- - Personality
- 	- Charasteristic [punchreach etc]
- - Behaviour
- 	- Rule
- 		- MoveAction [walk, run]
- 		- FightAction [block,punch,kick]
- 		- Condition [always, near,far]
-
-
-*/
-
-
 package nl.tamasja.uva.saf.fighter;
-
-//import nl.tamasja.uva.saf.fighter.action.FightAction_old.Height;
 import java.awt.Graphics;
 
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Attack;
