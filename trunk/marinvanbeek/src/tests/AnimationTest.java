@@ -3,42 +3,18 @@ import org.junit.*;
 import saf.data.*;
 import saf.animation.*;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class AnimationTest
+public class AnimationTest extends RedirectOutput
 {
     private static final String LOG_FILE = "simulation_test_results.txt";
-
-    private static PrintStream systemStdout;
-    private static PrintStream systemStderr;
 
     @BeforeClass
     public static void redirect()
     {
-        try
-        {
-            systemStdout = System.out;
-            systemStderr = System.err;
-
-            PrintStream logFile = new PrintStream(LOG_FILE);
-            System.setOut(logFile);
-            System.setErr(logFile);
-        } catch (FileNotFoundException e)
-        {
-            System.err.println("Couldn't open log file\n" + e.getMessage());
-        }
-    }
-
-    @AfterClass
-    public static void unRedirect()
-    {
-        System.setOut(systemStdout);
-        System.setErr(systemStderr);
+        redirectTo(LOG_FILE);
     }
 
     @Test

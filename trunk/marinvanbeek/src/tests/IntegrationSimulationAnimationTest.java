@@ -6,41 +6,17 @@ import saf.simulation.Simulator;
 import saf.animation.Animator;
 import saf.animation.ArenaAnimator;
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
 import java.util.Random;
 
-public class IntegrationSimulationAnimationTest
+public class IntegrationSimulationAnimationTest extends RedirectOutput
 {
     private static final String LOG_FILE = 
             "integration_sim_anim_test_results.txt";
 
-    private static PrintStream systemStdout;
-    private static PrintStream systemStderr;
-
     @BeforeClass
     public static void redirect()
     {
-        try
-        {
-            systemStdout = System.out;
-            systemStderr = System.err;
-
-            PrintStream logFile = new PrintStream(LOG_FILE);
-            System.setOut(logFile);
-            System.setErr(logFile);
-        } catch (FileNotFoundException e)
-        {
-            System.err.println("Couldn't open log file\n" + e.getMessage());
-        }
-    }
-
-    @AfterClass
-    public static void unRedirect()
-    {
-        System.setOut(systemStdout);
-        System.setErr(systemStderr);
+        redirectTo(LOG_FILE);
     }
 
     @Test

@@ -1,4 +1,4 @@
 legal_minimal
 {
-    always [jump punch_low]
+    always [crouch punch_low]
 }
