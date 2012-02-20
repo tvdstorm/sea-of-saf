@@ -13,14 +13,14 @@ public abstract class Attribute
 
         for (saf.data.Attribute attributeData : attributeDatas)
         {
-            wellFormed &= checkAttribute(attributeData, errorMessages);
+            wellFormed &= checkSingleAttribute(attributeData, errorMessages);
         }
 
         return wellFormed;
     }
 
-    private static boolean checkAttribute(saf.data.Attribute attributeData, 
-                                          List<String> errorMessages)
+    private static boolean checkSingleAttribute(
+            saf.data.Attribute attributeData, List<String> errorMessages)
     {
         boolean wellFormed = true;
 
