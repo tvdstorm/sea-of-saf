@@ -53,7 +53,7 @@ public class SuperAwesomeFighter extends AbstractDescribableFighter implements F
 	protected Condition getState(double distance, double strengthDifference) {
 		List<Condition> possibleStates = new LinkedList<Condition>();
 		
-		if(distance < NEAR_ZONE_DISTANCE) {
+		if(Math.abs(distance) < NEAR_ZONE_DISTANCE) {
 			possibleStates.add(new Condition("near", null));
 		} else {
 			possibleStates.add(new Condition("far", null));
