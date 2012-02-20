@@ -8,9 +8,9 @@ import nl.tamasja.uva.saf.tree.IFighterVisitor;
 public class Fighter implements IFighterNode {
 	
 	private final String name;
-	private final ArrayList<Property> properties;
+	private final ArrayList<IProperty> properties;
 	
-	public Fighter(String name, ArrayList<Property> properties) {
+	public Fighter(String name, ArrayList<IProperty> properties) {
 		this.name = name;
 		this.properties = properties;
 	}
@@ -18,7 +18,7 @@ public class Fighter implements IFighterNode {
 	@Override
 	public void accept(IFighterVisitor visitor) {
 		
-		for(Property p : properties ) {
+		for(IProperty p : properties ) {
 			p.accept(visitor);
 		}
 		
@@ -29,7 +29,7 @@ public class Fighter implements IFighterNode {
 		return name;
 	}
 
-	public ArrayList<Property> getProperties() {
+	public ArrayList<IProperty> getProperties() {
 		return properties;
 	}
 

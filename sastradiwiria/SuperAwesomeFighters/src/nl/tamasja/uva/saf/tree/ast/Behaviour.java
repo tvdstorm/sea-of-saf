@@ -2,13 +2,13 @@ package nl.tamasja.uva.saf.tree.ast;
 
 import nl.tamasja.uva.saf.tree.IFighterVisitor;
 
-public class Behaviour implements Property {
+public class Behaviour implements IProperty {
 
-	private final Condition condition;
-	private final Action moveAction;
-	private final Action fightAction;
+	private final ICondition condition;
+	private final IAction moveAction;
+	private final IAction fightAction;
 	
-	public Behaviour(Condition condition, Action moveAction, Action fightAction) {
+	public Behaviour(ICondition condition, IAction moveAction, IAction fightAction) {
 		this.condition = condition;
 		this.moveAction = moveAction;
 		this.fightAction = fightAction;
@@ -18,25 +18,25 @@ public class Behaviour implements Property {
 	@Override
 	public void accept(IFighterVisitor visitor) {
 		
-		condition.accept(visitor);
-		moveAction.accept(visitor);
-		fightAction.accept(visitor);
+		if(condition != null) condition.accept(visitor);
+		if(moveAction != null) moveAction.accept(visitor);
+		if(fightAction != null) fightAction.accept(visitor);
 		
 		visitor.visit(this);
 	}
 
 
-	public Condition getCondition() {
+	public ICondition getCondition() {
 		return condition;
 	}
 
 
-	public Action getMoveAction() {
+	public IAction getMoveAction() {
 		return moveAction;
 	}
 
 
-	public Action getFightAction() {
+	public IAction getFightAction() {
 		return fightAction;
 	}
 
