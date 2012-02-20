@@ -1,8 +1,6 @@
 package saf.engine;
 
 import saf.IArenaEngine;
-import saf.astelements.IAction;
-import saf.astelements.ICondition;
 import saf.mvc.FighterModel;
 import saf.mvc.models.SimpleFighterModel;
 
@@ -10,118 +8,121 @@ public class SimpleArenaEngine implements IArenaEngine{
 	private SimpleFighterModel currentFighter;
 	private SimpleFighterModel enemyFighter;
 	
+	private double currentFighterTime;
+	private double enemyFighterTime;
+	
 	private static final int MINIMUM_DISTANCE_BETWEEN_FIGHTERS = 1;
 	
 	public SimpleArenaEngine(SimpleFighterModel currentFighter, SimpleFighterModel enemyFighter){
 		this.currentFighter = currentFighter;
 		this.enemyFighter = enemyFighter;
+		
+		this.currentFighterTime = 0;
+		this.enemyFighterTime = 0;
 	}
 	
 	public FighterModel getCurrentFighter(){
 		return this.currentFighter;
 	}
 	
-	public void switchToNextFighter(){
-		SimpleFighterModel temp = this.currentFighter;
-		this.currentFighter = this.enemyFighter;
-		this.enemyFighter = temp;
+	/* 
+	 * Next fighter can be the same fighter as the 'current', because in SimpleController we check and get 
+	 * the next fighter by checking the speed of the fighter.
+	 */
+	public void nextTurn(){
+		this.currentFighterTime += this.currentFighter.getSpeed();
+		this.enemyFighterTime += this.enemyFighter.getSpeed();
+		
+		if(this.enemyFighterTime > this.currentFighterTime){
+			SimpleFighterModel tempModel = this.currentFighter;
+			this.currentFighter = this.enemyFighter;
+			this.enemyFighter = tempModel;
+			
+			double tempTime = this.currentFighterTime;
+			this.currentFighterTime = this.enemyFighterTime;
+			this.enemyFighterTime = tempTime;
+		}
+		this.currentFighterTime -= 1;
 	}
 	
-	public Boolean isTheCase(ICondition condition){//TODO: refactor with map: string -> Object/Class
-		if(condition.getNodeName().equals("far"))
-			return this.calculateDistance() > 20;
-		else if(condition.getNodeName().equals("near"))
-			return this.calculateDistance() < 5;
+	public Boolean isTheCase(String condition){
+		if(condition.equals("far"))
+			return this.getDistanceBetweenFighters() > 20;
+		else if(condition.equals("near"))
+			return this.getDistanceBetweenFighters() < 5;
 		/* Put the much_..... conditons before the .... conditions because of priority! */
-		else if(condition.getNodeName().equals("much_weaker"))
+		else if(condition.equals("much_weaker"))
 			return this.calculateTotalStrength(this.currentFighter)*2 < this.calculateTotalStrength(this.enemyFighter);
-		else if(condition.getNodeName().equals("weaker"))
+		else if(condition.equals("weaker"))
 			return this.calculateTotalStrength(this.currentFighter) < this.calculateTotalStrength(this.enemyFighter);		
-		else if(condition.getNodeName().equals("even"))
+		else if(condition.equals("even"))
 			return this.calculateTotalStrength(this.currentFighter) == this.calculateTotalStrength(this.enemyFighter);
-		else if(condition.getNodeName().equals("much_stronger"))
+		else if(condition.equals("much_stronger"))
 			return this.calculateTotalStrength(this.currentFighter) > this.calculateTotalStrength(this.enemyFighter)*2;
-		else if(condition.getNodeName().equals("stronger"))
+		else if(condition.equals("stronger"))
 			return this.calculateTotalStrength(this.currentFighter) > this.calculateTotalStrength(this.enemyFighter);
-		else if(condition.getNodeName().equals("always"))
+		else if(condition.equals("always"))
 			return true;
 		
 		return false;
 	}
 
-	public void doMoveAction(IAction action){ //TODO: refactor same as condition
-		//Move Actions
-		
-		System.out.println("Cur move: " + action.getNodeName());
-		
-		if(action.getNodeName().equals("jump") || action.getNodeName().equals("crouch")){
-			//nothing
-			this.currentFighter.setCurrentMoveState(action.getNodeName());
+	public void doMoveAction(String action){
+		if(action.equals("jump") || action.equals("crouch")){
+			this.currentFighter.setCurrentMoveState(action);
 		}
 		else{
-			if(action.getNodeName().equals("run_away")){
+			if(action.equals("run_away")){
 				this.doMoveIfPossible(-7);
-			}else if(action.getNodeName().equals("walk_away")){
+			}else if(action.equals("walk_away")){
 				this.doMoveIfPossible(-2);
-			}else if(action.getNodeName().equals("walk_towards")){
+			}else if(action.equals("walk_towards")){
 				this.doMoveIfPossible(2);
-			}else if(action.getNodeName().equals("run_towards")){
+			}else if(action.equals("run_towards")){
 				this.doMoveIfPossible(7);
 			}
-			//if there is no 'special' MOVE action, so move action is will become stand.
+			//if there is no 'special' MOVE action, so move action will be stand.
 			this.currentFighter.setCurrentMoveState("stand");
 		}
 	}
 	
-	//TODO canReach function that determines if the fighter can hit the other one.
-	
-	public void doFightAction(IAction action){ //TODO: refactor same as condition
-		//FightActions
+	public void doFightAction(String action){
 		Boolean lowHitBlock = this.enemyFighter.getCurrentFightState().equals("block_low") || this.enemyFighter.getCurrentMoveState().equals("jump"); 
 		Boolean highHitBlock = this.enemyFighter.getCurrentFightState().equals("block_high") || this.enemyFighter.getCurrentMoveState().equals("crouch"); 
 		
-		System.out.println("Cur fight: " + action.getNodeName());
-		
 		if(!lowHitBlock){
-			if(action.getNodeName().equals("punch_low")){
-				if(Math.abs(this.currentFighter.getX() - this.enemyFighter.getX()) <= this.currentFighter.findCharacteristicValue("punchReach"))
+			if(action.equals("punch_low")){
+				if(getDistanceBetweenFighters() <= this.currentFighter.findCharacteristicValue("punchReach"))
 					this.enemyFighter.setHealth(this.enemyFighter.getHealth() - (this.currentFighter.findCharacteristicValue("punchPower")));
 			}
-			else if(action.getNodeName().equals("kick_low")){
-				if(Math.abs(this.currentFighter.getX() - this.enemyFighter.getX()) <= this.currentFighter.findCharacteristicValue("kickReach"))
+			else if(action.equals("kick_low")){
+				if(getDistanceBetweenFighters() <= this.currentFighter.findCharacteristicValue("kickReach"))
 					this.enemyFighter.setHealth(this.enemyFighter.getHealth() - (this.currentFighter.findCharacteristicValue("kickPower")));
 			}
 		}
-		else if(!highHitBlock){
-			if(action.getNodeName().equals("punch_high")){
-				if(Math.abs(this.currentFighter.getX() - this.enemyFighter.getX()) <= this.currentFighter.findCharacteristicValue("punchReach"))
+		
+		if(!highHitBlock){
+			if(action.equals("punch_high")){
+				if(getDistanceBetweenFighters() <= this.currentFighter.findCharacteristicValue("punchReach"))
 					this.enemyFighter.setHealth(this.enemyFighter.getHealth() - (this.currentFighter.findCharacteristicValue("punchPower")));						
 			}
-			else if(action.getNodeName().equals("kick_high")){
-				if(Math.abs(this.currentFighter.getX() - this.enemyFighter.getX()) <= this.currentFighter.findCharacteristicValue("kickReach"))
+			else if(action.equals("kick_high")){
+				if(getDistanceBetweenFighters() <= this.currentFighter.findCharacteristicValue("kickReach"))
 					this.enemyFighter.setHealth(this.enemyFighter.getHealth() - (this.currentFighter.findCharacteristicValue("kickPower")));				
 			}
-		}
-		else {
-//			if(action.getNodeName().equals("block_low")){
-//				
-//			}
-//			else if(action.getNodeName().equals("block_high")){
-//				
-//			}
 		}
 		
 		if(this.enemyFighter.getHealth() < 0)
 			this.enemyFighter.setHealth(0);
 		
-		this.currentFighter.setCurrentFightState(action.getNodeName());
+		this.currentFighter.setCurrentFightState(action);
 	}
 	
 	public FighterModel getFightWinner(){
 		if(this.currentFighter.getHealth() <= 0)
-			return this.currentFighter;
-		else if(this.enemyFighter.getHealth() <= 0)
 			return this.enemyFighter;
+		else if(this.enemyFighter.getHealth() <= 0)
+			return this.currentFighter;
 		
 		return null;
 	}
@@ -135,7 +136,7 @@ public class SimpleArenaEngine implements IArenaEngine{
 		}
 	}
 	
-	private int calculateDistance(){
+	private int getDistanceBetweenFighters(){
 		return Math.abs(this.currentFighter.getX() - this.enemyFighter.getX());
 	}
 	

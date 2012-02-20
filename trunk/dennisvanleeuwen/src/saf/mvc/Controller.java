@@ -1,6 +1,5 @@
 package saf.mvc;
 
-
 public abstract class Controller {
 	private IView view;
 	
