@@ -9,7 +9,6 @@ options {
   package nl.uva.lap.saf;
   import nl.uva.lap.saf.ast.action.Action;
   import nl.uva.lap.saf.ast.action.Choose;
-  import nl.uva.lap.saf.ast.Ident;
   import nl.uva.lap.saf.ast.action.SimpleAction;
   import nl.uva.lap.saf.ast.fighter.Behaviour;
   import nl.uva.lap.saf.ast.fighter.Fighter;
@@ -65,8 +64,6 @@ connectCondition returns[Condition connect] :	(
 conditions returns [Condition cond]
 	: simpleCondition {cond=$simpleCondition.simple;}
 	| connectCondition {cond=$connectCondition.connect;};
-
-
 
 simpleAction returns [Action simple]: action=IDENT {simple = new SimpleAction($action.text);}; 
 	

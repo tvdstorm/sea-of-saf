@@ -1,9 +1,8 @@
-// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-02-19 17:03:16
+// $ANTLR 3.4 D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g 2012-02-20 14:41:15
 
   package nl.uva.lap.saf;
   import nl.uva.lap.saf.ast.action.Action;
   import nl.uva.lap.saf.ast.action.Choose;
-  import nl.uva.lap.saf.ast.Ident;
   import nl.uva.lap.saf.ast.action.SimpleAction;
   import nl.uva.lap.saf.ast.fighter.Behaviour;
   import nl.uva.lap.saf.ast.fighter.Fighter;
@@ -68,7 +67,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "fighter"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:37:1: fighter returns [Fighter fighter] : name= IDENT '{' ( statement )* '}' ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:1: fighter returns [Fighter fighter] : name= IDENT '{' ( statement )* '}' ;
     public final Fighter fighter() throws RecognitionException {
         Fighter fighter = null;
 
@@ -76,14 +75,14 @@ public class SAFParser extends Parser {
         Token name=null;
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:37:34: (name= IDENT '{' ( statement )* '}' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:37:36: name= IDENT '{' ( statement )* '}'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:34: (name= IDENT '{' ( statement )* '}' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:36: name= IDENT '{' ( statement )* '}'
             {
             name=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter57); 
 
             match(input,17,FOLLOW_17_in_fighter59); 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:37:51: ( statement )*
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:51: ( statement )*
             loop1:
             do {
                 int alt1=2;
@@ -96,7 +95,7 @@ public class SAFParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:37:51: statement
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:36:51: statement
             	    {
             	    pushFollow(FOLLOW_statement_in_fighter61);
             	    statement();
@@ -135,10 +134,10 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "statement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:40:1: statement : ( personalityStatement | behaviourStatement );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:1: statement : ( personalityStatement | behaviourStatement );
     public final void statement() throws RecognitionException {
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:40:10: ( personalityStatement | behaviourStatement )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:10: ( personalityStatement | behaviourStatement )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -171,7 +170,7 @@ public class SAFParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:40:12: personalityStatement
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:12: personalityStatement
                     {
                     pushFollow(FOLLOW_personalityStatement_in_statement75);
                     personalityStatement();
@@ -182,7 +181,7 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:40:35: behaviourStatement
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:39:35: behaviourStatement
                     {
                     pushFollow(FOLLOW_behaviourStatement_in_statement79);
                     behaviourStatement();
@@ -210,14 +209,14 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "personalityStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:42:1: personalityStatement : personality= IDENT '=' value= INTEGER ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:41:1: personalityStatement : personality= IDENT '=' value= INTEGER ;
     public final void personalityStatement() throws RecognitionException {
         Token personality=null;
         Token value=null;
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:42:21: (personality= IDENT '=' value= INTEGER )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:42:23: personality= IDENT '=' value= INTEGER
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:41:21: (personality= IDENT '=' value= INTEGER )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:41:23: personality= IDENT '=' value= INTEGER
             {
             personality=(Token)match(input,IDENT,FOLLOW_IDENT_in_personalityStatement88); 
 
@@ -245,7 +244,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "behaviourStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:45:1: behaviourStatement : cond= conditions '[' action1= actionStatement (action2= actionStatement )? ']' ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:44:1: behaviourStatement : cond= conditions '[' action1= actionStatement (action2= actionStatement )? ']' ;
     public final void behaviourStatement() throws RecognitionException {
         Condition cond =null;
 
@@ -255,8 +254,8 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:45:20: (cond= conditions '[' action1= actionStatement (action2= actionStatement )? ']' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:45:22: cond= conditions '[' action1= actionStatement (action2= actionStatement )? ']'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:44:20: (cond= conditions '[' action1= actionStatement (action2= actionStatement )? ']' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:44:22: cond= conditions '[' action1= actionStatement (action2= actionStatement )? ']'
             {
             pushFollow(FOLLOW_conditions_in_behaviourStatement108);
             cond=conditions();
@@ -272,7 +271,7 @@ public class SAFParser extends Parser {
             state._fsp--;
 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:45:73: (action2= actionStatement )?
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:44:73: (action2= actionStatement )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -281,7 +280,7 @@ public class SAFParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:45:73: action2= actionStatement
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:44:73: action2= actionStatement
                     {
                     pushFollow(FOLLOW_actionStatement_in_behaviourStatement118);
                     action2=actionStatement();
@@ -322,7 +321,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "simpleCondition"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:53:1: simpleCondition returns [Condition simple] : cond= IDENT ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:52:1: simpleCondition returns [Condition simple] : cond= IDENT ;
     public final Condition simpleCondition() throws RecognitionException {
         Condition simple = null;
 
@@ -330,8 +329,8 @@ public class SAFParser extends Parser {
         Token cond=null;
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:53:44: (cond= IDENT )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:53:46: cond= IDENT
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:52:44: (cond= IDENT )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:52:46: cond= IDENT
             {
             cond=(Token)match(input,IDENT,FOLLOW_IDENT_in_simpleCondition138); 
 
@@ -355,7 +354,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "connectCondition"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:54:1: connectCondition returns [Condition connect] : ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition ) ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:53:1: connectCondition returns [Condition connect] : ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition ) ;
     public final Condition connectCondition() throws RecognitionException {
         Condition connect = null;
 
@@ -367,10 +366,10 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:54:45: ( ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition ) )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:54:47: ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:53:45: ( ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition ) )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:53:47: ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition )
             {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:54:47: ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:53:47: ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition )
             int alt4=3;
             int LA4_0 = input.LA(1);
 
@@ -414,7 +413,7 @@ public class SAFParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:55:3: '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:54:3: '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions
                     {
                     match(input,9,FOLLOW_9_in_connectCondition154); 
 
@@ -447,7 +446,7 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:56:5: lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')'
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:55:5: lhs= simpleCondition op= ( 'and' | 'or' ) '(' rhs= conditions ')'
                     {
                     pushFollow(FOLLOW_simpleCondition_in_connectCondition180);
                     lhs=simpleCondition();
@@ -480,7 +479,7 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:57:5: lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:56:5: lhs= simpleCondition op= ( 'and' | 'or' ) rhs= simpleCondition
                     {
                     pushFollow(FOLLOW_simpleCondition_in_connectCondition204);
                     lhs=simpleCondition();
@@ -537,7 +536,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "conditions"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:65:1: conditions returns [Condition cond] : ( simpleCondition | connectCondition );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:64:1: conditions returns [Condition cond] : ( simpleCondition | connectCondition );
     public final Condition conditions() throws RecognitionException {
         Condition cond = null;
 
@@ -548,7 +547,7 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:66:2: ( simpleCondition | connectCondition )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:65:2: ( simpleCondition | connectCondition )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -581,7 +580,7 @@ public class SAFParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:66:4: simpleCondition
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:65:4: simpleCondition
                     {
                     pushFollow(FOLLOW_simpleCondition_in_conditions233);
                     simpleCondition1=simpleCondition();
@@ -594,7 +593,7 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:67:4: connectCondition
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:66:4: connectCondition
                     {
                     pushFollow(FOLLOW_connectCondition_in_conditions240);
                     connectCondition2=connectCondition();
@@ -624,7 +623,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "simpleAction"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:71:1: simpleAction returns [Action simple] : action= IDENT ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:68:1: simpleAction returns [Action simple] : action= IDENT ;
     public final Action simpleAction() throws RecognitionException {
         Action simple = null;
 
@@ -632,10 +631,10 @@ public class SAFParser extends Parser {
         Token action=null;
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:71:37: (action= IDENT )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:71:39: action= IDENT
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:68:37: (action= IDENT )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:68:39: action= IDENT
             {
-            action=(Token)match(input,IDENT,FOLLOW_IDENT_in_simpleAction257); 
+            action=(Token)match(input,IDENT,FOLLOW_IDENT_in_simpleAction255); 
 
             simple = new SimpleAction((action!=null?action.getText():null));
 
@@ -657,7 +656,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "chooseAction"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:73:1: chooseAction returns [Action choose] : 'choose' '(' (simple= simpleAction )+ ')' ;
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:70:1: chooseAction returns [Action choose] : 'choose' '(' (simple= simpleAction )+ ')' ;
     public final Action chooseAction() throws RecognitionException {
         Action choose = null;
 
@@ -667,14 +666,14 @@ public class SAFParser extends Parser {
 
         List actions = new ArrayList<Action>();
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:75:2: ( 'choose' '(' (simple= simpleAction )+ ')' )
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:75:4: 'choose' '(' (simple= simpleAction )+ ')'
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:72:2: ( 'choose' '(' (simple= simpleAction )+ ')' )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:72:4: 'choose' '(' (simple= simpleAction )+ ')'
             {
-            match(input,15,FOLLOW_15_in_chooseAction279); 
+            match(input,15,FOLLOW_15_in_chooseAction277); 
 
-            match(input,9,FOLLOW_9_in_chooseAction281); 
+            match(input,9,FOLLOW_9_in_chooseAction279); 
 
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:75:17: (simple= simpleAction )+
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:72:17: (simple= simpleAction )+
             int cnt6=0;
             loop6:
             do {
@@ -688,9 +687,9 @@ public class SAFParser extends Parser {
 
                 switch (alt6) {
             	case 1 :
-            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:75:18: simple= simpleAction
+            	    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:72:18: simple= simpleAction
             	    {
-            	    pushFollow(FOLLOW_simpleAction_in_chooseAction286);
+            	    pushFollow(FOLLOW_simpleAction_in_chooseAction284);
             	    simple=simpleAction();
 
             	    state._fsp--;
@@ -711,7 +710,7 @@ public class SAFParser extends Parser {
             } while (true);
 
 
-            match(input,10,FOLLOW_10_in_chooseAction291); 
+            match(input,10,FOLLOW_10_in_chooseAction289); 
 
             choose = new Choose(actions);
 
@@ -733,7 +732,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "actionStatement"
-    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:79:1: actionStatement returns [Action action] : (simple= simpleAction |choose= chooseAction );
+    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:76:1: actionStatement returns [Action action] : (simple= simpleAction |choose= chooseAction );
     public final Action actionStatement() throws RecognitionException {
         Action action = null;
 
@@ -744,7 +743,7 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:80:2: (simple= simpleAction |choose= chooseAction )
+            // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:2: (simple= simpleAction |choose= chooseAction )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -763,9 +762,9 @@ public class SAFParser extends Parser {
             }
             switch (alt7) {
                 case 1 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:80:4: simple= simpleAction
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:77:4: simple= simpleAction
                     {
-                    pushFollow(FOLLOW_simpleAction_in_actionStatement311);
+                    pushFollow(FOLLOW_simpleAction_in_actionStatement309);
                     simple=simpleAction();
 
                     state._fsp--;
@@ -776,9 +775,9 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:81:4: choose= chooseAction
+                    // D:\\Jeroen\\Uni\\SC\\workspace\\SAF\\src\\nl\\uva\\lap\\saf\\SAF.g:78:4: choose= chooseAction
                     {
-                    pushFollow(FOLLOW_chooseAction_in_actionStatement321);
+                    pushFollow(FOLLOW_chooseAction_in_actionStatement319);
                     choose=chooseAction();
 
                     state._fsp--;
@@ -838,12 +837,12 @@ public class SAFParser extends Parser {
     public static final BitSet FOLLOW_simpleCondition_in_connectCondition216 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_simpleCondition_in_conditions233 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_connectCondition_in_conditions240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_simpleAction257 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_chooseAction279 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_chooseAction281 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_simpleAction_in_chooseAction286 = new BitSet(new long[]{0x0000000000000420L});
-    public static final BitSet FOLLOW_10_in_chooseAction291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_simpleAction_in_actionStatement311 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_chooseAction_in_actionStatement321 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_simpleAction255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_chooseAction277 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_chooseAction279 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_simpleAction_in_chooseAction284 = new BitSet(new long[]{0x0000000000000420L});
+    public static final BitSet FOLLOW_10_in_chooseAction289 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_simpleAction_in_actionStatement309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_chooseAction_in_actionStatement319 = new BitSet(new long[]{0x0000000000000002L});
 
 }

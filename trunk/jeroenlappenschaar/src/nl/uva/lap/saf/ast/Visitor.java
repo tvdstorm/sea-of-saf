@@ -11,7 +11,6 @@ import nl.uva.lap.saf.ast.fighter.Personality;
 
 public interface Visitor
 {
-	public void visit(Ident ident);
 	public void visit(SimpleAction action);
 	public void visit(Choose choose);
 	public void visit(Personality personality);
