@@ -10,6 +10,6 @@ public abstract class Message {
 
 	@Override
 	public String toString() {
-		return message;
+		return message + "\n";
 	}
 }

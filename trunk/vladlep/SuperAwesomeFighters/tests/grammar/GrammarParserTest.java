@@ -21,7 +21,7 @@ public class GrammarParserTest {
 	private Fighter fighter;
 
 	public GrammarParserTest() throws RecognitionException {
-		parser = TestUtils.getParserForFile("operatorsPriority.txt");
+		parser = TestUtils.getParserForFile(inputFile);
 		fighter = parser.fighter();
 	}
 

@@ -2,7 +2,7 @@ package fighter;
 
 import fighter.checker.Visitor;
 
-public class Fighter implements ASTNode, IFighter {
+public class Fighter implements IFighter {
 
 	private String name;
 	private Behaviour behaviour;

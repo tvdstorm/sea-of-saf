@@ -1,19 +1,30 @@
 package fighter.algorithm;
 
+import fighter.IFighter;
+import fighter.Personality;
 import fighter.action.FightActionType;
 import fighter.action.MoveActionType;
 
 public class FighterState {
 	// http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html
-	private int position;
+
+	private IFighter myFigter;
+	private int positionX;
+	private int positionY;
+	private int predefDirection;
 	private MoveActionType selectedMoveAction;
 	private FightActionType selectedFightAction;
 	// remaining time until all actions are completed
-	private int remainingTime;
+	private int remainingTime = 0;
 	private int health;
 
-	public FighterState(int health) {
+	public FighterState(IFighter myFighter, int health, int positionX,
+			int positionY, int direction) {
+		this.myFigter = myFighter;
 		this.health = health;
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.predefDirection = direction;
 	}
 
 	public boolean finishedPerformingActions() {
@@ -26,8 +37,8 @@ public class FighterState {
 		return health;
 	}
 
-	public int getPosition() {
-		return position;
+	public int getPositionX() {
+		return positionX;
 	}
 
 	public void setSelectedFightAction(FightActionType selectedFightAction) {
@@ -36,5 +47,53 @@ public class FighterState {
 
 	public void setSelectedMoveAction(MoveActionType selectedMoveAction) {
 		this.selectedMoveAction = selectedMoveAction;
+	}
+
+	// TODO in progress
+	public void performActions(Personality myPersonality,
+			FighterState oponentState) {
+
+		selectedMoveAction.doAction(this, oponentState);
+		selectedFightAction.doAction(this, oponentState);
+
+		remainingTime--;
+	}
+
+	public int calculateFigterDistance(FighterState oponentState) {
+		return Math.abs(this.positionX - oponentState.positionX);
+
+	}
+
+	public double getSpeed() {
+		return myFigter.getPersonality().getSpeed();
+	}
+
+	public int getRemainingTime() {
+		return remainingTime;
+	}
+
+	public void setRemainingTime(int remainingTime) {
+		this.remainingTime = remainingTime;
+	}
+
+	public int computeNewPositionX(int moveDirection) {
+		int newPositionX = predefDirection * moveDirection
+				* BattleConstants.stepSize;
+		if (checkInFrame(newPositionX)) {
+			return newPositionX;
+		}
+		return positionX;
+	}
+
+	private boolean checkInFrame(int newPositionX) {
+		if (newPositionX <= 0)
+			return false;
+		if (newPositionX > BattleConstants.arenaLength)
+			return false;
+		return true;
+	}
+
+	public void setPositionX(int positionX) {
+		this.positionX = positionX;
 	}
 }

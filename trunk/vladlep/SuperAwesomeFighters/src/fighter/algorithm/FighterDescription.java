@@ -3,7 +3,6 @@ package fighter.algorithm;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.Config;
 import fighter.IFighter;
 import fighter.Personality;
 import fighter.Rule;
@@ -16,9 +15,11 @@ public class FighterDescription {
 
 	private List<ConditionType> acceptedConditions;
 
-	public FighterDescription(IFighter fighter) {
+	public FighterDescription(IFighter fighter, int positionX, int positionY,
+			int direction) {
 		this.fighter = fighter;
-		fighterState = new FighterState(Config.startingHealth);
+		fighterState = new FighterState(fighter,
+				BattleConstants.startingHealth, positionX, positionY, direction);
 		acceptedConditions = new ArrayList<ConditionType>();
 		acceptedConditions.add(ConditionType.always);
 	}
@@ -28,13 +29,13 @@ public class FighterDescription {
 		double myPower = fighter.getPersonality().getPower();
 		double percentageDifference = myPower / oponentPower;
 
-		if (percentageDifference < Config.veryUnballacedThreash) {
+		if (percentageDifference < BattleConstants.veryUnballacedThreash) {
 			acceptedConditions.add(ConditionType.much_weaker);
-		} else if (percentageDifference < Config.unballacedThreash) {
+		} else if (percentageDifference < BattleConstants.unballacedThreash) {
 			acceptedConditions.add(ConditionType.weaker);
-		} else if (1 / percentageDifference > Config.veryUnballacedThreash) {
+		} else if (1 / percentageDifference > BattleConstants.veryUnballacedThreash) {
 			acceptedConditions.add(ConditionType.much_stronger);
-		} else if (1 / percentageDifference > Config.unballacedThreash) {
+		} else if (1 / percentageDifference > BattleConstants.unballacedThreash) {
 			acceptedConditions.add(ConditionType.stronger);
 		} else {
 			acceptedConditions.add(ConditionType.even);
@@ -68,5 +69,9 @@ public class FighterDescription {
 			fighterState.setSelectedFightAction(nextRule.getNextFightAction());
 		}
 
+	}
+
+	public int calculateFigterDistance(FighterState oponentState) {
+		return fighterState.calculateFigterDistance(oponentState);
 	}
 }
