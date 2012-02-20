@@ -23,6 +23,8 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.WindowConstants;
+
 import java.awt.FlowLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -38,7 +40,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ValidationErrorsDialog extends JDialog {
+	private static final long serialVersionUID = -1006958901591363925L;
+	private JTextArea errorTextArea;
+
 	private final ValidationErrorsDialog eventSourceWindow = this;
+
 	private ValidationReport report;
 
 	public ValidationErrorsDialog() {
@@ -75,23 +81,22 @@ public class ValidationErrorsDialog extends JDialog {
 		errorTextArea.setEditable(false);
 		panel_1.add(errorTextArea, "2, 4, fill, fill");
 
-		JLabel lblTheSimulationCannot = new JLabel("The simulation cannot start with improper fighters.");
+		JLabel lblTheSimulationCannot = new JLabel("The simulation cannot start with improperly defined fighters.");
 		panel_1.add(lblTheSimulationCannot, "2, 6");
-	}
-
-	private void setProperties() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		setTitle("Validation Errors");
-		setModal(true);
-		setPreferredSize(new Dimension(690, 360));
-		setSize(new Dimension(690, 360));
-		getContentPane().setLayout(new BorderLayout(0, 0));
 	}
 
 	public ValidationReport getReport() {
 		return report;
 	}
 
+	private void setProperties() {
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setTitle("Validation Errors");
+		setModal(true);
+		setPreferredSize(new Dimension(690, 360));
+		setSize(new Dimension(690, 360));
+		getContentPane().setLayout(new BorderLayout(0, 0));
+	}
 	public void setReport(ValidationReport report) {
 		this.report = report;
 
@@ -110,8 +115,5 @@ public class ValidationErrorsDialog extends JDialog {
 			errorTextArea.setText(reportText);
 		}
 	}
-
-	private static final long serialVersionUID = -1006958901591363925L;
-	private JTextArea errorTextArea;
 
 }

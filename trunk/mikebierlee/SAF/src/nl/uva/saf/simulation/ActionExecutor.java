@@ -27,16 +27,16 @@ import nl.uva.saf.fdl.types.FightActionType;
 import nl.uva.saf.fdl.types.MoveActionType;
 
 public class ActionExecutor implements IActionExecutor {
+	private final int addedKickCost;
+	private final int addedPunchCost;
+	private final int baseKickCost;
+	private final int basePunchCost;
 	private final double powerScale;
-	private final int walkSpeedScale;
 	private final int runSpeedScale;
 	private final int runTurnCost;
-	private final int walkTurnCost;
-	private final int baseKickCost;
-	private final int addedKickCost;
-	private final int basePunchCost;
-	private final int addedPunchCost;
 	private int totalTurnCost;
+	private final int walkSpeedScale;
+	private final int walkTurnCost;
 
 	public ActionExecutor() {
 		powerScale = 1;
@@ -61,60 +61,6 @@ public class ActionExecutor implements IActionExecutor {
 		this.addedKickCost = addedKickCost;
 		this.basePunchCost = basePunchCost;
 		this.addedPunchCost = addedPunchCost;
-	}
-
-	public int getSpeedScale() {
-		return walkSpeedScale;
-	}
-
-	public double getPowerScale() {
-		return powerScale;
-	}
-
-	@Override
-	public void executeFighterActions(FighterBot fighter, List<FighterBot> players,
-			HashMap<ConditionType, Boolean> truthTable) {
-		totalTurnCost = 0;
-
-		for (FighterBot enemy : players) {
-			if (enemy != fighter) {
-				executeFightAction(fighter, enemy, truthTable);
-				executeMoveAction(fighter, enemy);
-				break;
-			}
-		}
-	}
-
-	@Override
-	public int getTurnCost() {
-		return totalTurnCost;
-	}
-
-	private void executeMoveAction(FighterBot fighter, FighterBot enemy) {
-		Vector2d enemyPosition = enemy.getPosition();
-		Vector2d fighterPosition = fighter.getPosition();
-		Vector2d enemyDirection = Vector2d.substract(enemyPosition, fighterPosition);
-		enemyDirection.normalize();
-		int speed = fighter.getSpeed() + 1;
-
-		switch (fighter.getMoveAction()) {
-		case walk_away:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * walkSpeedScale)));
-			totalTurnCost += walkTurnCost;
-			break;
-		case walk_towards:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * walkSpeedScale));
-			totalTurnCost += walkTurnCost;
-			break;
-		case run_away:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * runSpeedScale)));
-			totalTurnCost += runTurnCost;
-			break;
-		case run_towards:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * runSpeedScale));
-			totalTurnCost += runTurnCost;
-			break;
-		}
 	}
 
 	private void executeFightAction(FighterBot fighter, FighterBot enemy, HashMap<ConditionType, Boolean> truthTable) {
@@ -163,5 +109,59 @@ public class ActionExecutor implements IActionExecutor {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public void executeFighterActions(FighterBot fighter, List<FighterBot> players,
+			HashMap<ConditionType, Boolean> truthTable) {
+		totalTurnCost = 0;
+
+		for (FighterBot enemy : players) {
+			if (enemy != fighter) {
+				executeFightAction(fighter, enemy, truthTable);
+				executeMoveAction(fighter, enemy);
+				break;
+			}
+		}
+	}
+
+	private void executeMoveAction(FighterBot fighter, FighterBot enemy) {
+		Vector2d enemyPosition = enemy.getPosition();
+		Vector2d fighterPosition = fighter.getPosition();
+		Vector2d enemyDirection = Vector2d.substract(enemyPosition, fighterPosition);
+		enemyDirection.normalize();
+		int speed = fighter.getSpeed() + 1;
+
+		switch (fighter.getMoveAction()) {
+		case walk_away:
+			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * walkSpeedScale)));
+			totalTurnCost += walkTurnCost;
+			break;
+		case walk_towards:
+			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * walkSpeedScale));
+			totalTurnCost += walkTurnCost;
+			break;
+		case run_away:
+			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * runSpeedScale)));
+			totalTurnCost += runTurnCost;
+			break;
+		case run_towards:
+			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * runSpeedScale));
+			totalTurnCost += runTurnCost;
+			break;
+		}
+	}
+
+	public double getPowerScale() {
+		return powerScale;
+	}
+
+	public int getSpeedScale() {
+		return walkSpeedScale;
+	}
+
+	@Override
+	public int getTurnCost() {
+		return totalTurnCost;
 	}
 }

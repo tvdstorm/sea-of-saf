@@ -29,8 +29,18 @@ import java.util.List;
 public class RandomMock extends Random {
 	private static final long serialVersionUID = 6029252354710961782L;
 
-	private final List<Integer> expected;
 	private int currentIndex = 0;
+	private final List<Integer> expected;
+
+	/**
+	 * Constructs instance of the random mock. This instance will return the
+	 * number 0 at every call.
+	 * 
+	 */
+	public RandomMock() {
+		expected = new ArrayList<Integer>();
+		expected.add(0);
+	}
 
 	/**
 	 * Constructs instance of the random mock.
@@ -41,16 +51,6 @@ public class RandomMock extends Random {
 	 */
 	public RandomMock(List<Integer> expected) {
 		this.expected = expected;
-	}
-
-	/**
-	 * Constructs instance of the random mock. This instance will return the
-	 * number 0 at every call.
-	 * 
-	 */
-	public RandomMock() {
-		expected = new ArrayList<Integer>();
-		expected.add(0);
 	}
 
 	@Override

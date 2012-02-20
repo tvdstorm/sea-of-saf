@@ -39,52 +39,6 @@ public class ConditionSemanticsTest {
 	private List<FighterBot> players;
 	private IConditionSemantics semanticsEvaluator;
 
-	@Before
-	public void setup() {
-		fighter = new FighterBot(null);
-		enemy = new FighterBot(null);
-
-		semanticsEvaluator = new ConditionSemantics();
-
-		players = new ArrayList<FighterBot>();
-		players.add(fighter);
-		players.add(enemy);
-	}
-
-	@Test
-	public void fighterIsMuchStrongerTest() {
-		fighter.setAttribute(CharacteristicType.punchPower, 10);
-		fighter.setAttribute(CharacteristicType.kickPower, 10);
-
-		enemy.setAttribute(CharacteristicType.punchPower, 1);
-		enemy.setAttribute(CharacteristicType.kickPower, 1);
-
-		HashMap<ConditionType, Boolean> truths = semanticsEvaluator.getConditionStates(fighter, players);
-
-		Assert.assertTrue(truths.get(ConditionType.much_stronger));
-		Assert.assertFalse(truths.get(ConditionType.stronger));
-		Assert.assertFalse(truths.get(ConditionType.even));
-		Assert.assertFalse(truths.get(ConditionType.weaker));
-		Assert.assertFalse(truths.get(ConditionType.much_weaker));
-	}
-
-	@Test
-	public void fighterIsStrongerTest() {
-		fighter.setAttribute(CharacteristicType.punchPower, 8);
-		fighter.setAttribute(CharacteristicType.kickPower, 8);
-
-		enemy.setAttribute(CharacteristicType.punchPower, 4);
-		enemy.setAttribute(CharacteristicType.kickPower, 4);
-
-		HashMap<ConditionType, Boolean> truths = semanticsEvaluator.getConditionStates(fighter, players);
-
-		Assert.assertFalse(truths.get(ConditionType.much_stronger));
-		Assert.assertTrue(truths.get(ConditionType.stronger));
-		Assert.assertFalse(truths.get(ConditionType.even));
-		Assert.assertFalse(truths.get(ConditionType.weaker));
-		Assert.assertFalse(truths.get(ConditionType.much_weaker));
-	}
-
 	@Test
 	public void fighterIsEvenTest() {
 		fighter.setAttribute(CharacteristicType.punchPower, 5);
@@ -103,19 +57,31 @@ public class ConditionSemanticsTest {
 	}
 
 	@Test
-	public void fighterIsWeakerTest() {
-		fighter.setAttribute(CharacteristicType.punchPower, 4);
-		fighter.setAttribute(CharacteristicType.kickPower, 4);
+	public void fighterIsFarTest() {
+		fighter.setAttribute(CharacteristicType.punchReach, 10);
+		fighter.setAttribute(CharacteristicType.kickReach, 10);
+		fighter.setPosition(new Vector2d(50, 0));
+		enemy.setPosition(new Vector2d(151, 0));
 
-		enemy.setAttribute(CharacteristicType.punchPower, 8);
-		enemy.setAttribute(CharacteristicType.kickPower, 8);
+		HashMap<ConditionType, Boolean> truths = semanticsEvaluator.getConditionStates(fighter, players);
+		Assert.assertFalse(truths.get(ConditionType.near));
+		Assert.assertTrue(truths.get(ConditionType.far));
+	}
+
+	@Test
+	public void fighterIsMuchStrongerTest() {
+		fighter.setAttribute(CharacteristicType.punchPower, 10);
+		fighter.setAttribute(CharacteristicType.kickPower, 10);
+
+		enemy.setAttribute(CharacteristicType.punchPower, 1);
+		enemy.setAttribute(CharacteristicType.kickPower, 1);
 
 		HashMap<ConditionType, Boolean> truths = semanticsEvaluator.getConditionStates(fighter, players);
 
-		Assert.assertFalse(truths.get(ConditionType.much_stronger));
+		Assert.assertTrue(truths.get(ConditionType.much_stronger));
 		Assert.assertFalse(truths.get(ConditionType.stronger));
 		Assert.assertFalse(truths.get(ConditionType.even));
-		Assert.assertTrue(truths.get(ConditionType.weaker));
+		Assert.assertFalse(truths.get(ConditionType.weaker));
 		Assert.assertFalse(truths.get(ConditionType.much_weaker));
 	}
 
@@ -149,14 +115,48 @@ public class ConditionSemanticsTest {
 	}
 
 	@Test
-	public void fighterIsFarTest() {
-		fighter.setAttribute(CharacteristicType.punchReach, 10);
-		fighter.setAttribute(CharacteristicType.kickReach, 10);
-		fighter.setPosition(new Vector2d(50, 0));
-		enemy.setPosition(new Vector2d(151, 0));
+	public void fighterIsStrongerTest() {
+		fighter.setAttribute(CharacteristicType.punchPower, 8);
+		fighter.setAttribute(CharacteristicType.kickPower, 8);
+
+		enemy.setAttribute(CharacteristicType.punchPower, 4);
+		enemy.setAttribute(CharacteristicType.kickPower, 4);
 
 		HashMap<ConditionType, Boolean> truths = semanticsEvaluator.getConditionStates(fighter, players);
-		Assert.assertFalse(truths.get(ConditionType.near));
-		Assert.assertTrue(truths.get(ConditionType.far));
+
+		Assert.assertFalse(truths.get(ConditionType.much_stronger));
+		Assert.assertTrue(truths.get(ConditionType.stronger));
+		Assert.assertFalse(truths.get(ConditionType.even));
+		Assert.assertFalse(truths.get(ConditionType.weaker));
+		Assert.assertFalse(truths.get(ConditionType.much_weaker));
+	}
+
+	@Test
+	public void fighterIsWeakerTest() {
+		fighter.setAttribute(CharacteristicType.punchPower, 4);
+		fighter.setAttribute(CharacteristicType.kickPower, 4);
+
+		enemy.setAttribute(CharacteristicType.punchPower, 8);
+		enemy.setAttribute(CharacteristicType.kickPower, 8);
+
+		HashMap<ConditionType, Boolean> truths = semanticsEvaluator.getConditionStates(fighter, players);
+
+		Assert.assertFalse(truths.get(ConditionType.much_stronger));
+		Assert.assertFalse(truths.get(ConditionType.stronger));
+		Assert.assertFalse(truths.get(ConditionType.even));
+		Assert.assertTrue(truths.get(ConditionType.weaker));
+		Assert.assertFalse(truths.get(ConditionType.much_weaker));
+	}
+
+	@Before
+	public void setup() {
+		fighter = new FighterBot(null);
+		enemy = new FighterBot(null);
+
+		semanticsEvaluator = new ConditionSemantics();
+
+		players = new ArrayList<FighterBot>();
+		players.add(fighter);
+		players.add(enemy);
 	}
 }

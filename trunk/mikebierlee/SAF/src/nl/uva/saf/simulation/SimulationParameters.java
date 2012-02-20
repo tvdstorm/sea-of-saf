@@ -27,9 +27,9 @@ import nl.uva.saf.fdl.ActionSelector;
  * simulator by influencing it's evaluation and execution objects.
  */
 public class SimulationParameters {
+	private final IActionExecutor actionExecutor;
 	private final ActionSelector actionSelector;
 	private final IConditionSemantics conditionSemantics;
-	private final IActionExecutor actionExecutor;
 
 	public SimulationParameters() {
 		actionSelector = new ActionSelector(new Random());
@@ -37,10 +37,15 @@ public class SimulationParameters {
 		actionExecutor = new ActionExecutor();
 	}
 
-	public SimulationParameters(ActionSelector actionSelector, IConditionSemantics conditionSemantics, IActionExecutor actionExecutor) {
+	public SimulationParameters(ActionSelector actionSelector, IConditionSemantics conditionSemantics,
+			IActionExecutor actionExecutor) {
 		this.actionSelector = actionSelector;
 		this.conditionSemantics = conditionSemantics;
 		this.actionExecutor = actionExecutor;
+	}
+
+	public IActionExecutor getActionExecutor() {
+		return actionExecutor;
 	}
 
 	public ActionSelector getActionSelector() {
@@ -49,9 +54,5 @@ public class SimulationParameters {
 
 	public IConditionSemantics getConditionSemantics() {
 		return conditionSemantics;
-	}
-
-	public IActionExecutor getActionExecutor() {
-		return actionExecutor;
 	}
 }

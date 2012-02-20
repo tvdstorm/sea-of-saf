@@ -47,6 +47,53 @@ import org.junit.Test;
 public class ActionSelectorTest {
 	private ITreeNode fighter;
 
+	@Test
+	public void alwaysConditionSelectedWithAlwaysOnTrueTest() {
+		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
+		truthTable.put(ConditionType.always, true);
+
+		RandomMock numberGenerator = new RandomMock();
+		ActionSelector selector = new ActionSelector(numberGenerator);
+
+		selector.selectActions(fighter, truthTable);
+
+		Assert.assertTrue(selector.getMoveAction() == MoveActionType.stand);
+		Assert.assertTrue(selector.getFightAction() == FightActionType.block_low);
+	}
+
+	@Test
+	public void alwaysConditionSelectedWithEverythingFalseTest() {
+		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
+		truthTable.put(ConditionType.always, false);
+		truthTable.put(ConditionType.near, false);
+		truthTable.put(ConditionType.far, false);
+		truthTable.put(ConditionType.much_stronger, false);
+		truthTable.put(ConditionType.stronger, false);
+		truthTable.put(ConditionType.even, false);
+		truthTable.put(ConditionType.weaker, false);
+		truthTable.put(ConditionType.much_weaker, false);
+
+		RandomMock numberGenerator = new RandomMock();
+
+		ActionSelector selector = new ActionSelector(numberGenerator);
+
+		selector.selectActions(fighter, truthTable);
+
+		Assert.assertTrue(selector.getMoveAction() == MoveActionType.stand);
+		Assert.assertTrue(selector.getFightAction() == FightActionType.block_low);
+	}
+
+	@Test
+	public void selectAlwaysTest() {
+		RandomMock numberGenerator = new RandomMock();
+
+		ActionSelector selector = new ActionSelector(numberGenerator);
+		selector.selectAlways(fighter);
+
+		Assert.assertTrue(selector.getMoveAction() == MoveActionType.stand);
+		Assert.assertTrue(selector.getFightAction() == FightActionType.block_low);
+	}
+
 	@Before
 	public void setup() {
 		MoveChoice moveChoice;
@@ -92,52 +139,5 @@ public class ActionSelectorTest {
 		attributes.add(behaviour);
 
 		fighter = new Fighter("ActionSelectorTest", attributes);
-	}
-
-	@Test
-	public void alwaysConditionSelectedWithEverythingFalseTest() {
-		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
-		truthTable.put(ConditionType.always, false);
-		truthTable.put(ConditionType.near, false);
-		truthTable.put(ConditionType.far, false);
-		truthTable.put(ConditionType.much_stronger, false);
-		truthTable.put(ConditionType.stronger, false);
-		truthTable.put(ConditionType.even, false);
-		truthTable.put(ConditionType.weaker, false);
-		truthTable.put(ConditionType.much_weaker, false);
-
-		RandomMock numberGenerator = new RandomMock();
-
-		ActionSelector selector = new ActionSelector(numberGenerator);
-
-		selector.selectActions(fighter, truthTable);
-
-		Assert.assertTrue(selector.getMoveAction() == MoveActionType.stand);
-		Assert.assertTrue(selector.getFightAction() == FightActionType.block_low);
-	}
-
-	@Test
-	public void alwaysConditionSelectedWithAlwaysOnTrueTest() {
-		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
-		truthTable.put(ConditionType.always, true);
-
-		RandomMock numberGenerator = new RandomMock();
-		ActionSelector selector = new ActionSelector(numberGenerator);
-
-		selector.selectActions(fighter, truthTable);
-
-		Assert.assertTrue(selector.getMoveAction() == MoveActionType.stand);
-		Assert.assertTrue(selector.getFightAction() == FightActionType.block_low);
-	}
-
-	@Test
-	public void selectAlwaysTest() {
-		RandomMock numberGenerator = new RandomMock();
-
-		ActionSelector selector = new ActionSelector(numberGenerator);
-		selector.selectAlways(fighter);
-
-		Assert.assertTrue(selector.getMoveAction() == MoveActionType.stand);
-		Assert.assertTrue(selector.getFightAction() == FightActionType.block_low);
 	}
 }

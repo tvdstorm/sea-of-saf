@@ -37,31 +37,39 @@ import nl.uva.saf.fdl.types.MoveActionType;
 import nl.uva.saf.fdl.types.TypeTranslator;
 
 public class ActionSelector extends TreeVisitor {
+	private List<Behaviour> candidateBehaviours;
+	private FightActionType fightAction;
 	private ITreeNode fighter;
 	private MoveActionType moveAction;
-	private FightActionType fightAction;
-	private HashMap<ConditionType, Boolean> truthTable;
-	private List<Behaviour> candidateBehaviours;
 	private final Random numberGenerator;
+	private HashMap<ConditionType, Boolean> truthTable;
 
-	public ActionSelector(Random numberGenerator) {	
+	public ActionSelector(Random numberGenerator) {
 		if (numberGenerator == null) {
 			throw new IllegalArgumentException("numberGenerator");
 		}
-		
+
 		this.numberGenerator = numberGenerator;
 		moveAction = MoveActionType.unknown;
 		fightAction = FightActionType.unknown;
 		candidateBehaviours = new ArrayList<Behaviour>();
 	}
 
+	public FightActionType getFightAction() {
+		return fightAction;
+	}
+
+	public MoveActionType getMoveAction() {
+		return moveAction;
+	}
+
 	public void selectActions(ITreeNode fighterNode, HashMap<ConditionType, Boolean> truthTable) {
 		if (fighterNode == null) {
 			throw new IllegalArgumentException("fighterNode");
 		}
-		
+
 		candidateBehaviours.clear();
-		
+
 		this.fighter = fighterNode;
 		this.truthTable = truthTable;
 		fighter.accept(this);
@@ -89,12 +97,10 @@ public class ActionSelector extends TreeVisitor {
 		}
 	}
 
-	public MoveActionType getMoveAction() {
-		return moveAction;
-	}
-
-	public FightActionType getFightAction() {
-		return fightAction;
+	public void selectAlways(ITreeNode fighterNode) {
+		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
+		truthTable.put(ConditionType.always, true);
+		selectActions(fighterNode, truthTable);
 	}
 
 	@Override
@@ -104,11 +110,5 @@ public class ActionSelector extends TreeVisitor {
 		if (evaluator.evaluate() == true) {
 			candidateBehaviours.add(node);
 		}
-	}
-
-	public void selectAlways(ITreeNode fighterNode) {
-		HashMap<ConditionType, Boolean> truthTable = new HashMap<ConditionType, Boolean>();
-		truthTable.put(ConditionType.always, true);
-		selectActions(fighterNode, truthTable);
 	}
 }

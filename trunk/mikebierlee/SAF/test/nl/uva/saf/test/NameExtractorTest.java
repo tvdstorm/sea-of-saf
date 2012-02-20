@@ -30,11 +30,6 @@ public class NameExtractorTest {
 	final String expectedName = "extractNameSuccessfullyTest";
 	ITreeNode fighter;
 
-	@Before
-	public void setup() {
-		fighter = new Fighter(expectedName, null);
-	}
-
 	@Test
 	public void extractNameSuccessfullyTest() {
 		NameExtractor extractor = new NameExtractor(fighter);
@@ -47,5 +42,10 @@ public class NameExtractorTest {
 	public void extractWithStaticMethod() {
 		String extractedName = NameExtractor.getName(fighter);
 		Assert.assertEquals(expectedName, extractedName);
+	}
+
+	@Before
+	public void setup() {
+		fighter = new Fighter(expectedName, null);
 	}
 }

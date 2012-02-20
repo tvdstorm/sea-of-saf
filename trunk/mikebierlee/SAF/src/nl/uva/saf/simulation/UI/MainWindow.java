@@ -46,9 +46,9 @@ import java.util.List;
 
 public class MainWindow extends JFrame implements WindowListener, IFightEndEventListener {
 	private static final long serialVersionUID = 8456781004070435366L;
+	final MainWindow eventSourceWindow = this;
 	private final IFightSimulator fightSimulator;
 	private RenderSurface rendereSurface;
-	final MainWindow eventSourceWindow = this;
 
 	public MainWindow(IFightSimulator simulator, IRenderer renderer) {
 		fightSimulator = simulator;
@@ -145,6 +145,18 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 		});
 	}
 
+	@Override
+	public void fightEnd(FightEndEvent e) {
+		String message = "The fight has ended.";
+		if (e.getWinner() != null) {
+			message += " And the winner is......." + e.getWinner().getName() + "!";
+		} else {
+			message += " There is no winner.";
+		}
+
+		JOptionPane.showMessageDialog(this, message, "End of fight", JOptionPane.PLAIN_MESSAGE);
+	}
+
 	private void setProperties() {
 		setSize(new Dimension(854, 480));
 		setPreferredSize(new Dimension(854, 480));
@@ -182,17 +194,5 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 
 	@Override
 	public void windowOpened(WindowEvent event) {
-	}
-
-	@Override
-	public void fightEnd(FightEndEvent e) {
-		String message = "The fight has ended.";
-		if (e.getWinner() != null) {
-			message += " And the winner is......." + e.getWinner().getName() + "!";
-		} else {
-			message += " There is no winner.";
-		}
-
-		JOptionPane.showMessageDialog(this, message, "End of fight", JOptionPane.PLAIN_MESSAGE);
 	}
 }

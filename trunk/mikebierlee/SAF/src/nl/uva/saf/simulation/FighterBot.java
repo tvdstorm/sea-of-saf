@@ -31,20 +31,20 @@ import nl.uva.saf.fdl.types.MoveActionType;
 public class FighterBot {
 	private HashMap<CharacteristicType, Integer> characteristics;
 	protected final int default_value = 5;
-	private String name;
+	private volatile FightActionType fightAction = FightActionType.unknown;
 	private final ITreeNode fighterNode;
-	private Vector2d spawnPosition;
-
 	private volatile int health;
-	private volatile Vector2d position;
-	private volatile Vector2d origin;
 
-	private int speed;
-
+	private volatile MoveActionType moveAction = MoveActionType.unknown;
+	private String name;
 	private int nextTurn;
 
-	private volatile FightActionType fightAction = FightActionType.unknown;
-	private volatile MoveActionType moveAction = MoveActionType.unknown;
+	private volatile Vector2d origin;
+
+	private volatile Vector2d position;
+
+	private Vector2d spawnPosition;
+	private int speed;
 
 	public FighterBot(ITreeNode fighter) {
 		fighterNode = fighter;
@@ -91,46 +91,6 @@ public class FighterBot {
 		}
 	}
 
-	public int getSpeed() {
-		return speed;
-	}
-
-	public void setAttribute(CharacteristicType name, int value) {
-		characteristics.put(name, value);
-		calculateSpeed();
-	}
-
-	public int getAttribute(CharacteristicType name) {
-		Integer value = characteristics.get(name);
-		return value == null ? default_value : value;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public Vector2d getPosition() {
-		return position;
-	}
-
-	public void resetHealth() {
-		health = 100;
-	}
-
-	public int getNextTurn() {
-		return nextTurn;
-	}
-
-	public void setNextTurn(int turns) {
-		if (turns >= 0) {
-			this.nextTurn = turns;
-		}
-	}
-
-	public void setPosition(Vector2d position) {
-		this.position = position;
-	}
-
 	/**
 	 * Deducts an amount of hitpoints from the bot. A bots health cannot get
 	 * lower than 0;
@@ -149,48 +109,88 @@ public class FighterBot {
 		}
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
-	public boolean isCrouching() {
-		return moveAction == MoveActionType.crouch;
-	}
-
-	public Vector2d getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(Vector2d origin) {
-		this.origin = origin;
-	}
-
-	public boolean isJumping() {
-		return moveAction == MoveActionType.jump;
-	}
-
-	public ITreeNode getFighterNode() {
-		return fighterNode;
+	public int getAttribute(CharacteristicType name) {
+		Integer value = characteristics.get(name);
+		return value == null ? default_value : value;
 	}
 
 	public FightActionType getFightAction() {
 		return fightAction;
 	}
 
-	public void setFightAction(FightActionType fightAction) {
-		this.fightAction = fightAction;
+	public ITreeNode getFighterNode() {
+		return fighterNode;
+	}
+
+	public int getHealth() {
+		return health;
 	}
 
 	public MoveActionType getMoveAction() {
 		return moveAction;
 	}
 
-	public void setMoveAction(MoveActionType moveAction) {
-		this.moveAction = moveAction;
+	public String getName() {
+		return name;
+	}
+
+	public int getNextTurn() {
+		return nextTurn;
+	}
+
+	public Vector2d getOrigin() {
+		return origin;
+	}
+
+	public Vector2d getPosition() {
+		return position;
 	}
 
 	public Vector2d getSpawnPosition() {
 		return spawnPosition;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public boolean isCrouching() {
+		return moveAction == MoveActionType.crouch;
+	}
+
+	public boolean isJumping() {
+		return moveAction == MoveActionType.jump;
+	}
+
+	public void resetHealth() {
+		health = 100;
+	}
+
+	public void setAttribute(CharacteristicType name, int value) {
+		characteristics.put(name, value);
+		calculateSpeed();
+	}
+
+	public void setFightAction(FightActionType fightAction) {
+		this.fightAction = fightAction;
+	}
+
+	public void setMoveAction(MoveActionType moveAction) {
+		this.moveAction = moveAction;
+	}
+
+	public void setNextTurn(int turns) {
+		if (turns >= 0) {
+			this.nextTurn = turns;
+		}
+	}
+
+	public void setOrigin(Vector2d origin) {
+		this.origin = origin;
+	}
+
+	public void setPosition(Vector2d position) {
+		this.position = position;
 	}
 
 	public void setSpawnPosition(Vector2d spawnPosition) {

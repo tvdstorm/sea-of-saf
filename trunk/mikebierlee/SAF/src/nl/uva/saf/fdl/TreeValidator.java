@@ -24,12 +24,24 @@ import nl.uva.saf.fdl.ast.ConditionAlways;
 import nl.uva.saf.fdl.ast.ITreeNode;
 
 public class TreeValidator extends TreeVisitor {
-	private ValidationReport report = null;
 	private boolean alwaysConditionPresent = false;
+	private ValidationReport report = null;
 	private final ITreeNode tree;
 
 	public TreeValidator(ITreeNode tree) {
 		this.tree = tree;
+	}
+
+	public void addError(String error) {
+		if (report != null) {
+			report.addError(error);
+		}
+	}
+
+	public void addWarning(String warning) {
+		if (report != null) {
+			report.addWarning(warning);
+		}
 	}
 
 	/**
@@ -70,30 +82,17 @@ public class TreeValidator extends TreeVisitor {
 	}
 
 	@Override
-	public void visit(ConditionAlways node) {
-		alwaysConditionPresent = true;
+	public void visit(Choice node) {
+		if (node.getActions().size() == 0) {
+			addError("Choice clause contains no choices");
+		}
+
 		super.visit(node);
 	}
 
 	@Override
-	public void visit(Choice node) {
-		if (node.getActions().size() == 0) {
-			addError("Choice clause contains no choices"); // TODO(mike): Make
-															// traceable
-		}
-
+	public void visit(ConditionAlways node) {
+		alwaysConditionPresent = true;
 		super.visit(node);
-	}
-
-	public void addWarning(String warning) {
-		if (report != null) {
-			report.addWarning(warning);
-		}
-	}
-
-	public void addError(String error) {
-		if (report != null) {
-			report.addError(error);
-		}
 	}
 }

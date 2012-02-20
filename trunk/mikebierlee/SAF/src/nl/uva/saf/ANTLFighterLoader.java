@@ -35,21 +35,21 @@ public class ANTLFighterLoader implements IFighterLoader {
 	@Override
 	public ITreeNode loadFighter(String fileName) {
 		ITreeNode loadedTree = null;
-		
+
 		try {
 			CharStream inputStream = new ANTLRFileStream(fileName);
 			FDLLexer lexer = new FDLLexer(inputStream);
 
 			TokenStream tokenStream = new CommonTokenStream(lexer);
 			FDLParser parser = new FDLParser(tokenStream);
-		
-			loadedTree = parser.parse();			
+
+			loadedTree = parser.parse();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		
+
 		return loadedTree;
 	}
 }

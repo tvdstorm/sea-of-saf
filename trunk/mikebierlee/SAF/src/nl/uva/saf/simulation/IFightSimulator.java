@@ -22,33 +22,33 @@ import java.awt.Dimension;
 import java.util.List;
 
 public interface IFightSimulator {
-	public void update();
-
 	public void addContestant(FighterBot bot) throws PlayfieldFullException;
+
+	public void addEventListener(IFightEndEventListener listener);
 
 	public void clearContestants() throws FightInProgressException;
 
 	public void dispose();
 
-	public boolean isDisposed();
-
-	public void start();
-
-	public void stop();
-	
-	public void join();
-
-	public boolean isRunning();
-
 	public List<FighterBot> getContestants();
 
 	public Dimension getPlayFieldSize();
 
-	public void setPlayFieldSize(Dimension playFieldSize);
-
 	public FighterBot getWinner();
 
-	public void addEventListener(IFightEndEventListener listener);
+	public boolean isDisposed();
+
+	public boolean isRunning();
+
+	public void join();
 
 	public void removeEventListener(IFightEndEventListener listener);
+
+	public void setPlayFieldSize(Dimension playFieldSize);
+
+	public void start();
+
+	public void stop();
+
+	public void update();
 }

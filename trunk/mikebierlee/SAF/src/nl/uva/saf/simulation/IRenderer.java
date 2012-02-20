@@ -25,15 +25,6 @@ import javax.swing.JComponent;
 
 public interface IRenderer extends Runnable {
 	/**
-	 * Draw state onto supplied graphics object. This function is typically
-	 * called by the render surface when it receives a command/event to redraw.
-	 * 
-	 * @param g
-	 *            Reference the graphics object of the surface..
-	 */
-	public void draw(Graphics g);
-
-	/**
 	 * Bind a Swing component to this render to allow it to draw on it. This
 	 * function should not be called when the renderer is started.
 	 * 
@@ -45,7 +36,32 @@ public interface IRenderer extends Runnable {
 	 */
 	public void bindRenderSurface(JComponent surface) throws ConcurrentModificationException;
 
-	public void unbindRenderSurface();
+	/**
+	 * Draw state onto supplied graphics object. This function is typically
+	 * called by the render surface when it receives a command/event to redraw.
+	 * 
+	 * @param g
+	 *            Reference the graphics object of the surface..
+	 */
+	public void draw(Graphics g);
+
+	public JComponent getSurface();
+
+	/**
+	 * If this renderer run threaded, this method will synchronize the calling
+	 * thread. If not, this method does nothing.
+	 * 
+	 * @throws InterruptedException
+	 *             Thrown when the render thread is interrupted.
+	 */
+	public void join() throws InterruptedException;
+
+	/**
+	 * Force a manual redraw of the renderer. Mainly used when handling the
+	 * render loop outside of the renderer.
+	 * 
+	 */
+	public void redraw();
 
 	/**
 	 * Allow the renderer to draw.
@@ -59,14 +75,7 @@ public interface IRenderer extends Runnable {
 
 	public void stop();
 
-	/**
-	 * If this renderer run threaded, this method will synchronize the calling
-	 * thread. If not, this method does nothing.
-	 * 
-	 * @throws InterruptedException
-	 *             Thrown when the render thread is interrupted.
-	 */
-	public void join() throws InterruptedException;
+	public void unbindRenderSurface();
 
 	/**
 	 * Update the size of the drawing area, making it the same as the size of
@@ -74,13 +83,4 @@ public interface IRenderer extends Runnable {
 	 * 
 	 */
 	public void updateDrawArea();
-
-	public JComponent getSurface();
-
-	/**
-	 * Force a manual redraw of the renderer. Mainly used when handling the
-	 * render loop outside of the renderer.
-	 * 
-	 */
-	public void redraw();
 }

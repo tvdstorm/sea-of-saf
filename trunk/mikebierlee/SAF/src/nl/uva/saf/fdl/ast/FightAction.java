@@ -22,7 +22,7 @@ import nl.uva.saf.fdl.ITreeVisitor;
 
 public class FightAction extends Action {
 	public FightAction(String actionType) {
-		super(actionType); 
+		super(actionType);
 	}
 
 	@Override

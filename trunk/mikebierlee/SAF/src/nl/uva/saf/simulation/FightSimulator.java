@@ -27,19 +27,19 @@ import nl.uva.saf.fdl.ActionSelector;
 import nl.uva.saf.fdl.types.ConditionType;
 
 public class FightSimulator implements IFightSimulator {
-	private volatile List<FighterBot> contestants;
-	private volatile boolean disposed = false;
-	private volatile boolean fightInProgress = false;
-
+	private final IActionExecutor actionExecutor;
 	private final ActionSelector actionSelector;
 	private final IConditionSemantics conditionSemantics;
-	private final IActionExecutor actionExecutor;
 
+	private volatile List<FighterBot> contestants;
+	private volatile boolean disposed = false;
 	private List<IFightEndEventListener> fightEndEventListeners = new ArrayList<IFightEndEventListener>();
 
-	private volatile FighterBot winner;
+	private volatile boolean fightInProgress = false;
 
 	private Dimension playFieldSize;
+
+	private volatile FighterBot winner;
 
 	public FightSimulator() {
 		this(new SimulationParameters());
@@ -73,8 +73,17 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
-	public synchronized void removeEventListener(IFightEndEventListener listener) {
-		fightEndEventListeners.remove(listener);
+	public void clearContestants() throws FightInProgressException {
+		if (fightInProgress) {
+			throw new FightInProgressException();
+		}
+
+		contestants.clear();
+	}
+
+	@Override
+	public void dispose() {
+		disposed = true;
 	}
 
 	private synchronized void fireEndFightEvent() {
@@ -89,20 +98,6 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
-	public void clearContestants() throws FightInProgressException {
-		if (fightInProgress) {
-			throw new FightInProgressException();
-		}
-
-		contestants.clear();
-	}
-
-	@Override
-	public void dispose() {
-		disposed = true;
-	}
-
-	@Override
 	public List<FighterBot> getContestants() {
 		return Collections.unmodifiableList(contestants);
 	}
@@ -113,6 +108,11 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
+	public FighterBot getWinner() {
+		return winner;
+	}
+
+	@Override
 	public boolean isDisposed() {
 		return disposed;
 	}
@@ -120,6 +120,17 @@ public class FightSimulator implements IFightSimulator {
 	@Override
 	public boolean isRunning() {
 		return fightInProgress;
+	}
+
+	@Override
+	public void join() {
+		while (isRunning())
+			;
+	}
+
+	@Override
+	public synchronized void removeEventListener(IFightEndEventListener listener) {
+		fightEndEventListeners.remove(listener);
 	}
 
 	private void selectActions(FighterBot contestant, HashMap<ConditionType, Boolean> truthTable) {
@@ -148,11 +159,6 @@ public class FightSimulator implements IFightSimulator {
 	@Override
 	public void stop() {
 		fightInProgress = false;
-	}
-
-	@Override
-	public FighterBot getWinner() {
-		return winner;
 	}
 
 	@Override
@@ -194,10 +200,5 @@ public class FightSimulator implements IFightSimulator {
 				stop();
 			}
 		}
-	}
-
-	@Override
-	public void join() {
-		while (isRunning());		
 	}
 }

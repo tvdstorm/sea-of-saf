@@ -24,7 +24,7 @@ import java.util.List;
 
 public abstract class Choice extends TreeNode {
 	private final ArrayList<Action> actions;
-	
+
 	public Choice(ArrayList<Action> actions) {
 		this.actions = actions;
 	}

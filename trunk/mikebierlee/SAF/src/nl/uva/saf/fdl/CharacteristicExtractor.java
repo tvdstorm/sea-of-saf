@@ -27,8 +27,13 @@ import java.util.HashMap;
 
 public class CharacteristicExtractor extends TreeVisitor {
 
-	private ITreeNode fighter;
+	public static HashMap<CharacteristicType, Integer> getCharacteristics(ITreeNode fighter) {
+		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
+		return extractor.extract();
+	}
 	private HashMap<CharacteristicType, Integer> extractedCharacteristics;
+
+	private ITreeNode fighter;
 
 	public CharacteristicExtractor(ITreeNode fighter) {
 		if (fighter == null) {
@@ -48,10 +53,5 @@ public class CharacteristicExtractor extends TreeVisitor {
 	public void visit(Characteristic node) {
 		extractedCharacteristics.put(TypeTranslator.getCharacteristicType(node.getType()), node.getValue());
 		super.visit(node);
-	}
-
-	public static HashMap<CharacteristicType, Integer> getCharacteristics(ITreeNode fighter) {
-		CharacteristicExtractor extractor = new CharacteristicExtractor(fighter);
-		return extractor.extract();
 	}
 }

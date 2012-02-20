@@ -24,12 +24,12 @@ import java.util.List;
 
 public abstract class BooleanExpression<T> extends ConditionAlways {
 	private final ArrayList<T> operands;
-	
+
 	public BooleanExpression(ArrayList<T> operands) {
 		this.operands = operands;
-	}	
+	}
 
 	public List<T> getOperands() {
 		return Collections.unmodifiableList(operands);
-	}	
+	}
 }

@@ -26,7 +26,7 @@ public class ConditionAnd extends BooleanExpression<String> {
 	public ConditionAnd(ArrayList<String> operands) {
 		super(operands);
 	}
-	
+
 	@Override
 	public void accept(ITreeVisitor visitor) {
 		visitor.visit(this);
