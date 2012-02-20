@@ -1,6 +1,8 @@
 package saf.syntax;
 
-public abstract class BinaryOperation implements Evaluable
+import saf.check.CheckLog;
+
+public abstract class BinaryOperation extends Evaluable
 {
     private final Evaluable left;
     private final Evaluable right;
@@ -14,5 +16,10 @@ public abstract class BinaryOperation implements Evaluable
     public Evaluable getLeft() { return left; }
     public Evaluable getRight() { return right; }
 
-    public abstract boolean evaluate(State current);
+    @Override
+    public void check(CheckLog log)
+    {
+        left.check(log);
+        right.check(log);
+    }
 }

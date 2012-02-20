@@ -32,7 +32,7 @@ import saf.syntax.*;
 @lexer::header { package saf.parser; }
 
 @parser::members {
-    public Fighter fighter;
+    private Fighter fighter;
 
     public static Fighter parseFromString(String input)
         throws RecognitionException
@@ -88,7 +88,7 @@ parse : fighter ;
 fighter
     :   STRING LCURLY personality behaviour RCURLY
         {
-            this.fighter = new Fighter($STRING.getText(),
+            this.fighter = new Fighter($STRING.text,
                                        $personality.characteristics,
                                        $behaviour.actions);
         }
@@ -99,7 +99,11 @@ personality returns [List<Characteristic> characteristics]
 {
     $characteristics  = new ArrayList<Characteristic>();
 }
-    :   (STRING EQUALS DIGIT {$characteristics.add(new Characteristic($STRING.getText(), Integer.parseInt($DIGIT.getText())));})*
+    :   (STRING EQUALS DIGIT {
+            Characteristic c = new Characteristic($STRING.text,
+                                                  Integer.parseInt($DIGIT.text));
+            $characteristics.add(c);
+        })*
     ;
 
 behaviour returns [List<Action> actions]
@@ -107,7 +111,12 @@ behaviour returns [List<Action> actions]
 {
     $actions = new ArrayList<Action>();
 }
-    :   (condition LSQUARE move=response fight=response RSQUARE {$actions.add(new Action($condition.expression, $move.construct, $fight.construct));})*
+    :   (condition LSQUARE move=response fight=response RSQUARE {
+            Action c = new Action($condition.expression,
+                                  $move.construct,
+                                  $fight.construct);
+            $actions.add(c);
+        })*
     ;
 
 condition returns [Evaluable expression]
@@ -115,7 +124,11 @@ condition returns [Evaluable expression]
 {
     Stack<Evaluable> ors = new Stack<Evaluable>();
 }
-    :   left=andExpression {ors.push($left.expression);} (OR right=andExpression {ors.push($right.expression);})*
+    :   left=andExpression {
+            ors.push($left.expression);
+        } (OR right=andExpression {
+            ors.push($right.expression);
+        })*
         { $expression = buildOrs(ors); }
     ;
 
@@ -124,19 +137,23 @@ andExpression returns [Evaluable expression]
 {
     Stack<Evaluable> states = new Stack<Evaluable>();
 }
-    :   left=STRING {states.push(new State($left.text));} (AND right=STRING {states.push(new State($right.text));})*
+    :   left=STRING {
+            states.push(new State($left.text));
+        } (AND right=STRING {
+            states.push(new State($right.text));
+        })*
         { $expression = buildAnds(states); }
     ;
 
 response returns [Response construct]
     :   CHOOSE LPAREN a=STRING b=STRING RPAREN
         {
-            $construct = new Choose(Arrays.asList(new Simple($a.getText()),
-                                                  new Simple($b.getText())));
+            $construct = new Choose(Arrays.asList(new Simple($a.text),
+                                                  new Simple($b.text)));
         }
     |   STRING
         {
-            $construct = new Simple($STRING.getText());
+            $construct = new Simple($STRING.text);
         }
     ;
 
@@ -151,6 +168,5 @@ STRING
     ;
 
 DIGIT
-    :   '10'
-    |   '1'..'9'
+    :   ('0'..'9')+
     ;
