@@ -51,23 +51,3 @@ public class ActionMapper {
 		}
 	}
 }
-/*
- * 	public static enum Move {
-		JUMP,
-		CROUCH,
-		STAND,
-		RUN_TOWARDS,
-		RUN_AWAY,
-		,
-		WALK_AWAY
-	}
-	
-	public static enum Attack {
-		PUNCH_LOW,
-		PUNCH_HIGH,
-		KICK_LOW,
-		KICK_HIGH,
-		BLOCK_LOW,
-		BLOCK_HIGH
-	}
- */

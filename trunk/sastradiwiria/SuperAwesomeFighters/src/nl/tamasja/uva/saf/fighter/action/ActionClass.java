@@ -14,33 +14,21 @@ public abstract class ActionClass implements IAction {
 
 	@Override
 	public Height getStrikeHeight() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Type getStrikeType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	/*
-	@Override
-	public Height getBlockHeight() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	 */
 	
 	@Override
 	public Height getMovementHeight() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int getMovement() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

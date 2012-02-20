@@ -73,7 +73,6 @@ public class FighterBot {
 		this.behaviour = behaviour;
 		this.personality = personality;
 		this.fighterGraphics = fighterGraphics;
-		//this.fighterGraphics.setName(name);
 	}
 	
 	public void SetEnemyFighter(FighterBot enemyFighter) {
@@ -90,39 +89,25 @@ public class FighterBot {
 	
 	public void act() {
 		
-		
-		
-		//this.setVerticalPosition(null);
-		
-		//System.out.println(this.getName() + " [HP:"+ getHealth() +", P:"+ getPosition()+"]");
+
 		
 		if(isKnockOut()) {
-		//	System.out.print(" [hes dead jim]");
 		} else {
 			if(cooldown == 0) {
-				
-				//this.setBlock(null);
-				//this.setVerticalPosition(null);
-				//enemyFighter.setHitStatus(false);
+
 				behaviour.decideBehaviour(this,enemyFighter);
 				cooldown += this.getSpeed();
 				reset = true;
-				//setHitStatus(false);
+
 			} else {
-				
-		//		if(getVerticalPosition() != null && cooldown < getSpeed()/2) {
-		//			System.out.print(" [NP]");
-		//			this.setVerticalPosition(null);
-		//		}
+
 				if(reset && cooldown < getSpeed()/2) {
 					reset();
 				}
-			//	System.out.print(" waiting.. "+cooldown);
 				cooldown = Math.max(cooldown-0.1 ,0.0);
 				
 			}
 		}
-		//System.out.print("\n");
 	}
 	
 	public void attack(Type strikeType, Height strikeHeight) {
@@ -132,7 +117,6 @@ public class FighterBot {
 		Attack attack = actionOptions.MapAttack(strikeType, strikeHeight);
 		
 		if(attack != null) {
-			//System.out.println(getName()+" -> "+attack);
 			Strength powerStat = actionOptions.getPowerStat(strikeType);
 			if(powerStat != null) {
 				int damage = getStat(powerStat);

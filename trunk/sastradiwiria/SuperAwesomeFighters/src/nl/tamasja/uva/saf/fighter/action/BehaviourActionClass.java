@@ -15,7 +15,6 @@ public class BehaviourActionClass implements IBehaviourAction {
 	@Override
 	public void execute(FighterBot self) {
 		execute.doAction(self,action);
-		
 	}
 	
 }
