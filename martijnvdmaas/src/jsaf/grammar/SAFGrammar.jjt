@@ -2,9 +2,9 @@ options {	STATIC = false ;}
 
 PARSER_BEGIN(SAFGrammar)
 
-package grammar;
+package jsaf.grammar;
 
-import astelements.*;
+import jsaf.astelements.*;
 
 public class SAFGrammar
 {}
@@ -64,17 +64,17 @@ TOKEN : /* definition brackets */
 
 Bots Start() : 
 {
-  	Bot firstBot;
-  	Bot secondBot;
+  	Bot leftBot;
+  	Bot rightBot;
 }
 { 
-  	firstBot  = CreateBot()
-  	secondBot = CreateBot()
+  	leftBot  = CreateBot()
+  	rightBot = CreateBot()
   	< EOF >
 	{
 		Bots bots 		= new Bots();
-        bots.setFirstBot(firstBot);
-        bots.setSecondBot(secondBot);
+        bots.setLeftBot(leftBot);
+        bots.setRightBot(rightBot);
 	    return bots;
 	}
 } 
