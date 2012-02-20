@@ -132,6 +132,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
     // set of key codes currently pressed down
     private static TreeSet<Integer> keysDown = new TreeSet<Integer>();
   
+    private static String title = "Std Draw";
 
     // not instantiable
     private StdDraw() { }
@@ -139,6 +140,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
     // static initializer
     static { init(); }
+    
+    public static void setTitle(String t){
+    	title = t;
+    }
 
     /**
      * Set the window size to the default size 512-by-512 pixels.
@@ -196,7 +201,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);            // closes all windows
         // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);      // closes only current window
-        frame.setTitle("Standard Draw");
+        frame.setTitle(title);
         frame.setJMenuBar(createMenuBar());
         frame.pack();
         frame.requestFocusInWindow();
@@ -636,6 +641,36 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         if (ws < 0 || hs < 0) throw new RuntimeException("image " + s + " is corrupt");
 
         offscreen.drawImage(image, (int) Math.round(xs - ws/2.0), (int) Math.round(ys - hs/2.0), null);
+        draw();
+    }
+    
+    /**
+     * Draw picture (gif, jpg, or png) centered on (x, y) flipped mirrored on the x-axis.
+     * @param x the center x-coordinate of the image
+     * @param y the center y-coordinate of the image
+     * @param s the name of the image/picture, e.g., "ball.gif"
+     * @throws RuntimeException if the image is corrupt
+     */
+    public static void pictureFlipped(double x, double y, String s) {
+        Image image = getImage(s);
+        double xs = scaleX(x);
+        double ys = scaleY(y);
+        int ws = image.getWidth(null);
+        int hs = image.getHeight(null);
+        if (ws < 0 || hs < 0) throw new RuntimeException("image " + s + " is corrupt");
+
+        BufferedImage bufferedImage = new BufferedImage(ws, hs, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics gb = bufferedImage.getGraphics();
+        gb.drawImage(image, 0, 0, null);
+        gb.dispose();
+
+        AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+        tx.translate(-ws, 0);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        bufferedImage = op.filter(bufferedImage, null);
+        
+        offscreen.drawImage(bufferedImage, (int) Math.round(xs - ws/2.0), (int) Math.round(ys - hs/2.0), null);
         draw();
     }
 
