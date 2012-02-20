@@ -2,54 +2,55 @@ package grammar.Evaluators;
 
 import java.util.*;
 
-
 public class Bot implements Visitable {
-	final private List <Characteristic> characteristics = new LinkedList<Characteristic>();
-	final private List <Rule>rules = new LinkedList<Rule>();
+	final private List<Characteristic> characteristics = new LinkedList<Characteristic>();
+	final private List<Rule> rules = new LinkedList<Rule>();
 	private String name;
 	private double speed;
-	
+
 	public Bot() {
 
 	}
-	
-	public double getSpeed(){
+
+	public double getSpeed() {
 		return this.speed;
 	}
-	public void setSpeed(double speed){
+
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
-	
-    public void setName(String name) {
-    	this.name = name;
-    }
 
-    public String getName(){
-    	return this.name;
-    }
-    
-    public Bot (String name) {
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Bot(String name) {
 		super();
 		this.name = name;
 	}
-	
-	public  void addC (Characteristic karakterestiek) {
+
+	public void addC(Characteristic karakterestiek) {
 		this.characteristics.add(karakterestiek);
 	}
 
-	public  void addR (Rule regel) {
+	public void addR(Rule regel) {
 		this.rules.add(regel);
 	}
 
-	public String toString () {
-		return "Bot: "+this.name + this.characteristics.toString() + " "+ this.rules.toString();
+	public String toString() {
+		return "Bot: " + this.name + this.characteristics.toString() + " "
+				+ this.rules.toString();
 	}
 
-	public List<Characteristic> getCharacteristics (){
+	public List<Characteristic> getCharacteristics() {
 		return this.characteristics;
 	}
-	
-	public List<Rule> getRules () {
+
+	public List<Rule> getRules() {
 		return this.rules;
 	}
 
