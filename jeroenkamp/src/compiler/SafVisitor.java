@@ -1,5 +1,7 @@
 package compiler;
 
+import compiler.types.*;
+
 public interface SafVisitor {
 	void visit(SafObject o);
 	void visit(VariableStatement st);
