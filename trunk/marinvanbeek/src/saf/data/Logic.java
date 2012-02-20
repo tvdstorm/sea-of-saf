@@ -6,11 +6,14 @@ import java.util.Random;
 
 public interface Logic
 {
+    /* Generates a random logic tree. */
     public static class RandomLogicGenerator
     {
+        public static final int MAX_DEPTH = 3;
+
         public static Logic getRandom(Random random)
         {
-            int logicTreeDepth = random.nextInt(3);
+            int logicTreeDepth = random.nextInt(MAX_DEPTH);
 
             return getRandom(random, logicTreeDepth);
         }
