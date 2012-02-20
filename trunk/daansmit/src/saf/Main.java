@@ -46,10 +46,23 @@ public class Main
         CheckLog rightLog = new CheckLog();
         right.check(rightLog);
 
-        System.out.println("LEFT:\n" + leftLog);
-        System.out.println("RIGHT:\n" + rightLog);
+        if (!leftLog.isEmpty())
+        {
+            System.out.println(args[0] + ":\n" + leftLog);
+        }
+        if (!rightLog.isEmpty())
+        {
+            System.out.println(args[1] + ":\n" + rightLog);
+        }
 
-        fight(left, right);
+        if (leftLog.isSafe() && rightLog.isSafe())
+        {
+            fight(left, right);
+        }
+        else
+        {
+            System.out.println("CANCELED: Malformed fighters.");
+        }
     }
 
     public static void fight(Fighter left, Fighter right)

@@ -16,6 +16,11 @@ public abstract class Message
     public String getMessage() { return message; }
     public ASTNode getNode() { return node; }
 
+    public boolean isFatal()
+    {
+        return false;
+    }
+
     public String toString()
     {
         return message;

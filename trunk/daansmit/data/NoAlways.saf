@@ -1,0 +1,5 @@
+NoAlways {
+         punchReach = 1
+         kickReach = 1
+         near [walk_towards block_low]
+}

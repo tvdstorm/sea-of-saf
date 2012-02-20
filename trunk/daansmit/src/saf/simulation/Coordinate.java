@@ -4,7 +4,7 @@ import java.lang.Math;
 
 public class Coordinate
 {
-    private static final int MIN = 0;;
+    private static final int MIN = 0;
     private static final int MAX = 1000;
 
     private int x;

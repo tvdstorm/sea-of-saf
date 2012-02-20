@@ -14,6 +14,23 @@ public class CheckLog
         messages.add(m);
     }
 
+    public boolean isSafe()
+    {
+        for (Message message : messages)
+        {
+            if (message.isFatal())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isEmpty()
+    {
+        return messages.isEmpty();
+    }
+
     public String toString()
     {
         if (messages.size() == 0)
@@ -24,7 +41,7 @@ public class CheckLog
         String log = "";
         for (Message message : messages)
         {
-            log.concat(message + "\n");
+            log += message + "\n";
         }
         return log;
     }

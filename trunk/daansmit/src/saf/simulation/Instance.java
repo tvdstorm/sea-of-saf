@@ -130,29 +130,32 @@ public class Instance
     {
         List<State> situation = new ArrayList<State>();
         int healthDiff = health - other.getHealth();
-        if (healthDiff > 20)
+        if (healthDiff != 0)
         {
-            situation.add(new State("much_weaker"));
-        }
-        else if (healthDiff > 0)
-        {
-            situation.add(new State("weaker"));
-        }
-        else if (healthDiff < 0)
-        {
-            situation.add(new State("stronger"));
-        }
-        else if (healthDiff < 20)
-        {
-            situation.add(new State("much_stronger"));
+            if (healthDiff > 20)
+            {
+                situation.add(new State("much_weaker"));
+            }
+            else if (healthDiff > 0)
+            {
+                situation.add(new State("weaker"));
+            }
+            else if (healthDiff < 0)
+            {
+                situation.add(new State("stronger"));
+            }
+            else if (healthDiff < 20)
+            {
+                situation.add(new State("much_stronger"));
+            }
         }
 
         int distance = position.getDistance(other.getPosition());
-        if (distance <= 10)
+        if (distance <= 50)
         {
             situation.add(new State("near"));
         }
-        else if (distance >= 100)
+        else if (distance >= 200)
         {
             situation.add(new State("far"));
         }
