@@ -1,0 +1,6 @@
+error {
+	kickReach = 1
+	punchReach = 0
+	far or near [ARrun_towards kick_low]
+	never [choose(run_towards run_away) punch_yourself]
+}
