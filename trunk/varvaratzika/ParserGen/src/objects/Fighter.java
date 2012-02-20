@@ -20,6 +20,8 @@ public class Fighter{
      {
     	 this.fighterName = name;
      }
+     public Fighter()
+     {}
      
      public void setFighterName(String fighter1)
      {
