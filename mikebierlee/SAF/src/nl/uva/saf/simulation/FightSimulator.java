@@ -35,6 +35,8 @@ public class FightSimulator implements IFightSimulator {
 	private final IConditionSemantics conditionSemantics;
 	private final IActionExecutor actionExecutor;
 
+	private volatile FighterBot winner;
+
 	private Dimension playFieldSize;
 
 	public FightSimulator() {
@@ -114,12 +116,18 @@ public class FightSimulator implements IFightSimulator {
 			contestant.setNextTurn(0);
 		}
 
+		winner = null;
 		fightInProgress = true;
 	}
 
 	@Override
 	public void stop() {
 		fightInProgress = false;
+	}
+	
+	@Override
+	public FighterBot getWinner() {
+		return winner;
 	}
 
 	@Override
@@ -129,6 +137,8 @@ public class FightSimulator implements IFightSimulator {
 		}
 
 		if (fightInProgress) {
+			List<FighterBot> losers = new ArrayList<FighterBot>();
+
 			for (FighterBot contestant : contestants) {
 				HashMap<ConditionType, Boolean> truthTable = conditionSemantics.getConditionStates(contestant,
 						contestants);
@@ -137,13 +147,25 @@ public class FightSimulator implements IFightSimulator {
 					selectActions(contestant, truthTable);
 					actionExecutor.executeFighterActions(contestant, contestants, truthTable);
 					contestant.setNextTurn(actionExecutor.getTurnCost());
-					
+
 					contestant.containInDimension(playFieldSize);
-					
-					//TODO: win condition
+
+					if (contestant.getHealth() == 0) {
+						losers.add(contestant);
+					}
 				} else {
 					contestant.setNextTurn(contestant.getNextTurn() - 1);
 				}
+			}
+
+			if (losers.size() > 0) {
+				ArrayList<FighterBot> winners = new ArrayList<FighterBot>(contestants);
+				winners.removeAll(losers);
+				if (winners.size() == 1) {
+					winner = winners.get(0);
+				}
+
+				stop();
 			}
 		}
 	}
