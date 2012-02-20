@@ -70,7 +70,7 @@ public class ParserSteps extends Steps {
     {
     	Bot expectedClass = new Bot();
     	String expectedClassName = expectedClass.getClass().getName();
-    	String actualClassName = bots.getFirstBot().getClass().getName();
+    	String actualClassName = bots.getLeftBot().getClass().getName();
     	
     	ensureThat(actualClassName, equalTo(expectedClassName));
     }
@@ -80,7 +80,7 @@ public class ParserSteps extends Steps {
     {
     	Bot expectedClass = new Bot();
     	String expectedClassName = expectedClass.getClass().getName();
-    	String actualClassName = bots.getSecondBot().getClass().getName();
+    	String actualClassName = bots.getRightBot().getClass().getName();
     	
     	ensureThat(actualClassName, equalTo(expectedClassName));
     }

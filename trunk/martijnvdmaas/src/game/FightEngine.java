@@ -46,8 +46,8 @@ public class FightEngine extends Observable implements SAFConstants
 		isPlaying = true;
 		randomInt = new Random();
 
-		leftFighter = initializeFighter(bots.getFirstBot());
-		rightFighter = initializeFighter(bots.getSecondBot());
+		leftFighter = initializeFighter(bots.getLeftBot());
+		rightFighter = initializeFighter(bots.getRightBot());
 	}
 
 	private Fighter initializeFighter(Bot bot)
@@ -130,7 +130,7 @@ public class FightEngine extends Observable implements SAFConstants
 
 			getLeftFighter().setHealth(currentLeftHealth);
 			getRightFighter().setHealth(currentRightHealth);
-			
+
 			playFightSound();
 
 			setChanged();
@@ -142,9 +142,9 @@ public class FightEngine extends Observable implements SAFConstants
 	{
 		File soundDirectory = new File(main.Main.getRelativeProjectPath() + "sounds");
 		File[] soundFiles = soundDirectory.listFiles();
-		
+
 		int randomSoundIndex = (int) (Math.random() * soundFiles.length);
-		
+
 		playSound(soundFiles[randomSoundIndex].getAbsolutePath());
 	}
 
@@ -248,12 +248,12 @@ public class FightEngine extends Observable implements SAFConstants
 			boolean isApplicableCondition = true;
 			for (String condition : conditionGroup.getConditionTypes())
 			{
-				if(!conditionApplies(currentFighter, condition, opponentHealth, playerDistance))
+				if (!conditionApplies(currentFighter, condition, opponentHealth, playerDistance))
 				{
 					isApplicableCondition = false;
 				}
 			}
-			
+
 			if (isApplicableCondition) applicableConditionChoice = true;
 		}
 		return applicableConditionChoice;
@@ -313,7 +313,7 @@ public class FightEngine extends Observable implements SAFConstants
 			in = new FileInputStream(url);
 			AudioStream as = new AudioStream(in);
 
-			AudioPlayer.player.start(as);  
+			AudioPlayer.player.start(as);
 		}
 		catch (FileNotFoundException e)
 		{

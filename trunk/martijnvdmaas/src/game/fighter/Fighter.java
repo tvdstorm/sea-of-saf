@@ -1,6 +1,5 @@
 package game.fighter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import astelements.Behaviour;
