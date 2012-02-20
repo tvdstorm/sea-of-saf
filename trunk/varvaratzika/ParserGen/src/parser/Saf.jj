@@ -11,6 +11,7 @@ options
 PARSER_BEGIN(SafParser)
 package parser;
 import objects.*;
+import visualization.*;
 import java.lang.String;
 import java.util.ArrayList;
 import java.io.FileInputStream;
@@ -30,8 +31,9 @@ public class SafParser
     	ArrayList<Fighter> f = parser.Start();
 		Interpreter i = new Interpreter(f);
     	i.Interpret();
-    	visualize(f);
-     	}
+    	StartFight start=new StartFight();
+        start.startGame(f);
+      	}
  	catch(Exception e)
  	{
  	  System.out.println("Exception:"+e);

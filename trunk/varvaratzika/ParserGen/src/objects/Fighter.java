@@ -11,7 +11,8 @@ public class Fighter{
      private double weight=0.0;
      private double height=0.0;
      private double speed=0.0;
-     private int location=0;
+     private int locationX=0;
+     private int locationY=0;
      private int life=100;
      private int lifeStr=100;
    
@@ -66,9 +67,19 @@ public class Fighter{
 		// TODO Auto-generated method stub
 		return this.lifeStr;
 	}
-	public int getLocation()
+	public int getLocationX()
 	{
-		return this.location;
+		return this.locationX;
+	}
+	public int getLocationY()
+	{
+		return this.locationY;
+	}
+
+	public void setLocation(int x,int y) 
+	{
+		this.locationX=getLocationX()+x;
+		this.locationY=getLocationY()+y;
 	}	
 }
 
