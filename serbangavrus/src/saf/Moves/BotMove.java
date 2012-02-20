@@ -1,4 +1,4 @@
-package saf.Moves;
+package saf.moves;
 import saf.*;
 
 public abstract class BotMove {

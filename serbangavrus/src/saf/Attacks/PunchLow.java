@@ -1,4 +1,4 @@
-package saf.Attacks;
+package saf.attacks;
 
 import saf.Bot;
 

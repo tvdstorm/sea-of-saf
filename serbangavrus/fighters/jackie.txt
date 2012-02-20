@@ -1,0 +1,11 @@
+Jackie{
+	kickPower = 9
+	punchPower = 7
+	kickReach = 2
+	punchReach = 1
+	far[run_towards punch_high]
+	near[choose(jump crouch) kick_high]
+	much_stronger[walk_towards punch_low]
+	always [run_towards kick_high]
+}
+

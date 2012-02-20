@@ -2,7 +2,9 @@ package saf;
 
 import java.util.ArrayList;
 
-import nodes.*;
+import safreader.nodes.*;
+
+
 
 public class BotPersonality {
 	

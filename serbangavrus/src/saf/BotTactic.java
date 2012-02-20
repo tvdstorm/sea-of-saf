@@ -2,23 +2,22 @@ package saf;
 
 import java.util.ArrayList;
 import java.util.Random;
-import saf.Moves.*;
-import saf.Attacks.*;
 
-import nodes.*;
+import saf.attacks.*;
+import saf.moves.*;
+import safreader.nodes.*;
 
 public class BotTactic {
 
 	private Fighter fighter;
-	private Bot bot, opponent;
+	private Bot bot;
 	private BotMove botmove = null;
 	private BotAttack botattack = null;
 	
-	public BotTactic(Fighter f, Bot b, Bot o)
+	public BotTactic(Fighter f, Bot b)
 	{
 		fighter = f;
 		bot = b;
-		opponent = o;
 	}
 	
 	// Returns the Move the Fighter should do against the opponent 
