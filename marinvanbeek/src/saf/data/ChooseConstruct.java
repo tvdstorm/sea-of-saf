@@ -40,6 +40,7 @@ public class ChooseConstruct
         return stringRepresentation;
     }
     
+    /* Choose one of the possible names. */
     public String getName()
     {
         Random random = new Random();

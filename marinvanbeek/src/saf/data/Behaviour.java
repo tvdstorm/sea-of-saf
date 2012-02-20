@@ -19,7 +19,7 @@ public class Behaviour
 
     /* 
      * Returns 'null' if this Behaviour doesn't contain an always action. This
-     * should have been checked by saf.syntax, though.
+     * should have been checked by saf.syntax, anyway.
      */
     public Action getAlwaysAction()
     {
