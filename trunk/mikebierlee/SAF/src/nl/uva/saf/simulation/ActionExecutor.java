@@ -41,6 +41,14 @@ public class ActionExecutor implements IActionExecutor {
 		this.speedScale = speedScale;
 	}
 
+	public int getSpeedScale() {
+		return speedScale;
+	}
+
+	public double getPowerScale() {
+		return powerScale;
+	}
+
 	@Override
 	public void executeFighterActions(FighterBot fighter, List<FighterBot> players,
 			HashMap<ConditionType, Boolean> truthTable) {

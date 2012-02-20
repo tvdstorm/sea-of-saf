@@ -64,7 +64,9 @@ public class ActionExecutorTest {
 		bot.setMoveAction(MoveActionType.walk_away);
 		actionExecutor.executeFighterActions(bot, players, truthTable);
 
-		Vector2d expectedPosition = new Vector2d(20 - bot.getSpeed() - 1, 0);
+		int speedScale = ((ActionExecutor) actionExecutor).getSpeedScale();
+
+		Vector2d expectedPosition = new Vector2d(20 - ((bot.getSpeed() + 1) * speedScale), 0);
 		Vector2d botPosition = bot.getPosition();
 
 		Assert.assertTrue(botPosition.equals(expectedPosition));
@@ -75,7 +77,9 @@ public class ActionExecutorTest {
 		bot.setMoveAction(MoveActionType.run_towards);
 		actionExecutor.executeFighterActions(bot, players, truthTable);
 
-		Vector2d expectedPosition = new Vector2d(20 + (bot.getSpeed() + 1) * 2, 0);
+		int speedScale = ((ActionExecutor) actionExecutor).getSpeedScale();
+
+		Vector2d expectedPosition = new Vector2d(20 + ((bot.getSpeed() + 1) * speedScale) * 2, 0);
 		Vector2d botPosition = bot.getPosition();
 
 		Assert.assertTrue(botPosition.equals(expectedPosition));
