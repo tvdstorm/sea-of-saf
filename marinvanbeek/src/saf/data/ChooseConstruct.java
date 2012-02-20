@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*
+ * FIXME Choose behaviour shouldn't be implemented in the data package. Move
+ * this functionality to the simulation package.
+ */
 public class ChooseConstruct
 {
     private List<String> possibilities;
@@ -11,12 +15,20 @@ public class ChooseConstruct
     public ChooseConstruct(String name)
     {
         this.possibilities = new ArrayList<String>();
-        possibilities.add(name);
+        this.possibilities.add(name);
     }
 
     public ChooseConstruct(List<String> possibilities)
     {
         this.possibilities = possibilities;
+    }
+
+    private String choose(List<String> possibilities)
+    {
+        Random random = new Random();
+        int randomIndex = random.nextInt(possibilities.size());
+
+        return possibilities.get(randomIndex); 
     }
 
     public String toString()
@@ -40,14 +52,8 @@ public class ChooseConstruct
         return stringRepresentation;
     }
     
-    /* Choose one of the possible names. */
-    public String getName()
-    {
-        Random random = new Random();
-        int randomIndex = random.nextInt(possibilities.size());
-
-        return possibilities.get(randomIndex); 
-    }
+    public String getName() { return choose(possibilities); }
+    /* Still make all possibilities readable for the syntax check. */
     public List<String> getAllPossibilities() { return possibilities; }
 }
 

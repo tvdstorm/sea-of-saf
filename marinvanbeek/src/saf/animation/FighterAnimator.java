@@ -33,7 +33,7 @@ public class FighterAnimator
                            boolean flipped)
     {
         this(new FighterSprites(spritesLocation, flipped), contentPane);
-        xOffset = 80;
+        xOffset = FighterSprites.IMAGE_WIDTH;
     }
 
     private FighterAnimator(FighterSprites sprites, Container contentPane)

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+import java.lang.Math;
+
 public interface Logic
 {
     /* Generates a random logic tree. */
@@ -13,7 +15,13 @@ public interface Logic
 
         public static Logic getRandom(Random random)
         {
-            int logicTreeDepth = random.nextInt(MAX_DEPTH);
+            /* Make deep logic trees less common by using the following 
+             * formula: 
+             *      depth = abs(MAX_DEPTH - random(MAX_DEPTH * 1.5)) 
+             *
+             * Note that this is never higher or lower than MAX_DEPTH.*/
+            int randomInt = random.nextInt((int)(MAX_DEPTH * 1.5));
+            int logicTreeDepth = Math.abs(MAX_DEPTH - randomInt);
 
             return getRandom(random, logicTreeDepth);
         }
@@ -55,7 +63,8 @@ public interface Logic
         public static List<Logic> getRandomList(Random random)
         {
             List<Logic> randomLogics = new ArrayList<Logic>();
-            int numberOfLogics = random.nextInt(6);
+            int numberOfLogics = 
+                    random.nextInt(Behaviour.MAX_RANDOM_BEHAVIOUR_SIZE);
     
             for (int i = 0; i < numberOfLogics; i++)
             {

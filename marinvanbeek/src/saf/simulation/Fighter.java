@@ -26,8 +26,6 @@ public class Fighter {
         this.movementDirection = movementDirection;
         this.strength = calculateStrength(fighterData.getAttributes());
         this.fighterData.setHealth(saf.data.Fighter.MAX_HEALTH);
-
-        System.out.println("<sim.Fighter> strength = " + strength);
     }
 
     /*

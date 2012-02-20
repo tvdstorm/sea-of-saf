@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class Behaviour
 {
+    public static final int MAX_RANDOM_BEHAVIOUR_SIZE = 10;
+
     private List<Tactic> tactics;
 
     public Behaviour(List<Tactic> tactics)

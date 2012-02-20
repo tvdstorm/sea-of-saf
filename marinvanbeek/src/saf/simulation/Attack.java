@@ -54,12 +54,12 @@ public abstract class Attack
         if (attackName.equals("kick_high") ||
             attackName.equals("kick_low"))
         {
-            damage = saf.data.Fighter.MAX_HEALTH / 2;
+            damage = saf.data.Fighter.MAX_HEALTH / 6;
         }
         else if (attackName.equals("punch_high") ||
                  attackName.equals("punch_low"))
         {
-            damage = saf.data.Fighter.MAX_HEALTH / 3;
+            damage = saf.data.Fighter.MAX_HEALTH / 9;
         }
 
         return damage;
