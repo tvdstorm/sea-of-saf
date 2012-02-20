@@ -28,21 +28,43 @@ import nl.uva.saf.fdl.types.MoveActionType;
 
 public class ActionExecutor implements IActionExecutor {
 	private final double powerScale;
-	private final int speedScale;
-	private int turnCost;
+	private final int walkSpeedScale;
+	private final int runSpeedScale;
+	private final int runTurnCost;
+	private final int walkTurnCost;
+	private final int baseKickCost;
+	private final int addedKickCost;
+	private final int basePunchCost;
+	private final int addedPunchCost;
+	private int totalTurnCost;
 
 	public ActionExecutor() {
 		powerScale = 1;
-		speedScale = 10;
+		walkSpeedScale = 10;
+		runSpeedScale = 20;
+		runTurnCost = 1;
+		walkTurnCost = 2;
+		baseKickCost = 1;
+		addedKickCost = 1;
+		basePunchCost = 1;
+		addedPunchCost = 1;
 	}
 
-	public ActionExecutor(double powerScale, int speedScale) {
+	public ActionExecutor(double powerScale, int walkSpeedScale, int runSpeedScale, int runTurnCost, int walkTurnCost,
+			int baseKickCost, int basePunchCost, int addedKickCost, int addedPunchCost) {
 		this.powerScale = powerScale;
-		this.speedScale = speedScale;
+		this.walkSpeedScale = walkSpeedScale;
+		this.runSpeedScale = runSpeedScale;
+		this.runTurnCost = runTurnCost;
+		this.walkTurnCost = walkTurnCost;
+		this.baseKickCost = baseKickCost;
+		this.addedKickCost = addedKickCost;
+		this.basePunchCost = basePunchCost;
+		this.addedPunchCost = addedPunchCost;
 	}
 
 	public int getSpeedScale() {
-		return speedScale;
+		return walkSpeedScale;
 	}
 
 	public double getPowerScale() {
@@ -52,7 +74,7 @@ public class ActionExecutor implements IActionExecutor {
 	@Override
 	public void executeFighterActions(FighterBot fighter, List<FighterBot> players,
 			HashMap<ConditionType, Boolean> truthTable) {
-		turnCost = 0;
+		totalTurnCost = 0;
 
 		for (FighterBot enemy : players) {
 			if (enemy != fighter) {
@@ -65,7 +87,7 @@ public class ActionExecutor implements IActionExecutor {
 
 	@Override
 	public int getTurnCost() {
-		return turnCost;
+		return totalTurnCost;
 	}
 
 	private void executeMoveAction(FighterBot fighter, FighterBot enemy) {
@@ -77,20 +99,20 @@ public class ActionExecutor implements IActionExecutor {
 
 		switch (fighter.getMoveAction()) {
 		case walk_away:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * speedScale)));
-			turnCost += 1;
+			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * walkSpeedScale)));
+			totalTurnCost += walkTurnCost;
 			break;
 		case walk_towards:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * speedScale));
-			turnCost += 1;
+			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * walkSpeedScale));
+			totalTurnCost += walkTurnCost;
 			break;
 		case run_away:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * speedScale) * 2));
-			turnCost += 2;
+			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * runSpeedScale)));
+			totalTurnCost += runTurnCost;
 			break;
 		case run_towards:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, (speed * speedScale) * 2));
-			turnCost += 2;
+			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * runSpeedScale));
+			totalTurnCost += runTurnCost;
 			break;
 		}
 	}
@@ -101,12 +123,12 @@ public class ActionExecutor implements IActionExecutor {
 			int punchDamage = (int) Math.round(fighter.getAttribute(CharacteristicType.punchPower) * powerScale);
 			int kickDamage = (int) Math.round(fighter.getAttribute(CharacteristicType.kickPower) * powerScale);
 
-			int kickCost = 1;
-			int punchCost = 1;
+			int kickCost = baseKickCost;
+			int punchCost = basePunchCost;
 			if (kickDamage > punchDamage) {
-				kickCost += 1;
+				kickCost += addedKickCost;
 			} else {
-				punchCost += 1;
+				punchCost += addedPunchCost;
 			}
 
 			switch (fighter.getFightAction()) {
@@ -114,21 +136,21 @@ public class ActionExecutor implements IActionExecutor {
 				if ((enemy.getMoveAction() != MoveActionType.crouch && enemy.getFightAction() != FightActionType.block_high)
 						|| (enemy.getMoveAction() == MoveActionType.jump && enemy.getFightAction() != FightActionType.block_low)) {
 					enemy.deductHealth(punchDamage);
-					turnCost += punchCost;
+					totalTurnCost += punchCost;
 				}
 				break;
 			case punch_low:
 				if ((enemy.getFightAction() != FightActionType.block_low && enemy.getMoveAction() != MoveActionType.jump)
 						|| (enemy.getMoveAction() == MoveActionType.crouch && enemy.getFightAction() != FightActionType.block_high)) {
 					enemy.deductHealth(punchDamage);
-					turnCost += punchCost;
+					totalTurnCost += punchCost;
 				}
 				break;
 			case kick_high:
 				if (enemy.getFightAction() != FightActionType.block_low
 						&& enemy.getMoveAction() != MoveActionType.crouch) {
 					enemy.deductHealth(kickDamage);
-					turnCost += kickCost;
+					totalTurnCost += kickCost;
 				}
 				break;
 
@@ -136,7 +158,7 @@ public class ActionExecutor implements IActionExecutor {
 				if ((enemy.getMoveAction() == MoveActionType.crouch && enemy.getFightAction() != FightActionType.block_high)
 						|| (enemy.getMoveAction() != MoveActionType.crouch && enemy.getMoveAction() != MoveActionType.jump)) {
 					enemy.deductHealth(kickDamage);
-					turnCost += kickCost;
+					totalTurnCost += kickCost;
 				}
 				break;
 			}

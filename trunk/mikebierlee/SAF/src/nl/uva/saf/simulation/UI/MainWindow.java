@@ -16,11 +16,11 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 package nl.uva.saf.simulation.UI;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -28,9 +28,12 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import nl.uva.saf.simulation.FightEndEvent;
+import nl.uva.saf.simulation.FightInProgressException;
+import nl.uva.saf.simulation.FighterBot;
 import nl.uva.saf.simulation.IFightEndEventListener;
 import nl.uva.saf.simulation.IFightSimulator;
 import nl.uva.saf.simulation.IRenderer;
+import nl.uva.saf.simulation.PlayfieldFullException;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.InputEvent;
@@ -39,23 +42,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowListener;
 import java.awt.BorderLayout;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 public class MainWindow extends JFrame implements WindowListener, IFightEndEventListener {
 	private static final long serialVersionUID = 8456781004070435366L;
 	private final IFightSimulator fightSimulator;
 	private RenderSurface rendereSurface;
+	final MainWindow eventSourceWindow = this;
 
 	public MainWindow(IFightSimulator simulator, IRenderer renderer) {
 		fightSimulator = simulator;
-		
+
 		fightSimulator.addEventListener(this);
 
-		setSize(new Dimension(854, 480));
-		setPreferredSize(new Dimension(854, 480));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Super Awesome Fighters");
-		setResizable(false);
-		setLocationRelativeTo(null);
+		setProperties();
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -65,6 +65,8 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 		menuBar.add(mnFile);
 
 		JMenuItem mntmNewFight = new JMenuItem("New Fight");
+		addNewFightAction(mntmNewFight);
+
 		mntmNewFight.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		mnFile.add(mntmNewFight);
 
@@ -80,8 +82,10 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 		mntmRestartFight.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent event) {
-				fightSimulator.stop();
-				fightSimulator.start();
+				if (fightSimulator.isRunning()) {
+					fightSimulator.stop();
+					fightSimulator.start();
+				}
 			}
 		});
 		mnFile.add(mntmRestartFight);
@@ -91,8 +95,6 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 		mnFile.add(menuItem);
 
 		JMenuItem mntmExit = new JMenuItem("Exit");
-
-		final MainWindow eventSourceWindow = this;
 
 		mntmExit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -109,6 +111,47 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 		getContentPane().add(rendereSurface, BorderLayout.CENTER);
 
 		addWindowListener(this);
+	}
+
+	private void addNewFightAction(JMenuItem mntmNewFight) {
+		mntmNewFight.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent event) {
+				FighterLoadDialog loadDialog = new FighterLoadDialog();
+				loadDialog.setLocationRelativeTo(eventSourceWindow);
+				loadDialog.setVisible(true);
+				List<FighterBot> loadedFighters = loadDialog.getLoadedFighters();
+				if (loadedFighters.size() == 2) {
+					try {
+						fightSimulator.stop();
+						fightSimulator.join();
+						fightSimulator.clearContestants();
+						for (FighterBot fighter : loadedFighters) {
+							fightSimulator.addContestant(fighter);
+						}
+						fightSimulator.start();
+					} catch (PlayfieldFullException e) {
+						JOptionPane.showMessageDialog(eventSourceWindow,
+								"Could not load players, the playfield is reported to be full.",
+								"Playfield full error", JOptionPane.ERROR_MESSAGE);
+						e.printStackTrace();
+					} catch (FightInProgressException e) {
+						JOptionPane.showMessageDialog(eventSourceWindow,
+								"Cannot load fighters, the fight is still in progress.");
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+	}
+
+	private void setProperties() {
+		setSize(new Dimension(854, 480));
+		setPreferredSize(new Dimension(854, 480));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Super Awesome Fighters");
+		setResizable(false);
+		setLocationRelativeTo(null);
 	}
 
 	@Override
@@ -149,7 +192,7 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 		} else {
 			message += " There is no winner.";
 		}
-		
+
 		JOptionPane.showMessageDialog(this, message, "End of fight", JOptionPane.PLAIN_MESSAGE);
 	}
 }

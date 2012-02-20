@@ -21,8 +21,9 @@ package nl.uva.saf.fdl;
 import java.util.ArrayList;
 
 public class ValidationReport {
-	private ArrayList<String> errors;
-	private ArrayList<String> warnings;
+	private final ArrayList<String> errors;
+	private final ArrayList<String> warnings;
+	private String fighterFile;
 
 	public ValidationReport() {
 		errors = new ArrayList<String>();
@@ -51,5 +52,13 @@ public class ValidationReport {
 
 	public boolean isValid() {
 		return errors.size() == 0 ? true : false;
+	}
+
+	public String getFighterFile() {
+		return fighterFile;
+	}
+
+	public void setFighterFile(String fighterFile) {
+		this.fighterFile = fighterFile;
 	}
 }

@@ -35,6 +35,8 @@ public interface IFightSimulator {
 	public void start();
 
 	public void stop();
+	
+	public void join();
 
 	public boolean isRunning();
 

@@ -27,9 +27,9 @@ import nl.uva.saf.fdl.ActionSelector;
 import nl.uva.saf.fdl.types.ConditionType;
 
 public class FightSimulator implements IFightSimulator {
-	private List<FighterBot> contestants;
+	private volatile List<FighterBot> contestants;
 	private volatile boolean disposed = false;
-	private boolean fightInProgress = false;
+	private volatile boolean fightInProgress = false;
 
 	private final ActionSelector actionSelector;
 	private final IConditionSemantics conditionSemantics;
@@ -56,13 +56,15 @@ public class FightSimulator implements IFightSimulator {
 
 	@Override
 	public void addContestant(FighterBot bot) throws PlayfieldFullException {
-		if (contestants.size() == 2) {
-			throw new PlayfieldFullException();
-		}
+		if (bot != null) {
+			if (contestants.size() == 2) {
+				throw new PlayfieldFullException();
+			}
 
-		bot.setSpawnPosition(new Vector2d(new Vector2d(50 + (contestants.size() * (playFieldSize.width - 100)),
-				playFieldSize.height / 2)));
-		contestants.add(bot);
+			bot.setSpawnPosition(new Vector2d(new Vector2d(50 + (contestants.size() * (playFieldSize.width - 100)),
+					playFieldSize.height / 2)));
+			contestants.add(bot);
+		}
 	}
 
 	@Override
@@ -192,5 +194,10 @@ public class FightSimulator implements IFightSimulator {
 				stop();
 			}
 		}
+	}
+
+	@Override
+	public void join() {
+		while (isRunning());		
 	}
 }

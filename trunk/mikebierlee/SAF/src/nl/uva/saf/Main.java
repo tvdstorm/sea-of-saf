@@ -22,42 +22,17 @@ import java.awt.Dimension;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
 
-import nl.uva.saf.fdl.ast.Fighter;
 import nl.uva.saf.simulation.FightSimulator;
-import nl.uva.saf.simulation.FighterBot;
 import nl.uva.saf.simulation.IFightSimulator;
 import nl.uva.saf.simulation.IRenderer;
-import nl.uva.saf.simulation.PlayfieldFullException;
 import nl.uva.saf.simulation.Renderer;
 import nl.uva.saf.simulation.UI.MainWindow;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
-		/*
-		 * IFighterLoader loader = new ANTLFighterLoader(); Fighter fighter =
-		 * (Fighter) loader.loadFighter("data/unbeatabledude.saf");
-		 * 
-		 * TreeValidator validator = new TreeValidator(fighter);
-		 * ValidationReport validationReport = validator.validate();
-		 * 
-		 * TreeVisualizer visualizer = new TreeVisualizer();
-		 * visualizer.printTree(fighter);
-		 * 
-		 * for(String warning : validationReport.getWarnings()) {
-		 * System.out.println("Warning: " + warning); }
-		 * 
-		 * for(String error : validationReport.getErrors()) {
-		 * System.err.println("Error: " + error); }
-		 * 
-		 * System.out.println("Loaded \"" + fighter.getName() + "\" - " +
-		 * validationReport.getWarnings().size() + " warning(s), " +
-		 * validationReport.getErrors().size() + " error(s).");
-		 */		
-		
+	public static void main(String[] args) throws IOException {		
 		final IFightSimulator simulator = new FightSimulator();
 		simulator.setPlayFieldSize(new Dimension(825, 350));
-
 		final IRenderer renderer = new Renderer(simulator, 60);
 
 		SwingUtilities.invokeLater(new Runnable() {
@@ -68,24 +43,7 @@ public class Main {
 				renderer.start(true);
 			}
 		});
-
-		// TODO: move loading to load UI
-		IFighterLoader loader = new ANTLFighterLoader();
-		Fighter blueFighter = (Fighter) loader
-				.loadFighter("data/headon.saf");
-		Fighter redFighter = (Fighter) loader.loadFighter("data/headon.saf");
-
-		// Skipping validation, trusting myself to not screw up.
-
-		try {
-			simulator.addContestant(new FighterBot(blueFighter));
-			simulator.addContestant(new FighterBot(redFighter));
-			simulator.start();
-		} catch (PlayfieldFullException ex) {
-			System.out.println("Simulator does not accept fighters anymore: "
-					+ ex.getMessage());
-		}
-
+		
 		try {
 			while (!simulator.isDisposed()) {
 				simulator.update();
@@ -95,7 +53,6 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		// Teardown
 		renderer.stop();
 	}
 }
