@@ -1,0 +1,253 @@
+/**
+ * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
+ */options{  JDK_VERSION = "1.5";  static = true;}PARSER_BEGIN(FighterGrammar)
+package grammar;
+import ast.*;
+import interpreter.*;
+
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+public class FighterGrammar{  public static void main(String args [])  {    try{
+		String file = "input.txt";
+		InputStream input = new FileInputStream("input.txt");
+		System.out.println("[Parser]Parsing from file ... ");	
+		FighterGrammar parser = new FighterGrammar(input);
+		SAF saf = parser.Parse();					
+		Interpreter i = new Interpreter(saf.firstBot, saf.secondBot);
+		boolean result = i.interpret();
+		
+		if (result == true)
+			System.out.println("[Interpreter]Healthy fighters!");
+			
+		System.out.println("[Parser]Done!");
+    }
+	catch(Exception e)
+	{
+		System.out.println("[Parser]Oops! ");
+		System.out.println(e.getMessage());
+		e.printStackTrace();
+	}  }}PARSER_END(FighterGrammar)SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| < "//" (~[ "\n", "\r" ])*
+    (
+      "\n"
+    | "\r"
+    | "\r\n"
+    ) >
+| < "/*" (~[ "*" ])* "*"
+    (
+      ~[ "/" ] (~[ "*" ])* "*"
+    )*
+    "/" >
+}
+
+
+TOKEN : /* Operators */
+{
+	<AND: "AND" | "and"> |
+	<OR: "OR" | "or"> |
+	<ASSIGN: "="> |
+	<CHOOSE: "choose">
+}
+
+TOKEN : /* Types of paranthesis used */
+{
+	<LSQBRACKET: "["> | 
+	<RSQBRACKET: "]"> |
+	<LBRACE: "{"> | 
+	<RBRACE: "}"> |			
+	<LBRACKET: "("> |
+	<RBRACKET: ")">
+}
+
+
+TOKEN :
+{
+	<IDENTIFIER: ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* > |
+	<VALUE:  ["1"-"9"]  ( ["0"-"9"] )* > 
+}
+
+/** Root production. */
+
+SAF Parse() :
+{
+ 	 	
+	Bot bot1;
+	Bot bot2;	
+}
+{  	
+	bot1 = getBot()
+	bot2 = getBot()		<EOF>
+	
+	{	  		SAF saf = new SAF();
+		saf.setBot1(bot1);
+		saf.setBot2(bot2);
+		return saf;
+	} 	
+}	
+Bot getBot():
+{	Token name = new Token();
+	Personality p = new Personality();
+	Behaviour b = new Behaviour();
+	Strength s = new Strength();
+	BehaviourItem i = new BehaviourItem();
+	Bot bot = new Bot();
+}
+{
+			name = < IDENTIFIER >
+		{
+		  bot.setName(name.toString());	  		}
+		
+		<LBRACE>
+		
+		(
+		  LOOKAHEAD(2)
+		  
+		  ( s = Strength() )
+		  {
+		    p.addStrength(s);		  }
+		| 
+		  ( i = BehaviourItem() )
+		  {
+		    b.addCondition(i);		  }
+		    
+		)*	
+		
+		<RBRACE>
+	
+		{
+		  bot.setBehaviour(b);
+		  bot.setPersonality(p);		}
+	
+	{	  return bot;
+	}
+} 
+
+
+Strength Strength() :
+{
+	Token strength = new Token();
+	Token value = new Token();
+	
+}
+{
+	 (strength = <IDENTIFIER>) <ASSIGN> (value = <VALUE>)
+	 {
+	 	/*System.out.println(strength + " " + value);*/	 	
+		return new Strength(strength.toString(), Integer.valueOf(value.toString()));   	 }
+}
+
+BehaviourItem BehaviourItem() :
+{	Condition condition = new Condition();	
+	Move move = new Move();
+	Attack attack = new Attack();	
+}
+{	 
+	 ( 
+	 	 Condition(condition)
+		 <LSQBRACKET>
+		  (
+		  	  Move(move)						  
+			  Attack(attack)			  
+		  )  
+		 <RSQBRACKET>
+	 )
+	 {			 
+	 	/*move.printMove();
+	 	attack.printAttack();*/
+		return new BehaviourItem(condition, move, attack); 
+	 }
+}
+
+void Condition(Condition c) :
+{
+	Token condition = new Token();
+}
+{
+	(condition = <IDENTIFIER>)
+	{
+		c.setCondition(condition.toString());
+		/*System.out.println("Cond: " + condition.toString());*/
+	}
+}
+
+void Move(Move m) : 
+{
+	Token move = new Token();
+	Token move1 = new Token();
+	Token move2 = new Token();
+	boolean choice;			
+}
+{
+
+	(
+		LOOKAHEAD(2)
+		(
+			<CHOOSE> 
+			<LBRACKET> 
+				(move1 = <IDENTIFIER>) (move2 = <IDENTIFIER>)
+			<RBRACKET>
+		)
+		{			
+  			/*m.setMoveChoices(move1.toString(),move2.toString());
+  			System.out.println("setting: " + move1.toString() + " " + move2.toString());
+  			System.out.println("after setting: " + m.choice1 + " " + m.choice2);*/
+  			choice = true;  			
+		}
+		|
+		(			 
+			move = <IDENTIFIER>		
+		)
+		{
+			/*m.setMove(move.toString());
+			System.out.println("setting: " + move.toString());  		
+			System.out.println("after setting: " + m.type);*/			
+			choice = false;
+		}
+	 
+	)	
+	{
+		if (choice)
+			m.setMoveChoices(move1.toString(),move2.toString());
+		else
+			m.setMove(move.toString());	
+	}  
+}
+
+
+void Attack(Attack a) :
+{
+	Token attack = new Token();
+	Token attack1 = new Token();
+	Token attack2 = new Token();		
+}
+{
+	(
+		LOOKAHEAD(2)
+		(
+			<CHOOSE> 
+			<LBRACKET> 
+				(attack1 = <IDENTIFIER>) (attack2 = <IDENTIFIER>)
+			<RBRACKET>
+		)  
+		{			
+  			a.setAttackChoices(attack1.toString(),attack2.toString());
+  			/*System.out.println("setting: " +  attack1.toString() + " " + attack2.toString());*/  			
+		}
+		|
+		(			 
+			attack = <IDENTIFIER>		
+		)	
+		{
+			a.setAttack(attack.toString());
+			/*System.out.println("setting: " + attack.toString());*/  		
+		}
+	)		
+	
+}
