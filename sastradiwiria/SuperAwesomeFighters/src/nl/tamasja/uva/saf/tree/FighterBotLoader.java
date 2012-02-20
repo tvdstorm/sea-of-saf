@@ -22,7 +22,6 @@ import nl.tamasja.uva.saf.tree.ast.Behaviour;
 import nl.tamasja.uva.saf.tree.ast.ChooseAction;
 import nl.tamasja.uva.saf.tree.ast.ConditionAtom;
 import nl.tamasja.uva.saf.tree.ast.Fighter;
-import nl.tamasja.uva.saf.tree.ast.ICondition;
 import nl.tamasja.uva.saf.tree.ast.IProperty;
 import nl.tamasja.uva.saf.tree.ast.OrCondition;
 import nl.tamasja.uva.saf.tree.ast.Strength;
@@ -30,22 +29,18 @@ import nl.tamasja.uva.saf.tree.ast.Strength;
 public class FighterBotLoader implements IFighterVisitor {
 	
 	
-	private ArrayList<ConditionAtom> conditionAtoms;
 	private ConditionMapper conditionMapper;
 	private ActionMapper actionMapper;
 	private SpecificationMapper specificationMapper;
 	
 	Queue<IBehaviourCondition> conditions;
 	Queue<IBehaviourAction> actions;
-	
-	
-	//FighterBot fighterBot;
+
 	
 	private Personality personality;
 	private nl.tamasja.uva.saf.fighter.Behaviour behaviour;
 	
 	public FighterBotLoader() {
-		this.conditionAtoms = new ArrayList<ConditionAtom>();
 		this.conditionMapper = new ConditionMapper();
 		this.specificationMapper = new SpecificationMapper();
 		
@@ -56,30 +51,12 @@ public class FighterBotLoader implements IFighterVisitor {
 		
 		
 	}
-	/*
-	public IBehaviourCondition getCondition() {
-		//TODO:check size? System.out.println(conditions.size());
-		return conditions.peek();
-	}
-	
-	public IBehaviourAction getAction() {
-		return actions.peek();
-	}
-	
-	public void clearActions() {
-		actions.clear();
-	}
-	*/
+
 	
 	public FighterBot traverseFighterAst(Fighter fighterAst, IFighterGraphics graphics) {
 		
-		//fighterAst.accept(this);
-		
 		traverseBehaviour(fighterAst.getProperties());
-		
 		return new FighterBot(fighterAst.getName(), behaviour, personality, graphics);
-		
-		//return fighterBot; 
 	}
 	
 	public IBehaviourCondition traverseConditions(nl.tamasja.uva.saf.tree.ast.ICondition cNode) {
@@ -129,7 +106,6 @@ public class FighterBotLoader implements IFighterVisitor {
 
 	@Override
 	public void visit(ActionAtom actionAtom) {
-		// TODO Auto-generated method stub
 		String actionString = actionAtom.getAction();
 		SpecificationMapper.Attack attack = specificationMapper.MapAttack(actionString);
 		SpecificationMapper.Move move = specificationMapper.MapMove(actionString);
@@ -172,7 +148,6 @@ public class FighterBotLoader implements IFighterVisitor {
 	@Override
 	public void visit(ConditionAtom conditionAtom) {
 		IBehaviourCondition ruleCondition = conditionMapper.Map(specificationMapper.MapCondition(conditionAtom.getName()));
-		System.out.println(conditionAtom.getName()+" -> "+ruleCondition);
 		if(ruleCondition != null) conditions.add(ruleCondition);
 	}
 

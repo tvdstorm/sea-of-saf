@@ -1,7 +1,6 @@
 package nl.tamasja.uva.saf.fighter;
 
 import java.util.HashMap;
-import java.util.List;
 
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Strength;
 

@@ -2,10 +2,7 @@ package nl.tamasja.uva.saf.tree;
 
 import java.util.ArrayList;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.SpecialAction;
-
 import nl.tamasja.uva.saf.fighter.SpecificationMapper;
-import nl.tamasja.uva.saf.fighter.SpecificationMapper.*;
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Condition;
 import nl.tamasja.uva.saf.tree.ast.*;
 import nl.tamasja.uva.saf.tree.ast.Strength;
@@ -24,7 +21,13 @@ public class FighterAstChecker implements IFighterVisitor {
 	
 	public ArrayList<ErrorMessage> checkAst(Fighter fighter) {
 		errors.clear();
-		fighter.accept(this);
+		
+		if(fighter == null) {
+			errors.add(new ErrorMessage("Fighter is null"));
+		} else {
+			fighter.accept(this);	
+		}
+		
 		return errors;
 	}
 	
@@ -34,8 +37,6 @@ public class FighterAstChecker implements IFighterVisitor {
 	
 	@Override
 	public void visit(Fighter fighter) {
-		System.out.println(fighter.getName());
-		
 		if(!hasAlwaysCondition) 
 			errors.add(new ErrorMessage("There must be an always rule"));
 	}
@@ -44,7 +45,6 @@ public class FighterAstChecker implements IFighterVisitor {
 	public void visit(Strength strength) {
 		String name = strength.getName();
 		int value = strength.getValue();
-		System.out.println(name+"="+value);
 		
 		if(specificationMapper.MapStrength(name) == null)
 			 errors.add(new ErrorMessage("Invalid strength statistic: "+name));

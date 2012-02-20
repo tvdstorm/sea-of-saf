@@ -30,11 +30,13 @@ public class FighterAstLoader {
 				fighter = parser.parse().fighter;
 			} catch (RecognitionException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//e.printStackTrace();
+				System.out.println("RecognitionException");
 			}
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			//e1.printStackTrace();
+			System.out.println("IO Exception");
 		}
 		return fighter;
 	}

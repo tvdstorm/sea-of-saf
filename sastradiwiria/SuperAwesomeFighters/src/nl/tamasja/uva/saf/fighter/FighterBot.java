@@ -36,7 +36,6 @@ package nl.tamasja.uva.saf.fighter;
 //import nl.tamasja.uva.saf.fighter.action.FightAction_old.Height;
 import java.awt.Graphics;
 
-import nl.tamasja.uva.saf.Arena;
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Attack;
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Move;
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Strength;
@@ -130,7 +129,7 @@ public class FighterBot {
 	
 	public void move(int movement, Height height, Move move) {
 		
-		if(position > getEnemyFighter().position) {
+		if(position > getEnemyFighter().getPosition()) {
 			direction = -1;
 		} else {
 			direction = 1;
@@ -141,9 +140,9 @@ public class FighterBot {
 		
 		
 		if(direction == 1) {
-			newPosition = Math.min(getEnemyFighter().position-1, newPosition);
+			newPosition = Math.min(getEnemyFighter().getPosition()-1, newPosition);
 		} else {
-			newPosition = Math.max(getEnemyFighter().position+1, newPosition);
+			newPosition = Math.max(getEnemyFighter().getPosition()+1, newPosition);
 		}
 	
 		position = newPosition;
@@ -159,7 +158,6 @@ public class FighterBot {
 	void takeHit(int damage, Height strikeHeight) {
 		if(damage > 0 && verticalPosition != null && verticalPosition != strikeHeight) {
 			damage = 0;
-			System.out.println(getName()+" evaded!");
 		}
 		
 		if(damage > 0 && block == strikeHeight) {
@@ -232,6 +230,7 @@ public class FighterBot {
 	}	
 	
 	public int getDistance() {
+		
 		return Math.abs(getPosition() - getEnemyFighter().getPosition());
 	}
 	

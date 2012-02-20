@@ -1,7 +1,6 @@
 package nl.tamasja.uva.saf.fighter.actions;
 
 import nl.tamasja.uva.saf.fighter.action.ActionClass;
-import nl.tamasja.uva.saf.fighter.action.ActionOptions.Height;
 
 public class ActionStand extends ActionClass {
 
