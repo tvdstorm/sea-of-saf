@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.blommesteijn.uva.sc.saf.runner.model.exceptions.FileLoadException;
-import com.blommesteijn.uva.sc.saf.runner.view.CliMessager;
+import com.blommesteijn.uva.sc.saf.runner.model.FileLoadException;
+import com.blommesteijn.uva.sc.saf.runner.view.CliMessenger;
 
 public class Files
 {
@@ -25,7 +25,7 @@ public class Files
 		if(!userDir.endsWith(Common.FILE_SEPARATOR))
 			userDir += Common.FILE_SEPARATOR;
 		_currentDir = new File(userDir);
-		CliMessager.msg(new String[]{"currentDir: ", _currentDir.getName()});
+		CliMessenger.msg(new String[]{"currentDir: ", _currentDir.getName()});
 		
 		this.loadSources();
 	}
@@ -44,7 +44,7 @@ public class Files
 		{
 			String filename = reference;
 			
-			CliMessager.msg(new String[]{"filename: ", filename});
+			CliMessenger.msg(new String[]{"filename: ", filename});
 
 			//absolute path
 			File file = new File(filename);

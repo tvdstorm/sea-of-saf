@@ -43,10 +43,13 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 public class GuiApplication
 {
 	private JFrame _frame;
+	private JTextPane _outputPane;
 
 	/**
 	 * Create the application.
@@ -72,25 +75,17 @@ public class GuiApplication
 		JPanel bottom = new JPanel();
 		_frame.getContentPane().add(bottom, BorderLayout.SOUTH);
 		
-
 		Dimension minimumSize = new Dimension(100, 50);
 		
 		JPanel top = new JPanel();
 		_frame.getContentPane().add(top, BorderLayout.NORTH);
 
-        final CustomTreeCellRenderer renderer = new CustomTreeCellRenderer();
-
 		JTree tree = new JTree();
-		tree.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				System.out.println("mouse release");
-			}
-		});
 		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Config") {
+			new DefaultMutableTreeNode("SAF 0.0.1") {
 				{
-					add(new DefaultMutableTreeNode("Fighters"));
+					add(new DefaultMutableTreeNode("D. Blommesteijn"));
+					add(new DefaultMutableTreeNode("UvA id: 10276726"));
 				}
 			}
 		));
@@ -100,8 +95,6 @@ public class GuiApplication
 		tree.setAlignmentX(Component.LEFT_ALIGNMENT);
 		tree.setAlignmentY(Component.TOP_ALIGNMENT);
 		tree.setMinimumSize(minimumSize);
-		renderer.setRendererIcon(new EmptyIcon());
-		tree.setCellRenderer(renderer);
 		tree.repaint();
 		
 		JScrollPane scrollPane = new JScrollPane(tree);
@@ -114,8 +107,13 @@ public class GuiApplication
 		contentScrollPane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		contentScrollPane.setBackground(Color.WHITE);
 		contentScrollPane.setMinimumSize(minimumSize);
-		
 				
+		
+		_outputPane = new JTextPane();
+		_outputPane.setEditable(false);
+		contentScrollPane.add(_outputPane);
+		
+		
 		JSplitPane center = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, contentScrollPane);
 		center.setBackground(new Color(250,250,250));
 		center.setForeground(Color.LIGHT_GRAY);
@@ -123,9 +121,8 @@ public class GuiApplication
 		center.setDividerLocation(200);
 		center.scrollRectToVisible(new Rectangle(10,10));
 		
+		
 		_frame.getContentPane().add(center, BorderLayout.CENTER);
-		
-		
 		
 		
 		
@@ -138,65 +135,72 @@ public class GuiApplication
 	{
 		return _frame;
 	}
-
-	@SuppressWarnings("serial")
-	private static class CustomTreeCellRenderer extends DefaultTreeCellRenderer
+	
+	public void setOutputText(String text)
 	{
-
-		Icon rendererIcon;
-
-		public void setRendererIcon(Icon myIcon)
-		{
-			this.rendererIcon = myIcon;
-		};
-
-		public Component getTreeCellRendererComponent(JTree tree, Object value,
-				boolean selected, boolean expanded, boolean leaf, int row,
-				boolean hasFocus)
-		{
-
-			Component ret = super.getTreeCellRendererComponent(tree, value,
-					selected, expanded, leaf, row, hasFocus);
-
-			JLabel label = (JLabel) ret;
-
-			label.setIcon(rendererIcon);
-
-			return ret;
-		}
+		_outputPane.setText(text);
 	}
+	
+	
 
-	private final class EmptyIcon implements Icon
-	{
-
-		private int width;
-		private int height;
-
-		public EmptyIcon()
-		{
-			this(0, 0);
-		}
-
-		public EmptyIcon(int width, int height)
-		{
-			this.width = width;
-			this.height = height;
-		}
-
-		public int getIconHeight()
-		{
-			return height;
-		}
-
-		public int getIconWidth()
-		{
-			return width;
-		}
-
-		public void paintIcon(Component c, Graphics g, int x, int y)
-		{
-		}
-
-	}
+//	@SuppressWarnings("serial")
+//	private static class CustomTreeCellRenderer extends DefaultTreeCellRenderer
+//	{
+//
+//		Icon rendererIcon;
+//
+//		public void setRendererIcon(Icon myIcon)
+//		{
+//			this.rendererIcon = myIcon;
+//		};
+//
+//		public Component getTreeCellRendererComponent(JTree tree, Object value,
+//				boolean selected, boolean expanded, boolean leaf, int row,
+//				boolean hasFocus)
+//		{
+//
+//			Component ret = super.getTreeCellRendererComponent(tree, value,
+//					selected, expanded, leaf, row, hasFocus);
+//
+//			JLabel label = (JLabel) ret;
+//
+//			label.setIcon(rendererIcon);
+//
+//			return ret;
+//		}
+//	}
+//
+//	private final class EmptyIcon implements Icon
+//	{
+//
+//		private int width;
+//		private int height;
+//
+//		public EmptyIcon()
+//		{
+//			this(0, 0);
+//		}
+//
+//		public EmptyIcon(int width, int height)
+//		{
+//			this.width = width;
+//			this.height = height;
+//		}
+//
+//		public int getIconHeight()
+//		{
+//			return height;
+//		}
+//
+//		public int getIconWidth()
+//		{
+//			return width;
+//		}
+//
+//		public void paintIcon(Component c, Graphics g, int x, int y)
+//		{
+//		}
+//
+//	}
 
 }
