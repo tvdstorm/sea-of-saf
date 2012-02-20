@@ -20,19 +20,6 @@ tokens {
 
     PAREN_OPEN      = '(' ;
     PAREN_CLOSE     = ')' ;
-
-    /* Imaginary nodes, used for tree topology. */
-    SAF;
-    ATTRIBUTES;
-    ATTRIBUTE;
-    MOVE;
-    ATTACK;
-    BEHAVIOUR;
-    TACTIC;
-    COMPOSED_CONDITION;
-    CONDITION;
-    LOGIC_AND;
-    LOGIC_OR;
 }
 
 @parser::header {
