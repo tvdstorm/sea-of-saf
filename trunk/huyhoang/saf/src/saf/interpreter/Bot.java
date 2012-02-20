@@ -16,30 +16,6 @@ public class Bot extends Observable implements Observer
 		return position;
 	}
 	
-	private String lastState;
-	public String getLastState() {
-		if (this.lastState == null)
-			return "";
-		else
-			return this.lastState;
-	}
-	
-	public static ArrayList<String> fetchBotStrengths() {
-		ArrayList<String> result = new ArrayList<String>();
-		
-		try {
-			Field fields[] = Bot.class.getFields();
-			for ( Field field : fields ) {
-				result.add(field.getName());
-			}
-			
-			return result;
-		}
-		catch (Exception ex) {
-			return new ArrayList<String>();
-		}
-	}
-
 	public void setPosition(int position) {
 		this.position = position;
 		if (this.botOnTheLeft && getPosition() >= this.opponentBot.getPosition()) {
@@ -50,6 +26,15 @@ public class Bot extends Observable implements Observer
 		}
 	}
 	
+	private String lastState;
+	public String getLastState() {
+		if (this.lastState == null)
+			return "";
+		else
+			return this.lastState;
+	}
+
+	private boolean botOnTheLeft;
 	public boolean isStandingLeft() {
 		return this.botOnTheLeft;
 	}
@@ -60,13 +45,55 @@ public class Bot extends Observable implements Observer
 	}
 	
 	// hmmm, this is too bad...
-	public int kickReach = 5;
-	public int punchReach = 5;
-	public int kickPower = 5;
-	public int punchPower = 5;
+	private int punchReach = 5;
+	
+	@MethodAnnotation(safName = "punchReach", keywordType = "setStrength")
+	public void setPunchReach(int punchReach) {
+		this.punchReach = punchReach;
+	}
+	
+	@MethodAnnotation(safName = "punchReach", keywordType = "getStrength")
+	public int getPunchReach() {
+		return this.punchReach;
+	}
+	
+	private int kickPower = 5;
+	
+	@MethodAnnotation(safName = "kickPower", keywordType = "setStrength")
+	public void setKickPower(int kickPower) {
+		this.kickPower = kickPower;
+	}
+	
+	@MethodAnnotation(safName = "kickPower", keywordType = "getStrength")
+	public int getKickPower() {
+		return this.kickPower;
+	}
+	
+	private int punchPower = 5;
+	
+	@MethodAnnotation(safName = "punchPower", keywordType = "setStrength")
+	public void setPunchPower(int punchPower) {
+		this.punchPower = punchPower;
+	}
+	
+	@MethodAnnotation(safName = "punchPower", keywordType = "getStrength")
+	public int getPunchPower() {
+		return this.punchPower;
+	}
+	
+	private int kickReach = 5;
+
+	@MethodAnnotation(safName = "kickReach", keywordType = "setStrength")
+	public void setKickReach(int kickReach) {
+		this.kickReach = kickReach;
+	}
+	
+	@MethodAnnotation(safName = "kickReach", keywordType = "getStrength")
+	public int getKickReach() {
+		return this.kickReach;
+	}
 	
 	private Bot opponentBot;
-	private boolean botOnTheLeft;
 	private int remainingActionSteps;
 	private int hitpoints;
 	public int getHitpoints() {
@@ -134,7 +161,8 @@ public class Bot extends Observable implements Observer
 	
 	@MethodAnnotation(safName = "even", keywordType = "condition")
 	public boolean isEven() {
-		return this.getNumberOfStrongerStrengths() == this.getNumberOfWeakerStrengths();
+		return this.getHitpoints() == this.getOpponentBot().getHitpoints();
+		//return this.getNumberOfStrongerStrengths() == this.getNumberOfWeakerStrengths();
 	}
 	
 	@MethodAnnotation(safName = "near", keywordType = "condition")
@@ -258,7 +286,6 @@ public class Bot extends Observable implements Observer
 			return false;
 		} catch (Exception exception) {
 			exception.printStackTrace();
-			//System.out.println("invokeMethod exception: " + );
 			return false;
 		}
 	}

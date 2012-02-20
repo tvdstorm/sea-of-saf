@@ -33,7 +33,7 @@ public class CheckerVisitor implements FighterVisitor
     
 	public CheckerVisitor(Fighter fighter) {
 		this.listOfAllowedBotConditions = Tool.getAnnotatedSafnamesFromClass(Bot.class, "condition");
-		this.listOfAllowedBotStrengths = Bot.fetchBotStrengths();
+		this.listOfAllowedBotStrengths = Tool.getAnnotatedSafnamesFromClass(Bot.class, "getStrength");
 		this.visitedActions = new ArrayList<Action>();
 		this.fighter = fighter;
 	}
