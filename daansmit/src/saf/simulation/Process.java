@@ -11,7 +11,7 @@ import saf.syntax.Simple;
 
 public abstract class Process
 {
-    private static final int BASE_DURATION = 45;
+    private static final int BASE_DURATION = 10;
 
     private final Instance subject;
     private final Instance complement;

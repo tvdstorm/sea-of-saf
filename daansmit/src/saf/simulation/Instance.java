@@ -1,5 +1,6 @@
 package saf.simulation;
 
+import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,10 +14,11 @@ import saf.syntax.State;
 
 public class Instance
 {
-    private final Coordinate position;
     private final Fighter template;
+    private final int hash;
     private final List<Process> processes = new ArrayList<Process>();
-    private Instance other = null;
+    private Coordinate position;
+    private Instance other;
     private int health = 100;
 
     private boolean blockingHigh = false;
@@ -28,6 +30,7 @@ public class Instance
     {
         this.template = template;
         this.position = position;
+        hash = template.getName().hashCode() + position.getX();
     }
 
     public Coordinate getPosition() { return position; }
@@ -52,6 +55,12 @@ public class Instance
     public boolean isCrouching() { return crouching; }
     public boolean isJumping() { return jumping; }
 
+    @Override
+    public int hashCode()
+    {
+        return hash;
+    }
+
     public boolean isAlive()
     {
         return (health > 0);
@@ -59,12 +68,20 @@ public class Instance
 
     public void move(int distance)
     {
-        position.add(distance);
+        Coordinate target = position.add(distance);
+        if (Math.abs(target.getX() - other.getPosition().getX()) >= 16)
+        {
+            position = target;
+        }
+        else if (distance > 1)
+        {
+            move(distance - 1);
+        }
     }
 
-    public boolean inReach(int distance)
+    public boolean inReach(int reach)
     {
-        return distance <= position.getDistance(other.getPosition());
+        return position.getDistance(other.getPosition()) <= reach;
     }
 
     public void plan()
@@ -112,8 +129,33 @@ public class Instance
     public List<State> getSituation()
     {
         List<State> situation = new ArrayList<State>();
-        situation.add(new State("weaker"));
-        situation.add(new State("near"));
+        int healthDiff = health - other.getHealth();
+        if (healthDiff > 20)
+        {
+            situation.add(new State("much_weaker"));
+        }
+        else if (healthDiff > 0)
+        {
+            situation.add(new State("weaker"));
+        }
+        else if (healthDiff < 0)
+        {
+            situation.add(new State("stronger"));
+        }
+        else if (healthDiff < 20)
+        {
+            situation.add(new State("much_stronger"));
+        }
+
+        int distance = position.getDistance(other.getPosition());
+        if (distance <= 10)
+        {
+            situation.add(new State("near"));
+        }
+        else
+        {
+            situation.add(new State("far"));
+        }
         return situation;
     }
 }

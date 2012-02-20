@@ -8,7 +8,6 @@ import saf.syntax.Response;
 
 public class Move extends Process
 {
-    private static final int BASE_DURATION = 45;
     private static final int RUN_DISTANCE = 3;
     private static final int WALK_DISTANCE = 2;
 
@@ -20,30 +19,32 @@ public class Move extends Process
     @Override
     public void first(List<Event> events)
     {
-        if (getActivity().getId() == "jump")
+        switch (getActivity().getId())
         {
+        case "jump":
             getSubject().setJumping(true);
             events.add(new Jump(getSubject()));
-        }
-        else if (getActivity().getId() == "crouch")
-        {
+            break;
+        case "crouch":
             getSubject().setCrouching(true);
             events.add(new Crouch(getSubject()));
+            break;
         }
     }
 
     @Override
     public void last(List<Event> events)
     {
-        if (getActivity().getId() == "jump")
+        switch (getActivity().getId())
         {
+        case "jump":
             getSubject().setJumping(false);
             events.add(new Stand(getSubject()));
-        }
-        else if (getActivity().getId() == "crouch")
-        {
+            break;
+        case "crouch":
             getSubject().setCrouching(false);
             events.add(new Stand(getSubject()));
+            break;
         }
     }
 
@@ -55,28 +56,29 @@ public class Move extends Process
         int towards = position.getDirection(other);
         int away = other.getDirection(position);
 
-        int distance = 0;
-        if (getActivity().getId() == "run_away")
+        Integer distance;
+        switch (getActivity().getId())
         {
+        case "run_away":
             distance = (away * RUN_DISTANCE);
-        }
-        else if (getActivity().getId() == "run_towards")
-        {
+            break;
+        case "run_towards":
             distance = (towards * RUN_DISTANCE);
-        }
-        else if (getActivity().getId() == "walk_away")
-        {
+            break;
+        case "walk_away":
             distance = (away * WALK_DISTANCE);
-        }
-        else if (getActivity().getId() == "run_towards")
-        {
+            break;
+        case "walk_towards":
             distance = (towards * WALK_DISTANCE);
-        }
-        else
-        {
+            break;
+        default:
             return;
         }
+
         getSubject().move(distance);
-        events.add(new MoveTo(getSubject()));
+        if (!position.equals(getSubject().getPosition()))
+        {
+            events.add(new MoveTo(getSubject()));
+        }
     }
 }
