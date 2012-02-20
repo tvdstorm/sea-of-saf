@@ -1,5 +1,7 @@
 package nl.uva.lap.saf.ast.action;
 
+import java.util.List;
+
 import nl.uva.lap.saf.ast.Visitor;
 
 public class SimpleAction extends Action
@@ -20,5 +22,13 @@ public class SimpleAction extends Action
 	public String getAction()
 	{
 		return action;
+	}
+
+	@Override
+	public boolean contains(List<String> elements)
+	{
+		if(elements.contains(action))
+			return true;
+		return false;
 	}
 }

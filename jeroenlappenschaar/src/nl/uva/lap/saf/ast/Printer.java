@@ -30,12 +30,6 @@ public class Printer implements Visitor
 	}
 
 	@Override
-	public void visit(Ident ident)
-	{
-		builder.append(ident.toString());
-	}
-
-	@Override
 	public void visit(Personality personality)
 	{
 		builder.append(personality.getName());
@@ -85,7 +79,7 @@ public class Printer implements Visitor
 	{
 		builder.append("(");
 		builder.append(andCondition.getLhs());
-		builder.append("and ");
+		builder.append(" and ");
 		builder.append(andCondition.getRhs());
 		builder.append(")");
 	}
@@ -95,7 +89,7 @@ public class Printer implements Visitor
 	{
 		builder.append("(");
 		builder.append(orCondition.getLhs());
-		builder.append("or ");
+		builder.append(" or ");
 		builder.append(orCondition.getRhs());
 		builder.append(")");
 	}
@@ -104,13 +98,11 @@ public class Printer implements Visitor
 	public void visit(SimpleCondition simple)
 	{
 		builder.append(simple.getCondition());
-		builder.append(" ");
 	}
 
 	@Override
 	public void visit(SimpleAction simple)
 	{
 		builder.append(simple.getAction());
-		builder.append(" ");
 	}
 }

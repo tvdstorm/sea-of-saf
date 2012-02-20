@@ -24,4 +24,13 @@ public class Choose extends Action
 	{
 		return actions;
 	}
+
+	@Override
+	public boolean contains(List<String> elements)
+	{
+		for(Action action : actions)
+			if(elements.contains(action))
+				return true;
+		return false;
+	}
 }

@@ -1,5 +1,9 @@
 package nl.uva.lap.saf;
 
+import java.util.List;
+
+import nl.uva.lap.saf.ast.evaluator.Evaluator;
+import nl.uva.lap.saf.ast.evaluator.Message;
 import nl.uva.lap.saf.ast.fighter.Fighter;
 
 import org.antlr.runtime.ANTLRStringStream;
@@ -42,7 +46,7 @@ public class Test
 
 	public static void main(String[] args) throws RecognitionException
 	{
-		CharStream charStream = new ANTLRStringStream(Test.pietje);
+		CharStream charStream = new ANTLRStringStream(Test.jetLi);
 		SAFLexer lexer = new SAFLexer(charStream);
 		
 		TokenStream tokenStream = new CommonTokenStream(lexer);
@@ -50,5 +54,10 @@ public class Test
 		
 		Fighter fighter = parser.fighter();
 		System.out.println(fighter.toString());
+		
+		List<Message> messages = Evaluator.evaluate(fighter);
+		for(Message message : messages)
+			System.out.println(message.getMessage());
+		
 	}
 }
