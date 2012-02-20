@@ -2,10 +2,10 @@ package test.scenarios;
 
 import jsaf.astelements.Bot;
 import jsaf.astelements.Bots;
-import grammar.ParseException;
+import jsaf.grammar.ParseException;
+import jsaf.main.Main;
+import jsaf.main.Parser;
 
-import main.Main;
-import main.Parser;
 
 import static org.jbehave.util.JUnit4Ensure.ensureThat;
 import org.jbehave.scenario.annotations.Given;

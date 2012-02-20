@@ -3,23 +3,23 @@ package test.scenarios;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.jbehave.util.JUnit4Ensure.ensureThat;
-import game.FightEngine;
-import game.fighter.Fighter;
-import grammar.ParseException;
 
 import java.io.IOException;
 
 import jsaf.astelements.Bots;
+import jsaf.constants.SAFConstants;
+import jsaf.game.FightEngine;
+import jsaf.game.fighter.Fighter;
+import jsaf.grammar.ParseException;
+import jsaf.main.Main;
+import jsaf.main.Parser;
 
-import main.Main;
-import main.Parser;
 
 import org.jbehave.scenario.annotations.Given;
 import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.jbehave.scenario.steps.Steps;
 
-import constants.SAFConstants;
 
 
 public class GameSteps extends Steps
