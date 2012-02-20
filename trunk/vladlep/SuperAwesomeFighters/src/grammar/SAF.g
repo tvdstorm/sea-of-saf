@@ -17,35 +17,33 @@ package reader.antlr;
 
 fighter returns [Fighter fighter]
   :
-  IDENT '{' personality behaviour 
-                                  {
-                                   fighter = new Fighter($IDENT.getText(), $personality.personality, $behaviour.behaviour);                  
-                                  }
-  '}'
+  IDENT '{' personality behaviour  '}'
+  {  
+  	fighter = new Fighter($IDENT.getText(), $personality.personality, $behaviour.behaviour);
+  }
   ;
 
 personality returns [Personality personality]
   :
-  
-   {
+  {
     personality = new Personality();
-   }
+  }
   (STRENGTHS '=' INTEGER 
-                           {
-                            if ($STRENGTHS.getText().equals("punchReach")) {
-                                              	personality.setPunchReach(Integer.parseInt($INTEGER.text));
-                            }
-                            if ($STRENGTHS.text.equals("punchPower")) {
-                            	personality.setPunchPower(Integer.parseInt($INTEGER.text));
-                            }
-                            if ($STRENGTHS.text.equals("kickReach")) {
-                            	personality.setKickReach(Integer.parseInt($INTEGER.text));
-                            }
-                            if ($STRENGTHS.text.equals( "kickPower")) {
-                            	personality.setKickPower(Integer.parseInt($INTEGER.text));
-                            }
-                            ;
-                           })*
+                  {
+                   if ($STRENGTHS.getText().equals("punchReach")) {
+                                     	personality.setPunchReach(Integer.parseInt($INTEGER.text));
+                   }
+                   if ($STRENGTHS.text.equals("punchPower")) {
+                   	personality.setPunchPower(Integer.parseInt($INTEGER.text));
+                   }
+                   if ($STRENGTHS.text.equals("kickReach")) {
+                   	personality.setKickReach(Integer.parseInt($INTEGER.text));
+                   }
+                   if ($STRENGTHS.text.equals( "kickPower")) {
+                   	personality.setKickPower(Integer.parseInt($INTEGER.text));
+                   }
+                   ;
+                  })*
   ;
 
 behaviour returns [Behaviour behaviour]
@@ -54,18 +52,19 @@ behaviour returns [Behaviour behaviour]
   behaviour = new Behaviour();
   }
   (
-  {Rule rule;}
+  {	Rule rule;	}
    cond   '['    moveGen = move   attackGen = atack   ']'
   {
   	rule = new Rule($cond.condition, $moveGen.moveActions, $attackGen.fightActions); 
   	behaviour.add(rule);
   }
   )*
+
   'always' '[' moveAlw =  move attackAlw=atack ']'
   {
-  Rule rule;
-  rule = new Rule($cond.condition, $moveAlw.moveActions, $attackAlw.fightActions); 
-  behaviour.add(rule);
+	  Rule rule;
+	  rule = new Rule($cond.condition, $moveAlw.moveActions, $attackAlw.fightActions); 
+	  behaviour.add(rule);
   }
   ;
   
@@ -111,12 +110,11 @@ atack returns [ Actions<FightActionType> fightActions] :
 cond returns [ ICondition condition]
 	:	
 	 (
-    //maybe + instead of *
-    //factorizez pt a merge and multiplu.
       (orCond {condition = $orCond.condition;}
       )
     )
 	;
+
 condSimple returns [ ICondition condition]
 	:
 	
@@ -125,12 +123,14 @@ condSimple returns [ ICondition condition]
 	 )
 	| ('(' cond')' {condition = $cond.condition;})
 	;
+
 andCond returns  [ ICondition condition]
 	:
 	cond1 = condSimple { condition = $cond1.condition;}
 	('and' cond2 = condSimple { condition = new AndCondition(condition, $cond2.condition); 
 	})*
 	;
+
 orCond returns  [ ICondition condition]
 	:
 	cond1 = andCond { condition = $cond1.condition;}
@@ -139,6 +139,7 @@ orCond returns  [ ICondition condition]
 	}
 	)*
 	;
+
 CONDITIONS: ('stronger' | 'weaker'|'much_stronger'|'much_weaker' | 'even' | 'near' | 'far' | 'always');
 MOVES: ('jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' | 'walk_towards' | 'walk_away');
 ATTACKS : ('punch_low' | 'punch_high' | 'kick_low' | 'kick_high' | 'block_low' | 'block_high');
@@ -146,13 +147,12 @@ STRENGTHS : ('punchReach' | 'kickReach' | 'kickPower' | 'punchPower');
 
 IDENT : ('A'..'Z'|'a'..'z')('0'..'9'|'A'..'Z'|'a'..'z')*;
 
-// errror handling -> better for integer
+
 INTEGER
   : ('0'..'9')+
   ;
 
 //parse comments and whitespaces to a hidden channel
-
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n' )+    { $channel = HIDDEN; } ;
 
 COMMENTS

@@ -4,7 +4,7 @@ import fighter.action.FightActionType;
 import fighter.action.MoveActionType;
 
 public class FighterState {
-
+	// http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html
 	private int position;
 	private MoveActionType selectedMoveAction;
 	private FightActionType selectedFightAction;
@@ -20,10 +20,6 @@ public class FighterState {
 		if (remainingTime == 0)
 			return true;
 		return false;
-	}
-
-	public void updateActions() {
-
 	}
 
 	public int getHealth() {

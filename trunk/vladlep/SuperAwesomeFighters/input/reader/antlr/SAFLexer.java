@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-02-20 00:13:40
+// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-02-20 13:29:45
 
 package reader.antlr;
 
@@ -332,16 +332,16 @@ public class SAFLexer extends Lexer {
 			int _type = CONDITIONS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:11:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:11:
 			// ( ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' |
 			// 'even' | 'near' | 'far' | 'always' ) )
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:13:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:13:
 			// ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' |
 			// 'even' | 'near' | 'far' | 'always' )
 			{
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:13:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:13:
 				// ( 'stronger' | 'weaker' | 'much_stronger' | 'much_weaker' |
 				// 'even' | 'near' | 'far' | 'always' )
 				int alt1 = 8;
@@ -437,7 +437,7 @@ public class SAFLexer extends Lexer {
 				switch (alt1) {
 				case 1:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:14:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:14:
 				// 'stronger'
 				{
 					match("stronger");
@@ -446,7 +446,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 2:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:27:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:27:
 				// 'weaker'
 				{
 					match("weaker");
@@ -455,7 +455,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 3:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:36:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:36:
 				// 'much_stronger'
 				{
 					match("much_stronger");
@@ -464,7 +464,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 4:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:52:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:52:
 				// 'much_weaker'
 				{
 					match("much_weaker");
@@ -473,7 +473,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 5:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:68:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:68:
 				// 'even'
 				{
 					match("even");
@@ -482,7 +482,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 6:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:77:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:77:
 				// 'near'
 				{
 					match("near");
@@ -491,7 +491,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 7:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:86:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:86:
 				// 'far'
 				{
 					match("far");
@@ -500,7 +500,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 8:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:142:94:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:94:
 				// 'always'
 				{
 					match("always");
@@ -527,16 +527,16 @@ public class SAFLexer extends Lexer {
 			int _type = MOVES;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:6:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:6:
 			// ( ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' |
 			// 'walk_towards' | 'walk_away' ) )
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:8:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:8:
 			// ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' |
 			// 'walk_towards' | 'walk_away' )
 			{
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:8:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:8:
 				// ( 'jump' | 'crouch' | 'stand' | 'run_towards' | 'run_away' |
 				// 'walk_towards' | 'walk_away' )
 				int alt2 = 7;
@@ -666,7 +666,7 @@ public class SAFLexer extends Lexer {
 				switch (alt2) {
 				case 1:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:9:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:9:
 				// 'jump'
 				{
 					match("jump");
@@ -675,7 +675,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 2:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:18:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:18:
 				// 'crouch'
 				{
 					match("crouch");
@@ -684,7 +684,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 3:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:29:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:29:
 				// 'stand'
 				{
 					match("stand");
@@ -693,7 +693,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 4:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:39:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:39:
 				// 'run_towards'
 				{
 					match("run_towards");
@@ -702,7 +702,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 5:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:55:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:55:
 				// 'run_away'
 				{
 					match("run_away");
@@ -711,7 +711,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 6:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:68:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:68:
 				// 'walk_towards'
 				{
 					match("walk_towards");
@@ -720,7 +720,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 7:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:143:85:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:85:
 				// 'walk_away'
 				{
 					match("walk_away");
@@ -747,16 +747,16 @@ public class SAFLexer extends Lexer {
 			int _type = ATTACKS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:9:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:9:
 			// ( ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' |
 			// 'block_low' | 'block_high' ) )
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:11:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:11:
 			// ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' |
 			// 'block_low' | 'block_high' )
 			{
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:11:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:11:
 				// ( 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' |
 				// 'block_low' | 'block_high' )
 				int alt3 = 6;
@@ -960,7 +960,7 @@ public class SAFLexer extends Lexer {
 				switch (alt3) {
 				case 1:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:12:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:12:
 				// 'punch_low'
 				{
 					match("punch_low");
@@ -969,7 +969,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 2:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:26:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:26:
 				// 'punch_high'
 				{
 					match("punch_high");
@@ -978,7 +978,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 3:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:41:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:41:
 				// 'kick_low'
 				{
 					match("kick_low");
@@ -987,7 +987,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 4:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:54:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:54:
 				// 'kick_high'
 				{
 					match("kick_high");
@@ -996,7 +996,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 5:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:68:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:68:
 				// 'block_low'
 				{
 					match("block_low");
@@ -1005,7 +1005,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 6:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:144:82:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:82:
 				// 'block_high'
 				{
 					match("block_high");
@@ -1032,14 +1032,14 @@ public class SAFLexer extends Lexer {
 			int _type = STRENGTHS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:11:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:11:
 			// ( ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' ) )
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:13:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:13:
 			// ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' )
 			{
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:13:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:13:
 				// ( 'punchReach' | 'kickReach' | 'kickPower' | 'punchPower' )
 				int alt4 = 4;
 				int LA4_0 = input.LA(1);
@@ -1152,7 +1152,7 @@ public class SAFLexer extends Lexer {
 				switch (alt4) {
 				case 1:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:14:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:14:
 				// 'punchReach'
 				{
 					match("punchReach");
@@ -1161,7 +1161,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 2:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:29:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:29:
 				// 'kickReach'
 				{
 					match("kickReach");
@@ -1170,7 +1170,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 3:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:43:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:43:
 				// 'kickPower'
 				{
 					match("kickPower");
@@ -1179,7 +1179,7 @@ public class SAFLexer extends Lexer {
 					break;
 				case 4:
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:145:57:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:146:57:
 				// 'punchPower'
 				{
 					match("punchPower");
@@ -1206,11 +1206,11 @@ public class SAFLexer extends Lexer {
 			int _type = IDENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:147:7:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:148:7:
 			// ( ( 'A' .. 'Z' | 'a' .. 'z' ) ( '0' .. '9' | 'A' .. 'Z' | 'a' ..
 			// 'z' )* )
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:147:9:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:148:9:
 			// ( 'A' .. 'Z' | 'a' .. 'z' ) ( '0' .. '9' | 'A' .. 'Z' | 'a' ..
 			// 'z' )*
 			{
@@ -1225,7 +1225,7 @@ public class SAFLexer extends Lexer {
 				}
 
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:147:28:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:148:28:
 				// ( '0' .. '9' | 'A' .. 'Z' | 'a' .. 'z' )*
 				loop5: do {
 					int alt5 = 2;
@@ -1277,14 +1277,14 @@ public class SAFLexer extends Lexer {
 			int _type = INTEGER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:151:3:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:152:3:
 			// ( ( '0' .. '9' )+ )
 			// D:\\vlad\\serios\\master\\Software
-			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:151:5:
+			// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:152:5:
 			// ( '0' .. '9' )+
 			{
 				// D:\\vlad\\serios\\master\\Software
-				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:151:5:
+				// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:152:5:
 				// ( '0' .. '9' )+
 				int cnt6 = 0;
 				loop6: do {

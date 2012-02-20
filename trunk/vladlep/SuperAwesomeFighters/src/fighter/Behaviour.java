@@ -20,18 +20,29 @@ public class Behaviour extends ArrayList<Rule> implements ASTNode {
 
 		Rule selectedRule;
 		int index;
-		do {
-			index = generatRandomIndex();
-			selectedRule = this.get(index);
-			if (selectedRule.checkCondition(acceptedConditions) == true) {
-				return selectedRule;
-			}
-		} while (true);
+		List<Rule> possibleRules;
 
+		possibleRules = preselectPossibleMoves(acceptedConditions);
+		index = generatRandomIndex(possibleRules.size());
+		selectedRule = possibleRules.get(index);
+
+		return selectedRule;
 	}
 
-	private int generatRandomIndex() {
+	private int generatRandomIndex(int maxIndex) {
 		Random randomGenerator = new Random();
-		return randomGenerator.nextInt(this.size());
+		return randomGenerator.nextInt(maxIndex);
+	}
+
+	private List<Rule> preselectPossibleMoves(
+			List<ConditionType> acceptedConditions) {
+
+		List<Rule> possibleActions = new ArrayList<Rule>();
+		for (Rule rule : this) {
+			if (rule.checkCondition(acceptedConditions)) {
+				possibleActions.add(rule);
+			}
+		}
+		return possibleActions;
 	}
 }
