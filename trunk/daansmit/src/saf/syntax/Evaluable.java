@@ -1,6 +1,13 @@
 package saf.syntax;
 
-public interface Evaluable
+import java.util.List;
+
+public abstract class Evaluable extends ASTNode
 {
-    public boolean evaluate(State current);
+    public boolean isAlways()
+    {
+        return false;
+    }
+
+    public abstract boolean evaluate(List<State> situation);
 }

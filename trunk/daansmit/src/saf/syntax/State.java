@@ -1,7 +1,18 @@
 package saf.syntax;
 
-public class State implements Evaluable
+import java.util.Arrays;
+import java.util.List;
+
+import saf.check.CheckLog;
+
+public class State extends Evaluable
 {
+    private static final List<String> STATES =
+        Arrays.asList("stronger", "weaker", "much_stronger",
+                      "much_weaker", "even", "near", "far", "always");
+
+    private static final String ALWAYS = "always";
+
     private final String id;
 
     public State(String id)
@@ -9,19 +20,32 @@ public class State implements Evaluable
         this.id = id;
     }
 
-    public String getId()
+    public String getId() { return id; }
+
+    @Override
+    public boolean isAlways()
     {
-        return id;
+        return id.equals(ALWAYS);
     }
 
-    public String toString()
+    @Override
+    public void check(CheckLog log)
     {
-        return id;
+        if (!STATES.contains(id))
+        {
+            log.add(new saf.check.Error("Invalid state: \"" + toString() + "\"", this));
+        }
     }
 
-    public boolean evaluate(State current)
+    @Override
+    public boolean evaluate(List<State> situation)
     {
-        return equals(current);
+        boolean isValid = false;
+        for (State current : situation)
+        {
+            isValid |= equals(current);
+        }
+        return isValid;
     }
 
     public boolean equals(Object other)
@@ -32,5 +56,10 @@ public class State implements Evaluable
         }
         State s = (State)other;
         return getId().equals(s.getId());
+    }
+
+    public String toString()
+    {
+        return id;
     }
 }

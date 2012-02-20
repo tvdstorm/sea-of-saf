@@ -1,5 +1,7 @@
 package saf.syntax;
 
+import java.util.List;
+
 public class And extends BinaryOperation
 {
     public And(Evaluable left, Evaluable right)
@@ -7,9 +9,10 @@ public class And extends BinaryOperation
         super(left, right);
     }
 
-    public boolean evaluate(State current)
+    @Override
+    public boolean evaluate(List<State> situation)
     {
-        return getLeft().evaluate(current) && getRight().evaluate(current);
+        return getLeft().evaluate(situation) && getRight().evaluate(situation);
     }
 
     public String toString()
