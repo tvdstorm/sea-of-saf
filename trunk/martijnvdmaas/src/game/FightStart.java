@@ -4,7 +4,8 @@ import game.view.FightView;
 
 import javax.swing.UIManager;
 
-import astelements.Bots;
+import jsaf.astelements.Bots;
+
 
 public class FightStart {
 	

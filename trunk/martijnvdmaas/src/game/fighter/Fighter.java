@@ -2,7 +2,8 @@ package game.fighter;
 
 import java.util.List;
 
-import astelements.Behaviour;
+import jsaf.astelements.Behaviour;
+
 
 public class Fighter {
 

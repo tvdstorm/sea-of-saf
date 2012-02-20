@@ -9,6 +9,8 @@ import grammar.ParseException;
 
 import java.io.IOException;
 
+import jsaf.astelements.Bots;
+
 import main.Main;
 import main.Parser;
 
@@ -19,7 +21,6 @@ import org.jbehave.scenario.steps.Steps;
 
 import constants.SAFConstants;
 
-import astelements.Bots;
 
 public class GameSteps extends Steps
 {

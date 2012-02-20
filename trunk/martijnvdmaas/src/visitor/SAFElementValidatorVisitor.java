@@ -2,16 +2,17 @@ package visitor;
 
 import java.util.List;
 
+import jsaf.astelements.Behaviour;
+import jsaf.astelements.Bot;
+import jsaf.astelements.Bots;
+import jsaf.astelements.Characteristic;
+import jsaf.astelements.ConditionChoices;
+import jsaf.astelements.ConditionGroup;
+
 import logger.ErrorLog;
 
 import constants.SAFConstants;
 
-import astelements.Behaviour;
-import astelements.Bot;
-import astelements.Bots;
-import astelements.Characteristic;
-import astelements.ConditionChoices;
-import astelements.ConditionGroup;
 
 public class SAFElementValidatorVisitor implements SAFElementVisitor
 {

@@ -1,10 +1,10 @@
 package visitor;
 
-import astelements.Behaviour;
-import astelements.Bot;
-import astelements.Bots;
-import astelements.Characteristic;
-import astelements.ConditionGroup;
+import jsaf.astelements.Behaviour;
+import jsaf.astelements.Bot;
+import jsaf.astelements.Bots;
+import jsaf.astelements.Characteristic;
+import jsaf.astelements.ConditionGroup;
 
 public class SAFElementPrintVisitor implements SAFElementVisitor {
 
