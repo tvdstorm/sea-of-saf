@@ -7,7 +7,6 @@ public class Fighter implements ASTNode, IFighter {
 	private String name;
 	private Behaviour behaviour;
 	private Personality personality;
-	
 
 	public Fighter(String name, Personality personality, Behaviour behaviour) {
 		this.name = name;
@@ -17,14 +16,17 @@ public class Fighter implements ASTNode, IFighter {
 		personality.updateSpeed();
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public Behaviour getBehaviour() {
 		return behaviour;
 	}
 
+	@Override
 	public Personality getPersonality() {
 		return personality;
 	}

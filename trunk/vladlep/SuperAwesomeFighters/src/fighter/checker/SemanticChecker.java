@@ -100,8 +100,9 @@ public class SemanticChecker implements Visitor {
 	@Override
 	public void visit(Rule rule) {
 		rule.getCondition().accept(this);
-		// do not like this. Brakes encapsulation. But, should respect the pattern.
-		rule.getMoveActions().accept(this); 
+		// do not like this. Brakes encapsulation. But, should respect the
+		// pattern.
+		rule.getMoveActions().accept(this);
 		rule.getFightActions().accept(this);
 
 	}

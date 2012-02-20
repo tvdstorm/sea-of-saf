@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-02-19 20:37:16
+// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-02-20 00:13:39
 
 package reader.antlr;
 
@@ -66,9 +66,9 @@ public class SAFParser extends Parser {
 	// $ANTLR start "fighter"
 	// D:\\vlad\\serios\\master\\Software
 	// Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g:18:1:
-	// fighter returns [Bot bot] : IDENT '{' personality behaviour '}' ;
-	public final Bot fighter() throws RecognitionException {
-		Bot bot = null;
+	// fighter returns [Fighter fighter] : IDENT '{' personality behaviour '}' ;
+	public final Fighter fighter() throws RecognitionException {
+		Fighter fighter = null;
 
 		Token IDENT1 = null;
 		Personality personality2 = null;
@@ -97,7 +97,8 @@ public class SAFParser extends Parser {
 
 				state._fsp--;
 
-				bot = new Bot(IDENT1.getText(), personality2, behaviour3);
+				fighter = new Fighter(IDENT1.getText(), personality2,
+						behaviour3);
 
 				match(input, 22, FOLLOW_22_in_fighter94);
 
@@ -111,7 +112,7 @@ public class SAFParser extends Parser {
 		finally {
 			// do for sure before leaving
 		}
-		return bot;
+		return fighter;
 	}
 
 	// $ANTLR end "fighter"

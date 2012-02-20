@@ -1,6 +1,5 @@
 package fighter.algorithm;
 
-import fighter.action.ActionType;
 import fighter.action.FightActionType;
 import fighter.action.MoveActionType;
 
@@ -9,7 +8,7 @@ public class FighterState {
 	private int position;
 	private MoveActionType selectedMoveAction;
 	private FightActionType selectedFightAction;
-	// remainining time untill all actions are completed
+	// remaining time until all actions are completed
 	private int remainingTime;
 	private int health;
 
@@ -33,5 +32,13 @@ public class FighterState {
 
 	public int getPosition() {
 		return position;
+	}
+
+	public void setSelectedFightAction(FightActionType selectedFightAction) {
+		this.selectedFightAction = selectedFightAction;
+	}
+
+	public void setSelectedMoveAction(MoveActionType selectedMoveAction) {
+		this.selectedMoveAction = selectedMoveAction;
 	}
 }

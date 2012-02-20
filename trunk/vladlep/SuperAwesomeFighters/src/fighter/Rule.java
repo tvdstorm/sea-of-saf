@@ -29,16 +29,16 @@ public class Rule implements ASTNode {
 
 	public boolean checkCondition(List<ConditionType> acceptedConditions) {
 		return condition.testCondition(acceptedConditions);
-		
+
 	}
 
-	public ActionType getNextMoveAction() {
+	public MoveActionType getNextMoveAction() {
 		int index;
 		index = generatRandomIndex(moveActions.size());
 		return moveActions.get(index);
 	}
 
-	public ActionType getNextFightAction() {
+	public FightActionType getNextFightAction() {
 		int index;
 		index = generatRandomIndex(fightActions.size());
 		return fightActions.get(index);
