@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import nl.tamasja.uva.saf.fighter.FighterBot;
 import nl.tamasja.uva.saf.graphics.DrawFighter;
-import nl.tamasja.uva.saf.graphics.IFighterGraphics;
 import nl.tamasja.uva.saf.tree.ErrorMessage;
 import nl.tamasja.uva.saf.tree.FighterAstChecker;
 import nl.tamasja.uva.saf.tree.FighterAstLoader;

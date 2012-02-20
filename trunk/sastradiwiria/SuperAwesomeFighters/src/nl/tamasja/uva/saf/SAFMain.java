@@ -4,7 +4,9 @@ import javax.swing.JFrame;
 
 public class SAFMain extends JFrame {
 
-    public SAFMain() {
+	private static final long serialVersionUID = 1L;
+
+	public SAFMain() {
 
         add(new Game());
 

@@ -3,8 +3,6 @@ package nl.tamasja.uva.saf.fighter;
 import java.util.ArrayList;
 import java.util.List;
 
-import nl.tamasja.uva.saf.fighter.action.IBehaviourAction;
-
 public class Behaviour {
 	
 	private List<BehaviourRule> rules;
@@ -20,15 +18,15 @@ public class Behaviour {
 	}
 	
 	public void decideBehaviour(FighterBot self, FighterBot target) {
-		
-		 for(BehaviourRule rule : rules) {
-			 if(rule.evaluate(self)) {
-				 rule.execute(self);
-				 currentAction = rule;
-				 break;
+		if(target != null) {
+			 for(BehaviourRule rule : rules) {
+				 if(rule.evaluate(self)) {
+					 rule.execute(self);
+					 currentAction = rule;
+					 break;
+				 }
 			 }
-		 }
-
+		}
 	}
 
 	public BehaviourRule getCurrentRule() {

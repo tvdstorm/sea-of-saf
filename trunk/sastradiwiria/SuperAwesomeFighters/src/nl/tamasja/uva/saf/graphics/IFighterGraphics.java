@@ -30,15 +30,10 @@ public interface IFighterGraphics {
 	
 	public void legKickHigh(int range);
 	public void legKickLow(int range);
-	
-	//public void setArmReach(int range);
-	//public void setLegReach(int range);
 
 	public void move(int move);
 	
 	public void setDirection(int direction);
-	
-	//public void setName(String name);
 	
 	public int getWidth();
 	

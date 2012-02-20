@@ -4,19 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.text.DecimalFormat;
 
-import org.antlr.gunit.JUnitCodeGen;
-
 import nl.tamasja.uva.saf.fighter.FighterBot;
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Attack;
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Move;
 import nl.tamasja.uva.saf.fighter.SpecificationMapper.Strength;
-import nl.tamasja.uva.saf.fighter.actions.ActionBlockHigh;
-import nl.tamasja.uva.saf.fighter.actions.ActionBlockLow;
-import nl.tamasja.uva.saf.fighter.actions.ActionCrouch;
-import nl.tamasja.uva.saf.fighter.actions.ActionJump;
-import nl.tamasja.uva.saf.fighter.actions.ActionPunchHigh;
-import nl.tamasja.uva.saf.fighter.actions.ActionPunchLow;
-import nl.tamasja.uva.saf.fighter.actions.ActionStand;
 
 public class DrawFighter implements IFighterGraphics {
 	
@@ -32,12 +23,9 @@ public class DrawFighter implements IFighterGraphics {
 	
 	private int direction = 1;
 	
-	private Color color;
-	
+
 	private int fighterBodyHight = 50;
 	private int fighterY;
-	
-	private boolean test = false;
 	
 	private int width = 55;
 	Graphics g;
@@ -53,15 +41,9 @@ public class DrawFighter implements IFighterGraphics {
 	private boolean isHit = false;
 	
 	public DrawFighter(int y) {
-		//this.x = x;
 		this.y = y;
-
-		//if(flipDirection) this.direction = -this.direction;
-		
 		this.fighterY = y;
-		
 		this.xCenter = (headSize/2); 
-
 		this.drawColor = this.defaultColor;
 		
 	}
@@ -80,17 +62,12 @@ public class DrawFighter implements IFighterGraphics {
 		drawArms(attack,armReach);
 		drawLegs(attack,legReach);
 		
-		//name
-		//g.drawString(fighter.getName(), x+5, y+(headSize/2));		
-		
 		drawStringCenter(g,fighter.getName(), x, y-20);
 		
 		drawStringCenter(g,"P"+fighter.getPosition(), x, fighterY+2*fighterBodyHight+headSize+10);
 		
-		//int maxRectWidth = 50;
-		//int maxHealth = 100;
+
 		int currentHealth = fighter.getHealth();
-		//int maxHealth = 100;
 		int maxRectWidth = 50;
 		int rectWidth = fighter.getHealth()/2;
 		
@@ -110,8 +87,14 @@ public class DrawFighter implements IFighterGraphics {
 		
 		//Cooldown
 		drawStringCenter(g,""+twoDigit.format(fighter.getCooldown()), x, fighterY+2*fighterBodyHight+headSize+25);
-		drawStringCenter(g,""+move, x, fighterY+2*fighterBodyHight+headSize+40);
-		drawStringCenter(g,""+attack, x, fighterY+2*fighterBodyHight+headSize+55);
+		
+		//Actions are disabled for now
+		
+		//Current move action
+		//drawStringCenter(g,""+move, x, fighterY+2*fighterBodyHight+headSize+40);
+		
+		//Current Fight Action
+		//drawStringCenter(g,""+attack, x, fighterY+2*fighterBodyHight+headSize+55);
 		
 		
 		
@@ -123,13 +106,7 @@ public class DrawFighter implements IFighterGraphics {
 		 g.drawString(s, start + x, y);
 	}
 	
-	private void fillRectCenter(Graphics g, int x, int y, int width, int height) {
-		
-		//g.fillRect(x+15, y-15, maxRectWidth-30, 10);
-	}
-	
-	
-	
+
 	protected void setMovementHeight(Move move) {
 		y = fighterY;
 		setJump(move == Move.JUMP);
@@ -150,6 +127,7 @@ public class DrawFighter implements IFighterGraphics {
 		} else {
 			armNormal();
 		}
+		
 		//other arm
 		g.drawLine(x+xCenter, y+headSize+armConnectionOffset, x+xCenter-10*direction, y+headSize+40);
 	}
