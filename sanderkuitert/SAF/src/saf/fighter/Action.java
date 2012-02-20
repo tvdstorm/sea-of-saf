@@ -38,7 +38,7 @@ class Action implements AST {
 		Move move = moves.get(new Random().nextInt(moves.size()));
 		Attack attack = attacks.get(new Random().nextInt(attacks.size()));
 		
-		int moveSteps = 1; 			//TODO include moveSteps in new ActionEffect
+		int moveSteps = 1; 			//TODO include moveFrames in new ActionEffect
 		double moveDistance = 10.0; //TODO include moveDistance in new ActionEffect
 		
 		return new Fighter.ActionEffect(attack.getName(), attack.getPhysicalEffect(properties), 
