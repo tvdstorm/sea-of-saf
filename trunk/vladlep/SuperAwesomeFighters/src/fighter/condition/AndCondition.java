@@ -2,6 +2,7 @@ package fighter.condition;
 
 import fighter.ASTNode;
 import fighter.checker.Visitor;
+import java.util.List;
 
 public class AndCondition implements ICondition, ASTNode {
 
@@ -14,10 +15,10 @@ public class AndCondition implements ICondition, ASTNode {
 	}
 
 	@Override
-	public boolean testCondition() {
-		return firstCondition.testCondition()
-				&& secondCondition.testCondition();
-	}
+	public boolean testCondition(List<ConditionType> acceptedConditions) {
+		return firstCondition.testCondition(acceptedConditions)
+				&& secondCondition.testCondition(acceptedConditions);
+	};
 
 	@Override
 	public void accept(Visitor visitor) {

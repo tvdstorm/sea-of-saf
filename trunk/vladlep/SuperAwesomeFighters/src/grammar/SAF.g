@@ -15,11 +15,11 @@ package reader.antlr;
 package reader.antlr;
 }
 
-fighter returns [Bot bot]
+fighter returns [Fighter fighter]
   :
   IDENT '{' personality behaviour 
                                   {
-                                   bot = new Bot($IDENT.getText(), $personality.personality, $behaviour.behaviour);                  
+                                   fighter = new Fighter($IDENT.getText(), $personality.personality, $behaviour.behaviour);                  
                                   }
   '}'
   ;

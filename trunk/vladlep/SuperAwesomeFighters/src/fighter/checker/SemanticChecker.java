@@ -5,13 +5,12 @@ import java.util.List;
 
 import main.Config;
 import fighter.Behaviour;
-import fighter.Bot;
+import fighter.Fighter;
 import fighter.Personality;
 import fighter.Rule;
 import fighter.action.ActionType;
 import fighter.action.Actions;
 import fighter.condition.AndCondition;
-import fighter.condition.ICondition;
 import fighter.condition.OrCondition;
 import fighter.condition.SimpleCondition;
 import fighter.messages.Error;
@@ -22,8 +21,8 @@ public class SemanticChecker implements Visitor {
 
 	private static List<Message> messageList = null;
 
-	public static List<Message> checkBot(Bot bot) {
-		bot.accept(new SemanticChecker());
+	public static List<Message> checkFighter(Fighter fighter) {
+		fighter.accept(new SemanticChecker());
 		return messageList;
 	}
 
@@ -34,31 +33,22 @@ public class SemanticChecker implements Visitor {
 	}
 
 	@Override
-	public void visit(Bot bot) {
-		bot.getBehaviour().accept(this);
-		bot.getPersonality().accept(this);
+	public void visit(Fighter fighter) {
+		fighter.getBehaviour().accept(this);
+		fighter.getPersonality().accept(this);
 	}
 
 	@Override
 	public void visit(Behaviour behaviour) {
-		boolean isAlways = false;
 		for (Rule rule : behaviour) {
 			rule.accept(this);
-			ICondition condition = rule.getCondition();
-			if (condition.equals("always")) {
-				isAlways = true;
-			}
 
-		}
-		if (isAlways == false) {
-			messageList.add(new Error("No always rule for fighter behaviour."));
 		}
 
 	}
 
 	@Override
 	public void visit(Personality personality) {
-		System.out.println("in pers");
 		if (personality.getKickPower() > Config.MAX_STRENGTH) {
 			messageList.add(new Error("Kick Power exceeds uper limit"));
 		}
@@ -90,7 +80,6 @@ public class SemanticChecker implements Visitor {
 		if (personality.getPunchReach() < Config.MIN_STRENGTH) {
 			messageList.add(new Error("Punch Reach exceeds lower limit"));
 		}
-		System.out.println("out pers");
 	}
 
 	@Override
@@ -111,7 +100,8 @@ public class SemanticChecker implements Visitor {
 	@Override
 	public void visit(Rule rule) {
 		rule.getCondition().accept(this);
-		rule.getMoveActions().accept(this);
+		// do not like this. Brakes encapsulation. But, should respect the pattern.
+		rule.getMoveActions().accept(this); 
 		rule.getFightActions().accept(this);
 
 	}

@@ -1,7 +1,7 @@
 package fighter.checker;
 
 import fighter.Behaviour;
-import fighter.Bot;
+import fighter.Fighter;
 import fighter.Personality;
 import fighter.Rule;
 import fighter.action.Actions;
@@ -11,7 +11,7 @@ import fighter.condition.SimpleCondition;
 
 public interface Visitor {
 
-	public void visit(Bot bot);
+	public void visit(Fighter fighter);
 
 	public void visit(Personality personality);
 

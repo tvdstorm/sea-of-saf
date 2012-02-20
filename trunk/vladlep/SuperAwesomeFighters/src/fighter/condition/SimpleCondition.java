@@ -1,5 +1,7 @@
 package fighter.condition;
 
+import java.util.List;
+
 import fighter.ASTNode;
 import fighter.checker.Visitor;
 
@@ -11,9 +13,10 @@ public class SimpleCondition implements ICondition, ASTNode {
 		this.condition = ConditionType.valueOf(cond);
 	}
 
-	// TODO think what to test based on the upper algorithm
 	@Override
-	public boolean testCondition() {
+	public boolean testCondition(List<ConditionType> acceptedConditions) {
+		if(acceptedConditions.contains(condition))
+			return true;
 		return false;
 	}
 
@@ -26,5 +29,13 @@ public class SimpleCondition implements ICondition, ASTNode {
 	@Override
 	public String toString() {
 		return condition.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ICondition)
+			if (toString().equals(obj))
+				return true;
+		return false;
 	}
 }

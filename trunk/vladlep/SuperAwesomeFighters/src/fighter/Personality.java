@@ -9,6 +9,8 @@ public class Personality implements ASTNode {
 	private int punchPower;
 	private int kickReach;
 	private int kickPower;
+	private double speed;
+	private double power;
 
 	public Personality() {
 		punchPower = Config.DEFAULT_STRENGTH;
@@ -55,4 +57,23 @@ public class Personality implements ASTNode {
 
 	}
 
+	public void updateSpeed() {
+		double power;
+		double reach;
+		power = 0.5 * (punchPower - kickPower) ;
+		reach = 0.5 * (punchReach - kickReach);
+		speed = Math.abs(0.5 * (power - reach));
+	}
+
+	public void updatePower() {
+		power = 0.5 * (punchPower - kickPower) ;
+	}
+
+	public double getPower() {
+		return power;
+	}
+	
+	public double getSpeed() {
+		return speed;
+	}
 }
