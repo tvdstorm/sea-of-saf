@@ -1,13 +1,14 @@
 package astelements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import visitor.SAFElement;
 import visitor.SAFElementVisitor;
 
 public class ConditionGroup implements SAFElement
 {
-	private ArrayList<String> conditionTypes;
+	private List<String> conditionTypes;
 	
 	public ConditionGroup() 
 	{
@@ -31,12 +32,12 @@ public class ConditionGroup implements SAFElement
 		return "        Class: " + this.getClass().getName() + "\n" + output + "\n";
 	}
 	
-	public ArrayList<String> getConditionTypes() 
+	public List<String> getConditionTypes() 
 	{
 		return conditionTypes;
 	}
 
-	public void setConditionTypes(ArrayList<String> conditionTypes) 
+	public void setConditionTypes(List<String> conditionTypes) 
 	{
 		this.conditionTypes = conditionTypes;
 	}

@@ -38,6 +38,12 @@ public class GameSteps extends Steps
 		fightEngine = new FightEngine(bots);
 
 	}
+	
+	@When("I start a game")
+	public void iStartAGame()
+	{
+		//fightEngine = new FightEngine(bots);
+	}
 
 	@When("I click on next step")
 	public void iClickOnNextStep()
@@ -88,12 +94,6 @@ public class GameSteps extends Steps
 		rightBot = bots.getSecondBot().getBotName();
 	}
 
-	@When("I start a game")
-	public void iStartAGame()
-	{
-		fightEngine = new FightEngine(bots);
-	}
-
 	@When("I play till the game is finished")
 	public void playTillTheGameIsFinished()
 	{
@@ -116,6 +116,7 @@ public class GameSteps extends Steps
 	public void anUnbeatableFighterFileWithValue(String name) throws ParseException, IOException
 	{
 		bots = new Parser(Main.getRelativeProjectPath() + "input\\" + name).getBots();
+		fightEngine = new FightEngine(bots);
 	}
 
 	@Given("the name of the unbeatable player is $value")

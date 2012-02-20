@@ -17,7 +17,6 @@ public interface SAFConstants {
 	public static final int MAX_HEALTH 					= 100;
 	public static final int MUCH_WEAKER_AMOUNT 			= 15;
 	
-	
 	/* Fighter constants */
 	
 	public static final String CONDITION_TYPE_ALWAYS 			= "always"; 

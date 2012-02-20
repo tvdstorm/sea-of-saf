@@ -19,14 +19,6 @@ public class Characteristic implements SAFElement
 		this.value 	= value;
 	}
 	
-	public String toString() 
-	{
-		String output 	 = "      Name: " + this.name + "\n";
-		output 			+= "      Value: " + this.value;
-		
-		return "    Class: " + this.getClass().getName() + "\n" +  output + "\n";
-	}
-	
 	public String getName() 
 	{
 		return name;

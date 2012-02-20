@@ -1,14 +1,15 @@
 package astelements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import visitor.SAFElement;
 import visitor.SAFElementVisitor;
 
 public class Bot implements SAFElement
 {
-	private ArrayList<Characteristic> characteristics 	= new ArrayList<Characteristic>();
-	private ArrayList<Behaviour> behaviours 			= new ArrayList<Behaviour>();
+	private List<Characteristic> characteristics 	= new ArrayList<Characteristic>();
+	private List<Behaviour> behaviours 				= new ArrayList<Behaviour>();
 	
 	private String botName = new String();
 
@@ -29,22 +30,22 @@ public class Bot implements SAFElement
 		return output;
 	}
 	
-	public ArrayList<Characteristic> getCharacteristics() 
+	public List<Characteristic> getCharacteristics() 
 	{
 		return characteristics;
 	}
 	
-	public void setCharacteristics(ArrayList<Characteristic> characteristics) 
+	public void setCharacteristics(List<Characteristic> characteristics) 
 	{
 		this.characteristics = characteristics;
 	}
 	
-	public ArrayList<Behaviour> getBehaviours() 
+	public List<Behaviour> getBehaviours() 
 	{
 		return behaviours;
 	}
 	
-	public void setBehaviours(ArrayList<Behaviour> behaviours) 
+	public void setBehaviours(List<Behaviour> behaviours) 
 	{
 		this.behaviours = behaviours;
 	}

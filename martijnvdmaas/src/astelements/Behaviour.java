@@ -1,6 +1,7 @@
 package astelements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import visitor.SAFElement;
 import visitor.SAFElementVisitor;
@@ -9,8 +10,8 @@ public class Behaviour implements SAFElement
 {
 	private ConditionChoices conditionChoices;
 
-	private ArrayList<String>  moveChoices;
-	private ArrayList<String> attackChoices;
+	private List<String>  moveChoices;
+	private List<String> attackChoices;
 	
 	public Behaviour() 
 	{
@@ -28,26 +29,6 @@ public class Behaviour implements SAFElement
 		this.attackChoices.add(attackChoice);
 	}
 	
-	public String toString() 
-	{
-		String output = "";
-		
-		String moves = "";
-		for(String moveChoice : moveChoices) 
-		{
-			moves += moves == "" ? "      Moves: " + moveChoice : " or " + moveChoice;
-		}
-
-		String attacks = "";
-		for(String attackChoice : attackChoices) 
-		{
-			attacks += attacks == "" ? "      Attacks: " + attackChoice : " or " + attackChoice;
-		}
-		output += moves + "\n";
-		output += attacks + "\n";
-		return "    Class: " + this.getClass().getName() + "\n" + output;
-	}
-	
 	public ConditionChoices getConditionChoices() 
 	{
 		return conditionChoices;
@@ -58,22 +39,22 @@ public class Behaviour implements SAFElement
 		this.conditionChoices = conditionChoices;
 	}
 	
-	public ArrayList<String> getMoveChoices() 
+	public List<String> getMoveChoices() 
 	{
 		return moveChoices;
 	}
 
-	public void setMoveChoices(ArrayList<String> moveChoices) 
+	public void setMoveChoices(List<String> moveChoices) 
 	{
 		this.moveChoices = moveChoices;
 	}
 
-	public ArrayList<String> getAttackChoices() 
+	public List<String> getAttackChoices() 
 	{
 		return attackChoices;
 	}
 
-	public void setAttackChoices(ArrayList<String> attackChoices) 
+	public void setAttackChoices(List<String> attackChoices) 
 	{
 		this.attackChoices = attackChoices;
 	}
