@@ -1,0 +1,12 @@
+Scenario: Only one player is given
+
+Given an incorrect SAF file with value onePlayer.saf
+When I parse the file
+Then there should be a parse error
+
+Scenario: Valid input is given
+
+Given a correct SAF file with value validInput.saf
+When I parse the file
+Then the left player should be initialized
+And the right player should be initialized
