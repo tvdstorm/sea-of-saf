@@ -16,6 +16,16 @@ public class CheckLog
 
     public String toString()
     {
-        return messages.toString();
+        if (messages.size() == 0)
+        {
+            return "No messages.";
+        }
+
+        String log = "";
+        for (Message message : messages)
+        {
+            log.concat(message + "\n");
+        }
+        return log;
     }
 }

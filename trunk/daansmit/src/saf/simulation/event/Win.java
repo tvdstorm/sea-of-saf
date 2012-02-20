@@ -5,14 +5,17 @@ import saf.visualization.Visualizer;
 
 public class Win extends Event
 {
-    private final Instance subject;
+    private final Instance winner;
+    private final Instance loser;
 
-    public Win(Instance subject)
+    public Win(Instance winner, Instance loser)
     {
-        this.subject = subject;
+        this.winner = winner;
+        this.loser = loser;
     }
 
-    public Instance getSubject() { return subject; }
+    public Instance getWinner() { return winner; }
+    public Instance getLoser() { return loser; }
 
     @Override
     public void visualize(Visualizer visualizer)

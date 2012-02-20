@@ -57,7 +57,8 @@ SIMULATION_EVENT_SOURCES=src/saf/simulation/event/ChangeHealth.java \
 
 VISUALIZATION_SOURCES=src/saf/visualization/Visualizer.java \
 	src/saf/visualization/GraphicalVisualizer.java \
-	src/saf/visualization/TextVisualizer.java \
+	src/saf/visualization/SimpleTextVisualizer.java \
+	src/saf/visualization/CompleteTextVisualizer.java \
 	src/saf/visualization/Sprite.java \
 	src/saf/visualization/MirrorImageIcon.java
 

@@ -1,0 +1,12 @@
+Clown {
+      kickPower = 4
+      punchPower = 10
+      kickReach = 4
+      punchReach = 6
+
+      far and stronger or far and much_stronger [run_towards block_low]
+      far and stronger or far and much_stronger [run_towards block_high]
+      near and weaker [walk_towards choose(punch_high punch_low)]
+      near and much_weaker [walk_towards choose(punch_high punch_low)]
+      always [run_towards choose(punch_high punch_low)]
+}
