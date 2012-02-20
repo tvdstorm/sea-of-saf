@@ -89,6 +89,11 @@ public class GraphicalVisualizer extends JFrame implements Visualizer, ImageSet
     }
 
     @Override
+    public void visualize(Draw draw)
+    {
+    }
+
+    @Override
     public void visualize(Hit hit)
     {
     }

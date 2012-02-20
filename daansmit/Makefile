@@ -52,7 +52,8 @@ SIMULATION_EVENT_SOURCES=src/saf/simulation/event/ChangeHealth.java \
 	src/saf/simulation/event/PunchHigh.java \
 	src/saf/simulation/event/Block.java \
 	src/saf/simulation/event/Win.java \
-	src/saf/simulation/event/Hit.java
+	src/saf/simulation/event/Hit.java \
+	src/saf/simulation/event/Draw.java
 
 VISUALIZATION_SOURCES=src/saf/visualization/Visualizer.java \
 	src/saf/visualization/GraphicalVisualizer.java \

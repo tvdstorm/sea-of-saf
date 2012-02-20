@@ -4,8 +4,6 @@ public interface ImageSet
 {
     public static final String ROOT = "saf/visualization/images/";
     
-    public static final String BACKGROUND = (ROOT + "background.gif");
-
     public static final String CROUCH = (ROOT + "crouch.gif");
     public static final String CROUCH_BLOCK_HIGH = (ROOT + "crouch_block_high.gif");
     public static final String CROUCH_BLOCK_LOW = (ROOT + "crouch_block_low.gif");

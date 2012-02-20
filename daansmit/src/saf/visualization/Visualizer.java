@@ -10,7 +10,9 @@ public interface Visualizer
     public void visualize(BlockLow blockLow);
     public void visualize(ChangeHealth changeHealth);
     public void visualize(Crouch crouch);
+    public void visualize(Draw draw);
     public void visualize(Hit hit);
+    public void visualize(Init init);
     public void visualize(Jump jump);
     public void visualize(KickHigh kickHigh);
     public void visualize(KickLow kickLow);
