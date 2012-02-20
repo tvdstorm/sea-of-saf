@@ -28,7 +28,7 @@ public class Game extends JPanel implements Runnable {
         CreateFighterBot fighterBotCreator = new CreateFighterBot();
         
         FighterBot fighterBot1 = fighterBotCreator.loadFighterFile("bots/here2win.saf");
-        FighterBot fighterBot2 = fighterBotCreator.loadFighterFile("bots/here2win.saf");
+        FighterBot fighterBot2 = fighterBotCreator.loadFighterFile("bots/JackieChan.saf");
         
         
         if(fighterBot1 != null && fighterBot2 != null) {
