@@ -1,0 +1,6 @@
+- Clean grammar
+- Visitor pattern for validating elements
+- Apart ErrorLog file
+- SAF Constants and Error Constants in interfaces
+- Model-view-controller pattern for global architecture using observer
+- BDD/JBehave as development method
