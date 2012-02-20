@@ -44,7 +44,6 @@ public class Bot extends Observable implements Observer
 		return fighter;
 	}
 	
-	// hmmm, this is too bad...
 	private int punchReach = 5;
 	
 	@MethodAnnotation(safName = "punchReach", keywordType = "setStrength")
