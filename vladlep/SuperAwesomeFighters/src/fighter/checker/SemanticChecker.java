@@ -6,6 +6,7 @@ import java.util.List;
 import main.Config;
 import fighter.Behaviour;
 import fighter.Fighter;
+import fighter.IFighter;
 import fighter.Personality;
 import fighter.Rule;
 import fighter.action.ActionType;
@@ -21,7 +22,7 @@ public class SemanticChecker implements Visitor {
 
 	private static List<Message> messageList = null;
 
-	public static List<Message> checkFighter(Fighter fighter) {
+	public static List<Message> checkFighter(IFighter fighter) {
 		fighter.accept(new SemanticChecker());
 		return messageList;
 	}

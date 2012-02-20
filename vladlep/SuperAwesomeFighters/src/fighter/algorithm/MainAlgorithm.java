@@ -1,17 +1,21 @@
 package fighter.algorithm;
 
-import main.Config;
 import fighter.IFighter;
 import fighter.condition.ConditionType;
 
 public class MainAlgorithm {
 
+	public static final int direction = 1;
 	private FighterDescription leftFighterDesc;
 	private FighterDescription rightFighterDesc;
 
 	public void setUpFight(IFighter leftFighter, IFighter rightFighter) {
-		leftFighterDesc = new FighterDescription(leftFighter);
-		rightFighterDesc = new FighterDescription(rightFighter);
+		leftFighterDesc = new FighterDescription(leftFighter,
+				BattleConstants.leftFighterStartPositionX,
+				BattleConstants.groundPositionY, direction);
+		rightFighterDesc = new FighterDescription(rightFighter,
+				BattleConstants.rightFighterStartPositionX,
+				BattleConstants.groundPositionY, -direction);
 		leftFighterDesc.updateAcceptedPowerCond(rightFighter.getPersonality());
 		rightFighterDesc.updateAcceptedPowerCond(leftFighter.getPersonality());
 	}
@@ -20,7 +24,8 @@ public class MainAlgorithm {
 		int fightersDistance;
 		do {
 			// select next move phase
-			fightersDistance = calculateFigterDistance();
+			fightersDistance = leftFighterDesc
+					.calculateFigterDistance(rightFighterDesc.getFighterState());
 			updateDistanceConditions(fightersDistance);
 
 			leftFighterDesc.calculateNextMove();
@@ -34,7 +39,7 @@ public class MainAlgorithm {
 	}
 
 	private void updateDistanceConditions(int distance) {
-		if (distance < Config.farDistanceThreshold) {
+		if (distance < BattleConstants.farDistanceThreshold) {
 			leftFighterDesc.updateDistAcceptedCond(ConditionType.near);
 			rightFighterDesc.updateDistAcceptedCond(ConditionType.near);
 		} else {
@@ -44,11 +49,4 @@ public class MainAlgorithm {
 
 	}
 
-	private int calculateFigterDistance() {
-		int firstPos = rightFighterDesc.getFighterState().getPosition();
-		int secondPos = leftFighterDesc.getFighterState().getPosition();
-
-		return Math.abs(firstPos - secondPos);
-
-	}
 }
