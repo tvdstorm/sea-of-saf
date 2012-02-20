@@ -65,7 +65,7 @@ public class Main {
 			public void run() {
 				MainWindow mainWindow = new MainWindow(simulator, renderer);
 				mainWindow.setVisible(true);
-				renderer.start();
+				renderer.start(true);
 			}
 		});
 

@@ -5,8 +5,11 @@ import java.awt.Dimension;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
+import nl.uva.saf.simulation.FightEndEvent;
+import nl.uva.saf.simulation.IFightEndEventListener;
 import nl.uva.saf.simulation.IFightSimulator;
 import nl.uva.saf.simulation.IRenderer;
 
@@ -18,13 +21,15 @@ import java.awt.event.WindowListener;
 import java.awt.BorderLayout;
 import java.awt.event.WindowEvent;
 
-public class MainWindow extends JFrame implements WindowListener {
+public class MainWindow extends JFrame implements WindowListener, IFightEndEventListener {
 	private static final long serialVersionUID = 8456781004070435366L;
 	private final IFightSimulator fightSimulator;
 	private RenderSurface rendereSurface;
 
 	public MainWindow(IFightSimulator simulator, IRenderer renderer) {
-		this.fightSimulator = simulator;
+		fightSimulator = simulator;
+		
+		fightSimulator.addEventListener(this);
 
 		setSize(new Dimension(854, 480));
 		setPreferredSize(new Dimension(854, 480));
@@ -41,10 +46,9 @@ public class MainWindow extends JFrame implements WindowListener {
 		menuBar.add(mnFile);
 
 		JMenuItem mntmNewFight = new JMenuItem("New Fight");
-		mntmNewFight.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-				InputEvent.CTRL_MASK));
+		mntmNewFight.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
 		mnFile.add(mntmNewFight);
-		
+
 		JMenuItem mntmStopFight = new JMenuItem("Stop Fight");
 		mntmStopFight.addMouseListener(new MouseAdapter() {
 			@Override
@@ -52,7 +56,7 @@ public class MainWindow extends JFrame implements WindowListener {
 				fightSimulator.stop();
 			}
 		});
-		
+
 		JMenuItem mntmRestartFight = new JMenuItem("Restart Fight");
 		mntmRestartFight.addMouseListener(new MouseAdapter() {
 			@Override
@@ -79,8 +83,7 @@ public class MainWindow extends JFrame implements WindowListener {
 			}
 		});
 
-		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4,
-				InputEvent.ALT_MASK));
+		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, InputEvent.ALT_MASK));
 		mnFile.add(mntmExit);
 
 		rendereSurface = new RenderSurface(renderer);
@@ -117,5 +120,17 @@ public class MainWindow extends JFrame implements WindowListener {
 
 	@Override
 	public void windowOpened(WindowEvent event) {
+	}
+
+	@Override
+	public void fightEnd(FightEndEvent e) {
+		String message = "The fight has ended.";
+		if (e.getWinner() != null) {
+			message += " And the winner is......." + e.getWinner().getName() + "!";
+		} else {
+			message += " There is no winner.";
+		}
+		
+		JOptionPane.showMessageDialog(this, message, "End of fight", JOptionPane.PLAIN_MESSAGE);
 	}
 }

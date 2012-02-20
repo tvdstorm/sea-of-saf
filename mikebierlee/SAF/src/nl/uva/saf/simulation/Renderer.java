@@ -53,7 +53,7 @@ public class Renderer implements IRenderer {
 
 	private volatile Dimension drawArea;
 
-	private final Thread renderThread;
+	private Thread renderThread;
 
 	/**
 	 * Creates a new render thread which is tasked to updating the appointed
@@ -73,9 +73,6 @@ public class Renderer implements IRenderer {
 		this.simulator = simulator;
 
 		loadContent();
-
-		renderThread = new Thread(this);
-		renderThread.setName("Renderer");
 	}
 
 	private void loadContent() {
@@ -151,6 +148,13 @@ public class Renderer implements IRenderer {
 		}
 	}
 
+	@Override
+	public void redraw() {
+		if (surface != null) {
+			surface.repaint();
+		}
+	}
+
 	/**
 	 * Binds a component to this renderer, allowing it to render on it. You can
 	 * only bind when the renderer is not active.
@@ -160,7 +164,7 @@ public class Renderer implements IRenderer {
 	 */
 	@Override
 	public void bindRenderSurface(JComponent surface) throws ConcurrentModificationException {
-		if (renderThread.isAlive()) {
+		if (renderThread != null && renderThread.isAlive()) {
 			throw new ConcurrentModificationException();
 		}
 
@@ -297,15 +301,28 @@ public class Renderer implements IRenderer {
 	}
 
 	@Override
-	public void start() {
+	public void start(boolean threaded) {
 		stopRunning = false;
-		renderThread.start();
+
+		if (threaded) {
+			if (renderThread == null) {
+				renderThread = new Thread(this);
+				renderThread.setName("Renderer");
+			}
+
+			renderThread.start();
+		}
 	}
 
 	@Override
 	public void stop() {
 		stopRunning = true;
-		renderThread.interrupt();
+
+		if (renderThread != null) {
+			renderThread.interrupt();
+		}
+
+		renderThread = null;
 	}
 
 	@Override
@@ -315,7 +332,9 @@ public class Renderer implements IRenderer {
 
 	@Override
 	public void join() throws InterruptedException {
-		renderThread.join();
+		if (renderThread != null) {
+			renderThread.join();
+		}
 	}
 
 	@Override

@@ -24,19 +24,63 @@ import java.util.ConcurrentModificationException;
 import javax.swing.JComponent;
 
 public interface IRenderer extends Runnable {
+	/**
+	 * Draw state onto supplied graphics object. This function is typically
+	 * called by the render surface when it receives a command/event to redraw.
+	 * 
+	 * @param g
+	 *            Reference the graphics object of the surface..
+	 */
 	public void draw(Graphics g);
 
+	/**
+	 * Bind a Swing component to this render to allow it to draw on it. This
+	 * function should not be called when the renderer is started.
+	 * 
+	 * @param surface
+	 *            Component serving as render surface.
+	 * @throws ConcurrentModificationException
+	 *             Thrown when the renderer is running threaded and is currently
+	 *             rendering.
+	 */
 	public void bindRenderSurface(JComponent surface) throws ConcurrentModificationException;
 
 	public void unbindRenderSurface();
 
-	public void start();
+	/**
+	 * Allow the renderer to draw.
+	 * 
+	 * @param threaded
+	 *            Set whether the renderer should use its internal threading
+	 *            mechanism to defer rendering to a different thread. If set to
+	 *            false you will have to render using redraw().
+	 */
+	public void start(boolean threaded);
 
 	public void stop();
 
+	/**
+	 * If this renderer run threaded, this method will synchronize the calling
+	 * thread. If not, this method does nothing.
+	 * 
+	 * @throws InterruptedException
+	 *             Thrown when the render thread is interrupted.
+	 */
 	public void join() throws InterruptedException;
 
+	/**
+	 * Update the size of the drawing area, making it the same as the size of
+	 * the bound render surface.
+	 * 
+	 */
 	public void updateDrawArea();
 
 	public JComponent getSurface();
+
+	/**
+	 * Force a manual redraw of the renderer. Mainly used when handling the
+	 * render loop outside of the renderer.
+	 * 
+	 */
+	public void redraw();
 }
