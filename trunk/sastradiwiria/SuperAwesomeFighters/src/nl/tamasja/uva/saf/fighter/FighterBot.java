@@ -161,7 +161,7 @@ public class FighterBot {
 		}
 		
 		if(damage > 0 && block == strikeHeight) {
-			damage = Math.max(damage - getPower(),0);
+			damage = Math.max(damage - (getPower()*2),0);
 		}
 		
 		takeDamage(damage);

@@ -12,6 +12,7 @@ public class SAFMain extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1300, 500);
+        setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Super Awesome Fighters");
         setVisible(true);
