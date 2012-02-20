@@ -1,3 +1,8 @@
+Narrative:
+In order to run the game properly
+As a user
+I want to check whether the game performs as expected with certain variables
+
 Scenario: each player makes a move after taking a step
 
 Given two random players from the input file validInput.saf

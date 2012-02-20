@@ -1,0 +1,24 @@
+Narrative:
+In order to check whether the parser is working properly
+As a development team
+I want to test the parser with certain conditions
+
+Scenario: Only one player is given
+
+Given a SAF file with value onePlayer.saf
+When I parse the file
+Then there should be a parse error
+
+Scenario: a player is given with wrong a characteristic 
+
+Given a SAF file with value wrongCharacteristic.saf
+When I parse the file
+Then there  should be a parse error
+
+
+Scenario: Valid input is given
+
+Given a SAF file with value validInput.saf
+When I parse the file
+Then the left player should be initialized
+And the right player should be initialized

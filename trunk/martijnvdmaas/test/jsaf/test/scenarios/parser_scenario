@@ -1,12 +1,23 @@
+Narrative:
+In order to check whether files are parsed properly
+As a development team
+I want to test the parser with certain conditions
+
 Scenario: Only one player is given
 
-Given an incorrect SAF file with value onePlayer.saf
+Given a SAF fighter file with value onePlayer.saf
+When I parse the file
+Then there should be a parse error
+
+Scenario: There is a syntax error in the input file
+
+Given a SAF fighter file with value incorrectSyntax.saf
 When I parse the file
 Then there should be a parse error
 
 Scenario: Valid input is given
 
-Given a correct SAF file with value validInput.saf
+Given a SAF fighter file with value validInput.saf
 When I parse the file
 Then the left player should be initialized
 And the right player should be initialized
