@@ -2,9 +2,7 @@ package saf.ast.definition;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import saf.ast.ASTNode;
-import saf.ast.FighterVisitor;
 
 public abstract class Procedure implements ASTNode {
 	private List<Procedure> procedures;
