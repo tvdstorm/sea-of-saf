@@ -12,69 +12,51 @@ import saf.simulation.Simulation;
 import saf.simulation.event.Event;
 import saf.syntax.Fighter;
 import saf.visualization.Visualizer;
-import saf.visualization.TextVisualizer;
+import saf.visualization.SimpleTextVisualizer;
+import saf.visualization.CompleteTextVisualizer;
 import saf.visualization.GraphicalVisualizer;
 
 public class Main
 {
     public static void main(String[] args)
-        throws RecognitionException, java.io.IOException, InterruptedException
+        throws RecognitionException, InterruptedException
     {
-        for (String s : args)
-        {
-            Fighter fighter = SAFParser.parseFromFile(s);
-            System.out.println(fighter.toString());
-            CheckLog checklog = new CheckLog();
-            fighter.check(checklog);
-            System.out.println(checklog.toString());
-            System.out.println("");
-        }
-        List<Fighter> fighters = new ArrayList<Fighter>();
+        Fighter left;
+        Fighter right;
 
-        fighters.add(SAFParser.parseFromString("monkey {\n" +
-                                               "mounthsize=12\n" +
-                                               "always [run_towards kick_high]\n" +
-                                               "}"));
-        // fighters.add(SAFParser.parseFromString("WithoutEmpty {\n" + 
-        //                                        "punchReach=6\n" +
-        //                                        "near [crouch block_high]\n" + 
-        //                                        "}"));
-
-        for (Fighter fighter : fighters)
+        if (args.length < 2)
         {
-            System.out.println(fighter.toString());
-            CheckLog checklog = new CheckLog();
-            fighter.check(checklog);
-            System.out.println(checklog.toString());
-            System.out.println("");
+            System.out.println("ERROR: Not enough fighters!");
+            return;
         }
 
-        // Fighter left = SAFParser.parseFromString("chicken { "
-        //                                          + "punchPower=1 "
-        //                                          + "kickPower=1 "
-        //                                          + "near [run_away block_low] "
-        //                                          + "always [crouch block_low] "
-        //                                          + "}");
+        try
+        {
+            left = SAFParser.parseFromFile(args[0]);
+            right = SAFParser.parseFromFile(args[1]);
+        }
+        catch (java.io.IOException e)
+        {
+            System.out.println("ERROR: Invalid fighter file(s)!");
+            return;
+        }
 
-        Fighter left = SAFParser.parseFromFile("../data/JackieChan.saf");
-        CheckLog log = new CheckLog();
-        left.check(log);
-        System.out.println(log.toString());
-        System.out.println("");
+        CheckLog leftLog = new CheckLog();
+        left.check(leftLog);
+        CheckLog rightLog = new CheckLog();
+        right.check(rightLog);
 
-        Fighter right = SAFParser.parseFromString("default { "
-                                                  + "far [run_towards punch_high] "
-                                                  + "near [crouch kick_low] "
-                                                  + "always [jump kick_high] "
-                                                  + "}");
+        System.out.println("LEFT:\n" + leftLog);
+        System.out.println("RIGHT:\n" + rightLog);
 
-        log = new CheckLog();
-        right.check(log);
-        System.out.println(log.toString());
-        System.out.println("");
+        fight(left, right);
+    }
 
+    public static void fight(Fighter left, Fighter right)
+        throws InterruptedException
+    {
         Simulation s = new Simulation(left, right);
-        Visualizer text = new TextVisualizer();
+        Visualizer text = new SimpleTextVisualizer();
         Visualizer graphics = new GraphicalVisualizer();
         Thread thread = Thread.currentThread();
 
@@ -85,7 +67,7 @@ public class Main
                 e.visualize(text);
                 e.visualize(graphics);
             }
-            thread.sleep(25);
-        }
+            thread.sleep(30);
+        }        
     }
 }

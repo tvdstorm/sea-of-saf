@@ -218,8 +218,8 @@ public class GraphicalVisualizer extends JFrame implements Visualizer, ImageSet
     @Override
     public void visualize(Stand stand)
     {
-        // Sprite sprite = fighters.get(stand.getSubject());
-        // sprite.setImage(STAND);
+        Sprite sprite = fighters.get(stand.getSubject());
+        sprite.setImage(STAND);
     }
 
     @Override
@@ -230,5 +230,8 @@ public class GraphicalVisualizer extends JFrame implements Visualizer, ImageSet
     @Override
     public void visualize(Win win)
     {
+        Instance loser = win.getLoser();
+        Sprite sprite = fighters.get(loser);
+        sprite.setImage(DEAD);
     }
 }

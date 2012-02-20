@@ -6,6 +6,7 @@ import java.util.List;
 import saf.simulation.event.Draw;
 import saf.simulation.event.Event;
 import saf.simulation.event.Init;
+import saf.simulation.event.Win;
 import saf.syntax.Fighter;
 
 public class Simulation
@@ -55,6 +56,21 @@ public class Simulation
         right.step(events);
 
         running = left.isAlive() && right.isAlive();
+        if (!running)
+        {
+            if (left.isAlive())
+            {
+                events.add(new Win(left, right));
+            }
+            else if (right.isAlive())
+            {
+                events.add(new Win(right, left));
+            }
+            else
+            {
+                events.add(new Draw(left, right));
+            }
+        }
         stepCounter++;
         return events;
     }

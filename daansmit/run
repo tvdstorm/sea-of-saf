@@ -1,4 +1,4 @@
 #! /bin/bash
 
 cd classes
-java -cp .:../lib/antlr-3.4-complete.jar saf/Main ../data/Nested.saf ../data/JackieChan.saf ../data/Logic.saf ../data/Empty.saf ../data/Average.saf
+java -cp .:../lib/antlr-3.4-complete.jar saf/Main ../data/$1.saf ../data/$2.saf

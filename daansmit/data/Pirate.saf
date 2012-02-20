@@ -1,0 +1,11 @@
+Pirate {
+       kickPower = 4
+       punchPower = 4
+       kickReach = 7
+       punchReach = 6
+
+       far and weaker [run_towards choose(kick_high punch_low)]
+       near and stronger [run_away choose(block_low block_high)]
+       near and stronger [walk_away punch_low]
+       always [run_towards kick_low]
+}

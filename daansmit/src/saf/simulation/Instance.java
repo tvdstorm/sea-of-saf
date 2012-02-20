@@ -152,7 +152,7 @@ public class Instance
         {
             situation.add(new State("near"));
         }
-        else
+        else if (distance >= 100)
         {
             situation.add(new State("far"));
         }

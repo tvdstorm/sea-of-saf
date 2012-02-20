@@ -129,11 +129,8 @@ public class Fight extends Process
             }
             getComplement().modHealth(-damage);
             events.add(new ChangeHealth(getComplement()));
+            events.add(new Hit(getComplement(), getSubject(), getActivity()));
             striked = true;
-            if (!getComplement().isAlive())
-            {
-                events.add(new Win(getSubject()));
-            }
         }
     }
 }
