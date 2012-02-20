@@ -20,7 +20,8 @@ public class ArenaAnimator extends Animator
 
     public static final int ARENA_WIDTH = 512;
     public static final int ARENA_HEIGHT = 512;
-    public static final int ANIMATION_DELAY_MS = 100;
+    public static final int ANIMATION_DELAY_MS = 1;
+    public static final int START_END_DELAY_MS = 500;
 
     private FighterAnimator leftAnimator;
     private FighterAnimator rightAnimator;
@@ -56,7 +57,7 @@ public class ArenaAnimator extends Animator
     {
         leftAnimator.animateFirst();
         rightAnimator.animateFirst();
-        sleepDelay(ANIMATION_DELAY_MS * 5);
+        sleepDelay(START_END_DELAY_MS);
 
         while (leftAnimator.hasAnimations() &&
                rightAnimator.hasAnimations())
@@ -68,7 +69,7 @@ public class ArenaAnimator extends Animator
         }
         System.out.println();
 
-        sleepDelay(2500);
+        sleepDelay(START_END_DELAY_MS);
     }
 }
 
