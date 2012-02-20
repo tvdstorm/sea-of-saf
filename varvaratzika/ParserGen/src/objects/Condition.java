@@ -15,6 +15,10 @@ public Condition(String conditionName,String movesName,String attacksName,int id
 			this.setId(id);
 }
 
+public Condition() {
+	// TODO Auto-generated constructor stub
+}
+
 public void setConditionName(String ConditionName)
 {
     this.ConditionName = ConditionName;

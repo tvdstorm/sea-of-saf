@@ -13,8 +13,10 @@ import javax.swing.JComponent;
 	    
 		public ImagePanel(Image image, int x, int y) {
 	        this.image = image;
-	        this.x = x;	    
+	        this.x = x;	
+	        this.y=y;
 	    }
+		
 		
 	    @Override
 	    protected void paintComponent(Graphics g) {
