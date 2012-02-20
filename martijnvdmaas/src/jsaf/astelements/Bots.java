@@ -1,7 +1,7 @@
 package jsaf.astelements;
 
-import visitor.SAFElement;
-import visitor.SAFElementVisitor;
+import jsaf.visitor.SAFElement;
+import jsaf.visitor.SAFElementVisitor;
 
 public class Bots implements SAFElement
 {

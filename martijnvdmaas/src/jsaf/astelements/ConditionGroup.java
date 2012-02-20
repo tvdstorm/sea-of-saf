@@ -3,8 +3,9 @@ package jsaf.astelements;
 import java.util.ArrayList;
 import java.util.List;
 
-import visitor.SAFElement;
-import visitor.SAFElementVisitor;
+import jsaf.visitor.SAFElement;
+import jsaf.visitor.SAFElementVisitor;
+
 
 public class ConditionGroup implements SAFElement
 {
