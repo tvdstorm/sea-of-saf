@@ -1,8 +1,0 @@
-Sample
-{
-kickPower = 6
-punchReach = 4
-stronger near or far [ stand punch_low]
-stronger [run_towards block_high]
-always [ choose (jump stand) kick_high]
-}

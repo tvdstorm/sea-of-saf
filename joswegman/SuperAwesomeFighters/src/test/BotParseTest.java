@@ -29,17 +29,6 @@ public class BotParseTest {
 		b.accept(bc);
 		assertEquals(1, bc.getErrorMessages().size());
 		assertEquals(bc.getErrorMessages().get(0),"There is no always condition"); 
-		
-		
-		/*
-		ANTLRFileStream fileStream1 = new ANTLRFileStream(defaultpath + "chuck.saf");
-		SafLexer lexer1 = new SafLexer(fileStream1);
-		TokenStream tokenStream1 = new CommonTokenStream(lexer1);
-		SafParser parser1 = new SafParser(tokenStream1);
-		Bot b1 = parser1.bot();
-		b1.accept(new BotChecker());
-		b1.toString();
-		*/
 	}
 	
 	@Test

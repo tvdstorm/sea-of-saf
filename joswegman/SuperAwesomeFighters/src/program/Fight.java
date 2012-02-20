@@ -6,31 +6,6 @@ import java.util.Random;
 import java.lang.Math;
 import grammar.Evaluators.*;
 
-/* regels van het gevecht
- * punchReachh 1..10
- * punchPower 1..10
- * kickReach 1..10
- * kickPower 1..10
- * 
- * Distance Fight. posistionLeft - Fight. positionRight
- * even   stronger/weaker  much stronger/weaker worden bepaalt door
- *  life. bot1 - life. bot2  
- *  even = 10 - 20
- *  stronger/ weaker = 20 - 40
- *  much stronger / weaker > 40
- *  
- *  far > 20
- *  near <= 20
- *  
- *  kickpower over punchpower 
- *  block over kick
- *  punch over block
- *  
- *  Eerst afstand bepalen en gesteldheid tov de tegenstander.
- * 
-*/
-
-
 public class Fight {
 	Bot botLeft, botRight;
 	private int lifeLeft, lifeRight;
@@ -39,8 +14,6 @@ public class Fight {
 	private int distance;
 	private InputRule currentMoveLeft,currentMoveRight;
 	private InputRule currentFightLeft, currentFightRight;
-	
-	
 	
 	private static final Random RANDOM = new Random();
 	
@@ -56,8 +29,6 @@ public class Fight {
 		this.botLeft.setSpeed(calcSpeed (botLeft));
 		this.botRight.setSpeed(calcSpeed (botRight));
 	}
-
-	
 	
 	public int getPositionLeft() {
 		return positionLeft;
@@ -103,7 +74,6 @@ public class Fight {
 		this.lifeLeft = value;
 	}
 	
-	
 	public String getStatusLeft() {
 		return statusLeft;
 	}
@@ -132,10 +102,10 @@ public class Fight {
 		int dif = hisLife - opponentLife;
 		if ((dif <   20) & (dif >   0)) {return "even";}
 		if ((dif >=  20) & (dif <  40)) {return "stronger";}
-		if ( dif >=  40) {return "much stronger";}
+		if ( dif >=  40)                {return "much stronger";}
 		if ((dif >  -20) & (dif <   0)) {return "even";}
 		if ((dif <= -20) &( dif > -40)) {return "weaker";}
-		if ( dif <= -40) {return "much weaker";}
+		if ( dif <= -40)                {return "much weaker";}
 		return "even";
 	}
 	
@@ -162,7 +132,7 @@ public class Fight {
 		double weight = (punchPower + kickPower) / 2;
 		double heigth = (punchReach + kickReach) / 2;
 		double speed = Math.abs(0.5 * (heigth - weight));
-		if (speed == 0) { speed = 1.0;} //aanpassing om met speed te vermenigvuldigen ipv optellen
+		if (speed == 0) { speed = 1.0;} 
 		return speed;
 	}
 
@@ -176,11 +146,15 @@ public class Fight {
 		return distance;
 	}
 	
-	public InputRule getAction(Bot b, String sd, boolean move){
+	public InputRule getAction(Bot b, String strengthdiff, boolean move){
 		List<InputRule> action = new LinkedList<InputRule>();
+		List<String> operator = new LinkedList<String>();
 		for (Rule r:b.getRules()){
 			for(Condition c: r.getConditionList()){
-				if ((c.getLeft().equalsIgnoreCase(sd))||(c.getLeft().equalsIgnoreCase(getDistanceString()))){
+				if ((c.getLeft().equalsIgnoreCase(strengthdiff))||(c.getLeft().equalsIgnoreCase(getDistanceString()))){
+					if ((c.getType().equalsIgnoreCase("and"))|| (c.getType().equalsIgnoreCase("or"))){
+						operator.add(c.getType());
+					}
 					if (move){
 						action.add(r.getMoveRule());
 					}else{
@@ -194,7 +168,6 @@ public class Fight {
 		} 
 		return action.get(RANDOM.nextInt(action.size()));
 	}
-	
 	
 	public void doAction() {
 		this.setStatusLeft(calculateStrengthDif(this.lifeLeft,this.lifeRight));
@@ -218,6 +191,8 @@ public class Fight {
 			if ((!irr.getInputrule(true).contains("block")) && (irl.getInputrule(true).contains("punch"))){ this.lifeRight -= 3 * this.botRight.getSpeed();}
 			if ((irr.getInputrule(true).contains("block"))  && (irl.getInputrule(true).contains("kick"))) { this.lifeRight -= 3 * this.botRight.getSpeed();}
 			if ((irr.getInputrule(true).contains("block"))  && (irl.getInputrule(true).contains("punch"))){ this.lifeRight -= 1 * this.botRight.getSpeed();}
+			this.lifeRight -= 1;
+			this.lifeLeft  -= 1;
 		}
 	}
 	
@@ -231,13 +206,7 @@ public class Fight {
 		if (m.contains("run_away"))    {return -10;}
 		if (m.contains("walk_towards")){return   5;}
 		if (m.contains("walk_away"))   {return  -5;}
+		if (m.contains("crouch"))	   {return   2;}
 		return 0;
 	}
-
-	
-	
-	
-		
-
-	
 }

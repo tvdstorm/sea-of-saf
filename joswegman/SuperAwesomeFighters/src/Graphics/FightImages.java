@@ -25,7 +25,7 @@ public class FightImages{
 	
 	public FightImages(){
 		String defaultpath = "/home/jos/workspace/SuperAwesomeFighters/bot_sprites/";
-		//left
+
 		stanceLeft      = new ImageIcon (defaultpath + "stance_left.gif");
 		blockhighLeft   = new ImageIcon (defaultpath + "block_high.gif");
 		blocklowLeft    = new ImageIcon (defaultpath + "block_low.gif");
@@ -35,7 +35,7 @@ public class FightImages{
 		punchhighLeft   = new ImageIcon (defaultpath + "punch_high.gif");
 		punchlowLeft    = new ImageIcon (defaultpath + "punch_low.gif");
 		deadLeft        = new ImageIcon (defaultpath + "dead_left.gif");
-		//right
+
 		stanceRight     =  new ImageIcon (defaultpath + "stance_right_red.gif");
 		blockhighRight  = new ImageIcon (defaultpath + "block_high_right_red.gif");
 		blocklowRight   = new ImageIcon (defaultpath + "block_low_right_red.gif");
@@ -44,7 +44,6 @@ public class FightImages{
 		kicklowRight    = new ImageIcon (defaultpath + "kick_low_right_red.gif");
 		punchhighRight  = new ImageIcon (defaultpath + "punch_high_right_red.gif");
 		deadRight       = new ImageIcon (defaultpath + "dead_right_red.gif");
-		
 	}
 	
 	public ImageIcon getImage(String name){
@@ -68,7 +67,6 @@ public class FightImages{
 		if (name.contentEquals("crouchRight") ){return crawlRight;}
 		if (name.contentEquals("deadRight") ){return deadRight;}
 		return stanceRight;
-		
 	}
 	
 	

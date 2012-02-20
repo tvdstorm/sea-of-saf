@@ -39,8 +39,7 @@ public class Condition implements Visitable{
 	}
 	
 	@Override
-	  public void accept(BotVisit visitor) {
+	public void accept(BotVisit visitor) {
 		  	visitor.visit(this);
-	  }
-
+	}
 }

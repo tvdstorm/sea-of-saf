@@ -25,6 +25,4 @@ public class Characteristic implements Visitable {
 	public void accept(BotVisit visitor) {
 		visitor.visit(this);
 	}
-	
-	
 }
