@@ -2,19 +2,25 @@ package com.blommesteijn.uva.sc.saf.runner.view;
 
 import com.blommesteijn.uva.sc.saf.runner.model.Model;
 
-public class CliMessager
+/**
+ * Standard out/err messenger
+ * NOTE: with regulated check for debugging
+ * @author dblommesteijn
+ * @since Feb 19, 2012
+ */
+public class CliMessenger
 {
 	
 	public static void exit(ExitCode code, String message)
 	{
-		CliMessager.err("error: " + message + " (try --help)");
+		CliMessenger.err("error: " + message + " (try --help)");
 		System.exit(code.getCode());
 	}
 	
 	public static void msg(String[] messages)
 	{
 		for(String message : messages)
-			CliMessager.msg(message);
+			CliMessenger.msg(message);
 	}
 	
 	

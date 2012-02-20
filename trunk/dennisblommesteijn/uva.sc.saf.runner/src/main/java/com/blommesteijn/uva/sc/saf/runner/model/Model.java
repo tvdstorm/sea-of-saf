@@ -3,26 +3,34 @@
  */
 package com.blommesteijn.uva.sc.saf.runner.model;
 
-import java.io.IOException;
 import java.util.List;
 
-import com.blommesteijn.uva.sc.saf.runner.model.exceptions.FileLoadException;
+import com.blommesteijn.uva.sc.saf.runner.model.ast.AstLoader;
+import com.blommesteijn.uva.sc.saf.runner.model.game.Draw;
+import com.blommesteijn.uva.sc.saf.runner.model.interpreter.IInterpreter;
+import com.blommesteijn.uva.sc.saf.runner.model.interpreter.SuperAwesomeGameInterpreter;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Common;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Files;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Options;
-import com.blommesteijn.uva.sc.saf.runner.view.CliMessager;
+import com.blommesteijn.uva.sc.saf.runner.view.CliMessenger;
 import com.blommesteijn.uva.sc.saf.runner.view.ExitCode;
+import com.blommesteijn.uva.sc.saf.runner.view.GuiLoader;
 
 
 
 /**
- * @author pinguin
- * 
+ * MVC - Model
+ * @author dblommesteijn
+ * @since 12 Feb, 2012
  */
 public class Model
 {
 	private static Model _instance = null;
 
+	/**
+	 * Get Singleton instance of this object
+	 * @return instance of this object
+	 */
 	public static Model getInstance()
 	{
 		if (_instance == null)
@@ -33,17 +41,33 @@ public class Model
 	private Options _options = null;
 	private Files _files = null;
 	private AstLoader _astLoader = null;
+	private IInterpreter _interpreter = null;
 
+	/**
+	 * Constructor
+	 */
 	private Model()
 	{
 	}
 
+	/**
+	 * Load model properties
+	 * @param appName application name
+	 * @param appVersion application version
+	 * @param args application arguments
+	 */
 	public void load(String appName, String appVersion, String[] args)
 	{
+		//load sources from arguments
 		this.loadSources(appName, appVersion, args);
+		//load files from sources
 		this.loadFiles();
+		//load ast from files
 		this.loadAst();
+		//run ast interpreter
+		this.loadInterpreter();
 	}
+
 
 	private void loadSources(String appName, String appVersion, String[] args)
 	{
@@ -57,12 +81,12 @@ public class Model
 		}
 
 		// report options
-		CliMessager.msg(new String[] { "arguments:", _options.toString() });
+		CliMessenger.msg(new String[] { "arguments:", _options.toString() });
 
 		// no source files found
 		if (!_options.hasOption(Options.SOURCE)
 				|| _options.getOption(Options.SOURCE).size() <= 0)
-			CliMessager.exit(ExitCode.EC_SOURCES, "no source file(s)");
+			CliMessenger.exit(ExitCode.EC_SOURCES, "no source file(s)");
 
 	}
 
@@ -76,15 +100,15 @@ public class Model
 		}
 		catch (FileLoadException e)
 		{
-			CliMessager.exit(ExitCode.EC_FILES, e.getMessage());
+			CliMessenger.exit(ExitCode.EC_FILES, e.getMessage());
 		}
 
 		if (_files == null)
-			CliMessager.exit(ExitCode.EC_FILES,
+			CliMessenger.exit(ExitCode.EC_FILES,
 					"no source file(s) could be loaded");
 
 		// report files
-		CliMessager.msg(new String[] { "current dir:", _files.toString() });
+		CliMessenger.msg(new String[] { "current dir:", _files.toString() });
 	}
 
 	private void loadAst()
@@ -96,15 +120,24 @@ public class Model
 		}
 		catch (FileLoadException e)
 		{
-			CliMessager.exit(ExitCode.EC_AST, e.getMessage());
+			CliMessenger.exit(ExitCode.EC_AST, e.getMessage());
 		}
 
-		CliMessager.msg(new String[] { "astLoader:", _astLoader.toString() });
+		CliMessenger.msg(new String[] { "astLoader:", _astLoader.toString() });
 
 		// verify asts per files
 		if (_astLoader.getAstNodes().size() < _files.getFiles().size())
-			CliMessager.exit(ExitCode.EC_AST,
+			CliMessenger.exit(ExitCode.EC_AST,
 					"not all files contain valid ast(s)");
+	}
+
+	private void loadInterpreter()
+	{
+		//run saf interpreter
+		_interpreter = new SuperAwesomeGameInterpreter(
+				_astLoader.getAstNodes(), 
+				new Draw(new GuiLoader()));
+		_interpreter.start();
 	}
 
 	public Options getOption()
