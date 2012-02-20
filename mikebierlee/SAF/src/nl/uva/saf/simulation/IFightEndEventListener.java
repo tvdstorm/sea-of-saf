@@ -16,7 +16,6 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 package nl.uva.saf.simulation;
 
 public interface IFightEndEventListener {

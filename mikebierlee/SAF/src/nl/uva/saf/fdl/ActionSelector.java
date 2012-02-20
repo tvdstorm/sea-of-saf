@@ -44,13 +44,10 @@ public class ActionSelector extends TreeVisitor {
 	private List<Behaviour> candidateBehaviours;
 	private final Random numberGenerator;
 
-	public ActionSelector(Random numberGenerator) {
-		
-
+	public ActionSelector(Random numberGenerator) {	
 		if (numberGenerator == null) {
 			throw new IllegalArgumentException("numberGenerator");
 		}
-
 		
 		this.numberGenerator = numberGenerator;
 		moveAction = MoveActionType.unknown;
@@ -62,6 +59,8 @@ public class ActionSelector extends TreeVisitor {
 		if (fighterNode == null) {
 			throw new IllegalArgumentException("fighterNode");
 		}
+		
+		candidateBehaviours.clear();
 		
 		this.fighter = fighterNode;
 		this.truthTable = truthTable;
