@@ -99,5 +99,17 @@ public class FighterDefinitionParser {
 	public List<String> getErrorList() {
 		return Collections.unmodifiableList(errorList);
 	}
+	
+	public String getErrorMessage() {
+		if (getErrorList().isEmpty())
+			return null;
+		
+		StringBuilder builder = new StringBuilder();
+		for (String error : errorList) {
+			builder.append(error);
+			builder.append('\n');
+		}
+		return builder.toString();
+	}
 
 }

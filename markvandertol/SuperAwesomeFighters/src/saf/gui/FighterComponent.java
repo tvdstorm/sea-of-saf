@@ -16,12 +16,42 @@ import saf.ast.FightAction;
 import saf.ast.Stance;
 
 public class FighterComponent extends JComponent {
+	private static final String FONT_FACE = "Arial";
+	private static final Font GAME_RESULT_FONT = new Font(FONT_FACE, Font.BOLD, 56);
+	private static final Font DEFAULT_FONT = new Font(FONT_FACE, Font.PLAIN, 14);
+	
+	private static final String TEXT_PLAYER_STANCE_CROUCHING = "Crouching";
+	private static final String TEXT_PLAYER_STANCE_JUMPING = "Jumping";
+	private static final String TEXT_PLAYER_WON = "Winner!";
+	private static final String TEXT_PLAYER_FAR = "Far";
+	private static final String TEXT_PLAYER_NEAR = "Near";
+	
+	private static final BasicStroke STROKE_STICKMAN = new BasicStroke(3.0f);
+	
+	private static final Color COLOR_STICKMAN_ATTACK = Color.red;
+	private static final Color COLOR_STICKMAN_BLOCK = Color.orange;
+	private static final Color COLOR_STICKMAN = Color.black;
+	private static final Color COLOR_WINTEXT = Color.green;
+	private static final Color COLOR_HUD_TEXT = Color.darkGray;
+	private static final Color COLOR_BACKGROUND = Color.white;
+		
+	private static final int HEAD_DIAMETER = 75;
+	private static final int BODY_HEIGHT = 125;
+	private static final int ARM_WIDTH = 40;
+	private static final int LEG_WIDTH =  35;
+	private static final int LEG_HEIGHT = 35;
+	
+	private static final int Y_OFFSET_TOP = 10;
+	private static final int Y_OFFSET_BODY = Y_OFFSET_TOP + HEAD_DIAMETER;
+	private static final int Y_OFFSET_ARM = Y_OFFSET_TOP + HEAD_DIAMETER + 30;
+	private static final int Y_OFFSET_LEG =  Y_OFFSET_TOP + HEAD_DIAMETER + BODY_HEIGHT;
+	private static final int Y_OFFSET_PUNCH = 15;
+	
+	private static final int COMPONENT_WIDTH = 250;
+	private static final int COMPONENT_HEIGHT = 300;
+	
 	private final int playerIndex;
 	private final Arena arena;
-	
-	private final int width = 250;
-	private final int height = 300;
-	
 	private final boolean mirrorImage;
 	
 	public FighterComponent(Arena arena, int playerIndex, boolean mirrorImage) {
@@ -29,108 +59,129 @@ public class FighterComponent extends JComponent {
 		this.arena = arena;
 		this.mirrorImage = mirrorImage;
 		
-		setPreferredSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(COMPONENT_WIDTH, COMPONENT_HEIGHT));
 	}
 	
 	@Override
-	protected void paintComponent(Graphics g) {
-		Graphics2D graphics = (Graphics2D)g;
-		graphics.setColor(Color.white);
-		graphics.fillRect(0, 0, width, height);
+	protected void paintComponent(Graphics graphics) {
+		Graphics2D g = (Graphics2D)graphics;
+		g.setColor(COLOR_BACKGROUND);
+		g.fillRect(0, 0, COMPONENT_WIDTH, COMPONENT_HEIGHT);
 		
 		Fighter player = arena.getFighterOfPlayer(playerIndex);
 		if (player == null)
 			return;
 		
-		paintStickMan(graphics, player.getLastFightAction());
-		
-		boolean near = player.getSpeed() > arena.getDistanceBetweenPlayers();
-		String move = (player.getLastMoveAction() != null) ? player.getLastMoveAction().toString() : "";
-		paintStats(graphics, player.getName(), move, player.getHealth(), near, player.hasWonRound(), player.getStance());
+		paintStickMan(g, player.getLastFightAction());
+		paintHud(g, player, arena);
 	}
 	
-	private void paintStats(Graphics2D g, String name, String move, int health, boolean near, boolean winner, Stance stance) {
-		g.setColor(Color.darkGray);
-		Font font = new Font("Arial", Font.PLAIN, 14);
-		g.setFont(font);
-		g.drawString(name, 0, 25);
-		g.drawString(health + "/100", 0, 50);
+	private int getStringWidth(String str) {
+		FontMetrics fm = getFontMetrics(getFont());
+		return fm.stringWidth(str);
+	}
+	
+	private void paintHud(Graphics2D g, Fighter player, Arena arena) {
+		g.setColor(COLOR_HUD_TEXT);
+		g.setFont(DEFAULT_FONT);
 		
-		if (Stance.jumping.equals(stance))
-			g.drawString("Jumping", 0, 75);
-		if (Stance.crouching.equals(stance))
-			g.drawString("Crouching", 0, 75);
-			
+		g.drawString(player.getName(), 0, 25);
+		g.drawString(player.getHealth() + "/100", 0, 50);
 		
-		if (near)
-			g.drawString("Near", 0, 275);
-		else
-			g.drawString("Far", 0, 275);
-		
-		FontMetrics fm = getFontMetrics(font);
-		g.drawString(move, 250 - fm.stringWidth(move), 275);
-		
-		if (winner) {
-			Font winnerFont = new Font("Arial", Font.BOLD, 56);
-			g.setFont(winnerFont);
-			g.setColor(Color.green);
-			FontMetrics fm2 = getFontMetrics(winnerFont);
-			final String winnerText= "Winner!";
-			int xpos = getWidth() / 2 - fm2.stringWidth(winnerText) / 2;
-			g.drawString(winnerText, xpos , 175);
+		paintHudStance(g, player);				
+		paintHudDistance(g, player, arena);		
+		paintHudLastMoveAction(g, player);		
+		paintHudRoundWon(g, player);
+	}
+
+	private void paintHudStance(Graphics2D g, Fighter player) {
+		if (Stance.jumping.equals(player.getStance()))
+			g.drawString(TEXT_PLAYER_STANCE_JUMPING, 0, 75);
+		if (Stance.crouching.equals(player.getStance()))
+			g.drawString(TEXT_PLAYER_STANCE_CROUCHING, 0, 75);
+	}
+
+	private void paintHudRoundWon(Graphics2D g, Fighter player) {
+		if (player.hasWonRound()) {
+			g.setFont(GAME_RESULT_FONT);
+			g.setColor(COLOR_WINTEXT);
+
+
+			int xpos = getWidth() / 2 - getStringWidth(TEXT_PLAYER_WON) / 2;
+			g.drawString(TEXT_PLAYER_WON, xpos , 175);
 		}
 	}
 
+	private void paintHudLastMoveAction(Graphics2D g, Fighter player) {
+		String lastMove = (player.getLastMoveAction() != null) ? player.getLastMoveAction().toString() : "";
+		g.drawString(lastMove , 250 - getStringWidth(lastMove), 275);
+	}
+
+	private void paintHudDistance(Graphics2D g, Fighter player, Arena arena) {
+		boolean near = player.getSpeed() > arena.getDistanceBetweenPlayers();
+		
+		if (near)
+			g.drawString(TEXT_PLAYER_NEAR, 0, 275);
+		else
+			g.drawString(TEXT_PLAYER_FAR, 0, 275);
+	}
+
+	private int getTransformedWidth(int width) {
+		return (mirrorImage) ? -width : width;
+	}
 
 	
 	private void paintStickMan(Graphics2D g, FightAction state) {
-		int center = getSize().width / 2;
-		final int offsetTop = 10;
+		int centerXOffset = getSize().width / 2;		
 		
-		final int headSize = 75;
-		final int bodyLength = 125;
-		final int bodyYOffset = offsetTop + headSize;
-		final int armWidth = (mirrorImage) ? -40 : 40;
-		final int armYOffset = offsetTop + headSize + 30;
-		final int legWidth = (mirrorImage) ? -35 : 35;
-		final int legHeight = 35;
-		final int legYOffset =  offsetTop + headSize + bodyLength;
+		g.setColor(COLOR_STICKMAN);
+		g.setStroke(STROKE_STICKMAN);		
 		
-		g.setColor(Color.black);
-		g.setStroke(new BasicStroke(3.0f));		
-		
-		//Draw head:
-		g.drawOval(center - (headSize / 2), offsetTop, headSize, headSize);
-		
-		//Draw body:
-		g.drawLine(center, bodyYOffset, center, bodyYOffset + bodyLength);
-		
-		//Draw arms:
-		int armDiag = 0;
-		if (FightAction.punch_high.equals(state))
-			armDiag = -15;
-		if (FightAction.punch_low.equals(state))
-			armDiag = 15;
-		g.drawLine(center, armYOffset, center - armWidth, armYOffset - armDiag);
-			
-		if (FightAction.block_high.equals(state))
-			g.setColor(Color.orange);
-		if (state.isPunch())
-			g.setColor(Color.red);
-		
-		g.drawLine(center, armYOffset, center + armWidth, armYOffset + armDiag);	
-		
-		g.setColor(Color.black);
-		
-		//Draw legs:
-		g.drawLine(center, legYOffset, center - legWidth, legYOffset + legHeight);
+		paintHead(g, centerXOffset);
+		paintBody(g, centerXOffset);
+		paintArms(g, centerXOffset, state);
+		paintLegs(g, centerXOffset, state);
+	}
+
+	private void paintLegs(Graphics2D g, int centerXOffset, FightAction state) {
+		Color restoreColor = g.getColor();
+		g.drawLine(centerXOffset, Y_OFFSET_LEG, centerXOffset - getTransformedWidth(LEG_WIDTH), Y_OFFSET_LEG + LEG_HEIGHT);
 		
 		boolean legHigh = FightAction.block_low.equals(state) || FightAction.kick_high.equals(state);
 		
 		if (state.isBlock())
-			g.setColor(Color.orange);
+			g.setColor(COLOR_STICKMAN_BLOCK);
 		if (state.isKick())
-			g.setColor(Color.red);
-		g.drawLine(center, legYOffset, center + legWidth, legYOffset + ((legHigh) ? -legHeight /2 : legHeight));
+			g.setColor(COLOR_STICKMAN_ATTACK);
+		g.drawLine(centerXOffset, Y_OFFSET_LEG, centerXOffset + getTransformedWidth(LEG_WIDTH), Y_OFFSET_LEG + ((legHigh) ? -LEG_HEIGHT /2 : LEG_HEIGHT));
+		g.setColor(restoreColor);
+	}
+
+	private void paintHead(Graphics2D g, int centerXOffset) {
+		g.drawOval(centerXOffset - (HEAD_DIAMETER / 2), Y_OFFSET_TOP, HEAD_DIAMETER, HEAD_DIAMETER);
+	}
+
+	private void paintBody(Graphics2D g, int centerXOffset) {
+		g.drawLine(centerXOffset, Y_OFFSET_BODY, centerXOffset, Y_OFFSET_BODY + BODY_HEIGHT);
+	}
+
+	private void paintArms(Graphics2D g, int centerXOffset, FightAction state) {
+		Color restoreColor = g.getColor();
+		
+		int armDiag = 0;
+		if (FightAction.punch_high.equals(state))
+			armDiag = -Y_OFFSET_PUNCH;
+		if (FightAction.punch_low.equals(state))
+			armDiag = Y_OFFSET_PUNCH;
+		g.drawLine(centerXOffset, Y_OFFSET_ARM, centerXOffset - getTransformedWidth(ARM_WIDTH), Y_OFFSET_ARM - armDiag);
+			
+		if (FightAction.block_high.equals(state))
+			g.setColor(COLOR_STICKMAN_BLOCK);
+		if (state.isPunch())
+			g.setColor(COLOR_STICKMAN_ATTACK);
+		
+		g.drawLine(centerXOffset, Y_OFFSET_ARM, centerXOffset + getTransformedWidth(ARM_WIDTH), Y_OFFSET_ARM + armDiag);	
+		
+		g.setColor(restoreColor);
 	}
 }
