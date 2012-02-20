@@ -147,6 +147,7 @@ public class FightSimulator implements IFightSimulator {
 					contestant.setNextTurn(actionExecutor.getTurnCost());
 					
 					//TODO: Prevent fighters from leaving the playfield
+					//TODO: win condition
 				} else {
 					contestant.setNextTurn(contestant.getNextTurn() - 1);
 				}

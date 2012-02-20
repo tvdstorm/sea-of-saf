@@ -71,7 +71,7 @@ public class Vector2d {
 	}
 
 	public double length() {
-		return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+		return Math.abs(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
 	}
 
 	public void normalize() {
