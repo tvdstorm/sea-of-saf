@@ -1,4 +1,4 @@
-package com.blommesteijn.uva.sc.saf.runner.model;
+package com.blommesteijn.uva.sc.saf.runner.model.ast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,7 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.ast.types.AstNode;
-import com.blommesteijn.uva.sc.saf.runner.model.exceptions.FileLoadException;
+import com.blommesteijn.uva.sc.saf.runner.model.FileLoadException;
+import com.blommesteijn.uva.sc.saf.runner.model.Model;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Common;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Files;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Options;

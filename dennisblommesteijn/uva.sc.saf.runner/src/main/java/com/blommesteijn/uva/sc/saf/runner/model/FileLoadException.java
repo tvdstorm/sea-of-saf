@@ -1,4 +1,4 @@
-package com.blommesteijn.uva.sc.saf.runner.model.exceptions;
+package com.blommesteijn.uva.sc.saf.runner.model;
 
 
 public class FileLoadException extends DefaultException
