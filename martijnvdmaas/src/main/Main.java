@@ -6,9 +6,10 @@ import grammar.ParseException;
 import java.io.File;
 import java.io.IOException;
 
+import jsaf.astelements.Bots;
+
 import logger.ErrorLog;
 import visitor.SAFElementValidatorVisitor;
-import astelements.Bots;
 
 public class Main
 {

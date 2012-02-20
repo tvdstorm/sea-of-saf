@@ -16,18 +16,19 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import jsaf.astelements.Behaviour;
+import jsaf.astelements.Bot;
+import jsaf.astelements.Bots;
+import jsaf.astelements.Characteristic;
+import jsaf.astelements.ConditionChoices;
+import jsaf.astelements.ConditionGroup;
+
 import logger.ErrorLog;
 
 import sun.applet.Main;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
-import astelements.Behaviour;
-import astelements.Bot;
-import astelements.Bots;
-import astelements.Characteristic;
-import astelements.ConditionChoices;
-import astelements.ConditionGroup;
 import constants.SAFConstants;
 
 public class FightEngine extends Observable implements SAFConstants

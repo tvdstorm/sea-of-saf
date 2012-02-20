@@ -1,5 +1,7 @@
 package test.scenarios;
 
+import jsaf.astelements.Bot;
+import jsaf.astelements.Bots;
 import grammar.ParseException;
 
 import main.Main;
@@ -11,8 +13,6 @@ import org.jbehave.scenario.annotations.Then;
 import org.jbehave.scenario.annotations.When;
 import org.jbehave.scenario.steps.Steps;
 
-import astelements.Bot;
-import astelements.Bots;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class ParserSteps extends Steps {
