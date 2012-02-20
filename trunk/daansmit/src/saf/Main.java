@@ -17,8 +17,6 @@ import saf.visualization.GraphicalVisualizer;
 
 public class Main
 {
-    private static final int MAX_STEPS = 1000;
-
     public static void main(String[] args)
         throws RecognitionException, java.io.IOException, InterruptedException
     {
@@ -78,7 +76,6 @@ public class Main
         Simulation s = new Simulation(left, right);
         Visualizer text = new TextVisualizer();
         Visualizer graphics = new GraphicalVisualizer();
-        int stepCount = 0;
         Thread thread = Thread.currentThread();
 
         while (s.isRunning())
@@ -87,11 +84,6 @@ public class Main
             {
                 e.visualize(text);
                 e.visualize(graphics);
-            }
-            if (stepCount++ >= MAX_STEPS)
-            {
-                System.out.println("draw");
-                break;
             }
             thread.sleep(25);
         }

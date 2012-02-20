@@ -3,12 +3,14 @@ package saf.simulation;
 import java.util.ArrayList;
 import java.util.List;
 
+import saf.simulation.event.Draw;
 import saf.simulation.event.Event;
 import saf.simulation.event.Init;
 import saf.syntax.Fighter;
 
 public class Simulation
 {
+    private static final int MAX_STEP = 1000;
     private static final Coordinate POSITION_LEFT = new Coordinate(200);
     private static final Coordinate POSITION_RIGHT = new Coordinate(800);
 
@@ -16,7 +18,7 @@ public class Simulation
     private final Instance left;
     private final Instance right;
     private boolean running = true;
-    private boolean initialized = false;
+    private int stepCounter = 0;
 
     public Simulation(Fighter left, Fighter right)
     {
@@ -35,10 +37,15 @@ public class Simulation
 
         List<Event> events = new ArrayList<Event>();
 
-        if (!initialized)
+        if (stepCounter == 0)
         {
             events.add(new Init(left, right));
-            initialized = true;
+            stepCounter++;
+            return events;
+        }
+        else if (stepCounter >= MAX_STEP)
+        {
+            events.add(new Draw(left, right));
         }
 
         left.plan();
@@ -48,6 +55,7 @@ public class Simulation
         right.step(events);
 
         running = left.isAlive() && right.isAlive();
+        stepCounter++;
         return events;
     }
 }

@@ -60,6 +60,12 @@ public class TextVisualizer implements Visualizer
     }
 
     @Override
+    public void visualize(Draw draw)
+    {
+        display("* DRAW *");
+    }
+
+    @Override
     public void visualize(Hit hit)
     {
         Instance subject = hit.getSubject();
@@ -67,6 +73,14 @@ public class TextVisualizer implements Visualizer
         Simple attack = hit.getAttack();
         display(subject.getName()
                 + " hit (" + attack + ") " + complement.getName());
+    }
+
+    @Override
+    public void visualize(Init init)
+    {
+        Instance left = init.getLeft();
+        Instance right = init.getRight();
+        display(left.getName() + " vs. " + right.getName());
     }
 
     @Override
@@ -93,20 +107,20 @@ public class TextVisualizer implements Visualizer
     @Override
     public void visualize(Miss miss)
     {
-        Instance subject = miss.getSubject();
-        Instance complement = miss.getSubject();
-        Simple attack = miss.getAttack();
-        display(subject.getName() + " misses ("
-                + attack.getId() + ") " + complement.getName());
+        // Instance subject = miss.getSubject();
+        // Instance complement = miss.getComplement();
+        // Simple attack = miss.getAttack();
+        // display(subject.getName() + " misses ("
+        //         + attack.getId() + ") " + complement.getName());
     }
 
     @Override
     public void visualize(MoveTo moveTo)
     {
-        Instance subject = moveTo.getSubject();
-        Coordinate position = moveTo.getPosition();
-        display(subject.getName()
-                + " moved to " + position.toString());
+        // Instance subject = moveTo.getSubject();
+        // Coordinate position = moveTo.getPosition();
+        // display(subject.getName()
+        //         + " moved to " + position.toString());
     }
 
     @Override
@@ -133,15 +147,15 @@ public class TextVisualizer implements Visualizer
     @Override
     public void visualize(StopAttack stopAttack)
     {
-        Instance subject = stopAttack.getSubject();
-        display(subject.getName() + ": stopAttack");
+        // Instance subject = stopAttack.getSubject();
+        // display(subject.getName() + ": stopAttack");
     }
 
     @Override
     public void visualize(Win win)
     {
         Instance subject = win.getSubject();
-        display(subject.getName()
+        display("* VICTORY * " + subject.getName()
                 + " has won the fight with " + subject.getHealth()
                 + " health remaining!");
     }
