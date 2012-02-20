@@ -14,24 +14,12 @@ public class Or implements Node{
 	
 	@Override
 	public void addNode(Node n) {}
-
-	@Override
-	public String toTreeString(String indent) {
-		String s = '\n' + indent + "or";
-		for(Node node : nodes){
-			s += node.toTreeString(indent + "  ");
-		}
-		
-		return s;
-	}
 	
 	@Override
-	public List<String> getErrors() {
-		List<String> allErrors = new ArrayList<String>();
+	public void accept(VisitorInterface v) {
+		v.visit(this);
 		for(Node n : nodes){
-			allErrors.addAll(n.getErrors());
+			n.accept(v);
 		}
-		
-		return allErrors;
 	}
 }

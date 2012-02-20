@@ -17,22 +17,10 @@ public class Action implements Node{
 	}
 
 	@Override
-	public String toTreeString(String indent) {
-		String s = '\n' + indent + "action";
+	public void accept(VisitorInterface v) {
+		v.visit(this);
 		for(Node type : types){
-			s += type.toTreeString(indent + "  ");
+			type.accept(v);
 		}
-		
-		return s;
-	}
-
-	@Override
-	public List<String> getErrors() {
-		List<String> allErrors = new ArrayList<String>();
-		for(Node type : types){
-			allErrors.addAll(type.getErrors());
-		}
-		
-		return allErrors;
 	}
 }

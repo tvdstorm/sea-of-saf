@@ -5,18 +5,20 @@ import java.util.List;
 
 public class Personality implements Node{
 	private final List<Node> characteristic;
-	private List<String> errors;
 	
 	private String[] defaultCharacteristic = {"punchPower", "kickPower", "punchReach", "kickReach"};
 	private final int defaultValue = 5;
 	
 	public Personality(){
 		characteristic = new ArrayList<Node>();
-		errors = new ArrayList<String>();
 
 		for(String s : defaultCharacteristic){
 			characteristic.add(new Characteristic(s, defaultValue));
 		}
+	}
+	
+	public List<Node> getCharacteristic(){
+		return characteristic;
 	}
 	
 	private void addLastCharacteristic(){
@@ -33,13 +35,8 @@ public class Personality implements Node{
 			if(ch.getName().equals("kickReach")) kickReach = ch.getValue();
 		}
 		
-		int weight = (punchPower + kickPower) / 2;
-		Characteristic w = new Characteristic("weight", weight);
-		characteristic.add(w);
-		
+		int weight = (punchPower + kickPower) / 2;		
 		int height = (punchReach + kickReach) / 2;
-		Characteristic h = new Characteristic("height", height);
-		characteristic.add(h);
 		
 		int speed = (height-weight) / 2;
 		if(speed < 1) speed = 1;
@@ -64,25 +61,12 @@ public class Personality implements Node{
 			if(c != null) characteristic.add(n);
 		}
 	}
-
+	
 	@Override
-	public String toTreeString(String indent) {
-		String s = '\n' + indent + "characteristic";
-		for(Node chars : characteristic){
-			s += chars.toTreeString(indent + "  ");
-		}
-		
-		return s;
-	}
-
-	@Override
-	public List<String> getErrors() {
-		List<String> allErrors = new ArrayList<String>();
-		allErrors.addAll(errors);
+	public void accept(VisitorInterface v) {
+		v.visit(this);
 		for(Node c : characteristic){
-			allErrors.addAll(c.getErrors());
+			c.accept(v);
 		}
-		
-		return allErrors;
 	}
 }
