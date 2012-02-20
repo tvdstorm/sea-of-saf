@@ -23,7 +23,8 @@ public class Attack implements AST {
 		return Collections.emptyList();
 	}
 	
-	public int getPhysicalEffect(List<Property> properties) {
+	/** Positive values are damage to opponent, negative values block damage to self */
+	public int getDamage(List<Property> properties) {
 		int defensiveModifier = 1;
 		if(attack.startsWith(BLOCK)) {
 			defensiveModifier = -1;

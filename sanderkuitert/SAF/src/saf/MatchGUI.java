@@ -12,12 +12,20 @@ class MatchGUI extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
-	//TODO support observing Player & clean up
+	private boolean endGameMsgShown;
+	
+	
+	public MatchGUI() {
+		this.endGameMsgShown = false;
+	}
+	
+	
 	public void update(Observable obs, Object arg) {
 		if(obs instanceof Match) {
 			Match match = ((Match) obs);
 			
-			if(match.hasEnded()) {
+			if(match.hasEnded() && !endGameMsgShown) {
+				endGameMsgShown=true;
 				drawGameEndMessage(match.getEndMessage());
 			}
 			
@@ -34,17 +42,15 @@ class MatchGUI extends JFrame implements Observer {
 	}
 
 	private void drawGameEndMessage(String endMessage) {
-		// TODO implement gui effect
-		//			account for possibility that this method is called more than once!
-		System.out.println(endMessage);
+		System.out.println("\n    "+endMessage);
 		
 		System.exit(0); //TODO end more gracefully
 	}
 
-	// where screen width corresponds to VisibleObject.MAX_POSITION_VALUE
+	// where screen width corresponds to VisibleObject.MAX_POSITION
 	private void drawVisibleObject(VisibleObject object) {
 		// TODO implement drawing of objects
-		System.out.println("Draws "+object); //DEBUG
+//		System.out.println("Draws "+object); //DEBUG
 //		if(object.stretchMe()) { }
 //		object.appearance();
 //		object.xPosition();

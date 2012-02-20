@@ -34,11 +34,11 @@ class Action implements AST {
 		return result;
 	}
 	
-	public Fighter.ActionEffect getEffectFromRandomChoice(List<Property> properties) {
+	public PassiveFighter.ActionEffect getEffectFromRandomChoice(List<Property> properties) {
 		Move move = moves.get(new Random().nextInt(moves.size()));
 		Attack attack = attacks.get(new Random().nextInt(attacks.size()));
 		
-		return new Fighter.ActionEffect(attack.getName(), attack.getPhysicalEffect(properties), 
+		return new PassiveFighter.ActionEffect(attack.getName(), attack.getDamage(properties), 
 					attack.getRange(properties), move.getName(), move.getSteps(), move.getDistance());
 	}
 	
