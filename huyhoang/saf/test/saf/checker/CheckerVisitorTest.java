@@ -53,7 +53,7 @@ public class CheckerVisitorTest {
 		String specification = "Huy { super_strong [ jump punch_high ] always [ jump punch_high ] }";
 		CheckerVisitor visitor = checkParsedSpecification(specification);
 		assertEquals(1, visitor.getErrors().size());
-		assertTrue(visitor.getErrors().get(0).matches("Condition 'super_strong' is invalid"));
+		assertTrue(visitor.getErrors().get(0).equals("Condition 'super_strong' is invalid"));
 	}
 	
 	@Test
@@ -61,7 +61,7 @@ public class CheckerVisitorTest {
 		String specification = "Huy { always [ choose punch_high ] }";
 		CheckerVisitor visitor = checkParsedSpecification(specification);
 		assertEquals(1, visitor.getErrors().size());
-		assertTrue(visitor.getErrors().get(0).matches("The 'choose' keyword requires at least 1 action as its parameter"));
+		assertTrue(visitor.getErrors().get(0).equals("The 'choose' keyword requires at least 1 action as its parameter"));
 	}
 	
 	@Test
@@ -69,8 +69,8 @@ public class CheckerVisitorTest {
 		String specification = "Huy { always [ punch_high jump ] }";
 		CheckerVisitor visitor = checkParsedSpecification(specification);
 		assertEquals(2, visitor.getErrors().size());
-		assertTrue(visitor.getErrors().get(0).matches("'punch_high' is a 'attack' keyword. A 'choose' keyword or 'move' keyword was expected"));
-		assertTrue(visitor.getErrors().get(1).matches("'jump' is a 'move' keyword. A 'choose' keyword or 'attack' keyword was expected"));
+		assertTrue(visitor.getErrors().get(0).equals("'punch_high' is a 'attack' keyword. A 'choose' keyword or 'move' keyword was expected"));
+		assertTrue(visitor.getErrors().get(1).equals("'jump' is a 'move' keyword. A 'choose' keyword or 'attack' keyword was expected"));
 	}
 	
 	@Test
@@ -102,8 +102,8 @@ public class CheckerVisitorTest {
 		
 		assertEquals(3, checker.getErrors().size());
 		
-		assertTrue(checker.getErrors().get(0).matches("The action 'jump' does not accept any parameters"));
-		assertTrue(checker.getErrors().get(1).matches("'nuke' is an invalid action"));
-		assertTrue(checker.getErrors().get(2).matches("'invisible' is an invalid action"));
+		assertTrue(checker.getErrors().get(0).equals("The action 'jump' does not accept any parameters"));
+		assertTrue(checker.getErrors().get(1).equals("'nuke' is an invalid action"));
+		assertTrue(checker.getErrors().get(2).equals("'invisible' is an invalid action"));
 	}
 }
