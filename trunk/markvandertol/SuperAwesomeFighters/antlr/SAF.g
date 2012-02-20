@@ -50,36 +50,41 @@ package saf.parser;
 	}
 }
 
-fighter	: IDENTIFIER '{'  assignment*  rule* '}' -> ^(FIGHTER IDENTIFIER assignment* rule*);
+fighter
+		: IDENTIFIER '{'  assignment*  rule* '}' -> ^(FIGHTER IDENTIFIER assignment* rule*);
 
 assignment
-	:	IDENTIFIER '=' DIGIT
-	 	-> ^(ASSIGNMENT IDENTIFIER DIGIT);
+		:	IDENTIFIER '=' DIGIT -> ^(ASSIGNMENT IDENTIFIER DIGIT);
 
-rule 	:	condition '[' moves attacks ']'
-		-> ^(RULE condition moves attacks);
+rule
+	 	:	condition '[' moves attacks ']' -> ^(RULE condition moves attacks);
 		
-moves 	:	move=IDENTIFIER -> ^(MOVES $move)
+moves
+	 	:	move=IDENTIFIER -> ^(MOVES $move)
 		|	'(' (move=IDENTIFIER)+ ')' -> ^(MOVES $move+);
 		
-attacks :	attack=IDENTIFIER -> ^(ATTACKS $attack)
+attacks
+		:	attack=IDENTIFIER -> ^(ATTACKS $attack)
 		|	'(' (attack=IDENTIFIER)+ ')' -> ^(ATTACKS $attack+);
 
 condition 
-	:	first=andcondition ( 'or' second=condition -> ^(ORCONDITION $first $second) | -> ^(RCONDITION $first));
+		:	first=andcondition ( 'or' second=condition -> ^(ORCONDITION $first $second) | -> ^(RCONDITION $first));
 	
 andcondition
-	:	first=pcondition ( 'and' second=andcondition -> ^(ANDCONDITION $first $second) | -> ^(RCONDITION $first));
+		:	first=pcondition ( 'and' second=andcondition -> ^(ANDCONDITION $first $second) | -> ^(RCONDITION $first));
 	
 
 pcondition 
-	:	'(' c=condition ')' -> ^(RCONDITION $c)
-	|	p=IDENTIFIER -> ^(CONDITION $p);
+		:	'(' c=condition ')' -> ^(RCONDITION $c)
+		|	p=IDENTIFIER -> ^(CONDITION $p);
 
 
 /* Tokens: */
 
-WS 	:	( ' ' | '\t' | '\r' | '\n')+ {$channel=HIDDEN;};
-IDENTIFIER	:	('a'..'z'|'A'..'Z'|'_')('a' .. 'z'| 'A'..'Z'| '0' .. '9' | '_' | '-')+;
-DIGIT	:	('0' .. '9')+;
+WS
+		:	( ' ' | '\t' | '\r' | '\n')+ {$channel=HIDDEN;};
+IDENTIFIER
+		:	('a'..'z'|'A'..'Z'|'_')('a' .. 'z'| 'A'..'Z'| '0' .. '9' | '_' | '-')+;
+DIGIT
+		:	('0' .. '9')+;
 

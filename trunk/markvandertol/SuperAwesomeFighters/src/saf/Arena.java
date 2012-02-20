@@ -41,20 +41,16 @@ public class Arena {
 		try {
 			fighterParser = new FighterDefinitionParser(file);
 			
-			if (!fighterParser.getErrorList().isEmpty()) {
-				StringBuilder builder = new StringBuilder();
-				for (String error : fighterParser.getErrorList()) {
-					builder.append(error);
-					builder.append('\n');
-				}
-				return builder.toString();
+			String errorMessage = fighterParser.getErrorMessage();
+			if (errorMessage != null) {
+				return "Fighter couldn't be loaded:\n" + errorMessage;
 			}
 			else {
 				playerDefinitions[playerIndex] = fighterParser.getDefinition();
 				restartRound();
 			}
 		} catch (IOException e) {
-			return "Error while reading: " + e.toString();
+			return "Error while reading:\n" + e.toString();
 		}
 		
 		
@@ -158,14 +154,14 @@ public class Arena {
 	private BehaviourRule pickRule(Fighter currentPlayer, Fighter opponent) {
 		Set<State> currentStates = new HashSet<State>();
 		currentStates.add(State.always);
-		currentStates.add(getNearOrFar(currentPlayer));
+		currentStates.add(getNearOrFarState(currentPlayer));
 		currentStates.add(getStrengthComparison(currentPlayer, opponent));
 		
 		List<BehaviourRule> rules = currentPlayer.getBeheaviourRules(currentStates);
 		return RandomHelper.getElementFromList(rules);
 	}
 
-	private State getNearOrFar(Fighter currentPlayer) {
+	private State getNearOrFarState(Fighter currentPlayer) {
 		int smallestReach = Math.min(currentPlayer.getKickReach(), currentPlayer.getPuchReach());
 		return (smallestReach >= distanceBetweenPlayers) ? State.near : State.far;
 	}
