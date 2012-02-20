@@ -26,10 +26,10 @@ public class InterpreterVisitorTest {
 		Bot bot = new Bot(fighter, 0);
 		InterpreterVisitor interpreter = new InterpreterVisitor();
 		
-		assertEquals(5, bot.kickPower);
+		assertEquals(5, bot.getKickPower());
 		interpreter.setBot(bot);
 		interpreter.Evaluate(fighter);
-		assertEquals(10, bot.kickPower);
+		assertEquals(10, bot.getKickPower());
 	}
 	
 	@Test

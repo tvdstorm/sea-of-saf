@@ -46,4 +46,13 @@ public class Tool {
 		}
 		return result;
 	}
+
+	public static Method getAnnotatedMethod(Class aClass, String safName, String keywordType) {
+		for (Method method : getAnnotatedMethods(aClass)) {
+			MethodAnnotation annotation = method.getAnnotation(MethodAnnotation.class);
+			if (annotation.safName().equals(safName) && annotation.keywordType().equals(keywordType))
+				return method;
+		}
+		return null;
+	}
 }

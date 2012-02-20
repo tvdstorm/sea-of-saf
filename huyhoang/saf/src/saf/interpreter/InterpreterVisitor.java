@@ -4,6 +4,8 @@ import java.lang.reflect.*;
 import saf.ast.*;
 import saf.ast.condition.*;
 import saf.ast.definition.*;
+import saf.util.Tool;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,8 +33,8 @@ public class InterpreterVisitor implements FighterVisitor
 	
 	public void visit(Strength strength) {
 		try {
-			Field field = Bot.class.getField(strength.getName());
-			field.setInt(this.bot, new Integer(strength.getValue()));
+			Method method = Tool.getAnnotatedMethod(Bot.class, strength.getName(), "setStrength");
+			method.invoke(this.bot, strength.getValue());
 		} catch (Exception ex) {
 			System.out.println("Unable to set strength: " + ex.getMessage());
 		}

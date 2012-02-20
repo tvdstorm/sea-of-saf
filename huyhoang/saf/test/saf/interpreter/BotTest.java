@@ -56,30 +56,20 @@ public class BotTest {
 		beta.setPosition(-2);
 		assertEquals(-1, beta.getPosition());
 	}
-
-	@Test
-	public void testIsEven() {
-		assertTrue(bruceLee.kickPower == jackieChan.kickPower);
-		assertTrue(bruceLee.kickReach == jackieChan.kickReach);
-		assertTrue(bruceLee.punchPower == jackieChan.punchPower);
-		assertTrue(bruceLee.punchReach == jackieChan.punchReach);
-		
-		assertTrue(bruceLee.isEven());
-	}
 	
 	@Test
 	public void testIsStrongerWeaker() {
 		Bot bruceLee = new Bot(null, 0);
-		bruceLee.kickPower = 8;
-		bruceLee.kickReach = 8;
-		bruceLee.punchPower = 8;
-		bruceLee.punchReach = 8;
+		bruceLee.setKickPower(8);
+		bruceLee.setKickReach(8);
+		bruceLee.setPunchPower(8);
+		bruceLee.setPunchReach(8);
 		
 		Bot jackieChan = new Bot(null, 5);
-		jackieChan.kickPower = 5; 
-		jackieChan.kickReach = 5; 
-		jackieChan.punchPower = 5; 
-		jackieChan.punchReach = 5;
+		jackieChan.setKickPower(5); 
+		jackieChan.setKickReach(5); 
+		jackieChan.setPunchPower(5); 
+		jackieChan.setPunchReach(5);
 		
 		bruceLee.setOpponentBot(jackieChan);
 		
@@ -138,7 +128,7 @@ public class BotTest {
 		Bot jackieChan = new Bot(null, 3);
 		bruceLee.setOpponentBot(jackieChan);
 		
-		assertEquals(5, bruceLee.punchReach);
+		assertEquals(5, bruceLee.getPunchReach());
 		assertTrue(bruceLee.isPunchInReach());
 	}
 	
@@ -159,10 +149,10 @@ public class BotTest {
 		Bot jackieChan = new Bot(null, 2);
 		bruceLee.setOpponentBot(jackieChan);
 		
-		bruceLee.kickPower = 1;
-		bruceLee.kickReach = 1;
-		bruceLee.punchPower = 1;
-		bruceLee.punchReach = 1;
+		bruceLee.setKickPower(1);
+		bruceLee.setKickReach(1);
+		bruceLee.setPunchPower(1);
+		bruceLee.setPunchReach(1);
 		bruceLee.performAction("punch_high");
 		assertEquals(100, jackieChan.getHitpoints());
 		assertEquals(100, bruceLee.getHitpoints());
