@@ -72,8 +72,8 @@ public class Main {
 		// TODO: move loading to load UI
 		IFighterLoader loader = new ANTLFighterLoader();
 		Fighter blueFighter = (Fighter) loader
-				.loadFighter("data/testfighter.saf");
-		Fighter redFighter = (Fighter) loader.loadFighter("data/testfighter.saf");
+				.loadFighter("data/headon.saf");
+		Fighter redFighter = (Fighter) loader.loadFighter("data/headon.saf");
 
 		// Skipping validation, trusting myself to not screw up.
 
@@ -89,9 +89,7 @@ public class Main {
 		try {
 			while (!simulator.isDisposed()) {
 				simulator.update();
-
-				// Lock simulation at 60 ticks per second
-				Thread.sleep(1000 / 60);
+				Thread.sleep(1000 / 30);
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();

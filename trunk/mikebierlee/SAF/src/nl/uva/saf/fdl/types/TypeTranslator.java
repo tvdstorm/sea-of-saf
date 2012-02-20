@@ -22,7 +22,7 @@ public class TypeTranslator {
 	public static FightActionType getFightActionType(String typeString) {
 		FightActionType type = FightActionType.unknown;
 
-		if (typeString == "block_low") {
+		if (typeString.equals("block_low")) {
 			type = FightActionType.block_low;
 		} else if (typeString.equals("block_high")) {
 			type = FightActionType.block_high;

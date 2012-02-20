@@ -18,6 +18,7 @@
 
 package nl.uva.saf.simulation;
 
+import java.awt.Dimension;
 import java.util.HashMap;
 
 import nl.uva.saf.fdl.CharacteristicExtractor;
@@ -52,14 +53,14 @@ public class FighterBot {
 		position = new Vector2d();
 		spawnPosition = new Vector2d();
 		origin = new Vector2d(100, 150);
-		health = 100;		
+		health = 100;
 
 		if (fighterNode != null) {
 			name = NameExtractor.getName(fighterNode);
 			characteristics = CharacteristicExtractor.getCharacteristics(fighterNode);
 		} else {
 			name = "";
-			characteristics =  new HashMap<CharacteristicType, Integer>();
+			characteristics = new HashMap<CharacteristicType, Integer>();
 		}
 
 		calculateSpeed();
@@ -74,6 +75,20 @@ public class FighterBot {
 		double weight = (punchPower + kickPower) / 2;
 		double height = (punchReach + kickReach) / 2;
 		speed = (int) Math.abs(0.5 * (height - weight));
+	}
+
+	public void containInDimension(Dimension dimension) {
+		if (position.x < 0) {
+			position.x = 0;
+		} else if (position.x > dimension.width - 1) {
+			position.x = dimension.width - 1;
+		}
+
+		if (position.y < 0) {
+			position.y = 0;
+		} else if (position.y > dimension.height - 1) {
+			position.y = dimension.height - 1;
+		}
 	}
 
 	public int getSpeed() {

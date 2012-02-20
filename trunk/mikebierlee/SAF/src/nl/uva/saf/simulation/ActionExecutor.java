@@ -28,14 +28,17 @@ import nl.uva.saf.fdl.types.MoveActionType;
 
 public class ActionExecutor implements IActionExecutor {
 	private final double powerScale;
+	private final int speedScale;
 	private int turnCost;
 
 	public ActionExecutor() {
 		powerScale = 1;
+		speedScale = 10;
 	}
 
-	public ActionExecutor(double powerScale) {
+	public ActionExecutor(double powerScale, int speedScale) {
 		this.powerScale = powerScale;
+		this.speedScale = speedScale;
 	}
 
 	@Override
@@ -66,19 +69,19 @@ public class ActionExecutor implements IActionExecutor {
 
 		switch (fighter.getMoveAction()) {
 		case walk_away:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, -speed));
+			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * speedScale)));
 			turnCost += 1;
 			break;
 		case walk_towards:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, speed));
+			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * speedScale));
 			turnCost += 1;
 			break;
 		case run_away:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, -speed * 2));
+			fighterPosition.add(Vector2d.multiply(enemyDirection, -(speed * speedScale) * 2));
 			turnCost += 2;
 			break;
 		case run_towards:
-			fighterPosition.add(Vector2d.multiply(enemyDirection, speed * 2));
+			fighterPosition.add(Vector2d.multiply(enemyDirection, (speed * speedScale) * 2));
 			turnCost += 2;
 			break;
 		}
