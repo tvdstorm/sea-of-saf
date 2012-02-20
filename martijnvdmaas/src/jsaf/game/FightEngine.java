@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Random;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
 import jsaf.astelements.Behaviour;
 import jsaf.astelements.Bot;
 import jsaf.astelements.Bots;

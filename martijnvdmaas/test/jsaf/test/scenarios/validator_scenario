@@ -1,24 +1,65 @@
 Narrative:
-In order to check whether the parser is working properly
-As a development team
-I want to test the parser with certain conditions
+In order to check whether the given input is valid
+As a developer
+I want to test the validator against different invalid inputs
 
-Scenario: Only one player is given
-
-Given a SAF file with value onePlayer.saf
-When I parse the file
-Then there should be a parse error
-
-Scenario: a player is given with wrong a characteristic 
+Scenario: a player is given with an incorrect characteristic 
 
 Given a SAF file with value wrongCharacteristic.saf
-When I parse the file
-Then there  should be a parse error
+When I parse the input
+And I validate the file
+Then the validator should contain a characteristic error
+
+
+
+Scenario: a player is given with an incorrect move 
+
+Given a SAF file with value wrongMove.saf
+When I parse the input
+And I validate the file
+Then the validator should contain a move error
+
+
+
+Scenario: a player is given with an incorrect attack 
+
+Given a SAF file with value wrongAttack.saf
+When I parse the input
+And I validate the file
+Then the validator should contain an attack error
+
+
+
+Scenario: a player is given with an incorrect condition 
+
+Given a SAF file with value wrongCondition.saf
+When I parse the input
+And I validate the file
+Then the validator should contain a condition error
+
+
+
+Scenario: a player is given without an always rule 
+
+Given a SAF file with value noAlwaysRule.saf
+When I parse the input
+And I validate the file
+Then the validator should contain a hasnoalways error
 
 
 Scenario: Valid input is given
 
 Given a SAF file with value validInput.saf
-When I parse the file
-Then the left player should be initialized
-And the right player should be initialized
+When I parse the input
+And I validate the file
+Then the validator should contain no errors
+
+Scenario: a player is given all errors
+
+Given a SAF file with value allWrongConstants.saf
+When I parse the input
+And I validate the file
+Then the validator should contain all validator errors
+
+
+

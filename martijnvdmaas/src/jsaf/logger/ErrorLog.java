@@ -11,6 +11,7 @@ public class ErrorLog
 	public ErrorLog(String errorMessage)
 	{
 		System.err.println(errorMessage);
+		
 		try
 		{
 			String projectPath = new java.io.File(".").getCanonicalPath();

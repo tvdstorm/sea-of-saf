@@ -87,8 +87,8 @@ public class GameSteps extends Steps
 
 	/* Scenario: fight has one winner */
 
-	@Given("a SAF file with value $value")
-	public void aSAFFileWithValue(String name) throws ParseException, IOException
+	@Given("a file with value $value")
+	public void aFileWithValue(String name) throws ParseException, IOException
 	{
 		bots = new Parser(Main.getRelativeProjectPath() + "input\\" + name).getBots();
 		leftBot = bots.getLeftBot().getBotName();

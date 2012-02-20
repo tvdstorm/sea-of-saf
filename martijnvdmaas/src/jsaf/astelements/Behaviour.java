@@ -61,7 +61,7 @@ public class Behaviour implements SAFElement
 	}
 
 	@Override
-	public void accept(SAFElementVisitor visitor) throws Exception {
+	public void accept(SAFElementVisitor visitor) {
 		for (ConditionGroup conditionGroup : conditionChoices.getConditionGroups()) {
 			conditionGroup.accept(visitor);
 		}

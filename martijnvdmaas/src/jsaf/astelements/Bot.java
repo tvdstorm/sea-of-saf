@@ -60,7 +60,7 @@ public class Bot implements SAFElement
 	}
 
 	@Override
-	public void accept(SAFElementVisitor visitor) throws Exception
+	public void accept(SAFElementVisitor visitor)
 	{
 		for (Characteristic characteristic : characteristics)
 		{

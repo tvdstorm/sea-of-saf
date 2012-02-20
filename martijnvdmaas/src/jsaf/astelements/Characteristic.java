@@ -40,7 +40,7 @@ public class Characteristic implements SAFElement
 	}
 
 	@Override
-	public void accept(SAFElementVisitor visitor) throws Exception {
+	public void accept(SAFElementVisitor visitor) {
 		visitor.visit(this);
 	}
 }

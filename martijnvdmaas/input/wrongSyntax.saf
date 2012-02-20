@@ -2,8 +2,8 @@ chicken
 {
   kickReach  = 9
   punchReach = 8
-  kickPower  = 6
-  punchPower = 9
+  kickPower  = asdads
+  punchPower = 4
   near [choose(crouch walk_towards) choose(block_high punch_high)]
   far [run_towards kick_high]
   always [crouch punch_low]

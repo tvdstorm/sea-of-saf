@@ -3,9 +3,9 @@ chicken
   kickReach  = 9
   punchReach = 8
   kickPower  = 6
-  punchPower = 9
+  punchPower = 32
   near [choose(crouch walk_towards) choose(block_high punch_high)]
-  far [run_towards kick_high]
+  far [run_towards kicsdk_high]
   always [crouch punch_low]
 }
 goose
@@ -16,7 +16,7 @@ goose
   punchPower = 8
   far  [run_towards kick_low]
   near [run_away kick_low]
-  much_weaker or much_weaker and weaker [run_away kick_low]
+  much_weaker or much_weaker and weaker [run_away kick_lw]
   always [run_away kick_high]
   far [crouch punch_low]
 }

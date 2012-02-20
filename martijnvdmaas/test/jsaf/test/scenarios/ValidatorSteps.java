@@ -1,11 +1,14 @@
 package jsaf.test.scenarios;
 
-import jsaf.astelements.Bot;
+import java.io.IOException;
+import java.util.List;
+
 import jsaf.astelements.Bots;
+import jsaf.constants.ErrorConstants;
 import jsaf.grammar.ParseException;
 import jsaf.main.Main;
 import jsaf.main.Parser;
-
+import jsaf.visitor.SAFElementValidatorVisitor;
 
 import static org.jbehave.util.JUnit4Ensure.ensureThat;
 import org.jbehave.scenario.annotations.Given;
@@ -15,73 +18,88 @@ import org.jbehave.scenario.steps.Steps;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class ValidatorSteps extends Steps {
-    private String safFileName;
-    private Bots bots;
-    private Exception actualException;
+public class ValidatorSteps extends Steps implements ErrorConstants
+{
+	private String safFileName;
+	private SAFElementValidatorVisitor validator;
+	private Bots bots;
 
-    /* Scenario: Only one player is given */
-    @Given("an incorrect SAF file with value $value")
-    public void anIncorrectSAFFileWithValue (String name)
-    {
-    	safFileName = name;
-    }
+	@Given("a SAF file with value $value")
+	public void aSAFFileWithValue(String name) throws ParseException, IOException
+	{
+		safFileName = name;
+	}
 
-    @When("I parse the input")
-    public void iParseTheInput() {
-    	try
+	@When("I parse the input")
+	public void iParseTheInput() throws ParseException, IOException
+	{
+		bots = new Parser(Main.getRelativeProjectPath() + "input\\" + safFileName).getBots();
+	}
+
+	@When("I validate the file")
+	public void iValidateTheFile()
+	{
+		validator = new SAFElementValidatorVisitor();
+		bots.accept(validator);
+	}
+
+	@Then("the validator should contain a characteristic error")
+	public void theValidatorShouldContainACharacteristicError()
+	{
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.CHARACTERISTIC_INVALID_NAME));
+	}
+
+	@Then("the validator should contain a move error")
+	public void theValidatorShouldContainAMoveError()
+	{
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.BEHAVIOUR_INVALID_MOVE_NAME));
+	}
+
+	@Then("the validator should contain a condition error")
+	public void theValidatorShouldContainAConditionError()
+	{
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.CONDITION_INVALID_NAME));
+	}
+
+	@Then("the validator should contain an attack error")
+	public void theValidatorShouldContainAnAttackError()
+	{
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.BEHAVIOUR_INVALID_ATTACK_NAME));
+	}
+
+	@Then("the validator should contain a hasnoalways error")
+	public void theValidatorShouldContainAHasnoalwaysError()
+	{
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.BOT_HAS_NOT_ALWAYS));
+	}
+
+	@Then("the validator should contain all validator errors")
+	public void theValidatorShouldContainAllValidatorErrors()
+	{
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.CHARACTERISTIC_INVALID_NAME));
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.BEHAVIOUR_INVALID_MOVE_NAME));
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.CONDITION_INVALID_NAME));
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.BEHAVIOUR_INVALID_ATTACK_NAME));
+		ensureThat(containsError(validator.getErrorMessages(), ErrorConstants.BOT_HAS_NOT_ALWAYS));
+	}
+
+	@Then("the validator should contain no errors")
+	public void theValidatorShouldContainNoErros()
+	{
+		//ensureThat(true);
+	}
+
+	private boolean containsError(List<String> errorMessages, String searchError)
+	{
+		boolean errorFound = false;
+		for (String error : errorMessages)
 		{
-			bots = new Parser(Main.getRelativeProjectPath() + "input\\" + safFileName).getBots();
+			if (error.startsWith(searchError))
+			{
+				errorFound = true;
+			}
 		}
-		catch (Exception e)
-		{
-			actualException = e;
-		}
-    	finally
-    	{
-    		if(actualException == null) 
-    		{
-    			actualException = new NullPointerException();
-    		}
-    	}
-    }
-    
-    @Then("there should be a parsing error")
-    public void thereShouldBeAParsingError()
-    {
-    	ParseException expectedException 	= new ParseException();
-    	String expectedExceptionClassName 	= expectedException.getClass().getName();
-    	String actualExceptionClassName 	= actualException.getClass().getName();
-    	
-    	ensureThat(actualExceptionClassName, equalTo(expectedExceptionClassName));
-    }
-    
-    /* Scenario: Valid input is given */
-    
-    @Given("a correct SAF file with value $value")
-    public void aCorrectSAFFileWithValue(String name) 
-    {
-    	safFileName = name; 
-    }
-    
+		return errorFound;
+	}
 
-    @Then("the left fighter should be initialized")
-    public void theLeftFighterShouldBeInitialized() 
-    {
-    	Bot expectedClass = new Bot();
-    	String expectedClassName = expectedClass.getClass().getName();
-    	String actualClassName = bots.getLeftBot().getClass().getName();
-    	
-    	ensureThat(actualClassName, equalTo(expectedClassName));
-    }
-    
-    @Then("the right fighter should be initialized")
-    public void theRightFighterShouldBeInitialized() 
-    {
-    	Bot expectedClass = new Bot();
-    	String expectedClassName = expectedClass.getClass().getName();
-    	String actualClassName = bots.getRightBot().getClass().getName();
-    	
-    	ensureThat(actualClassName, equalTo(expectedClassName));
-    }
 }
