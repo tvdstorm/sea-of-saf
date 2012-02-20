@@ -3,7 +3,6 @@ package saf.animation;
 import saf.data.*;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Dictionary;
