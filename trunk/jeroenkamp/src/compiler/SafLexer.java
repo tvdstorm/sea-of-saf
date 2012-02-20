@@ -1,6 +1,7 @@
 package compiler;
 
 import java.io.*;
+import compiler.types.*;
 
 class SafLexer implements SafTokens {
     private int c = ' ';
@@ -76,8 +77,8 @@ class SafLexer implements SafTokens {
                 text+=(char)c;
                 nextChar();
               }while(Character.isLetterOrDigit((char)c) || (char)c == '_');
-              m_Val=new StringValue(text);
-              return m_Token=VAR;
+              
+              return m_Token=identifyText(text);
             }
             else{
               SafCompiler.fatalError("Illegal character "+c);

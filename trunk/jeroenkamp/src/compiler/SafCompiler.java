@@ -2,11 +2,17 @@ package compiler;
 
 import java.io.*;
 
-class SafCompiler {
+import compiler.types.*;
+
+public class SafCompiler {
   public static void main(String[] args) {
-	  String s="c:\\fighter.saf";
+	  String s=args[0];
 	  String response=compile(s);
 	  System.out.println(response);
+	  try{
+	  java.io.FileWriter stream=new FileWriter(args[1]);
+	  stream.write(response);
+	  }catch(Exception e){}
   }
   private static String compile(String file){
 	  try{
@@ -18,7 +24,7 @@ class SafCompiler {
 		parser.parse();
 		input.close();
 		SafObject root=parser.getRootNode();
-		return root.toString();
+		return root.toJavaCode();
 	  }catch(FileNotFoundException fnfe){
 		  
 	  }
@@ -32,11 +38,11 @@ class SafCompiler {
 
   }
 	
-  static void fatalError(String msg) {
+  public static void fatalError(String msg) {
 	System.out.println("Fatal ERROR: " + msg);
 	System.exit(1);
   }
-  static void error(String msg) {
+  public static void error(String msg) {
 		System.out.println("ERROR: " + msg);
   }
 }
