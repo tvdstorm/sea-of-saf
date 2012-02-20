@@ -1,0 +1,4 @@
+legal_minimal
+{
+    always [jump punch_low]
+}

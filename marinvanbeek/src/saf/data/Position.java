@@ -30,8 +30,6 @@ public class Position
             newX = max;
         }
 
-        System.out.println("data.Position, newx, newy, min, max: " + newX + ", " +
-                           newY + ", " + min + ", " + max);
         return new Position(newX, newY);
     }
 

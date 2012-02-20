@@ -1,7 +1,9 @@
 package saf.animation;
 
-import saf.simulation.Fighter;
+import saf.data.Fighter;
 import saf.data.Position;
+import saf.data.SimulationData;
+import saf.animation.Animator;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,14 +11,10 @@ import java.util.ArrayList;
 import java.lang.Thread;
 
 import java.awt.Container;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
-//import javax.swing.JPanel;
-import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 
-public class ArenaAnimator extends JFrame
+public class ArenaAnimator extends Animator
 {
     public static final long serialVersionUID = 1L;
 
@@ -27,28 +25,38 @@ public class ArenaAnimator extends JFrame
     private FighterAnimator leftAnimator;
     private FighterAnimator rightAnimator;
 
-    public ArenaAnimator(String leftFileName, String rightFileName)
+    public ArenaAnimator(String leftFileName, String rightFileName, 
+                         SimulationData simulationData)
     {
-        setupArena();
+        this("Super Awesome Fighters Arena", leftFileName, rightFileName,
+             simulationData);
+    }
+
+    public ArenaAnimator(String windowName, String leftFileName, 
+                         String rightFileName, SimulationData simulationData)
+    {
+        super(windowName, ARENA_WIDTH, ARENA_HEIGHT);
 
         Container contentPane = getContentPane();
 
         leftAnimator = new FighterAnimator(leftFileName, contentPane);
-        rightAnimator = new FighterAnimator(rightFileName, contentPane, true);
-    }
+        for (Fighter simulationStep : simulationData.getLeftData())
+        {
+            leftAnimator.bufferAnimation(simulationStep);
+        }
 
-    public void setupArena()
-    {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(ARENA_WIDTH, ARENA_HEIGHT);
-        setVisible(true);
+        rightAnimator = new FighterAnimator(rightFileName, contentPane, true);
+        for (Fighter simulationStep : simulationData.getRightData())
+        {
+            rightAnimator.bufferAnimation(simulationStep);
+        }
     }
 
     public void runAnimation()
     {
         leftAnimator.animateFirst();
         rightAnimator.animateFirst();
-        sleepDelay();
+        sleepDelay(ANIMATION_DELAY_MS * 5);
 
         while (leftAnimator.hasAnimations() &&
                rightAnimator.hasAnimations())
@@ -56,29 +64,11 @@ public class ArenaAnimator extends JFrame
             leftAnimator.animateNext();
             rightAnimator.animateNext();
 
-            System.out.print(">");
-            sleepDelay();
+            sleepDelay(ANIMATION_DELAY_MS);
         }
         System.out.println();
-    }
 
-    public void sleepDelay()
-    {
-        try
-        {
-            Thread.currentThread().sleep(ANIMATION_DELAY_MS);
-        }
-        catch (InterruptedException e)
-        {
-            System.out.println("The Animation sleep was interrupted: " +
-                               e.getMessage());
-        }
-    }
-
-    public void bufferTimeStep(Fighter leftFighter, Fighter rightFighter)
-    {
-        leftAnimator.bufferAnimation(leftFighter);
-        rightAnimator.bufferAnimation(rightFighter);
+        sleepDelay(2500);
     }
 }
 

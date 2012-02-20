@@ -1,69 +1,103 @@
-//import org.testng.annotations.*;
 import org.junit.*;
 
 import saf.data.*;
-import saf.simulation.*;
 import saf.animation.*;
 
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class AnimationTest
 {
+    private static final String LOG_FILE = "simulation_test_results.txt";
+
+    private static PrintStream systemStdout;
+    private static PrintStream systemStderr;
+
+    @BeforeClass
+    public static void redirect()
+    {
+        try
+        {
+            systemStdout = System.out;
+            systemStderr = System.err;
+
+            PrintStream logFile = new PrintStream(LOG_FILE);
+            System.setOut(logFile);
+            System.setErr(logFile);
+        } catch (FileNotFoundException e)
+        {
+            System.err.println("Couldn't open log file\n" + e.getMessage());
+        }
+    }
+
+    @AfterClass
+    public static void unRedirect()
+    {
+        System.setOut(systemStdout);
+        System.setErr(systemStderr);
+    }
+
     @Test
     public void testPredefinedActions()
     {
-        List<saf.simulation.Fighter> leftFighters = getCompleteFighters(0);
-        List<saf.simulation.Fighter> rightFighters = getCompleteFighters(100);
-        ArenaAnimator animator = new ArenaAnimator("bison", "bison");
+        List<Fighter> leftFighters = getCompleteFighters(10);
+        List<Fighter> rightFighters = getCompleteFighters(110);
+        SimulationData simulationData = 
+                new SimulationData(leftFighters, rightFighters);
 
-        System.out.println();
-        for (int i = 0; i < leftFighters.size(); i++)
-        {
-            animator.bufferTimeStep(leftFighters.get(i), rightFighters.get(i));
-            System.out.print("<");
-        }
-        System.out.println();
+        Animator animator = new ArenaAnimator("Animation Test", "bison", 
+                                              "bison", simulationData);
 
         animator.runAnimation();
     }
 
     /*
-     * Returns a list of simulated Fighters, where every move and every attack
-     * is guaranteed to appear and where the Fighter's position changes.
+     * Returns a list of simulated Fighters, where every attack is guaranteed
+     * to appear and where the Fighter's position changes.
      */
-    private List<saf.simulation.Fighter> getCompleteFighters(int position)
+    private List<Fighter> getCompleteFighters(int xPosition) 
     {
-        /* This data Fighter is needed for the simulation Fighter, but not used
-         * in the actual animation. */
-        saf.data.Fighter generalFighter = saf.data.Fighter.getRandom(0);
-        saf.data.Action generalAction = 
-                new saf.data.Action(new saf.data.Move("stand"), 
-                                    new saf.data.Attack("punch_high"));
-        List<saf.data.Action> actions = getCompleteActions();
-        List<saf.simulation.Fighter> fighters = 
-                new ArrayList<saf.simulation.Fighter>();
+        List<Action> actions = getCompleteActions();
+        List<Fighter> fighters = new ArrayList<Fighter>();
+        Position position = new Position(xPosition, 0);
 
         for (saf.data.Action action : actions)
         {
-            fighters.add(new saf.simulation.Fighter(generalFighter, position, 
-                                                    action));
+            /* Add the Fighter several times to slow down the animation; in the
+             * simulation a fighter will only perform a move every
+             * Fighter.speed timesteps (~10-15). */
+            for (int i = 0; i < 5; i++)
+            {
+                saf.data.Fighter randomFighter = Fighter.getRandom(0);
+                randomFighter.setPosition(position);
+                randomFighter.setAction(action);
+                fighters.add(randomFighter);
+            }
         }
 
-        for (int i = 0; i < 10; i++)
+        saf.data.Action generalAction = new Action(new Move("stand"), 
+                                                   new Attack("punch_high"));
+        for (int i = 0; i < 15; i++)
         {
-            fighters.add(new saf.simulation.Fighter(generalFighter,
-                                                    i*3+position,
-                                                    generalAction));
+            PositionDifference difference = new PositionDifference(i*3, 0);
+            Position movedPosition = position.move(difference, 1, 0, 
+                                                   i*15 + 110);
+
+            saf.data.Fighter randomFighter = Fighter.getRandom(0);
+            randomFighter.setPosition(movedPosition);
+            randomFighter.setAction(generalAction);
+            fighters.add(randomFighter);
         }
 
         return fighters;
     }
 
     /*
-     * Returns a list of actions, where every move and every attack is
-     * guaranteed to appear.
+     * Returns a list of actions, where every attack is guaranteed to appear.
      */
     private List<saf.data.Action> getCompleteActions()
     {
@@ -71,13 +105,6 @@ public class AnimationTest
         List<String> attacks = saf.data.Attack.LEGAL;
 
         List<saf.data.Action> actions = new ArrayList<saf.data.Action>();
-
-        for (String move : moves)
-        {
-            actions.add(
-                    new saf.data.Action(new saf.data.Move(move), 
-                                        new saf.data.Attack(attacks.get(0))));
-        }
 
         for (String attack : attacks)
         {

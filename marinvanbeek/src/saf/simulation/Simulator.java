@@ -1,54 +1,67 @@
 package saf.simulation;
 
 import saf.data.*;
-import saf.animation.ArenaAnimator;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Simulator {
+    public static final int LEFT_BORDER = 0;
+    public static final int LEFT_START = 50;
+    public static final int RIGHT_BORDER = 200;
+    public static final int RIGHT_START = 150;
+    public static final int MAXIMUM_STEPS = 300;
+
     private Fighter leftFighter;
+    private List<saf.data.Fighter> leftSimulationData =
+            new ArrayList<saf.data.Fighter>();
     private Fighter rightFighter;
-    private ArenaAnimator animator;
+    private List<saf.data.Fighter> rightSimulationData = 
+            new ArrayList<saf.data.Fighter>();
 
-    public Simulator()
+    public Simulator(saf.data.Fighter leftData, saf.data.Fighter rightData)
     {
-        Random random = new Random(0);
-
-        saf.data.Fighter leftData = 
-                saf.data.Fighter.getRandom(random.nextInt());
-        this.leftFighter = new Fighter(leftData, 10, 1);
-
-        saf.data.Fighter rightData =    
-                saf.data.Fighter.getRandom(random.nextInt());
-        this.rightFighter = new Fighter(rightData, 200, -1);
-
-        this.animator = new ArenaAnimator("bison", "bison");
-    }
-
-    public Simulator(String leftFileName, String rightFileName)
-    {
-        /* FIXME uses random fighters instead of the fighters specified by the
-         * filenames. */
-        this();
+        this.leftFighter = new Fighter(leftData, LEFT_START, 1);
+        this.rightFighter = new Fighter(rightData, RIGHT_START, -1);
     }
 
     public void runSimulation()
     {
-        while (leftFighter.isAlive() && rightFighter.isAlive())
+        int i;
+        for (i = 0; i < MAXIMUM_STEPS; i++)
         {
-            handleFighter(leftFighter, rightFighter, 
-                          0, rightFighter.getPosition().getX());
-            handleFighter(rightFighter, leftFighter,  
-                          leftFighter.getPosition().getX(), 210);
+            handleFighter(leftFighter, rightFighter, leftSimulationData,
+                          LEFT_BORDER, rightFighter.getPosition().getX());
+            handleFighter(rightFighter, leftFighter, rightSimulationData,
+                          leftFighter.getPosition().getX(), RIGHT_BORDER);
 
-            animator.bufferTimeStep(leftFighter, rightFighter);
+            if (!(leftFighter.isAlive() && rightFighter.isAlive()))
+            {
+                if (leftFighter.isAlive())
+                {
+                    System.out.println("Left won!");
+                }
+                else
+                {
+                    System.out.println("Right won!");
+                }
+
+                break;
+            }
         }
+        addData(leftFighter, leftSimulationData);
+        addData(rightFighter, rightSimulationData);
 
-        animator.runAnimation();
+        if (i == MAXIMUM_STEPS)
+        {
+            System.out.println("Draw!");
+        }
     }
 
-    private void handleFighter(Fighter fighter, Fighter opponent, int min, 
-                               int max)
+    private void handleFighter(Fighter fighter, Fighter opponent, 
+                               List<saf.data.Fighter> simulationData, 
+                               int min, int max)
     {
         if (fighter.mayAct())
         {
@@ -58,7 +71,20 @@ public class Simulator {
             fighter.move(action.getMove(), min, max);
             opponent.defend(action.getAttack(), rightState);
         }
+
+        addData(fighter, simulationData);
         fighter.tick();
+    }
+
+    private void addData(Fighter fighter, List<saf.data.Fighter> data)
+    {
+        data.add(new saf.data.Fighter(fighter.getData()));
+    }
+
+    public saf.data.SimulationData getSimulationData()
+    {
+        return new saf.data.SimulationData(leftSimulationData,
+                                           rightSimulationData);
     }
 }
 

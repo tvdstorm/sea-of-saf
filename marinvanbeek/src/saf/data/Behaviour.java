@@ -17,6 +17,26 @@ public class Behaviour
         return new Behaviour(Tactic.getRandomList(random));
     }
 
+    /* 
+     * Returns 'null' if this Behaviour doesn't contain an always action. This
+     * should have been checked by saf.syntax, though.
+     */
+    public Action getAlwaysAction()
+    {
+        for (Tactic tactic : tactics)
+        {
+            Logic condition = tactic.getCondition();
+            String conditionName = condition.getName();
+
+            if (conditionName.equals("always"))
+            {
+                return tactic.getAction();
+            }
+        }
+
+        return null;
+    }
+
     public String toString()
     {
         String s = "";

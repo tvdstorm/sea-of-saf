@@ -37,9 +37,9 @@ public class Fighter implements SyntaxCheck
         nrParseErrors = nr;
     }
 
-    public void printResult()
+    public saf.data.Fighter getFighterData()
     {
-        System.out.println(fighterData);
+        return fighterData;
     }
 }
 
