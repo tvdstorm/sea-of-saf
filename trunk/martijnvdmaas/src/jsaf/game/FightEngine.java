@@ -158,19 +158,19 @@ public class FightEngine extends Observable implements SAFConstants
 		switch (movingFighter.getCurrentMove())
 		{
 		case MOVE_TYPE_CROUCH:
-			distance = ((distance - CROUCH_STEP_DISTANCE) < 0) ? 0 : distance - CROUCH_STEP_DISTANCE;
+			distance = ((distance + CROUCH_STEP_DISTANCE) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + CROUCH_STEP_DISTANCE;
 			break;
 		case MOVE_TYPE_RUN_TOWARDS:
-			distance = ((distance - RUN_STEP_DISTANCE) < 0) ? 0 : distance - RUN_STEP_DISTANCE;
-			break;
-		case MOVE_TYPE_RUN_AWAY:
 			distance = ((distance + RUN_STEP_DISTANCE) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + RUN_STEP_DISTANCE;
 			break;
 		case MOVE_TYPE_WALK_TOWARDS:
-			distance = ((distance - WALK_STEP_DISTANCE) < 0) ? 0 : distance - WALK_STEP_DISTANCE;
+			distance = ((distance + WALK_STEP_DISTANCE) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + WALK_STEP_DISTANCE;
+			break;
+		case MOVE_TYPE_RUN_AWAY:
+			distance = ((distance - RUN_STEP_DISTANCE) < 0) ? 0 : distance - RUN_STEP_DISTANCE;
 			break;
 		case MOVE_TYPE_WALK_AWAY:
-			distance = ((distance + WALK_STEP_DISTANCE) > MAX_HORIZONTAL_DISTANCE) ? MAX_HORIZONTAL_DISTANCE : distance + WALK_STEP_DISTANCE;
+			distance = ((distance - WALK_STEP_DISTANCE) < 0) ? 0 : distance - WALK_STEP_DISTANCE;
 			break;
 		}
 	}
@@ -272,10 +272,10 @@ public class FightEngine extends Observable implements SAFConstants
 			if (opponentHealth == currentFighter.getHealth()) return true;
 			break;
 		case CONDITION_TYPE_NEAR:
-			if (playerDistance >= SHORT_DISTANCE) return true;
+			if (playerDistance > SHORT_DISTANCE) return true;
 			break;
 		case CONDITION_TYPE_FAR:
-			if (playerDistance < LONG_DISTANCE) return true;
+			if (playerDistance >= LONG_DISTANCE) return true;
 			break;
 		case CONDITION_TYPE_ALWAYS:
 			return true;

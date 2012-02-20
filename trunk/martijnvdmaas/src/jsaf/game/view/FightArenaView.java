@@ -46,8 +46,8 @@ public class FightArenaView extends JPanel implements Observer {
 		
 		g.drawImage(loadImage(new File(imagePath + "arena.jpg")), 0, 0, this);
 		
-		if (leftFighterImage != null) 	g.drawImage(leftFighterImage, 135 + (fighterDistance * 8) , 100, this);
-		if (rightFighterImage != null) 	g.drawImage(rightFighterImage, 280 - (fighterDistance * 8) , 100, this);
+		if (leftFighterImage != null) 	g.drawImage(leftFighterImage, 115 + (fighterDistance * 8) , 100, this);
+		if (rightFighterImage != null) 	g.drawImage(rightFighterImage, 300 - (fighterDistance * 8) , 100, this);
 	}
 
 	private Graphics clearGraphic(Graphics g) {
