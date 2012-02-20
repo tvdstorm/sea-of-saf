@@ -30,8 +30,7 @@ public class MoveActionProcessor implements GameConstant {
 		int dXDistance = 0;
 		int dYDistance = 0;
 
-		if (moveAction.equals(MOVE_ACTION_WALKTOWARDS) 
-				|| moveAction.equals(MOVE_ACTION_WALKAWAY)
+		if (moveAction.equals(MOVE_ACTION_WALKTOWARDS) || moveAction.equals(MOVE_ACTION_WALKAWAY)
 				|| moveAction.equals(MOVE_ACTION_RUNTOWARDS)
 				|| moveAction.equals(MOVE_ACTION_RUNAWAY)) {
 			dXDistance = MOVEACTION_DISTANCE.get(moveAction);
