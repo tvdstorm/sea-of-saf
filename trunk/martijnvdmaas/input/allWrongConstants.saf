@@ -1,0 +1,21 @@
+chicken
+{
+  kickReach  = 11
+  punc2hReach = 8
+  kickPower  = 6
+  punchPower = 4
+  near [choose(crouc3h walk_tdowards) choose(block_high punch_dhigh)]
+  far [run_towards kick_high]
+}
+goose
+{
+  kickRea3ch  = 8
+  punchReach = 11
+  kickPower  = 4
+  punchPower = 8
+  far  [run_towardds kick_losw]
+  near [run_away kick_low]
+  much_weaker or much_weaker and weaker [run_away kick_low]
+  alsways [run_away kick_high]
+  far [crouch punch_low]
+}

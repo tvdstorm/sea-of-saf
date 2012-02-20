@@ -3,6 +3,8 @@ package jsaf.main;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jsaf.astelements.Bots;
 import jsaf.game.FightStart;
@@ -30,14 +32,23 @@ public class Main
 			try
 			{
 				/* Validate input */
-				bots.accept(new SAFElementValidatorVisitor());
-
+				
+				SAFElementValidatorVisitor validator = new SAFElementValidatorVisitor();
+				bots.accept(validator);
+				
+				List<String> errorMessages = new ArrayList<String>(validator.getErrorMessages());
+				
+				if(!errorMessages.isEmpty()) 
+				{
+					throw new Exception();
+				}
+				
 				/* Open FightView */
 				new FightStart(bots);
 			}
 			catch (Exception e)
 			{
-				new ErrorLog("Validation error: " + e.getMessage());
+				new ErrorLog("Validation error.");
 			}
 		}
 		catch (ParseException | IOException e)

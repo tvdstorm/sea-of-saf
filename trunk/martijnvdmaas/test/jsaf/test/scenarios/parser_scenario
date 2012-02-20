@@ -11,7 +11,7 @@ Then there should be a parse error
 
 Scenario: There is a syntax error in the input file
 
-Given a SAF fighter file with value incorrectSyntax.saf
+Given a SAF fighter file with value wrongSyntax.saf
 When I parse the file
 Then there should be a parse error
 

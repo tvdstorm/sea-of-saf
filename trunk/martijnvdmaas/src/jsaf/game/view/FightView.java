@@ -10,6 +10,7 @@ import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import jsaf.constants.SAFConstants;
 import jsaf.game.FightEngine;
 import jsaf.game.controller.FightControlController;
 import jsaf.game.controller.FightMenuViewController;
@@ -68,7 +69,10 @@ public class FightView extends JFrame implements Observer
 			showFinishMessage(fightEngineObserverable.getWinner());
 		}
 		else  {
-			fightEngineObserverable.playFightSound();
+			if(!(fightEngineObserverable.getLeftCurrentAttack().equals(SAFConstants.ATTACK_TYPE_STAND) && fightEngineObserverable.getRightCurrentAttack().equals(SAFConstants.ATTACK_TYPE_STAND)))
+			{
+				fightEngineObserverable.playFightSound();
+			}
 		}
 	}
 

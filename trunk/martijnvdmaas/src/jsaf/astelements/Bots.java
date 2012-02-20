@@ -32,7 +32,7 @@ public class Bots implements SAFElement
 	}
 
 	@Override
-	public void accept(SAFElementVisitor visitor) throws Exception {
+	public void accept(SAFElementVisitor visitor) {
 		leftBot.accept(visitor);
 		rightBot.accept(visitor);
 		

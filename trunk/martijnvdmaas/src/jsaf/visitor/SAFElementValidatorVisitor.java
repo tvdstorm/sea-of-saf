@@ -1,5 +1,6 @@
 package jsaf.visitor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jsaf.astelements.Behaviour;
@@ -8,22 +9,29 @@ import jsaf.astelements.Bots;
 import jsaf.astelements.Characteristic;
 import jsaf.astelements.ConditionChoices;
 import jsaf.astelements.ConditionGroup;
+import jsaf.constants.ErrorConstants;
 import jsaf.constants.SAFConstants;
 import jsaf.logger.ErrorLog;
 
-
-
-
-public class SAFElementValidatorVisitor implements SAFElementVisitor
+public class SAFElementValidatorVisitor implements SAFElementVisitor, ErrorConstants
 {
+	private List<String> errorMessages;
+
+	public SAFElementValidatorVisitor()
+	{
+		errorMessages = new ArrayList<String>();
+	}
 
 	@Override
-	public void visit(Behaviour botBehaviour) throws Exception
+	public void visit(Behaviour botBehaviour)
 	{
+
 		/* The amount of moves in a behaviour should not be empty */
 		if (botBehaviour.getMoveChoices().isEmpty())
 		{
-			ErrorLog.throwException(new Exception("Behaviour found without moves"));
+			String errorMessage = BEHAVIOUR_EMPTY_MOVES;
+			errorMessages.add(errorMessage);
+			new ErrorLog(errorMessage);
 		}
 
 		/* Only moves from SAFConstants are allowed */
@@ -32,7 +40,10 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 			if (!SAFConstants.MoveTypes.contains(behaviourMoveOption))
 			{
 				String closestMatch = getClosestStringMatch(behaviourMoveOption, SAFConstants.MoveTypes);
-				ErrorLog.throwException(new Exception("Invalid behaviour move detected: " + behaviourMoveOption + ", did you mean: " + closestMatch));
+
+				String errorMessage = BEHAVIOUR_INVALID_MOVE_NAME + " : " + behaviourMoveOption + "," +  ERROR_OTHER_SUGGESTION + " : " + closestMatch;
+				errorMessages.add(errorMessage);
+				new ErrorLog(errorMessage);
 			}
 		}
 
@@ -41,19 +52,24 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 		{
 			if (!SAFConstants.AttackTypes.contains(behaviourAttackOption))
 			{
-				String closestMatch = getClosestStringMatch(behaviourAttackOption, SAFConstants.MoveTypes);
-				ErrorLog.throwException(new Exception("Invalid behaviour attack detected: " + behaviourAttackOption + ", did you mean: " + closestMatch));
+				String closestMatch = getClosestStringMatch(behaviourAttackOption, SAFConstants.AttackTypes);
+				
+				String errorMessage = BEHAVIOUR_INVALID_ATTACK_NAME + " : " + behaviourAttackOption + "," +  ERROR_OTHER_SUGGESTION + " : " + closestMatch;
+				errorMessages.add(errorMessage);
+				new ErrorLog(errorMessage);
 			}
 		}
 	}
 
 	@Override
-	public void visit(Bot bot) throws Exception
+	public void visit(Bot bot)
 	{
 		/* Botname should not be empty */
 		if (bot.getBotName().isEmpty() || bot.getBotName() == null)
 		{
-			ErrorLog.throwException(new Exception("Botname is empty or null"));
+			String errorMessage = BOTNAME_EMPTY_NAME;
+			errorMessages.add(errorMessage);
+			new ErrorLog(errorMessage);
 		}
 
 		boolean hasAlwaysRule = false;
@@ -68,51 +84,66 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 		}
 		if (!hasAlwaysRule)
 		{
-			ErrorLog.throwException(new Exception("Bot \"" + bot.getBotName() + "\" does not have an always rule."));
+			String errorMessage = BOT_HAS_NOT_ALWAYS + " : " + bot.getBotName();
+			errorMessages.add(errorMessage);
+			new ErrorLog(errorMessage);
 		}
 	}
 
 	@Override
-	public void visit(Bots bots) throws Exception
+	public void visit(Bots bots)
 	{
 		/* Firstbot and Secondbot should be instantiated */
 		if (bots.getLeftBot() == null)
 		{
-			ErrorLog.throwException(new Exception("First bot is not instantiated"));
+			String errorMessage = LEFTBOT_NOT_INSTANTIATED;
+			errorMessages.add(errorMessage);
+			new ErrorLog(errorMessage);
 		}
 		if (bots.getRightBot() == null)
 		{
-			ErrorLog.throwException(new Exception("Second bot is not instantiated"));
+			String errorMessage = RIGHTBOT_NOT_INSTANTIATED;
+			errorMessages.add(errorMessage);
+			new ErrorLog(errorMessage);
 		}
 	}
 
 	@Override
-	public void visit(Characteristic characteristic) throws Exception
+	public void visit(Characteristic characteristic)
 	{
 		/* Each characteristic should have a name */
 		if (characteristic.getName().isEmpty() || characteristic.getName() == null)
 		{
-			ErrorLog.throwException(new Exception("Characteristic found with empty or null name"));
+			String errorMessage = CHARACTERISTIC_EMPTY_NAME;
+			errorMessages.add(errorMessage);
+			new ErrorLog(errorMessage);
 		}
 
 		/* Only characteristics with values from SAFConstants are allowed */
 		if (!SAFConstants.CharacteristicTypes.contains(characteristic.getName()))
 		{
 			String closestMatch = getClosestStringMatch(characteristic.getName(), SAFConstants.CharacteristicTypes);
-			ErrorLog.throwException(new Exception("Invalid characteristic: " + characteristic.getName() + ", did you mean: " + closestMatch));
+			
+			String errorMessage = CHARACTERISTIC_INVALID_NAME + " : " + characteristic.getName() + ". " + ERROR_OTHER_SUGGESTION + closestMatch;
+			errorMessages.add(errorMessage);
+			
+			new ErrorLog(errorMessage);
 		}
 
 		/* Characteristics should have a value in between 1 and 10 */
 		if (characteristic.getValue() < 1)
 		{
-			ErrorLog.throwException(new Exception("Characteristic \"" + characteristic.getName() + "\" has too low value: " + characteristic.getValue()
-					+ ". Should be in between 1/10"));
+			String errorMessage = CHARACTERISTIC_TOO_LOW_VALUE + " : " + characteristic.getName();
+			errorMessages.add(errorMessage);
+			
+			new ErrorLog(errorMessage);
 		}
 		else if (characteristic.getValue() > 10)
 		{
-			ErrorLog.throwException(new Exception("Characteristic \"" + characteristic.getName() + "\" has too high value: " + characteristic.getValue()
-					+ ". Should be in between 1/10"));
-		}
+			String errorMessage = CHARACTERISTIC_TOO_HIGH_VALUE + " : " + characteristic.getName();
+			errorMessages.add(errorMessage);
+			
+			new ErrorLog(errorMessage);}
 	}
 
 	/* Function for check whether a conditionchoice contains an always rule */
@@ -134,7 +165,7 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 	}
 
 	@Override
-	public void visit(ConditionGroup conditionGroup) throws Exception
+	public void visit(ConditionGroup conditionGroup)
 	{
 		/* Only conditions from SAFConstants are allowed */
 		for (String condition : conditionGroup.getConditionTypes())
@@ -142,7 +173,10 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 			if (!SAFConstants.ConditionTypes.contains(condition))
 			{
 				String closestMatch = getClosestStringMatch(condition, SAFConstants.ConditionTypes);
-				ErrorLog.throwException(new Exception("Invalid condition: " + condition + ", did you mean: " + closestMatch));
+				
+				String errorMessage = CONDITION_INVALID_NAME + " : " + condition + ". " + ERROR_OTHER_SUGGESTION + closestMatch;
+				errorMessages.add(errorMessage);
+				new ErrorLog(errorMessage);
 			}
 		}
 	}
@@ -151,7 +185,7 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 	 * returns the best-matched string from a list, based on the levenshtein
 	 * distance
 	 */
-	private String getClosestStringMatch(String searchString, List<String> matchList) throws Exception
+	private String getClosestStringMatch(String searchString, List<String> matchList)
 	{
 		String closestMatch = "";
 		int closestLevenshteinDistance = 0;
@@ -174,11 +208,11 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 	}
 
 	/* Returns the Levenshtein distance between two strings */
-	public int getLevenshteinDistance(String s, String t) throws Exception
+	public int getLevenshteinDistance(String s, String t)
 	{
 		if (s == null || t == null)
 		{
-			ErrorLog.throwException(new IllegalArgumentException("Strings must not be null"));
+			return 0;
 		}
 
 		int n = s.length(); // length of s
@@ -232,5 +266,10 @@ public class SAFElementValidatorVisitor implements SAFElementVisitor
 		// our last action in the above loop was to switch d and p, so p now
 		// actually has the most recent cost counts
 		return p[n];
+	}
+
+	public List<String> getErrorMessages()
+	{
+		return errorMessages;
 	}
 }
