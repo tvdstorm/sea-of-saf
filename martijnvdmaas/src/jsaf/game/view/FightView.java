@@ -67,6 +67,9 @@ public class FightView extends JFrame implements Observer
 		{
 			showFinishMessage(fightEngineObserverable.getWinner());
 		}
+		else  {
+			fightEngineObserverable.playFightSound();
+		}
 	}
 
 	public void showFinishMessage(String winner)

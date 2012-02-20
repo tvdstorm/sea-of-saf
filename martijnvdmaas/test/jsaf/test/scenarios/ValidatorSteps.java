@@ -15,19 +15,20 @@ import org.jbehave.scenario.steps.Steps;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class ParserSteps extends Steps {
+public class ValidatorSteps extends Steps {
     private String safFileName;
     private Bots bots;
     private Exception actualException;
 
-    @Given("a SAF fighter file with value $value")
-    public void aSAFFighterFileWithValue(String name) 
+    /* Scenario: Only one player is given */
+    @Given("an incorrect SAF file with value $value")
+    public void anIncorrectSAFFileWithValue (String name)
     {
-    	safFileName = name; 
+    	safFileName = name;
     }
-    
-    @When("I parse the file")
-    public void iParseTheFile() {
+
+    @When("I parse the input")
+    public void iParseTheInput() {
     	try
 		{
 			bots = new Parser(Main.getRelativeProjectPath() + "input\\" + safFileName).getBots();
@@ -45,8 +46,8 @@ public class ParserSteps extends Steps {
     	}
     }
     
-    @Then("there should be a parse error")
-    public void thereShouldBeAParseError()
+    @Then("there should be a parsing error")
+    public void thereShouldBeAParsingError()
     {
     	ParseException expectedException 	= new ParseException();
     	String expectedExceptionClassName 	= expectedException.getClass().getName();
@@ -55,10 +56,17 @@ public class ParserSteps extends Steps {
     	ensureThat(actualExceptionClassName, equalTo(expectedExceptionClassName));
     }
     
-    /* Scenario: Valid input is given */    
+    /* Scenario: Valid input is given */
+    
+    @Given("a correct SAF file with value $value")
+    public void aCorrectSAFFileWithValue(String name) 
+    {
+    	safFileName = name; 
+    }
+    
 
-    @Then("the left player should be initialized")
-    public void theLeftPlayerShouldBeInitialized() 
+    @Then("the left fighter should be initialized")
+    public void theLeftFighterShouldBeInitialized() 
     {
     	Bot expectedClass = new Bot();
     	String expectedClassName = expectedClass.getClass().getName();
@@ -67,8 +75,8 @@ public class ParserSteps extends Steps {
     	ensureThat(actualClassName, equalTo(expectedClassName));
     }
     
-    @Then("the right player should be initialized")
-    public void theRightPlayerShouldBeInitialized() 
+    @Then("the right fighter should be initialized")
+    public void theRightFighterShouldBeInitialized() 
     {
     	Bot expectedClass = new Bot();
     	String expectedClassName = expectedClass.getClass().getName();

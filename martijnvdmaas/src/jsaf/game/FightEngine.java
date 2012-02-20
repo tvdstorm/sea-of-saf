@@ -132,14 +132,12 @@ public class FightEngine extends Observable implements SAFConstants
 			getLeftFighter().setHealth(currentLeftHealth);
 			getRightFighter().setHealth(currentRightHealth);
 
-			playFightSound();
-
 			setChanged();
 			notifyObservers();
 		}
 	}
 
-	private void playFightSound()
+	public void playFightSound()
 	{
 		File soundDirectory = new File(jsaf.main.Main.getRelativeProjectPath() + "sounds");
 		File[] soundFiles = soundDirectory.listFiles();

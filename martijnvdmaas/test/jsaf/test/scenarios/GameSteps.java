@@ -43,7 +43,7 @@ public class GameSteps extends Steps
 	@When("I start a game")
 	public void iStartAGame()
 	{
-		//fightEngine = new FightEngine(bots);
+		fightEngine = new FightEngine(bots);
 	}
 
 	@When("I click on next step")
@@ -88,7 +88,7 @@ public class GameSteps extends Steps
 	/* Scenario: fight has one winner */
 
 	@Given("a SAF file with value $value")
-	public void aPlayerXWithNamse(String name) throws ParseException, IOException
+	public void aSAFFileWithValue(String name) throws ParseException, IOException
 	{
 		bots = new Parser(Main.getRelativeProjectPath() + "input\\" + name).getBots();
 		leftBot = bots.getLeftBot().getBotName();
