@@ -17,6 +17,6 @@ goose
   far  [run_towards kick_low]
   near [run_away kick_low]
   much_weaker or much_weaker and weaker [run_away kick_low]
-  always [run_away kick_high]
+  always [run_towards kick_high]
   far [crouch punch_low]
 }

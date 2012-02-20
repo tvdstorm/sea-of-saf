@@ -21,8 +21,6 @@ import jsaf.constants.SAFConstants;
 import jsaf.game.fighter.Fighter;
 import jsaf.logger.ErrorLog;
 
-
-import sun.applet.Main;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -289,7 +287,7 @@ public class FightEngine extends Observable implements SAFConstants
 	/* Reinitializes the game: */
 	public void reStart()
 	{
-
+		setDistance(START_HORIZONTAL_DISTANCE);
 		setLeftHealth(MAX_HEALTH);
 		setRightHealth(MAX_HEALTH);
 		getLeftFighter().setCurrentAttack(ATTACK_TYPE_STAND);
