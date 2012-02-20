@@ -23,8 +23,18 @@ interface AST {
 					ALWAYS_CONDITION,"near","far","much_stronger","stronger","even","weaker","much_weaker")));
 	
 	//Move
+	final String TOWARDS = "_towards";
+	final String AWAY = "_away";
+	final String WALK = "walk_";
+	final double WALK_DISTANCE = 5.0;
+	final String RUN = "run_";
+	final int RUN_STEPS = 2;
+	final double RUN_DISTANCE = 15.0;
+	final String JUMP = "jump";
+	final int JUMP_STEPS = 3;
+	final double JUMP_DISTANCE = 10.0;
 	final Set<String> VALID_MOVES = Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
-    	    		"walk_towards","walk_away","run_towards","run_away","jump","crouch","stand")));
+    	    		WALK+TOWARDS,WALK+AWAY,RUN+TOWARDS,RUN+AWAY,JUMP,"crouch","stand")));
 	
 	//Attack
 	final String BLOCK = "block_";

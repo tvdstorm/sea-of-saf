@@ -8,11 +8,11 @@ import javax.swing.JFrame;
 import saf.Match.VisibleObject;
 
 
-public class MatchGUI extends JFrame implements Observer {
+class MatchGUI extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 1L;
 
-	
+	//TODO support observing Player & clean up
 	public void update(Observable obs, Object arg) {
 		if(obs instanceof Match) {
 			Match match = ((Match) obs);

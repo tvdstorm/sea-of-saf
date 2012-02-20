@@ -23,4 +23,32 @@ public class Move implements AST {
 		return Collections.emptyList();
 	}
 
+	public int getSteps() {
+		if(move.startsWith(RUN)){
+			return RUN_STEPS;
+		}
+		if(move.equals(JUMP)) {
+			return JUMP_STEPS;
+		}
+		return 1;
+	}
+	
+	public double getDistance() {
+		int directionModifier=1;
+		if(move.endsWith(AWAY)){
+			directionModifier = -1;
+		}
+		
+		if(move.startsWith(WALK)){
+			return WALK_DISTANCE * directionModifier;
+		}
+		if(move.startsWith(RUN)){
+			return RUN_DISTANCE * directionModifier;
+		}
+		if(move.equals(JUMP)) {
+			return JUMP_DISTANCE * directionModifier;
+		}
+		return 0.0;
+	}
+
 }
