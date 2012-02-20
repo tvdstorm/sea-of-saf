@@ -21,7 +21,7 @@ package nl.uva.saf.simulation;
 import java.awt.Dimension;
 import java.util.List;
 
-public interface IFightSimulator {	
+public interface IFightSimulator {
 	public void update();
 
 	public void addContestant(FighterBot bot) throws PlayfieldFullException;
@@ -40,7 +40,9 @@ public interface IFightSimulator {
 
 	public List<FighterBot> getContestants();
 
-	Dimension getPlayFieldSize();
+	public Dimension getPlayFieldSize();
 
-	void setPlayFieldSize(Dimension playFieldSize);
+	public void setPlayFieldSize(Dimension playFieldSize);
+
+	public FighterBot getWinner();
 }
