@@ -67,7 +67,6 @@ public class FighterDescription {
 			fighterState.setSelectedMoveAction(nextRule.getNextMoveAction());
 			fighterState.setSelectedFightAction(nextRule.getNextFightAction());
 		}
-		
 
 	}
 }

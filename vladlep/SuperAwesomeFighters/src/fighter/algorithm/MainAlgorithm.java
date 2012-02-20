@@ -22,10 +22,9 @@ public class MainAlgorithm {
 			// select next move phase
 			fightersDistance = calculateFigterDistance();
 			updateDistanceConditions(fightersDistance);
-			
+
 			leftFighterDesc.calculateNextMove();
 			rightFighterDesc.calculateNextMove();
-		
 
 			// do move, calculate new position and health
 
@@ -35,17 +34,14 @@ public class MainAlgorithm {
 	}
 
 	private void updateDistanceConditions(int distance) {
-		if(distance < Config.farDistanceThreshold)
-		{
+		if (distance < Config.farDistanceThreshold) {
 			leftFighterDesc.updateDistAcceptedCond(ConditionType.near);
 			rightFighterDesc.updateDistAcceptedCond(ConditionType.near);
-		}
-		else{
+		} else {
 			leftFighterDesc.updateDistAcceptedCond(ConditionType.far);
 			rightFighterDesc.updateDistAcceptedCond(ConditionType.far);
 		}
-			
-		
+
 	}
 
 	private int calculateFigterDistance() {
