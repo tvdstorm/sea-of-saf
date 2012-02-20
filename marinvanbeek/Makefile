@@ -5,7 +5,7 @@ CLASSPATH           = -cp build
 DATA_SOURCES        = src/saf/data/*.java
 DATA_CLASSES        = $(subst src,build,$(DATA_SOURCES:.java=.class))
 
-GRAMMAR             = src/SAF.g
+GRAMMAR             = src/saf/parser/SAF.g
 GRAMMAR_BUILD_DIR   = build/grammar
 GRAMMAR_OUTPUT      = $(GRAMMAR_BUILD_DIR)/*.java
 
