@@ -36,7 +36,7 @@ public class Animations extends JFrame
 		JPanel background = new JPanel();
 		//background.setLayout(null);
 	    File path1  = new File(".\\src\\images\\LeftFighter.gif");
-	    background.add(drawFile(path1,10,20));
+	    background.add(drawFile(path1,100,10));
 	    //File path2  = new File(".\\src\\images\\RightFighter.gif");
 	    //background.add(drawFile(path2,200,10));
 	    background.setOpaque(true);
