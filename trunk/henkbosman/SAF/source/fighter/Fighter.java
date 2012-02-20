@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import fighter.Property.Properties;
+
 import arena.Engine.Fighters;
 import behaviours.Action;
 import behaviours.Activity;
@@ -120,7 +122,7 @@ public class Fighter
 	
 	private Condition.Conditions evaluateEnemy(int enemyHealth)
 	{
-		double range = enemyHealth - _status.health();
+		double range = enemyHealth - getHealth();
 		
 		if (range<-40)
 			return Condition.Conditions.much_weaker;
@@ -137,7 +139,7 @@ public class Fighter
 	
 	private Condition.Conditions evaluateDistance(int enemyDistance)
 	{
-		if (enemyDistance>getPropertyValue(Property.Properties.punchReach) && enemyDistance>getPropertyValue(Property.Properties.kickReach))
+		if (enemyDistance>getPropertyValue(Properties.punchReach) && enemyDistance>getPropertyValue(Properties.kickReach))
 			return Condition.Conditions.far;
 		
 		return Condition.Conditions.near;

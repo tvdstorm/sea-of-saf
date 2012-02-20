@@ -38,7 +38,7 @@ public class Engine
 		_fighterB = loadFighter(fileb);
 		_fighterA.movePosition(20);
 		_fighterB.movePosition(360);
-		_fatigue=50;
+		_fatigue=100;
 	}
 	
 	private Fighter loadFighter(String file) throws IOException, RecognitionException

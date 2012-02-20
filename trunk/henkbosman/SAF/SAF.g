@@ -1,7 +1,13 @@
 grammar SAF;
 
 options {   language = Java; }
-@header {import java.util.LinkedList;}
+@header 
+{
+	package parser;
+	import java.util.LinkedList;
+	import behaviours.*;
+	import fighter.*;
+}
 
 INT	  	:	('0'..'9')+;
 WS	  	:	(' ' | '\t' ) {$channel=HIDDEN;};
@@ -13,7 +19,7 @@ NAME		:	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 fighter returns [Fighter f]
  @init{$f = new Fighter();}
  
-:	n=NAME {$f.name($n.text);} NEWLINE '{' 
+:	n=NAME {$f.name($n.text);} NEWLINE* '{' 
 		(
 			  NEWLINE 
 			| p=property {$f.addProperty(p);}
