@@ -34,9 +34,12 @@ public class IntegrationAllTest extends RedirectOutput
     public void testAnimatedAndParsedFighterSimulation()
         throws IOException, RecognitionException
     {
-        Random seedGenerator = new Random(0);
         Fighter leftRandomFighter = parseFighter("left.saf");
         Fighter rightRandomFighter = parseFighter("right.saf");
+
+        System.out.println("New fight, parsed from left.saf and right.saf");
+        System.out.println("In the left corner: " + leftRandomFighter);
+        System.out.println("In the right corner: " + rightRandomFighter);
             
         SimulationData data = runSimulation(leftRandomFighter, 
                                             rightRandomFighter);

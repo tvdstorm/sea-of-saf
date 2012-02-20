@@ -1,4 +1,10 @@
-legal_minimal
+right
 {
-    always [jump punch_low]
+    punch_power = 9
+    punch_reach = 4
+    kick_power = 3
+    kick_reach = 5
+    near [run_away kick_high]
+    always [jump choose(punch_low punch_high)]
 }
+

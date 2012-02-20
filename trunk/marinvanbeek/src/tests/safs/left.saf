@@ -1,4 +1,10 @@
-legal_minimal
+left
 {
-    always [crouch punch_low]
+    punch_power = 3 
+    punch_reach = 10 
+    kick_power = 2 
+    kick_reach = 3 
+    near [choose(walk_towards stand) punch_high]
+    always [walk_towards choose(block_low block_high)]
 }
+

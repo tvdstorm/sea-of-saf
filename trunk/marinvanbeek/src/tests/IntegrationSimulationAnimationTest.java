@@ -12,6 +12,7 @@ public class IntegrationSimulationAnimationTest extends RedirectOutput
 {
     private static final String LOG_FILE = 
             "integration_sim_anim_test_results.txt";
+    private static final int NR_RUNS = 5;
 
     @BeforeClass
     public static void redirect()
@@ -20,18 +21,20 @@ public class IntegrationSimulationAnimationTest extends RedirectOutput
     }
 
     @Test
-    public void randomTest()
+    public void pseudoRandomTest()
     {
-        testAnimatedFight(new Random().nextInt());
+        testAnimatedFight(1, "(Pseudo random, seed=1)");
     }
 
     @Test
-    public void pseudoRandomTest()
+    public void randomTest()
     {
-        testAnimatedFight(3);
+        for (int i = 0; i < NR_RUNS; i ++)
+            testAnimatedFight(new Random().nextInt(), 
+                              " (Real random test, run number " + (i+1) + ")");
     }
 
-    public void testAnimatedFight(int seed)
+    public void testAnimatedFight(int seed, String extraTitleText)
     {
         Random seedGenerator = new Random();
         Fighter leftRandomFighter = Fighter.getRandom(seedGenerator.nextInt());
@@ -41,10 +44,10 @@ public class IntegrationSimulationAnimationTest extends RedirectOutput
         System.out.println("New fight, generated with seed " + seed);
         System.out.println("In the left corner: " + leftRandomFighter);
         System.out.println("In the right corner: " + rightRandomFighter);
-            
+
         SimulationData data = runSimulation(leftRandomFighter, 
                                             rightRandomFighter);
-        runAnimation(data);
+        runAnimation(data, extraTitleText);
     }
 
     private SimulationData runSimulation(Fighter left, Fighter right)
@@ -55,12 +58,13 @@ public class IntegrationSimulationAnimationTest extends RedirectOutput
         return simulator.getSimulationData();
     }
 
-    private void runAnimation(SimulationData data)
+    private void runAnimation(SimulationData data, String extraTitleText)
     {
         System.out.println("Simulation data size: " +
                            data.getLeftData().size());
         Animator animator = new ArenaAnimator("Simulation and Animation " + 
-                                              "Integration Test", "bison", 
+                                              "Integration" +
+                                              extraTitleText, "bison", 
                                               "bison", data);
         animator.runAnimation();
     }
