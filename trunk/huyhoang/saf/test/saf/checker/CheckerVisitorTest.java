@@ -1,20 +1,18 @@
 package saf.checker;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.ByteArrayInputStream;
 
+import org.junit.Test;
+
 import saf.AllTests;
-import saf.checker.CheckerVisitor;
-import saf.ast.*;
-import saf.parser.Parser;
-import saf.parser.ParseException;
-import saf.ast.condition.Condition;
-import saf.ast.definition.Action;
-import saf.ast.definition.Behaviour;
-import saf.ast.definition.Choose;
-import saf.ast.definition.Procedure;
+import saf.ast.Fighter;
 import saf.ast.definition.Strength;
+import saf.parser.ParseException;
+import saf.parser.Parser;
 
 public class CheckerVisitorTest {
 	private CheckerVisitor checkParsedSpecification(String specification) {
