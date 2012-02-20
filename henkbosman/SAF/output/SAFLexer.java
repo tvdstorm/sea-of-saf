@@ -1,4 +1,3 @@
-package parser;
 // $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-02-20 11:33:00
 
 import org.antlr.runtime.*;

@@ -230,13 +230,11 @@ public class Gamescreen extends JFrame implements ActionListener{
 				Popupscreen popupScreen = new Popupscreen();
 				popupScreen.addMessage("IOException:");
 				popupScreen.addMessage(e1.getMessage());
-				System.out.println(e1.getMessage());
 				popupScreen.setVisible(true);
 			} catch (RecognitionException e1) {
 				Popupscreen popupScreen = new Popupscreen();
 				popupScreen.addMessage("RecognitionException:");
 				popupScreen.addMessage(e1.getMessage());
-				System.out.println(e1.getMessage());
 				popupScreen.setVisible(true);
 			}
 		}

@@ -9,6 +9,7 @@ public class Action
 		punch_low,punch_high,kick_low,kick_high,block_low,block_high, nothing
 	}
 	private List<String> _errorList;
+	private String _name;
 	private List<Actions> _actions;
 	private void addAction(String name)
 	{
