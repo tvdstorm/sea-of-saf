@@ -46,7 +46,7 @@ public class Test
 
 	public static void main(String[] args) throws RecognitionException
 	{
-		CharStream charStream = new ANTLRStringStream(Test.jetLi);
+		CharStream charStream = new ANTLRStringStream(Test.jackieChan);
 		SAFLexer lexer = new SAFLexer(charStream);
 		
 		TokenStream tokenStream = new CommonTokenStream(lexer);
