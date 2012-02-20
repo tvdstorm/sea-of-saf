@@ -39,8 +39,8 @@ import program.Fight;
 public class FighterScreen extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel cPanel,panel;
-	private JTextField txtBotLeft,txtBotRight;
+	private JPanel cPanel, panel;
+	private JTextField txtBotLeft, txtBotRight;
 	private JLabel lblBotLeft, lblBotRight;
 	private JButton btnStart, btnBotLeft, btnBotRight;
 	private JLabel lblHealthBotLeft, lblHealthBotRight;
@@ -80,9 +80,15 @@ public class FighterScreen extends JFrame implements ActionListener{
 		btnStart = new JButton("Start!");
 		btnStart.setEnabled(false);
 		btnStart.addActionListener(this);
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					prepareFight();
+					if (!(bLeft == null ) && !(bRight == null)){
+						  doFight(bLeft, bRight);
+						}
+			}});
 		btnStart.setBounds(10, 8, 89, 46);
 		cPanel.add(btnStart);
-		
 		
 		lblBotLeft = new JLabel("Left Fighter");
 		lblBotLeft.setBounds(105, 11, 100, 14);
@@ -103,12 +109,19 @@ public class FighterScreen extends JFrame implements ActionListener{
 		cPanel.add(txtBotRight);
 		
 		btnBotLeft = new JButton("...");
-		btnBotLeft.addActionListener(this);
+		btnBotLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checkChooseButton(txtBotLeft);
+		}});
 		btnBotLeft.setBounds(485, 8, 45, 20);
 		cPanel.add(btnBotLeft);
 		
 		btnBotRight = new JButton("...");
-		btnBotRight.addActionListener(this);
+		btnBotRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checkChooseButton(txtBotRight);
+		}});
+		
 		btnBotRight.setBounds(485, 33, 45, 20);
 		cPanel.add(btnBotRight);
 		
@@ -260,21 +273,6 @@ public class FighterScreen extends JFrame implements ActionListener{
 		if (e.getSource()==timer){
 			doFight( bLeft,bRight);
 		}
-		if (e.getSource()==btnBotRight){
-			txtBotRight.setText(actionFileChooser());
-			checkStart();
-		}
-		if (e.getSource()==btnBotLeft){
-			txtBotLeft.setText(actionFileChooser());
-			checkStart();
-		}
-		if (e.getSource()==btnStart){
-			prepareFight();
-			if (!(bLeft == null ) && !(bRight == null)){
-				  doFight(bLeft, bRight);
-				   
-				}
-		}
 		 cPanel.repaint();
 	}
 	
@@ -286,5 +284,8 @@ public class FighterScreen extends JFrame implements ActionListener{
 		}
 	}
 	
-	
+	private void checkChooseButton(JTextField txt){
+		txt.setText(actionFileChooser());
+		checkStart();
+	}
 }

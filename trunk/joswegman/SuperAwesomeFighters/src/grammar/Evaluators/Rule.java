@@ -44,7 +44,6 @@ public class Rule implements Visitable {
    public void accept(BotVisit visitor) {
 	  	visitor.visit(this);
    }
-
   
    @Override
    public String toString() {

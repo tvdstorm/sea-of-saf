@@ -13,10 +13,14 @@ public class BotChecker implements BotVisit {
 	private List <String> initMessages = new LinkedList<String>();
 	private List <String> warningMessages = new LinkedList<String>();
 	
+	private int conditioncounter;
+	
 	public BotChecker () {
+		this.conditioncounter = 0;
 		this.errorMessages.clear();
 		this.initMessages.clear();
 		this.warningMessages.clear();
+		
 	}
 	
 	@Override
@@ -44,6 +48,7 @@ public class BotChecker implements BotVisit {
 
 	private void checkInputRule (InputRule inputrule, boolean firstrule ){
 		if ((this.moveActions.contains(inputrule.getInputrule(firstrule))) || (this.fightActions.contains(inputrule.getInputrule(firstrule)))){
+			
 			this.initMessages.add(inputrule.getInputrule(firstrule));
 		}else {
 			this.errorMessages.add("Inputrule:  "+ inputrule.getInputrule(firstrule) + "  is not valid!");
@@ -77,6 +82,7 @@ public class BotChecker implements BotVisit {
 		boolean always = false;
 		for (Rule r : bot.getRules()) {
 			for (Condition c :r.getConditionList()){
+				this.conditioncounter+=1;
 				if (c.getLeft().equalsIgnoreCase("always")){
 					always = true;
 				}
@@ -85,6 +91,9 @@ public class BotChecker implements BotVisit {
 		}
 		if (!always){
 			this.errorMessages.add("There is no always condition");
+		}
+		if (this.conditioncounter == 0 ){
+			this.errorMessages.add("There are no conditions");
 		}
 		if (this.errorMessages.isEmpty()) {
 			if (!this.warningMessages.isEmpty()){
