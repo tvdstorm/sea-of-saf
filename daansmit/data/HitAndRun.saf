@@ -1,10 +1,10 @@
 HitAndRun
 {
-  kickReach  = 1
-  punchReach = 1
+  kickReach  = 10
+  punchReach = 10
   kickPower  = 1
   punchPower = 1
-  far [run_towards choose(kick_low punch_low)]
-  near [run_away block_low]
-  always [run_away punch_high]
+  far [run_towards kick_low]
+  near and stronger or near and much_stronger [run_away block_low]
+  always [run_towards punch_low]
 }

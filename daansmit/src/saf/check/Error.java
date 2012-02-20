@@ -10,6 +10,12 @@ public class Error extends Message
     }
 
     @Override
+    public boolean isFatal()
+    {
+        return true;
+    }
+
+    @Override
     public String toString()
     {
         return "ERROR: " + super.toString();

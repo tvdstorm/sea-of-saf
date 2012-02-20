@@ -24,7 +24,7 @@ public class GraphicalVisualizer extends JFrame implements Visualizer, ImageSet
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
         setTitle("Super Awesome Fighters");
-        setSize(1000,300);
+        setSize(1050,300);
         setVisible(true);
     }
 
