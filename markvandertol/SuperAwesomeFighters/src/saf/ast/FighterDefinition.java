@@ -80,19 +80,26 @@ public class FighterDefinition {
 
 	private void validateProperties(List<String> errorList) {
 		for (String key : properties.keySet()) {
-			boolean found = false;
-			for (String string : propertyNames) {
-				if (string.equals(key)) {
-					found = true;
-					
-					int value = getProperty(key);
-					if (value < 1 || value > 10)
-						errorList.add("Value out of range for " + key + " (" + value + ")");
-				}
-			}
-			if (!found)
+			validatePropertyRange(errorList, key);
+			if (! propertyExists(key))
 				errorList.add("Unknown assignment: " + key);
 		}
+	}
+
+	private void validatePropertyRange(List<String> errorList, String key) {
+		int value = getProperty(key);
+		if (value < 1 || value > 10)
+			errorList.add("Value out of range for " + key + " (" + value + ")");
+	}
+
+	private boolean propertyExists(String key) {
+		boolean found = false;
+		for (String string : propertyNames) {
+			if (string.equals(key)) {
+				found = true;
+			}
+		}
+		return found;
 	}
 
 	public List<BehaviourRule> findBehaviourRulesForStates(Set<State> filter) {
