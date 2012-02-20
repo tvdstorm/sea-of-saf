@@ -29,8 +29,9 @@ public class GameController implements GameConstant {
 	private final DefaultListModel botRightCharModel;
 
 	public GameController(GameEventListener gameEventListener) {
+
 		setApplicationLookAndFeel();
-		
+
 		gameForm = new GameForm();
 		gameForm.setVisible(true);
 
