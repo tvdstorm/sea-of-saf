@@ -1,9 +1,10 @@
 package saf.animation;
 
-import saf.simulation.Fighter;
+import saf.data.Fighter;
 import saf.data.Position;
 
 import java.lang.Integer;
+import java.lang.Math;
 
 import java.util.Queue;
 import java.util.ArrayDeque;
@@ -52,7 +53,8 @@ public class FighterAnimator
     private void setPosition(Position position, int width, int height)
     {
         int x = position.getX() + xOffset;
-        int y = position.getY();
+        /* y is measured from the top, so set JUMP_HEIGHT to 0. */
+        int y = Math.abs(saf.data.Move.JUMP_HEIGHT - position.getY());
 
         label.setBounds(x, y, width, height);
     }

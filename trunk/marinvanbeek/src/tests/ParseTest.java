@@ -96,14 +96,13 @@ public class ParseTest
         ANTLRFileStream input = new ANTLRFileStream(TEST_FILES_LOCATION + 
                                                     fileName);
         SAFLexer lexer = new SAFLexer(input);
-        SAFParser parser = 
-                new SAFParser(new CommonTokenStream(lexer));
+        SAFParser parser = new SAFParser(new CommonTokenStream(lexer));
         parser.parse();
         saf.syntax.SyntaxCheck syntaxCheck = parser.getSyntaxCheck();
 
         List<String> syntaxErrors = new ArrayList<String>();
-
         boolean wellFormed = syntaxCheck.isWellFormed(syntaxErrors);
+
         if (syntaxErrors.size() > 0)
         {
             System.out.println("Reported errors:");
@@ -116,7 +115,7 @@ public class ParseTest
         else if (wellFormed)
         {
             System.out.println("Passed; parsed result:");
-            syntaxCheck.printResult();
+            System.out.println(syntaxCheck.getFighterData());
         } 
         else
         {

@@ -1,6 +1,6 @@
 package saf.animation;
 
-import saf.simulation.Fighter;
+import saf.data.Fighter;
 import saf.data.Position;
 
 import javax.swing.ImageIcon;

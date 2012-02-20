@@ -11,5 +11,7 @@ public class LogicOr extends LogicOperator
     {
         return "(" + getOperand1() + " and " + getOperand2() + ")";
     }
+
+    public String getName() { return "or"; }
 }
 

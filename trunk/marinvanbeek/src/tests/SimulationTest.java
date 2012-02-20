@@ -8,10 +8,10 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Random;
 
-public class FightTest
+public class SimulationTest
 {
     public static final int NR_OF_TESTS = 1000;
-    private static final String LOG_FILE = "fight_test_results.txt";
+    private static final String LOG_FILE = "simulation_test_results.txt";
 
     private static PrintStream systemStdout;
     private static PrintStream systemStderr;

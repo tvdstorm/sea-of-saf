@@ -8,36 +8,33 @@ import java.util.List;
 public class Fighter {
     private saf.data.Fighter fighterData;
 
-    private Position position;
-    private int healthPoints;
     private int timeToNextMove;
     private int movementDirection;
-    /* FIXME speed and strength shouldn't be static. */
     private int speed;
     private int strength;
-    private saf.data.Action currentAction = null;
 
     public Fighter(saf.data.Fighter fighterData, int startingX, 
                    int movementDirection)
     {
         this.fighterData = fighterData;
-        this.position = new Position(startingX, 0);
+        this.fighterData.setPosition(new Position(startingX, 0));
 
         this.speed = calculateSpeed(fighterData.getAttributes());
         this.timeToNextMove = 0;
         this.movementDirection = movementDirection;
         this.strength = calculateStrength(fighterData.getAttributes());
-        this.healthPoints = saf.data.Fighter.MAX_HEALTH;
+        this.fighterData.setHealth(saf.data.Fighter.MAX_HEALTH);
     }
 
     /*
      * Constructor provided for animation testing, where both the action and
      * the position are animated.
      */
-    public Fighter(saf.data.Fighter fighterData, saf.data.Action initialAction)
+    public Fighter(saf.data.Fighter fighterData, saf.data.Action initialAction,
+                   int startingX)
     {
-        this(fighterData, 0, -1);
-        this.currentAction = initialAction;
+        this(fighterData, startingX, 1);
+        this.fighterData.setAction(initialAction);
     }
 
     public static int calculateSpeed(List<saf.data.Attribute> attributes)
@@ -63,28 +60,38 @@ public class Fighter {
 
     public saf.data.Action act(State state)
     {
+        saf.data.Behaviour fighterBehaviour = fighterData.getBehaviour();
+        saf.data.Action action = Behaviour.determineAction(fighterBehaviour, 
+                                                           state);
+        fighterData.setAction(action);
         timeToNextMove = speed;
-        currentAction = Behaviour.determineAction(fighterData.getBehaviour(), 
-                                                  state);
 
-        return currentAction;
+        return action;
     }
 
     public void move(saf.data.Move moveAction, int min, int max)
     {
-        System.out.println("<sim.Fighter> min, max " + min + ", " + max);
-        position = position.move(Move.determineMoveDistance(moveAction),
-                                 movementDirection, min, max);
+        PositionDifference moveDistance = 
+                Move.determineMoveDistance(moveAction);
+        Position previousPosition = fighterData.getPosition();
+
+        Position newPosition = previousPosition.move(moveDistance, 
+                                                     movementDirection, 
+                                                     min, max);
+        fighterData.setPosition(newPosition);
     }
 
     public void defend(saf.data.Attack attack, State state)
     {
-        healthPoints -= Attack.determineDamage(attack, state);
+        int damage = Attack.determineDamage(attack, state);
+        int currentHealth = fighterData.getHealth();
+
+        fighterData.setHealth(currentHealth - damage);
     }
 
     public boolean isAlive()
     {
-        return healthPoints > 0;
+        return getHealth() > 0;
     }
 
     public void tick()
@@ -97,9 +104,10 @@ public class Fighter {
         return timeToNextMove == 0;
     }
 
-    public Position getPosition() { return position; }
-    public saf.data.Action getAction() { return currentAction; }
+    public Position getPosition() { return fighterData.getPosition(); }
+    public saf.data.Action getAction() { return fighterData.getAction(); }
     public int getStrength() { return strength; }
-    public int getHealth() { return healthPoints; }
+    public int getHealth() { return fighterData.getHealth(); }
+    public saf.data.Fighter getData() { return fighterData; }
 }
 

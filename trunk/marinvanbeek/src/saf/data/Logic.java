@@ -62,5 +62,7 @@ public interface Logic
             return randomLogics;
         }
     }
+
+    public String getName();
 }
 

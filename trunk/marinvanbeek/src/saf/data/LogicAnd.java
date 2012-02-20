@@ -11,5 +11,7 @@ public class LogicAnd extends LogicOperator
     {
         return "(" + getOperand1() + " and " + getOperand2() + ")";
     }
+
+    public String getName() { return "and"; }
 }
 
