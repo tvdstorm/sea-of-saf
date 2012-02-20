@@ -23,17 +23,16 @@ public class FighterAnimator
     private Queue<FighterAnimationStep> animationQueue = 
             new ArrayDeque<FighterAnimationStep>();
 
-    public FighterAnimator(String fighterName, Container contentPane)
+    public FighterAnimator(String spritesLocation, Container contentPane)
     {
-        this(new FighterSprites(fighterName), contentPane);
+        this(new FighterSprites(spritesLocation), contentPane);
         xOffset = 0;
     }
 
-    public FighterAnimator(String fighterName, Container contentPane, 
+    public FighterAnimator(String spritesLocation, Container contentPane, 
                            boolean flipped)
     {
-        this(new FighterSprites(fighterName, flipped), 
-             contentPane);
+        this(new FighterSprites(spritesLocation, flipped), contentPane);
         xOffset = 80;
     }
 
