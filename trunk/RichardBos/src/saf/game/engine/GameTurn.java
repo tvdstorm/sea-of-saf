@@ -17,7 +17,7 @@ public class GameTurn implements GameConstant {
 
 	protected BotState botState;
 	protected GameState gameState;
-	
+	private boolean winner;
 	private Random random;
 	private GameController gameController;
 	
@@ -29,7 +29,12 @@ public class GameTurn implements GameConstant {
 		this.gameState = gameState;
 		this.random = new Random();
 		this.gameController = gameController;
+		this.winner = false;
 		doTurn();
+	}
+
+	public boolean isWinner() {
+		return winner;
 	}
 
 	private void doTurn() {
@@ -108,5 +113,8 @@ public class GameTurn implements GameConstant {
 
 		otherBotState.updateHitpoints(attackPower);
 		gameController.setHitpoints(otherBotState);
+		
+		if(otherBotState.getHitpoints() <= 0)
+			this.winner = true;
 	}
 }

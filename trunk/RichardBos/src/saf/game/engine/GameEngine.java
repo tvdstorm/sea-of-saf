@@ -10,16 +10,17 @@ import saf.game.state.BotState;
 import saf.game.state.GameState;
 
 public class GameEngine implements GameConstant {
-	
-	protected GameEngine()
-	{
-		//Used in unitTest: "GameEngineTest"
+
+	protected GameEngine() {
+		// Used in unitTest: "GameEngineTest"
 		this.gameMain = null;
 		this.gameState = new GameState();
 		this.gameController = null;
 		this.timer = null;
 	}
-	public GameEngine(GameState gameState, GameController gameController, GameMain gameMain) {
+
+	public GameEngine(GameState gameState, GameController gameController,
+			GameMain gameMain) {
 		this.gameMain = gameMain;
 		this.gameState = gameState;
 		this.gameController = gameController;
@@ -30,6 +31,9 @@ public class GameEngine implements GameConstant {
 	protected final GameMain gameMain;
 	private final GameController gameController;
 	private final Timer timer;
+
+	private BotState botStateFirst = null;
+	private BotState botStateSecond = null;
 
 	public void battle() {
 		doTurnCycle();
@@ -53,8 +57,20 @@ public class GameEngine implements GameConstant {
 	}
 
 	private String doTurns() {
-		BotState botStateFirst = null;
-		BotState botStateSecond = null;
+
+		getFirstAndSecondBotState();
+
+		// Make the turns if enough credit is present
+		if (makeTurn(botStateFirst))
+			return botStateFirst.getBot().getName();
+
+		if (makeTurn(botStateSecond))
+			return botStateSecond.getBot().getName();
+
+		return ""; // No winner yet
+	}
+
+	private void getFirstAndSecondBotState() {
 
 		// Determine which bot has the most credits, this bot moves first
 		for (BotState botState : gameState.getBotStates()) {
@@ -63,8 +79,8 @@ public class GameEngine implements GameConstant {
 				continue;
 			}
 			if (botStateFirst.getCredits() < botState.getCredits()
-					|| ((botStateFirst.getCredits() == botState.getCredits() 
-						&& botStateFirst.getSpeed() < botState.getSpeed()))) {
+					|| ((botStateFirst.getCredits() == botState.getCredits() && botStateFirst
+							.getSpeed() < botState.getSpeed()))) {
 				botStateSecond = botStateFirst;
 				botStateFirst = botState;
 			} else if (botStateFirst.getCredits() == botState.getCredits()
@@ -75,45 +91,23 @@ public class GameEngine implements GameConstant {
 			}
 		}
 
-		String winner = "";
-		// Make the turns if enough credit is present
-		if (botStateFirst.getCredits() > CONST_MIN_ACTIONCOST)
-			new GameTurn(botStateFirst, gameState, gameController);
-		
-		winner = checkForWinner();
-		if(!winner.isEmpty())
-			return winner;
-				
-		if (botStateSecond.getCredits() > CONST_MIN_ACTIONCOST)
-			new GameTurn(botStateSecond, gameState, gameController);
-		
-		return checkForWinner();		
-		
 	}
 
-	private String checkForWinner() {
-		BotState winnerState = null;
-		BotState loserState = null;
-		for (BotState botState : gameState.getBotStates()) {
-			if (botState.getHitpoints() <= 0) {
-				loserState = botState;
-			} else {
-				winnerState = botState;
-			}
+	private boolean makeTurn(BotState botState) {
+		if (botState.getCredits() > CONST_MIN_ACTIONCOST) {
+			GameTurn gameTurn = new GameTurn(botState, gameState,
+					gameController);
+			if (gameTurn.isWinner())
+				return true;
 		}
-
-		if (loserState != null)
-			return winnerState.getBot().getName();
-		else
-			return "";
+		return false;
 	}
 
-	public void resetGame()
-	{
+	public void resetGame() {
 		gameState.resetGame();
 		gameController.resetGame();
 	}
-	
+
 	class AdvanceTurn extends TimerTask {
 		@Override
 		public void run() {
