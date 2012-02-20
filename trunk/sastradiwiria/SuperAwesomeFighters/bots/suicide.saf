@@ -1,0 +1,7 @@
+Suicide {
+	kickReach = 3
+	punchReach = 3
+	kickPower = 3
+	punchPower = 3
+	always [run_towards choose(punch_low kick_high)]
+}

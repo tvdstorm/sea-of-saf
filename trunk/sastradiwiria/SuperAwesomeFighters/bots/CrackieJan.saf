@@ -1,0 +1,12 @@
+CrackieJan{
+	kickPower = 7
+	punchPower = 5
+	kickReach = 3
+	punchReach = 9
+	far or even [run_towards choose(block_low block_high)]
+	near and stronger [choose(jump crouch run_away) choose(kick_high kick_low)]
+	much_stronger [walk_towards punch_low]
+	weaker and far or much_weaker [run_away choose(block_high block_low)]
+	much_weaker [choose(run_away walk_towards jump) choose(punch_high block_low kick_high)]
+	always [choose(walk_towards walk_away jump crouch) choose(block_high kick_high punch_low)]
+}

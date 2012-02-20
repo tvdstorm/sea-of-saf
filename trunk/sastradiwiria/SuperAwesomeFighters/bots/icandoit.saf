@@ -1,0 +1,7 @@
+ICanDoIt {
+	kickPower = 5
+	punchPower = 5
+	kickReach = 5
+	punchReach = 5
+	always[choose(run_towards run_away walk_away walk_towards jump crouch) choose(block_high block_low punch_high punch_low kick_high kick_low)]
+}

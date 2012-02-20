@@ -1,0 +1,9 @@
+Here2Win {
+	kickReach = 5
+	punchReach = 2
+	kickPower = 8
+	punchPower = 4
+	far [choose(walk_towards run_towards) choose(block_low block_high)]
+	near [choose(jump crouch walk_away run_towards) choose(kick_low punch_high block_high block_low kick_high punch_low)]
+	always[choose(run_towards  walk_away) choose(kick_low punch_high block_high block_low kick_high punch_low)]
+}
