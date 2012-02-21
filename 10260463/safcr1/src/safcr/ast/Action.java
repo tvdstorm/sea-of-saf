@@ -11,6 +11,10 @@ public class Action implements Node{
 		types.add(actionType);
 	}
 	
+	public List<Node> getTypes(){
+		return types;
+	}
+	
 	@Override
 	public void addNode(Node actionType) {
 		types.add(actionType);
