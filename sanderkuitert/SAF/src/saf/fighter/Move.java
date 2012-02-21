@@ -22,16 +22,6 @@ public class Move implements AST {
 	public List<AST> getChildren() {
 		return Collections.emptyList();
 	}
-
-	public int getSteps() {
-		if(move.startsWith(RUN)){
-			return RUN_STEPS;
-		}
-		if(move.equals(JUMP)) {
-			return JUMP_STEPS;
-		}
-		return 1;
-	}
 	
 	public double getDistance() {
 		int directionModifier=1;

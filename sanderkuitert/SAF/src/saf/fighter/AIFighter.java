@@ -9,14 +9,14 @@ import saf.fighter.fdl.FDLReader;
 import saf.fighter.fdl.InvalidAttributeMessage;
 
 
-public class SuperAwesomeFighter extends AbstractDescribableFighter implements PassiveFighter {
+public class AIFighter extends AbstractDescribableFighter implements PassiveFighter {
 	
 
-	public SuperAwesomeFighter (){
+	public AIFighter (){
 		super();
 	}
 	
-	public SuperAwesomeFighter (String fdl) throws InvalidParameterException {
+	public AIFighter (String fdl) throws InvalidParameterException {
 		this();
 		
 		FDLReader attributeSource = new FDLReader(fdl);

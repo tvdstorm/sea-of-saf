@@ -25,17 +25,15 @@ interface AST {
 					ALWAYS_CONDITION,"near","far","much_stronger","stronger","even","weaker","much_weaker")));
 	
 	//Move
-	final double NEAR_ZONE_DISTANCE_PERCENTAGE = 0.05;
+	final double NEAR_ZONE_DISTANCE_PERCENTAGE = 0.04;
 	final String TOWARDS = "towards";
 	final String AWAY = "away";
 	final String WALK = "walk";
-	final double WALK_DISTANCE_PERCENTAGE = 0.10;
+	final double WALK_DISTANCE_PERCENTAGE = 0.05;
 	final String RUN = "run";
-	final int RUN_STEPS = 2;
-	final double RUN_DISTANCE_PERCENTAGE = 0.30;
+	final double RUN_DISTANCE_PERCENTAGE = 0.15;
 	final String JUMP = "jump";
-	final int JUMP_STEPS = 3;
-	final double JUMP_DISTANCE_PERCENTAGE = 0.20;
+	final double JUMP_DISTANCE_PERCENTAGE = 0.10;
 	final Set<String> VALID_MOVES = Collections.unmodifiableSet(new HashSet<String>(Arrays.asList(
     	    		WALK+"_"+TOWARDS,WALK+"_"+AWAY,RUN+"_"+TOWARDS,RUN+"_"+AWAY,JUMP,"crouch","stand")));
 	

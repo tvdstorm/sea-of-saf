@@ -1,21 +1,26 @@
 package saf;
 
 import java.io.File;
+import java.io.FilenameFilter;
+import java.lang.reflect.Array;
 
 import javax.swing.ImageIcon;
 
-import saf.Match.VisibleObject;
 import saf.fighter.PassiveFighter;
 import saf.fighter.PassiveFighter.ActionEffect;
 
-class Player implements VisibleObject, Runnable {
+
+class Player implements Match.VisibleObject, Runnable {
 	
-	protected final static int STARTING_HEALTH_PERCENTAGE = 100;
+	protected final static int STARTING_HEALTH = 50;
 	protected final static double ATTACK_STAGE = 0.8;
-	protected final static File ANIMATION_DIRECTORY = new File("./data/saf/animations/");
-	protected final static File IDLE_ANIMATION_IMAGE_FILE = new File(ANIMATION_DIRECTORY,"idle.gif");
-	protected final static String ANIMATION_EXTENSION = ".gif";
-	protected final static double GROUND_LEVEL = 0.0;
+	protected final static String ANIMATION_DIRECTORY = "./data/images/player/";
+	protected final static FilenameFilter PNG = new FilenameFilter() {
+		public boolean accept(File dir, String name) 	{ return name.endsWith(".png"); }
+		public String toString() 						{ return ".png"; 				}
+	};
+	protected final static double PLAYER_WIDTH = 25;
+	protected final static double GROUND_LEVEL = 55;
 
 	protected PassiveFighter passiveFighter;
 	protected int healthPercentage;
@@ -29,9 +34,10 @@ class Player implements VisibleObject, Runnable {
 	public Player(Match game, PassiveFighter passiveFighter, double startPosition) {
 		this.game = game;
 		this.passiveFighter = passiveFighter;
-		this.healthPercentage = STARTING_HEALTH_PERCENTAGE;
+		this.healthPercentage = STARTING_HEALTH;
 		this.horizontalPosition = startPosition;
-		this.appearance = new ImageIcon(IDLE_ANIMATION_IMAGE_FILE.getPath());
+		String direction = startPosition < (Match.TOTAL_ARENA_WIDTH / 2) ? "left-right" : "right-left";
+		this.appearance = new ImageIcon(new File(ANIMATION_DIRECTORY+direction+"/stand/1"+PNG).getPath());
 		this.currentBlockStrength = 0;
 		this.initiatedEffect= null;
 	}
@@ -47,10 +53,9 @@ class Player implements VisibleObject, Runnable {
 	
 	private void act() {
 		if(initiatedEffect == null || initiatedEffect.hasEnded()) {
-			double strengthDifference = game.getStrengthDifference(this);
-			ActionEffect initiatedAction = passiveFighter.selectAction(opponentDistance(), strengthDifference);
+			ActionEffect initiatedAction = passiveFighter.selectAction(opponentDistance(), strengthDifference());
 			
-			initiatedEffect = new AnimatedActionEffect(initiatedAction, this);
+			initiatedEffect = new AnimatedActionEffect(initiatedAction, this, opponentDistance() > 0);
 		}
 		initiatedEffect.applyNextFrame();
 	}
@@ -72,27 +77,32 @@ class Player implements VisibleObject, Runnable {
 	}
 	
 	public void takeHit(int damage) {
-		damage = (damage > currentBlockStrength) ? damage - currentBlockStrength : 0; //avoid negative damage
-		healthPercentage -= damage;
-		System.out.println("> "+this+"\ttakes "+damage+" damage ("+healthPercentage+" left)");	//DEBUG
+		healthPercentage -= Math.max(0, damage - currentBlockStrength);
+		System.out.println("> "+this+"\ttakes "+damage+" damage ("+healthPercentage+" left)");	//LOG
 	}
 	
 	public void attack(int attackDamage) {
-		System.out.println("> "+this+"\tattacks for "+attackDamage+" damage");					//DEBUG
+		System.out.println("> "+this+"\tattacks for "+attackDamage+" damage");					//LOG
 		game.applyAttack(this, attackDamage);
 	}
 	
+	// 0 <= resulting position <= TOTAL_ARENA_WIDTH - PLAYER_WIDTH
 	public void move(double distance) {
-		horizontalPosition += distance;
+		distance = Math.max(0.0, horizontalPosition+distance);  
+		horizontalPosition = Math.min(distance, Match.TOTAL_ARENA_WIDTH - PLAYER_WIDTH);
 	}
 	
 	public void setAppearance(String imageName){
-		this.appearance = new ImageIcon(new File(ANIMATION_DIRECTORY, imageName).getPath());
+		this.appearance = new ImageIcon(new File(imageName).getPath());
 		game.appearanceChanged(this);
 	}
 	
 	public boolean isAlive() {
 		return healthPercentage > 0;
+	}
+	
+	public double strengthDifference() {
+		return game.getStrengthDifference(this);
 	}
 	
 	public double opponentDistance() {
@@ -109,15 +119,15 @@ class Player implements VisibleObject, Runnable {
 		return appearance;
 	}
 	
-	public double xPosition() {
-		return horizontalPosition;
+	public int xPosition() {
+		return (int) horizontalPosition;
 	}
 	
-	public double yPosition() {
-		return GROUND_LEVEL;
+	public int yPosition() {
+		return (int) GROUND_LEVEL;
 	}
 	
-	public boolean stretchMe() {
+	public boolean isBackGround() {
 		return false;
 	}
 	
@@ -127,27 +137,45 @@ class Player implements VisibleObject, Runnable {
 		
 		protected final ActionEffect action;
 		protected Player actor;
-		private int currentFrame;
+		private String attackAnimationDir;
+		private String moveAnimationDir;
+		private int totalAttackFrames;
+		private int totalMoveFrames;
+		private int currentAttackFrame;
+		private int currentMoveFrame;
 		
 		
-		public AnimatedActionEffect(ActionEffect action, Player actor) {
+		public AnimatedActionEffect(ActionEffect action, Player actor, boolean facesRight) {
 			this.action = action;
 			this.actor = actor;
-			this.currentFrame = 1;
+			String animationDir = ANIMATION_DIRECTORY+(facesRight ? "left-right" : "right-left")+"/";
+			this.attackAnimationDir = animationDir+action.attackName+"/";
+			this.moveAnimationDir = animationDir+action.moveName+"/";
+			assert new File(attackAnimationDir).exists() && new File(moveAnimationDir).exists():
+				"Can't find" + attackAnimationDir + " and " + moveAnimationDir;
+			this.totalAttackFrames = Array.getLength(new File(attackAnimationDir).listFiles(PNG));
+			this.totalMoveFrames = Array.getLength(new File(moveAnimationDir).listFiles(PNG));
+			this.currentAttackFrame = 1;
+			this.currentMoveFrame = 1;
 		}
 		
 		
 		public boolean hasEnded() {
-			return currentFrame > action.moveSteps;
+			return currentAttackFrame >= totalAttackFrames && currentMoveFrame >= totalMoveFrames;
 		}
 		
 		public void applyNextFrame() {
-			assert !hasEnded(): "don't applyNextFrame() when hasEnded()";
-			applyFrame(currentFrame++);
+			assert !hasEnded(): "don't applyNextFrame() when hasEnded()!";
+			
+			if(currentAttackFrame < currentMoveFrame) {
+				applyNextAttackFrame(currentAttackFrame++);
+			} else {
+				applyNextMoveFrame(currentMoveFrame++);
+			}
 		}
 		
-		private void applyFrame(int frameNr) {
-			int frameOfAttack = (int) (ATTACK_STAGE * action.moveSteps);
+		private void applyNextAttackFrame(int frameNr) {
+			int frameOfAttack = (int) (ATTACK_STAGE * totalAttackFrames);
 			double opponentDistance = Math.abs(actor.opponentDistance());
 			
 			if(frameNr == 1 && action.attackDamage < 0) {
@@ -156,18 +184,22 @@ class Player implements VisibleObject, Runnable {
 			if(frameNr == frameOfAttack && action.attackDamage > 0 && opponentDistance < action.attackRange){
 				actor.attack(action.attackDamage);
 			}
-			if(frameNr == action.moveSteps) {
+			if(frameNr == totalAttackFrames) {
 				actor.stopBlocking();
 			}
 			
-			actor.move((action.moveDistance * Match.TOTAL_ARENA_WIDTH) / action.moveSteps);
-			
-			actor.setAppearance(action.attackName+"-"+action.moveName+"-"+frameNr+ANIMATION_EXTENSION);
+			actor.setAppearance(attackAnimationDir+frameNr+PNG);
+		}
+		
+		private void applyNextMoveFrame(int frameNr) {
+			actor.move((action.moveDistance * Match.TOTAL_ARENA_WIDTH) / totalMoveFrames);		
+		
+			actor.setAppearance(moveAnimationDir+frameNr+PNG);
 		}
 		
 		public String toString() {
-			return actor+" is doing "+action.attackName+" and "+action.moveName+
-																" ("+currentFrame+"/"+action.moveSteps+")";
+			return actor+" is doing "+action.attackName+" ("+currentAttackFrame+""+totalAttackFrames+")"+" and "+
+										action.moveName+" ("+currentMoveFrame+""+totalMoveFrames+")";
 		}
 	}
 }

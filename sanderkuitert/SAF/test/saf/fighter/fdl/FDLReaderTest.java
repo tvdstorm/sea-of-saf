@@ -15,7 +15,7 @@ import java.util.Map;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import saf.fighter.SuperAwesomeFighter;
+import saf.fighter.AIFighter;
 
 public class FDLReaderTest {
 
@@ -96,7 +96,7 @@ public class FDLReaderTest {
 	
 	@Test
 	public void testApplyAttributes_Interpret(){
-		SuperAwesomeFighter manualChicken = new SuperAwesomeFighter();
+		AIFighter manualChicken = new AIFighter();
 		manualChicken.setName("chicken");
 		manualChicken.addProperty("kickReach", 9);
 		manualChicken.addProperty("punchReach", 1);
@@ -106,7 +106,7 @@ public class FDLReaderTest {
 		manualChicken.addBehaviour(Arrays.asList("near","and","or"), Arrays.asList("run_away"), Arrays.asList("kick_low"));
 		manualChicken.addBehaviour(Arrays.asList("always","and","or"), Arrays.asList("crouch"), Arrays.asList("punch_low"));
 		
-		SuperAwesomeFighter readChicken = new SuperAwesomeFighter(fdls.get("chicken.fdl"));
+		AIFighter readChicken = new AIFighter(fdls.get("chicken.fdl"));
 		
 		assertEquals(manualChicken, readChicken);
 	}
@@ -117,7 +117,7 @@ public class FDLReaderTest {
 	}
 	
 	private List<InvalidAttributeMessage> testApplyAttributes(String fileName) {
-		return new FDLReader(fdls.get(fileName)).applyAttributes(new SuperAwesomeFighter());
+		return new FDLReader(fdls.get(fileName)).applyAttributes(new AIFighter());
 	}
 
 }
