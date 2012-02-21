@@ -26,6 +26,7 @@ public class ConditionInterpreter implements Visitor
 	public static boolean evaluate(Behaviour behaviour, Fighter fighter, State state)
 	{
 		ConditionInterpreter interpreter = new ConditionInterpreter(fighter, state);
+		evaluation = false;
 		interpreter.visit(behaviour);
 		return evaluation;
 	}

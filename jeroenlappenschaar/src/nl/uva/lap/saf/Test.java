@@ -29,7 +29,7 @@ public class Test
 			"	kickPower = 7\r\n" + 
 			"	far [run_towards]" +
 			"	near [walk_away]" +
-			"	always [stand]" +
+			"	always [walk_towards]" +
 			"}";
 	
 	@SuppressWarnings("unused")

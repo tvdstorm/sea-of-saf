@@ -5,11 +5,17 @@ import nl.uva.lap.saf.ast.fighter.StateFighter;
 
 public class State
 {
-	private int NEAR_DISTANCE = 4;
-	private int FAR_DISTANCE = 4;
+	/**
+	 * The influence the weight of the player has on its moves
+	 * the higher it is, the less influence it has and the faster players move.
+	 */
+	private final int WEIGHT_INFLUENCE = 3;
 	
-	private int LEFT_START_POSITION = 20;
-	private int RIGHT_START_POSITION = 80;
+	private final int NEAR_DISTANCE = 10;
+	private final int FAR_DISTANCE = 20;
+	
+	private final int LEFT_START_POSITION = 20;
+	private final int RIGHT_START_POSITION = 80;
 	
 	private StateFighter fighter1;
 	private StateFighter fighter2;
@@ -26,7 +32,7 @@ public class State
 	 */
 	private boolean performAction(StateFighter fighter)
 	{
-		if(fighter.getStep() == fighter.getWeight())
+		if(fighter.getStep() == fighter.getWeight()/WEIGHT_INFLUENCE)
 		{
 			fighter.resetStep();
 			fighter.calculateBehaviour(this);
