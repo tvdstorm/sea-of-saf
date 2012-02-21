@@ -7,6 +7,7 @@ import nl.uva.lap.saf.ast.ASTNode;
 import nl.uva.lap.saf.ast.Visitor;
 import nl.uva.lap.saf.ast.action.Action;
 import nl.uva.lap.saf.ast.condition.Condition;
+import nl.uva.lap.saf.ast.condition.SimpleCondition;
 
 public class Behaviour extends ASTNode
 {
@@ -40,5 +41,13 @@ public class Behaviour extends ASTNode
 	public List<Action> getActions()
 	{
 		return actions;
+	}
+
+	public boolean isAlways()
+	{
+		if(!(condition instanceof SimpleCondition))
+			return false;
+		SimpleCondition simple = (SimpleCondition) condition;
+		return simple.getCondition().equals("always");
 	}
 }
