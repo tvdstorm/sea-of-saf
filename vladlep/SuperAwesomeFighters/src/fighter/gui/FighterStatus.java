@@ -5,34 +5,26 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fighter.algorithm.BattleConstants;
 import fighter.algorithm.FighterDescription;
 
 @SuppressWarnings("serial")
 public class FighterStatus extends JPanel {
 
-	private FighterDescription fighterDesc;
 	private JLabel health;
 	private JLabel name;
 
-	public FighterStatus(FighterDescription fighterDescription) {
-		this.fighterDesc = fighterDescription;
+	public FighterStatus(final FighterDescription fighterDescription) {
 		setLayout(new GridLayout(2, 1));
-		name = new JLabel(fighterDescription.getFighter().getName());
+		this.name = new JLabel(fighterDescription.getFighter().getName());
 		add(name);
-		health = new JLabel(String.valueOf(BattleConstants.startingHealth));
+		this.health = new JLabel() {
+			@Override
+			protected void paintComponent(java.awt.Graphics g) {
+				super.paintComponent(g);
+				this.setText(String.valueOf(fighterDescription.getHealth()));
+			}
+		};
 		add(health);
 	}
 
-	@Override
-	public void repaint() {
-		if (fighterDesc != null) {
-			upadateHealth();
-		}
-		super.repaint();
-	}
-
-	private void upadateHealth() {
-		this.health.setText(String.valueOf(fighterDesc.getHealth()));
-	}
 }
