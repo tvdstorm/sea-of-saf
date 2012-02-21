@@ -12,9 +12,4 @@ import ast.Visitor;
  */
 public abstract class Action extends ASTNode {
 
-	@Override
-	public void accept(Visitor visitor) {
-		// TODO Auto-generated method stub
-		
-	}
 }

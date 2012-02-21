@@ -12,7 +12,8 @@ import ast.fighter.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 public class SAFParser{  public static void main(String args []) throws ParseException  {
     FileReader input = initFile();
@@ -70,7 +71,7 @@ public class SAFParser{  public static void main(String args []) throws ParseE
       try
       {
         Fighter fighter = getFighter();
-        System.out.println(fighter);
+        System.out.println(Printer.print(fighter));
       }
       catch (Exception e)
       {
@@ -95,42 +96,33 @@ TOKEN: /* operators */
 }
 TOKEN :{  < CONSTANT : (< DIGIT >)+ >| < #DIGIT : [ "0"-"9" ] >
 | < ID : (["a"-"z", "A" - "Z", "0"-"9", "_"])+ >
-
-
-/*
-| < FIGHTER : < ID > "{" <FIGHTER_PROPS> "}" >
-| < #FIGHTER_PROPS : (<FIGHTER_PROP>)* >
-| < FIGHTER_PROP : <FIGHT_CHAR> >
-| < #FIGHT_POWER : <DIGIT> >//(<DIGIT>~["0"]) | ("1""0") >
-| < FIGHT_CHAR : <FIGHT_ID> "=" <FIGHT_POWER> >
-| < FIGHT_ID : <KICKPOWER> | <PUNCHPOWER> | <KICKREACH> | <PUNCHREACH> >
-| < #KICKPOWER : "kickPower" >
-| < #PUNCHPOWER : "punchPower" >
-| < #KICKREACH : "kickReach" >
-| < #PUNCHREACH : "punchReach" >
-*/}
+}
 
 Fighter getFighter():
 {
     Token t;
+    List<FighterProp> fighterProps;
 }
-{  t = <ID>  {
-    Set fighterProps = fighterProps();
-    Fighter fighter = new Fighter(t.image);
+{  t = <ID> fighterProps = fighterProps()  {
+    Fighter fighter = new Fighter(t.image, fighterProps);
     return fighter;  }
 }
 
-void fighter():
-{}
+List fighterProps():
 {
-    <ID> fighterProps()
+    FighterProp fighterProp;
+    List<FighterProp> fighterProps = new ArrayList();
 }
-
-Set fighterProps():
-{}
 {
-    "{"(fighterProp())*"}"
-    {return null;}
+    "{"
+    (
+        fighterProp = fighterProp()
+        {
+            fighterProps.add(fighterProp);
+        }
+    )*
+    "}"
+    {return fighterProps;}
 }
 
 FighterProp fighterProp():
@@ -170,7 +162,7 @@ Behavior behavior():
 	   fightAction = action()
 	"]"
 	
-	{	    System.out.println(Printer.print(condition));	    return new Behavior(condition, moveAction, fightAction);	}
+	{	    return new Behavior(condition, moveAction, fightAction);	}
 
 }
 
@@ -206,11 +198,8 @@ Action action():
     Action a;
 }
 {
-
-    (LOOKAHEAD(2) (a=choose()) | (a=moveAction()))
-    //(LOOKAHEAD(2) (a=choose()) | (a=fightAction()))
-    {return a;}
-    
+    (LOOKAHEAD(2) (a=choose()) | (a=simpleAction()))
+    {return a;} 
 }
 
 Choose choose():
@@ -222,23 +211,14 @@ Choose choose():
     <CHOOSE> "("
                 {c = new Choose();} 
                 (
-                    (LOOKAHEAD(2)(s=moveAction())|(s=fightAction()))
-                    {c.addChoice(s.getAction());}
+                    s=simpleAction()
+                    {c.addChoice(s);}
                 )+
               ")"
               {return c;}
 }
 
-SimpleAction moveAction():
-{
-    String image;
-}
-{
-    image = <ID>.image
-    {return new SimpleAction(image);}
-}
-
-SimpleAction fightAction():
+SimpleAction simpleAction():
 {
     String image;
 }
@@ -267,14 +247,4 @@ int fightPower():
        fightPower = Integer.valueOf(image).intValue();
        return fightPower;
     }
-}
-
-
-String getFighterName():
-{
-    Token t;
-}
-{
-    t = <ID>
-    {return t.image;}
 }

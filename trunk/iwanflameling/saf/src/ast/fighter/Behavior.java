@@ -3,6 +3,7 @@
  */
 package ast.fighter;
 
+import ast.Visitor;
 import ast.action.Action;
 import ast.condition.Condition;
 
@@ -21,5 +22,31 @@ public class Behavior extends FighterProp {
 		this.moveAction = moveAction;
 		this.fightAction = fightAction;
 	}
-		
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);	
+	}
+
+	/**
+	 * @return the condition
+	 */
+	public Condition getCondition() {
+		return condition;
+	}
+
+	/**
+	 * @return the moveAction
+	 */
+	public Action getMoveAction() {
+		return moveAction;
+	}
+
+	/**
+	 * @return the fightAction
+	 */
+	public Action getFightAction() {
+		return fightAction;
+	}
+	
 }

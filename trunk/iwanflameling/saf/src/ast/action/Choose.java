@@ -15,23 +15,25 @@ import ast.Visitor;
  */
 public class Choose extends Action {
 	
-	private List<String> choices = new ArrayList<String>();
+	private List<SimpleAction> choices = new ArrayList<SimpleAction>();
 	
 	public Choose(){
 		
 	}
 
-	/* (non-Javadoc)
-	 * @see ast.ASTNode#accept(ast.Visitor)
-	 */
+
 	@Override
 	public void accept(Visitor visitor) {
-		// TODO Auto-generated method stub
+		visitor.visit(this);
 
 	}
 	
-	public void addChoice(String choice){
+	public void addChoice(SimpleAction choice){
 		this.choices.add(choice);
+	}
+	
+	public List<SimpleAction> getChoices(){
+		return this.choices;
 	}
 
 }
