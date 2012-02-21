@@ -1,0 +1,202 @@
+options
+{
+   static = false;
+} 
+
+PARSER_BEGIN(SAFParser)
+
+package safParser;
+
+import safAST.*;
+import safAST.action.*;
+import safAST.condition.*;
+
+public class SAFParser 
+{
+  
+}
+
+PARSER_END(SAFParser)
+
+SKIP : /* WHITE SPACES & COMMENTS */
+{
+  " " | "\r" | "\t" | "\n" | "\r\n"
+ | <"//" (~["\r", "\n"])* ("\r"|"\n"|"\r\n")>
+ | <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
+}
+
+TOKEN : /* OPERATORS */
+{
+   < PLUS : "+" >
+ | < MINUS : "-" >
+ | < MULTIPLY : "*" >
+ | < DIVIDE : "/" >
+ | < ASSIGN : "=" >
+ | < LBRACES : "{" >
+ | < RBRACES : "}" >
+ | < AND : "&&" >
+ | < OR : "||" >
+ | < LPARENTHESES : "[" | "(" >
+ | < RPARENTHESES : "]" | ")" >
+}
+
+TOKEN : /*LITERAL */
+{
+   < NUM : (< DIGIT >)+ >
+ | < STRING : < LETTER > (< LETTER >)* >
+ | < #LETTER : [ "_", "a"-"z", "A"-"Z" ] >
+ | < #DIGIT : [ "0"-"9" ] >
+}
+
+Bot StartParser() :
+{
+  Bot bot;
+}
+{
+  bot = Bot()< EOF >
+  {
+    return bot;
+  }
+}
+
+Bot Bot() :
+{
+  Bot bot;
+  Token name;
+  Personality personality;
+  Behaviour behave;
+}
+{
+  name = < STRING >
+  {
+    bot = new Bot(name.image);
+  }[< LBRACES >(
+    (LOOKAHEAD(< STRING >< ASSIGN >)personality = Personality()
+    {
+      bot.addPersonality(personality);
+    }
+    | behave = Behaviour()
+    {
+	  bot.addBehaviour(behave);
+    }))+< RBRACES >] 
+  {
+	return bot; 
+  }
+}
+
+Personality Personality() :
+{
+  Personality personality;
+  Token characName, value;
+}
+{
+  characName = < STRING > < ASSIGN > value = < NUM >
+  {
+	personality = new Personality(characName.image, Integer.parseInt(value.image));
+	return personality;
+  }
+}
+
+Behaviour Behaviour() :
+{
+  Behaviour behave;
+  Condition condition;
+  Action action;
+  Token cond;
+}
+{
+      condition = ORCondition()
+  
+  (< LPARENTHESES >action = Action()< RPARENTHESES >)
+  {
+	behave = new Behaviour(condition, action);
+	return behave;
+  }
+}
+
+Condition ORCondition() :
+{
+  Condition condA, condB;
+}
+{
+  condA = ANDCondition() (< OR > condB = ANDCondition()
+  {
+    condA = new OrCombineCondition(condA, condB);
+  })*
+  {
+    return condA;
+  }
+}
+
+Condition ANDCondition() :
+{
+  Condition condA, condB;
+}
+{
+  condA = ConditionAtom() (< AND > condB = ConditionAtom()
+  {
+    condA = new AndCombineCondition(condA, condB);
+  })*
+  {
+    return condA;
+  }
+}
+
+Condition ConditionAtom() :
+{
+  Condition cond;
+  SingleCondition singleCond;
+  Token condType;
+}
+{
+  condType = < STRING >
+  {
+	singleCond = new SingleCondition(condType.image);	return singleCond;
+  }
+  | < LPARENTHESES > cond = ORCondition() < RPARENTHESES >
+  {
+    return cond;
+  }
+   
+}
+
+Action Action() :
+{
+  Action moveAct = new Action();
+  Action fightAct = new Action();
+  Token action;
+}
+{
+  [ LOOKAHEAD(2) moveAct = SelectAction() | action = < STRING > moveAct = ActionAtom(action)]
+  [ LOOKAHEAD(2) fightAct = SelectAction() | action = < STRING > fightAct = ActionAtom(action)]
+  {  
+    return new Action(moveAct, fightAct);
+  }
+}
+
+SelectAction SelectAction() :
+{
+  SelectAction selectAct = new SelectAction();
+  Token action;
+}
+{
+  < STRING >< LPARENTHESES >
+  	(  	  action = < STRING >
+	  {
+	    selectAct.addActions(ActionAtom(action));	  }	)+
+  < RPARENTHESES >
+  {
+    return selectAct;
+  }
+}
+
+SingleAction ActionAtom(Token action) :
+{
+  SingleAction singleAct;
+}
+{
+  {
+    singleAct = new SingleAction(action.image);
+    return singleAct;
+  }
+}

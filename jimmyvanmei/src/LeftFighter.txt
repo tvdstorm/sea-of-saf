@@ -1,0 +1,10 @@
+Bot{
+ kickPower = 10
+ punchPower = 12
+ far||near[run_towards punch_high]
+ near&&weaker[choose(stand crouch) kick_high]
+ stronger&&weaker[choose(stand crouch) kick_high]
+ ((far&&near)&&near)&&stronger[run_towards punch_high]
+ much_stronger&&(weaker||stronger)[choose(stand crouch) kick_high]
+ (much_stronger&&weaker)||stronger[choose(stand crouch) kick_high]
+}
