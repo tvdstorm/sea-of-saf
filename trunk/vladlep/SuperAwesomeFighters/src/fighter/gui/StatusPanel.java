@@ -20,10 +20,4 @@ public class StatusPanel extends JPanel {
 		add(this.secondFighter);
 	}
 
-	@Override
-	public void repaint() {
-		super.repaint();
-		// firstFighter.upadateHealth();
-		// secondFighter.upadateHealth();
-	}
 }

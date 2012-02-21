@@ -24,8 +24,8 @@ import fighter.messages.Error;
 
 public class Main {
 	private static List<Message> messages;
-	private static final String firstFile = "firstFighter.txt";
-	private static final String secondFile = "secondFighter.txt";
+	private static final String firstFile = "thirdFighter.txt";
+	private static final String secondFile = "forthFighter.txt";
 	private static IFighter firstFighter = null;
 	private static IFighter secondFighter = null;
 	private static MessageReporter messageReporter;
