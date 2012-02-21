@@ -17,8 +17,8 @@ public class Fighter implements IFighter {
 	}
 
 	@Override
-	public String getName() {
-		return name;
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}
 
 	@Override
@@ -27,13 +27,13 @@ public class Fighter implements IFighter {
 	}
 
 	@Override
-	public Personality getPersonality() {
-		return personality;
+	public String getName() {
+		return name;
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public Personality getPersonality() {
+		return personality;
 	}
 
 }

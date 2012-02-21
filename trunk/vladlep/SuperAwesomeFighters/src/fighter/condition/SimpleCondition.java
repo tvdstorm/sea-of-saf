@@ -14,21 +14,9 @@ public class SimpleCondition implements ICondition, ASTNode {
 	}
 
 	@Override
-	public boolean testCondition(List<ConditionType> acceptedConditions) {
-		if (acceptedConditions.contains(condition))
-			return true;
-		return false;
-	}
-
-	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
 
-	}
-
-	@Override
-	public String toString() {
-		return condition.toString();
 	}
 
 	@Override
@@ -37,5 +25,17 @@ public class SimpleCondition implements ICondition, ASTNode {
 			if (toString().equals(obj))
 				return true;
 		return false;
+	}
+
+	@Override
+	public boolean testCondition(List<ConditionType> acceptedConditions) {
+		if (acceptedConditions.contains(condition))
+			return true;
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		return condition.toString();
 	}
 }

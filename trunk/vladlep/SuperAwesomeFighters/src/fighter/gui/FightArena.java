@@ -1,34 +1,16 @@
 package fighter.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
-import java.util.List;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import fighter.IFighter;
 import fighter.algorithm.FighterDescription;
-import fighter.messages.Message;
+import fighter.algorithm.ScenePanel;
 
 @SuppressWarnings("serial")
 public class FightArena extends JFrame {
 	private static FightArena singleton = null;
-	private FighterDescription firstFighter;
-	private FighterDescription secondFighter;
-	private Container masterContainer;
-	JPanel statusPanel;
-
-	private FightArena(FighterDescription firstFighter, FighterDescription secondFighter) {
-		this.firstFighter = firstFighter;
-		this.secondFighter = secondFighter;
-		setTitle(ArenaConstants.GAME_NAME);
-		setSize(ArenaConstants.ARENA_WIDTH, ArenaConstants.ARENA_HEIGHT);
-		masterContainer = getContentPane();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
-	}
-
 	public static FightArena getFightArena(FighterDescription firstFighter,
 			FighterDescription secondFighter) {
 		if (singleton == null)
@@ -36,17 +18,39 @@ public class FightArena extends JFrame {
 		return singleton;
 
 	}
+	private FighterDescription firstFighter;
+	private Container masterContainer;
+	private JPanel scenePanel;
+	private FighterDescription secondFighter;
 
-	public void intiArena() {
-		singleton.drawComponents();
-		singleton.setVisible(true);
+	private JPanel statusPanel;
 
+	private FightArena(FighterDescription firstFighter,
+			FighterDescription secondFighter) {
+		this.firstFighter = firstFighter;
+		this.secondFighter = secondFighter;
+		setTitle(ArenaConstants.GAME_NAME);
+//		setSize(ArenaConstants.ARENA_WIDTH, ArenaConstants.ARENA_HEIGHT);
+		masterContainer = getContentPane();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setResizable(false);
 	}
 
 	private void drawComponents() {
+		masterContainer.setLayout(new BorderLayout());
 		drawStatusPanel();
 		drawScenePanel();
+		masterContainer.repaint();
+		masterContainer.validate();
 
+	}
+
+	private void drawScenePanel() {
+		scenePanel = new ScenePanel(firstFighter,secondFighter);
+		scenePanel.setSize(ArenaConstants.ARENA_WIDTH,
+				ArenaConstants.ARENA_HEIGHT);
+//		masterContainer.add(scenePanel);
+	
 	}
 
 	private void drawStatusPanel() {
@@ -58,7 +62,10 @@ public class FightArena extends JFrame {
 		masterContainer.add(statusPanel);
 	}
 
-	private void drawScenePanel() {
+	public void intiArena() {
+		singleton.drawComponents();
+		singleton.pack();
+		singleton.setVisible(true);
 
 	}
 

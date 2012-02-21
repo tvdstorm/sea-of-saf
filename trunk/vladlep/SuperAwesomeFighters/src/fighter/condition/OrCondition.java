@@ -15,22 +15,9 @@ public class OrCondition implements ICondition, ASTNode {
 	}
 
 	@Override
-	public boolean testCondition(List<ConditionType> acceptedConditions) {
-		return firstCondition.testCondition(acceptedConditions)
-				|| secondCondition.testCondition(acceptedConditions);
-	}
-
-	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
 
-	}
-
-	@Override
-	public String toString() {
-
-		return "(" + firstCondition.toString() + " OR "
-				+ secondCondition.toString() + ")";
 	}
 
 	public ICondition getFirstCond() {
@@ -39,5 +26,18 @@ public class OrCondition implements ICondition, ASTNode {
 
 	public ICondition getSecondCond() {
 		return secondCondition;
+	}
+
+	@Override
+	public boolean testCondition(List<ConditionType> acceptedConditions) {
+		return firstCondition.testCondition(acceptedConditions)
+				|| secondCondition.testCondition(acceptedConditions);
+	}
+
+	@Override
+	public String toString() {
+
+		return "(" + firstCondition.toString() + " OR "
+				+ secondCondition.toString() + ")";
 	}
 }

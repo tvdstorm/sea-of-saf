@@ -32,18 +32,6 @@ public class Rule implements ASTNode {
 
 	}
 
-	public MoveActionType getNextMoveAction() {
-		int index;
-		index = generatRandomIndex(moveActions.size());
-		return moveActions.get(index);
-	}
-
-	public FightActionType getNextFightAction() {
-		int index;
-		index = generatRandomIndex(fightActions.size());
-		return fightActions.get(index);
-	}
-
 	private int generatRandomIndex(int maxSize) {
 		Random randomGenerator = new Random();
 		return randomGenerator.nextInt(maxSize);
@@ -53,12 +41,24 @@ public class Rule implements ASTNode {
 		return condition;
 	}
 
+	public Actions<FightActionType> getFightActions() {
+		return fightActions;
+	}
+
 	public Actions<MoveActionType> getMoveActions() {
 		return moveActions;
 	}
 
-	public Actions<FightActionType> getFightActions() {
-		return fightActions;
+	public FightActionType getNextFightAction() {
+		int index;
+		index = generatRandomIndex(fightActions.size());
+		return fightActions.get(index);
+	}
+
+	public MoveActionType getNextMoveAction() {
+		int index;
+		index = generatRandomIndex(moveActions.size());
+		return moveActions.get(index);
 	}
 
 }

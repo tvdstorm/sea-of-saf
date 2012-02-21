@@ -10,8 +10,8 @@ import fighter.messages.Error;
 
 public class ImageLoader {
 
-	private final static String PATH_PICS = "./pics/";
 	private final static String EXTENSION = ".png";
+	private final static String PATH_PICS = "./pics/";
 
 	public static BufferedImage loadImage(String imageName) {
 		BufferedImage img = null;
