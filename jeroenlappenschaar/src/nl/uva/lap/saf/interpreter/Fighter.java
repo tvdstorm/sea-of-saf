@@ -139,22 +139,22 @@ public class Fighter implements Settings
 	
 	public boolean isKicking()
 	{
-		return currentAction.equals("low_kick") || currentAction.equals("high_kick");
+		return currentAction.equals("kick_low") || currentAction.equals("kick_high");
 	}
 	
 	public boolean isPunching()
 	{
-		return currentAction.equals("low_punch") || currentAction.equals("high_punch");
+		return currentAction.equals("punch_low") || currentAction.equals("punch_high");
 	}
 	
 	public boolean isHighAttack()
 	{
-		return currentAction.equals("high_kick") || currentAction.equals("high_punch");
+		return currentAction.equals("kick_high") || currentAction.equals("punch_high");
 	}
 	
 	public boolean isLowAttack()
 	{
-		return currentAction.equals("low_punch") || currentAction.equals("low_kick");
+		return currentAction.equals("punch_low") || currentAction.equals("kick_low");
 	}
 	
 	public boolean isBlocking()
@@ -164,18 +164,16 @@ public class Fighter implements Settings
 	
 	public boolean isLowBlock()
 	{
-		return currentAction.equals("low_block");
+		return currentAction.equals("block_low");
 	}
 	
 	public boolean isHighBlock()
 	{
-		return currentAction.equals("high_block");
+		return currentAction.equals("block_high");
 	}
 	
 	public boolean isBlocked(Fighter otherFighter)
 	{
-		if(!isBlocking())
-			return false;
 		if(otherFighter.isHighAttack() && isHighBlock())
 			return true;
 		if(otherFighter.isLowAttack() && isLowBlock())

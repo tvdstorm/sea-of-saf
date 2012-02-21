@@ -5,7 +5,6 @@ import java.awt.Font;
 import nl.uva.lap.saf.arena.StateFighter.Color;
 import nl.uva.lap.saf.arena.StateFighter.Direction;
 import nl.uva.lap.saf.arena.StateFighter.Stand;
-import nl.uva.lap.saf.interpreter.Fighter;
 
 public class Arena
 {
