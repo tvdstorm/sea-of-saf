@@ -10,10 +10,9 @@ public class Bot{
 	private final List<Behaviour> behaviour;
 	
 	public Bot(String fighterName){
-			this.fighterName = new String(fighterName);
+			this.fighterName = fighterName;
 			this.behaviour = new ArrayList<Behaviour>();
 			this.personality = new ArrayList<Personality>();
-			///this.fighterName = fighterName;
 	}
 	
 	public String getFighterName() {
@@ -21,8 +20,10 @@ public class Bot{
 	}
 	
 	public void addPersonality(Personality personality){
-		this.personality.add(personality);
+	//	if(personality.validate(personality))
+		personality.add(personality);
 	}
+
 	public void addBehaviour(Behaviour behaviour){
 		this.behaviour.add(behaviour);
 	}
@@ -47,7 +48,13 @@ public class Bot{
 		return 0.5*(getHeight() - getWeight()) ;
 	}
 
-	
+//	private boolean validatePersonality(Personality personality) {
+//		if(Constants.getCharacteristics().contains(personality.getCharacteristic())){
+//			return true;
+//		}
+//		return false;
+//	}
+//	
 	
 	public String toString(){
 		return fighterName + "\n" +

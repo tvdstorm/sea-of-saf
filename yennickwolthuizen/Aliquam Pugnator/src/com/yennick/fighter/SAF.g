@@ -19,8 +19,6 @@ tokens
   package com.yennick.fighter;
 }
 
-
-
 fighter returns [Bot fighter]
 	: IDENT '{' {			$fighter = new Bot($IDENT.text); }
 			(personality {$fighter.addPersonality($personality.personality);}
@@ -40,7 +38,6 @@ behaviour returns [Behaviour behaviour]
 		 '[' a1=action a2=action ']' {$behaviour.addAction($a1.action,$a2.action);}
 		
 	;
-
 
 condition returns [Condition condition]
 	: IDENT { $condition = new Condition($IDENT.text); }
@@ -69,6 +66,3 @@ IDENT	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'_')*;
 VALUE	: '0'..'9'+;
 
 WHITESPACE : ( '\t' | ' ' | '\r' | '\n' )*   { $channel = HIDDEN; } ;
-
-COMMENT : '//' .* ('\n'|'\r')   { $channel = HIDDEN; } ;
-MULTI_COMMENT : '/*' .* '*/'   { $channel = HIDDEN; } ;
