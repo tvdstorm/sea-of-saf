@@ -1,10 +1,8 @@
 package fighter.gui;
 
 import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import fighter.messages.Message;
 
 public class MessageReporter {

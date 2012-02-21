@@ -16,6 +16,11 @@ public class Behaviour extends ArrayList<Rule> implements ASTNode {
 
 	}
 
+	private int generatRandomIndex(int maxIndex) {
+		Random randomGenerator = new Random();
+		return randomGenerator.nextInt(maxIndex);
+	}
+
 	public Rule getNextRule(List<ConditionType> acceptedConditions) {
 
 		Rule selectedRule;
@@ -27,11 +32,6 @@ public class Behaviour extends ArrayList<Rule> implements ASTNode {
 		selectedRule = possibleRules.get(index);
 
 		return selectedRule;
-	}
-
-	private int generatRandomIndex(int maxIndex) {
-		Random randomGenerator = new Random();
-		return randomGenerator.nextInt(maxIndex);
 	}
 
 	private List<Rule> preselectPossibleMoves(

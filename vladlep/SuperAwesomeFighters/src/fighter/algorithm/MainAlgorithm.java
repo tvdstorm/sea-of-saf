@@ -7,9 +7,9 @@ import fighter.gui.FightArena;
 public class MainAlgorithm {
 
 	public static final int direction = 1;
+	private static FightArena fightArena;
 	private static FighterDescription leftFighterDesc;
 	private static FighterDescription rightFighterDesc;
-	private static FightArena fightArena;
 
 	public static void setUpFight(IFighter leftFighter, IFighter rightFighter) {
 		leftFighterDesc = new FighterDescription(leftFighter,
@@ -37,9 +37,11 @@ public class MainAlgorithm {
 			leftFighterDesc.calculateNextMove();
 			rightFighterDesc.calculateNextMove();
 
-			// do move, calculate new position and health
-
-			// update drawing and commit changes
+			leftFighterDesc.performActions(rightFighterDesc.getFighterState());
+			rightFighterDesc.performActions(leftFighterDesc.getFighterState());
+			
+			fightArena.redrawComponents();
+			
 		} while (leftFighterDesc.getHealth() != 0
 				|| rightFighterDesc.getHealth() != 0);
 	}

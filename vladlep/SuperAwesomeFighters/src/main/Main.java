@@ -18,7 +18,6 @@ import reader.antlr.SAFParser;
 import fighter.IFighter;
 import fighter.algorithm.MainAlgorithm;
 import fighter.checker.SemanticChecker;
-import fighter.gui.FightArena;
 import fighter.gui.MessageReporter;
 import fighter.messages.Message;
 import fighter.messages.Error;

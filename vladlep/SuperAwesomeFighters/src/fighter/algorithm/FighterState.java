@@ -6,17 +6,16 @@ import fighter.action.FightActionType;
 import fighter.action.MoveActionType;
 
 public class FighterState {
-	// http://docs.oracle.com/javase/1.5.0/docs/guide/language/enums.html
 
+	private int health;
 	private IFighter myFigter;
 	private int positionX;
 	private int positionY;
 	private int predefDirection;
-	private MoveActionType selectedMoveAction;
-	private FightActionType selectedFightAction;
 	// remaining time until all actions are completed
 	private int remainingTime = 0;
-	private int health;
+	private FightActionType selectedFightAction;
+	private MoveActionType selectedMoveAction;
 
 	public FighterState(IFighter myFighter, int health, int positionX,
 			int positionY, int direction) {
@@ -29,25 +28,18 @@ public class FighterState {
 		selectedFightAction = FightActionType.stand;
 	}
 
-	public boolean finishedPerformingActions() {
-		if (remainingTime == 0)
-			return true;
-		return false;
-	}
-
-	// TODO in progress
-	public void performActions(Personality myPersonality,
-			FighterState oponentState) {
-
-		selectedMoveAction.doAction(this, oponentState);
-		selectedFightAction.doAction(this, oponentState);
-
-		remainingTime--;
-	}
-
 	public int calculateFigterDistance(FighterState oponentState) {
 		return Math.abs(this.positionX - oponentState.positionX);
 
+	}
+
+	
+	private boolean checkInFrame(int newPositionX) {
+		if (newPositionX <= 0)
+			return false;
+		if (newPositionX > BattleConstants.arenaLength)
+			return false;
+		return true;
 	}
 
 	public int computeNewPositionX(int moveDirection) {
@@ -59,12 +51,10 @@ public class FighterState {
 		return positionX;
 	}
 
-	private boolean checkInFrame(int newPositionX) {
-		if (newPositionX <= 0)
-			return false;
-		if (newPositionX > BattleConstants.arenaLength)
-			return false;
-		return true;
+	public boolean finishedPerformingActions() {
+		if (remainingTime == 0)
+			return true;
+		return false;
 	}
 
 	public int getHealth() {
@@ -75,24 +65,29 @@ public class FighterState {
 		return positionX;
 	}
 
-	public void setSelectedFightAction(FightActionType selectedFightAction) {
-		this.selectedFightAction = selectedFightAction;
-	}
-
-	public void setSelectedMoveAction(MoveActionType selectedMoveAction) {
-		this.selectedMoveAction = selectedMoveAction;
-	}
-
-	public double getSpeed() {
-		return myFigter.getPersonality().getSpeed();
+	public int getPositionY() {
+		return positionY;
 	}
 
 	public int getRemainingTime() {
 		return remainingTime;
 	}
 
-	public void setRemainingTime(int remainingTime) {
-		this.remainingTime = remainingTime;
+	public FightActionType getSelectedFightAction() {
+		return selectedFightAction;
+	}
+
+	public double getSpeed() {
+		return myFigter.getPersonality().getSpeed();
+	}
+
+	public void performActions(Personality myPersonality,
+			FighterState oponentState) {
+		// TODO in progress
+		selectedMoveAction.doAction(this, oponentState);
+		selectedFightAction.doAction(this, oponentState);
+
+		remainingTime--;
 	}
 
 	public void setPositionX(int positionX) {
@@ -101,5 +96,17 @@ public class FighterState {
 
 	public void setPositionY(int positionY) {
 		this.positionY = positionY;
+	}
+
+	public void setRemainingTime(int remainingTime) {
+		this.remainingTime = remainingTime;
+	}
+
+	public void setSelectedFightAction(FightActionType selectedFightAction) {
+		this.selectedFightAction = selectedFightAction;
+	}
+
+	public void setSelectedMoveAction(MoveActionType selectedMoveAction) {
+		this.selectedMoveAction = selectedMoveAction;
 	}
 }
