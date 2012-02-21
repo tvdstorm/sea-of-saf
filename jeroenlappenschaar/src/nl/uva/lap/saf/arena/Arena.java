@@ -1,15 +1,36 @@
 package nl.uva.lap.saf.arena;
 
-import javax.swing.JOptionPane;
+import nl.uva.lap.saf.ast.fighter.StateFighter;
+import nl.uva.lap.saf.ast.fighter.StateFighter.Direction;
+import nl.uva.lap.saf.ast.fighter.StateFighter.Stand;
 
 public class Arena
 {
+	private final String title = "Super Awesome Fighter";
+	private final int X_WINDOW = 1280;
+	private final int Y_WINDOW = 720;
+	
+	private final int X_SCALE = 100;
+	private final int Y_SCALE = 100;
+	
+	private final int Y_FIGHTER = 11;
+	private final int Y_FIGHTER_JUMP = 14;
+	
+	private State state;
+	
+	public Arena(State state)
+	{
+		this.state = state;
+	}
+	
+	private final int FRAME_RATE = 20;
+	
 	private void initializeWindow()
 	{
-		StdDraw.setTitle("Super Awesome Fighters");
-		StdDraw.setCanvasSize(1280, 720);
-		StdDraw.setXscale(0, 100.0);
-		StdDraw.setYscale(0, 100.0);
+		StdDraw.setTitle(title);
+		StdDraw.setCanvasSize(X_WINDOW, Y_WINDOW);
+		StdDraw.setXscale(0, X_SCALE);
+		StdDraw.setYscale(0, Y_SCALE);
 	}
 
 	private void reset()
@@ -17,27 +38,35 @@ public class Arena
 		StdDraw.setPenColor(StdDraw.WHITE);
 		StdDraw.filledSquare(0, 0, 100.0);
 	}
-
-	public void display()
+	
+	private void drawArena()
 	{
-		initializeWindow();
-		double x = 20.0;
-		while(true)
-		{
-			reset();
-			StdDraw.setPenColor(StdDraw.BLACK);
-			StdDraw.text(10.0, 10.0, "test");
-			StdDraw.picture(50.0, 50.0, "recourses/sprites/dojo.png");
-			StdDraw.picture(x, 11.0, "recourses/sprites/blue/stand.gif");
-			StdDraw.pictureFlipped(80.0, 11.0, "recourses/sprites/green/low_kick.png");
-			StdDraw.show(20);
-			x += 0.5;
-		}
+		StdDraw.picture(50.0, 50.0, "recourses/sprites/dojo.png");
 	}
 	
-	public static void main(String[] args)
+	private void drawFighter(StateFighter fighter)
 	{
-		Arena a = new Arena();
-		a.display();
+		int xPosition = fighter.getXPosition();
+		int yPosition = Y_FIGHTER;
+		if(fighter.getStand() == Stand.JUMP)
+			yPosition = Y_FIGHTER_JUMP;
+		//String color = fighter.getColor();
+		if(fighter.getDirection() == Direction.LEFT)
+			StdDraw.picture(xPosition, yPosition, "recourses/sprites/blue/stand.gif");
+		else
+			StdDraw.pictureFlipped(xPosition, yPosition, "recourses/sprites/green/low_kick.png");
+	}
+
+	public void run()
+	{
+		initializeWindow();
+		while(true)
+		{
+			drawArena();
+			drawFighter(state.getFighter1());
+			drawFighter(state.getFighter2());
+			state.next();
+			StdDraw.show(FRAME_RATE);
+		}
 	}
 }
