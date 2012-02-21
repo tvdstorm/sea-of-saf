@@ -11,10 +11,12 @@ public class Fighter{
      private double weight=0.0;
      private double height=0.0;
      private double speed=0.0;
-     private int locationX=0;
-     private int locationY=0;
+     private int locationX=15;
+     private int locationY=200;
      private int life=100;
+     private Condition currentCondition=new Condition();
      private int lifeStr=100;
+	 private boolean IsLeft;
    
      public Fighter(String name)
      {
@@ -63,7 +65,15 @@ public class Fighter{
      {
     		 this.speed=s;
      }
+     public void setCurrentCondition(Condition c)
+     {
+    	 this.currentCondition=c;
+     }
 
+     public Condition getCurrentCondition()
+     {
+    	 return this.currentCondition;
+     }
 
 	public int getStrLife() {
 		// TODO Auto-generated method stub
@@ -80,8 +90,13 @@ public class Fighter{
 
 	public void setLocation(int x,int y) 
 	{
-		this.locationX=getLocationX()+x;
-		this.locationY=getLocationY()+y;
+		this.locationX=x;
+		this.locationY=y;
+	}
+	public void setIsLeft(boolean b) {
+		this.IsLeft=b;
 	}	
+	
+	
 }
 
