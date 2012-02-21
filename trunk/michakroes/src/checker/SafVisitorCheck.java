@@ -7,21 +7,6 @@ import config.settings;
 
 import saf.*;
 
-/*
- * Checks if Super Awesome Fighter has valid properties.
- * 
- * checks the following properties:
- * - Personality
- * 	 -> valid strengts
- *     -> valid characteristics
- *     -> valid powers (in bounds)
- *   -> presence of all strengths
- * - Behaviour 
- *   -> valid rules
- *     -> valid string
- *   -> required always rule
- *  
- */
 public class SafVisitorCheck implements SafVisitor {	
 	private List<String> errors = new ArrayList<String>();
 	
@@ -29,6 +14,9 @@ public class SafVisitorCheck implements SafVisitor {
 	public void visit(Saf saf) {
         if (saf.getBehaviour() == null) addError("There is no behaviour defined");
         if (saf.getPersonality() == null) addError("There is no personality defined");
+        
+        if (this.errors.size() > 0)
+        	System.exit(this.errors.size());
     }
  
 	@Override

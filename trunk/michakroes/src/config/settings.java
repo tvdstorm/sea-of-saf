@@ -14,7 +14,7 @@ public interface settings {
 	public final String PLAYER1_FILE = "expendables/Statham.saf";
 	public final String PLAYER2_FILE = "expendables/li.saf";
 	
-	public final int STEP_MS = 200;
+	public final int STEP_MS = 100;
 	public final int OFFSET_Y = 50;
 	public final int DISTANCE_THRESHOLD = 10;
 	public final int HEALTH_THRESHOLD = 30;

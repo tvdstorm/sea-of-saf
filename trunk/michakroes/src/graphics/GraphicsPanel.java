@@ -47,51 +47,77 @@ public class GraphicsPanel extends JPanel implements ActionListener, settings {
 		repaint();
 	}
 	
+	@Override
+    public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+        
+		Graphics2D g2 = (Graphics2D)g; 
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                			RenderingHints.VALUE_ANTIALIAS_ON);
+		
+        if (!checkGameOver(g2)) {
+	        step();
+			checkHit();
+			walk();
+			
+	        drawFighterNames(g2);
+			drawFighters(g2);
+			drawHealth(g2);
+			drawDistanceStatus(g2);
+			drawRules(g2);
+			drawFighterSpeed(g2);
+			drawCoordinates(g2);
+        }
+    }
+	
+	public boolean checkGameOver(Graphics g2) {
+		g2.setColor(Color.RED);
+		
+		if (this.player1.getHealth() < 0) {
+			g2.drawString("Game Over, winner: " + this.player1.getName(), SCREEN_PADDING, PLAYER_HEIGHT + 250);
+			return true;
+		}
+		
+		if (this.player2.getHealth() < 0) {
+			g2.drawString("Game Over, winner: " + this.player2.getName(), SCREEN_PADDING, PLAYER_HEIGHT + 250);
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public boolean checkHit() {
 		int distance = player2.getPosX() - (player1.getPosX() + PLAYER_WIDTH);
 		
-		int p1_reach = getReachPower(player1, this.currentRulePlayer1, false);
-		int p2_reach = getReachPower(player2, this.currentRulePlayer2, false);
-		
-		int p1_power = getReachPower(player1, this.currentRulePlayer1, true);
-		int p2_power = getReachPower(player2, this.currentRulePlayer2, true);
-		
-		String p1_fight = this.currentRulePlayer1.getFightAction().getType();
-		String p2_fight = this.currentRulePlayer2.getFightAction().getType();
+		int p1_reach = getReach(player1, this.currentRulePlayer1);
+		int p2_reach = getReach(player2, this.currentRulePlayer2);
 		
 		if (distance < p1_reach) {
-			if ( (p2_fight.equals(BLOCK_HIGH) && 
-				  (p1_fight.equals(KICK_HIGH) || p1_fight.equals(PUNCH_HIGH))) ||
-				 (p2_fight.equals(BLOCK_LOW) && 
-				  (p1_fight.equals(KICK_LOW) || p1_fight.equals(PUNCH_LOW)))
-			   ) 
-				p1_power /= 2;
-			
-			player2.setHealth(player2.getHealth() - p1_power);
+			player2.setHealth( beat(player1, player2, this.currentRulePlayer1, this.currentRulePlayer2) );
 			
 			int newPosX = player1.getPosX() - 50;
-			if (newPosX < SCREEN_PADDING) newPosX = SCREEN_PADDING;
+			if (newPosX < SCREEN_PADDING) 
+				newPosX = SCREEN_PADDING;
+			
 			player1.setPosX(newPosX);
 			
-			if (player2.getPosX() < (newPosX + 50) ) player2.setPosX(newPosX + 50); 
+			if (player2.getPosX() < (newPosX + 50) ) 
+				player2.setPosX(newPosX + 50); 
 			
 			return true;
-		} 
+		}
+		
 		if (distance < p2_reach) {
-			if ( (p1_fight.equals(BLOCK_HIGH) && 
-				  (p2_fight.equals(KICK_HIGH) || p2_fight.equals(PUNCH_HIGH))) ||
-				 (p1_fight.equals(BLOCK_LOW) && 
-				  (p2_fight.equals(KICK_LOW) || p2_fight.equals(PUNCH_LOW)))
-			   ) 
-				p2_power /= 2;
-			
-			player1.setHealth(player1.getHealth() - p2_power);	
+			player1.setHealth( beat(player2, player1, this.currentRulePlayer2, this.currentRulePlayer1) );
 			
 			int newPosX = player2.getPosX() + 100;
-			if (newPosX > (SCREEN_WIDTH - PLAYER_WIDTH)) newPosX = SCREEN_WIDTH - PLAYER_WIDTH;
+			if (newPosX > (SCREEN_WIDTH - PLAYER_WIDTH)) 
+				newPosX = SCREEN_WIDTH - PLAYER_WIDTH;
+			
 			player2.setPosX(newPosX);
 			
-			if (player1.getPosX() < (newPosX + 50 + PLAYER_WIDTH) ) player1.setPosX(newPosX + 50 + PLAYER_WIDTH); 
+			if (player1.getPosX() < (newPosX + 50 + PLAYER_WIDTH) ) 
+				player1.setPosX(newPosX + 50 + PLAYER_WIDTH); 
 			
 			return true;
 		} 
@@ -99,17 +125,50 @@ public class GraphicsPanel extends JPanel implements ActionListener, settings {
 		return false;
 	}
 	
-	private int getReachPower(Saf player, BehaviourRule rule, boolean reach) {
+	private int beat(Saf p1, Saf p2, BehaviourRule r1, BehaviourRule r2) {		
+		float hit_power = getPower(p1, r1);
+		
+		String p1_fight = r1.getFightAction().getType();
+		String p2_fight = r2.getFightAction().getType();
+		
+		if (checkBlock(p1_fight, p2_fight))
+			hit_power /= 2;
+		
+		return p2.getHealth() - (int) hit_power;
+	}
+	
+	private boolean checkBlock(String p1_fight, String p2_fight) {
+		if ( (p1_fight.equals(BLOCK_HIGH) && 
+			 (p2_fight.equals(KICK_HIGH) || p2_fight.equals(PUNCH_HIGH))) ||
+			 (p1_fight.equals(BLOCK_LOW) && 
+			 (p2_fight.equals(KICK_LOW) || p2_fight.equals(PUNCH_LOW)))
+			)
+			return true;
+		return false;
+	}
+	
+	private int getReach(Saf player, BehaviourRule rule) {
 		if (rule.getFightAction().getType().equals(KICK_HIGH) || 
 			rule.getFightAction().getType().equals(KICK_LOW)) {
-			if (reach) return REACH_FACTOR * (player.getPersonality().getStrength(KICK_REACH).getValue());
-			else return player.getPersonality().getStrength(KICK_POWER).getValue();
+			return REACH_FACTOR * (player.getPersonality().getStrength(KICK_REACH).getValue());
 		}
 		
 		if (rule.getFightAction().getType().equals(PUNCH_HIGH) || 
 			rule.getFightAction().getType().equals(PUNCH_LOW)) {
-			if (reach) return REACH_FACTOR * (player.getPersonality().getStrength(KICK_REACH).getValue());
-			else return player.getPersonality().getStrength(PUNCH_POWER).getValue();
+			return REACH_FACTOR * (player.getPersonality().getStrength(KICK_REACH).getValue());
+		}
+		return 0;
+	}
+	
+	private int getPower(Saf player, BehaviourRule rule) {
+		if (rule.getFightAction().getType().equals(KICK_HIGH) || 
+			rule.getFightAction().getType().equals(KICK_LOW)) {
+			return player.getPersonality().getStrength(KICK_POWER).getValue();
+		}
+		
+		if (rule.getFightAction().getType().equals(PUNCH_HIGH) || 
+			rule.getFightAction().getType().equals(PUNCH_LOW)) {
+			return player.getPersonality().getStrength(PUNCH_POWER).getValue();
 		}
 		return 0;
 	}
@@ -138,9 +197,8 @@ public class GraphicsPanel extends JPanel implements ActionListener, settings {
 	private String getDistanceStatus(Saf s1, Saf s2) {
 		String walk_status = NEAR;
 				
-		if ((player2.getPosX() - (player1.getPosX() + PLAYER_WIDTH)) > DISTANCE_THRESHOLD) {			
+		if ((player2.getPosX() - (player1.getPosX() + PLAYER_WIDTH)) > DISTANCE_THRESHOLD)			
 			walk_status = FAR;
-		}
 		
 		return walk_status;
 	}
@@ -187,27 +245,6 @@ public class GraphicsPanel extends JPanel implements ActionListener, settings {
 		return player1.getHealth() > player2.getHealth() + HEALTH_THRESHOLD;
 	}
 	
-	@Override
-    public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-        
-		Graphics2D g2 = (Graphics2D)g; 
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                			RenderingHints.VALUE_ANTIALIAS_ON);
-		
-        step();
-		checkHit();
-		walk();
-		
-        drawFighterNames(g2);
-		drawFighters(g2);
-		drawHealth(g2);
-		drawDistanceStatus(g2);
-		drawRules(g2);
-		drawFighterSpeed(g2);
-		drawCoordinates(g2);
-    }
-	
 	private void drawFighterNames(Graphics2D g2) {
 		g2.drawString(this.player1.getName(), SCREEN_PADDING, PLAYER_HEIGHT + 60);
 		g2.drawString(this.player2.getName(), SCREEN_WIDTH - SCREEN_PADDING - PLAYER_WIDTH, PLAYER_HEIGHT + 60);
@@ -225,7 +262,7 @@ public class GraphicsPanel extends JPanel implements ActionListener, settings {
 		
 		g2.setColor(Color.green);
 		g2.fillRect(SCREEN_PADDING + 1, PLAYER_HEIGHT + 81, (player1.getHealth() * 2) - 2, 29);
-		g2.fillRect(SCREEN_WIDTH - SCREEN_PADDING - PLAYER_WIDTH + 1, PLAYER_HEIGHT + 81, (player1.getHealth() * 2) - 2, 29);		
+		g2.fillRect(SCREEN_WIDTH - SCREEN_PADDING - PLAYER_WIDTH + 1, PLAYER_HEIGHT + 81, (player2.getHealth() * 2) - 2, 29);		
 	}
 	
 	public int[] getCurrentSprite(BehaviourRule rule) {
