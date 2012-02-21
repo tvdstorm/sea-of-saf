@@ -82,4 +82,9 @@ public class FighterDescription {
 		acceptedConditions.add(newAcceptedCond);
 
 	}
+
+	public void reinit() {
+		fighterState.setPositionY(BattleConstants.groundPositionY);
+		
+	}
 }

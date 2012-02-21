@@ -42,7 +42,7 @@ public class FighterState {
 	}
 
 	public int computeNewPositionX(int moveDirection) {
-		int newPositionX = predefDirection * moveDirection
+		int newPositionX = positionX + predefDirection * moveDirection
 				* BattleConstants.stepSize;
 		if (checkInFrame(newPositionX)) {
 			return newPositionX;
@@ -80,6 +80,10 @@ public class FighterState {
 		return myFigter.getPersonality().getSpeed();
 	}
 
+	public double getPower() {
+		return myFigter.getPersonality().getPower();
+	}
+
 	public void performActions(Personality myPersonality,
 			FighterState oponentState) {
 		// TODO in progress
@@ -107,5 +111,13 @@ public class FighterState {
 
 	public void setSelectedMoveAction(MoveActionType selectedMoveAction) {
 		this.selectedMoveAction = selectedMoveAction;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public IFighter getMyFigter() {
+		return myFigter;
 	}
 }
