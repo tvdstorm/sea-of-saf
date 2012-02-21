@@ -43,7 +43,7 @@ public class ScenePanel extends JPanel {
 
 		int positionX, positionY;
 		positionX = figterState.getPositionX();
-		positionX = mapCoordinateX(positionX,image.getWidth());
+		positionX = mapCoordinateX(positionX, image.getWidth());
 		positionY = figterState.getPositionY();
 		positionY = mapCoordinateY(positionY);
 
@@ -53,7 +53,7 @@ public class ScenePanel extends JPanel {
 
 	private int mapCoordinateX(int battlePositionX, int pictureWidht) {
 		int panelPosition;
-		panelPosition = (int) (battlePositionX * (double) ((ArenaConstants.ARENA_WIDTH - pictureWidht/2)/ BattleConstants.arenaLength));
+		panelPosition = (int) (battlePositionX * (double) ((ArenaConstants.ARENA_WIDTH - pictureWidht / 2) / BattleConstants.arenaLength));
 
 		return panelPosition;
 	}

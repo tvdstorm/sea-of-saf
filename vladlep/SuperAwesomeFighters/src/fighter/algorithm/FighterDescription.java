@@ -36,9 +36,6 @@ public class FighterDescription {
 
 			fighterState.setSelectedMoveAction(nextRule.getNextMoveAction());
 			fighterState.setSelectedFightAction(nextRule.getNextFightAction());
-			System.out.println(fighter.getName() + "  "
-					+ nextRule.getNextMoveAction() + "  "
-					+ nextRule.getNextFightAction());
 		}
 
 	}

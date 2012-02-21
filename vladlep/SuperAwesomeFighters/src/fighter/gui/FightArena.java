@@ -63,9 +63,8 @@ public class FightArena extends JFrame {
 		singleton.drawComponents();
 		singleton.setVisible(true);
 	}
-	
-	public void showWinner(String name)
-	{
-		JOptionPane.showMessageDialog(singleton, "WINNER : "+name);
+
+	public void showWinner(String name) {
+		JOptionPane.showMessageDialog(singleton, "WINNER : " + name);
 	}
 }
