@@ -35,20 +35,26 @@ public abstract class BaseScreen extends JPanel {
        onInitialize();
 	}
 	
-	public void destroy() {
-		onDestroy();
-	
+	public boolean update() {
+		return onUpdate();
 	}
 	
-   // @Override
+	public void destroy() {
+		onDestroy();
+	}
+	
+	@Override
     public void paintComponent(Graphics g) {
     	if ( backgroundLoaded ) {
     		g.drawImage(backgroundImage, 0, 0, null);
     	}
+    	onDraw(g);
     }
 	
 	protected abstract void onInitialize();
+	protected abstract boolean onUpdate();
+	protected abstract void onDraw(Graphics g);
 	protected abstract void onDestroy();
-	public abstract void handleButtonPress(int buttonId);
+	protected abstract void handleButtonPress(int buttonId);
 	
 }

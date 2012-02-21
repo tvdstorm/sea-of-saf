@@ -4,8 +4,8 @@ jackiechan {
   kickReach = 3
   punchReach = 9
   far[run_towards punch_high]
-  near[choose(stand crouch) kick_high]
+  near[choose(walk_towards) kick_high]
   much_stronger and near[walk_towards punch_low]
   weaker[run_away choose(block_high block_low)]
-  always[choose(walk_towards walk_away) choose(block_high block_low)]
+  always[choose(walk_towards) choose(block_low kick_low)]
 }

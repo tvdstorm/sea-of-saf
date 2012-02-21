@@ -67,11 +67,13 @@ orStatement	returns[Condition value]
 					;
 					
 actions returns[Actions value]
-					:	(action action) { $value = null; }
+					:	(moveActions=action attackActions=action) { $value = new Actions($moveActions.value, $attackActions.value); }
 					;
 
-action				:	IDENTIFIER
-					| 	'choose' '(' IDENTIFIER+ ')'
+action returns[List<String> value]
+					@init { value = new LinkedList<String>(); }
+					:	IDENTIFIER { value.add($IDENTIFIER.text); }
+					| 	'choose' '(' (IDENTIFIER { value.add($IDENTIFIER.text); } )+ ')'
 					;
 
 fragment LETTER		:	('a'..'z' | 'A'..'Z');

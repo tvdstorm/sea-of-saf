@@ -5,11 +5,11 @@ import core.BaseTreeVisitor;
 public class Rule extends BaseData {
 
 	private Condition condition;
-	private Actions action;
+	private Actions actions;
 	
 	public Rule(Condition condition, Actions action) {
 		this.condition = condition;
-		this.action = action;
+		this.actions = action;
 	}
 	
 	public Condition getCondition() {
@@ -17,15 +17,14 @@ public class Rule extends BaseData {
 	}
 	
 	public Actions getAction() {
-		return action;
+		return actions;
 	}
 
 	@Override
-	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
-		treePrinter.visit(this);
-		condition.acceptTreeVisitor(treePrinter);
-		//action.acc
-		//treePrinter.visit(action);
+	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
+		treeVisitor.visit(this);
+		condition.acceptTreeVisitor(treeVisitor);
+		actions.acceptTreeVisitor(treeVisitor);
 	}
 	
 }

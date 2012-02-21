@@ -1,9 +1,9 @@
 package gui;
 
-import java.io.File;
-import java.util.ArrayList;
-
+import java.awt.Graphics;
 import javax.swing.*;
+
+import logic.FightSimulation;
 
 public class GameScreen extends BaseScreen {
 
@@ -12,32 +12,34 @@ public class GameScreen extends BaseScreen {
 	private static final int RETURN_BUTTON = 1;
 	private SoundFile backgroundMusic;
 	
+	MenuButton fightButton;
+	MenuButton returnButton;
+	private FightSimulation simulation;
+	
 	public GameScreen(BaseFrame baseFrame) {
 		super(baseFrame, "data\\textures\\game_background.png");
+		simulation = null;
+		fightButton = null;
+		returnButton = null;
 	}
 
 	@Override
-	public void onInitialize() {
+	protected void onInitialize() {
 	 	setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	 	
 	 	backgroundMusic = new SoundFile();
 	 	backgroundMusic.load("data\\audio\\game_background.wav");
-	 	//backgroundMusic.play();
+	 	backgroundMusic.play();
 	 	
-	 	MenuButton fightButton = new MenuButton("Fight!", FIGHT_BUTTON, this);
-	 	MenuButton returnButton = new MenuButton("Return to Menu", RETURN_BUTTON, this);
+	 	fightButton = new MenuButton("Fight!", FIGHT_BUTTON, this);
+	 	returnButton = new MenuButton("Return to Menu", RETURN_BUTTON, this);
 	 	add(fightButton);
 	 	add(returnButton);
 	 	
-	 	//String[] bla = { "bla bla bla", "hmm ok" };
-	 	ArrayList<String> fighters = new ArrayList<String>();
-	 	
-	 	//Directory directory;
-	 	
+	 	/*ArrayList<String> fighters = new ArrayList<String>();
 	 	File directory = new File("data\\fighters\\");
 	    File files[] = directory.listFiles();
 	    for (File f : files) {
-	    // do whatever you want with each File f
 	    	fighters.add(f.getName());
 	    }
 	    
@@ -51,19 +53,42 @@ public class GameScreen extends BaseScreen {
 	 	boxie.setVisibleRowCount(1);
 	 	
 	 	boxie.setSize(120, 20);
-	 	add(boxie);
+	 	add(boxie);*/
 	 	
+	 	simulation = new FightSimulation();
+	}
+	
+	@Override
+	protected boolean onUpdate() {
+		if ( simulation != null ) {
+			return simulation.update();
+		}
+		return true;
+	}
+	
+	@Override
+	protected void onDraw(Graphics g) {
+		if ( simulation != null ) {
+			simulation.draw(g);
+		}
 	}
 
 	@Override
-	public void onDestroy() {
+	protected void onDestroy() {
 		backgroundMusic.unload();
 	}
 
 	@Override
-	public void handleButtonPress(int buttonId) {
+	protected void handleButtonPress(int buttonId) {
 		switch ( buttonId ) {
 		case FIGHT_BUTTON: {
+			if ( simulation.isMatchStarted() ) {
+				simulation.stop();
+				fightButton.setText("Fight!");				
+			} else {
+				simulation.start();
+				fightButton.setText("Stop!");
+			}
 			break;
 		}
 		case RETURN_BUTTON: {

@@ -1,5 +1,7 @@
 package data;
 
+import java.util.List;
+
 import core.BaseTreeVisitor;
 
 public class OrStatement extends BaseData implements Condition {
@@ -21,18 +23,18 @@ public class OrStatement extends BaseData implements Condition {
 	}
 	
 	@Override
-	public Boolean evaluateCondition() {
-		return condition1.evaluateCondition() || condition2.evaluateCondition();
+	public Boolean evaluateCondition(List<String> environment) {
+		return condition1.evaluateCondition(environment) || condition2.evaluateCondition(environment);
 	}
 
 	@Override
-	public void acceptTreeVisitor(BaseTreeVisitor treePrinter) {
-		System.out.println("or statement");
+	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
+		treeVisitor.visit(this);
 		if ( condition1 instanceof BaseData ) {
-			((BaseData)condition1).acceptTreeVisitor(treePrinter);
+			((BaseData)condition1).acceptTreeVisitor(treeVisitor);
 		}
 		if ( condition2 instanceof BaseData ) {
-			((BaseData)condition2).acceptTreeVisitor(treePrinter);
+			((BaseData)condition2).acceptTreeVisitor(treeVisitor);
 		}
 	}
 	

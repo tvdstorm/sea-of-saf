@@ -39,6 +39,17 @@ public abstract class BaseFrame extends JFrame {
 		initialized = true;
 	}
 	
+	public boolean update() {
+		if ( currentScreen != null ) {
+			return currentScreen.update();
+		}
+		return false;
+	}
+	
+	public void draw() {
+		repaint();
+	}
+	
 	public void destroy() {
 		onDestroy();
 		switchScreen(null);
@@ -48,6 +59,7 @@ public abstract class BaseFrame extends JFrame {
 	}
 	
 	public abstract void onInitialize();
+	public abstract void onUpdate();
 	public abstract void onDestroy();
 	
 	

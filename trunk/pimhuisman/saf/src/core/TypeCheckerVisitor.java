@@ -6,6 +6,7 @@ import data.Actions;
 import data.AndStatement;
 import data.Behaviour;
 import data.Characteristic;
+import data.Condition;
 import data.Fighter;
 import data.OrStatement;
 import data.Personality;
@@ -42,12 +43,24 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 
 	@Override
 	public void visit(Personality personality) {
-
+		
 	}
 
 	@Override
 	public void visit(Behaviour behaviour) {
-
+		boolean foundAlwaysRule = false;
+		List<Rule> rules = behaviour.getRules();
+		for ( Rule rule : rules ) {
+			Condition condition = rule.getCondition();
+			if ( condition instanceof SingleCondition ) {
+				if ( ((SingleCondition)condition).getName() == "always" ) {
+					foundAlwaysRule = true;
+				}
+			}
+		}
+		if ( !foundAlwaysRule ) {
+			errors.add("The rule 'always' should always be specified");
+		}
 	}
 
 	@Override

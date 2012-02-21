@@ -1,29 +1,16 @@
 // Copyright © Pim Huisman 2012.
 package core;
-import data.Fighter;
-import gui.BaseFrame;
-import gui.BaseScreen;
-import gui.MenuButton;
-import gui.MenuScreen;
-import gui.SoundFile;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.ArrayList;
+import gui.BaseFrame;
+import gui.MenuScreen;
 
 import javax.swing.*;
 
-
-
-
-public class Main {
+/*public class Main {
 
 	public static void main(String[] args) throws Exception {
 			
-		FighterLoader loader = new ANTLRFighterLoader();
+		FighterLoader loader = new FighterLoader();
 		Fighter fighter = loader.loadFighterByFile("data/fighters/jackiechan.saf");
 		
 		TypeCheckerVisitor typeChecker = new TypeCheckerVisitor();
@@ -36,22 +23,14 @@ public class Main {
 		
 	}
 	
-}
-
-/*
+}*/
 
 public class Main extends BaseFrame {  
 	
 	private static final long serialVersionUID = 1L;
 	
 	public Main() {
-
-	}
-	
-	public static void main(String[]args) {  
-		Main game = new Main();
-		game.switchScreen(new MenuScreen(game));
-		game.initialize();
+		
 	}
 
 	@Override
@@ -59,6 +38,12 @@ public class Main extends BaseFrame {
 		setTitle("SAF Redux - Pim Huisman © 2012");
 	 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	 	setSize(1280, 720);
+	 	switchScreen(new MenuScreen(this));
+	}
+	
+	@Override
+	public void onUpdate() {
+		
 	}
 
 	@Override
@@ -66,4 +51,24 @@ public class Main extends BaseFrame {
 
 	}
 	
-}*/
+	public static void main(String[]args) {  
+		
+		Main game = new Main();
+		game.initialize();
+		Boolean updating = true;
+		while ( updating ) {
+			updating = game.update();
+			if ( updating ) {
+				game.draw();
+			}
+			try {
+				Thread.sleep(100); // Update 50 times per second.
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		game.destroy();
+		
+	}
+	
+}
