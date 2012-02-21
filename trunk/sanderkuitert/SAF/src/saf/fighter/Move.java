@@ -6,7 +6,7 @@ package saf.fighter;
 import java.util.Collections;
 import java.util.List;
 
-public class Move implements AST {
+public class Move implements AST, FighterConfig {
 
 	private String move;
 	

@@ -6,7 +6,7 @@ package saf.fighter;
 import java.util.Collections;
 import java.util.List;
 
-public class Attack implements AST {
+public class Attack implements AST, FighterConfig {
 	
 	private String attack;
 	

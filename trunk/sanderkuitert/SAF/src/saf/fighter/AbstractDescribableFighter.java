@@ -5,7 +5,8 @@ import java.util.List;
 
 import saf.fighter.fdl.DescribableFighter;
 
-abstract class AbstractDescribableFighter implements DescribableFighter, AST {
+
+abstract class AbstractDescribableFighter implements DescribableFighter, AST, FighterConfig {
 
 	protected String name;
 	protected List<Property> properties;
