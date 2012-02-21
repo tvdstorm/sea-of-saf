@@ -35,31 +35,12 @@ public class GameScreen extends BaseScreen {
 	 	add(fightButton);
 	 	add(returnButton);
 	 	
-	 	/*ArrayList<String> fighters = new ArrayList<String>();
-	 	File directory = new File("data\\fighters\\");
-	    File files[] = directory.listFiles();
-	    for (File f : files) {
-	    	fighters.add(f.getName());
-	    }
-	    
-	    String []strArray = new String[fighters.size()];
-	    fighters.toArray(strArray);
-	 	
-	 	JList boxie = new JList();
-	 	boxie.setListData(strArray);
-
-	 	boxie.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	 	boxie.setVisibleRowCount(1);
-	 	
-	 	boxie.setSize(120, 20);
-	 	add(boxie);*/
-	 	
 	 	simulation = new FightSimulation();
 	}
 	
 	@Override
 	protected boolean onUpdate() {
-		if ( simulation != null ) {
+		if ( simulation != null && simulation.isMatchStarted() ) {
 			return simulation.update();
 		}
 		return true;

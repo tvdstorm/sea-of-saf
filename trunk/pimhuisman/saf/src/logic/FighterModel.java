@@ -82,9 +82,8 @@ public class FighterModel extends BaseGameObject {
 			if ( stepSize > distance-60 ) {
 				position.x -= distance-60;
 			} else if ( position.x-stepSize > 1220 ) {
-				position.x = 1220; 
-			}
-			else {
+				position.x = 1220;
+			} else {
 				position.x -= stepSize;
 			}
 			setPosition(position);

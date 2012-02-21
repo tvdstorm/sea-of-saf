@@ -74,11 +74,10 @@ public class FightSimulation {
 	}
 	
 	public boolean update() {
-		if ( !matchStarted ) return true;
 		nextMove -= 1;
-		
 		FighterModel currentFighter = null;
 		FighterModel otherFighter = null;
+		
 		if ( turn == PlayerTurn.PLAYER_ONE ) {
 			currentFighter = fighter1;
 			otherFighter = fighter2;
@@ -95,8 +94,6 @@ public class FightSimulation {
 			}
 			actions = environment.getValidActions(currentFighter, otherFighter);
 			currentMoveAction = actions.getRandomMoveOption();
-			int bla = 0;
-			if ( bla > 1 ) ;
 		}		
 		currentFighter.performMoveAction(otherFighter, currentMoveAction);
 		
@@ -105,7 +102,6 @@ public class FightSimulation {
 			checkWinCondition();
 			nextMove = 10;
 		}
-		
 		return true;
 	}
 	
