@@ -1,4 +1,3 @@
 To-do:
-- Read SAF paper - check!
-- Select parser generator - check!
-- Read at least one other paper - going to do that on my way home :)
+ - A FighterArena consists of exactly 2 Fighters
+ - implement the type/value-checker. use Tijs' code for inspiration.
