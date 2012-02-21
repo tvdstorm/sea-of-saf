@@ -3,6 +3,8 @@ package fighter.gui.image.reader;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
 import fighter.gui.MessageReporter;
 import fighter.messages.Error;
 
@@ -16,8 +18,8 @@ public class ImageLoader {
 		try {
 			img = ImageIO.read(new File(PATH_PICS + imageName + EXTENSION));
 		} catch (Exception e) {
-			MessageReporter.reportMessages(new Error(imageName + EXTENSION
-					+ ";  " + e.toString()));
+			MessageReporter.getMessageReporter(new JFrame()).reportMessages(
+					new Error(imageName + EXTENSION + ";  " + e.toString()));
 			System.exit(-1);
 		}
 		return img;

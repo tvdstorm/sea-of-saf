@@ -10,7 +10,7 @@ public class FightActionReaderTest {
 
 	public FightActionReaderTest() {
 
-		MessageReporter.initMessageReporter(new JFrame());
+		MessageReporter.getMessageReporter(new JFrame());
 	}
 
 	@Test

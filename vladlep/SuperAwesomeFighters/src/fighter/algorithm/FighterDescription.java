@@ -58,6 +58,10 @@ public class FighterDescription {
 		return fighterState.getHealth();
 
 	}
+	
+	public IFighter getFighter() {
+		return fighter;
+	}
 
 	// if he has no move to do he picks a new one, otherwise he does nothing
 	public void calculateNextMove() {

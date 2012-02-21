@@ -50,6 +50,16 @@ public enum FightActionType implements ActionType {
 			// TODO Auto-generated method stub
 
 		}
-	};
+	},
+	stand{
+		@Override
+		public void doAction(FighterState fighterState,
+				FighterState oponentState) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	;
 
 }

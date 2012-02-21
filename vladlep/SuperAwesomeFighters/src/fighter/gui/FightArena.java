@@ -8,16 +8,18 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import fighter.IFighter;
+import fighter.algorithm.FighterDescription;
 import fighter.messages.Message;
 
 @SuppressWarnings("serial")
 public class FightArena extends JFrame {
 	private static FightArena singleton = null;
-	private IFighter firstFighter;
-	private IFighter secondFighter;
+	private FighterDescription firstFighter;
+	private FighterDescription secondFighter;
 	private Container masterContainer;
+	JPanel statusPanel;
 
-	private FightArena(IFighter firstFighter, IFighter secondFighter) {
+	private FightArena(FighterDescription firstFighter, FighterDescription secondFighter) {
 		this.firstFighter = firstFighter;
 		this.secondFighter = secondFighter;
 		setTitle(ArenaConstants.GAME_NAME);
@@ -27,15 +29,15 @@ public class FightArena extends JFrame {
 		setResizable(false);
 	}
 
-	public static FightArena initGui(IFighter firstFighter,
-			IFighter secondFighter) {
+	public static FightArena getFightArena(FighterDescription firstFighter,
+			FighterDescription secondFighter) {
 		if (singleton == null)
 			singleton = new FightArena(firstFighter, secondFighter);
 		return singleton;
 
 	}
 
-	public static void startGame() {
+	public void intiArena() {
 		singleton.drawComponents();
 		singleton.setVisible(true);
 
@@ -43,17 +45,25 @@ public class FightArena extends JFrame {
 
 	private void drawComponents() {
 		drawStatusPanel();
-		
+		drawScenePanel();
 
 	}
 
 	private void drawStatusPanel() {
-		JPanel statusPanel = new JPanel();
+		statusPanel = new JPanel();
 		statusPanel.setLayout(new GridLayout(1, 2));
 		statusPanel.add(new FighterStatus(firstFighter));
 		statusPanel.add(new FighterStatus(secondFighter));
 
 		masterContainer.add(statusPanel);
+	}
+
+	private void drawScenePanel() {
+
+	}
+
+	public void redrawComponents() {
+
 	}
 
 }

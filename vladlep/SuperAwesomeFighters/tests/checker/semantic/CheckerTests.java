@@ -41,11 +41,11 @@ public class CheckerTests {
 
 		assertEquals(
 				"WARNING: Action block_high apears multiple times in choose",
-				messages.get(0).toString());
+				messages.get(0).toString().trim());
 		assertEquals("ERROR: Kick Reach exceeds lower limit", messages.get(1)
-				.toString());
+				.toString().trim());
 		assertEquals("ERROR: Punch Reach exceeds uper limit", messages.get(2)
-				.toString());
+				.toString().trim());
 
 	}
 

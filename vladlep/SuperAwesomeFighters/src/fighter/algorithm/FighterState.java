@@ -25,28 +25,14 @@ public class FighterState {
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.predefDirection = direction;
+		selectedMoveAction = MoveActionType.stand;
+		selectedFightAction = FightActionType.stand;
 	}
 
 	public boolean finishedPerformingActions() {
 		if (remainingTime == 0)
 			return true;
 		return false;
-	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public int getPositionX() {
-		return positionX;
-	}
-
-	public void setSelectedFightAction(FightActionType selectedFightAction) {
-		this.selectedFightAction = selectedFightAction;
-	}
-
-	public void setSelectedMoveAction(MoveActionType selectedMoveAction) {
-		this.selectedMoveAction = selectedMoveAction;
 	}
 
 	// TODO in progress
@@ -62,18 +48,6 @@ public class FighterState {
 	public int calculateFigterDistance(FighterState oponentState) {
 		return Math.abs(this.positionX - oponentState.positionX);
 
-	}
-
-	public double getSpeed() {
-		return myFigter.getPersonality().getSpeed();
-	}
-
-	public int getRemainingTime() {
-		return remainingTime;
-	}
-
-	public void setRemainingTime(int remainingTime) {
-		this.remainingTime = remainingTime;
 	}
 
 	public int computeNewPositionX(int moveDirection) {
@@ -93,7 +67,39 @@ public class FighterState {
 		return true;
 	}
 
+	public int getHealth() {
+		return health;
+	}
+
+	public int getPositionX() {
+		return positionX;
+	}
+
+	public void setSelectedFightAction(FightActionType selectedFightAction) {
+		this.selectedFightAction = selectedFightAction;
+	}
+
+	public void setSelectedMoveAction(MoveActionType selectedMoveAction) {
+		this.selectedMoveAction = selectedMoveAction;
+	}
+
+	public double getSpeed() {
+		return myFigter.getPersonality().getSpeed();
+	}
+
+	public int getRemainingTime() {
+		return remainingTime;
+	}
+
+	public void setRemainingTime(int remainingTime) {
+		this.remainingTime = remainingTime;
+	}
+
 	public void setPositionX(int positionX) {
 		this.positionX = positionX;
+	}
+
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
 	}
 }
