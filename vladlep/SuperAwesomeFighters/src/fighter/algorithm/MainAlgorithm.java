@@ -3,6 +3,7 @@ package fighter.algorithm;
 import fighter.IFighter;
 import fighter.condition.ConditionType;
 import fighter.gui.FightArena;
+import fighter.gui.images.FightImagesContainer;
 
 public class MainAlgorithm {
 
@@ -21,9 +22,11 @@ public class MainAlgorithm {
 		leftFighterDesc.updateAcceptedPowerCond(rightFighter.getPersonality());
 		rightFighterDesc.updateAcceptedPowerCond(leftFighter.getPersonality());
 
-		fightArena = FightArena.getFightArena(leftFighterDesc, rightFighterDesc);
+		FightImagesContainer.loadAllFightImages();
+		fightArena = FightArena
+				.getFightArena(leftFighterDesc, rightFighterDesc);
 		fightArena.intiArena();
-		
+
 	}
 
 	public static void simulateFight() {
@@ -39,9 +42,9 @@ public class MainAlgorithm {
 
 			leftFighterDesc.performActions(rightFighterDesc.getFighterState());
 			rightFighterDesc.performActions(leftFighterDesc.getFighterState());
-			
+
 			fightArena.redrawComponents();
-			
+
 		} while (leftFighterDesc.getHealth() != 0
 				|| rightFighterDesc.getHealth() != 0);
 	}

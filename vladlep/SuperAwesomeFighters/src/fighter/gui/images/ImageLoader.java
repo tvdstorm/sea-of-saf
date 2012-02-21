@@ -1,4 +1,4 @@
-package fighter.gui.image.reader;
+package fighter.gui.images;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
