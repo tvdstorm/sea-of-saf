@@ -8,11 +8,27 @@ public class BehaviourRule implements SafInterface {
 	private WalkAction walkaction;
 	private FightAction fightaction;
 	
+	public BehaviourRule() {
+		
+	}
+	
 	public BehaviourRule(Condition c, WalkAction ma, FightAction fa) {
 		this.condition = c;
 		this.walkaction = ma;
-		this.fightaction = fa;
-	}	
+		this.fightaction = fa;	
+	}
+	
+	public Condition getCondition() {
+		return this.condition;
+	}
+	
+	public WalkAction getWalkAction() {
+		return this.walkaction;
+	}
+	
+	public FightAction getFightAction() {
+		return this.fightaction;
+	}
 	
 	@Override
 	public void accept(SafVisitor visitor) {
