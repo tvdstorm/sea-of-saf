@@ -18,8 +18,9 @@ public class Behaviour {
 		this.condition.add(condition);
 	}
 	
-	public void addAction(Action action,Action action2) {
+	public void addAction(Action action,Action moveAction) {
 		this.action.add(action);
+		this.action.add(moveAction);
 	}
 	
 	public String toString(){

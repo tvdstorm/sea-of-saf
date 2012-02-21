@@ -1,12 +1,30 @@
 package com.yennick.fighter.bot;
 
-public class Personality {
+
+import java.util.ArrayList;
+
+import com.yennick.fighter.bot.Constants;
+
+public class Personality extends ArrayList<Personality> {
+
 	private final String characteristic;
 	private final int value;
+	private static int defaultPersonality = 5;
 	
 	public Personality(String characteristic, int value){
+		
 		this.characteristic = characteristic;
 		this.value = value;
+	}
+
+	public boolean add(Personality personality){
+		if(this.validate(personality)){
+			super.add(personality);
+			System.out.println("valid "+ personality.characteristic);
+			return true;
+		}
+		System.out.println("not valid "+ personality.characteristic);
+		return false;
 	}
 	
 	public int getValue() {
@@ -19,6 +37,13 @@ public class Personality {
 
 	public String toString(){
 		return characteristic + " = " + value + "\n";
+	}
+	
+	public boolean validate(Personality personality){
+		if(Constants.getCharacteristics().contains(personality.getCharacteristic())){
+			return true;
+		}
+		return false;
 	}
 	
 }
