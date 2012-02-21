@@ -14,7 +14,6 @@ import nl.uva.lap.saf.ast.fighter.Personality;
 public class Fighter implements Settings
 {
 	private final int DEFAULT_PERSONALITY = 5;
-	private final int DEFAULT_HEALTH = 10;
 	
 	//fixed properties:
 	private int kickReach = DEFAULT_PERSONALITY;
@@ -23,8 +22,6 @@ public class Fighter implements Settings
 	private int punchPower = DEFAULT_PERSONALITY;
 	
 	//variable properties:
-	private int health = DEFAULT_HEALTH;
-	
 	protected String currentAction;
 	protected String currentMovement;
 	
@@ -55,6 +52,7 @@ public class Fighter implements Settings
 			else
 				alwaysBehaviour = behaviour;
 		}
+		defaultActions();
 	}
 	
 	private List<Behaviour> getValidBehaviours(State state)
@@ -64,9 +62,14 @@ public class Fighter implements Settings
 			if(ConditionInterpreter.evaluate(behaviour, astFighter, state))
 			{
 				valid.add(behaviour);
-				//System.out.println("chosen behaviour: " + behaviour.getCondition().toString() + " " + behaviour.getActions().get(0).toString());
 			}
 		return valid;
+	}
+	
+	public void defaultActions()
+	{
+		currentAction = "stand";
+		currentMovement = "stand";
 	}
 	
 	public void calculateBehaviour(State state)
@@ -87,12 +90,16 @@ public class Fighter implements Settings
 		for(Action action : behaviour.getActions())
 		{
 			SimpleAction chosenAction = ActionInterpreter.evaluate(action);
-			System.out.println("chosen behaviour: " + behaviour.getCondition().toString() + " " + chosenAction.toString());
 			if(MOVES.contains(chosenAction.getAction()))
 				currentMovement = chosenAction.getAction();
 			else
 				currentAction = chosenAction.getAction();
 		}
+	}
+	
+	public String getName()
+	{
+		return astFighter.getName();
 	}
 	
 	public String getAction()
@@ -110,8 +117,69 @@ public class Fighter implements Settings
 		return kickReach + kickPower + punchReach + punchPower;
 	}
 	
-	public void hit()
+	public int getKickReach()
 	{
-		health--;
+		return kickReach;
+	}
+	
+	public int getKickPower()
+	{
+		return kickPower;
+	}
+	
+	public int getPunchReach()
+	{
+		return punchReach;
+	}
+	
+	public int getPunchPower()
+	{
+		return punchPower;
+	}
+	
+	public boolean isKicking()
+	{
+		return currentAction.equals("low_kick") || currentAction.equals("high_kick");
+	}
+	
+	public boolean isPunching()
+	{
+		return currentAction.equals("low_punch") || currentAction.equals("high_punch");
+	}
+	
+	public boolean isHighAttack()
+	{
+		return currentAction.equals("high_kick") || currentAction.equals("high_punch");
+	}
+	
+	public boolean isLowAttack()
+	{
+		return currentAction.equals("low_punch") || currentAction.equals("low_kick");
+	}
+	
+	public boolean isBlocking()
+	{
+		return isLowBlock() || isHighBlock();
+	}
+	
+	public boolean isLowBlock()
+	{
+		return currentAction.equals("low_block");
+	}
+	
+	public boolean isHighBlock()
+	{
+		return currentAction.equals("high_block");
+	}
+	
+	public boolean isBlocked(Fighter otherFighter)
+	{
+		if(!isBlocking())
+			return false;
+		if(otherFighter.isHighAttack() && isHighBlock())
+			return true;
+		if(otherFighter.isLowAttack() && isLowBlock())
+			return true;
+		return false;
 	}
 }

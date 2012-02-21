@@ -1,6 +1,5 @@
 package nl.uva.lap.saf.interpreter;
 
-import java.rmi.activation.UnknownObjectException;
 import java.util.List;
 import java.util.Random;
 

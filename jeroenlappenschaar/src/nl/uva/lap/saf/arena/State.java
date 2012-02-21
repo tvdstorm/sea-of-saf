@@ -1,6 +1,7 @@
 package nl.uva.lap.saf.arena;
 
-import nl.uva.lap.saf.ast.fighter.StateFighter;
+import nl.uva.lap.saf.arena.StateFighter.Color;
+
 
 
 public class State
@@ -11,7 +12,7 @@ public class State
 	 */
 	private final int WEIGHT_INFLUENCE = 3;
 	
-	private final int NEAR_DISTANCE = 10;
+	private final int NEAR_DISTANCE = 5;
 	private final int FAR_DISTANCE = 20;
 	
 	private final int LEFT_START_POSITION = 20;
@@ -22,8 +23,8 @@ public class State
 	
 	public State(nl.uva.lap.saf.ast.fighter.Fighter fighter1, nl.uva.lap.saf.ast.fighter.Fighter fighter2)
 	{
-		this.fighter1 = new StateFighter(fighter1, LEFT_START_POSITION, StateFighter.Direction.LEFT);
-		this.fighter2 = new StateFighter(fighter2, RIGHT_START_POSITION, StateFighter.Direction.RIGHT);
+		this.fighter1 = new StateFighter(fighter1, LEFT_START_POSITION, StateFighter.Direction.LEFT, Color.BLUE);
+		this.fighter2 = new StateFighter(fighter2, RIGHT_START_POSITION, StateFighter.Direction.RIGHT, Color.GREEN);
 	}
 	
 	/**
@@ -35,6 +36,7 @@ public class State
 		if(fighter.getStep() == fighter.getWeight()/WEIGHT_INFLUENCE)
 		{
 			fighter.resetStep();
+			fighter.defaultActions();
 			fighter.calculateBehaviour(this);
 			return true;
 		}
@@ -48,9 +50,14 @@ public class State
 		boolean fighter2Performed = performAction(fighter2);
 		
 		if(fighter1Performed)
-			fighter1.updateState(fighter2);
+			fighter1.updateMovement(fighter2);
 		if(fighter2Performed)
-			fighter2.updateState(fighter1);
+			fighter2.updateMovement(fighter1);
+		
+		if(fighter1Performed)
+			fighter1.updateAction(fighter2);
+		if(fighter2Performed)
+			fighter2.updateAction(fighter1);
 	}
 	
 	public StateFighter getFighter1()
@@ -63,13 +70,13 @@ public class State
 		return fighter2;
 	}
 
-	public boolean areFighterNear()
+	public boolean areFightersNear()
 	{
-		return Math.abs(fighter1.getXPosition() - fighter2.getXPosition()) < NEAR_DISTANCE;
+		return fighter1.getDistance(fighter2) < NEAR_DISTANCE;
 	}
 	
-	public boolean areFighterFar()
+	public boolean areFightersFar()
 	{
-		return Math.abs(fighter1.getXPosition() - fighter2.getXPosition()) > FAR_DISTANCE;
+		return fighter1.getDistance(fighter2) > FAR_DISTANCE;
 	}
 }
