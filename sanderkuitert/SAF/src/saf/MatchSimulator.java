@@ -11,13 +11,13 @@ import javax.swing.ImageIcon;
 import saf.fighter.PassiveFighter;
 
 
-class Match extends Observable implements Runnable {
+class MatchSimulator extends Observable implements Runnable {
 
 	protected final static ImageIcon BACKGROUND_IMAGE = new ImageIcon(new File("./data/images/background.gif").getPath());
 	protected final static int TOTAL_ARENA_WIDTH = 100;
 	protected final static long DEFAULT_TIME_STEP = 150; //in ms
 	
-	protected MatchGUI gui;
+	protected MatchSimulatorGUI gui;
 	protected StaticBackground staticBackground; 
 	protected Player player1;
 	protected Player player2;
@@ -25,14 +25,14 @@ class Match extends Observable implements Runnable {
 	private boolean matchEnded;	
 	
 	/** This class simulates matches of two players. */
-	public Match(PassiveFighter fighter1, PassiveFighter fighter2) {
+	public MatchSimulator(PassiveFighter fighter1, PassiveFighter fighter2) {
 		assert fighter1 != null: "PassiveFighter fighter1 is not properly initialized";
 		assert fighter2 != null: "PassiveFighter fighter2 is not properly initialized";
 		
 		this.player1 = new Player(this, fighter1,   (TOTAL_ARENA_WIDTH/5));
 		this.player2 = new Player(this, fighter2, 1-(TOTAL_ARENA_WIDTH/5));
 		this.staticBackground = new StaticBackground();
-		this.gui = new MatchGUI(this.toString(), staticBackground.appearance().getIconWidth(), 
+		this.gui = new MatchSimulatorGUI(this.toString(), staticBackground.appearance().getIconWidth(), 
 																	staticBackground.appearance().getIconHeight());
 		this.matchEndMessage = "The match ended";
 		this.matchEnded = false;
@@ -86,7 +86,7 @@ class Match extends Observable implements Runnable {
 	}
 	
 	public String toString() {
-		return "Match between "+player1+" and "+player2;
+		return "MatchSimulator between "+player1+" and "+player2;
 	}
 	
 	/** Negative distance means to the left */

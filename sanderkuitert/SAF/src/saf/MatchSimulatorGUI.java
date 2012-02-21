@@ -7,17 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import saf.Match.VisibleObject;
+import saf.MatchSimulator.VisibleObject;
 
 
-class MatchGUI extends JFrame implements Observer {
+class MatchSimulatorGUI extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	
 	private boolean endGameMsgShown;
 	
 	
-	public MatchGUI(String title, int width, int height) {
+	public MatchSimulatorGUI(String title, int width, int height) {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -29,16 +29,16 @@ class MatchGUI extends JFrame implements Observer {
 	}
 	
 	public void update(Observable obs, Object arg) {
-		if(obs instanceof Match) {
-			Match match = ((Match) obs);
+		if(obs instanceof MatchSimulator) {
+			MatchSimulator matchSimulator = ((MatchSimulator) obs);
 			
-			if(match.hasEnded() && !endGameMsgShown) {
+			if(matchSimulator.hasEnded() && !endGameMsgShown) {
 				endGameMsgShown=true;
-				drawGameEndedMessage(match.getEndMessage());
+				drawGameEndedMessage(matchSimulator.getEndMessage());
 			}
 			
 			this.getLayeredPane().removeAll();
-			for (Match.VisibleObject object: match.getVisibleObjects()) {
+			for (MatchSimulator.VisibleObject object: matchSimulator.getVisibleObjects()) {
 				drawVisibleObject(object);
 				this.getLayeredPane().validate();
 			}

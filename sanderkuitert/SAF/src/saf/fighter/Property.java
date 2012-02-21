@@ -3,7 +3,7 @@ package saf.fighter;
 import java.util.Collections;
 import java.util.List;
 
-class Property implements AST {
+class Property implements AST, FighterConfig {
 	
 	private String aspect;
 	private Value value;

@@ -90,7 +90,7 @@ public class StartGame {
 		ThreadGroup simulations = new ThreadGroup("Tournament with "+fighters.size()+" fighters");
 		for(int i=0; i < fighters.size()-1; i++) {
 			for(int j=i+1; j < fighters.size(); j++) {
-				Runnable match = new Match(fighters.get(i),fighters.get(j));
+				Runnable match = new MatchSimulator(fighters.get(i),fighters.get(j));
 				new Thread(simulations, match).start();
 			}
 		}

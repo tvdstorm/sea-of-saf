@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-class Condition implements AST {
+class Condition implements AST, FighterConfig {
 	
 	private String condition;
 	private Action action;

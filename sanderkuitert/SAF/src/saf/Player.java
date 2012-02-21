@@ -10,7 +10,7 @@ import saf.fighter.PassiveFighter;
 import saf.fighter.PassiveFighter.ActionEffect;
 
 
-class Player implements Match.VisibleObject, Runnable {
+class Player implements MatchSimulator.VisibleObject, Runnable {
 	
 	protected final static int STARTING_HEALTH = 50;
 	protected final static double ATTACK_STAGE = 0.8;
@@ -24,19 +24,19 @@ class Player implements Match.VisibleObject, Runnable {
 
 	protected PassiveFighter passiveFighter;
 	protected int healthPercentage;
-	protected Match game;
+	protected MatchSimulator environment;
 	protected double horizontalPosition;
 	protected ImageIcon appearance;
 	protected int currentBlockStrength;
 	protected AnimatedActionEffect initiatedEffect;
 	
 	
-	public Player(Match game, PassiveFighter passiveFighter, double startPosition) {
-		this.game = game;
+	public Player(MatchSimulator environment, PassiveFighter passiveFighter, double startPosition) {
+		this.environment = environment;
 		this.passiveFighter = passiveFighter;
 		this.healthPercentage = STARTING_HEALTH;
 		this.horizontalPosition = startPosition;
-		String direction = startPosition < (Match.TOTAL_ARENA_WIDTH / 2) ? "left-right" : "right-left";
+		String direction = startPosition < (MatchSimulator.TOTAL_ARENA_WIDTH / 2) ? "left-right" : "right-left";
 		this.appearance = new ImageIcon(new File(ANIMATION_DIRECTORY+direction+"/stand/1"+PNG).getPath());
 		this.currentBlockStrength = 0;
 		this.initiatedEffect= null;
@@ -44,7 +44,7 @@ class Player implements Match.VisibleObject, Runnable {
 
 
 	public void run() {
-		while(!game.hasEnded()) {
+		while(!environment.hasEnded()) {
 			act();
 			
 			waitAFrame();
@@ -62,7 +62,7 @@ class Player implements Match.VisibleObject, Runnable {
 	
 	private void waitAFrame() {
 		try {
-			Thread.sleep((long) passiveFighter.getRelativeActSpeed() * game.getTimeStep());
+			Thread.sleep((long) passiveFighter.getRelativeActSpeed() * environment.getTimeStep());
 		} catch (InterruptedException e) { 
 			assert false: "Don't interrupt when I'm asleep!";
 		}
@@ -83,18 +83,18 @@ class Player implements Match.VisibleObject, Runnable {
 	
 	public void attack(int attackDamage) {
 		System.out.println("> "+this+"\tattacks for "+attackDamage+" damage");					//LOG
-		game.applyAttack(this, attackDamage);
+		environment.applyAttack(this, attackDamage);
 	}
 	
 	// 0 <= resulting position <= TOTAL_ARENA_WIDTH - PLAYER_WIDTH
 	public void move(double distance) {
 		distance = Math.max(0.0, horizontalPosition+distance);  
-		horizontalPosition = Math.min(distance, Match.TOTAL_ARENA_WIDTH - PLAYER_WIDTH);
+		horizontalPosition = Math.min(distance, MatchSimulator.TOTAL_ARENA_WIDTH - PLAYER_WIDTH);
 	}
 	
 	public void setAppearance(String imageName){
 		this.appearance = new ImageIcon(new File(imageName).getPath());
-		game.appearanceChanged(this);
+		environment.appearanceChanged(this);
 	}
 	
 	public boolean isAlive() {
@@ -102,11 +102,11 @@ class Player implements Match.VisibleObject, Runnable {
 	}
 	
 	public double strengthDifference() {
-		return game.getStrengthDifference(this);
+		return environment.getStrengthDifference(this);
 	}
 	
 	public double opponentDistance() {
-		return game.getDistance(this);
+		return environment.getDistance(this);
 	}
 	
 	public String toString() {
@@ -192,7 +192,7 @@ class Player implements Match.VisibleObject, Runnable {
 		}
 		
 		private void applyNextMoveFrame(int frameNr) {
-			actor.move((action.moveDistance * Match.TOTAL_ARENA_WIDTH) / totalMoveFrames);		
+			actor.move((action.moveDistance * MatchSimulator.TOTAL_ARENA_WIDTH) / totalMoveFrames);		
 		
 			actor.setAppearance(moveAnimationDir+frameNr+PNG);
 		}
