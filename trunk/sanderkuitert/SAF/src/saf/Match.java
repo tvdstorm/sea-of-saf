@@ -13,56 +13,72 @@ import saf.fighter.PassiveFighter;
 
 class Match extends Observable implements Runnable {
 
-	protected final static File BACKGROUND_IMAGE_FILE = new File("./data/saf/background.gif");
-	protected final static double TOTAL_ARENA_WIDTH = 100.0;
-	protected final static long DEFAULT_TIME_STEP = 10; //in ms
+	protected final static ImageIcon BACKGROUND_IMAGE = new ImageIcon(new File("./data/images/background.gif").getPath());
+	protected final static int TOTAL_ARENA_WIDTH = 100;
+	protected final static long DEFAULT_TIME_STEP = 150; //in ms
 	
 	protected MatchGUI gui;
-	protected Background staticBackground; 
+	protected StaticBackground staticBackground; 
 	protected Player player1;
 	protected Player player2;
-	private String gameEndMessage;
-	private boolean gameEnded;	
-	
+	private String matchEndMessage;
+	private boolean matchEnded;	
 	
 	/** This class simulates matches of two players. */
 	public Match(PassiveFighter fighter1, PassiveFighter fighter2) {
 		assert fighter1 != null: "PassiveFighter fighter1 is not properly initialized";
 		assert fighter2 != null: "PassiveFighter fighter2 is not properly initialized";
 		
-		this.gui = new MatchGUI();
-		this.staticBackground = new Background();
 		this.player1 = new Player(this, fighter1,   (TOTAL_ARENA_WIDTH/5));
 		this.player2 = new Player(this, fighter2, 1-(TOTAL_ARENA_WIDTH/5));
-
+		this.staticBackground = new StaticBackground();
+		this.gui = new MatchGUI(this.toString(), staticBackground.appearance().getIconWidth(), 
+																	staticBackground.appearance().getIconHeight());
+		this.matchEndMessage = "The match ended";
+		this.matchEnded = false;
+		setChanged();
+		
 		this.addObserver(gui);
 	}
 	
 	
 	public void run() {
-		System.out.println("> Match between "+player1+" and "+player2+" started\n");//DEBUG
+		matchStarts();
+		
+		while(!hasEnded()) {
+			try {
+				Thread.sleep(DEFAULT_TIME_STEP);
+			} catch (InterruptedException e) {
+			}
+			notifyObservers();
+		}
+	}
+	
+	protected void matchStarts() {
+		System.out.println("> "+this.toString()+" started\n"); //LOG
+		notifyObservers(staticBackground);
+		gui.setVisible(true);
+		
 		new Thread(player1).start();
 		new Thread(player2).start();
+	}	
+	
+	protected void matchEnds(String endMessage) {
+		matchEndMessage = endMessage;
+		matchEnded = true;
+		setChanged();
 	}
 	
 	public boolean hasEnded() {
-		return gameEnded;
+		return matchEnded;
 	}
 	
 	public String getEndMessage() {
-		return gameEndMessage;
+		return matchEndMessage;
 	}
 	
-	private void gameEnds(String endMessage) {
-		gameEndMessage = endMessage;
-		gameEnded = true;
-		setChanged();
-		
-		notifyObservers();
-	}
-	
-	public List<VisibleObject> getSimulatedObjects() {
-		return new LinkedList<VisibleObject> (Arrays.asList(player1, player2));
+	public List<VisibleObject> getVisibleObjects() {
+		return new LinkedList<VisibleObject> (Arrays.asList(staticBackground, player1, player2));
 	}
 
 	public long getTimeStep() {
@@ -70,7 +86,7 @@ class Match extends Observable implements Runnable {
 	}
 	
 	public String toString() {
-		return player1 + " vs " + player2;
+		return "Match between "+player1+" and "+player2;
 	}
 	
 	/** Negative distance means to the left */
@@ -90,45 +106,42 @@ class Match extends Observable implements Runnable {
 		Player other = actor.equals(player1) ?  player2 : player1;
 		other.takeHit(attackDamage);
 		setChanged();
-		notifyObservers(other);
 		
 		if(!other.isAlive()) {
-			gameEnds("-=[  Player "+actor+" wins!  ]=-");
+			matchEnds("-=[  Player "+actor+" wins!  ]=-");
 		}
 	}
 	
 	public void appearanceChanged(Player player) {
 		setChanged();
-		notifyObservers(player);
 	}
 	
 	
 	//=== Inner classes ========================================================
-	//TODO redesign to use some general Graphics format?
 	public interface VisibleObject {
-		public final static double MIN_POSITION = 0.0;
-		public final static double MAX_POSITION = TOTAL_ARENA_WIDTH;
-		public double xPosition();
-		public double yPosition();
-		public boolean stretchMe();
+		public final static int MIN_POSITION = 0;
+		public final static int MAX_POSITION = TOTAL_ARENA_WIDTH;
+		public int xPosition();
+		public int yPosition();
+		public boolean isBackGround();
 		public ImageIcon appearance();
 	}
 	
-	private class Background implements VisibleObject {
-		public double xPosition() {
+	protected class StaticBackground implements VisibleObject {
+		public int xPosition() {
 			return MIN_POSITION;
 		}
 		
-		public double yPosition() {
+		public int yPosition() {
 			return MIN_POSITION;
 		}
 
-		public boolean stretchMe() {
+		public boolean isBackGround() {
 			return true;
 		}
 		
 		public ImageIcon appearance() {
-			return new ImageIcon(BACKGROUND_IMAGE_FILE.getPath());
+			return BACKGROUND_IMAGE;
 		}
 	}
 

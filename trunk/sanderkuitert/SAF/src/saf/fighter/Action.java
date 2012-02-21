@@ -38,8 +38,8 @@ class Action implements AST {
 		Move move = moves.get(new Random().nextInt(moves.size()));
 		Attack attack = attacks.get(new Random().nextInt(attacks.size()));
 		
-		return new PassiveFighter.ActionEffect(attack.getName(), attack.getDamage(properties), 
-					attack.getRange(properties), move.getName(), move.getSteps(), move.getDistance());
+		return new PassiveFighter.ActionEffect(attack.getName(), attack.getDamage(properties),
+									attack.getRange(properties), move.getName(), move.getDistance());
 	}
 	
 }

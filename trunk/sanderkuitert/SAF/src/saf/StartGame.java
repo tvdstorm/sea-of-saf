@@ -6,67 +6,80 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.InvalidParameterException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import saf.fighter.AIFighter;
 import saf.fighter.PassiveFighter;
-import saf.fighter.SuperAwesomeFighter;
 
 
 public class StartGame {
 	
-	private ThreadGroup simulations;
+	public final static String WELCOME_MSG = "============[Super Awesome Fighters]==================";
+	public final static File AUTO_START_DIRECTORY = new File("./data/fighters/Drop fighters into me for autostart");
 	
 	
 	public static void main(String[] args) {
-		System.out.println("============[Super Awesome Fighters]==================");
-		new StartGame().startGame(args);
+		System.out.println(WELCOME_MSG);
+		
+		List<File> files = new LinkedList<File>();
+		for(String arg: args) {
+			files.add(new File(arg));
+		}
+		new StartGame().startGame(files);
 	}
 
 	/** Load fighters from args, and simulate matches between all of them */
-	public void startGame(String[] args){
+	public void startGame(List<File> files){
         
-		List<PassiveFighter> fighters = obtainFighters(args);
-		System.err.flush();	System.out.println("> " + fighters.size() + " fighters joined the game");//DEBUG
+		List<PassiveFighter> fighters = obtainFighters(files);
+		System.err.flush();	System.out.println("> " + fighters.size() + " fighters joined the game");//LOG
 		
 		if(fighters.size() > 1){
 			startTournament(fighters);
 		}else{
-			System.out.println("> Simulation aborted (not enough fighters available)"); 			//DEBUG
+			System.out.println("> Simulation aborted (not enough fighters available)"); 			//LOG
 		}
 		
 	}
 
-	private List<PassiveFighter> obtainFighters(String[] args) {
+	private List<PassiveFighter> obtainFighters(List<File> files) {
 		List<PassiveFighter> fighters = new LinkedList<PassiveFighter>();
 
-		for(String source : args){
+		files.addAll(Arrays.asList(AUTO_START_DIRECTORY.listFiles()));
+			
+		for(File file : files){
 			try {
-				String fdl = readFileContent(source);
-				PassiveFighter fighter = new SuperAwesomeFighter(fdl);
-				fighters.add(fighter);
-			} catch (FileNotFoundException e){
-				System.err.println(e.getMessage());
-			} catch (IOException e) {
-				System.err.println("Failed to extract fighter from "+source);
+				if(file.isFile()) {
+					String fdl = readFileContent(file);
+					PassiveFighter fighter = new AIFighter(fdl);
+					fighters.add(fighter);
+				}
 			} catch (InvalidParameterException e){
 				System.out.flush();
-				System.err.println(source+": "+e.getMessage());
+				System.err.println(file.getName()+": "+e.getMessage());
 			}
 		}
 		
 		return fighters;
 	}
 
-	private String readFileContent(String source) throws FileNotFoundException, IOException {
+	private String readFileContent(File source) {
 		String content = "";
 		
-		String line;
-		BufferedReader reader = new BufferedReader(new FileReader(new File(source)));
-		while((line = reader.readLine()) != null) {
-			content+=line+"\n";
+		try {
+			String line;
+			BufferedReader reader = new BufferedReader(new FileReader(source));
+			while((line = reader.readLine()) != null) {
+				content+=line+"\n";
+			}
+		} catch (FileNotFoundException e){
+			System.err.println(e.getMessage());
+		} catch (IOException e) {
+			System.err.println("Failed to read from "+source);
 		}
-		
+
 		return content;
 	}
 	
@@ -74,7 +87,7 @@ public class StartGame {
 		assert fighters.size() > 1 : "Matches need at least two valid fighters!";
 		
 		//Start matches between every fighter
-		simulations = new ThreadGroup("Tournament with "+fighters.size()+" fighters");
+		ThreadGroup simulations = new ThreadGroup("Tournament with "+fighters.size()+" fighters");
 		for(int i=0; i < fighters.size()-1; i++) {
 			for(int j=i+1; j < fighters.size(); j++) {
 				Runnable match = new Match(fighters.get(i),fighters.get(j));

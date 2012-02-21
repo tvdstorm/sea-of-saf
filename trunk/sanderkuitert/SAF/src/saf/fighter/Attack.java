@@ -37,7 +37,7 @@ public class Attack implements AST {
 		}
 		return defensiveModifier * DEFAULT_PROPERTY_VALUE;
 	}
-
+	
 	public int getRange(List<Property> properties) {
 		for(Property property: properties) {
 			if(property.getName().startsWith(attack) && property.getName().endsWith(ASPECT_RANGE)) {
@@ -46,5 +46,5 @@ public class Attack implements AST {
 		}
 		return DEFAULT_PROPERTY_VALUE;
 	}
-	
+
 }
