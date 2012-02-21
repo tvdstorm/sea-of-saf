@@ -57,6 +57,8 @@ public class MainAlgorithm {
 		} while (leftFighterDesc.getHealth() > 0
 				&& rightFighterDesc.getHealth() > 0);
 
+		String winerName = computeWinner();
+		fightArena.showWinner(winerName);
 		fightArena.dispose();
 	}
 
@@ -69,6 +71,14 @@ public class MainAlgorithm {
 			rightFighterDesc.updateDistAcceptedCond(ConditionType.far);
 		}
 
+	}
+
+	private static String computeWinner() {
+
+		if (leftFighterDesc.getHealth() > 0)
+			return leftFighterDesc.getFighter().getName();
+		else
+			return rightFighterDesc.getFighter().getName();
 	}
 
 }

@@ -86,8 +86,6 @@ public enum FightActionType implements ActionType {
 				}
 				int newHeath;
 				newHeath = oponentState.getHealth() - damage;
-				System.out.println(fighterState.getMyFigter().getName() + " "
-						+ newHeath);
 				oponentState.setHealth(newHeath);
 
 			}

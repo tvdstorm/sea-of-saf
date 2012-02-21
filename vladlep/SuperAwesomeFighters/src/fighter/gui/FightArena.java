@@ -3,6 +3,8 @@ package fighter.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import fighter.algorithm.FighterDescription;
 
 @SuppressWarnings("serial")
@@ -60,5 +62,10 @@ public class FightArena extends JFrame {
 	public void intiArena() {
 		singleton.drawComponents();
 		singleton.setVisible(true);
+	}
+	
+	public void showWinner(String name)
+	{
+		JOptionPane.showMessageDialog(singleton, "WINNER : "+name);
 	}
 }
