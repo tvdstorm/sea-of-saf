@@ -1,6 +1,6 @@
 package config;
 
-import test.SafList;
+import checker.SafList;
 
 public interface settings {
 	

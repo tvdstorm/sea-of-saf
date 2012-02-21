@@ -1,7 +1,7 @@
 package saf;
 
 import java.util.List;
-import test.SafVisitor;
+import checker.SafVisitor;
 
 public class WalkAction extends Type {
 	

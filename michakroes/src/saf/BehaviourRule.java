@@ -1,7 +1,7 @@
 package saf;
 
-import test.SafInterface;
-import test.SafVisitor;
+import checker.SafInterface;
+import checker.SafVisitor;
 
 public class BehaviourRule implements SafInterface {
 	private Condition condition;

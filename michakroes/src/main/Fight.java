@@ -6,7 +6,7 @@ import org.antlr.runtime.*;
 
 import lexer.*;
 import saf.*;
-import test.*;
+import checker.*;
 import graphics.*;
 import config.*;
 
@@ -19,7 +19,7 @@ public class Fight {
     		doGraphics(s1, s2);
     }
     
-    private static Saf createFigher(String file) {
+    public static Saf createFigher(String file) {
     	Saf s = loadFighter(file);
     	if (s != null)
     		s.accept(new SafVisitorCheck());
@@ -32,7 +32,7 @@ public class Fight {
         gFrame.setPanel(new GraphicsPanel(fighter_sprite, s1, s2));
     }
     
-    public static Saf loadFighter(String file) {
+    private static Saf loadFighter(String file) {
     	ANTLRFileStream fs;
 		Saf s = new Saf();
 		

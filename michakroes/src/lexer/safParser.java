@@ -1,4 +1,4 @@
-// $ANTLR 3.4 /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g 2012-02-20 23:10:15
+// $ANTLR 3.4 /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g 2012-02-21 13:27:13
  
   package lexer;
   
@@ -292,12 +292,12 @@ public class safParser extends Parser {
 
 
     // $ANTLR start "behaviourrule"
-    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:59:1: behaviourrule returns [BehaviourRule br] : conditions '[' walkAction fightAction ']' ;
+    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:59:1: behaviourrule returns [BehaviourRule br] : condition '[' walkAction fightAction ']' ;
     public final BehaviourRule behaviourrule() throws RecognitionException {
         BehaviourRule br = null;
 
 
-        Condition conditions8 =null;
+        Condition condition8 =null;
 
         WalkAction walkAction9 =null;
 
@@ -305,11 +305,11 @@ public class safParser extends Parser {
 
 
         try {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:60:3: ( conditions '[' walkAction fightAction ']' )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:60:5: conditions '[' walkAction fightAction ']'
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:60:3: ( condition '[' walkAction fightAction ']' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:60:5: condition '[' walkAction fightAction ']'
             {
-            pushFollow(FOLLOW_conditions_in_behaviourrule292);
-            conditions8=conditions();
+            pushFollow(FOLLOW_condition_in_behaviourrule292);
+            condition8=condition();
 
             state._fsp--;
 
@@ -330,7 +330,7 @@ public class safParser extends Parser {
 
             match(input,12,FOLLOW_12_in_behaviourrule300); 
 
-             br = new BehaviourRule(conditions8, walkAction9, fightAction10); 
+             br = new BehaviourRule(condition8, walkAction9, fightAction10); 
 
             }
 
@@ -349,38 +349,67 @@ public class safParser extends Parser {
 
 
 
-    // $ANTLR start "conditions"
-    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:64:1: conditions returns [Condition c] : ( atom | connective );
-    public final Condition conditions() throws RecognitionException {
+    // $ANTLR start "condition"
+    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:64:1: condition returns [Condition c] : ( orCondition ) ;
+    public final Condition condition() throws RecognitionException {
         Condition c = null;
 
 
-        Condition atom11 =null;
-
-        Condition connective12 =null;
+        Condition orCondition11 =null;
 
 
         try {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:65:3: ( atom | connective )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:65:3: ( ( orCondition ) )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:65:5: ( orCondition )
+            {
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:65:5: ( orCondition )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:65:6: orCondition
+            {
+            pushFollow(FOLLOW_orCondition_in_condition326);
+            orCondition11=orCondition();
+
+            state._fsp--;
+
+
+             c = orCondition11; 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return c;
+    }
+    // $ANTLR end "condition"
+
+
+
+    // $ANTLR start "atomCondition"
+    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:68:1: atomCondition returns [Condition c] : ( ( ID ) | ( '(' condition ')' ) );
+    public final Condition atomCondition() throws RecognitionException {
+        Condition c = null;
+
+
+        Token ID12=null;
+        Condition condition13 =null;
+
+
+        try {
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:69:3: ( ( ID ) | ( '(' condition ')' ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
             if ( (LA3_0==ID) ) {
-                int LA3_1 = input.LA(2);
-
-                if ( (LA3_1==9||LA3_1==11) ) {
-                    alt3=1;
-                }
-                else if ( ((LA3_1 >= 13 && LA3_1 <= 14)) ) {
-                    alt3=2;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 3, 1, input);
-
-                    throw nvae;
-
-                }
+                alt3=1;
             }
             else if ( (LA3_0==8) ) {
                 alt3=2;
@@ -394,28 +423,40 @@ public class safParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:65:5: atom
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:69:5: ( ID )
                     {
-                    pushFollow(FOLLOW_atom_in_conditions325);
-                    atom11=atom();
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:69:5: ( ID )
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:69:6: ID
+                    {
+                    ID12=(Token)match(input,ID,FOLLOW_ID_in_atomCondition349); 
 
-                    state._fsp--;
+                    c = new ConditionAction((ID12!=null?ID12.getText():null)); 
 
+                    }
 
-                     c = atom11;
 
                     }
                     break;
                 case 2 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:66:5: connective
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:71:5: ( '(' condition ')' )
                     {
-                    pushFollow(FOLLOW_connective_in_conditions333);
-                    connective12=connective();
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:71:5: ( '(' condition ')' )
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:71:6: '(' condition ')'
+                    {
+                    match(input,8,FOLLOW_8_in_atomCondition365); 
+
+                    pushFollow(FOLLOW_condition_in_atomCondition367);
+                    condition13=condition();
 
                     state._fsp--;
 
 
-                     c = connective12; 
+                    match(input,9,FOLLOW_9_in_atomCondition369); 
+
+                     c = condition13; 
+
+                    }
+
 
                     }
                     break;
@@ -432,207 +473,67 @@ public class safParser extends Parser {
         }
         return c;
     }
-    // $ANTLR end "conditions"
+    // $ANTLR end "atomCondition"
 
 
 
-    // $ANTLR start "atom"
-    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:68:1: atom returns [Condition atom] : ID ;
-    public final Condition atom() throws RecognitionException {
-        Condition atom = null;
-
-
-        Token ID13=null;
-
-        try {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:69:3: ( ID )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:69:5: ID
-            {
-            ID13=(Token)match(input,ID,FOLLOW_ID_in_atom352); 
-
-             atom = new ConditionAction((ID13!=null?ID13.getText():null)); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-
-        finally {
-        	// do for sure before leaving
-        }
-        return atom;
-    }
-    // $ANTLR end "atom"
-
-
-
-    // $ANTLR start "connective"
-    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:73:1: connective returns [Condition c] : ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= atom op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= atom op= ( 'and' | 'or' ) rhs= atom ) ;
-    public final Condition connective() throws RecognitionException {
+    // $ANTLR start "andCondition"
+    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:74:1: andCondition returns [Condition c] : cond1= atomCondition ( 'and' cond2= atomCondition )* ;
+    public final Condition andCondition() throws RecognitionException {
         Condition c = null;
 
 
-        Token op=null;
-        Condition lhs =null;
+        Condition cond1 =null;
 
-        Condition rhs =null;
+        Condition cond2 =null;
 
 
         try {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:73:33: ( ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= atom op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= atom op= ( 'and' | 'or' ) rhs= atom ) )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:73:35: ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= atom op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= atom op= ( 'and' | 'or' ) rhs= atom )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:75:3: (cond1= atomCondition ( 'and' cond2= atomCondition )* )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:75:5: cond1= atomCondition ( 'and' cond2= atomCondition )*
             {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:73:35: ( '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions |lhs= atom op= ( 'and' | 'or' ) '(' rhs= conditions ')' |lhs= atom op= ( 'and' | 'or' ) rhs= atom )
-            int alt4=3;
-            int LA4_0 = input.LA(1);
+            pushFollow(FOLLOW_atomCondition_in_andCondition393);
+            cond1=atomCondition();
 
-            if ( (LA4_0==8) ) {
-                alt4=1;
-            }
-            else if ( (LA4_0==ID) ) {
-                int LA4_2 = input.LA(2);
+            state._fsp--;
 
-                if ( ((LA4_2 >= 13 && LA4_2 <= 14)) ) {
-                    int LA4_3 = input.LA(3);
 
-                    if ( (LA4_3==8) ) {
-                        alt4=2;
-                    }
-                    else if ( (LA4_3==ID) ) {
-                        alt4=3;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 4, 3, input);
+             c = cond1; 
 
-                        throw nvae;
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:76:3: ( 'and' cond2= atomCondition )*
+            loop4:
+            do {
+                int alt4=2;
+                int LA4_0 = input.LA(1);
 
-                    }
+                if ( (LA4_0==13) ) {
+                    alt4=1;
                 }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 4, 2, input);
 
-                    throw nvae;
 
+                switch (alt4) {
+            	case 1 :
+            	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:76:4: 'and' cond2= atomCondition
+            	    {
+            	    match(input,13,FOLLOW_13_in_andCondition400); 
+
+            	    pushFollow(FOLLOW_atomCondition_in_andCondition406);
+            	    cond2=atomCondition();
+
+            	    state._fsp--;
+
+
+            	     c = new ConditionAnd(c, cond2);
+            	      
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop4;
                 }
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 4, 0, input);
+            } while (true);
 
-                throw nvae;
-
-            }
-            switch (alt4) {
-                case 1 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:74:5: '(' lhs= conditions ')' op= ( 'and' | 'or' ) rhs= conditions
-                    {
-                    match(input,8,FOLLOW_8_in_connective375); 
-
-                    pushFollow(FOLLOW_conditions_in_connective381);
-                    lhs=conditions();
-
-                    state._fsp--;
-
-
-                    match(input,9,FOLLOW_9_in_connective383); 
-
-                    op=(Token)input.LT(1);
-
-                    if ( (input.LA(1) >= 13 && input.LA(1) <= 14) ) {
-                        input.consume();
-                        state.errorRecovery=false;
-                    }
-                    else {
-                        MismatchedSetException mse = new MismatchedSetException(null,input);
-                        throw mse;
-                    }
-
-
-                    pushFollow(FOLLOW_conditions_in_connective401);
-                    rhs=conditions();
-
-                    state._fsp--;
-
-
-                    }
-                    break;
-                case 2 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:75:7: lhs= atom op= ( 'and' | 'or' ) '(' rhs= conditions ')'
-                    {
-                    pushFollow(FOLLOW_atom_in_connective413);
-                    lhs=atom();
-
-                    state._fsp--;
-
-
-                    op=(Token)input.LT(1);
-
-                    if ( (input.LA(1) >= 13 && input.LA(1) <= 14) ) {
-                        input.consume();
-                        state.errorRecovery=false;
-                    }
-                    else {
-                        MismatchedSetException mse = new MismatchedSetException(null,input);
-                        throw mse;
-                    }
-
-
-                    match(input,8,FOLLOW_8_in_connective427); 
-
-                    pushFollow(FOLLOW_conditions_in_connective433);
-                    rhs=conditions();
-
-                    state._fsp--;
-
-
-                    match(input,9,FOLLOW_9_in_connective435); 
-
-                    }
-                    break;
-                case 3 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:76:7: lhs= atom op= ( 'and' | 'or' ) rhs= atom
-                    {
-                    pushFollow(FOLLOW_atom_in_connective447);
-                    lhs=atom();
-
-                    state._fsp--;
-
-
-                    op=(Token)input.LT(1);
-
-                    if ( (input.LA(1) >= 13 && input.LA(1) <= 14) ) {
-                        input.consume();
-                        state.errorRecovery=false;
-                    }
-                    else {
-                        MismatchedSetException mse = new MismatchedSetException(null,input);
-                        throw mse;
-                    }
-
-
-                    pushFollow(FOLLOW_atom_in_connective465);
-                    rhs=atom();
-
-                    state._fsp--;
-
-
-                    }
-                    break;
-
-            }
-
-
-             
-                if((op!=null?op.getText():null).equals("and"))
-                  c = new ConditionAnd(lhs, rhs);
-                else
-                  c = new ConditionOr(lhs, rhs);
-              
 
             }
 
@@ -647,12 +548,86 @@ public class safParser extends Parser {
         }
         return c;
     }
-    // $ANTLR end "connective"
+    // $ANTLR end "andCondition"
+
+
+
+    // $ANTLR start "orCondition"
+    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:80:1: orCondition returns [Condition c] : cond1= andCondition ( 'or' cond2= andCondition )* ;
+    public final Condition orCondition() throws RecognitionException {
+        Condition c = null;
+
+
+        Condition cond1 =null;
+
+        Condition cond2 =null;
+
+
+        try {
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:81:3: (cond1= andCondition ( 'or' cond2= andCondition )* )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:81:5: cond1= andCondition ( 'or' cond2= andCondition )*
+            {
+            pushFollow(FOLLOW_andCondition_in_orCondition431);
+            cond1=andCondition();
+
+            state._fsp--;
+
+
+             c = cond1; 
+
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:82:3: ( 'or' cond2= andCondition )*
+            loop5:
+            do {
+                int alt5=2;
+                int LA5_0 = input.LA(1);
+
+                if ( (LA5_0==14) ) {
+                    alt5=1;
+                }
+
+
+                switch (alt5) {
+            	case 1 :
+            	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:82:4: 'or' cond2= andCondition
+            	    {
+            	    match(input,14,FOLLOW_14_in_orCondition438); 
+
+            	    pushFollow(FOLLOW_andCondition_in_orCondition444);
+            	    cond2=andCondition();
+
+            	    state._fsp--;
+
+
+            	     c = new ConditionOr(c, cond2); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop5;
+                }
+            } while (true);
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return c;
+    }
+    // $ANTLR end "orCondition"
 
 
 
     // $ANTLR start "walkAction"
-    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:84:1: walkAction returns [WalkAction wa] : (w1= ID | CHOOSE '(' (w2= ID )+ ')' ) ;
+    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:86:1: walkAction returns [WalkAction wa] : (w1= ID | CHOOSE '(' (w2= ID )+ ')' ) ;
     public final WalkAction walkAction() throws RecognitionException {
         WalkAction wa = null;
 
@@ -662,60 +637,60 @@ public class safParser extends Parser {
 
          List<String> walks = new ArrayList<String>(); 
         try {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:86:3: ( (w1= ID | CHOOSE '(' (w2= ID )+ ')' ) )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:86:5: (w1= ID | CHOOSE '(' (w2= ID )+ ')' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:88:3: ( (w1= ID | CHOOSE '(' (w2= ID )+ ')' ) )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:88:5: (w1= ID | CHOOSE '(' (w2= ID )+ ')' )
             {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:86:5: (w1= ID | CHOOSE '(' (w2= ID )+ ')' )
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:88:5: (w1= ID | CHOOSE '(' (w2= ID )+ ')' )
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA6_0==ID) ) {
-                alt6=1;
+            if ( (LA7_0==ID) ) {
+                alt7=1;
             }
-            else if ( (LA6_0==CHOOSE) ) {
-                alt6=2;
+            else if ( (LA7_0==CHOOSE) ) {
+                alt7=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 6, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt6) {
+            switch (alt7) {
                 case 1 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:87:7: w1= ID
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:89:7: w1= ID
                     {
-                    w1=(Token)match(input,ID,FOLLOW_ID_in_walkAction502); 
+                    w1=(Token)match(input,ID,FOLLOW_ID_in_walkAction485); 
 
                      walks.add((w1!=null?w1.getText():null)); 
 
                     }
                     break;
                 case 2 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:89:7: CHOOSE '(' (w2= ID )+ ')'
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:91:7: CHOOSE '(' (w2= ID )+ ')'
                     {
-                    match(input,CHOOSE,FOLLOW_CHOOSE_in_walkAction522); 
+                    match(input,CHOOSE,FOLLOW_CHOOSE_in_walkAction505); 
 
-                    match(input,8,FOLLOW_8_in_walkAction524); 
+                    match(input,8,FOLLOW_8_in_walkAction507); 
 
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:89:18: (w2= ID )+
-                    int cnt5=0;
-                    loop5:
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:91:18: (w2= ID )+
+                    int cnt6=0;
+                    loop6:
                     do {
-                        int alt5=2;
-                        int LA5_0 = input.LA(1);
+                        int alt6=2;
+                        int LA6_0 = input.LA(1);
 
-                        if ( (LA5_0==ID) ) {
-                            alt5=1;
+                        if ( (LA6_0==ID) ) {
+                            alt6=1;
                         }
 
 
-                        switch (alt5) {
+                        switch (alt6) {
                     	case 1 :
-                    	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:89:19: w2= ID
+                    	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:91:19: w2= ID
                     	    {
-                    	    w2=(Token)match(input,ID,FOLLOW_ID_in_walkAction531); 
+                    	    w2=(Token)match(input,ID,FOLLOW_ID_in_walkAction514); 
 
                     	     walks.add((w2!=null?w2.getText():null)); 
 
@@ -723,16 +698,16 @@ public class safParser extends Parser {
                     	    break;
 
                     	default :
-                    	    if ( cnt5 >= 1 ) break loop5;
+                    	    if ( cnt6 >= 1 ) break loop6;
                                 EarlyExitException eee =
-                                    new EarlyExitException(5, input);
+                                    new EarlyExitException(6, input);
                                 throw eee;
                         }
-                        cnt5++;
+                        cnt6++;
                     } while (true);
 
 
-                    match(input,9,FOLLOW_9_in_walkAction538); 
+                    match(input,9,FOLLOW_9_in_walkAction521); 
 
                     }
                     break;
@@ -760,7 +735,7 @@ public class safParser extends Parser {
 
 
     // $ANTLR start "fightAction"
-    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:94:1: fightAction returns [FightAction fa] : (f1= ID | CHOOSE '(' (f2= ID )+ ')' ) ;
+    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:96:1: fightAction returns [FightAction fa] : (f1= ID | CHOOSE '(' (f2= ID )+ ')' ) ;
     public final FightAction fightAction() throws RecognitionException {
         FightAction fa = null;
 
@@ -770,60 +745,60 @@ public class safParser extends Parser {
 
          List<String> fights = new ArrayList<String>(); 
         try {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:96:3: ( (f1= ID | CHOOSE '(' (f2= ID )+ ')' ) )
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:96:5: (f1= ID | CHOOSE '(' (f2= ID )+ ')' )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:98:3: ( (f1= ID | CHOOSE '(' (f2= ID )+ ')' ) )
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:98:5: (f1= ID | CHOOSE '(' (f2= ID )+ ')' )
             {
-            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:96:5: (f1= ID | CHOOSE '(' (f2= ID )+ ')' )
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:98:5: (f1= ID | CHOOSE '(' (f2= ID )+ ')' )
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA8_0==ID) ) {
-                alt8=1;
+            if ( (LA9_0==ID) ) {
+                alt9=1;
             }
-            else if ( (LA8_0==CHOOSE) ) {
-                alt8=2;
+            else if ( (LA9_0==CHOOSE) ) {
+                alt9=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
+                    new NoViableAltException("", 9, 0, input);
 
                 throw nvae;
 
             }
-            switch (alt8) {
+            switch (alt9) {
                 case 1 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:97:7: f1= ID
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:99:7: f1= ID
                     {
-                    f1=(Token)match(input,ID,FOLLOW_ID_in_fightAction583); 
+                    f1=(Token)match(input,ID,FOLLOW_ID_in_fightAction566); 
 
                      fights.add((f1!=null?f1.getText():null)); 
 
                     }
                     break;
                 case 2 :
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:99:7: CHOOSE '(' (f2= ID )+ ')'
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:101:7: CHOOSE '(' (f2= ID )+ ')'
                     {
-                    match(input,CHOOSE,FOLLOW_CHOOSE_in_fightAction603); 
+                    match(input,CHOOSE,FOLLOW_CHOOSE_in_fightAction586); 
 
-                    match(input,8,FOLLOW_8_in_fightAction605); 
+                    match(input,8,FOLLOW_8_in_fightAction588); 
 
-                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:99:18: (f2= ID )+
-                    int cnt7=0;
-                    loop7:
+                    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:101:18: (f2= ID )+
+                    int cnt8=0;
+                    loop8:
                     do {
-                        int alt7=2;
-                        int LA7_0 = input.LA(1);
+                        int alt8=2;
+                        int LA8_0 = input.LA(1);
 
-                        if ( (LA7_0==ID) ) {
-                            alt7=1;
+                        if ( (LA8_0==ID) ) {
+                            alt8=1;
                         }
 
 
-                        switch (alt7) {
+                        switch (alt8) {
                     	case 1 :
-                    	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:99:19: f2= ID
+                    	    // /Users/michakroes/Documents/workspace/saf/src/lexer/saf.g:101:19: f2= ID
                     	    {
-                    	    f2=(Token)match(input,ID,FOLLOW_ID_in_fightAction612); 
+                    	    f2=(Token)match(input,ID,FOLLOW_ID_in_fightAction595); 
 
                     	     fights.add((f2!=null?f2.getText():null)); 
 
@@ -831,16 +806,16 @@ public class safParser extends Parser {
                     	    break;
 
                     	default :
-                    	    if ( cnt7 >= 1 ) break loop7;
+                    	    if ( cnt8 >= 1 ) break loop8;
                                 EarlyExitException eee =
-                                    new EarlyExitException(7, input);
+                                    new EarlyExitException(8, input);
                                 throw eee;
                         }
-                        cnt7++;
+                        cnt8++;
                     } while (true);
 
 
-                    match(input,9,FOLLOW_9_in_fightAction619); 
+                    match(input,9,FOLLOW_9_in_fightAction602); 
 
                     }
                     break;
@@ -881,36 +856,31 @@ public class safParser extends Parser {
     public static final BitSet FOLLOW_10_in_strength240 = new BitSet(new long[]{0x0000000000000040L});
     public static final BitSet FOLLOW_INT_in_strength242 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_behaviourrule_in_behaviour268 = new BitSet(new long[]{0x0000000000000122L});
-    public static final BitSet FOLLOW_conditions_in_behaviourrule292 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_condition_in_behaviourrule292 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_11_in_behaviourrule294 = new BitSet(new long[]{0x0000000000000030L});
     public static final BitSet FOLLOW_walkAction_in_behaviourrule296 = new BitSet(new long[]{0x0000000000000030L});
     public static final BitSet FOLLOW_fightAction_in_behaviourrule298 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_12_in_behaviourrule300 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_in_conditions325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_connective_in_conditions333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_atom352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_8_in_connective375 = new BitSet(new long[]{0x0000000000000120L});
-    public static final BitSet FOLLOW_conditions_in_connective381 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_connective383 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_set_in_connective389 = new BitSet(new long[]{0x0000000000000120L});
-    public static final BitSet FOLLOW_conditions_in_connective401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_in_connective413 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_set_in_connective419 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_connective427 = new BitSet(new long[]{0x0000000000000120L});
-    public static final BitSet FOLLOW_conditions_in_connective433 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_connective435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_atom_in_connective447 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_set_in_connective453 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_atom_in_connective465 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_walkAction502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_walkAction522 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_walkAction524 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_walkAction531 = new BitSet(new long[]{0x0000000000000220L});
-    public static final BitSet FOLLOW_9_in_walkAction538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ID_in_fightAction583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_fightAction603 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_fightAction605 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ID_in_fightAction612 = new BitSet(new long[]{0x0000000000000220L});
-    public static final BitSet FOLLOW_9_in_fightAction619 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_orCondition_in_condition326 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_atomCondition349 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_8_in_atomCondition365 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_condition_in_atomCondition367 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_atomCondition369 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_atomCondition_in_andCondition393 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_13_in_andCondition400 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_atomCondition_in_andCondition406 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_andCondition_in_orCondition431 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_14_in_orCondition438 = new BitSet(new long[]{0x0000000000000120L});
+    public static final BitSet FOLLOW_andCondition_in_orCondition444 = new BitSet(new long[]{0x0000000000004002L});
+    public static final BitSet FOLLOW_ID_in_walkAction485 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_walkAction505 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_walkAction507 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_walkAction514 = new BitSet(new long[]{0x0000000000000220L});
+    public static final BitSet FOLLOW_9_in_walkAction521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ID_in_fightAction566 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_fightAction586 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_fightAction588 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ID_in_fightAction595 = new BitSet(new long[]{0x0000000000000220L});
+    public static final BitSet FOLLOW_9_in_fightAction602 = new BitSet(new long[]{0x0000000000000002L});
 
 }

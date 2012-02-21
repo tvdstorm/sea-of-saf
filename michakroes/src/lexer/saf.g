@@ -57,30 +57,32 @@ behaviour returns[Behaviour b]
 ; 
 
 behaviourrule returns[BehaviourRule br]
-  : conditions '[' walkAction fightAction ']' 
-    { $br = new BehaviourRule($conditions.c, $walkAction.wa, $fightAction.fa); } 
+  : condition '[' walkAction fightAction ']' 
+    { $br = new BehaviourRule($condition.c, $walkAction.wa, $fightAction.fa); } 
 ;  
 
-conditions returns [Condition c]
-  : atom { $c = $atom.atom;}
-  | connective { $c = $connective.c; };
-  
-atom returns [Condition atom] 
-  : ID 
-  { $atom = new ConditionAction($ID.text); }
+condition returns [Condition c]
+  : (orCondition { $c = $orCondition.c; })
 ;
-
-connective returns[Condition c] : (
-    '(' lhs = conditions ')' op = ('and' | 'or') rhs = conditions
-    | lhs = atom op = ('and' | 'or') '(' rhs = conditions ')'
-    | lhs = atom op = ('and' | 'or') rhs = atom)
-  { 
-    if($op.text.equals("and"))
-      c = new ConditionAnd(lhs, rhs);
-    else
-      c = new ConditionOr(lhs, rhs);
-  };
-
+    
+atomCondition returns [Condition c]
+  : (ID
+     {$c = new ConditionAction($ID.text); } )
+  | ('(' condition ')' { $c = $condition.c; })
+;
+  
+andCondition returns [Condition c]
+  : cond1 = atomCondition { $c = $cond1.c; }
+  ('and' cond2 = atomCondition { $c = new ConditionAnd(c, $cond2.c);
+  })*
+;
+  
+orCondition returns [Condition c]
+  : cond1 = andCondition { $c = $cond1.c; }
+  ('or' cond2 = andCondition { $c = new ConditionOr($c, $cond2.c); }
+	)*
+;
+  
 walkAction returns[WalkAction wa]
   @init { List<String> walks = new ArrayList<String>(); }
   : (

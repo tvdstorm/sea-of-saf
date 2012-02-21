@@ -1,6 +1,6 @@
 package saf;
 
-import test.SafInterface;
+import checker.SafInterface;
 
 public abstract class Condition implements SafInterface {
 	

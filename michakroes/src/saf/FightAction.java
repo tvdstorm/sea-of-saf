@@ -2,13 +2,12 @@ package saf;
 
 import java.util.List;
 
-import test.SafVisitor;
+import checker.SafVisitor;
 
 public class FightAction extends Type {
 	
 	public FightAction(String m) { 
 		super(m);
-		System.out.println("Fight: "  + m.toString());
 	}
 	
 	public FightAction(List<String> fights) {

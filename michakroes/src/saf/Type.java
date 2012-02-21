@@ -3,7 +3,7 @@ package saf;
 import java.util.List;
 import java.util.Random;
 
-import test.SafInterface;
+import checker.SafInterface;
 
 public abstract class Type implements SafInterface {
 	private String type;
