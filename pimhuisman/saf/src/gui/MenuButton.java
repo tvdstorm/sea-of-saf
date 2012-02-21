@@ -49,14 +49,18 @@ public class MenuButton extends JPanel implements MouseListener {
 		add(this.label);
 	}
 	
-	void setCurrentImage(BufferedImage image) {
+	public void setCurrentImage(BufferedImage image) {
 		currentImage = image;
 		repaint();
 	}
 	
+	public void setText(String text) {
+		this.label.setText(text);
+	}
+	
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(currentImage, 0, 0, null); // see javadoc for more info on the parameters
+        g.drawImage(currentImage, 0, 0, null);
     }
 
 	@Override

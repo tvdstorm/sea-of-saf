@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Graphics;
 import javax.swing.*;
 
 public class MenuScreen extends BaseScreen {
@@ -14,7 +15,7 @@ public class MenuScreen extends BaseScreen {
 	}
 
 	@Override
-	public void onInitialize() {
+	protected void onInitialize() {
 	 	setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	 	
 	 	backgroundMusic = new SoundFile();
@@ -28,18 +29,26 @@ public class MenuScreen extends BaseScreen {
 	 	add(startButton);
 	 	add(quitButton);
 	}
-
+	
 	@Override
-	public void onDestroy() {
+	protected void onDraw(Graphics g) {
+				
+	}
+	
+	@Override
+	protected boolean onUpdate() {
+		return true;
+	}
+	
+	@Override
+	protected void onDestroy() {
 		backgroundMusic.unload();
 	}
 
 	@Override
-	public void handleButtonPress(int buttonId) {
-		// TODO Auto-generated method stub
+	protected void handleButtonPress(int buttonId) {
 		switch ( buttonId ) {
 		case START_BUTTON: {
-			//baseFrame->switchScreen(new GameScreen(baseFrame));
 			getBaseFrame().switchScreen(new GameScreen(getBaseFrame()));
 			break;
 		}
@@ -49,7 +58,5 @@ public class MenuScreen extends BaseScreen {
 		}
 		}
 	}
-	
-	
 
 }

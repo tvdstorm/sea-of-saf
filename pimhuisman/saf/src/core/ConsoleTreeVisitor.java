@@ -29,52 +29,50 @@ public class ConsoleTreeVisitor extends BaseTreeVisitor {
 	public void visit(Fighter fighter) {
 		printWhitespace();
 		System.out.println("Fighter Name=" + fighter.getName());
-		depth += 1;
+
 	}
 
 	@Override
 	public void visit(Personality personality) {
+		depth = 1;
 		printWhitespace();
 		System.out.println("Personality");
-		depth += 1;
 	}
 
 	@Override
 	public void visit(Behaviour behaviour) {
-		depth -= 1;
+		depth = 1;
 		printWhitespace();
 		System.out.println("Behaviour");
-		depth += 1;
 	}
 	
 	@Override
 	public void visit(Characteristic characteristic) {
+		depth = 2;
 		printWhitespace();
 		System.out.println("Characteristic Name=" + characteristic.getName() + " Value=" + characteristic.getValue());
 	}
 	
 	@Override
 	public void visit(Rule rule) {
+		depth = 2;
 		printWhitespace();
 		System.out.println("Rule");
+		depth += 1;
 	}
-
-	//@Override
-	//public void visit(Condition condition) {
-	//	printWhitespace();
-	//	System.out.println("Condition");
-	//}
 	
 	@Override
 	public void visit(AndStatement andStatement) {
 		printWhitespace();
 		System.out.println("And statement");
+		depth += 1;
 	}
 
 	@Override
 	public void visit(OrStatement orStatement) {
 		printWhitespace();
 		System.out.println("Or statement");
+		depth += 1;
 	}
 
 	@Override
@@ -85,9 +83,11 @@ public class ConsoleTreeVisitor extends BaseTreeVisitor {
 	
 	@Override
 	public void visit(Actions action) {
+		depth = 3;
 		printWhitespace();
-		//System.out.println(action.getMoveOptions().toString());
-		//System.out.println(action.getAttackOptions().toString());
+		System.out.println(action.getMoveOptions().toString());
+		printWhitespace();
+		System.out.println(action.getAttackOptions().toString());
 	}
 
 }

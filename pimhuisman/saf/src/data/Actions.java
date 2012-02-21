@@ -3,7 +3,9 @@ package data;
 import java.util.List;
 import java.util.Random;
 
-public class Actions {
+import core.BaseTreeVisitor;
+
+public class Actions extends BaseData {
 
 	private List<String> moveOptions;
 	private List<String> attackOptions;
@@ -36,6 +38,11 @@ public class Actions {
 			return options.get(randomOption);
 		}
 		return "";
+	}
+
+	@Override
+	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
+		treeVisitor.visit(this);
 	}
 	
 }
