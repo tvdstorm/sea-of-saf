@@ -1,6 +1,5 @@
 package nl.uva.lap.saf.ast.fighter;
 
-import nl.uva.lap.saf.ast.fighter.StateFighter.Stand;
 import nl.uva.lap.saf.interpreter.Fighter;
 
 public class StateFighter extends Fighter
@@ -41,9 +40,9 @@ public class StateFighter extends Fighter
 	private void moveCloser(int closer)
 	{
 		if(direction == Direction.LEFT)
-			xPosition -= closer;
-		else
 			xPosition += closer;
+		else
+			xPosition -= closer;
 	}
 	
 	private void moveAway(int closer)

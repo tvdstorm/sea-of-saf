@@ -14,7 +14,7 @@ public class Arena
 	private final int Y_SCALE = 100;
 	
 	private final int Y_FIGHTER = 11;
-	private final int Y_FIGHTER_JUMP = 14;
+	private final int Y_FIGHTER_JUMP = 18;
 	
 	private State state;
 	
@@ -41,7 +41,7 @@ public class Arena
 	
 	private void drawArena()
 	{
-		StdDraw.picture(50.0, 50.0, "recourses/sprites/dojo.png");
+		StdDraw.picture(X_SCALE/2, Y_SCALE/2, "recourses/sprites/dojo.png");
 	}
 	
 	private void drawFighter(StateFighter fighter)
@@ -50,7 +50,7 @@ public class Arena
 		int yPosition = Y_FIGHTER;
 		if(fighter.getStand() == Stand.JUMP)
 			yPosition = Y_FIGHTER_JUMP;
-		//String color = fighter.getColor();
+		//String color = fighter.getColor(); //TODO
 		if(fighter.getDirection() == Direction.LEFT)
 			StdDraw.picture(xPosition, yPosition, "recourses/sprites/blue/stand.gif");
 		else
