@@ -64,7 +64,7 @@ public class Fighter implements Settings
 			if(ConditionInterpreter.evaluate(behaviour, astFighter, state))
 			{
 				valid.add(behaviour);
-				System.out.println("chosen behaviour: " + behaviour.getCondition().toString() + " " + behaviour.getActions().get(0).toString());
+				//System.out.println("chosen behaviour: " + behaviour.getCondition().toString() + " " + behaviour.getActions().get(0).toString());
 			}
 		return valid;
 	}
@@ -87,6 +87,7 @@ public class Fighter implements Settings
 		for(Action action : behaviour.getActions())
 		{
 			SimpleAction chosenAction = ActionInterpreter.evaluate(action);
+			System.out.println("chosen behaviour: " + behaviour.getCondition().toString() + " " + chosenAction.toString());
 			if(MOVES.contains(chosenAction.getAction()))
 				currentMovement = chosenAction.getAction();
 			else

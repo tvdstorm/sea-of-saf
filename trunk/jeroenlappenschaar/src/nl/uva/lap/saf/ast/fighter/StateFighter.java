@@ -65,9 +65,9 @@ public class StateFighter extends Fighter
 			moveCloser(RUN_SPEED);
 		else if(currentMovement.equals("run_away"))
 			moveAway(RUN_SPEED);
-		else if(currentMovement.equals("move_towards"))
+		else if(currentMovement.equals("walk_towards"))
 			moveCloser(WALK_SPEED);
-		else if(currentMovement.equals("move_away"))
+		else if(currentMovement.equals("walk_away"))
 			moveAway(WALK_SPEED);
 	}
 
