@@ -21,7 +21,13 @@ package nl.uva.saf.fdl;
 import nl.uva.saf.fdl.ast.Characteristic;
 import nl.uva.saf.fdl.ast.Choice;
 import nl.uva.saf.fdl.ast.ConditionAlways;
+import nl.uva.saf.fdl.ast.FightAction;
 import nl.uva.saf.fdl.ast.ITreeNode;
+import nl.uva.saf.fdl.ast.MoveAction;
+import nl.uva.saf.fdl.types.CharacteristicType;
+import nl.uva.saf.fdl.types.FightActionType;
+import nl.uva.saf.fdl.types.MoveActionType;
+import nl.uva.saf.fdl.types.TypeTranslator;
 
 public class TreeValidator extends TreeVisitor {
 	private boolean alwaysConditionPresent = false;
@@ -66,11 +72,10 @@ public class TreeValidator extends TreeVisitor {
 
 	@Override
 	public void visit(Characteristic node) {
-		String type = node.getType();
+		CharacteristicType type = TypeTranslator.getCharacteristicType(node.getType());
 
-		if (!type.equals("punchReach") && !type.equals("punchPower") && !type.equals("kickReach")
-				&& !type.equals("kickPower")) {
-			addWarning(type + ": unrecognized characteristic.");
+		if (type == CharacteristicType.unknown) {
+			addWarning(node.getType() + ": unrecognized characteristic.");
 		}
 
 		int value = node.getValue();
@@ -93,6 +98,26 @@ public class TreeValidator extends TreeVisitor {
 	@Override
 	public void visit(ConditionAlways node) {
 		alwaysConditionPresent = true;
+		super.visit(node);
+	}
+
+	@Override
+	public void visit(FightAction node) {
+		FightActionType type = TypeTranslator.getFightActionType(node.getActionType());
+		if (type == FightActionType.unknown) {
+			addWarning(node.getActionType() + ": unrecognized fight action.");
+		}
+
+		super.visit(node);
+	}
+
+	@Override
+	public void visit(MoveAction node) {
+		MoveActionType type = TypeTranslator.getMoveActionType(node.getActionType());
+		if (type == MoveActionType.unknown) {
+			addWarning(node.getActionType() + ": unrecognized move action.");
+		}
+
 		super.visit(node);
 	}
 }
