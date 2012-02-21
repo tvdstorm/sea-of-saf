@@ -16,14 +16,15 @@ public class MessageReporter {
 		this.parentFrame = parentFrame;
 	}
 
-	public static void initMessageReporter(JFrame parentFrame) {
+	public static MessageReporter getMessageReporter(JFrame parentFrame) {
 		if (singleton == null) {
 			singleton = new MessageReporter(parentFrame);
 		}
+		return singleton;
 	}
 
 	// TODO improve aspect
-	public static void reportMessages(List<Message> messages) {
+	public void reportMessages(List<Message> messages) {
 
 		JOptionPane.showMessageDialog(singleton.parentFrame,
 				messages.toString(), "Errors", JOptionPane.ERROR_MESSAGE);
@@ -31,7 +32,7 @@ public class MessageReporter {
 	}
 
 	// TODO improve aspect
-	public static void reportMessages(Message messages) {
+	public  void reportMessages(Message messages) {
 		JOptionPane.showMessageDialog(singleton.parentFrame,
 				messages.toString(), "Errors", JOptionPane.ERROR_MESSAGE);
 		singleton.parentFrame.dispose();

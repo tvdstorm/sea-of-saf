@@ -2,14 +2,16 @@ package fighter.algorithm;
 
 import fighter.IFighter;
 import fighter.condition.ConditionType;
+import fighter.gui.FightArena;
 
 public class MainAlgorithm {
 
 	public static final int direction = 1;
-	private FighterDescription leftFighterDesc;
-	private FighterDescription rightFighterDesc;
+	private static FighterDescription leftFighterDesc;
+	private static FighterDescription rightFighterDesc;
+	private static FightArena fightArena;
 
-	public void setUpFight(IFighter leftFighter, IFighter rightFighter) {
+	public static void setUpFight(IFighter leftFighter, IFighter rightFighter) {
 		leftFighterDesc = new FighterDescription(leftFighter,
 				BattleConstants.leftFighterStartPositionX,
 				BattleConstants.groundPositionY, direction);
@@ -18,9 +20,13 @@ public class MainAlgorithm {
 				BattleConstants.groundPositionY, -direction);
 		leftFighterDesc.updateAcceptedPowerCond(rightFighter.getPersonality());
 		rightFighterDesc.updateAcceptedPowerCond(leftFighter.getPersonality());
+
+		fightArena = FightArena.getFightArena(leftFighterDesc, rightFighterDesc);
+		fightArena.intiArena();
+		
 	}
 
-	public void simulateFight() {
+	public static void simulateFight() {
 		int fightersDistance;
 		do {
 			// select next move phase
@@ -38,7 +44,7 @@ public class MainAlgorithm {
 				|| rightFighterDesc.getHealth() != 0);
 	}
 
-	private void updateDistanceConditions(int distance) {
+	private static void updateDistanceConditions(int distance) {
 		if (distance < BattleConstants.farDistanceThreshold) {
 			leftFighterDesc.updateDistAcceptedCond(ConditionType.near);
 			rightFighterDesc.updateDistAcceptedCond(ConditionType.near);
