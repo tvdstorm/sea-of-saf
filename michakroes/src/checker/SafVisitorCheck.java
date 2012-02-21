@@ -1,4 +1,4 @@
-package test;
+package checker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +27,6 @@ public class SafVisitorCheck implements SafVisitor {
 	
 	@Override
 	public void visit(Saf saf) {
-		if ( this.errors.size() > 0 ) {
-			System.err.println("Fighter is not valid");
-		} else {
-			System.out.println("Fighter is valid");
-		}
-		
         if (saf.getBehaviour() == null) addError("There is no behaviour defined");
         if (saf.getPersonality() == null) addError("There is no personality defined");
     }
@@ -125,5 +119,9 @@ public class SafVisitorCheck implements SafVisitor {
     public void addError(String error) {
     	this.errors.add(error);
     	System.err.println(error);
+    }
+    
+    public int getCountErrors() {
+    	return this.errors.size();
     }
 }

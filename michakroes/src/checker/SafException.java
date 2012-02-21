@@ -1,4 +1,4 @@
-package test;
+package checker;
 
 @SuppressWarnings("serial")
 public class SafException extends Exception {
