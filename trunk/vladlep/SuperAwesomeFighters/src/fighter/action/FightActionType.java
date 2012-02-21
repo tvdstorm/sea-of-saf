@@ -24,17 +24,21 @@ public enum FightActionType implements ActionType {
 			int punchReach = fighterState.getMyFigter().getPersonality()
 					.getPunchReach();
 			if (fighterState.calculateFigterDistance(oponentState) < punchReach) {
-
+				int damage = 0;
 				if (oponentState.getSelectedFightAction().equals(
 						FightActionType.block_low)
 						&& fighterState.getPower() > oponentState.getPower()) {
-					int damage = 0;
+
 					damage = (int) (fighterState.getPower() - oponentState
 							.getPower());
-					int newHeath;
-					newHeath = oponentState.getHealth() - damage;
-					oponentState.setHealth(newHeath);
+				} else {
+					damage = (int) fighterState.getPower();
+
 				}
+				int newHeath;
+				newHeath = oponentState.getHealth() - damage;
+				oponentState.setHealth(newHeath);
+
 			}
 
 		}
@@ -46,17 +50,20 @@ public enum FightActionType implements ActionType {
 			int punchReach = fighterState.getMyFigter().getPersonality()
 					.getPunchReach();
 			if (fighterState.calculateFigterDistance(oponentState) < punchReach) {
-
+				int damage = 0;
 				if (oponentState.getSelectedFightAction().equals(
 						FightActionType.block_high)
 						&& fighterState.getPower() > oponentState.getPower()) {
-					int damage = 0;
+
 					damage = (int) (fighterState.getPower() - oponentState
 							.getPower());
-					int newHeath;
-					newHeath = oponentState.getHealth() - damage;
-					oponentState.setHealth(newHeath);
+				} else {
+					damage = (int) fighterState.getPower();
 				}
+				int newHeath;
+				newHeath = oponentState.getHealth() - damage;
+				oponentState.setHealth(newHeath);
+
 			}
 		}
 	},
@@ -67,17 +74,22 @@ public enum FightActionType implements ActionType {
 			int kickReach = fighterState.getMyFigter().getPersonality()
 					.getKickReach();
 			if (fighterState.calculateFigterDistance(oponentState) < kickReach) {
-
+				int damage = 0;
 				if (oponentState.getSelectedFightAction().equals(
 						FightActionType.block_low)
 						&& fighterState.getPower() > oponentState.getPower()) {
-					int damage = 0;
+
 					damage = (int) (fighterState.getPower() - oponentState
 							.getPower());
-					int newHeath;
-					newHeath = oponentState.getHealth() - damage;
-					oponentState.setHealth(newHeath);
+				} else {
+					damage = (int) fighterState.getPower();
 				}
+				int newHeath;
+				newHeath = oponentState.getHealth() - damage;
+				System.out.println(fighterState.getMyFigter().getName() + " "
+						+ newHeath);
+				oponentState.setHealth(newHeath);
+
 			}
 		}
 	},
@@ -88,17 +100,20 @@ public enum FightActionType implements ActionType {
 			int kickReach = fighterState.getMyFigter().getPersonality()
 					.getKickReach();
 			if (fighterState.calculateFigterDistance(oponentState) < kickReach) {
-
+				int damage = 0;
 				if (oponentState.getSelectedFightAction().equals(
 						FightActionType.block_high)
 						&& fighterState.getPower() > oponentState.getPower()) {
-					int damage = 0;
+
 					damage = (int) (fighterState.getPower() - oponentState
 							.getPower());
-					int newHeath;
-					newHeath = oponentState.getHealth() - damage;
-					oponentState.setHealth(newHeath);
+				} else {
+					damage = (int) fighterState.getPower();
+
 				}
+				int newHeath;
+				newHeath = oponentState.getHealth() - damage;
+				oponentState.setHealth(newHeath);
 
 			}
 

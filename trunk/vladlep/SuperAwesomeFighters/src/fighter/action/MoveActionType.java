@@ -53,7 +53,6 @@ public enum MoveActionType implements ActionType {
 			if (Math.abs(newPosistionX - oponentState.getPositionX()) > BattleConstants.minimDistance) {
 				fighterState.setPositionX(newPosistionX);
 			} else {
-				System.out.println(newPosistionX);
 				fighterState.setRemainingTime(1);
 			}
 		}

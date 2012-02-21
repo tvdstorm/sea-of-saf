@@ -66,14 +66,14 @@ public class Personality implements ASTNode {
 	}
 
 	public void updatePower() {
-		power = 0.5 * (punchPower - kickPower);
+		power = 0.5 * (punchPower + kickPower);
 	}
 
 	public void updateSpeed() {
 		double power;
 		double reach;
-		power = 0.5 * (punchPower - kickPower);
-		reach = 0.5 * (punchReach - kickReach);
+		power = 0.5 * (punchPower + kickPower);
+		reach = 0.5 * (punchReach + kickReach);
 		speed = Math.abs(0.5 * (power - reach));
 	}
 }

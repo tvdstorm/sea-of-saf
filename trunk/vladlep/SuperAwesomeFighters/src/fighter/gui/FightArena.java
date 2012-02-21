@@ -60,11 +60,5 @@ public class FightArena extends JFrame {
 	public void intiArena() {
 		singleton.drawComponents();
 		singleton.setVisible(true);
-
-	}
-
-	public void redrawComponents() {
-		statusPanel.repaint();
-		scenePanel.repaint();
 	}
 }

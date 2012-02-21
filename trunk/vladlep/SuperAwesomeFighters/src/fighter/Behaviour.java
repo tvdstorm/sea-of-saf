@@ -37,8 +37,6 @@ public class Behaviour extends ArrayList<Rule> implements ASTNode {
 
 	private List<Rule> preselectPossibleMoves(
 			List<ConditionType> acceptedConditions) {
-		System.out.println("accepted cond " + acceptedConditions);
-		System.out.println("all actions" + this);
 		List<Rule> possibleActions = new ArrayList<Rule>();
 		for (Rule rule : this) {
 			if (rule.checkCondition(acceptedConditions)) {
