@@ -16,7 +16,6 @@ public class SimpleFighterModel extends FighterModel{
 			if(fighterChar.item.equals(characteristicItem))
 				return fighterChar.value;
 		}
-		System.out.println("Default characteristic!");
 		return DEFAULT_VALUE;
 	}
 	
