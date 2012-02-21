@@ -5,4 +5,5 @@ import nl.uva.lap.saf.ast.ASTNode;
 public abstract class Condition extends ASTNode
 {
 
+	public abstract boolean isAlways();
 }

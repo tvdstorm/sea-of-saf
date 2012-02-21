@@ -61,8 +61,14 @@ public class Evaluator implements Visitor, Settings
 	{
 		for(Personality personality : fighter.getPersonalities())
 			personality.accept(this);
+		boolean alwaysConditionFound = false;
 		for(Behaviour behaviour : fighter.getBehaviours())
+		{
 			behaviour.accept(this);
+			alwaysConditionFound |= behaviour.getCondition().isAlways();
+		}
+		if(!alwaysConditionFound)
+			messages.add(new Error("'always' statement is required and was not found"));
 	}
 
 	@Override

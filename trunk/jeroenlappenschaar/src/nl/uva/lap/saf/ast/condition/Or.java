@@ -15,4 +15,8 @@ public class Or extends Connector
 		visitor.visit(this);
 	}
 
+	public boolean isAlways()
+	{
+		return false;
+	}
 }
