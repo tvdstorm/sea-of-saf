@@ -45,6 +45,7 @@ public class Printer implements Visitor
 		builder.append("\n\n");
 		for(Personality personality : fighter.getPersonalities())
 			personality.accept(this);
+		
 		builder.append("\n");
 		for(Behaviour behaviour : fighter.getBehaviours())
 			behaviour.accept(this);

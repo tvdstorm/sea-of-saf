@@ -59,7 +59,7 @@ public class Fighter implements Settings
 	{
 		List<Behaviour> valid = new ArrayList<Behaviour>();
 		for(Behaviour behaviour : behaviours)
-			if(ConditionInterpreter.evaluate(behaviour, astFighter, state))
+			if(ConditionInterpreter.evaluate(behaviour, state))
 			{
 				valid.add(behaviour);
 			}

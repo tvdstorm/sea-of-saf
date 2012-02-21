@@ -32,12 +32,12 @@ public class ActionInterpreter implements Visitor
 	}
 
 	@Override
-	public void visit(SimpleAction action)
+	public void visit(SimpleAction given)
 	{
-		this.action = action; 
+		action = given; 
 	}
 	
-	/* TODO: How to fix this?? */
+	//Unfortunate or can this be done better?
 	public void visit(Action action)
 	{
 		if(action instanceof SimpleAction)
