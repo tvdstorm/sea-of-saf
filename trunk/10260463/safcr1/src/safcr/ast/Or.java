@@ -12,6 +12,10 @@ public class Or implements Node{
 		nodes.add(n2);
 	}
 	
+	public List<Node> getOrNodes(){
+		return nodes;
+	}
+	
 	@Override
 	public void addNode(Node n) {}
 	

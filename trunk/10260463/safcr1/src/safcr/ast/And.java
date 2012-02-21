@@ -12,6 +12,10 @@ public class And implements Node{
 		nodes.add(n2);
 	}
 	
+	public List<Node> getAndNodes(){
+		return nodes;
+	}
+	
 	@Override
 	public void addNode(Node n) {}
 
@@ -21,5 +25,10 @@ public class And implements Node{
 		for(Node n : nodes){
 			n.accept(v);
 		}
+	}
+	
+	@Override
+	public String toString(){
+		return null;
 	}
 }

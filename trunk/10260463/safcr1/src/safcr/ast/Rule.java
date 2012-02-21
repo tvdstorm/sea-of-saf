@@ -9,6 +9,14 @@ public class Rule implements Node{
 		action = ruleAction;
 	}
 	
+	public Node getCondition(){
+		return condition;
+	}
+	
+	public Node getAction(){
+		return action;
+	}
+	
 	@Override
 	public void addNode(Node actionType) {}
 

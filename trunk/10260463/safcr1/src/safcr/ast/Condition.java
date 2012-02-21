@@ -12,7 +12,7 @@ public class Condition implements Node{
 	}
 	
 	@Override
-	public void addNode(Node actionType) {}
+	public void addNode(Node n) {}
 
 	@Override
 	public void accept(VisitorInterface v) {
