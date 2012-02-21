@@ -6,7 +6,7 @@ public interface IGameContext
 	 * Load game assets, load (before game)
 	 * HINT: use it for non-graphical stuff only
 	 */
-	void load();
+	void load() throws GameException;
 	
 	/**
 	 * Unload loaded game assets, cleanup (after game)
@@ -28,7 +28,7 @@ public interface IGameContext
 	 * Update game assets
 	 * HINT: runs 60 times per second
 	 */
-	void update();
+	void update() throws GameException;
 	
 	/**
 	 * Update graphical assets

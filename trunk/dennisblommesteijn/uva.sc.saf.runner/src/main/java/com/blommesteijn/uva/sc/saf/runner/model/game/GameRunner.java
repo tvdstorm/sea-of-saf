@@ -67,7 +67,14 @@ public class GameRunner implements IGameRunner
 		//initiate game context
 		for(IGameContext gameContext : _gameContexts)
 		{
-			gameContext.load();
+			try
+			{
+				gameContext.load();
+			}
+			catch (GameException e)
+			{
+				e.printStackTrace();
+			}
 		}
 		for(IGameContext gameContext : _gameContexts)
 		{
@@ -81,7 +88,15 @@ public class GameRunner implements IGameRunner
 		{
 			for(IGameContext gameContext : _gameContexts)
 			{
-				gameContext.update();
+				try
+				{
+					gameContext.update();
+				}
+				catch (GameException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if(!_skipDraw)
 			{

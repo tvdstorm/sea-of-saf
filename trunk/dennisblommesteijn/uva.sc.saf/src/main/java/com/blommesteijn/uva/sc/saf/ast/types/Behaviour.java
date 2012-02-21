@@ -69,7 +69,7 @@ public class Behaviour extends AstNode
 		return _operators;
 	}
 	
-	public List<Condition> getLocations()
+	public List<Condition> getConditions()
 	{
 		return _locations;
 	}
