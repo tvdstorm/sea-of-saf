@@ -7,6 +7,8 @@ import ast.object.Fighter;
 import ast.fighter.prop.Id;
 import ast.condition.*;
 import ast.Printer;
+import ast.action.*;
+import ast.fighter.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -131,16 +133,45 @@ Set fighterProps():
     {return null;}
 }
 
-void fighterProp():
+FighterProp fighterProp():
 {
-    Condition condition;
+    FighterProp result;
 }
 {
-    LOOKAHEAD(2)
-    (fightId() "=" fightPower())
-    |
-    (condition = condition()"["action()"]")
-    {System.out.println(Printer.print(condition));}
+    (
+        LOOKAHEAD(2)
+	    result = strength()
+	    |
+	    result = behavior()
+    )
+    {return result;}
+}
+
+Strength strength():
+{
+    String fightId;
+    int fightPower;
+}
+{
+    fightId = fightId() "=" fightPower = fightPower()
+    {return new Strength(fightId, fightPower);}
+}
+
+Behavior behavior():
+{
+	Condition condition;
+	Action moveAction;
+	Action fightAction;
+}
+{
+	condition = condition()
+	"["
+	   moveAction = action()
+	   fightAction = action()
+	"]"
+	
+	{	    System.out.println(Printer.print(condition));	    return new Behavior(condition, moveAction, fightAction);	}
+
 }
 
 Condition condition():
@@ -170,43 +201,72 @@ Condition condition():
     }
 }
 
-void action():
-{}
+Action action():
+{
+    Action a;
+}
 {
 
-    (LOOKAHEAD(2) choose() | moveAction())
-    (LOOKAHEAD(2) choose() | fightAction())
+    (LOOKAHEAD(2) (a=choose()) | (a=moveAction()))
+    //(LOOKAHEAD(2) (a=choose()) | (a=fightAction()))
+    {return a;}
     
 }
 
-void choose():
-{}
+Choose choose():
 {
-    <CHOOSE> "(" (LOOKAHEAD(2)moveAction()|fightAction())+ ")"
+    Choose c;
+    SimpleAction s;
+}
+{
+    <CHOOSE> "("
+                {c = new Choose();} 
+                (
+                    (LOOKAHEAD(2)(s=moveAction())|(s=fightAction()))
+                    {c.addChoice(s.getAction());}
+                )+
+              ")"
+              {return c;}
 }
 
-void moveAction():
-{}
+SimpleAction moveAction():
 {
-    <ID>
+    String image;
+}
+{
+    image = <ID>.image
+    {return new SimpleAction(image);}
 }
 
-void fightAction():
-{}
+SimpleAction fightAction():
 {
-    <ID>
+    String image;
+}
+{
+    image = <ID>.image
+    {return new SimpleAction(image);}
 }
 
-void fightId():
-{}
+String fightId():
 {
-    <ID>
+    String image;
+}
+{
+    image = <ID>.image
+    {return image;}
 }
 
-void fightPower():
-{}
+int fightPower():
 {
-    <CONSTANT>
+    String image;
+    int fightPower;
+}
+{
+   image = <CONSTANT>.image
+    {
+       fightPower = Integer.valueOf(image).intValue();
+       return fightPower;
+    }
 }
 
 
