@@ -37,7 +37,7 @@ public class FighterState extends Subject {
 				this.fighterX = 80;
 				break;
 		}
-		this.setCurrentMoveActionType(MoveActionType.stand);
+		this.currentMoveActionType = MoveActionType.stand;
 		this.fighter = fighter;
 		this.startingPosition = startingPosition;
 		this.health = 100;
@@ -97,15 +97,11 @@ public class FighterState extends Subject {
 		return health;
 	}
 
-	public void setHealth(int health) 
-	{
-		this.health = health;
-		this.notifyObservers();
-	}
 	
 	public void doDamage(int damage, FightActionType fightAction)
 	{
-		this.setHealth(this.getHealth() - damageDone(fightAction, damage));
+		this.health = this.getHealth() - damageDone(fightAction, damage);
+		this.notifyObservers();
 	}
 	
 	public boolean fighterLost()
@@ -117,10 +113,6 @@ public class FighterState extends Subject {
 		return fighter;
 	}
 
-	public void setCurrentRule1(Rule currentRule) {
-		this.currentRule = currentRule;
-	}
-
 	public StartingPosition getStartingPosition() {
 		return startingPosition;
 	}
@@ -129,25 +121,16 @@ public class FighterState extends Subject {
 		return currentMoveActionType;
 	}
 
-	public void setCurrentMoveActionType(MoveActionType currentMoveActionType) {
-		this.currentMoveActionType = currentMoveActionType;
-		this.notifyObservers();
-	}
-
 	public FightActionType getCurrentFightActionType() {
 		return currentFightActionType;
-	}
-
-	public void setCurrentFightActionType(FightActionType currentFightActionType) {
-		this.currentFightActionType = currentFightActionType;
-		this.notifyObservers();
 	}
 
 	public boolean isActionPerform() {
 		return actionPerform;
 	}
 
-	public void setActionPerform(boolean actionPerformed) {
+	public void setActionPerform(boolean actionPerformed) 
+	{
 		this.actionPerform = actionPerformed;
 		this.notifyObservers();
 	}
@@ -159,27 +142,21 @@ public class FighterState extends Subject {
 	private void setCurrentRule(FighterState otherFighterState)
 	{
 		Random randomGenerator = new Random();
-		
 		List<Rule> possible = getPossibleRules(otherFighterState);
-		
 		this.currentRule = possible.get(randomGenerator.nextInt(possible.size()));
 	}
 	
 	public void setCurrentMoveAction()
 	{
 		Random randomGenerator = new Random();
-		
 		List<MoveAction> moveActions = currentRule.getMoveActions();
-		
 		currentMoveActionType = moveActions.get(randomGenerator.nextInt(moveActions.size())).getMoveActionType();
 	}
 	
 	public void setCurrentFightAction()
 	{
 		Random randomGenerator = new Random();
-		
 		List<FightAction> fightActions = currentRule.getFightActions();
-		
 		currentFightActionType = fightActions.get(randomGenerator.nextInt(fightActions.size())).getFightActionType();
 	}
 	
@@ -197,7 +174,6 @@ public class FighterState extends Subject {
 	
 	private boolean isRulePossible(Logical logical, FighterState otherFighterState)
 	{
-		
 		if(logical instanceof LogicalClause)
 			return ((LogicalClause) logical).computeClause(
 					isRulePossible(((LogicalClause) logical).getLeftHandSide(), otherFighterState),
@@ -336,7 +312,6 @@ public class FighterState extends Subject {
 					otherFighterState.doDamage(fighter.getAttributePower(Attribute.kickPower), FightActionType.kick_high);
 				break;
 		}
-		
 		setActionPerform(step > 50 && step < 70);
 	}
 	
@@ -363,7 +338,6 @@ public class FighterState extends Subject {
 					return Math.round(damage / 5);
 				break;
 		}
-		
 		return damage;
 	}
 }

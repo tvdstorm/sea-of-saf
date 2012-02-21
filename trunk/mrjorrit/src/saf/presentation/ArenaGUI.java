@@ -30,13 +30,6 @@ public class ArenaGUI extends Arena {
 		view.updateFighterPresentation(fighterState);
 		view.updateUI();
 		
-		
-		System.out.println("Fighter: " + fighterState.getFighter().getName());
-		System.out.println("Health: " + fighterState.getHealth());
-		System.out.println("X: " + fighterState.getFighterX());
-		System.out.println("Move: " + fighterState.getCurrentMoveActionType().name());
-		System.out.println("Fight: " + fighterState.getCurrentFightActionType().name());
-		
 	}
 	
 
