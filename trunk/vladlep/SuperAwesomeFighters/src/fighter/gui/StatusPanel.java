@@ -19,5 +19,5 @@ public class StatusPanel extends JPanel {
 		add(this.firstFighter);
 		add(this.secondFighter);
 	}
-	
+
 }

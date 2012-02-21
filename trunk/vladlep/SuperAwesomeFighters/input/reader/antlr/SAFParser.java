@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-02-20 13:29:44
+// $ANTLR 3.4 D:\\vlad\\serios\\master\\Software Construction\\java_code\\SuperAwesomeFighters\\src\\grammar\\SAF.g 2012-02-21 15:49:32
 
 package reader.antlr;
 
@@ -309,7 +309,8 @@ public class SAFParser extends Parser {
 				match(input, 16, FOLLOW_16_in_behaviour197);
 
 				Rule rule;
-				rule = new Rule(cond6, moveAlw, attackAlw);
+				rule = new Rule(new SimpleCondition("always"), moveAlw,
+						attackAlw);
 				behaviour.add(rule);
 
 			}

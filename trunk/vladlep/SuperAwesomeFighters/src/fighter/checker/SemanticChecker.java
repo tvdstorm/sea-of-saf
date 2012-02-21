@@ -85,7 +85,7 @@ public class SemanticChecker implements Visitor {
 
 	@Override
 	public void visit(Actions<ActionType> actions) {
-		int index = 1; // TODO check if this works if the list has 1 element;
+		int index = 1;
 		for (ActionType i : actions) {
 			for (ActionType j : actions.subList(index, actions.size())) {
 				if (i.equals(j))
@@ -101,8 +101,6 @@ public class SemanticChecker implements Visitor {
 	@Override
 	public void visit(Rule rule) {
 		rule.getCondition().accept(this);
-		// do not like this. Brakes encapsulation. But, should respect the
-		// pattern.
 		rule.getMoveActions().accept(this);
 		rule.getFightActions().accept(this);
 

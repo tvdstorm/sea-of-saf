@@ -63,7 +63,7 @@ behaviour returns [Behaviour behaviour]
   'always' '[' moveAlw =  move attackAlw=atack ']'
   {
 	  Rule rule;
-	  rule = new Rule($cond.condition, $moveAlw.moveActions, $attackAlw.fightActions); 
+	  rule = new Rule( new SimpleCondition("always"), $moveAlw.moveActions, $attackAlw.fightActions); 
 	  behaviour.add(rule);
   }
   ;
