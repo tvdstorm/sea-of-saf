@@ -20,7 +20,7 @@ public class Test
 			"pietje{\r\n" + 
 			"	kickPower = 7\r\n" + 
 			"	far [crouch]" +
-			"	near [jump]" + 
+			"	near [stand block_low]" + 
 			"	always [stand]" +
 			"}";
 	
@@ -28,7 +28,7 @@ public class Test
 			"jantje{\r\n" + 
 			"	kickPower = 7\r\n" + 
 			"	far [run_towards]" +
-			"	near [walk_away]" +
+			"	near [walk_away kick_high]" +
 			"	always [walk_towards]" +
 			"}";
 	
@@ -94,6 +94,5 @@ public class Test
 		State state = new State(fighter1, fighter2);
 		Arena arena = new Arena(state);
 		arena.run();
-		
 	}
 }
