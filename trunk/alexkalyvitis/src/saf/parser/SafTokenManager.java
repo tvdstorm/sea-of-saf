@@ -3,6 +3,7 @@ package saf.parser;
 import java.util.List;
 import java.util.ArrayList;
 import saf.ast.*;
+import saf.ast.base.*;
 
 /** Token Manager. */
 public class SafTokenManager implements SafConstants

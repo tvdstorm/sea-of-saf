@@ -1,8 +1,8 @@
 package saf.ast;
 
-import saf.ast.base.BehaviorItem;
+import saf.ast.base.Identifier;
 
-public class Move extends BehaviorItem {
+public class Move extends Identifier {
 	private String name;
 	
 	public Move(){
@@ -13,12 +13,16 @@ public class Move extends BehaviorItem {
 		this.name = n;
 	}
 	
-	public String getName(){ return this.name; }
+	public String getName(){ 
+		return this.name; 
+	}
+	public String toString(){ 
+		return this.getName(); 
+	}
 	
-	@Override
-	public boolean keywordIsValid() {
+	public boolean isValid() {
 		try {
-			saf.ast.enums.AvailableMoves.valueOf(name.toUpperCase());
+			saf.ast.identifiers.Moves.valueOf(name.toUpperCase());
 		} catch(Exception e) {
 			return false;
 		}
