@@ -1,4 +1,4 @@
-package test;
+package checker;
 
 import saf.*;
 
@@ -15,4 +15,5 @@ public interface SafVisitor {
 	 void visit(ConditionAnd conditionAnd);
 	 void visit(ConditionOr conditionOr);
 	 void visit(Condition c);
+	 int getCountErrors();
 }
