@@ -59,6 +59,16 @@ public class ConditionSemantics implements IConditionSemantics {
 		truthTable.put(ConditionType.far, far);
 	}
 
+	/**
+	 * Evaluates the strength of the enemy compared to the fighter's.
+	 * 
+	 * @param fighter
+	 *            Fighter to compare
+	 * @param enemy
+	 *            Enemy fighter to compare
+	 * @param truthTable
+	 *            Resulting truths about enemy.
+	 */
 	private void evaluateStrength(FighterBot fighter, FighterBot enemy, HashMap<ConditionType, Boolean> truthTable) {
 		int fighterAveragePower = Math.round((fighter.getAttribute(CharacteristicType.punchPower) + fighter
 				.getAttribute(CharacteristicType.kickPower)) / 2);
@@ -76,17 +86,17 @@ public class ConditionSemantics implements IConditionSemantics {
 
 		if (powerDifference == 0) {
 			even = true;
-		} else if (powerDifference < 0) {
-			if (absoluteDifference > muchWeakerDifference) {
-				much_weaker = true;
-			} else {
-				weaker = true;
-			}
-		} else if (powerDifference > 0) {
+		} else if (powerDifference < 0) { // Enemy is stronger
 			if (absoluteDifference > muchWeakerDifference) {
 				much_stronger = true;
 			} else {
 				stronger = true;
+			}
+		} else if (powerDifference > 0) { // Enemy is weaker
+			if (absoluteDifference > muchWeakerDifference) {
+				much_weaker = true;
+			} else {
+				weaker = true;
 			}
 		}
 

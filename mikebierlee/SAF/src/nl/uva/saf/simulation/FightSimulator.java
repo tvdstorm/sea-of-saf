@@ -98,6 +98,11 @@ public class FightSimulator implements IFightSimulator {
 	}
 
 	@Override
+	public int getContestantCount() {
+		return contestants.size();
+	}
+
+	@Override
 	public List<FighterBot> getContestants() {
 		return Collections.unmodifiableList(contestants);
 	}

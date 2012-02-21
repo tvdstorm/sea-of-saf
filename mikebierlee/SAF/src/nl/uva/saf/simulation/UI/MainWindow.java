@@ -82,7 +82,7 @@ public class MainWindow extends JFrame implements WindowListener, IFightEndEvent
 		mntmRestartFight.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent event) {
-				if (fightSimulator.isRunning()) {
+				if (fightSimulator.getContestantCount() == 2) {
 					fightSimulator.stop();
 					fightSimulator.start();
 				}
