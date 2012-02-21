@@ -30,7 +30,7 @@ public class Fighter implements Settings
 	
 	private List<Behaviour> behaviours = new ArrayList<Behaviour>();
 	private Behaviour alwaysBehaviour;
-	private nl.uva.lap.saf.ast.fighter.Fighter astFighter;
+	private final nl.uva.lap.saf.ast.fighter.Fighter astFighter;
 	
 	private Random random = new Random();
 	
@@ -62,7 +62,10 @@ public class Fighter implements Settings
 		List<Behaviour> valid = new ArrayList<Behaviour>();
 		for(Behaviour behaviour : behaviours)
 			if(ConditionInterpreter.evaluate(behaviour, astFighter, state))
+			{
 				valid.add(behaviour);
+				System.out.println("chosen behaviour: " + behaviour.getCondition().toString() + " " + behaviour.getActions().get(0).toString());
+			}
 		return valid;
 	}
 	

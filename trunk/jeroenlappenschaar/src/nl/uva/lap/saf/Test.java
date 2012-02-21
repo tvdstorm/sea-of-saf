@@ -90,8 +90,6 @@ public class Test
 		
 		evaluate(fighter1);
 		evaluate(fighter2);
-		System.out.println(fighter1.toString());
-		System.out.println(fighter2.toString());
 		
 		State state = new State(fighter1, fighter2);
 		Arena arena = new Arena(state);

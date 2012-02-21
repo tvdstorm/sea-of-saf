@@ -1,11 +1,13 @@
 package nl.uva.lap.saf.arena;
 
-import java.rmi.activation.UnknownObjectException;
 import nl.uva.lap.saf.ast.fighter.StateFighter;
 
 
 public class State
 {
+	private int NEAR_DISTANCE = 4;
+	private int FAR_DISTANCE = 4;
+	
 	private int LEFT_START_POSITION = 20;
 	private int RIGHT_START_POSITION = 80;
 	
@@ -15,7 +17,7 @@ public class State
 	public State(nl.uva.lap.saf.ast.fighter.Fighter fighter1, nl.uva.lap.saf.ast.fighter.Fighter fighter2)
 	{
 		this.fighter1 = new StateFighter(fighter1, LEFT_START_POSITION, StateFighter.Direction.LEFT);
-		this.fighter2 = new StateFighter(fighter1, RIGHT_START_POSITION, StateFighter.Direction.RIGHT);
+		this.fighter2 = new StateFighter(fighter2, RIGHT_START_POSITION, StateFighter.Direction.RIGHT);
 	}
 	
 	/**
@@ -53,5 +55,15 @@ public class State
 	public StateFighter getFighter2()
 	{
 		return fighter2;
+	}
+
+	public boolean areFighterNear()
+	{
+		return Math.abs(fighter1.getXPosition() - fighter2.getXPosition()) < NEAR_DISTANCE;
+	}
+	
+	public boolean areFighterFar()
+	{
+		return Math.abs(fighter1.getXPosition() - fighter2.getXPosition()) > FAR_DISTANCE;
 	}
 }

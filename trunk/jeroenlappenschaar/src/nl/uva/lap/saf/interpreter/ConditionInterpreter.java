@@ -83,9 +83,11 @@ public class ConditionInterpreter implements Visitor
 	public void visit(SimpleCondition simpleCondition)
 	{
 		if(simpleCondition.getCondition().equals("near"))
-			if(state.equals("near"))
+			if(state.areFighterNear())
 				evaluation = true;
-		
+		if(simpleCondition.getCondition().equals("far"))
+			if(state.areFighterFar())
+				evaluation = true;
 	}
 
 }
