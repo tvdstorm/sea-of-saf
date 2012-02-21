@@ -11,6 +11,7 @@ import fighter.algorithm.BattleConstants;
 import fighter.algorithm.FighterState;
 import fighter.gui.images.FightImagesContainer;
 
+@SuppressWarnings("serial")
 public class ScenePanel extends JPanel {
 
 	private final int leftRotationX = 0;
@@ -34,6 +35,22 @@ public class ScenePanel extends JPanel {
 		drawFigter(g2, rightFighter, rightRotateAngle);
 	}
 
+	private void drawFigter(Graphics2D g2, FighterState figterState,
+			int rotateAngle) {
+		BufferedImage image;
+		image = FightImagesContainer.getImage(
+				figterState.getSelectedFightAction(), rotateAngle);
+
+		int positionX, positionY;
+		positionX = figterState.getPositionX();
+		positionX = mapCoordinateX(positionX);
+		positionY = figterState.getPositionY();
+		positionY = mapCoordinateY(positionY);
+
+		g2.drawImage(image, positionX - image.getWidth() / 2,
+				positionY - image.getHeight() / 2, null);
+	}
+
 	private int mapCoordinateX(int battlePositionX) {
 		int panelPosition;
 		panelPosition = (int) (battlePositionX * (double) (ArenaConstants.ARENA_WIDTH / BattleConstants.arenaLength));
@@ -44,24 +61,7 @@ public class ScenePanel extends JPanel {
 	private int mapCoordinateY(int battlePositionY) {
 		int panelPosition;
 		panelPosition = ((ArenaConstants.ARENA_HEIGHT / BattleConstants.arenaHeight) * (BattleConstants.arenaHeight - battlePositionY));
-		System.out.println(battlePositionY);
-		System.out.println(panelPosition);
 		return panelPosition;
-	}
-
-	private void drawFigter(Graphics2D g2, FighterState figterState,
-			int rotateAngle) {
-		BufferedImage image;
-		image = FightImagesContainer.getImage(
-				figterState.getSelectedFightAction(), rotateAngle);
-		int positionX, positionY;
-		positionX = figterState.getPositionX();
-		positionX = mapCoordinateX(positionX);
-		positionY = figterState.getPositionY();
-		positionY = mapCoordinateY(positionY);
-
-		g2.drawImage(image, positionX - image.getWidth() / 2,
-				positionY - image.getHeight() / 2, null);
 	}
 
 }

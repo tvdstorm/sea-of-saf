@@ -24,7 +24,15 @@ public class FighterStatus extends JPanel {
 		add(health);
 	}
 
-	public void upadateHealth() {
+	@Override
+	public void repaint() {
+		if (fighterDesc != null) {
+			upadateHealth();
+		}
+		super.repaint();
+	}
+
+	private void upadateHealth() {
 		this.health.setText(String.valueOf(fighterDesc.getHealth()));
 	}
 }

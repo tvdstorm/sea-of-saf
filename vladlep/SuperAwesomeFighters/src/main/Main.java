@@ -43,7 +43,7 @@ public class Main {
 		reportPossibleProblems();
 
 		MainAlgorithm.setUpFight(firstFighter, secondFighter);
-		// MainAlgorithm.simulateFight();
+		MainAlgorithm.simulateFight();
 	}
 
 	private static void reportPossibleProblems() {

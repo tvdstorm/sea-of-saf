@@ -77,7 +77,9 @@ public enum MoveActionType implements ActionType {
 		@Override
 		public void doAction(FighterState fighterState,
 				FighterState oponentState) {
-			// TODO Auto-generated method stub
+
+			fighterState.setRemainingTime(BattleConstants.defaulWalkTime);
+			fighterState.setPositionY(BattleConstants.jumpPosY);
 
 		}
 	},
@@ -85,14 +87,15 @@ public enum MoveActionType implements ActionType {
 		@Override
 		public void doAction(FighterState fighterState,
 				FighterState oponentState) {
-
+			fighterState.setRemainingTime(BattleConstants.defaulCrouchTime);
+			fighterState.setPositionY(BattleConstants.crouchPosY);
 		}
 	},
 	stand {
 		@Override
 		public void doAction(FighterState fighterState,
 				FighterState oponentState) {
-			fighterState.setRemainingTime(BattleConstants.defaulWalkTime);
+			fighterState.setRemainingTime(BattleConstants.defaulStandTime);
 		}
 
 	}

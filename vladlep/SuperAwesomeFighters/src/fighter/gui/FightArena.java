@@ -18,7 +18,7 @@ public class FightArena extends JFrame {
 	private Container masterContainer;
 	private ScenePanel scenePanel;
 	private FighterDescription secondFighter;
-	private JPanel statusPanel;
+	private StatusPanel statusPanel;
 
 	private FightArena(FighterDescription firstFighter,
 			FighterDescription secondFighter) {
@@ -56,10 +56,7 @@ public class FightArena extends JFrame {
 	}
 
 	private void drawStatusPanel() {
-		statusPanel = new JPanel();
-		statusPanel.setLayout(new GridLayout(1, 2));
-		statusPanel.add(new FighterStatus(firstFighter));
-		statusPanel.add(new FighterStatus(secondFighter));
+		statusPanel = new StatusPanel(firstFighter, secondFighter);
 		masterContainer.add(statusPanel, BorderLayout.NORTH);
 	}
 
@@ -70,7 +67,7 @@ public class FightArena extends JFrame {
 	}
 
 	public void redrawComponents() {
-
+		statusPanel.repaint();
+		scenePanel.repaint();
 	}
-
 }

@@ -8,6 +8,7 @@ import fighter.gui.images.FightImagesContainer;
 public class MainAlgorithm {
 
 	public static final int direction = 1;
+	private static final int sleepTimeMiliS = 2000;
 	private static FightArena fightArena;
 	private static FighterDescription leftFighterDesc;
 	private static FighterDescription rightFighterDesc;
@@ -32,6 +33,13 @@ public class MainAlgorithm {
 	public static void simulateFight() {
 		int fightersDistance;
 		do {
+
+			try {
+				Thread.sleep(sleepTimeMiliS);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
 			// select next move phase
 			fightersDistance = leftFighterDesc
 					.calculateFigterDistance(rightFighterDesc.getFighterState());
@@ -45,6 +53,8 @@ public class MainAlgorithm {
 
 			fightArena.redrawComponents();
 
+			leftFighterDesc.reinit();
+			rightFighterDesc.reinit();
 		} while (leftFighterDesc.getHealth() != 0
 				|| rightFighterDesc.getHealth() != 0);
 	}
