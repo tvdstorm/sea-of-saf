@@ -30,6 +30,8 @@ public interface IFightSimulator {
 
 	public void dispose();
 
+	public int getContestantCount();
+
 	public List<FighterBot> getContestants();
 
 	public Dimension getPlayFieldSize();
