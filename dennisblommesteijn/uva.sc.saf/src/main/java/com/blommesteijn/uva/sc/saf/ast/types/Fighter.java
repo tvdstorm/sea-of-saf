@@ -112,7 +112,7 @@ public class Fighter extends AstNode
 		boolean foundAlways = false;
 		for(Behaviour behaviour : _behaviours)
 		{
-			for(Condition location : behaviour.getLocations())
+			for(Condition location : behaviour.getConditions())
 			{
 				//compare location ident to always ident
 				if(location.getIdent().equals(ECondition.ALWAYS.getIdent()))

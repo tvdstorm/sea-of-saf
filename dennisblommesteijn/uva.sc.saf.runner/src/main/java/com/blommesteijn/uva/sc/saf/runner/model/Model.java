@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.runner.model.ast.AstLoader;
 import com.blommesteijn.uva.sc.saf.runner.model.game.Draw;
+import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
 import com.blommesteijn.uva.sc.saf.runner.model.interpreter.IInterpreter;
 import com.blommesteijn.uva.sc.saf.runner.model.interpreter.SuperAwesomeGameInterpreter;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Common;
@@ -133,10 +134,16 @@ public class Model
 
 	private void loadInterpreter()
 	{
-		//run saf interpreter
-		_interpreter = new SuperAwesomeGameInterpreter(
-				_astLoader.getAstNodes(), 
-				new Draw(new GuiLoader()));
+		// run saf interpreter
+		try
+		{
+			_interpreter = new SuperAwesomeGameInterpreter(
+					_astLoader.getAstNodes(), new Draw(new GuiLoader()));
+		}
+		catch (GameException e)
+		{
+			CliMessenger.exit(ExitCode.EC_ERROR, e.getMessage());
+		}
 		_interpreter.start();
 	}
 

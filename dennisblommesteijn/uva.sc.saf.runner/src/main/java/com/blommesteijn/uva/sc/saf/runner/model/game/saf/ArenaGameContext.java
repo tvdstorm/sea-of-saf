@@ -5,11 +5,12 @@ package com.blommesteijn.uva.sc.saf.runner.model.game.saf;
 
 import java.util.List;
 
-import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
-import com.blommesteijn.uva.sc.saf.ast.types.Property;
+import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IDraw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IGame;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IGameContext;
+import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.ActiveFighter;
+import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.Arena;
 
 /**
  * Super Awesome Fighter Game Context
@@ -19,28 +20,39 @@ import com.blommesteijn.uva.sc.saf.runner.model.game.IGameContext;
 public class ArenaGameContext implements IGameContext
 {
 	private IGame _game = null;
-	private List<Fighter> _fighters = null;
+//	private List<Fighter> _fighters = null;
+	private List<ActiveFighter> _activeFighters = null;
 	
-	private long _time = 0L;
-	private String[][] _matrix = null;
+	private Arena _arena = null;
 
 	/**
 	 * Construct a Fighter context
 	 * @param game 
+	 * @param arena 
 	 * @param fighters 
 	 * @param fighter fighter object
+	 * @throws GameException 
 	 */
-	public ArenaGameContext(IGame game, List<Fighter> fighters)
+	public ArenaGameContext(IGame game, Arena arena) throws GameException
 	{
 		_game = game;
-		_fighters = fighters;
+		_arena = arena;
+		_activeFighters = _arena.getActiveFighters();
+		_arena.setSize(100);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.blommesteijn.uva.sc.saf.runner.model.game.interfaces.IGameContext#load()
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.blommesteijn.uva.sc.saf.runner.model.game.interfaces.IGameContext
+	 * #load()
 	 */
-	public void load()
+	public void load() throws GameException
 	{
+		if (_activeFighters.size() != Arena.FIGHTERS_IN_ARENA_MAX)
+			throw new GameException("arena is for " + Arena.FIGHTERS_IN_ARENA_MAX
+					+ " fighters only");
+
 	}
 
 	/* (non-Javadoc)
@@ -55,7 +67,6 @@ public class ArenaGameContext implements IGameContext
 	 */
 	public void loadContext()
 	{
-//		_matrix = new String[][] {};
 		
 	}
 
@@ -71,20 +82,6 @@ public class ArenaGameContext implements IGameContext
 	 */
 	public void update()
 	{
-//		//TODO: arena properties
-//		for(Fighter fighter : _fighters)
-//		{
-//			for(Property property : fighter.getProperties())
-//			{
-//				System.out.println("ident: " + property.getIdent());
-//				System.out.println("value: " + property.getValue());
-////				proper
-//			}
-//		}
-		
-
-		
-		
 		
 	}
 
@@ -93,9 +90,7 @@ public class ArenaGameContext implements IGameContext
 	 */
 	public void draw(IDraw draw)
 	{
-		draw.print("draw test\n" +
-				"draw test\n" +
-				"");
+//		draw.print(_arena.toString());
 	}
 
 }
