@@ -29,21 +29,21 @@ public class Main {
 	private static IFighter firstFighter = null;
 	private static IFighter secondFighter = null;
 	private static MessageReporter messageReporter;
-	
+
 	public static void main(String[] args) {
 		messages = new ArrayList<Message>();
 		readFighters();
 
-		messageReporter =  MessageReporter.getMessageReporter(new JFrame());
+		messageReporter = MessageReporter.getMessageReporter(new JFrame());
 		reportPossibleProblems();
 
 		messages = SemanticChecker.checkFighter(firstFighter);
 		reportPossibleProblems();
 		messages = SemanticChecker.checkFighter(secondFighter);
 		reportPossibleProblems();
-	
+
 		MainAlgorithm.setUpFight(firstFighter, secondFighter);
-		MainAlgorithm.simulateFight();
+		// MainAlgorithm.simulateFight();
 	}
 
 	private static void reportPossibleProblems() {
