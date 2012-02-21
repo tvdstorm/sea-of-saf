@@ -7,26 +7,28 @@ import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 public enum EStrength
 {
 	//Strengths: punchReach, kickReach, kickPower, punchPower.
-	PUNCH_POWER("punchPower", new double[]{ 1.0, 10.0 }),
-	PUNCH_REACH("punchReach", new double[]{ 1.0, 10.0 }),
-	KICK_REACH("kickReach", new double[]{ 1.0, 10.0 }),
-	KICK_POWER("kickPower", new double[]{ 1.0, 10.0 });
+	PUNCH_POWER("punchPower", new double[]{ 1.0, 10.0 }, EStrengthType.POWER),
+	PUNCH_REACH("punchReach", new double[]{ 1.0, 10.0 }, EStrengthType.REACH),
+	KICK_REACH("kickReach", new double[]{ 1.0, 10.0 }, EStrengthType.REACH),
+	KICK_POWER("kickPower", new double[]{ 1.0, 10.0 }, EStrengthType.POWER);
 	
 	private static final int FST = 0;
 	private static final int SND = 1;
 
 	private String _ident = null;
 	private double[] _range = new double[2];
+	private EStrengthType _type = null;
 	
 	/**
 	 * Enum constructor
 	 * @param ident identity
 	 * @param range min max range
 	 */
-	EStrength(String ident, double[] range)
+	EStrength(String ident, double[] range, EStrengthType type)
 	{
 		_ident = ident;
 		_range = range;
+		_type = type;
 	}
 	
 	/**
@@ -57,5 +59,11 @@ public enum EStrength
 	public String getIdent()
 	{
 		return _ident;
+	}
+	
+	
+	public EStrengthType getType()
+	{
+		return _type;
 	}
 }

@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
 import com.blommesteijn.uva.sc.saf.ast.SerialNode;
+import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
 import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EStrengthType;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 
@@ -104,6 +106,25 @@ public class Fighter extends AstNode
 		//test behaviour
 		if(_behaviours.size() <= 0)
 			result.append(new StaticCheckIssue(this, "no behaviour(s) found"));
+		
+		
+		//check for at least one always behaviour
+		boolean foundAlways = false;
+		for(Behaviour behaviour : _behaviours)
+		{
+			for(Condition location : behaviour.getLocations())
+			{
+				//compare location ident to always ident
+				if(location.getIdent().equals(ECondition.ALWAYS.getIdent()))
+				{
+					foundAlways = true;
+					break;
+				}
+			}
+		}
+		if(!foundAlways)
+			result.append(new StaticCheckIssue(this, "missing always (default) case"));
+		
 	}
 	
 	/**
@@ -127,9 +148,9 @@ public class Fighter extends AstNode
 	}
 	
 	/**
-	 * 
-	 * @param ident
-	 * @return
+	 * Get Property by EStrength
+	 * @param ident type of property
+	 * @return property of type
 	 */
 	private Property getProperty(EStrength ident)
 	{
@@ -144,6 +165,44 @@ public class Fighter extends AstNode
 		}
 		return ret;
 	}
+	
+	/**
+	 * Get Property by ident name
+	 * @param ident name of property
+	 * @return type of ident
+	 */
+	private EStrength getProperty(String ident)
+	{
+		EStrength ret = null;
+		for(EStrength strength : EStrength.values())
+		{
+			if(strength.getIdent().equals(ident))
+			{
+				ret = strength;
+				break;
+			}
+		}
+		return ret;
+	}
+		
+		
+	/**
+	 * Get Property by Strength SubType (ex: reach, power)
+	 * @param type target subtype of strength
+	 * @return list of properties
+	 */
+	public List<Property> getProperty(EStrengthType type)
+	{
+		List<Property> ret = new LinkedList<Property>();
+		for(Property p : _properties)
+		{
+			EStrength property = this.getProperty(p.getIdent());
+			if(property != null && property.getType().equals(type))
+				ret.add(p);
+		}
+		return ret;
+	}
+	
 	
 	
 	
@@ -177,7 +236,4 @@ public class Fighter extends AstNode
 		return sb.toString();
 	}
 	
-	
-	
-
 }

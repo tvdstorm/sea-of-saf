@@ -6,7 +6,7 @@ options
 	language = Java;
 	output = AST;
 	ASTLabelType = CommonTree;
-}
+} 
 
 @header 
 {

@@ -6,18 +6,24 @@ import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 
 
-public class Location extends AstNode
+public class Condition extends AstNode
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8406996690157171458L;
 
-	public Location(int line, String ident)
+	public Condition(int line, String ident)
 	{
 		super();
 		_line = line;
 		_ident = ident;
+	}
+	
+	public void register(AstNode astNode)
+	{
+		Behaviour b = (Behaviour) astNode;
+		b.append(this);
 	}
 	
 	/**

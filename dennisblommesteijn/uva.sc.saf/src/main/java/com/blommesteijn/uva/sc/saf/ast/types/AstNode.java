@@ -100,8 +100,15 @@ public abstract class AstNode implements IAstNode
 	
 	public void register(AstNode astNode)
 	{
-		Fighter f = (Fighter) astNode;
-		_fighters.add(f);
+		try
+		{
+			Fighter f = (Fighter) astNode;
+			_fighters.add(f);
+		}
+		catch(ClassCastException e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 
