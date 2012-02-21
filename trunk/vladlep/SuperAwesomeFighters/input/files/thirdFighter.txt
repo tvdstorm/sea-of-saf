@@ -3,5 +3,5 @@ fighter{
  stronger[choose(jump run_away) choose(kick_low block_low)]
  far or much_weaker[choose(crouch run_towards) choose(
 punch_low punch_high)]
- always[crouch kick_low]
+ always[walk_towards kick_low]
  }

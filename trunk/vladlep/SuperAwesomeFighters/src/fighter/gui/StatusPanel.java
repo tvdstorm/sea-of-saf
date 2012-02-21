@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import fighter.algorithm.FighterDescription;
 
+@SuppressWarnings("serial")
 public class StatusPanel extends JPanel {
 
 	private FighterStatus firstFighter;
