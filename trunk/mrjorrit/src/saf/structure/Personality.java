@@ -1,34 +1,37 @@
 package saf.structure;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import saf.Checker.Check;
 
-public class Personality extends Check  {
+public class Personality extends Node  
+{
 	
-	public Personality(ArrayList<Characteristic> characteristics)
+	private final List<Characteristic> characteristics;
+	
+	public Personality(List<Characteristic> characteristics)
 	{
 		this.characteristics = characteristics;
 	}
 	
-	private final ArrayList<Characteristic> characteristics;
-	
-	public ArrayList<Characteristic> getCharacteristics() {
+	public List<Characteristic> getCharacteristics() 
+	{
 		return characteristics;
 	}
 
 	@Override
-	public ArrayList<String> check(){
-		
-		ArrayList<Attribute> foundAttributes = new ArrayList<Attribute>(); 
+	public void check(Check checker) 
+	{
+		List<String> foundAttributes = new ArrayList<String>();
 		for(Characteristic character : characteristics)
 		{
-			addErrors(character.check());
-			if(foundAttributes.contains(character.getAttribute()))
-				addError("'" + character.getAttribute().toString() + "' already defined, this is a dupe.");
+			character.check(checker);
+			if(foundAttributes.contains(character.getAttributeString()))
+				checker.addError("'" + character.getAttributeString() + "' already defined, this is a dupe.");
 			else
-				foundAttributes.add(character.getAttribute());
+				foundAttributes.add(character.getAttributeString());
 		}
-		return getErrors();
+		
 	}
 }

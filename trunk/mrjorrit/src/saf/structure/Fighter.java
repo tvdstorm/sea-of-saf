@@ -5,46 +5,46 @@ import java.util.ArrayList;
 import saf.Checker.Check;
 import saf.simulation.Arena;
 
-public class Fighter extends Check 
+public class Fighter extends Node 
 {
 	
-	//Constructor
-	public Fighter(String name, Personality personality, Behaviour behaviour) {
+	private final String name;
+	private final Personality personality;
+	private final Behaviour behaviour;
+	
+	public Fighter(String name, Personality personality, Behaviour behaviour) 
+	{
 		this.name = name;
 		this.personality = personality;
 		this.behaviour = behaviour;
 	}
 	
-	//Name
-	private final String name;
-	
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
-
-	//Personality
-	private final Personality personality;
 	
-	public Personality getPersonality() {
+	public Personality getPersonality() 
+	{
 		return personality;
 	}
 	
-	//Behaviour
-	private final Behaviour behaviour;
-	
-	public Behaviour getBehaviour() {
+	public Behaviour getBehaviour() 
+	{
 		return behaviour;
 	}	
 	
+
 	@Override
-	public ArrayList<String> check(){
+	public void check(Check checker) 
+	{
 		if(name == null || name.isEmpty())
 		{
-			addError("A fighter needs a name!");
+			checker.addError("A fighter needs a name!");
 		}
-		addErrors(personality.check());
-		addErrors(behaviour.check());
-		return getErrors();
+		
+		personality.check(checker);
+		behaviour.check(checker);
 	}
 
 }

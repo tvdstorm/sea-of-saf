@@ -16,7 +16,7 @@ public class FightActionAI
 		if(fighterState.getCurrentRule() == null)
 			return;
 		
-		ArrayList<FightAction> fightActions = fighterState.getCurrentRule().getFightAction();
+		ArrayList<FightAction> fightActions = fighterState.getCurrentRule().getFightActions();
 		Random randomGenerator = new Random();
 		
 		fighterState.setCurrentFightActionType(fightActions.get(randomGenerator.nextInt(fightActions.size())).getFightActionType());

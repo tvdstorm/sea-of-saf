@@ -22,12 +22,10 @@ public class Engine {
 			FighterAI.performAction(left, right);
 			FighterAI.performAction(right, left);
 			
-			left.incrementStep();
-			right.incrementStep();
+			left.nextStep();
+			right.nextStep();
 			wait(1);
 		}
-		
-		//Game Ends
 	}
 	
 	public void wait (int n){
@@ -39,6 +37,6 @@ public class Engine {
         do{
             t1 = System.currentTimeMillis();
         }
-        while ((t1 - t0) < (n * 10));
+        while ((t1 - t0) < (n * 100));
     }
 }

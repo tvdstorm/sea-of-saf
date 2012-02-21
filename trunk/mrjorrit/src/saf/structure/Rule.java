@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import saf.Checker.Check;
 
 
-public class Rule extends Check  {
+public class Rule extends Node 
+{
 	
-	//Constructor
+	private final Logical logical;
+	private final ArrayList<MoveAction> moveActions;
+	private final ArrayList<FightAction> fightActions;
+	
 	public Rule(Logical logical, ArrayList<MoveAction> moveActions, ArrayList<FightAction> fightActions)
 	{
 		this.logical = logical;
@@ -15,55 +19,44 @@ public class Rule extends Check  {
 		this.fightActions = fightActions;
 	}
 	
-	//conditionTypeOperator
-	private final Logical logical;
-
-	public Logical getLogical() {		
+	public Logical getLogical() 
+	{		
 		return logical;
 	}
 	
-	
-	//MoveActionType
-	private final ArrayList<MoveAction> moveActions;
-	
-	public ArrayList<MoveAction> getMoveActions() {
+	public ArrayList<MoveAction> getMoveActions() 
+	{
 		return moveActions;
+	}	
+	
+	public ArrayList<FightAction> getFightActions() 
+	{
+		return fightActions;
 	}
 	
-	//FightActionTypes
-	private final ArrayList<FightAction> fightActions;
-	
-	public ArrayList<FightAction> getFightAction() {
-		return fightActions;
+	public ArrayList<Action> getAllActions()
+	{
+		ArrayList<Action> actions = new ArrayList<Action>();
+		actions.addAll(moveActions);
+		actions.addAll(fightActions);
+		return actions;		
 	}
 
 	@Override
-	public ArrayList<String> check() {
+	public void check(Check checker) 
+	{
+		logical.check(checker);
 		
-		addErrors(logical.check());
-		
-		//Needs refactoring
-		ArrayList<MoveActionType> foundMoveActions = new ArrayList<MoveActionType>();
-		ArrayList<FightActionType> foundFightActions = new ArrayList<FightActionType>();
-		
-		for(MoveAction moveAction : moveActions)
+		ArrayList<String> foundActions = new ArrayList<String>();
+
+		for(Action action : getAllActions())
 		{
-			addErrors(moveAction.check());
-			if(foundMoveActions.contains(moveAction.getMoveActionType()))
-				addError("The moveaction '" + moveAction.getMoveActionType().toString() + "' is defined more than once in the choose expression");
+			action.check(checker);
+			if(foundActions.contains(action.getActionTypeString()))
+				checker.addError("The action '" + (action.getActionTypeString() + "' is defined more than once in the choose expression"));
 			else
-				foundMoveActions.add(moveAction.getMoveActionType());
+				foundActions.add(action.getActionTypeString());
 		}
 		
-		for(FightAction fightAction : fightActions)
-		{
-			addErrors(fightAction.check());
-			if(foundFightActions.contains(fightAction.getFightActionType()))
-				addError("The fightaction '" + fightAction.getFightActionType().toString() + "' is defined more than once in the choose expression");
-			else
-				foundFightActions.add(fightAction.getFightActionType());
-		}
-		
-		return getErrors();
 	}
 }

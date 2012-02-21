@@ -4,12 +4,12 @@ public class FighterAI
 {	
 	public static void determineAction(FighterState fighterState, FighterState otherFighterState)
 	{
-		if(fighterState.getStep() >= 100)
+		if(fighterState.getStep() <= 0)
 		{
 			RuleAI.setPossibleRule(fighterState, otherFighterState);
 			MoveActionAI.setMoveAction(fighterState);
 			FightActionAI.setFightAction(fighterState);
-			fighterState.setStep(0);
+			fighterState.setStep(100);
 		}
 	}
 	

@@ -8,6 +8,7 @@ import saf.structure.MoveAction;
 
 public class MoveActionAI 
 {
+	
 	public static void setMoveAction(FighterState fighterState)
 	{
 		if(fighterState.getCurrentRule() == null)
@@ -28,7 +29,7 @@ public class MoveActionAI
 		switch(fighterState.getCurrentMoveActionType())
 		{
 			case walk_towards:
-				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) > 3)
+				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) > 0)
 				{
 					if(fighterState.getStartingPosition() == StartingPosition.left)
 					{
@@ -42,7 +43,7 @@ public class MoveActionAI
 				}
 				break;
 			case walk_away:
-				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) > 3)
+				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) >= 0)
 				{
 					if(fighterState.getStartingPosition() == StartingPosition.left)
 					{
@@ -56,7 +57,7 @@ public class MoveActionAI
 				}
 				break;
 			case run_towards:
-				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) > 3)
+				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) > 1)
 				{
 					if(fighterState.getStartingPosition() == StartingPosition.left)
 					{
@@ -70,7 +71,7 @@ public class MoveActionAI
 				}
 				break;
 			case run_away:
-				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) > 3)
+				if(Math.abs(fighterState.getFighterX() - otherFighterState.getFighterX()) >= 1)
 				{
 					if(fighterState.getStartingPosition() == StartingPosition.left)
 					{

@@ -1,29 +1,23 @@
 package saf.Checker;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Check {
+public class Check {
+	private List<String> errors = new ArrayList<String>();
 	
-	public abstract ArrayList<String> check();
-	
-	private ArrayList<String> errors = new ArrayList<String>();
-	public ArrayList<String> getErrors()
+	public List<String> getErrors()
 	{
 		return errors;
 	}
+	
 	public void addError(String error)
 	{
 		errors.add(error);
 	}
 	
-	public void addErrors(ArrayList<String> errors)
-	{
-		this.errors.addAll(errors);
-	}
-	
 	public boolean hasErrors()
 	{
-		errors = check();
 		if(errors.size() == 0)
 			return false;
 		

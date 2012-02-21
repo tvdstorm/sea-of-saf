@@ -1,6 +1,7 @@
 package saf.structure;
 
-public enum MoveActionType {
+public enum MoveActionType 
+{
 	walk_towards,
 	walk_away,
 	run_towards,

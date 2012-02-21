@@ -1,32 +1,38 @@
 package saf.structure;
 
-import java.util.ArrayList;
+import saf.Checker.Check;
 
 public class LogicalSimple extends Logical{
 	
-	private final Condition condition;
-	public Condition getCondition() {
-		return condition;
+	private final String conditionString;
+	
+	public LogicalSimple(String conditionString)
+	{
+		this.conditionString = conditionString; 
 	}
 	
-	public LogicalSimple(String condition)
+	public Condition getCondition() 
 	{
-		Condition condition2;
-		try
-		{
-			condition2 = Condition.valueOf(condition);
-		}
-		catch(Exception e)
-		{
-			//set to default value
-			condition2  = null;
-			addError("Illegal condition: " + condition);
-		}
-		this.condition = condition2;
+		return Condition.valueOf(getConditionString());
 	}
+	
+	public String getConditionString() {
+		return conditionString;
+	}
+	
 	
 	@Override
-	public ArrayList<String> check(){
-		return getErrors();
+	public void check(Check checker)
+	{
+		boolean conditionExists = false;
+		for(Condition condition : Condition.values())
+		{
+			if(getConditionString().equals(condition.name()))
+				conditionExists = true;
+		}
+		
+		if(!conditionExists)
+			checker.addError("'" + getConditionString() + "' isn't a valid condition");
 	}
+
 }
