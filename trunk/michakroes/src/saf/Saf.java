@@ -1,16 +1,7 @@
 package saf;
 
-//import java.io.IOException;
-
-//import lexer.safLexer;
-//import lexer.safParser;
-
-//import org.antlr.runtime.ANTLRFileStream;
-//import org.antlr.runtime.RecognitionException;
-//import org.antlr.runtime.TokenRewriteStream;
-
-import test.SafInterface;
-import test.SafVisitor;
+import checker.SafInterface;
+import checker.SafVisitor;
 
 public class Saf implements SafInterface {
 

@@ -1,6 +1,6 @@
 package saf;
 
-import test.SafVisitor;
+import checker.SafVisitor;
 
 public class ConditionConnective extends Condition {
 	private Condition lhs;

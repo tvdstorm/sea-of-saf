@@ -3,8 +3,8 @@ package saf;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.SafInterface;
-import test.SafVisitor;
+import checker.SafInterface;
+import checker.SafVisitor;
 
 public class Behaviour implements SafInterface {
 	
@@ -29,35 +29,28 @@ public class Behaviour implements SafInterface {
 	
 	public boolean checkCondition(Condition condition, String distanceState, String healthState) {
 		if (condition instanceof ConditionAnd) {
-			ConditionAnd conditionAnd = (ConditionAnd) condition;
-			
-			ConditionAction lhs = (ConditionAction) conditionAnd.getLhs();
-			ConditionAction rhs = (ConditionAction) conditionAnd.getRhs();
-			
-			if (
-					lhs.getCondition().equals(distanceState) || lhs.getCondition().equals(healthState) &&
-					rhs.getCondition().equals(distanceState) || rhs.getCondition().equals(healthState) 
-			   ) 
+			ConditionAnd conditionAnd = (ConditionAnd) condition;			
+						
+			if (checkCondition(conditionAnd.getLhs(), distanceState, healthState) && 
+				checkCondition(conditionAnd.getRhs(), distanceState, healthState)) {
 				return true;
+			}
 		}
 		
 		if (condition instanceof ConditionOr) {
-			ConditionOr conditionOr = (ConditionOr) condition;
-			
-			ConditionAction lhs = (ConditionAction) conditionOr.getLhs();
-			ConditionAction rhs = (ConditionAction) conditionOr.getRhs();
-			
-			if (
-					lhs.getCondition().equals(distanceState) || lhs.getCondition().equals(healthState) ||
-					rhs.getCondition().equals(distanceState) || rhs.getCondition().equals(healthState) 
-			   ) 
+			ConditionOr conditionOr = (ConditionOr) condition;			
+						
+			if (checkCondition(conditionOr.getLhs(), distanceState, healthState) || 
+				checkCondition(conditionOr.getRhs(), distanceState, healthState)) {
 				return true;
+			}
 		}
 		
 		if (condition instanceof ConditionAction) {
 			ConditionAction conditionAction = (ConditionAction) condition; 
 			
-			if ( conditionAction.getCondition().equals(distanceState) || conditionAction.getCondition().equals(healthState) )
+			if (conditionAction.getCondition().equals(distanceState) || 
+				conditionAction.getCondition().equals(healthState) )
 				return true;
 		}
 

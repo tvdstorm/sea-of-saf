@@ -1,6 +1,6 @@
 package saf;
 
-import test.SafVisitor;
+import checker.SafVisitor;
 
 public class ConditionAction extends Condition {
 	private final String condition;

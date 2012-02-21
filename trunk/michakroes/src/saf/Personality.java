@@ -4,8 +4,8 @@ import java.util.List;
 
 import config.settings;
 
-import test.SafInterface;
-import test.SafVisitor;
+import checker.SafInterface;
+import checker.SafVisitor;
 
 public class Personality implements SafInterface {
 	
@@ -29,7 +29,7 @@ public class Personality implements SafInterface {
         
 		int weight = (punchPower + kickPower) / 2;                       
 		int height = (punchReach + kickReach) / 2;                       
-		this.speed = ((height-weight) / 2);
+		this.speed = (height-weight) / 2;
 	}                                                                     
 	
 	public List<Strength> getStrengths() {
@@ -53,8 +53,6 @@ public class Personality implements SafInterface {
 	}
 	
 	public float getSpeed() {
-		if (this.speed < 1)
-			return 1;
 		return this.speed;
 	}
 	
