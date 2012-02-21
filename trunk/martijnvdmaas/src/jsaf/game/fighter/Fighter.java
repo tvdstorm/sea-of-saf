@@ -4,7 +4,6 @@ import java.util.List;
 
 import jsaf.astelements.Behaviour;
 
-
 public class Fighter {
 
 	private int weight;
