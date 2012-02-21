@@ -1,0 +1,7 @@
+badformed {
+kickPower = 11
+awsomeness = 9001
+far [choose(run_towards run_towards) kick_low]
+weaker and near [stand kick_high]
+stronger [move_in_air punch_self]
+}
