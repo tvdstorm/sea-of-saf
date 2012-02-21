@@ -15,17 +15,15 @@ public class ConditionInterpreter implements Visitor
 {
 	private static boolean evaluation = false;
 	private final State state;
-	private final Fighter fighter;
 	
-	private ConditionInterpreter(Fighter fighter, State state)
+	private ConditionInterpreter(State state)
 	{
 		this.state = state;
-		this.fighter = fighter;
 	}
 	
-	public static boolean evaluate(Behaviour behaviour, Fighter fighter, State state)
+	public static boolean evaluate(Behaviour behaviour, State state)
 	{
-		ConditionInterpreter interpreter = new ConditionInterpreter(fighter, state);
+		ConditionInterpreter interpreter = new ConditionInterpreter(state);
 		evaluation = false;
 		interpreter.visit(behaviour);
 		return evaluation;
@@ -90,5 +88,4 @@ public class ConditionInterpreter implements Visitor
 			if(state.areFightersFar())
 				evaluation = true;
 	}
-
 }

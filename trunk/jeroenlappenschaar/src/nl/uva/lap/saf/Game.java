@@ -14,7 +14,7 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 
-public class Test
+public class Game
 {
 	private static String pietje = "" + 
 			"pietje{\r\n" + 
@@ -70,7 +70,6 @@ public class Test
 		}
 		catch (RecognitionException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return fighter1;
@@ -85,8 +84,8 @@ public class Test
 
 	public static void main(String[] args)
 	{
-		Fighter fighter1 = loadFighter(Test.pietje);
-		Fighter fighter2 = loadFighter(Test.jantje);
+		Fighter fighter1 = loadFighter(Game.pietje);
+		Fighter fighter2 = loadFighter(Game.jantje);
 		
 		evaluate(fighter1);
 		evaluate(fighter2);

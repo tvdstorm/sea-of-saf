@@ -20,3 +20,4 @@ public interface Visitor
 	public void visit(Or orCondition);
 	public void visit(SimpleCondition simpleCondition);
 }
+
