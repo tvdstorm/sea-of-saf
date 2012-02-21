@@ -20,7 +20,7 @@ public class SafParser implements SafParserConstants {
         ArrayList<Fighter> f = parser.Start();
                 Interpreter i = new Interpreter(f);
         i.Interpret();
-        StartFight start=new StartFight();
+        Fight start=new Fight();
         start.startGame(f);
         }
         catch(Exception e)

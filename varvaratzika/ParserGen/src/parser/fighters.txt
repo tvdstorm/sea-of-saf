@@ -1,4 +1,26 @@
-chicken{kickReach=9
-far [run_away choose(kick_low kick_high)]}
-Alex{kickReach=5
-far AND near [run_towards kick_high]}
+Eric
+{
+	kickReach = 6
+	kickPower = 7
+	punchReach = 5
+	punchPower = 3
+	near [crouch punch_low]
+	near [stand punch_high]
+	far [run_towards kick_high]
+	stronger OR much_stronger [walk_towards kick_low]
+	weaker OR much_weaker [run_away block_high]
+	always [walk_towards punch_low]
+}
+Kyle
+{
+	kickReach = 4
+	kickPower = 6
+	punchReach = 8
+	punchPower = 7
+	near [jump kick_high]
+	far [choose(run_towards walk_towards) kick_high]
+	stronger OR much_stronger [walk_towards punch_low]
+	weaker OR much_weaker [run_towards punch_high]
+	near [walk_away block_high]
+	always [walk_away block_low]
+}

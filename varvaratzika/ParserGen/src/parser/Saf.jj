@@ -25,7 +25,7 @@ public class SafParser
 	try
 	{
 		String path  = new java.io.File(".").getCanonicalPath();
-        String FightersFile = "fighters.txt";
+        String FightersFile = "fighters2.txt";
 		InputStream stream = new FileInputStream(path + "/src/parser/" + FightersFile);
 	  	SafParser parser = new SafParser(stream);
     	ArrayList<Fighter> f = parser.Start();
