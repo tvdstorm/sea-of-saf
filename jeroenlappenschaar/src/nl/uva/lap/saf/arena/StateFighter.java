@@ -19,6 +19,7 @@ public class StateFighter extends Fighter
 	private Direction direction; 
 	private Stand stand = Stand.STAND;
 	private Color color;
+	private boolean victorious = false;
 	
 	public StateFighter(nl.uva.lap.saf.ast.fighter.Fighter fighter, int xPosition, Direction direction, Color color)
 	{
@@ -80,13 +81,6 @@ public class StateFighter extends Fighter
 	public void updateAction(StateFighter otherFighter)
 	{
 		int distance = getDistance(otherFighter);
-		/*if(otherFighter.isKicking())
-			System.out.println("kicking");
-		if(distance <= otherFighter.getKickReach())
-			System.out.println("distance");
-		if(isBlocked(otherFighter))
-			System.out.println("blocked");
-		System.out.println();*/
 		if(otherFighter.isKicking() && distance <= otherFighter.getKickReach() && !isBlocked(otherFighter))
 			hit(otherFighter.getKickPower());
 		else if (otherFighter.isPunching() && distance <= otherFighter.getPunchReach() && !isBlocked(otherFighter))
@@ -126,5 +120,20 @@ public class StateFighter extends Fighter
 	public int getHealth()
 	{
 		return health;
+	}
+	
+	public boolean isDead()
+	{
+		return health <= 0;
+	}
+	
+	public void setVictorious(boolean victorious)
+	{
+		this.victorious = victorious;
+	}
+	
+	public boolean isVictorious()
+	{
+		return victorious;
 	}
 }

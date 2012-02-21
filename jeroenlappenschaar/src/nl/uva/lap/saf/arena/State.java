@@ -33,6 +33,8 @@ public class State
 	 */
 	private boolean performAction(StateFighter fighter)
 	{
+		if(fighter.isDead() || fighter.isVictorious()) //nothing to do anymore
+			return false;
 		if(fighter.getStep() == fighter.getWeight()/WEIGHT_INFLUENCE)
 		{
 			fighter.resetStep();
@@ -58,6 +60,11 @@ public class State
 			fighter1.updateAction(fighter2);
 		if(fighter2Performed)
 			fighter2.updateAction(fighter1);
+		
+		if(fighter1.isDead() && !fighter2.isDead())
+			fighter2.setVictorious(true);
+		if(!fighter1.isDead() && fighter2.isDead())
+			fighter1.setVictorious(true);
 	}
 	
 	public StateFighter getFighter1()
