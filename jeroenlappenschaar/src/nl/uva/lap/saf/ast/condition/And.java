@@ -14,4 +14,9 @@ public class And extends Connector
 	{
 		visitor.visit(this);
 	}
+	
+	public boolean isAlways()
+	{
+		return false;
+	}
 }

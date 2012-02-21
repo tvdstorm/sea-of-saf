@@ -21,4 +21,9 @@ public class SimpleCondition extends Condition
 	{
 		return condition;
 	}
+	
+	public boolean isAlways()
+	{
+		return condition.equals("always");
+	}
 }
