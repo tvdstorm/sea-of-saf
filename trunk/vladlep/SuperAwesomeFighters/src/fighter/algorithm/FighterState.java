@@ -33,7 +33,6 @@ public class FighterState {
 
 	}
 
-	
 	private boolean checkInFrame(int newPositionX) {
 		if (newPositionX <= 0)
 			return false;

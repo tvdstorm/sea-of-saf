@@ -30,7 +30,7 @@ public class MessageReporter {
 	}
 
 	// TODO improve aspect
-	public  void reportMessages(Message messages) {
+	public void reportMessages(Message messages) {
 		JOptionPane.showMessageDialog(singleton.parentFrame,
 				messages.toString(), "Errors", JOptionPane.ERROR_MESSAGE);
 		singleton.parentFrame.dispose();
