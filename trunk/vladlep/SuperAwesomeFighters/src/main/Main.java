@@ -16,6 +16,7 @@ import reader.antlr.SAFParser;
 import fighter.IFighter;
 import fighter.checker.SemanticChecker;
 import fighter.gui.FightArena;
+import fighter.gui.MessageReporter;
 import fighter.messages.Message;
 import fighter.messages.Error;
 
@@ -31,6 +32,7 @@ public class Main {
 		messages = new ArrayList<Message>();
 		readFighters();
 		fightArena = FightArena.initGui(firstFighter, secondFighter);
+		MessageReporter.initMessageReporter(fightArena);
 		reportPossibleProblems();
 
 		messages = SemanticChecker.checkFighter(firstFighter);
@@ -38,12 +40,12 @@ public class Main {
 		messages = SemanticChecker.checkFighter(secondFighter);
 		reportPossibleProblems();
 
-		FightArena.startGame(firstFighter, secondFighter, messages);
+		FightArena.startGame();
 	}
 
 	private static void reportPossibleProblems() {
 		if (messages.size() != 0) {
-			fightArena.showMessages(messages);
+			MessageReporter.reportMessages(messages);
 			System.exit(0);
 		}
 	}
@@ -61,8 +63,8 @@ public class Main {
 			throws RecognitionException {
 		IFighter fighter;
 		SAFParser parser;
-		String inputFile = "." + File.separator + "tests" + File.separator
-				+ "inputFiles" + File.separator + fileName;
+		String inputFile = "." + File.separator + "input" + File.separator
+				+ "files" + File.separator + fileName;
 		CharStream chStream = null;
 		try {
 			chStream = new ANTLRFileStream(inputFile);
