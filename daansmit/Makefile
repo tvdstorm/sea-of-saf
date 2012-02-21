@@ -83,8 +83,7 @@ VISUALIZATION_SRC_IMAGES=src/saf/visualization/images/jump_punch_high.gif \
 	src/saf/visualization/images/stand_punch_high.gif \
 	src/saf/visualization/images/stand_block_low.gif \
 	src/saf/visualization/images/crouch_punch_high.gif \
-	src/saf/visualization/images/stand.gif \
-	src/saf/visualization/images/background.gif
+	src/saf/visualization/images/stand.gif
 
 
 PARSER_CLASSES=$(PARSER_SOURCES:$(SRC_DIR)/%.java=$(CLASS_DIR)/%.class)
