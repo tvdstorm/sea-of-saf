@@ -20,7 +20,7 @@ public class MenuScreen extends BaseScreen {
 	 	
 	 	backgroundMusic = new SoundFile();
 	 	backgroundMusic.load("data\\audio\\menu_background.wav");
-	 	//backgroundMusic.play();
+	 	backgroundMusic.play();
 	 	
 	 	setBorder(BorderFactory.createEmptyBorder(220, 0, 0, 0));
 	 	

@@ -2,7 +2,6 @@ package data;
 
 import java.util.List;
 import java.util.Random;
-
 import core.BaseTreeVisitor;
 
 public class Actions extends BaseData {

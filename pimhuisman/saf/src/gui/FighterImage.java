@@ -3,14 +3,12 @@ package gui;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-
 import logic.FighterState;
 
 public class FighterImage {
 	
-	private FighterState state;
+	private final FighterState state;
 	private BufferedImage image;
 	
 	public FighterImage(FighterState state, String filename) {

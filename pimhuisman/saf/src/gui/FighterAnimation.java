@@ -3,12 +3,11 @@ package gui;
 import java.awt.Graphics;
 import java.util.LinkedList;
 import java.util.List;
-
 import logic.FighterState;
 
 public class FighterAnimation {
 
-	private String imageDirectory;
+	private final String imageDirectory;
 	private FighterState state;
 	private List<FighterImage> images;
 	

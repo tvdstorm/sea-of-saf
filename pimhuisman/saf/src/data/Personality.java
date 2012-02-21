@@ -1,12 +1,12 @@
 package data;
-import java.util.List;
 
+import java.util.List;
 import core.BaseTreeVisitor;
 
 public class Personality extends BaseData {
 
 	private final static int DEFAULT_VALUE = 5;
-	private List<Characteristic> characteristics;
+	private final List<Characteristic> characteristics;
 	
 	public Personality(List<Characteristic> characteristics) {
 		this.characteristics = characteristics;

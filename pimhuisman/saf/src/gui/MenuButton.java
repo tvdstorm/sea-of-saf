@@ -5,18 +5,18 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class MenuButton extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
-	private int buttonId;
-	private BaseScreen baseScreen;
-	private Font font;
-	private JLabel label;
+	private final int buttonId;
+	private final BaseScreen baseScreen;
+	private final Font font;
+	private final JLabel label;
 	private BufferedImage currentImage;
 	private BufferedImage normalImage;
 	private BufferedImage activeImage;

@@ -1,14 +1,6 @@
 package core;
 
-import data.Actions;
-import data.AndStatement;
-import data.Behaviour;
-import data.Characteristic;
-import data.Fighter;
-import data.OrStatement;
-import data.Personality;
-import data.Rule;
-import data.SingleCondition;
+import data.*;
 
 public class ConsoleTreeVisitor extends BaseTreeVisitor {
 

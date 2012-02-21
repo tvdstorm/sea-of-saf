@@ -4,15 +4,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public abstract class BaseScreen extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private BaseFrame baseFrame;
-	private String backgroundFilename;
+	private final BaseFrame baseFrame;
+	private final String backgroundFilename;
 	private BufferedImage backgroundImage;
 	private Boolean backgroundLoaded;
 

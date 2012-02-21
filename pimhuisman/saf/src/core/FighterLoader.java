@@ -1,18 +1,14 @@
 package core;
 
 import java.io.IOException;
-
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
-
 import parser.SAFLexer;
 import parser.SAFParser;
-
 import data.Fighter;
-
 
 public class FighterLoader {
 

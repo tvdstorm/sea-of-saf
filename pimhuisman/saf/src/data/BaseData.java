@@ -1,4 +1,5 @@
 package data;
+
 import core.BaseTreeVisitor;
 
 public abstract class BaseData {
