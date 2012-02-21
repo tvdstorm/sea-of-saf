@@ -12,7 +12,7 @@ import parser.SAFParser;
 import saf.IArenaEngine;
 import saf.astnodes.Fighter;
 import saf.configuration.SAFConstants;
-import saf.engine.SimpleArenaEngine;
+import saf.engines.SimpleArenaEngine;
 import saf.mvc.models.SimpleFighterModel;
 
 public class TestSimpleEngine {

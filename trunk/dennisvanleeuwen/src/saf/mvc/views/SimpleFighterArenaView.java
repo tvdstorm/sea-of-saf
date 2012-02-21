@@ -8,8 +8,6 @@ import saf.mvc.IView;
 import saf.mvc.views.fighterfigures.PencilDrawnFigure;
 
 public class SimpleFighterArenaView extends JPanel implements IView {
-	private static final long serialVersionUID = -2587487392484802159L;
-	
 	private FighterModel leftFighter;
 	private FighterModel rightFighter;
 
@@ -17,8 +15,6 @@ public class SimpleFighterArenaView extends JPanel implements IView {
 	
 	private static final int APPLICATION_WIDTH = 600;
 	private static final int APPLICATION_HEIGHT = 350; 
-	private static final int APPLICATION_X_POSITION = 100;
-	private static final int APPLICATION_Y_POSITION = 100;
 	
 	public SimpleFighterArenaView(FighterModel leftFighter, FighterModel rightFighter){		
 		this.leftFighter = leftFighter;

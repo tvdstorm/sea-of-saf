@@ -3,7 +3,6 @@ package mylib;
 import java.util.Calendar;
 import java.util.Random;
 
-/* Returns only random positive numbers! */
 public class Randomizer {
 	private static final Random getRandomGenerator(){
 		Calendar calendar = Calendar.getInstance();
