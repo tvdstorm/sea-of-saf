@@ -80,6 +80,13 @@ public class StateFighter extends Fighter
 	public void updateAction(StateFighter otherFighter)
 	{
 		int distance = getDistance(otherFighter);
+		/*if(otherFighter.isKicking())
+			System.out.println("kicking");
+		if(distance <= otherFighter.getKickReach())
+			System.out.println("distance");
+		if(isBlocked(otherFighter))
+			System.out.println("blocked");
+		System.out.println();*/
 		if(otherFighter.isKicking() && distance <= otherFighter.getKickReach() && !isBlocked(otherFighter))
 			hit(otherFighter.getKickPower());
 		else if (otherFighter.isPunching() && distance <= otherFighter.getPunchReach() && !isBlocked(otherFighter))
