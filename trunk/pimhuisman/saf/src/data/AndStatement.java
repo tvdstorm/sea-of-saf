@@ -1,7 +1,6 @@
 package data;
 
 import java.util.List;
-
 import core.BaseTreeVisitor;
 
 public class AndStatement extends BaseData implements Condition {

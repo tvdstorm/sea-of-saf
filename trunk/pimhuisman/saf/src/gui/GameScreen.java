@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.Graphics;
 import javax.swing.*;
-
 import logic.FightSimulation;
 
 public class GameScreen extends BaseScreen {

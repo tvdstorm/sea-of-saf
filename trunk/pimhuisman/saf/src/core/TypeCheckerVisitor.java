@@ -1,17 +1,8 @@
 package core;
+
 import java.util.List;
 import java.util.LinkedList;
-
-import data.Actions;
-import data.AndStatement;
-import data.Behaviour;
-import data.Characteristic;
-import data.Condition;
-import data.Fighter;
-import data.OrStatement;
-import data.Personality;
-import data.Rule;
-import data.SingleCondition;
+import data.*;
 
 public class TypeCheckerVisitor extends BaseTreeVisitor {
 

@@ -1,12 +1,11 @@
 package data;
 
 import java.util.List;
-
 import core.BaseTreeVisitor;
 
 public class SingleCondition extends BaseData implements Condition {
 
-	private String name;
+	private final String name;
 	
 	public SingleCondition(String name) {
 		this.name = name;

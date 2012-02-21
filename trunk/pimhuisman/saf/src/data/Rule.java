@@ -4,8 +4,8 @@ import core.BaseTreeVisitor;
 
 public class Rule extends BaseData {
 
-	private Condition condition;
-	private Actions actions;
+	private final Condition condition;
+	private final Actions actions;
 	
 	public Rule(Condition condition, Actions action) {
 		this.condition = condition;

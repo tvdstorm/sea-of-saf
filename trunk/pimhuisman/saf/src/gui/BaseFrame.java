@@ -1,8 +1,8 @@
 package gui;
+
 import javax.swing.JFrame;
 
 public abstract class BaseFrame extends JFrame {
-
 
 	private static final long serialVersionUID = 1L;
 	private BaseScreen currentScreen;

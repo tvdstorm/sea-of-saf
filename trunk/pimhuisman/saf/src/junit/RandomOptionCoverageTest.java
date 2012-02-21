@@ -1,10 +1,8 @@
 package junit;
 
 import static org.junit.Assert.*;
-
 import java.util.List;
 import java.util.LinkedList;
-
 import org.junit.Test;
 import data.Actions;
 

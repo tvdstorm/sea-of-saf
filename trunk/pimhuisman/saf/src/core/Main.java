@@ -3,27 +3,7 @@ package core;
 
 import gui.BaseFrame;
 import gui.MenuScreen;
-
 import javax.swing.*;
-
-/*public class Main {
-
-	public static void main(String[] args) throws Exception {
-			
-		FighterLoader loader = new FighterLoader();
-		Fighter fighter = loader.loadFighterByFile("data/fighters/jackiechan.saf");
-		
-		TypeCheckerVisitor typeChecker = new TypeCheckerVisitor();
-		ConsoleTreeVisitor consolePrinter = new ConsoleTreeVisitor();
-		
-		fighter.acceptTreeVisitor(typeChecker);
-		fighter.acceptTreeVisitor(consolePrinter);
-		
-		typeChecker.printErrorsInConsole();
-		
-	}
-	
-}*/
 
 public class Main extends BaseFrame {  
 	
@@ -62,7 +42,7 @@ public class Main extends BaseFrame {
 				game.draw();
 			}
 			try {
-				Thread.sleep(100); // Update 50 times per second.
+				Thread.sleep(100); // Update 10 times per second.
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

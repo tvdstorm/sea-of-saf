@@ -1,13 +1,10 @@
 package logic;
 
 import gui.FighterAnimation;
-
 import java.awt.Graphics;
 import java.awt.Point;
-
 import core.FighterLoader;
 import core.TypeCheckerVisitor;
-
 import data.Characteristic;
 import data.Fighter;
 import data.Personality;
@@ -15,9 +12,9 @@ import data.Personality;
 public class FighterModel extends BaseGameObject {
 
 	private int health;
-	private int maxHealth;
-	private FighterAnimation animation;
-	private String fighterFilename;
+	private final int maxHealth;
+	private final FighterAnimation animation;
+	private final String fighterFilename;
 	private Fighter fighterData;
 	
 	public FighterModel(String imageDirectory, String fighterFilename) {

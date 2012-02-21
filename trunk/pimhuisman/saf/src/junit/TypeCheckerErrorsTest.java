@@ -1,7 +1,7 @@
 package junit;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
-
 import core.FighterLoader;
 import core.TypeCheckerVisitor;
 import data.Fighter;

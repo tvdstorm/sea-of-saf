@@ -1,4 +1,5 @@
 package data;
+
 import core.BaseTreeVisitor;
 
 public class Characteristic extends BaseData {

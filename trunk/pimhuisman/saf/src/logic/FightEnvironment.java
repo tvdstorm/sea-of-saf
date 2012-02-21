@@ -2,7 +2,6 @@ package logic;
 
 import java.util.LinkedList;
 import java.util.List;
-
 import data.Actions;
 import data.Behaviour;
 import data.Fighter;
