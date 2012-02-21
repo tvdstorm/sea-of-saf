@@ -1,0 +1,108 @@
+digraph {
+
+	ordering=out;
+	ranksep=.4;
+	bgcolor="lightgrey"; node [shape=box, fixedsize=false, fontsize=12, fontname="Helvetica-bold", fontcolor="blue"
+		width=.25, height=.25, color="black", fillcolor="white", style="filled, solid, bold"];
+	edge [arrowsize=.5, color="black", style="bold"]
+
+  n0 [label=""];
+  n1 [label="JackieChan"];
+  n2 [label="{"];
+  n3 [label="kickPower"];
+  n4 [label="="];
+  n5 [label="7"];
+  n6 [label="punchPower"];
+  n7 [label="="];
+  n8 [label="5"];
+  n9 [label="kickReach"];
+  n10 [label="="];
+  n11 [label="3"];
+  n12 [label="punchReach"];
+  n13 [label="="];
+  n14 [label="9"];
+  n15 [label="far"];
+  n16 [label="["];
+  n17 [label="run_towards"];
+  n18 [label="punch_high"];
+  n19 [label="]"];
+  n20 [label="near"];
+  n21 [label="["];
+  n22 [label="choose"];
+  n23 [label="("];
+  n24 [label="stand"];
+  n25 [label="crouch"];
+  n26 [label=")"];
+  n27 [label="kick_high"];
+  n28 [label="]"];
+  n29 [label="much_stronger"];
+  n30 [label="["];
+  n31 [label="walk_towards"];
+  n32 [label="punch_low"];
+  n33 [label="]"];
+  n34 [label="weaker"];
+  n35 [label="["];
+  n36 [label="run_away"];
+  n37 [label="choose"];
+  n38 [label="("];
+  n39 [label="block_high"];
+  n40 [label="block_low"];
+  n41 [label=")"];
+  n42 [label="]"];
+  n43 [label="always"];
+  n44 [label="["];
+  n45 [label="walk_towards"];
+  n46 [label="block_high"];
+  n47 [label="]"];
+  n48 [label="}"];
+
+  n0 -> n1 // "" -> "JackieChan"
+  n0 -> n2 // "" -> "{"
+  n0 -> n3 // "" -> "kickPower"
+  n0 -> n4 // "" -> "="
+  n0 -> n5 // "" -> "7"
+  n0 -> n6 // "" -> "punchPower"
+  n0 -> n7 // "" -> "="
+  n0 -> n8 // "" -> "5"
+  n0 -> n9 // "" -> "kickReach"
+  n0 -> n10 // "" -> "="
+  n0 -> n11 // "" -> "3"
+  n0 -> n12 // "" -> "punchReach"
+  n0 -> n13 // "" -> "="
+  n0 -> n14 // "" -> "9"
+  n0 -> n15 // "" -> "far"
+  n0 -> n16 // "" -> "["
+  n0 -> n17 // "" -> "run_towards"
+  n0 -> n18 // "" -> "punch_high"
+  n0 -> n19 // "" -> "]"
+  n0 -> n20 // "" -> "near"
+  n0 -> n21 // "" -> "["
+  n0 -> n22 // "" -> "choose"
+  n0 -> n23 // "" -> "("
+  n0 -> n24 // "" -> "stand"
+  n0 -> n25 // "" -> "crouch"
+  n0 -> n26 // "" -> ")"
+  n0 -> n27 // "" -> "kick_high"
+  n0 -> n28 // "" -> "]"
+  n0 -> n29 // "" -> "much_stronger"
+  n0 -> n30 // "" -> "["
+  n0 -> n31 // "" -> "walk_towards"
+  n0 -> n32 // "" -> "punch_low"
+  n0 -> n33 // "" -> "]"
+  n0 -> n34 // "" -> "weaker"
+  n0 -> n35 // "" -> "["
+  n0 -> n36 // "" -> "run_away"
+  n0 -> n37 // "" -> "choose"
+  n0 -> n38 // "" -> "("
+  n0 -> n39 // "" -> "block_high"
+  n0 -> n40 // "" -> "block_low"
+  n0 -> n41 // "" -> ")"
+  n0 -> n42 // "" -> "]"
+  n0 -> n43 // "" -> "always"
+  n0 -> n44 // "" -> "["
+  n0 -> n45 // "" -> "walk_towards"
+  n0 -> n46 // "" -> "block_high"
+  n0 -> n47 // "" -> "]"
+  n0 -> n48 // "" -> "}"
+
+}
