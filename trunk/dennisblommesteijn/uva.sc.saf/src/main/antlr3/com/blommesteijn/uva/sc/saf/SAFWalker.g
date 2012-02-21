@@ -57,7 +57,6 @@ behaviour returns [Behaviour behaviour]
 		{_rules = new LinkedList<AstNode>();}
 		{_actions = new LinkedList<AstNode>();}
 		^(r1=IDENT operator* action+)
-//		{_rules.add(new Location(r1.getLine(), r1.getText()));}
 		{behaviour = new Behaviour(r1.getLine(), r1.getText());}
 		{behaviour.append(_actions);}
 		{behaviour.append(_rules);}
@@ -67,7 +66,7 @@ behaviour returns [Behaviour behaviour]
 operator
 	:
 		^(i1=IDENT i2=IDENT)
-		{_rules.add(new Location(i2.getLine(), i2.getText()));}
+		{_rules.add(new Condition(i2.getLine(), i2.getText()));}
 		{_rules.add(new Operator(i1.getLine(), i1.getText()));}
 	;
 

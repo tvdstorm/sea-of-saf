@@ -19,7 +19,7 @@ public class Behaviour extends AstNode
 	public static final int OPERATORS_ALLOWED = 1;
 	
 	private List<Operator> _operators = new LinkedList<Operator>();
-	private List<Location> _locations = new LinkedList<Location>();
+	private List<Condition> _locations = new LinkedList<Condition>();
 	private List<Action> _moves = new LinkedList<Action>();
 	private List<Action> _attacks = new LinkedList<Action>();
 	
@@ -33,7 +33,8 @@ public class Behaviour extends AstNode
 	{
 		super();
 		_line = line;
-		this.append(new Location(line, ident));
+//		_locations
+		this.append((AstNode)new Condition(line, ident));
 	}
 	
 	public void append(Operator operator)
@@ -41,7 +42,7 @@ public class Behaviour extends AstNode
 		_operators.add(operator);
 	}
 	
-	public void append(Location location)
+	public void append(Condition location)
 	{
 		_locations.add(location);
 	}
@@ -53,6 +54,8 @@ public class Behaviour extends AstNode
 		else if (action.isMove())
 			_moves.add(action);
 	}
+	
+	
 
 	public void register(AstNode astNode)
 	{
@@ -60,17 +63,13 @@ public class Behaviour extends AstNode
 		f.append(this);
 	}
 	
-//	_operators = new LinkedList<Operator>();
-//	private List<Location> _locations = new LinkedList<Location>();
-//	private List<Action> _moves = new LinkedList<Action>();
-//	private List<Action> _attacks = new LinkedList<Action>();
 	
 	public List<Operator> getOperators()
 	{
 		return _operators;
 	}
 	
-	public List<Location> getLocations()
+	public List<Condition> getLocations()
 	{
 		return _locations;
 	}
@@ -95,6 +94,7 @@ public class Behaviour extends AstNode
 		// visit all nested nodes
 		for (AstNode node : this.getNodes())
 		{
+//			System.out.println(node.getIdent());
 			node.staticCheck(result);
 			node.register(this);
 		}
@@ -119,19 +119,6 @@ public class Behaviour extends AstNode
 			result.append(new StaticCheckIssue(this, 
 					"no attack(s) found"));
 		}
-		
-		//locate always keyword
-		boolean found = false;
-		for(Location l : _locations)
-		{
-			if(l.getIdent().equals(ECondition.ALWAYS.getIdent()))
-			{
-				found = true;
-				break;
-			}
-		}
-		if(!found)
-			result.append(new StaticCheckIssue(this, "missing always (default) case"));
 	}	
 	
 	

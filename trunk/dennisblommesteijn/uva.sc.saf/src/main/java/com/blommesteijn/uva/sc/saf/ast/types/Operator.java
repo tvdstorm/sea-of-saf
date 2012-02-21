@@ -25,6 +25,12 @@ public class Operator extends AstNode
 		_ident = ident;
 	}
 	
+	public void register(AstNode astNode)
+	{
+		Behaviour b = (Behaviour) astNode;
+		b.append(this);
+	}
+	
 	/**
 	 * Perform Static Check
 	 * @param checker static result checker reference

@@ -98,7 +98,8 @@ public class BuildAst
 		_parserChecker = parser.getParserChecker();
 		if(_parserChecker.hasIssues())
 			throw new BuildAstException("parse check failed");
-				
+		
+ 						
 		//Run Walker
 		CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(astNodeParser.getTree());
 		SAFWalker walker = new SAFWalker(nodeStream);
@@ -114,7 +115,8 @@ public class BuildAst
 		catch (RecognitionException e)
 		{
 			throw new BuildAstException("could not recongnize nodesteam");
-		}
+		}		
+		
 		
 		//run static checker
 		_staticChecker = new StaticChecker(_astNodes);
