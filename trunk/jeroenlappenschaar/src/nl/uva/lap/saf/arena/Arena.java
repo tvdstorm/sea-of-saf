@@ -53,6 +53,23 @@ public class Arena
 		StdDraw.text(x, Y_SCALE-6, "Health: " + fighter.getHealth());
 	}
 	
+	private void drawBigText(String text)
+	{
+		StdDraw.setFont(new Font("SansSerif", Font.PLAIN, 65));
+		StdDraw.setPenColor(StdDraw.RED);
+		StdDraw.text(X_SCALE/2, Y_SCALE/2, text);
+	}
+	
+	private void drawVictoryScreen()
+	{
+		if(state.getFighter1().isDead() && state.getFighter2().isDead())
+			drawBigText("Both players loose!");
+		else if(state.getFighter1().isDead())
+			drawBigText(state.getFighter2().getName() + " wins!!!");
+		else if(state.getFighter2().isDead())
+			drawBigText(state.getFighter1().getName() + " wins!!!");
+	}
+	
 	private void drawScoreBoard()
 	{
 		StdDraw.setFont(new Font("SansSerif", Font.PLAIN, 30));
@@ -67,9 +84,14 @@ public class Arena
 		return "blue";
 	}
 	
-	private String getMovementSpriteAdress(String movement, String action)
+	private String getMovementSpriteAdress(StateFighter fighter)
 	{
-		if(movement.equals("crouch"))
+		if(fighter.isDead())
+			return "lost";
+		if(fighter.isVictorious())
+			return "victory";
+		String action = fighter.getAction();
+		if(fighter.getMovement().equals("crouch"))
 		{
 			if(action.equals("punch_low") || action.equals("punch_high"))
 				return "crouch_punch";
@@ -81,9 +103,9 @@ public class Arena
 		return action;
 	}
 	
-	private String getSpriteAdress(Color color, String movement, String stand)
+	private String getSpriteAdress(StateFighter fighter)
 	{
-		return RECOURSES+"/"+getColorAdress(color)+"/"+getMovementSpriteAdress(movement, stand)+IMAGE_EXTENSION;
+		return RECOURSES+"/"+getColorAdress(fighter.getColor())+"/"+getMovementSpriteAdress(fighter)+IMAGE_EXTENSION;
 	}
 	
 	private void drawFighter(StateFighter fighter)
@@ -92,7 +114,7 @@ public class Arena
 		int yPosition = Y_FIGHTER;
 		if(fighter.getStand() == Stand.JUMP)
 			yPosition = Y_FIGHTER_JUMP;
-		String spriteAdress = getSpriteAdress(fighter.getColor(), fighter.getMovement(), fighter.getAction());
+		String spriteAdress = getSpriteAdress(fighter);
 		if(fighter.getDirection() == Direction.LEFT)
 			StdDraw.picture(xPosition, yPosition, spriteAdress);
 		else
@@ -108,6 +130,7 @@ public class Arena
 			drawFighter(state.getFighter1());
 			drawFighter(state.getFighter2());
 			drawScoreBoard();
+			drawVictoryScreen();
 			state.next();
 			StdDraw.show(FRAME_RATE);
 		}
