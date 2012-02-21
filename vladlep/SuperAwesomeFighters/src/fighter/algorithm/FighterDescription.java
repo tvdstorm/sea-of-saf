@@ -75,7 +75,7 @@ public class FighterDescription {
 		}
 	}
 
-	public void updateDistAcceptedCond(ConditionType newAcceptedCond) {
+	public void updateAcceptedDistanceCond(ConditionType newAcceptedCond) {
 
 		acceptedConditions.remove(ConditionType.near);
 		acceptedConditions.remove(ConditionType.far);
