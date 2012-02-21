@@ -35,14 +35,7 @@ public class FightArena extends JFrame {
 
 	}
 
-	public static void startGame(IFighter firstFighter, IFighter secondFighter,
-			List<Message> messages) {
-		if (singleton == null)
-			singleton = new FightArena(firstFighter, secondFighter);
-
-		if (messages.size() != 0) {
-			singleton.showMessages(messages);
-		}
+	public static void startGame() {
 		singleton.drawComponents();
 		singleton.setVisible(true);
 
@@ -50,6 +43,7 @@ public class FightArena extends JFrame {
 
 	private void drawComponents() {
 		drawStatusPanel();
+		
 
 	}
 
@@ -60,13 +54,6 @@ public class FightArena extends JFrame {
 		statusPanel.add(new FighterStatus(secondFighter));
 
 		masterContainer.add(statusPanel);
-	}
-
-	public void showMessages(List<Message> messages) {
-		// could be improved much more.
-		JOptionPane.showMessageDialog(singleton, messages.toString(), "Errors",
-				JOptionPane.ERROR_MESSAGE);
-		singleton.dispose();
 	}
 
 }
