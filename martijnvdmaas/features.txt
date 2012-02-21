@@ -1,5 +1,6 @@
 - Clean grammar
 - Visitor pattern for validating elements
+- Validation with useful feedback due to levenshtein distance algorithm
 - Apart ErrorLog file
 - SAF Constants and Error Constants in interfaces
 - Model-view-controller pattern for global architecture using observer
