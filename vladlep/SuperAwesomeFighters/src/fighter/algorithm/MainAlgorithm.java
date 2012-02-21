@@ -57,6 +57,8 @@ public class MainAlgorithm {
 			rightFighterDesc.reinit();
 		} while (leftFighterDesc.getHealth() != 0
 				|| rightFighterDesc.getHealth() != 0);
+
+		fightArena.dispose();
 	}
 
 	private static void updateDistanceConditions(int distance) {

@@ -14,8 +14,9 @@ public enum MoveActionType implements ActionType {
 
 			int newPosistionX;
 			newPosistionX = fighterState.computeNewPositionX(1);
-			if (newPosistionX != oponentState.getPositionX())
+			if (Math.abs(newPosistionX - oponentState.getPositionX()) > BattleConstants.minimDistance) {
 				fighterState.setPositionX(newPosistionX);
+			}
 		}
 
 	},
@@ -28,8 +29,9 @@ public enum MoveActionType implements ActionType {
 
 			int newPosistionX;
 			newPosistionX = fighterState.computeNewPositionX(-1);
-			if (newPosistionX != oponentState.getPositionX())
+			if (Math.abs(newPosistionX - oponentState.getPositionX()) > BattleConstants.minimDistance) {
 				fighterState.setPositionX(newPosistionX);
+			}
 		}
 
 	},
@@ -48,8 +50,12 @@ public enum MoveActionType implements ActionType {
 
 			int newPosistionX;
 			newPosistionX = fighterState.computeNewPositionX(1);
-			if (newPosistionX != oponentState.getPositionX())
+			if (Math.abs(newPosistionX - oponentState.getPositionX()) > BattleConstants.minimDistance) {
 				fighterState.setPositionX(newPosistionX);
+			} else {
+				System.out.println(newPosistionX);
+				fighterState.setRemainingTime(1);
+			}
 		}
 
 	},
@@ -68,8 +74,10 @@ public enum MoveActionType implements ActionType {
 
 			int newPosistionX;
 			newPosistionX = fighterState.computeNewPositionX(-1);
-			if (newPosistionX != oponentState.getPositionX())
+			if (Math.abs(newPosistionX - oponentState.getPositionX()) > BattleConstants.minimDistance)
 				fighterState.setPositionX(newPosistionX);
+			else
+				fighterState.setRemainingTime(1);
 		}
 	},
 

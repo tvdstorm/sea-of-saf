@@ -2,10 +2,7 @@ package fighter.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridLayout;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import fighter.algorithm.FighterDescription;
 
 @SuppressWarnings("serial")
