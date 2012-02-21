@@ -26,16 +26,16 @@ import nl.uva.saf.fdl.types.ConditionType;
 
 public class ConditionSemantics implements IConditionSemantics {
 	final int distanceScale;
-	final int muchWeakerDifference;
+	final int significantStrengthDifference;
 
 	public ConditionSemantics() {
 		distanceScale = 4;
-		muchWeakerDifference = 5;
+		significantStrengthDifference = 5;
 	}
 
-	public ConditionSemantics(int distanceScale, int muchWeakerDifference) {
+	public ConditionSemantics(int distanceScale, int significantStrengthDifference) {
 		this.distanceScale = distanceScale;
-		this.muchWeakerDifference = muchWeakerDifference;
+		this.significantStrengthDifference = significantStrengthDifference;
 	}
 
 	private void evaluateDistance(FighterBot fighter, FighterBot enemy, HashMap<ConditionType, Boolean> truthTable) {
@@ -87,16 +87,16 @@ public class ConditionSemantics implements IConditionSemantics {
 		if (powerDifference == 0) {
 			even = true;
 		} else if (powerDifference < 0) { // Enemy is stronger
-			if (absoluteDifference > muchWeakerDifference) {
-				much_stronger = true;
-			} else {
-				stronger = true;
-			}
-		} else if (powerDifference > 0) { // Enemy is weaker
-			if (absoluteDifference > muchWeakerDifference) {
+			if (absoluteDifference > significantStrengthDifference) {
 				much_weaker = true;
 			} else {
 				weaker = true;
+			}
+		} else if (powerDifference > 0) { // Enemy is weaker
+			if (absoluteDifference > significantStrengthDifference) {
+				much_stronger = true;
+			} else {
+				stronger = true;
 			}
 		}
 
