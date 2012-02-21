@@ -18,35 +18,35 @@ public class ConsoleTreeVisitor extends BaseTreeVisitor {
 	}
 	
 	@Override
-	public void visit(Fighter fighter) {
+	public void visitFighter(Fighter fighter) {
 		printWhitespace();
 		System.out.println("Fighter Name=" + fighter.getName());
 
 	}
 
 	@Override
-	public void visit(Personality personality) {
+	public void visitPersonality(Personality personality) {
 		depth = 1;
 		printWhitespace();
 		System.out.println("Personality");
 	}
 
 	@Override
-	public void visit(Behaviour behaviour) {
+	public void visitBehaviour(Behaviour behaviour) {
 		depth = 1;
 		printWhitespace();
 		System.out.println("Behaviour");
 	}
 	
 	@Override
-	public void visit(Characteristic characteristic) {
+	public void visitCharacteristic(Characteristic characteristic) {
 		depth = 2;
 		printWhitespace();
 		System.out.println("Characteristic Name=" + characteristic.getName() + " Value=" + characteristic.getValue());
 	}
 	
 	@Override
-	public void visit(Rule rule) {
+	public void visitRule(Rule rule) {
 		depth = 2;
 		printWhitespace();
 		System.out.println("Rule");
@@ -54,27 +54,27 @@ public class ConsoleTreeVisitor extends BaseTreeVisitor {
 	}
 	
 	@Override
-	public void visit(AndStatement andStatement) {
+	public void visitAndStatement(AndStatement andStatement) {
 		printWhitespace();
 		System.out.println("And statement");
 		depth += 1;
 	}
 
 	@Override
-	public void visit(OrStatement orStatement) {
+	public void visitOrStatement(OrStatement orStatement) {
 		printWhitespace();
 		System.out.println("Or statement");
 		depth += 1;
 	}
 
 	@Override
-	public void visit(SingleCondition condition) {
+	public void visitSingleCondition(SingleCondition condition) {
 		printWhitespace();
 		System.out.println("Single condition Name=" + condition.getName());
 	}
 	
 	@Override
-	public void visit(Actions action) {
+	public void visitActions(Actions action) {
 		depth = 3;
 		printWhitespace();
 		System.out.println(action.getMoveOptions().toString());

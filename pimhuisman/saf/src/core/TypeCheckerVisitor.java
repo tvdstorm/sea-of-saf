@@ -23,7 +23,7 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 	}
 	
 	@Override
-	public void visit(Fighter fighter) {
+	public void visitFighter(Fighter fighter) {
 		if ( fighter.getPersonality() == null ) {
 			errors.add("The personality of a fighter must be specified.");
 		}
@@ -33,12 +33,12 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 	}
 
 	@Override
-	public void visit(Personality personality) {
+	public void visitPersonality(Personality personality) {
 		
 	}
 
 	@Override
-	public void visit(Behaviour behaviour) {
+	public void visitBehaviour(Behaviour behaviour) {
 		boolean foundAlwaysRule = false;
 		List<Rule> rules = behaviour.getRules();
 		for ( Rule rule : rules ) {
@@ -55,7 +55,7 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 	}
 
 	@Override
-	public void visit(Characteristic characteristic) {
+	public void visitCharacteristic(Characteristic characteristic) {
 		String name = characteristic.getName();
 		int value = characteristic.getValue();
 		if ( value < 0 ) {
@@ -66,27 +66,27 @@ public class TypeCheckerVisitor extends BaseTreeVisitor {
 	}
 
 	@Override
-	public void visit(Rule rule) {
+	public void visitRule(Rule rule) {
 
 	}
 	
 	@Override
-	public void visit(AndStatement andStatement) {
+	public void visitAndStatement(AndStatement andStatement) {
 		
 	}
 	
 	@Override
-	public void visit(OrStatement orStatement) {
+	public void visitOrStatement(OrStatement orStatement) {
 		
 	}
 
 	@Override
-	public void visit(SingleCondition condition) {
+	public void visitSingleCondition(SingleCondition condition) {
 				
 	}
 
 	@Override
-	public void visit(Actions action) {
+	public void visitActions(Actions action) {
 		
 	}
 

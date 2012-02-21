@@ -11,14 +11,14 @@ import data.SingleCondition;
 
 public abstract class BaseTreeVisitor {
 
-	public abstract void visit(Fighter fighter);
-	public abstract void visit(Personality personality);
-	public abstract void visit(Behaviour behaviour);
-	public abstract void visit(Characteristic characteristic);
-	public abstract void visit(Rule rule);
-	public abstract void visit(AndStatement andStatement);
-	public abstract void visit(OrStatement orStatement);
-	public abstract void visit(SingleCondition condition);
-	public abstract void visit(Actions action);
+	public abstract void visitFighter(Fighter fighter);
+	public abstract void visitPersonality(Personality personality);
+	public abstract void visitBehaviour(Behaviour behaviour);
+	public abstract void visitCharacteristic(Characteristic characteristic);
+	public abstract void visitRule(Rule rule);
+	public abstract void visitAndStatement(AndStatement andStatement);
+	public abstract void visitOrStatement(OrStatement orStatement);
+	public abstract void visitSingleCondition(SingleCondition condition);
+	public abstract void visitActions(Actions action);
 	
 }

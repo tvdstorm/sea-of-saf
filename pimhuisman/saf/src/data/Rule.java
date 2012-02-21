@@ -22,7 +22,7 @@ public class Rule extends BaseData {
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
-		treeVisitor.visit(this);
+		treeVisitor.visitRule(this);
 		condition.acceptTreeVisitor(treeVisitor);
 		actions.acceptTreeVisitor(treeVisitor);
 	}

@@ -28,7 +28,7 @@ public class OrStatement extends BaseData implements Condition {
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
-		treeVisitor.visit(this);
+		treeVisitor.visitOrStatement(this);
 		if ( condition1 instanceof BaseData ) {
 			((BaseData)condition1).acceptTreeVisitor(treeVisitor);
 		}

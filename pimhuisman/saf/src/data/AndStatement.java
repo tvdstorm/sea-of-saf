@@ -28,7 +28,7 @@ public class AndStatement extends BaseData implements Condition {
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
-		treeVisitor.visit(this);
+		treeVisitor.visitAndStatement(this);
 		if ( condition1 instanceof BaseData ) {
 			((BaseData)condition1).acceptTreeVisitor(treeVisitor);
 		}
