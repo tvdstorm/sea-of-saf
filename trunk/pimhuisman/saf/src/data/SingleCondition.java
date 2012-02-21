@@ -28,7 +28,7 @@ public class SingleCondition extends BaseData implements Condition {
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
-		treeVisitor.visit(this);
+		treeVisitor.visitSingleCondition(this);
 	}
 	
 }

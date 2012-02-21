@@ -28,7 +28,7 @@ public class Behaviour extends BaseData {
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
-		treeVisitor.visit(this);
+		treeVisitor.visitBehaviour(this);
 		for ( Rule rule : rules ) {
 			rule.acceptTreeVisitor(treeVisitor);
 		}

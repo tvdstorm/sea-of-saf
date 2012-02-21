@@ -22,7 +22,7 @@ public class Characteristic extends BaseData {
 
 	@Override
 	public void acceptTreeVisitor(BaseTreeVisitor treeVisitor) {
-		treeVisitor.visit(this);
+		treeVisitor.visitCharacteristic(this);
 	}
 	
 }
