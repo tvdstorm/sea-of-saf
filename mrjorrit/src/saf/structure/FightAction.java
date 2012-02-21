@@ -1,38 +1,31 @@
 package saf.structure;
 
-import java.util.ArrayList;
-
 import saf.Checker.Check;
 
-public class FightAction extends Check {
-
-	//Constructor
-	public FightAction(String fightAction)
+public class FightAction extends Action 
+{	
+	public FightAction(String fightActionTypeString)
 	{
-		FightActionType fightActionType2;
-		try
-		{
-			fightActionType2 = FightActionType.valueOf(fightAction);
-		}
-		catch(Exception e)
-		{
-			//set to default value
-			fightActionType2  = null;
-			addError("Illegal FightAction: '" + fightAction + "'");
-		}
-		this.fightActionType = fightActionType2;
+		super(fightActionTypeString);
 	}
-	
-	//Attribute
-	private final FightActionType fightActionType;
 
-	public FightActionType getFightActionType() {
-		return fightActionType;
+	public FightActionType getFightActionType() 
+	{
+		return FightActionType.valueOf(actionTypeString);
 	}
-	
+
 	@Override
-	public ArrayList<String> check() {
-		// TODO Auto-generated method stub
-		return getErrors();
+	public void check(Check checker) 
+	{
+		boolean fightActionExists = false;
+		for(FightActionType fightActionType : FightActionType.values())
+		{
+			if(actionTypeString.equals(fightActionType.name()))
+				fightActionExists = true;
+		}
+		
+		if(!fightActionExists)
+			checker.addError("'" + actionTypeString + "' isn't a valid fight action");
 	}
+
 }

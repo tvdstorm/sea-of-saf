@@ -149,8 +149,8 @@ public class FighterState extends Subject {
 		this.step = step;
 	}
 
-	public void incrementStep() {
-		step += speed;
+	public void nextStep() {
+		step -= speed;
 	}
 	
 	

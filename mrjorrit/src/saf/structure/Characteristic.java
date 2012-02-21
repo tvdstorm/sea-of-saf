@@ -1,50 +1,52 @@
 package saf.structure;
 
-import java.util.ArrayList;
-
 import saf.Checker.Check;
 
-public class Characteristic extends Check {
+public class Characteristic extends Node 
+{
 	
-	//Attribute
-	private final Attribute attribute;
-
-	public Attribute getAttribute() {
-		return attribute;
-	}
-
-	//Power
+	private final String attributeString;
 	private final int power;
-		
-	public int getPower() {
+	
+	public Attribute getAttribute() 
+	{
+		return Attribute.valueOf(attributeString);
+	}
+	
+	public String getAttributeString() 
+	{
+		return attributeString;
+	}
+	
+	public int getPower() 
+	{
 		return power;
 	}
 
-	public Characteristic(String attribute, int power)
+	public Characteristic(String attributeString, int power)
 	{
-		Attribute attribute2;
-		
-		try
-		{
-			attribute2 = Attribute.valueOf(attribute);
-		}
-		catch(Exception e)
-		{
-			//Set to default attribute
-			attribute2 = null;
-			addError("Illegal attribute: '" + attribute + "'");
-		}
-		this.attribute = attribute2;
+		this.attributeString = attributeString;
 		this.power = power;
 	}
 
 	@Override
-	public ArrayList<String> check(){
+	public void check(Check checker) 
+	{
 		if(power < 1 || power > 10) 
 		{
-			addError("The power: '" + power + "', is invalid for: '" + attribute.toString() + "'. Power should be in the range of 1-10.");
+			checker.addError("The power: '" + power + "', is invalid for: '" + attributeString + "'. Power should be in the range of 1-10.");
 		}
-		return getErrors();
+		
+		boolean attributeExists = false;
+		for(Attribute attribute : Attribute.values())
+		{
+			if(attributeString.equals(attribute.name()))
+				attributeExists = true;
+		}
+		
+		if(!attributeExists)
+			checker.addError("'" + attributeString + "' isn't a valid move action");
+		
 	}
 	
 }

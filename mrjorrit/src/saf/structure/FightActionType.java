@@ -1,6 +1,7 @@
 package saf.structure;
 
-public enum FightActionType {
+public enum FightActionType 
+{
 	block_low,
 	block_high,
 	punch_low,

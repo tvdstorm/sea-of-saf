@@ -1,38 +1,30 @@
 package saf.structure;
 
-import java.util.ArrayList;
-
 import saf.Checker.Check;
 
-public class MoveAction extends Check {
-
-	//Constructor
-	public MoveAction(String moveAction)
+public class MoveAction extends Action 
+{
+	public MoveAction(String moveActionTypeString)
 	{
-		MoveActionType moveActionType2;
-		try
-		{
-			moveActionType2 = MoveActionType.valueOf(moveAction);
-		}
-		catch(Exception e)
-		{
-			//set to default value
-			moveActionType2  = null;
-			addError("Illegal MoveAction: '" + moveAction + "'");
-		}
-		this.moveActionType = moveActionType2;
+		super(moveActionTypeString);
 	}
-	
-	//Attribute
-	private final MoveActionType moveActionType;
 
-	public MoveActionType getMoveActionType() {
-		return moveActionType;
+	public MoveActionType getMoveActionType() 
+	{
+		return MoveActionType.valueOf(actionTypeString);
 	}
-	
+
 	@Override
-	public ArrayList<String> check() {
-		// TODO Auto-generated method stub
-		return getErrors();
+	public void check(Check checker) 
+	{
+		boolean moveActionExists = false;
+		for(MoveActionType moveActionType : MoveActionType.values())
+		{
+			if(actionTypeString.equals(moveActionType.name()))
+				moveActionExists = true;
+		}
+		
+		if(!moveActionExists)
+			checker.addError("'" + actionTypeString + "' isn't a valid move action");
 	}
 }

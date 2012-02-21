@@ -26,11 +26,13 @@ public abstract class Arena extends Observer {
 		engine.start();
 	}
 
-	public FighterState getRightFighterState() {
+	public FighterState getRightFighterState() 
+	{
 		return rightFighterState;
 	}
 
-	public FighterState getLeftFighterState() {
+	public FighterState getLeftFighterState() 
+	{
 		return leftFighterState;
 	}
 }
