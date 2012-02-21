@@ -35,4 +35,5 @@ public class MessageReporter {
 				messages.toString(), "Errors", JOptionPane.ERROR_MESSAGE);
 		singleton.parentFrame.dispose();
 	}
+	
 }
