@@ -1,8 +1,8 @@
 JackieChan{
 	kickPower = 7
 	punchPower = 5
-	kickReach = 3
-	punchReach = 9
+	kickReach = 1
+	punchReach = 1
 	always[run_towards block_high]
 	near[walk_away block_high]
 }
