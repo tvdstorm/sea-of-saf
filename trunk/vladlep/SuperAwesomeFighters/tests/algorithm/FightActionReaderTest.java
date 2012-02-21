@@ -1,4 +1,4 @@
-package gui;
+package algorithm;
 
 import javax.swing.JFrame;
 

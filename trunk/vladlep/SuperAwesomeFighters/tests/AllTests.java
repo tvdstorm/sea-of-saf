@@ -4,7 +4,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ grammar.GrammarParserTest.class,
-		gui.FightActionReaderTest.class, checker.semantic.CheckerTests.class })
+		algorithm.FightActionReaderTest.class, checker.semantic.CheckerTests.class })
 public class AllTests {
 
 }
