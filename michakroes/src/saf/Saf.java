@@ -18,21 +18,33 @@ public class Saf implements SafInterface {
 	
 	private Behaviour behaviour;
 	private Personality personality; 
+
+	private int health; 
 	
-	public Saf() {}
+	private int posX;
+	private int posY;
+	
+	public Saf() {
+		
+	}
 	
 	public Saf(String name, Personality p, Behaviour b) {
         this.name = name;
         this.personality = p; 
         this.behaviour = b;
+        this.health = 100;
 	} 
 
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 	
 	public Personality getPersonality() {
@@ -49,5 +61,21 @@ public class Saf implements SafInterface {
 		this.personality.accept(visitor);
 		
 		visitor.visit(this);
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 }

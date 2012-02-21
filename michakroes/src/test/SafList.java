@@ -23,6 +23,10 @@ public class SafList {
 		return this.type;
 	}
 	
+	public List<String> getItems() {
+		return this.items;
+	}
+	
 	public String getSuggestion(String item) {
 		int min = item.length();
 		String suggestion = "no suggestion";

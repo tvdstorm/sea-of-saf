@@ -7,9 +7,12 @@ public interface SafVisitor {
 	 void visit(Behaviour b);
 	 void visit(Personality p);
 	 void visit(Strength s);
-	 void visit(Condition c);
+	 void visit(BehaviourRule br);
+	 void visit(ConditionAction c);
 	 void visit(WalkAction wa);
 	 void visit(FightAction fa);
-	 void visit(BehaviourRule br);
-	 void visit(Type t);	 
+	 void visit(ConditionConnective conditionConnective);
+	 void visit(ConditionAnd conditionAnd);
+	 void visit(ConditionOr conditionOr);
+	 void visit(Condition c);
 }

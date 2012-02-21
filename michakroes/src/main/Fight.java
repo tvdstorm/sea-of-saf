@@ -3,99 +3,54 @@ package main;
 import java.io.*;
 
 import org.antlr.runtime.*;
-import org.antlr.runtime.tree.*;
-import org.antlr.stringtemplate.*;
-
-//import antlr.CommonAST;
-//import antlr.DumpASTVisitor;
-//import org.antlr.stringtemplate.*;
 
 import lexer.*;
 import saf.*;
 import test.*;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
+import graphics.*;
+import config.*;
 
-public class Fight {
-
-	static final TreeAdaptor adaptor = new CommonTreeAdaptor() {
-		public Object create(Token payload) {
-			return new CommonTree(payload);
-		}
-	};
-	
+public class Fight {	
     public static void main(String[] args) throws Exception {
-    	// create new fighter Statham
-    	Saf s = loadFighter("expendables/Statham.saf");
-        
-    	// visit AST
-    	s.accept(new SafVisitorCheck());
+    	Saf s1 = createFigher(settings.PLAYER1_FILE);
+    	Saf s2 = createFigher(settings.PLAYER2_FILE);
     	
-    	// print the name, so you know parsing went ok
-    	System.out.println(s.getName());
-    	
-    	// do consistency check
-    	//checkSaf();
-    	
-    	//grammar.setTreeAdaptor(adaptor);
-    	//safParser.saf_return ret = grammar.saf();
-    	//CommonTree tree = (CommonTree)ret.getTree();
-    	
-    	//String treeString = generateStringDotTree(tree);
-    	//saveDotFile("output/fighter_ast.dot", treeString);
-        
-        //CommonAST ast = (CommonAST)parser.getAST(); 
-        //DumpASTVisitor visitor = new DumpASTVisitor();
-        //visitor.visit(ast);
+    	if (s1 != null && s2 != null)
+    		doGraphics(s1, s2);
     }
     
-    public static Saf loadFighter(String file) throws IOException, RecognitionException {
-    	ANTLRFileStream fs = new ANTLRFileStream(file);
-    	safLexer lex = new safLexer(fs);
-    	
-    	TokenRewriteStream tokens = new TokenRewriteStream(lex);
-    	safParser grammar = new safParser(tokens);
-    	
-    	return grammar.saf();
+    private static Saf createFigher(String file) {
+    	Saf s = loadFighter(file);
+    	if (s != null)
+    		s.accept(new SafVisitorCheck());
+    	return s;
     }
     
-    public static void checkSaf() {
-    	Result result = JUnitCore.runClasses(SafChecker.class);
-		for (Failure failure : result.getFailures()) {
-			System.out.println(failure.toString());
-		}
+    private static void doGraphics(Saf s1, Saf s2) {
+    	GraphicsFrame gFrame = new GraphicsFrame(settings.SCREEN_TITLE);
+    	Sprite fighter_sprite = new Sprite();
+        gFrame.setPanel(new GraphicsPanel(fighter_sprite, s1, s2));
     }
     
-    // print the AST as DOT specification 
-    public static String generateStringDotTree(CommonTree tree) {
-    	DOTTreeGenerator gen = new DOTTreeGenerator(); 
-    	StringTemplate st = gen.toDOT(tree); 
-    	return st.toString();
-    }
-    
-    // save the file to disk
-    public static void saveDotFile(String file, String content) {
+    public static Saf loadFighter(String file) {
+    	ANTLRFileStream fs;
+		Saf s = new Saf();
+		
     	try {
-    		FileWriter fstream = new FileWriter(file);
-    		BufferedWriter out = new BufferedWriter(fstream);
-    		out.write(content);
-    		out.close();
-    	} catch (Exception e){
-    		System.err.println("Error: " + e.getMessage());
-        }
-    }
-    
-    // print tree in console
-    public static void printTree(CommonTree t, int indent) {
-    	if ( t != null ) {
-    		StringBuffer sb = new StringBuffer(indent);
-    		for ( int i = 0; i < indent; i++ )
-    			sb = sb.append("   ");
-    		for ( int i = 0; i < t.getChildCount(); i++ ) {
-    			System.out.println(sb.toString() + t.getChild(i).toString());
-    			printTree((CommonTree)t.getChild(i), indent+1);
-    		}
-    	}
+			fs = new ANTLRFileStream(file);
+			
+			safLexer lex = new safLexer(fs);
+	    	
+	    	TokenRewriteStream tokens = new TokenRewriteStream(lex);
+	    	safParser grammar = new safParser(tokens);
+	    	
+	    	s = grammar.saf();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (RecognitionException e) {
+			e.printStackTrace();
+		}
+    	
+    	return s;
     }
 }

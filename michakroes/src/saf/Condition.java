@@ -1,14 +1,7 @@
 package saf;
 
-import test.SafVisitor;
+import test.SafInterface;
 
-public class Condition extends Type {
-	public Condition(String m) {
-		super(m);
-	}
+public abstract class Condition implements SafInterface {
 	
-	@Override
-	public void accept(SafVisitor visitor) {
-		visitor.visit(this);
-	}
 }

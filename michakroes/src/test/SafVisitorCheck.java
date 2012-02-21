@@ -1,68 +1,99 @@
 package test;
 
-//import java.util.ArrayList;
-//import java.util.List;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import config.settings;
+
 import saf.*;
-//import test.*;
 
-public class SafVisitorCheck implements SafVisitor {
-
-	final SafList Strenghts = new SafList("strength", new String[]{ "punchReach", "punchPower", "kickReach", "kickPower" } );
-	final SafList Conditions = new SafList("condition", new String[]{ "always", "near", "far", "much_stronger", "stronger", "even", "weaker", "much_weaker" } );
-	final SafList Moves = new SafList("move", new String[]{ "walk_towards", "walk_away", "run_towards", "run_away", "jump", "crouch", "stand" } );
-	final SafList Fights = new SafList("fight", new String[]{ "block_low", "block_high", "punch_low", "punch_high", "kick_low", "kick_high" } );
-	
-	final int minStrength = 1;
-	final int maxStrength = 9;
-	
+/*
+ * Checks if Super Awesome Fighter has valid properties.
+ * 
+ * checks the following properties:
+ * - Personality
+ * 	 -> valid strengts
+ *     -> valid characteristics
+ *     -> valid powers (in bounds)
+ *   -> presence of all strengths
+ * - Behaviour 
+ *   -> valid rules
+ *     -> valid string
+ *   -> required always rule
+ *  
+ */
+public class SafVisitorCheck implements SafVisitor {	
 	private List<String> errors = new ArrayList<String>();
 	
 	@Override
-	public void visit(Saf saf) {      
-        System.out.println("Visiting " + saf.getName());
-
+	public void visit(Saf saf) {
+		if ( this.errors.size() > 0 ) {
+			System.err.println("Fighter is not valid");
+		} else {
+			System.out.println("Fighter is valid");
+		}
+		
         if (saf.getBehaviour() == null) addError("There is no behaviour defined");
         if (saf.getPersonality() == null) addError("There is no personality defined");
     }
  
 	@Override
     public void visit(Personality p) {
-        //System.out.println("Visiting personality");
+		for (String strength : settings.Strenghts.getItems()) {
+    		if (! p.hasStrength(strength) ) addError("Strength " + strength + " is not defined");
+		}
     }
  
     @Override
 	public void visit(Strength s) {    	 
     	try {
-			inList(this.Strenghts, s.getCharacteristic());
+			inList(settings.Strenghts, s.getCharacteristic());
 		} catch (SafException e) {
 			addError(e.getMessage());
 		}
     	
-    	if (s.getValue() > this.maxStrength) 
+    	if (s.getValue() > settings.maxStrength) 
     		addError("Value for strength " + s.getCharacteristic() + " is too large: " + s.getValue());
     	
-    	if (s.getValue() < this.minStrength) 
+    	if (s.getValue() < settings.minStrength) 
     		addError("Value for strength " + s.getCharacteristic() + " is too small: " + s.getValue());
 	} 
     
     @Override
-    public void visit(Behaviour b) {
-        //System.out.println("Visiting behaviour");
+    public void visit(Behaviour b) {    	
+    	if (b.getAlwaysRule() == null)
+    		addError("Always is not defined");
     }
     
     @Override
     public void visit(BehaviourRule br) {
-        //System.out.println("Visiting BehaviourRule");
+        
     }
     
     @Override
     public void visit(Condition c) {
+    	//System.out.println("Visiting Condition");
+    }
+    
+    @Override
+    public void visit(ConditionConnective conditionConnective) {
+    	//System.out.println("Visiting conditionConnective");
+    }
+    
+    @Override
+    public void visit(ConditionAnd c) {
+    	//System.out.println("Visiting ConditionAnd");
+    }
+    
+    @Override
+    public void visit(ConditionOr c) {
+    	//System.out.println("Visiting ConditionOr");
+    }
+    
+    @Override
+    public void visit(ConditionAction c) {
     	try {
-			inList(this.Conditions, c.getType());
+			inList(settings.Conditions, c.getCondition());
 		} catch (SafException e) {
 			addError(e.getMessage());
 		}
@@ -71,7 +102,7 @@ public class SafVisitorCheck implements SafVisitor {
     @Override
     public void visit(WalkAction ma) {
     	try {
-			inList(this.Moves, ma.getType());
+			inList(settings.Moves, ma.getType());
 		} catch (SafException e) {
 			addError(e.getMessage());
 		}
@@ -80,15 +111,10 @@ public class SafVisitorCheck implements SafVisitor {
     @Override
     public void visit(FightAction ma) {
     	try {
-			inList(this.Fights, ma.getType());
+			inList(settings.Fights, ma.getType());
 		} catch (SafException e) {
 			addError(e.getMessage());
 		}
-    }
-    
-    @Override
-    public void visit(Type t) {
-        System.out.println("Visiting type:" + t.getType());
     }
     
     public void inList(SafList sl, String item) throws SafException {
