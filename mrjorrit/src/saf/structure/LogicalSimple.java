@@ -34,5 +34,7 @@ public class LogicalSimple extends Logical{
 		if(!conditionExists)
 			checker.addError("'" + getConditionString() + "' isn't a valid condition");
 	}
+	
+	
 
 }

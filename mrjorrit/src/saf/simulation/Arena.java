@@ -1,6 +1,5 @@
 package saf.simulation;
 
-import saf.presentation.View;
 import saf.structure.*;
 
 public abstract class Arena extends Observer {
