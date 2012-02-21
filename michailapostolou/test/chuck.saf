@@ -1,0 +1,16 @@
+Chuck
+{
+  kickReach  = 1
+  punchReach = 1
+  punchPower = 9
+  kickPower  = 9
+  near [jump kick_low]
+  always [run_towards punch_high]
+}
+
+Challenging { 
+  kickReach = 10 
+  stronger [choose(jump run_away) choose(kick_low block_low)] 
+  near and much_stronger [choose(crouch jump) choose(kick_high punch_low)] 
+  always [crouch kick_low]
+}
