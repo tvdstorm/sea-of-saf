@@ -20,5 +20,11 @@ public class SimpleAction extends Action {
 	public String getAction(){
 		return this.action;
 	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+		
+	}
 
 }

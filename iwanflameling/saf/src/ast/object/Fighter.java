@@ -3,67 +3,58 @@
  */
 package ast.object;
 
-import java.util.Set;
+import java.util.List;
+
+import ast.ASTNode;
+import ast.Visitor;
+import ast.fighter.FighterProp;
 
 /**
  * Describes a Fighter in the SAF game.
  * @author Iwan Flameling
  */
-public class Fighter {
+public class Fighter extends ASTNode {
 	/**
 	 * The name of this {@link Fighter}.
 	 */
 	private String name;
 	
 	/**
-	 * A {@link Set} of {@link Rule}s to describe the behavior of this {@link Fighter}. 
+	 * A {@link List} of {@link FighterProp}s to describe the properties of this {@link Fighter}. 
 	 */
-	private Set<Rule> behaviour;
-	
-	/**
-	 * Indication of how far this {@link Fighter} can reach its punch.
-	 */
-	private int punchReach;
-	
-	/**
-	 * Indication of how far this {@link Fighter} can reach its kick.
-	 */
-	private int kickReach;
-	
-	/**
-	 * Indication of how powerful this {@link Fighter} can punch.
-	 */
-	private int punchPower;
-	
-	/**
-	 * Indication of kick-power on a scale of 1 to 10 inclusive.
-	 */
-	private int kickPower;
+	private List<FighterProp> fighterProps;
 	
 	
 	/**
 	 * no-arg constructor, because I don't know yet the mandatory
 	 * information for a {@link Fighter}.
 	 */
-	public Fighter(String name){
+	public Fighter(String name, List<FighterProp> properties){
 		this.name = name;
+		this.fighterProps = properties;
 	}
 	
-	public int getPunchPower() {
-		return punchPower;
-	}
-
-	public void setPunchPower(int punchPower) {
-		this.punchPower = punchPower;
-	}
-
 	/**
 	 * @return The name of the {@link Fighter}.
 	 */
-	private String getName(){
+	public String getName(){
 		return this.name;
 	}
 	
+	
+	/**
+	 * @return The {@link FighterProp}s applicable to this {@link Fighter}.
+	 */
+	public List<FighterProp> getFighterProps() {
+		return fighterProps;
+	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+		
+	}
+
 	/**
 	 * @return A {@link String} representation of the {@link Fighter}.
 	 */
@@ -71,7 +62,6 @@ public class Fighter {
 		String className = this.getClass().getSimpleName();
 		StringBuilder sb = new StringBuilder("<" + className + "| ");
 		sb.append("name: " + getName() + ", ");
-		sb.append("punchPower: " + getPunchPower() + ", ");
 		sb.append("|>");
 		return sb.toString();
 	}

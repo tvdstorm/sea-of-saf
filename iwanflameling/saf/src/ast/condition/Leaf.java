@@ -27,4 +27,11 @@ public class Leaf extends Condition {
 		
 	}
 
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	
 }
