@@ -148,7 +148,11 @@ public class FighterLoadDialog extends JDialog {
 						loadedFighters.add(red);
 					}
 
-					eventSourceWindow.dispose();
+					if (loadedFighters.size() == 2) {
+						eventSourceWindow.dispose();
+					} else {
+						loadedFighters.clear();
+					}
 				}
 			}
 		});
@@ -176,9 +180,11 @@ public class FighterLoadDialog extends JDialog {
 
 		return listModel;
 	}
+
 	public List<FighterBot> getLoadedFighters() {
 		return loadedFighters;
 	}
+
 	private void setProperties() {
 		setModal(true);
 		setSize(new Dimension(600, 470));
