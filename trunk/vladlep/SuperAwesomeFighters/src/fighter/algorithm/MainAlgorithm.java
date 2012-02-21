@@ -7,8 +7,8 @@ import fighter.gui.images.FightImagesContainer;
 
 public class MainAlgorithm {
 
-	public static final int direction = 1;
-	private static final int sleepTimeMiliS = 1000;
+	public static final int towardsRightDirection = 1;
+	private static final int sleepTimeMiliS = 500;
 	private static FightArena fightArena;
 	private static FighterDescription leftFighterDesc;
 	private static FighterDescription rightFighterDesc;
@@ -16,10 +16,10 @@ public class MainAlgorithm {
 	public static void setUpFight(IFighter leftFighter, IFighter rightFighter) {
 		leftFighterDesc = new FighterDescription(leftFighter,
 				BattleConstants.leftFighterStartPositionX,
-				BattleConstants.groundPositionY, direction);
+				BattleConstants.groundPositionY, towardsRightDirection);
 		rightFighterDesc = new FighterDescription(rightFighter,
 				BattleConstants.rightFighterStartPositionX,
-				BattleConstants.groundPositionY, -direction);
+				BattleConstants.groundPositionY, -towardsRightDirection);
 		leftFighterDesc.updateAcceptedPowerCond(rightFighter.getPersonality());
 		rightFighterDesc.updateAcceptedPowerCond(leftFighter.getPersonality());
 
@@ -33,20 +33,20 @@ public class MainAlgorithm {
 	public static void simulateFight() {
 		int fightersDistance;
 		do {
-
 			try {
 				Thread.sleep(sleepTimeMiliS);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			// select next move phase
+			// calculate conditions that hold now, based on fighter's distance.
 			fightersDistance = leftFighterDesc
 					.calculateFigterDistance(rightFighterDesc.getFighterState());
 			updateDistanceConditions(fightersDistance);
-
+			// select next move phase
 			leftFighterDesc.calculateNextMove();
 			rightFighterDesc.calculateNextMove();
 
+			//perform actions 
 			leftFighterDesc.performActions(rightFighterDesc.getFighterState());
 			rightFighterDesc.performActions(leftFighterDesc.getFighterState());
 
@@ -64,11 +64,11 @@ public class MainAlgorithm {
 
 	private static void updateDistanceConditions(int distance) {
 		if (distance < BattleConstants.farDistanceThreshold) {
-			leftFighterDesc.updateDistAcceptedCond(ConditionType.near);
-			rightFighterDesc.updateDistAcceptedCond(ConditionType.near);
+			leftFighterDesc.updateAcceptedDistanceCond(ConditionType.near);
+			rightFighterDesc.updateAcceptedDistanceCond(ConditionType.near);
 		} else {
-			leftFighterDesc.updateDistAcceptedCond(ConditionType.far);
-			rightFighterDesc.updateDistAcceptedCond(ConditionType.far);
+			leftFighterDesc.updateAcceptedDistanceCond(ConditionType.far);
+			rightFighterDesc.updateAcceptedDistanceCond(ConditionType.far);
 		}
 
 	}

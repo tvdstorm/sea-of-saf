@@ -11,6 +11,14 @@ public class FightImagesContainer {
 
 	private static HashMap<FightActionType, BufferedImage> fightImages;
 
+	public static void loadAllFightImages() {
+		fightImages = new HashMap<FightActionType, BufferedImage>();
+		for (FightActionType action : FightActionType.values()) {
+			BufferedImage img = ImageLoader.loadImage(action.toString());
+			fightImages.put(action, img);
+		}
+	}
+
 	public static BufferedImage getImage(FightActionType key, int rotationAngle) {
 		BufferedImage selectedImage;
 		selectedImage = fightImages.get(key);
@@ -25,11 +33,4 @@ public class FightImagesContainer {
 		return selectedImage;
 	}
 
-	public static void loadAllFightImages() {
-		fightImages = new HashMap<FightActionType, BufferedImage>();
-		for (FightActionType action : FightActionType.values()) {
-			BufferedImage img = ImageLoader.loadImage(action.toString());
-			fightImages.put(action, img);
-		}
-	}
 }
