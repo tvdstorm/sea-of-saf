@@ -3,28 +3,18 @@ package saf.ast;
 import java.util.ArrayList;
 import java.util.List;
 
-import saf.ast.base.BehaviorItem;
-import saf.simulator.enums.*;
+import saf.ast.base.Identifier;
+import saf.ast.identifiers.Strengths;
+//import saf.simulator.enums.*;
 
-public class Fighter extends BehaviorItem{
+public class Fighter extends Identifier{
 	
 	private String name;
 	private List<Strength> strengths;
 	private List<Behavior> behaviors;
 	
-	private int health;
-	
-	private float weight;
-	private float height;
-	private float speed;
-	
-	private FighterStatus status;
-	private FighterLocation location;
-	
 	public Fighter(){
-		this.name = "";
-		this.strengths = new ArrayList<Strength>();
-		this.behaviors = new ArrayList<Behavior>();
+		this("");
 	}
 	
 	public Fighter(String n){
@@ -72,56 +62,16 @@ public class Fighter extends BehaviorItem{
 		this.behaviors.addAll(behaviors);
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-	
-	public void reduceHealth(int units){
-		this.health -= units;
-	}
-
 	public float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(float weight) {
-		this.weight = weight;
+		return (float)(getValueOfStrength(Strengths.PUNCHPOWER) + getValueOfStrength(Strengths.KICKPOWER)) / 2;
 	}
 
 	public float getHeight() {
-		return height;
-	}
-
-	public void setHeight(float height) {
-		this.height = height;
+		return (float)(getValueOfStrength(Strengths.PUNCHREACH) + getValueOfStrength(Strengths.KICKREACH)) / 2;
 	}
 
 	public float getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(float speed) {
-		this.speed = speed;
-	}
-
-	public FighterStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(FighterStatus status) {
-		this.status = status;
-	}
-
-	public FighterLocation getLocation() {
-		return location;
-	}
-
-	public void setLocation(FighterLocation location) {
-		this.location = location;
+		return (float)Math.abs(getHeight() - getWeight()) / 2;
 	}
 	
 	public int getTotalStrength(){ 
@@ -132,9 +82,9 @@ public class Fighter extends BehaviorItem{
 		return sumStrength;
 	}
 	
-	public int getValueOfStrength(String s){
+	public int getValueOfStrength(Strengths s){
 		for(Strength strength : strengths){
-			if(strength.getName().equals(s)){
+			if(strength.getStrength().equals(s)){
 				return strength.getValue();
 			}
 		}
@@ -142,10 +92,6 @@ public class Fighter extends BehaviorItem{
 	}
 	
 	public void print(){
-		System.out.println("Name: " + name);
-		System.out.println("Weight: " + weight);
-		System.out.println("Height: " + height);
-		System.out.println("Speed: " + speed);
 		for (Strength strength : strengths){
 			System.out.println("\tStrength :" + strength.toString());
 		}

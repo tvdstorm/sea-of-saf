@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 import saf.ast.*;
+import saf.ast.base.*;
 
 public class Saf implements SafConstants {
 
   final public List<Fighter> Parse() throws ParseException {
-        ArrayList<Fighter> fighters = new ArrayList<Fighter>();
+        List<Fighter> fighters = new ArrayList<Fighter>();
         Fighter fighter = new Fighter();
 
         Token fighterName = new Token();
@@ -86,7 +87,7 @@ public class Saf implements SafConstants {
   }
 
   final public List<Behavior> Behaviors() throws ParseException {
-    Condition condition = new Condition();
+    BaseCondition condition;
 
     List<Move> moves = new ArrayList<Move>();
     List<Attack> attacks = new ArrayList<Attack>();
@@ -108,51 +109,37 @@ public class Saf implements SafConstants {
     throw new Error("Missing return statement in function");
   }
 
-  final public Condition Condition() throws ParseException {
+  final public BaseCondition Condition() throws ParseException {
     Token conditionToken = new Token();
     Token secondConditionToken = new Token();
 
-    Condition condition;
-    if (jj_2_3(2)) {
-      if (jj_2_2(2)) {
-        conditionToken = jj_consume_token(IDENTIFIER);
+    BaseCondition condition;
+    conditionToken = jj_consume_token(IDENTIFIER);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case AND:
+    case OR:
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case AND:
         jj_consume_token(AND);
         secondConditionToken = jj_consume_token(IDENTIFIER);
-                    condition = new AndCondition();
-                    ((AndCondition)condition).setCondition(conditionToken.toString());
-                    ((AndCondition)condition).setAndCondition(secondConditionToken.toString());
-                    {if (true) return condition;}
-      } else {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case IDENTIFIER:
-          conditionToken = jj_consume_token(IDENTIFIER);
-          jj_consume_token(OR);
-          secondConditionToken = jj_consume_token(IDENTIFIER);
-                    condition = new OrCondition();
-                    ((OrCondition)condition).setCondition(conditionToken.toString());
-                    ((OrCondition)condition).setOrCondition(secondConditionToken.toString());
-                    {if (true) return condition;}
-          break;
-        default:
-          jj_la1[4] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
-      }
-    } else {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case IDENTIFIER:
-        conditionToken = jj_consume_token(IDENTIFIER);
-                    condition = new Condition();
-                    condition.setName(conditionToken.toString());
-                    {if (true) return condition;}
+                  {if (true) return new And(conditionToken.toString(),secondConditionToken.toString());}
+        break;
+      case OR:
+        jj_consume_token(OR);
+        secondConditionToken = jj_consume_token(IDENTIFIER);
+                  {if (true) return new Or(conditionToken.toString(),secondConditionToken.toString());}
         break;
       default:
-        jj_la1[5] = jj_gen;
+        jj_la1[4] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+      break;
+    default:
+      jj_la1[5] = jj_gen;
+      ;
     }
+          {if (true) return new Condition(conditionToken.toString());}
     throw new Error("Missing return statement in function");
   }
 
@@ -233,50 +220,14 @@ public class Saf implements SafConstants {
     finally { jj_save(0, xla); }
   }
 
-  private boolean jj_2_2(int xla) {
-    jj_la = xla; jj_lastpos = jj_scanpos = token;
-    try { return !jj_3_2(); }
-    catch(LookaheadSuccess ls) { return true; }
-    finally { jj_save(1, xla); }
-  }
-
-  private boolean jj_2_3(int xla) {
-    jj_la = xla; jj_lastpos = jj_scanpos = token;
-    try { return !jj_3_3(); }
-    catch(LookaheadSuccess ls) { return true; }
-    finally { jj_save(2, xla); }
-  }
-
-  private boolean jj_3R_7() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    if (jj_scan_token(OR)) return true;
+  private boolean jj_3_1() {
+    if (jj_3R_6()) return true;
     return false;
   }
 
   private boolean jj_3R_6() {
     if (jj_scan_token(IDENTIFIER)) return true;
     if (jj_scan_token(ASSIGNMENT)) return true;
-    return false;
-  }
-
-  private boolean jj_3_1() {
-    if (jj_3R_6()) return true;
-    return false;
-  }
-
-  private boolean jj_3_3() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_2()) {
-    jj_scanpos = xsp;
-    if (jj_3R_7()) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3_2() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    if (jj_scan_token(AND)) return true;
     return false;
   }
 
@@ -297,9 +248,9 @@ public class Saf implements SafConstants {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x400,0x400,0x400,0x400,0x400,0x400,0x400,0x600,0x400,0x600,};
+      jj_la1_0 = new int[] {0x400,0x400,0x400,0x400,0x180,0x180,0x400,0x600,0x400,0x600,};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[3];
+  final private JJCalls[] jj_2_rtns = new JJCalls[1];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -524,7 +475,7 @@ public class Saf implements SafConstants {
 
   private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 1; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -532,8 +483,6 @@ public class Saf implements SafConstants {
           jj_la = p.arg; jj_lastpos = jj_scanpos = p.first;
           switch (i) {
             case 0: jj_3_1(); break;
-            case 1: jj_3_2(); break;
-            case 2: jj_3_3(); break;
           }
         }
         p = p.next;

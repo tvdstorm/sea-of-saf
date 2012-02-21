@@ -1,33 +1,37 @@
 package saf.ast;
 
-import saf.ast.base.BehaviorItem;
+import saf.ast.base.Identifier;
+import saf.ast.identifiers.Strengths;
 
-public class Strength extends BehaviorItem {
+public class Strength extends Identifier {
 	private String name;
 	private int value;
 	
 	public Strength(){
-		this.name = "";
-		this.value = 5;
+		this("");
 	}
 	
 	public Strength(String n){
-		this.name = n;
-		this.value = 5;
+		this(n,5);
 	}
-	
 	public Strength(String n, int v){
 		this.name = n;
 		this.value = v;
 	}
 	
-	public String getName(){ return this.name; }
-	public int getValue(){ return this.value; }
+	public Strengths getStrength(){
+		return Strengths.valueOf(this.name.toUpperCase());
+	}
+	public String getName() { 
+		return this.name; 
+	}
+	public int getValue() { 
+		return this.value; 
+	}
 	
-	@Override
-	public boolean keywordIsValid() {
+	public boolean isValid() {
 		try {
-			saf.ast.enums.AvailableStrengths.valueOf(name.toUpperCase());
+			saf.ast.identifiers.Strengths.valueOf(name.toUpperCase());
 		} catch(Exception e) {
 			return false;
 		}

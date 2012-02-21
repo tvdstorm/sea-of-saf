@@ -1,23 +1,41 @@
 package saf.ast;
 
-import saf.ast.base.BehaviorItem;
+import java.util.List;
 
-public class Condition extends BehaviorItem{
+import saf.ast.identifiers.Conditions;
+
+import saf.ast.base.BaseCondition;
+
+public class Condition extends BaseCondition{
 	private String name;
-	
-	public void setName(String n){ this.name = n; }
-	
-	public String getName(){ return this.name; }
-	
-	public String toString() {
-		return "\n\t\tCondition: " + name; 
+
+	public Condition(){
+		this("");
 	}
-	
-	@Override
-	public boolean keywordIsValid() {
+	public Condition(String name){
+		this.name = name;
+	}
+	public Conditions getCondition(){
+		return Conditions.valueOf(this.name.toUpperCase());
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public boolean eval(List<BaseCondition> conditions){
+		return conditions.contains(this);
+	}
+	public String toString(){
+		return this.name;
+	}
+	public boolean isValid() {
 		try {
-			saf.ast.enums.AvailableConditions.valueOf(name.toUpperCase());
-		} catch(Exception e) {
+			Conditions.valueOf(name.toUpperCase());
+		} catch(IllegalArgumentException e) {
+			return false;
+		} catch(NullPointerException e){
 			return false;
 		}
 		return true;

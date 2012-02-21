@@ -5,10 +5,12 @@ import java.io.InputStream;
 import java.util.List;
 
 import saf.ast.Fighter;
-import saf.interpreter.SafInterpreter;
+import saf.checker.CheckException;
+import saf.checker.SafChecker;
 import saf.parser.Saf;
 import saf.parser.ParseException;
-import saf.simulator.FightSimulator;
+import saf.simulator.Fight;
+//import saf.simulator.FightSimulator;
 
 /**
  * @author      Alex Kalyvitis <me@alexkappa.com>
@@ -27,7 +29,7 @@ public class SafMain {
 	 * 3) Simulates a fight between two fighters.
 	 */
 	public static void main(String[] args){
-
+		
 		try{
 	        String path  = new java.io.File(".").getCanonicalPath();
 			String safFile = "fighters.saf";
@@ -36,22 +38,26 @@ public class SafMain {
 
 	        Saf parser = new Saf(stream);
 
-	        System.out.println("Parsing...");
-	        
+	        System.out.print("Parsing...      ");
 			List<Fighter> fighters = parser.Parse();
-			System.out.println("Parsing OK");
+			System.out.println("PASSED");
 
-			System.out.println("Interpreting...");
+			System.out.print("Checking...     ");
+			SafChecker checker = new SafChecker(fighters);
+			checker.check();
+			System.out.println("PASSED");
 
-			SafInterpreter interpreter = new SafInterpreter(fighters);
-			if (interpreter.interpret()) {
-				System.out.println("Interpreting OK");
-				FightSimulator fightSimulator = new FightSimulator(fighters);
-				fightSimulator.Simulate();
-			}
+			System.out.print("Simulating...   ");
+			Fight fight = new Fight(fighters, 150, 650);
+			System.out.println("DONE");
+//			FightSimulatorIOld fightSimulator = new FightSimulatorIOld(fighters);
+//			fightSimulator.Simulate();
 	    }
-		catch(ParseException e){
-			System.out.println("Parsing FAILED \n\n" + e.getMessage());
+		catch(ParseException pe) {
+			System.out.println("FAILED: " + pe.getMessage());
+		}
+		catch(CheckException ce) {
+			System.out.println("FAILED: " + ce.getMessage());
 		}
 	    catch(Exception e) {
 	        System.out.println("ERROR: " + e.getMessage());
