@@ -2,6 +2,7 @@ ChuckNorris{
 	kickPower = 10
 	punchPower = 10
 	kickReach = 10
-	punchReac = 10
-	nears[crouch kick_highs]
+	punchReach = 10
+	always[walk_towards punch_high]
+	near[crouch kick_high]
 }

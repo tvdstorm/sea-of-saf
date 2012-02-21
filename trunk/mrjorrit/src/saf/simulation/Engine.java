@@ -16,14 +16,12 @@ public class Engine {
 		
 		while(!left.fighterLost() && !right.fighterLost())
 		{
-			FighterAI.determineAction(left, right);
-			FighterAI.determineAction(right, left);
+			left.think(right);
+			right.think(left);
 			
-			FighterAI.performAction(left, right);
-			FighterAI.performAction(right, left);
+			left.perform(right);
+			right.perform(left);
 			
-			left.nextStep();
-			right.nextStep();
 			wait(1);
 		}
 	}

@@ -1,9 +1,8 @@
 package saf.structure;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import saf.Checker.Check;
-import saf.simulation.Arena;
 
 public class Fighter extends Node 
 {
@@ -32,7 +31,22 @@ public class Fighter extends Node
 	public Behaviour getBehaviour() 
 	{
 		return behaviour;
-	}	
+	}
+	
+	public int getAttributePower(Attribute attribute)
+	{
+		for(Characteristic characteristic : personality.getCharacteristics())
+		{
+			if(characteristic.getAttribute() == attribute)
+				return characteristic.getPower();
+		}
+		return 5;
+	}
+	
+	public List<Rule> getRules()
+	{
+		return behaviour.getRules();
+	}
 	
 
 	@Override
