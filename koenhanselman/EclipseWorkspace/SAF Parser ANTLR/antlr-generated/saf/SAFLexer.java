@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g 2012-02-19 07:16:02
+// $ANTLR 3.4 C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g 2012-02-21 23:02:50
 
   package saf;
 
@@ -39,15 +39,15 @@ public class SAFLexer extends Lexer {
     public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g"; }
+    public String getGrammarFileName() { return "C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g"; }
 
     // $ANTLR start "T__16"
     public final void mT__16() throws RecognitionException {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:11:7: ( '=' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:11:9: '='
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:11:7: ( '=' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:11:9: '='
             {
             match('='); 
 
@@ -67,8 +67,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:12:7: ( 'choose' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:12:9: 'choose'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:12:7: ( 'choose' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:12:9: 'choose'
             {
             match("choose"); 
 
@@ -90,8 +90,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = LEFT_CURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:97:12: ( '{' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:97:14: '{'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:97:12: ( '{' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:97:14: '{'
             {
             match('{'); 
 
@@ -111,8 +111,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = RIGHT_CURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:98:13: ( '}' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:98:15: '}'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:98:13: ( '}' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:98:15: '}'
             {
             match('}'); 
 
@@ -132,8 +132,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = LEFT_BRACK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:99:12: ( '[' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:99:14: '['
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:99:12: ( '[' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:99:14: '['
             {
             match('['); 
 
@@ -153,8 +153,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = RIGHT_BRACK;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:100:13: ( ']' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:100:15: ']'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:100:13: ( ']' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:100:15: ']'
             {
             match(']'); 
 
@@ -174,8 +174,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = LEFT_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:101:12: ( '(' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:101:14: '('
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:101:12: ( '(' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:101:14: '('
             {
             match('('); 
 
@@ -195,8 +195,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = RIGHT_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:102:13: ( ')' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:102:15: ')'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:102:13: ( ')' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:102:15: ')'
             {
             match(')'); 
 
@@ -216,8 +216,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = LETTER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:104:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:104:8: ( ( 'a' .. 'z' | 'A' .. 'Z' ) )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -245,49 +245,50 @@ public class SAFLexer extends Lexer {
         try {
             int _type = DIGIT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:105:7: ( '0' .. '9' | '10' )
-            int alt1=2;
-            int LA1_0 = input.LA(1);
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:105:7: ( ( '0' .. '9' )+ )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:105:9: ( '0' .. '9' )+
+            {
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:105:9: ( '0' .. '9' )+
+            int cnt1=0;
+            loop1:
+            do {
+                int alt1=2;
+                int LA1_0 = input.LA(1);
 
-            if ( (LA1_0=='1') ) {
-                int LA1_1 = input.LA(2);
-
-                if ( (LA1_1=='0') ) {
-                    alt1=2;
-                }
-                else {
+                if ( ((LA1_0 >= '0' && LA1_0 <= '9')) ) {
                     alt1=1;
                 }
+
+
+                switch (alt1) {
+            	case 1 :
+            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:
+            	    {
+            	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
+            	        input.consume();
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;
+            	    }
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt1 >= 1 ) break loop1;
+                        EarlyExitException eee =
+                            new EarlyExitException(1, input);
+                        throw eee;
+                }
+                cnt1++;
+            } while (true);
+
+
             }
-            else if ( (LA1_0=='0'||(LA1_0 >= '2' && LA1_0 <= '9')) ) {
-                alt1=1;
-            }
-            else {
-                NoViableAltException nvae =
-                    new NoViableAltException("", 1, 0, input);
 
-                throw nvae;
-
-            }
-            switch (alt1) {
-                case 1 :
-                    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:105:9: '0' .. '9'
-                    {
-                    matchRange('0','9'); 
-
-                    }
-                    break;
-                case 2 :
-                    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:105:20: '10'
-                    {
-                    match("10"); 
-
-
-
-                    }
-                    break;
-
-            }
             state.type = _type;
             state.channel = _channel;
         }
@@ -302,8 +303,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:107:5: ( 'and' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:107:7: 'and'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:107:5: ( 'and' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:107:7: 'and'
             {
             match("and"); 
 
@@ -325,8 +326,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:108:4: ( 'or' )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:108:6: 'or'
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:108:4: ( 'or' )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:108:6: 'or'
             {
             match("or"); 
 
@@ -348,13 +349,13 @@ public class SAFLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:110:7: ( LETTER ( LETTER | DIGIT | '_' )* )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:110:9: LETTER ( LETTER | DIGIT | '_' )*
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:110:7: ( LETTER ( LETTER | DIGIT | '_' )* )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:110:9: LETTER ( LETTER | DIGIT | '_' )*
             {
             mLETTER(); 
 
 
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:110:16: ( LETTER | DIGIT | '_' )*
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:110:16: ( LETTER | DIGIT | '_' )*
             loop2:
             do {
                 int alt2=4;
@@ -439,7 +440,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:110:17: LETTER
+            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:110:17: LETTER
             	    {
             	    mLETTER(); 
 
@@ -447,7 +448,7 @@ public class SAFLexer extends Lexer {
             	    }
             	    break;
             	case 2 :
-            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:110:26: DIGIT
+            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:110:26: DIGIT
             	    {
             	    mDIGIT(); 
 
@@ -455,7 +456,7 @@ public class SAFLexer extends Lexer {
             	    }
             	    break;
             	case 3 :
-            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:110:34: '_'
+            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:110:34: '_'
             	    {
             	    match('_'); 
 
@@ -484,10 +485,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:111:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:111:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:111:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:111:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             {
-            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:111:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:111:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             int cnt3=0;
             loop3:
             do {
@@ -501,7 +502,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:
+            	    // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:
             	    {
             	    if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' ' ) {
             	        input.consume();
@@ -540,7 +541,7 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:8: ( T__16 | T__17 | LEFT_CURLY | RIGHT_CURLY | LEFT_BRACK | RIGHT_BRACK | LEFT_PAREN | RIGHT_PAREN | LETTER | DIGIT | AND | OR | IDENT | WS )
+        // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:8: ( T__16 | T__17 | LEFT_CURLY | RIGHT_CURLY | LEFT_BRACK | RIGHT_BRACK | LEFT_PAREN | RIGHT_PAREN | LETTER | DIGIT | AND | OR | IDENT | WS )
         int alt4=14;
         switch ( input.LA(1) ) {
         case '=':
@@ -967,7 +968,7 @@ public class SAFLexer extends Lexer {
 
         switch (alt4) {
             case 1 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:10: T__16
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:10: T__16
                 {
                 mT__16(); 
 
@@ -975,7 +976,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:16: T__17
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:16: T__17
                 {
                 mT__17(); 
 
@@ -983,7 +984,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:22: LEFT_CURLY
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:22: LEFT_CURLY
                 {
                 mLEFT_CURLY(); 
 
@@ -991,7 +992,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:33: RIGHT_CURLY
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:33: RIGHT_CURLY
                 {
                 mRIGHT_CURLY(); 
 
@@ -999,7 +1000,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:45: LEFT_BRACK
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:45: LEFT_BRACK
                 {
                 mLEFT_BRACK(); 
 
@@ -1007,7 +1008,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:56: RIGHT_BRACK
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:56: RIGHT_BRACK
                 {
                 mRIGHT_BRACK(); 
 
@@ -1015,7 +1016,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:68: LEFT_PAREN
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:68: LEFT_PAREN
                 {
                 mLEFT_PAREN(); 
 
@@ -1023,7 +1024,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:79: RIGHT_PAREN
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:79: RIGHT_PAREN
                 {
                 mRIGHT_PAREN(); 
 
@@ -1031,7 +1032,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:91: LETTER
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:91: LETTER
                 {
                 mLETTER(); 
 
@@ -1039,7 +1040,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:98: DIGIT
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:98: DIGIT
                 {
                 mDIGIT(); 
 
@@ -1047,7 +1048,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:104: AND
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:104: AND
                 {
                 mAND(); 
 
@@ -1055,7 +1056,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:108: OR
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:108: OR
                 {
                 mOR(); 
 
@@ -1063,7 +1064,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:111: IDENT
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:111: IDENT
                 {
                 mIDENT(); 
 
@@ -1071,7 +1072,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 14 :
-                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\SAF.g:1:117: WS
+                // C:\\Werkmap\\Documenten\\School\\SoftwareConstruction\\svn\\koenhanselman\\EclipseWorkspace\\SAF Parser ANTLR\\src\\saf\\grammar\\SAF.g:1:117: WS
                 {
                 mWS(); 
 
