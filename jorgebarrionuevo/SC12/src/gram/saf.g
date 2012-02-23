@@ -22,9 +22,6 @@ tokens{
 }
 
 @parser::members {
-    //Fighter fighter;
-    //List<Characteristic> personality = new ArrayList<Characteristic>();
-    //List<Rule> behaviour = new ArrayList<Rule>();
 }
 
 program returns [Arena arena] @init{$arena = new Arena();}
