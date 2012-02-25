@@ -12,14 +12,14 @@ import config.*;
 
 public class Fight {	
     public static void main(String[] args) throws Exception {
-    	Saf s1 = createFigher(settings.PLAYER1_FILE);
-    	Saf s2 = createFigher(settings.PLAYER2_FILE);
+    	Saf s1 = createFighter(settings.PLAYER1_FILE);
+    	Saf s2 = createFighter(settings.PLAYER2_FILE);
     	
     	if (s1 != null && s2 != null)
     		doGraphics(s1, s2);
     }
     
-    public static Saf createFigher(String file) {
+    public static Saf createFighter(String file) {
     	Saf s = loadFighter(file);
     	if (s != null)
     		s.accept(new SafVisitorCheck());
@@ -33,10 +33,8 @@ public class Fight {
     }
     
     private static Saf loadFighter(String file) {
-    	ANTLRFileStream fs;
-		Saf s = new Saf();
-		
     	try {
+    		ANTLRFileStream fs;
 			fs = new ANTLRFileStream(file);
 			
 			safLexer lex = new safLexer(fs);
@@ -44,13 +42,14 @@ public class Fight {
 	    	TokenRewriteStream tokens = new TokenRewriteStream(lex);
 	    	safParser grammar = new safParser(tokens);
 	    	
-	    	s = grammar.saf();
+	    	return grammar.saf();
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.exit(1);
 		} catch (RecognitionException e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
-    	
-    	return s;
+    	return null;  
     }
 }

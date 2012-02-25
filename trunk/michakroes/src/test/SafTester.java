@@ -18,25 +18,20 @@ import saf.*;
 public class SafTester extends TestCase {
 	
 	Saf saf;
-	
-	@Override
-	public void setUp() {
-
-	}
-	
+		
 	@Test
 	public void testAndOrs() {
-		saf = Fight.createFigher(settings.PLAYER1_FILE);
+		saf = Fight.createFighter(settings.PLAYER1_FILE);
 		Behaviour behaviour = saf.getBehaviour();
 		
 		boolean foundCondition = false;
 		
 		for (BehaviourRule behaviourrule: behaviour.getRules()) {
-			if (behaviour.checkCondition(behaviourrule.getCondition(), "stronger", "far"))
+			if (behaviour.checkCondition(behaviourrule.getCondition(), settings.STRONGER, settings.FAR))
 				foundCondition = true;
 		}
 		
-		assertEquals(true, foundCondition);
+		assertTrue(foundCondition);
 	}
 	
 	@Test
@@ -106,7 +101,7 @@ public class SafTester extends TestCase {
 	
 	@Test
 	public void testSaf() {
-		saf = Fight.createFigher(settings.PLAYER1_FILE);
+		saf = Fight.createFighter(settings.PLAYER1_FILE);
 		
 		assertNotNull("Check for personality", saf.getPersonality());
 		assertNotNull("Check for Behaviour", saf.getBehaviour()); 
@@ -114,11 +109,10 @@ public class SafTester extends TestCase {
 	
 	@Test
 	public void testValidFighter() {
-		saf = Fight.createFigher(settings.PLAYER1_FILE);
+		saf = Fight.createFighter(settings.PLAYER1_FILE);
 		SafVisitor safVisitor = new SafVisitorCheck();
 		saf.accept(safVisitor);
 		
 		assertEquals(0, safVisitor.getCountErrors());		
 	}
-	
 }
