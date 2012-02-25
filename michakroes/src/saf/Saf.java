@@ -15,10 +15,6 @@ public class Saf implements SafInterface {
 	private int posX;
 	private int posY;
 	
-	public Saf() {
-		
-	}
-	
 	public Saf(String name, Personality p, Behaviour b) {
         this.name = name;
         this.personality = p; 

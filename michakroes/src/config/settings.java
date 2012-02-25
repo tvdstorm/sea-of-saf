@@ -1,5 +1,8 @@
 package config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import checker.SafList;
 
 public interface settings {
@@ -52,7 +55,8 @@ public interface settings {
 	public final String KICK_LOW = "kick_low";	
 	public final String KICK_HIGH = "kick_high";	
 	
-	public final SafList Strenghts = new SafList("strength", new String[]{ PUNCH_REACH, PUNCH_POWER, KICK_REACH, KICK_POWER } );
+	public final List<String> Strengths = Arrays.asList(PUNCH_REACH, PUNCH_POWER) ;
+			//new SafList("strength", new String[]{ PUNCH_REACH, PUNCH_POWER, KICK_REACH, KICK_POWER } );
 	public final SafList Conditions = new SafList("condition", new String[]{ ALWAYS, NEAR, FAR, MUCH_STRONGER, STRONGER, EVEN, WEAKER, MUCH_WEAKER } );
 	public final SafList Moves = new SafList("move", new String[]{ WALK_TOWARDS, WALK_AWAY, RUN_TOWARDS, RUN_AWAY, JUMP, CROUCH, STAND } );
 	public final SafList Fights = new SafList("fight", new String[]{ BLOCK_LOW, BLOCK_HIGH, PUNCH_LOW, PUNCH_HIGH, KICK_LOW, KICK_HIGH } );

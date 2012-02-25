@@ -24,7 +24,7 @@ public class GraphicsPanel extends JPanel implements ActionListener, settings {
 	private Saf player2;
 	
 	private String distanceStatus = "";
-	
+	    
 	private BehaviourRule currentRulePlayer1;
 	private BehaviourRule currentRulePlayer2;
 	

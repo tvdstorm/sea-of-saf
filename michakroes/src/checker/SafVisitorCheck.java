@@ -12,16 +12,16 @@ public class SafVisitorCheck implements SafVisitor {
 	
 	@Override
 	public void visit(Saf saf) {
-        if (saf.getBehaviour() == null) addError("There is no behaviour defined");
-        if (saf.getPersonality() == null) addError("There is no personality defined");
-        
+		// TODO technische implementatie van visitor
+		saf.getBehaviour().accept(this);
+		
         if (this.errors.size() > 0)
         	System.exit(this.errors.size());
     }
  
 	@Override
     public void visit(Personality p) {
-		for (String strength : settings.Strenghts.getItems()) {
+		for (String strength : settings.Strengths.getItems()) {
     		if (! p.hasStrength(strength) ) addError("Strength " + strength + " is not defined");
 		}
     }
@@ -29,7 +29,7 @@ public class SafVisitorCheck implements SafVisitor {
     @Override
 	public void visit(Strength s) {    	 
     	try {
-			inList(settings.Strenghts, s.getCharacteristic());
+			inList(settings.Strengths, s.getCharacteristic());
 		} catch (SafException e) {
 			addError(e.getMessage());
 		}
@@ -39,7 +39,7 @@ public class SafVisitorCheck implements SafVisitor {
     	
     	if (s.getValue() < settings.minStrength) 
     		addError("Value for strength " + s.getCharacteristic() + " is too small: " + s.getValue());
-	} 
+    } 
     
     @Override
     public void visit(Behaviour b) {    	
@@ -54,22 +54,18 @@ public class SafVisitorCheck implements SafVisitor {
     
     @Override
     public void visit(Condition c) {
-    	//System.out.println("Visiting Condition");
     }
     
     @Override
     public void visit(ConditionConnective conditionConnective) {
-    	//System.out.println("Visiting conditionConnective");
     }
     
     @Override
     public void visit(ConditionAnd c) {
-    	//System.out.println("Visiting ConditionAnd");
     }
     
     @Override
     public void visit(ConditionOr c) {
-    	//System.out.println("Visiting ConditionOr");
     }
     
     @Override
@@ -92,11 +88,15 @@ public class SafVisitorCheck implements SafVisitor {
     
     @Override
     public void visit(FightAction ma) {
-    	try {
-			inList(settings.Fights, ma.getType());
-		} catch (SafException e) {
-			addError(e.getMessage());
-		}
+    	assert ma != null;
+    	if (!settings.Fights.inList(ma.getType())) {
+    		addError("nov alid ");
+    	}
+//    	try {
+//			inList(settings.Fights, ma.getType());
+//		} catch (SafException e) {
+//			addError(e.getMessage());
+//		}
     }
     
     public void inList(SafList sl, String item) throws SafException {
