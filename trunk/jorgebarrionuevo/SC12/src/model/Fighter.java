@@ -6,10 +6,8 @@ public class Fighter extends ASTNode{
 	
 	//private static final Integer DEFAULT_STRENGTH = 5;
 	private String name;
-	private ArrayList<Behavior> behaviors = new ArrayList<Behavior>();
+	private ArrayList<Behaviour> behaviors = new ArrayList<Behaviour>();
 	private Personality personality = new Personality();
-	
-	
 	
 	public void setName(String nameFighter) {
         this.name = nameFighter;
@@ -19,12 +17,12 @@ public class Fighter extends ASTNode{
 		return this.name;
 	}
 	
-	public void addBehavior(Behavior behavior) {
-		this.behaviors.add(behavior);
+	public void addBehavior(Behaviour behaviour) {
+		this.behaviors.add(behaviour);
 	}
 	
 	public void addCharacteristic(Characteristic characteristic) {
-		this.personality.add(characteristic);
+		this.personality.addCharacteristic(characteristic);
 	}	
 	
 }

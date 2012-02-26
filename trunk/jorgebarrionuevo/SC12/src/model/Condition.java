@@ -4,14 +4,14 @@ package model;
 public class Condition extends ASTNode{
 
 	//private static final String ALWAYS = "always";
-	private final String name;
+	private final String nameCondition;
 
-	public Condition(NameFighter name) {
-		this.name = name.getName();
+	public Condition(String name) {
+		this.nameCondition = name;
 	}
 	
 	public String getName() {
-		return name;
+		return nameCondition;
 	}
 	
 }
