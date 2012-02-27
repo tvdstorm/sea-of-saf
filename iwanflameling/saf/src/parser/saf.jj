@@ -4,7 +4,6 @@
 PARSER_BEGIN(SAFParser)package parser;
 
 import ast.object.Fighter;
-import ast.fighter.prop.Id;
 import ast.condition.*;
 import ast.Printer;
 import ast.action.*;
