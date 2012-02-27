@@ -9,7 +9,6 @@ import ast.condition.Or;
 import ast.fighter.Behavior;
 import ast.fighter.FighterProp;
 import ast.fighter.Strength;
-import ast.fighter.prop.Id;
 import ast.object.Fighter;
 
 public abstract class DelegateVisitor implements Visitor {
