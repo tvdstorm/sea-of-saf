@@ -131,10 +131,4 @@ public class Printer implements Visitor {
 		append("]");
 	}
 
-	@Override
-	public void visit(Id id) {
-		append(id.toString() + "-id");
-		
-	}
-
 }

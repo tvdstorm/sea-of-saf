@@ -19,7 +19,6 @@ public interface Visitor {
 	public void visit(And and);
 	public void visit(Leaf leaf);
 	public void visit(Or or);
-	public void visit(Id id);
 	public void visit(SimpleAction action);
 	public void visit(Choose choose);
 	public void visit(Strength strength);
