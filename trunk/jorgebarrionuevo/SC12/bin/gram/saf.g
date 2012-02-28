@@ -53,7 +53,6 @@ behaviour returns[Behaviour b]
         { 
           $b = new Behaviour(new Condition($CONDITION.getText()), new Action($MOVE_ACTION.getText()), new Action($FIGHT_ACTION.getText()));
         }
-    
   ;
 
 ID : ('A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9'| '_')*;

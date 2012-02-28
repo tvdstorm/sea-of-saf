@@ -1,14 +1,19 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import util.Visitor;
 
-public class Or extends Logic{
-	public Or(Condition leftSide, Condition rightSide) {
-		super(leftSide, rightSide);
-	}
 
+public class Choose extends Action{
+
+	public Choose() {
+		
+	}
+	
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
 	}
+
 }

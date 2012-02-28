@@ -1,17 +1,9 @@
 package model;
 
+import util.Visitor;
 
-public class Condition extends ASTNode{
 
-	//private static final String ALWAYS = "always";
-	private final String nameCondition;
-
-	public Condition(String name) {
-		this.nameCondition = name;
-	}
+public abstract class Condition extends ASTNode{	
 	
-	public String getName() {
-		return nameCondition;
-	}
-	
+
 }
