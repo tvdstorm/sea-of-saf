@@ -2,7 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
-public class Arena extends ASTNode{
+import util.Visitor;
+
+public class Arena{
 
 	private ArrayList<Fighter> fighters = new ArrayList<Fighter>();
 	

@@ -1,6 +1,6 @@
 package model;
 
-public class Characteristic extends ASTNode{
+public class Characteristic{
 	
 	private final String nameCharacteristic;
 	private final Integer value;
@@ -17,4 +17,5 @@ public class Characteristic extends ASTNode{
 	public Integer getValue() {
 		return value;
 	}
+
 }
