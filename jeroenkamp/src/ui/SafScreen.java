@@ -16,6 +16,11 @@ public class SafScreen extends Canvas{
 	private final int HEALTHBARHEIGHT=20;
 	private final int HEALTHBARY=40;
 	
+	private final int GAMEOVERY=230;
+	private final int GAMEOVERX=40;
+	
+	private boolean m_Gameover=false;
+	
 	public SafScreen(IFighter p1,IFighter p2){
 		m_Player1=p1;
 		m_Player2=p2;
@@ -33,7 +38,9 @@ public class SafScreen extends Canvas{
 		m_P1Health.drawBar(m_Player1.getHealth(), m_Player1.getMaxHealth(),g );
 		m_P2Health.drawBar(m_Player2.getHealth(), m_Player2.getMaxHealth(),g );
 		drawFighters(g);
-		
+		if(m_Gameover){
+			gameOver(g);
+		}
 	}
 	private int getPosition(int position){
 		return position *10+50;
@@ -54,5 +61,24 @@ public class SafScreen extends Canvas{
 			g.drawImage(img,p1pos,yoffset, p1pos+point.x,yoffset+point.y, point.x,0,0,point.y,this);
 			g.drawImage(img2,p2pos,yoffset, p2pos+point.x,yoffset+point.y, 0,0,point.x,point.y,this);
 		}	
+	}
+	public void gameOver(Graphics g){
+		g.setColor(Color.black);
+		g.setFont(new Font("sanserif",Font.BOLD,20));
+		if(m_Player1.getHealth()==0){
+			if(m_Player2.getHealth()==0){
+				g.drawString("Draw",GAMEOVERX,GAMEOVERY);
+			}
+			else{
+				g.drawString("Player 2 Wins",GAMEOVERX,GAMEOVERY);
+			}
+		}
+		else{
+			g.drawString("Player 1 Wins", GAMEOVERX, GAMEOVERY);
+		}
+	}
+	public void setGameover(boolean state){
+		m_Gameover=state;
+		repaint();
 	}
 }

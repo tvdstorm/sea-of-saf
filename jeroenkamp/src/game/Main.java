@@ -22,6 +22,7 @@ public class Main {
 		Component c=frame.getCanvas();
 		Arena arena=new Arena(p1,p2,c);
 		arena.run();
+		frame.gameOver();
 		
 	}
 	public static Fighter getFighter(String path){
