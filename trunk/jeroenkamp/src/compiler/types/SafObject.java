@@ -4,6 +4,8 @@ import compiler.SafVisitor;
 
 public abstract class SafObject{
 
+
+	
 	public void accept(SafVisitor visitor){
 		visitor.visit(this);
 	}

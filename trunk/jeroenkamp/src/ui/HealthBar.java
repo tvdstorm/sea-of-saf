@@ -20,8 +20,8 @@ public final class HealthBar {
 	public void drawBar(int health, int maxhealth, Graphics g){
 		
 		Graphics2D g2d=(Graphics2D)g;
-		g2d.setPaint(new GradientPaint(0,0,Color.RED,m_Width,0,Color.GREEN,false));
-		g2d.fillRect(m_OffsetLeft, m_OffsetTop, m_Width, m_Height);
+		g2d.setPaint(new GradientPaint(m_OffsetLeft,0,Color.RED,m_OffsetLeft+m_Width,0,Color.GREEN,false));
+		g2d.fillRect(m_OffsetLeft, m_OffsetTop, m_Width*health/maxhealth, m_Height);
 		g2d.setColor(Color.black);
 		g2d.drawRect(m_OffsetLeft, m_OffsetTop, m_Width, m_Height);
 	}

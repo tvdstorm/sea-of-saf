@@ -4,8 +4,10 @@ import common.*;
 
 import java.util.*;
 
+import ui.IFighter;
 
-public abstract class Fighter {
+
+public abstract class Fighter implements IFighter {
 	private int m_Position;
 	private int m_Health;
 	private int m_Speed;
@@ -20,15 +22,19 @@ public abstract class Fighter {
 	protected int m_PunchReach=5;
 	protected int m_KickPower=5;
 	protected int m_KickReach=5;
+	protected String m_Name="Unknown";
+	
+	private final int FACTOR=2;
 	
 	public Fighter(){
 	}
-	public void init(int position){
+	public void init(int position,Fighter opponent){
 		//the predefined formula dosen't make sense
 		m_Speed=(int)Math.abs(0.5*((m_PunchPower+m_KickPower)-(m_PunchReach+m_KickReach)));
 		m_MaxHealth=100;
 		m_Health=m_MaxHealth;
 		m_Position=position;
+		m_Opponent=opponent;
 	}
 	
 	public abstract List<ActionPair> doSomething();
@@ -44,14 +50,16 @@ public abstract class Fighter {
 	public void setHealth(int health){
 		m_Health=health;
 	}
-
+	public int getMaxHealth(){
+		return m_MaxHealth;
+	}
 	public MoveType getMoveState(){
 		return m_MoveState;
 	}
 	public void setMoveState(MoveType state){
 		m_MoveState=state;
 	}
-	public ActionType GetActionState(){
+	public ActionType getActionState(){
 		return m_ActionType;
 	}
 	public void setActionState(ActionType state){
@@ -66,31 +74,31 @@ public abstract class Fighter {
 	public void setPosition(int newPos){
 		m_Position= newPos;
 	}
-	public boolean isNear(Fighter f,Fighter opponent){
-		int res =Math.abs(f.getPosition()-opponent.getPosition());
+	public boolean isNear(){
+		int res =Math.abs(getPosition()-m_Opponent.getPosition());
 		if(res<m_PunchReach || res<m_KickReach){
 			return true;
 		}
 		return false;
 	}
 	public boolean isFar(Fighter f,Fighter opponent){
-		int res =Math.abs(f.getPosition()-opponent.getPosition());
+		int res =Math.abs(getPosition()-m_Opponent.getPosition());
 		if(res>m_PunchReach || res>m_KickReach){
 			return true;
 		}
 		return false;
 	}
 	public boolean isWeaker(){
-		return false;
+		return m_Health<m_Opponent.getHealth();
 	}
 	public boolean isMuchWeaker(){
-		return false;
+		return m_Health*FACTOR<m_Opponent.getHealth();
 	}
 	public boolean isStronger(){
-		return false;
+		return m_Health>m_Opponent.getHealth();
 	}
 	public boolean isMuchStronger(){
-		return false;
+		return m_Health>m_Opponent.getHealth()*FACTOR;
 	}
 	public <T> T choose(T action1,T action2){
 		if(Math.random()>0.5){
@@ -109,5 +117,8 @@ public abstract class Fighter {
 	}
 	public int getKickReach(){
 		return m_KickReach;
+	}
+	public String getName(){
+		return m_Name;
 	}
 }
