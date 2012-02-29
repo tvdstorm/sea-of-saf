@@ -28,14 +28,25 @@ public class Move {
 	private static void makeMove(Fighter f,MoveType move, Fighter opponent){
 		f.setMoveState(move);
 		int poschange=getPositionChange(move);
+		int pos=f.getPosition();
 		if(f.getPosition()<opponent.getPosition()){
-			f.setPosition(f.getPosition()+poschange);
+			f.setPosition(determinePosition(pos,pos+poschange,opponent.getPosition()));
 		}
 		else{
-			f.setPosition(f.getPosition()-poschange);
+			f.setPosition(determinePosition(pos,pos-poschange,opponent.getPosition()));
 		}
 	}
-	
+	private static int determinePosition(int oldPos, int newPos,int opPos){
+		int pos=Math.max(newPos,0);
+		pos=Math.min(newPos,Arena.MAXPOS);
+		
+		if(oldPos<opPos&& newPos>=opPos){
+			pos=opPos-1;
+		}else if(oldPos>opPos && newPos<=opPos){
+			pos=opPos+1;
+		}
+		return pos;
+	}
 	public static void doAction(Fighter f, ActionPair p , Fighter opponent){
 		makeMove(f, p.getAction1(), opponent);
 		doFightAction(f, p.getAction2() , opponent);
@@ -67,7 +78,7 @@ public class Move {
 		else if(opponent.getMoveState()==MoveType.crouch){
 			miss(f,action,opponent);
 		}
-		else if(opponent.GetActionState()==ActionType.block_high){
+		else if(opponent.getActionState()==ActionType.block_high){
 			block(f,action, opponent);
 		}
 		else{
@@ -81,7 +92,7 @@ public class Move {
 		else if(opponent.getMoveState()==MoveType.jump){
 			miss(f,action,opponent);
 		}
-		else if(opponent.GetActionState()==ActionType.block_low){
+		else if(opponent.getActionState()==ActionType.block_low){
 			block(f,action, opponent);
 		}
 		else{

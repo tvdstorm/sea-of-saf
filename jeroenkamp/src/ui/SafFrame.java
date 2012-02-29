@@ -13,18 +13,20 @@ public class SafFrame extends JFrame implements ActionListener{
 	
 	private JButton m_Fight;
 	
-	private Canvas m_Area;
+	private SafScreen m_Area;
 	
 	private static final long serialVersionUID = 1L;
-	public SafFrame(String [] args){
+	public SafFrame(IFighter p1,IFighter p2){
 		Container c=this.getContentPane();
 		c.setLayout(new BorderLayout());
 		Container menu=new Container();
 		c.add(menu,BorderLayout.NORTH);
-		m_Area=new Canvas();
+		m_Area=new SafScreen(p1,p2);
 		c.add(m_Area,BorderLayout.CENTER);
 		
 		setMenu(menu);
+		setSize(400, 400);
+		setVisible(true);
 		
 	}
 	private void setMenu(Container menu){
@@ -39,10 +41,13 @@ public class SafFrame extends JFrame implements ActionListener{
 		m_Panelp2=new PlayerPanel();
 		menu.add(m_Panelp2);
 	}
-	public static void main(String[] args){
-		SafFrame frame=new SafFrame(args);
-		frame.setVisible(true);
+	public Component getCanvas(){
+		return m_Area;
 	}
+	public void gameOver(){
+		//do something with it
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub

@@ -6,10 +6,14 @@ class ErrorModule {
 	private List<Error> m_Errorlist;
 	private boolean m_Continue;
 	
+	private ErrorModule m_Instance;
+	
 	private ErrorModule(){
 		
 	}
-	
+	public ErrorModule getErrorModule(){
+		return m_Instance;
+	}
 	
 	public void addError(ErrorType type, String message, int line, int column){
 		m_Errorlist.add(new Error(type,message,line,column));

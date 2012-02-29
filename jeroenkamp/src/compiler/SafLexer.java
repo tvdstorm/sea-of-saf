@@ -7,17 +7,14 @@ class SafLexer implements SafTokens {
     private int c = ' ';
     private InputStream m_Stream; 
     private int m_Token;
-    private int m_Line=0;
-    private int m_Column=0;
     private Value m_Val;
-    /** Read a single input character from standard input.
-     */
+
     public SafLexer(InputStream stream){
     	m_Stream=stream;
     }
     
     private void nextChar() {
-    	m_Column++;
+
       if (c>=0) {
         try {
           c = m_Stream.read();
@@ -37,10 +34,6 @@ class SafLexer implements SafTokens {
       while(true) {
         // Skip whitespace
         while (c==' ' || c=='\n' || c=='\t' || c=='\r') {
-        	if(c=='\n'){
-        		m_Line++;
-        		m_Column=0;
-        	}
           nextChar();
         }
         if (c<0) {
