@@ -26,4 +26,25 @@ public class Strength {
 	{
 		return StrenghtValue;
 	}
+	public boolean isValid()
+	{
+		try 
+		{
+			StrengthsNames.valueOf(StrenghtName);
+			if((this.getStrenghtValue()<=10)&&(this.getStrenghtValue()>=0))
+			{
+				return true;
+			} 
+			else
+			{
+				System.out.println("Strength value must be between 0-10");
+				return false;
+			}
+		}
+		catch(Exception e)
+	 	{
+	 	    System.out.println("Invalid Attack Name");
+			return false;
+		}
+	}
 }

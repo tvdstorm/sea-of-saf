@@ -5,98 +5,48 @@ import java.util.List;
 
 
 public class Fighter{
-	 private String fighterName = new String();
-	 private List<Strength> strengths = new ArrayList<Strength>();
-     private List<Condition> condition = new ArrayList<Condition>();
-     private double weight=0.0;
-     private double height=0.0;
-     private double speed=0.0;
-     private int locationX=15;
-     private int locationY=200;
-     private int life=100;
-     private Condition currentCondition=new Condition();
-     private int lifeStr=100;
-	 private boolean IsLeft;
+	 private String fighterName;
+	 private List<Strength> strengths;
+     private List<Behavior> behaviors;
    
      public Fighter(String name)
      {
     	 this.fighterName = name;
+    	 strengths = new ArrayList<Strength>();
+    	 behaviors = new ArrayList<Behavior>();
      }
      public Fighter()
-     {}
-     
+     {
+    	 this("");
+    	 
+     }
      public void setFighterName(String fighter1)
      {
          this.fighterName = fighter1;
      }
-     public void setStrength (Strength s)
+     public void setStrengths (List<Strength> s)
      {
-         this.strengths.add(s);
+         this.strengths.addAll(s);
      }
-     public void setCondition(Condition c)
+     public List<Strength> getStrengths()
      {
-         this.condition.add(c);
+         return strengths;
      }
-     public void setConditions(ArrayList <Condition> c)
+     public void setBehavior(Behavior c)
      {
-         this.condition.addAll(c);
+         this.behaviors.add(c);
+     }
+     public void setBehaviors(List<Behavior> b)
+     {
+         this.behaviors.addAll(b);
      }
      public String getFighterName()
      {
          return fighterName;
      }
-     public List <Strength> getStrength()
+     public List <Behavior> getBehaviors()
      {
-         return strengths;
+         return behaviors;
      }
-     public List <Condition> getCondition()
-     {
-         return condition;
-     }
-     public void setWeight(double w)
-     {
-    		 this.weight=w;
-     }
-     public void setHeight(double h)
-     {
-    		 this.height=h;
-     }
-     public void setSpeed(double s)
-     {
-    		 this.speed=s;
-     }
-     public void setCurrentCondition(Condition c)
-     {
-    	 this.currentCondition=c;
-     }
-
-     public Condition getCurrentCondition()
-     {
-    	 return this.currentCondition;
-     }
-
-	public int getStrLife() {
-		// TODO Auto-generated method stub
-		return this.lifeStr;
-	}
-	public int getLocationX()
-	{
-		return this.locationX;
-	}
-	public int getLocationY()
-	{
-		return this.locationY;
-	}
-
-	public void setLocation(int x,int y) 
-	{
-		this.locationX=x;
-		this.locationY=y;
-	}
-	public void setIsLeft(boolean b) {
-		this.IsLeft=b;
-	}	
-	
-	
 }
 
