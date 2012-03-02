@@ -1,0 +1,8 @@
+bad_condition {
+  kickPower = 7
+  punchPower = 5
+  kickReach = 3
+  punchReach = 9
+  far [run_towards punch_high]
+  test [choose(stand crouch) kick_high] 
+}
