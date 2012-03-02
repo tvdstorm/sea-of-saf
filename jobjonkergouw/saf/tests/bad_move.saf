@@ -1,0 +1,8 @@
+bad_move {
+  kickPower = 7
+  punchPower = 5
+  kickReach = 3
+  punchReach = 9
+  far [dance punch_high]
+  near [choose(stand crouch) kick_high] 
+}
