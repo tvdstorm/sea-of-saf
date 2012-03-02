@@ -90,4 +90,8 @@ public class RightFighter extends BaseFighter{
 	    		}
 			return null;
 		}
+	public boolean isLeft() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

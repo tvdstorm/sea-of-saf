@@ -25,7 +25,7 @@ public class SafParser implements SafParserConstants {
         Fight saf=new Fight(f);
         saf.evaluateCondition();
         Animations a=new Animations(saf);
-        a.Initialize();
+        a.startFight();
         }
         catch(Exception e)
         {

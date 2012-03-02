@@ -21,5 +21,10 @@ public abstract class BaseFighter {
 	 public void addCurrentBehavior(){ }
 	 public List<Behavior> getCurrentBehavior() {return this.getCurrentBehavior();}
 	 public Behavior chooseRandomBehavior() {return null;}
+	 public boolean isLeft() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
 

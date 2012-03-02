@@ -52,7 +52,7 @@ public class Fight {
 			}
 		}
 
-	private void searchFighterRules(BaseFighter f)
+	public void searchFighterRules(BaseFighter f)
 	{
 		Fighter fighter=f.getFighter();
 		for (Behavior behavior : fighter.getBehaviors())
@@ -64,5 +64,16 @@ public class Fight {
 				}
 		}				
 	}
+	
+	public LeftFighter getLeftFighter()
+	{
+		return this.left;
+	}
+	
+	public RightFighter getRightFighter()
+	{
+		return this.right;
+	}
+
 
 }

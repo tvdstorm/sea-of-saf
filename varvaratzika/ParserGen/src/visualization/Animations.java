@@ -1,7 +1,9 @@
 package visualization;
 
+import game.BaseFighter;
 import game.Fight;
 import game.LeftFighter;
+import game.RightFighter;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -23,71 +25,58 @@ public class Animations extends JFrame
 	private JFrame frame;
 	private Fight fight;
 	private boolean isLeft;
-	
+		
 	public Animations(Fight f)
 	{
 		frame = new JFrame("Saf");
 		fight=new Fight();
-		isLeft=false;
 		fight=f;
+		
 	}
 
 	public void Initialize() throws IOException
 	{
-		frame.setBackground(Color.white);
-		frame.setSize(800, 600);
-	    frame.setVisible(true);
-	 	File leftFile=new File("./src/images/LeftFighter.gif");
-	 	File rightFile=new File("./src/images/RightFighter.gif");
-	 	JPanel left=createContentPane(leftFile,15,350);
-	    frame.setContentPane(left);
-	    JPanel right =createContentPane(rightFile,600,350);
-	    frame.setContentPane(right);
+		 StdDraw.setCanvasSize(800, 600);
+         StdDraw.setXscale(0, 100);
+         StdDraw.setYscale(0,100);
+         StdDraw.picture(15,15,"./src/images/RightFighter.gif");
+         StdDraw.picture(80,15,"./src/images/RightFighter.gif");
 	}
 
-	
-/*	public void refreshFrame(Fighter leftFighter,Fighter rightFighter) throws IOException 
-	{
-		JFrame hframe = new JFrame("Saf");
-		hframe.setBackground(Color.white);
-		JPanel left=createFighterFigures(leftFighter);
-		JPanel right=createFighterFigures(rightFighter);
-	    hframe.setContentPane(left);
-	    hframe.setContentPane(right);
-	    hframe.removeAll();
-	}
-*/
+	public void startFight() throws IOException 
 
-	public JPanel createFighterFigures(LeftFighter f) throws IOException
 	{
-		JPanel fighterPanel = new JPanel();
-		fighterPanel.setLayout(null);
-		Behavior b=f.chooseRandomBehavior();
-		Move m=b.getMove();
-		Attack a=b.getAttack();
-		System.out.println();
-		System.out.println(updateImageFile(m.getMoveName()));
-	   	BufferedImage myPicture = ImageIO.read(
-	   			updateImageFile(a.getAttackName())
-	   	);
-		JLabel picLabel = new JLabel(new ImageIcon( myPicture ));
-		picLabel.setBounds(0, 0, 161, 195);
-		picLabel.setBackground(Color.cyan);
-		fighterPanel.setBounds(f.getLocationX(),f.getLocationY(), 200, 200);
-		fighterPanel.add( picLabel );
-		fighterPanel.setOpaque(true);
-		return fighterPanel;
+		Initialize();
+		LeftFighter leftFighter=fight.getLeftFighter();
+		RightFighter rightFighter=fight.getRightFighter();
+		while(true)
+		{	StdDraw.clear();
+			fight.evaluateCondition();
+			String left=updateImageFighter(leftFighter);
+			updateLocation(leftFighter);
+			System.out.println(leftFighter.getLocationX());
+			System.out.println(leftFighter.getLocationY());
+			StdDraw.picture(leftFighter.getLocationX(),leftFighter.getLocationY(),left);
+
+			fight.evaluateCondition();
+			String right=updateImageFighter(rightFighter);
+			updateLocation(rightFighter);
+			System.out.println(rightFighter.getLocationX());
+			System.out.println(rightFighter.getLocationY());
+			StdDraw.picture(rightFighter.getLocationX(),rightFighter.getLocationY(),right);
+		}
 		
 	}
-	
-	public File updateImageFile(String attacksName)
-	{
-		assert attacksName != "" : "stringIsEmpty";
-		String p=new String();
 
+	public String updateImageFighter(BaseFighter f) throws IOException
+	{
+		Behavior b=f.chooseRandomBehavior();
+		Attack a=b.getAttack();
+		System.out.println();
+		String p=new String();
 		try {
-			AttacksNames currAttack = AttacksNames.valueOf(attacksName);
-			if(this.isLeft)
+			AttacksNames currAttack = AttacksNames.valueOf(a.getAttackName());
+			if(f.isLeft())
 			{
 				System.out.println(currAttack);
 				switch (currAttack)
@@ -115,14 +104,53 @@ public class Animations extends JFrame
 					default:p="./src/images/RightFighter.gif";break;
 				 }			
 			}
-			File path=new File(p);
-			return path;
+			return p;
 		} 
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		return new File(p="./src/images/LeftFighter.gif");
+		return p;
+		
 	}
+	public void updateLocation(BaseFighter f)
+	{
+		Behavior b=f.chooseRandomBehavior();
+		Move m=b.getMove();
+		try
+		{
+			MovesNames currMove=MovesNames.valueOf(m.getMoveName());
+			if(f.isLeft())
+			{
+				switch (currMove)
+				{	
+					case jump:f.setLocation(f.getLocationX(),40);break;
+					case crouch:f.setLocation(f.getLocationX(),15);break;
+					case stand:f.setLocation(f.getLocationX(),15);break;
+					case run_away:f.setLocation(15,15);break;
+					case walk_towards:f.setLocation(40,15);break;
+					case walk_away:f.setLocation(15,15);break;
+					default:f.setLocation(15,15);break;
+				 }
+			}
+			else
+			{
+				switch (currMove)
+				{	
+					case jump:f.setLocation(f.getLocationX(),40);break;
+					case crouch:f.setLocation(f.getLocationX(),15);break;
+					case stand:f.setLocation(f.getLocationX(),15);break;
+					case run_away:f.setLocation(60,60);break;
+					case walk_towards:f.setLocation(40,15);break;
+					case walk_away:f.setLocation(60,15);break;
+					default:f.setLocation(60,15);break;
+				 }
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
 
 
 	public JPanel createContentPane(File imagePath,int x,int y) throws IOException
@@ -139,5 +167,6 @@ public class Animations extends JFrame
 	    left.setOpaque(true);
         return left; 
     }
+
 
 }

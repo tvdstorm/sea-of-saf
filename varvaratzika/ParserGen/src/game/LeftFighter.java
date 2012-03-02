@@ -91,4 +91,8 @@ public class LeftFighter extends BaseFighter{
 	    	
 			return null;
 		}
+	 public boolean isLeft() {
+			// TODO Auto-generated method stub
+			return true;
+		}
 }
