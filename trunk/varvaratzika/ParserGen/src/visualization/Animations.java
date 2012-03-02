@@ -1,5 +1,8 @@
 package visualization;
 
+import game.Fight;
+import game.LeftFighter;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -10,16 +13,24 @@ import java.awt.Color;
 import java.io.IOException;
 import javax.swing.JFrame;
 
-import objects.AttacksNames;
-import objects.Condition;
-import objects.Fighter;
+import objects.*;
+
 
 
 public class Animations extends JFrame 
 {
 	private static final long serialVersionUID = 1L;
-	private JFrame frame = new JFrame("Saf");
-	private boolean isLeft = true;
+	private JFrame frame;
+	private Fight fight;
+	private boolean isLeft;
+	
+	public Animations(Fight f)
+	{
+		frame = new JFrame("Saf");
+		fight=new Fight();
+		isLeft=false;
+		fight=f;
+	}
 
 	public void Initialize() throws IOException
 	{
@@ -35,7 +46,7 @@ public class Animations extends JFrame
 	}
 
 	
-	public void refreshFrame(Fighter leftFighter,Fighter rightFighter) throws IOException 
+/*	public void refreshFrame(Fighter leftFighter,Fighter rightFighter) throws IOException 
 	{
 		JFrame hframe = new JFrame("Saf");
 		hframe.setBackground(Color.white);
@@ -45,16 +56,19 @@ public class Animations extends JFrame
 	    hframe.setContentPane(right);
 	    hframe.removeAll();
 	}
+*/
 
-
-	public JPanel createFighterFigures(Fighter f) throws IOException
+	public JPanel createFighterFigures(LeftFighter f) throws IOException
 	{
 		JPanel fighterPanel = new JPanel();
 		fighterPanel.setLayout(null);
+		Behavior b=f.chooseRandomBehavior();
+		Move m=b.getMove();
+		Attack a=b.getAttack();
+		System.out.println();
+		System.out.println(updateImageFile(m.getMoveName()));
 	   	BufferedImage myPicture = ImageIO.read(
-	   			updateImageFile(
-	   					f.getCurrentCondition().getAttacksName()
-	   			)
+	   			updateImageFile(a.getAttackName())
 	   	);
 		JLabel picLabel = new JLabel(new ImageIcon( myPicture ));
 		picLabel.setBounds(0, 0, 161, 195);
@@ -68,52 +82,46 @@ public class Animations extends JFrame
 	
 	public File updateImageFile(String attacksName)
 	{
-    		int i=(int) (Math.random()*6);
-			if (i==0) attacksName="punch_low";
-			else if (i==1) attacksName="punch_high";
-			else if (i==2) attacksName="kick_low";
-			else if (i==3) attacksName="kick_high";
-			else if (i==4) attacksName="block_low";
-			else if (i==5) attacksName="block_high";
-			else attacksName="block_high";
-	
-		try {
-			
-		AttacksNames currAttack = AttacksNames.valueOf(attacksName);
-		
+		assert attacksName != "" : "stringIsEmpty";
 		String p=new String();
-		if(this.isLeft)
-		{
-			switch (currAttack)
-			{	
-				case punch_low:p="./src/images/LeftPunchLow.gif";
-				case punch_high:p="./src/images/LeftPunchHigh.gif";
-				case kick_low:p="./src/images/LeftKickLow.gif";
-				case kick_high:p="./src/images/LeftKickHigh.gif";
-				case block_low:p="./src/images/LeftBlockLow.gif";
-				case block_high:p="./src/images/LeftBlockHigh.gif";
-				default:p="./src/images/LeftFighter.gif";
-			 }
-		}
-		else
-		{
-			switch (currAttack)
-			{	
-				case punch_low:p="./src/images/RightPunchLow.gif";
-				case punch_high:p="./src/images/RightPunchHigh.gif";
-				case kick_low:p="./src/images/RightKickLow.gif";
-				case kick_high:p="./src/images/RightKickHigh.gif";
-				case block_low:p="./src/images/RightBlockLow.gif";
-				case block_high:p="./src/images/RightBlockHigh.gif";
-				default:p="./src/images/RightFighter.gif";
-			 }			
-		}
-		File path=new File(p);
-		return path;
-		} catch(Exception e){
+
+		try {
+			AttacksNames currAttack = AttacksNames.valueOf(attacksName);
+			if(this.isLeft)
+			{
+				System.out.println(currAttack);
+				switch (currAttack)
+				{	
+					case punch_low:p="./src/images/LeftPunchLow.gif";break;
+					case punch_high:p="./src/images/LeftPunchHigh.gif";break;
+					case kick_low:p="./src/images/LeftKickLow.gif";break;
+					case kick_high:p="./src/images/LeftKickHigh.gif";break;
+					case block_low:p="./src/images/LeftBlockLow.gif";break;
+					case block_high:p="./src/images/LeftBlockHigh.gif";break;
+					default:p="./src/images/LeftFighter.gif";break;
+				}
+			}
+			else
+			{
+				System.out.println(currAttack);
+				switch (currAttack)
+				{	
+					case punch_low:p="./src/images/RightPunchLow.gif";break;
+					case punch_high:p="./src/images/RightPunchHigh.gif";break;
+					case kick_low:p="./src/images/RightKickLow.gif";break;
+					case kick_high:p="./src/images/RightKickHigh.gif";break;
+					case block_low:p="./src/images/RightBlockLow.gif";break;
+					case block_high:p="./src/images/RightBlockHigh.gif";break;
+					default:p="./src/images/RightFighter.gif";break;
+				 }			
+			}
+			File path=new File(p);
+			return path;
+		} 
+		catch(Exception e){
 			e.printStackTrace();
 		}
-		return null;
+		return new File(p="./src/images/LeftFighter.gif");
 	}
 
 

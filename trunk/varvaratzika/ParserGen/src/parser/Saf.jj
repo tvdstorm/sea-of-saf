@@ -6,11 +6,12 @@ options
 {
   JDK_VERSION = "1.5";
   static = true;
-} 
+}
 
 PARSER_BEGIN(SafParser)
 package parser;
 import objects.*;
+import game.*;
 import visualization.*;
 import java.lang.String;
 import java.util.ArrayList;
@@ -25,19 +26,23 @@ public class SafParser
 	try
 	{
 		String path  = new java.io.File(".").getCanonicalPath();
-        String FightersFile = "fighters2.txt";
+        String FightersFile = "fighters.txt";
 		InputStream stream = new FileInputStream(path + "/src/parser/" + FightersFile);
 	  	SafParser parser = new SafParser(stream);
-    	ArrayList<Fighter> f = parser.Start();
-		Interpreter i = new Interpreter(f);
-    	i.Interpret();
-    	StartFight start=new StartFight();
-        start.startGame(f);
+	  	System.out.println("Parsing is completed!!!!");
+    	List<Fighter> f = parser.Start();
+		Checker i = new Checker(f);
+    	i.CheckInputs();
+    	Fight saf=new Fight(f);
+        saf.evaluateCondition();
+        Animations a=new Animations(saf);
+        a.Initialize();
       	}
  	catch(Exception e)
  	{
- 	  System.out.println("Exception:"+e);
- 	}        
+ 	    System.out.println("ERROR: " + e.getMessage());
+        e.printStackTrace();
+ 	}
   }
 }
 
@@ -78,178 +83,124 @@ TOKEN :
 }
 
 
-ArrayList<Fighter> Start() :
+List<Fighter> Start() :
 {
     Token fighterName  = new Token();
     Token strengthName = new Token();
     Token strengValue = new Token();
-    ArrayList<Fighter> fighters = new ArrayList<Fighter>();
-    ArrayList<Condition> conditions = new ArrayList<Condition>();
+    List<Behavior> behaviors = new ArrayList<Behavior>();
+    List<Fighter> fighters= new ArrayList<Fighter>();
+    List<Strength> s=new ArrayList<Strength>();
 }
 {
     (
-	    LOOKAHEAD( 2 )
-		(fighterName = <IDENTIFIER>)
-		<OP_CURLY_BRACKETS>		{Fighter f = new Fighter(fighterName.toString());}
+		(fighterName = <IDENTIFIER>{ Fighter f = new Fighter(fighterName.toString()); })
+		<OP_CURLY_BRACKETS>
 		(
-		LOOKAHEAD( 2 )
-		(strengthName=<IDENTIFIER>)
-	  	<ASSIGN>
-	  	(strengValue=<PROP_VALUE>)
-	  	{f.setStrength(new Strength(strengthName.toString(),Integer.valueOf(strengValue.toString())));}
-		|
-		LOOKAHEAD( 2 )
-		(conditions=searchForAndOrInConditions())
-		{f.setConditions(conditions);}
-		)+   
+			LOOKAHEAD( 2 )
+			(strengthName = <IDENTIFIER>)
+		  	<ASSIGN>
+		  	(strengValue = <PROP_VALUE>)
+		  	{s.add(new Strength(strengthName.toString(),Integer.valueOf(strengValue.toString())));}
+			|
+			LOOKAHEAD( 2 )
+			(behaviors=behavior())
+			{f.setBehaviors(behaviors);}
+		)+
 		<CL_CURLY_BRACKETS>
+		{f.setStrengths(s);}
 		{fighters.add(f);}
 	)+
 		<EOF>
 		{return fighters;}
-	
 }
-
-ArrayList<Condition> searchForAndOrInConditions() :
+List<Behavior> behavior() :
  {
      Token conditionName = new Token();
+     Token conditionName2 = new Token();
      Token movesName = new Token();
      Token attacksName = new Token();
-     Token conditionNameOr = new Token();
-     Token conditionNameAnd = new Token();
-     ArrayList conditionList=new ArrayList();
+     List conditionList=new ArrayList();
      List<Token> listMovesName = new ArrayList<Token>();
      List<Token> listAttacksName = new ArrayList<Token>();
-     ArrayList<Condition> returnedCondition =new ArrayList<Condition>();
-     int id=1;
-  
+     List<Behavior> returnedBehavior =new ArrayList<Behavior>();
+     List<Move> move= new ArrayList<Move>();
+     List<Attack> attack=new ArrayList<Attack>();
+     Condition condition;
+
  }
  {
-       (
-		LOOKAHEAD( 2 )
-		(conditionName=<IDENTIFIER>)
-		<OP_BRACKETS>
-		(returnedCondition=conditions(conditionName,0,new Token()))
-		<CL_BRACKETS>
-		|   
-		LOOKAHEAD( 2 )
-		(conditionName=<IDENTIFIER>)
-		<OR>
-		(conditionNameOr=<IDENTIFIER>)
-		<OP_BRACKETS>
-		(returnedCondition=conditions(conditionName,0,conditionNameOr))
-		<CL_BRACKETS>
-		|
-		LOOKAHEAD( 2 )
-		(conditionName=<IDENTIFIER>)
-		<AND>
-		(conditionNameAnd=<IDENTIFIER>)
-		<OP_BRACKETS>
-		(returnedCondition=conditions(conditionName,id,conditionNameAnd))
-		<CL_BRACKETS>  
+     (conditionName=<IDENTIFIER>)
+     (
+         (
+			LOOKAHEAD( 2 )
+			<OP_BRACKETS>			(move=moveContents())
+			(attack=attackContents())
+			<CL_BRACKETS>
+			{condition=new SimpleCondition(conditionName.toString());}
+			|
+			LOOKAHEAD( 2 )
+			<OR>
+			(conditionName2=<IDENTIFIER>)
+			<OP_BRACKETS>
+			(move=moveContents())
+			(attack=attackContents())
+			<CL_BRACKETS>
+			{condition=new Or(new SimpleCondition(conditionName.toString()),new SimpleCondition(conditionName2.toString()));}
+			|
+			LOOKAHEAD( 2 )
+			<AND>
+			(conditionName2=<IDENTIFIER>)
+			<OP_BRACKETS>
+			(move=moveContents())
+			(attack=attackContents())
+			<CL_BRACKETS>
+			{condition=new And(new SimpleCondition(conditionName.toString()),new SimpleCondition(conditionName2.toString()));}
+		)
+		{		    for(Move m : move)
+			{
+			    for(Attack a : attack)
+			    {					returnedBehavior.add(new Behavior(condition,m,a));
+			    }			}
+		}
 	)+
-	{return returnedCondition; }
- 
- }
+	{return returnedBehavior; }
 
- 
-ArrayList<Condition> conditions(Token conditionName,int id,Token conditionName2nd) :
-{
+ }
+List<Move> moveContents() :
+ {
     Token movesName = new Token();
-    Token attacksName = new Token();
-    ArrayList<Condition> returnedCondition = new ArrayList<Condition>();
-    List<Token > listAttacksName = new ArrayList<Token>();
-    List<Token > listMovesName = new ArrayList<Token>();}
+    List<Move> returnedMovesNames = new ArrayList<Move>();
+ }
 {
     (
-   		LOOKAHEAD( 2 )
-   		(movesName=<IDENTIFIER>)
-   		(attacksName=<IDENTIFIER>)
-		{	if(id==0){returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));}
-			else
-			{returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));
-			 returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));
-			}
-		}
+		(movesName=<IDENTIFIER>{ returnedMovesNames.add(new Move(movesName.toString())); })
 		|
-		LOOKAHEAD( 2 )
-        (movesName = <IDENTIFIER>)
-        (attacksName = <IDENTIFIER>)	
-		{
-		    if(id==0){returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));}
-		    else
-		    {returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));
-			 returnedCondition.add(new Condition(conditionName2nd.toString(),movesName.toString(),attacksName.toString(),id));
-			}
-		}
-		|
-		LOOKAHEAD( 2 )
-		(movesName=<IDENTIFIER>)
 		<CHOOSE>
 		<OP_ROUND_BRACKETS>
-		(attacksName=<IDENTIFIER>{listAttacksName.add(attacksName);})+
-		<CL_ROUND_BRACKETS>
-		{
-		     for(Token oneOfListAttacks: listAttacksName)
-				{
-					if(id==0){returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));}
-					else
-					{
-			 			returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));
-			 			returnedCondition.add(new Condition(conditionName2nd.toString(),movesName.toString(),attacksName.toString(),id));
-			 		}
-			    }
-			}
-		|   
-		LOOKAHEAD( 2 )
-		<CHOOSE>
-		<OP_ROUND_BRACKETS>
-		(movesName=<IDENTIFIER>{listMovesName.add(movesName);})+
-		<CL_ROUND_BRACKETS>
-		(attacksName=<IDENTIFIER>)		
-		{
-		    for(Token oneOfListMoves: listMovesName)
-		    {
-				if(id==0){returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));}
-				else
-				{
-			 		returnedCondition.add(new Condition(conditionName2nd.toString(),movesName.toString(),attacksName.toString(),id));
-					returnedCondition.add(new Condition(conditionName2nd.toString(),movesName.toString(),attacksName.toString(),id));
-				}
-
-			 }
-		}
-		|   
-        LOOKAHEAD( 2 )
-        <CHOOSE>
-        <OP_ROUND_BRACKETS>
-        (movesName=<IDENTIFIER>{listMovesName.add(movesName);})+
-        <CL_ROUND_BRACKETS>
-        <CHOOSE>
-        <OP_ROUND_BRACKETS>
-        (attacksName=<IDENTIFIER>{listAttacksName.add(attacksName);})+
-        <CL_ROUND_BRACKETS>
-		{
-		    for(Token oneOfListMoves: listMovesName)
-			{
-			    for(Token oneOfListAttacks: listAttacksName)
-				{
-					if(id==0)
-			 		{returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));}
-					else
-					{returnedCondition.add(new Condition(conditionName.toString(),movesName.toString(),attacksName.toString(),id));
-			 		 returnedCondition.add(new Condition(conditionName2nd.toString(),movesName.toString(),attacksName.toString(),id));
-					}
-			    
-			    }
-			}
-		}  
+		(
+		    movesName=<IDENTIFIER>
+			{returnedMovesNames.add(new Move(movesName.toString()));}
 		)+
-		{return returnedCondition;}
+		<CL_ROUND_BRACKETS>
+	)
+    {return returnedMovesNames;}}
+List<Attack> attackContents() :
+ {
+    Token attacksName = new Token();
+    List<Attack> returnedAttacksNames = new ArrayList<Attack>();
+}
+{
+    (
+		(attacksName=<IDENTIFIER>)
+		{returnedAttacksNames.add(new Attack(attacksName.toString()));}
+		|
+		<CHOOSE>
+		<OP_ROUND_BRACKETS>
+		(attacksName=<IDENTIFIER>{returnedAttacksNames.add(new Attack(attacksName.toString()));})+
+		<CL_ROUND_BRACKETS>
+	)
+	{return returnedAttacksNames;}
 }
 
-
 
-
-
-		   
