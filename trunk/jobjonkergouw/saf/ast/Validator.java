@@ -46,8 +46,9 @@ public class Validator implements Visitor {
  
     public void visit(Strength strength) {
         if (verbose) messages.add("Visiting Strength node " + strength.getName());
-        String[] allowStrengths = {
-        if (strength.getName()
+        String[] strengthArray = {"punchReach", "kickReach", "kickPower", "punchPower"};
+        java.util.List<String> strengthList = Arrays.asList(strengthArray);
+
     }
        
     public void visit(Fighter fighter) {
