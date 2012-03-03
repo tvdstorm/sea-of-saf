@@ -38,7 +38,7 @@ public class Main {
     public static void main(String[] args) {
         String src = null;
         try {
-            src = readStringFromFile("saf/tests/bad_attack.saf");
+            src = readStringFromFile("saf/tests/bad_everything.saf");
         } catch (IOException e) {
             System.out.println(e.getMessage());
             java.lang.System.exit(1);
@@ -54,11 +54,12 @@ public class Main {
         }
         System.out.println(fighterTree.printTree());
         
-        Validator val = new Validator(true);
+        Validator val = new Validator();
         val.visit(fighterTree);
+        if ( val.isValid() ) {
         
-        System.out.println(val.messagesAsString());
-
-    }
-    
+        } else {
+            System.out.println(val.messagesAsString());
+        }
+     }   
 }

@@ -8,9 +8,9 @@ public class Validator implements Visitor {
     
     // print all message, not only errors
     private boolean verbose;
-    private int errorsFound;                                 
     
-    
+    private int errorsFound;                              
+        
     public Validator() {
         this(false);
     }
@@ -29,30 +29,67 @@ public class Validator implements Visitor {
             }
         }
         return result;
-    }    
-
+    }
+    
+    public boolean isValid() {
+        if (errorsFound == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public void visit(Attack attack) {
-        if (verbose) messages.add("Visiting Attack node: " + attack.getName());
+        if (verbose) messages.add("Visiting Attack node: " + attack.getName() );
         
+        String[] allowedAttacks = {"punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high"};
+        for ( String attackChoice : attack.getActionsAsArrayList() ) {
+            if (stringNotInArray(attackChoice, allowedAttacks)) {
+                messages.add("Invalid AST: Attack node contains unkown attack type: " + attackChoice);
+                errorsFound += 1;        
+            }
+        }  
     }
     
     public void visit(Move move) {
-        if (verbose) messages.add("Visiting Move node: " + move.getName());
+        if (verbose) messages.add("Visiting Move node: " + move.getName() );
+        
+        String[] allowedMoves = {"jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away"};
+        for ( String moveChoice : move.getActionsAsArrayList() ) {
+            if (stringNotInArray(moveChoice, allowedMoves)) {
+                messages.add("Invalid AST: Move node contains unkown move type: " + moveChoice);
+                errorsFound += 1;        
+            }
+        }          
     }
     
     public void visit(Condition condition) {
-        if (verbose) messages.add("Visiting Condition node: " + condition.getName());
+        if (verbose) messages.add("Visiting Condition node: " + condition.getName() );
+        
+        String[] allowedCondition = {"stronger", "weaker", "much_stronger", "much_weaker", "even", "near", "far", "always"};
+        if (stringNotInArray(condition.getName(), allowedCondition)) {
+            messages.add("Invalid AST: Condition node of unkown type: " + condition.getName());
+            errorsFound += 1;        
+        }
     }
  
     public void visit(Strength strength) {
-        if (verbose) messages.add("Visiting Strength node " + strength.getName());
-        String[] strengthArray = {"punchReach", "kickReach", "kickPower", "punchPower"};
-        java.util.List<String> strengthList = Arrays.asList(strengthArray);
-
+        if (verbose) messages.add("Visiting Strength node " + strength.getName() );
+        
+        String[] allowedStrengths = {"punchReach", "kickReach", "kickPower", "punchPower"};
+        if (stringNotInArray(strength.getName(), allowedStrengths)) {
+            messages.add("Invalid AST: Strength node of unkown type: " + strength.getName() );
+            errorsFound += 1;        
+        }
+        
+        if (strength.getValue() > 10 | strength.getValue() < 1) {
+            messages.add("Invalid AST: Strength node " + strength.getName() + " with invalid value " + strength.getValue() );
+            errorsFound += 1;          
+        }
     }
        
     public void visit(Fighter fighter) {
-        if (verbose) messages.add("Visiting Fighter node: " + fighter.getName());
+        if (verbose) messages.add("Visiting Fighter node: " + fighter.getName() );
         visitChildren(fighter);
     }
  
@@ -64,7 +101,7 @@ public class Validator implements Visitor {
     public void visit(And and) {
         if (verbose) messages.add("Visiting And node");
         if (and.childCount() != 2) {
-            messages.add("Error: And node find with " + and.childCount() + " children");
+            messages.add("Invalid AST: And node find with " + and.childCount() + " children");
             errorsFound += 1;
         }        
         visitChildren(and);            
@@ -74,7 +111,7 @@ public class Validator implements Visitor {
     public void visit(Or or) {
         if (verbose) messages.add("Visiting Or node");
         if (or.childCount() != 2) {
-            messages.add("Error: Or node find with " + or.childCount() + " children");
+            messages.add("Invalid AST: Or node find with " + or.childCount() + " children");
             errorsFound += 1;
         }        
         visitChildren(or);    
@@ -85,6 +122,11 @@ public class Validator implements Visitor {
             ASTNode child = node.getChild(i);
             child.accept(this);
         }      
+    }
+    
+    private boolean stringNotInArray(String string, String[] stringArray) {
+        java.util.List<String> stringList = java.util.Arrays.asList(stringArray);
+        return !stringList.contains(string);
     }
 }
 

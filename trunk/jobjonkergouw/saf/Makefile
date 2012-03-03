@@ -36,7 +36,7 @@ ast/Validator.class : ast/Validator.java
 
 astnodesclasses : ast/nodes/ASTNode.class ast/nodes/Fighter.class ast/nodes/Strength.class ast/nodes/Rule.class \
 			 	ast/nodes/Or.class ast/nodes/And.class ast/nodes/Condition.class \
-			  	ast/nodes/Action.class ast/nodes/Move.class ast/nodes/Attack.class
+			  	ast/nodes/Move.class ast/nodes/Attack.class ast/nodes/Action.class
 	
 ast/nodes/ASTNode.class : ast/nodes/ASTNode.java
 	$(CC) $(FLAGS) ast/nodes/ASTNode.java 

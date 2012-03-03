@@ -1,0 +1,8 @@
+bad_everything {
+  kickPower = 12
+  punchPower = 5
+  kickReach = 3
+  punchHeight = 9
+  far [run_west punch_high]
+  dead [choose(stand crouch) shoot] 
+}

@@ -1,7 +1,5 @@
 package saf.ast.nodes;
 
-import saf.ast.Visitor;
-
 import java.util.ArrayList;
 
 public abstract class Action extends ASTNode {
@@ -16,11 +14,10 @@ public abstract class Action extends ASTNode {
         public void addAction(String action) {
             actions.add(action);
             setName( getName() + ", " + action );
-        } 
-
-        @Override
-        public void accept(Visitor visitor) {
-            visitor.visit(this);
+        }
+        
+        public ArrayList<String> getActionsAsArrayList() {
+            return new ArrayList<String>(actions);
         }
         
         @Override
@@ -28,7 +25,7 @@ public abstract class Action extends ASTNode {
                 return name;
         }
         
-        public void setName(String name) {
+        private void setName(String name) {
                 this.name = name;
         }
 }
