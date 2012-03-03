@@ -6,7 +6,7 @@ options {
 
 @header {
     package saf.syntax;
-    import saf.ast.*;
+    import saf.ast.nodes.*;
     import java.lang.String;
     
 }

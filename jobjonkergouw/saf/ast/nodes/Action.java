@@ -1,4 +1,6 @@
-package saf.ast;
+package saf.ast.nodes;
+
+import saf.ast.Visitor;
 
 import java.util.ArrayList;
 
@@ -17,8 +19,8 @@ public abstract class Action extends ASTNode {
         } 
 
         @Override
-        public boolean accept() {
-            return true;      
+        public void accept(Visitor visitor) {
+            visitor.visit(this);
         }
         
         @Override
