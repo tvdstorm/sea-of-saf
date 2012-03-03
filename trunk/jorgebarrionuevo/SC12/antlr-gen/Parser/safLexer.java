@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-02-28 12:01:19
+// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-03 13:04:30
 
   package Parser;
 
@@ -15,7 +15,7 @@ public class safLexer extends Lexer {
     public static final int BEHAVIOUR=5;
     public static final int BETWEEN=6;
     public static final int CHARACTERISTIC=7;
-    public static final int CONDITION=8;
+    public static final int CONDITION_TYPE=8;
     public static final int DIGIT=9;
     public static final int EQ=10;
     public static final int FIGHT_ACTION=11;
@@ -819,15 +819,15 @@ public class safLexer extends Lexer {
     }
     // $ANTLR end "FIGHT_ACTION"
 
-    // $ANTLR start "CONDITION"
-    public final void mCONDITION() throws RecognitionException {
+    // $ANTLR start "CONDITION_TYPE"
+    public final void mCONDITION_TYPE() throws RecognitionException {
         try {
-            int _type = CONDITION;
+            int _type = CONDITION_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:11: ( ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' ) )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:13: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:16: ( ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' ) )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:18: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
             {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:13: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:18: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
             int alt5=8;
             switch ( input.LA(1) ) {
             case 'a':
@@ -933,7 +933,7 @@ public class safLexer extends Lexer {
 
             switch (alt5) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:14: 'always'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:19: 'always'
                     {
                     match("always"); 
 
@@ -942,7 +942,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:25: 'near'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:30: 'near'
                     {
                     match("near"); 
 
@@ -951,7 +951,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:34: 'far'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:39: 'far'
                     {
                     match("far"); 
 
@@ -960,7 +960,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:42: 'much_stronger'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:47: 'much_stronger'
                     {
                     match("much_stronger"); 
 
@@ -969,7 +969,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:60: 'stronger'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:65: 'stronger'
                     {
                     match("stronger"); 
 
@@ -978,7 +978,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:73: 'even'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:78: 'even'
                     {
                     match("even"); 
 
@@ -987,7 +987,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:82: 'weaker'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:87: 'weaker'
                     {
                     match("weaker"); 
 
@@ -996,7 +996,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:93: 'much_weaker'
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:62:98: 'much_weaker'
                     {
                     match("much_weaker"); 
 
@@ -1017,7 +1017,7 @@ public class safLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "CONDITION"
+    // $ANTLR end "CONDITION_TYPE"
 
     // $ANTLR start "L_BRACKET"
     public final void mL_BRACKET() throws RecognitionException {
@@ -1450,7 +1450,7 @@ public class safLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:8: ( ID | CHARACTERISTIC | MOVE_ACTION | FIGHT_ACTION | CONDITION | L_BRACKET | R_BRACKET | L_CURLY | R_CURLY | L_PAR | R_PAR | DIGIT | AND | OR | EQ | WS )
+        // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:8: ( ID | CHARACTERISTIC | MOVE_ACTION | FIGHT_ACTION | CONDITION_TYPE | L_BRACKET | R_BRACKET | L_CURLY | R_CURLY | L_PAR | R_PAR | DIGIT | AND | OR | EQ | WS )
         int alt10=16;
         switch ( input.LA(1) ) {
         case 'A':
@@ -1827,15 +1827,15 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:53: CONDITION
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:53: CONDITION_TYPE
                 {
-                mCONDITION(); 
+                mCONDITION_TYPE(); 
 
 
                 }
                 break;
             case 6 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:63: L_BRACKET
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:68: L_BRACKET
                 {
                 mL_BRACKET(); 
 
@@ -1843,7 +1843,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:73: R_BRACKET
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:78: R_BRACKET
                 {
                 mR_BRACKET(); 
 
@@ -1851,7 +1851,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:83: L_CURLY
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:88: L_CURLY
                 {
                 mL_CURLY(); 
 
@@ -1859,7 +1859,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:91: R_CURLY
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:96: R_CURLY
                 {
                 mR_CURLY(); 
 
@@ -1867,7 +1867,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:99: L_PAR
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:104: L_PAR
                 {
                 mL_PAR(); 
 
@@ -1875,7 +1875,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:105: R_PAR
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:110: R_PAR
                 {
                 mR_PAR(); 
 
@@ -1883,7 +1883,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:111: DIGIT
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:116: DIGIT
                 {
                 mDIGIT(); 
 
@@ -1891,7 +1891,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:117: AND
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:122: AND
                 {
                 mAND(); 
 
@@ -1899,7 +1899,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 14 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:121: OR
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:126: OR
                 {
                 mOR(); 
 
@@ -1907,7 +1907,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 15 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:124: EQ
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:129: EQ
                 {
                 mEQ(); 
 
@@ -1915,7 +1915,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 16 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:127: WS
+                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:132: WS
                 {
                 mWS(); 
 

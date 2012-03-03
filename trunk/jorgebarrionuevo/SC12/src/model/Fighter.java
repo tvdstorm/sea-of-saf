@@ -1,15 +1,14 @@
 package model;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.ArrayList;
 import util.Visitor;
 
 public class Fighter extends ASTNode{
 	
 	
 	private String name;
-	private ArrayList<Behaviour> behaviors = new ArrayList<Behaviour>();
-	private Personality personality = new Personality();
+	private ArrayList<Behaviour> behaviours = new ArrayList<Behaviour>();
+	private ArrayList<Characteristic> characteristics = new ArrayList<Characteristic>();
 	
 	public void setName(String nameFighter) {
         this.name = nameFighter;
@@ -20,15 +19,19 @@ public class Fighter extends ASTNode{
 	}
 	
 	public void addBehavior(Behaviour behaviour) {
-		this.behaviors.add(behaviour);
+		this.behaviours.add(behaviour);
 	}
 	
 	public void addCharacteristic(Characteristic characteristic) {
-		this.personality.addCharacteristic(characteristic);
+		this.characteristics.add(characteristic);
 	}
 	
-	public Personality getPersonality() {
-		return this.personality;
+	public ArrayList<Behaviour> getBehaviours() {
+		return this.behaviours;
+	}
+	
+	public ArrayList<Characteristic> getCharacteristics() {
+		return this.characteristics;
 	}
 	
 	@Override

@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import util.Visitor;
-
 public class Arena{
 
 	private ArrayList<Fighter> fighters = new ArrayList<Fighter>();

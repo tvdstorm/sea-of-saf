@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-02-28 12:01:19
+// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-03 13:04:30
 
   package Parser;
   import model.*;
@@ -15,7 +15,7 @@ import org.antlr.runtime.tree.*;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class safParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "BEHAVIOUR", "BETWEEN", "CHARACTERISTIC", "CONDITION", "DIGIT", "EQ", "FIGHT_ACTION", "ID", "L_BRACKET", "L_CURLY", "L_PAR", "MOVE_ACTION", "OR", "PROGRAM", "R_BRACKET", "R_CURLY", "R_PAR", "WS"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "BEHAVIOUR", "BETWEEN", "CHARACTERISTIC", "CONDITION_TYPE", "DIGIT", "EQ", "FIGHT_ACTION", "ID", "L_BRACKET", "L_CURLY", "L_PAR", "MOVE_ACTION", "OR", "PROGRAM", "R_BRACKET", "R_CURLY", "R_PAR", "WS"
     };
 
     public static final int EOF=-1;
@@ -23,7 +23,7 @@ public class safParser extends Parser {
     public static final int BEHAVIOUR=5;
     public static final int BETWEEN=6;
     public static final int CHARACTERISTIC=7;
-    public static final int CONDITION=8;
+    public static final int CONDITION_TYPE=8;
     public static final int DIGIT=9;
     public static final int EQ=10;
     public static final int FIGHT_ACTION=11;
@@ -138,7 +138,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "fighter"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:32:1: fighter returns [Fighter fighter] : ID L_CURLY ( personality )* ( behaviour )* R_CURLY ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:32:1: fighter returns [Fighter fighter] : ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY ;
     public final safParser.fighter_return fighter() throws RecognitionException {
         safParser.fighter_return retval = new safParser.fighter_return();
         retval.start = input.LT(1);
@@ -149,7 +149,7 @@ public TreeAdaptor getTreeAdaptor() {
         Token ID1=null;
         Token L_CURLY2=null;
         Token R_CURLY5=null;
-        safParser.personality_return personality3 =null;
+        safParser.characteristic_return characteristic3 =null;
 
         safParser.behaviour_return behaviour4 =null;
 
@@ -160,8 +160,8 @@ public TreeAdaptor getTreeAdaptor() {
 
          retval.fighter = new Fighter();
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:33:3: ( ID L_CURLY ( personality )* ( behaviour )* R_CURLY )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:5: ID L_CURLY ( personality )* ( behaviour )* R_CURLY
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:33:3: ( ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:5: ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY
             {
             root_0 = (Object)adaptor.nil();
 
@@ -180,7 +180,7 @@ public TreeAdaptor getTreeAdaptor() {
             adaptor.addChild(root_0, L_CURLY2_tree);
 
 
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:16: ( personality )*
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:16: ( characteristic )*
             loop1:
             do {
                 int alt1=2;
@@ -193,14 +193,14 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:16: personality
+            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:16: characteristic
             	    {
-            	    pushFollow(FOLLOW_personality_in_fighter135);
-            	    personality3=personality();
+            	    pushFollow(FOLLOW_characteristic_in_fighter135);
+            	    characteristic3=characteristic();
 
             	    state._fsp--;
 
-            	    adaptor.addChild(root_0, personality3.getTree());
+            	    adaptor.addChild(root_0, characteristic3.getTree());
 
             	    }
             	    break;
@@ -211,20 +211,20 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:30: ( behaviour )*
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:33: ( behaviour )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==CONDITION) ) {
+                if ( (LA2_0==CONDITION_TYPE) ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:30: behaviour
+            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:34:33: behaviour
             	    {
             	    pushFollow(FOLLOW_behaviour_in_fighter139);
             	    behaviour4=behaviour();
@@ -243,7 +243,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
 
-                  retval.fighter.addCharacteristic((personality3!=null?personality3.c:null));
+                  retval.fighter.addCharacteristic((characteristic3!=null?characteristic3.c:null));
                 
 
             R_CURLY5=(Token)match(input,R_CURLY,FOLLOW_R_CURLY_in_fighter154); 
@@ -281,17 +281,17 @@ public TreeAdaptor getTreeAdaptor() {
     // $ANTLR end "fighter"
 
 
-    public static class personality_return extends ParserRuleReturnScope {
+    public static class characteristic_return extends ParserRuleReturnScope {
         public Characteristic c;
         Object tree;
         public Object getTree() { return tree; }
     };
 
 
-    // $ANTLR start "personality"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:44:1: personality returns [Characteristic c] : CHARACTERISTIC EQ DIGIT ;
-    public final safParser.personality_return personality() throws RecognitionException {
-        safParser.personality_return retval = new safParser.personality_return();
+    // $ANTLR start "characteristic"
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:44:1: characteristic returns [Characteristic c] : CHARACTERISTIC EQ DIGIT ;
+    public final safParser.characteristic_return characteristic() throws RecognitionException {
+        safParser.characteristic_return retval = new safParser.characteristic_return();
         retval.start = input.LT(1);
 
 
@@ -312,21 +312,21 @@ public TreeAdaptor getTreeAdaptor() {
             root_0 = (Object)adaptor.nil();
 
 
-            CHARACTERISTIC6=(Token)match(input,CHARACTERISTIC,FOLLOW_CHARACTERISTIC_in_personality180); 
+            CHARACTERISTIC6=(Token)match(input,CHARACTERISTIC,FOLLOW_CHARACTERISTIC_in_characteristic180); 
             CHARACTERISTIC6_tree = 
             (Object)adaptor.create(CHARACTERISTIC6)
             ;
             adaptor.addChild(root_0, CHARACTERISTIC6_tree);
 
 
-            EQ7=(Token)match(input,EQ,FOLLOW_EQ_in_personality182); 
+            EQ7=(Token)match(input,EQ,FOLLOW_EQ_in_characteristic182); 
             EQ7_tree = 
             (Object)adaptor.create(EQ7)
             ;
             adaptor.addChild(root_0, EQ7_tree);
 
 
-            DIGIT8=(Token)match(input,DIGIT,FOLLOW_DIGIT_in_personality184); 
+            DIGIT8=(Token)match(input,DIGIT,FOLLOW_DIGIT_in_characteristic184); 
             DIGIT8_tree = 
             (Object)adaptor.create(DIGIT8)
             ;
@@ -356,7 +356,7 @@ public TreeAdaptor getTreeAdaptor() {
         }
         return retval;
     }
-    // $ANTLR end "personality"
+    // $ANTLR end "characteristic"
 
 
     public static class behaviour_return extends ParserRuleReturnScope {
@@ -367,7 +367,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "behaviour"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:49:1: behaviour returns [Behaviour b] : CONDITION L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:49:1: behaviour returns [Behaviour b] : CONDITION_TYPE L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET ;
     public final safParser.behaviour_return behaviour() throws RecognitionException {
         safParser.behaviour_return retval = new safParser.behaviour_return();
         retval.start = input.LT(1);
@@ -375,30 +375,30 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        Token CONDITION9=null;
+        Token CONDITION_TYPE9=null;
         Token L_BRACKET10=null;
         Token MOVE_ACTION11=null;
         Token FIGHT_ACTION12=null;
         Token R_BRACKET13=null;
 
-        Object CONDITION9_tree=null;
+        Object CONDITION_TYPE9_tree=null;
         Object L_BRACKET10_tree=null;
         Object MOVE_ACTION11_tree=null;
         Object FIGHT_ACTION12_tree=null;
         Object R_BRACKET13_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:50:3: ( CONDITION L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:51:3: CONDITION L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:50:3: ( CONDITION_TYPE L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:51:3: CONDITION_TYPE L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET
             {
             root_0 = (Object)adaptor.nil();
 
 
-            CONDITION9=(Token)match(input,CONDITION,FOLLOW_CONDITION_in_behaviour204); 
-            CONDITION9_tree = 
-            (Object)adaptor.create(CONDITION9)
+            CONDITION_TYPE9=(Token)match(input,CONDITION_TYPE,FOLLOW_CONDITION_TYPE_in_behaviour204); 
+            CONDITION_TYPE9_tree = 
+            (Object)adaptor.create(CONDITION_TYPE9)
             ;
-            adaptor.addChild(root_0, CONDITION9_tree);
+            adaptor.addChild(root_0, CONDITION_TYPE9_tree);
 
 
             L_BRACKET10=(Token)match(input,L_BRACKET,FOLLOW_L_BRACKET_in_behaviour211); 
@@ -430,7 +430,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
              
-                      retval.b = new Behaviour(new Condition(CONDITION9.getText()), new Action(MOVE_ACTION11.getText()), new Action(FIGHT_ACTION12.getText()));
+                      retval.b = new Behaviour(new ConditionType(CONDITION_TYPE9.getText()), new MoveAction(MOVE_ACTION11.getText()), new FightAction(FIGHT_ACTION12.getText()));
                     
 
             }
@@ -464,13 +464,13 @@ public TreeAdaptor getTreeAdaptor() {
     public static final BitSet FOLLOW_fighter_in_program103 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ID_in_fighter131 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_L_CURLY_in_fighter133 = new BitSet(new long[]{0x0000000000100180L});
-    public static final BitSet FOLLOW_personality_in_fighter135 = new BitSet(new long[]{0x0000000000100180L});
+    public static final BitSet FOLLOW_characteristic_in_fighter135 = new BitSet(new long[]{0x0000000000100180L});
     public static final BitSet FOLLOW_behaviour_in_fighter139 = new BitSet(new long[]{0x0000000000100100L});
     public static final BitSet FOLLOW_R_CURLY_in_fighter154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHARACTERISTIC_in_personality180 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_EQ_in_personality182 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_DIGIT_in_personality184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CONDITION_in_behaviour204 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_CHARACTERISTIC_in_characteristic180 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_EQ_in_characteristic182 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_DIGIT_in_characteristic184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CONDITION_TYPE_in_behaviour204 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_L_BRACKET_in_behaviour211 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_MOVE_ACTION_in_behaviour213 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_FIGHT_ACTION_in_behaviour215 = new BitSet(new long[]{0x0000000000080000L});
