@@ -40,7 +40,7 @@ fighter returns [Fighter fighter] @init{ $fighter = new Fighter();}
       $fighter.setName($ID.text);
     } 
   ;
-
+  
 characteristic returns[Characteristic c]
   :
   CHARACTERISTIC EQ DIGIT {$c = new Characteristic($CHARACTERISTIC.getText(),Integer.parseInt($DIGIT.getText()));}
@@ -58,18 +58,19 @@ characteristic returns[Characteristic c]
 behaviour returns[Behaviour beha]
   :
   condi=condition
-    L_BRACKET action action R_BRACKET
-        { 
-          $beha = new Behaviour($condi.ct, $moveAction.mova , new FightAction($FIGHT_ACTION.getText()));
-        }
+  { 
+   $beha = new Behaviour($condi.ct, $condi.ma , $condi.fa);
+  }
   ;
 
-condition returns [ConditionType ct, MoveAction ma, FightAction fa]
+condition returns [ConditionType ct, MoveAction ma, FightAction fa, ChooseAction ca]
   :
-  c=conditionType a=action
+  c=conditionType L_BRACKET  a=action R_BRACKET
   {
     $ct=$c.condType;
-
+    $ma=$a.m;
+    $fa=$a.f;
+    $ca=$a.c;  
   }
   ;
 
@@ -78,19 +79,29 @@ conditionType returns [ConditionType condType]
   CONDITION_TYPE
   {
   $condType = new ConditionType($CONDITION_TYPE.getText());
+  System.out.println("The condition is> " + $condType.getName());
   }
   ;
 
-action
+action returns [MoveAction m, FightAction f, ChooseAction c]
   :
-  moveAction fightAction | chooseAction chooseAction | moveAction chooseAction | chooseAction fightAction 
-  ;
+  mac=moveAction fac=fightAction | 
+  cho=chooseAction cho=chooseAction | 
+  mac=moveAction cho=chooseAction | 
+  cho=chooseAction fac=fightAction 
   
-chooseAction returns[ChooseAction ch]
-  :
-  CHOOSE R_CURLY ma1=moveAction ma2=moveAction L_CURLY
   {
-   $ch = new ChooseAction(ma1.mova, ma2.mova);
+    $m=$mac.mova;
+    $f=$fac.figa;
+    $c=$cho.chm;
+  }
+  ;
+chooseAction returns[ChooseAction chm, ChooseAction chf]
+  :
+  CHOOSE L_PAR (ma1=moveAction ma2=moveAction  |  fa1=fightAction fa2=fightAction ) R_PAR 
+  {
+   $chm = new ChooseAction(ma1.mova, ma2.mova);
+   $chf = new ChooseAction(fa1.figa, fa2.figa);
   }
   ;
   

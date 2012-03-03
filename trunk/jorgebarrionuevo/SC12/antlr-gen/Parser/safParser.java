@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-03 18:09:06
+// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-03 19:38:10
 
   package Parser;
   import model.*;
@@ -313,21 +313,21 @@ public TreeAdaptor getTreeAdaptor() {
             root_0 = (Object)adaptor.nil();
 
 
-            CHARACTERISTIC6=(Token)match(input,CHARACTERISTIC,FOLLOW_CHARACTERISTIC_in_characteristic180); 
+            CHARACTERISTIC6=(Token)match(input,CHARACTERISTIC,FOLLOW_CHARACTERISTIC_in_characteristic182); 
             CHARACTERISTIC6_tree = 
             (Object)adaptor.create(CHARACTERISTIC6)
             ;
             adaptor.addChild(root_0, CHARACTERISTIC6_tree);
 
 
-            EQ7=(Token)match(input,EQ,FOLLOW_EQ_in_characteristic182); 
+            EQ7=(Token)match(input,EQ,FOLLOW_EQ_in_characteristic184); 
             EQ7_tree = 
             (Object)adaptor.create(EQ7)
             ;
             adaptor.addChild(root_0, EQ7_tree);
 
 
-            DIGIT8=(Token)match(input,DIGIT,FOLLOW_DIGIT_in_characteristic184); 
+            DIGIT8=(Token)match(input,DIGIT,FOLLOW_DIGIT_in_characteristic186); 
             DIGIT8_tree = 
             (Object)adaptor.create(DIGIT8)
             ;
@@ -368,7 +368,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "behaviour"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:58:1: behaviour returns [Behaviour beha] : condi= condition L_BRACKET action action R_BRACKET ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:58:1: behaviour returns [Behaviour beha] : condi= condition ;
     public final safParser.behaviour_return behaviour() throws RecognitionException {
         safParser.behaviour_return retval = new safParser.behaviour_return();
         retval.start = input.LT(1);
@@ -376,63 +376,27 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        Token L_BRACKET9=null;
-        Token R_BRACKET12=null;
         safParser.condition_return condi =null;
 
-        safParser.action_return action10 =null;
 
-        safParser.action_return action11 =null;
-
-
-        Object L_BRACKET9_tree=null;
-        Object R_BRACKET12_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:59:3: (condi= condition L_BRACKET action action R_BRACKET )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:60:3: condi= condition L_BRACKET action action R_BRACKET
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:59:3: (condi= condition )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:60:3: condi= condition
             {
             root_0 = (Object)adaptor.nil();
 
 
-            pushFollow(FOLLOW_condition_in_behaviour215);
+            pushFollow(FOLLOW_condition_in_behaviour217);
             condi=condition();
 
             state._fsp--;
 
             adaptor.addChild(root_0, condi.getTree());
 
-            L_BRACKET9=(Token)match(input,L_BRACKET,FOLLOW_L_BRACKET_in_behaviour221); 
-            L_BRACKET9_tree = 
-            (Object)adaptor.create(L_BRACKET9)
-            ;
-            adaptor.addChild(root_0, L_BRACKET9_tree);
-
-
-            pushFollow(FOLLOW_action_in_behaviour223);
-            action10=action();
-
-            state._fsp--;
-
-            adaptor.addChild(root_0, action10.getTree());
-
-            pushFollow(FOLLOW_action_in_behaviour225);
-            action11=action();
-
-            state._fsp--;
-
-            adaptor.addChild(root_0, action11.getTree());
-
-            R_BRACKET12=(Token)match(input,R_BRACKET,FOLLOW_R_BRACKET_in_behaviour227); 
-            R_BRACKET12_tree = 
-            (Object)adaptor.create(R_BRACKET12)
-            ;
-            adaptor.addChild(root_0, R_BRACKET12_tree);
-
-
              
-                      retval.beha = new Behaviour((condi!=null?condi.ct:null), $moveAction.mova , new FightAction($FIGHT_ACTION.getText()));
-                    
+               retval.beha = new Behaviour((condi!=null?condi.ct:null), (condi!=null?condi.ma:null) , (condi!=null?condi.fa:null));
+              
 
             }
 
@@ -462,13 +426,14 @@ public TreeAdaptor getTreeAdaptor() {
         public ConditionType ct;
         public MoveAction ma;
         public FightAction fa;
+        public ChooseAction ca;
         Object tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "condition"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:67:1: condition returns [ConditionType ct, MoveAction ma, FightAction fa] : c= conditionType a= action ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:66:1: condition returns [ConditionType ct, MoveAction ma, FightAction fa, ChooseAction ca] : c= conditionType L_BRACKET a= action R_BRACKET ;
     public final safParser.condition_return condition() throws RecognitionException {
         safParser.condition_return retval = new safParser.condition_return();
         retval.start = input.LT(1);
@@ -476,36 +441,56 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
+        Token L_BRACKET9=null;
+        Token R_BRACKET10=null;
         safParser.conditionType_return c =null;
 
         safParser.action_return a =null;
 
 
+        Object L_BRACKET9_tree=null;
+        Object R_BRACKET10_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:68:3: (c= conditionType a= action )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:69:3: c= conditionType a= action
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:67:3: (c= conditionType L_BRACKET a= action R_BRACKET )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:68:3: c= conditionType L_BRACKET a= action R_BRACKET
             {
             root_0 = (Object)adaptor.nil();
 
 
-            pushFollow(FOLLOW_conditionType_in_condition258);
+            pushFollow(FOLLOW_conditionType_in_condition242);
             c=conditionType();
 
             state._fsp--;
 
             adaptor.addChild(root_0, c.getTree());
 
-            pushFollow(FOLLOW_action_in_condition262);
+            L_BRACKET9=(Token)match(input,L_BRACKET,FOLLOW_L_BRACKET_in_condition244); 
+            L_BRACKET9_tree = 
+            (Object)adaptor.create(L_BRACKET9)
+            ;
+            adaptor.addChild(root_0, L_BRACKET9_tree);
+
+
+            pushFollow(FOLLOW_action_in_condition249);
             a=action();
 
             state._fsp--;
 
             adaptor.addChild(root_0, a.getTree());
 
+            R_BRACKET10=(Token)match(input,R_BRACKET,FOLLOW_R_BRACKET_in_condition251); 
+            R_BRACKET10_tree = 
+            (Object)adaptor.create(R_BRACKET10)
+            ;
+            adaptor.addChild(root_0, R_BRACKET10_tree);
+
+
 
                 retval.ct =(c!=null?c.condType:null);
-
+                retval.ma =(a!=null?a.m:null);
+                retval.fa =(a!=null?a.f:null);
+                retval.ca =(a!=null?a.c:null);  
               
 
             }
@@ -540,7 +525,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "conditionType"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:76:1: conditionType returns [ConditionType condType] : CONDITION_TYPE ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:77:1: conditionType returns [ConditionType condType] : CONDITION_TYPE ;
     public final safParser.conditionType_return conditionType() throws RecognitionException {
         safParser.conditionType_return retval = new safParser.conditionType_return();
         retval.start = input.LT(1);
@@ -548,26 +533,27 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        Token CONDITION_TYPE13=null;
+        Token CONDITION_TYPE11=null;
 
-        Object CONDITION_TYPE13_tree=null;
+        Object CONDITION_TYPE11_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:77:3: ( CONDITION_TYPE )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:78:3: CONDITION_TYPE
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:78:3: ( CONDITION_TYPE )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:79:3: CONDITION_TYPE
             {
             root_0 = (Object)adaptor.nil();
 
 
-            CONDITION_TYPE13=(Token)match(input,CONDITION_TYPE,FOLLOW_CONDITION_TYPE_in_conditionType285); 
-            CONDITION_TYPE13_tree = 
-            (Object)adaptor.create(CONDITION_TYPE13)
+            CONDITION_TYPE11=(Token)match(input,CONDITION_TYPE,FOLLOW_CONDITION_TYPE_in_conditionType274); 
+            CONDITION_TYPE11_tree = 
+            (Object)adaptor.create(CONDITION_TYPE11)
             ;
-            adaptor.addChild(root_0, CONDITION_TYPE13_tree);
+            adaptor.addChild(root_0, CONDITION_TYPE11_tree);
 
 
 
-              retval.condType = new ConditionType(CONDITION_TYPE13.getText());
+              retval.condType = new ConditionType(CONDITION_TYPE11.getText());
+              System.out.println("The condition is> " + retval.condType.getName());
               
 
             }
@@ -595,13 +581,16 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class action_return extends ParserRuleReturnScope {
+        public MoveAction m;
+        public FightAction f;
+        public ChooseAction c;
         Object tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "action"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:84:1: action : ( moveAction fightAction | chooseAction chooseAction | moveAction chooseAction | chooseAction fightAction );
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:86:1: action returns [MoveAction m, FightAction f, ChooseAction c] : (mac= moveAction fac= fightAction |cho= chooseAction cho= chooseAction |mac= moveAction cho= chooseAction |cho= chooseAction fac= fightAction );
     public final safParser.action_return action() throws RecognitionException {
         safParser.action_return retval = new safParser.action_return();
         retval.start = input.LT(1);
@@ -609,26 +598,16 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        safParser.moveAction_return moveAction14 =null;
+        safParser.moveAction_return mac =null;
 
-        safParser.fightAction_return fightAction15 =null;
+        safParser.fightAction_return fac =null;
 
-        safParser.chooseAction_return chooseAction16 =null;
-
-        safParser.chooseAction_return chooseAction17 =null;
-
-        safParser.moveAction_return moveAction18 =null;
-
-        safParser.chooseAction_return chooseAction19 =null;
-
-        safParser.chooseAction_return chooseAction20 =null;
-
-        safParser.fightAction_return fightAction21 =null;
+        safParser.chooseAction_return cho =null;
 
 
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:85:3: ( moveAction fightAction | chooseAction chooseAction | moveAction chooseAction | chooseAction fightAction )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:87:3: (mac= moveAction fac= fightAction |cho= chooseAction cho= chooseAction |mac= moveAction cho= chooseAction |cho= chooseAction fac= fightAction )
             int alt3=4;
             int LA3_0 = input.LA(1);
 
@@ -652,27 +631,27 @@ public TreeAdaptor getTreeAdaptor() {
             else if ( (LA3_0==CHOOSE) ) {
                 int LA3_2 = input.LA(2);
 
-                if ( (LA3_2==R_CURLY) ) {
+                if ( (LA3_2==L_PAR) ) {
                     int LA3_5 = input.LA(3);
 
                     if ( (LA3_5==MOVE_ACTION) ) {
                         int LA3_6 = input.LA(4);
 
                         if ( (LA3_6==MOVE_ACTION) ) {
-                            int LA3_7 = input.LA(5);
+                            int LA3_8 = input.LA(5);
 
-                            if ( (LA3_7==L_CURLY) ) {
-                                int LA3_8 = input.LA(6);
+                            if ( (LA3_8==R_PAR) ) {
+                                int LA3_10 = input.LA(6);
 
-                                if ( (LA3_8==CHOOSE) ) {
+                                if ( (LA3_10==CHOOSE) ) {
                                     alt3=2;
                                 }
-                                else if ( (LA3_8==FIGHT_ACTION) ) {
+                                else if ( (LA3_10==FIGHT_ACTION) ) {
                                     alt3=4;
                                 }
                                 else {
                                     NoViableAltException nvae =
-                                        new NoViableAltException("", 3, 8, input);
+                                        new NoViableAltException("", 3, 10, input);
 
                                     throw nvae;
 
@@ -680,7 +659,7 @@ public TreeAdaptor getTreeAdaptor() {
                             }
                             else {
                                 NoViableAltException nvae =
-                                    new NoViableAltException("", 3, 7, input);
+                                    new NoViableAltException("", 3, 8, input);
 
                                 throw nvae;
 
@@ -689,6 +668,45 @@ public TreeAdaptor getTreeAdaptor() {
                         else {
                             NoViableAltException nvae =
                                 new NoViableAltException("", 3, 6, input);
+
+                            throw nvae;
+
+                        }
+                    }
+                    else if ( (LA3_5==FIGHT_ACTION) ) {
+                        int LA3_7 = input.LA(4);
+
+                        if ( (LA3_7==FIGHT_ACTION) ) {
+                            int LA3_9 = input.LA(5);
+
+                            if ( (LA3_9==R_PAR) ) {
+                                int LA3_10 = input.LA(6);
+
+                                if ( (LA3_10==CHOOSE) ) {
+                                    alt3=2;
+                                }
+                                else if ( (LA3_10==FIGHT_ACTION) ) {
+                                    alt3=4;
+                                }
+                                else {
+                                    NoViableAltException nvae =
+                                        new NoViableAltException("", 3, 10, input);
+
+                                    throw nvae;
+
+                                }
+                            }
+                            else {
+                                NoViableAltException nvae =
+                                    new NoViableAltException("", 3, 9, input);
+
+                                throw nvae;
+
+                            }
+                        }
+                        else {
+                            NoViableAltException nvae =
+                                new NoViableAltException("", 3, 7, input);
 
                             throw nvae;
 
@@ -719,90 +737,96 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:86:3: moveAction fightAction
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:88:3: mac= moveAction fac= fightAction
                     {
                     root_0 = (Object)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_moveAction_in_action304);
-                    moveAction14=moveAction();
+                    pushFollow(FOLLOW_moveAction_in_action299);
+                    mac=moveAction();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, moveAction14.getTree());
+                    adaptor.addChild(root_0, mac.getTree());
 
-                    pushFollow(FOLLOW_fightAction_in_action306);
-                    fightAction15=fightAction();
+                    pushFollow(FOLLOW_fightAction_in_action303);
+                    fac=fightAction();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, fightAction15.getTree());
+                    adaptor.addChild(root_0, fac.getTree());
 
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:86:28: chooseAction chooseAction
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:89:3: cho= chooseAction cho= chooseAction
                     {
                     root_0 = (Object)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_chooseAction_in_action310);
-                    chooseAction16=chooseAction();
-
-                    state._fsp--;
-
-                    adaptor.addChild(root_0, chooseAction16.getTree());
-
                     pushFollow(FOLLOW_chooseAction_in_action312);
-                    chooseAction17=chooseAction();
+                    cho=chooseAction();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, chooseAction17.getTree());
+                    adaptor.addChild(root_0, cho.getTree());
+
+                    pushFollow(FOLLOW_chooseAction_in_action316);
+                    cho=chooseAction();
+
+                    state._fsp--;
+
+                    adaptor.addChild(root_0, cho.getTree());
 
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:86:56: moveAction chooseAction
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:90:3: mac= moveAction cho= chooseAction
                     {
                     root_0 = (Object)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_moveAction_in_action316);
-                    moveAction18=moveAction();
+                    pushFollow(FOLLOW_moveAction_in_action325);
+                    mac=moveAction();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, moveAction18.getTree());
+                    adaptor.addChild(root_0, mac.getTree());
 
-                    pushFollow(FOLLOW_chooseAction_in_action318);
-                    chooseAction19=chooseAction();
+                    pushFollow(FOLLOW_chooseAction_in_action329);
+                    cho=chooseAction();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, chooseAction19.getTree());
+                    adaptor.addChild(root_0, cho.getTree());
 
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:86:82: chooseAction fightAction
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:91:3: cho= chooseAction fac= fightAction
                     {
                     root_0 = (Object)adaptor.nil();
 
 
-                    pushFollow(FOLLOW_chooseAction_in_action322);
-                    chooseAction20=chooseAction();
+                    pushFollow(FOLLOW_chooseAction_in_action338);
+                    cho=chooseAction();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, chooseAction20.getTree());
+                    adaptor.addChild(root_0, cho.getTree());
 
-                    pushFollow(FOLLOW_fightAction_in_action324);
-                    fightAction21=fightAction();
+                    pushFollow(FOLLOW_fightAction_in_action342);
+                    fac=fightAction();
 
                     state._fsp--;
 
-                    adaptor.addChild(root_0, fightAction21.getTree());
+                    adaptor.addChild(root_0, fac.getTree());
+
+
+                        retval.m =(mac!=null?mac.mova:null);
+                        retval.f =(fac!=null?fac.figa:null);
+                        retval.c =(cho!=null?cho.chm:null);
+                      
 
                     }
                     break;
@@ -831,14 +855,15 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     public static class chooseAction_return extends ParserRuleReturnScope {
-        public ChooseAction ch;
+        public ChooseAction chm;
+        public ChooseAction chf;
         Object tree;
         public Object getTree() { return tree; }
     };
 
 
     // $ANTLR start "chooseAction"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:89:1: chooseAction returns [ChooseAction ch] : CHOOSE R_CURLY ma1= moveAction ma2= moveAction L_CURLY ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:99:1: chooseAction returns [ChooseAction chm, ChooseAction chf] : CHOOSE L_PAR (ma1= moveAction ma2= moveAction |fa1= fightAction fa2= fightAction ) R_PAR ;
     public final safParser.chooseAction_return chooseAction() throws RecognitionException {
         safParser.chooseAction_return retval = new safParser.chooseAction_return();
         retval.start = input.LT(1);
@@ -846,62 +871,113 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        Token CHOOSE22=null;
-        Token R_CURLY23=null;
-        Token L_CURLY24=null;
+        Token CHOOSE12=null;
+        Token L_PAR13=null;
+        Token R_PAR14=null;
         safParser.moveAction_return ma1 =null;
 
         safParser.moveAction_return ma2 =null;
 
+        safParser.fightAction_return fa1 =null;
 
-        Object CHOOSE22_tree=null;
-        Object R_CURLY23_tree=null;
-        Object L_CURLY24_tree=null;
+        safParser.fightAction_return fa2 =null;
+
+
+        Object CHOOSE12_tree=null;
+        Object L_PAR13_tree=null;
+        Object R_PAR14_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:90:3: ( CHOOSE R_CURLY ma1= moveAction ma2= moveAction L_CURLY )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:91:3: CHOOSE R_CURLY ma1= moveAction ma2= moveAction L_CURLY
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:100:3: ( CHOOSE L_PAR (ma1= moveAction ma2= moveAction |fa1= fightAction fa2= fightAction ) R_PAR )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:101:3: CHOOSE L_PAR (ma1= moveAction ma2= moveAction |fa1= fightAction fa2= fightAction ) R_PAR
             {
             root_0 = (Object)adaptor.nil();
 
 
-            CHOOSE22=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_chooseAction345); 
-            CHOOSE22_tree = 
-            (Object)adaptor.create(CHOOSE22)
+            CHOOSE12=(Token)match(input,CHOOSE,FOLLOW_CHOOSE_in_chooseAction367); 
+            CHOOSE12_tree = 
+            (Object)adaptor.create(CHOOSE12)
             ;
-            adaptor.addChild(root_0, CHOOSE22_tree);
+            adaptor.addChild(root_0, CHOOSE12_tree);
 
 
-            R_CURLY23=(Token)match(input,R_CURLY,FOLLOW_R_CURLY_in_chooseAction347); 
-            R_CURLY23_tree = 
-            (Object)adaptor.create(R_CURLY23)
+            L_PAR13=(Token)match(input,L_PAR,FOLLOW_L_PAR_in_chooseAction369); 
+            L_PAR13_tree = 
+            (Object)adaptor.create(L_PAR13)
             ;
-            adaptor.addChild(root_0, R_CURLY23_tree);
+            adaptor.addChild(root_0, L_PAR13_tree);
 
 
-            pushFollow(FOLLOW_moveAction_in_chooseAction351);
-            ma1=moveAction();
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:101:16: (ma1= moveAction ma2= moveAction |fa1= fightAction fa2= fightAction )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            state._fsp--;
+            if ( (LA4_0==MOVE_ACTION) ) {
+                alt4=1;
+            }
+            else if ( (LA4_0==FIGHT_ACTION) ) {
+                alt4=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 4, 0, input);
 
-            adaptor.addChild(root_0, ma1.getTree());
+                throw nvae;
 
-            pushFollow(FOLLOW_moveAction_in_chooseAction355);
-            ma2=moveAction();
+            }
+            switch (alt4) {
+                case 1 :
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:101:17: ma1= moveAction ma2= moveAction
+                    {
+                    pushFollow(FOLLOW_moveAction_in_chooseAction374);
+                    ma1=moveAction();
 
-            state._fsp--;
+                    state._fsp--;
 
-            adaptor.addChild(root_0, ma2.getTree());
+                    adaptor.addChild(root_0, ma1.getTree());
 
-            L_CURLY24=(Token)match(input,L_CURLY,FOLLOW_L_CURLY_in_chooseAction357); 
-            L_CURLY24_tree = 
-            (Object)adaptor.create(L_CURLY24)
+                    pushFollow(FOLLOW_moveAction_in_chooseAction378);
+                    ma2=moveAction();
+
+                    state._fsp--;
+
+                    adaptor.addChild(root_0, ma2.getTree());
+
+                    }
+                    break;
+                case 2 :
+                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:101:51: fa1= fightAction fa2= fightAction
+                    {
+                    pushFollow(FOLLOW_fightAction_in_chooseAction386);
+                    fa1=fightAction();
+
+                    state._fsp--;
+
+                    adaptor.addChild(root_0, fa1.getTree());
+
+                    pushFollow(FOLLOW_fightAction_in_chooseAction390);
+                    fa2=fightAction();
+
+                    state._fsp--;
+
+                    adaptor.addChild(root_0, fa2.getTree());
+
+                    }
+                    break;
+
+            }
+
+
+            R_PAR14=(Token)match(input,R_PAR,FOLLOW_R_PAR_in_chooseAction394); 
+            R_PAR14_tree = 
+            (Object)adaptor.create(R_PAR14)
             ;
-            adaptor.addChild(root_0, L_CURLY24_tree);
+            adaptor.addChild(root_0, R_PAR14_tree);
 
 
 
-               retval.ch = new ChooseAction(ma1.mova, ma2.mova);
+               retval.chm = new ChooseAction(ma1.mova, ma2.mova);
+               retval.chf = new ChooseAction(fa1.figa, fa2.figa);
               
 
             }
@@ -936,7 +1012,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "moveAction"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:97:1: moveAction returns [MoveAction mova] : MOVE_ACTION ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:108:1: moveAction returns [MoveAction mova] : MOVE_ACTION ;
     public final safParser.moveAction_return moveAction() throws RecognitionException {
         safParser.moveAction_return retval = new safParser.moveAction_return();
         retval.start = input.LT(1);
@@ -944,27 +1020,27 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        Token MOVE_ACTION25=null;
+        Token MOVE_ACTION15=null;
 
-        Object MOVE_ACTION25_tree=null;
+        Object MOVE_ACTION15_tree=null;
 
         retval.mova = new MoveAction();
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:98:3: ( MOVE_ACTION )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:99:3: MOVE_ACTION
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:109:3: ( MOVE_ACTION )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:110:3: MOVE_ACTION
             {
             root_0 = (Object)adaptor.nil();
 
 
-            MOVE_ACTION25=(Token)match(input,MOVE_ACTION,FOLLOW_MOVE_ACTION_in_moveAction385); 
-            MOVE_ACTION25_tree = 
-            (Object)adaptor.create(MOVE_ACTION25)
+            MOVE_ACTION15=(Token)match(input,MOVE_ACTION,FOLLOW_MOVE_ACTION_in_moveAction423); 
+            MOVE_ACTION15_tree = 
+            (Object)adaptor.create(MOVE_ACTION15)
             ;
-            adaptor.addChild(root_0, MOVE_ACTION25_tree);
+            adaptor.addChild(root_0, MOVE_ACTION15_tree);
 
 
 
-                retval.mova = new MoveAction(MOVE_ACTION25.getText());
+                retval.mova = new MoveAction(MOVE_ACTION15.getText());
               
 
             }
@@ -999,7 +1075,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "fightAction"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:105:1: fightAction returns [FightAction figa] : FIGHT_ACTION ;
+    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:116:1: fightAction returns [FightAction figa] : FIGHT_ACTION ;
     public final safParser.fightAction_return fightAction() throws RecognitionException {
         safParser.fightAction_return retval = new safParser.fightAction_return();
         retval.start = input.LT(1);
@@ -1007,26 +1083,26 @@ public TreeAdaptor getTreeAdaptor() {
 
         Object root_0 = null;
 
-        Token FIGHT_ACTION26=null;
+        Token FIGHT_ACTION16=null;
 
-        Object FIGHT_ACTION26_tree=null;
+        Object FIGHT_ACTION16_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:106:3: ( FIGHT_ACTION )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:107:3: FIGHT_ACTION
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:117:3: ( FIGHT_ACTION )
+            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:118:3: FIGHT_ACTION
             {
             root_0 = (Object)adaptor.nil();
 
 
-            FIGHT_ACTION26=(Token)match(input,FIGHT_ACTION,FOLLOW_FIGHT_ACTION_in_fightAction407); 
-            FIGHT_ACTION26_tree = 
-            (Object)adaptor.create(FIGHT_ACTION26)
+            FIGHT_ACTION16=(Token)match(input,FIGHT_ACTION,FOLLOW_FIGHT_ACTION_in_fightAction445); 
+            FIGHT_ACTION16_tree = 
+            (Object)adaptor.create(FIGHT_ACTION16)
             ;
-            adaptor.addChild(root_0, FIGHT_ACTION26_tree);
+            adaptor.addChild(root_0, FIGHT_ACTION16_tree);
 
 
 
-                retval.figa = new FightAction(FIGHT_ACTION26.getText());
+                retval.figa = new FightAction(FIGHT_ACTION16.getText());
               
 
             }
@@ -1063,31 +1139,31 @@ public TreeAdaptor getTreeAdaptor() {
     public static final BitSet FOLLOW_characteristic_in_fighter135 = new BitSet(new long[]{0x0000000000200280L});
     public static final BitSet FOLLOW_behaviour_in_fighter139 = new BitSet(new long[]{0x0000000000200200L});
     public static final BitSet FOLLOW_R_CURLY_in_fighter154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHARACTERISTIC_in_characteristic180 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_EQ_in_characteristic182 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_DIGIT_in_characteristic184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_behaviour215 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_L_BRACKET_in_behaviour221 = new BitSet(new long[]{0x0000000000020100L});
-    public static final BitSet FOLLOW_action_in_behaviour223 = new BitSet(new long[]{0x0000000000020100L});
-    public static final BitSet FOLLOW_action_in_behaviour225 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_R_BRACKET_in_behaviour227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_conditionType_in_condition258 = new BitSet(new long[]{0x0000000000020100L});
-    public static final BitSet FOLLOW_action_in_condition262 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CONDITION_TYPE_in_conditionType285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_moveAction_in_action304 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_fightAction_in_action306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_chooseAction_in_action310 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_chooseAction_in_action312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_moveAction_in_action316 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_chooseAction_in_action318 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_chooseAction_in_action322 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_fightAction_in_action324 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHOOSE_in_chooseAction345 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_R_CURLY_in_chooseAction347 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_moveAction_in_chooseAction351 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_moveAction_in_chooseAction355 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_L_CURLY_in_chooseAction357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_MOVE_ACTION_in_moveAction385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_FIGHT_ACTION_in_fightAction407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHARACTERISTIC_in_characteristic182 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_EQ_in_characteristic184 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_DIGIT_in_characteristic186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_in_behaviour217 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_conditionType_in_condition242 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_L_BRACKET_in_condition244 = new BitSet(new long[]{0x0000000000020100L});
+    public static final BitSet FOLLOW_action_in_condition249 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_R_BRACKET_in_condition251 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CONDITION_TYPE_in_conditionType274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_moveAction_in_action299 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_fightAction_in_action303 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_chooseAction_in_action312 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_chooseAction_in_action316 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_moveAction_in_action325 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_chooseAction_in_action329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_chooseAction_in_action338 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_fightAction_in_action342 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_chooseAction367 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_L_PAR_in_chooseAction369 = new BitSet(new long[]{0x0000000000021000L});
+    public static final BitSet FOLLOW_moveAction_in_chooseAction374 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_moveAction_in_chooseAction378 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_fightAction_in_chooseAction386 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_fightAction_in_chooseAction390 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_R_PAR_in_chooseAction394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_MOVE_ACTION_in_moveAction423 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_FIGHT_ACTION_in_fightAction445 = new BitSet(new long[]{0x0000000000000002L});
 
 }
