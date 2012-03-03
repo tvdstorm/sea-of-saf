@@ -3,11 +3,10 @@ package saf;
 //import org.antlr.RecognitionException;
 
 import org.antlr.runtime.*;
-import org.antlr.runtime.tree.*;
-import org.antlr.stringtemplate.*;
 
 import saf.syntax.*;
-import saf.ast.*;
+import saf.ast.nodes.*;
+import saf.ast.Validator;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,10 +38,11 @@ public class Main {
     public static void main(String[] args) {
         String src = null;
         try {
-            src = readStringFromFile("saf/tests/bad_attacka.saf");
+            src = readStringFromFile("saf/tests/bad_attack.saf");
         } catch (IOException e) {
             System.out.println(e.getMessage());
-            src = "testnaam { slaan = 5 trappen = 12 close and far [ choose(run walk_away stand) ] }";
+            java.lang.System.exit(1);
+            //src = "testnaam { slaan = 5 trappen = 12 close and far [ choose(run walk_away stand) ] }";
         }
         
         Fighter fighterTree = null;
@@ -53,6 +53,11 @@ public class Main {
             java.lang.System.exit(1);
         }
         System.out.println(fighterTree.printTree());
+        
+        Validator val = new Validator(true);
+        val.visit(fighterTree);
+        
+        System.out.println(val.messagesAsString());
 
     }
     

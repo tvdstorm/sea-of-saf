@@ -4,10 +4,10 @@
 # Compiler: Java Compiler v_677_R32x, 3.2.1
 
 CC = javac
-FLAGS = -1.6 -nowarning -classpath /user/jjonkerg/sc/jobjonkergouw:/user/jjonkerg/sc/antlrworks-1.4.3.jar:.
+FLAGS = -1.6 -classpath /user/jjonkerg/sc/jobjonkergouw/svn/jobjonkergouw/:/user/jjonkerg/sc/antlrworks-1.4.3.jar:.
 
 
-main : Main.class astclasses
+main : astclasses Main.class 
 
 Main.class : Main.java syntax/SAFParser.class syntax/SAFLexer.java	
 	$(CC) $(FLAGS) Main.java 
@@ -23,41 +23,50 @@ syntax/SAFParser.java : syntax/SAF.g
 
 syntax/SSAF.g : 
 
-# java sources
+# ast sources
+astclasses : astnodesclasses ast/Visitor.class ast/Validator.class
 
-astclasses : ast/Fighter.class ast/Strength.class ast/ASTNode.class ast/Rule.class \
-			 ast/Or.class ast/And.class ast/Condition.class \
-			  ast/Action.class ast/Move.class ast/Attack.class
+ast/Visitor.class : ast/Visitor.java
+	$(CC) $(FLAGS) ast/Visitor.java 
 	
-ast/Strength.class : ast/Strength.java
-	$(CC) $(FLAGS) ast/Strength.java 
+ast/Validator.class : ast/Validator.java
+	$(CC) $(FLAGS) ast/Validator.java 
 
-ast/Fighter.class : ast/Fighter.java
-	$(CC) $(FLAGS) ast/Fighter.java 
+# ast node sources
 
-ast/Rule.class : ast/Rule.java
-	$(CC) $(FLAGS) ast/Rule.java  
+astnodesclasses : ast/nodes/ASTNode.class ast/nodes/Fighter.class ast/nodes/Strength.class ast/nodes/Rule.class \
+			 	ast/nodes/Or.class ast/nodes/And.class ast/nodes/Condition.class \
+			  	ast/nodes/Action.class ast/nodes/Move.class ast/nodes/Attack.class
 	
-ast/ASTNode.class : ast/ASTNode.java
-	$(CC) $(FLAGS) ast/ASTNode.java 
+ast/nodes/ASTNode.class : ast/nodes/ASTNode.java
+	$(CC) $(FLAGS) ast/nodes/ASTNode.java 
 	
-ast/And.class : ast/And.java
-	$(CC) $(FLAGS) ast/And.java 
+ast/nodes/Strength.class : ast/nodes/Strength.java
+	$(CC) $(FLAGS) ast/nodes/Strength.java 
+
+ast/nodes/Fighter.class : ast/nodes/Fighter.java
+	$(CC) $(FLAGS) ast/nodes/Fighter.java 
+
+ast/nodes/Rule.class : ast/nodes/Rule.java
+	$(CC) $(FLAGS) ast/nodes/Rule.java  
 	
-ast/Or.class : ast/Or.java
-	$(CC) $(FLAGS) ast/Or.java 
+ast/nodes/And.class : ast/nodes/And.java
+	$(CC) $(FLAGS) ast/nodes/And.java 
 	
-ast/Condition.class : ast/Condition.java
-	$(CC) $(FLAGS) ast/Condition.java 
+ast/nodes/Or.class : ast/nodes/Or.java
+	$(CC) $(FLAGS) ast/nodes/Or.java 
 	
-ast/Move.class : ast/Move.java
-	$(CC) $(FLAGS) ast/Move.java 
+ast/nodes/Condition.class : ast/nodes/Condition.java
+	$(CC) $(FLAGS) ast/nodes/Condition.java 
 	
-ast/Attack.class : ast/Attack.java
-	$(CC) $(FLAGS) ast/Attack.java 
+ast/nodes/Move.class : ast/nodes/Move.java
+	$(CC) $(FLAGS) ast/nodes/Move.java 
 	
-ast/Action.class : ast/Action.java
-	$(CC) $(FLAGS) ast/Action.java 
+ast/nodes/Attack.class : ast/nodes/Attack.java
+	$(CC) $(FLAGS) ast/nodes/Attack.java 
 	
-	
+ast/nodes/Action.class : ast/nodes/Action.java
+	$(CC) $(FLAGS) ast/nodes/Action.java 
+
+
 	

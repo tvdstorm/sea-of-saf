@@ -1,7 +1,8 @@
-package saf.ast;
+package saf.ast.nodes;
 
 //import org.antlr.runtime.tree.CommonTree;
 import java.util.ArrayList;
+import saf.ast.*;
 
 public abstract class ASTNode {
     private ArrayList<ASTNode> children = new ArrayList<ASTNode>();
@@ -9,9 +10,14 @@ public abstract class ASTNode {
     
     public abstract String getName() ;
 
-    public abstract boolean accept() ;
+    public abstract void accept(Visitor visitor);
     
-    public int getChildCount() {
+//     public void accept2(Visitor visitor) {
+//         visitor.visit(this);
+//     }
+
+    
+    public int childCount() {
         return children.size();
     }
     
@@ -21,7 +27,11 @@ public abstract class ASTNode {
     }
     
     public ASTNode getChild(int i) {
-        return children.get(i);
+        if (i >= children.size()) {
+            throw new java.lang.IndexOutOfBoundsException();
+        } else {
+            return children.get(i);
+        }
     }
     
     public boolean hasChildren() {
@@ -29,13 +39,19 @@ public abstract class ASTNode {
     }
     
     public String printTree() {
-        return printTreeWithIndent(0);
+        String result = printTreeWithIndent(0);
+    
+        // remove last line break
+        if (result.length() > 1) {
+            result = result.substring(0, result.length() - 1);
+        }
+        return result;
     }
     
     private String printTreeWithIndent(int ind) {
         String result = "";
         for (int i = 0; i < ind; i++) {
-            result += "--";
+            result += "    ";
         }
         result += " " + this.getName() + "\n";
         
