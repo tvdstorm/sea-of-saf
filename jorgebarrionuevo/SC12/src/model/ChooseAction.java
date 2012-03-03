@@ -11,7 +11,7 @@ public class ChooseAction extends Action{
 	private final Action action2;
 	private List<Action> listActions = new ArrayList<Action>();
 	
-	public ChooseAction(MoveAction action1, MoveAction action2) {
+	public ChooseAction(Action action1, Action action2) {
 		this.action1 = action1;
 		this.action2 = action2;
 		listActions.add(action1);
