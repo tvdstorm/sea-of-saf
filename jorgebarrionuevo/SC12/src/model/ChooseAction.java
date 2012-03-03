@@ -1,13 +1,11 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 import util.Visitor;
 
 
-public class Choose extends Action{
+public class ChooseAction extends Action{
 
-	public Choose() {
+	public ChooseAction() {
 		
 	}
 	

@@ -31,9 +31,9 @@ program returns [Arena arena] @init{$arena = new Arena();}
     ;
 fighter returns [Fighter fighter] @init{ $fighter = new Fighter();}
   : 
-    ID L_CURLY personality * behaviour *
+    ID L_CURLY characteristic * behaviour *
     {
-      $fighter.addCharacteristic($personality.c);
+      $fighter.addCharacteristic($characteristic.c);
     } 
     R_CURLY 
     {
@@ -41,17 +41,17 @@ fighter returns [Fighter fighter] @init{ $fighter = new Fighter();}
     } 
   ;
 
-personality returns[Characteristic c]
+characteristic returns[Characteristic c]
   :
   CHARACTERISTIC EQ DIGIT {$c = new Characteristic($CHARACTERISTIC.getText(),Integer.parseInt($DIGIT.getText()));}
   ;
 
 behaviour returns[Behaviour b]
   :
-  CONDITION 
+  CONDITION_TYPE 
     L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET
         { 
-          $b = new Behaviour(new Condition($CONDITION.getText()), new Action($MOVE_ACTION.getText()), new Action($FIGHT_ACTION.getText()));
+          $b = new Behaviour(new ConditionType($CONDITION_TYPE.getText()), new MoveAction($MOVE_ACTION.getText()), new FightAction($FIGHT_ACTION.getText()));
         }
   ;
 
@@ -59,7 +59,7 @@ ID : ('A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9'| '_')*;
 CHARACTERISTIC: ('punchReach' | 'punchPower' | 'kickReach' | 'kickPower');
 MOVE_ACTION: ('walk_towards' | 'walk_away' | 'run_towards' | 'run_away' | 'jump' | 'crouch' | 'stand');
 FIGHT_ACTION: ('block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high');
-CONDITION : ('always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker');
+CONDITION_TYPE : ('always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker');
 L_BRACKET : '[';
 R_BRACKET : ']';
 L_CURLY : '{';

@@ -1,6 +1,8 @@
 package model;
 
-public class Characteristic{
+import util.Visitor;
+
+public class Characteristic extends ASTNode{
 	
 	private final String nameCharacteristic;
 	private final Integer value;
@@ -16,6 +18,11 @@ public class Characteristic{
 	
 	public Integer getValue() {
 		return value;
+	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}
 
 }

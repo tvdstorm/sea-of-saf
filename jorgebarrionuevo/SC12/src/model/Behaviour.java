@@ -1,6 +1,8 @@
 package model;
 
-public class Behaviour {
+import util.Visitor;
+
+public class Behaviour extends ASTNode{
 	private final Condition guard;
 	private final Action move;
 	private final Action fight;
@@ -25,5 +27,10 @@ public class Behaviour {
 	
 	public Action getMove() {
 		return move;
+	}
+	
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
 	}
 }

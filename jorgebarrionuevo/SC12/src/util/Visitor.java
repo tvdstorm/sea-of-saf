@@ -3,14 +3,20 @@ package util;
 import model.*;
 
 public interface Visitor {
-	public void visit(Choose choose);
-	public void visit(Simple simple);
-	public void visit(Behaviour behavior);
-	public void visit(Strength strength);
+
 	public void visit(Fighter fighter);
-	public void visit(Ident ident);
-	public void visit(Type type);
+	
+	public void visit(Behaviour behavior);
+	public void visit(Characteristic characteristic);
+	
+	public void visit(ConditionType conditionType);
 	public void visit(And and);
 	public void visit(Or or);
-	public void visit(Personality personality);
+	
+	public void visit(ChooseAction chooseAction);
+	public void visit(MoveAction moveAction);
+	public void visit(FightAction fightAction);
+	
+	public void visit(Ident ident);
+	
 }	
