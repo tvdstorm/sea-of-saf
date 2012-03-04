@@ -26,6 +26,13 @@ public class Strength {
 	{
 		return StrenghtValue;
 	}
+	public int getStrenghtValue(String s)
+	{
+		if (this.StrenghtName.equals(s))
+			return this.StrenghtValue;
+		else 
+			return 0;
+	}
 	public boolean isValid()
 	{
 		try 
