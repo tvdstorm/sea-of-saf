@@ -4,7 +4,8 @@ chicken
   punchReach = 1
   kickPower  = 2
   punchPower = 2
-  for and near[choose(run_towards run_away) kick_low]
+  far[run_towards kick_low]
+  near[choose(run_towards run_away) choose(kick_low kick_high)]
   near [run_away choose(kick_low punch_low kick_low)]
   near [crouch punch_low]
 }

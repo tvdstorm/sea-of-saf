@@ -10,15 +10,14 @@ import javax.swing.border.EmptyBorder;
 
 public class Popupscreen extends JFrame
 {
-	private final static String newline = "\n";
 
 	private static final long serialVersionUID = -8944872185331109788L;
-	private JPanel contentPane;
-	private JTextArea textArea;
+	private JPanel _contentPane;
+	private JTextArea _textArea;
 	 
 	public void addMessage(String msg)
 	{
-		textArea.append(msg+newline);
+		_textArea.append(msg+"\n");
 	}
 	
 	public void addMessage(List<String> list)
@@ -31,23 +30,23 @@ public class Popupscreen extends JFrame
 	
 	public boolean hasMessages()
 	{
-		return !textArea.getText().isEmpty();
+		return !_textArea.getText().isEmpty();
 	}
 	
 	public Popupscreen()
 	{
 		setTitle("Message");
 		setBounds(100, 100, 200, 200);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(new BorderLayout()); 
+		_contentPane = new JPanel();
+		_contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(_contentPane);
+		_contentPane.setLayout(new BorderLayout()); 
 		
-		textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
+		_textArea = new JTextArea();
+		_textArea.setEditable(false);
+		_textArea.setLineWrap(true);
+		_textArea.setWrapStyleWord(true);
 
-		contentPane.add(textArea, BorderLayout.CENTER);
+		_contentPane.add(_textArea, BorderLayout.CENTER);
 	}
 }

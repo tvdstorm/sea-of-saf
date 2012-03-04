@@ -29,14 +29,14 @@ import java.io.IOException;
 public class Gamescreen extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 3204571424404600487L;
-	private JPanel contentPane;
-	private JPanel panel;
-	private JTextField textFieldA;
-	private JTextField textFieldB;
-	private JLabel healthLabelA;
-	private JLabel healthLabelB;
-	private JLabel actionLabelA;
-	private JLabel actionLabelB;
+	private JPanel _contentPane;
+	private JPanel _panel;
+	private JTextField _textFieldA;
+	private JTextField _textFieldB;
+	private JLabel _healthLabelA;
+	private JLabel _healthLabelB;
+	private JLabel _actionLabelA;
+	private JLabel _actionLabelB;
 	private JButton _fightButton;
 	private JLabel _fighter1;
 	private JLabel _fighter2;
@@ -66,81 +66,81 @@ public class Gamescreen extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		_contentPane = new JPanel();
+		_contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(_contentPane);
+		_contentPane.setLayout(null);
 		
 		JLabel lblFighterA = new JLabel("Fighter A");
 		lblFighterA.setBounds(10, 11, 66, 14);
-		contentPane.add(lblFighterA);
+		_contentPane.add(lblFighterA);
 		
-		textFieldA = new JTextField();
-		textFieldA.setBounds(86, 8, 247, 20);
-		contentPane.add(textFieldA);
-		textFieldA.setColumns(10);
+		_textFieldA = new JTextField();
+		_textFieldA.setBounds(86, 8, 247, 20);
+		_contentPane.add(_textFieldA);
+		_textFieldA.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Fighter B");
 		lblNewLabel.setBounds(10, 36, 66, 14);
-		contentPane.add(lblNewLabel);
+		_contentPane.add(lblNewLabel);
 		
-		textFieldB = new JTextField();
-		textFieldB.setBounds(86, 33, 247, 20);
-		contentPane.add(textFieldB);
-		textFieldB.setColumns(10);
+		_textFieldB = new JTextField();
+		_textFieldB.setBounds(86, 33, 247, 20);
+		_contentPane.add(_textFieldB);
+		_textFieldB.setColumns(10);
 		
 		_fightButton = new JButton("Fight!");
 		_fightButton.addActionListener(this);
 		_fightButton.setBounds(343, 8, 89, 46);
-		contentPane.add(_fightButton);
+		_contentPane.add(_fightButton);
 		
 		JLabel lblHealthFighterA = new JLabel("Fighter A");
 		lblHealthFighterA.setBounds(10, 69, 100, 14);
-		contentPane.add(lblHealthFighterA);
+		_contentPane.add(lblHealthFighterA);
 		
 		JLabel lblHealthFighterB = new JLabel("Fighter B");
 		lblHealthFighterB.setBounds(10, 83, 100, 14);
-		contentPane.add(lblHealthFighterB);
+		_contentPane.add(lblHealthFighterB);
 		
-		healthLabelA = new JLabel("100%");
-		healthLabelA.setBounds(103, 69, 46, 14);
-		contentPane.add(healthLabelA);
+		_healthLabelA = new JLabel("100%");
+		_healthLabelA.setBounds(103, 69, 46, 14);
+		_contentPane.add(_healthLabelA);
 		
-		healthLabelB = new JLabel("100%");
-		healthLabelB.setBounds(103, 83, 46, 14);
-		contentPane.add(healthLabelB);
+		_healthLabelB = new JLabel("100%");
+		_healthLabelB.setBounds(103, 83, 46, 14);
+		_contentPane.add(_healthLabelB);
 		
-		actionLabelA = new JLabel("Waiting");
-		actionLabelA.setBounds(143, 69, 250, 14);
-		contentPane.add(actionLabelA);
+		_actionLabelA = new JLabel("Waiting");
+		_actionLabelA.setBounds(143, 69, 250, 14);
+		_contentPane.add(_actionLabelA);
 		
-		actionLabelB = new JLabel("Waiting");
-		actionLabelB.setBounds(143, 83, 250, 14);
-		contentPane.add(actionLabelB);
+		_actionLabelB = new JLabel("Waiting");
+		_actionLabelB.setBounds(143, 83, 250, 14);
+		_contentPane.add(_actionLabelB);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(10, 58, 422, 0);
-		contentPane.add(horizontalStrut);
+		_contentPane.add(horizontalStrut);
 		
 		Component verticalGlue_1 = Box.createVerticalGlue();
 		verticalGlue_1.setBounds(431, 252, 1, -143);
-		contentPane.add(verticalGlue_1);
+		_contentPane.add(verticalGlue_1);
 		
-		panel = new JPanel();
-		panel.setBackground(Color.PINK);
-		panel.setLayout(null);
+		_panel = new JPanel();
+		_panel.setBackground(Color.PINK);
+		_panel.setLayout(null);
 		
 		_fighter1 = new JLabel();
 		_fighter1.setBounds(10, 10, 63, 48);
-		panel.add(_fighter1);
+		_panel.add(_fighter1);
 		
 		_fighter2 = new JLabel();
 		_fighter2.setBounds(10, 10, 63, 48);
-		panel.add(_fighter2);
+		_panel.add(_fighter2);
 	
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setBounds(10, 101, 422, 154);
-		contentPane.add(panel);
+		_panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		_panel.setBounds(10, 101, 422, 154);
+		_contentPane.add(_panel);
 	}
 	
 	private void drawFighter(Combatmove combatmove, Fighters fighter)
@@ -152,13 +152,13 @@ public class Gamescreen extends JFrame implements ActionListener{
 				_fighter1.setBounds(_engine.getPosition(Fighters.FighterA)-12, 100, 63, 48);
 				if (combatmove!=null)
 				{
-					actionLabelA.setText(combatmove._movement + " " + combatmove._action);
-					healthLabelA.setText(_engine.getHealth(Fighters.FighterA)+"%");
+					_actionLabelA.setText(combatmove.getMovement() + " " + combatmove.getAction());
+					_healthLabelA.setText(_engine.getHealth(Fighters.FighterA)+"%");
 				}
 				else
 				{
-					actionLabelA.setText("DEAD");
-					healthLabelA.setText("LOST");
+					_actionLabelA.setText("DEAD");
+					_healthLabelA.setText("LOST");
 				}
 				break;
 			case FighterB:
@@ -166,13 +166,13 @@ public class Gamescreen extends JFrame implements ActionListener{
 				_fighter2.setBounds(_engine.getPosition(Fighters.FighterB)+12, 100, 63, 48);
 				if (combatmove!=null)
 				{
-					actionLabelB.setText(combatmove._movement + " " + combatmove._action);
-					healthLabelB.setText(_engine.getHealth(Fighters.FighterB)+"%");
+					_actionLabelB.setText(combatmove.getMovement() + " " + combatmove.getAction());
+					_healthLabelB.setText(_engine.getHealth(Fighters.FighterB)+"%");
 				}
 				else
 				{
-					actionLabelB.setText("DEAD");
-					healthLabelB.setText("LOST");
+					_actionLabelB.setText("DEAD");
+					_healthLabelB.setText("LOST");
 				}
 				break;
 		}
@@ -181,7 +181,7 @@ public class Gamescreen extends JFrame implements ActionListener{
 	
 	private void beginFight() throws IOException, RecognitionException
 	{
-		_engine = new Engine(textFieldA.getText(), textFieldB.getText());
+		_engine = new Engine(_textFieldA.getText(), _textFieldB.getText());
 		Popupscreen popupScreen = new Popupscreen();
 		if (!_engine.getErrors(Fighters.FighterA).isEmpty())
 			popupScreen.addMessage(_engine.getErrors(Fighters.FighterA));
@@ -197,31 +197,34 @@ public class Gamescreen extends JFrame implements ActionListener{
 		_timer.start();
 	}
 	
-	private void doFightMove()
+	private void doFightMoves()
 	{
-		if (_engine.doMoves())
-		{
-			if (_engine.getHealth(Fighters.FighterA)<1)
-			{
-				drawFighter(null,Fighters.FighterA);
-			}
-			if (_engine.getHealth(Fighters.FighterB)<1)
-			{
-				drawFighter(null,Fighters.FighterB);
-			}
-			_timer.stop();
-			contentPane.repaint();
-			return;
-		}
-		drawFighter(_engine.getCombatmove(Fighters.FighterA),Fighters.FighterA);
-		drawFighter(_engine.getCombatmove(Fighters.FighterB),Fighters.FighterB);
+		_engine.doMoves();
+		doFightMove(Fighters.FighterA);
+		doFightMove(Fighters.FighterB);
 	}
+	
+	private void doFightMove(Fighters fighter)
+	{
+		if (_engine.getHealth(fighter)<1)
+		{
+			drawFighter(null,fighter);
+			_timer.stop();
+		}
+		else
+		{
+			drawFighter(_engine.getCombatmove(fighter),fighter);
+		}
+		_contentPane.repaint();
+	}
+	
+	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource().equals(_timer))
-			doFightMove();
+			doFightMoves();
 		if (e.getSource().equals(_fightButton))
 		{
 			try {
@@ -238,6 +241,6 @@ public class Gamescreen extends JFrame implements ActionListener{
 				popupScreen.setVisible(true);
 			}
 		}
-		contentPane.repaint();
+		_contentPane.repaint();
 	}
 }

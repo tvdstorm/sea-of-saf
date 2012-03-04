@@ -56,7 +56,7 @@ public class Graphics
 			if (combatmove == null)
 				return _deadA;
 			
-			switch (combatmove._action)
+			switch (combatmove.getAction())
 			{
 				case punch_high:
 					return _punchhighA;
@@ -79,7 +79,7 @@ public class Graphics
 			if (combatmove == null)
 				return _deadB;
 			
-			switch (combatmove._action)
+			switch (combatmove.getAction())
 			{
 				case punch_high:
 					return _punchhighB;

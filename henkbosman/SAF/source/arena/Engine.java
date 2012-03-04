@@ -8,12 +8,12 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 
-import behaviours.Action;
-import behaviours.Movement;
+import behaviours.Action.EnumActions;
+import behaviours.Movement.EnumMovements;
 
 import fighter.Combatmove;
 import fighter.Fighter;
-import fighter.Property;
+import fighter.Property.EnumProperties;
 import fighter.Rules;
 
 import parser.SAFLexer;
@@ -54,16 +54,14 @@ public class Engine
 		return fighter;
 	}
 	
-	public boolean doMoves()
+	public void doMoves()
 	{
 		int distance = Math.abs(_fighterA.getPosition()-_fighterB.getPosition());
-		Combatmove combatmoveA = _fighterA.performAction(distance, _fighterB.getHealth());
-		Combatmove combatmoveB = _fighterB.performAction(distance, _fighterA.getHealth());
-		_lastCombatmoveA = combatmoveA;
-		_lastCombatmoveB = combatmoveB;
+		_lastCombatmoveA = _fighterA.performAction(distance, _fighterB.getHealth());
+		_lastCombatmoveB = _fighterB.performAction(distance, _fighterA.getHealth());
 		
-		_fighterA.doMove(combatmoveA, Fighters.FighterA);
-		_fighterB.doMove(combatmoveB, Fighters.FighterB);
+		_fighterA.doMove(_lastCombatmoveA, Fighters.FighterA);
+		_fighterB.doMove(_lastCombatmoveB, Fighters.FighterB);
 		
 		while (_fighterA.getPosition()>=_fighterB.getPosition())
 		{
@@ -71,11 +69,9 @@ public class Engine
 			_fighterB.movePosition(1);
 		}
 		
-		boolean a = _fighterA.getDamage(doDamage(_fighterB, combatmoveB, combatmoveA, distance));
-		boolean b = _fighterB.getDamage(doDamage(_fighterA, combatmoveA, combatmoveB, distance));
+		_fighterA.getDamage(doDamage(_fighterB, _lastCombatmoveB, _lastCombatmoveA, distance));
+		_fighterB.getDamage(doDamage(_fighterA, _lastCombatmoveA, _lastCombatmoveB, distance));
 		fatigue();
-		
-		return a||b;
 	}
 	
 	private void fatigue()
@@ -100,42 +96,42 @@ public class Engine
 			case FighterB:
 				return _lastCombatmoveB;
 		}
-		return new Combatmove(Movement.Movements.stand, Action.Actions.nothing);
+		return new Combatmove(EnumMovements.stand, EnumActions.nothing);
 	}
 	
 	private int doDamage(Fighter f, Combatmove combatmoveA, Combatmove combatmoveB, int distance)
 	{
 		
-		if (distance<=f.getPropertyValue(Property.Properties.punchReach))
+		if (distance<=f.getPropertyValue(EnumProperties.punchReach))
 		{
-			switch (combatmoveA._action)
+			switch (combatmoveA.getAction())
 			{
 				case punch_low:
-					if (combatmoveB._action==Action.Actions.block_low || combatmoveB._movement == Movement.Movements.jump)
+					if (combatmoveB.getAction()==EnumActions.block_low || combatmoveB.getMovement() == EnumMovements.jump)
 						return 0;
 					else
-						return f.getPropertyValue(Property.Properties.punchPower);
-			case punch_high:
-					if (combatmoveB._action==Action.Actions.block_high || combatmoveB._movement == Movement.Movements.crouch)
+						return f.getPropertyValue(EnumProperties.punchPower);
+				case punch_high:
+					if (combatmoveB.getAction()==EnumActions.block_high || combatmoveB.getMovement() == EnumMovements.crouch)
 						return 0;
 					else
-						return f.getPropertyValue(Property.Properties.punchPower);
+						return f.getPropertyValue(EnumProperties.punchPower);
 			}
 		}
-		if (distance<=f.getPropertyValue(Property.Properties.kickReach))
+		if (distance<=f.getPropertyValue(EnumProperties.kickReach))
 		{
-			switch (combatmoveA._action)
+			switch (combatmoveA.getAction())
 			{
 				case kick_low:
-					if (combatmoveB._action==Action.Actions.block_low || combatmoveB._movement == Movement.Movements.jump)
+					if (combatmoveB.getAction()==EnumActions.block_low || combatmoveB.getMovement() == EnumMovements.jump)
 						return 0;
 					else
-						return f.getPropertyValue(Property.Properties.kickPower);
+						return f.getPropertyValue(EnumProperties.kickPower);
 				case kick_high:
-					if (combatmoveB._action==Action.Actions.block_high || combatmoveB._movement == Movement.Movements.crouch)
+					if (combatmoveB.getAction()==EnumActions.block_high || combatmoveB.getMovement() == EnumMovements.crouch)
 						return 0;
 					else
-						return f.getPropertyValue(Property.Properties.kickPower);
+						return f.getPropertyValue(EnumProperties.kickPower);
 			}
 		}
 		

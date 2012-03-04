@@ -5,51 +5,58 @@ import java.util.Random;
 
 public class Movement
 {
-	public enum Movements 	{	
+	public enum EnumMovements 	{	
 		jump,crouch,stand,run_towards,run_away,walk_towards,walk_away
 	}
-	private List<Movements> _movements;
+	private List<String> _movements;
+	private List<String> _errorList;
+	
 	private void addMovement(String name)
 	{
-		try
-		{
-			_movements.add(Movements.valueOf(name));
-		} catch (IllegalArgumentException e) {
-			String msg = "Error parsing \""+name+"\". Possible options:";
-			for (Movements m : Movements.values())
-			{
-				msg+=" "+m+" ";
-			}
-			_errorList.add(msg);
-		}
+		_movements.add(name);
 	}
-	private List<String> _errorList;
 	
 	public Movement(String name)
 	{
 		_errorList = new LinkedList<String>();
-		_movements = new LinkedList<Movements>();
+		_movements = new LinkedList<String>();
 		addMovement(name);
 	}
 	
 	public Movement(List<String> list)
 	{
 		_errorList = new LinkedList<String>();
-		_movements = new LinkedList<Movements>();
-		
-		for(String name : list)
-		{
-			addMovement(name);
-		}
+		_movements = list;
 	}
 	
-	public Movements getMovement(Random random)
+	public EnumMovements getMovement(Random random)
 	{
-		return _movements.get(random.nextInt(_movements.size()));
+		return parseMovements().get(random.nextInt(parseMovements().size()));
+	}
+	
+	private List<EnumMovements> parseMovements()
+	{
+		List<EnumMovements> returnList = new LinkedList<EnumMovements>();
+		for(String m : _movements)
+		{
+			try
+			{
+				returnList.add(EnumMovements.valueOf(m));
+			} catch (IllegalArgumentException e) {
+				String msg = "Error parsing \""+m+"\". Possible options:";
+				for (EnumMovements movement : EnumMovements.values())
+				{
+					msg+=" "+movement+" ";
+				}
+				_errorList.add(msg);
+			}
+		}
+		return returnList;
 	}
 	
 	public List<String> getErrors()
 	{
+		parseMovements();
 		return _errorList;
 	}
 }
