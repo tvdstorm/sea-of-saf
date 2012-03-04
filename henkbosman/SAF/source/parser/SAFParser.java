@@ -1,9 +1,9 @@
-// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-02-20 11:33:00
+// $ANTLR 3.4 C:\\Antlr\\SAF\\SAF.g 2012-03-04 22:04:13
 
-	package parser;
-	import java.util.LinkedList;
-	import behaviours.*;
-	import fighter.*;
+package parser;
+import java.util.LinkedList;
+import behaviours.*;
+import fighter.*;
 
 
 import org.antlr.runtime.*;
@@ -71,9 +71,9 @@ public class SAFParser extends Parser {
             {
             n=(Token)match(input,NAME,FOLLOW_NAME_in_fighter152); 
 
-            f.name((n!=null?n.getText():null));
+            f.setName((n!=null?n.getText():null));
 
-            // C:\\Antlr\\SAF\\SAF.g:22:30: ( NEWLINE )*
+            // C:\\Antlr\\SAF\\SAF.g:22:33: ( NEWLINE )*
             loop1:
             do {
                 int alt1=2;
@@ -86,7 +86,7 @@ public class SAFParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // C:\\Antlr\\SAF\\SAF.g:22:30: NEWLINE
+            	    // C:\\Antlr\\SAF\\SAF.g:22:33: NEWLINE
             	    {
             	    match(input,NEWLINE,FOLLOW_NEWLINE_in_fighter156); 
 
@@ -350,7 +350,7 @@ public class SAFParser extends Parser {
                     state._fsp--;
 
 
-                    c = new Condition(cc);
+                    c = cc;
 
                     match(input,11,FOLLOW_11_in_condition298); 
 
@@ -360,7 +360,7 @@ public class SAFParser extends Parser {
             }
 
 
-            // C:\\Antlr\\SAF\\SAF.g:39:93: (o= OPERATOR sc= condition )?
+            // C:\\Antlr\\SAF\\SAF.g:39:78: (o= OPERATOR sc= condition )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -369,7 +369,7 @@ public class SAFParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // C:\\Antlr\\SAF\\SAF.g:39:94: o= OPERATOR sc= condition
+                    // C:\\Antlr\\SAF\\SAF.g:39:79: o= OPERATOR sc= condition
                     {
                     o=(Token)match(input,OPERATOR,FOLLOW_OPERATOR_in_condition304); 
 

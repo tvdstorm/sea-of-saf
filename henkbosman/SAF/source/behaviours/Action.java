@@ -17,18 +17,21 @@ public class Action
 		_actions.add(name);
 	}
 	
-	
-	public Action(String name)
+	private void initialize()
 	{
 		_actions = new LinkedList<String>();
 		_errorList = new LinkedList<String>();
+	}
+	
+	public Action(String name)
+	{
+		initialize();
 		addAction(name);
 	}
 	
 	public Action(List<String> list)
 	{
-		_errorList = new LinkedList<String>();
-		_actions = new LinkedList<String>();
+		initialize();
 		for(String name : list)
 		{
 			addAction(name);

@@ -3,10 +3,10 @@ grammar SAF;
 options {   language = Java; }
 @header 
 {
-	package parser;
-	import java.util.LinkedList;
-	import behaviours.*;
-	import fighter.*;
+package parser;
+import java.util.LinkedList;
+import behaviours.*;
+import fighter.*;
 }
 
 INT	  	:	('0'..'9')+;
@@ -19,7 +19,7 @@ NAME		:	('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 fighter returns [Fighter f]
  @init{$f = new Fighter();}
  
-:	n=NAME {$f.name($n.text);} NEWLINE* '{' 
+:	n=NAME {$f.setName($n.text);} NEWLINE* '{' 
 		(
 			  NEWLINE 
 			| p=property {$f.addProperty(p);}
@@ -36,7 +36,7 @@ activity returns [Activity a]
 
 condition returns [Condition c]
 	:	
-	  (n=NAME {$c = new Condition($n.text);} | '(' cc=condition {$c = new Condition(cc);} ')') (o=OPERATOR sc=condition {$c.addSubCondition($o.text,sc);})?
+	  (n=NAME {$c = new Condition($n.text);} | '(' cc=condition {$c = cc;} ')') (o=OPERATOR sc=condition {$c.addSubCondition($o.text,sc);})?
 ;
 
 

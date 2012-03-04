@@ -2,9 +2,24 @@ package fighter;
 
 public class Rules
 {
-	protected int _defaultMovementSpeed;
-	protected int _defaultMovementDistance;
-	protected int _startingHealth;
+	private int _defaultMovementSpeed;
+	private int _defaultMovementDistance;
+	private int _startingHealth;
+	
+	public int getDefaultMovementSpeed()
+	{
+		return _defaultMovementSpeed;
+	}
+	
+	public int getDefaultMovementDistance()
+	{
+		return _defaultMovementDistance;
+	}
+	
+	public int getStartingHealth()
+	{
+		return _startingHealth;
+	}
 	
 	public Rules(int defaultMovementSpeed, int defaultMovementDistance, int startingHealth)
 	{

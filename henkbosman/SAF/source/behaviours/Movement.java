@@ -16,17 +16,22 @@ public class Movement
 		_movements.add(name);
 	}
 	
-	public Movement(String name)
+	private void initialize()
 	{
 		_errorList = new LinkedList<String>();
 		_movements = new LinkedList<String>();
+	}
+	
+	public Movement(String name)
+	{
+		initialize();
 		addMovement(name);
 	}
 	
 	public Movement(List<String> list)
 	{
-		_errorList = new LinkedList<String>();
-		_movements = list;
+		initialize();
+		_movements.addAll(list);
 	}
 	
 	public EnumMovements getMovement(Random random)

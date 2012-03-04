@@ -1,7 +1,7 @@
 package arena;
 import javax.swing.ImageIcon;
 
-import arena.Engine.Fighters;
+import arena.Engine.EnumFighters;
 import fighter.Combatmove;
 
 public class Graphics 
@@ -49,9 +49,9 @@ public class Graphics
 	    return new ImageIcon(fileName);
 	}
 	
-	public ImageIcon getImage(Combatmove combatmove, Fighters fighter)
+	public ImageIcon getImage(Combatmove combatmove, EnumFighters fighter)
 	{
-		if (fighter.equals(Fighters.FighterA))
+		if (fighter.equals(EnumFighters.FighterA))
 		{
 			if (combatmove == null)
 				return _deadA;

@@ -13,22 +13,21 @@ import parser.SAFLexer;
 import parser.SAFParser;
 
 import behaviours.Action.EnumActions;
-import behaviours.Condition;
-import behaviours.Condition.Conditions;
+import behaviours.Condition.EnumConditions;
 import behaviours.Movement.EnumMovements;
 
 import fighter.Fighter;
 import fighter.Property.EnumProperties;
 import fighter.Rules;
 
-public class Main {
+public class MaxFighter {
 
 	@Test
 	public void testFighter()
 	{
 		Fighter fighter = parseFighter();
 		assertEquals(true, fighter.getErrors().isEmpty());
-		assertEquals("Testfighter", fighter.name());
+		assertEquals("Testfighter", fighter.getName());
 	}
 	
 	@Test
@@ -108,7 +107,7 @@ public class Main {
 			fighter+="\n"+p+"=7";
 		}
 		
-		for (Conditions c : Condition.Conditions.values())
+		for (EnumConditions c : EnumConditions.values())
 		{
 			for (EnumMovements m : EnumMovements.values())
 			{

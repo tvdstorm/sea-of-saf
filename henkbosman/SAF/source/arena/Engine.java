@@ -1,6 +1,7 @@
 package arena;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.antlr.runtime.ANTLRFileStream;
@@ -21,7 +22,7 @@ import parser.SAFParser;
 
 public class Engine 
 {
-	public enum Fighters 	{	
+	public enum EnumFighters 	{	
 		FighterA, FighterB
 	}
 	
@@ -60,8 +61,8 @@ public class Engine
 		_lastCombatmoveA = _fighterA.performAction(distance, _fighterB.getHealth());
 		_lastCombatmoveB = _fighterB.performAction(distance, _fighterA.getHealth());
 		
-		_fighterA.doMove(_lastCombatmoveA, Fighters.FighterA);
-		_fighterB.doMove(_lastCombatmoveB, Fighters.FighterB);
+		_fighterA.doMove(_lastCombatmoveA, EnumFighters.FighterA);
+		_fighterB.doMove(_lastCombatmoveB, EnumFighters.FighterB);
 		
 		while (_fighterA.getPosition()>=_fighterB.getPosition())
 		{
@@ -87,7 +88,7 @@ public class Engine
 		}
 	}
 	
-	public Combatmove getCombatmove(Fighters fighter)
+	public Combatmove getCombatmove(EnumFighters fighter)
 	{
 		switch (fighter)
 		{
@@ -95,13 +96,13 @@ public class Engine
 				return _lastCombatmoveA;
 			case FighterB:
 				return _lastCombatmoveB;
+			default:
+				return new Combatmove(EnumMovements.stand, EnumActions.nothing);
 		}
-		return new Combatmove(EnumMovements.stand, EnumActions.nothing);
 	}
 	
 	private int doDamage(Fighter f, Combatmove combatmoveA, Combatmove combatmoveB, int distance)
 	{
-		
 		if (distance<=f.getPropertyValue(EnumProperties.punchReach))
 		{
 			switch (combatmoveA.getAction())
@@ -138,7 +139,7 @@ public class Engine
 		return 0;
 	}
 	
-	public int getHealth(Fighters fighter)
+	public int getHealth(EnumFighters fighter)
 	{
 		switch (fighter)
 		{
@@ -146,11 +147,12 @@ public class Engine
 				return _fighterA.getHealth();
 			case FighterB:
 				return _fighterB.getHealth();
+			default:
+				return 0;
 		}
-		return 0;
 	}
 	
-	public int getPosition(Fighters fighter)
+	public int getPosition(EnumFighters fighter)
 	{
 		switch (fighter)
 		{
@@ -158,11 +160,12 @@ public class Engine
 				return _fighterA.getPosition();
 			case FighterB:
 				return _fighterB.getPosition();
+			default:
+				return 0;
 		}
-		return 0;
 	}
 	
-	public List<String> getErrors(Fighters fighter)
+	public List<String> getErrors(EnumFighters fighter)
 	{
 		switch (fighter)
 		{
@@ -170,8 +173,8 @@ public class Engine
 				return _fighterA.getErrors();
 			case FighterB:
 				return _fighterB.getErrors();
+			default:
+				return new LinkedList<String>();
 		}
-		
-		return null;
 	}
 }
