@@ -5,56 +5,68 @@ import java.util.List;
 
 public class Property 
 {
-	public enum Properties {
+	public enum EnumProperties {
 		kickPower, kickReach, punchPower, punchReach
 	}
 
+	private String _type;
+	private String _value;
+	
 	private List<String> _errorList;
 	
-	private Properties _type; 
-	public Properties type()
+	public EnumProperties getType()
 	{
-		return _type;
-	}
-	private void type(String name)
-	{
-		try
-		{
-			_type = Properties.valueOf(name);
-		} catch (IllegalArgumentException e) {
-			String msg = "Error parsing \""+name+"\". Possible options:";
-			for (Properties p : Properties.values())
-			{
-				msg+=" "+p+" ";
-			}
-			_errorList.add(msg);
-		}
+		return parseType();
 	}
 	
-	private int _value = 5; 
-	public int value()
+	public int getValue()
 	{
-		return _value;
-	}
-	private void value(String value)
-	{
-		_value = Integer.parseInt(value);
-		if (_value<1 || _value>10)
-		{
-			_errorList.add("Property values must be between 1 and 10, using the default value 5");
-			_value=5;
-		}
+		return parseValue();
 	}
 	
 	public Property(String name, String value)
 	{
 		_errorList = new LinkedList<String>();
-		type(name);
-		value(value);
+		_type = name;
+		_value = value;
+	}
+	
+	private int parseValue()
+	{
+		int returnValue=Integer.parseInt(_value);
+
+		if (returnValue<1 || returnValue>10)
+		{
+			_errorList.add("Property values must be between 1 and 10, using the default value 5");
+			returnValue=5;
+		}
+		
+		return returnValue;
+	}
+	
+	private EnumProperties parseType()
+	{
+		EnumProperties returnType;
+		try
+		{
+			returnType = EnumProperties.valueOf(_type);
+			return returnType;
+		} catch (IllegalArgumentException e) {
+			String msg = "Error parsing \""+_type+"\". Possible options:";
+			for (EnumProperties p : EnumProperties.values())
+			{
+				msg+=" "+p+" ";
+			}
+			_errorList.add(msg);
+		}
+		
+		return null;
 	}
 	
 	public List<String> getErrors()
 	{
+		parseValue();
+		parseType();
 		return _errorList;
 	}
 }

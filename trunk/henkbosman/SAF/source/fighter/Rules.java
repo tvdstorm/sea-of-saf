@@ -15,7 +15,7 @@ public class Rules
 	
 	public int calculateMovement(Combatmove combatmove)
 	{
-		switch(combatmove._movement)
+		switch(combatmove.getMovement())
 		{
 			case run_towards:
 				return (_defaultMovementDistance*_defaultMovementSpeed*-3);
@@ -33,7 +33,7 @@ public class Rules
 	{
 		double cSpeed=0;
 
-		switch(combatmove._movement)
+		switch(combatmove.getMovement())
 		{
 			case run_away:
 				cSpeed+=speed+0.2;
@@ -55,7 +55,7 @@ public class Rules
 				break;
 		}
 		
-		switch(combatmove._action)
+		switch(combatmove.getAction())
 		{
 			case kick_low:
 				cSpeed=speed+0.1;

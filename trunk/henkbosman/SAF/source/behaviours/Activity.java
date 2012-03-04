@@ -3,6 +3,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import behaviours.Action.EnumActions;
+import behaviours.Movement.EnumMovements;
+
 public class Activity 
 {
 	private Condition _condition;
@@ -21,12 +24,12 @@ public class Activity
 		return _condition.checkCondition(conditions);
 	}
 	
-	public Movement.Movements getMovement(Random random)
+	public EnumMovements getMovement(Random random)
 	{
 		return _movement.getMovement(random);
 	}
 	
-	public Action.Actions getAction(Random random)
+	public EnumActions getAction(Random random)
 	{
 		return _action.getAction(random);
 	}

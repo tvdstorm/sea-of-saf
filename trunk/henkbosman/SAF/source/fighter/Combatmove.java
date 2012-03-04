@@ -1,13 +1,23 @@
 package fighter;
-import behaviours.Action;
-import behaviours.Movement;
+import behaviours.Action.EnumActions;
+import behaviours.Movement.EnumMovements;
 
 public class Combatmove
 {
-	final public Movement.Movements _movement;
-	final public Action.Actions _action;
+	private EnumMovements _movement;
+	private EnumActions _action;
 	
-	public Combatmove(Movement.Movements movement, Action.Actions action)
+	public EnumMovements getMovement()
+	{
+		return _movement;
+	}
+	
+	public EnumActions getAction()
+	{
+		return _action;
+	}
+	
+	public Combatmove(EnumMovements movement, EnumActions action)
 	{
 		_movement = movement;
 		_action = action;

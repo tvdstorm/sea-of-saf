@@ -12,23 +12,78 @@ import org.junit.Test;
 import parser.SAFLexer;
 import parser.SAFParser;
 
-import behaviours.Action;
-import behaviours.Action.Actions;
+import behaviours.Action.EnumActions;
 import behaviours.Condition;
 import behaviours.Condition.Conditions;
-import behaviours.Movement;
-import behaviours.Movement.Movements;
+import behaviours.Movement.EnumMovements;
 
-import fighter.Combatmove;
 import fighter.Fighter;
-import fighter.Property;
+import fighter.Property.EnumProperties;
 import fighter.Rules;
-import fighter.Property.Properties;
 
 public class Main {
 
 	@Test
-	public void test()
+	public void testFighter()
+	{
+		Fighter fighter = parseFighter();
+		assertEquals(true, fighter.getErrors().isEmpty());
+		assertEquals("Testfighter", fighter.name());
+	}
+	
+	@Test
+	public void testProperties()
+	{
+		Fighter fighter = parseFighter();
+		for (EnumProperties p : EnumProperties.values())
+		{
+			assertEquals(fighter.getPropertyValue(p), 7);
+		}
+	}
+	
+	@Test
+	public void testRules()
+	{
+		Fighter fighter = parseFighter();
+		Rules rules = new Rules(10,1,100);
+		fighter.setRules(rules);
+		assertEquals(100, fighter.getHealth());
+	}
+	
+	@Test
+	public void testDamage()
+	{
+		Fighter fighter = parseFighter();
+		Rules rules = new Rules(10,1,100);
+		fighter.setRules(rules);
+		fighter.getDamage(10);
+		assertEquals(90, fighter.getHealth());
+	}
+	
+	@Test
+	public void testMovement()
+	{
+		Fighter fighter = parseFighter();
+		Rules rules = new Rules(10,1,100);
+		fighter.setRules(rules);
+		fighter.movePosition(20);
+		assertEquals(20,fighter.getPosition());
+		fighter.movePosition(30);
+		assertEquals(50,fighter.getPosition());
+	}
+	
+	@Test
+	public void testActions()
+	{
+		Fighter fighter = parseFighter();
+		Rules rules = new Rules(10,1,100);
+		fighter.setRules(rules);
+		assertNotNull(fighter.performAction(1, 10));
+		assertNotNull(fighter.performAction(1, 50));
+		assertNotNull(fighter.performAction(1, 90));
+	}
+	
+	private Fighter parseFighter()
 	{
 		try {
 			SAFLexer lexer = new SAFLexer(createFighter());
@@ -36,52 +91,28 @@ public class Main {
 			SAFParser parser = new SAFParser(tokenStream); 
 			Fighter fighter = parser.fighter();
 
-			runTests(fighter);
+			return fighter;
+			
 		} catch (RecognitionException e) {
 			fail(e.getMessage());
 		}
-
-	}
-	
-	private void runTests(Fighter fighter)
-	{
-		assertEquals(true, fighter.getErrors().isEmpty());
-		assertEquals("Testfighter", fighter.name());
 		
-		for (Properties p : Property.Properties.values())
-		{
-			assertEquals(fighter.getPropertyValue(p), 7);
-		}
-		
-		Rules rules = new Rules(10,1,100);
-		fighter.setRules(rules);
-		assertEquals(100, fighter.getHealth());
-		fighter.getDamage(10);
-		assertEquals(90, fighter.getHealth());
-		
-		fighter.movePosition(20);
-		assertEquals(20,fighter.getPosition());
-		fighter.movePosition(30);
-		assertEquals(50,fighter.getPosition());
-		
-		assertNotNull(fighter.performAction(1, 10));
-		assertNotNull(fighter.performAction(1, 50));
-		assertNotNull(fighter.performAction(1, 90));
+		return null;
 	}
 	
 	private CharStream createFighter()
 	{
 		String fighter="Testfighter\n{";
-		for (Properties p : Property.Properties.values())
+		for (EnumProperties p : EnumProperties.values())
 		{
 			fighter+="\n"+p+"=7";
 		}
 		
 		for (Conditions c : Condition.Conditions.values())
 		{
-			for (Movements m : Movement.Movements.values())
+			for (EnumMovements m : EnumMovements.values())
 			{
-				for (Actions a : Action.Actions.values())
+				for (EnumActions a : EnumActions.values())
 				{
 					fighter+="\n"+c+"["+m+" "+a+"]";
 					fighter+="\n"+c+" and ("+c+" or "+c+")["+m+" "+a+"]";

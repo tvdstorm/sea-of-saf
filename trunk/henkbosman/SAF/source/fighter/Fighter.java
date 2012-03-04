@@ -4,14 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import fighter.Property.Properties;
+import fighter.Property.EnumProperties;
 
 import arena.Engine.Fighters;
-import behaviours.Action;
+import behaviours.Action.EnumActions;
 import behaviours.Activity;
 import behaviours.Behaviour;
 import behaviours.Condition;
-import behaviours.Movement;
+import behaviours.Movement.EnumMovements;
 
 public class Fighter 
 {
@@ -38,17 +38,17 @@ public class Fighter
 	private double _speed = 0.0;
 	private double speed()
 	{
-		double height = ((double)(getPropertyValue(Property.Properties.punchReach) + getPropertyValue(Property.Properties.kickReach))) / 2;
-		double weight = ((double)(getPropertyValue(Property.Properties.punchPower) + getPropertyValue(Property.Properties.kickPower))) / 2;
+		double height = ((double)(getPropertyValue(EnumProperties.punchReach) + getPropertyValue(EnumProperties.kickReach))) / 2;
+		double weight = ((double)(getPropertyValue(EnumProperties.punchPower) + getPropertyValue(EnumProperties.kickPower))) / 2;
 		_speed = 0.1+(Math.abs(height-weight)*0.5);
 		return _speed;
 	}
-	public int getPropertyValue(Property.Properties property)
+	public int getPropertyValue(EnumProperties property)
 	{
 		for (Property p : _properties)
 		{
-			if (p.type().equals(property))
-				return p.value();
+			if (p.getType().equals(property))
+				return p.getValue();
 		}
 		return 5;
 	}
@@ -117,7 +117,7 @@ public class Fighter
 			return combatmove;
 		}
 		
-		return new Combatmove(Movement.Movements.stand, Action.Actions.nothing);
+		return new Combatmove(EnumMovements.stand, EnumActions.nothing);
 	}
 	
 	private Condition.Conditions evaluateEnemy(int enemyHealth)
@@ -139,7 +139,7 @@ public class Fighter
 	
 	private Condition.Conditions evaluateDistance(int enemyDistance)
 	{
-		if (enemyDistance>getPropertyValue(Properties.punchReach) && enemyDistance>getPropertyValue(Properties.kickReach))
+		if (enemyDistance>getPropertyValue(EnumProperties.punchReach) && enemyDistance>getPropertyValue(EnumProperties.kickReach))
 			return Condition.Conditions.far;
 		
 		return Condition.Conditions.near;
