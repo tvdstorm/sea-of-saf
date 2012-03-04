@@ -129,8 +129,6 @@ public class Printer implements Visitor {
 		}
 		
 		append("]");
-		
-		append("[Conditions: {" + TypeValues.CONDITIONS.contains(ConditionType.ALWAYS) + "}]");
 	}
 
 }

@@ -1,9 +1,9 @@
 iwan{
 
-punchPower = 8
+punchReach2 = 8
 kickPower = 9
 far[run_towards punch_high]
-near or far[choose(stand crouch) kick_high]
+near or far[choose(stand crouch) kick_high2]
 near or far and close[choose(stand crouch) kick_high]
 
 }
