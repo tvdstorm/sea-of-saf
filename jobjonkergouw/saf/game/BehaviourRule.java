@@ -28,8 +28,6 @@ public class BehaviourRule {
         String result = "If " + firstCondition.toString() + " ";
         if (logicalOperator != LogicalOperatorType.NONE) {
             result += logicalOperator.toString() + " " + secondCondition.toString() + " ";
-        } else {
-            result += "\t";
         }
         
         result += "\t-> moves [ ";
