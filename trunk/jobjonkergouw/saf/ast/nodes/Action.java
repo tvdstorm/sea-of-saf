@@ -2,7 +2,7 @@ package saf.ast.nodes;
 
 import java.util.ArrayList;
 
-public abstract class Action extends ASTNode {
+abstract class Action extends ASTNode {
         private String name;
         private ArrayList<String> actions = new ArrayList<String>();
        

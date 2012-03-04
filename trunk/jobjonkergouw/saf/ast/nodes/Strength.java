@@ -16,7 +16,7 @@ public class Strength extends ASTNode {
         visitor.visit(this);
     }        
     
-    @Override
+    @Override 
     public String getName() {
             return name;
     }

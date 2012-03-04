@@ -12,11 +12,6 @@ public abstract class ASTNode {
 
     public abstract void accept(Visitor visitor);
     
-//     public void accept2(Visitor visitor) {
-//         visitor.visit(this);
-//     }
-
-    
     public int childCount() {
         return children.size();
     }
@@ -32,7 +27,7 @@ public abstract class ASTNode {
         } else {
             return children.get(i);
         }
-    }
+    }    
     
     public boolean hasChildren() {
         return !(children.isEmpty());

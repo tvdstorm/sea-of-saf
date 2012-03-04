@@ -6,7 +6,9 @@ import org.antlr.runtime.*;
 
 import saf.syntax.*;
 import saf.ast.nodes.*;
-import saf.ast.Validator;
+import saf.ast.*;
+import saf.game.*;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -34,32 +36,50 @@ public class Main {
         f.close();
         return new String(buffer);
     }
-
-    public static void main(String[] args) {
-        String src = null;
+    
+    private static Bot getBotFromFile(String filePath) {
+        String source = null;
         try {
-            src = readStringFromFile("saf/tests/bad_everything.saf");
+            source = readStringFromFile(filePath);
         } catch (IOException e) {
             System.out.println(e.getMessage());
             java.lang.System.exit(1);
-            //src = "testnaam { slaan = 5 trappen = 12 close and far [ choose(run walk_away stand) ] }";
         }
         
         Fighter fighterTree = null;
         try {
-            fighterTree = getFighterTree(src);
+            fighterTree = getFighterTree(source);
         } catch (RecognitionException e) {
             System.out.println( printRecognitionException(e) );
             java.lang.System.exit(1);
         }
         System.out.println(fighterTree.printTree());
-        
+              
         Validator val = new Validator();
-        val.visit(fighterTree);
-        if ( val.isValid() ) {
-        
+        if ( val.isValid(fighterTree) ) {
+            BotCompiler compiler = new BotCompiler();
+            Bot bot = compiler.compileBot(fighterTree);
+            return bot;
         } else {
-            System.out.println(val.messagesAsString());
+            System.out.println( val.messagesAsString() );
+            return null;
+        }        
+    }
+
+    public static void main(String[] args) {
+
+        Bot bot1 = getBotFromFile("saf/tests/geneticFighter.saf");
+        Bot bot2 = getBotFromFile("saf/tests/jackieChan.saf");
+        
+        System.out.println( bot1.botSummaryAsString() );
+        System.out.println( bot2.botSummaryAsString() );
+        
+        Game game = new Game(bot1, bot2);
+        try {
+            game.runTimeStep();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            java.lang.System.exit(1);
         }
      }   
 }
