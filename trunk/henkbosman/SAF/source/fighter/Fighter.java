@@ -6,28 +6,28 @@ import java.util.Random;
 
 import fighter.Property.EnumProperties;
 
-import arena.Engine.Fighters;
+import arena.Engine.EnumFighters;
 import behaviours.Action.EnumActions;
 import behaviours.Activity;
 import behaviours.Behaviour;
-import behaviours.Condition;
+import behaviours.Condition.EnumConditions;
 import behaviours.Movement.EnumMovements;
 
 public class Fighter 
 {
 	private String _name; 
-	public String name()
+	public String getName()
 	{
 		return _name;
 	}
-	public void name(String name)
+	public void setName(String name)
 	{
 		_name=name;
 	}
 	
 	public int getPosition()
 	{
-		return _status.position();
+		return _status.getPosition();
 	}
 	
 	public void movePosition(int pos)
@@ -73,12 +73,12 @@ public class Fighter
 	}
 	public int getHealth()
 	{
-		return (int)(((float)_status.health()/(float)_rules._startingHealth)*100);
+		return (int)(((float)_status.getHealth()/(float)_rules.getStartingHealth())*100);
 	}
 	public void setRules(Rules rules)
 	{
 		_rules = rules;
-		_status = new Status(_rules._startingHealth);
+		_status = new Status(_rules.getStartingHealth());
 	}
 
 	private Random _randomGenerator;
@@ -91,7 +91,7 @@ public class Fighter
 		_name="";
 	}
 	
-	public void doMove(Combatmove combatmove, Fighters fighterType)
+	public void doMove(Combatmove combatmove, EnumFighters fighterType)
 	{
 		switch(fighterType)
 		{
@@ -106,7 +106,7 @@ public class Fighter
 	
 	public Combatmove performAction(int enemyDistance, int enemyHealth)
 	{
-		List<Condition.Conditions> actualConditions = new LinkedList<Condition.Conditions>();
+		List<EnumConditions> actualConditions = new LinkedList<EnumConditions>();
 		actualConditions.add(evaluateEnemy(enemyHealth));
 		actualConditions.add(evaluateDistance(enemyDistance));
 		Combatmove combatmove = _behaviour.pickCombatmove(actualConditions, _randomGenerator);
@@ -120,29 +120,29 @@ public class Fighter
 		return new Combatmove(EnumMovements.stand, EnumActions.nothing);
 	}
 	
-	private Condition.Conditions evaluateEnemy(int enemyHealth)
+	private EnumConditions evaluateEnemy(int enemyHealth)
 	{
 		double range = enemyHealth - getHealth();
 		
 		if (range<-40)
-			return Condition.Conditions.much_weaker;
+			return EnumConditions.much_weaker;
 		if (range<-25)
-			return Condition.Conditions.weaker;
+			return EnumConditions.weaker;
 		
 		if (range>40)
-			return Condition.Conditions.much_stronger;
+			return EnumConditions.much_stronger;
 		if (range>25)
-			return Condition.Conditions.stronger;
+			return EnumConditions.stronger;
 		
-		return Condition.Conditions.even;
+		return EnumConditions.even;
 	}
 	
-	private Condition.Conditions evaluateDistance(int enemyDistance)
+	private EnumConditions evaluateDistance(int enemyDistance)
 	{
 		if (enemyDistance>getPropertyValue(EnumProperties.punchReach) && enemyDistance>getPropertyValue(EnumProperties.kickReach))
-			return Condition.Conditions.far;
+			return EnumConditions.far;
 		
-		return Condition.Conditions.near;
+		return EnumConditions.near;
 	}
 	
 	public List<String> getErrors()

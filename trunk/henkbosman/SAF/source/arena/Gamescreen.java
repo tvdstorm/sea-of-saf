@@ -16,7 +16,7 @@ import javax.swing.border.BevelBorder;
 
 import org.antlr.runtime.RecognitionException;
 
-import arena.Engine.Fighters;
+import arena.Engine.EnumFighters;
 
 
 import fighter.Combatmove;
@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.io.IOException;
+import java.util.List;
 
 public class Gamescreen extends JFrame implements ActionListener{
 
@@ -43,6 +44,7 @@ public class Gamescreen extends JFrame implements ActionListener{
 	private Engine _engine;
 	private Timer _timer;
 	private Graphics _graphics;
+	private Popupscreen _popupScreen;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -141,19 +143,20 @@ public class Gamescreen extends JFrame implements ActionListener{
 		_panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		_panel.setBounds(10, 101, 422, 154);
 		_contentPane.add(_panel);
+		_popupScreen = new Popupscreen();
 	}
 	
-	private void drawFighter(Combatmove combatmove, Fighters fighter)
+	private void drawFighter(Combatmove combatmove, EnumFighters fighter)
 	{
 		switch (fighter)
 		{
 			case FighterA:
-				_fighter1.setIcon(_graphics.getImage(combatmove, Fighters.FighterA));
-				_fighter1.setBounds(_engine.getPosition(Fighters.FighterA)-12, 100, 63, 48);
+				_fighter1.setIcon(_graphics.getImage(combatmove, EnumFighters.FighterA));
+				_fighter1.setBounds(_engine.getPosition(EnumFighters.FighterA)-12, 100, 63, 48);
 				if (combatmove!=null)
 				{
 					_actionLabelA.setText(combatmove.getMovement() + " " + combatmove.getAction());
-					_healthLabelA.setText(_engine.getHealth(Fighters.FighterA)+"%");
+					_healthLabelA.setText(_engine.getHealth(EnumFighters.FighterA)+"%");
 				}
 				else
 				{
@@ -162,12 +165,12 @@ public class Gamescreen extends JFrame implements ActionListener{
 				}
 				break;
 			case FighterB:
-				_fighter2.setIcon(_graphics.getImage(combatmove, Fighters.FighterB));
-				_fighter2.setBounds(_engine.getPosition(Fighters.FighterB)+12, 100, 63, 48);
+				_fighter2.setIcon(_graphics.getImage(combatmove, EnumFighters.FighterB));
+				_fighter2.setBounds(_engine.getPosition(EnumFighters.FighterB)+12, 100, 63, 48);
 				if (combatmove!=null)
 				{
 					_actionLabelB.setText(combatmove.getMovement() + " " + combatmove.getAction());
-					_healthLabelB.setText(_engine.getHealth(Fighters.FighterB)+"%");
+					_healthLabelB.setText(_engine.getHealth(EnumFighters.FighterB)+"%");
 				}
 				else
 				{
@@ -182,15 +185,12 @@ public class Gamescreen extends JFrame implements ActionListener{
 	private void beginFight() throws IOException, RecognitionException
 	{
 		_engine = new Engine(_textFieldA.getText(), _textFieldB.getText());
-		Popupscreen popupScreen = new Popupscreen();
-		if (!_engine.getErrors(Fighters.FighterA).isEmpty())
-			popupScreen.addMessage(_engine.getErrors(Fighters.FighterA));
-		if (!_engine.getErrors(Fighters.FighterB).isEmpty())
-			popupScreen.addMessage(_engine.getErrors(Fighters.FighterB));
+		_popupScreen.addMessage(_engine.getErrors(EnumFighters.FighterA));
+		_popupScreen.addMessage(_engine.getErrors(EnumFighters.FighterB));
 
-		if (popupScreen.hasMessages())
+		if (_popupScreen.hasMessages())
 		{
-			popupScreen.setVisible(true);
+			_popupScreen.setVisible(true);
 			return;
 		}
 
@@ -200,11 +200,11 @@ public class Gamescreen extends JFrame implements ActionListener{
 	private void doFightMoves()
 	{
 		_engine.doMoves();
-		doFightMove(Fighters.FighterA);
-		doFightMove(Fighters.FighterB);
+		doFightMove(EnumFighters.FighterA);
+		doFightMove(EnumFighters.FighterB);
 	}
 	
-	private void doFightMove(Fighters fighter)
+	private void doFightMove(EnumFighters fighter)
 	{
 		if (_engine.getHealth(fighter)<1)
 		{
@@ -217,30 +217,40 @@ public class Gamescreen extends JFrame implements ActionListener{
 		}
 		_contentPane.repaint();
 	}
-	
-	
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource().equals(_timer))
-			doFightMoves();
+		{
+			performTimer();
+		}
 		if (e.getSource().equals(_fightButton))
 		{
-			try {
-				beginFight();
-			} catch (IOException e1) {
-				Popupscreen popupScreen = new Popupscreen();
-				popupScreen.addMessage("IOException:");
-				popupScreen.addMessage(e1.getMessage());
-				popupScreen.setVisible(true);
-			} catch (RecognitionException e1) {
-				Popupscreen popupScreen = new Popupscreen();
-				popupScreen.addMessage("RecognitionException:");
-				popupScreen.addMessage(e1.getMessage());
-				popupScreen.setVisible(true);
-			}
+			performFightButton();
 		}
 		_contentPane.repaint();
+	}
+	
+	private void performFightButton()
+	{
+		try {
+			beginFight();
+		} catch (IOException e1) {
+			showPopupScreen(e1.getMessage());
+		} catch (RecognitionException e1) {
+			showPopupScreen(e1.getMessage());
+		}
+	}
+	
+	private void showPopupScreen(String msg)
+	{
+		_popupScreen.addMessage(msg);
+		_popupScreen.setVisible(true);
+	}
+	
+	private void performTimer()
+	{
+		doFightMoves();
 	}
 }

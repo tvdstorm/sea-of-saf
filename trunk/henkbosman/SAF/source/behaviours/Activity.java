@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 import behaviours.Action.EnumActions;
+import behaviours.Condition.EnumConditions;
 import behaviours.Movement.EnumMovements;
 
 public class Activity 
@@ -19,7 +20,7 @@ public class Activity
 		_action=a;
 	}
 	
-	public boolean checkCondition(List<Condition.Conditions> conditions)
+	public boolean checkCondition(List<EnumConditions> conditions)
 	{
 		return _condition.checkCondition(conditions);
 	}
@@ -37,12 +38,9 @@ public class Activity
 	public List<String> getErrors()
 	{
 		List<String> list = new LinkedList<String>();
-		if (_condition!=null)
-			list.addAll(_condition.getErrors());
-		if (_movement!=null)
-			list.addAll(_movement.getErrors());
-		if (_action!=null)
-			list.addAll(_action.getErrors());
+		list.addAll(_condition.getErrors());
+		list.addAll(_movement.getErrors());
+		list.addAll(_action.getErrors());
 		return list;
 	}
 }

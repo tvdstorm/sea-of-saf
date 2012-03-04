@@ -2,7 +2,7 @@ package fighter;
 public class Status 
 {
 	private int _position;
-	public int position()
+	public int getPosition()
 	{
 		return _position;
 	}
@@ -16,7 +16,7 @@ public class Status
 	}
 	
 	private int _health;
-	public int health()
+	public int getHealth()
 	{
 		return _health;
 	}

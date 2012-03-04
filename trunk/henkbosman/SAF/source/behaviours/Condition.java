@@ -4,102 +4,98 @@ import java.util.List;
 
 public class Condition 
 {
-	public enum Conditions {
+	public enum EnumConditions {
 		stronger,weaker,much_stronger,much_weaker,even,near,far,always
 	}
-	public enum Operators {
-		and,or
+	public enum EnumOperators {
+		and,or, none
 	}
 
 	private List<String> _errorList;
 	
-	private Conditions _condition;
-	private Operators _operator;
+	private String _condition;
+	private String _operator;
 	private Condition _subCondition;
-	private Condition _mainCondition;
 	
-	
-	public Condition(String name)
+	private EnumConditions parseCondition()
 	{
-		_errorList = new LinkedList<String>();
-		
 		try
 		{
-			_condition = Conditions.valueOf(name);
+			return EnumConditions.valueOf(_condition);
 		} catch (IllegalArgumentException e) {
-			String msg = "Error parsing \""+name+"\". Possible options:";
-			for (Conditions c : Conditions.values())
+			String msg = "Error parsing \""+_condition+"\". Possible options:";
+			for (EnumConditions c : EnumConditions.values())
 			{
 				msg+=" "+c+" ";
 			}
 			_errorList.add(msg);
 		}
+		return null;
 	}
 	
-	public Condition(Condition condition)
+	private EnumOperators parseOperator()
+	{
+		try
+		{
+			return EnumOperators.valueOf(_operator);
+		} catch (IllegalArgumentException e) {
+			String msg = "Error parsing \""+_condition+"\". Possible options:";
+			for (EnumOperators c : EnumOperators.values())
+			{
+				msg+=" "+c+" ";
+			}
+			_errorList.add(msg);
+		}
+		return null;
+	}
+	
+	public Condition(String name)
 	{
 		_errorList = new LinkedList<String>();
-		_mainCondition = condition;
+		_condition=name;
+		_operator="none";
 	}
 	
 	public void addSubCondition(String operator, Condition condition)
 	{
-		try
-		{
-			_operator = Operators.valueOf(operator);
-		} catch (IllegalArgumentException e) {
-			String msg = "Error parsing \""+operator+"\". Possible options:";
-			for (Operators o : Operators.values())
-			{
-				msg+=" "+o+" ";
-			}
-			_errorList.add(msg);
-		}
-
+		_operator = operator;
 		_subCondition = condition;
 	}
 	
-	public boolean checkCondition(List<Condition.Conditions> conditions)
+	public boolean checkCondition(List<EnumConditions> conditions)
 	{
-		if (_operator==null)
-			return true;
-		switch (_operator)
+		switch (parseOperator())
 		{
 			case and:
-				return getFirstCondition(conditions) && getSecondCondition(conditions);
+				return matchConditions(conditions) && _subCondition.checkCondition(conditions);
 			case or:
-				return getFirstCondition(conditions) || getSecondCondition(conditions);
+				return matchConditions(conditions) || _subCondition.checkCondition(conditions);
+			default:
+				return matchConditions(conditions);
 		}
-
-		return true;
 	}
 	
-	private boolean getFirstCondition(List<Condition.Conditions> conditions)
+	private boolean matchConditions(List<EnumConditions> conditions)
 	{
-		if (_mainCondition!=null)
-			return _mainCondition.checkCondition(conditions);
-		
-		for (Condition.Conditions c : conditions)
+		for (EnumConditions c : conditions)
 		{
-			if (c.equals(_condition))
+			if (c.equals(parseCondition()))
 				return true;
 		}
 		
 		return false;
 	}
 	
-	private boolean getSecondCondition(List<Condition.Conditions> conditions)
-	{
-		return _subCondition.checkCondition(conditions);
-	}
-	
 	public List<String> getErrors()
 	{
 		List<String> list = new LinkedList<String>();
+		parseCondition();
+		parseOperator();
+		
 		if (_subCondition!=null)
+		{
 			list.addAll(_subCondition.getErrors());
-		if (_mainCondition!=null)
-			list.addAll(_mainCondition.getErrors());
+		}
 		list.addAll(_errorList);
 		
 		return list;

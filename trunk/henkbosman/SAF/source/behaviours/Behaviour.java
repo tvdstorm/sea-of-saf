@@ -3,6 +3,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import behaviours.Action.EnumActions;
+import behaviours.Condition.EnumConditions;
+import behaviours.Movement.EnumMovements;
+
 import fighter.Combatmove;
 
 public class Behaviour
@@ -18,7 +22,7 @@ public class Behaviour
 		_activities = new LinkedList<Activity>();
 	}
 	
-	public Combatmove pickCombatmove(List<Condition.Conditions> conditions, Random random)
+	public Combatmove pickCombatmove(List<EnumConditions> conditions, Random random)
 	{
 		List<Activity> possibleCombatmoves = new LinkedList<Activity>();
 		for (Activity a : _activities)
@@ -26,11 +30,18 @@ public class Behaviour
 			if (a.checkCondition(conditions))
 				possibleCombatmoves.add(a);
 		}
+		
+		if (!possibleCombatmoves.isEmpty())
+		{
+			Activity activity = possibleCombatmoves.get(random.nextInt(possibleCombatmoves.size()));
+			Combatmove combatmove = new Combatmove(activity.getMovement(random), activity.getAction(random));
+			return combatmove;
+		}
+		
+		return new Combatmove(EnumMovements.stand, EnumActions.nothing);
 
-		Activity activity = possibleCombatmoves.get(random.nextInt(possibleCombatmoves.size()));
-		Combatmove combatmove = new Combatmove(activity.getMovement(random), activity.getAction(random));
 
-		return combatmove;
+		
 	}
 	
 	public List<String> getErrors()
