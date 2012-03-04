@@ -53,6 +53,8 @@ public class EnumTypes {
                 return AttackType.PUNCH_HIGH;
             } else if ( s.equals("kick_low") ) {
                 return AttackType.KICK_LOW;
+            } else if ( s.equals("kick_high") ) {
+                return AttackType.KICK_HIGH;
             } else if ( s.equals("block_low") ) {
                 return AttackType.BLOCK_LOW;
             } else if ( s.equals("block_high") ) {
@@ -99,6 +101,11 @@ public class EnumTypes {
         NONE, 
         OR, 
         AND  
+    }
+    
+    public enum Orientation {
+        LEFT,
+        RIGHT
     }
 
 }
