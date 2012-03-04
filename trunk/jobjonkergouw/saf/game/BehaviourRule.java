@@ -1,65 +1,143 @@
 package saf.game;
 
-import java.io.*;
+import java.util.ArrayList;
+
+import saf.game.EnumTypes.*;
 
 /**
  * This class contains all properties of a behaviour rule of a fighter bot
  **/
 public class BehaviourRule {
-//////////// interface ///////////////    
-    public void print() {
-        // print condition
-        System.out.print(condition1 + " ");
-        if (!logicalOperator.isEmpty()) {
-            System.out.print(logicalOperator + " " + condition2 + " ");
-        }
-        System.out.print("-> ");
-        // print move actions
-        if (!moveAction2.isEmpty()) {
-            System.out.print("move = (" + moveAction1 + " or " + moveAction2 + "), ");
-        } else {
-            System.out.print("move = " + moveAction1 + ", ");
-        }
-        // print fight actions
-        if (!fightAction2.isEmpty()) {
-            System.out.print("fight = (" + fightAction1 + " or " + fightAction2 + ")");
-        } else {
-            System.out.print("fight = " + fightAction1 + "");
-        }
-        System.out.print("\n");
+    private ArrayList<MoveType> moves = new ArrayList<MoveType>() ;
+    private ArrayList<AttackType> attacks = new ArrayList<AttackType>();
+    private ConditionType firstCondition;
+    private ConditionType secondCondition;
+    private LogicalOperatorType logicalOperator;
+    
+    public BehaviourRule(ConditionType firstCondition) {
+        this(firstCondition, ConditionType.EMPTY, LogicalOperatorType.NONE);
+    } 
+    
+    public BehaviourRule (ConditionType firstCondition, ConditionType secondCondition, LogicalOperatorType logicalOperator) {
+        this.firstCondition = firstCondition;
+        this.secondCondition = secondCondition;
+        this.logicalOperator = logicalOperator;
     }
-
-    // check if two rules have the same conditions
-    public boolean equalCondition(BehaviourRule rule) {
-        if (condition1.equals(rule.condition1) &&
-            condition2.equals(rule.condition2) &&
-            logicalOperator.equals(rule.logicalOperator)) {
-            return true;
+    
+    public String toString () {
+        String result = "If " + firstCondition.toString() + " ";
+        if (logicalOperator != LogicalOperatorType.NONE) {
+            result += logicalOperator.toString() + " " + secondCondition.toString() + " ";
+        } else {
+            result += "\t";
+        }
+        
+        result += "\t-> moves [ ";
+        for (MoveType move : moves) {
+            result += move.toString() + " ";
+        }
+        
+        result += "] attacks [ ";
+        for (AttackType attack : attacks) {
+            result += attack.toString() + " ";
+        }
+        result += "]";
+        return result;
+    }
+    
+    public void addMove(MoveType move) {
+        moves.add(move);
+    }
+    
+    public MoveType getMove() {
+        if ( moves.isEmpty() ) {
+            return MoveType.EMPTY;
+        }
+        java.util.Random randomGenerator = new java.util.Random();
+        int randomIndex = randomGenerator.nextInt( moves.size() );
+        return moves.get(randomIndex);
+    }
+    
+    public void addAttack(AttackType attack) {
+        attacks.add(attack);
+    }
+    
+    // Notice: This is a clone of getMove() !
+    public AttackType getAttack() {
+        if ( attacks.isEmpty() ) {
+            return AttackType.EMPTY;
+        }
+        java.util.Random randomGenerator = new java.util.Random();
+        int randomIndex = randomGenerator.nextInt( attacks.size() );
+        return attacks.get(randomIndex);
+    }
+    
+    public boolean ruleIsTrue(ConditionType strengthCondition, ConditionType rangeCondition) {
+        if (logicalOperator == LogicalOperatorType.NONE) {
+            if ( singleRuleIsTrue(firstCondition, strengthCondition, rangeCondition) ) {
+                return true; 
+            }
+        } else if (logicalOperator == LogicalOperatorType.AND) {
+            if ( singleRuleIsTrue(firstCondition, strengthCondition, rangeCondition) &&
+                 singleRuleIsTrue(secondCondition, strengthCondition, rangeCondition) ) {
+                return true; 
+            }            
+        } else if (logicalOperator == LogicalOperatorType.OR) {
+            if ( singleRuleIsTrue(firstCondition, strengthCondition, rangeCondition) ||
+                 singleRuleIsTrue(secondCondition, strengthCondition, rangeCondition) ) {
+                return true; 
+            }            
         }
         return false;
     }
     
-//////////// constructor ///////////////    
-    BehaviourRule (String c1, String c2, String lo, String m1, String m2, String f1, String f2) {
-            condition1 = c1;
-            condition2 = c2;
-            logicalOperator = lo;
-            
-            moveAction1 = m1;
-            moveAction2 = m2;
-            
-            fightAction1 = f1;
-            fightAction2 = f2;               
-    }
+    private boolean singleRuleIsTrue(ConditionType ruleCondition, ConditionType strengthCondition, ConditionType rangeCondition) {
+        switch (ruleCondition) {
+            case MUCH_STRONGER:
+                if (strengthCondition == ConditionType.MUCH_STRONGER) {
+                    return true;
+                }
+                break;
+                
+            case STRONGER:
+                if (strengthCondition == ConditionType.MUCH_STRONGER || strengthCondition == ConditionType.STRONGER) {
+                    return true;
+                }
+                break;
+                
+            case EVEN:
+                if (strengthCondition == ConditionType.EVEN) {
+                    return true;
+                }
+                break;
+                
+            case WEAKER:
+                if (strengthCondition == ConditionType.MUCH_WEAKER || strengthCondition == ConditionType.WEAKER) {
+                    return true;
+                }
+                break;
 
-//////////// variables ///////////////   
-    private String condition1;
-    private String condition2;
-    private String logicalOperator;
-    
-    private String moveAction1;
-    private String moveAction2;
-    
-    private String fightAction1;
-    private String fightAction2;
+            case MUCH_WEAKER:
+                if (strengthCondition == ConditionType.MUCH_WEAKER) {
+                    return true;
+                }
+                break;
+            
+            case FAR:
+                if (rangeCondition == ConditionType.FAR) {
+                    return true;
+                }
+                break;
+            
+            case NEAR:
+                if (rangeCondition == ConditionType.NEAR) {
+                    return true;
+                }
+                break;
+            
+            case ALWAYS:
+                return true;            
+        }
+        return false;
+    }
 }

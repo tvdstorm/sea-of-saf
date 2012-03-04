@@ -1,61 +1,129 @@
 package saf.game;
 
+import java.util.ArrayList;
 
-
+import saf.game.EnumTypes.*;
 
 /**
  * This class contains all properties of a fighter bot
  **/
 public class Bot {
-    public enum Move { JUMP, CROUCH, STAND, RUN_TOWARDS, RUN_AWAY, WALK_TOWARDS, WALK_AWAY };
-    // design decision: idle attack defined to use as default attack
-    public enum Attack { PUNCH_LOW, PUNCH_HIGH, KICK_LOW, KICK_HIGH, BLOCK_LOW, BLOCK_HIGH, IDLE };
-    public enum StrengthCondition { STRONGER, WEAKER, MUCH_STRONGER, MUCH_WEAKER, EVEN };
-    public enum RangeCondition { NEAR, FAR };   
-
+    // fighter attributes
     private String name;
     private int punchReach;
     private int punchPower;
     private int kickReach;
     private int kickPower;         
     private double speed;
-    // extra attribute used to compare fighters
     private int totalPower;
+    private ArrayList<BehaviourRule> rules = new ArrayList<BehaviourRule>();
     
-    private Move currentMove = STAND;
-    private Attack currentAttack = IDLE;
-    private FightCondition strengthCondition = EVEN;
-    private RangeCondition rangeCondition = FAR;  
+    // values describing current fighter state
+    private MoveType currentMove = MoveType.STAND;
+    private AttackType currentAttack = AttackType.IDLE;
+    private ConditionType strengthCondition = ConditionType.EVEN;
+    private ConditionType rangeCondition = ConditionType.FAR;  
     private double currentPosition = 0.;
+    private double currentHealth = 100.;
     
-    Bot (int punchReach, int punchPower, int kickReach, int kickPower) {
+    
+    public Bot(String name, int punchReach, int punchPower, int kickReach, int kickPower) {
+        this.name = name;
         this.punchReach = punchReach;
         this.punchPower = punchPower;
         this.kickReach = kickReach;
         this.kickPower = kickPower;
         
-        weight = (punchPower + kickPower) / 2.;
-        height = (punchReach + kickReach) / 2.;
-        speed = Java.util.Math.abs(0.5 * (height - weight));                          
+        double weight = (punchPower + kickPower) / 2.;
+        double height = (punchReach + kickReach) / 2.;
+        this.speed = java.lang.Math.abs(0.5 * (height - weight));
+                                
+        computeTotalPower();
     }
 
-    public void setPosition(double position) {
-        currentPosition = position;
+    public String botSummaryAsString() {
+        String result = "Bot " + name + "\n";
+        result += "----------------------------\n";
+        result += "Attributes = (" + punchReach + ", " + punchPower + ", " + kickReach + ", " + kickPower + ")\n"; 
+        result += "Speed = " + speed + "\n";  
+        result += "totalPower = " + totalPower + "\n"; 
+        result += "rules:\n";
+        for (BehaviourRule rule : rules) {
+            result += "\t" + rule.toString() + "\n";
+        }
+        result += botStateAsString();
+        return result;
     }
     
-    public void compareAndAdjustConditions(Bot other) {
-        // compare the fight condition
+    public String botStateAsString() {
+        String result = "Current state of " + name + ":\n";
+        result += "\tposition = " + currentPosition + "\thealth = " + currentHealth + "\n";
+        result += "\tmove = " + currentMove.toString() + "\tattack = " + currentAttack.toString() + "\n";
+        return result;
+    }
+
+//     public void setPosition(double position) {
+//         currentPosition = position;
+//     }
+
+    public void moveBot(Bot other) {
+        // check the orientation of the other bot
+        boolean otherIsRight = (other.currentPosition - this.currentPosition) > 0;
+        
+    }
+    
+    public void compareStrengthConditions(Bot other) {
         double strengthDifference = this.totalPower - other.totalPower;
         if (strengthDifference > 15) {
-            this.strengthCondition = MUCH_STRONGER;
-            other.strengthCondition = MUCH_WEAKER;;
+            this.strengthCondition = ConditionType.MUCH_STRONGER;
+            other.strengthCondition = ConditionType.MUCH_WEAKER;;
         } else if (strengthDifference > 5) {
-            this.strengthCondition = STRONGER;
-            other.strengthCondition = WEAKER;        
+            this.strengthCondition = ConditionType.STRONGER;
+            other.strengthCondition = ConditionType.WEAKER;        
         } else if (strengthDifference < -15) {
-            this.strengthCondition = MUCH_WEAKER;
-            other.strengthCondition = MUCH_STRONGER;        
+            this.strengthCondition = ConditionType.MUCH_WEAKER;
+            other.strengthCondition = ConditionType.MUCH_STRONGER;        
+        } else if (strengthDifference < -5) {
+            this.strengthCondition = ConditionType.WEAKER;
+            other.strengthCondition = ConditionType.STRONGER;        
+        } else {
+            this.strengthCondition = ConditionType.EVEN;
+            other.strengthCondition = ConditionType.EVEN;              
         }
+    }
+    
+    public void compareRangeConditions(Bot other) {
+        double distance = java.lang.Math.abs(this.currentPosition - other.currentPosition);
+        if (distance > 5.) {
+            this.rangeCondition = ConditionType.FAR;
+            other.rangeCondition = ConditionType.FAR;
+        } else {
+            this.rangeCondition = ConditionType.NEAR;
+            other.rangeCondition = ConditionType.NEAR;
+        }
+    }
+    
+    /**
+    *   Search for a rule that is valid and adjust the move and attack of the bot.
+    *   Returns false if no valid rule was found.
+    **/    
+    public boolean determineMoveAndAttackByRules() {
+        if ( rules.isEmpty() ) {
+            return false;
+        }
+        
+        for (BehaviourRule rule : rules) {
+            if ( rule.ruleIsTrue(strengthCondition, rangeCondition) ) {
+                currentMove = rule.getMove();
+                currentAttack = rule.getAttack();
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void addRule(BehaviourRule rule) {
+        rules.add(rule);
     }
     
     private void computeTotalPower() {
@@ -63,81 +131,3 @@ public class Bot {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-/////////////// getters & setters ///////////////
-//////////// variables ///////////////    
-
-//////////// constructor ///////////////    
-//     // calculate derived attributes for fighter
-//     public void calculateFinalAttributes() {
- 
-//     }
-//     
-//     public void addRule (String c1, String c2, String lo, 
-//                          String m1, String m2, String f1, String f2) {
-//         rules.add(new BehaviourRule(c1, c2, lo, m1, m2, f1, f2));              
-//     }
-
-// /////////////// interface ///////////////
-//     public String botSummaryAsString() {
-//         String result = "";
-//         result += "Fighter " + name + "\n";
-//         result += "---------------------");
-//         result += "punchReach = " + punchReach);
-//         result += "punchPower = " + punchPower);
-//         result += "kickReach = " + kickReach);
-//         result += "kickPower = " + kickPower);
-//         
-// //         // print rules
-// //         Iterator it=rules.iterator();
-// //         while(it.hasNext()) {
-// //             BehaviourRule rule = (BehaviourRule)it.next();
-// //             rule.print();
-// //         }
-// //         
-// //         System.out.print("\n");
-//     }
-  
-//     public String getName() {
-//         return name;
-//     }
-//     public void setName(String name) {
-//         this.name = name;
-//     }
-//     
-//     public int getPunchReach() {
-//         return punchReach;
-//     } 
-//     public void setPunchReach(int reach) {
-//         this.punchReach = reach;
-//     }  
-//     
-//     public int getPunchPower() {
-//         return punchPower;
-//     }
-//     public void setPunchPower(int power) {
-//         this.punchPower = power;
-//     }
-//     
-//     public int getKickReach() {
-//         return kickReach;
-//     }
-//     public void setKickReach(int reach) {
-//         this.kickReach = reach;
-//     }
-//     
-//     public int getKickPower() {
-//         return kickPower;
-//     }
-//     public void setKickPower(int power) {
-//         this.kickPower = power;
-//     }  
