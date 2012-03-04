@@ -48,5 +48,14 @@ public class Fighter{
      {
          return behaviors;
      }
+     public int getStrengthFromList(String searchForThis)
+     {
+    	 for(Strength str:this.strengths)
+    	 {
+    		 if(str.getStrenghtName().equals(searchForThis)) 
+    			 return str.getStrenghtValue(searchForThis);
+    	 }
+    	 return 0;
+     }
 }
 

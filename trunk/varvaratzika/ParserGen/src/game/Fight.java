@@ -41,11 +41,11 @@ public class Fight {
 	public void searchIfConditionTrue(ConditionsNames conditionName)
 	{
 		switch (conditionName) {
-				case stronger		:if((left.getStrLife()-right.getStrLife())>30){left.addCurrentConditions("stronger");right.addCurrentConditions("weaker");};break;
-				case weaker		    :if((left.getStrLife()-right.getStrLife()<-10) && (left.getStrLife()-right.getStrLife()>-40)){left.addCurrentConditions("weaker");right.addCurrentConditions("stronger");};break;
-				case much_stronger  :if(left.getStrLife()-right.getStrLife()>40){left.addCurrentConditions("much_stronger");right.addCurrentConditions("much_weaker");};break;
-				case much_weaker	:if(left.getStrLife()-right.getStrLife()<-40){left.addCurrentConditions("much_weaker");right.addCurrentConditions("much_stronger");};break;
-				case even			:if(left.getStrLife()-right.getStrLife()==0){left.addCurrentConditions("even");right.addCurrentConditions("even");};break;
+				case stronger		:if((left.getLife()-right.getLife())>30){left.addCurrentConditions("stronger");right.addCurrentConditions("weaker");};break;
+				case weaker		    :if((left.getLife()-right.getLife()<-10) && (left.getLife()-right.getLife()>-40)){left.addCurrentConditions("weaker");right.addCurrentConditions("stronger");};break;
+				case much_stronger  :if(left.getLife()-right.getLife()>40){left.addCurrentConditions("much_stronger");right.addCurrentConditions("much_weaker");};break;
+				case much_weaker	:if(left.getLife()-right.getLife()<-40){left.addCurrentConditions("much_weaker");right.addCurrentConditions("much_stronger");};break;
+				case even			:if(left.getLife()-right.getLife()==0){left.addCurrentConditions("even");right.addCurrentConditions("even");};break;
 				case near			:if(left.getLocationX()-right.getLocationX()<5){left.addCurrentConditions("near");right.addCurrentConditions("near");};break;
 				case far			:if(left.getLocationX()-right.getLocationX()>5){left.addCurrentConditions("far");right.addCurrentConditions("far");};break;
 				default				:left.addCurrentConditions("always");right.addCurrentConditions("always");break;
