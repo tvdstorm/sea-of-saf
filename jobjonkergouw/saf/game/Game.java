@@ -11,6 +11,8 @@ public class Game {
     private double bot2Position;
     
     private void runTimeStep() {
+        bot1.compareStrenghtConditions(bot2);
+        bot1.compareRangeConditions(bot2);
         BotCondition bc1 = new BotCondition(bot1, bot2, bot1Position, bot2Position)
         bot1.chooseBehaviour();
         bot2.chooseBehaviour();
@@ -21,6 +23,6 @@ public class Game {
     
 }
 
-private class Configuration {
-    
-}
+// private class Configuration {
+//     
+// }
