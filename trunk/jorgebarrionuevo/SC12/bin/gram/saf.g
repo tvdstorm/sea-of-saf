@@ -46,31 +46,21 @@ characteristic returns[Characteristic c]
   CHARACTERISTIC EQ DIGIT {$c = new Characteristic($CHARACTERISTIC.getText(),Integer.parseInt($DIGIT.getText()));}
   ;
 
-//behaviour returns[Behaviour b]
-//  :
-//  CONDITION_TYPE
-//    L_BRACKET MOVE_ACTION FIGHT_ACTION R_BRACKET
-//        { 
-//          $b = new Behaviour(new ConditionType($CONDITION_TYPE.getText()), new MoveAction($MOVE_ACTION.getText()), new FightAction($FIGHT_ACTION.getText()));
-//        }
-//  ;
-
 behaviour returns[Behaviour beha]
   :
   condi=condition
   { 
-   $beha = new Behaviour($condi.ct, $condi.ma , $condi.fa);
+
+   $beha = new Behaviour($condi.ct,$condi.action.get(0), $condi.action.get(1));
   }
   ;
 
-condition returns [ConditionType ct, MoveAction ma, FightAction fa, ChooseAction ca]
+condition returns [ConditionType ct, ArrayList<Action> action]@init{$action = new ArrayList<Action>();}
   :
   c=conditionType L_BRACKET  a=action R_BRACKET
   {
     $ct=$c.condType;
-    $ma=$a.m;
-    $fa=$a.f;
-    $ca=$a.c;  
+    $action=$a.action;
   }
   ;
 
@@ -83,29 +73,55 @@ conditionType returns [ConditionType condType]
   }
   ;
 
-action returns [MoveAction m, FightAction f, ChooseAction c]
+action returns [ArrayList<Action> action]@init{$action = new ArrayList<Action>();}
   :
-  mac=moveAction fac=fightAction | 
-  cho=chooseAction cho=chooseAction | 
-  mac=moveAction cho=chooseAction | 
-  cho=chooseAction fac=fightAction 
-  
-  {
-    $m=$mac.mova;
-    $f=$fac.figa;
-    $c=$cho.chm;
-  }
+  mac=moveAction fac=fightAction 
+  {$action.add($mac.mova);$action.add($fac.figa);} | 
+  cho1=chooseAction cho2=chooseAction {$action.add($cho1.cha);$action.add($cho2.cha);} | 
+  mac=moveAction cho2=chooseAction {$action.add($mac.mova);$action.add($cho2.cha);} | 
+  cho=chooseAction fac=fightAction {$action.add($cho1.cha);$action.add($fac.figa);}  
   ;
-chooseAction returns[ChooseAction chm, ChooseAction chf]
+  
+chooseAction returns[ChooseAction cha]
   :
-  CHOOSE L_PAR (ma1=moveAction ma2=moveAction  |  fa1=fightAction fa2=fightAction ) R_PAR 
+  CHOOSE L_PAR ap=actionPair R_PAR  
   {
-   $chm = new ChooseAction(ma1.mova, ma2.mova);
-   $chf = new ChooseAction(fa1.figa, fa2.figa);
+   $cha = new ChooseAction(ap.actionPair);
   }
   ;
   
-moveAction returns[MoveAction mova] @init{$mova = new MoveAction();}
+actionPair returns [ArrayList<Action> actionPair] @init{$actionPair = new ArrayList<Action>();}
+  :
+  (movepair=moveActionPair  |  fightpair=fightActionPair)
+  {
+   if (! movepair.actionList.isEmpty()){
+    $actionPair.addAll(movepair.actionList);
+   }
+   else{
+    $actionPair.addAll(fightpair.actionList);
+   }
+  }
+  ; 
+  
+moveActionPair returns [ArrayList<Action> actionList] @init{$actionList = new ArrayList<Action>();}
+  :
+  ma1=moveAction ma2=moveAction 
+  {
+   $actionList.add(ma1.mova);
+   $actionList.add(ma2.mova);
+  }
+  ;
+
+fightActionPair returns [ArrayList<Action> actionList] @init{$actionList = new ArrayList<Action>();}
+  :
+  fa1=fightAction fa2=fightAction 
+  {
+   $actionList.add(fa1.figa);
+   $actionList.add(fa2.figa);
+  }
+  ;
+  
+moveAction returns[MoveAction mova] 
   :
   MOVE_ACTION
   {
@@ -113,14 +129,13 @@ moveAction returns[MoveAction mova] @init{$mova = new MoveAction();}
   }
   ;
 
-fightAction returns[FightAction figa]
+fightAction returns[FightAction figa] 
   :
   FIGHT_ACTION
   {
     $figa = new FightAction($FIGHT_ACTION.getText());
   }
   ;
-
 
 ID : ('A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9'| '_')*;
 CHARACTERISTIC: ('punchReach' | 'punchPower' | 'kickReach' | 'kickPower');
