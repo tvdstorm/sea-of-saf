@@ -4,3 +4,9 @@ defined anyway.
 
 - Why do I have operatorws as objects in my AST? Is it better fit for the job then the
 Composite Pattern?
+
+- Okay, so I decided to implement the checker as a visitor. The thing that bothers me is
+that I'm obstructed in using Throwable's, since the Visitor interface doens't describe them.
+Now one can argue that if the Checker finds an inconsistency, it is normal behavior to report
+it. One should use exception handling when the code is intermingled with the normal AST
+constructing code, then it is exceptional behavior.
