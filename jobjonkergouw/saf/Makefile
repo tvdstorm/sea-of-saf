@@ -6,8 +6,7 @@
 CC = javac
 FLAGS = -1.6 -classpath /user/jjonkerg/sc/jobjonkergouw/svn/jobjonkergouw/:/user/jjonkerg/sc/antlrworks-1.4.3.jar:.
 
-
-main : astclasses Main.class 
+main : astnodesclasses astclasses Main.class 
 
 Main.class : Main.java syntax/SAFParser.class syntax/SAFLexer.java	
 	$(CC) $(FLAGS) Main.java 
@@ -24,13 +23,25 @@ syntax/SAFParser.java : syntax/SAF.g
 syntax/SSAF.g : 
 
 # ast sources
-astclasses : astnodesclasses ast/Visitor.class ast/Validator.class
+astclasses : gameClasses \
+			 game/EnumTypes.class  \
+			 ast/Visitor.class ast/Validator.class ast/BotCompiler.class
 
 ast/Visitor.class : ast/Visitor.java
 	$(CC) $(FLAGS) ast/Visitor.java 
 	
 ast/Validator.class : ast/Validator.java
-	$(CC) $(FLAGS) ast/Validator.java 
+	$(CC) $(FLAGS) ast/Validator.java
+	
+ast/BotCompiler.class : ast/BotCompiler.java
+	$(CC) $(FLAGS) ast/BotCompiler.java 	
+	
+game/EnumTypes.class : game/EnumTypes.java
+	$(CC) $(FLAGS) game/EnumTypes.java
+
+gameClasses : game/BehaviourRule.java game/Bot.java game/Game.java
+	$(CC) $(FLAGS) game/BehaviourRule.java game/Bot.java game/Game.java
+	
 
 # ast node sources
 

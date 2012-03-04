@@ -9,6 +9,6 @@ public class Move extends Action {
     
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }    
+    }     
 }
 
