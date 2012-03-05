@@ -2,9 +2,10 @@ package safcr.ast;
 
 public class Rule implements Node{
 	private final Node condition;
-	private final Node action;
+	private final Action action;
 	
-	public Rule(Node ruleCondition, Node ruleAction){
+	public Rule(Node ruleCondition, Action ruleAction){
+		super();
 		condition = ruleCondition;
 		action = ruleAction;
 	}
@@ -13,17 +14,12 @@ public class Rule implements Node{
 		return condition;
 	}
 	
-	public Node getAction(){
+	public Action getAction(){
 		return action;
 	}
 	
 	@Override
-	public void addNode(Node actionType) {}
-
-	@Override
 	public void accept(VisitorInterface v) {
-		v.visit(this);
-		condition.accept(v);
-		action.accept(v);
+		v.visit(this);	
 	}
 }

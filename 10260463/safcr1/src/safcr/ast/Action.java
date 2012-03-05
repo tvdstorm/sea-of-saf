@@ -1,30 +1,27 @@
 package safcr.ast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Action implements Node{
-	private final List<Node> types;
+	private Node actionType1;
+	private Node actionType2;
 	
 	public Action(Node actionType){
-		types = new ArrayList<Node>();
-		types.add(actionType);
+		actionType1 = actionType;;
 	}
 	
-	public List<Node> getTypes(){
-		return types;
+	public void addActionType2(Node n){
+		actionType2 = n;
 	}
 	
-	@Override
-	public void addNode(Node actionType) {
-		types.add(actionType);
+	public Node getAction1(){
+		return actionType1;
 	}
-
+	
+	public Node getAction2(){
+		return actionType2;
+	}
+	
 	@Override
 	public void accept(VisitorInterface v) {
-		v.visit(this);
-		for(Node type : types){
-			type.accept(v);
-		}
+		v.visit(this);	
 	}
 }

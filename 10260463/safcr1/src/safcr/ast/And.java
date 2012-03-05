@@ -1,34 +1,24 @@
 package safcr.ast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class And implements Node{
-	private final List<Node> nodes;
+	private Node node1;
+	private Node node2;
 	
 	public And(Node n1, Node n2){
-		nodes = new ArrayList<Node>();
-		nodes.add(n1);
-		nodes.add(n2);
+		node1 = n1;
+		node2 = n2;
 	}
 	
-	public List<Node> getAndNodes(){
-		return nodes;
+	public Node getNode1(){
+		return node1;
 	}
 	
-	@Override
-	public void addNode(Node n) {}
-
+	public Node getNode2(){
+		return node2;
+	}
+	
 	@Override
 	public void accept(VisitorInterface v) {
-		v.visit(this);
-		for(Node n : nodes){
-			n.accept(v);
-		}
-	}
-	
-	@Override
-	public String toString(){
-		return null;
+		v.visit(this);	
 	}
 }

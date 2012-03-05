@@ -1,6 +1,5 @@
 package safcr.display;
 
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.util.HashMap;
@@ -10,6 +9,13 @@ import javax.swing.ImageIcon;
 public class BotChar {
 	private int x;
 	private int y;
+	private String currentImage;
+	private int speed;
+	private int strenghtSum;
+	private String strenghtCondition;
+	private int hp = 100;
+	private Boolean jumped = false;
+	
 	private String resourcePath = System.getProperty("user.dir") + "\\resources\\";
 	private Map<String,Image> images;
 	private String imageExt = ".png";
@@ -35,14 +41,30 @@ public class BotChar {
 
 			if(mt.checkID(i)) images.put(s, img);
 		}
+		
 	}
 	
-	public Image getImage(String s){
-		return images.get(s);
+	public Map<String,Image> getImages(){
+		return images;
 	}
 	
-	public void move(int x, int y){
+	public void setImages(Map<String,Image> imgs){
+		images = imgs;
+	}
+	
+	public void setCurrentImage(String img){
+		currentImage = img;
+	}
+	
+	public Image getImage(){
+		return images.get(currentImage);
+	}
+	
+	public void setX(int x){
 		this.x = x;
+	}
+	
+	public void setY(int y){
 		this.y = y;
 	}
 	
@@ -53,4 +75,47 @@ public class BotChar {
 	public int getY(){
 		return y;
 	}
+	
+	public void jump(){
+		y -= 50;
+		jumped = true;
+	}
+	
+	public void fall(){
+		y += 50;
+		jumped = false;
+	}
+	
+	public void setSpeed(int sp){
+		speed = sp;
+	}
+	
+	public void setStrenght(int s){
+		strenghtSum = s;
+	}
+	
+	public int getStrenght(){
+		return strenghtSum;
+	}
+	
+	public void setStrenghtCondition(String sc){
+		strenghtCondition = sc;
+	}
+	
+	public String getCondition(){
+		return strenghtCondition;
+	}
+	
+	public int getHp(){
+		return hp;
+	}
+	
+	public Boolean isJumped(){
+		return jumped;
+	}
+	
+	public int getSpeed(){
+		return speed;
+	}
+	
 }

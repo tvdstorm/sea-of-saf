@@ -1,29 +1,31 @@
 package safcr.ast;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Saf implements Node{
-	private final List<Node> bots;
+	private final Map<String,Bot> bots;
 	
 	public Saf(){
-		bots = new ArrayList<Node>();
+		super();
+		bots = new HashMap<String,Bot>();
 	}
 	
-	public List<Node> getBots(){
-		return bots;
+	public void addBot(Bot b){
+		bots.put(b.getName(), b);
 	}
 	
-	@Override
-	public void addNode(Node n) {
-		bots.add(n);
+	public Collection<Bot> getBots(){
+		return bots.values();
 	}
 	
+	public Bot getBot(String name){
+		return bots.get(name);
+	}
+
 	@Override
 	public void accept(VisitorInterface v) {
-		v.visit(this);
-		for(Node b : bots){
-			b.accept(v);
-		}
+		v.visit(this);	
 	}
 }

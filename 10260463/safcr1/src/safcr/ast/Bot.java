@@ -1,27 +1,41 @@
 package safcr.ast;
 
+import java.util.List;
+
 public class Bot implements Node{
 	private final String name;
-	private final Node personality;
-	private final Node behaviour;
+	private final Personality personality;
+	private final Behaviour behaviour;
 	
-	public Bot(String botName, Node botPersonality, Node botBehaviour){
+	public Bot(String botName, Personality botPersonality, Behaviour botBehaviour){
+		super();
 		name = botName;
 		personality = botPersonality;
 		behaviour = botBehaviour;
 	}
 	
-	@Override
-	public void addNode(Node n){}
-	
 	public String getName(){
 		return name;
 	}
 	
+	public Personality getPersonality(){
+		return personality;
+	}
+	
+	public Behaviour getBehaviour(){
+		return behaviour;
+	}
+	
+	public List<Characteristic> getCharacteristic(){
+		return personality.getCharacteristic();
+	}
+	
+	public List<Rule> getRules(){
+		return behaviour.getRules();
+	}
+	
 	@Override
 	public void accept(VisitorInterface v) {
-		v.visit(this);
-		personality.accept(v);
-		behaviour.accept(v);
+		v.visit(this);	
 	}
 }

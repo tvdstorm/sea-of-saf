@@ -12,10 +12,7 @@ public class ActionType implements Node{
 	}
 	
 	@Override
-	public void addNode(Node n) { }
-
-	@Override
 	public void accept(VisitorInterface v) {
-		v.visit(this);
+		v.visit(this);	
 	}
 }

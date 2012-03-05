@@ -17,44 +17,49 @@ import safcr.ast.*;
 package safcr.parser;
 }
 
-saf returns [Node n]
-    :   {$n = new Saf();}
-        (b=bot {$n.addNode($b.n);})* EOF 
+saf returns [Saf s]
+    :   {$s = new Saf();}
+        (b=bot {$s.addBot($b.bot);})* EOF 
     ;
 
-bot returns [Node n]
+bot returns [Bot bot]
     :   i=ID
         '{'
         p=personality
         b=behaviour 
         '}'
-        {$n = new Bot($i.text, $p.n, $b.n);}
+        {$bot = new Bot($i.text, $p.p, $b.b);}
     ;
     
-personality returns [Node n]
-    :   {$n = new Personality();}
-        (c=characteristic {$n.addNode($c.n);})* 
-        {$n.addNode(null);}
+personality returns [Personality p]
+    :   {$p = new Personality();}
+        (c=characteristic {$p.addCharacteristic($c.c);})* 
     ;
 
-characteristic returns [Node n]
-    :   i=ID '=' t=INT {$n = new Characteristic($i.text,Integer.parseInt($t.text));}
+characteristic returns [Characteristic c]
+    :   i=ID '=' t=INT {$c = new Characteristic($i.text,Integer.parseInt($t.text));}
     ;
     
-behaviour returns [Node n]
-    :   {$n = new Behaviour();}
-        (s=rule {$n.addNode($s.n);})*
+behaviour returns [Behaviour b]
+    :   {$b = new Behaviour();}
+        (r=rule {$b.addRule($r.r);})*
     ;
 
-rule returns [Node n]
-    :   c=statement a=action {$n = new Rule($c.n,$a.n);}
+rule returns [Rule r]
+    :   c=statement a=action {$r = new Rule($c.n,$a.a);}
     ;
 
-action returns [Node n]
+action returns [Action a]
     :   '[' 
-        a1=action_type {$n = new Action($a1.n);}
-        (a2=action_type {$n.addNode(a2);})? 
+        a1=action_type {$a = new Action($a1.n);}
+        (a2=action_type {$a.addActionType2(a2);})? 
         ']'
+    ;
+    
+action_type returns [Node n]
+    :   
+    i=ID {$n = new ActionType($i.text);}
+    |   (CHOOSE '(' i1=ID  i2=ID ')') {$n = new MultiActionType($i1.text,$i2.text);}
     ;
     
 statement returns [Node n]
@@ -74,11 +79,6 @@ and_statement returns [Node n]
 condition returns [Node n]
     :   i=ID {$n = new Condition($i.text);}
     |   '(' s=statement ')'{$n = $s.n;}
-    ;
-
-action_type returns [Node n]
-    :   i=ID {$n = new ActionType($i.text);}
-    |   (CHOOSE '(' i1=ID  i2=ID ')') {$n = new MultiActionType($i1.text,$i2.text);}
     ;
 
 // General tokens

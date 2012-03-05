@@ -1,18 +1,17 @@
 package safcr.display;
 
 import java.awt.Dimension;
-import java.awt.MediaTracker;
-import java.awt.Image;
-
 import javax.swing.JFrame;
 
-public class Saf extends JFrame {
+public class SafDisplay extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private String title = "Super Awesome Fighter";
-	private Dimension windowSize = new Dimension(1280,720);
-	private BotChar bot;
+	private Dimension windowSize = new Dimension(1000,600);
+	private Board b;
 	
-	public Saf(){
-		add(new Board());
+	public SafDisplay(){
+		b = new Board();
+		add(b);
 		setTitle(title);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(windowSize);
@@ -21,7 +20,8 @@ public class Saf extends JFrame {
         setResizable(false);
     }
 	
-    public static void main(String[] args) {
-        new Saf();
-    }
+	public Board getBoard(){
+		return b;
+	}
+	
 }
