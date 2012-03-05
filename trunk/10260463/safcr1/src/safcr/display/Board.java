@@ -21,7 +21,7 @@ public class Board extends JPanel{
 	
 	public Board(){
         mt = new MediaTracker(this);
-        bg = new ImageIcon(resourcePath + "bg3.gif").getImage();
+        bg = new ImageIcon(resourcePath + "bg1.gif").getImage();
         createBots();
 	}
 	

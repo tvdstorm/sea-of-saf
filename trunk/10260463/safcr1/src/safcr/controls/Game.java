@@ -72,17 +72,11 @@ public class Game implements Runnable{
 	@Override
 	public void run() {
 		while (!stopMe) {
-			
-			if(bot1.getHp() < 1 || bot2.getHp() < 1){
-				stopMe = true;
-				break;
-			}
 			botUpdates(b1,bot1,bot2);
 			botUpdates(b2,bot2,bot1);
 
 			disp.getBoard().reloadDisplay();			
         }
-		
 	}
 	
 	public void botUpdates(Bot b, BotChar bota, BotChar botb){
