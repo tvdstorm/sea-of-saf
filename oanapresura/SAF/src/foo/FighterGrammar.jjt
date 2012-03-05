@@ -1,153 +1,0 @@
-/**
- * JJTree template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
- */options{  JDK_VERSION = "1.5";  static = true;}PARSER_BEGIN(FighterGrammar)
-package foo;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
-public class FighterGrammar{  public static void main(String args [])  {    try{
-		String file = "input.txt";
-		InputStream input = new FileInputStream("input.txt");
-		System.out.println("Parsing from file ... ");	
-		FighterGrammar parser = new FighterGrammar(input);
-		SAF saf = parser.Parse();		   
-		System.out.print("All good!");
-    }
-	catch(Exception e)
-	{
-		System.out.println("Oops! ");
-		System.out.println(e.getMessage());
-		e.printStackTrace();
-	}  }}PARSER_END(FighterGrammar)SKIP :
-{
-  " "
-| "\t"
-| "\n"
-| "\r"
-| < "//" (~[ "\n", "\r" ])*
-    (
-      "\n"
-    | "\r"
-    | "\r\n"
-    ) >
-| < "/*" (~[ "*" ])* "*"
-    (
-      ~[ "/" ] (~[ "*" ])* "*"
-    )*
-    "/" >
-}
-
-
-TOKEN : /* Values for player strength */
-{
-	<STRENGTH_VALUE: ( ["1"-"9"] | "10")> 
-}
-
-TOKEN : /* Operators */
-{
-	<AND: "AND" | "and"> |
-	<OR: "OR" | "or"> |
-	<CHOOSE: "choose"> |
-	<ASSIGN: "=">
-}
-
-TOKEN : /* Types of paranthesis used */
-{
-	<LSQBRACKET: "["> | 
-	<RSQBRACKET: "]"> |
-	<LBRACE: "{"> | 
-	<RBRACE: "}"> |
-	<LBRACKET: "(" > |
-	<RBRACKET: ")">		
-}
-
-TOKEN : 
-{	
-	< MOVE: "jump" | "crouch" | "stand" | "runTowards" | "runAway" | "walkTowards" | "walkAway" > 	|
-	< STRENGTH: "punchReach" | "kickReach" | "kickPower" | "punchPower" > |
-	< ATTACK: "punchLow" | "punchHigh" | "kickLow" | "kickHigh" | "blockLow" | "blockHigh" > |
-	< CONDITION: "stronger" | "weaker" | "muchStronger" | "muchWeaker" | "even" | "near" | "far" | "always" >
-}
-
-TOKEN :
-{
-	<NAME: ["a"-"z","A"-"Z","_"] ( ["a"-"z","A"-"Z","_","0"-"9"] )* > 
-}
-
-/** Root production. */
-
-SAF Parse() :
-{
- 	 	
-	Bot bot1 = getBot();
-	Bot bot2 = getBot();	
-}
-{  	
-	(	  <EOF>
-	)
-	{	  		SAF saf = new SAF();
-		saf.setBot1(bot1);
-		saf.setBot2(bot2);
-		return saf;
-	} 	
-}	
-Bot getBot():
-{	Token name = new Token();
-	Personality p = new Personality();
-	Behaviour b = new Behaviour();
-	Strength s = new Strength();
-	BehaviourItem i = new BehaviourItem();
-	Bot bot = new Bot();
-}
-{
-	(		name = < NAME >
-		{
-		  bot.setName(name.toString());	  		}
-		
-		<LBRACE>
-		
-		(
-		  LOOKAHEAD(2)
-		  ( s = Strength() )
-		  {
-		    p.addStrength(s);		  }
-		  ( i = BehaviourItem() )
-		  {
-		    b.addCondition(i);		  }
-		    
-		)*	
-		
-		<RBRACE>
-	
-		{
-		  bot.setBehaviour(b);
-		  bot.setPersonality(p);		}
-	)*	
-	{	  return bot;
-	}
-} 
-
-
-Strength Strength() :
-{
-	Token strength = new Token();
-	Token value = new Token();
-	
-}
-{
-	 (strength = <STRENGTH>) <ASSIGN> (value = <STRENGTH_VALUE>)
-	 {
-		return new Strength(strength.toString(), Integer.valueOf(value.toString()));   	 }
-}
-
-BehaviourItem BehaviourItem() :
-{	Token condition = new Token();
-	Token move = new Token();
-	Token attack = new Token();	
-}
-{	(condition = <CONDITION>) <LSQBRACKET> (move = <MOVE>) (attack = <ATTACK>) <RSQBRACKET>
-	{			 		return new BehaviourItem(condition.toString(), move.toString(), attack.toString()); 
-	}
-}
-
-
