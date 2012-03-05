@@ -11,7 +11,7 @@ import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
  * @author dblommesteijn
  * @since 21 Feb, 2012
  */
-public class ActiveFighter
+public class ActiveFighter implements Iterable<Task>
 {
 	private Fighter _fighter = null;
 	private List<Task> _actions = null;
@@ -44,21 +44,6 @@ public class ActiveFighter
 	{
 		return _iterator.next();
 	}
-
-//	public Task next()
-//	{
-//		if(_iterator == null)
-//			_iterator = _actions.iterator();
-//		
-//		if(_iterator.hasNext())
-//			return _iterator.next();
-//		else
-//		{
-//			_iterator = null;
-//			return this.next();
-//		}
-//	}
-
 
 	public void add(Task task)
 	{
@@ -99,6 +84,11 @@ public class ActiveFighter
 	public void setHealth(int health)
 	{
 		_health = health;
+	}
+
+	public Iterator<Task> iterator()
+	{
+		return _iterator;
 	}
 
 }

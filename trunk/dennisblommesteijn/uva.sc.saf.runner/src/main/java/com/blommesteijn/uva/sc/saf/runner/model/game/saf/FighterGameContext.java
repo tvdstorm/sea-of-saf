@@ -9,11 +9,13 @@ import java.util.List;
 import com.blommesteijn.uva.sc.saf.ast.types.Behaviour;
 import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
 import com.blommesteijn.uva.sc.saf.ast.types.Condition;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
 import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
 import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IDraw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IGame;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IGameContext;
+import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.ActiveFighterDraw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.Arena;
 import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.Task;
 import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.ActiveFighter;
@@ -29,6 +31,7 @@ public class FighterGameContext implements IGameContext
 	private Fighter _fighter = null;
 	private ActiveFighter _activeFighter = null;
 	private Arena _arena = null;
+	private Behaviour _behaviour = null;
 	
 
 	/**
@@ -100,41 +103,58 @@ public class FighterGameContext implements IGameContext
 			Task task = _activeFighter.next();
 			
 			//collect arena properties
-			List<Condition> tmp = new LinkedList<Condition>();
+			List<Condition> currentState = new LinkedList<Condition>();
 			if(_arena.isFar(_fighter))
-				tmp.add(new Condition(0, ECondition.FAR.getIdent()));
+				currentState.add(new Condition(0, ECondition.FAR.getIdent()));
 			else if(_arena.isNear(_fighter))
-				tmp.add(new Condition(0, ECondition.NEAR.getIdent()));
+				currentState.add(new Condition(0, ECondition.NEAR.getIdent()));
 			
 			if(_arena.isStronger(_fighter))
-				tmp.add(new Condition(0, ECondition.STRONGER.getIdent()));
+				currentState.add(new Condition(0, ECondition.STRONGER.getIdent()));
 			else if(_arena.isWeaker(_fighter))
-				tmp.add(new Condition(0, ECondition.WEAKER.getIdent()));
+				currentState.add(new Condition(0, ECondition.WEAKER.getIdent()));
 			else if(_arena.areEven())
-				tmp.add(new Condition(0, ECondition.EVEN.getIdent()));
+				currentState.add(new Condition(0, ECondition.EVEN.getIdent()));
 			
 			if(_arena.isMuchStronger(_fighter))
-				tmp.add(new Condition(0, ECondition.MUCH_STRONGER.getIdent()));
+				currentState.add(new Condition(0, ECondition.MUCH_STRONGER.getIdent()));
 			if(_arena.isMuchWeaker(_fighter))
-				tmp.add(new Condition(0, ECondition.MUCH_WEAKER.getIdent()));
+				currentState.add(new Condition(0, ECondition.MUCH_WEAKER.getIdent()));
 			
 			
 			//skip task if it cannot be performed
-			Behaviour behaviour = task.getNextBehaviour(tmp);
-			if(behaviour == null)
+			_behaviour  = task.getNextBehaviour(currentState);
+			if(_behaviour == null)
 				continue;
 			
-			//TODO: run behaviour
+			System.out.println(_fighter.getIdent() + _behaviour);
+			
+			
 		}
 
 		
 	}
+	
+	
+	
+	
 
 	/* (non-Javadoc)
 	 * @see com.blommesteijn.uva.sc.saf.runner.model.game.interfaces.IGameContext#draw()
 	 */
 	public void draw(IDraw draw)
 	{
+		
+		
+//		String positionCache = String.valueOf(_activeFighter.getPosition());
+//		
+//		draw.printAll('1');
+		
+		String[] drawing = ActiveFighterDraw.getAttack(EAttack.KICK_HIGH, true);
+//		System.out.println(drawing);
+		draw.printFighter(drawing, _activeFighter.getPosition());
+//		draw.printFighter(ActiveFighterDraw.getAttack(null, true), _activeFighter.getPosition());
+		
 		
 	}
 
