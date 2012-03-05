@@ -4,18 +4,18 @@
 package grammar;
 import ast.*;
 import interpreter.*;
-
+import constants.*;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-public class FighterGrammar{  public static void main(String args [])  {    try{
+public class FighterGrammar implements CorrectValues{  public static void main(String args [])  {    try{
 		String file = "input.txt";
 		InputStream input = new FileInputStream("input.txt");
 		System.out.println("[Parser]Parsing from file ... ");	
 		FighterGrammar parser = new FighterGrammar(input);
 		SAF saf = parser.Parse();					
-		Interpreter i = new Interpreter(saf.firstBot, saf.secondBot);
+		Interpreter i = new Interpreter(saf.getBot1(), saf.getBot2());
 		boolean result = i.interpret();
 		
 		if (result == true)
@@ -92,11 +92,11 @@ SAF Parse() :
 	} 	
 }	
 Bot getBot():
-{	Token name = new Token();
+{
+  	BehaviourItem i;	Token name = new Token();
 	Personality p = new Personality();
 	Behaviour b = new Behaviour();
-	Strength s = new Strength();
-	BehaviourItem i = new BehaviourItem();
+	Strength s = new Strength();	
 	Bot bot = new Bot();
 }
 {
@@ -138,30 +138,30 @@ Strength Strength() :
 }
 {
 	 (strength = <IDENTIFIER>) <ASSIGN> (value = <VALUE>)
-	 {
-	 	/*System.out.println(strength + " " + value);*/	 	
+	 {	 		 	
 		return new Strength(strength.toString(), Integer.valueOf(value.toString()));   	 }
 }
 
 BehaviourItem BehaviourItem() :
-{	Condition condition = new Condition();	
-	Move move = new Move();
-	Attack attack = new Attack();	
+{	Condition condition = new Condition();		
+	Action action1;
+	Action action2;
 }
 {	 
 	 ( 
 	 	 Condition(condition)
 		 <LSQBRACKET>
 		  (
-		  	  Move(move)						  
-			  Attack(attack)			  
+		  	  action1 = Action()						  
+			  action2 = Action()			  
 		  )  
 		 <RSQBRACKET>
 	 )
-	 {			 
-	 	/*move.printMove();
-	 	attack.printAttack();*/
-		return new BehaviourItem(condition, move, attack); 
+	 {
+	    	 
+	 	action1.setFlag(CorrectValues.MOVE_TYPE);
+	 	action2.setFlag(CorrectValues.ATTACK_TYPE);
+		return new BehaviourItem(condition, action1, action2); 
 	 }
 }
 
@@ -173,81 +173,51 @@ void Condition(Condition c) :
 	(condition = <IDENTIFIER>)
 	{
 		c.setCondition(condition.toString());
-		/*System.out.println("Cond: " + condition.toString());*/
+		
 	}
 }
 
-void Move(Move m) : 
-{
-	Token move = new Token();
-	Token move1 = new Token();
-	Token move2 = new Token();
-	boolean choice;			
-}
-{
 
-	(
+Action Action() :
+{
+  	Action a;  	
+  	Token action = new Token();
+	Token action1 = new Token();
+	Token action2 = new Token();	
+	boolean choice;}
+{	(
 		LOOKAHEAD(2)
 		(
 			<CHOOSE> 
 			<LBRACKET> 
-				(move1 = <IDENTIFIER>) (move2 = <IDENTIFIER>)
+				(action1 = <IDENTIFIER>) (action2 = <IDENTIFIER>)
 			<RBRACKET>
 		)
-		{			
-  			/*m.setMoveChoices(move1.toString(),move2.toString());
-  			System.out.println("setting: " + move1.toString() + " " + move2.toString());
-  			System.out.println("after setting: " + m.choice1 + " " + m.choice2);*/
+		{			  			
   			choice = true;  			
 		}
 		|
 		(			 
-			move = <IDENTIFIER>		
+			action = <IDENTIFIER>		
 		)
 		{
-			/*m.setMove(move.toString());
-			System.out.println("setting: " + move.toString());  		
-			System.out.println("after setting: " + m.type);*/			
+					
 			choice = false;
 		}
 	 
 	)	
 	{
-		if (choice)
-			m.setMoveChoices(move1.toString(),move2.toString());
-		else
-			m.setMove(move.toString());	
-	}  
+			 
+		if (choice)		{		  		
+			a = new Action(action1.toString(),action2.toString());
+			/* System.out.println(action1.toString() + " " + action2.toString()); */
+		}		  		
+		else		{		  
+			a = new Action(action.toString());
+			/* System.out.println(action.toString()); */
+		}	
+		return a;			 	
+	}
 }
 
 
-void Attack(Attack a) :
-{
-	Token attack = new Token();
-	Token attack1 = new Token();
-	Token attack2 = new Token();		
-}
-{
-	(
-		LOOKAHEAD(2)
-		(
-			<CHOOSE> 
-			<LBRACKET> 
-				(attack1 = <IDENTIFIER>) (attack2 = <IDENTIFIER>)
-			<RBRACKET>
-		)  
-		{			
-  			a.setAttackChoices(attack1.toString(),attack2.toString());
-  			/*System.out.println("setting: " +  attack1.toString() + " " + attack2.toString());*/  			
-		}
-		|
-		(			 
-			attack = <IDENTIFIER>		
-		)	
-		{
-			a.setAttack(attack.toString());
-			/*System.out.println("setting: " + attack.toString());*/  		
-		}
-	)		
-	
-}

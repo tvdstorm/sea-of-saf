@@ -2,8 +2,8 @@ package ast;
 
 public class SAF {
 
-	public Bot firstBot;
-	public Bot secondBot;
+	private Bot firstBot;
+	private Bot secondBot;
 	
 	public SAF(){
 		this.firstBot = new Bot();

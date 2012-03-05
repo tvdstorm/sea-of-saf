@@ -1,9 +1,10 @@
 package ast;
 
 public class Bot {
-	public String botName;
-	public Behaviour botBehaviour;
-	public Personality botPersonality;
+	
+	private String botName;
+	private Behaviour botBehaviour;
+	private Personality botPersonality;
 	
 	
 	public void setName(String name){
@@ -13,6 +14,7 @@ public class Bot {
 	public String getName(){
 		return this.botName;
 	}
+		
 	
 	public void setBehaviour(Behaviour b){
 		this.botBehaviour = b;
