@@ -1,7 +1,6 @@
 package game;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import objects.*;
@@ -34,9 +33,7 @@ public class Fight {
 		}
 		searchFighterRules(left);
 		searchFighterRules(right);
-		//Behavior bl=new Behavior(left.chooseRandomBehavior());
-		//Behavior br=new Behavior(right.chooseRandomBehavior());
-		
+				
 }
 	public void searchIfConditionTrue(ConditionsNames conditionName)
 	{
@@ -56,12 +53,13 @@ public class Fight {
 	{
 		Fighter fighter=f.getFighter();
 		for (Behavior behavior : fighter.getBehaviors())
-		{		Condition c=behavior.getCondition();
-		List<String> list=f.getCurrentConditions();
-				if (c.eval(list))
-				{
-					f.addCurrentBehavior(behavior);
-				}
+		{
+			Condition c=behavior.getCondition();
+			List<String> list=f.getCurrentConditions();
+			if (c.eval(list))
+			{
+				f.addCurrentBehavior(behavior);
+			}
 		}				
 	}
 	

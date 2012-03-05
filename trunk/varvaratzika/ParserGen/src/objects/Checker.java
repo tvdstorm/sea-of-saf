@@ -27,7 +27,8 @@ public class Checker
 		for (Fighter fighter : this.fighters)
 		{
 			for (Behavior behavior : fighter.getBehaviors())
-			{	Condition c=behavior.getCondition();
+			{	
+				Condition c=behavior.getCondition();
 				if (c.isValid()==false)flagCondition=1;
 				Move m=behavior.getMove();
 				if(m.isValid()==false)flagMove=1;
