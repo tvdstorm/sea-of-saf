@@ -5,13 +5,7 @@ import game.Fight;
 import game.LeftFighter;
 import game.RightFighter;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.Color;
+
 import java.io.IOException;
 import javax.swing.JFrame;
 
@@ -22,14 +16,12 @@ import objects.*;
 public class Animations extends JFrame 
 {
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
 	private Fight fight;
-	private boolean isLeft;
 	private long endTime;
 		
 	public Animations(Fight f)
 	{
-		frame = new JFrame("Saf");
+		
 		fight=new Fight();
 		fight=f;
 		this.endTime = (System.currentTimeMillis() / 1000) + 10;

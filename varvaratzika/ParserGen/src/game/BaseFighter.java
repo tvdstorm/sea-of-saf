@@ -4,8 +4,6 @@ import java.util.List;
 
 import objects.Behavior;
 import objects.Fighter;
-import objects.Move;
-import objects.MovesNames;
 
 public abstract class BaseFighter {
 	

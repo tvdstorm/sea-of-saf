@@ -10,29 +10,6 @@ import java.io.InputStream;
 import java.util.List;
 
 public class SafParser implements SafParserConstants {
-  public static void main(String args []) throws ParseException
-  {
-        try
-        {
-                String path  = new java.io.File(".").getCanonicalPath();
-        String FightersFile = "fighters.txt";
-                InputStream stream = new FileInputStream(path + "/src/parser/" + FightersFile);
-                SafParser parser = new SafParser(stream);
-                System.out.println("Parsing is completed!!!!");
-        List<Fighter> f = parser.Start();
-                Checker i = new Checker(f);
-        i.CheckInputs();
-        Fight saf=new Fight(f);
-        saf.evaluateCondition();
-        Animations a=new Animations(saf);
-        a.startFight();
-        }
-        catch(Exception e)
-        {
-            System.out.println("ERROR: " + e.getMessage());
-        e.printStackTrace();
-        }
-  }
 
   static final public List<Fighter> Start() throws ParseException {
     Token fighterName  = new Token();
@@ -254,52 +231,6 @@ public class SafParser implements SafParserConstants {
     finally { jj_save(4, xla); }
   }
 
-  static private boolean jj_3R_10() {
-    if (jj_scan_token(CHOOSE)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_5() {
-    if (jj_scan_token(AND)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_2() {
-    if (jj_3R_6()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_9() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_1() {
-    if (jj_scan_token(IDENTIFIER)) return true;
-    if (jj_scan_token(ASSIGN)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_8() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_3()) {
-    jj_scanpos = xsp;
-    if (jj_3_4()) {
-    jj_scanpos = xsp;
-    if (jj_3_5()) return true;
-    }
-    }
-    return false;
-  }
-
-  static private boolean jj_3_4() {
-    if (jj_scan_token(OR)) return true;
-    if (jj_scan_token(IDENTIFIER)) return true;
-    return false;
-  }
-
   static private boolean jj_3R_6() {
     if (jj_scan_token(IDENTIFIER)) return true;
     Token xsp;
@@ -324,6 +255,52 @@ public class SafParser implements SafParserConstants {
   static private boolean jj_3_3() {
     if (jj_scan_token(OP_BRACKETS)) return true;
     if (jj_3R_7()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_10() {
+    if (jj_scan_token(CHOOSE)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_2() {
+    if (jj_3R_6()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_5() {
+    if (jj_scan_token(AND)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_9() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_1() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    if (jj_scan_token(ASSIGN)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_4() {
+    if (jj_scan_token(OR)) return true;
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_8() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_3()) {
+    jj_scanpos = xsp;
+    if (jj_3_4()) {
+    jj_scanpos = xsp;
+    if (jj_3_5()) return true;
+    }
+    }
     return false;
   }
 
@@ -630,4 +607,4 @@ public class SafParser implements SafParserConstants {
     JJCalls next;
   }
 
-}
+                       }

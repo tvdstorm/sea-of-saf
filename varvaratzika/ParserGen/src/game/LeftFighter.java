@@ -5,7 +5,6 @@ import java.util.List;
 
 import objects.AttacksNames;
 import objects.Behavior;
-import objects.ConditionsNames;
 import objects.Fighter;
 import objects.Move;
 import objects.MovesNames;
