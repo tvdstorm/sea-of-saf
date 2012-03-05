@@ -1,9 +1,9 @@
 package com.blommesteijn.uva.sc.saf.runner.model.utils;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
 import gnu.getopt.Getopt;
 import gnu.getopt.LongOpt;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
