@@ -8,8 +8,7 @@ public interface FighterGrammarTreeConstants
   public int JJTSTRENGTH = 2;
   public int JJTBEHAVIOURITEM = 3;
   public int JJTCONDITION = 4;
-  public int JJTMOVE = 5;
-  public int JJTATTACK = 6;
+  public int JJTACTION = 5;
 
 
   public String[] jjtNodeName = {
@@ -18,8 +17,7 @@ public interface FighterGrammarTreeConstants
     "Strength",
     "BehaviourItem",
     "Condition",
-    "Move",
-    "Attack",
+    "Action",
   };
 }
-/* JavaCC - OriginalChecksum=2e8dd781fa1a940ac1d019bcf4e86082 (do not edit this line) */
+/* JavaCC - OriginalChecksum=bf03044da741e1f4582132cd7c098896 (do not edit this line) */

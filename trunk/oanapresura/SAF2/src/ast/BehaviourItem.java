@@ -1,31 +1,39 @@
 package ast;
 
 public class BehaviourItem {
-	public Condition condition;
-	public Move move;
-	public Attack attack;
 	
-	public BehaviourItem(){
-		this.condition = new Condition();
-		this.move = new Move();
-		this.attack = new Attack();				
-	}
+	private Condition condition;
 	
-	public BehaviourItem(Condition condition, Move move, Attack attack){
+	private Action move;
+	private Action attack;		
+	
+	public BehaviourItem(Condition condition, Action move, Action attack){
 		this.condition = condition;
 		this.move = move;
 		this.attack = attack;				
 	}
 	
+	public Condition getCondition() {
+		return condition;
+	}
+
+	public Action getMove() {
+		return move;
+	}
+
+	public Action getAttack() {
+		return attack;
+	}
+
 	public void setCondition(Condition condition){
 		this.condition = condition;
 	}
 	
-	public void setMove(Move move){
+	public void setMove(Action move){
 		this.move = move;
 	}
 	
-	public void setAttack(Attack attack){
+	public void setAttack(Action attack){
 		this.attack = attack;
 	}
 }

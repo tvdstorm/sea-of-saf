@@ -1,45 +1,35 @@
 package interpreter;
 
-import ast.Attack;
-import ast.Behaviour;
-import ast.BehaviourItem;
-import ast.Bot;
-import ast.Condition;
-import ast.Move;
-import ast.Personality;
-import ast.Strength;
-import constants.CorrectValues;
-
+import ast.*;
 
 
 public class Interpreter{
 	
 	public Bot fighterLeft;
 	public Bot fighterRight;
-	CorrectValues cv;
+	
 	
 	public Interpreter(Bot bot1, Bot bot2){
-		
-		this.cv = new CorrectValues();
+			
 		this.fighterLeft = bot1;
 		this.fighterRight = bot2;
 	}
 	
 	public boolean interpret(){
 				
-		//return (testBot(fighterLeft) && testBot(fighterRight));		
-		return testBot(fighterLeft);
+		return (testBot(fighterLeft) && testBot(fighterRight));		
+
 	}
 	
-	public boolean testBot(Bot bot){
+	private boolean testBot(Bot bot){
 				
 		Behaviour b = bot.getBehavior();
 		Personality p = bot.getPersonality();
 				
-		for (BehaviourItem i : b.a)
+		for (BehaviourItem i : b.getBehaviourItems())
 			if (!testBehaviourItem(i,bot))
 				return false;
-		for (Strength s : p.strengths)
+		for (Strength s : p.getStrengths())
 			if (!testStrength(s,bot))
 				return false;				
 		return true;
@@ -47,13 +37,30 @@ public class Interpreter{
 	
 	private boolean testBehaviourItem(BehaviourItem i, Bot b){
 				
-		return ( testCondition(i.condition,b) && testMove(i.move,b) && testAttack(i.attack,b) );
+		return ( testCondition(i.getCondition(),b) && testAction(i.getAttack(),b) && testAction(i.getMove(),b));
+	}
+	
+	private boolean testCondition(Condition c, Bot b){
+		if (!c.isValid()){
+			System.out.println("[Interpreter]ERROR: Condition " + c.getCondition() + " inserted for " + b.getName() + " is not a valid condition!");
+			return false;
+		}
+		return true;
+	}
+	
+	private boolean testAction(Action a, Bot b){
+		
+		if (!a.isValid()){
+			System.out.println("[Interpreter]ERROR: Action " + a.getChoice().getChoiceType() + " inserted for " + b.getName() + "is not a valid action!");
+			return false;
+		}
+		return true;
 	}
 	
 	private boolean testValue(int value, Bot b){
 		
 		if (! (value >= 1 && value <= 10 )){
-			System.out.println("[Interpreter]ERROR: Value " + value + " inserted for " + b.botName + "strength should be between 1 and 10!");
+			System.out.println("[Interpreter]ERROR: Value " + value + " inserted for " + b.getName() + "strength should be between 1 and 10!");
 			return false;
 		}
 			
@@ -63,82 +70,15 @@ public class Interpreter{
 	
 	private boolean testStrength(Strength s, Bot b){
 				
-		if (!cv.getStrengths().contains(s.name))
+		if (!s.isValid())
 		{
-			System.out.println("[Interpreter]ERROR: " + s.name + " is not a valid SAF strength for fighter " + b.botName + "!");
+			System.out.println("[Interpreter]ERROR: " + s.getStrengthName() + " is not a valid SAF strength for fighter " + b.getName() + "!");
 			return false;
 		}	
-		if (!testValue(s.value,b))
+		if (!testValue(s.getValue(),b))
 			return false;
+		
 		return true;
 	}
 	
-	private boolean testCondition(Condition c, Bot b){
-						
-		
-		if (!cv.getConditions().contains(c.type))		
-		{			
-			System.out.println("[Interpreter]ERROR: " + c.type + " is not a valid SAF condition for fighter " + b.botName + "!");
-			return false;
-		}
-					
-		return true;			
-		
-			
-	}
-	
-	private boolean testAttack(Attack a, Bot b){
-		
-		if (!a.hasChoices)
-		{
-			if (!cv.getAttacks().contains(a.type))
-			{
-				System.out.println("[Interpreter]ERROR: " + a.type + " is not a valid SAF attack for fighter " + b.botName + "!");	
-				return false;
-			}
-		}
-		else
-		{
-			if (!cv.getAttacks().contains(a.choice1))
-			{
-				System.out.println("[Interpreter]ERROR: " + a.choice1 + " is not a valid SAF attack for fighter " + b.botName + "!");	
-				return false;
-			}
-			if (!cv.getAttacks().contains(a.choice2))
-			{
-				System.out.println("[Interpreter]ERROR: " + a.choice2 + " is not a valid SAF attack for fighter " + b.botName + "!");	
-				return false;
-			}
-			
-		}
-	
-		return true;
-	}
-	
-	private boolean testMove(Move m, Bot b){
-		
-		if (!m.hasChoices)
-		{
-			if (!cv.getMoves().contains(m.type))
-			{
-				System.out.println("[Interpreter]ERROR: " + m.type + " is not a valid SAF move for fighter " + b.botName + "!");	
-				return false;
-			}	
-		}
-		else
-		{
-			if (!cv.getMoves().contains(m.choice1))
-			{
-				System.out.println("[Interpreter]ERROR: " + m.choice1 + " is not a valid SAF move for fighter " + b.botName + "!");	
-				return false;
-			}
-			if (!cv.getMoves().contains(m.choice2))
-			{
-				System.out.println("[Interpreter]ERROR: " + m.choice2 + " is not a valid SAF move for fighter " + b.botName + "!");	
-				return false;
-			}
-			
-		}
-		return true;
-	}
 }

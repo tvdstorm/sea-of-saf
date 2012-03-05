@@ -1,10 +1,11 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Personality {
 	
-	public ArrayList<Strength> strengths;
+	private List<Strength> strengths;
 	
 	public Personality(){
 		this.strengths = new ArrayList<Strength>();
@@ -14,8 +15,14 @@ public class Personality {
 		this.strengths.add(s);
 	}
 	
-	public ArrayList<Strength> getStrengths(){
+	public List<Strength> getStrengths(){
 		return this.strengths;
 	}
 	
+	public int getStrengthValue(String name){
+		for (int i=0; i < this.strengths.size(); i++)
+			if (strengths.get(i).getStrengthName().equals(name))
+				return strengths.get(i).getStrengthValue();
+		return 0;
+	}
 }

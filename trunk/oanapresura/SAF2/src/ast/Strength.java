@@ -1,8 +1,11 @@
 package ast;
+import constants.*;
 
-public class Strength {
-	public String name;
-	public int value;
+public class Strength implements CorrectValues{
+	
+	private String name;
+	private int value;
+	
 	
 	public Strength(){
 		this.name = new String();
@@ -13,6 +16,15 @@ public class Strength {
 		this.name = name;
 		this.value = value;
 	}
+	
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
 	public void setStrengthName(String name){
 		this.name = name;
 	}
@@ -27,5 +39,9 @@ public class Strength {
 	
 	public int getStrengthValue(){
 		return this.value;
+	}
+	
+	public boolean isValid(){
+		return CorrectValues.strengths.contains(this.name);
 	}
 }

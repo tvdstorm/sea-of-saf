@@ -5,12 +5,12 @@
 package grammar;
 import ast.*;
 import interpreter.*;
-
+import constants.*;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstants/*@egen*/{/*@bgen(jjtree)*/
+public class FighterGrammar implements/*@bgen(jjtree)*/ FighterGrammarTreeConstants, /*@egen*/ CorrectValues{/*@bgen(jjtree)*/
   protected static JJTFighterGrammarState jjtree = new JJTFighterGrammarState();
 
 /*@egen*/  public static void main(String args [])  {    try{
@@ -19,7 +19,7 @@ public class FighterGrammar/*@bgen(jjtree)*/implements FighterGrammarTreeConstan
 		System.out.println("[Parser]Parsing from file ... ");	
 		FighterGrammar parser = new FighterGrammar(input);
 		SAF saf = parser.Parse();					
-		Interpreter i = new Interpreter(saf.firstBot, saf.secondBot);
+		Interpreter i = new Interpreter(saf.getBot1(), saf.getBot2());
 		boolean result = i.interpret();
 		
 		if (result == true)
@@ -131,11 +131,11 @@ Bot getBot():
         SimpleNode jjtn000 = new SimpleNode(JJTGETBOT);
         boolean jjtc000 = true;
         jjtree.openNodeScope(jjtn000);
-/*@egen*/	Token name = new Token();
+/*@egen*/
+  	BehaviourItem i;	Token name = new Token();
 	Personality p = new Personality();
 	Behaviour b = new Behaviour();
-	Strength s = new Strength();
-	BehaviourItem i = new BehaviourItem();
+	Strength s = new Strength();	
 	Bot bot = new Bot();
 }
 {/*@bgen(jjtree) getBot */
@@ -215,8 +215,7 @@ Strength Strength() :
            jjtc000 = false;
          }
 /*@egen*/
-	 {
-	 	/*System.out.println(strength + " " + value);*/	 	
+	 {	 		 	
 		return new Strength(strength.toString(), Integer.valueOf(value.toString()));   	 }/*@bgen(jjtree)*/
          } finally {
            if (jjtc000) {
@@ -231,9 +230,9 @@ BehaviourItem BehaviourItem() :
         SimpleNode jjtn000 = new SimpleNode(JJTBEHAVIOURITEM);
         boolean jjtc000 = true;
         jjtree.openNodeScope(jjtn000);
-/*@egen*/	Condition condition = new Condition();	
-	Move move = new Move();
-	Attack attack = new Attack();	
+/*@egen*/	Condition condition = new Condition();		
+	Action action1;
+	Action action2;
 }
 {/*@bgen(jjtree) BehaviourItem */
          try {
@@ -242,8 +241,8 @@ BehaviourItem BehaviourItem() :
 	 	 Condition(condition)
 		 <LSQBRACKET>
 		  (
-		  	  Move(move)						  
-			  Attack(attack)			  
+		  	  action1 = Action()						  
+			  action2 = Action()			  
 		  )  
 		 <RSQBRACKET>
 	 )/*@bgen(jjtree)*/
@@ -252,10 +251,11 @@ BehaviourItem BehaviourItem() :
            jjtc000 = false;
          }
 /*@egen*/
-	 {			 
-	 	/*move.printMove();
-	 	attack.printAttack();*/
-		return new BehaviourItem(condition, move, attack); 
+	 {
+	    	 
+	 	action1.setFlag(CorrectValues.MOVE_TYPE);
+	 	action2.setFlag(CorrectValues.ATTACK_TYPE);
+		return new BehaviourItem(condition, action1, action2); 
 	 }/*@bgen(jjtree)*/
          } catch (Throwable jjte000) {
            if (jjtc000) {
@@ -298,7 +298,7 @@ void Condition(Condition c) :
 /*@egen*/
 	{
 		c.setCondition(condition.toString());
-		/*System.out.println("Cond: " + condition.toString());*/
+		
 	}/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
@@ -308,43 +308,37 @@ void Condition(Condition c) :
 /*@egen*/
 }
 
-void Move(Move m) : 
-{/*@bgen(jjtree) Move */
-        SimpleNode jjtn000 = new SimpleNode(JJTMOVE);
+
+Action Action() :
+{/*@bgen(jjtree) Action */
+        SimpleNode jjtn000 = new SimpleNode(JJTACTION);
         boolean jjtc000 = true;
         jjtree.openNodeScope(jjtn000);
 /*@egen*/
-	Token move = new Token();
-	Token move1 = new Token();
-	Token move2 = new Token();
-	boolean choice;			
-}
-{/*@bgen(jjtree) Move */
+  	Action a;  	
+  	Token action = new Token();
+	Token action1 = new Token();
+	Token action2 = new Token();	
+	boolean choice;}
+{/*@bgen(jjtree) Action */
         try {
-/*@egen*/
-
-	(
+/*@egen*/	(
 		LOOKAHEAD(2)
 		(
 			<CHOOSE> 
 			<LBRACKET> 
-				(move1 = <IDENTIFIER>) (move2 = <IDENTIFIER>)
+				(action1 = <IDENTIFIER>) (action2 = <IDENTIFIER>)
 			<RBRACKET>
 		)
-		{			
-  			/*m.setMoveChoices(move1.toString(),move2.toString());
-  			System.out.println("setting: " + move1.toString() + " " + move2.toString());
-  			System.out.println("after setting: " + m.choice1 + " " + m.choice2);*/
+		{			  			
   			choice = true;  			
 		}
 		|
 		(			 
-			move = <IDENTIFIER>		
+			action = <IDENTIFIER>		
 		)
 		{
-			/*m.setMove(move.toString());
-			System.out.println("setting: " + move.toString());  		
-			System.out.println("after setting: " + m.type);*/			
+					
 			choice = false;
 		}
 	 
@@ -355,69 +349,23 @@ void Move(Move m) :
         }
 /*@egen*/	
 	{
-		if (choice)
-			m.setMoveChoices(move1.toString(),move2.toString());
-		else
-			m.setMove(move.toString());	
+			 
+		if (choice)		{		  		
+			a = new Action(action1.toString(),action2.toString());
+			/* System.out.println(action1.toString() + " " + action2.toString()); */
+		}		  		
+		else		{		  
+			a = new Action(action.toString());
+			/* System.out.println(action.toString()); */
+		}	
+		return a;			 	
 	}/*@bgen(jjtree)*/
         } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
           }
         }
-/*@egen*/  
+/*@egen*/
 }
 
 
-void Attack(Attack a) :
-{/*@bgen(jjtree) Attack */
-        SimpleNode jjtn000 = new SimpleNode(JJTATTACK);
-        boolean jjtc000 = true;
-        jjtree.openNodeScope(jjtn000);
-/*@egen*/
-	Token attack = new Token();
-	Token attack1 = new Token();
-	Token attack2 = new Token();		
-}
-{/*@bgen(jjtree) Attack */
-        try {
-/*@egen*/
-	(
-		LOOKAHEAD(2)
-		(
-			<CHOOSE> 
-			<LBRACKET> 
-				(attack1 = <IDENTIFIER>) (attack2 = <IDENTIFIER>)
-			<RBRACKET>
-		)/*@bgen(jjtree)*/
-                {
-                  jjtree.closeNodeScope(jjtn000, true);
-                  jjtc000 = false;
-                }
-/*@egen*/  
-		{			
-  			a.setAttackChoices(attack1.toString(),attack2.toString());
-  			/*System.out.println("setting: " +  attack1.toString() + " " + attack2.toString());*/  			
-		}
-		|
-		(			 
-			attack = <IDENTIFIER>		
-		)/*@bgen(jjtree)*/
-                {
-                  jjtree.closeNodeScope(jjtn000, true);
-                  jjtc000 = false;
-                }
-/*@egen*/	
-		{
-			a.setAttack(attack.toString());
-			/*System.out.println("setting: " + attack.toString());*/  		
-		}
-	)/*@bgen(jjtree)*/
-        } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-        }
-/*@egen*/		
-	
-}
