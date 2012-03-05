@@ -1,19 +1,23 @@
 package game;
 
+import ast.*;
+
 public class GameState {
 
 	private final int NEAR = 5;
 	private final int FAR = 25;
 	
 	private final int START_LEFT = 15;
-	private final int START_RIGTH = 90;
+	private final int START_RIGHT = 90;
 	
 	private FighterState fighter1;
 	private FighterState fighter2;
 	
-	public GameState(FighterState f1, FighterState f2){
-		this.fighter1 = new FighterState();
-		this.fighter2 = new FighterState();
+	public GameState(Bot bot1, Bot bot2){
+		
+		this.fighter1 = new FighterState(bot1,this.START_LEFT);
+		this.fighter2 = new FighterState(bot2,this.START_RIGHT);
+		
 	}
 	
 	
