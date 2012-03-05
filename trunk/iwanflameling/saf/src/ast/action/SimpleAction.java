@@ -26,5 +26,15 @@ public class SimpleAction extends Action {
 		visitor.visit(this);
 		
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof SimpleAction){
+			SimpleAction action = (SimpleAction) obj;
+			return this.action.equals(action.getAction());
+		} else{
+			return false;
+		}
+	}
 
 }

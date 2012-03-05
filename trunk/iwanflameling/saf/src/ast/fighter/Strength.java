@@ -36,4 +36,15 @@ public class Strength extends FighterProp {
 		return fightPower;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Strength){
+			Strength strength = (Strength) obj;
+			return this.getFightId().equals(strength.getFightId())
+					&& this.getFightPower() == strength.getFightPower();
+		} else{
+			return false;
+		}
+	}
+	
 }
