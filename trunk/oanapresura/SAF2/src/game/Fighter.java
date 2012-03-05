@@ -4,7 +4,7 @@ import ast.*;
 import java.lang.Math;
 
 
-public class Fighter {
+public class Fighter{
 
 		private int health;
 		private int weight;		
@@ -12,11 +12,13 @@ public class Fighter {
 		private int speed;
 		private Behaviour b;
 		private Personality p;
+		private Bot bot;
 
-		public Fighter(Behaviour b, Personality p)
+		public Fighter(Bot b)
 		{
-			this.b = b;
-			this.p = p;
+			this.bot = b;
+			this.b = b.getBehavior();
+			this.p = b.getPersonality();
 			weight = (p.getStrengthValue("punchPower") + p.getStrengthValue("kickPower")) / 2;
 			height = (p.getStrengthValue("punchReach") + p.getStrengthValue("kickReach")) / 2;
 			speed = (int) Math.abs(0.5*(height-weight));
