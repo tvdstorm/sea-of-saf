@@ -28,9 +28,9 @@ public class Fighter {
 			return health;
 		}
 
-		public void looseHealth()
+		public void looseHealth(int hit)
 		{
-			health --;
+			health = health - hit;
 		}
 		
 		public int getWeight() {
