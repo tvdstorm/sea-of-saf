@@ -5,6 +5,7 @@ public class Characteristic implements Node{
 	private int value;
 	
 	public Characteristic(String charName, int charValue){
+		super();
 		name = charName;
 		value = charValue;		
 	}
@@ -22,10 +23,7 @@ public class Characteristic implements Node{
 	}
 	
 	@Override
-	public void addNode(Node actionType) {}
-
-	@Override
 	public void accept(VisitorInterface v) {
-		v.visit(this);
+		v.visit(this);	
 	}
 }

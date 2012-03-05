@@ -1,35 +1,24 @@
 JackieChan{
-	kickPower = 11
-	punchPower = 5
-	kickReach = 3
-	punchReach = 9
-	far[run_towards punch_high]
-	near[choose(stand crouch) kick_high]
-	much_stronger[walk_towards punch_low]
-	weaker[run_away choose(block_high block_low)]
-	always[walk_towards block_high]
+	kickPower = 2
+	punchPower = 3
+	kickReach = 8
+	punchReach = 8
+	far [run_towards kick_low]
+	near [choose(jump walk_away) choose(kick_low block_high)]
+	far and much_stronger[run_towards punch_high]
+	near and much_stronger[choose(stand crouch) kick_high]
+	weaker or stronger[walk_towards punch_low]
+	near and much_weaker[run_away choose(block_high block_low)]
 }
 
 Terminator{
-	kickPower = 0
-	punchPower = 9
-	kickReach = 2
-	punchReach = 6
-	near and much_stronger[run_towards punch_high]
-	near[choose(stand crouch) kick_high]
-	near or far[walk_towards punch_low]
-	weaker[run_away choose(block_high block_low)]
-	always[walk_towards block_high]
-}
-
-Bob0000001{
-	kickPower = 9
-	punchPower = 9
-	kickReach = 2
-	punchReach = 6
-	far[run_towards punch_high]
-	near[choose(stand crouch) kick_high]
-	much_stronger[walk_towards punch_low]
-	weaker[run_away choose(block_high block_low)]
-	always[walk_towards block_high]
+	kickPower = 3
+	punchPower = 2
+	kickReach = 9
+	punchReach = 9
+	far [run_towards kick_high]
+	near [choose(jump walk_away) choose(kick_high block_low)]
+	near and much_stronger[choose(stand crouch) kick_low]
+	weaker or stronger[walk_towards punch_high]
+	near and much_weaker[run_away choose(block_high block_low)]
 }
