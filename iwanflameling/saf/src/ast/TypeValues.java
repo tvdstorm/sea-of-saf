@@ -23,5 +23,9 @@ public final class TypeValues {
 			"walk_away", "walk_towards", "run_away", "jump", "crouch", "stand",
 			"run_towards"
 			));
-
+	
+	public static final int MAX_STRENGTH = 10;
+	public static final int MIN_STRENGTH = 1;
+	public static final String DEFAULT_CONDITION = "always";
+	
 }
