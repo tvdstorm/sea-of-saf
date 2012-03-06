@@ -22,14 +22,9 @@ public class Game implements Runnable{
 		saf = s;
 		disp = new SafDisplay();
 		cr = new CheckRule();
-		
-		int i = 0;
-		for(Bot b : saf.getBots()){
-			if(i == 0) b1 = b;
-			else b2 = b;
-			i++;
-			if(i >= 2) break;
-		}
+
+		b1 = saf.getBots().get(0);
+		b2 = saf.getBots().get(1);
 		
 		bot1 = disp.getBoard().getBot1();
 		bot2 = disp.getBoard().getBot2();
