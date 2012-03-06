@@ -1,18 +1,19 @@
 package saf.game;
 
-import java.awt.*;
-import java.awt.geom.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import saf.game.EnumTypes.AttackType;
-import saf.game.EnumTypes.MoveType;
-import saf.game.EnumTypes.Orientation;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 import saf.ErrorHandler;
+import saf.bot.EnumTypes.AttackType;
+import saf.bot.EnumTypes.MoveType;
+import saf.bot.EnumTypes.Orientation;
 
 public class Window extends JFrame
 {
@@ -43,7 +44,7 @@ public class Window extends JFrame
 	private MoveType bot2Move;
 	private Orientation bot2Orientation;	
 
-	public Window(double gameWidth, Bot bot1, Bot bot2)	{
+	public Window(double gameWidth, GameBot bot1, GameBot bot2)	{
 		super("SAF game");
 		
 		// determine the conversion factor between the game logic and pixels
@@ -63,10 +64,10 @@ public class Window extends JFrame
 		this.setVisible(true);
 	}
 	
-	public void setBotStates(Bot bot1, Bot bot2) {
+	public void setBotStates(GameBot bot1, GameBot bot2) {
 		bot1X = (int)(scaleFactor * bot1.getCurrentPosition());
 		if (bot1.isDead()) {
-			bot1Y += DEAD_ADJUSTMENT;
+			bot1Y = WINDOW_HEIGHT - GRASS_HEIGHT - 200 + DEAD_ADJUSTMENT;
 			bot1IsDead = true;
 		} else {
 			bot1IsDead = false;
@@ -77,7 +78,7 @@ public class Window extends JFrame
 		
 		bot2X = (int)(scaleFactor * bot2.getCurrentPosition());
 		if (bot2.isDead()) {
-			bot2Y += DEAD_ADJUSTMENT;
+			bot2Y = WINDOW_HEIGHT - GRASS_HEIGHT - 200 + DEAD_ADJUSTMENT;
 			bot2IsDead = true;
 		} else {
 			bot2IsDead = false;
@@ -108,7 +109,7 @@ public class Window extends JFrame
 		}
 		
 		private Image loadFighterImage(boolean isDead, AttackType attackType, MoveType moveType, Orientation orientation) {
-			String filePath = "src/saf/pics/";
+			String filePath = "src/saf/figures/";
 			
 			if (isDead) {
 				filePath += "dead";
