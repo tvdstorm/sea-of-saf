@@ -9,7 +9,7 @@ package main;
 	public class Main  {
 	    public static void main(String[] args) throws Exception {
 	    	
-	    			InputStream inputStream = new FileInputStream("D:/SAF/workspace/SC12/data/unbeatable.saf");
+	    			InputStream inputStream = new FileInputStream("D:/SAF/workspace/SC12/data/safs.txt");
 	    			ANTLRInputStream input = new ANTLRInputStream(inputStream);
 	    	        safLexer lexer = new safLexer(input);
 	    	        CommonTokenStream tokens = new CommonTokenStream(lexer);

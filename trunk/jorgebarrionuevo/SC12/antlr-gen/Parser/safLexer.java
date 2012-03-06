@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-06 10:29:15
+// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-06 12:54:55
 
   package Parser;
 
@@ -13,12 +13,12 @@ public class safLexer extends Lexer {
     public static final int EOF=-1;
     public static final int AND=4;
     public static final int BEHAVIOUR=5;
-    public static final int BETWEEN=6;
-    public static final int CHARACTERISTIC=7;
-    public static final int CHOOSE=8;
-    public static final int CONDITION_TYPE=9;
-    public static final int DIGIT=10;
-    public static final int EQ=11;
+    public static final int CHARACTERISTIC=6;
+    public static final int CHOOSE=7;
+    public static final int CONDITION_TYPE=8;
+    public static final int DIGIT=9;
+    public static final int EQ=10;
+    public static final int FIGHTER=11;
     public static final int FIGHT_ACTION=12;
     public static final int ID=13;
     public static final int L_BRACKET=14;
