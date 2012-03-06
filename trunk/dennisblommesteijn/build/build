@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd ../uva.sc.saf/
+./build.sh
+cd ../uva/sc.saf.runner/
+./build.sh
+cd ../build
