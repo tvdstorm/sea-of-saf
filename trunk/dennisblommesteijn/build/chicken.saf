@@ -1,0 +1,5 @@
+chicken
+{
+	far [run_towards kick_low]
+	always [crouch kick_high block_low]
+}
