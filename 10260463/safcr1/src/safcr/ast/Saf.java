@@ -1,7 +1,6 @@
 package safcr.ast;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Saf implements Node{
