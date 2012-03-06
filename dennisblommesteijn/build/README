@@ -1,0 +1,23 @@
+----------------------------
+Super Awesome Fighter README
+D. Blommesteijn 10276726
+----------------------------
+
+Dependencies:
+- Java 1.6;
+- Maven 3;
+
+0. Constructing SAF/ SAFC
+Creating SAF and SAFC binaries
+$ ./build
+
+1. Compiling
+Creating sacc files form saf;
+$ ./safc cow.saf chicken.saf
+This produces cow.sacc and chicken.sacc
+
+2. Running
+Running sacc files;
+$ ./saf cow.sacc chicken.sacc
+An interactive shell is started
+
