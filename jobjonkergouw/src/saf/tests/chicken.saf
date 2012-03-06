@@ -4,6 +4,6 @@ chicken {
   kickReach = 3
   punchReach = 3
   much_stronger [walk_towards kick_low]
-  weaker [run_away choose(block_high bock_low)]
+  weaker [run_away choose(block_high block_low)]
   always [walk_away block_high] 
 }

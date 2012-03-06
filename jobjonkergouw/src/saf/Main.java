@@ -37,23 +37,22 @@ public class Main {
         return new String(buffer);
     }
     
+    
     private static Bot getBotFromFile(String filePath) {
         String source = null;
         try {
             source = readStringFromFile(filePath);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
-            java.lang.System.exit(1);
+        	ErrorHandler.exitWithException(e);
         }
         
         Fighter fighterTree = null;
         try {
             fighterTree = getFighterTree(source);
         } catch (RecognitionException e) {
-            System.out.println( printRecognitionException(e) );
-            java.lang.System.exit(1);
+        	ErrorHandler.exitWithException(e);
         }
-        System.out.println(fighterTree.printTree());
+        //System.out.println(fighterTree.printTree());
               
         Validator val = new Validator();
         if ( val.isValid(fighterTree) ) {
@@ -61,8 +60,8 @@ public class Main {
             Bot bot = compiler.compileBot(fighterTree);
             return bot;
         } else {
-            System.out.println( val.messagesAsString() );
-            return null;
+            ErrorHandler.exitWithString( val.messagesAsString());
+            return null;		// never happens
         }        
     }
 
@@ -71,11 +70,13 @@ public class Main {
         Bot bot1 = getBotFromFile("src/saf/tests/geneticFighter.saf");
         Bot bot2 = getBotFromFile("src/saf/tests/jackieChan.saf");
         
+        
+        
         System.out.println( bot1.botSummaryAsString() );
         System.out.println( bot2.botSummaryAsString() );
         
         Game game = new Game(bot1, bot2);
-        game.runGUI();
+        game.runGUI();  
 
      }   
 }

@@ -9,14 +9,17 @@ import saf.game.EnumTypes.*;
  **/
 public class Bot { 
     // general game configuration
-    private static final double STARTING_HEALTH = 100.;
-    private static final double MINIMAL_SPEED = 0.2;
-    private static final double BLOCK_MODIFIER = 0.5;
-    private static final double REACH_MODIFIER = 0.5;    // how much distance a unit of reach is worth
-    private static final int MUCHSTRONGER_MINIMUM = 15; 
-    private static final int STRONGER_MINIMUM = 5;
-    
-    // fighter attributes
+    private final double STARTING_HEALTH = 100.;
+    private final double MINIMAL_SPEED = 0.2;
+    private final double BLOCK_MODIFIER = 0.5;
+    private final double REACH_MODIFIER = 0.5;    // how much distance a unit of reach is worth
+    private final int MUCHSTRONGER_MINIMUM = 15; 
+    private final int STRONGER_MINIMUM = 5;
+    private final double RUN_SPEED = 1.; 
+    private final double MOVE_SPEED = 0.5;
+    private double gameWidth = 20.;
+
+	// fighter attributes
     private String name;
     private int punchReach;
     private int punchPower;
@@ -33,8 +36,9 @@ public class Bot {
     private ConditionType rangeCondition = ConditionType.FAR;  
     private double currentPosition = 0.;
     private double currentHealth = STARTING_HEALTH;    
-    
-    public Bot(String name, int punchReach, int punchPower, int kickReach, int kickPower) {
+    private double timeForNextAction = 0.;
+
+	public Bot(String name, int punchReach, int punchPower, int kickReach, int kickPower) {
         this.name = name;
         this.punchReach = punchReach;
         this.punchPower = punchPower;
@@ -72,10 +76,6 @@ public class Bot {
         result += "\tstrengthCondition = " + strengthCondition.toString() + "\trangeCondition = " + rangeCondition.toString() + "\n";
         return result;
     }
-    
-    public boolean isDead() {
-        return (currentHealth <= 0.);
-    }
 
     private void moveBot(Bot other, double distance) {   
         if (orientationFromOther(other) == Orientation.LEFT) {
@@ -90,20 +90,33 @@ public class Bot {
             }        
         }
     }
+    
+    public boolean isDead() {
+        return (currentHealth <= 0.);
+    }
 
-    public void moveOtherAccordingToState(Bot other) {       
+	public void updateBotActions(Bot other) {
+			this.compareStrengthConditions(other);
+			this.compareRangeConditions(other);
+
+			this.determineMoveAndAttackByRules();
+			this.moveOtherAccordingToState(other);
+			this.attackOtherAccordingToState(other);
+	}
+    
+    private void moveOtherAccordingToState(Bot other) {       
         if (currentMove ==  MoveType.RUN_AWAY) {
-                moveBot(other, -2. * speed );
+                moveBot(other, -RUN_SPEED * speed );
         } else if (currentMove ==  MoveType.WALK_AWAY) {
-                moveBot(other, -1. * speed );
+                moveBot(other, -MOVE_SPEED * speed );
         } else if (currentMove ==  MoveType.RUN_TOWARDS) {
-                moveBot(other, 2. * speed );
+                moveBot(other, RUN_SPEED * speed );
         }  else if (currentMove ==  MoveType.WALK_TOWARDS) {
-                moveBot(other, 1. * speed );
+                moveBot(other, MOVE_SPEED * speed );
         }      
     }
     
-    public void attackOtherAccordingToState(Bot other) {
+    private void attackOtherAccordingToState(Bot other) {
         double distance = java.lang.Math.abs(this.currentPosition - other.currentPosition);   
         if (currentAttack == AttackType.KICK_HIGH) {
             if (distance <= kickReach * REACH_MODIFIER && other.currentMove != MoveType.CROUCH) {
@@ -161,13 +174,7 @@ public class Bot {
     private void damageOtherBot(Bot other, double damage) {
         other.currentHealth -= damage;
     }
-    
-    public void checkIfDead() {
-    	if ( isDead() ) {
-    		currentMove = MoveType.DEAD;
-    	}
-    }
-      
+          
     public Orientation orientationFromOther(Bot other) {
         if ( (other.currentPosition - this.currentPosition) > 0) {
             return Orientation.LEFT;
@@ -176,7 +183,7 @@ public class Bot {
         }
     }
     
-    public void compareStrengthConditions(Bot other) {
+    private void compareStrengthConditions(Bot other) {
         double strengthDifference = this.totalPower - other.totalPower;
         if (strengthDifference > MUCHSTRONGER_MINIMUM) {
             this.strengthCondition = ConditionType.MUCH_STRONGER;
@@ -191,7 +198,7 @@ public class Bot {
         }
     }
     
-    public void compareRangeConditions(Bot other) {
+    private void compareRangeConditions(Bot other) {
         double distance = java.lang.Math.abs(this.currentPosition - other.currentPosition);
         double minimumDistance = (kickReach < punchReach) ? kickReach * REACH_MODIFIER : punchReach * REACH_MODIFIER;
         if (distance > minimumDistance) {
@@ -205,7 +212,7 @@ public class Bot {
     *   Search for a rule that is valid and adjust the move and attack of the bot.
     *   Returns false if no valid rule was found.
     **/    
-    public boolean determineMoveAndAttackByRules() {
+    private boolean determineMoveAndAttackByRules() {
         if ( rules.isEmpty() ) {
             return false;
         }
@@ -245,7 +252,33 @@ public class Bot {
 	}
 
 	public void setCurrentPosition(double currentPosition) {
-		this.currentPosition = currentPosition;
+		// check for out of bounds
+		if (currentPosition < 0) { 
+			this.currentPosition = 0.;
+		} else if (currentPosition > gameWidth){
+			this.currentPosition = gameWidth;
+		} else {
+			this.currentPosition = currentPosition;
+		}
+	}
+	
+	public boolean isTimeForNextAction(double time) {
+		if (time >= timeForNextAction) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public void updateTimeForNextAction() {
+		this.timeForNextAction += speed;
+	}	
+    
+    public double getGameWidth() {
+		return gameWidth;
+	}
+
+	public void setGameWidth(double gameWidth) {
+		this.gameWidth = gameWidth;
 	}
     
     private void computeTotalPower() {
