@@ -1,0 +1,4 @@
+cow
+{
+	always [run_away kick_high kick_low]
+}
