@@ -148,13 +148,13 @@ public class Main
 		}
 
 		//get astnodes
-		List<AstNode> astNodes = astBuilder.getAstNodes();		
+		List<AstNode> astNodes = astBuilder.getAstNodes();
 		if(astNodes == null)
 		{
 			System.out.println("error: could not load source file(s). (try --help)");
 			System.exit(1);
 		}
-		
+
 		//compile ast nodes
 		CompileAst compileAst = CompileAst.getInstance();
 		List<File> compiledFiles = compileAst.comileAst(astNodes);

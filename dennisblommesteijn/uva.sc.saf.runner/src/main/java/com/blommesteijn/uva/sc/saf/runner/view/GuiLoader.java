@@ -40,9 +40,25 @@ public class GuiLoader implements IView
 		}
 	}
 
-	public void print(String string)
+	
+	public void printOutputLeft(String text)
 	{
-		_window.setOutputText(string);
+		_window.setOutputPaneLeft(text);
+	}
+	
+	public void printOutputRight(String text)
+	{
+		_window.setOutputPaneRight(text);
+	}
+	
+	public void printAction(String text)
+	{
+		_window.setActionText(text);
+	}
+	
+	public void printScore(String text)
+	{
+		_window.setScoreText(text);
 	}
 	
 	

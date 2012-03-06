@@ -6,6 +6,7 @@ public interface IGameRunner extends Runnable
 {
 	void start();
 	void join() throws InterruptedException;
+	void stop();
 
 	void setContext(List<IGameContext> gameContexts);
 	

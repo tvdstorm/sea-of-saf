@@ -62,7 +62,7 @@ public class CompileAst
 		File file = null;
 		FileOutputStream fileOutputStream = null;
 		ObjectOutputStream objectOutputStream = null;
-		
+
 		try
 		{
 			file = new File(astNode.getIdent() + ".sacc");

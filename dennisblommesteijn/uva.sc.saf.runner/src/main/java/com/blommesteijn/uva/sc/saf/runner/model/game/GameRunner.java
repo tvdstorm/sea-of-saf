@@ -51,7 +51,8 @@ public class GameRunner implements IGameRunner
 	
 	public void stop()
 	{
-		//TODO: needs some work!
+		//TODO: not the correct way to shut it down!
+		_thread.stop();
 	}
 	
 	public void join() throws InterruptedException
@@ -63,6 +64,7 @@ public class GameRunner implements IGameRunner
 	{
 		_suspendTarget = MILLISEC_IN_SEC / TARGET_CYCLES;
 		_suspendGap = 0;
+		
 		
 		//initiate game context
 		for(IGameContext gameContext : _gameContexts)
