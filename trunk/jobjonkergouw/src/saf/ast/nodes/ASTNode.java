@@ -1,12 +1,10 @@
 package saf.ast.nodes;
 
-//import org.antlr.runtime.tree.CommonTree;
 import java.util.ArrayList;
 import saf.ast.*;
 
 public abstract class ASTNode {
     private ArrayList<ASTNode> children = new ArrayList<ASTNode>();
-    private ASTNode parent = null;
     
     public abstract String getName() ;
 
@@ -18,7 +16,6 @@ public abstract class ASTNode {
     
     public void addChild(ASTNode node) {
         children.add(node);
-        node.parent = this;
     }
     
     public ASTNode getChild(int i) {

@@ -9,10 +9,12 @@ import saf.game.EnumTypes.*;
  **/
 public class Bot { 
     // general game configuration
-    public static final double STARTING_HEALTH = 100.;
-    public static final double MINIMAL_SPEED = 0.2;
-    public static final double BLOCK_MODIFIER = 0.5;
-    public static final double REACH_MODIFIER = 0.5;    // how much distance a unit of reach is worth
+    private static final double STARTING_HEALTH = 100.;
+    private static final double MINIMAL_SPEED = 0.2;
+    private static final double BLOCK_MODIFIER = 0.5;
+    private static final double REACH_MODIFIER = 0.5;    // how much distance a unit of reach is worth
+    private static final int MUCHSTRONGER_MINIMUM = 15; 
+    private static final int STRONGER_MINIMUM = 5;
     
     // fighter attributes
     private String name;
@@ -26,7 +28,7 @@ public class Bot {
     
     // values describing current fighter state
     private MoveType currentMove = MoveType.STAND;
-    private AttackType currentAttack = AttackType.IDLE;
+	private AttackType currentAttack = AttackType.IDLE;
     private ConditionType strengthCondition = ConditionType.EVEN;
     private ConditionType rangeCondition = ConditionType.FAR;  
     private double currentPosition = 0.;
@@ -45,7 +47,7 @@ public class Bot {
         if (speed < MINIMAL_SPEED) {
             speed = MINIMAL_SPEED;
         }
-                                
+                                      
         computeTotalPower();
     }
 
@@ -75,20 +77,16 @@ public class Bot {
         return (currentHealth <= 0.);
     }
 
-    public void setPosition(double position) {
-        currentPosition = position;
-    }
-    
     private void moveBot(Bot other, double distance) {   
         if (orientationFromOther(other) == Orientation.LEFT) {
             // prevent bot from moving through other
             if ( currentPosition + distance < other.currentPosition) {
-                setPosition(currentPosition + distance);
+                setCurrentPosition(currentPosition + distance);
             }
         } else {
             // bot is at the right of other
             if ( currentPosition - distance > other.currentPosition) {
-                setPosition(currentPosition - distance);
+            	setCurrentPosition(currentPosition - distance);
             }        
         }
     }
@@ -127,7 +125,6 @@ public class Bot {
     }
     
     private void hitOtherBot(Bot other) {
-        System.out.println("HIER1");
         if (other.currentAttack == AttackType.BLOCK_HIGH) {
             if (currentAttack == AttackType.KICK_HIGH) {
                 damageOtherBot(other, BLOCK_MODIFIER * kickPower);
@@ -162,8 +159,13 @@ public class Bot {
     }
     
     private void damageOtherBot(Bot other, double damage) {
-        System.out.println("HIER2");
         other.currentHealth -= damage;
+    }
+    
+    public void checkIfDead() {
+    	if ( isDead() ) {
+    		currentMove = MoveType.DEAD;
+    	}
     }
       
     public Orientation orientationFromOther(Bot other) {
@@ -176,13 +178,13 @@ public class Bot {
     
     public void compareStrengthConditions(Bot other) {
         double strengthDifference = this.totalPower - other.totalPower;
-        if (strengthDifference > 15) {
+        if (strengthDifference > MUCHSTRONGER_MINIMUM) {
             this.strengthCondition = ConditionType.MUCH_STRONGER;
-        } else if (strengthDifference > 5) {
+        } else if (strengthDifference > STRONGER_MINIMUM) {
             this.strengthCondition = ConditionType.STRONGER;    
-        } else if (strengthDifference < -15) {
+        } else if (strengthDifference < -MUCHSTRONGER_MINIMUM) {
             this.strengthCondition = ConditionType.MUCH_WEAKER;       
-        } else if (strengthDifference < -5) {
+        } else if (strengthDifference < -STRONGER_MINIMUM) {
             this.strengthCondition = ConditionType.WEAKER;    
         } else {
             this.strengthCondition = ConditionType.EVEN;            
@@ -221,6 +223,30 @@ public class Bot {
     public void addRule(BehaviourRule rule) {
         rules.add(rule);
     }
+
+    public MoveType getCurrentMove() {
+		return currentMove;
+	}
+
+	public void setCurrentMove(MoveType currentMove) {
+		this.currentMove = currentMove;
+	}
+
+	public AttackType getCurrentAttack() {
+		return currentAttack;
+	}
+
+	public void setCurrentAttack(AttackType currentAttack) {
+		this.currentAttack = currentAttack;
+	}
+
+	public double getCurrentPosition() {
+		return currentPosition;
+	}
+
+	public void setCurrentPosition(double currentPosition) {
+		this.currentPosition = currentPosition;
+	}
     
     private void computeTotalPower() {
         totalPower = punchPower + punchReach + kickReach + kickPower;

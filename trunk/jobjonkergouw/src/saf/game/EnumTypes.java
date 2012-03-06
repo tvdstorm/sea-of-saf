@@ -13,7 +13,8 @@ public class EnumTypes {
         RUN_TOWARDS, 
         RUN_AWAY, 
         WALK_TOWARDS, 
-        WALK_AWAY, 
+        WALK_AWAY,
+        DEAD,
         EMPTY;
          
         public static MoveType stringToMoveType(String s) {
