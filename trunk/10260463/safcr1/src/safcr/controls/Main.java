@@ -29,8 +29,6 @@ public class Main {
 		MoveData md = new MoveData();
 		
 		Saf tree = parser.saf();
-		//TreePrinter printer = new TreePrinter();
-		//tree.accept(printer);
 		
 		CheckData check = new CheckData();
 		check.setDatas(cd, cod, ad, md);
