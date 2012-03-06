@@ -1,10 +1,13 @@
 package safcr.display;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Toolkit;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -21,7 +24,11 @@ public class Board extends JPanel{
 	
 	public Board(){
         mt = new MediaTracker(this);
-        bg = new ImageIcon(resourcePath + "bg1.gif").getImage();
+        
+        Random generator = new Random();
+		int rn = generator.nextInt(3) + 1;
+        
+        bg = new ImageIcon(resourcePath + "bg" + rn + ".gif").getImage();
         createBots();
 	}
 	
@@ -48,6 +55,15 @@ public class Board extends JPanel{
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.drawImage(bg, 0, 0, this.getWidth(), this.getHeight(), this);
+		
+		g.setColor(Color.white);
+		g.fillRect(45, 15, 60, 40);
+		g.fillRect(895, 15, 60, 40);
+		
+		g.setColor(Color.black);
+		g.setFont(new Font("Serif", Font.PLAIN, 36));
+		g.drawString(""+bot.getHp(), 50, 50);
+		g.drawString(""+bot2.getHp(), 900, 50);
 		
 	    Graphics2D g2d = (Graphics2D) g;
 	    g2d.drawImage(bot.getImage(), bot.getX(), bot.getY(), this);

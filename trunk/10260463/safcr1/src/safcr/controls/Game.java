@@ -44,9 +44,6 @@ public class Game implements Runnable{
 		setProperty(b1,bot1);
 		setProperty(b2,bot2);
 		
-		bot1.setStrenghtCondition(condData.getCondition(bot1.getStrenght(), bot2.getStrenght()));
-		bot2.setStrenghtCondition(condData.getCondition(bot2.getStrenght(), bot1.getStrenght()));
-		
 		animator = new Thread(this);
 		animator.start();
 	}
@@ -66,7 +63,6 @@ public class Game implements Runnable{
 		}
 
 		bot.setSpeed(charsData.calculateSpeed(pPower, kPower, pReach, kReach));
-		bot.setStrenght(pPower+kPower);
 	}
 
 	@Override
@@ -74,8 +70,25 @@ public class Game implements Runnable{
 		while (!stopMe) {
 			botUpdates(b1,bot1,bot2);
 			botUpdates(b2,bot2,bot1);
-
-			disp.getBoard().reloadDisplay();			
+			
+			if(bot1.getX() < 30){
+				bot1.setX(45);
+				bot2.setX(200);
+			}
+			
+			if(bot2.getX() > 970){
+				bot1.setX(800);
+				bot2.setX(945);
+			}
+			
+			if(bot1.getHp() < 1) bot1.setCurrentImage("dead");
+			if(bot2.getHp() < 1) bot2.setCurrentImage("dead");
+			
+			disp.getBoard().reloadDisplay();	
+			
+			if(bot1.getHp() < 1 || bot2.getHp() < 1){
+				stopMe = true;
+			}		
         }
 	}
 	
@@ -85,15 +98,30 @@ public class Game implements Runnable{
 		String dist = "";
 		String condition = "";
 		String img = "";
-		int speed = 1;
+		int speed = 0;
 		int newPos = 0;
 		int distance = 0;
+		
+		bota.setStrenghtCondition(condData.getCondition(bota.getHp(), botb.getHp()));
 		
 		if(bota.getX() > botb.getX()) distance = bota.getX() - botb.getX();
 		else distance = botb.getX() - bota.getX();
 		
 		dist = condData.getDistance(distance);
 		condition = bota.getCondition();
+		
+		if(dist.equals("near")){
+			String cImg1 = bota.getCurrentImage();
+			String cImg2 = botb.getCurrentImage();
+			if(doDamage(cImg1, cImg2)){
+				for(Characteristic c : b.getCharacteristic()){
+					if(c.getName().equals("punchPower") && cImg1.contains("punch"))
+						botb.decreaseHp(c.getValue());
+					if(c.getName().equals("kickPower") && cImg1.contains("kick"))
+						botb.decreaseHp(c.getValue());
+				}
+			}
+		}
 		
 		cr.setCondition(condition);
 		cr.setDistance(dist);
@@ -106,6 +134,11 @@ public class Game implements Runnable{
 		move = cr.getMoveAction();
 		attack = cr.getAttackAction();
 		
+		if(bota.getX() - botb.getX() > 1) img = attack + "_left";
+		else img = attack + "_right";
+		
+		bota.setCurrentImage(img);
+		
 		if(bota.isJumped())
 			bota.fall();
 		
@@ -113,32 +146,43 @@ public class Game implements Runnable{
 			bota.jump();
 		else if(move.equals("crouch")) 
 			speed = 2; 
-		else if(move.equals("walk_towards") || move.equals("walk_away")) 
-			speed = 4 * bota.getSpeed();
-		else if(move.equals("run_towards") || move.equals("run_away"))
+		else if(move.contains("walk")) 
+			speed = 5 * bota.getSpeed();
+		else if(move.contains("run"))
 			speed =  10 * bota.getSpeed();
 		
-		if(move.equals("crouch") || move.equals("walk_towards") || move.equals("run_towards")){
+		if(move.contains("_towards")){
 			if(bota.getX() - botb.getX() > 1) newPos = bota.getX() - speed;
 			else newPos = bota.getX() + speed;
 			bota.setX(newPos);
 		}
-		else if(move.equals("run_away") || move.equals("walk_away")){
+		else if(move.contains("_away")){
 			if(bota.getX() - botb.getX() > 1) newPos = bota.getX() + speed;
 			else newPos = bota.getX() - speed;
 			bota.setX(newPos);
 		}
-
-		if(bota.getX() - botb.getX() > 1) img = attack + "_left";
-		else img = attack + "_right";
-		
-		bota.setCurrentImage(img);
 		
 		try {
-			Thread.sleep(100);
+			Thread.sleep(50);
 		} catch (InterruptedException e) {
 			System.out.println("interrupted");
 		}
 		
+	}
+	
+	public Boolean doDamage(String a1, String a2){
+		if(a1.contains("block")){
+			return false;
+		}
+		
+		if(a2.equals("block_low") && a1.contains("_low")){
+			return false;
+		}
+		
+		if(a2.equals("block_high") && a1.contains("_high")){
+			return false;
+		}
+		
+		return true;
 	}
 }

@@ -11,7 +11,6 @@ public class BotChar {
 	private int y;
 	private String currentImage;
 	private int speed;
-	private int strenghtSum;
 	private String strenghtCondition;
 	private int hp = 100;
 	private Boolean jumped = false;
@@ -23,7 +22,7 @@ public class BotChar {
 									"block_low_right", "kick_high_left", "kick_high_right",
 									"kick_low_left", "kick_low_right", "punch_high_left",
 									"punch_high_right", "punch_low_left", "punch_low_right",
-									"stand" };
+									"stand", "dead" };
 	
 	public BotChar(int x, int y){
 		images = new HashMap<String,Image>();
@@ -54,6 +53,10 @@ public class BotChar {
 	
 	public void setCurrentImage(String img){
 		currentImage = img;
+	}
+	
+	public String getCurrentImage(){
+		return currentImage;
 	}
 	
 	public Image getImage(){
@@ -90,14 +93,6 @@ public class BotChar {
 		speed = sp;
 	}
 	
-	public void setStrenght(int s){
-		strenghtSum = s;
-	}
-	
-	public int getStrenght(){
-		return strenghtSum;
-	}
-	
 	public void setStrenghtCondition(String sc){
 		strenghtCondition = sc;
 	}
@@ -107,7 +102,12 @@ public class BotChar {
 	}
 	
 	public int getHp(){
+		if(hp < 0) return 0;
 		return hp;
+	}
+	
+	public void decreaseHp(int d){
+		hp -= d;
 	}
 	
 	public Boolean isJumped(){

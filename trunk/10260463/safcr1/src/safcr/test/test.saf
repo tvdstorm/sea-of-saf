@@ -1,24 +1,27 @@
 JackieChan{
-	kickPower = 2
-	punchPower = 3
+	kickPower = 4
+	punchPower = 5
 	kickReach = 8
 	punchReach = 8
-	far [run_towards kick_low]
-	near [choose(jump walk_away) choose(kick_low block_high)]
 	far and much_stronger[run_towards punch_high]
-	near and much_stronger[choose(stand crouch) kick_high]
-	weaker or stronger[walk_towards punch_low]
-	near and much_weaker[run_away choose(block_high block_low)]
+	far and weaker[walk_towards punch_high]
+	far and stronger[run_towards kick_high]
+	near and much_stronger[choose(walk_away jump) choose (kick_high punch_high)]
+	near and much_weaker[choose(jump walk_away) choose(block_high kick_low)]
+	weaker or stronger[choose(jump stand) choose(block_high punch_low)]
+	far [run_towards kick_low]
 }
 
 Terminator{
-	kickPower = 3
-	punchPower = 2
-	kickReach = 9
-	punchReach = 9
+	kickPower = 5
+	punchPower = 5
+	kickReach = 7
+	punchReach = 6
+	near and much_stronger[stand kick_low]
+	weaker or stronger[choose(walk_towards walk_away) choose(block_low punch_high)]
+	near and much_weaker[choose(jump walk_away) choose(block_high punch_low)]
 	far [run_towards kick_high]
+	far and weaker[walk_towards kick_high]
+	far and stronger[run_towards punch_high]
 	near [choose(jump walk_away) choose(kick_high block_low)]
-	near and much_stronger[choose(stand crouch) kick_low]
-	weaker or stronger[walk_towards punch_high]
-	near and much_weaker[run_away choose(block_high block_low)]
 }

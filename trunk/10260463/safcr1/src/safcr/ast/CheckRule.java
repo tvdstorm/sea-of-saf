@@ -65,7 +65,7 @@ public class CheckRule implements VisitorInterface {
 			found = true;
 			condition = con.getType();
 		}
-		if(con.getType().equals(searchDistance)){
+		else if(con.getType().equals(searchDistance)){
 			foundConditions = true;
 			found = true;
 			distance = con.getType();

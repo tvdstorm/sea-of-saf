@@ -22,10 +22,10 @@ public class ConditionData {
 	public String getCondition(int botStrenght1, int botStrenght2){
 		int diff = botStrenght1 - botStrenght2;
 		
-		if(diff > 0 && diff <= 10) return "stronger";
-		else if(diff > 10) return "much_stronger";
-		else if(diff < 0 && diff >= -10) return "weaker";
-		else if(diff < -10) return "much_weaker";
+		if(diff > 0 && diff <= 20) return "stronger";
+		else if(diff > 20) return "much_stronger";
+		else if(diff < 0 && diff >= -20) return "weaker";
+		else if(diff < -20) return "much_weaker";
 		
 		return "even";
 	}
