@@ -68,18 +68,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Bot bot1 = getBotFromFile("saf/tests/geneticFighter.saf");
-        Bot bot2 = getBotFromFile("saf/tests/jackieChan.saf");
+        Bot bot1 = getBotFromFile("src/saf/tests/geneticFighter.saf");
+        Bot bot2 = getBotFromFile("src/saf/tests/jackieChan.saf");
         
         System.out.println( bot1.botSummaryAsString() );
         System.out.println( bot2.botSummaryAsString() );
         
         Game game = new Game(bot1, bot2);
-        try {
-            game.runTimeStep();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            java.lang.System.exit(1);
-        }
+        game.runGUI();
+
      }   
 }
