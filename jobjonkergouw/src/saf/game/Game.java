@@ -8,12 +8,12 @@ import saf.ErrorHandler;
  *
  */
 public class Game {
-	private Bot bot1;
-	private Bot bot2;
+	private GameBot bot1;
+	private GameBot bot2;
 	
-	private final double GAME_WIDTH = 15.;	// size of game area in game position units
-	private final int SLEEPTIME = 1000;		// determines real clock time per timestep
-	private final double dt	= 0.1;			// size of time increments
+	private final double GAME_WIDTH = 14.;	// size of game area in game position units
+	private final int SLEEPTIME = 50;		// determines real clock time per timestep
+	private final double dt	= 0.05;			// size of time increments
 	
 	private Window gameWindow;
 	boolean enableGUI;
@@ -24,7 +24,7 @@ public class Game {
 	 * @param bot1	first bot
 	 * @param bot2  second bot
 	 */
-	public Game(Bot bot1, Bot bot2) {
+	public Game(GameBot bot1, GameBot bot2) {
 		this.bot1 = bot1;
 		this.bot2 = bot2;
 
@@ -57,6 +57,16 @@ public class Game {
 	}
 	
 	/**
+	 * Run the game with both graphics and text
+	 */
+	public void runGUIWithText() {
+		enableGUI = true;
+		enableText = true;		
+		runGame();		
+	}	
+	
+	
+	/**
 	 * Run the game by iterating over time
 	 */
 	private void runGame() {
@@ -64,8 +74,8 @@ public class Game {
 			gameWindow = new Window(GAME_WIDTH, bot1, bot2);
 		}
 		if (enableText) {
-			System.out.println( bot1.botSummaryAsString() );
-			System.out.println( bot2.botSummaryAsString() );			
+			System.out.println( bot1.attributesAsString() );
+			System.out.println( bot2.attributesAsString() );			
 		}
 
 		for (double t=0; !bot1.isDead() && !bot2.isDead(); t += dt ) {
@@ -78,6 +88,14 @@ public class Game {
 			checkAndUpdateBot(t, bot1, bot2);
 			checkAndUpdateBot(t, bot2, bot1);			
 		}
+		if (enableText) {
+			if ( bot1.isDead() ) {
+				System.out.println(bot1.getName() + " is dead!");				
+			}
+			if ( bot2.isDead() ) {
+				System.out.println(bot2.getName() + " is dead!");				
+			}
+		}
 		
 
 	}
@@ -88,19 +106,20 @@ public class Game {
 	 * @param botA	= the bot
 	 * @param botB  = his opponent
 	 */
-	private void checkAndUpdateBot(double t, Bot botA, Bot botB) {
+	private void checkAndUpdateBot(double t, GameBot botA, GameBot botB) {
 		if ( botA.isTimeForNextAction(t) ) {
 			botA.updateBotActions(botB);
 			botA.updateTimeForNextAction();
 			
 			if (enableGUI) {
-				gameWindow.setBotStates(botA, botB);
+				// Note: Here we must use bot1, bot2; not the arguments of this method!
+				gameWindow.setBotStates(bot1, bot2);
 				gameWindow.updateScreen();
 			}
 			if (enableText) {
-				System.out.println("Bot states at t=" + t);
-				System.out.print(bot1.botStateAsString());
-				System.out.println(bot2.botStateAsString());					
+				System.out.println("GameBot states at t=" + t);
+				System.out.print(bot1.statesAsString());
+				System.out.println(bot2.statesAsString());					
 			}
 		}		
 	}
