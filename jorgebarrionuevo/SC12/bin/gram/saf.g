@@ -8,8 +8,8 @@ options {
 tokens{
   BEHAVIOUR;
   CHARACTERISTIC;
-  BETWEEN;
   PROGRAM;
+  FIGHTER;
 }
 
 @header {

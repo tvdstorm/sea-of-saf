@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-06 10:29:15
+// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-06 12:54:55
 
   package Parser;
   import model.*;
@@ -15,18 +15,18 @@ import org.antlr.runtime.tree.*;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class safParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "BEHAVIOUR", "BETWEEN", "CHARACTERISTIC", "CHOOSE", "CONDITION_TYPE", "DIGIT", "EQ", "FIGHT_ACTION", "ID", "L_BRACKET", "L_CURLY", "L_PAR", "MOVE_ACTION", "OR", "PROGRAM", "R_BRACKET", "R_CURLY", "R_PAR", "WS"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "AND", "BEHAVIOUR", "CHARACTERISTIC", "CHOOSE", "CONDITION_TYPE", "DIGIT", "EQ", "FIGHTER", "FIGHT_ACTION", "ID", "L_BRACKET", "L_CURLY", "L_PAR", "MOVE_ACTION", "OR", "PROGRAM", "R_BRACKET", "R_CURLY", "R_PAR", "WS"
     };
 
     public static final int EOF=-1;
     public static final int AND=4;
     public static final int BEHAVIOUR=5;
-    public static final int BETWEEN=6;
-    public static final int CHARACTERISTIC=7;
-    public static final int CHOOSE=8;
-    public static final int CONDITION_TYPE=9;
-    public static final int DIGIT=10;
-    public static final int EQ=11;
+    public static final int CHARACTERISTIC=6;
+    public static final int CHOOSE=7;
+    public static final int CONDITION_TYPE=8;
+    public static final int DIGIT=9;
+    public static final int EQ=10;
+    public static final int FIGHTER=11;
     public static final int FIGHT_ACTION=12;
     public static final int ID=13;
     public static final int L_BRACKET=14;
@@ -1331,24 +1331,24 @@ public TreeAdaptor getTreeAdaptor() {
 
     public static final BitSet FOLLOW_fighter_in_program103 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ID_in_fighter131 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_L_CURLY_in_fighter133 = new BitSet(new long[]{0x0000000000200280L});
-    public static final BitSet FOLLOW_characteristic_in_fighter135 = new BitSet(new long[]{0x0000000000200280L});
-    public static final BitSet FOLLOW_behaviour_in_fighter139 = new BitSet(new long[]{0x0000000000200200L});
+    public static final BitSet FOLLOW_L_CURLY_in_fighter133 = new BitSet(new long[]{0x0000000000200140L});
+    public static final BitSet FOLLOW_characteristic_in_fighter135 = new BitSet(new long[]{0x0000000000200140L});
+    public static final BitSet FOLLOW_behaviour_in_fighter139 = new BitSet(new long[]{0x0000000000200100L});
     public static final BitSet FOLLOW_R_CURLY_in_fighter154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_CHARACTERISTIC_in_characteristic182 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_EQ_in_characteristic184 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_CHARACTERISTIC_in_characteristic182 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_EQ_in_characteristic184 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_DIGIT_in_characteristic186 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_condition_in_behaviour208 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_conditionType_in_condition236 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_L_BRACKET_in_condition238 = new BitSet(new long[]{0x0000000000020100L});
+    public static final BitSet FOLLOW_L_BRACKET_in_condition238 = new BitSet(new long[]{0x0000000000020080L});
     public static final BitSet FOLLOW_action_in_condition243 = new BitSet(new long[]{0x0000000000100000L});
     public static final BitSet FOLLOW_R_BRACKET_in_condition245 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_CONDITION_TYPE_in_conditionType268 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_moveAction_in_action296 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_fightAction_in_action300 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_chooseAction_in_action314 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_chooseAction_in_action314 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_chooseAction_in_action318 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_moveAction_in_action329 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_moveAction_in_action329 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_chooseAction_in_action333 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_chooseAction_in_action344 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_fightAction_in_action348 = new BitSet(new long[]{0x0000000000000002L});
