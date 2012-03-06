@@ -29,10 +29,8 @@ public class ChooseAction extends Action{
 		return listActions ;
 	}
 	
-	
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);
 	}
-
 }
