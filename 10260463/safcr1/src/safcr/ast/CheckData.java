@@ -56,6 +56,7 @@ public class CheckData implements VisitorInterface {
 	@Override
 	public void visit(Bot bot) {
 		currentBot = bot.getName();
+		currentRule = 0;
 		bot.getPersonality().accept(this);
 		bot.getBehaviour().accept(this);
 	}
