@@ -3,6 +3,8 @@ package com.blommesteijn.uva.sc.saf.runner.model.game;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.ActiveFighter;
+
 
 public class Game implements IGame
 {
@@ -50,6 +52,11 @@ public class Game implements IGame
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public void end() 
+	{
+		_gameRunner.stop();		
 	}
 
 

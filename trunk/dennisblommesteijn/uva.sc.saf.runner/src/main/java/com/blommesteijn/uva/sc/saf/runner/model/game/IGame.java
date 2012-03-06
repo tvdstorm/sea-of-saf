@@ -11,5 +11,6 @@ public interface IGame
 	IGameRunner getGameRunner();
 	
 	void start();
+	void end();
 
 }

@@ -4,8 +4,11 @@ package com.blommesteijn.uva.sc.saf.ast.types;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.blommesteijn.uva.sc.saf.utils.RandUtil;
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
 import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 
@@ -33,7 +36,6 @@ public class Behaviour extends AstNode
 	{
 		super();
 		_line = line;
-//		_locations
 		this.append((AstNode)new Condition(line, ident));
 	}
 	
@@ -54,8 +56,6 @@ public class Behaviour extends AstNode
 		else if (action.isMove())
 			_moves.add(action);
 	}
-	
-	
 
 	public void register(AstNode astNode)
 	{
@@ -79,9 +79,58 @@ public class Behaviour extends AstNode
 		return _moves;
 	}
 	
+	public Action getMove()
+	{
+		int size = _moves.size();
+		if(size > 1)
+			return _moves.get(RandUtil.getRandom(0, size));
+		return _moves.get(0);
+	}
+	
+	public Action getAttack()
+	{
+		int size = _attacks.size();
+		if(size > 1)
+		{
+			int random = RandUtil.getRandom(0, size);
+			return _attacks.get(random);
+		}
+		return _attacks.get(0);
+	}
+	
 	public List<Action> getAttacks()
 	{
 		return _attacks;
+	}
+	
+	
+	
+	public static EMove getMove(Action move) 
+	{
+		EMove ret = null;
+		for(EMove e : EMove.values())
+		{
+			if(e.getIdent().equals(move.getIdent()))
+			{
+				ret = e;
+				break;
+			}
+		}
+		return ret;
+	}
+
+	public static EAttack getAttack(Action attack) 
+	{
+		EAttack ret = null;
+		for(EAttack e : EAttack.values())
+		{
+			if(e.getIdent().equals(attack.getIdent()))
+			{
+				ret = e;
+				break;
+			}
+		}
+		return ret;
 	}
 	
 	/**

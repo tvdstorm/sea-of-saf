@@ -71,30 +71,30 @@ public class ActiveFighterDraw
 	private static String[] getAttackDefault()
 	{
 		return new String[] {
-				" ()  ",
-				"/---/",
-				" ||  ",
-				" /\\ "
+				" ()     ",
+				"/---/   ",
+				" ||     ",
+				" /\\    "
 		};
 	}
 	
 	private static String[] getAttackBlockHigh()
 	{
 		return new String[] {
-				" () |",
-				"/---/",
-				" ||-|",
-				" /   "
+				" () |   ",
+				"/---/   ",
+				" ||-|   ",
+				" /      "
 		};
 	}
 	
 	private static String[] getAttackBlockLow()
 	{
 		return new String[] {
-				" ()  ",
-				"/---|",
-				" ||-\\",
-				" /  |"
+				" ()    ",
+				"/---|  ",
+				" ||-\\  ",
+				" /  |   "
 		};	
 	}
 	
@@ -111,10 +111,10 @@ public class ActiveFighterDraw
 	private static String[] getAttackPunchLow()
 	{
 		return new String[] {
-				" ()    ",
-				" ---=\\ ",
-				" ||   \\-",
-				" /\\    "
+				" ()     ",
+				" ---=\\  ",
+				" ||   \\- ",
+				" /\\     "
 		};	
 	}
 	

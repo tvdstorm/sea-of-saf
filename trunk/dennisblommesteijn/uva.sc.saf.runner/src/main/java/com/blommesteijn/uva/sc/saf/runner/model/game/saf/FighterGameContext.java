@@ -3,14 +3,14 @@
  */
 package com.blommesteijn.uva.sc.saf.runner.model.game.saf;
 
-import java.util.LinkedList;
 import java.util.List;
 
+import com.blommesteijn.uva.sc.saf.ast.types.Action;
 import com.blommesteijn.uva.sc.saf.ast.types.Behaviour;
 import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
-import com.blommesteijn.uva.sc.saf.ast.types.Condition;
 import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
-import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
 import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IDraw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IGame;
@@ -27,11 +27,13 @@ import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.ActiveFighter;
  */
 public class FighterGameContext implements IGameContext
 {
+	private static final long UPDATE_INTERFAL = 500;
 	private IGame _game = null;
 	private Fighter _fighter = null;
 	private ActiveFighter _activeFighter = null;
 	private Arena _arena = null;
 	private Behaviour _behaviour = null;
+	private long _lastGameUpdate = 0L;
 	
 
 	/**
@@ -45,7 +47,9 @@ public class FighterGameContext implements IGameContext
 		_game = game;
 		_arena = arena;
 		_fighter = fighter;
+		_lastGameUpdate = System.currentTimeMillis();
 	}
+	
 	
 	
 	
@@ -57,11 +61,12 @@ public class FighterGameContext implements IGameContext
 	{
 		//initiate new fighter as an active fighter
 		_activeFighter = new ActiveFighter(_fighter);
+		
 		List<Behaviour> behaviours = _fighter.getBehaviour();
 		for(Behaviour behaviour : behaviours)
 		{
 			Task task = new Task(behaviour);
-			_activeFighter.add(task);
+			_activeFighter.getActions().add(task);
 		}
 		//add fighter to the arena
 		_arena.addFighter(_activeFighter);
@@ -91,48 +96,23 @@ public class FighterGameContext implements IGameContext
 	}
 
 	/* (non-Javadoc)
-	 * @see com.blommesteijn.uva.sc.saf.runner.model.game.interfaces.IGameContext#update()
+	 * @see co m.blommesteijn.uva.sc.saf.runner.model.game.interfaces.IGameContext#update()
 	 */
 	public void update() throws GameException
 	{
-		
-		//try all active tasks
-		while(_activeFighter.hasNext())
+		if(this.mustUpdate())
 		{
-			//get task
-			Task task = _activeFighter.next();
+			//get next fighter behaviour
+			_behaviour = _activeFighter.getNextBehaviour(_arena);
+			EMove move = Behaviour.getMove(_behaviour.getMove());
+			EAttack attack = Behaviour.getAttack(_behaviour.getAttack());
+			_activeFighter.setMove(move);
+			_activeFighter.setAttack(attack);
 			
-			//collect arena properties
-			List<Condition> currentState = new LinkedList<Condition>();
-			if(_arena.isFar(_fighter))
-				currentState.add(new Condition(0, ECondition.FAR.getIdent()));
-			else if(_arena.isNear(_fighter))
-				currentState.add(new Condition(0, ECondition.NEAR.getIdent()));
-			
-			if(_arena.isStronger(_fighter))
-				currentState.add(new Condition(0, ECondition.STRONGER.getIdent()));
-			else if(_arena.isWeaker(_fighter))
-				currentState.add(new Condition(0, ECondition.WEAKER.getIdent()));
-			else if(_arena.areEven())
-				currentState.add(new Condition(0, ECondition.EVEN.getIdent()));
-			
-			if(_arena.isMuchStronger(_fighter))
-				currentState.add(new Condition(0, ECondition.MUCH_STRONGER.getIdent()));
-			if(_arena.isMuchWeaker(_fighter))
-				currentState.add(new Condition(0, ECondition.MUCH_WEAKER.getIdent()));
-			
-			
-			//skip task if it cannot be performed
-			_behaviour  = task.getNextBehaviour(currentState);
-			if(_behaviour == null)
-				continue;
-			
-			System.out.println(_fighter.getIdent() + _behaviour);
-			
-			
+			//perform movement
+			_arena.move(_activeFighter, move);
+			_arena.attack(_activeFighter, attack);		
 		}
-
-		
 	}
 	
 	
@@ -144,18 +124,15 @@ public class FighterGameContext implements IGameContext
 	 */
 	public void draw(IDraw draw)
 	{
-		
-		
-//		String positionCache = String.valueOf(_activeFighter.getPosition());
-//		
-//		draw.printAll('1');
-		
-		String[] drawing = ActiveFighterDraw.getAttack(EAttack.KICK_HIGH, true);
-//		System.out.println(drawing);
-		draw.printFighter(drawing, _activeFighter.getPosition());
-//		draw.printFighter(ActiveFighterDraw.getAttack(null, true), _activeFighter.getPosition());
-		
-		
 	}
 
+	
+	private boolean mustUpdate()
+	{
+		long currentTimeMillis = System.currentTimeMillis();
+		boolean ret = (currentTimeMillis - _lastGameUpdate  > UPDATE_INTERFAL);
+		if(ret)
+			_lastGameUpdate = currentTimeMillis;
+		return ret;
+	}
 }

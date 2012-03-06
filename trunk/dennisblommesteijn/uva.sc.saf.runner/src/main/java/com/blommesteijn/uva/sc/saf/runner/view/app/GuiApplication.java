@@ -45,11 +45,16 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.JTextField;
+import java.awt.Font;
 
 public class GuiApplication
 {
 	private JFrame _frame;
-	private JTextPane _outputPane;
+	private JTextPane _outputPaneLeft;
+	private JTextField _score;
+	private JTextField _action;
+	private JTextPane _outputPaneRight;
 
 	/**
 	 * Create the application.
@@ -107,14 +112,33 @@ public class GuiApplication
 		contentScrollPane.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		contentScrollPane.setBackground(Color.WHITE);
 		contentScrollPane.setMinimumSize(minimumSize);
+		contentScrollPane.setLayout(new BorderLayout(0, 0));
 				
 		
-		_outputPane = new JTextPane();
-		_outputPane.setEditable(false);
-		contentScrollPane.add(_outputPane);
+		_outputPaneLeft = new JTextPane();
+		_outputPaneLeft.setFont(new Font("Courier", Font.PLAIN, 13));
+		_outputPaneLeft.setText("center");
+		_outputPaneLeft.setEditable(false);
+		contentScrollPane.add(_outputPaneLeft, BorderLayout.WEST);
 		
 		
 		JSplitPane center = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, contentScrollPane);
+		
+		_score = new JTextField();
+		_score.setFont(new Font("Courier", Font.PLAIN, 13));
+		contentScrollPane.add(_score, BorderLayout.NORTH);
+		_score.setColumns(10);
+		
+		_action = new JTextField();
+		_action.setFont(new Font("Courier", Font.PLAIN, 10));
+		_action.setColumns(10);
+		contentScrollPane.add(_action, BorderLayout.SOUTH);
+		
+		_outputPaneRight = new JTextPane();
+		_outputPaneRight.setText("center");
+		_outputPaneRight.setFont(new Font("Courier", Font.PLAIN, 13));
+		_outputPaneRight.setEditable(false);
+		contentScrollPane.add(_outputPaneRight, BorderLayout.EAST);
 		center.setBackground(new Color(250,250,250));
 		center.setForeground(Color.LIGHT_GRAY);
 		center.setContinuousLayout(true);
@@ -136,71 +160,26 @@ public class GuiApplication
 		return _frame;
 	}
 	
-	public void setOutputText(String text)
+	
+	
+	public void setOutputPaneLeft(String text)
 	{
-		_outputPane.setText(text);
+		_outputPaneLeft.setText(text);
 	}
 	
+	public void setActionText(String text)
+	{
+		_action.setText(text);
+	}
 	
+	public void setScoreText(String text)
+	{
+		_score.setText(text);
+	}
 
-//	@SuppressWarnings("serial")
-//	private static class CustomTreeCellRenderer extends DefaultTreeCellRenderer
-//	{
-//
-//		Icon rendererIcon;
-//
-//		public void setRendererIcon(Icon myIcon)
-//		{
-//			this.rendererIcon = myIcon;
-//		};
-//
-//		public Component getTreeCellRendererComponent(JTree tree, Object value,
-//				boolean selected, boolean expanded, boolean leaf, int row,
-//				boolean hasFocus)
-//		{
-//
-//			Component ret = super.getTreeCellRendererComponent(tree, value,
-//					selected, expanded, leaf, row, hasFocus);
-//
-//			JLabel label = (JLabel) ret;
-//
-//			label.setIcon(rendererIcon);
-//
-//			return ret;
-//		}
-//	}
-//
-//	private final class EmptyIcon implements Icon
-//	{
-//
-//		private int width;
-//		private int height;
-//
-//		public EmptyIcon()
-//		{
-//			this(0, 0);
-//		}
-//
-//		public EmptyIcon(int width, int height)
-//		{
-//			this.width = width;
-//			this.height = height;
-//		}
-//
-//		public int getIconHeight()
-//		{
-//			return height;
-//		}
-//
-//		public int getIconWidth()
-//		{
-//			return width;
-//		}
-//
-//		public void paintIcon(Component c, Graphics g, int x, int y)
-//		{
-//		}
-//
-//	}
+	public void setOutputPaneRight(String text) 
+	{
+		_outputPaneRight.setText(text);
+	}
 
 }

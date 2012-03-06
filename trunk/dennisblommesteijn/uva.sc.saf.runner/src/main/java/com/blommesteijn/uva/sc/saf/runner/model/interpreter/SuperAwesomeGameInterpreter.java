@@ -59,6 +59,7 @@ public class SuperAwesomeGameInterpreter implements IInterpreter
 		List<Fighter> fighters = new LinkedList<Fighter>();
 		for(AstNode astNode : _astNodes)
 		{
+//			System.out.println(astNode.getFighters());
 			fighters.addAll(astNode.getFighters());
 		}
 		return fighters;

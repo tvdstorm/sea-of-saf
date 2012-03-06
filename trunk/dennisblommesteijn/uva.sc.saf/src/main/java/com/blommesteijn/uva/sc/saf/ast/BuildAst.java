@@ -106,7 +106,16 @@ public class BuildAst
 		
 		try
 		{
-			_astNodes.addAll(walker.astNode());
+//			_astNodes.addAll();
+			List<AstNode> astNode = walker.astNode();
+			
+			//run static checker
+			_staticChecker = new StaticChecker(astNode);
+			if(_staticChecker.hasIssues())
+				throw new BuildAstException("static check failed");
+			
+			_astNodes.addAll(astNode);
+			
 		}
 		catch(NullPointerException e)
 		{
@@ -117,11 +126,21 @@ public class BuildAst
 			throw new BuildAstException("could not recongnize nodesteam");
 		}		
 		
+//		System.out.println("------------------");
+//		for(AstNode node : _astNodes)
+//		{
+//			System.out.println("node: " + node.getFighters().size());
+//		}
 		
-		//run static checker
-		_staticChecker = new StaticChecker(_astNodes);
-		if(_staticChecker.hasIssues())
-			throw new BuildAstException("static check failed");
+		
+
+		
+//		System.out.println("------------------");
+//		for(AstNode node : _astNodes)
+//		{
+//			System.out.println("node: " + node.getFighters().size());
+//		}
+		
 		
 		return _astNodes;
 	}

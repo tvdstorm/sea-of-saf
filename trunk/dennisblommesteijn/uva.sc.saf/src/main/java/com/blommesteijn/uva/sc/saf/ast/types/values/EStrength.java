@@ -10,7 +10,10 @@ public enum EStrength
 	PUNCH_POWER("punchPower", new double[]{ 1.0, 10.0 }, EStrengthType.POWER),
 	PUNCH_REACH("punchReach", new double[]{ 1.0, 10.0 }, EStrengthType.REACH),
 	KICK_REACH("kickReach", new double[]{ 1.0, 10.0 }, EStrengthType.REACH),
-	KICK_POWER("kickPower", new double[]{ 1.0, 10.0 }, EStrengthType.POWER);
+	KICK_POWER("kickPower", new double[]{ 1.0, 10.0 }, EStrengthType.POWER),
+	HEIGHT("height", new double[]{ 1.0, 10.0 }, EStrengthType.ASSET),
+	WIDTH("width", new double[]{ 1.0, 10.0 }, EStrengthType.ASSET),
+	SPEED("speed", new double[]{ 1.0, 10.0 }, EStrengthType.ASSET);
 	
 	private static final int FST = 0;
 	private static final int SND = 1;

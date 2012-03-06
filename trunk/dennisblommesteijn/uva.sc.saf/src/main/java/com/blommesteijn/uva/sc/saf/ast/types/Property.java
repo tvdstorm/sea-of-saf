@@ -6,6 +6,8 @@ import java.util.List;
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
 import com.blommesteijn.uva.sc.saf.ast.SerialNode;
 import com.blommesteijn.uva.sc.saf.ast.types.exceptions.PropertyValueException;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
 import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
@@ -139,6 +141,49 @@ public class Property extends AstNode
 		else
 			sb.append(indent).append("]").append(StringUtil.NEW_LINE);
 		return sb.toString();
+	}
+	
+	
+	public static EStrength getStrength(Property strength) 
+	{
+		EStrength ret = null;
+		for(EStrength e : EStrength.values())
+		{
+			if(e.getIdent().equals(strength.getIdent()))
+			{
+				ret = e;
+				break;
+			}
+		}
+		return ret;
+	}
+
+	
+	public boolean isAttack(EAttack attack) 
+	{
+		EStrength strength = this.getStrength(this);
+		
+		boolean ret = false;
+		switch(attack)
+		{
+			case KICK_HIGH:
+			case KICK_LOW:
+				ret = (strength == EStrength.KICK_POWER);
+				break;
+			case PUNCH_HIGH:
+			case PUNCH_LOW:
+				ret = (strength == EStrength.PUNCH_POWER);
+				break;
+			default:
+				break;
+		}
+		
+		return ret;
+	}
+	
+	public boolean isBlock(EAttack attack)
+	{
+		return true;
 	}
 	
 

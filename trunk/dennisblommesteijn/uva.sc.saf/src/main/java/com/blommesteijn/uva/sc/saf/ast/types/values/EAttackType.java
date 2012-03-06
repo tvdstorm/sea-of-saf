@@ -1,12 +1,11 @@
 package com.blommesteijn.uva.sc.saf.ast.types.values;
 
 
-public enum EStrengthType
+public enum EAttackType
 {
 	//Strengths: punchReach, kickReach, kickPower, punchPower.
-	REACH("reach"),
-	POWER("power"),
-	ASSET("asset");
+	BLOCK("block"),
+	ATTACK("attack");
 	
 	private String _ident = null;
 	
@@ -15,7 +14,7 @@ public enum EStrengthType
 	 * @param ident identity
 	 * @param range min max range
 	 */
-	EStrengthType(String ident)
+	EAttackType(String ident)
 	{
 		_ident = ident;
 	}

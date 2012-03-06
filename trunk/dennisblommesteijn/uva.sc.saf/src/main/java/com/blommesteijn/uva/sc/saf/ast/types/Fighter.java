@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
 import com.blommesteijn.uva.sc.saf.ast.SerialNode;
+import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
 import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
 import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
 import com.blommesteijn.uva.sc.saf.ast.types.values.EStrengthType;
@@ -144,6 +145,8 @@ public class Fighter extends AstNode
 		//create new properties
 		this.append(new Property("weight", weight));
 		this.append(new Property("height", height));
+		if(speed < 1)
+			speed = 1;
 		this.append(new Property("speed", speed));
 	}
 	
@@ -152,7 +155,7 @@ public class Fighter extends AstNode
 	 * @param ident type of property
 	 * @return property of type
 	 */
-	private Property getProperty(EStrength ident)
+	public Property getProperty(EStrength ident)
 	{
 		Property ret = null;
 		for(Property p : _properties)
@@ -165,6 +168,8 @@ public class Fighter extends AstNode
 		}
 		return ret;
 	}
+	
+	
 	
 	/**
 	 * Get Property by ident name
@@ -184,7 +189,13 @@ public class Fighter extends AstNode
 		}
 		return ret;
 	}
-		
+//	
+//	public Property getProperty(EAttack attack) 
+//	{
+//		
+//		return null;
+//	}
+//		
 		
 	/**
 	 * Get Property by Strength SubType (ex: reach, power)
@@ -202,6 +213,16 @@ public class Fighter extends AstNode
 		}
 		return ret;
 	}
+	
+//	public Property getProperty(EStrength strength)
+//	{
+//		Property ret = null;
+//		for(Property p : _properties)
+//		{
+//			this.getpr
+//		}
+//		return ret;
+//	}
 	
 	
 	
@@ -235,5 +256,8 @@ public class Fighter extends AstNode
 			sb.append(indent).append("]").append(StringUtil.NEW_LINE);
 		return sb.toString();
 	}
+
+
+
 	
 }
