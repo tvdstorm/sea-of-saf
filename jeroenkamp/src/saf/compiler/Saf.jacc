@@ -1,0 +1,44 @@
+
+%package saf.compiler
+%{
+import saf.compiler.types.*;
+import saf.compiler.common.*;
+%}
+%semantic SafObject
+%token OR AND '{' '}' '(' ')' '[' ']' '=' VAR CHOOSE INTEGER
+%left  OR AND
+%left  CHOOSE
+
+%%
+
+prog : VAR '{' statements '}' {$$ =new Fighter((StringValue)$1,(Statements)$3);}
+	|  VAR '{' '}' {$$ =new Fighter((StringValue)$1);}
+	;
+statements: statement statements {$$=new Statements((Statement)$1,(Statements) $2);}
+	| statement{$$ = new Statements((Statement)$1);}
+	;
+statement: VAR '=' INTEGER {$$=new VariableStatement((NamesValue)$1,(IntValue) $3);}
+	| condition '[' move action ']' {$$=new ActionStatement((ICondition)$1,(IMoveAction) $3,(IFightAction) $4);}
+	;
+action: CHOOSE '(' action action ')' {$$=new ChooseAction((IFightAction)$3,(IFightAction)$4);}
+	| VAR {$$ = new Action((StringValue)$1);}
+	;
+move: CHOOSE '(' move move ')' {$$=new ChooseMoveAction((IMoveAction)$3,(IMoveAction)$4);}
+	| VAR {$$ = new MoveAction((StringValue)$1);}
+	;
+condition: subcondition AND condition { $$=new AndCondition((ICondition)$1,(ICondition) $3);}
+	| subcondition OR condition { $$=new OrCondition((ICondition)$1, (ICondition)$3);}
+	| subcondition 
+	;
+	subcondition:'(' condition ')'
+	| VAR { $$=new Condition((StringValue)$1);}
+	;
+%%
+  private SafLexer lexer;
+  public SafParser(SafLexer lexer) { this.lexer = lexer; }
+  private void yyerror(String msg) {
+    ErrorModule.addError(ErrorType.FatalError, yyerrno<0 ? msg : yyerrmsgs[yyerrno]);
+  }
+  public SafObject getRootNode(){
+  	return yyrv;
+  }
