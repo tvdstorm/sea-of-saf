@@ -44,14 +44,14 @@ public class SafScreen extends Canvas{
 		}
 	}
 	private int getPosition(int position){
-		return position *10+50;
+		return position *20+10;
 	}
 	private void drawFighters(Graphics g){
 		final int yoffset=100;
-		final Point point =new Point(30,100);
-		FighterImage f=FighterImage.createImage(m_Player1.getMoveState());
+		final Point point =new Point(50,100);
+		FighterImage f=FighterImage.getFighterImage();
 		Image img=f.createImage(m_Player1);
-		FighterImage fighter2=FighterImage.createImage(m_Player2.getMoveState());
+		FighterImage fighter2=FighterImage.getFighterImage();
 		Image img2=fighter2.createImage(m_Player2);
 		int p2pos=getPosition( m_Player2.getPosition());
 		int p1pos=getPosition( m_Player1.getPosition());
