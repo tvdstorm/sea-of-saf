@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import saf.ErrorHandler;
+import saf.bot.GameBot;
 import saf.bot.EnumTypes.AttackType;
 import saf.bot.EnumTypes.MoveType;
 import saf.bot.EnumTypes.Orientation;
@@ -64,6 +65,11 @@ public class Window extends JFrame
 		this.setVisible(true);
 	}
 	
+	/**
+	 * Store the bot states into this instance
+	 * @param bot1
+	 * @param bot2
+	 */
 	public void setBotStates(GameBot bot1, GameBot bot2) {
 		bot1X = (int)(scaleFactor * bot1.getCurrentPosition());
 		if (bot1.isDead()) {
@@ -96,6 +102,9 @@ public class Window extends JFrame
 		
 		private static final long serialVersionUID = 2;
 	
+		/**
+		 * Paint both the background and the fighters with current states
+		 */
 		public void paint(Graphics g)  {
 			g.setColor(grassColor);
 			g.fillRect (0, WINDOW_HEIGHT - GRASS_HEIGHT, WINDOW_WIDTH, GRASS_HEIGHT);  
