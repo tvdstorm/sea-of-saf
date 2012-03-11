@@ -1,6 +1,7 @@
 package saf.game;
 
 import saf.ErrorHandler;
+import saf.bot.GameBot;
 
 /**
  * Let two saf bots fight with graphics or text.
@@ -25,14 +26,17 @@ public class Game {
 	 * @param bot2  second bot
 	 */
 	public Game(GameBot bot1, GameBot bot2) {
+		if (bot1 == null || bot2 == null) {
+			ErrorHandler.exitWithString("Incorrect bot given to play with");
+		}	
 		this.bot1 = bot1;
 		this.bot2 = bot2;
 
 		bot1.setGameWidth(GAME_WIDTH);
 		bot2.setGameWidth(GAME_WIDTH);
 		
-		bot1.setCurrentPosition(5.);
-		bot2.setCurrentPosition(15);
+		bot1.setCurrentPosition(2.);
+		bot2.setCurrentPosition(12.);
 		
 		enableGUI = false;
 		enableText = false;
@@ -82,7 +86,7 @@ public class Game {
 			try {
 				Thread.sleep(SLEEPTIME);
 			} catch (java.lang.InterruptedException e) {
-				ErrorHandler.exitWithException(e);
+				ErrorHandler.printException(e);
 			}
 			
 			checkAndUpdateBot(t, bot1, bot2);
