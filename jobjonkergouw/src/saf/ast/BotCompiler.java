@@ -2,11 +2,10 @@ package saf.ast;
 
 import java.util.ArrayList;
 
-import saf.ast.nodes.*;
-import saf.game.Bot;
-import saf.game.BehaviourRule;
-import saf.game.EnumTypes.*;
 
+import saf.ast.nodes.*;
+import saf.bot.*;
+import saf.bot.EnumTypes.*;
 
 public class BotCompiler implements Visitor {
                    
@@ -30,9 +29,9 @@ public class BotCompiler implements Visitor {
         resetFighterPorperties();
     }
     
-    public Bot compileBot(Fighter fighterTree) {
+    public GameBot compileBot(Fighter fighterTree) {
         visit(fighterTree);
-        Bot result = new Bot(botName, punchReach, punchPower, kickReach, kickPower);
+        GameBot result = new GameBot(botName, punchReach, punchPower, kickReach, kickPower);
         for (BehaviourRule rule : behaviourRules) {
             result.addRule(rule);
         }

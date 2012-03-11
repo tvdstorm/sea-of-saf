@@ -4,9 +4,13 @@ import saf.ast.nodes.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Checks if an AST created from saf file is valid
+ * @author job
+ *
+ */
 public class Validator implements Visitor {
     private ArrayList<String> messages = new ArrayList<String>();
-    // print all message, not only errors
     private boolean verbose;
     private int errorsFound;                              
         
@@ -14,6 +18,10 @@ public class Validator implements Visitor {
         this(false);
     }
     
+    /**
+     * Use this constructor to enable verbosity: also get normal messages with your error messages.
+     * @param enableVerbosity
+     */
     public Validator(boolean enableVerbosity) {
         verbose = enableVerbosity;
         errorsFound = 0;
@@ -30,6 +38,11 @@ public class Validator implements Visitor {
         return result;
     }
     
+    /**
+     * Run the validator 
+     * @param fighter - a fighter tree
+     * @return true if it's a correct ast
+     */
     public boolean isValid(Fighter fighter) {
         visit(fighter);
         if (errorsFound == 0) {
@@ -38,8 +51,6 @@ public class Validator implements Visitor {
             return false;
         }
     }
-    
-    
     
     /************************************ Visit methods ************************************/
     
@@ -104,6 +115,7 @@ public class Validator implements Visitor {
         visitChildren(fighter);
     }
  
+    // Note: clone of visit(Fighter) !
     public void visit(Rule rule) {
         if (verbose) messages.add("Visiting Rule node");    
         visitChildren(rule);  
