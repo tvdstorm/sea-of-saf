@@ -36,6 +36,8 @@ public abstract class Fighter implements IFighter {
 		m_Health=m_MaxHealth;
 		m_Position=position;
 		m_Opponent=opponent;
+		m_MoveState=MoveType.stand;
+		m_ActionType=ActionType.block_high;
 	}
 	
 	public abstract List<ActionPair> doSomething();
