@@ -1,4 +1,0 @@
-JackieChan {
- punchReach = 10
- near[choose(jump jump) kick_high]
-}

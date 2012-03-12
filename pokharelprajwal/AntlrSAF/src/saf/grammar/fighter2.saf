@@ -1,0 +1,7 @@
+RajeshDai {
+	kickPower = 10
+	kickReach = 10
+	punchPower = 10 
+	punchReach = 10
+	always[choose(jump run_towards) kick_high]
+}

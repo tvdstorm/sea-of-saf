@@ -1,0 +1,10 @@
+JackieChan {
+ kickReach = 9
+ kickPower = 9
+ punchReach = 9
+ punchPower = 9
+ near[run_towards kick_low]
+ much_stronger[run_towards punch_high]
+ stronger [run_towards punch_low] 
+ always [run_towards kick_low]
+}
