@@ -14,13 +14,8 @@ public class Function extends Action {
 	
 	@Override
 	public void accept(INodeVisitor v) {
-		v.visit(this);
 		_parameters.accept(v);
-	}
-
-	@Override
-	public String GetTreeString() {
-		return getCondition() + "[" + getParameters().GetTreeString() + "]";
+		v.visit(this);
 	}
 
 	public String getCondition() {
@@ -30,5 +25,7 @@ public class Function extends Action {
 	public Parameters getParameters() {
 		return _parameters;
 	}
+
+	
 
 }
