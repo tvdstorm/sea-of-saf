@@ -5,54 +5,52 @@ import saf.ast.INodeVisitor;
 
 public class Parameters implements INodeVisitable {
 	
-	private final String _firstConditon;
-	private final String _secondCondition;
-	private final Choose _firstChoose;
-	private final Choose _secondChoose;
-	private final String _returnString;
+	private String _firstConditon;
+	private String _secondCondition;
+	private Choose _firstChoose;
+	private Choose _secondChoose;
+	private ParameterType _parameterType;
+	
+	public enum ParameterType {
+		IdentAndIdent,
+		ChooseAndIdent,
+		IdentAndChoose,
+		ChooseAndChoose
+	}
+	
+	public ParameterType getParameterType(){
+		return _parameterType;
+	}
 	
 	public Parameters(String firstCondition, String secondCondition){
 		this._firstConditon = firstCondition;
 		this._secondCondition = secondCondition;
-		this._firstChoose = null;
-		this._secondChoose = null;
-		this._returnString = firstCondition + " " + secondCondition;
+		_parameterType = ParameterType.IdentAndIdent;
 	}
 	
 	public Parameters(Choose firstCondition, String secondCondition){
-		this._firstConditon = null;
 		this._secondCondition = secondCondition;
 		this._firstChoose = firstCondition;
-		this._secondChoose = null;
-		this._returnString = firstCondition.GetTreeString() + " " + secondCondition;
+		_parameterType = ParameterType.ChooseAndIdent;
 	}
 	
 	public Parameters(String firstCondition, Choose secondCondition){
 		this._firstConditon = firstCondition;
-		this._secondCondition = null;
-		this._firstChoose = null;
 		this._secondChoose = secondCondition;
-		this._returnString = firstCondition + " " + secondCondition.GetTreeString();
+		_parameterType = ParameterType.IdentAndChoose;
 	}
 	
 	public Parameters(Choose firstCondition, Choose secondCondition){
-		this._firstConditon = null;
-		this._secondCondition = null;
 		this._firstChoose = firstCondition;
 		this._secondChoose = secondCondition;
-		this._returnString = firstCondition.GetTreeString() + " " + secondCondition.GetTreeString();
+		_parameterType = ParameterType.ChooseAndChoose;
 	}
 
 	@Override
 	public void accept(INodeVisitor v) {
-		v.visit(this);
 		if(_firstChoose != null) _firstChoose.accept(v);
 		if(_secondChoose != null) _secondChoose.accept(v);
-	}
-
-	@Override
-	public String GetTreeString() {
-		return this._returnString;
+		v.visit(this);
 	}
 
 	public String getFirstConditon() {

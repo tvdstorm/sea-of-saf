@@ -1,6 +1,5 @@
 package saf.ast.action;
 import saf.ast.*;
-import saf.ast.INodeVisitor;
 
 public class Operator extends Action {
 
@@ -16,16 +15,9 @@ public class Operator extends Action {
 	
 	@Override
 	public void accept(INodeVisitor v) {
-		v.visit(this);
 		if(getAction() != null) getAction().accept(v);
 		getRule().accept(v);
-	}
-
-	@Override
-	public String GetTreeString() {
-		String actionStr = "Null";
-		if(getAction() != null) actionStr = getAction().GetTreeString();
-		return   getOperator() + "(" + actionStr + ";" + getRule().GetTreeString() + ")";
+		v.visit(this);
 	}
 
 	public Action getAction() {
@@ -39,5 +31,7 @@ public class Operator extends Action {
 	public String getOperator() {
 		return _operator;
 	}
+
+	
 
 }

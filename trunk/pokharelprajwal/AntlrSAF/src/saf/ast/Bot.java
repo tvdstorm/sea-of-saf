@@ -1,4 +1,7 @@
 package saf.ast;
+
+import java.util.List;
+
 public class Bot implements INodeVisitable {
 
 	private final String _name;
@@ -11,13 +14,6 @@ public class Bot implements INodeVisitable {
 		this._behaviour = behaviour;
 	}
 	
-	@Override
-	public void accept(INodeVisitor v) {
-		v.visit(this);
-		getBehaviour().accept(v);
-		getPersonality().accept(v);
-	}
-
 	public Behaviour getBehaviour() {
 		return _behaviour;
 	}
@@ -30,18 +26,20 @@ public class Bot implements INodeVisitable {
 		return _name;
 	}
 	
-	@Override
-	public String GetTreeString() {
-		
-		String newLine = System.getProperty("line.separator");
-		StringBuilder retStr = new StringBuilder();
-		retStr.append(_name);
-		retStr.append(newLine);
-		retStr.append(_personality.GetTreeString());
-		retStr.append(newLine);
-		retStr.append(_behaviour.GetTreeString());
-		
-		return retStr.toString();
+	public List<Characterstics> getCharacterstics(){
+		return _personality.getCharacterstics();
 	}
+	
+	public List<Rule> getRules(){		
+		return _behaviour.getRules();
+	}
+
+	@Override
+	public void accept(INodeVisitor v) {
+		getBehaviour().accept(v);
+		getPersonality().accept(v);
+		v.visit(this);
+	}
+	
 
 }

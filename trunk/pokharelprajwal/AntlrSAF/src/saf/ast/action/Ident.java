@@ -15,13 +15,9 @@ public class Ident extends Action {
 		v.visit(this);
 	}
 
-	@Override
-	public String GetTreeString() {
-		return getName();
-	}
-
 	public String getName() {
 		return _name;
 	}
 
+	
 }

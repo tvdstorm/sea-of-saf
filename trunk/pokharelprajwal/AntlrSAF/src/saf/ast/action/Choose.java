@@ -17,11 +17,6 @@ public class Choose extends Action {
 		v.visit(this);
 	}
 
-	@Override
-	public String GetTreeString() { 
-		return "Choose(" + getActionFirst() + " " + getActionSecond() + ")";
-	}
-	
 	public String getActionFirst() {
 		return _actionFirst;
 	}
@@ -29,5 +24,6 @@ public class Choose extends Action {
 	public String getActionSecond() {
 		return _actionSecond;
 	}
-	
+
+		
 }

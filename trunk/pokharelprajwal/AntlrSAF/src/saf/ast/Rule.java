@@ -13,6 +13,18 @@ public class Rule implements INodeVisitable {
 		_rules.add(rule);
 	}
 	
+	public ArrayList<Rule> GetRules(){
+		return _rules;
+	}
+	
+	public ArrayList<Action> GetAction(){
+		return _action;
+	}
+	
+	public ArrayList<Operator> GetOperator(){
+		return _operator;
+	}
+	
 	public void AddAction(Action action){
 		_action.add(action);
 	}
@@ -24,14 +36,9 @@ public class Rule implements INodeVisitable {
 	}
 	
 	public void AddOperator(String operator, Action action, Rule rule){
-		
 		RemoveAction();
 		Operator o = new Operator(operator, action, rule);
 		_operator.add(o);
-	}
-	
-	public void AddToBehaviour(Behaviour behaviour){
-		behaviour.addRule(this);
 	}
 		
 	@Override
@@ -51,31 +58,6 @@ public class Rule implements INodeVisitable {
 		}
 		
 	}
-	
-	@Override
-	public String GetTreeString() {
-		
-		StringBuilder retStr = new StringBuilder();
-		
-		for(Action a : _action){
-			//retStr.append(newLine);
-			retStr.append(" ");
-			retStr.append(a.GetTreeString());
-		}
 
-		for(Rule r : _rules){
-			//retStr.append(newLine);
-			retStr.append(" ");
-			retStr.append(r.GetTreeString());
-		}
-		
-		for(Operator o : _operator){
-			//retStr.append(newLine);
-			retStr.append(" ");
-			retStr.append(o.GetTreeString());
-		}
-		
-		return retStr.toString();
-	}
 	
 }

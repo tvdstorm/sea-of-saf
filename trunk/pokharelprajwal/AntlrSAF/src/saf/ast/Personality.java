@@ -6,14 +6,6 @@ public class Personality implements INodeVisitable  {
 	
 	private final ArrayList<Characterstics> characterstics = new ArrayList<Characterstics>();
 
-	@Override
-	public void accept(INodeVisitor v) {
-		v.visit(this);
-		for(Characterstics c : characterstics){
-			c.accept(v);
-		}
-	}
-
 	public ArrayList<Characterstics> getCharacterstics() {
 		return characterstics;
 	}
@@ -21,16 +13,14 @@ public class Personality implements INodeVisitable  {
 	public void addCharacterstics(Characterstics characterstics) {
 		this.characterstics.add(characterstics);
 	}
-	
+
 	@Override
-	public String GetTreeString() {
-		StringBuilder retStr = new StringBuilder();
-		String newLine = System.getProperty("line.separator");
+	public void accept(INodeVisitor v) {
 		for(Characterstics c : characterstics){
-			retStr.append(newLine);
-			retStr.append(c.GetTreeString());
+			c.accept(v);
 		}
-		return retStr.toString();
+		v.visit(this);
 	}
 	
+		
 }

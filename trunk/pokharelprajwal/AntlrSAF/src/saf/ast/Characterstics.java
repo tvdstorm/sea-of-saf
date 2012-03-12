@@ -18,11 +18,6 @@ public class Characterstics implements INodeVisitable {
 	public void accept(INodeVisitor v) {
 		v.visit(this);
 	}
-	
-	@Override
-	public String GetTreeString() {
-		return getName() + " = " + getValue();
-	}
 
 	public String getName() {
 		return _name;
@@ -31,5 +26,6 @@ public class Characterstics implements INodeVisitable {
 	public String getValue() {
 		return _value;
 	}
+
 
 }
