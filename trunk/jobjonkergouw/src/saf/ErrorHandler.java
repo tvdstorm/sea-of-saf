@@ -16,9 +16,14 @@ public class ErrorHandler {
 		System.out.println(s);
 	}	
 	
-	public static void exitWithString(String s) {
-		System.out.println(s);
+	public static void exitWithException(Exception e) {
+		System.out.println( e.getMessage() );
         java.lang.System.exit(1);
 	}	
 	
+	public static void exitWithString(String s) {
+		System.out.println(s);
+        java.lang.System.exit(1);
+	}		
 }
+

@@ -4,6 +4,6 @@ chuckNorris {
     kickReach = 10
     punchReach = 10
     far [run_towards kick_high]
-    near [stand choose(kick_high punch_high punch_low)]
+    near [stand choose(kick_high punch_high)]
     always [walk_towards block_low]
 }

@@ -2,11 +2,13 @@ grammar SAF;
 
 options {
     language = Java;
+   // backtrack = true;
 }
 
 @header {
     package saf.syntax;
     import saf.ast.nodes.*;
+    import saf.bot.GameBot;
     import java.lang.String;
     
 }
@@ -15,11 +17,11 @@ options {
 
 /********************* Parser rules ************************/
 
-fighter returns [Fighter fighter]
-    :   name=ID                 { $fighter = new Fighter($name.text); }
+fighter returns [GameBot fighter]
+    :   name=ID                 { $fighter = new GameBot($name.text); }
         '{' 
-            (   strength        { $fighter.addChild($strength.s); }
-                | rule          { $fighter.addChild($rule.r); }
+            (   strength        { $fighter.addStrength($strength.s); }
+                | rule          { $fighter.addRule($rule.r); }
             )*
         '}'  
     ;
@@ -29,38 +31,46 @@ strength returns [Strength s]
     ;
    
 rule returns [Rule r]
-    :                           { $r = new Rule();}
-      ( 
-            ( c1=condition 'and' c2=condition)  { And and = new And(); $r.addChild(and); and.addChild($c1.c); and.addChild($c2.c); }
-          | ( c1=condition 'or' c2=condition )  { Or or = new Or(); $r.addChild(or); or.addChild($c1.c); or.addChild($c2.c); }
-          |   c1=condition                      { $r.addChild($c1.c); }
-      )  
-    '[' move attack ']'                                { $r.addChild($move.m); $r.addChild($attack.a); }
-    ;
-    
-condition returns [Condition c]
-    : ID                        { $c = new Condition($ID.text); }
+    :                      		            { $r = new Rule();}
+    condition				                { $r.setCondition($condition.c); }      
+    '[' 
+        (m0=ID                              { $r.addMove(new Move($m0.text)); }
+        | 'choose' '(' m1=ID m2=ID ')'      { $r.addMove(new Move($m1.text));
+                                              $r.addMove(new Move($m2.text)); }
+        )
+        (a0=ID                              { $r.addAttack(new Attack($a0.text)); }
+        | 'choose' '(' a1=ID a2=ID ')'      { $r.addAttack(new Attack($a1.text));
+                                              $r.addAttack(new Attack($a2.text)); }
+        )
+    ']'
     ;
 
+
+condition returns [Condition c]
+   	: ID					
+	( 
+		  'and' c1=conditionTail    { $c = new ConditionOperator("and");
+		                              $c.addCondition(new ConditionName($ID.text));
+		                              $c.addCondition($c1.c);}
+		| 'or' c2=conditionTail		{ $c = new ConditionOperator("or");
+		                              $c.addCondition(new ConditionName($ID.text));
+		                              $c.addCondition($c2.c);}
+		|						    { $c = new ConditionName($ID.text); }   
+ 	)
+ 	;
+
+conditionTail returns [Condition c]
+    : condition                     { $c = $condition.c; }
+    ;
+        
 move returns [Move m]
-    : 'choose' '(' 
-                    m1=ID       { $m = new Move($m1.text); }
-                   ( 
-                        m2=ID   { $m.addAction($m2.text); }     
-                   )*     
-               ')'   
-    | m1=ID                     { $m = new Move($m1.text); }
-    ;
-    
+	: ID								{ $m = new Move($ID.text); }
+	;
+	
 attack returns [Attack a]
-    : 'choose' '(' 
-                    a1=ID       { $a = new Attack($a1.text); }
-                   ( 
-                        a2=ID   { $a.addAction($a2.text); }     
-                   )*     
-               ')'   
-    |a1=ID                     { $a = new Attack($a1.text); }
-    ;
+	: ID								{ $a = new Attack($ID.text); }
+	;	
+
 /********************* Lexer rules ************************/
 
 INT         :       '0'..'9'+;
