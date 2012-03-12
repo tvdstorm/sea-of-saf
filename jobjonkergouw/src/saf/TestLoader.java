@@ -21,7 +21,7 @@ import saf.syntax.SAFParser;
  * @author job
  *
  */
-public class Loader {
+public class TestLoader {
 
 	/**
 	 * Print the AST from a .saf file
@@ -32,14 +32,14 @@ public class Loader {
 		try {
 			source = readStringFromFile(filePath);
 		} catch (IOException e) {
-			ErrorHandler.exitWithException(e);
+			ErrorHandler.printException(e);
 		}
 
-		Fighter fighter = null;
+		GameBot fighter = null;
 		try {
 			fighter = getFighterTree(source);
 		} catch (RecognitionException e) {
-			ErrorHandler.exitWithException(e);
+			ErrorHandler.printException(e);
 		}
 		
 		Printer printer = new Printer();
@@ -51,32 +51,30 @@ public class Loader {
 	 * @param filePath
 	 * @return bot
 	 */
-	public static GameBot getBotFromFile(String filePath) {
+	public static Fighter getBotFromFile(String filePath) {
 		String source = null;
 		try {
 			source = readStringFromFile(filePath);
 		} catch (IOException e) {
-			ErrorHandler.exitWithException( e );
+			ErrorHandler.printException( e );
+			return null;
 		}
 
 		GameBot fighter = null;
 		try {
-			fighter = (GameBot)getFighterTree(source);
+			fighter = getFighterTree(source);
 		} catch (RecognitionException e) {
-			ErrorHandler.exitWithException(e);
+			ErrorHandler.printException(e);
+			return null;
 		}
 
 		Validator val = new Validator();
 		if ( val.isValid(fighter) ) {
-			fighter.initializeFighter();
 			return fighter;
 		} else {
-			ErrorHandler.exitWithString( val.messagesAsString());
-			// unreachable:
+			ErrorHandler.printString( val.messagesAsString());
 			return null;
-		}
-		
-		
+		}        
 	}
 
 	private static GameBot getFighterTree(String source) throws RecognitionException {

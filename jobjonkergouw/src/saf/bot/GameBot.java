@@ -1,22 +1,29 @@
 package saf.bot;
 
-import saf.bot.BehaviourRule;
-import saf.bot.Bot;
+import saf.ast.nodes.*;
 import saf.bot.EnumTypes.*;
 
 /**
  * Adds game logic to the bot. Including the states and game configurations.
  **/
-public class GameBot extends Bot { 
+public class GameBot extends Fighter {
+	// fighter attributes
+	private int punchReach = 5;
+    private int punchPower = 5;
+    private int kickReach = 5;
+    private int kickPower = 5;         
+    private double speed = 0;
+    private int totalPower;
+	
     // general game configuration
     private final double STARTING_HEALTH = 100.;
-    private final double MINIMAL_SPEED = 0.2;
     private final double BLOCK_MODIFIER = 0.5;
     private final double REACH_MODIFIER = 0.5;    // how much distance a unit of reach is worth
     private final int MUCHSTRONGER_MINIMUM = 15; 
     private final int STRONGER_MINIMUM = 5;
     private final double RUN_SPEED = 1.; 
     private final double MOVE_SPEED = 0.5;
+    private final double MINIMUM_SPEED = 0.2;
     private double gameWidth = 20.;
     
     // values describing current fighter state
@@ -28,11 +35,8 @@ public class GameBot extends Bot {
     private double currentHealth = STARTING_HEALTH;    
     private double timeForNextAction = 0.;
 
-	public GameBot(String name, int punchReach, int punchPower, int kickReach, int kickPower) {
-        super(name, punchReach, punchPower, kickReach, kickPower);
-        if (speed < MINIMAL_SPEED) {
-            speed = MINIMAL_SPEED;
-        }
+	public GameBot(String name) {
+		super(name);
 	}
 
 	/**
@@ -43,6 +47,19 @@ public class GameBot extends Bot {
         result += "\tposition = " + currentPosition + "\thealth = " + currentHealth + "\n";
         result += "\tmove = " + currentMove.toString() + "\tattack = " + currentAttack.toString() + "\n";
         result += "\tstrengthCondition = " + strengthCondition.toString() + "\trangeCondition = " + rangeCondition.toString() + "\n";
+        return result;
+    }
+    
+    public String attributesAsString() {
+        String result = "Bot " + name + "\n";
+        result += "----------------------------\n";
+        result += "Attributes = (" + punchReach + ", " + punchPower + ", " + kickReach + ", " + kickPower + ")\n"; 
+        result += "Speed = " + speed + "\n";  
+        result += "totalPower = " + totalPower + "\n"; 
+        result += "rules:\n";
+        for (Rule rule : rules) {
+            result += "\t" + rule.toString() + "\n";
+        }
         return result;
     }
     
@@ -176,7 +193,7 @@ public class GameBot extends Bot {
 	        return false;
 	    }
 	    
-	    for (BehaviourRule rule : rules) {
+	    for (Rule rule : rules) {
 	        if ( rule.ruleIsTrue(strengthCondition, rangeCondition) ) {
 	            currentMove = rule.getMove();
 	            currentAttack = rule.getAttack();
@@ -270,4 +287,37 @@ public class GameBot extends Bot {
 	        }           
 	    }
 	}
+
+	public void initializeFighter() {
+		for ( Strength strength : getStrengths() ) {
+			applyStrength(strength);
+		}
+		setSpeed();
+		setTotalPower();
+	}
+	
+	private void applyStrength(Strength strength) {      
+        if (strength.getName().equals("punchReach")) {
+        	this.punchReach = strength.getValue();
+        } else if (strength.getName().equals("kickReach")) {
+        	this.kickReach = strength.getValue();
+        } else if (strength.getName().equals("kickPower")) {
+        	this.kickPower = strength.getValue();
+        } else if (strength.getName().equals("punchPower")) {
+        	this.punchPower = strength.getValue();
+        }
+	}
+	
+	private void setTotalPower() {
+        totalPower = punchPower + punchReach + kickReach + kickPower;
+    }
+    
+    private void setSpeed() {
+        double weight = (punchPower + kickPower) / 2.;
+        double height = (punchReach + kickReach) / 2.;
+        speed = java.lang.Math.abs(0.5 * (height - weight));
+        if (speed < MINIMUM_SPEED) {
+        	speed = MINIMUM_SPEED;
+        }
+    }
 }

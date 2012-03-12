@@ -1,4 +1,4 @@
-// $ANTLR 3.4 syntax/SAF.g 2012-03-03 13:50:06
+// $ANTLR 3.4 SAF.g 2012-03-12 11:41:19
 package saf.syntax; 
 
 import org.antlr.runtime.*;
@@ -36,15 +36,15 @@ public class SAFLexer extends Lexer {
     public SAFLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "syntax/SAF.g"; }
+    public String getGrammarFileName() { return "SAF.g"; }
 
     // $ANTLR start "T__7"
     public final void mT__7() throws RecognitionException {
         try {
             int _type = T__7;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:9:6: ( '(' )
-            // syntax/SAF.g:9:8: '('
+            // SAF.g:9:6: ( '(' )
+            // SAF.g:9:8: '('
             {
             match('('); 
 
@@ -64,8 +64,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:10:6: ( ')' )
-            // syntax/SAF.g:10:8: ')'
+            // SAF.g:10:6: ( ')' )
+            // SAF.g:10:8: ')'
             {
             match(')'); 
 
@@ -85,8 +85,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:11:6: ( '=' )
-            // syntax/SAF.g:11:8: '='
+            // SAF.g:11:6: ( '=' )
+            // SAF.g:11:8: '='
             {
             match('='); 
 
@@ -106,8 +106,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:12:7: ( '[' )
-            // syntax/SAF.g:12:9: '['
+            // SAF.g:12:7: ( '[' )
+            // SAF.g:12:9: '['
             {
             match('['); 
 
@@ -127,8 +127,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:13:7: ( ']' )
-            // syntax/SAF.g:13:9: ']'
+            // SAF.g:13:7: ( ']' )
+            // SAF.g:13:9: ']'
             {
             match(']'); 
 
@@ -148,8 +148,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:14:7: ( 'and' )
-            // syntax/SAF.g:14:9: 'and'
+            // SAF.g:14:7: ( 'and' )
+            // SAF.g:14:9: 'and'
             {
             match("and"); 
 
@@ -171,8 +171,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:15:7: ( 'choose' )
-            // syntax/SAF.g:15:9: 'choose'
+            // SAF.g:15:7: ( 'choose' )
+            // SAF.g:15:9: 'choose'
             {
             match("choose"); 
 
@@ -194,8 +194,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:16:7: ( 'or' )
-            // syntax/SAF.g:16:9: 'or'
+            // SAF.g:16:7: ( 'or' )
+            // SAF.g:16:9: 'or'
             {
             match("or"); 
 
@@ -217,8 +217,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:17:7: ( '{' )
-            // syntax/SAF.g:17:9: '{'
+            // SAF.g:17:7: ( '{' )
+            // SAF.g:17:9: '{'
             {
             match('{'); 
 
@@ -238,8 +238,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:18:7: ( '}' )
-            // syntax/SAF.g:18:9: '}'
+            // SAF.g:18:7: ( '}' )
+            // SAF.g:18:9: '}'
             {
             match('}'); 
 
@@ -259,10 +259,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:68:13: ( ( '0' .. '9' )+ )
-            // syntax/SAF.g:68:21: ( '0' .. '9' )+
+            // SAF.g:78:13: ( ( '0' .. '9' )+ )
+            // SAF.g:78:21: ( '0' .. '9' )+
             {
-            // syntax/SAF.g:68:21: ( '0' .. '9' )+
+            // SAF.g:78:21: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -276,7 +276,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // syntax/SAF.g:
+            	    // SAF.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -317,8 +317,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:67:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // syntax/SAF.g:67:21: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // SAF.g:77:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // SAF.g:77:21: ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -330,7 +330,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // syntax/SAF.g:67:45: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // SAF.g:77:45: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop2:
             do {
                 int alt2=2;
@@ -343,7 +343,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // syntax/SAF.g:
+            	    // SAF.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -380,10 +380,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // syntax/SAF.g:68:13: ( ( ' ' | '\\t' | '\\r' | '\\n' )* )
-            // syntax/SAF.g:68:21: ( ' ' | '\\t' | '\\r' | '\\n' )*
+            // SAF.g:78:13: ( ( ' ' | '\\t' | '\\r' | '\\n' )* )
+            // SAF.g:78:21: ( ' ' | '\\t' | '\\r' | '\\n' )*
             {
-            // syntax/SAF.g:68:21: ( ' ' | '\\t' | '\\r' | '\\n' )*
+            // SAF.g:78:21: ( ' ' | '\\t' | '\\r' | '\\n' )*
             loop3:
             do {
                 int alt3=2;
@@ -396,7 +396,7 @@ public class SAFLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // syntax/SAF.g:
+            	    // SAF.g:
             	    {
             	    if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -431,7 +431,7 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // syntax/SAF.g:1:8: ( T__7 | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | INT | ID | WS )
+        // SAF.g:1:8: ( T__7 | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | INT | ID | WS )
         int alt4=13;
         switch ( input.LA(1) ) {
         case '(':
@@ -635,7 +635,7 @@ public class SAFLexer extends Lexer {
 
         switch (alt4) {
             case 1 :
-                // syntax/SAF.g:1:10: T__7
+                // SAF.g:1:10: T__7
                 {
                 mT__7(); 
 
@@ -643,7 +643,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // syntax/SAF.g:1:15: T__8
+                // SAF.g:1:15: T__8
                 {
                 mT__8(); 
 
@@ -651,7 +651,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // syntax/SAF.g:1:20: T__9
+                // SAF.g:1:20: T__9
                 {
                 mT__9(); 
 
@@ -659,7 +659,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // syntax/SAF.g:1:25: T__10
+                // SAF.g:1:25: T__10
                 {
                 mT__10(); 
 
@@ -667,7 +667,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // syntax/SAF.g:1:31: T__11
+                // SAF.g:1:31: T__11
                 {
                 mT__11(); 
 
@@ -675,7 +675,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // syntax/SAF.g:1:37: T__12
+                // SAF.g:1:37: T__12
                 {
                 mT__12(); 
 
@@ -683,7 +683,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // syntax/SAF.g:1:43: T__13
+                // SAF.g:1:43: T__13
                 {
                 mT__13(); 
 
@@ -691,7 +691,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // syntax/SAF.g:1:49: T__14
+                // SAF.g:1:49: T__14
                 {
                 mT__14(); 
 
@@ -699,7 +699,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // syntax/SAF.g:1:55: T__15
+                // SAF.g:1:55: T__15
                 {
                 mT__15(); 
 
@@ -707,7 +707,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // syntax/SAF.g:1:61: T__16
+                // SAF.g:1:61: T__16
                 {
                 mT__16(); 
 
@@ -715,7 +715,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // syntax/SAF.g:1:67: INT
+                // SAF.g:1:67: INT
                 {
                 mINT(); 
 
@@ -723,7 +723,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // syntax/SAF.g:1:71: ID
+                // SAF.g:1:71: ID
                 {
                 mID(); 
 
@@ -731,7 +731,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // syntax/SAF.g:1:74: WS
+                // SAF.g:1:74: WS
                 {
                 mWS(); 
 
