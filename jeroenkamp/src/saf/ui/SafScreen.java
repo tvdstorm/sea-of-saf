@@ -44,7 +44,7 @@ public class SafScreen extends Canvas{
 		}
 	}
 	private int getPosition(int position){
-		return position *20+10;
+		return position *15+10;
 	}
 	private void drawFighters(Graphics g){
 		final int yoffset=100;

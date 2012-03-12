@@ -1,0 +1,4 @@
+dummy{
+
+	always [ choose(walk_towards choose(jump crouch)) choose(block_high choose(kick_low punch_high)) ]
+}

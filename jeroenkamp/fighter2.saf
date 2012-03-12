@@ -1,0 +1,3 @@
+dummy{
+	always [ walk_towards kick_high ]
+}
