@@ -1,10 +1,11 @@
 Bot{
- kickPower = 10
- punchPower = 12
+ punchReach = 8
+ kickPower = 3
  far||near[run_towards punch_high]
- near&&weaker[choose(stand crouch) kick_high]
- stronger&&weaker[choose(stand crouch) kick_high]
- ((far&&near)&&near)&&stronger[run_towards punch_high]
- much_stronger&&(weaker||stronger)[choose(stand crouch) kick_high]
- (much_stronger&&weaker)||stronger[choose(stand crouch) kick_high]
+ near&&weaker[choose(walk_away crouch) block_high]
+ stronger&&weaker[choose(run_away stand) punch_high]
+ ((far&&near)&&near)&&stronger[run_towards punch_low]
+ much_stronger&&(weaker||stronger)[choose(jump crouch) kick_high]
+ (much_stronger&&weaker)||stronger[choose(stand crouch) block_low]
+ always[run_towards punch_low]
 }
