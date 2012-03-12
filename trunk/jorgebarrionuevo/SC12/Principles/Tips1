@@ -1,0 +1,22 @@
+- check that values of characteristics are in the range 1 to 10
+- names of characteristics, moves and fights are valid names
+- presence of always rules.
+
+Main method is unimportant. The main method basically create the "game
+play" object, and starts "running". But the key is: first load, parse
+fighter, then check the loaded fighter, if errors, bail out. If no
+errors, continue with rendering/fighting.
+
+Tasks are:
+- loading + parsing
+- checking
+- fighting
+   - determining a valid action based on the enabled conditions
+         (Note that this depend on fighter state)
+   - rendering the effect of performing an action
+
+But note that tasks are not the best way to modularize (cf. Parnas):
+think about classes representing an arena and fighter state (e.g.
+health, position). This should be independent of the fighter AST. The
+game logic could be in both in Arena or Fighter state (or distributed
+among both). Don't put *state* in the AST.

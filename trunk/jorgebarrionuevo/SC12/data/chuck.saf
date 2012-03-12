@@ -1,9 +1,0 @@
-chuck
-{
-  kickReach  = 1
-  punchReach = 1
-  punchPower = 9
-  kickPower  = 9
-  always [walk_towards punch_high]
-  near [jump kick_low]
-}
