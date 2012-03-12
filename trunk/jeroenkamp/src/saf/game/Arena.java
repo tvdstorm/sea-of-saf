@@ -3,7 +3,7 @@ package saf.game;
 import java.awt.*;
 
 public class Arena implements Runnable{
-	public static final int MAXPOS=40;
+	public static final int MAXPOS=20;
 	private Fighter m_Player1;
 	private Fighter m_Player2;
 	private boolean m_Continue;
@@ -20,8 +20,8 @@ public class Arena implements Runnable{
 	public Arena(Fighter p1,Fighter p2,Component c){
 		m_Player1=p1;
 		m_Player2=p2;
-		m_Player1.init(5,p2);
-		m_Player2.init(25,p1);
+		m_Player1.init(2,p2);
+		m_Player2.init(18,p1);
 		m_Canvas=c;
 		m_Continue=true;
 	}

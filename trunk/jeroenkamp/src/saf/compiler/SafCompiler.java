@@ -19,8 +19,13 @@ public class SafCompiler {
 			input.close();
 			ErrorModule mod=ErrorModule.getErrorModule();
 			if(mod.canContinue()){
+				mod.printErrors();
 				SafObject root=parser.getRootNode();
 				return toJavaCode(root, pack, ((Fighter)root).getName());
+			}
+			else{
+				mod.printErrors();
+				System.exit(1);
 			}
 		}catch(IOException ioe){
 			System.err.println("IO problem with "+file);

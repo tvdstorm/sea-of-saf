@@ -50,6 +50,7 @@ return new SecureClassLoader() {
 * Gives the compiler an instance of the JavaClassObject
 * so that the compiler can write the byte code into it.
 */
+@Override
 public JavaFileObject getJavaFileForOutput(Location location,
 String className, Kind kind, FileObject sibling)
     throws IOException {

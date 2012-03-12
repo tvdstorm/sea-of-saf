@@ -30,6 +30,11 @@ public abstract class Fighter implements IFighter {
 	public Fighter(){
 	}
 	public void init(int position,Fighter opponent){
+		m_PunchPower=checkValue(m_PunchPower);
+		m_KickPower=checkValue(m_KickPower);
+		m_PunchReach=checkValue(m_PunchReach);
+		m_KickReach=checkValue(m_KickReach);
+		
 		//the predefined formula dosen't make sense
 		m_Speed=(int)Math.abs(0.5*((m_PunchPower+m_KickPower)-(m_PunchReach+m_KickReach)));
 		m_MaxHealth=100;
@@ -38,6 +43,12 @@ public abstract class Fighter implements IFighter {
 		m_Opponent=opponent;
 		m_MoveState=MoveType.stand;
 		m_ActionType=ActionType.block_high;
+	}
+	private int checkValue(int value){
+		if(value>10 ||value<1){
+			return 5;
+		}
+		return value;
 	}
 	
 	public abstract List<ActionPair> doSomething();

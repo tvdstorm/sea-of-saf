@@ -856,7 +856,7 @@ class SafParser implements SafTokens {
     }
 
     private int yyr15() { // subcondition : VAR
-        { yyrv=new Condition((StringValue)yysv[yysp-1]);}
+        { yyrv=new Condition(yysv[yysp-1]);}
         yysv[yysp-=1] = yyrv;
         return 7;
     }
