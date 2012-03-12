@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g 2012-02-19 16:51:21
+// $ANTLR 3.4 D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g 2012-03-05 01:22:01
 
   package saf;
   import saf.ast.*;
@@ -67,16 +67,13 @@ public class SAFParser extends Parser {
             // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:15:2: ( IDENT '{' (c= characterstics |r= rule )* '}' )
             // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:16:3: IDENT '{' (c= characterstics |r= rule )* '}'
             {
-             
-            			Personality personality = new Personality();  
-            			Behaviour behaviour = new Behaviour();
-            		
+              Personality personality = new Personality();  Behaviour behaviour = new Behaviour(); 
 
-            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_bot38); 
+            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_bot41); 
 
-            match(input,15,FOLLOW_15_in_bot40); 
+            match(input,15,FOLLOW_15_in_bot43); 
 
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:21:6: (c= characterstics |r= rule )*
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:19:6: (c= characterstics |r= rule )*
             loop1:
             do {
                 int alt1=3;
@@ -101,9 +98,9 @@ public class SAFParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:22:7: c= characterstics
+            	    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:19:9: c= characterstics
             	    {
-            	    pushFollow(FOLLOW_characterstics_in_bot62);
+            	    pushFollow(FOLLOW_characterstics_in_bot59);
             	    c=characterstics();
 
             	    state._fsp--;
@@ -114,9 +111,9 @@ public class SAFParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:23:9: r= rule
+            	    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:19:70: r= rule
             	    {
-            	    pushFollow(FOLLOW_rule_in_bot80);
+            	    pushFollow(FOLLOW_rule_in_bot71);
             	    r=rule();
 
             	    state._fsp--;
@@ -133,7 +130,7 @@ public class SAFParser extends Parser {
             } while (true);
 
 
-            match(input,16,FOLLOW_16_in_bot98); 
+            match(input,16,FOLLOW_16_in_bot85); 
 
              
             			fighter = new Bot((IDENT1!=null?IDENT1.getText():null), personality , behaviour); 
@@ -157,7 +154,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "characterstics"
-    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:32:1: characterstics returns [Characterstics characterstics] : IDENT '=' INTEGER ;
+    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:27:1: characterstics returns [Characterstics characterstics] : IDENT '=' INTEGER ;
     public final Characterstics characterstics() throws RecognitionException {
         Characterstics characterstics = null;
 
@@ -166,14 +163,14 @@ public class SAFParser extends Parser {
         Token INTEGER3=null;
 
         try {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:33:2: ( IDENT '=' INTEGER )
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:34:3: IDENT '=' INTEGER
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:28:2: ( IDENT '=' INTEGER )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:29:3: IDENT '=' INTEGER
             {
-            IDENT2=(Token)match(input,IDENT,FOLLOW_IDENT_in_characterstics121); 
+            IDENT2=(Token)match(input,IDENT,FOLLOW_IDENT_in_characterstics108); 
 
-            match(input,9,FOLLOW_9_in_characterstics123); 
+            match(input,9,FOLLOW_9_in_characterstics110); 
 
-            INTEGER3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_characterstics125); 
+            INTEGER3=(Token)match(input,INTEGER,FOLLOW_INTEGER_in_characterstics112); 
 
              characterstics = new Characterstics((IDENT2!=null?IDENT2.getText():null), (INTEGER3!=null?INTEGER3.getText():null));
 
@@ -195,7 +192,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "rule"
-    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:45:1: rule returns [Rule rule] : (a= action | '(' (r1= rule )* ')' ) (o= operator r2= rule )? ;
+    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:33:1: rule returns [Rule rule] : (a= action | '(' (r1= rule )* ')' ) (o= operator r2= rule )? ;
     public final Rule rule() throws RecognitionException {
         Rule rule = null;
 
@@ -210,12 +207,12 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:46:2: ( (a= action | '(' (r1= rule )* ')' ) (o= operator r2= rule )? )
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:46:3: (a= action | '(' (r1= rule )* ')' ) (o= operator r2= rule )?
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:34:2: ( (a= action | '(' (r1= rule )* ')' ) (o= operator r2= rule )? )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:34:3: (a= action | '(' (r1= rule )* ')' ) (o= operator r2= rule )?
             {
              Rule r = new Rule(); 
 
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:47:2: (a= action | '(' (r1= rule )* ')' )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:35:3: (a= action | '(' (r1= rule )* ')' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -234,9 +231,9 @@ public class SAFParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:47:3: a= action
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:35:4: a= action
                     {
-                    pushFollow(FOLLOW_action_in_rule164);
+                    pushFollow(FOLLOW_action_in_rule140);
                     a=action();
 
                     state._fsp--;
@@ -247,11 +244,11 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:47:36: '(' (r1= rule )* ')'
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:35:37: '(' (r1= rule )* ')'
                     {
-                    match(input,7,FOLLOW_7_in_rule170); 
+                    match(input,7,FOLLOW_7_in_rule146); 
 
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:47:43: (r1= rule )*
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:35:41: (r1= rule )*
                     loop2:
                     do {
                         int alt2=2;
@@ -264,13 +261,15 @@ public class SAFParser extends Parser {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:47:43: r1= rule
+                    	    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:35:42: r1= rule
                     	    {
-                    	    pushFollow(FOLLOW_rule_in_rule176);
+                    	    pushFollow(FOLLOW_rule_in_rule153);
                     	    r1=rule();
 
                     	    state._fsp--;
 
+
+                    	     r.AddRule(r1); 
 
                     	    }
                     	    break;
@@ -281,9 +280,7 @@ public class SAFParser extends Parser {
                     } while (true);
 
 
-                     r.AddRule(r1); 
-
-                    match(input,8,FOLLOW_8_in_rule182); 
+                    match(input,8,FOLLOW_8_in_rule160); 
 
                     }
                     break;
@@ -291,7 +288,7 @@ public class SAFParser extends Parser {
             }
 
 
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:47:76: (o= operator r2= rule )?
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:35:79: (o= operator r2= rule )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -300,15 +297,15 @@ public class SAFParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:47:78: o= operator r2= rule
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:35:81: o= operator r2= rule
                     {
-                    pushFollow(FOLLOW_operator_in_rule191);
+                    pushFollow(FOLLOW_operator_in_rule169);
                     o=operator();
 
                     state._fsp--;
 
 
-                    pushFollow(FOLLOW_rule_in_rule197);
+                    pushFollow(FOLLOW_rule_in_rule175);
                     r2=rule();
 
                     state._fsp--;
@@ -342,7 +339,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "action"
-    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:52:1: action returns [Action action] : ( IDENT |f= function |c= choose );
+    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:40:1: action returns [Action action] : ( IDENT |f= function |c= choose );
     public final Action action() throws RecognitionException {
         Action action = null;
 
@@ -354,7 +351,7 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:53:2: ( IDENT |f= function |c= choose )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:41:2: ( IDENT |f= function |c= choose )
             int alt5=3;
             int LA5_0 = input.LA(1);
 
@@ -387,18 +384,18 @@ public class SAFParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:54:2: IDENT
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:42:3: IDENT
                     {
-                    IDENT4=(Token)match(input,IDENT,FOLLOW_IDENT_in_action223); 
+                    IDENT4=(Token)match(input,IDENT,FOLLOW_IDENT_in_action203); 
 
                      action = new Ident((IDENT4!=null?IDENT4.getText():null)); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:55:3: f= function
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:43:3: f= function
                     {
-                    pushFollow(FOLLOW_function_in_action233);
+                    pushFollow(FOLLOW_function_in_action213);
                     f=function();
 
                     state._fsp--;
@@ -409,9 +406,9 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:56:3: c= choose
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:44:3: c= choose
                     {
-                    pushFollow(FOLLOW_choose_in_action244);
+                    pushFollow(FOLLOW_choose_in_action224);
                     c=choose();
 
                     state._fsp--;
@@ -439,7 +436,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "function"
-    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:60:1: function returns [Function function] : IDENT '[' p= parameters ']' ;
+    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:48:1: function returns [Function function] : IDENT '[' p= parameters ']' ;
     public final Function function() throws RecognitionException {
         Function function = null;
 
@@ -449,20 +446,20 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:61:2: ( IDENT '[' p= parameters ']' )
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:62:2: IDENT '[' p= parameters ']'
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:49:2: ( IDENT '[' p= parameters ']' )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:50:3: IDENT '[' p= parameters ']'
             {
-            IDENT5=(Token)match(input,IDENT,FOLLOW_IDENT_in_function266); 
+            IDENT5=(Token)match(input,IDENT,FOLLOW_IDENT_in_function247); 
 
-            match(input,10,FOLLOW_10_in_function268); 
+            match(input,10,FOLLOW_10_in_function249); 
 
-            pushFollow(FOLLOW_parameters_in_function274);
+            pushFollow(FOLLOW_parameters_in_function255);
             p=parameters();
 
             state._fsp--;
 
 
-            match(input,11,FOLLOW_11_in_function276); 
+            match(input,11,FOLLOW_11_in_function257); 
 
              function = new Function((IDENT5!=null?IDENT5.getText():null), p); 
 
@@ -484,7 +481,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "choose"
-    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:66:1: choose returns [Choose choose] : 'choose(' i1= IDENT i2= IDENT ')' ;
+    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:54:1: choose returns [Choose choose] : 'choose(' i1= IDENT i2= IDENT ')' ;
     public final Choose choose() throws RecognitionException {
         Choose choose = null;
 
@@ -493,18 +490,18 @@ public class SAFParser extends Parser {
         Token i2=null;
 
         try {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:67:2: ( 'choose(' i1= IDENT i2= IDENT ')' )
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:68:2: 'choose(' i1= IDENT i2= IDENT ')'
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:55:2: ( 'choose(' i1= IDENT i2= IDENT ')' )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:56:3: 'choose(' i1= IDENT i2= IDENT ')'
             {
-            match(input,13,FOLLOW_13_in_choose294); 
+            match(input,13,FOLLOW_13_in_choose276); 
 
-            i1=(Token)match(input,IDENT,FOLLOW_IDENT_in_choose300); 
+            i1=(Token)match(input,IDENT,FOLLOW_IDENT_in_choose282); 
 
-            i2=(Token)match(input,IDENT,FOLLOW_IDENT_in_choose306); 
+            i2=(Token)match(input,IDENT,FOLLOW_IDENT_in_choose288); 
 
-            match(input,8,FOLLOW_8_in_choose308); 
+            match(input,8,FOLLOW_8_in_choose290); 
 
-            choose = new Choose((i1!=null?i1.getText():null), (i2!=null?i2.getText():null)); 
+             choose = new Choose((i1!=null?i1.getText():null), (i2!=null?i2.getText():null)); 
 
             }
 
@@ -524,7 +521,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "parameters"
-    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:72:1: parameters returns [Parameters parameters] : (i1= IDENT i2= IDENT |c1= choose i3= IDENT |i4= IDENT c2= choose |c3= choose c4= choose );
+    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:60:1: parameters returns [Parameters parameters] : (i1= IDENT i2= IDENT |c1= choose i3= IDENT |i4= IDENT c2= choose |c3= choose c4= choose );
     public final Parameters parameters() throws RecognitionException {
         Parameters parameters = null;
 
@@ -543,7 +540,7 @@ public class SAFParser extends Parser {
 
 
         try {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:73:2: (i1= IDENT i2= IDENT |c1= choose i3= IDENT |i4= IDENT c2= choose |c3= choose c4= choose )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:61:2: (i1= IDENT i2= IDENT |c1= choose i3= IDENT |i4= IDENT c2= choose |c3= choose c4= choose )
             int alt6=4;
             int LA6_0 = input.LA(1);
 
@@ -623,37 +620,37 @@ public class SAFParser extends Parser {
             }
             switch (alt6) {
                 case 1 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:74:2: i1= IDENT i2= IDENT
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:62:3: i1= IDENT i2= IDENT
                     {
-                    i1=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters332); 
+                    i1=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters315); 
 
-                    i2=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters338); 
+                    i2=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters321); 
 
                      parameters = new Parameters((i1!=null?i1.getText():null), (i2!=null?i2.getText():null)); 
 
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:75:3: c1= choose i3= IDENT
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:63:3: c1= choose i3= IDENT
                     {
-                    pushFollow(FOLLOW_choose_in_parameters348);
+                    pushFollow(FOLLOW_choose_in_parameters331);
                     c1=choose();
 
                     state._fsp--;
 
 
-                    i3=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters354); 
+                    i3=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters337); 
 
                      parameters = new Parameters(c1, (i3!=null?i3.getText():null)); 
 
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:76:3: i4= IDENT c2= choose
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:64:3: i4= IDENT c2= choose
                     {
-                    i4=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters364); 
+                    i4=(Token)match(input,IDENT,FOLLOW_IDENT_in_parameters347); 
 
-                    pushFollow(FOLLOW_choose_in_parameters370);
+                    pushFollow(FOLLOW_choose_in_parameters353);
                     c2=choose();
 
                     state._fsp--;
@@ -664,15 +661,15 @@ public class SAFParser extends Parser {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:77:3: c3= choose c4= choose
+                    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:65:3: c3= choose c4= choose
                     {
-                    pushFollow(FOLLOW_choose_in_parameters380);
+                    pushFollow(FOLLOW_choose_in_parameters363);
                     c3=choose();
 
                     state._fsp--;
 
 
-                    pushFollow(FOLLOW_choose_in_parameters386);
+                    pushFollow(FOLLOW_choose_in_parameters369);
                     c4=choose();
 
                     state._fsp--;
@@ -703,14 +700,14 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "operator"
-    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:81:1: operator : ( 'and' | 'or' );
+    // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:69:1: operator : ( 'and' | 'or' );
     public final SAFParser.operator_return operator() throws RecognitionException {
         SAFParser.operator_return retval = new SAFParser.operator_return();
         retval.start = input.LT(1);
 
 
         try {
-            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:82:2: ( 'and' | 'or' )
+            // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:70:2: ( 'and' | 'or' )
             // D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\SAF.g:
             {
             if ( input.LA(1)==12||input.LA(1)==14 ) {
@@ -746,38 +743,38 @@ public class SAFParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_IDENT_in_bot38 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_bot40 = new BitSet(new long[]{0x0000000000012090L});
-    public static final BitSet FOLLOW_characterstics_in_bot62 = new BitSet(new long[]{0x0000000000012090L});
-    public static final BitSet FOLLOW_rule_in_bot80 = new BitSet(new long[]{0x0000000000012090L});
-    public static final BitSet FOLLOW_16_in_bot98 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_characterstics121 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_characterstics123 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_INTEGER_in_characterstics125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_action_in_rule164 = new BitSet(new long[]{0x0000000000005002L});
-    public static final BitSet FOLLOW_7_in_rule170 = new BitSet(new long[]{0x0000000000002190L});
-    public static final BitSet FOLLOW_rule_in_rule176 = new BitSet(new long[]{0x0000000000002190L});
-    public static final BitSet FOLLOW_8_in_rule182 = new BitSet(new long[]{0x0000000000005002L});
-    public static final BitSet FOLLOW_operator_in_rule191 = new BitSet(new long[]{0x0000000000002090L});
-    public static final BitSet FOLLOW_rule_in_rule197 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_action223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_function_in_action233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_choose_in_action244 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_function266 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_function268 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_parameters_in_function274 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_function276 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_choose294 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENT_in_choose300 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENT_in_choose306 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_choose308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_parameters332 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENT_in_parameters338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_choose_in_parameters348 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_IDENT_in_parameters354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_parameters364 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_choose_in_parameters370 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_choose_in_parameters380 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_choose_in_parameters386 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_bot41 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_bot43 = new BitSet(new long[]{0x0000000000012090L});
+    public static final BitSet FOLLOW_characterstics_in_bot59 = new BitSet(new long[]{0x0000000000012090L});
+    public static final BitSet FOLLOW_rule_in_bot71 = new BitSet(new long[]{0x0000000000012090L});
+    public static final BitSet FOLLOW_16_in_bot85 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_characterstics108 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_9_in_characterstics110 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_INTEGER_in_characterstics112 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_action_in_rule140 = new BitSet(new long[]{0x0000000000005002L});
+    public static final BitSet FOLLOW_7_in_rule146 = new BitSet(new long[]{0x0000000000002190L});
+    public static final BitSet FOLLOW_rule_in_rule153 = new BitSet(new long[]{0x0000000000002190L});
+    public static final BitSet FOLLOW_8_in_rule160 = new BitSet(new long[]{0x0000000000005002L});
+    public static final BitSet FOLLOW_operator_in_rule169 = new BitSet(new long[]{0x0000000000002090L});
+    public static final BitSet FOLLOW_rule_in_rule175 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_action203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_in_action213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_choose_in_action224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_function247 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_function249 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_parameters_in_function255 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_function257 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_choose276 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENT_in_choose282 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENT_in_choose288 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_8_in_choose290 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_parameters315 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENT_in_parameters321 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_choose_in_parameters331 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_IDENT_in_parameters337 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_parameters347 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_choose_in_parameters353 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_choose_in_parameters363 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_choose_in_parameters369 = new BitSet(new long[]{0x0000000000000002L});
 
 }
