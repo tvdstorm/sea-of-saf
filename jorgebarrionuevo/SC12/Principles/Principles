@@ -1,0 +1,48 @@
+We take the principles laid down in Code Complete as guidelines when grading your solutions. More specifically, the following aspects of quality code will be our focus:
+
+Functionality (e.g., are the requirements implemented)
+Tests (e.g., presence of meaningful unit tests)
+Simplicity (absence of code bloat and complexity; YAGNI)
+Modularity (e.g., encapsulation, class dependencies, package structure)
+Layout and style (indentation, comments, naming of variables etc.)
+Sensible use of design patterns (e.g., Visitor)
+More concretely, we ask you to take the following list of advice into consideration.
+
+Code quality is of the utmost importance in this course. You will write clean, consistently formatted, concise code. Your naming and indentation convention will be consistent.
+
+You show that you master the concepts of encapsulation, modularity and separation of concerns. This should be visible from the code. The structure of the code should show the design.
+
+Method and functions should realize a single piece of functionality. You adhere to the Don't Repeat Yourself (DRY) principle.
+
+You will select tools and libraries wisely. You can argue why you chose to use a particular artifact.
+
+You know your (standard) libraries and APIs. Do not reimplement (simple) functions that can be expected to be in a (standard) library. Especially, do not claim that your version is faster, because: it is irrelevant, and, you're probably wrong. Make the trade-off for reusing a library: do you really need a heavy dependency, for some simple functionality?
+
+Test your code using unit tests if this is meaningful. Do not write tests, because your are somehow supposed to. Do not write your own testing framework; use appropriate libraries and/or language features of the platform (e.g. JUnit on Java). Separate test code from main code.
+
+Use asserts in the correct way. Asserts are used to document and check assumptions. They are not used for input validation or error handling.
+
+Use exception handling wisely. Do not implement your Exception class in a situation where a standard library exception makes perfect sense. Handle exceptions sanely, if possible. Empty catch-blocks are unacceptable 99.9% of the time.
+
+Non-constant static variables should be avoided at all cost.
+
+If you are forced to need instanceof a lot, you probably have a flaw in your design.
+
+You are expected not to indulge in elaborate gold plating. For instance, fancy graphics/user interfaces are not important. YAGNI: You Ain't Gonna Need It. Focus on the simplest thing that could possibly work, first.
+
+Do not optimize your code unless you can argue there is a real problem (proven by profiling). Simplicity of the code has priority.
+
+We should forget about small efficiencies, say about 97% of the time: premature optimization is the root of all evil. --Donald Knuth
+
+You are not supposed to show off how smart you are.
+Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it. --Brian Kernighan
+
+You are expected to write comments, only if you need to explain a complicated algorithm or motivate a particular piece of code. Do not engage in obligatory comments. Javadoc (or similar) is ok, but think about the purpose of Javadoc first.
+
+It is unacceptable that there are remnants of dead code, commented out sections, or debugging print statements etc. in the code that you will present for grading.
+
+You will only present working code for grading. Note: working code implies your project compiles without errors. Additionally, you should use the IDE in the correct way, setup dependencies correctly, provide build-scripts if necessary.
+
+Please take this advice to heart. It will influence your grade.
+
+Note that, although Rascal is not an object-oriented programming language, this does not imply that you cannot modularize and encapsulate. On the other hand, your are forbidden to "write Java/C/PHP/C# etc." in Rascal. If you go with Rascal, be sure that you know how to use comprehensions, visit, pattern matching etc.
