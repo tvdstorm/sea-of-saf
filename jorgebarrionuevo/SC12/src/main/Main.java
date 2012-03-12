@@ -2,6 +2,9 @@ package main;
 
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
+
+import graphic.ArenaPanel;
+
 import java.io.*;
 import java.util.ArrayList;
 import Parser.*;
@@ -39,6 +42,14 @@ import alert.*;
 	    	        for (int i=0; i < alert.size();i++){
 	    	        	System.out.println("Alert found: "+alert.get(i).getAlert());
 	    	        }
+	    	        
+	    	        java.awt.EventQueue.invokeLater(new Runnable()
+	    	        {
+	    	          public void run()
+	    	          {
+	    	        	  ArenaPanel panel = new ArenaPanel();
+	    	          }
+	    	        });
 	    	          	        
 	    }
 }
