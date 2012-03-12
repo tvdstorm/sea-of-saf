@@ -5,20 +5,26 @@ import java.util.List;
 
 public class Config {
 	
-	final protected List<String> CONDITIONTYPE =
+	static public List<String> CONDITIONTYPE =
 			Arrays.asList("near", "even", "far", "always", "stronger", "weaker", "much_stronger", "much_weaker");
 
-	final protected List<String> MOVEACTIONTYPE =
+	static public List<String> MOVEACTIONTYPE =
 			Arrays.asList("jump", "crouch", "stand", "run_towards", "run_away", "walk_towards", "walk_away");
 
-	final protected List<String> FIGHTSACTOINTYPE =
+	static public List<String> FIGHTSACTOINTYPE =
 			Arrays.asList("punch_low", "punch_high", "kick_low", "kick_high", "block_low", "block_high");
 
-	final protected List<String> Characterstics =
+	static public List<String> Characterstics =
 			Arrays.asList("punchReach", "kickReach", "kickPower", "punchPower");
 
-	final protected Integer MIN_STRENGTH = 1;
-	final protected Integer MAX_STRENGTH = 10;
-	final protected Integer DEFAULT_STRENGTH = 5;
+	static public Integer MIN_STRENGTH = 0;
+	static public Integer MAX_STRENGTH = 10;
+	static public Integer DEFAULT_STRENGTH = 5;
+	static public String ImagePath = "D:\\SAF\\AntlrSAF\\src\\saf\\evaluator\\images\\";
+	static public String INITIALCONDITION = "far";
+	static public String DEFAULTCONDITION = "always";
+	static public Integer INITIALPOSITION = 300;
+	static public Integer DEFAULTHEALTH = 100;
+	static public Integer DEFAULTBLOCKHEALTH = 2;
 
 }
