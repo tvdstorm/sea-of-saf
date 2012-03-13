@@ -33,5 +33,6 @@ public class ParserCheckerResult implements ICheckerResult
 			sb.append(issue);
 		return sb.toString();
 	}
-	
+
+
 }

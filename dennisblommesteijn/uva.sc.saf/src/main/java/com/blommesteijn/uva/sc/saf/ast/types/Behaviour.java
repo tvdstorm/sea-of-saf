@@ -1,201 +1,225 @@
 package com.blommesteijn.uva.sc.saf.ast.types;
 
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.blommesteijn.uva.sc.saf.utils.RandUtil;
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
-import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.Action;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.AttackAction;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.BlockAction;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.MoveAction;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 
 public class Behaviour extends AstNode
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4093675952766967070L;
+	private static final long serialVersionUID = 2206995385688428837L;
+	private Conditions _conditions = null;
+	
+	//actions container
+	private Map<Class<? extends Action>, Action> _actions = new HashMap<Class<? extends Action>, Action>();
 
-	public static final int OPERATORS_ALLOWED = 1;
+	//map of actions, and keywords
+	protected static Map<String, Class<? extends Action>> __allActions = getAllActions();
 	
-	private List<Operator> _operators = new LinkedList<Operator>();
-	private List<Condition> _locations = new LinkedList<Condition>();
-	private List<Action> _moves = new LinkedList<Action>();
-	private List<Action> _attacks = new LinkedList<Action>();
-	
+	//populating actions map
+	private static Map<String, Class<? extends Action>> getAllActions()
+	{
+		Map<String, Class<? extends Action>> ret = new HashMap<String, Class<? extends Action>>();
+		ret.put("jump", MoveAction.class);
+		ret.put("crouch", MoveAction.class);
+		ret.put("stand", MoveAction.class);
+		ret.put("run_towards", MoveAction.class);
+		ret.put("run_away", MoveAction.class);
+		ret.put("walk_towards", MoveAction.class);
+		ret.put("walk_away", MoveAction.class);
+		
+		ret.put("punch_low", AttackAction.class);
+		ret.put("punch_high", AttackAction.class);
+		ret.put("kick_low", AttackAction.class);
+		ret.put("kick_high", AttackAction.class);
+		
+		ret.put("block_low", BlockAction.class);
+		ret.put("block_high", BlockAction.class);
+		return ret;
+	}
+
 	/**
 	 * 
-	 * @param line
-	 * @param ident
-	 * @param value
+	 * @param conditions
 	 */
-	public Behaviour(int line, String ident)
+	public Behaviour(Conditions conditions)
 	{
 		super();
-		_line = line;
-		this.append((AstNode)new Condition(line, ident));
+		_conditions = conditions;
 	}
 	
-	public void append(Operator operator)
+	public Behaviour(int line, Conditions conditions) 
 	{
-		_operators.add(operator);
-	}
-	
-	public void append(Condition location)
-	{
-		_locations.add(location);
-	}
-	
-	public void append(Action action)
-	{
-		if(action.isAttack())
-			_attacks.add(action);
-		else if (action.isMove())
-			_moves.add(action);
+		super(line);
+		_conditions = conditions;
+		_conditions.setLine(line);
 	}
 
-	public void register(AstNode astNode)
+	public void addActions(List<Action> actions) 
 	{
-		Fighter f = (Fighter) astNode;
-		f.append(this);
-	}
-	
-	
-	public List<Operator> getOperators()
-	{
-		return _operators;
-	}
-	
-	public List<Condition> getConditions()
-	{
-		return _locations;
-	}
-	
-	public List<Action> getMoves()
-	{
-		return _moves;
-	}
-	
-	public Action getMove()
-	{
-		int size = _moves.size();
-		if(size > 1)
-			return _moves.get(RandUtil.getRandom(0, size));
-		return _moves.get(0);
-	}
-	
-	public Action getAttack()
-	{
-		int size = _attacks.size();
-		if(size > 1)
+		List<Action> specificActions = this.getSpecificOperator(actions);		
+		for(Action specificAction : specificActions)
 		{
-			int random = RandUtil.getRandom(0, size);
-			return _attacks.get(random);
+			_actions.put(specificAction.getClass(), specificAction);
 		}
-		return _attacks.get(0);
-	}
-	
-	public List<Action> getAttacks()
-	{
-		return _attacks;
-	}
-	
-	
-	
-	public static EMove getMove(Action move) 
-	{
-		EMove ret = null;
-		for(EMove e : EMove.values())
-		{
-			if(e.getIdent().equals(move.getIdent()))
-			{
-				ret = e;
-				break;
-			}
-		}
-		return ret;
 	}
 
-	public static EAttack getAttack(Action attack) 
-	{
-		EAttack ret = null;
-		for(EAttack e : EAttack.values())
-		{
-			if(e.getIdent().equals(attack.getIdent()))
-			{
-				ret = e;
-				break;
-			}
-		}
-		return ret;
-	}
-	
 	/**
-	 * Perform Static Check
-	 * @param checker static result checker reference
+	 * Check presence of actions (actions >= 2, moves >=1, attack/block >= 1)
+	 * @param result reference to static checker result
 	 */
-	@Override
-	public void staticCheck(StaticCheckerResult result)
-	{
-		// visit all nested nodes
-		for (AstNode node : this.getNodes())
+	protected void checkActions(StaticCheckerResult result)
+	{		
+		for(Entry<Class<? extends Action>, Action> iter : _actions.entrySet())
 		{
-//			System.out.println(node.getIdent());
-			node.staticCheck(result);
-			node.register(this);
-		}
-				
-		//invalid operators
-		if(_operators.size() > OPERATORS_ALLOWED)
-		{
-			result.append(new StaticCheckIssue(this, 
-					"only: " + OPERATORS_ALLOWED + " operator(s) allowed"));
-		}
-
-		//invalid moves
-		if(_moves.size() <= 0)
-		{
-			result.append(new StaticCheckIssue(this, 
-					"no move(s) found"));
+			Action action = iter.getValue();
+			if(!__allActions.containsKey(action.getName()))
+				result.append(new StaticCheckIssue(action, "incorrect keyword"));
 		}
 		
-		//invalid attacks
-		if(_attacks.size() <= 0)
-		{
-			result.append(new StaticCheckIssue(this, 
-					"no attack(s) found"));
-		}
-	}	
-	
+		//at least two actions
+		if(_actions.size() < 2)
+			result.append(new StaticCheckIssue(this, "not enough actions (<2)"));
+		//at least one move
+		List<Action> moves = this.getActionByType(MoveAction.class);
+		if(moves.size() < 1)
+			result.append(new StaticCheckIssue(this, "no moves (<1)"));
+		//at least one block or attack
+		List<Action> attacks = this.getActionByType(AttackAction.class);
+		List<Action> blocks = this.getActionByType(BlockAction.class);
+		if(blocks.size() + attacks.size() < 1)
+			result.append(new StaticCheckIssue(this, "no attack/ block (<1)"));
+	}
+
+
+
+	@Override
+	public void staticCheck(StaticCheckerResult result) 
+	{
+		//validate actions
+		this.checkActions(result);
+		
+		//check actions
+		for(Entry<Class<? extends Action>, Action> action : _actions.entrySet())
+			action.getValue().staticCheck(result);
+		//check conditions
+		_conditions.staticCheck(result);
+	}
 	
 	/**
-	 * @return string representation
+	 * Get Actions by type
+	 * @param type derived class of action
+	 * @return list of actions of specified type
 	 */
-	public String toString(String indent)
+	public List<Action> getActionByType(Class<? extends Action> type) 
+	{
+		List<Action> ret = new LinkedList<Action>();
+		for(Entry<Class<? extends Action>, Action> action : _actions.entrySet())
+		{
+			if(type.equals(action.getKey()))
+				ret.add(action.getValue());
+		}
+		return ret;
+	}
+	
+	private List<Action> getSpecificOperator(List<Action> actions) 
+	{
+		List<Action> ret = new LinkedList<Action>();
+		for(Action action : actions)
+			ret.add(this.getSpecificOperator(action));
+		return ret;
+	}
+	
+	/**
+	 * Get Type specific operator (Operator -> OrOperator)
+	 * @param action original action (base class)
+	 * @return derived class, matched to keyword
+	 */
+	private Action getSpecificOperator(Action action)
+	{
+		Action tmp = null;
+		String name = action.getName();
+		if(__allActions.containsKey(name))
+		{
+			Class<? extends Action> o = __allActions.get(name);
+			Action newInstance = null;
+			try 
+			{
+				newInstance = o.newInstance();
+			} 
+			catch (Exception e) 
+			{}
+			newInstance.setObjectFields(action);
+			tmp = newInstance;
+		}
+		else
+			tmp = action;
+		return tmp;
+	}
+
+	public String getDescription() 
+	{
+		return "behaviour";
+	}
+	
+	public String toString()
+	{
+		return this.toString("");
+	}
+	
+	public String toString(String indent) 
 	{
 		StringBuilder sb = new StringBuilder();
 		//append typename
 		sb.append(indent).append("[ ").append(this.getClass().getSimpleName());
-		sb.append(": ").append(StringUtil.NEW_LINE);
+		sb.append(": ").append(StringUtil.NEW_LINE);	
 		
-		//visit nested nodes
-		if(this.hasNodes())
+		if(!_actions.isEmpty())
 		{
 			sb.append(indent).append("( ").append(StringUtil.NEW_LINE);
-			for(AstNode node : this.getNodes())
+			for(Entry<Class<? extends Action>, Action> action : _actions.entrySet())
 			{
-				sb.append(node.toString(indent + StringUtil.TAB));
+				sb.append(action.getValue().toString(indent + StringUtil.TAB));
 			}
 			sb.append(indent).append(")");
-			sb.append("]").append(StringUtil.NEW_LINE);
+			sb.append(StringUtil.NEW_LINE);
 		}
-		else
-			sb.append(indent).append("]").append(StringUtil.NEW_LINE);
+		if(_conditions != null)
+		{
+			sb.append(indent).append("( ").append(StringUtil.NEW_LINE);
+			sb.append(_conditions.toString(indent + StringUtil.TAB));
+			sb.append(indent).append(")");
+			sb.append(StringUtil.NEW_LINE);
+		}
+		
+		
+		sb.append(indent).append(StringUtil.NEW_LINE);
 		return sb.toString();
 	}
-	
-	
+
+	public Conditions getConditions() 
+	{
+		return _conditions;
+	}
+
+	public Action getRandomAction(Class<? extends Action> clazz) 
+	{
+		List<Action> tmp = this.getActionByType(clazz);
+		if(tmp.isEmpty())
+			return null;
+		int random = RandUtil.getRandom(0, tmp.size());
+		return tmp.get(random);
+	}
+
 }

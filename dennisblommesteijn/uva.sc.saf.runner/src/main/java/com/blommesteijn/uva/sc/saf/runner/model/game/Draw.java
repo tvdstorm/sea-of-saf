@@ -48,7 +48,8 @@ public class Draw implements IDraw
 
 
 
-	public void printAction(String[] fighter, int position) {
+	public void printAction(String[] fighter, int position) 
+	{
 		// TODO Auto-generated method stub
 		
 	}

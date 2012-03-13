@@ -4,13 +4,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.ast.types.AstNode;
+import com.blommesteijn.uva.sc.saf.ast.types.IAstNode;
 
 
 public class StaticChecker extends Checker
 {
-	private List<AstNode> _astNodes = null;
+	private List<IAstNode> _astNodes = null;
 
-	public StaticChecker(List<AstNode> astNodes)
+	public StaticChecker(List<IAstNode> astNodes)
 	{
 		super();	
 		_result = new StaticCheckerResult();
@@ -18,18 +19,18 @@ public class StaticChecker extends Checker
 		this.init();
 	}
 	
-	public StaticChecker(AstNode astNode)
+	public StaticChecker(IAstNode astNode)
 	{
 		super();
 		_result = new StaticCheckerResult();
-		_astNodes = new LinkedList<AstNode>();
+		_astNodes = new LinkedList<IAstNode>();
 		_astNodes.add(astNode);
 		this.init();
 	}
 	
 	private void init()
 	{
-		for(AstNode astNode : _astNodes)
+		for(IAstNode astNode : _astNodes)
 			astNode.staticCheck((StaticCheckerResult)_result);
 	}
 

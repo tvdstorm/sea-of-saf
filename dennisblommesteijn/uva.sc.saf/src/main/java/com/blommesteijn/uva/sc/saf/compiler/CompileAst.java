@@ -13,6 +13,8 @@ import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.ast.SerialNode;
 import com.blommesteijn.uva.sc.saf.ast.types.AstNode;
+import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
+import com.blommesteijn.uva.sc.saf.ast.types.IAstNode;
 
 public class CompileAst
 {
@@ -33,30 +35,24 @@ public class CompileAst
 	{
 	}
 
-	public List<File> comileAst(List<AstNode> astNodes)
+	public List<File> comileAst(List<IAstNode> astNodes)
 	{
 		List<File> ret = new LinkedList<File>();
-		for(AstNode astNode : astNodes)
+		for(IAstNode astNode : astNodes)
 		{
-			//find node duplicate
-			int duplicate = 0;
-			for(AstNode astNode2 : astNodes)
+			if( !(astNode instanceof AstNode) )
+				continue;
+			AstNode ast = (AstNode) astNode;
+			List<Fighter> fighters = ast.getFighters();
+			for(Fighter fighter : fighters)
 			{
-				if(astNode2.getIdent().equals(astNode.getIdent()))
-				{
-					duplicate++;
-					break;
-				}
+				ret.addAll(this.compileAst(fighter));
 			}
-			if(duplicate > 1)
-				System.out.println("error: duplicates found \'" + astNode.getIdent()+ "\'");
-			else
-				ret.addAll(this.compileAst(astNode));
 		}
 		return ret;
 	}
 	
-	public List<File> compileAst(AstNode astNode)
+	public List<File> compileAst(Fighter fighter)
 	{		
 		List<File> ret = new LinkedList<File>();
 		File file = null;
@@ -65,10 +61,10 @@ public class CompileAst
 
 		try
 		{
-			file = new File(astNode.getIdent() + ".sacc");
+			file = new File(fighter.getName() + ".sacc");
 			fileOutputStream = new FileOutputStream(file);
 			objectOutputStream = new ObjectOutputStream(fileOutputStream);
-			objectOutputStream.writeObject(astNode);
+			objectOutputStream.writeObject(fighter);
 			ret.add(file);
 		}
 		catch (FileNotFoundException e)

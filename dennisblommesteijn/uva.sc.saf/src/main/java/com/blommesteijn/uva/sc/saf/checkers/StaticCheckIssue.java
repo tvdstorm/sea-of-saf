@@ -37,10 +37,14 @@ public class StaticCheckIssue implements ICheckerIssue
 		StringBuilder sb = new StringBuilder();
 		if(_astNode != null)
 		{
+			//mesage
 			if(_message != null)
 				sb.append("\'").append(_message).append("\'");
+			//object name
 			sb.append(" ").append(_astNode.getClass().getSimpleName());
-			sb.append(": ").append(_astNode.getIdent()).append("");
+			//description
+			sb.append(": ").append(_astNode.getDescription());
+			//line number
 			if(_astNode.getLine() != Integer.MAX_VALUE)
 				sb.append(", line: ").append(_astNode.getLine());
 		}

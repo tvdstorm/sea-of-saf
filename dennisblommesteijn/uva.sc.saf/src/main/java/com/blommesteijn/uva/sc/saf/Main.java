@@ -1,5 +1,6 @@
 package com.blommesteijn.uva.sc.saf;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
 import gnu.getopt.Getopt;
 import gnu.getopt.LongOpt;
 
@@ -12,6 +13,11 @@ import java.util.Map;
 import com.blommesteijn.uva.sc.saf.ast.BuildAst;
 import com.blommesteijn.uva.sc.saf.ast.BuildAstException;
 import com.blommesteijn.uva.sc.saf.ast.types.AstNode;
+import com.blommesteijn.uva.sc.saf.ast.types.Behaviour;
+import com.blommesteijn.uva.sc.saf.ast.types.Condition;
+import com.blommesteijn.uva.sc.saf.ast.types.Conditions;
+import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
+import com.blommesteijn.uva.sc.saf.ast.types.IAstNode;
 import com.blommesteijn.uva.sc.saf.checkers.ParserChecker;
 import com.blommesteijn.uva.sc.saf.checkers.StaticChecker;
 import com.blommesteijn.uva.sc.saf.compiler.CompileAst;
@@ -148,12 +154,13 @@ public class Main
 		}
 
 		//get astnodes
-		List<AstNode> astNodes = astBuilder.getAstNodes();
+		List<IAstNode> astNodes = astBuilder.getAstNodes();		
 		if(astNodes == null)
 		{
 			System.out.println("error: could not load source file(s). (try --help)");
 			System.exit(1);
 		}
+
 
 		//compile ast nodes
 		CompileAst compileAst = CompileAst.getInstance();

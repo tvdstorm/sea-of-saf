@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.ast.types.AstNode;
 import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
+import com.blommesteijn.uva.sc.saf.ast.types.IAstNode;
 import com.blommesteijn.uva.sc.saf.runner.model.game.Draw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.Game;
 import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
@@ -21,18 +22,18 @@ import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.Arena;
  */
 public class SuperAwesomeGameInterpreter implements IInterpreter
 {
-	private List<AstNode> _astNodes = null;
+	private List<IAstNode> _astNodes = null;
 	private IGame _game = null;
 
 	/**
 	 * Construct SAF game from AST
-	 * @param astNodes list of ASTs
+	 * @param list list of ASTs
 	 * @param draw 
 	 * @throws GameException 
 	 */
-	public SuperAwesomeGameInterpreter(List<AstNode> astNodes, IDraw draw) throws GameException
+	public SuperAwesomeGameInterpreter(List<IAstNode> list, IDraw draw) throws GameException
 	{
-		_astNodes  = astNodes;		
+		_astNodes  = list;		
 		_game  = new Game(draw);
 		
 		//load fighters
@@ -57,10 +58,10 @@ public class SuperAwesomeGameInterpreter implements IInterpreter
 	private List<Fighter> getFighters()
 	{
 		List<Fighter> fighters = new LinkedList<Fighter>();
-		for(AstNode astNode : _astNodes)
+		for(IAstNode astNode : _astNodes)
 		{
-//			System.out.println(astNode.getFighters());
-			fighters.addAll(astNode.getFighters());
+			Fighter fighter = (Fighter) astNode;
+			fighters.add(fighter);
 		}
 		return fighters;
 	}

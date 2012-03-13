@@ -5,12 +5,12 @@ package com.blommesteijn.uva.sc.saf.runner.model.game.saf;
 
 import java.util.List;
 
-import com.blommesteijn.uva.sc.saf.ast.types.Action;
 import com.blommesteijn.uva.sc.saf.ast.types.Behaviour;
 import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.Action;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.AttackAction;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.BlockAction;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.MoveAction;
 import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IDraw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IGame;
@@ -62,7 +62,7 @@ public class FighterGameContext implements IGameContext
 		//initiate new fighter as an active fighter
 		_activeFighter = new ActiveFighter(_fighter);
 		
-		List<Behaviour> behaviours = _fighter.getBehaviour();
+		List<Behaviour> behaviours = _fighter.getBehaviours();
 		for(Behaviour behaviour : behaviours)
 		{
 			Task task = new Task(behaviour);
@@ -104,14 +104,24 @@ public class FighterGameContext implements IGameContext
 		{
 			//get next fighter behaviour
 			_behaviour = _activeFighter.getNextBehaviour(_arena);
-			EMove move = Behaviour.getMove(_behaviour.getMove());
-			EAttack attack = Behaviour.getAttack(_behaviour.getAttack());
+			
+			Action move = _behaviour.getRandomAction(MoveAction.class);
+			Action attack = _behaviour.getRandomAction(AttackAction.class);
+			Action block = _behaviour.getRandomAction(BlockAction.class);
+
 			_activeFighter.setMove(move);
 			_activeFighter.setAttack(attack);
+			_activeFighter.setBlock(block);
+			
+			Action lastAction = null;
+			if(attack != null)
+				lastAction = attack;
+			if(block != null)
+				lastAction = block;
 			
 			//perform movement
 			_arena.move(_activeFighter, move);
-			_arena.attack(_activeFighter, attack);		
+			_arena.attack(_activeFighter, lastAction);		
 		}
 	}
 	

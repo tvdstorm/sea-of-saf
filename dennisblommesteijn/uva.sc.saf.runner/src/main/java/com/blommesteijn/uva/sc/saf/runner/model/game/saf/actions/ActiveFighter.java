@@ -4,13 +4,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.blommesteijn.uva.sc.saf.ast.types.Action;
 import com.blommesteijn.uva.sc.saf.ast.types.Behaviour;
 import com.blommesteijn.uva.sc.saf.ast.types.Condition;
 import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
-import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.Action;
 import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
 
 /**
@@ -27,15 +24,16 @@ public class ActiveFighter
 	private int _position = 0;
 	private int _health = 0;
 	private int _speed = 0;
-	private EMove _currentMove;
-	private EAttack _currentAttack;
+	
+	private Action _currentMove;
+	private Action _currentAttack;
+	private Action _currentBlock;
 
 	
 	public ActiveFighter(Fighter fighter)
 	{
 		_fighter = fighter;
 		_actions = new LinkedList<Task>();
-		_fighter.getProperties();
 		_health = 100;
 	}
 	
@@ -89,22 +87,21 @@ public class ActiveFighter
 			//collect arena properties
 			List<Condition> currentState = new LinkedList<Condition>();
 			if(arena.isFar(_fighter))
-				currentState.add(new Condition(0, ECondition.FAR.getIdent()));
+				currentState.add(new Condition("far"));
 			else if(arena.isNear(_fighter))
-				currentState.add(new Condition(0, ECondition.NEAR.getIdent()));
+				currentState.add(new Condition("near"));
 			
 			if(arena.isStronger(_fighter))
-				currentState.add(new Condition(0, ECondition.STRONGER.getIdent()));
+				currentState.add(new Condition("stronger"));
 			else if(arena.isWeaker(_fighter))
-				currentState.add(new Condition(0, ECondition.WEAKER.getIdent()));
+				currentState.add(new Condition("weaker"));
 			else if(arena.areEven())
-				currentState.add(new Condition(0, ECondition.EVEN.getIdent()));
+				currentState.add(new Condition("even"));
 			
 			if(arena.isMuchStronger(_fighter))
-				currentState.add(new Condition(0, ECondition.MUCH_STRONGER.getIdent()));
+				currentState.add(new Condition("much_stronger"));
 			if(arena.isMuchWeaker(_fighter))
-				currentState.add(new Condition(0, ECondition.MUCH_WEAKER.getIdent()));
-			
+				currentState.add(new Condition("much_weaker"));
 			
 			//skip task if it cannot be performed
 			behaviour = task.getNextBehaviour(currentState);
@@ -122,30 +119,33 @@ public class ActiveFighter
 		return _lastBehaviour;
 	}
 
-	public void setMove(EMove move) 
+	public void setMove(Action move) 
 	{
 		_currentMove = move;
 	}
 	
-	public EMove getMove()
+	public Action getMove()
 	{
 		return _currentMove;
 	}
-
-
-	public void setAttack(EAttack attack) 
+	
+	public void setAttack(Action attack) 
 	{
 		_currentAttack = attack;
 	}
 
-	public EAttack getAttack() 
+	public Action getAttack() 
 	{
 		return _currentAttack;
 	}
 
+	public Action getBlock() 
+	{
+		return _currentBlock;
+	}
 
-
-
-	
-
+	public void setBlock(Action block) 
+	{
+		_currentBlock = block;
+	}
 }

@@ -1,236 +1,153 @@
 package com.blommesteijn.uva.sc.saf.ast.types;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
 import com.blommesteijn.uva.sc.saf.ast.SerialNode;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
-import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EStrengthType;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 
+import edu.emory.mathcs.backport.java.util.Arrays;
+
 public class Fighter extends AstNode
 {
+	private static final long serialVersionUID = 5706847103982971950L;
+	private final String _name;
+	private final List<Property> _properties;
+	private final List<Behaviour> _behaviours;
+	
+	//predefined properties
+	protected static Map<String, Property> __allPresetProperties = getAllProperties();
+	
 	/**
-	 * 
+	 * Get all properties (pre-populate)
+	 * @return list of properties
 	 */
-	private static final long serialVersionUID = -918648162127106598L;
-
-	public static final String IDENT_PNAME = "ident: ";
-
-	private List<Property> _properties = new LinkedList<Property>();
-	private List<Behaviour> _behaviours = new LinkedList<Behaviour>();
-
+	private static Map<String, Property> getAllProperties()
+	{
+		Map<String, Property> ret = new HashMap<String, Property>();
+		ret.put("punchPower", new Property("punchPower", 5.0));
+		ret.put("punchReach", new Property("punchReach", 5.0));
+		ret.put("kickReach", new Property("kickReach", 5.0));
+		ret.put("kickPower", new Property("kickPower", 5.0));
+		return ret;
+	}
 
 	/**
 	 * 
 	 * @param line
-	 * @param ident
+	 * @param name
 	 */
-	public Fighter(int line, String ident)
+	public Fighter(int line, String name)
 	{
-		super();
-		_line = line;
-		_ident = ident;
+		super(line);
+		_name = name;
+		_properties = new LinkedList<Property>();
+		_behaviours = new LinkedList<Behaviour>();
 	}
 	
-	/**
-	 * 
-	 * @param property
-	 */
-	public void append(Property property)
+	public String getName()
 	{
-		_properties.add(property);
+		return _name;
 	}
-	
-	public void append(Behaviour behaviour)
-	{
-		_behaviours.add(behaviour);
-	}
-	
 
-	public List<Property> getProperties()
+	public void addProperties(List<Property> properties) 
 	{
-		return _properties;
+		_properties.addAll(properties);
+		this.addMissingProperties();
 	}
 	
-	public List<Behaviour> getBehaviour()
+	public double getReach()
+	{
+		double val = 0;
+		for(Property property : _properties)
+		{	
+			double newVal = property.getValue();
+			if(property.isReach() && val < newVal)
+				val = newVal;
+		}
+		return val;
+	}
+	
+	public double getStrength()
+	{
+		double val = 0;
+		for(Property property : _properties)
+		{	
+			double newVal = property.getValue();
+			if(property.isPower() && val < newVal)
+				val = newVal;
+		}
+		return val;
+	}
+
+	private void addMissingProperties()
+	{
+		for(Entry<String, Property> preset : __allPresetProperties.entrySet())
+		{
+			Property p = preset.getValue();
+			if(_properties.contains(p))
+				continue;
+			_properties.add(p);
+		}
+	}
+
+	public void addBehaviours(List<Behaviour> behaviours) 
+	{
+		_behaviours.addAll(behaviours);
+	}
+
+	public List<Behaviour> getBehaviours() 
 	{
 		return _behaviours;
 	}
-
 	
-	/**
-	 * Perform Static Check
-	 * @param checker static result checker reference
-	 */
-	@Override
-	public void staticCheck(StaticCheckerResult result)
-	{	
-		//register itself (entry point)
-		super.register(this);
-		
-		//visit all nested nodes
-		for (AstNode node : this.getNodes())
-		{
-			node.staticCheck(result);
-			node.register(this);
-		}
-		
-		//check for properties, of none found create new one
-		boolean found = false;
-		for(EStrength strength : Property.STRENGTHS)
-		{
-			found = false;
-			for(Property p : _properties)
-			{
-				if(strength.equals(p.getIdent()))
-				{
-					found = true;
-					break;
-				}
-			}
-			//not found, create new property
-			if (!found)
-			{
-				_properties.add(new Property(
-						strength.getIdent(),
-						Property.DEFAULT_VALUE));
-			}
-		}
-		//Instantiate properties
-		this.loadProperties();
-		
-		//test behaviour
-		if(_behaviours.size() <= 0)
-			result.append(new StaticCheckIssue(this, "no behaviour(s) found"));
-		
-		
-		//check for at least one always behaviour
-		boolean foundAlways = false;
+	protected void checkActions(StaticCheckerResult result)
+	{
+		//check if it has an always behaviour
+		boolean hasAlways = false;
 		for(Behaviour behaviour : _behaviours)
 		{
-			for(Condition location : behaviour.getConditions())
-			{
-				//compare location ident to always ident
-				if(location.getIdent().equals(ECondition.ALWAYS.getIdent()))
-				{
-					foundAlways = true;
-					break;
-				}
-			}
+			if(behaviour.getConditions().isValidCondition(
+					Arrays.asList(new Condition[]{new Condition("always")})))
+				hasAlways = true;
 		}
-		if(!foundAlways)
-			result.append(new StaticCheckIssue(this, "missing always (default) case"));
+		if(!hasAlways)
+			result.append(new StaticCheckIssue(this, "always behaviour missing"));
 		
+		//check properties
+		for(Property property : _properties)
+			if(!__allPresetProperties.containsValue(property))
+				result.append(new StaticCheckIssue(property, "incorrect property"));
 	}
 	
-	/**
-	 * Load fighter specific properties
-	 */
-	private void loadProperties()
+	
+	@Override
+	public void staticCheck(StaticCheckerResult result)
+	{		
+		//check self
+		this.checkActions(result);
+		//loop nested
+		for(Property property : _properties)
+			property.staticCheck(result);
+		for(Behaviour behaviour : _behaviours)
+			behaviour.staticCheck(result);
+	}
+	
+	public String getDescription() 
 	{
-		//get properties
-		double punchPower = this.getProperty(EStrength.PUNCH_POWER).getValue();
-		double kickPower = this.getProperty(EStrength.KICK_POWER).getValue();
-		double punchReach = this.getProperty(EStrength.PUNCH_REACH).getValue();
-		double kickReach = this.getProperty(EStrength.KICK_REACH).getValue();
-		//calculate new values
-		double weight = (punchPower + kickPower) / 2;
-		double height = (punchReach + kickReach) / 2;
-		double speed = 0.5 * (height - weight);
-		//create new properties
-		this.append(new Property("weight", weight));
-		this.append(new Property("height", height));
-		if(speed < 1)
-			speed = 1;
-		this.append(new Property("speed", speed));
+		return _name;
 	}
 	
-	/**
-	 * Get Property by EStrength
-	 * @param ident type of property
-	 * @return property of type
-	 */
-	public Property getProperty(EStrength ident)
+	public String toString()
 	{
-		Property ret = null;
-		for(Property p : _properties)
-		{
-			if(p.getIdent().equals(ident.getIdent()))
-			{
-				ret = p;
-				break;
-			}
-		}
-		return ret;
+		return this.toString("");
 	}
 	
-	
-	
-	/**
-	 * Get Property by ident name
-	 * @param ident name of property
-	 * @return type of ident
-	 */
-	private EStrength getProperty(String ident)
-	{
-		EStrength ret = null;
-		for(EStrength strength : EStrength.values())
-		{
-			if(strength.getIdent().equals(ident))
-			{
-				ret = strength;
-				break;
-			}
-		}
-		return ret;
-	}
-//	
-//	public Property getProperty(EAttack attack) 
-//	{
-//		
-//		return null;
-//	}
-//		
-		
-	/**
-	 * Get Property by Strength SubType (ex: reach, power)
-	 * @param type target subtype of strength
-	 * @return list of properties
-	 */
-	public List<Property> getProperty(EStrengthType type)
-	{
-		List<Property> ret = new LinkedList<Property>();
-		for(Property p : _properties)
-		{
-			EStrength property = this.getProperty(p.getIdent());
-			if(property != null && property.getType().equals(type))
-				ret.add(p);
-		}
-		return ret;
-	}
-	
-//	public Property getProperty(EStrength strength)
-//	{
-//		Property ret = null;
-//		for(Property p : _properties)
-//		{
-//			this.getpr
-//		}
-//		return ret;
-//	}
-	
-	
-	
-	
-	
-	/**
-	 * @return string representation
-	 */
 	public String toString(String indent)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -238,26 +155,61 @@ public class Fighter extends AstNode
 		sb.append(indent).append("[ ").append(this.getClass().getSimpleName());
 		sb.append(": ").append(StringUtil.NEW_LINE);
 		//append name and value
-		sb.append(indent).append(Fighter.IDENT_PNAME).append(_ident);
-		sb.append(StringUtil.NEW_LINE);			
+		sb.append(indent).append("name: ").append(_name);
+		sb.append(StringUtil.NEW_LINE);		
 		
-		//visit nested nodes
-		if(this.hasNodes())
+		if(!_behaviours.isEmpty())
 		{
 			sb.append(indent).append("( ").append(StringUtil.NEW_LINE);
-			for(AstNode node : this.getNodes())
+			for(Behaviour behaviour : _behaviours)
 			{
-				sb.append(node.toString(indent + StringUtil.TAB));
+				sb.append(behaviour.toString(indent + StringUtil.TAB));
 			}
 			sb.append(indent).append(")");
-			sb.append("]").append(StringUtil.NEW_LINE);
+			sb.append(StringUtil.NEW_LINE);
 		}
-		else
-			sb.append(indent).append("]").append(StringUtil.NEW_LINE);
+		if(!_properties.isEmpty())
+		{
+			sb.append(indent).append("( ").append(StringUtil.NEW_LINE);
+			for(Property property : _properties)
+			{
+				sb.append(property.toString(indent + StringUtil.TAB));
+			}
+			sb.append(indent).append(")");
+			sb.append("]");//.append(StringUtil.NEW_LINE);
+		}
+		
+		
+		sb.append(indent).append("]").append(StringUtil.NEW_LINE);
 		return sb.toString();
 	}
+	
+	public double getWeight()
+	{
+		double val = 0;
+		for(Property property : _properties)
+			if(property.isPower())
+				val += property.getValue();
+		return (val / 2);
+	}
+	
+	public double getHeight()
+	{
+		double val = 0;
+		for(Property property : _properties)
+			if(property.isReach())
+				val += property.getValue();
+		return (val / 2);
+	}
 
-
+	public double getSpeed() 
+	{
+		double val = 0.5 * (this.getHeight() - this.getWeight());
+		if(val < 1)
+			val = 1;
+		return val;
+	}
 
 	
+
 }

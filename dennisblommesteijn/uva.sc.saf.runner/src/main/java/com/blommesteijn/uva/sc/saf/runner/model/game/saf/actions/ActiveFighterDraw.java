@@ -1,47 +1,28 @@
 package com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.Action;
 
 public class ActiveFighterDraw
 {
-	public static String[] getAttack(EAttack attack, boolean inverse)
+	public static String[] getAttack(Action lastAction, boolean inverse)
 	{
 		String[] ret = null;
+		String actionName = lastAction.getName();
 		
-		if(attack == null)
+		if(lastAction == null)
 			ret = ActiveFighterDraw.getAttackDefault();
 		else
-			switch(attack)
-			{
-				case BLOCK_HIGH:
-					ret = ActiveFighterDraw.getAttackBlockHigh();
-					break;
-				case BLOCK_LOW:
-					ret = ActiveFighterDraw.getAttackBlockLow();
-					break;
-				case PUNCH_HIGH:
-					ret = ActiveFighterDraw.getAttackPunchHigh();
-					break;
-				case PUNCH_LOW:
-					ret = ActiveFighterDraw.getAttackPunchLow();
-					break;
-				case KICK_HIGH:
-					ret = ActiveFighterDraw.getAttackKickHigh();
-					break;
-				case KICK_LOW:
-					ret = ActiveFighterDraw.getAttackKickLow();
-					break;
-				default:
-					ret = ActiveFighterDraw.getAttackDefault();
-					break;
-			}
-		
+		{
+			if(__allDraw.containsKey(actionName))
+				ret = __allDraw.get(actionName);
+		}
 		if(inverse)
 			ret = ActiveFighterDraw.inverse(ret);
-		
 		return ret;
 	}
 	
@@ -67,6 +48,20 @@ public class ActiveFighterDraw
 		return ret.toArray(new String[0]);
 	}
 	
+	
+	private static Map<String, String[]> __allDraw = getAllDraw();
+	protected static Map<String, String[]> getAllDraw()
+	{
+		Map<String, String[]> ret = new HashMap<String, String[]>();
+		ret.put("default", getAttackDefault());
+		ret.put("block_high", getAttackBlockHigh());
+		ret.put("block_low", getAttackBlockLow());
+		ret.put("punch_high", getAttackPunchHigh());
+		ret.put("punch_low", getAttackPunchLow());
+		ret.put("kick_high", getAttackKickHigh());
+		ret.put("kick_low", getAttackKickLow());
+		return ret;
+	}
 	
 	private static String[] getAttackDefault()
 	{

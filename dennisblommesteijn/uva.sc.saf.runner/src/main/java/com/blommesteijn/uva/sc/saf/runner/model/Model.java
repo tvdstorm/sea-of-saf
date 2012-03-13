@@ -5,6 +5,7 @@ package com.blommesteijn.uva.sc.saf.runner.model;
 
 import java.util.List;
 
+import com.blommesteijn.uva.sc.saf.ast.types.IAstNode;
 import com.blommesteijn.uva.sc.saf.runner.model.ast.AstLoader;
 import com.blommesteijn.uva.sc.saf.runner.model.game.Draw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
@@ -124,7 +125,7 @@ public class Model
 			CliMessenger.exit(ExitCode.EC_AST, e.getMessage());
 		}
 
-		CliMessenger.msg(new String[] { "astLoader:", _astLoader.toString() });
+//		CliMessenger.msg(new String[] { "astLoader:", _astLoader.toString() });
 
 		// verify asts per files
 		if (_astLoader.getAstNodes().size() < _files.getFiles().size())
