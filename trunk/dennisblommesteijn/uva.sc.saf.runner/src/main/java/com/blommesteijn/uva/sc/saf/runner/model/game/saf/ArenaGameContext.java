@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.blommesteijn.uva.sc.saf.ast.types.Action;
 import com.blommesteijn.uva.sc.saf.ast.types.Behaviour;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.Action;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.AttackAction;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.BlockAction;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.MoveAction;
 import com.blommesteijn.uva.sc.saf.runner.model.game.GameException;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IDraw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.IGame;
@@ -19,6 +21,7 @@ import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.ActiveFighter;
 import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.ActiveFighterDraw;
 import com.blommesteijn.uva.sc.saf.runner.model.game.saf.actions.Arena;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Common;
+import com.blommesteijn.uva.sc.saf.utils.StringUtil;
 
 /**
  * Super Awesome Fighter Game Context
@@ -126,24 +129,38 @@ public class ArenaGameContext implements IGameContext
 			//check for dead fighter
 			if(af.getHealth() < 0)
 			{
-				String fighterName = _arena.getOtherFighter(af).getFighter().getIdent();
+				String fighterName = _arena.getOtherFighter(af).getFighter().getName();
 				draw.printScore(fighterName + " has won!");
 				_game.end();
 			}
+			
+			Action lastAction = null; 
 			
 			//add last behaviour
 			Behaviour lastBehaviour = af.getLastBehaviour();
 			if(lastBehaviour != null)
 			{
-				Action attack = lastBehaviour.getAttack();
-				Action move = lastBehaviour.getMove();
+				Action attack = lastBehaviour.getRandomAction(AttackAction.class);
+				Action move = lastBehaviour.getRandomAction(MoveAction.class);
+				Action block = lastBehaviour.getRandomAction(BlockAction.class);
 			
-				action += af.getFighter().getIdent() + ": " + move.getIdent() + " " + attack.getIdent();
-				action += Common.TAB;
+				if(attack != null)
+					lastAction = attack;
+				if(block != null)
+					lastAction = block;
+				//display action
+//				action += af.getFighter().getName() + ": " + move.getName() + " " + lastAction.getName();
+//				action += Common.TAB;
+				
+				//display position
+				action += Common.TAB + Common.TAB;
+				action += af.getPosition();
+				action += Common.TAB + Common.TAB;
+				
 			}
 			
 			//add fighter health
-			score += af.getFighter().getIdent() + ": " + af.getHealth();
+			score += af.getFighter().getName() + ": " + af.getHealth();
 			score += Common.TAB + Common.TAB + Common.TAB;
 			
 			//add fighter
@@ -151,9 +168,9 @@ public class ArenaGameContext implements IGameContext
 			ActiveFighter other = _arena.getOtherFighter(af);
 			if(other.getPosition() < af.getPosition())
 				inverted = true;
+			
 			//get ascii art
-			EAttack attack = af.getAttack();
-			String[] fighter = ActiveFighterDraw.getAttack(attack, inverted);
+			String[] fighter = ActiveFighterDraw.getAttack(lastAction, inverted);
 			draw.printOutputPane(fighter, af.getPosition(), other.getPosition());			
 		}
 		draw.printScore(score);

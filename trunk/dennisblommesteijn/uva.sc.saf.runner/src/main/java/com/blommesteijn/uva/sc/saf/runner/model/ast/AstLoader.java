@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.ast.types.AstNode;
+import com.blommesteijn.uva.sc.saf.ast.types.IAstNode;
 import com.blommesteijn.uva.sc.saf.runner.model.FileLoadException;
 import com.blommesteijn.uva.sc.saf.runner.model.Model;
 import com.blommesteijn.uva.sc.saf.runner.model.utils.Common;
@@ -17,13 +18,13 @@ import com.blommesteijn.uva.sc.saf.runner.model.utils.Options;
 public class AstLoader
 {
 	private Files _files = null;
-	private List<AstNode> _astNodes = null;
+	private List<IAstNode> _astNodes = null;
 	private Options _options = null;
 	
 	public AstLoader(Files files) throws FileLoadException
 	{
 		_files = files;
-		_astNodes = new LinkedList<AstNode>();
+		_astNodes = new LinkedList<IAstNode>();
 		_options = Model.getInstance().getOption();
 		
 		this.loadAst();
@@ -40,12 +41,13 @@ public class AstLoader
 			{
 				fileInputStream = new FileInputStream(file);
 				objectInputStream = new ObjectInputStream(fileInputStream);
-				_astNodes.add((AstNode) objectInputStream.readObject());
+				_astNodes.add((IAstNode) objectInputStream.readObject());
 			}
 			catch (ClassNotFoundException e)
 			{
 				if(_options.hasOption(Options.DEBUG))
 				{
+					e.printStackTrace();
 					System.out.println("error: sacc invalid.");
 					System.out.println(file.getName());
 				}
@@ -54,6 +56,7 @@ public class AstLoader
 			{
 				if(_options.hasOption(Options.DEBUG))
 				{
+					e.printStackTrace();
 					System.out.println("error: file read.");
 					System.out.println(file.getName());
 				}
@@ -66,7 +69,7 @@ public class AstLoader
 		}
 	}
 	
-	public List<AstNode> getAstNodes()
+	public List<IAstNode> getAstNodes()
 	{
 		return _astNodes;
 	}
@@ -75,7 +78,7 @@ public class AstLoader
 	public String toString()
 	{
 		StringBuilder sb = new StringBuilder();
-		for(AstNode astNode : _astNodes)
+		for(IAstNode astNode : _astNodes)
 		{
 			sb.append(astNode).append(Common.NEW_LINE);
 		}

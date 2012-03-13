@@ -1,191 +1,98 @@
 package com.blommesteijn.uva.sc.saf.ast.types;
 
-import java.util.Arrays;
-import java.util.List;
 
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
-import com.blommesteijn.uva.sc.saf.ast.SerialNode;
-import com.blommesteijn.uva.sc.saf.ast.types.exceptions.PropertyValueException;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
+
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 
 public class Property extends AstNode
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5179564374566348170L;
-	public static final String VALUE_PNAME = "value: ";
-	public static final String IDENT_PNAME = "ident: ";
-	
-	public static final List<EStrength> STRENGTHS = Arrays.asList(EStrength.values());
-	public static final int DEFAULT_VALUE = 5;
+	private static final long serialVersionUID = -837829044101579142L;
 
+	protected double _minValue = 1.0;
+	protected double _maxValue = 10.0;
 	
-	private double _value = 0; 
+	private final String _name;
+	private final double _value;
 	
-	/**
-	 * Property created from resource
-	 * @param line
-	 * @param ident
-	 * @param value
-	 */
-	public Property(int line, String ident, int value)
+	public Property(String name, double value)
 	{
 		super();
-		_line = line;
-		_ident = ident;
-		_value = (double)value;
-	}
-	
-	/**
-	 * Property created by generator (default values)
-	 * @param ident
-	 * @param value
-	 */
-	public Property(String ident, int value)
-	{
-		super();
-		_ident = ident;
-		_value = (double)value;	
-	}
-	
-	public Property(String ident, double value)
-	{
-		super();
-		_ident = ident;
+		_name = name;
 		_value = value;
 	}
 
-	
-	public void register(AstNode astNode)
+	public Property(int line, String name, double value)
 	{
-		Fighter f = (Fighter) astNode;
-		f.append(this);
-	}
-	
-	/**
-	 * Perform Static Check
-	 * @param checker static result checker reference
-	 */
-	@Override
-	public void staticCheck(StaticCheckerResult result)
-	{	
-		boolean found = false;
-		for (EStrength ident : EStrength.values())
-		{
-			if (ident.getIdent().equals(_ident))
-			{
-				found = true;
-				try
-				{
-					ident.testValue(getValue());
-				}
-				catch (PropertyValueException e)
-				{
-					result.append(new StaticCheckIssue(this, e.getMessage()));
-				}
-				break;
-			}
-		}
-		//property not found
-		if(!found)
-			result.append(new StaticCheckIssue(this, "unknown property"));
+		super(line);
+		_name = name;
+		_value = value;
 	}
 
-	/**
-	 * @return the value
-	 */
+	public String getName()
+	{
+		return _name;
+	}
+	
 	public double getValue()
 	{
 		return _value;
 	}
-
-	/**
-	 * @param value the value to set
-	 */
-	public void setValue(int value)
+	
+	public boolean isPower()
 	{
-		_value = value;
+		return _name.contains("Power");
+	}
+	
+	public boolean isReach()
+	{
+		return _name.contains("Reach");
 	}
 	
 	
-	/**
-	 * @return string representation
-	 */
-	public String toString(String indent)
+	public boolean equals(Object object)
+	{
+		if(object instanceof Property)
+		{
+			Property p = (Property) object;
+			return (p._name.equals(_name));
+		}
+		return false;
+	}
+	
+	@Override
+	public void staticCheck(StaticCheckerResult result)
+	{		
+		//limit property size
+		if(_value > _maxValue || _value < _minValue)
+			result.append(new StaticCheckIssue(this, "value out of bounds"));
+	}
+	
+	public String getDescription() 
+	{
+		return _name;
+	}
+	
+	public String toString()
+	{
+		return this.toString("");
+	}
+	
+	public String toString(String indent) 
 	{
 		StringBuilder sb = new StringBuilder();
 		//append typename
 		sb.append(indent).append("[ ").append(this.getClass().getSimpleName());
 		sb.append(": ").append(StringUtil.NEW_LINE);
 		//append name and value
-		sb.append(indent).append(Property.IDENT_PNAME).append(_ident).append(StringUtil.NEW_LINE);
-		sb.append(indent).append(Property.VALUE_PNAME).append(_value).append(StringUtil.NEW_LINE);
-
+		sb.append(indent).append("name: ").append(_name).append(",").append(StringUtil.NEW_LINE);
+		sb.append(indent).append("value: ").append(_value);
+		sb.append(StringUtil.NEW_LINE);
 		
-		//visit nested nodes
-		if(this.hasNodes())
-		{
-			sb.append(indent).append("( ").append(StringUtil.NEW_LINE);
-			for(AstNode node : this.getNodes())
-			{
-				sb.append(node.toString(indent + StringUtil.TAB));
-			}
-			sb.append(indent).append(")");
-			sb.append("]").append(StringUtil.NEW_LINE);
-		}
-		else
-			sb.append(indent).append("]").append(StringUtil.NEW_LINE);
+		sb.append(indent).append("]").append(StringUtil.NEW_LINE);
 		return sb.toString();
 	}
-	
-	
-	public static EStrength getStrength(Property strength) 
-	{
-		EStrength ret = null;
-		for(EStrength e : EStrength.values())
-		{
-			if(e.getIdent().equals(strength.getIdent()))
-			{
-				ret = e;
-				break;
-			}
-		}
-		return ret;
-	}
-
-	
-	public boolean isAttack(EAttack attack) 
-	{
-		EStrength strength = this.getStrength(this);
-		
-		boolean ret = false;
-		switch(attack)
-		{
-			case KICK_HIGH:
-			case KICK_LOW:
-				ret = (strength == EStrength.KICK_POWER);
-				break;
-			case PUNCH_HIGH:
-			case PUNCH_LOW:
-				ret = (strength == EStrength.PUNCH_POWER);
-				break;
-			default:
-				break;
-		}
-		
-		return ret;
-	}
-	
-	public boolean isBlock(EAttack attack)
-	{
-		return true;
-	}
-	
 
 }
 

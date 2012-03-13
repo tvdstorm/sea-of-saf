@@ -7,15 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.blommesteijn.uva.sc.saf.ast.types.Action;
 import com.blommesteijn.uva.sc.saf.ast.types.Behaviour;
 import com.blommesteijn.uva.sc.saf.ast.types.Fighter;
 import com.blommesteijn.uva.sc.saf.ast.types.Property;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttack;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EAttackType;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EMove;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EStrength;
-import com.blommesteijn.uva.sc.saf.ast.types.values.EStrengthType;
+import com.blommesteijn.uva.sc.saf.ast.types.actions.Action;
 import com.blommesteijn.uva.sc.saf.utils.ListUtil;
 
 /**
@@ -27,9 +22,8 @@ public class Arena
 {
 	public static final int FIGHTERS_IN_ARENA_MAX = 2;
 	public static final int MUCH_OFFSET = 5;
-	private static final int SPEED_RUN_OFFSET = 10;
-	private static final int SPEED_WALK_OFFSET = 5;
 	private static final int BLOCK_OFFSET = 3;
+
 	
 	private static Arena __instance = null;
 	
@@ -106,27 +100,12 @@ public class Arena
 	
 	private int getReach(Fighter fighter)
 	{
-		//get reach properties
-		int reach = _size;
-		//get property by reach type
-		List<Property> properties = fighter.getProperty(EStrengthType.REACH);
-		for(Property p : properties)
-		{
-			if(p.getValue() < reach)
-				reach = (int)p.getValue();
-		}
-		return reach;
+		return (int)fighter.getReach();
 	}
 	
 	private double getStrength(Fighter fighter)
 	{
-		double strength = 0;
-		List<Property> properties = fighter.getProperty(EStrengthType.POWER);
-		for(Property p : properties)
-		{
-			strength += p.getValue();
-		}
-		return strength;
+		return fighter.getStrength();
 	}
 	
 	/**
@@ -262,89 +241,40 @@ public class Arena
 		return false;
 	}
 	
-
-	public void move(ActiveFighter origin, EMove move) 
+	public void move(ActiveFighter origin, Action move)
 	{
 		ActiveFighter other = this.getOtherFighter(origin);
-		
 		int direction = 1;
 		if(other.getPosition() < origin.getPosition())
 			direction = -1;
 		
-		switch(move)
-		{
-			case CROUCH:
-				break;
-			case JUMP:
-				break;
-			case RUN_AWAY:
-				this.movement(origin, SPEED_RUN_OFFSET, -direction);
-				break;
-			case RUN_TOWARDS:
-				this.movement(origin, SPEED_RUN_OFFSET, direction);
-				break;
-			case STAND:
-				break;
-			case WALK_AWAY:
-				this.movement(origin, SPEED_WALK_OFFSET, -direction);
-				break;
-			case WALK_TOWARDS:
-				this.movement(origin, SPEED_WALK_OFFSET, direction);
-				break;
-		}
-		
+		double fighterSpeed = origin.getFighter().getSpeed();
+		double position = origin.getPosition();
+		double newPosition = move.calcNextPosition(position, fighterSpeed, direction);
+		if(newPosition <= _size && newPosition >= 0)
+			origin.setPosition((int)newPosition);
 	}
 
-	private void movement(ActiveFighter origin, int speedOffset, int direction) 
-	{
-		Property speed = origin.getFighter().getProperty(EStrength.SPEED);
-		int position = origin.getPosition();
-		int q = position + (int)(direction * speed.getValue());
-		
-		//bound fighter to arena
-		if(q <= _size && q >= 0)
-			origin.setPosition(q);
-	}
 
-	public void attack(ActiveFighter activeFighter, EAttack attack) 
+	public void attack(ActiveFighter activeFighter, Action attack) 
 	{
-		//get fighters
 		Fighter origin = activeFighter.getFighter();
 		ActiveFighter otherActiveFighter = this.getOtherFighter(activeFighter);
-		
 		if(this.isNear(origin))
 		{
-			//get power options
-			List<Property> properties = origin.getProperty(EStrengthType.POWER);
-			for(Property p : properties)
-			{
-				//match power of attack
-				if(p.isAttack(attack))
-				{
-					//amount of health to reduce (note - sign)
-					int value = (int) -p.getValue();
-					//check if other fighter is blocking, than correct offset
-					if(this.isOtherBlocking(otherActiveFighter))
-					{
-//						System.out.println("is block!"+ otherActiveFighter.getAttack().getIdent());
-						value = (int) -p.getValue() + BLOCK_OFFSET;
-					}
-					//reduce health
-					otherActiveFighter.reduceHealth(value);
-				}
-			}
+			double value = -origin.getStrength();
 			
-			
+			if(this.isOtherBlocking(otherActiveFighter))
+				value = -origin.getStrength() + BLOCK_OFFSET;
+			otherActiveFighter.reduceHealth((int)value);
 		}
 	}
 
 	
 	public boolean isOtherBlocking(ActiveFighter otherActiveFighter)
 	{		
-//		Behaviour lastBehaviour = otherActiveFighter.getLastBehaviour();
-		
-		EAttack attack = otherActiveFighter.getAttack();
-		return attack.getType().equals(EAttackType.BLOCK);
+		Action block = otherActiveFighter.getBlock();		
+		return (block != null);
 	}
 
 

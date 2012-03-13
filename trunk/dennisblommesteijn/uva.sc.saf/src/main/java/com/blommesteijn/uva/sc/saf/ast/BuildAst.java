@@ -21,6 +21,7 @@ import com.blommesteijn.uva.sc.saf.SAFLexer;
 import com.blommesteijn.uva.sc.saf.SAFParser;
 import com.blommesteijn.uva.sc.saf.SAFParser.astNode_return;
 import com.blommesteijn.uva.sc.saf.ast.types.AstNode;
+import com.blommesteijn.uva.sc.saf.ast.types.IAstNode;
 import com.blommesteijn.uva.sc.saf.checkers.ParserChecker;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticChecker;
@@ -28,19 +29,19 @@ import com.blommesteijn.uva.sc.saf.checkers.StaticChecker;
 public class BuildAst
 {
 
-	private List<AstNode> _astNodes = null;
+	private List<IAstNode> _astNodes = null;
 	private ParserChecker _parserChecker = null;
 	private StaticChecker _staticChecker = null;
 	
 
 	public BuildAst()
 	{
-		_astNodes = new LinkedList<AstNode>();
+		_astNodes = new LinkedList<IAstNode>();
 	}
 
-	public List<AstNode> loadSource(List<File> files) throws BuildAstException
+	public List<IAstNode> loadSource(List<File> files) throws BuildAstException
 	{		
-		List<AstNode> ret = new LinkedList<AstNode>();
+		List<IAstNode> ret = new LinkedList<IAstNode>();
 		for(File file : files)
 		{	
 			try
@@ -54,7 +55,7 @@ public class BuildAst
 		return ret;
 	}
 	
-	public List<AstNode> loadSource( File file ) throws IOException, BuildAstException
+	public List<IAstNode> loadSource( File file ) throws IOException, BuildAstException
 	{
 		FileReader fr = new FileReader(file);
 		BufferedReader br = new BufferedReader(fr);
@@ -76,7 +77,7 @@ public class BuildAst
 	 * @throws RecognitionException
 	 * @throws StaticCheckIssue 
 	 */
-	public List<AstNode> loadSource(String string) throws BuildAstException
+	public List<IAstNode> loadSource(String string) throws BuildAstException
 	{
 		CharStream input = new ANTLRStringStream(string);
 		SAFLexer lexer = new SAFLexer(input);
@@ -106,19 +107,19 @@ public class BuildAst
 		
 		try
 		{
-//			_astNodes.addAll();
-			List<AstNode> astNode = walker.astNode();
+			IAstNode astNode = walker.astNode();
 			
 			//run static checker
 			_staticChecker = new StaticChecker(astNode);
 			if(_staticChecker.hasIssues())
 				throw new BuildAstException("static check failed");
 			
-			_astNodes.addAll(astNode);
+			_astNodes.add(astNode);
 			
 		}
 		catch(NullPointerException e)
 		{
+			e.printStackTrace();
 			throw new BuildAstException("ast build failed");
 		}
 		catch (RecognitionException e)
@@ -164,7 +165,7 @@ public class BuildAst
 		return _staticChecker;
 	}
 	
-	public List<AstNode> getAstNodes()
+	public List<IAstNode> getAstNodes()
 	{
 		return _astNodes;
 	}

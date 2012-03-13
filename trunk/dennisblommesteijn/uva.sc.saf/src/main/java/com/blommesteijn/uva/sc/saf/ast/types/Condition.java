@@ -1,92 +1,80 @@
 package com.blommesteijn.uva.sc.saf.ast.types;
 
+import java.util.List;
+
 import com.blommesteijn.uva.sc.saf.utils.StringUtil;
-import com.blommesteijn.uva.sc.saf.ast.types.values.ECondition;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckIssue;
 import com.blommesteijn.uva.sc.saf.checkers.StaticCheckerResult;
 
 
 public class Condition extends AstNode
 {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8406996690157171458L;
+	private static final long serialVersionUID = -7368203201969178978L;
+	private final String _name;
 
-	public Condition(int line, String ident)
+	public Condition(String name) 
 	{
 		super();
-		_line = line;
-		_ident = ident;
+		_name = name;
 	}
 	
-	public void register(AstNode astNode)
+	public Condition(int line, String name)
 	{
-		Behaviour b = (Behaviour) astNode;
-		b.append(this);
+		super(line);
+		_name = name;
 	}
 	
-	/**
-	 * Perform Static Check
-	 * @param checker static result checker reference
-	 */
-	@Override
-	public void staticCheck(StaticCheckerResult result)
-	{		
-		//has a valid ident value
-		if(!this.isValidIdent())
-		{
-			StaticCheckIssue e = new StaticCheckIssue(this, "invalid ident");
-			result.append(e);
-		}	
-	}
-	
-	/**
-	 * Is the Ident valid
-	 * @return invalid/valid ident
-	 * @throws StaticCheckIssue
-	 */
-	private boolean isValidIdent()
+	public boolean equals(Object o)
 	{
-		boolean found = false;
-		// map ident to property
-		for (ECondition ident : ECondition.values())
+		boolean ret = false;
+		if(o instanceof Condition)
 		{
-			if (ident.getIdent().equals(_ident))
-			{
-				found = true;
-				break;
-			}
+			Condition condition = (Condition) o;
+			ret = (_name.equals(condition._name));
 		}
-		return found;
+		return ret;
 	}
 	
-	/**
-	 * @return string representation
-	 */
-	public String toString(String indent)
+	
+	public boolean isValidCondition(List<Condition> conditions) 
+	{
+		return conditions.contains(this);
+	}
+	
+
+
+	@Override
+	public void staticCheck(StaticCheckerResult _result) 
+	{		
+	}
+	
+	public String getDescription() 
+	{
+		return _name;
+	}
+	
+	public String toString()
+	{
+		return this.toString("");
+	}
+
+	@Override
+	public String toString(String indent) 
 	{
 		StringBuilder sb = new StringBuilder();
 		//append typename
 		sb.append(indent).append("[ ").append(this.getClass().getSimpleName());
 		sb.append(": ").append(StringUtil.NEW_LINE);
-		
 		//append name and value
-		sb.append(indent).append(Property.IDENT_PNAME).append(_ident).append(StringUtil.NEW_LINE);
-		
-		//visit nested nodes
-		if(this.hasNodes())
-		{
-			sb.append(indent).append("( ").append(StringUtil.NEW_LINE);
-			for(AstNode node : this.getNodes())
-			{
-				sb.append(node.toString(indent + StringUtil.TAB));
-			}
-			sb.append(indent).append(")");
-			sb.append("]").append(StringUtil.NEW_LINE);
-		}
-		else
-			sb.append(indent).append("]").append(StringUtil.NEW_LINE);
+		sb.append(indent).append("name: ").append(_name);
+		sb.append(StringUtil.NEW_LINE);			
 		return sb.toString();
 	}
+
+	public String getName() 
+	{
+		return _name;
+	}
+
+
 }

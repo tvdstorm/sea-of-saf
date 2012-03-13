@@ -18,6 +18,8 @@ public class StaticCheckerResult implements ICheckerResult
 	}
 	
 	
+	
+	
 	@Override
 	public String toString()
 	{
@@ -49,7 +51,6 @@ public class StaticCheckerResult implements ICheckerResult
 	{
 		return !_isConsistent;
 	}
-
 	
 
 }
