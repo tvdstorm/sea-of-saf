@@ -3,7 +3,7 @@ package main;
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 
-import graphic.ArenaPanel;
+import graphic.GameGraphicController;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ import alert.*;
 	    	        {
 	    	          public void run()
 	    	          {
-	    	        	  ArenaPanel panel = new ArenaPanel();
+	    	        	  GameGraphicController gc = new GameGraphicController();
 	    	          }
 	    	        });
 	    	          	        
