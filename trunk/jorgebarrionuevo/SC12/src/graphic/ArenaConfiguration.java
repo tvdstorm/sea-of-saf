@@ -18,14 +18,13 @@ public interface ArenaConfiguration {
 	String KICK_LOW_L = "kick_low_l.jpg";
 	String PUNCH_HIGH_L = "punch_high_l.jpg";
 	String PUNCH_LOW_L = "punch_low_l.jpg";
-	String RELAXED_L = "relaxed_l.jpg";
 	String BLOCK_HIGH_R = "block_high_r.jpg";
 	String BLOCK_LOW_R = "block_low_r.jpg";
 	String KICK_HIGH_R = "kick_high_r.jpg";
 	String KICK_LOW_R = "kick_low_r.jpg";
 	String PUNCH_HIGH_R = "punch_high_r.jpg";
 	String PUNCH_LOW_R = "punch_low_r.jpg";
-	String RELAXED_R = "relaxed_r.jpg";
+	String RELAXED = "relaxed.jpg";
 	
 	File blockHighL = new File (PATH_IMAGES + BLOCK_HIGH_L);
 	File blockLowL = new File (PATH_IMAGES + BLOCK_LOW_L);
@@ -33,13 +32,13 @@ public interface ArenaConfiguration {
 	File kickLowL = new File (PATH_IMAGES + KICK_LOW_L);
 	File punchkHighL = new File (PATH_IMAGES + PUNCH_HIGH_L);
 	File punchLowL = new File (PATH_IMAGES + PUNCH_LOW_L);
-	File relaxedL = new File (PATH_IMAGES + PATH_IMAGES);
 	
-	File blockHighR = new File (BLOCK_HIGH_R + RELAXED_R);
+	File blockHighR = new File (BLOCK_HIGH_R + BLOCK_HIGH_R);
 	File blockLowR = new File (PATH_IMAGES + BLOCK_LOW_R);
 	File kickHighR = new File (PATH_IMAGES + KICK_HIGH_R);
 	File kickLowR = new File (PATH_IMAGES + KICK_LOW_R);
 	File punchkHighR = new File (PATH_IMAGES + PUNCH_HIGH_R);
 	File punchLowR = new File (PATH_IMAGES + PUNCH_LOW_R);
-	File relaxedR = new File (PATH_IMAGES + RELAXED_R);
+	
+	File relaxed = new File (PATH_IMAGES + RELAXED);
 }
