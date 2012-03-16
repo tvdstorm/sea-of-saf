@@ -8,17 +8,16 @@ import model.Fighter;
 public class FighterController {
 //responsibility: run a fighter and updates its status
 
-	Fighter fighter;
 	FighterStatus fighterStatus;
 	ConditionController conditionCtrl;
 	ActionController actionCtrl;
 
-	public FighterController(Fighter fighter) {
-		this.fighter = fighter;
+	public FighterController(FighterStatus fighterStatus) {
+		this.fighterStatus = fighterStatus;
 	}
 
-	public Fighter getFighter() {
-		return fighter;
+	public FighterStatus getFighterStatus1() {
+		return fighterStatus;
 	}
 
 	public FighterStatus getFighterStatus() {
@@ -44,11 +43,30 @@ public class FighterController {
 	public void setActionCtrl(ActionController actionCtrl) {
 		this.actionCtrl = actionCtrl;
 	}
-
-	public void setFighter(Fighter fighter) {
-		this.fighter = fighter;
+	
+	public void moveRunAway(){
+		fighterStatus.setSpeed(10);
+		fighterStatus.setXPosition(fighterStatus.getXPosition() - 1);
 	}
 	
+	public void moveRunTowards(){
+		fighterStatus.setSpeed(10);
+		fighterStatus.setXPosition(fighterStatus.getXPosition() + 1);
+	}
 	
+	public void moveWalkAway(){
+		fighterStatus.setSpeed(2);
+		fighterStatus.setXPosition(fighterStatus.getXPosition() - 1);
+	}
+	
+	public void moveWakTowards(){
+		fighterStatus.setSpeed(2);
+		fighterStatus.setXPosition(fighterStatus.getXPosition() + 1);
+	}
+	
+	public void fightBlockLow(){
+		fighterStatus.setSpeed(2);
+		fighterStatus.setXPosition(fighterStatus.getXPosition() + 1);
+	}
 	
 }

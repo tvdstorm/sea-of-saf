@@ -3,6 +3,8 @@ package main;
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 
+import game.controller.MainController;
+import graphic.ArenaFrame;
 import graphic.GameGraphicController;
 
 import java.io.*;
@@ -32,7 +34,7 @@ import alert.*;
 	    	        }
 	    	        
 	    	        //Arena a = result.arena;
-	    	        Fighter f = result.fighter;
+	    	        final Fighter f = result.fighter;
 	    	        
 	    	        //System.out.println(a.getFighters().toString());
 	    	        //System.out.println(tokens.toString());
@@ -43,12 +45,10 @@ import alert.*;
 	    	        	System.out.println("Alert found: "+alert.get(i).getAlert());
 	    	        }
 	    	        
-	    	        java.awt.EventQueue.invokeLater(new Runnable()
-	    	        {
-	    	          public void run()
-	    	          {
-	    	        	  GameGraphicController gc = new GameGraphicController();
-	    	          }
+	    	        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+	    	            public void run() {
+	    	            	MainController mc = new MainController(f,f);
+	    	            }
 	    	        });
 	    	          	        
 	    }
