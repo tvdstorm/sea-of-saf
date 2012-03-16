@@ -1,5 +1,7 @@
 package graphic;
 
+import game.FighterStatus;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,6 +24,7 @@ public class FighterPanel extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	private BufferedImage image;
+	private FighterStatus fighterStatus;
 	
 	public FighterPanel() {
 	       try {                
@@ -41,15 +44,24 @@ public class FighterPanel extends JPanel{
        }
     }
 	
+	public void SetFighterStatus(FighterStatus fighterStatus) {
+		this.fighterStatus=fighterStatus; 
+	}
+	
+	public FighterStatus getFighterStatus() { 
+	    return this.fighterStatus;
+	}
+	
 	public BufferedImage getImage() { 
 	    return this.image;
 	}
 	
-	  public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-        Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(image, 0, 0, this);
-	    System.out.println("paintComponent()");
-	  }
+	public void updateStatus(FighterStatus fighterStatus){
+		this.fighterStatus = fighterStatus;
+	} 
+	
+	public FighterStatus getStatus(){
+		return this.fighterStatus;
+	}
 	  
 }

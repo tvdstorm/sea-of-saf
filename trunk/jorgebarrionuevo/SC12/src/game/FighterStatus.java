@@ -1,15 +1,18 @@
 package game;
 
+import model.Fighter;
+
 public class FighterStatus {
-	private double energy;
-	private double yPosition;
-	private double xPosition;
-	private double speed;
-	private String direction;
-	private boolean lifeStatus;
+	protected double energy;
+	protected int yPosition;
+	protected int xPosition;
+	protected double speed;
+	protected String direction;
+	protected boolean lifeStatus;
+	Fighter fighter;
 	
-	public FighterStatus() {
-		this.energy = 100.0;
+	public FighterStatus(Fighter fighter) {
+		this.fighter = fighter;
 	}
 
 	public void setEnergy(double energy) {
@@ -20,19 +23,19 @@ public class FighterStatus {
 		return this.energy;
 	}
 	
-	public void setYPosition(double yPosition) {
+	public void setYPosition(int yPosition) {
         this.yPosition = yPosition;
 	}
 	
-	public double getYPosition() {
+	public int getYPosition() {
 		return this.yPosition;
 	}
 	
-	public void setXPosition(double xPosition) {
-        this.yPosition = xPosition;
+	public void setXPosition(int xPosition) {
+        this.xPosition = xPosition;
 	}
 	
-	public double getXPosition() {
+	public int getXPosition() {
 		return this.xPosition;
 	}
 	public void setSpeed(double speed) {
