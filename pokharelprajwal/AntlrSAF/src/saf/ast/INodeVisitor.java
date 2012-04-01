@@ -1,5 +1,6 @@
 package saf.ast;
 import saf.ast.action.*;
+import saf.ast.condition.*;
 
 public interface INodeVisitor {
 	public void visit(Bot bot);
@@ -12,4 +13,7 @@ public interface INodeVisitor {
 	public void visit(Parameters parameters);
 	public void visit(Ident ident);
 	public void visit(Operator operator);
+	public void visit(And and);
+	public void visit(Or or);
+	public void visit(Simple simple);
 }
