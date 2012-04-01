@@ -141,8 +141,7 @@ public class State {
 	
 	private ArrayList<Object> getChooseAsList(Choose choose){
 		ArrayList<Object> chooseOptions = new ArrayList<Object>();
-		chooseOptions.add(choose.getActionFirst());
-		chooseOptions.add(choose.getActionSecond());
+		chooseOptions.add(choose.getActions());
 		return chooseOptions;
 	}
 	

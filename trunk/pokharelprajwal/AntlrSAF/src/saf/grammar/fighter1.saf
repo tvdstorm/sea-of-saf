@@ -4,7 +4,7 @@ JackieChan {
  punchReach = 9
  punchPower = 9
  near[run_towards kick_low]
- much_stronger[run_towards punch_high]
+ much_weaker[run_away block_low]
  stronger [run_towards punch_low] 
  always [run_towards kick_low]
 }

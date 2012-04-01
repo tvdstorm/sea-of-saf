@@ -20,7 +20,8 @@ public class Config {
 	static public Integer MIN_STRENGTH = 0;
 	static public Integer MAX_STRENGTH = 10;
 	static public Integer DEFAULT_STRENGTH = 5;
-	static public String ImagePath = "D:\\SAF\\AntlrSAF\\src\\saf\\evaluator\\images\\";
+	static public String ImagePath = "D:\\SAF\\AntlrSAF\\src\\saf\\images\\";
+	static public String FighterPath = "D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\";
 	static public String INITIALCONDITION = "far";
 	static public String DEFAULTCONDITION = "always";
 	static public Integer INITIALPOSITION = 300;
