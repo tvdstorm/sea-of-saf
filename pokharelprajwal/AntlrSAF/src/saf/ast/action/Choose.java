@@ -1,15 +1,17 @@
 package saf.ast.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import saf.ast.INodeVisitor;
 
 public class Choose extends Action {
 
-	private final String _actionFirst;
-	private final String _actionSecond;
+	private List<String> actions = new ArrayList<String>();
 	
 	public Choose(String actionFirst, String actionSecond){
-		this._actionFirst = actionFirst;
-		this._actionSecond = actionSecond;
+		this.actions.add(actionFirst);
+		this.actions.add(actionSecond);
 	}
 	
 	@Override
@@ -17,13 +19,8 @@ public class Choose extends Action {
 		v.visit(this);
 	}
 
-	public String getActionFirst() {
-		return _actionFirst;
+	public List<String> getActions() {
+		return this.actions;
 	}
-
-	public String getActionSecond() {
-		return _actionSecond;
-	}
-
 		
 }
