@@ -38,8 +38,8 @@ public class Ring extends JFrame {
 		hasErrors = false;
 		
 		//Get fighters
-		Bot fighter1 = GetFighter("D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\fighter1.saf");
-		Bot fighter2 = GetFighter("D:\\SAF\\AntlrSAF\\src\\saf\\grammar\\fighter2.saf");
+		Bot fighter1 = GetFighter(Config.FighterPath + "fighter1.saf");
+		Bot fighter2 = GetFighter(Config.FighterPath + "fighter2.saf");
 	
 	   //fighter states
 	    fighter1State = new State(fighter1, 0);
