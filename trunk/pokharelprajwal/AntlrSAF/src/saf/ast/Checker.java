@@ -1,10 +1,12 @@
 package saf.ast;
 
-import java.math.BigInteger;
 import saf.utils.*;
 import java.util.ArrayList;
 import java.util.List;
 import saf.ast.action.*;
+import saf.ast.condition.And;
+import saf.ast.condition.Or;
+import saf.ast.condition.Simple;
 
 
 public class Checker implements INodeVisitor  {
@@ -26,29 +28,12 @@ public class Checker implements INodeVisitor  {
 	public void visit(Characterstics characterstics) {
 		
 		//check for valid characteristics
-		String errorMsg = "";
 		if(Config.Characterstics.contains(characterstics.getName())){
-			
-			//check for range between 0 and 9
-			Boolean insertMsg = false;
-			try {
-				BigInteger value = new BigInteger(characterstics.getValue());
-				if(value.intValue() < Config.MIN_STRENGTH || value.intValue() > Config.MAX_STRENGTH) insertMsg = true;
-			} 
-			catch (Exception e) {
-				insertMsg = true;
-			}
-			
-			if(insertMsg) errorMsg=  "Characterstics '" + characterstics.getName() + "' should be between " + Config.MIN_STRENGTH +" and " + Config.MAX_STRENGTH;
-			
-			
-		}else {
-		
-			errorMsg = "'" + characterstics.getName() + "' is not a valid characterstics property.";
-		}
-		
-		if(errorMsg.length() > 0)
-			_errorMessage.add(errorMsg);
+			Integer value = Integer.parseInt(characterstics.getValue());
+			if(value < Config.MIN_STRENGTH || value > Config.MAX_STRENGTH) 
+				_errorMessage.add("Characterstics '" + characterstics.getName() + "' should be between " + Config.MIN_STRENGTH +" and " + Config.MAX_STRENGTH);
+		}else		
+			_errorMessage.add("'" + characterstics.getName() + "' is not a valid characterstics property.");
 	}
 
 	@Override
@@ -90,6 +75,7 @@ public class Checker implements INodeVisitor  {
 	@Override
 	public void visit(Choose choose) {
 		
+		/*
 		//check for same valid type
 		Boolean fightActionType1 = Config.FIGHTSACTOINTYPE.contains(choose.getActionFirst().toLowerCase());
 		Boolean fightActionType2 = Config.FIGHTSACTOINTYPE.contains(choose.getActionSecond().toLowerCase());
@@ -110,7 +96,7 @@ public class Checker implements INodeVisitor  {
 		//check default rule
 		defaultRule = defaultRule || CheckAlways(choose.getActionFirst());
 		defaultRule = defaultRule || CheckAlways(choose.getActionSecond());
-		
+		*/
 	}
 	
 	private Boolean CheckAlways(String value){
@@ -191,6 +177,24 @@ public class Checker implements INodeVisitor  {
 
 	public void addErrorMessage(String errorMesszge) {
 		this._errorMessage.add(errorMesszge);
+	}
+
+	@Override
+	public void visit(And and) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Or or) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void visit(Simple simple) {
+		// TODO Auto-generated method stub
+		
 	}
 			
 }
