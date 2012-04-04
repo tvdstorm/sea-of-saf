@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-12 09:47:01
+// $ANTLR 3.4 D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g 2012-04-04 09:36:27
 
   package Parser;
 
@@ -42,15 +42,15 @@ public class safLexer extends Lexer {
     public safLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
     }
-    public String getGrammarFileName() { return "D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g"; }
+    public String getGrammarFileName() { return "D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g"; }
 
     // $ANTLR start "ID"
     public final void mID() throws RecognitionException {
         try {
             int _type = ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:143:4: ( ( 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:143:6: ( 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:143:4: ( ( 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )* )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:143:6: ( 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
                 input.consume();
@@ -62,7 +62,7 @@ public class safLexer extends Lexer {
             }
 
 
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:143:16: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:143:16: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' )*
             loop1:
             do {
                 int alt1=2;
@@ -75,7 +75,7 @@ public class safLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:
+            	    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9')||(input.LA(1) >= 'A' && input.LA(1) <= 'Z')||input.LA(1)=='_'||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
             	        input.consume();
@@ -112,10 +112,10 @@ public class safLexer extends Lexer {
         try {
             int _type = CHARACTERISTIC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:144:15: ( ( 'punchReach' | 'punchPower' | 'kickReach' | 'kickPower' ) )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:144:17: ( 'punchReach' | 'punchPower' | 'kickReach' | 'kickPower' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:144:15: ( ( 'punchReach' | 'punchPower' | 'kickReach' | 'kickPower' ) )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:144:17: ( 'punchReach' | 'punchPower' | 'kickReach' | 'kickPower' )
             {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:144:17: ( 'punchReach' | 'punchPower' | 'kickReach' | 'kickPower' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:144:17: ( 'punchReach' | 'punchPower' | 'kickReach' | 'kickPower' )
             int alt2=4;
             int LA2_0 = input.LA(1);
 
@@ -239,7 +239,7 @@ public class safLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:144:18: 'punchReach'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:144:18: 'punchReach'
                     {
                     match("punchReach"); 
 
@@ -248,7 +248,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:144:33: 'punchPower'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:144:33: 'punchPower'
                     {
                     match("punchPower"); 
 
@@ -257,7 +257,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:144:48: 'kickReach'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:144:48: 'kickReach'
                     {
                     match("kickReach"); 
 
@@ -266,7 +266,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:144:62: 'kickPower'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:144:62: 'kickPower'
                     {
                     match("kickPower"); 
 
@@ -294,10 +294,10 @@ public class safLexer extends Lexer {
         try {
             int _type = CONDITION_TYPE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:16: ( ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' ) )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:18: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:16: ( ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' ) )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:18: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
             {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:18: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:18: ( 'always' | 'near' | 'far' | 'much_stronger' | 'stronger' | 'even' | 'weaker' | 'much_weaker' )
             int alt3=8;
             switch ( input.LA(1) ) {
             case 'a':
@@ -403,7 +403,7 @@ public class safLexer extends Lexer {
 
             switch (alt3) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:19: 'always'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:19: 'always'
                     {
                     match("always"); 
 
@@ -412,7 +412,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:30: 'near'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:30: 'near'
                     {
                     match("near"); 
 
@@ -421,7 +421,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:39: 'far'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:39: 'far'
                     {
                     match("far"); 
 
@@ -430,7 +430,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:47: 'much_stronger'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:47: 'much_stronger'
                     {
                     match("much_stronger"); 
 
@@ -439,7 +439,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:65: 'stronger'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:65: 'stronger'
                     {
                     match("stronger"); 
 
@@ -448,7 +448,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:78: 'even'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:78: 'even'
                     {
                     match("even"); 
 
@@ -457,7 +457,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:87: 'weaker'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:87: 'weaker'
                     {
                     match("weaker"); 
 
@@ -466,7 +466,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:145:98: 'much_weaker'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:145:98: 'much_weaker'
                     {
                     match("much_weaker"); 
 
@@ -494,10 +494,10 @@ public class safLexer extends Lexer {
         try {
             int _type = MOVE_ACTION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:12: ( ( 'jump' | 'crouch' | 'stand' | 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' ) )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:14: ( 'jump' | 'crouch' | 'stand' | 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:12: ( ( 'jump' | 'crouch' | 'stand' | 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' ) )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:14: ( 'jump' | 'crouch' | 'stand' | 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' )
             {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:14: ( 'jump' | 'crouch' | 'stand' | 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:14: ( 'jump' | 'crouch' | 'stand' | 'walk_towards' | 'walk_away' | 'run_towards' | 'run_away' )
             int alt4=7;
             switch ( input.LA(1) ) {
             case 'j':
@@ -640,7 +640,7 @@ public class safLexer extends Lexer {
 
             switch (alt4) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:15: 'jump'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:15: 'jump'
                     {
                     match("jump"); 
 
@@ -649,7 +649,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:24: 'crouch'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:24: 'crouch'
                     {
                     match("crouch"); 
 
@@ -658,7 +658,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:35: 'stand'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:35: 'stand'
                     {
                     match("stand"); 
 
@@ -667,7 +667,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:43: 'walk_towards'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:43: 'walk_towards'
                     {
                     match("walk_towards"); 
 
@@ -676,7 +676,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:60: 'walk_away'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:60: 'walk_away'
                     {
                     match("walk_away"); 
 
@@ -685,7 +685,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:74: 'run_towards'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:74: 'run_towards'
                     {
                     match("run_towards"); 
 
@@ -694,7 +694,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:146:90: 'run_away'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:146:90: 'run_away'
                     {
                     match("run_away"); 
 
@@ -722,10 +722,10 @@ public class safLexer extends Lexer {
         try {
             int _type = FIGHT_ACTION;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:13: ( ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' ) )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:15: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:13: ( ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' ) )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:15: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
             {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:15: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:15: ( 'block_low' | 'block_high' | 'punch_low' | 'punch_high' | 'kick_low' | 'kick_high' )
             int alt5=6;
             switch ( input.LA(1) ) {
             case 'b':
@@ -949,7 +949,7 @@ public class safLexer extends Lexer {
 
             switch (alt5) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:16: 'block_low'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:16: 'block_low'
                     {
                     match("block_low"); 
 
@@ -958,7 +958,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:30: 'block_high'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:30: 'block_high'
                     {
                     match("block_high"); 
 
@@ -967,7 +967,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:45: 'punch_low'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:45: 'punch_low'
                     {
                     match("punch_low"); 
 
@@ -976,7 +976,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:59: 'punch_high'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:59: 'punch_high'
                     {
                     match("punch_high"); 
 
@@ -985,7 +985,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:74: 'kick_low'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:74: 'kick_low'
                     {
                     match("kick_low"); 
 
@@ -994,7 +994,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:147:87: 'kick_high'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:147:87: 'kick_high'
                     {
                     match("kick_high"); 
 
@@ -1022,8 +1022,8 @@ public class safLexer extends Lexer {
         try {
             int _type = CHOOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:148:7: ( 'choose' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:148:9: 'choose'
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:148:7: ( 'choose' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:148:9: 'choose'
             {
             match("choose"); 
 
@@ -1045,8 +1045,8 @@ public class safLexer extends Lexer {
         try {
             int _type = L_BRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:149:11: ( '[' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:149:13: '['
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:149:11: ( '[' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:149:13: '['
             {
             match('['); 
 
@@ -1066,8 +1066,8 @@ public class safLexer extends Lexer {
         try {
             int _type = R_BRACKET;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:150:11: ( ']' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:150:13: ']'
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:150:11: ( ']' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:150:13: ']'
             {
             match(']'); 
 
@@ -1087,8 +1087,8 @@ public class safLexer extends Lexer {
         try {
             int _type = L_CURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:151:9: ( '{' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:151:11: '{'
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:151:9: ( '{' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:151:11: '{'
             {
             match('{'); 
 
@@ -1108,8 +1108,8 @@ public class safLexer extends Lexer {
         try {
             int _type = R_CURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:152:9: ( '}' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:152:11: '}'
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:152:9: ( '}' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:152:11: '}'
             {
             match('}'); 
 
@@ -1129,8 +1129,8 @@ public class safLexer extends Lexer {
         try {
             int _type = L_PAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:153:7: ( '(' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:153:9: '('
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:153:7: ( '(' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:153:9: '('
             {
             match('('); 
 
@@ -1150,8 +1150,8 @@ public class safLexer extends Lexer {
         try {
             int _type = R_PAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:154:7: ( ')' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:154:9: ')'
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:154:7: ( ')' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:154:9: ')'
             {
             match(')'); 
 
@@ -1171,10 +1171,10 @@ public class safLexer extends Lexer {
         try {
             int _type = NUMBER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:155:8: ( ( '0' .. '9' )* )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:155:10: ( '0' .. '9' )*
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:155:8: ( ( '0' .. '9' )* )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:155:10: ( '0' .. '9' )*
             {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:155:10: ( '0' .. '9' )*
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:155:10: ( '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -1187,7 +1187,7 @@ public class safLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:
+            	    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:
             	    {
             	    if ( (input.LA(1) >= '0' && input.LA(1) <= '9') ) {
             	        input.consume();
@@ -1224,7 +1224,7 @@ public class safLexer extends Lexer {
         try {
             int _type = AND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:156:5: ( 'and' | 'AND' | '&&' | ',' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:156:5: ( 'and' | 'AND' | '&&' | ',' )
             int alt7=4;
             switch ( input.LA(1) ) {
             case 'a':
@@ -1257,7 +1257,7 @@ public class safLexer extends Lexer {
 
             switch (alt7) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:156:7: 'and'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:156:7: 'and'
                     {
                     match("and"); 
 
@@ -1266,7 +1266,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:156:13: 'AND'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:156:13: 'AND'
                     {
                     match("AND"); 
 
@@ -1275,7 +1275,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:156:21: '&&'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:156:21: '&&'
                     {
                     match("&&"); 
 
@@ -1284,7 +1284,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:156:28: ','
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:156:28: ','
                     {
                     match(','); 
 
@@ -1306,7 +1306,7 @@ public class safLexer extends Lexer {
         try {
             int _type = OR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:157:4: ( 'or' | 'OR' | '||' | '|' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:157:4: ( 'or' | 'OR' | '||' | '|' )
             int alt8=4;
             switch ( input.LA(1) ) {
             case 'o':
@@ -1341,7 +1341,7 @@ public class safLexer extends Lexer {
 
             switch (alt8) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:157:6: 'or'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:157:6: 'or'
                     {
                     match("or"); 
 
@@ -1350,7 +1350,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:157:12: 'OR'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:157:12: 'OR'
                     {
                     match("OR"); 
 
@@ -1359,7 +1359,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:157:19: '||'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:157:19: '||'
                     {
                     match("||"); 
 
@@ -1368,7 +1368,7 @@ public class safLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:157:26: '|'
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:157:26: '|'
                     {
                     match('|'); 
 
@@ -1390,8 +1390,8 @@ public class safLexer extends Lexer {
         try {
             int _type = EQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:158:3: ( '=' )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:158:5: '='
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:158:3: ( '=' )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:158:5: '='
             {
             match('='); 
 
@@ -1411,10 +1411,10 @@ public class safLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:159:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:159:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:159:4: ( ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+ )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:159:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:159:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:159:6: ( ' ' | '\\t' | '\\n' | '\\r' | '\\f' )+
             int cnt9=0;
             loop9:
             do {
@@ -1428,7 +1428,7 @@ public class safLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:
+            	    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:
             	    {
             	    if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||(input.LA(1) >= '\f' && input.LA(1) <= '\r')||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1467,7 +1467,7 @@ public class safLexer extends Lexer {
     // $ANTLR end "WS"
 
     public void mTokens() throws RecognitionException {
-        // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:8: ( ID | CHARACTERISTIC | CONDITION_TYPE | MOVE_ACTION | FIGHT_ACTION | CHOOSE | L_BRACKET | R_BRACKET | L_CURLY | R_CURLY | L_PAR | R_PAR | NUMBER | AND | OR | EQ | WS )
+        // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:8: ( ID | CHARACTERISTIC | CONDITION_TYPE | MOVE_ACTION | FIGHT_ACTION | CHOOSE | L_BRACKET | R_BRACKET | L_CURLY | R_CURLY | L_PAR | R_PAR | NUMBER | AND | OR | EQ | WS )
         int alt10=17;
         switch ( input.LA(1) ) {
         case 'A':
@@ -1812,7 +1812,7 @@ public class safLexer extends Lexer {
 
         switch (alt10) {
             case 1 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:10: ID
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:10: ID
                 {
                 mID(); 
 
@@ -1820,7 +1820,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:13: CHARACTERISTIC
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:13: CHARACTERISTIC
                 {
                 mCHARACTERISTIC(); 
 
@@ -1828,7 +1828,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 3 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:28: CONDITION_TYPE
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:28: CONDITION_TYPE
                 {
                 mCONDITION_TYPE(); 
 
@@ -1836,7 +1836,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 4 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:43: MOVE_ACTION
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:43: MOVE_ACTION
                 {
                 mMOVE_ACTION(); 
 
@@ -1844,7 +1844,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:55: FIGHT_ACTION
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:55: FIGHT_ACTION
                 {
                 mFIGHT_ACTION(); 
 
@@ -1852,7 +1852,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:68: CHOOSE
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:68: CHOOSE
                 {
                 mCHOOSE(); 
 
@@ -1860,7 +1860,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:75: L_BRACKET
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:75: L_BRACKET
                 {
                 mL_BRACKET(); 
 
@@ -1868,7 +1868,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:85: R_BRACKET
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:85: R_BRACKET
                 {
                 mR_BRACKET(); 
 
@@ -1876,7 +1876,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:95: L_CURLY
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:95: L_CURLY
                 {
                 mL_CURLY(); 
 
@@ -1884,7 +1884,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:103: R_CURLY
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:103: R_CURLY
                 {
                 mR_CURLY(); 
 
@@ -1892,7 +1892,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:111: L_PAR
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:111: L_PAR
                 {
                 mL_PAR(); 
 
@@ -1900,7 +1900,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:117: R_PAR
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:117: R_PAR
                 {
                 mR_PAR(); 
 
@@ -1908,7 +1908,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:123: NUMBER
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:123: NUMBER
                 {
                 mNUMBER(); 
 
@@ -1916,7 +1916,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 14 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:130: AND
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:130: AND
                 {
                 mAND(); 
 
@@ -1924,7 +1924,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 15 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:134: OR
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:134: OR
                 {
                 mOR(); 
 
@@ -1932,7 +1932,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 16 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:137: EQ
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:137: EQ
                 {
                 mEQ(); 
 
@@ -1940,7 +1940,7 @@ public class safLexer extends Lexer {
                 }
                 break;
             case 17 :
-                // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:1:140: WS
+                // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:1:140: WS
                 {
                 mWS(); 
 

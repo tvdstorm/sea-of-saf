@@ -18,11 +18,11 @@ public class Behaviour extends ASTNode{
 		return condition;
 	}
 	
-	public Action getAction2() {
+	public Action getFightAction() {
 		return this.action2;
 	}
 	
-	public Action getAction1() {
+	public Action getMoveAction() {
 		return this.action1;
 	}
 	

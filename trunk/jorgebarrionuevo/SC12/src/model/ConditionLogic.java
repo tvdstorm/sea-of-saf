@@ -8,6 +8,7 @@ public abstract class ConditionLogic extends Condition{
 	public ConditionLogic(Condition leftSide, Condition rightSide) {
 		this.leftSide = leftSide;
 		this.rightSide = rightSide;
+		this.conditionName = "CONNECTIVE";
 	}
 }
 

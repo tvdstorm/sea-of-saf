@@ -10,6 +10,8 @@ public interface ArenaConfiguration {
 	static final Dimension SIZE_ARENA = new Dimension(WIDTH, HEIGHT);
 	static final Color BACKGROUND_COLOR = Color.white;	
 	static final String TITLE = "Super Awsome Fighters Battle";
+	static final int NEAR = 10;
+	static final int FAR = 11;
 	
 	String PATH_IMAGES = "D:/SAF/workspace/SC12/images/";
 	String BLOCK_HIGH_L = "block_high_l.jpg";

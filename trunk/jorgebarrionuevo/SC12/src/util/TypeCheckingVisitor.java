@@ -43,10 +43,10 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 	@Override
 	public void visit(Behaviour behaviour) {
 		behaviour.getCondition().accept(this);
-		behaviour.getAction1().accept(this);
-		behaviour.getAction2().accept(this);	
-		if (checkSameActionType(behaviour.getAction1().getClass(),behaviour.getAction2().getClass()) ){
-			this.alerts.add(new Warning(behaviour.toString() + " Incorrect behaviour configuration (same type)" + behaviour.getAction1().getClass()+ " and " + behaviour.getAction2().getClass()));
+		behaviour.getMoveAction().accept(this);
+		behaviour.getFightAction().accept(this);	
+		if (checkSameActionType(behaviour.getMoveAction().getClass(),behaviour.getFightAction().getClass()) ){
+			this.alerts.add(new Warning(behaviour.toString() + " Incorrect behaviour configuration (same type)" + behaviour.getMoveAction().getClass()+ " and " + behaviour.getFightAction().getClass()));
 		}	
 	}
 	
@@ -57,12 +57,12 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 	}
 	@Override
 	public void visit(FightAction fightAction) {
-		if (util.isIn(fightAction.getNameAction(), FIGHT_ACTION_TYPES)){}
-		else{this.alerts.add(new Error(fightAction.getNameAction() + " Incorrect fight action type" ));}
+		if (util.isIn(fightAction.getName(), FIGHT_ACTION_TYPES)){}
+		else{this.alerts.add(new Error(fightAction.getName() + " Incorrect fight action type" ));}
 	}
 	@Override
 	public void visit(MoveAction moveAction) {
-		if (util.isIn(moveAction.getNameAction(), MOVE_ACTION_TYPES)){}
+		if (util.isIn(moveAction.getName(), MOVE_ACTION_TYPES)){}
 		else{this.alerts.add(new Error(moveAction.toString() + " Incorrect move action type"));}
 	}
 	
