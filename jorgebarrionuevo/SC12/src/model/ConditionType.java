@@ -4,9 +4,6 @@ import util.Visitor;
 
 public class ConditionType extends Condition{
 
-	private final String conditionName;
-	
-	
 	public ConditionType(String conditionTypeName) {
 		this.conditionName = conditionTypeName;
 		setAlways();
@@ -16,10 +13,6 @@ public class ConditionType extends Condition{
 		if (this.conditionName.equals("always")){
 			this.isAlways=true;
 		}
-	}
-	
-	public String getName() {
-		return conditionName;
 	}
 	
 	@Override

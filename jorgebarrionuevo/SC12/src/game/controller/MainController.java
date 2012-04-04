@@ -1,39 +1,42 @@
 package game.controller;
 
 import game.FighterStatus;
-import game.FighterStatusLeft;
-import game.FighterStatusRight;
+import graphic.ArenaConfiguration;
 import graphic.GameGraphicController;
 import model.Fighter;
 
-public class MainController {
+public class MainController implements ArenaConfiguration{
 	//responsibility: run the fight, contains all the controllers
 	
 	private FighterController fighterCtrlLeft; 
 	private FighterController fighterCtrlRight;
-	private FighterStatusLeft fighterStatusLeft; 
-	private FighterStatusRight fighterStatusRight;
 	private GameGraphicController gameGraphicController;
 	
 	public MainController(Fighter fighterL, Fighter fighterR) {
-		
-		this.fighterStatusLeft =  new FighterStatusLeft(fighterL);
-		this.fighterStatusRight =  new FighterStatusRight(fighterL);
-		this.fighterCtrlLeft = new FighterController(fighterStatusLeft);
-		this.fighterCtrlRight = new FighterController(fighterStatusRight);
+		System.out.println("Creating mainController");
+		FighterStatus fighterStatusLeft =  new FighterStatus(fighterL, "LEFT");
+		FighterStatus fighterStatusRight =  new FighterStatus(fighterR, "RIGHT");
+		this.fighterCtrlLeft = new FighterController(fighterStatusLeft, fighterStatusRight);
+		this.fighterCtrlRight = new FighterController(fighterStatusRight, fighterStatusLeft);
 		this.gameGraphicController = new GameGraphicController(this); 
-		this.fighterCtrlLeft.moveRunAway();
 	}
 
-	public void startFight(){
-		
+	public void startFight() throws InterruptedException{
+
+		while(fighterCtrlLeft.life() && fighterCtrlRight.life()){
+			//attack left
+ 			fighterCtrlLeft.fight();
+ 			//attack right
+ 			fighterCtrlRight.fight();
+		}
+	
+		//define winner
+		System.out.println("And the winner is: " + getWinner());
+	}	
+	
+	private String getWinner(){
+		if (fighterCtrlRight.life()){return fighterCtrlRight.getFighterName();}
+		else{return fighterCtrlLeft.getFighterName();}
 	}
 	
-	public FighterStatus getFighterStatusLeft(){
-		return this.fighterStatusLeft;
-	}
-	
-	public FighterStatus getFighterStatusRight(){
-		return this.fighterStatusRight;
-	}
 }

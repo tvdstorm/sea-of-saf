@@ -48,6 +48,12 @@ import alert.*;
 	    	        javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	    	            public void run() {
 	    	            	MainController mc = new MainController(f,f);
+	    	            	try {
+								mc.startFight();
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 	    	            }
 	    	        });
 	    	          	        

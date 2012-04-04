@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
 import util.Visitor;
 
 
@@ -27,7 +29,7 @@ public class ChooseAction extends Action{
 	}
 	
 	public String getNameAction1() {
-		return action2.getNameAction() ;
+		return action2.getName() ;
 	}
 	
 	public SimpleAction getAction2() {
@@ -35,7 +37,13 @@ public class ChooseAction extends Action{
 	}
 	
 	public String getNameAction2() {
-		return action2.getNameAction() ;
+		return action2.getName() ;
+	}
+	@Override
+	public String getName() {
+		Random random = new Random(); 
+		if(random.nextBoolean()){return action1.getName();}
+		else{return action2.getName();}
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g 2012-03-12 09:47:00
+// $ANTLR 3.4 D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g 2012-04-04 09:36:26
 
   package Parser;
   import model.*;
@@ -61,7 +61,7 @@ public TreeAdaptor getTreeAdaptor() {
     return adaptor;
 }
     public String[] getTokenNames() { return safParser.tokenNames; }
-    public String getGrammarFileName() { return "D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g"; }
+    public String getGrammarFileName() { return "D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g"; }
 
 
     Fighter fighter;
@@ -75,7 +75,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "fighter"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:26:1: fighter returns [Fighter fighter] : ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY ;
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:26:1: fighter returns [Fighter fighter] : ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY ;
     public final safParser.fighter_return fighter() throws RecognitionException {
         safParser.fighter_return retval = new safParser.fighter_return();
         retval.start = input.LT(1);
@@ -97,8 +97,8 @@ public TreeAdaptor getTreeAdaptor() {
 
          retval.fighter = new Fighter();
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:27:3: ( ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:28:5: ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:27:3: ( ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:28:5: ID L_CURLY ( characteristic )* ( behaviour )* R_CURLY
             {
             root_0 = (Object)adaptor.nil();
 
@@ -121,7 +121,7 @@ public TreeAdaptor getTreeAdaptor() {
             adaptor.addChild(root_0, L_CURLY2_tree);
 
 
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:33:5: ( characteristic )*
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:33:5: ( characteristic )*
             loop1:
             do {
                 int alt1=2;
@@ -134,7 +134,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt1) {
             	case 1 :
-            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:33:6: characteristic
+            	    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:33:6: characteristic
             	    {
             	    pushFollow(FOLLOW_characteristic_in_fighter102);
             	    characteristic3=characteristic();
@@ -156,7 +156,7 @@ public TreeAdaptor getTreeAdaptor() {
             } while (true);
 
 
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:38:5: ( behaviour )*
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:38:5: ( behaviour )*
             loop2:
             do {
                 int alt2=2;
@@ -169,7 +169,7 @@ public TreeAdaptor getTreeAdaptor() {
 
                 switch (alt2) {
             	case 1 :
-            	    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:38:6: behaviour
+            	    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:38:6: behaviour
             	    {
             	    pushFollow(FOLLOW_behaviour_in_fighter124);
             	    behaviour4=behaviour();
@@ -230,7 +230,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "characteristic"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:47:1: characteristic returns [Characteristic c] : CHARACTERISTIC EQ NUMBER ;
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:47:1: characteristic returns [Characteristic c] : CHARACTERISTIC EQ NUMBER ;
     public final safParser.characteristic_return characteristic() throws RecognitionException {
         safParser.characteristic_return retval = new safParser.characteristic_return();
         retval.start = input.LT(1);
@@ -247,8 +247,8 @@ public TreeAdaptor getTreeAdaptor() {
         Object NUMBER8_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:48:3: ( CHARACTERISTIC EQ NUMBER )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:49:3: CHARACTERISTIC EQ NUMBER
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:48:3: ( CHARACTERISTIC EQ NUMBER )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:49:3: CHARACTERISTIC EQ NUMBER
             {
             root_0 = (Object)adaptor.nil();
 
@@ -310,7 +310,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "behaviour"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:55:1: behaviour returns [Behaviour beha] : condi= condition ;
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:55:1: behaviour returns [Behaviour beha] : condi= condition ;
     public final safParser.behaviour_return behaviour() throws RecognitionException {
         safParser.behaviour_return retval = new safParser.behaviour_return();
         retval.start = input.LT(1);
@@ -323,8 +323,8 @@ public TreeAdaptor getTreeAdaptor() {
 
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:56:3: (condi= condition )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:57:3: condi= condition
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:56:3: (condi= condition )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:57:3: condi= condition
             {
             root_0 = (Object)adaptor.nil();
 
@@ -374,7 +374,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "condition"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:63:1: condition returns [Condition ct, Action act1, Action act2] : (c= conditionType L_BRACKET a1= action a2= action R_BRACKET |o= operand L_BRACKET a1= action a2= action R_BRACKET );
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:63:1: condition returns [Condition ct, Action act1, Action act2] : (c= conditionType L_BRACKET a1= action a2= action R_BRACKET |o= operand L_BRACKET a1= action a2= action R_BRACKET );
     public final safParser.condition_return condition() throws RecognitionException {
         safParser.condition_return retval = new safParser.condition_return();
         retval.start = input.LT(1);
@@ -401,7 +401,7 @@ public TreeAdaptor getTreeAdaptor() {
         Object R_BRACKET12_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:64:3: (c= conditionType L_BRACKET a1= action a2= action R_BRACKET |o= operand L_BRACKET a1= action a2= action R_BRACKET )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:64:3: (c= conditionType L_BRACKET a1= action a2= action R_BRACKET |o= operand L_BRACKET a1= action a2= action R_BRACKET )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -431,7 +431,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt3) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:65:3: c= conditionType L_BRACKET a1= action a2= action R_BRACKET
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:65:3: c= conditionType L_BRACKET a1= action a2= action R_BRACKET
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -480,7 +480,7 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:72:3: o= operand L_BRACKET a1= action a2= action R_BRACKET
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:72:3: o= operand L_BRACKET a1= action a2= action R_BRACKET
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -560,7 +560,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "operand"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:79:1: operand returns [ConditionLogic log] : (cl= conditionType OR cr= conditionType |cl= conditionType AND cr= conditionType );
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:79:1: operand returns [ConditionLogic log] : (cl= conditionType OR cr= conditionType |cl= conditionType AND cr= conditionType );
     public final safParser.operand_return operand() throws RecognitionException {
         safParser.operand_return retval = new safParser.operand_return();
         retval.start = input.LT(1);
@@ -579,7 +579,7 @@ public TreeAdaptor getTreeAdaptor() {
         Object AND14_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:80:3: (cl= conditionType OR cr= conditionType |cl= conditionType AND cr= conditionType )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:80:3: (cl= conditionType OR cr= conditionType |cl= conditionType AND cr= conditionType )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -609,7 +609,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt4) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:81:3: cl= conditionType OR cr= conditionType
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:81:3: cl= conditionType OR cr= conditionType
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -642,7 +642,7 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:85:3: cl= conditionType AND cr= conditionType
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:85:3: cl= conditionType AND cr= conditionType
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -706,7 +706,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "conditionType"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:91:1: conditionType returns [ConditionType condType] : CONDITION_TYPE ;
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:91:1: conditionType returns [ConditionType condType] : CONDITION_TYPE ;
     public final safParser.conditionType_return conditionType() throws RecognitionException {
         safParser.conditionType_return retval = new safParser.conditionType_return();
         retval.start = input.LT(1);
@@ -719,8 +719,8 @@ public TreeAdaptor getTreeAdaptor() {
         Object CONDITION_TYPE15_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:92:3: ( CONDITION_TYPE )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:93:3: CONDITION_TYPE
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:92:3: ( CONDITION_TYPE )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:93:3: CONDITION_TYPE
             {
             root_0 = (Object)adaptor.nil();
 
@@ -768,7 +768,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "action"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:99:1: action returns [Action act] : (choa= chooseAction |simac= simpleAction );
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:99:1: action returns [Action act] : (choa= chooseAction |simac= simpleAction );
     public final safParser.action_return action() throws RecognitionException {
         safParser.action_return retval = new safParser.action_return();
         retval.start = input.LT(1);
@@ -783,7 +783,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:100:3: (choa= chooseAction |simac= simpleAction )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:100:3: (choa= chooseAction |simac= simpleAction )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -802,7 +802,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt5) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:102:3: choa= chooseAction
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:102:3: choa= chooseAction
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -819,7 +819,7 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:103:3: simac= simpleAction
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:103:3: simac= simpleAction
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -867,7 +867,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "chooseAction"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:106:1: chooseAction returns [ChooseAction cha] : CHOOSE L_PAR sa1= simpleAction sa2= simpleAction R_PAR ;
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:106:1: chooseAction returns [ChooseAction cha] : CHOOSE L_PAR sa1= simpleAction sa2= simpleAction R_PAR ;
     public final safParser.chooseAction_return chooseAction() throws RecognitionException {
         safParser.chooseAction_return retval = new safParser.chooseAction_return();
         retval.start = input.LT(1);
@@ -888,8 +888,8 @@ public TreeAdaptor getTreeAdaptor() {
         Object R_PAR18_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:107:3: ( CHOOSE L_PAR sa1= simpleAction sa2= simpleAction R_PAR )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:108:3: CHOOSE L_PAR sa1= simpleAction sa2= simpleAction R_PAR
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:107:3: ( CHOOSE L_PAR sa1= simpleAction sa2= simpleAction R_PAR )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:108:3: CHOOSE L_PAR sa1= simpleAction sa2= simpleAction R_PAR
             {
             root_0 = (Object)adaptor.nil();
 
@@ -965,7 +965,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "simpleAction"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:114:1: simpleAction returns [SimpleAction siac] : ( moveAction | fightAction );
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:114:1: simpleAction returns [SimpleAction siac] : ( moveAction | fightAction );
     public final safParser.simpleAction_return simpleAction() throws RecognitionException {
         safParser.simpleAction_return retval = new safParser.simpleAction_return();
         retval.start = input.LT(1);
@@ -980,7 +980,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:115:3: ( moveAction | fightAction )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:115:3: ( moveAction | fightAction )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -999,7 +999,7 @@ public TreeAdaptor getTreeAdaptor() {
             }
             switch (alt6) {
                 case 1 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:116:3: moveAction
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:116:3: moveAction
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -1018,7 +1018,7 @@ public TreeAdaptor getTreeAdaptor() {
                     }
                     break;
                 case 2 :
-                    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:120:5: fightAction
+                    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:120:5: fightAction
                     {
                     root_0 = (Object)adaptor.nil();
 
@@ -1068,7 +1068,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "moveAction"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:126:1: moveAction returns [MoveAction moac] : MOVE_ACTION ;
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:126:1: moveAction returns [MoveAction moac] : MOVE_ACTION ;
     public final safParser.moveAction_return moveAction() throws RecognitionException {
         safParser.moveAction_return retval = new safParser.moveAction_return();
         retval.start = input.LT(1);
@@ -1081,8 +1081,8 @@ public TreeAdaptor getTreeAdaptor() {
         Object MOVE_ACTION21_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:127:3: ( MOVE_ACTION )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:128:3: MOVE_ACTION
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:127:3: ( MOVE_ACTION )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:128:3: MOVE_ACTION
             {
             root_0 = (Object)adaptor.nil();
 
@@ -1130,7 +1130,7 @@ public TreeAdaptor getTreeAdaptor() {
 
 
     // $ANTLR start "fightAction"
-    // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:134:1: fightAction returns [FightAction fiac] : FIGHT_ACTION ;
+    // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:134:1: fightAction returns [FightAction fiac] : FIGHT_ACTION ;
     public final safParser.fightAction_return fightAction() throws RecognitionException {
         safParser.fightAction_return retval = new safParser.fightAction_return();
         retval.start = input.LT(1);
@@ -1143,8 +1143,8 @@ public TreeAdaptor getTreeAdaptor() {
         Object FIGHT_ACTION22_tree=null;
 
         try {
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:135:3: ( FIGHT_ACTION )
-            // D:\\SAF\\workspace\\SC12\\src\\gram\\saf.g:136:3: FIGHT_ACTION
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:135:3: ( FIGHT_ACTION )
+            // D:\\Dropbox\\Dropbox\\Software Construction\\workspace\\SC12\\src\\gram\\saf.g:136:3: FIGHT_ACTION
             {
             root_0 = (Object)adaptor.nil();
 
