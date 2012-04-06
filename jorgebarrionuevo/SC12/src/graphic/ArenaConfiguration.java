@@ -13,6 +13,7 @@ public interface ArenaConfiguration {
 	static final int NEAR = 10;
 	static final int FAR = 11;
 	
+	
 	String PATH_IMAGES = "D:/SAF/workspace/SC12/images/";
 	String BLOCK_HIGH_L = "block_high_l.jpg";
 	String BLOCK_LOW_L = "block_low_l.jpg";

@@ -33,6 +33,14 @@ public class Fighter extends ASTNode{
 		return this.characteristics;
 	}
 	
+	public int getCharacteristic(String characteristic){
+		int ret =0;
+		for(int i=0; i<characteristics.size();i++){
+			if(this.characteristics.get(i).getNameCharacteristic().equals(characteristic)){ret = this.characteristics.get(i).getValue();}
+		}
+		return ret;
+	}
+	
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);

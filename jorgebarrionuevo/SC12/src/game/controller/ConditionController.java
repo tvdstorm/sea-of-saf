@@ -8,97 +8,100 @@ import model.Behaviour;
 public class ConditionController {
 //responsibility: monitor fighter condition regularly
 //informs the other fighter controller about its actual condition
-	FighterController fc;
-	FighterStatus fighterStatus;
-	FighterStatus oponentStatus;
+
 	
-	public ConditionController (FighterStatus fighterStatus,  FighterStatus oponentStatus){
+	public ConditionController (){
 		//System.out.println("Creating conditionController");
-		this.fighterStatus= fighterStatus;
-		this.oponentStatus= oponentStatus;
 	}
 	
-	public ArrayList<Behaviour> getActualBehaviours(){
-		//For a given fighterStatus, return a list of behaviours based on actual conditions 
+	public ArrayList<Behaviour> getActualBehaviours(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		//For a given attackingFighterStatus, return a list of behaviours based on actual conditions 
 		//System.out.println("getActualBehaviours");
 		ArrayList<Behaviour> filteredBehaviours = new ArrayList<Behaviour>();
 		
-		for (int i=0; i<fighterStatus.getBehaviours().size() ;i++){
+		for (int i=0; i<attackingFighterStatus.getBehaviours().size() ;i++){
 			//System.out.println("find a behaviour " + figtherStatus.getBehaviours().get(i).getCondition().getName());
 			
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("far") && isFar()) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("far") && isFar(attackingFighterStatus, waitingFighterStatus)) {
 				 //System.out.println("Is far");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));
 			 }
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("near") && isNear()) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("near") && isNear(attackingFighterStatus, waitingFighterStatus)) {
 				 //System.out.println("Is near");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));
 			 }
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("much_stronger")&& isMuchStronger()) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("much_stronger")&& isMuchStronger(attackingFighterStatus, waitingFighterStatus)) {
 				 //System.out.println("is much stronger");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));
 			 }
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("stronger")&& isStronger()) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("stronger")&& isStronger(attackingFighterStatus, waitingFighterStatus)) {
 				 //System.out.println("is stronger");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));
 			 }
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("weaker")&& isWeaker()) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("weaker")&& isWeaker(attackingFighterStatus, waitingFighterStatus)) {
 				 //System.out.println("is weaker");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));
 			 }
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("much_weaker")&& isMuchWeaker()) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("much_weaker")&& isMuchWeaker(attackingFighterStatus, waitingFighterStatus)) {
 				 //System.out.println("is much weaker");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));
 			 }
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("even") && isEven()) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("even") && isEven(attackingFighterStatus, waitingFighterStatus)) {
 				// System.out.println("are even");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));	 
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));	 
 			 }
-			 if (fighterStatus.getBehaviours().get(i).getCondition().getName().equals("always")) {
+			 if (attackingFighterStatus.getBehaviours().get(i).getCondition().getName().equals("always")) {
 				 //System.out.println("is always");
-				 filteredBehaviours.add(fighterStatus.getBehaviours().get(i));
+				 filteredBehaviours.add(attackingFighterStatus.getBehaviours().get(i));
 			 }
 		}
-		
-		//for (int i=0; i<filteredBehaviours.size(); i++){
-			//System.out.println("Filtered: " + filteredBehaviours.get(i).getCondition().getName());
-		//}
+
 		
 		return filteredBehaviours;
 	}
 	
-	private boolean isFar(){
-		int positionDelta = Math.abs(fighterStatus.getXPosition() - oponentStatus.getXPosition());
-		//System.out.println("Position delta " + positionDelta);
-		fighterStatus.setDistance(positionDelta);
-		return positionDelta >= ArenaConfiguration.FAR;  		
+	private boolean isFar(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		int positionDelta = Math.abs(attackingFighterStatus.getXPosition() - waitingFighterStatus.getXPosition());
+		boolean isFar = positionDelta >= ArenaConfiguration.FAR; 
+		attackingFighterStatus.setFar(isFar);
+		return isFar;  		
 	}
 	
-	private boolean isNear(){
-		int positionDelta = Math.abs(fighterStatus.getXPosition() - oponentStatus.getXPosition());
-		//System.out.println("Position delta " + positionDelta);
-		fighterStatus.setDistance(positionDelta);
-		return positionDelta <= ArenaConfiguration.NEAR;  
+	private boolean isNear(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		int positionDelta = Math.abs(attackingFighterStatus.getXPosition() - waitingFighterStatus.getXPosition());
+		boolean isNear = positionDelta <= ArenaConfiguration.NEAR;
+		attackingFighterStatus.setNear(isNear);
+		return isNear;  
 	}
 	
-	private boolean isMuchStronger(){
-		return fighterStatus.getEnergy() > (oponentStatus.getEnergy() + 50.0);
+	private boolean isMuchStronger(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		boolean isMuchStronger = attackingFighterStatus.getEnergy() > (waitingFighterStatus.getEnergy() + 50.0);
+		attackingFighterStatus.setMuchStronger(isMuchStronger);
+		return isMuchStronger;
 	}
 	
-	private boolean isStronger(){
-		return fighterStatus.getEnergy() > oponentStatus.getEnergy();
+	private boolean isStronger(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		boolean isStronger = attackingFighterStatus.getEnergy() > waitingFighterStatus.getEnergy();
+		attackingFighterStatus.setStronger(isStronger);
+		return isStronger;
 	}
 	
-	private boolean isWeaker(){
-		return fighterStatus.getEnergy() < oponentStatus.getEnergy();
+	private boolean isWeaker(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		boolean isWeaker = attackingFighterStatus.getEnergy() < waitingFighterStatus.getEnergy();
+		attackingFighterStatus.setWeaker (isWeaker );
+		return isWeaker;
 	}
 	
-	private boolean isMuchWeaker(){
-		return fighterStatus.getEnergy() < (oponentStatus.getEnergy() - 50);
+	private boolean isMuchWeaker(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		boolean isMuchWeaker = attackingFighterStatus.getEnergy() < (waitingFighterStatus.getEnergy() - 50);
+		attackingFighterStatus.setMuchWeaker (isMuchWeaker );
+		return isMuchWeaker;
 	}
 	
-	private boolean isEven(){
-		return fighterStatus.getEnergy() == oponentStatus.getEnergy();
+	private boolean isEven(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
+		boolean isEven = attackingFighterStatus.getEnergy() == waitingFighterStatus.getEnergy();
+		attackingFighterStatus.setEven (isEven);
+		return isEven;
 	}
 	
 }
