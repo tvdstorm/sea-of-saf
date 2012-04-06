@@ -1,5 +1,7 @@
 package game;
 
+import game.controller.FighterController;
+
 import java.util.ArrayList;
 
 import model.Action;
@@ -17,21 +19,45 @@ public class FighterStatus {
 	protected String direction;
 	protected Action lastMoveAction; 
 	protected Action lastFightAction;
+	protected boolean near;
+	protected boolean far;
+	protected boolean stronger;
+	protected boolean muchStronger;
+	protected boolean even;
+	protected boolean weaker;
+	protected boolean muchWeaker;	
 	protected int distance;
 	Fighter fighter;
 	
-	public FighterStatus(Fighter fighter, String status) {
+	public FighterStatus(Fighter fighter, String direction) {
 		this.fighter = fighter;
-		this.direction = status;
+		this.direction = direction;
 		this.energy = 100.0;
 		this.yPosition = 0;
 		this.lastFightAction = new FightAction("block_high");
 		this.lastMoveAction = new MoveAction("stand");
-		if (this.direction.equals("LEFT")) {this.xPosition = 300;}
-		if (this.direction.equals("RIGHT")) {this.xPosition = 400;}
-		this.distance=100;
+		if (this.direction.equals("LEFT")) {this.xPosition = -100;}
+		if (this.direction.equals("RIGHT")) {this.xPosition = 100;}
+		this.distance=200;
 	}
-
+	
+	public void resetStatus(){
+		near=false;
+		far=false;
+		stronger=false;
+		muchStronger=false;
+		even=false;
+		weaker=false;
+		muchWeaker=false;
+		
+	}
+	
+	public void updateStatus(){
+		
+		
+		//notify
+	}
+	
 	public void setEnergy(double energy) {
         this.energy = energy;
 	}
@@ -99,17 +125,101 @@ public class FighterStatus {
 	public void setLastFightAction(Action lastFightAction) {
 		this.lastFightAction = lastFightAction;
 	}
+	
+	public void reduceEnergy(double oponentHitPower){
+		energy = energy - oponentHitPower; 
+	}
+	
+	public boolean isNear() {
+		return near;
+	}
+
+	public void setNear(boolean near) {
+		this.near = near;
+	}
+
+	public boolean isFar() {
+		return far;
+	}
+
+	public void setFar(boolean far) {
+		this.far = far;
+	}
+
+	public boolean isStronger() {
+		return stronger;
+	}
+
+	public void setStronger(boolean stronger) {
+		this.stronger = stronger;
+	}
+
+	public boolean isMuchStronger() {
+		return muchStronger;
+	}
+
+	public void setMuchStronger(boolean muchStronger) {
+		this.muchStronger = muchStronger;
+	}
+
+	public boolean isEven() {
+		return even;
+	}
+
+	public void setEven(boolean even) {
+		this.even = even;
+	}
+
+	public boolean isWeaker() {
+		return weaker;
+	}
+
+	public void setWeaker(boolean weaker) {
+		this.weaker = weaker;
+	}
+
+	public boolean isMuchWeaker() {
+		return muchWeaker;
+	}
+
+	public void setMuchWeaker(boolean muchWeaker) {
+		this.muchWeaker = muchWeaker;
+	}
+	
+	public void moveForward(int steps){
+		if (this.direction.equals("LEFT")) {this.xPosition = this.xPosition + steps;}
+		if (this.direction.equals("RIGHT")) {this.xPosition = this.xPosition - steps;}
+	}
+	
+	public void moveBackwards(int steps){
+		if (this.direction.equals("LEFT")) {this.xPosition = this.xPosition - steps;}
+		if (this.direction.equals("RIGHT")) {this.xPosition = this.xPosition + steps;}
+	}
+	
+	public int getKickPower(){
+		return fighter.getCharacteristic("kickPower");
+	}
+	
+	public int getPunchPower(){
+		return fighter.getCharacteristic("punchPower");
+	}
+	
+	public int getKickReach(){
+		return fighter.getCharacteristic("kickReach");
+	}
+	
+	public int getPunchReach(){
+		return fighter.getCharacteristic("punchReach");
+	}
+
+	public void setDistance(int positionDelta) {
+		this.distance=positionDelta;
+	}
+
 	public int getDistance() {
 		return distance;
 	}
-
-	public void setDistance(int distance) {
-		this.distance = distance;
-	}
 	
-	public void reduceEnergy(double reduction){
-		energy = energy - reduction; 
-	}
 	
 }
 
