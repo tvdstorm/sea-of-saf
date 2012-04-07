@@ -2,7 +2,7 @@ package graphic;
 
 import game.FighterStatus;
 
-import game.controller.MainController;
+//import game.controller.MainController;
 
 import java.awt.BorderLayout;
 
@@ -14,10 +14,10 @@ public class GameGraphicController implements ArenaConfiguration{
 	ArenaFrame mainFrame = new ArenaFrame();
 	private FighterPanel fighterPanelL;
 	private FighterPanel fighterPanelR;
-	private MainController mainController;
+	//private MainController mainController;
 
-	public GameGraphicController(MainController mainController) {
-		this.mainController = mainController;
+	public GameGraphicController() {
+		//this.mainController = mainController;
 		this.startFighters();
 	}
 
@@ -61,13 +61,13 @@ public class GameGraphicController implements ArenaConfiguration{
 		this.fighterPanelR = fighterPanelR;
 	}
 
-	public MainController getFightController() {
-		return mainController;
-	}
-
-	public void setMainController(MainController mainController) {
-		this.mainController = mainController;
-	}
+//	public MainController getFightController() {
+//		return mainController;
+//	}
+//
+//	public void setMainController(MainController mainController) {
+//		this.mainController = mainController;
+//	}
 
 	//update each fighter panel status
 	public void updateFighterPanels(){
