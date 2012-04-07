@@ -41,6 +41,11 @@ public class Fighter extends ASTNode{
 		return ret;
 	}
 	
+	public ArrayList<Characteristic> getCharacteristic() {
+		return this.characteristics;
+	}
+	
+	
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);

@@ -24,7 +24,8 @@ public class FightController {
 	}
 
 	public void startFight() throws InterruptedException{
-
+		
+		
 		while(this.fighterStatusLeft.imAlive() && fighterStatusRight.imAlive()){
 			//attack left
  			this.fight(fighterStatusLeft, fighterStatusRight);
@@ -33,7 +34,11 @@ public class FightController {
 		}
 	
 		//define winner
-		System.out.println("And the winner is: " + getWinner());
+		
+		System.out.println("FINAL RESULTS");
+		System.out.println("	" + "And the winner is: " + getWinner());
+		System.out.println("	" + fighterStatusLeft.getFighter().getName() + " energy is: " + fighterStatusLeft.getEnergy());
+		System.out.println("	" + fighterStatusRight.getFighter().getName() + " energy is: " + fighterStatusRight.getEnergy());
 	}	
 	
 	private void fight(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
@@ -55,26 +60,23 @@ public class FightController {
 		//returns a list of actions related with a set of behaviours
 		
 		for (int i=0; i<behaviours.size(); i++){ 
-//			System.out.println("Filtered: " + behaviours.get(i).getCondition().getName());
-//			System.out.println("Move: " + behaviours.get(i).getMoveAction().getName());
-//			System.out.println("Fight: " + behaviours.get(i).getFightAction().getName());
 			
 			//do moves
-			if(behaviours.get(i).getMoveAction().getName().equals("jump")){move.moveJump(attackingFighterStatus, waitingFighterStatus, behaviours.get(i).getMoveAction());}
-			if(behaviours.get(i).getMoveAction().getName().equals("crouch")){move.moveCrouch(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getMoveAction());}
-			if(behaviours.get(i).getMoveAction().getName().equals("stand")){move.moveStand(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getMoveAction());}
-			if(behaviours.get(i).getMoveAction().getName().equals("run_towards")){move.runTowards(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getMoveAction());}
-			if(behaviours.get(i).getMoveAction().getName().equals("run_away")){move.runAway(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getMoveAction());}
-			if(behaviours.get(i).getMoveAction().getName().equals("walk_towards")){move.walkTowards(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getMoveAction());}
-			if(behaviours.get(i).getMoveAction().getName().equals("walk_away")){move.walkAway(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getMoveAction());}	
+			if(behaviours.get(i).getMoveAction().getName().equals("jump")){move.moveJump(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getMoveAction().getName().equals("crouch")){move.moveCrouch(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getMoveAction().getName().equals("stand")){move.moveStand(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getMoveAction().getName().equals("run_towards")){move.runTowards(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getMoveAction().getName().equals("run_away")){move.runAway(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getMoveAction().getName().equals("walk_towards")){move.walkTowards(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getMoveAction().getName().equals("walk_away")){move.walkAway(attackingFighterStatus, waitingFighterStatus);}	
 			
 			//do fight
-			if(behaviours.get(i).getFightAction().getName().equals("block_low")){attack.blockLow(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getFightAction());}
-			if(behaviours.get(i).getFightAction().getName().equals("block_high")){attack.blockHigh(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getFightAction());}
-			if(behaviours.get(i).getFightAction().getName().equals("punch_low")){attack.punchLow(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getFightAction());}
-			if(behaviours.get(i).getFightAction().getName().equals("punch_high")){attack.punchHigh(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getFightAction());}
-			if(behaviours.get(i).getFightAction().getName().equals("kick_low")){attack.kickLow(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getFightAction());}
-			if(behaviours.get(i).getFightAction().getName().equals("kick_high")){attack.kickHigh(attackingFighterStatus, waitingFighterStatus,behaviours.get(i).getFightAction());}			
+			if(behaviours.get(i).getFightAction().getName().equals("block_low")){attack.blockLow(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getFightAction().getName().equals("block_high")){attack.blockHigh(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getFightAction().getName().equals("punch_low")){attack.punchLow(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getFightAction().getName().equals("punch_high")){attack.punchHigh(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getFightAction().getName().equals("kick_low")){attack.kickLow(attackingFighterStatus, waitingFighterStatus);}
+			if(behaviours.get(i).getFightAction().getName().equals("kick_high")){attack.kickHigh(attackingFighterStatus, waitingFighterStatus);}			
 		}	
 	}
 }
