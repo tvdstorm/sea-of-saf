@@ -14,7 +14,7 @@ public interface ArenaConfiguration {
 	static final int FAR = 11;
 	
 	
-	String PATH_IMAGES = "D:/SAF/workspace/SC12/images/";
+	String PATH_IMAGES = "D:/Dropbox/Dropbox/Software Construction/workspace/SC12/images/";
 	String BLOCK_HIGH_L = "block_high_l.jpg";
 	String BLOCK_LOW_L = "block_low_l.jpg";
 	String KICK_HIGH_L = "kick_high_l.jpg";
@@ -27,6 +27,8 @@ public interface ArenaConfiguration {
 	String KICK_LOW_R = "kick_low_r.jpg";
 	String PUNCH_HIGH_R = "punch_high_r.jpg";
 	String PUNCH_LOW_R = "punch_low_r.jpg";
+	String DEAD_L = "dead_l.jpg";
+	String DEAD_R = "dead_r.jpg";
 	String RELAXED = "relaxed.jpg";
 	
 	File blockHighL = new File (PATH_IMAGES + BLOCK_HIGH_L);
@@ -35,6 +37,7 @@ public interface ArenaConfiguration {
 	File kickLowL = new File (PATH_IMAGES + KICK_LOW_L);
 	File punchkHighL = new File (PATH_IMAGES + PUNCH_HIGH_L);
 	File punchLowL = new File (PATH_IMAGES + PUNCH_LOW_L);
+	File deadL = new File (PATH_IMAGES + DEAD_L);
 	
 	File blockHighR = new File (BLOCK_HIGH_R + BLOCK_HIGH_R);
 	File blockLowR = new File (PATH_IMAGES + BLOCK_LOW_R);
@@ -42,6 +45,7 @@ public interface ArenaConfiguration {
 	File kickLowR = new File (PATH_IMAGES + KICK_LOW_R);
 	File punchkHighR = new File (PATH_IMAGES + PUNCH_HIGH_R);
 	File punchLowR = new File (PATH_IMAGES + PUNCH_LOW_R);
+	File deadR = new File (PATH_IMAGES + DEAD_R);
 	
 	File relaxed = new File (PATH_IMAGES + RELAXED);
 }

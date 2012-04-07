@@ -14,7 +14,8 @@ public class ArenaFrame extends JFrame implements ArenaConfiguration{
 	private GameGraphicController graphicController;
 	private static final long serialVersionUID = 1L;
 
-	public ArenaFrame(){
+	public ArenaFrame(GameGraphicController gc){
+		this.graphicController = gc;
 		  this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		  JPanel mainPanel = new JPanel();
 		  this.setTitle(TITLE); 
@@ -24,15 +25,11 @@ public class ArenaFrame extends JFrame implements ArenaConfiguration{
 		  this.setBackground(BACKGROUND_COLOR);
 		  this.setLayout(new BorderLayout(5, 5));
 	      this.pack();
-	      this.setVisible(false);
-	}
-    
-	public void setGameGraphicController(GameGraphicController gc){
-		this.graphicController = gc;
+	      this.setVisible(true);
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(this.graphicController.getFighterPanelL().getImage(), this.graphicController.getFighterPanelL().getFighterStatus().getXPosition(), this.graphicController.getFighterPanelL().getFighterStatus().getYPosition(), rootPane);
-		g.drawImage(this.graphicController.getFighterPanelL().getImage(), this.graphicController.getFighterPanelR().getFighterStatus().getXPosition(), this.graphicController.getFighterPanelR().getFighterStatus().getYPosition(), rootPane);
+		g.drawImage(this.graphicController.getFighterPanelL().getImage(), 100, 200, null);
+		g.drawImage(this.graphicController.getFighterPanelR().getImage(), 400, 200, null);
     }
 }

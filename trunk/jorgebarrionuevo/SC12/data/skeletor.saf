@@ -1,7 +1,8 @@
 SkeLetor {
   kickPower = 10
-  punchPower = 40
+  punchPower = 10
   kickReach = 10
-  punchReach = 15
-  always [walk_towards punch_high]
+  punchReach = 10  
+  always [stand punch_low]
+  much_stronger [jump kick_low]
 }

@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.FighterStatus;
+import graphic.GameGraphicController;
 
 import java.util.ArrayList;
 
@@ -13,55 +14,45 @@ public class FightController {
 	private ConditionController conditionCtrl;
 	private Attack attack;
 	private Move move;
-	
+	GameGraphicController graphicController;
+
 	public FightController(Fighter fighterL, Fighter fighterR) {
-		System.out.println("Creating mainController");
-		fighterStatusLeft =  new FighterStatus(fighterL, "LEFT");
-		fighterStatusRight =  new FighterStatus(fighterR, "RIGHT");
+		System.out.println("Creating fighterController");
+		GameGraphicController gc = new GameGraphicController(fighterStatusLeft, fighterStatusRight);
+		fighterStatusLeft =  new FighterStatus(fighterL, "LEFT", gc);
+		fighterStatusRight =  new FighterStatus(fighterR, "RIGHT", gc);
+		
 		conditionCtrl = new ConditionController();
 		attack = new Attack();
 		move = new Move();
 	}
 
 	public void startFight() throws InterruptedException{
-		
-		
 		while(this.fighterStatusLeft.imAlive() && fighterStatusRight.imAlive()){
 			//attack left
- 			this.fight(fighterStatusLeft, fighterStatusRight);
- 			//attack right
- 			this.fight(fighterStatusRight, fighterStatusLeft);
-		}
-	
-		//define winner
-		
+			this.fight(fighterStatusLeft, fighterStatusRight);
+			//attack right
+			if (fighterStatusRight.imAlive()){this.fight(fighterStatusRight, fighterStatusLeft);}
+		}		
 		System.out.println("FINAL RESULTS");
 		System.out.println("	" + "And the winner is: " + getWinner());
 		System.out.println("	" + fighterStatusLeft.getFighter().getName() + " energy is: " + fighterStatusLeft.getEnergy());
 		System.out.println("	" + fighterStatusRight.getFighter().getName() + " energy is: " + fighterStatusRight.getEnergy());
 	}	
-	
+
 	private void fight(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
-		//check actual valid conditions
-		//System.out.println("Fight!");
 		ArrayList<Behaviour> behaviours = conditionCtrl.getActualBehaviours(attackingFighterStatus, waitingFighterStatus);
 		this.doActions(attackingFighterStatus, waitingFighterStatus, behaviours);
-		//do all the relatd actions and modify the status of both fighters
-		
-		
 	}
-	
+
 	private String getWinner(){
 		if (fighterStatusRight.imAlive()){return fighterStatusRight.getFighter().getName();}
 		else{return fighterStatusLeft.getFighter().getName();}
 	}
-	
+
 	private void doActions(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus, ArrayList<Behaviour> behaviours){
-		//returns a list of actions related with a set of behaviours
-		
 		for (int i=0; i<behaviours.size(); i++){ 
-			
-			//do moves
+			//Move
 			if(behaviours.get(i).getMoveAction().getName().equals("jump")){move.moveJump(attackingFighterStatus, waitingFighterStatus);}
 			if(behaviours.get(i).getMoveAction().getName().equals("crouch")){move.moveCrouch(attackingFighterStatus, waitingFighterStatus);}
 			if(behaviours.get(i).getMoveAction().getName().equals("stand")){move.moveStand(attackingFighterStatus, waitingFighterStatus);}
@@ -69,8 +60,7 @@ public class FightController {
 			if(behaviours.get(i).getMoveAction().getName().equals("run_away")){move.runAway(attackingFighterStatus, waitingFighterStatus);}
 			if(behaviours.get(i).getMoveAction().getName().equals("walk_towards")){move.walkTowards(attackingFighterStatus, waitingFighterStatus);}
 			if(behaviours.get(i).getMoveAction().getName().equals("walk_away")){move.walkAway(attackingFighterStatus, waitingFighterStatus);}	
-			
-			//do fight
+			//Attack
 			if(behaviours.get(i).getFightAction().getName().equals("block_low")){attack.blockLow(attackingFighterStatus, waitingFighterStatus);}
 			if(behaviours.get(i).getFightAction().getName().equals("block_high")){attack.blockHigh(attackingFighterStatus, waitingFighterStatus);}
 			if(behaviours.get(i).getFightAction().getName().equals("punch_low")){attack.punchLow(attackingFighterStatus, waitingFighterStatus);}
