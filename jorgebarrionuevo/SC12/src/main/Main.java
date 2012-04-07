@@ -44,6 +44,7 @@ public class Main  {
 			public void run() {
 
 				FightController mc = new FightController(fighterLeft, fighterRight);
+				
 				try {
 					long start = System.nanoTime();    
 					mc.startFight();

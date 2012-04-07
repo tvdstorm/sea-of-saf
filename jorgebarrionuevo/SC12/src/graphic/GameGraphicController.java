@@ -11,40 +11,32 @@ import javax.swing.JPanel;
 
 public class GameGraphicController implements ArenaConfiguration{
 
-	ArenaFrame mainFrame = new ArenaFrame();
+	ArenaFrame arenaFrame = new ArenaFrame(this);
 	private FighterPanel fighterPanelL;
 	private FighterPanel fighterPanelR;
-	//private MainController mainController;
+	private FighterStatus fighterStatusLeft;
+	private FighterStatus fighterStatusRight;
 
-	public GameGraphicController() {
-		//this.mainController = mainController;
+	public GameGraphicController(FighterStatus fighterStatusLeft, FighterStatus fighterStatusRight) {
+		this.fighterStatusLeft = fighterStatusLeft;
+		this.fighterStatusRight = fighterStatusRight;
+		fighterPanelL = new FighterPanel();
+		fighterPanelR = new FighterPanel();
+		arenaFrame.setVisible(true);
 		this.startFighters();
 	}
 
 	public void startFighters(){
 		System.out.println("StartFighters");
-		fighterPanelL = new FighterPanel();
-		fighterPanelR = new FighterPanel();
-		fighterPanelL.SetImage(ArenaConfiguration.relaxed);
-		fighterPanelR.SetImage(ArenaConfiguration.relaxed);
-		//fighterPanelL.SetFighterStatus(mainController.getFighterStatusLeft());
-		//fighterPanelR.SetFighterStatus(mainController.getFighterStatusRight());
-		//mainFrame.setGameGraphicController(this);
-		//mainFrame.getContentPane().add(fighterPanelL);  
-		//mainFrame.getContentPane().add(fighterPanelR);
-		//mainFrame.setVisible(true);
+		//arenaFrame.repaint();
+		
+		//fighterPanelL.SetImage(ArenaConfiguration.relaxed);
+		//fighterPanelR.SetImage(ArenaConfiguration.relaxed);
+		//arenaFrame.getContentPane().add(fighterPanelL);  
+		//arenaFrame.getContentPane().add(fighterPanelR);
+
 	}
 	
-	
-
-	public JFrame getMainFrame() {
-		return mainFrame;
-	}
-
-	public void setMainFrame(ArenaFrame mainFrame) {
-		this.mainFrame = mainFrame;
-	}
-
 	public FighterPanel getFighterPanelL() {
 		return fighterPanelL;
 	}
@@ -61,20 +53,47 @@ public class GameGraphicController implements ArenaConfiguration{
 		this.fighterPanelR = fighterPanelR;
 	}
 
-//	public MainController getFightController() {
-//		return mainController;
-//	}
-//
-//	public void setMainController(MainController mainController) {
-//		this.mainController = mainController;
-//	}
-
-	//update each fighter panel status
-	public void updateFighterPanels(){
-		//fighterPanelL.updateStatus(mainController.getFighterStatusLeft());
-		//fighterPanelL.updateStatus(mainController.getFighterStatusRight());
-		mainFrame.repaint();
+	public void updateLeftImage(String actualAction) {
+		// TODO Auto-generated method stub
+		if(actualAction.equals("block_low")){fighterPanelL.SetImage(ArenaConfiguration.blockLowL);}
+		if(actualAction.equals("block_high")){fighterPanelL.SetImage(ArenaConfiguration.blockHighL);}
+		if(actualAction.equals("punch_low")){fighterPanelL.SetImage(ArenaConfiguration.punchLowL);}
+		if(actualAction.equals("punch_high")){fighterPanelL.SetImage(ArenaConfiguration.punchkHighL);}
+		if(actualAction.equals("kick_low")){fighterPanelL.SetImage(ArenaConfiguration.kickLowL);}
+		if(actualAction.equals("kick_high")){fighterPanelL.SetImage(ArenaConfiguration.kickHighL);}
+		if(actualAction.equals("stand")){fighterPanelL.SetImage(ArenaConfiguration.relaxed);}
+		if(actualAction.equals("jump")){fighterPanelL.SetImage(ArenaConfiguration.relaxed);}
+		if(actualAction.equals("crouch")){fighterPanelL.SetImage(ArenaConfiguration.relaxed);}
+		if(actualAction.equals("death")){
+			System.out.println("death Left!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+			fighterPanelL.SetImage(ArenaConfiguration.deadL);}
+		
 	}
 
+	public void updateRightImage(String actualAction) {
+		// TODO Auto-generated method stub
+		if(actualAction.equals("block_low")){fighterPanelR.SetImage(ArenaConfiguration.blockLowR);}
+		if(actualAction.equals("block_high")){fighterPanelR.SetImage(ArenaConfiguration.blockHighR);}
+		if(actualAction.equals("punch_low")){fighterPanelR.SetImage(ArenaConfiguration.punchLowR);}
+		if(actualAction.equals("punch_high")){fighterPanelR.SetImage(ArenaConfiguration.punchkHighR);}
+		if(actualAction.equals("kick_low")){fighterPanelR.SetImage(ArenaConfiguration.kickLowR);}
+		if(actualAction.equals("kick_high")){fighterPanelR.SetImage(ArenaConfiguration.kickHighR);}
+		if(actualAction.equals("stand")){fighterPanelR.SetImage(ArenaConfiguration.relaxed);}
+		if(actualAction.equals("jump")){fighterPanelR.SetImage(ArenaConfiguration.relaxed);}
+		if(actualAction.equals("crouch")){fighterPanelR.SetImage(ArenaConfiguration.relaxed);}
+		if(actualAction.equals("death")){
+			System.out.println("death Right!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+			fighterPanelR.SetImage(ArenaConfiguration.deadR);}
+		
+	}
+	
+	public void updateLeftXPosition() {
+		// TODO Auto-generated method stub
+		
+	}
 
+	public void updateRightXPosition() {
+		// TODO Auto-generated method stub
+		
+	}
 }

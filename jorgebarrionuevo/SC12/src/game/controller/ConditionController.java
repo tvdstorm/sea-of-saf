@@ -67,44 +67,37 @@ public class ConditionController {
 	private boolean isFar(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		int positionDelta = Math.abs(attackingFighterStatus.getXPosition() - waitingFighterStatus.getXPosition());
 		boolean isFar = positionDelta >= ArenaConfiguration.FAR; 
-		//attackingFighterStatus.setFar(isFar);
 		return isFar;  		
 	}
 	
 	private boolean isNear(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		int positionDelta = Math.abs(attackingFighterStatus.getXPosition() - waitingFighterStatus.getXPosition());
 		boolean isNear = positionDelta <= ArenaConfiguration.NEAR;
-		//attackingFighterStatus.setNear(isNear);
 		return isNear;  
 	}
 	
 	private boolean isMuchStronger(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		boolean isMuchStronger = attackingFighterStatus.getEnergy() > (waitingFighterStatus.getEnergy() + 50.0);
-		//attackingFighterStatus.setMuchStronger(isMuchStronger);
 		return isMuchStronger;
 	}
 	
 	private boolean isStronger(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		boolean isStronger = attackingFighterStatus.getEnergy() > waitingFighterStatus.getEnergy();
-		//attackingFighterStatus.setStronger(isStronger);
 		return isStronger;
 	}
 	
 	private boolean isWeaker(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		boolean isWeaker = attackingFighterStatus.getEnergy() < waitingFighterStatus.getEnergy();
-		//attackingFighterStatus.setWeaker (isWeaker );
 		return isWeaker;
 	}
 	
 	private boolean isMuchWeaker(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		boolean isMuchWeaker = attackingFighterStatus.getEnergy() < (waitingFighterStatus.getEnergy() - 50);
-		//attackingFighterStatus.setMuchWeaker (isMuchWeaker );
 		return isMuchWeaker;
 	}
 	
 	private boolean isEven(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		boolean isEven = attackingFighterStatus.getEnergy() == waitingFighterStatus.getEnergy();
-		//attackingFighterStatus.setEven (isEven);
 		return isEven;
 	}
 	

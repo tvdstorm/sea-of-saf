@@ -4,6 +4,6 @@ HeMan {
   kickReach = 10
   punchReach = 10
   always [walk_towards punch_high]
-  near [walk_towards punch_low]	
+  much_weaker [crouch block_low]
   
 }
