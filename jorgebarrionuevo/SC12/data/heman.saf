@@ -4,6 +4,6 @@ HeMan {
   kickPower  = 2
   punchPower = 2
   far [run_towards kick_low]
-  near [walk_away kick_low]
+  near [stand kick_low]
   always [crouch punch_low]
 }
