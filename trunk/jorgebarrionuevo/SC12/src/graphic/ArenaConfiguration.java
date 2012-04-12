@@ -9,7 +9,7 @@ public interface ArenaConfiguration {
 	static final int HEIGHT = 400;
 	static final Dimension SIZE_ARENA = new Dimension(WIDTH, HEIGHT);
 	static final Color BACKGROUND_COLOR = Color.white;	
-	static final String TITLE = "Super Awsome Fighters Battle";
+	static final String TITLE = "Super Awesome Fighters Battle";
 	static final int NEAR = 10;
 	static final int FAR = 11;
 	
