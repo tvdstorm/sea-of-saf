@@ -40,8 +40,8 @@ public class Main  {
 			System.out.println("Alert found: "+ alert1.get(i).getAlert());
 		}
 
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
+		//javax.swing.SwingUtilities.(new Runnable() {
+			//public void run() {
 
 				FightController mc = new FightController(fighterLeft, fighterRight);
 				
@@ -54,8 +54,8 @@ public class Main  {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
-		});
+			//}
+		//});
 
 	}
 }

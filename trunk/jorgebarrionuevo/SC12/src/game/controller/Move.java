@@ -1,6 +1,5 @@
 package game.controller;
 
-import game.FighterStatus;
 
 public class Move {
 
@@ -8,8 +7,8 @@ public class Move {
 	}
 
 	public void walkTowards(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
-		if (attackingFighterStatus.getDistance()>2){
-			attackingFighterStatus.moveForward(1);
+		if (attackingFighterStatus.getDistance()>10){
+			attackingFighterStatus.moveForward(3);
 			setDistance(attackingFighterStatus, waitingFighterStatus);
 			attackingFighterStatus.setActualAction("walk_towards");
 			System.out.println(attackingFighterStatus.getFighter().getName() + " walked to " + attackingFighterStatus.getXPosition());
@@ -17,8 +16,8 @@ public class Move {
 	}
 
 	public void walkAway(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
-		if (attackingFighterStatus.getDistance()<200){
-			attackingFighterStatus.moveBackwards(1);
+		if (attackingFighterStatus.getDistance()<10){
+			attackingFighterStatus.moveBackwards(3);
 			setDistance(attackingFighterStatus, waitingFighterStatus);
 			attackingFighterStatus.setActualAction("walk_away");
 			System.out.println(attackingFighterStatus.getFighter().getName() + " walked away to " + attackingFighterStatus.getXPosition());

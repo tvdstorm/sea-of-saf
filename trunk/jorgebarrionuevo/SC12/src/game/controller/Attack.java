@@ -1,6 +1,5 @@
 package game.controller;
 
-import game.FighterStatus;
 
 public class Attack {
 
@@ -25,7 +24,6 @@ public class Attack {
 	public void punchHigh(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		if (areConditionsForPunchHigh(attackingFighterStatus,waitingFighterStatus))
 		{
-
 			waitingFighterStatus.reduceEnergy(attackingFighterStatus.getPunchPower());
 			attackingFighterStatus.setActualAction("punch_high");
 			System.out.println(attackingFighterStatus.getFighter().getName() + " punchHigh Sucess! power " + attackingFighterStatus.getPunchPower());

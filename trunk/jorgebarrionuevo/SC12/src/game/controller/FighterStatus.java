@@ -1,4 +1,4 @@
-package game;
+package game.controller;
 
 import graphic.GameGraphicController;
 
@@ -22,9 +22,9 @@ public class FighterStatus {
 		this.direction = direction;
 		this.energy = 100.0;
 		this.yPosition = 0;
-		if (this.direction.equals("LEFT")) {this.xPosition = -100;}
-		if (this.direction.equals("RIGHT")) {this.xPosition = 100;}
-		this.distance=200;
+		if (this.direction.equals("LEFT")) {this.xPosition = 400;}
+		if (this.direction.equals("RIGHT")) {this.xPosition = 500;}
+		this.distance=100;
 		actualBehaviours = new ArrayList<Behaviour>();
 		this.actualAction="stand";
 		this.graphicController = graphicController;
@@ -69,7 +69,6 @@ public class FighterStatus {
 	public boolean imAlive(){
 		if (this.energy>0) { return true;}
 		else {
-			System.out.println("muriooooo");
 			this.setActualAction("death");	
 			return false;
 		}
@@ -86,22 +85,22 @@ public class FighterStatus {
 	public void moveForward(int steps){
 		if (this.direction.equals("LEFT")) {
 			this.xPosition = this.xPosition + steps;
-			graphicController.updateLeftXPosition();
+			graphicController.updateLeftXPosition(this);
 		}
 		if (this.direction.equals("RIGHT")) {
 			this.xPosition = this.xPosition - steps;
-			graphicController.updateRightXPosition();
+			graphicController.updateRightXPosition(this);
 		}
 	}
 
 	public void moveBackwards(int steps){
 		if (this.direction.equals("LEFT")) {
 			this.xPosition = this.xPosition - steps;
-			graphicController.updateLeftXPosition();
+			graphicController.updateLeftXPosition(this);
 		}
 		if (this.direction.equals("RIGHT")) {
 			this.xPosition = this.xPosition + steps;
-			graphicController.updateRightXPosition();
+			graphicController.updateRightXPosition(this);
 		}
 	}
 
@@ -160,8 +159,8 @@ public class FighterStatus {
 
 	public void setActualAction(String actualAction) {
 		this.actualAction = actualAction;
-		if (this.direction.equals("LEFT")){graphicController.updateLeftImage(actualAction);}
-		if (this.direction.equals("RIGHT")){graphicController.updateRightImage(actualAction);}
+		if (this.direction.equals("LEFT")){graphicController.updateLeftImage(this, actualAction);}
+		if (this.direction.equals("RIGHT")){graphicController.updateRightImage(this, actualAction);}
 	} 
 	
 }
