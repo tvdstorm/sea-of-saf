@@ -1,9 +1,9 @@
 SkeLetor {
   kickPower = 7
-  punchPower = 5
+  punchPower = 10
   kickReach = 10
-  punchReach = 9
-  far [run_towards punch_high]
+  punchReach = 10
+  far [run_towards kick_high]
   near [choose(stand crouch) kick_low] 
   much_stronger [walk_towards punch_low]
   weaker [run_away choose(block_high block_low)]
