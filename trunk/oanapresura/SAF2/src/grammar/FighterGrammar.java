@@ -3,27 +3,38 @@ package grammar;
 import ast.*;
 import interpreter.*;
 import constants.*;
+import visitor.*;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class FighterGrammar implements/*@bgen(jjtree)*/ FighterGrammarTreeConstants,CorrectValues, FighterGrammarConstants {/*@bgen(jjtree)*/
-  protected static JJTFighterGrammarState jjtree = new JJTFighterGrammarState();public static void main(String args [])
+  protected static JJTFighterGrammarState jjtree = new JJTFighterGrammarState();public SAF saf;
+  public Interpreter i;
+  public VisitorTest vt;
+
+  public FighterGrammar(){
+  }
+
+  //public static void main(String args [])
+  public void run()
   {
     try{
                 String file = "input.txt";
                 InputStream input = new FileInputStream("input.txt");
                 System.out.println("[Parser]Parsing from file ... ");
                 FighterGrammar parser = new FighterGrammar(input);
-                SAF saf = parser.Parse();
-                Interpreter i = new Interpreter(saf.getBot1(), saf.getBot2());
+                saf = parser.Parse();
+                i = new Interpreter(saf.getBot1(), saf.getBot2());
                 boolean result = i.interpret();
-
+                vt = new VisitorTest();
+                vt.startVisit(saf.getBot1(),saf.getBot2());
                 if (result == true)
                         System.out.println("[Interpreter]Healthy fighters!");
 
                 System.out.println("[Parser]Done!");
     }
+
         catch(Exception e)
         {
                 System.out.println("[Parser]Oops! ");

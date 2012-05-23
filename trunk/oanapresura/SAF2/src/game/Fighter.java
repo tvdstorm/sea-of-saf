@@ -10,9 +10,15 @@ public class Fighter{
 		private int weight;		
 		private int height;
 		private int speed;
-		private Behaviour b;
-		private Personality p;
+		public Behaviour b;
+		public Personality p;
 		private Bot bot;
+		public int side;
+		
+	
+
+		
+
 
 		public Fighter(Bot b)
 		{
@@ -23,6 +29,16 @@ public class Fighter{
 			height = (p.getStrengthValue("punchReach") + p.getStrengthValue("kickReach")) / 2;
 			speed = (int) Math.abs(0.5*(height-weight));
 			health = 10;			
+			
+		}
+		
+		public int getSide() {
+			return side;
+		}
+
+
+		public void setSide(int side) {
+			this.side = side;
 		}
 		
 		public int getHealth()
@@ -47,5 +63,5 @@ public class Fighter{
 			return speed;
 		}
 
-	 
+		
 }

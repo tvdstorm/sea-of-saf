@@ -1,39 +1,50 @@
 package ast;
 
+import constants.CorrectValues;
+
 public class BehaviourItem {
 	
 	private Condition condition;
 	
-	private Action move;
-	private Action attack;		
+	//We don't know where is situated the move and where is situated the attack
+	//Therefore, we will test further what type of Action we have 
+	public Action left;
+	public Action right;		
 	
+	public Action getLeft() {
+		return left;
+	}
+
+	public void setLeft(Action left) {
+		this.left = left;
+	}
+
+	public Action getRight() {
+		return right;
+	}
+
+	public void setRight(Action right) {
+		this.right = right;
+	}
+
 	public BehaviourItem(Condition condition, Action move, Action attack){
 		this.condition = condition;
-		this.move = move;
-		this.attack = attack;				
+		this.left = move;
+		this.right = attack;				
 	}
 	
 	public Condition getCondition() {
 		return condition;
 	}
 
-	public Action getMove() {
-		return move;
-	}
-
-	public Action getAttack() {
-		return attack;
-	}
-
-	public void setCondition(Condition condition){
+	public void setCondition(Condition condition) 	{ 
 		this.condition = condition;
 	}
 	
-	public void setMove(Action move){
-		this.move = move;
+	public void setActions(Action left, Action right) {
+		this.left = left;
+		this.right = right;
 	}
 	
-	public void setAttack(Action attack){
-		this.attack = attack;
-	}
+
 }
