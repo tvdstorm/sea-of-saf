@@ -1,43 +1,62 @@
 package ast;
 
+import visitor.FighterVisitor;
 import constants.*;
+import visitor.*;
 
 public class Action implements CorrectValues{
 		
-	private Choice choice1,choice2;
-	private int type;
-	private int flag;
+	public Choice choice1,choice2;
+	//Single/Choice
+	public int type;
+	//Move/Attack
+	public int flag;
 				
 	public class Choice{
 		
-		private String choice;
+		/* Name of choice - jump/stand/ ... */
+		public String choiceName;
+		/* Index in names list */
+		public int choiceType;
 		
 		
-		public Choice(String choice){			
-			this.choice = choice;			
+		public int getChoiceType() {
+			return choiceType;
+		}
+
+		public void setChoiceType(int choiceType) {
+			this.choiceType = choiceType;
+		}
+
+		public Choice(String choiceName){			
+			this.choiceName = choiceName;			
 		}
 		
-		public void setChoice(String type){
-			this.choice = type;
+		public void setChoiceName(String type){
+			this.choiceName = type;
 		}
 		
-		public String getChoiceType(){
-			return this.choice;
+		public String getChoiceName(){
+			return this.choiceName;
 		}
 		
 		public boolean isValid(int flag, String type){
 			
 			switch(flag){
 			case CorrectValues.MOVE_TYPE:
+				this.setChoiceType(CorrectValues.moves.indexOf(type));
 				return (CorrectValues.moves.contains(type));
 			case CorrectValues.ATTACK_TYPE:
+				this.setChoiceType(CorrectValues.attacks.indexOf(type));
 				return (CorrectValues.attacks.contains(type));
 			default:
 				return true;
 			}								
 		}
 		
-		
+		public void accept(FighterVisitor v){
+			v.visit(this);
+		}
 	}
 
 	
@@ -71,9 +90,9 @@ public class Action implements CorrectValues{
 	public boolean isValid(){
 		
 		if (type == CorrectValues.SINGLE)
-			return (choice1.isValid(flag, choice1.choice));
+			return (choice1.isValid(flag, choice1.choiceName));
 		else
-			return (choice2.isValid(flag, choice2.choice)&&choice1.isValid(flag, choice1.choice));		
+			return (choice2.isValid(flag, choice2.choiceName)&&choice1.isValid(flag, choice1.choiceName));		
 	}
 	
 	public int getFlag() {
@@ -83,5 +102,20 @@ public class Action implements CorrectValues{
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
-
+	
+	public void accept(FighterVisitor v){
+		v.visit(this);
+	}
+	
+	public boolean isMove(){
+		if (this.flag == CorrectValues.MOVE_TYPE)
+			return true;
+		return false;
+	}
+	
+	public boolean isAttack(){
+		if (this.flag == CorrectValues.ATTACK_TYPE)
+			return true;
+		return false;
+	}
 }

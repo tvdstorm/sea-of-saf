@@ -4,7 +4,7 @@ import constants.CorrectValues;
 
 public class Condition implements CorrectValues{
 
-	private String type;
+	public String type;
 	
 	public Condition(){
 		this.type = new String();

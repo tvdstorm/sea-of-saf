@@ -3,6 +3,7 @@ package grammar;
 import ast.*;
 import interpreter.*;
 import constants.*;
+import visitor.*;
 import java.io.FileInputStream;
 import java.io.InputStream;
 

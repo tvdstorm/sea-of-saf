@@ -37,7 +37,7 @@ public class Interpreter{
 	
 	private boolean testBehaviourItem(BehaviourItem i, Bot b){
 				
-		return ( testCondition(i.getCondition(),b) && testAction(i.getAttack(),b) && testAction(i.getMove(),b));
+		return ( testCondition(i.getCondition(),b) && testAction(i.left,b) && testAction(i.right,b));
 	}
 	
 	private boolean testCondition(Condition c, Bot b){

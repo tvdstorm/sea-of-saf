@@ -1,4 +1,5 @@
 package ast;
+import visitor.*;
 
 public class Bot {
 	
@@ -30,5 +31,9 @@ public class Bot {
 	
 	public Personality getPersonality(){
 		return this.botPersonality;
+	}
+	
+	public void accept(FighterVisitor v){
+		v.visit(this);
 	}
 }
