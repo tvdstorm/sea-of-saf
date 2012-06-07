@@ -8,7 +8,7 @@ public class FighterState extends Fighter{
 		private final int DEFAULT = 5;
 		private final int HEALTH = 10;
 		private int health;
-		public BehaviourItem currentMove;	
+		public BehaviourItem currentAction;	
 		public int position;
 		public String currentPic;
 		
@@ -28,13 +28,13 @@ public class FighterState extends Fighter{
 			this.currentPic = currentPic;
 		}
 
-		public BehaviourItem getCurrentMove() {
-			return currentMove;
+		public BehaviourItem getCurrentAction() {
+			return currentAction;
 		}
 
 
-		public void setCurrentMove(BehaviourItem currentMove) {
-			this.currentMove = currentMove;
+		public void setCurrentAction(BehaviourItem currentAction) {
+			this.currentAction = currentAction;
 		}	
 	 
 }

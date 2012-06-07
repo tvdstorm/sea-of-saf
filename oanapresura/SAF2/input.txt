@@ -19,4 +19,5 @@ chicken
   far [choose(runTowards runAway) kickLow]
   near [runAway kickLow]
   near [crouch punchLow]
+  muchStronger[walkTowards kickHigh]
 }

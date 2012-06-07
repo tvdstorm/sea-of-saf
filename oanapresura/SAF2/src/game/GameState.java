@@ -13,8 +13,8 @@ public class GameState implements CorrectValues{
 	private final int START_LEFT = 15;
 	private final int START_RIGHT = 90;
 	
-	private final int LEFT = 1000;
-	private final int RIGHT = 1001;
+	public final int LEFT = 1000;
+	public final int RIGHT = 1001;
 	
 	public FighterState fighter1;
 	public FighterState fighter2;
@@ -34,7 +34,7 @@ public class GameState implements CorrectValues{
 		this.fighter2 = new FighterState(bot2,this.START_RIGHT);		
 		fighter2.side = START_RIGHT;
 		fighter2.setCurrentPic(initialPicRight);
-		this.generator = new Random();
+		this.generator = new Random();		
 	}
 	
 	
@@ -55,25 +55,34 @@ public class GameState implements CorrectValues{
 	}
 
 	public boolean isValidMove(BehaviourItem b){
-		if ((b.getCondition().type.equals("near")) && (this.distance <= this.NEAR)){
-			//System.out.println("near and near");
+		if ((b.getCondition().type.equals("near")) && ( Math.abs(fighter2.position - fighter1.position) <= this.NEAR)){			
 			return true;
 		}	
 		else
-			if ((b.getCondition().type.equals("far")) && (this.distance > this.NEAR)){
-				//System.out.println("far and far");
+			if ((b.getCondition().type.equals("far")) && (Math.abs(fighter2.position - fighter1.position) > this.NEAR)){				
 				return true;
 			}	
-			else {
-				//System.out.println("condition not met");
+			else {				
 				return false;				
-			}	
+			}
+		//return true;
 	}
 	
 	private BehaviourItem generateMove(Fighter fighter){
 		
 		randomChoice = this.generator.nextInt(fighter.b.getBehaviourItems().size());		
 		BehaviourItem newMove = fighter.b.getBehaviourItems().get(randomChoice);
+		
+		//Test
+		/*System.out.println("[MOVE_GENERATOR (Move)] " + newMove.left.choice1.choiceName);
+		if (newMove.left.choice2 != null)
+			System.out.println("[MOVE_GENERATOR (Move)] " + newMove.left.choice2.choiceName);
+		System.out.println("[MOVE_GENERATOR (Action)] " + newMove.right.choice1.choiceName);
+		if (newMove.right.choice2 != null)
+			System.out.println("[MOVE_GENERATOR (Action)] " + newMove.right.choice2.choiceName);
+		System.out.println("--------------------------------------------------");*/
+				
+		
 		return newMove;
 		
 	}
@@ -82,10 +91,23 @@ public class GameState implements CorrectValues{
 				
 		//Check move
 		BehaviourItem newMove = generateMove(fighter); 
+		
+
+		//Test
+		System.out.println("[MOVE_GENERATOR (Move)] " + newMove.left.choice1.choiceName);
+		if (newMove.left.choice2 != null)
+			System.out.println("[MOVE_GENERATOR (Move)] " + newMove.left.choice2.choiceName);
+		System.out.println("[MOVE_GENERATOR (Action)] " + newMove.right.choice1.choiceName);
+		if (newMove.right.choice2 != null)
+			System.out.println("[MOVE_GENERATOR (Action)] " + newMove.right.choice2.choiceName);
+		System.out.println("--------------------------------------------------");
+		
+		/* Make sure conditions are met before making a move */
+		
 		while(!isValidMove(newMove)){
-			newMove = generateMove(fighter);
-			//System.out.println("* " + newMove.left.choice1.choiceType);			
+			newMove = generateMove(fighter);						
 		}
+				
 		return newMove;					
 	}
 	
@@ -106,12 +128,16 @@ public class GameState implements CorrectValues{
 				;
 			case 3:
 				distance -= 10;				
+				System.out.println("updateDistance " + choiceType);
 			case 4:
 				distance += 10;
+				System.out.println("updateDistance " + choiceType);
 			case 5:
 				distance -= 3;
+				System.out.println("updateDistance " + choiceType);
 			case 6:
 				distance += 3;
+				System.out.println("updateDistance " + choiceType);
 			default:
 				;						
 		}
@@ -128,25 +154,59 @@ public class GameState implements CorrectValues{
 			case 2:
 				;
 			case 3:
-				if (side == LEFT) 
-					distance -= 10;
-				else
-					distance += 10;
+				if (side == LEFT) { 
+					//distance -= 10;
+					if (fighter1.position <= 80 ) {
+						fighter1.position += 10;
+						System.out.println("updated Position " + fighter1.position);
+					}
+				}	
+				else {
+					//distance += 10;
+					if (fighter2.position >= 25 ){
+						fighter2.position -= 10;					
+						System.out.println("updated Position " + fighter2.position);
+					}
+				}	
+				
 			case 4:
-				if (side == LEFT)
-					distance += 10;
-				else
-					distance -= 10;
+				if (side == LEFT) {
+					//distance += 10;
+					if (fighter1.position >= 25 ) {
+						fighter1.position -= 10;
+						System.out.println("updated Position " + fighter1.position);
+					}
+				}	
+				else {
+					//distance -= 10;			
+					if (fighter2.position <= 80 ){
+						fighter2.position += 10;
+						System.out.println("updated Position " + fighter2.position);
+					}
+				}	
+			/* TO DO: Update here, check limits of fight ring */	
 			case 5:
-				if (side == LEFT)
-					distance -= 3;
-				else
-					distance += 3;
+				if (side == LEFT){									
+					fighter1.position += 3;
+					System.out.println("updated Position " + fighter1.position);
+				}	
+				else{
+					//distance += 3;
+					fighter2.position -= 3;
+					System.out.println("updated Position " + fighter2.position);
+				}	
+				
 			case 6:
-				if (side == LEFT)
-					distance += 3;
-				else
-					distance -= 3;
+				if (side == LEFT){
+					//distance += 3;
+					fighter1.position -= 3;
+					System.out.println("updated Position " + fighter1.position);
+				}	
+				else{
+					//distance -= 3;
+					fighter2.position += 3;
+					System.out.println("updated Position " + fighter2.position);
+				}
 			default:
 				;						
 		}
@@ -157,9 +217,12 @@ public class GameState implements CorrectValues{
 	public void updateDistances(FighterState fighter, Action action, int side){
 	
 		//Update distance & position according to new move, current distance									
-			
+			System.out.println("Player: " + side);
 			/* Move type, one choice */
 			if (action.type == CorrectValues.SINGLE) {
+				
+				System.out.println("[SINGLE]");
+				System.out.println("[Move] " + fighter.getCurrentAction().left.choice1.choiceName);
 				updateDistanceValue(action.choice1.choiceType);	
 				updatePositionValue(action.choice1.choiceType,side);
 				updatePic(fighter, action.flag, action.choice1.choiceType, side);
@@ -168,22 +231,27 @@ public class GameState implements CorrectValues{
 			
 			/* Move type, 2 choices */
 			else {				
+				
+				System.out.println("[CHOICE]");				
 				random01 = generator.nextInt(1);
 				switch(random01){
 				case 0:
 					updateDistanceValue(action.choice1.choiceType);
 					updatePositionValue(action.choice1.choiceType,side);
 					updatePic(fighter, action.flag, action.choice1.choiceType, side);
+					System.out.println("[Move] " + fighter.getCurrentAction().left.choice1.choiceName);
 					
 				case 1:
 					updateDistanceValue(action.choice2.choiceType);
 					updatePositionValue(action.choice2.choiceType,side);
 					updatePic(fighter, action.flag, action.choice2.choiceType, side);
+					System.out.println("[Move] " + fighter.getCurrentAction().left.choice2.choiceName);
 					
 				default:	
 					updateDistanceValue(action.choice1.choiceType);
 					updatePositionValue(action.choice1.choiceType,side);
 					updatePic(fighter, action.flag, action.choice1.choiceType, side);
+					System.out.println("[Move] " + fighter.getCurrentAction().left.choice1.choiceName);
 				}
 			}
 		
@@ -199,6 +267,7 @@ public class GameState implements CorrectValues{
 				case CorrectValues.ATTACK_TYPE:	
 					fighter.setCurrentPic(CorrectValues.attacksPicturesLeft.get(choiceType));
 				}
+				System.out.println("[Left fighter PIC]:" + fighter.getCurrentPic());
 			case RIGHT:
 				switch(flag){
 				case CorrectValues.MOVE_TYPE:
@@ -206,23 +275,22 @@ public class GameState implements CorrectValues{
 				case CorrectValues.ATTACK_TYPE:	
 					fighter.setCurrentPic(CorrectValues.attacksPicturesRight.get(choiceType));
 				}
-				
+				System.out.println("[Right fighter PIC]:" + fighter.getCurrentPic());
+			default:
+				;
 		}
 	}
 	
 	public void fighterTurn(FighterState fighter, int side) {
-				
-		fighter.setCurrentMove(this.getNewMove(fighter));		
-		if (fighter.getCurrentMove().left.isMove()) {
 						
-			updateDistances(fighter, fighter.getCurrentMove().left,side);			
-			updateHealth(fighter.getCurrentMove().right);
-			
+		fighter.setCurrentAction(this.getNewMove(fighter));		
+		if (fighter.getCurrentAction().left.isMove()) {						
+			updateDistances(fighter, fighter.getCurrentAction().left,side);			
+			updateHealth(fighter.getCurrentAction().right);						
 		}
-		else {
-					
-			updateHealth(fighter.getCurrentMove().left);
-			updateDistances(fighter, fighter.getCurrentMove().right, side);
+		else {					
+			updateHealth(fighter.getCurrentAction().left);
+			updateDistances(fighter, fighter.getCurrentAction().right, side);			
 		}
 		
 	}
@@ -230,7 +298,9 @@ public class GameState implements CorrectValues{
 	public void makeGameUpdate() {
 		
 		fighterTurn(fighter1, LEFT);
+		System.out.println("&&&& Updated left");
 		fighterTurn(fighter2, RIGHT);
+		System.out.println("&&&& Updated right");
 				
 	}
 }
