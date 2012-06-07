@@ -42,6 +42,9 @@ public class Game implements Runnable {
         runner = null;
     }
 	
+    /* (non-Javadoc)
+     * @see java.lang.Runnable#run()
+     */
     public void run() {
     	
     	init();
@@ -50,8 +53,9 @@ public class Game implements Runnable {
 
         	
             draw();
-            gs.makeGameUpdate();
-            
+            gs.makeGameUpdate();           
+            draw();
+           
             try {
 
                 Thread.sleep( 20 );
@@ -62,12 +66,16 @@ public class Game implements Runnable {
             }
         }
     }
+    
 	private void drawFighterLeft(){
 		StdDraw.picture(gs.fighter1.position, 30, gs.fighter1.getCurrentPic());
+		System.out.println("[drawFL]" + gs.fighter1.position);
+		System.out.println("[drawFL]" + gs.fighter1.getCurrentPic());
 	}
 	
 	private void drawFighterRight(){
 		StdDraw.picture(gs.fighter2.position, 30, gs.fighter2.getCurrentPic());
+		System.out.println("[drawFR]" + gs.fighter2.position);
 	}
 	
 	private void drawBackground(){
@@ -79,7 +87,7 @@ public class Game implements Runnable {
 		drawBackground();
 		drawFighterLeft();
 		drawFighterRight();
-		StdDraw.show(1000);
+		StdDraw.show(700);
 		
 	}
 	
