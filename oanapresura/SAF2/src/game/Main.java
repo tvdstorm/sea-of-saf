@@ -22,7 +22,7 @@ public class Main{
 		//New game - visual part,drawn according to game state		
 		Game game = new Game(gs);
 		game.start();
-		
+		//System.out.println(gs.fighter1.getHealth() + "    " + gs.fighter2.getHealth());
 	}
 	
 }
