@@ -59,7 +59,7 @@ public class Game implements Runnable {
            
             try {
 
-                Thread.sleep( 200 );
+                Thread.sleep( 100 );
 
             } catch ( InterruptedException e ) {
 
@@ -84,11 +84,17 @@ public class Game implements Runnable {
 		StdDraw.picture(50, 50, "pics/eco_background.png");
 	}
 	
+	private void drawHealth(){
+		StdDraw.setFont(StdDraw.getHealthFont());
+		StdDraw.setPenColor(Color.DARK_GRAY);
+		StdDraw.text(50, 100, "[L HEALTH]: " + gs.fighter1.getHealth() + "    " + "[R HEALTH]: " + gs.fighter2.getHealth());
+	}
 	public void draw(){
 							
 		drawBackground();
 		drawFighterLeft();
 		drawFighterRight();
+		drawHealth();
 		if (!( (gs.fighter1.getHealth() > 0) && (gs.fighter2.getHealth() > 0))){
     		StdDraw.setFont(StdDraw.getDefaultFont());
 			StdDraw.setPenColor(Color.BLUE);			
@@ -100,7 +106,7 @@ public class Game implements Runnable {
     		}
     		runner = null;    		
     	}
-		StdDraw.show(1000);
+		StdDraw.show(800);
 		
 	}
 	

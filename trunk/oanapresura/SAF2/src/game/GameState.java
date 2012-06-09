@@ -6,7 +6,7 @@ import constants.CorrectValues;
 
 public class GameState implements CorrectValues{
 
-	private final int NEAR = 10;
+	private final int NEAR = 12;
 			
 	private final int START_LEFT = 15;
 	private final int START_RIGHT = 90;
@@ -54,16 +54,18 @@ public class GameState implements CorrectValues{
 
 	public boolean isValidMove(BehaviourItem b){
 		
-		if (b.getCondition().type.equals("always"))
+		if (b.getCondition().type.equals("always") || b.getCondition().type.equals("weaker") || 
+				b.getCondition().type.equals("stronger") || b.getCondition().type.equals("muchWeaker")
+					|| b.getCondition().type.equals("muchStronger"))
 			return true;
+		
 		if ((b.getCondition().type.equals("near")) && 
-				( Math.abs(fighter2.position - fighter1.position) <= this.NEAR)){			
+				( Math.abs(fighter2.getPosition() - fighter1.getPosition()) <= this.NEAR)){			
 			return true;
 		}	
-		else
-			
+		else			
 			if ((b.getCondition().type.equals("far")) && 
-					(Math.abs(fighter2.position - fighter1.position) > this.NEAR)){				
+					(Math.abs(fighter2.getPosition() - fighter1.getPosition()) > this.NEAR)){				
 				return true;
 			}	
 			else {				
@@ -99,80 +101,80 @@ public class GameState implements CorrectValues{
 		System.out.println("----------updateHealth----------");				
 		System.out.println("[CHOICE] " + choiceType);
 		System.out.println("[SIDE] " + side);
-		switch (choiceType) {
-		/* punch low */
-		case 0:
-			if (side == LEFT) { 
-				fighter2.setHealth(fighter1.getHealth() - 2);
-				System.out.println("[Health] " + fighter2.getHealth());
-			}	
-			else {
-				fighter1.setHealth(fighter1.getHealth() - 2);
-				System.out.println("[Health] " + fighter1.getHealth());
-			}	
-			break;
-		/* punch high */	
-		case 1:
-			if (side == LEFT) { 
-				fighter2.setHealth(fighter1.getHealth() - 4);
-				System.out.println("[Health] " + fighter2.getHealth());
-			}	
-			else {
-				fighter1.setHealth(fighter1.getHealth() - 4);
-				System.out.println("[Health] " + fighter1.getHealth());
-			}	
-			break;
-		/* kick low */	
-		case 2:
-			if (side == LEFT) { 
-				fighter2.setHealth(fighter1.getHealth() - 3);
-				System.out.println("[Health] " + fighter2.getHealth());
-			}	
-			else {
-				fighter1.setHealth(fighter1.getHealth() - 3);
-				System.out.println("[Health] " + fighter1.getHealth());
-			}	
-			break;
-		/* kick high */	
-		case 3:
-			if (side == LEFT) { 
-				fighter2.setHealth(fighter1.getHealth() - 6);
-				System.out.println("[Health] " + fighter2.getHealth());
-			}	
-			else {
-				fighter1.setHealth(fighter1.getHealth() - 6);
-				System.out.println("[Health] " + fighter1.getHealth());
-			}	
-			break;
-		/* block low */	
-		case 4:
-			if (side == LEFT) {
-				fighter1.setHealth(fighter1.getHealth() + 1);
-				System.out.println("[Health] " + fighter1.getHealth());
+		if (Math.abs(fighter1.getPosition() - fighter2.getPosition()) <= NEAR)
+			switch (choiceType) {
+			/* punch low */
+			case 0:			
+				if (side == LEFT) { 
+					fighter2.setHealth(fighter1.getHealth() - 2);
+					System.out.println("[Health] " + fighter2.getHealth());
+				}	
+				else {
+					fighter1.setHealth(fighter1.getHealth() - 2);
+					System.out.println("[Health] " + fighter1.getHealth());
+				}	
+				break;
+			/* punch high */	
+			case 1:
+				if (side == LEFT) { 
+					fighter2.setHealth(fighter1.getHealth() - 4);
+					System.out.println("[Health] " + fighter2.getHealth());
+				}	
+				else {
+					fighter1.setHealth(fighter1.getHealth() - 4);
+					System.out.println("[Health] " + fighter1.getHealth());
+				}	
+				break;
+			/* kick low */	
+			case 2:
+				if (side == LEFT) { 
+					fighter2.setHealth(fighter1.getHealth() - 3);
+					System.out.println("[Health] " + fighter2.getHealth());
+				}	
+				else {
+					fighter1.setHealth(fighter1.getHealth() - 3);
+					System.out.println("[Health] " + fighter1.getHealth());
+				}	
+				break;
+			/* kick high */	
+			case 3:
+				if (side == LEFT) { 
+					fighter2.setHealth(fighter1.getHealth() - 6);
+					System.out.println("[Health] " + fighter2.getHealth());
+				}	
+				else {
+					fighter1.setHealth(fighter1.getHealth() - 6);
+					System.out.println("[Health] " + fighter1.getHealth());
+				}	
+				break;
+			/* block low */	
+			case 4:
+				if (side == LEFT) {
+					fighter1.setHealth(fighter1.getHealth() + 1);
+					System.out.println("[Health] " + fighter1.getHealth());
+				}
+					
+				else {
+					fighter2.setHealth(fighter1.getHealth() + 1);
+					System.out.println("[Health] " + fighter2.getHealth());
+				}
+					
+				break;
+			/* block high */	
+			case 5:
+				if (side == LEFT){
+					fighter1.setHealth(fighter1.getHealth() + 2);	
+					System.out.println("[Health] " + fighter1.getHealth());
+				}	
+				else{
+					fighter2.setHealth(fighter1.getHealth() + 2);
+					System.out.println("[Health] " + fighter2.getHealth());
+				}	
+				break;
+			
+			default:
+				;				
 			}
-				
-			else {
-				fighter2.setHealth(fighter1.getHealth() + 1);
-				System.out.println("[Health] " + fighter2.getHealth());
-			}
-				
-			break;
-		/* block high */	
-		case 5:
-			if (side == LEFT){
-				fighter1.setHealth(fighter1.getHealth() + 2);	
-				System.out.println("[Health] " + fighter1.getHealth());
-			}	
-			else{
-				fighter2.setHealth(fighter1.getHealth() + 2);
-				System.out.println("[Health] " + fighter2.getHealth());
-			}	
-			break;
-		
-		default:
-			;				
-		}
-		
 	}
 	
 	
@@ -187,56 +189,56 @@ public class GameState implements CorrectValues{
 				break;
 			case 3:
 				if (side == LEFT) { 					
-					if (fighter1.position <= 82 ) {
-						fighter1.position += 8;
+					if (fighter1.getPosition() <= 82 ) {
+						fighter1.setPosition(fighter1.getPosition() + 8);
 						System.out.println("[" + side + "]" + "[3 updated Position] " + fighter1.getPosition());
 					}
 				}	
 				else {					
-					if (fighter2.position >= 23 ){
-						fighter2.position -= 8;					
+					if (fighter2.getPosition() >= 23 ){
+						fighter2.setPosition(fighter2.getPosition() - 8);					
 						System.out.println("[" + side + "]" + "[3 updated Position] " + fighter2.getPosition());
 					}
 				}	
 				break;
 			case 4:
 				if (side == LEFT) {					
-					if (fighter1.position >= 23 ) {
-						fighter1.position -= 8;
+					if (fighter1.getPosition() >= 23 ) {
+						fighter1.setPosition(fighter1.getPosition() - 8);
 						System.out.println("[" + side + "]" + "[4 updated Position] " + fighter1.getPosition());
 					}
 				}	
 				else {							
-					if (fighter2.position <= 82 ){
-						fighter2.position += 8;
+					if (fighter2.getPosition() <= 82 ){
+						fighter2.setPosition(fighter2.getPosition() + 8);
 						System.out.println("[" + side + "]" + "[4 updated Position] " + fighter2.getPosition());
 					}
 				}	
 				break;
 			case 5:
 				if (side == LEFT){
-					if (fighter1.position <= 88){
-						fighter1.position += 2;
+					if (fighter1.getPosition() <= 88){
+						fighter1.setPosition(fighter1.getPosition() + 2);
 						System.out.println("[" + side + "]" + "[5 updated Position] " + fighter1.getPosition());
 					}	
 				}	
 				else{
-					if (fighter2.position >= 17){
-						fighter2.position -= 2;
+					if (fighter2.getPosition() >= 17){
+						fighter2.setPosition(fighter2.getPosition() - 2);
 						System.out.println("[" + side + "]" + "[5 updated Position] " + fighter2.getPosition());
 					}
 				}	
 				break;
 			case 6:
 				if (side == LEFT){
-					if (fighter1.position >= 17){
-						fighter1.position -= 2;
+					if (fighter1.getPosition() >= 17){
+						fighter1.setPosition(fighter1.getPosition() - 2);
 						System.out.println("[" + side + "]" + "[6 updated Position] " + fighter1.getPosition());
 					}
 				}	
 				else{
-					if (fighter2.position <= 88){
-						fighter2.position += 2;
+					if (fighter2.getPosition() <= 88){
+						fighter2.setPosition(fighter2.getPosition() + 2);
 						System.out.println("[" + side + "]" + "[6 updated Position] " + fighter2.getPosition());
 					}
 				}
