@@ -4,17 +4,15 @@ import constants.CorrectValues;
 import ast.*;
 
 public class FighterState extends Fighter{
-
-		
-		private final int DEFAULT = 5;
-		private final int HEALTH = 40;
+				
+		private final int HEALTH = 20;
 		private int health;
 
 
 
 		public BehaviourItem currentAction;	
 
-		public int position;
+		private int position;
 		public String currentPic;
 		
 

@@ -10,7 +10,7 @@ JackieChan{
  always[walkTowards blockHigh]
 }
 
-chicken
+Chicken
 {
   kickReach  = 9
   punchReach = 1

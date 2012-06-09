@@ -106,11 +106,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
     // default font
     private static final Font DEFAULT_FONT = new Font("SansSerif", Font.BOLD, 50);
-
-    public static Font getDefaultFont() {
-		return DEFAULT_FONT;
-	}
-
+    private static final Font HEALTH_FONT = new Font("SansSerif", Font.BOLD, 30);
+  
 
 
 
@@ -166,6 +163,13 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
         height = h;
         init();
     }
+    public static Font getHealthFont() {
+  		return HEALTH_FONT;
+  	}
+
+  	public static Font getDefaultFont() {
+  		return DEFAULT_FONT;
+  	}
 
     // init
     public static void init() {
