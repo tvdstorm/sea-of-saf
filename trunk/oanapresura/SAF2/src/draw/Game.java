@@ -51,13 +51,15 @@ public class Game implements Runnable {
     	draw();
 
         while (runner != null) {
-        	            
-            gs.makeGameUpdate();           
+        	  
+        	
+            gs.makeGameUpdate();   
+            System.out.println(gs.fighter1.getHealth() + "    " + gs.fighter2.getHealth());
             draw();
            
             try {
 
-                Thread.sleep( 1000 );
+                Thread.sleep( 200 );
 
             } catch ( InterruptedException e ) {
 
@@ -87,6 +89,17 @@ public class Game implements Runnable {
 		drawBackground();
 		drawFighterLeft();
 		drawFighterRight();
+		if (!( (gs.fighter1.getHealth() > 0) && (gs.fighter2.getHealth() > 0))){
+    		StdDraw.setFont(StdDraw.getDefaultFont());
+			StdDraw.setPenColor(Color.BLUE);			
+    		if (gs.fighter1.getHealth() > 0){        			
+    			StdDraw.text(50, 60, "Left side wins!");
+    		}	
+    		else{
+    			StdDraw.text(50, 60, "Right side wins!");
+    		}
+    		runner = null;    		
+    	}
 		StdDraw.show(1000);
 		
 	}

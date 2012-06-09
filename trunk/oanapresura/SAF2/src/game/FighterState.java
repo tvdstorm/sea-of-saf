@@ -7,8 +7,11 @@ public class FighterState extends Fighter{
 
 		
 		private final int DEFAULT = 5;
-		private final int HEALTH = 10;
+		private final int HEALTH = 40;
 		private int health;
+
+
+
 		public BehaviourItem currentAction;	
 
 		public int position;
@@ -19,9 +22,17 @@ public class FighterState extends Fighter{
 		public FighterState(Bot bot, int position){
 			
 			super(bot);			
-			this.health = HEALTH;
+			this.setHealth(HEALTH);
 			this.position = position;
 			
+		}
+		
+		public int getHealth() {
+			return health;
+		}
+
+		public void setHealth(int health) {
+			this.health = health;
 		}
 		
 		public int getPosition() {
@@ -38,7 +49,6 @@ public class FighterState extends Fighter{
 
 		public void setCurrentPic(String currentPic) {
 			this.currentPic = currentPic;
-			//System.out.println("[Fighter] Changed pic: " + currentPic);
 		}
 
 		public BehaviourItem getCurrentAction() {
