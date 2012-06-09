@@ -16,11 +16,6 @@ public class Main{
 		FighterGrammar fg = new FighterGrammar();
 		fg.run();
 		
-		/*
-		 * Fighter f1 = new Fighter(fg.saf.getBot1());
-		 * Fighter f2 = new Fighter(fg.saf.getBot2());
-		 */		
-		
 		//Game state according to fighter states
 		GameState gs = new GameState(fg.saf.getBot1(),fg.saf.getBot2());
 

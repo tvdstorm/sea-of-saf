@@ -48,17 +48,16 @@ public class Game implements Runnable {
     public void run() {
     	
     	init();
+    	draw();
 
         while (runner != null) {
-
-        	
-            draw();
+        	            
             gs.makeGameUpdate();           
             draw();
            
             try {
 
-                Thread.sleep( 20 );
+                Thread.sleep( 1000 );
 
             } catch ( InterruptedException e ) {
 
@@ -68,14 +67,15 @@ public class Game implements Runnable {
     }
     
 	private void drawFighterLeft(){
-		StdDraw.picture(gs.fighter1.position, 30, gs.fighter1.getCurrentPic());
-		System.out.println("[drawFL]" + gs.fighter1.position);
-		System.out.println("[drawFL]" + gs.fighter1.getCurrentPic());
+		StdDraw.picture(gs.fighter1.getPosition(), 30, gs.fighter1.getCurrentPic());
+		System.out.println("[drawFL]" + gs.fighter1.getPosition());
+		System.out.println("[drawFL]" + gs.fighter1.getCurrentPic());		
 	}
 	
 	private void drawFighterRight(){
-		StdDraw.picture(gs.fighter2.position, 30, gs.fighter2.getCurrentPic());
-		System.out.println("[drawFR]" + gs.fighter2.position);
+		StdDraw.picture(gs.fighter2.getPosition(), 30, gs.fighter2.getCurrentPic());
+		System.out.println("[drawFR]" + gs.fighter2.getPosition());
+		System.out.println("[drawFR]" + gs.fighter2.getCurrentPic());		
 	}
 	
 	private void drawBackground(){
@@ -87,7 +87,7 @@ public class Game implements Runnable {
 		drawBackground();
 		drawFighterLeft();
 		drawFighterRight();
-		StdDraw.show(700);
+		StdDraw.show(1000);
 		
 	}
 	
