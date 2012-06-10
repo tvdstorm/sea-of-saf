@@ -2,7 +2,7 @@ package ast;
 
 import visitor.FighterVisitor;
 import constants.*;
-import visitor.*;
+//import visitor.*;
 
 public class Action implements CorrectValues{
 		

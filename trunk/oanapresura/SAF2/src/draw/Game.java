@@ -87,7 +87,8 @@ public class Game implements Runnable {
 	private void drawHealth(){
 		StdDraw.setFont(StdDraw.getHealthFont());
 		StdDraw.setPenColor(Color.DARK_GRAY);
-		StdDraw.text(50, 100, "[L HEALTH]: " + gs.fighter1.getHealth() + "    " + "[R HEALTH]: " + gs.fighter2.getHealth());
+		StdDraw.text(50, 100, 
+				gs.fighter1.getName() + ": " + gs.fighter1.getHealth() + "    " + gs.fighter2.getName() + ": " + gs.fighter2.getHealth());
 	}
 	public void draw(){
 							
@@ -97,7 +98,7 @@ public class Game implements Runnable {
 		drawHealth();
 		if (!( (gs.fighter1.getHealth() > 0) && (gs.fighter2.getHealth() > 0))){
     		StdDraw.setFont(StdDraw.getDefaultFont());
-			StdDraw.setPenColor(Color.BLUE);			
+			StdDraw.setPenColor(Color.YELLOW);			
     		if (gs.fighter1.getHealth() > 0){        			
     			StdDraw.text(50, 60, "Left side wins!");
     		}	

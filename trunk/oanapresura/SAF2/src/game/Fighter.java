@@ -14,11 +14,7 @@ public class Fighter{
 		public Personality p;
 		private Bot bot;
 		public int side;
-		
-	
-
-		
-
+		private String name;
 
 		public Fighter(Bot b)
 		{
@@ -29,13 +25,21 @@ public class Fighter{
 			height = (p.getStrengthValue("punchReach") + p.getStrengthValue("kickReach")) / 2;
 			speed = (int) Math.abs(0.5*(height-weight));
 			health = 10;			
-			
+			name = bot.getName();
 		}
 		
 		public int getSide() {
 			return side;
 		}
 
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
 
 		public void setSide(int side) {
 			this.side = side;
