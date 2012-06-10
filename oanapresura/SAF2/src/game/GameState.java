@@ -6,7 +6,7 @@ import constants.CorrectValues;
 
 public class GameState implements CorrectValues{
 
-	private final int NEAR = 12;
+	private final int NEAR = 14;
 			
 	private final int START_LEFT = 15;
 	private final int START_RIGHT = 90;
@@ -101,80 +101,16 @@ public class GameState implements CorrectValues{
 		System.out.println("----------updateHealth----------");				
 		System.out.println("[CHOICE] " + choiceType);
 		System.out.println("[SIDE] " + side);
+		
 		if (Math.abs(fighter1.getPosition() - fighter2.getPosition()) <= NEAR)
-			switch (choiceType) {
-			/* punch low */
-			case 0:			
-				if (side == LEFT) { 
-					fighter2.setHealth(fighter1.getHealth() - 2);
-					System.out.println("[Health] " + fighter2.getHealth());
-				}	
-				else {
-					fighter1.setHealth(fighter1.getHealth() - 2);
-					System.out.println("[Health] " + fighter1.getHealth());
-				}	
-				break;
-			/* punch high */	
-			case 1:
-				if (side == LEFT) { 
-					fighter2.setHealth(fighter1.getHealth() - 4);
-					System.out.println("[Health] " + fighter2.getHealth());
-				}	
-				else {
-					fighter1.setHealth(fighter1.getHealth() - 4);
-					System.out.println("[Health] " + fighter1.getHealth());
-				}	
-				break;
-			/* kick low */	
-			case 2:
-				if (side == LEFT) { 
-					fighter2.setHealth(fighter1.getHealth() - 3);
-					System.out.println("[Health] " + fighter2.getHealth());
-				}	
-				else {
-					fighter1.setHealth(fighter1.getHealth() - 3);
-					System.out.println("[Health] " + fighter1.getHealth());
-				}	
-				break;
-			/* kick high */	
-			case 3:
-				if (side == LEFT) { 
-					fighter2.setHealth(fighter1.getHealth() - 6);
-					System.out.println("[Health] " + fighter2.getHealth());
-				}	
-				else {
-					fighter1.setHealth(fighter1.getHealth() - 6);
-					System.out.println("[Health] " + fighter1.getHealth());
-				}	
-				break;
-			/* block low */	
-			case 4:
-				if (side == LEFT) {
-					fighter1.setHealth(fighter1.getHealth() + 1);
-					System.out.println("[Health] " + fighter1.getHealth());
-				}
-					
-				else {
-					fighter2.setHealth(fighter1.getHealth() + 1);
-					System.out.println("[Health] " + fighter2.getHealth());
-				}
-					
-				break;
-			/* block high */	
-			case 5:
-				if (side == LEFT){
-					fighter1.setHealth(fighter1.getHealth() + 2);	
-					System.out.println("[Health] " + fighter1.getHealth());
-				}	
-				else{
-					fighter2.setHealth(fighter1.getHealth() + 2);
-					System.out.println("[Health] " + fighter2.getHealth());
-				}	
-				break;
-			
-			default:
-				;				
-			}
+			if (side == LEFT) { 
+				fighter2.setHealth(fighter2.getHealth() - fighter1.p.getStrengths().get(choiceType).getValue());
+				System.out.println("[Health] " + fighter2.getHealth());
+			}	
+			else {
+				fighter1.setHealth(fighter1.getHealth() - fighter2.p.getStrengths().get(choiceType).getValue());
+				System.out.println("[Health] " + fighter1.getHealth());
+			}													
 	}
 	
 	
@@ -190,14 +126,16 @@ public class GameState implements CorrectValues{
 			case 3:
 				if (side == LEFT) { 					
 					if (fighter1.getPosition() <= 82 ) {
-						fighter1.setPosition(fighter1.getPosition() + 8);
-						System.out.println("[" + side + "]" + "[3 updated Position] " + fighter1.getPosition());
+						if (fighter1.getPosition() + 8 <= fighter2.getPosition())
+							fighter1.setPosition(fighter1.getPosition() + 8);
+						//System.out.println("[" + side + "]" + "[3 updated Position] " + fighter1.getPosition());
 					}
 				}	
 				else {					
 					if (fighter2.getPosition() >= 23 ){
-						fighter2.setPosition(fighter2.getPosition() - 8);					
-						System.out.println("[" + side + "]" + "[3 updated Position] " + fighter2.getPosition());
+						if (fighter2.getPosition() - 8 >= fighter1.getPosition())
+							fighter2.setPosition(fighter2.getPosition() - 8);					
+						//System.out.println("[" + side + "]" + "[3 updated Position] " + fighter2.getPosition());
 					}
 				}	
 				break;
@@ -205,27 +143,29 @@ public class GameState implements CorrectValues{
 				if (side == LEFT) {					
 					if (fighter1.getPosition() >= 23 ) {
 						fighter1.setPosition(fighter1.getPosition() - 8);
-						System.out.println("[" + side + "]" + "[4 updated Position] " + fighter1.getPosition());
+						//System.out.println("[" + side + "]" + "[4 updated Position] " + fighter1.getPosition());
 					}
 				}	
 				else {							
 					if (fighter2.getPosition() <= 82 ){
 						fighter2.setPosition(fighter2.getPosition() + 8);
-						System.out.println("[" + side + "]" + "[4 updated Position] " + fighter2.getPosition());
+						//System.out.println("[" + side + "]" + "[4 updated Position] " + fighter2.getPosition());
 					}
 				}	
 				break;
 			case 5:
 				if (side == LEFT){
 					if (fighter1.getPosition() <= 88){
-						fighter1.setPosition(fighter1.getPosition() + 2);
-						System.out.println("[" + side + "]" + "[5 updated Position] " + fighter1.getPosition());
+						if (fighter1.getPosition() + 2 <= fighter2.getPosition())
+							fighter1.setPosition(fighter1.getPosition() + 2);
+						//System.out.println("[" + side + "]" + "[5 updated Position] " + fighter1.getPosition());
 					}	
 				}	
 				else{
 					if (fighter2.getPosition() >= 17){
-						fighter2.setPosition(fighter2.getPosition() - 2);
-						System.out.println("[" + side + "]" + "[5 updated Position] " + fighter2.getPosition());
+						if (fighter2.getPosition() - 2 >= fighter1.getPosition())
+							fighter2.setPosition(fighter2.getPosition() - 2);
+						//System.out.println("[" + side + "]" + "[5 updated Position] " + fighter2.getPosition());
 					}
 				}	
 				break;
@@ -233,13 +173,13 @@ public class GameState implements CorrectValues{
 				if (side == LEFT){
 					if (fighter1.getPosition() >= 17){
 						fighter1.setPosition(fighter1.getPosition() - 2);
-						System.out.println("[" + side + "]" + "[6 updated Position] " + fighter1.getPosition());
+						//System.out.println("[" + side + "]" + "[6 updated Position] " + fighter1.getPosition());
 					}
 				}	
 				else{
 					if (fighter2.getPosition() <= 88){
 						fighter2.setPosition(fighter2.getPosition() + 2);
-						System.out.println("[" + side + "]" + "[6 updated Position] " + fighter2.getPosition());
+						//System.out.println("[" + side + "]" + "[6 updated Position] " + fighter2.getPosition());
 					}
 				}
 				break;
@@ -257,60 +197,59 @@ public class GameState implements CorrectValues{
 			/* Move type, one choice */
 			if (action.type == CorrectValues.SINGLE) {
 				
-				System.out.println("[SINGLE]");
+				//System.out.println("[SINGLE]");
 				updatePositionValue(action.choice1.choiceType,side);
 				updatePic(fighter, action.flag, action.choice1.choiceType, side);
-				updateHealth(action.choice1.choiceType,side);
+				if (action.flag == 1)
+					updateHealth(action.choice1.choiceType,side);
+				System.out.println("[*Action] " + action.choice1.choiceName);
 			}
 			
 			/* Move type, 2 choices */
 			else {				
 				
-				System.out.println("[CHOICE]");				
+				//System.out.println("[CHOICE]");				
 				random01 = generator.nextInt(1);
 				switch(random01){
 				case 0:
 					updatePositionValue(action.choice1.choiceType,side);
 					updatePic(fighter, action.flag, action.choice1.choiceType, side);
-					updateHealth(action.choice1.choiceType,side);
-					System.out.println("[*Move] " + fighter.getCurrentAction().left.choice1.choiceName);
+					if (action.isAttack())
+						updateHealth(action.choice1.choiceType,side);
+					System.out.println("[*Action] " + action.choice1.choiceName);
 					break;
 					
 				case 1:					
 					updatePositionValue(action.choice2.choiceType,side);
 					updatePic(fighter, action.flag, action.choice2.choiceType, side);
-					updateHealth(action.choice2.choiceType,side);
-					System.out.println("[**Move] " + fighter.getCurrentAction().left.choice2.choiceName);
+					if (action.isAttack())
+						updateHealth(action.choice2.choiceType,side);
+					System.out.println("[**Action] " + action.choice2.choiceName);
 					break;
 					
 				default:						
 					updatePositionValue(action.choice1.choiceType,side);
 					updatePic(fighter, action.flag, action.choice1.choiceType, side);
-					updateHealth(action.choice1.choiceType,side);
-					System.out.println("[Move] " + fighter.getCurrentAction().left.choice1.choiceName);
+					if (action.isAttack())
+						updateHealth(action.choice1.choiceType,side);
+					System.out.println("[*Action] " + action.choice1.choiceName);
 					break;
 				}
 			}
 		
 	}
 	
-	public void updatePic(FighterState fighter, int flag, int choiceType, int side) {
-		
-		/*System.out.println("----------updatePic----------");
-		System.out.println("[Fighter(W)] " + fighter.getWeight());
-		System.out.println("[FLAG] " + flag);
-		System.out.println("[CHOICE] " + choiceType);
-		System.out.println("[SIDE] " + side);*/
+	public void updatePic(FighterState fighter, int flag, int choiceType, int side) {			
 		
 		switch(side){
 			case LEFT:
 				switch(flag){
 				case CorrectValues.MOVE_TYPE:
 					fighter.setCurrentPic(CorrectValues.movesPicturesLeft.get(choiceType));					
-					System.out.println("[Fighter Left] Changed pic: " + CorrectValues.movesPicturesLeft.get(choiceType));
+					//System.out.println("[Fighter Left] Changed pic: " + CorrectValues.movesPicturesLeft.get(choiceType));
 				case CorrectValues.ATTACK_TYPE:	
 					fighter.setCurrentPic(CorrectValues.attacksPicturesLeft.get(choiceType));
-					System.out.println("[Fighter Left] Changed pic: " + CorrectValues.attacksPicturesLeft.get(choiceType));
+					//System.out.println("[Fighter Left] Changed pic: " + CorrectValues.attacksPicturesLeft.get(choiceType));
 				}				
 				break;
 				
@@ -318,10 +257,10 @@ public class GameState implements CorrectValues{
 				switch(flag){
 				case CorrectValues.MOVE_TYPE:
 					fighter.setCurrentPic(CorrectValues.movesPicturesRight.get(choiceType));
-					System.out.println("[Fighter Right] Changed pic: " + CorrectValues.movesPicturesRight.get(choiceType));
+					//System.out.println("[Fighter Right] Changed pic: " + CorrectValues.movesPicturesRight.get(choiceType));
 				case CorrectValues.ATTACK_TYPE:	
 					fighter.setCurrentPic(CorrectValues.attacksPicturesRight.get(choiceType));
-					System.out.println("[Fighter Right] Changed pic: " + CorrectValues.attacksPicturesRight.get(choiceType));
+					//System.out.println("[Fighter Right] Changed pic: " + CorrectValues.attacksPicturesRight.get(choiceType));
 				}				
 				break;
 				
@@ -332,13 +271,9 @@ public class GameState implements CorrectValues{
 	
 	public void fighterTurn(FighterState fighter, int side) {
 						
-		fighter.setCurrentAction(this.getNewMove(fighter));		
-		if (fighter.getCurrentAction().left.isMove()) {						
-			updateGameValues(fighter, fighter.getCurrentAction().left,side);												
-		}
-		else {								
-			updateGameValues(fighter, fighter.getCurrentAction().right, side);			
-		}
+		fighter.setCurrentAction(this.getNewMove(fighter));				
+		updateGameValues(fighter, fighter.getCurrentAction().left,side);		
+		updateGameValues(fighter, fighter.getCurrentAction().right,side);
 		
 	}
 	
