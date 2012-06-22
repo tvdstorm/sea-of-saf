@@ -1,4 +1,4 @@
-JackieChan{
+Jeroen{
  kickPower = 7
  punchPower = 5
  kickReach = 3
@@ -10,7 +10,7 @@ JackieChan{
  always[walkTowards blockHigh]
 }
 
-Chicken
+Dusica
 {
   kickReach  = 9
   punchReach = 1

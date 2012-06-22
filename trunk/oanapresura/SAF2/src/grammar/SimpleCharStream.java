@@ -242,7 +242,7 @@ public class SimpleCharStream
   }
 
 /** Backup a number of characters. */
-  static public void backup(int amount) {
+  public static void backup(int amount) {
 
     inBuf += amount;
     if ((bufpos -= amount) < 0)

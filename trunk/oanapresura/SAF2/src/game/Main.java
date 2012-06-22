@@ -1,12 +1,7 @@
 package game;
 
-import java.awt.*;
-
-import java.util.*;
-import java.applet.*;
-import java.net.*;
-import grammar.*;
-import draw.*;
+import grammar.FighterGrammar;
+import draw.Game;
 
 
 public class Main{
@@ -14,15 +9,16 @@ public class Main{
 	public static void main(String[] args) {
 		
 		FighterGrammar fg = new FighterGrammar();
-		fg.run();
+		int result = fg.run();
 		
-		//Game state according to fighter states
-		GameState gs = new GameState(fg.saf.getBot1(),fg.saf.getBot2());
-
-		//New game - visual part,drawn according to game state		
-		Game game = new Game(gs);
-		game.start();
-		//System.out.println(gs.fighter1.getHealth() + "    " + gs.fighter2.getHealth());
+		if (result == 0){
+			/*Game state according to fighter states*/
+			GameState gs = new GameState(fg.getSaf().getBot1(),fg.getSaf().getBot2());
+	
+			/*New game - visual part,drawn according to game state*/		
+			Game game = new Game(gs);
+			game.start();
+		}
 	}
 	
 }

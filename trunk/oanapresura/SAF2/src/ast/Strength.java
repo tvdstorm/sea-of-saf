@@ -16,14 +16,6 @@ public class Strength implements CorrectValues{
 		this.name = name;
 		this.value = value;
 	}
-	
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
 
 	public void setStrengthName(String name){
 		this.name = name;

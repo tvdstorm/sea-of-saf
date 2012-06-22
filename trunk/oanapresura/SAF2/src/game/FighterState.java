@@ -1,61 +1,56 @@
 package game;
 
-import constants.CorrectValues;
-import ast.*;
+import ast.BehaviourItem;
+import ast.Bot;
 
-public class FighterState extends Fighter{
-				
-		private final int HEALTH = 20;
-		private int health;
+public class FighterState extends Fighter {
 
+	private final int HEALTH = 40;
+	private int health;
 
+	private BehaviourItem currentAction;
 
-		public BehaviourItem currentAction;	
+	private int position;
+	private String currentPic;
 
-		private int position;
-		public String currentPic;
-		
+	public FighterState(Bot bot, int position) {
 
-		
-		public FighterState(Bot bot, int position){
-			
-			super(bot);			
-			this.setHealth(HEALTH);
-			this.position = position;
-			
-		}
-		
-		public int getHealth() {
-			return health;
-		}
+		super(bot);
+		this.setHealth(HEALTH);
+		this.position = position;
 
-		public void setHealth(int health) {
-			this.health = health;
-		}
-		
-		public int getPosition() {
-			return position;
-		}
+	}
 
-		public void setPosition(int position) {
-			this.position = position;
-		}
+	public int getHealth() {
+		return health;
+	}
 
-		public String getCurrentPic() {
-			return currentPic;
-		}
+	public void setHealth(int health) {
+		this.health = health;
+	}
 
-		public void setCurrentPic(String currentPic) {
-			this.currentPic = currentPic;
-		}
+	public int getPosition() {
+		return position;
+	}
 
-		public BehaviourItem getCurrentAction() {
-			return currentAction;
-		}
+	public void setPosition(int position) {
+		this.position = position;
+	}
 
+	public String getCurrentPic() {
+		return currentPic;
+	}
 
-		public void setCurrentAction(BehaviourItem currentAction) {
-			this.currentAction = currentAction;
-		}	
-	 
+	public void setCurrentPic(String currentPic) {
+		this.currentPic = currentPic;
+	}
+
+	public BehaviourItem getCurrentAction() {
+		return currentAction;
+	}
+
+	public void setCurrentAction(BehaviourItem currentAction) {
+		this.currentAction = currentAction;
+	}
+
 }

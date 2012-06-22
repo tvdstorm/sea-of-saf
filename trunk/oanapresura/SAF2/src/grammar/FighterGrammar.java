@@ -9,15 +9,16 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class FighterGrammar implements/*@bgen(jjtree)*/ FighterGrammarTreeConstants,CorrectValues, FighterGrammarConstants {/*@bgen(jjtree)*/
-  protected static JJTFighterGrammarState jjtree = new JJTFighterGrammarState();public SAF saf;
-  public Interpreter i;
-  public VisitorTest vt;
+  protected static JJTFighterGrammarState jjtree = new JJTFighterGrammarState();
+  private SAF saf;
+  private Interpreter i;
+  private VisitorTest vt;
 
   public FighterGrammar(){
   }
 
   //public static void main(String args [])
-  public void run()
+  public int run()
   {
     try{
                 String file = "input.txt";
@@ -33,6 +34,7 @@ public class FighterGrammar implements/*@bgen(jjtree)*/ FighterGrammarTreeConsta
                         System.out.println("[Interpreter]Healthy fighters!");
 
                 System.out.println("[Parser]Done!");
+                return 0;
     }
 
         catch(Exception e)
@@ -41,7 +43,12 @@ public class FighterGrammar implements/*@bgen(jjtree)*/ FighterGrammarTreeConsta
                 System.out.println(e.getMessage());
                 e.printStackTrace();
         }
+    return -1;
   }
+
+public SAF getSaf() {
+	return saf;
+}
 
 /** Root production. */
   static final public SAF Parse() throws ParseException {
