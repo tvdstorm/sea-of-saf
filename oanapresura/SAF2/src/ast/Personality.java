@@ -15,6 +15,10 @@ public class Personality {
 		this.strengths.add(s);
 	}
 	
+	public void addStrength(String name, int value){
+		Strength s = new Strength(name,value);
+		this.strengths.add(s);
+	}
 	public List<Strength> getStrengths(){
 		return this.strengths;
 	}

@@ -1,12 +1,18 @@
 package interpreter;
 
-import ast.*;
+import ast.Action;
+import ast.Behaviour;
+import ast.BehaviourItem;
+import ast.Bot;
+import ast.Condition;
+import ast.Personality;
+import ast.Strength;
 
 
 public class Interpreter{
 	
-	public Bot fighterLeft;
-	public Bot fighterRight;
+	private Bot fighterLeft;
+	private Bot fighterRight;
 	
 	
 	public Interpreter(Bot bot1, Bot bot2){
@@ -37,7 +43,7 @@ public class Interpreter{
 	
 	private boolean testBehaviourItem(BehaviourItem i, Bot b){
 				
-		return ( testCondition(i.getCondition(),b) && testAction(i.left,b) && testAction(i.right,b));
+		return ( testCondition(i.getCondition(),b) && testAction(i.getLeft(),b) && testAction(i.getRight(),b));
 	}
 	
 	private boolean testCondition(Condition c, Bot b){
@@ -51,7 +57,7 @@ public class Interpreter{
 	private boolean testAction(Action a, Bot b){
 		
 		if (!a.isValid()){
-			System.out.println("[Interpreter]ERROR: Action " + a.getChoice().getChoiceType() + " inserted for " + b.getName() + "is not a valid action!");
+			System.out.println("[Interpreter]ERROR: Action " + a.getChoice().getChoiceType() + " inserted for " + b.getName() + " is not a valid action!");
 			return false;
 		}
 		return true;
@@ -60,7 +66,7 @@ public class Interpreter{
 	private boolean testValue(int value, Bot b){
 		
 		if (! (value >= 1 && value <= 10 )){
-			System.out.println("[Interpreter]ERROR: Value " + value + " inserted for " + b.getName() + "strength should be between 1 and 10!");
+			System.out.println("[Interpreter]ERROR: Value " + value + " inserted for " + b.getName() + " strength should be between 1 and 10!");
 			return false;
 		}
 			
@@ -75,7 +81,7 @@ public class Interpreter{
 			System.out.println("[Interpreter]ERROR: " + s.getStrengthName() + " is not a valid SAF strength for fighter " + b.getName() + "!");
 			return false;
 		}	
-		if (!testValue(s.getValue(),b))
+		if (!testValue(s.getStrengthValue(),b))
 			return false;
 		
 		return true;

@@ -1,115 +1,119 @@
 package draw;
-import game.*;
-import java.awt.*;
 
+import game.GameState;
+
+import java.awt.Color;
 
 public class Game implements Runnable {
-	
-	Thread runner = null;
+
+	private Thread runner = null;
 	private GameState gs;
 
-	
 	public Game(GameState gs) {
 		this.gs = gs;
 	}
-	
+
 	private void init() {
+
+		StdDraw.setCanvasSize(800, 450);
+		StdDraw.setXscale(0, 100);
+		StdDraw.setYscale(0, 100);
+	}
+
+	public void start() {
+
+		// user visits the page, create a new thread
+
+		if (runner == null) {
+
+			runner = new Thread(this);
+			runner.start();
+		}
+	}
+
+	@SuppressWarnings("deprecation")
+	public void stop() {
+
+		// user leaves the page, stop the thread
+
+		if (runner != null && runner.isAlive())
+			runner.stop();
+
+		runner = null;
 		
-		StdDraw.setCanvasSize(800,450);
-		StdDraw.setXscale(0,100);
-		StdDraw.setYscale(0,100);
 	}
-	
-    public void start() {
 
-        // user visits the page, create a new thread
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
 
-        if ( runner == null ) {
+	public void run() {
 
-            runner = new Thread( this );
-            runner.start();
-        }
-    }
+		init();
+		draw();
 
+		while (runner != null) {
 
-    public void stop() {
+			gs.makeGameUpdate();
+			draw();
 
-        // user leaves the page, stop the thread
+			try {
 
-        if ( runner != null && runner.isAlive() )
-            runner.stop();
+				Thread.sleep(100);
 
-        runner = null;
-    }
-	
-    /* (non-Javadoc)
-     * @see java.lang.Runnable#run()
-     */
-    public void run() {
-    	
-    	init();
-    	draw();
+			} catch (InterruptedException e) {
 
-        while (runner != null) {
-        	  
-        	
-            gs.makeGameUpdate();   
-            System.out.println(gs.fighter1.getHealth() + "    " + gs.fighter2.getHealth());
-            draw();
-           
-            try {
-
-                Thread.sleep( 100 );
-
-            } catch ( InterruptedException e ) {
-
-                // do nothing
-            }
-        }
-    }
-    
-	private void drawFighterLeft(){
-		StdDraw.picture(gs.fighter1.getPosition(), 30, gs.fighter1.getCurrentPic());
-		System.out.println("[drawFL]" + gs.fighter1.getPosition());
-		System.out.println("[drawFL]" + gs.fighter1.getCurrentPic());		
+				// do nothing
+			}
+		}
 	}
-	
-	private void drawFighterRight(){
-		StdDraw.picture(gs.fighter2.getPosition(), 30, gs.fighter2.getCurrentPic());
-		System.out.println("[drawFR]" + gs.fighter2.getPosition());
-		System.out.println("[drawFR]" + gs.fighter2.getCurrentPic());		
+
+	private void drawFighterLeft() {
+		StdDraw.picture(gs.getFighter1().getPosition(), 30, gs.getFighter1()
+				.getCurrentPic());
 	}
-	
-	private void drawBackground(){
+
+	private void drawFighterRight() {
+		StdDraw.picture(gs.getFighter2().getPosition(), 30, gs.getFighter2()
+				.getCurrentPic());
+
+	}
+
+	private void drawBackground() {
 		StdDraw.picture(50, 50, "pics/eco_background.png");
 	}
-	
-	private void drawHealth(){
+
+	private void drawHealth() {
 		StdDraw.setFont(StdDraw.getHealthFont());
 		StdDraw.setPenColor(Color.DARK_GRAY);
-		StdDraw.text(50, 100, 
-				gs.fighter1.getName() + ": " + gs.fighter1.getHealth() + "    " + gs.fighter2.getName() + ": " + gs.fighter2.getHealth());
+		StdDraw.text(50, 100, gs.getFighter1().getName() + ": "
+				+ gs.getFighter1().getHealth() + "    "
+				+ gs.getFighter2().getName() + ": "
+				+ gs.getFighter2().getHealth());
 	}
-	public void draw(){
-							
+
+	public void draw() {
+
 		drawBackground();
 		drawFighterLeft();
 		drawFighterRight();
 		drawHealth();
-		if (!( (gs.fighter1.getHealth() > 0) && (gs.fighter2.getHealth() > 0))){
-    		StdDraw.setFont(StdDraw.getDefaultFont());
-			StdDraw.setPenColor(Color.YELLOW);			
-    		if (gs.fighter1.getHealth() > 0){        			
-    			StdDraw.text(50, 60, "Left side wins!");
-    		}	
-    		else{
-    			StdDraw.text(50, 60, "Right side wins!");
-    		}
-    		runner = null;    		
-    	}
+		if (!((gs.getFighter1().getHealth() > 0) && (gs.getFighter2()
+				.getHealth() > 0))) {
+			StdDraw.setFont(StdDraw.getDefaultFont());
+			StdDraw.setPenColor(Color.YELLOW);
+			if (gs.getFighter1().getHealth() > 0) {
+				StdDraw.text(50, 60, "Left side wins!");
+			} else {
+				StdDraw.text(50, 60, "Right side wins!");
+			}
+			System.out.println("*****GAME OVER*****");
+			runner = null;
+		}
 		StdDraw.show(800);
-		
+
 	}
-	
-	
+
 }
