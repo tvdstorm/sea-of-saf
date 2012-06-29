@@ -1,7 +1,7 @@
 package util;
 
 import java.util.ArrayList;
-
+import model.Action;
 import model.Characteristic;
 import model.ConditionType;
 import model.DefaultValues;
@@ -21,17 +21,14 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 		if ( (characteristic.getValue() >= LOWEST_RANGE) && (characteristic.getValue() <= HIGHEST_RANGE))return true;
 		else return false;
 	}
-	
 	public ArrayList<Alert> getAlerts(){
 		return this.alerts;
 	}
-	
 	//Reconsider this use of Class
-	private boolean checkSameActionType(Class a1, Class a2){
+	private boolean checkSameActionType(Class<? extends Action> a1, Class<? extends Action> a2){
 		if(a1.equals(a2)){return true;}
 		else{return false;}
 	}
-	
 	@Override
 	public void visit(Characteristic characteristic) {	
 		if (util.isIn(characteristic.getNameCharacteristic(), CHARACTERISTICS)){}
@@ -39,7 +36,6 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 		if (correctRange(characteristic)) {}
 		else{this.alerts.add(new Error(characteristic.toString() + " Incorrect characteristic range"));}
 	}
-	
 	@Override
 	public void visit(Behaviour behaviour) {
 		behaviour.getCondition().accept(this);
@@ -49,7 +45,6 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 			this.alerts.add(new Warning(behaviour.toString() + " Incorrect behaviour configuration (same type)" + behaviour.getMoveAction().getClass()+ " and " + behaviour.getFightAction().getClass()));
 		}	
 	}
-	
 	@Override
 	public void visit(ConditionType conditionType) {	
 		if (util.isIn(conditionType.getName(), CONDITION_TYPES)){}
@@ -65,13 +60,11 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 		if (util.isIn(moveAction.getName(), MOVE_ACTION_TYPES)){}
 		else{this.alerts.add(new Error(moveAction.toString() + " Incorrect move action type"));}
 	}
-	
 	@Override
 	public void visit(ChooseAction chooseAction) {
 		chooseAction.getAction1().accept(this);
 		chooseAction.getAction2().accept(this);
 	}
-	
 	@Override
 	public void visit(Fighter fighter) {
 		boolean missingAlways = true;
@@ -82,7 +75,6 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 		for (Characteristic characteristic: fighter.getCharacteristics()) {
 			characteristic.accept(this);
 		}
-		
 		if(missingAlways){
 			this.alerts.add(new Error(fighter.getName() + " always behaviour not present"));
 		}

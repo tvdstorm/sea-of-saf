@@ -12,10 +12,9 @@ public class SimpleTest {
 	public void testisInCharacteristic() {
 		String str = "punchPower";
 		String[] charact = {"punchReach", "kickReach", "kickPower", "punchPower"};
-		
+
 		assertTrue(util.isIn(str,charact));
 		assertNotNull(util.isIn(str,charact));
 		assertEquals(true,util.isIn(str,charact));
 	}
-	
 }

@@ -11,15 +11,12 @@ public class Characteristic extends ASTNode{
 		this.nameCharacteristic = nameCharacteristic;
 		this.value = value;
 	}
-
 	public String getNameCharacteristic() {
 		return nameCharacteristic;
 	}
-	
 	public Integer getValue() {
 		return value;
 	}
-	
 	@Override
 	public void accept(Visitor visitor) {
 		visitor.visit(this);

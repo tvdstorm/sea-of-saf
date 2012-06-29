@@ -2,8 +2,7 @@ package model;
 
 import util.Visitor;
 
-public class MoveAction extends SimpleAction{
-	
+public class MoveAction extends SimpleAction{	
 	public MoveAction(String actionName) {
 		super(actionName);
 	}

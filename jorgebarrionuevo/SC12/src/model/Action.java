@@ -5,7 +5,5 @@ public abstract class Action extends ASTNode{
 	
 	public String getName() {
 		return simpleAction;
-	}
-	
-	
+	}	
 }
