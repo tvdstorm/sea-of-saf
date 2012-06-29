@@ -19,18 +19,13 @@ public class FighterCompiler {
 	public Fighter compileFighter(FileInputStream file) throws IOException, RecognitionException{
 		InputStream inputStream = file;
 		ANTLRInputStream input = new ANTLRInputStream(inputStream);
-	    safLexer lexer = new safLexer(input);
-	    CommonTokenStream tokens = new CommonTokenStream(lexer);
-	    safParser parser = new safParser(tokens);
-	    safParser.fighter_return result = parser.fighter();
-	    Tree t = (Tree)result.getTree();
-	    for(int i=0; i < t.getChildCount(); i++){
-	    	System.out.println("Tree child " + i + " : " + t.getChild(i).toString());
-	    }
-	    Fighter fighter = result.fighter;
-	    return fighter;
+		safLexer lexer = new safLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		safParser parser = new safParser(tokens);
+		safParser.fighter_return result = parser.fighter();
+		Tree t = (Tree)result.getTree();
+		for(int i=0; i < t.getChildCount(); i++){System.out.println("Tree child " + i + " : " + t.getChild(i).toString());}
+		Fighter fighter = result.fighter;
+		return fighter;
 	}
-	
-	
-	
 }

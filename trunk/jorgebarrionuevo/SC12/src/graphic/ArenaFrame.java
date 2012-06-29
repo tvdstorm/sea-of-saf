@@ -3,24 +3,16 @@ package graphic;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-
 import graphic.ArenaConfiguration;
-import java.awt.BorderLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
 
 public class ArenaFrame extends JFrame implements ArenaConfiguration{
-
 	private GameGraphicController graphicController;
 	private static final long serialVersionUID = 1L;
 
 	public ArenaFrame(GameGraphicController gc){
 		super();
-		this.graphicController = gc;
+		this.setGraphicController(gc);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle(TITLE); 
 		this.isOpaque();
@@ -34,8 +26,13 @@ public class ArenaFrame extends JFrame implements ArenaConfiguration{
 		this.revalidate();
 		container.add(fighterFrameLeft);
 		this.revalidate();
+		container.setBackground(Color.WHITE);
 		setVisible(true);
-
 	}
-
+	public GameGraphicController getGraphicController() {
+		return graphicController;
+	}
+	public void setGraphicController(GameGraphicController graphicController) {
+		this.graphicController = graphicController;
+	}
 }

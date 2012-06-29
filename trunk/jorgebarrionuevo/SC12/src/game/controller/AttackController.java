@@ -1,16 +1,12 @@
 package game.controller;
 
-
-public class Attack {
-
+public class AttackController {
 	public void blockLow(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		attackingFighterStatus.setActualAction("block_low");
 	}
-
 	public void blockHigh(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		attackingFighterStatus.setActualAction("block_high");
 	}
-
 	public void punchLow(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		if (areConditionsForPunchLow(attackingFighterStatus,waitingFighterStatus))
 		{
@@ -20,7 +16,6 @@ public class Attack {
 			System.out.println(waitingFighterStatus.getFighter().getName() + " energy is now " + waitingFighterStatus.getEnergy() );
 		}
 	}
-
 	public void punchHigh(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		if (areConditionsForPunchHigh(attackingFighterStatus,waitingFighterStatus))
 		{
@@ -30,7 +25,6 @@ public class Attack {
 			System.out.println(waitingFighterStatus.getFighter().getName() + " energy is now " + waitingFighterStatus.getEnergy() );
 		}
 	}
-
 	public void kickLow(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		if (areConditionsForKickLow(attackingFighterStatus,waitingFighterStatus))
 		{
@@ -40,7 +34,6 @@ public class Attack {
 			System.out.println(waitingFighterStatus.getFighter().getName() + " energy is now " + waitingFighterStatus.getEnergy() );
 		}
 	}
-
 	public void kickHigh(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 
 		if (areConditionsForKickHigh(attackingFighterStatus,waitingFighterStatus))
@@ -51,13 +44,11 @@ public class Attack {
 			System.out.println(waitingFighterStatus.getFighter().getName() + " energy is now " + waitingFighterStatus.getEnergy() );
 		}
 	}
-
 	private boolean areConditionsForPunchHigh(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		return (attackingFighterStatus.getDistance()<=attackingFighterStatus.getPunchReach()) 
 				&& (!waitingFighterStatus.isFightActionAvailable("block_high")) 
 				&& (!waitingFighterStatus.isMoveActionAvailable("crouch"));
 	}
-
 	private boolean areConditionsForKickHigh(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		return (attackingFighterStatus.getDistance()<=attackingFighterStatus.getKickReach()) 
 				&& (!waitingFighterStatus.isFightActionAvailable("block_high")) 
@@ -68,7 +59,6 @@ public class Attack {
 		return (attackingFighterStatus.getDistance()<=attackingFighterStatus.getPunchReach()) 
 				&& (!waitingFighterStatus.isFightActionAvailable("block_low"));
 	}
-
 	private boolean areConditionsForKickLow(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus){
 		return (attackingFighterStatus.getDistance()<=attackingFighterStatus.getKickReach()) 
 				&& (!waitingFighterStatus.isFightActionAvailable("block_low")) 
