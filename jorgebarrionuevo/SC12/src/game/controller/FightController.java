@@ -1,11 +1,10 @@
 package game.controller;
 
 import graphic.GameGraphicController;
-
 import java.util.ArrayList;
-
 import model.Behaviour;
 import model.Fighter;
+import util.MainConfiguration;
 
 public class FightController {
 	private FighterStatus fighterStatusLeft;
@@ -13,20 +12,18 @@ public class FightController {
 	private ConditionController conditionCtrl;
 	private AttackController attack;
 	private MoveController move;
-	GameGraphicController graphicController;
+	private GameGraphicController graphicController;
 
 	public FightController(Fighter fighterL, Fighter fighterR) {
-		System.out.println("Creating fighterController");
-		GameGraphicController gc = new GameGraphicController(fighterL.getName(), fighterR.getName());
-		fighterStatusLeft =  new FighterStatus(fighterL, "LEFT", gc);
-		fighterStatusRight =  new FighterStatus(fighterR, "RIGHT", gc);
-
+		graphicController = new GameGraphicController(fighterL.getName(), fighterR.getName());
+		fighterStatusLeft =  new FighterStatus(fighterL, "LEFT", graphicController);
+		fighterStatusRight =  new FighterStatus(fighterR, "RIGHT", graphicController);
 		conditionCtrl = new ConditionController();
 		attack = new AttackController();
 		move = new MoveController();
 	}
-	public void startFight() throws InterruptedException{
-		while(this.fighterStatusLeft.imAlive() && fighterStatusRight.imAlive()){
+	public void startFight(long fightStartTime) throws InterruptedException{
+		while(this.fighterStatusLeft.imAlive() && fighterStatusRight.imAlive() && isBattleOn(fightStartTime)){
 			//attack left
 			this.fight(fighterStatusLeft, fighterStatusRight);
 			Thread.sleep(10);
@@ -34,26 +31,32 @@ public class FightController {
 			if (fighterStatusRight.imAlive()){this.fight(fighterStatusRight, fighterStatusLeft);}
 			Thread.sleep(5); 
 		}		
-		System.out.println("FINAL RESULTS");
-		System.out.println("	" + "And the winner is: " + getWinner());
-		System.out.println("	" + fighterStatusLeft.getFighter().getName() + " energy is: " + fighterStatusLeft.getEnergy());
-		System.out.println("	" + fighterStatusRight.getFighter().getName() + " energy is: " + fighterStatusRight.getEnergy());
+		getWinner();
 	}	
 	private void fight(FighterStatus attackingFighterStatus, FighterStatus waitingFighterStatus){
 		ArrayList<Behaviour> behaviours = conditionCtrl.getActualBehaviours(attackingFighterStatus, waitingFighterStatus);
 		this.doActions(attackingFighterStatus, waitingFighterStatus, behaviours);	
 	}
 	private String getWinner(){
-		if (fighterStatusRight.imAlive()){
-			fighterStatusLeft.setActualAction("death");
+		String winner;
+		if (fighterStatusRight.getEnergy()==fighterStatusLeft.getEnergy()){
+			fighterStatusLeft.setActualAction("win");
 			fighterStatusRight.setActualAction("win");
-			return fighterStatusRight.getFighter().getName();	
+			winner = fighterStatusRight.getFighter().getName() +" and "+ fighterStatusLeft.getFighter().getName();	
 		}
 		else{
-			fighterStatusRight.setActualAction("death");
-			fighterStatusLeft.setActualAction("win");
-			return fighterStatusLeft.getFighter().getName();
+			if (fighterStatusRight.getEnergy()>fighterStatusLeft.getEnergy()){
+				fighterStatusLeft.setActualAction("death");
+				fighterStatusRight.setActualAction("win");
+				winner = fighterStatusRight.getFighter().getName();	
+			}
+			else{
+				fighterStatusRight.setActualAction("death");
+				fighterStatusLeft.setActualAction("win");
+				winner=fighterStatusLeft.getFighter().getName();
+			}
 		}
+		return winner;
 	}
 	private void doActions(FighterStatus attackingFighterStatus,FighterStatus waitingFighterStatus, ArrayList<Behaviour> behaviours){
 		for (int i=0; i<behaviours.size(); i++){ 
@@ -73,5 +76,13 @@ public class FightController {
 			if(behaviours.get(i).getFightAction().getName().equals("kick_low")){attack.kickLow(attackingFighterStatus, waitingFighterStatus);}
 			if(behaviours.get(i).getFightAction().getName().equals("kick_high")){attack.kickHigh(attackingFighterStatus, waitingFighterStatus);}
 		}	
+	}
+	private boolean isBattleOn(long timeBattleStarted){
+		boolean ret= false;
+		long elapsedTime = (System.nanoTime()-timeBattleStarted)/1000000000;
+		if (elapsedTime<=MainConfiguration.BATTLE_DURATION){
+			ret=true;
+		}
+		return ret;
 	}
 }
