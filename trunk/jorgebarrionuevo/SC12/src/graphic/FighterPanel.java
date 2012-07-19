@@ -17,17 +17,16 @@ public class FighterPanel extends JLayeredPane {
 	private static final long serialVersionUID = 1L;
 	private BufferedImage image;
 	int x, y;
-	String direction;
-	JLabel fighterNameLabel; 
-	String fighterName;
-	JPanel nameLabel;
-	JProgressBar statusBar;
+	private String direction;
+	private JLabel fighterNameLabel; 
+	private String fighterName;
+	private JPanel nameLabel;
+	private JProgressBar statusBar;
 	
 	public FighterPanel(String dir, String fighterName) {
 		statusBar = new JProgressBar();
 		nameLabel = new JPanel();
 		fighterNameLabel = new JLabel();
-		
 		y=200;
 		fighterNameLabel.setText(fighterName);
 		statusBar.add(fighterNameLabel, BorderLayout.NORTH);
@@ -44,7 +43,7 @@ public class FighterPanel extends JLayeredPane {
 		add(nameLabel,2);
 		if (dir.equals("LEFT")){
 			setAlignmentX(LEFT_ALIGNMENT);
-			x=200;
+			x=600;
 			direction = "LEFT";
 			statusBar.setBounds(200, 0, 20, 100);
 			nameLabel.setBounds(this.x, this.y, 70, 200);		
@@ -52,10 +51,10 @@ public class FighterPanel extends JLayeredPane {
 		}
 		if (dir.equals("RIGHT")){
 			setAlignmentX(RIGHT_ALIGNMENT);
-			x=400;
+			x=660;
 			direction = "RIGHT";
-			statusBar.setBounds(750, 0, 20, 100);
-			nameLabel.setBounds(this.x, this.y, 70, 200);
+			statusBar.setBounds(1000, 0, 20, 100);
+			nameLabel.setBounds(this.x, this.y, 120, 200);
 			setImage(ArenaConfiguration.relaxedR);
 		}
 	}
@@ -95,6 +94,4 @@ public class FighterPanel extends JLayeredPane {
 	public void updateBar(double energyValue){
 		this.statusBar.setValue((int) energyValue);
 	}
-
 }
-

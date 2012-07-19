@@ -1,7 +1,6 @@
 package game.controller;
 
 import graphic.GameGraphicController;
-
 import java.util.ArrayList;
 import model.Behaviour;
 import model.Fighter;
@@ -14,16 +13,20 @@ public class FighterStatus {
 	protected int distance;
 	private ArrayList<Behaviour> actualBehaviours;
 	private String actualAction;
-	Fighter fighter;
-	GameGraphicController graphicController;
-	
+	private int xBackLimit;
+	private int xForwardLimit;
+	private Fighter fighter;
+	private GameGraphicController graphicController;
+
 	public FighterStatus(Fighter fighter, String direction, GameGraphicController graphicController) {
 		this.fighter = fighter;
 		this.direction = direction;
 		this.energy = 100.0;
 		this.yPosition = 0;
 		if (this.direction.equals("LEFT")) {this.xPosition = 400;}
-		if (this.direction.equals("RIGHT")) {this.xPosition = 500;}
+		if (this.direction.equals("RIGHT")) {this.xPosition = 700;}
+		if (this.direction.equals("LEFT")) {this.xBackLimit =30 ; this.xForwardLimit = 1000;}
+		if (this.direction.equals("RIGHT")) {this.xBackLimit =1000  ; this.xForwardLimit = 30;}
 		this.distance=100;
 		actualBehaviours = new ArrayList<Behaviour>();
 		this.actualAction="stand";
@@ -136,5 +139,30 @@ public class FighterStatus {
 		if (this.direction.equals("LEFT")){graphicController.updateLeftImage(this, actualAction);}
 		if (this.direction.equals("RIGHT")){graphicController.updateRightImage(this, actualAction);}
 	} 
+	public int getxBackLimit() {
+		return xBackLimit;
+	}
+	public void setxBackLimit(int xBackLimit) {
+		this.xBackLimit = xBackLimit;
+	}
+	public int getxForwardLimit() {
+		return xForwardLimit;
+	}
+	public void setxForwardLimit(int xForwardLimit) {
+		this.xForwardLimit = xForwardLimit;
+	}
+	public boolean isBetweenArenaLimits(){
+		boolean ret = false;
+		if (this.direction.equals("LEFT")) {
+			if (this.xPosition> this.xBackLimit && this.xPosition < this.xForwardLimit){
+				ret = true;
+			}
+		}
+		if (this.direction.equals("RIGHT")) {
+			if (this.xPosition< this.xBackLimit && this.xPosition > this.xForwardLimit){
+				ret = true;
+			}
+		}
+		return ret;
+	}
 }
-

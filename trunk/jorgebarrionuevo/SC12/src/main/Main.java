@@ -10,36 +10,29 @@ import alert.*;
 public class Main  {
 	public static void main(String[] args) throws Exception {
 
-		FighterCompiler fc = new FighterCompiler();
+		FighterCompiler fighterCompiler = new FighterCompiler();
 
-		FileInputStream fighterLeftFile = new FileInputStream("D:/Dropbox/Dropbox/Software Construction/workspace/SC12/fighter_definition/chicken.saf");
+		FileInputStream fighterLeftFile = new FileInputStream("D:/Dropbox/Dropbox/Software Construction/workspace/SC12/fighter_definition/skeletor.saf");
 		FileInputStream fighterRightFile = new FileInputStream("D:/Dropbox/Dropbox/Software Construction/workspace/SC12/fighter_definition/heman.saf");
 
-		final Fighter fighterLeft = fc.compileFighter(fighterLeftFile);
-		final Fighter fighterRight = fc.compileFighter(fighterRightFile);
+		final Fighter fighterLeft = fighterCompiler.compileFighter(fighterLeftFile);
+		final Fighter fighterRight = fighterCompiler.compileFighter(fighterRightFile);
 
-		VisitorController vc = new VisitorController();
-		VisitorController vc1 = new VisitorController();
+		VisitorController visitiorControllerLeftFighter = new VisitorController();
+		VisitorController visitorControllerRightFighter = new VisitorController();
 
-		ArrayList<Alert> alert = vc.checker(fighterLeft);
-		ArrayList<Alert> alert1 = vc1.checker(fighterRight);
-
-		for (int i=0; i < alert.size();i++){
-			System.out.println("Alert found: "+alert.get(i).getAlert());
-		}
-
-		for (int i=0; i < alert1.size();i++){
-			System.out.println("Alert found: "+ alert1.get(i).getAlert());
-		}
-		FightController mc = new FightController(fighterLeft, fighterRight);
-
-		try {
+		ArrayList<Alert> alertFighterLeft = visitiorControllerLeftFighter.checker(fighterLeft);
+		ArrayList<Alert> alertFighterRight = visitorControllerRightFighter.checker(fighterRight);
+		
+		AlertProcessor alertProcessor = new AlertProcessor();
+		
+		if(!alertProcessor.isErrorFound(alertFighterLeft) && !alertProcessor.isErrorFound(alertFighterRight)){
+			FightController fightController = new FightController(fighterLeft, fighterRight);
 			long start = System.nanoTime();    
-			mc.startFight();
-			long elapsedTime = System.nanoTime() - start;
-			System.out.println("	" + "Total Fight time : "+ (elapsedTime / 1000000) + " miliseconds");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			fightController.startFight(start);
+		}
+		else{
+			System.out.println("Battle not processed: Errors found");
 		}
 	}
 }

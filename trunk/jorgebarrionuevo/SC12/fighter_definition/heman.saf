@@ -1,8 +1,8 @@
 HeMan {
-  kickReach  = 9
-  punchReach = 1
-  kickPower  = 2
-  punchPower = 10
+  kickReach  = 7
+  punchReach = 7
+  kickPower  = 9
+  punchPower = 9
   far [run_towards kick_low]
   near [stand kick_low]
   always [choose(run_towards walk_towards) punch_low]

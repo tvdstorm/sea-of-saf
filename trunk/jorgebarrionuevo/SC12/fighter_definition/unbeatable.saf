@@ -1,6 +1,6 @@
 Unbeatable {
  punchReach = 9
- punchPower = 100 
+ punchPower = 10 
  even [choose(crouch walk_towards) choose(block_high punch_low)] 
  always [crouch block_low]
 }

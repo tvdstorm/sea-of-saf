@@ -24,7 +24,6 @@ public class TypeCheckingVisitor extends Visitor implements DefaultValues{
 	public ArrayList<Alert> getAlerts(){
 		return this.alerts;
 	}
-	//Reconsider this use of Class
 	private boolean checkSameActionType(Class<? extends Action> a1, Class<? extends Action> a2){
 		if(a1.equals(a2)){return true;}
 		else{return false;}

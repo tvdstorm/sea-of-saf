@@ -1,4 +1,5 @@
 Kicking {
-  kickPower = 10
-  always [walk_towards walk_towards]
+  kickPower  = 5
+  kickReach  = 2
+  always [walk_towards kick_high]
 }

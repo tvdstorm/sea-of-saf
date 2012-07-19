@@ -1,6 +1,6 @@
 Chuck
 {
-  kickReach  = 1
+  kickReach  = 2
   punchReach = 1
   punchPower = 9
   kickPower  = 9
