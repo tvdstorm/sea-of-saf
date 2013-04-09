@@ -3,6 +3,8 @@
  */
 package ast.object;
 
+import ast.fighter.Fighter;
+
 /**
  * {@link ConditionType}'s that describe a condition a {@link Fighter} finds itself in.
  * @author Iwan Flameling

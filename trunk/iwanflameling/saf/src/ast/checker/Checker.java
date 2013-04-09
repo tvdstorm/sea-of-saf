@@ -11,17 +11,20 @@ import ast.condition.And;
 import ast.condition.Condition;
 import ast.condition.Leaf;
 import ast.fighter.Behavior;
+import ast.fighter.Fighter;
 import ast.fighter.FighterProp;
 import ast.fighter.Strength;
-import ast.object.Fighter;
 
 public class Checker extends DelegateVisitor {
 	
 	private List<Message> messages;
 	
-	public static List<Message> Check(Fighter fighter){
+	public static List<Message> Check(List<Fighter> fighters){
 		Checker checker = new Checker();
-		fighter.accept(checker);
+		checker.checkFighterListSize(fighters);
+		for(Fighter fighter : fighters){
+			fighter.accept(checker);
+		}
 		return checker.messages;
 	}
 	
@@ -31,6 +34,12 @@ public class Checker extends DelegateVisitor {
 	
 	private Checker(){
 		this.messages = new ArrayList<Message>();
+	}
+	
+	private void checkFighterListSize(List<Fighter> fighters){
+		if(fighters.size() != 2){
+			addMessage(new Error("Exactly 2 fighters have to be defined"));
+		}
 	}
 	
 	@Override

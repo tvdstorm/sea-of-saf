@@ -3,7 +3,7 @@
  */options{  JDK_VERSION = "1.5";  static = true;}
 PARSER_BEGIN(SAFParser)package parser;
 
-import ast.object.Fighter;
+import ast.fighter.Fighter;
 import ast.condition.*;
 import ast.Printer;
 import ast.action.*;
@@ -69,8 +69,10 @@ public class SAFParser{  public static void main(String args []) throws ParseE
   private static void startParser(SAFParser parser, boolean useSystemIn) throws Error{
       try
       {
-        Fighter fighter = getFighter();
-        System.out.println(Printer.print(fighter));
+        List<Fighter> fighters = getFighters();
+        for(Fighter fighter : fighters){
+            System.out.println(Printer.print(fighter));
+        }
       }
       catch (Exception e)
       {
@@ -96,6 +98,23 @@ TOKEN: /* operators */
 TOKEN :{  < CONSTANT : (< DIGIT >)+ >| < #DIGIT : [ "0"-"9" ] >
 | < ID : (["a"-"z", "A" - "Z", "0"-"9", "_"])+ >
 }
+
+List<Fighter> getFighters():
+{
+    List<Fighter> fighters = new ArrayList<Fighter>();
+    Fighter fighter;
+}
+{
+    (
+        fighter = getFighter()
+        {
+            fighters.add(fighter);
+        }
+    )*
+    {
+        return fighters;
+    }
+}
 
 Fighter getFighter():
 {
