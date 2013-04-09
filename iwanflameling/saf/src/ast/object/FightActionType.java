@@ -3,6 +3,8 @@
  */
 package ast.object;
 
+import ast.fighter.Fighter;
+
 /**
  * Describes a "fight-action" a {@link Fighter} can perform. for example, this could be
  * a kick or a punch.

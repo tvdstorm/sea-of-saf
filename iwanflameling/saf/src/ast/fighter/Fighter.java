@@ -1,13 +1,12 @@
 /**
  * 
  */
-package ast.object;
+package ast.fighter;
 
 import java.util.List;
 
 import ast.ASTNode;
 import ast.Visitor;
-import ast.fighter.FighterProp;
 
 /**
  * Describes a Fighter in the SAF game.

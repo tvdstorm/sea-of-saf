@@ -13,10 +13,19 @@ public abstract class Message extends Throwable {
 		this.node = node;
 	}
 	
+	public Message(String msg){
+		this(msg, null);
+	}
+	
 	@Override
 	public String toString() {
+		String result = null;
 		String superMsg = super.toString();
-		String result = superMsg + ":[" + this.msg + "], " + Printer.print(node);
+		if(node != null){
+			result = superMsg + ":[" + this.msg + "], " + Printer.print(node);
+		} else {
+			result = superMsg + ":[" + this.msg + "]";
+		}
 		return result;
 	}
 }

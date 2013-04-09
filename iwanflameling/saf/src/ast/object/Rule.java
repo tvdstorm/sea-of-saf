@@ -3,6 +3,8 @@
  */
 package ast.object;
 
+import ast.fighter.Fighter;
+
 /**
  * Describes what a {@link Fighter} does in a particular condition the {@link Fighter}
  * finds itself in.

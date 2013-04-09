@@ -5,7 +5,7 @@ import java.util.List;
 import ast.Printer;
 import ast.checker.Checker;
 import ast.checker.Message;
-import ast.object.Fighter;
+import ast.fighter.Fighter;
 import parser.ParseException;
 import parser.SAFParser;
 
@@ -80,11 +80,21 @@ public class Main {
 	  private static void startParser(SAFParser parser, boolean useSystemIn) throws Error{
 	      try
 	      {
-	        Fighter fighter = SAFParser.getFighter();
-	        System.out.println(Printer.print(fighter));
-	        List<Message> messages = Checker.Check(fighter);
+			List<Fighter> fighters = SAFParser.getFighters();
+			for(Fighter fighter : fighters){
+			    System.out.println(Printer.print(fighter));
+			}
+	        List<Message> messages = Checker.Check(fighters);
+	        int numberOfErrors = 0;
 	        for(Message msg: messages){
+	        	if(msg instanceof ast.checker.Error){
+	        		numberOfErrors++;
+	        	}
 	        	System.out.println(msg);
+	        }
+	        if(numberOfErrors > 0){
+	        	String msg = numberOfErrors + " error(s) occured during parsing.";
+	        	throw new Error(msg);
 	        }
 	      }
 	      catch (Exception e)

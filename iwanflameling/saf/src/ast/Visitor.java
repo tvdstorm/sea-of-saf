@@ -6,8 +6,8 @@ import ast.condition.And;
 import ast.condition.Leaf;
 import ast.condition.Or;
 import ast.fighter.Behavior;
+import ast.fighter.Fighter;
 import ast.fighter.Strength;
-import ast.object.Fighter;
 
 /**
  * 
