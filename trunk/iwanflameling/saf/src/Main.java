@@ -1,3 +1,5 @@
+import game.Arena;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
@@ -27,28 +29,36 @@ public class Main {
 	    FileReader input = initFile();
 	    SAFParser parser = null;
 	    boolean useSystemIn = !initSAFParser(parser, input);
-	    launchSAFParser(useSystemIn, parser);
+	    List<Fighter> fighters = launchSAFParser(useSystemIn, parser);
+		if(fighters != null){
+			startFight(fighters);
+		  }
+		else{
+			System.err.println("No fighters available.");
+			}
 	  }
 
-	  private static void launchSAFParser(boolean useSystemIn, SAFParser parser){
-	    if(useSystemIn){
+	  private static List<Fighter> launchSAFParser(boolean useSystemIn, SAFParser parser){
+		  List<Fighter> fighters = null;
+		  if(useSystemIn){
 	        while (true)
 	        {
 	          System.out.print("Enter an expression like \u005c"1+(2+3)*4;\u005c" :");
 	          try{
-	           startParser(parser, true);
+	           fighters = startParser(parser, true);
 	          } catch(Error e){
-	           System.out.println(e);
+	           System.err.println(e);
 	           break;
 	          }
 	        }
 	    } else{
 	        try{
-	            startParser(parser, false);
+	            fighters = startParser(parser, false);
 	        } catch(Error e){
-	            System.out.println(e);
-	            }
+	            System.err.println(e);
+	        }
 	    }
+		  return fighters;
 	  }
 
 	  private static boolean initSAFParser(SAFParser parser, FileReader input){
@@ -77,10 +87,11 @@ public class Main {
 	    return input;
 	  }
 
-	  private static void startParser(SAFParser parser, boolean useSystemIn) throws Error{
-	      try
+	  private static List<Fighter> startParser(SAFParser parser, boolean useSystemIn) throws Error{
+		  List<Fighter> fighters = null;
+		  try
 	      {
-			List<Fighter> fighters = SAFParser.getFighters();
+			fighters = SAFParser.getFighters();
 			for(Fighter fighter : fighters){
 			    System.out.println(Printer.print(fighter));
 			}
@@ -109,6 +120,14 @@ public class Main {
 	        System.out.println("Oops.");
 	        throw e;
 	      }
+		  return fighters;
+	  }
+	  
+	  private static void startFight(List<Fighter> fighters){
+		  Fighter fighterOne = fighters.get(0);
+		  Fighter fighterTwo = fighters.get(1);
+		  Arena arena = new Arena(fighterOne, fighterTwo);
+		  arena.startFight();
 	  }
 
 }
