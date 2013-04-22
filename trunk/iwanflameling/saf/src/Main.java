@@ -1,8 +1,9 @@
-import game.Arena;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
+
+import ccgame.Arena;
 
 import ast.Printer;
 import ast.checker.Checker;
