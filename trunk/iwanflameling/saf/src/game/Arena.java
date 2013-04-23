@@ -1,4 +1,4 @@
-package ast.game;
+package game;
 
 public class Arena {
 	

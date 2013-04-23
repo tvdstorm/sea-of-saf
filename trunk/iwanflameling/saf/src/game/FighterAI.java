@@ -1,4 +1,4 @@
-package ast.game;
+package game;
 
 import java.util.List;
 
