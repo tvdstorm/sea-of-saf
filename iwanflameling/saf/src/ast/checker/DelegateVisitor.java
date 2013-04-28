@@ -4,6 +4,7 @@ import ast.Visitor;
 import ast.action.Choose;
 import ast.action.SimpleAction;
 import ast.condition.And;
+import ast.condition.Condition;
 import ast.condition.Leaf;
 import ast.condition.Or;
 import ast.fighter.Behavior;
@@ -62,7 +63,11 @@ public abstract class DelegateVisitor implements Visitor {
 		for(FighterProp fighterProp : fighter.getFighterProps()){
 			fighterProp.accept(this);
 		}
-
+	}
+	
+	@Override
+	public void visit(Condition condition) {
+		// Condition is an abstract type. The visits should always be of a subclass of Condition.
 	}
 
 }
