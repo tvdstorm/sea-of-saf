@@ -3,6 +3,7 @@ package ast;
 import ast.action.Choose;
 import ast.action.SimpleAction;
 import ast.condition.And;
+import ast.condition.Condition;
 import ast.condition.Leaf;
 import ast.condition.Or;
 import ast.fighter.Behavior;
@@ -23,4 +24,5 @@ public interface Visitor {
 	public void visit(Strength strength);
 	public void visit(Behavior behavior);
 	public void visit(Fighter fighter);
+	public void visit(Condition condition);
 }

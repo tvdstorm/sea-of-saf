@@ -27,6 +27,10 @@ public class Populator extends DelegateVisitor {
 	private boolean flagAddValue;
 	private boolean seperateValue;
 	private Set<String> conditions = new HashSet<String>();
+	private List<String> memList = new ArrayList<String>();
+	private List<List<String>> memory = new ArrayList<List<String>>();
+	private boolean isAnd = false;
+	private Condition rootNode;
 	
 	public Populator(){
 		this.fo = new FighterObject();
@@ -46,24 +50,20 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	public void visit(Behavior behavior){
+		rootNode = behavior.getCondition();
 		behavior.getCondition().accept(this);
 		//fo.behaviors.put(key, value);
 	}
 	
 	@Override
 	public void visit(And and){
-		//yeah baby, siblings in tha house!
-		stack.push(and);
-		// This is gonna be an option that demands
-		// multi-parted conditions.
-		//addToMemlist(and.getLhs()); <----- PICK ME! PICK ME!!
+		isAnd = true;
 		super.visit(and);
 	}
 	
 	@Override
 	public void visit(Or or) {
-		// Siblings in tha house, next condition should
-		// be treated as a new option.
+		isAnd = false;
 		super.visit(or);
 	}
 	
@@ -72,19 +72,53 @@ public class Populator extends DelegateVisitor {
 		String id = leaf.getId();
 		if(conditions.contains(id)){
 			addToMemList(leaf);
+			if(!isAnd){
+				memory.add(memList);
+				memList = new ArrayList<String>();
+				Backtripper bt = new Backtripper(leaf);
+				rootNode.accept(bt);
+			}
+			conditions.remove(leaf.getId());
 		}
 	}
 	
 	private void addToMemList(Leaf leaf){
-		
+		memList.add(leaf.getId());
 	}
 	
-	private void checkForSiblings(){
-		if(stack.isEmpty()){
-			// I don't have siblings.
-		} else {
-			// I have a sibling. Let's check them.
-			Connective conn = stack.pop();
+	
+	private class Backtripper extends DelegateVisitor{
+		
+		private Leaf endNodeChild;
+		private boolean endNode = false;
+		
+		public Backtripper(Leaf endNodeChild){
+			this.endNodeChild = endNodeChild;
 		}
+		
+		@Override
+		public void visit(Or or) {
+			or.getLhs().accept(this);
+			// if this is not the end node, we happily continue visiting.
+			if(!endNode)
+				or.getRhs().accept(this);
+		}
+		
+		@Override
+		public void visit(And and) {
+			and.getLhs().accept(this);
+			and.getRhs().accept(this);
+			//super.visit(and);
+		}
+		
+		@Override
+		public void visit(Leaf leaf) {
+			if(leaf.equals(endNodeChild))
+				endNode = true;
+			else
+				addToMemList(leaf);
+		}
+
 	}
+	
 }
