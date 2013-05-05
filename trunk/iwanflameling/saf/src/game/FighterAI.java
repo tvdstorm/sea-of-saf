@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ast.fighter.Fighter;
@@ -66,11 +67,9 @@ public class FighterAI {
 		return result;
 	}
 	
-	private void pickBehavior(String condition){
-		List<FighterProp> fprops = ast.getFighterProps();
-		for(FighterProp fprop : fprops){
-			// fuck, this is gonna be a pain. I better use a visitor to populate a
-			// "fighter-object" that is better usable then an AST. Work from there on.
+	private void pickBehavior(String... conditions){
+		ArrayList<String> conditionsList = new ArrayList<String>();
+		for(String )
 		}
 	}
 	

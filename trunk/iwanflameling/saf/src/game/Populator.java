@@ -38,9 +38,11 @@ public class Populator extends DelegateVisitor {
 		this.values = new ArrayList<Leaf>();
 	}
 	
-	public void populate(String search1, String search2){
-		this.search1 = search1;
+	public List populate(String search1, String search2){
+		conditions.add(search1);
+		conditions.add(search2);
 		behavior.accept(this);
+		return memory;
 	}
 	
 	@Override
@@ -78,7 +80,7 @@ public class Populator extends DelegateVisitor {
 				Backtripper bt = new Backtripper(leaf);
 				rootNode.accept(bt);
 			}
-			conditions.remove(leaf.getId());
+			//conditions.remove(leaf.getId());
 		}
 	}
 	
@@ -115,8 +117,10 @@ public class Populator extends DelegateVisitor {
 		public void visit(Leaf leaf) {
 			if(leaf.equals(endNodeChild))
 				endNode = true;
-			else
-				addToMemList(leaf);
+			else {
+				if(conditions.contains(leaf))
+					addToMemList(leaf);
+			}
 		}
 
 	}
