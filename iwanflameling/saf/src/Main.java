@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
-import ccgame.Arena;
+import game.Arena;
 
 import ast.Printer;
 import ast.checker.Checker;

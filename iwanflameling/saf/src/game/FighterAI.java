@@ -1,10 +1,10 @@
 package game;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import ast.fighter.Fighter;
-import ast.fighter.FighterProp;
 
 public class FighterAI {
 
@@ -21,10 +21,11 @@ public class FighterAI {
 	}
 	
 	public void setOpponent(FighterAI opponent){
-		this.setOpponent(opponent);
+		this.opponent = (opponent);
 	}
 	
 	public void takeAction(){
+		pickBehavior("far", "much_stronger");
 	}
 	
 	public int getPosition(){
@@ -68,9 +69,13 @@ public class FighterAI {
 	}
 	
 	private void pickBehavior(String... conditions){
-		ArrayList<String> conditionsList = new ArrayList<String>();
-		for(String )
+		Set<String> conditionsSet = new HashSet<String>();
+		for(String condition: conditions) {
+			conditionsSet.add(condition);
 		}
+		Populator pop = new Populator();
+		List<List<String>> result = pop.populate(conditionsSet, this);
+		System.out.println(result);
 	}
 	
 }
