@@ -14,6 +14,7 @@ import ast.condition.Leaf;
 import ast.condition.Or;
 import ast.fighter.Behavior;
 import ast.fighter.Fighter;
+import ast.fighter.FighterProp;
 
 public class Populator extends DelegateVisitor {
 	
@@ -30,6 +31,7 @@ public class Populator extends DelegateVisitor {
 	private List<String> memList = new ArrayList<String>();
 	private List<List<String>> memory = new ArrayList<List<String>>();
 	private boolean isAnd = false;
+	private boolean isRhs = false;
 	private Condition rootNode;
 	
 	public Populator(){
@@ -38,16 +40,17 @@ public class Populator extends DelegateVisitor {
 		this.values = new ArrayList<Leaf>();
 	}
 	
-	public List populate(String search1, String search2){
-		conditions.add(search1);
-		conditions.add(search2);
-		behavior.accept(this);
+	public List<List<String>> populate(Set<String> conditions, FighterAI fighter){
+		this.conditions = conditions;
+		fighter.ast.accept(this);
 		return memory;
 	}
+	
 	
 	@Override
 	public void visit(Fighter fighter) {
 		fo.name = fighter.getName();
+		System.out.println("Name: " + fighter.getName());
 		super.visit(fighter);
 	}
 	
@@ -69,19 +72,63 @@ public class Populator extends DelegateVisitor {
 		super.visit(or);
 	}
 	
+	private void delegate(Connective conn){
+		isRhs = false;
+		conn.getLhs().accept(this);
+		isRhs = true;
+		conn.getRhs().accept(this);
+	}
+	
 	@Override
 	public void visit(Leaf leaf){
 		String id = leaf.getId();
 		if(conditions.contains(id)){
-			addToMemList(leaf);
-			if(!isAnd){
-				memory.add(memList);
-				memList = new ArrayList<String>();
-				Backtripper bt = new Backtripper(leaf);
-				rootNode.accept(bt);
-			}
-			//conditions.remove(leaf.getId());
+			saveLeaf(leaf);
 		}
+	}
+	
+	private void saveLeaf(Leaf leaf){
+		addToMemList(leaf);
+		storeToMemory(leaf);
+	}
+	
+	private void storeToMemory(Leaf leaf){
+		// if this leaf was proceeded by an and-node, than
+		// only store them (and start an new memList)
+		// when the number of leafs is the same
+		// as the number of current conditions.
+		if(isAnd){
+			if(memList.size() == conditions.size()){
+				storeMemList();
+				initEmptyMemList();
+			}
+		}
+		// If this leaf is not proceeded by an and-node than store
+		// the leaf(s) and start a new memList that is populated
+		// with the leafs of all proceeding and-nodes.
+		else{
+			storeMemList();
+			initPopulatedMemList(leaf);
+		}
+	}
+	
+	/**
+	 * Init a new <code>memList</code> from the <code>rootNode</code> all the way
+	 * down to this <code>leaf</code>.
+	 * @param leaf
+	 */
+	private void initPopulatedMemList(Leaf leaf){
+		initEmptyMemList();
+		MemListPopulator bt = new MemListPopulator(leaf);
+		rootNode.accept(bt);
+	}
+	
+	private void initEmptyMemList(){
+		this.memList = new ArrayList<String>();
+	}
+	
+	private void storeMemList(){
+		memory.add(memList);
 	}
 	
 	private void addToMemList(Leaf leaf){
@@ -89,12 +136,12 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	
-	private class Backtripper extends DelegateVisitor{
+	private class MemListPopulator extends DelegateVisitor{
 		
 		private Leaf endNodeChild;
 		private boolean endNode = false;
 		
-		public Backtripper(Leaf endNodeChild){
+		public MemListPopulator(Leaf endNodeChild){
 			this.endNodeChild = endNodeChild;
 		}
 		

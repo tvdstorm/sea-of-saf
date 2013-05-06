@@ -131,4 +131,12 @@ public class Printer implements Visitor {
 		append("]");
 	}
 
+	@Override
+	public void visit(Condition condition) {
+		// I do not expect that this method is called, ever.
+		append("[Condition: ");
+		condition.accept(this);
+		append("]");
+	}
+
 }

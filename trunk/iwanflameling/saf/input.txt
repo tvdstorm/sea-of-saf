@@ -1,10 +1,8 @@
 iwan{
 
-punchReach = 8
-kickPower = 9
 far[run_towards punch_high]
-near or far[choose(stand run_away) kick_high]
-near or far[choose(stand crouch) kick_high]
+near and far[choose(stand run_away) kick_high]
+much_stronger and far[choose(stand run_away) kick_high]
 always[stand kick_low]
 
 }
@@ -15,6 +13,6 @@ punchReach = 8
 kickPower = 9
 far[run_towards punch_high]
 near or far[choose(stand run_away) kick_high]
-near or far[choose(stand crouch) kick_high]
+near and far and much_stronger or stronger[choose(stand crouch) kick_high]
 always[stand kick_low]
 }
