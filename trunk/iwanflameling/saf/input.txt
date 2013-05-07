@@ -2,8 +2,9 @@ iwan{
 
 far[run_towards punch_high]
 near and far[choose(stand run_away) kick_high]
-much_stronger and far[choose(stand run_away) kick_high]
+much_stronger and far or stronger and near[choose(stand run_away) kick_high]
 always[stand kick_low]
+far[stand kick_high]
 
 }
 
