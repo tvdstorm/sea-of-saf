@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -75,7 +76,29 @@ public class FighterAI {
 		}
 		Populator pop = new Populator();
 		List<Set<String>> result = pop.populate(conditionsSet, this);
+		List<Set<String>> bestResult = getBestFittingBehaviors(result, conditionsSet.size());
 		System.out.println(result);
+		System.out.println(bestResult);
+	}
+	
+	private List<Set<String>> getBestFittingBehaviors(List<Set<String>> behaviors, int numberOfDefinedConditions){
+		List<Set<String>> result = null;
+		for(;numberOfDefinedConditions > 0; numberOfDefinedConditions--){
+			result = getSetsWithExactSize(behaviors, numberOfDefinedConditions);
+			if(result != null)
+				break;
+		}
+		return result;
+	}
+	
+	private List<Set<String>> getSetsWithExactSize(List<Set<String>> behaviors, int setSize){
+		List<Set<String>> result = new ArrayList<Set<String>>();
+		for(Set<String> behavior : behaviors){
+			if(behavior.size() == setSize){
+				result.add(behavior);
+			}
+		}
+		return result;
 	}
 	
 }
