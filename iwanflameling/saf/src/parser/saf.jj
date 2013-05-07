@@ -1,268 +1,0 @@
-/**
- * JavaCC template file created by SF JavaCC plugin 1.5.17+ wizard for JavaCC 1.5.0+
- */options{  JDK_VERSION = "1.5";  static = true;}
-PARSER_BEGIN(SAFParser)package parser;
-
-import ast.fighter.Fighter;
-import ast.condition.*;
-import ast.Printer;
-import ast.action.*;
-import ast.fighter.*;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.List;
-import java.util.ArrayList;
-
-public class SAFParser{  public static void main(String args []) throws ParseException  {
-    FileReader input = initFile();
-    SAFParser parser = null;
-    boolean useSystemIn = !initSAFParser(parser, input);    launchSAFParser(useSystemIn, parser);  }
-  
-  private static void launchSAFParser(boolean useSystemIn, SAFParser parser){
-    if(useSystemIn){
-        while (true)
-        {
-          System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
-          try{
-           startParser(parser, true);
-          } catch(Error e){
-           System.out.println(e);
-           break;
-          }
-        }
-    } else{
-        try{
-            startParser(parser, false);
-        } catch(Error e){
-            System.out.println(e);
-            }
-    }
-  }
-  
-  private static boolean initSAFParser(SAFParser parser, FileReader input){
-    boolean result = false;
-    if(input != null){
-        parser = new SAFParser(input);
-        result = true;
-    } else {
-        System.out.println("Defaulting to console-input");
-        parser = new SAFParser(System.in);
-        result = false;
-    }
-    return result;
-  }
-  
-  private static FileReader initFile(){
-    FileReader input;
-    boolean useSystemIn = false;
-    try{
-        input = new FileReader("input.txt");
-        System.out.println("input-file found, using it.");
-    } catch(FileNotFoundException e) {
-        System.out.println("input-file not found: " + e);
-        input = null;
-    }
-    return input;
-  }
-  
-  private static void startParser(SAFParser parser, boolean useSystemIn) throws Error{
-      try
-      {
-        List<Fighter> fighters = getFighters();
-        for(Fighter fighter : fighters){
-            System.out.println(Printer.print(fighter));
-        }
-      }
-      catch (Exception e)
-      {
-        System.out.println("NOK.");
-        System.out.println(e.getMessage());
-        e.printStackTrace();
-        if(useSystemIn) parser.ReInit(System.in);
-      }
-      catch (Error e)
-      {
-        System.out.println("Oops.");
-        throw e;
-      }
-  }
-  }PARSER_END(SAFParser)SKIP :{  " "| "\r"| "\t"| "\n"}
-
-TOKEN: /* operators */
-{
-    < AND : "and" >
-|   < OR : "or" >
-|   < CHOOSE : "choose" >
-}
-TOKEN :{  < CONSTANT : (< DIGIT >)+ >| < #DIGIT : [ "0"-"9" ] >
-| < ID : (["a"-"z", "A" - "Z", "0"-"9", "_"])+ >
-}
-
-List<Fighter> getFighters():
-{
-    List<Fighter> fighters = new ArrayList<Fighter>();
-    Fighter fighter;
-}
-{
-    (
-        fighter = getFighter()
-        {
-            fighters.add(fighter);
-        }
-    )*
-    {
-        return fighters;
-    }
-}
-
-Fighter getFighter():
-{
-    Token t;
-    List<FighterProp> fighterProps;
-}
-{  t = <ID> fighterProps = fighterProps()  {
-    Fighter fighter = new Fighter(t.image, fighterProps);
-    return fighter;  }
-}
-
-List fighterProps():
-{
-    FighterProp fighterProp;
-    List<FighterProp> fighterProps = new ArrayList();
-}
-{
-    "{"
-    (
-        fighterProp = fighterProp()
-        {
-            fighterProps.add(fighterProp);
-        }
-    )*
-    "}"
-    {return fighterProps;}
-}
-
-FighterProp fighterProp():
-{
-    FighterProp result;
-}
-{
-    (
-        LOOKAHEAD(2)
-	    result = strength()
-	    |
-	    result = behavior()
-    )
-    {return result;}
-}
-
-Strength strength():
-{
-    String fightId;
-    int fightPower;
-}
-{
-    fightId = fightId() "=" fightPower = fightPower()
-    {return new Strength(fightId, fightPower);}
-}
-
-Behavior behavior():
-{
-	Condition condition;
-	Action moveAction;
-	Action fightAction;
-}
-{
-	condition = condition()
-	"["
-	   moveAction = action()
-	   fightAction = action()
-	"]"
-	
-	{	    return new Behavior(condition, moveAction, fightAction);	}
-
-}
-
-Condition condition():
-{
-    Condition lhs;
-    Condition rhs;
-    String id;
-}
-{   
-    LOOKAHEAD(2)
-    (id = <ID>.image <OR> rhs = condition())
-    {
-        lhs = new Leaf(id);
-        return new Or(lhs, rhs);
-    }
-    |
-    LOOKAHEAD(2)
-    (id = <ID>.image <AND> rhs = condition())
-    {
-        lhs = new Leaf(id);
-        return new And(lhs, rhs);
-    }
-    |
-    id = <ID>.image
-    {
-        return new Leaf(id);
-    }
-}
-
-Action action():
-{
-    Action a;
-}
-{
-    (LOOKAHEAD(2) (a=choose()) | (a=simpleAction()))
-    {return a;} 
-}
-
-Choose choose():
-{
-    Choose c;
-    SimpleAction s;
-}
-{
-    <CHOOSE> "("
-                {c = new Choose();} 
-                (
-                    s=simpleAction()
-                    {c.addChoice(s);}
-                )+
-              ")"
-              {return c;}
-}
-
-SimpleAction simpleAction():
-{
-    String image;
-}
-{
-    image = <ID>.image
-    {return new SimpleAction(image);}
-}
-
-String fightId():
-{
-    String image;
-}
-{
-    image = <ID>.image
-    {return image;}
-}
-
-int fightPower():
-{
-    String image;
-    int fightPower;
-}
-{
-   image = <CONSTANT>.image
-    {
-       fightPower = Integer.valueOf(image).intValue();
-       return fightPower;
-    }
-}
