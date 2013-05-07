@@ -18,29 +18,17 @@ import ast.fighter.FighterProp;
 
 public class Populator extends DelegateVisitor {
 	
-	private FighterObject fo;
-	private Fighter ast;
-	private Stack<Connective> stack;
-	private String search1;
-	private String search2;
-	private Behavior behavior;
-	private List<Leaf> values;
-	private boolean flagAddValue;
-	private boolean seperateValue;
 	private Set<String> conditions = new HashSet<String>();
-	private List<String> memList = new ArrayList<String>();
-	private List<List<String>> memory = new ArrayList<List<String>>();
+	private Set<String> memSet = new HashSet<String>();
+	private List<Set<String>> memory = new ArrayList<Set<String>>();
 	private boolean isAnd = false;
 	private boolean isRhs = false;
 	private Condition rootNode;
 	
 	public Populator(){
-		this.fo = new FighterObject();
-		this.stack = new Stack<Connective>();
-		this.values = new ArrayList<Leaf>();
 	}
 	
-	public List<List<String>> populate(Set<String> conditions, FighterAI fighter){
+	public List<Set<String>> populate(Set<String> conditions, FighterAI fighter){
 		this.conditions = conditions;
 		fighter.ast.accept(this);
 		return memory;
@@ -49,8 +37,6 @@ public class Populator extends DelegateVisitor {
 	
 	@Override
 	public void visit(Fighter fighter) {
-		fo.name = fighter.getName();
-		System.out.println("Name: " + fighter.getName());
 		super.visit(fighter);
 	}
 	
@@ -100,7 +86,7 @@ public class Populator extends DelegateVisitor {
 		// when the number of leafs is the same
 		// as the number of current conditions.
 		if(isAnd){
-			if(memList.size() == conditions.size() && isRhs){
+			if(memSet.size() == conditions.size() && isRhs){
 				storeMemList();
 				initEmptyMemList();
 			}
@@ -126,15 +112,15 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	private void initEmptyMemList(){
-		this.memList = new ArrayList<String>();
+		this.memSet = new HashSet<String>();
 	}
 	
 	private void storeMemList(){
-		memory.add(memList);
+		memory.add(memSet);
 	}
 	
 	private void addToMemList(Leaf leaf){
-		memList.add(leaf.getId());
+		memSet.add(leaf.getId());
 	}
 	
 	

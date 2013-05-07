@@ -74,7 +74,7 @@ public class FighterAI {
 			conditionsSet.add(condition);
 		}
 		Populator pop = new Populator();
-		List<List<String>> result = pop.populate(conditionsSet, this);
+		List<Set<String>> result = pop.populate(conditionsSet, this);
 		System.out.println(result);
 	}
 	
