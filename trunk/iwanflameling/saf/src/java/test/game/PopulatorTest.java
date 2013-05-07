@@ -53,7 +53,6 @@ public class PopulatorTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		populator = new Populator();
 	}
 
 	/**
@@ -68,19 +67,31 @@ public class PopulatorTest {
 	 */
 	@Test
 	public void testPopulate() {
-		//fail("Not yet implemented");
+		List<Set<String>> expecteds;
+		List<Set<String>> actuals;
 		Set<String> conditions = createConditions_FarAndMuchStronger();
-		List<FighterProp> properties = createProp_Far_MuchStrongerAndFar();
+		List<FighterProp> properties = createProp_Far_MuchStrongerAndFarOrStrongerAndNear();
 		
 		Fighter ast = new Fighter("TestIwan", properties);
 		FighterAI fighter = new FighterAI(ast, 0);
 		
-		List<Set<String>> expecteds = new ArrayList<Set<String>>();
+		expecteds = new ArrayList<Set<String>>();
 		expecteds.add(new HashSet<String>(Arrays.asList("far")));
 		expecteds.add(new HashSet<String>(Arrays.asList("far", "much_stronger")));
-		List<Set<String>> actuals = populator.populate(conditions, fighter);
+		populator = new Populator();
+		actuals = populator.populate(conditions, fighter);
 		
 		assertArrayEquals(expecteds.toArray(), actuals.toArray());
+		
+		conditions = createConditions_MuchStrongerAndStrongerAndNear();
+		expecteds = new ArrayList<Set<String>>();
+		expecteds.add(new HashSet<String>(Arrays.asList("much_stronger", "stronger", "near")));
+		populator = new Populator();
+		actuals = populator.populate(conditions, fighter);
+		
+		assertArrayEquals("should be the same: " + expecteds + " versus " + actuals
+				, expecteds.toArray(), actuals.toArray());
+		
 	}
 	
 	private Set<String> createConditions_FarAndMuchStronger(){
@@ -90,7 +101,15 @@ public class PopulatorTest {
 		return conditions;
 	}
 	
-	private List<FighterProp> createProp_Far_MuchStrongerAndFar(){
+	private Set<String> createConditions_MuchStrongerAndStrongerAndNear(){
+		Set<String> conditions = new HashSet<String>();
+		conditions.add("much_stronger");
+		conditions.add("stronger");
+		conditions.add("near");
+		return conditions;
+	}
+	
+	private List<FighterProp> createProp_Far_MuchStrongerAndFarOrStrongerAndNear(){
 		Action moveAction = new SimpleAction("run_towards");
 		Action fightAction = new SimpleAction("kick");
 		

@@ -41,7 +41,7 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	public void visit(Behavior behavior){
-		initEmptyMemList();
+		initEmptyMemSet();
 		isAnd = false;
 		rootNode = behavior.getCondition();
 		behavior.getCondition().accept(this);
@@ -76,7 +76,7 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	private void saveLeaf(Leaf leaf){
-		addToMemList(leaf);
+		addToMemSet(leaf);
 		storeToMemory(leaf);
 	}
 	
@@ -87,49 +87,49 @@ public class Populator extends DelegateVisitor {
 		// as the number of current conditions.
 		if(isAnd){
 			if(memSet.size() == conditions.size() && isRhs){
-				storeMemList();
-				initEmptyMemList();
+				storeMemSet();
+				initEmptyMemSet();
 			}
 		}
 		// If this leaf is not proceeded by an and-node than store
 		// the leaf(s) and start a new memList that is populated
 		// with the leafs of all proceeding and-nodes.
 		else{
-			storeMemList();
-			initPopulatedMemList(leaf);
+			storeMemSet();
+			initPopulatedMemSet(leaf);
 		}
 	}
 	
 	/**
-	 * Init a new <code>memList</code> from the <code>rootNode</code> all the way
+	 * Init a new <code>memSet</code> from the <code>rootNode</code> all the way
 	 * down to this <code>leaf</code>.
 	 * @param leaf
 	 */
-	private void initPopulatedMemList(Leaf leaf){
-		initEmptyMemList();
-		MemListPopulator bt = new MemListPopulator(leaf);
+	private void initPopulatedMemSet(Leaf leaf){
+		initEmptyMemSet();
+		MemSetPopulator bt = new MemSetPopulator(leaf);
 		rootNode.accept(bt);
 	}
 	
-	private void initEmptyMemList(){
+	private void initEmptyMemSet(){
 		this.memSet = new HashSet<String>();
 	}
 	
-	private void storeMemList(){
+	private void storeMemSet(){
 		memory.add(memSet);
 	}
 	
-	private void addToMemList(Leaf leaf){
+	private void addToMemSet(Leaf leaf){
 		memSet.add(leaf.getId());
 	}
 	
 	
-	private class MemListPopulator extends DelegateVisitor{
+	private class MemSetPopulator extends DelegateVisitor{
 		
 		private Leaf endNodeChild;
 		private boolean endNode = false;
 		
-		public MemListPopulator(Leaf endNodeChild){
+		public MemSetPopulator(Leaf endNodeChild){
 			this.endNodeChild = endNodeChild;
 		}
 		
@@ -154,7 +154,7 @@ public class Populator extends DelegateVisitor {
 				endNode = true;
 			else {
 				if(conditions.contains(leaf))
-					addToMemList(leaf);
+					addToMemSet(leaf);
 			}
 		}
 
