@@ -67,25 +67,25 @@ public class PopulatorTest {
 	 */
 	@Test
 	public void testPopulate() {
-		List<Set<String>> expecteds;
-		List<Set<String>> actuals;
+		List<Rule> expecteds;
+		List<Rule> actuals;
 		Set<String> conditions = createConditions_FarAndMuchStronger();
 		List<FighterProp> properties = createProp_Far_MuchStrongerAndFarOrStrongerAndNear();
 		
 		Fighter ast = new Fighter("TestIwan", properties);
 		FighterAI fighter = new FighterAI(ast, 0);
 		
-		expecteds = new ArrayList<Set<String>>();
-		expecteds.add(new HashSet<String>(Arrays.asList("far")));
-		expecteds.add(new HashSet<String>(Arrays.asList("far", "much_stronger")));
+		expecteds = new ArrayList<Rule>();
+		expecteds.add(new Rule(new HashSet<String>(Arrays.asList("far")), null));
+		expecteds.add(new Rule(new HashSet<String>(Arrays.asList("far", "much_stronger")), null));
 		populator = new Populator();
 		actuals = populator.populate(conditions, fighter);
 		
 		assertArrayEquals(expecteds.toArray(), actuals.toArray());
 		
 		conditions = createConditions_MuchStrongerAndStrongerAndNear();
-		expecteds = new ArrayList<Set<String>>();
-		expecteds.add(new HashSet<String>(Arrays.asList("much_stronger", "stronger", "near")));
+		expecteds = new ArrayList<Rule>();
+		expecteds.add(new Rule(new HashSet<String>(Arrays.asList("much_stronger", "stronger", "near")), null));
 		populator = new Populator();
 		actuals = populator.populate(conditions, fighter);
 		

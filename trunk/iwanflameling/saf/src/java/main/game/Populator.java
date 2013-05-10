@@ -19,16 +19,17 @@ import ast.fighter.FighterProp;
 public class Populator extends DelegateVisitor {
 	
 	private Set<String> conditions = new HashSet<String>();
-	private Set<String> memSet = new HashSet<String>();
-	private List<Set<String>> memory = new ArrayList<Set<String>>();
+	private Rule rule;
+	private List<Rule> memory = new ArrayList<Rule>();
 	private boolean isAnd = false;
 	private boolean isRhs = false;
 	private Condition rootNode;
+	private Behavior behavior;
 	
 	public Populator(){
 	}
 	
-	public List<Set<String>> populate(Set<String> conditions, FighterAI fighter){
+	public List<Rule> populate(Set<String> conditions, FighterAI fighter){
 		this.conditions = conditions;
 		fighter.ast.accept(this);
 		return memory;
@@ -86,7 +87,7 @@ public class Populator extends DelegateVisitor {
 		// when the number of leafs is the same
 		// as the number of current conditions.
 		if(isAnd){
-			if(memSet.size() == conditions.size() && isRhs){
+			if(rule.size() == conditions.size() && isRhs){
 				storeMemSet();
 				initEmptyMemSet();
 			}
@@ -112,15 +113,16 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	private void initEmptyMemSet(){
-		this.memSet = new HashSet<String>();
+		Set<String> memSet = new HashSet<String>();
+		this.rule = new Rule(memSet, this.behavior);
 	}
 	
 	private void storeMemSet(){
-		memory.add(memSet);
+		memory.add(rule);
 	}
 	
 	private void addToMemSet(Leaf leaf){
-		memSet.add(leaf.getId());
+		rule.add(leaf.getId());
 	}
 	
 	
