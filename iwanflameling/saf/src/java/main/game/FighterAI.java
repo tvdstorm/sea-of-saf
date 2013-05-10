@@ -75,14 +75,14 @@ public class FighterAI {
 			conditionsSet.add(condition);
 		}
 		Populator pop = new Populator();
-		List<Set<String>> result = pop.populate(conditionsSet, this);
-		List<Set<String>> bestResult = getBestFittingBehaviors(result, conditionsSet.size());
+		List<Rule> result = pop.populate(conditionsSet, this);
+		List<Rule> bestResult = getBestFittingRules(result, conditionsSet.size());
 		System.out.println(result);
 		System.out.println(bestResult);
 	}
 	
-	private List<Set<String>> getBestFittingBehaviors(List<Set<String>> behaviors, int numberOfDefinedConditions){
-		List<Set<String>> result = null;
+	private List<Rule> getBestFittingRules(List<Rule> behaviors, int numberOfDefinedConditions){
+		List<Rule> result = null;
 		for(;numberOfDefinedConditions > 0; numberOfDefinedConditions--){
 			result = getSetsWithExactSize(behaviors, numberOfDefinedConditions);
 			if(result != null)
@@ -91,11 +91,11 @@ public class FighterAI {
 		return result;
 	}
 	
-	private List<Set<String>> getSetsWithExactSize(List<Set<String>> behaviors, int setSize){
-		List<Set<String>> result = new ArrayList<Set<String>>();
-		for(Set<String> behavior : behaviors){
-			if(behavior.size() == setSize){
-				result.add(behavior);
+	private List<Rule> getSetsWithExactSize(List<Rule> rules, int setSize){
+		List<Rule> result = new ArrayList<Rule>();
+		for(Rule rule : rules){
+			if(rule.size() == setSize){
+				result.add(rule);
 			}
 		}
 		return result;
