@@ -17,6 +17,12 @@ public class FighterAI {
 
 	Fighter ast;
 	private int position;
+	private String currentFightAction;
+	private String currentMoveAction;
+	private int kickPower;
+	private int kickReach;
+	private int punchPower;
+	private int punchReach;
 	private int maxPos;
 	private int minPos;
 	private int timestepBlock;
@@ -34,25 +40,47 @@ public class FighterAI {
 	}
 	
 	public void takeAction(){
-		pickRule("far", "much_stronger");
+		timestepBlock--;
+		if(!isBusy()){
+			Rule rule = pickRule("far", "much_stronger");
+			executeRule(rule);
+		}
 	}
 	
 	public int getPosition(){
 		return position;
 	}
 	
-	private void executeRule(Rule rule){
-		Behavior behavior = rule.getBehavior();
-		if(behavior != null){
-			Action action = behavior.getMoveAction();
-			ActionPicker ap = new ActionPicker();
-			executeMoveAction(ap.pick(action));
+	public boolean isBusy(){
+		if(timestepBlock > 0){
+			return true;
+		} else{
+			return false;
 		}
 	}
 	
-	private void executeMoveAction(SimpleAction action){
+	private void setStrengths(){
+		
+	}
+	
+	private void executeRule(Rule rule){
 		timestepBlock = (Arena.STANDARD_TIMESTEP * speed);
-		action.getAction();
+		ActionPicker ap = new ActionPicker();
+		Behavior behavior = rule.getBehavior();
+		if(behavior != null){
+			Action moveAction = behavior.getMoveAction();
+			executeMoveAction(ap.pick(moveAction));
+			Action fightAction = behavior.getFightAction();
+			executeFightAction(ap.pick(fightAction));
+		}
+	}
+	
+	private void executeMoveAction(SimpleAction moveAction){
+		this.currentMoveAction = moveAction.getAction();
+	}
+	
+	private void executeFightAction(SimpleAction fightAction){
+		this.currentFightAction = fightAction.getAction();
 	}
 	
 	private void setPosition(int position){
@@ -96,66 +124,70 @@ public class FighterAI {
 		for(String condition: conditions) {
 			conditionsSet.add(condition);
 		}
-		Populator pop = new Populator();
-		List<Rule> result = pop.populate(conditionsSet, this);
-		List<Rule> bestResult = getBestFittingRules(result, conditionsSet.size());
-		System.out.println(bestResult);
+		RulesFactory rf = new RulesFactory();
+		List<Rule> bestResult = rf.getRules(conditionsSet, this);
 		Random rand = new Random();
 		int index = rand.nextInt(bestResult.size());
 		Rule rule = bestResult.get(index);
 		return rule;
 	}
-	
-	private List<Rule> getBestFittingRules(List<Rule> rules, int numberOfDefinedConditions){
-		List<Rule> result = null;
-		for(;numberOfDefinedConditions > 0; numberOfDefinedConditions--){
-			result = getRulesWithExactSize(rules, numberOfDefinedConditions);
-			if(result != null)
-				break;
-		}
-		return result;
-	}
-	
-	private List<Rule> getRulesWithExactSize(List<Rule> rules, int setSize){
-		List<Rule> result = new ArrayList<Rule>();
-		for(Rule rule : rules){
-			if(rule.size() == setSize){
-				result.add(rule);
-			}
-		}
-		return result;
-	}
-	
-	private class ActionPicker extends DelegateVisitor{
-		SimpleAction returnValue;
-		
-		public SimpleAction pick(Action action){
-			this.returnValue = null;
-			action.accept(this);
-			return returnValue;
-		}
 
-		/* (non-Javadoc)
-		 * @see ast.checker.DelegateVisitor#visit(ast.action.SimpleAction)
-		 */
-		@Override
-		public void visit(SimpleAction simpleAction) {
-			returnValue = simpleAction;
-			super.visit(simpleAction);
-		}
-
-		/* (non-Javadoc)
-		 * @see ast.checker.DelegateVisitor#visit(ast.action.Choose)
-		 */
-		@Override
-		public void visit(Choose choose) {
-			Random rand = new Random();
-			List<SimpleAction> simpleActions = choose.getChoices();
-			int index = rand.nextInt(simpleActions.size());
-			SimpleAction simpleAction = simpleActions.get(index);
-			this.visit(simpleAction);
-		}
-		
+	/**
+	 * @return the kickPower
+	 */
+	public int getKickPower() {
+		return kickPower;
 	}
+
+	/**
+	 * @param kickPower the kickPower to set
+	 */
+	void setKickPower(int kickPower) {
+		this.kickPower = kickPower;
+	}
+
+	/**
+	 * @return the kickReach
+	 */
+	public int getKickReach() {
+		return kickReach;
+	}
+
+	/**
+	 * @param kickReach the kickReach to set
+	 */
+	void setKickReach(int kickReach) {
+		this.kickReach = kickReach;
+	}
+
+	/**
+	 * @return the punchPower
+	 */
+	public int getPunchPower() {
+		return punchPower;
+	}
+
+	/**
+	 * @param punchPower the punchPower to set
+	 */
+	void setPunchPower(int punchPower) {
+		this.punchPower = punchPower;
+	}
+
+	/**
+	 * @return the punchReach
+	 */
+	public int getPunchReach() {
+		return punchReach;
+	}
+
+	/**
+	 * @param punchReach the punchReach to set
+	 */
+	void setPunchReach(int punchReach) {
+		this.punchReach = punchReach;
+	}
+	
+	
 	
 }
