@@ -33,6 +33,7 @@ public class FighterAI {
 	public FighterAI(Fighter ast, int initialPosition){
 		this.ast = ast;
 		this.setPosition(initialPosition);
+		initStrengths();
 	}
 	
 	public void setOpponent(FighterAI opponent){
@@ -59,8 +60,9 @@ public class FighterAI {
 		}
 	}
 	
-	private void setStrengths(){
-		
+	private void initStrengths(){
+		FighterStrengthInitializer fsi = new FighterStrengthInitializer(this);
+		fsi.initStrengths();
 	}
 	
 	private void executeRule(Rule rule){

@@ -10,6 +10,10 @@ public class FighterStrengthInitializer extends DelegateVisitor {
 	public FighterStrengthInitializer(FighterAI fighter){
 		this.fighter = fighter;
 	}
+	
+	public void initStrengths(){
+		fighter.ast.accept(this);
+	}
 	/* (non-Javadoc)
 	 * @see ast.checker.DelegateVisitor#visit(ast.fighter.Strength)
 	 */
