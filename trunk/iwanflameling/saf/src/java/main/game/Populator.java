@@ -20,8 +20,8 @@ public class Populator extends DelegateVisitor {
 	
 	private Set<String> conditions = new HashSet<String>();
 	private Rule rule;
-	private List<Rule> memory = new ArrayList<Rule>();
-	private boolean isAnd = false;
+	private List<Rule> rules = new ArrayList<Rule>();
+	private boolean perceededByAnd = false;
 	private boolean isRhs = false;
 	private Condition rootNode;
 	private Behavior behavior;
@@ -32,7 +32,7 @@ public class Populator extends DelegateVisitor {
 	public List<Rule> populate(Set<String> conditions, FighterAI fighter){
 		this.conditions = conditions;
 		fighter.ast.accept(this);
-		return memory;
+		return rules;
 	}
 	
 	
@@ -42,22 +42,22 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	public void visit(Behavior behavior){
-		initEmptyMemSet();
-		isAnd = false;
+		this.behavior = behavior;
+		initNewRule();
+		perceededByAnd = false;
 		rootNode = behavior.getCondition();
 		behavior.getCondition().accept(this);
-		//fo.behaviors.put(key, value);
 	}
 	
 	@Override
 	public void visit(And and){
-		isAnd = true;
+		perceededByAnd = true;
 		delegate(and);
 	}
 	
 	@Override
 	public void visit(Or or) {
-		isAnd = false;
+		perceededByAnd = false;
 		delegate(or);
 	}
 	
@@ -77,61 +77,61 @@ public class Populator extends DelegateVisitor {
 	}
 	
 	private void saveLeaf(Leaf leaf){
-		addToMemSet(leaf);
-		storeToMemory(leaf);
+		addToRuleConditions(leaf);
+		attemptRuleStore(leaf);
 	}
 	
-	private void storeToMemory(Leaf leaf){
+	private void attemptRuleStore(Leaf leaf){
 		// if this leaf was proceeded by an and-node, than
-		// only store them (and start an new memList)
+		// only store them (and start an new rule)
 		// when the number of leafs is the same
 		// as the number of current conditions.
-		if(isAnd){
+		if(perceededByAnd){
 			if(rule.size() == conditions.size() && isRhs){
-				storeMemSet();
-				initEmptyMemSet();
+				storeRule();
+				initNewRule();
 			}
 		}
 		// If this leaf is not proceeded by an and-node than store
-		// the leaf(s) and start a new memList that is populated
+		// the leaf(s) and start a new rule that is populated
 		// with the leafs of all proceeding and-nodes.
 		else{
-			storeMemSet();
-			initPopulatedMemSet(leaf);
+			storeRule();
+			initConditionedRule(leaf);
 		}
 	}
 	
 	/**
-	 * Init a new <code>memSet</code> from the <code>rootNode</code> all the way
+	 * Init a new <code>rule</code> with conditions from the <code>rootNode</code> all the way
 	 * down to this <code>leaf</code>.
 	 * @param leaf
 	 */
-	private void initPopulatedMemSet(Leaf leaf){
-		initEmptyMemSet();
-		MemSetPopulator bt = new MemSetPopulator(leaf);
+	private void initConditionedRule(Leaf leaf){
+		initNewRule();
+		RuleConditionsPopulator bt = new RuleConditionsPopulator(leaf);
 		rootNode.accept(bt);
 	}
 	
-	private void initEmptyMemSet(){
-		Set<String> memSet = new HashSet<String>();
-		this.rule = new Rule(memSet, this.behavior);
+	private void initNewRule(){
+		Set<String> ruleConditions = new HashSet<String>();
+		this.rule = new Rule(ruleConditions, this.behavior);
 	}
 	
-	private void storeMemSet(){
-		memory.add(rule);
+	private void storeRule(){
+		rules.add(rule);
 	}
 	
-	private void addToMemSet(Leaf leaf){
-		rule.add(leaf.getId());
+	private void addToRuleConditions(Leaf leaf){
+		rule.addCondition(leaf.getId());
 	}
 	
 	
-	private class MemSetPopulator extends DelegateVisitor{
+	private class RuleConditionsPopulator extends DelegateVisitor{
 		
 		private Leaf endNodeChild;
 		private boolean endNode = false;
 		
-		public MemSetPopulator(Leaf endNodeChild){
+		public RuleConditionsPopulator(Leaf endNodeChild){
 			this.endNodeChild = endNodeChild;
 		}
 		
@@ -156,7 +156,7 @@ public class Populator extends DelegateVisitor {
 				endNode = true;
 			else {
 				if(conditions.contains(leaf))
-					addToMemSet(leaf);
+					addToRuleConditions(leaf);
 			}
 		}
 

@@ -6,6 +6,7 @@ public class Arena {
 	
 	public static final int MIN_FLOOR_POSITION = 1;
 	public static final int MAX_FLOOR_POSITION = 200;
+	public static final int STANDARD_TIMESTEP = 5;
 	FighterAI fighterOne;
 	FighterAI fighterTwo;
 	
