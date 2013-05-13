@@ -16,23 +16,79 @@ import ast.fighter.Behavior;
 import ast.fighter.Fighter;
 import ast.fighter.FighterProp;
 
-public class Populator extends DelegateVisitor {
+public class RulesFactory extends DelegateVisitor {
 	
-	private Set<String> conditions = new HashSet<String>();
-	private Rule rule;
-	private List<Rule> rules = new ArrayList<Rule>();
-	private boolean perceededByAnd = false;
-	private boolean isRhs = false;
+	private Set<String> conditions;
+	private List<Rule> rules;
+	private boolean perceededByAnd;
+	private boolean isRhs;
 	private Condition rootNode;
 	private Behavior behavior;
+	private Rule rule;
 	
-	public Populator(){
+	public RulesFactory(){
+		initMembers();
 	}
 	
-	public List<Rule> populate(Set<String> conditions, FighterAI fighter){
+	private void initMembers(){
+		this.conditions = new HashSet<String>();
+		this.rules = new ArrayList<Rule>();
+		this.perceededByAnd = false;
+		this.isRhs = false;
+		this.rootNode = null;
+		this.behavior = null;
+		this.rule = null;
+	}
+	
+	/**
+	 * Convenience method that returns the rules that addresses the
+	 * <code>conditions</code> best. It only returns rules that most specifically
+	 * match the <code>conditions</code>.
+	 * 
+	 * @param conditions The conditions that apply to the <code>fighter</code>'s rules.
+	 * @param fighter the {@link FighterAI fighter} from who the rules are needed.
+	 * @return Rules that are best applicable to the fighter during the given
+	 * <code>conditions</code>.
+	 * @see RulesFactory#getAllRules(Set, FighterAI)
+	 */
+	public List<Rule> getRules(Set<String> conditions, FighterAI fighter){
+		List<Rule> allRules = getAllRules(conditions, fighter);
+		List<Rule> rules = getBestFittingRules(allRules, conditions.size());
+		return rules;
+	}
+	
+	/**
+	 * 
+	 * @param conditions The conditions that apply to the <code>fighter</code>'s rules.
+	 * @param fighter the {@link FighterAI fighter} from who the rules are needed.
+	 * @return Rules that are applicable to the fighter during the given
+	 * <code>conditions</code>.
+	 */
+	public List<Rule> getAllRules(Set<String> conditions, FighterAI fighter){
+		initMembers();
 		this.conditions = conditions;
 		fighter.ast.accept(this);
 		return rules;
+	}
+	
+	private List<Rule> getBestFittingRules(List<Rule> rules, int numberOfDefinedConditions){
+		List<Rule> result = null;
+		for(;numberOfDefinedConditions > 0; numberOfDefinedConditions--){
+			result = getRulesWithExactSize(rules, numberOfDefinedConditions);
+			if(result != null)
+				break;
+		}
+		return result;
+	}
+	
+	private List<Rule> getRulesWithExactSize(List<Rule> rules, int setSize){
+		List<Rule> result = new ArrayList<Rule>();
+		for(Rule rule : rules){
+			if(rule.size() == setSize){
+				result.add(rule);
+			}
+		}
+		return result;
 	}
 	
 	

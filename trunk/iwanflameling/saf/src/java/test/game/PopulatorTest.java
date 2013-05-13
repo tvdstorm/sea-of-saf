@@ -32,7 +32,7 @@ import ast.fighter.FighterProp;
  */
 public class PopulatorTest {
 	
-	Populator populator;
+	RulesFactory populator;
 
 	/**
 	 * @throws java.lang.Exception
@@ -63,7 +63,7 @@ public class PopulatorTest {
 	}
 
 	/**
-	 * Test method for {@link game.Populator#populate(java.util.Set, game.FighterAI)}.
+	 * Test method for {@link game.RulesFactory#getRules(java.util.Set, game.FighterAI)}.
 	 */
 	@Test
 	public void testPopulate() {
@@ -78,16 +78,16 @@ public class PopulatorTest {
 		expecteds = new ArrayList<Rule>();
 		expecteds.add(new Rule(new HashSet<String>(Arrays.asList("far")), null));
 		expecteds.add(new Rule(new HashSet<String>(Arrays.asList("far", "much_stronger")), null));
-		populator = new Populator();
-		actuals = populator.populate(conditions, fighter);
+		populator = new RulesFactory();
+		actuals = populator.getAllRules(conditions, fighter);
 		
 		assertArrayEquals(expecteds.toArray(), actuals.toArray());
 		
 		conditions = createConditions_MuchStrongerAndStrongerAndNear();
 		expecteds = new ArrayList<Rule>();
 		expecteds.add(new Rule(new HashSet<String>(Arrays.asList("much_stronger", "stronger", "near")), null));
-		populator = new Populator();
-		actuals = populator.populate(conditions, fighter);
+		populator = new RulesFactory();
+		actuals = populator.getRules(conditions, fighter);
 		
 		assertArrayEquals("should be the same: " + expecteds + " versus " + actuals
 				, expecteds.toArray(), actuals.toArray());
