@@ -20,7 +20,7 @@ public class Action {
 	}
 	
 	public String toString(){
-		return (choose)? choose +	": " +action1 + " , "+ action2 + "\n" : action1 +"\n";		
+		return (choose)? "choose" +	": " +action1 + " , "+ action2  : action1 ;		
 	}
 
 }

@@ -5,28 +5,36 @@ import java.util.List;
 
 public class Constants {
 	
-	private static final List<String> availCharacteristics = Arrays.asList("kickPower","kickReach","punchPower","punchReach");
+	private static final List<String> Characteristics = Arrays.asList("kickPower","kickReach","punchPower","punchReach");
 	
-	private static final List<String> availConditions = Arrays.asList("always","near","far","weaker","much_weaker","even","stronger","much_stronger");
+	private static final List<String> Conditions = Arrays.asList("always","near","far","weaker","much_weaker","even","stronger","much_stronger");
 	
-	private static final List<String> availMoveActions = Arrays.asList("stand","crouch","jump","run_towards","walk_towards","run_away","walk_away");
+	private static final List<String> MoveActions = Arrays.asList("stand","crouch","jump","run_towards","walk_towards","run_away","walk_away");
 
-	private static final List<String> availFightActions = Arrays.asList("block_low","block_high","kick_low","kick_high","punch_low","punch_high");
+	private static final List<String> FightActions = Arrays.asList("block_low","block_high","kick_low","kick_high","punch_low","punch_high","shotgun");
+
+	private static int defaultValue = 5;
+	
+	
 
 	public static List<String> getCharacteristics() {
-		return availCharacteristics;
+		return Characteristics;
 	}
 
 	public static List<String> getConditions() {
-		return availConditions;
+		return Conditions;
 	}
 
 	public static List<String> getMoveActions() {
-		return availMoveActions;
+		return MoveActions;
 	}
 	
 	public static List<String> getFightActions() {
-		return availFightActions;
+		return FightActions;
+	}
+
+	public static Integer getDefaultValue() {
+		return defaultValue;
 	}
 
 }

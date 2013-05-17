@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 import com.yennick.fighter.bot.Constants;
 
+@SuppressWarnings("serial")
 public class Personality extends ArrayList<Personality> {
 
 	private final String characteristic;
 	private final int value;
-	private static int defaultPersonality = 5;
 	
 	public Personality(String characteristic, int value){
 		
@@ -20,10 +20,10 @@ public class Personality extends ArrayList<Personality> {
 	public boolean add(Personality personality){
 		if(this.validate(personality)){
 			super.add(personality);
-			System.out.println("valid "+ personality.characteristic);
+	//		System.out.println("valid "+ personality.characteristic);
 			return true;
 		}
-		System.out.println("not valid "+ personality.characteristic);
+	//	System.out.println("not valid "+ personality.characteristic);
 		return false;
 	}
 	
@@ -36,7 +36,7 @@ public class Personality extends ArrayList<Personality> {
 	}
 
 	public String toString(){
-		return characteristic + " = " + value + "\n";
+		return this.characteristic.toString() + " = " + value ;
 	}
 	
 	public boolean validate(Personality personality){
