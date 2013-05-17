@@ -20,7 +20,6 @@ public class Bot{
 	}
 	
 	public void addPersonality(Personality personality){
-	//	if(personality.validate(personality))
 		personality.add(personality);
 	}
 
@@ -33,7 +32,7 @@ public class Bot{
 			if(pers.getCharacteristic() == getP)
 				return pers.getValue();
 		}
-		return 5;
+		return Constants.getDefaultValue();
 	}
 
 	private double getWeight(){
@@ -57,9 +56,7 @@ public class Bot{
 //	
 	
 	public String toString(){
-		return fighterName + "\n" +
-				this.personality.toString()  + "\n" +
-				this.behaviour.toString();
+		return "Name: " +fighterName + "\n";
 	}
 
 	

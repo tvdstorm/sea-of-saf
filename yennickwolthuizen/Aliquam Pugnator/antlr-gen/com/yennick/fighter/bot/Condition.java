@@ -16,17 +16,19 @@ public class Condition {
 		this.second = null;
 		this.type = null;
 	}
+	
 	public Condition(String first){
 		this.first = first;
 		this.second = null;
 		this.type = null;
 	}
+
 	public String getFirst(){
 		return first;
 	}
 	
 	public String toString(){
-		return (type != null)?first + " - "+ type +" - " + second + "\n" : first +"\n";		
+		return (type != null)? first + " "+ type +" " + second  : first ;		
 	}
 
 }
