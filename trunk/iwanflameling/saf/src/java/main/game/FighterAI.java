@@ -25,12 +25,20 @@ public class FighterAI {
 	private int punchReach;
 	private int maxPos;
 	private int minPos;
-	private int timestepBlock;
-	private int speed;
+	private long timestepBlock;
+	private long speed;
 	private FighterAI opponent;
 	private enum Direction {LEFT, RIGHT};
 	
+	/**
+	 * 
+	 * @param ast
+	 * @param initialPosition
+	 * @throws NullPointerException when <code>ast</code> is <code>null</code>.
+	 */
 	public FighterAI(Fighter ast, int initialPosition){
+		if(ast == null)
+			throw new NullPointerException("Fighter needs an AST that defines him");
 		this.ast = ast;
 		this.setPosition(initialPosition);
 		initStrengths();
@@ -41,7 +49,8 @@ public class FighterAI {
 	}
 	
 	public void takeAction(){
-		timestepBlock--;
+		if(timestepBlock > 0)
+			timestepBlock--;
 		if(!isBusy()){
 			Rule rule = pickRule("far", "much_stronger");
 			executeRule(rule);
@@ -188,6 +197,20 @@ public class FighterAI {
 	 */
 	void setPunchReach(int punchReach) {
 		this.punchReach = punchReach;
+	}
+
+	/**
+	 * 
+	 * @return speed rounded as a positive <code>long</code>.
+	 */
+	public long calculateSpeed() {
+		int weight = (punchPower + kickPower)/2;
+		int height = (punchReach + kickReach)/2;
+		double exactSpeed = 0.5 * (height-weight);
+		long roundedSpeed = Math.round(exactSpeed);
+		if(roundedSpeed < 0)
+			roundedSpeed = 0;
+		return roundedSpeed;
 	}
 	
 	
