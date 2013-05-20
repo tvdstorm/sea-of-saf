@@ -1,11 +1,13 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
+import ast.TypeValues;
 import ast.checker.DelegateVisitor;
 import ast.condition.And;
 import ast.condition.Condition;
@@ -26,6 +28,7 @@ public class RulesFactory extends DelegateVisitor {
 	private Behavior behavior;
 	private Rule rule;
 	private Stack<And> stack;
+	private FighterAI fighter;
 	
 	public RulesFactory(){
 		initMembers();
@@ -39,6 +42,7 @@ public class RulesFactory extends DelegateVisitor {
 		this.rootNode = null;
 		this.behavior = null;
 		this.rule = null;
+		this.fighter = null;
 		this.stack = new Stack<And>();
 	}
 	
@@ -69,16 +73,20 @@ public class RulesFactory extends DelegateVisitor {
 	public List<Rule> getAllRules(Set<String> conditions, FighterAI fighter){
 		initMembers();
 		this.conditions = conditions;
+		this.fighter = fighter;
 		fighter.ast.accept(this);
 		return rules;
 	}
 	
 	private List<Rule> getBestFittingRules(List<Rule> rules, int numberOfDefinedConditions){
 		List<Rule> result = null;
-		for(;numberOfDefinedConditions > 0; numberOfDefinedConditions--){
+		for(;numberOfDefinedConditions >= 0; numberOfDefinedConditions--){
 			result = getRulesWithExactSize(rules, numberOfDefinedConditions);
 			if(!result.isEmpty())
 				break;
+		}
+		if(result.isEmpty()){
+			result = getRules(new HashSet<String>(Arrays.asList(TypeValues.DEFAULT_CONDITION)), this.fighter);
 		}
 		return result;
 	}

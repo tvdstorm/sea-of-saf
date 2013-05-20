@@ -22,9 +22,25 @@ public class Arena {
 	}
 	
 	public void startFight(){
-		for(int counter = 50; counter >0; counter--)
+		for(int counter = 10000; counter > 0; counter--){
 			fighterOne.takeAction();
-		
+			fighterTwo.takeAction();
+		}
+	}
+	
+	private boolean calculateHit(FighterAI fighter, FighterAI opponent){
+		boolean hit = false;
+		String fightAction = fighter.getCurrentFightAction();
+		int reach = Math.abs(fighter.getPosition()-opponent.getPosition());
+		int fightReach = 0;
+		if(fightAction.contains("kick")){
+			fightReach = fighter.getKickReach();
+		} else if(fightAction.contains("punch")){
+			fightReach = fighter.getPunchReach();
+		}
+		if(reach <= fightReach)
+			hit = true;
+		return hit;
 	}
 
 }
