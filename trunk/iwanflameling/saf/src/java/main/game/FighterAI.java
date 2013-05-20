@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.Vector;
 
+import ast.TypeValues;
 import ast.action.Action;
 import ast.action.Choose;
 import ast.action.SimpleAction;
@@ -42,6 +44,7 @@ public class FighterAI {
 		this.ast = ast;
 		this.setPosition(initialPosition);
 		initStrengths();
+		this.speed = calculateSpeed();
 	}
 	
 	public void setOpponent(FighterAI opponent){
@@ -52,7 +55,7 @@ public class FighterAI {
 		if(timestepBlock > 0)
 			timestepBlock--;
 		if(!isBusy()){
-			Rule rule = pickRule("far", "much_stronger");
+			Rule rule = pickRule(calculateCondition());
 			executeRule(rule);
 		}
 	}
@@ -70,12 +73,16 @@ public class FighterAI {
 	}
 	
 	private void initStrengths(){
+		setKickPower(TypeValues.DEFAULT_STRENGTH);
+		setPunchPower(TypeValues.DEFAULT_STRENGTH);
+		setKickReach(TypeValues.DEFAULT_STRENGTH);
+		setPunchReach(TypeValues.DEFAULT_STRENGTH);
 		FighterStrengthInitializer fsi = new FighterStrengthInitializer(this);
 		fsi.initStrengths();
 	}
 	
 	private void executeRule(Rule rule){
-		timestepBlock = (Arena.STANDARD_TIMESTEP * speed);
+		timestepBlock = (Arena.STANDARD_TIMESTEP * (speed+1));
 		ActionPicker ap = new ActionPicker();
 		Behavior behavior = rule.getBehavior();
 		if(behavior != null){
@@ -84,6 +91,7 @@ public class FighterAI {
 			Action fightAction = behavior.getFightAction();
 			executeFightAction(ap.pick(fightAction));
 		}
+		System.out.println(this.ast.getName() + ": " + this.currentMoveAction + " and " + this.currentFightAction);
 	}
 	
 	private void executeMoveAction(SimpleAction moveAction){
@@ -141,6 +149,54 @@ public class FighterAI {
 		int index = rand.nextInt(bestResult.size());
 		Rule rule = bestResult.get(index);
 		return rule;
+	}
+	
+	private String[] calculateCondition(){
+		Vector<String> condition = new Vector<String>();
+		condition.add(calculatePositionCondition());
+		condition.add(calculateStrengthCondition());
+		System.out.println(condition);
+		return condition.toArray(new String[0]);
+	}
+	
+	private String calculatePositionCondition(){
+		String calculatedCondition;
+		int myPosition = this.getPosition();
+		int oppPosition = opponent.getPosition();
+		int positionDelta = Math.abs(myPosition-oppPosition);
+		int reach = Math.max(this.getKickReach(), this.getPunchReach());
+		if(positionDelta <= reach){
+			calculatedCondition = "near";
+		} else{
+			calculatedCondition = "far";
+		}
+		return calculatedCondition;
+	}
+	
+	/**
+	 * Calculates the oppponent's strength condition, compared to this
+	 * fighter's own strength. Values can be "stronger", "weaker" or
+	 * "even". If the difference is more or equal to 20%, the return value
+	 * is prefixed with "much_".
+	 * @return indicating whether the opponent is stronger or weaker.
+	 */
+	private String calculateStrengthCondition(){
+		String calculatedCondition;
+		int myStrength = Math.max(this.getKickPower(), this.getPunchPower());
+		int oppStrength = Math.max(opponent.getKickPower(), opponent.getPunchPower());
+		int strengthDelta = Math.abs(myStrength - oppStrength);
+		int extremeDelta = TypeValues.MAX_STRENGTH/5;
+		String extreme = "";
+		if(strengthDelta >= extremeDelta)
+			extreme = "much_";
+		if(oppStrength > myStrength){
+			calculatedCondition = extreme+"stronger";
+		} else if(oppStrength == myStrength){
+			calculatedCondition = "even";
+		} else {
+			calculatedCondition = extreme+"weaker";
+		}
+		return calculatedCondition;
 	}
 
 	/**
@@ -207,9 +263,9 @@ public class FighterAI {
 		int weight = (punchPower + kickPower)/2;
 		int height = (punchReach + kickReach)/2;
 		double exactSpeed = 0.5 * (height-weight);
-		long roundedSpeed = Math.round(exactSpeed);
-		if(roundedSpeed < 0)
-			roundedSpeed = 0;
+		double delta = 0.5*(TypeValues.MAX_STRENGTH-TypeValues.MIN_STRENGTH);
+		double totalSpeed = exactSpeed + delta;
+		long roundedSpeed = Math.round(totalSpeed);
 		return roundedSpeed;
 	}
 	

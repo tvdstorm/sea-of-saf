@@ -22,7 +22,9 @@ public class Arena {
 	}
 	
 	public void startFight(){
-		fighterOne.takeAction();
+		for(int counter = 50; counter >0; counter--)
+			fighterOne.takeAction();
+		
 	}
 
 }

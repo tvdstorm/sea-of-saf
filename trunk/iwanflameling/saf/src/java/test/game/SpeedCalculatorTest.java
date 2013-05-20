@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ast.TypeValues;
 import ast.fighter.Fighter;
 import ast.fighter.FighterProp;
 import ast.fighter.Strength;
@@ -39,8 +40,9 @@ public class SpeedCalculatorTest {
 		Fighter ast = createFighterAst(5,5,5,5);
 		FighterAI fighter = new FighterAI(ast, 0);
 		long speed = fighter.calculateSpeed();
-		long expected = Math.round((0.5*(((5+5)/2)-((5 + 5)/2))));
-		assertEquals(expected, speed);
+		double expectedDouble = ((0.5*(((5+5)/2)-((5 + 5)/2))));
+		long expectedLong = Math.round(((0.5*(TypeValues.MAX_STRENGTH-TypeValues.MIN_STRENGTH))+expectedDouble));
+		assertEquals(expectedLong, speed);
 	}
 	@Test
 	public void testNotBelowZero(){

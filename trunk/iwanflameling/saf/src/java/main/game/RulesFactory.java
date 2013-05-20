@@ -20,11 +20,12 @@ public class RulesFactory extends DelegateVisitor {
 	
 	private Set<String> conditions;
 	private List<Rule> rules;
-	private boolean perceededByAnd;
+	private boolean firstParentIsAnd;
 	private boolean isRhs;
 	private Condition rootNode;
 	private Behavior behavior;
 	private Rule rule;
+	private Stack<And> stack;
 	
 	public RulesFactory(){
 		initMembers();
@@ -33,11 +34,12 @@ public class RulesFactory extends DelegateVisitor {
 	private void initMembers(){
 		this.conditions = new HashSet<String>();
 		this.rules = new ArrayList<Rule>();
-		this.perceededByAnd = false;
+		this.firstParentIsAnd = false;
 		this.isRhs = false;
 		this.rootNode = null;
 		this.behavior = null;
 		this.rule = null;
+		this.stack = new Stack<And>();
 	}
 	
 	/**
@@ -75,7 +77,7 @@ public class RulesFactory extends DelegateVisitor {
 		List<Rule> result = null;
 		for(;numberOfDefinedConditions > 0; numberOfDefinedConditions--){
 			result = getRulesWithExactSize(rules, numberOfDefinedConditions);
-			if(result != null)
+			if(!result.isEmpty())
 				break;
 		}
 		return result;
@@ -100,20 +102,22 @@ public class RulesFactory extends DelegateVisitor {
 	public void visit(Behavior behavior){
 		this.behavior = behavior;
 		initNewRule();
-		perceededByAnd = false;
+		firstParentIsAnd = false;
+		this.stack = new Stack<And>();
 		rootNode = behavior.getCondition();
 		behavior.getCondition().accept(this);
 	}
 	
 	@Override
 	public void visit(And and){
-		perceededByAnd = true;
+		firstParentIsAnd = true;
+		stack.add(and);
 		delegate(and);
 	}
 	
 	@Override
 	public void visit(Or or) {
-		perceededByAnd = false;
+		firstParentIsAnd = false;
 		delegate(or);
 	}
 	
@@ -142,7 +146,7 @@ public class RulesFactory extends DelegateVisitor {
 		// only store them (and start an new rule)
 		// when the number of leafs is the same
 		// as the number of current conditions.
-		if(perceededByAnd){
+		if(firstParentIsAnd){
 			if(rule.size() == conditions.size() && isRhs){
 				storeRule();
 				initNewRule();
@@ -154,6 +158,14 @@ public class RulesFactory extends DelegateVisitor {
 		else{
 			storeRule();
 			initConditionedRule(leaf);
+		}
+	}
+	
+	private boolean storeRuleIsAllowed(){
+		if(stack.size()+1 == rule.size()){
+			return true;
+		} else{
+			return false;
 		}
 	}
 	
@@ -174,7 +186,8 @@ public class RulesFactory extends DelegateVisitor {
 	}
 	
 	private void storeRule(){
-		rules.add(rule);
+		if(storeRuleIsAllowed())
+			rules.add(rule);
 	}
 	
 	private void addToRuleConditions(Leaf leaf){
