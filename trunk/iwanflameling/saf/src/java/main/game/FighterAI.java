@@ -82,7 +82,7 @@ public class FighterAI {
 	}
 	
 	private void executeRule(Rule rule){
-		timestepBlock = (Arena.STANDARD_TIMESTEP * (speed+1));
+		timestepBlock = (Arena.STANDARD_TIMESTEP * ((TypeValues.MAX_STRENGTH-speed)));
 		ActionPicker ap = new ActionPicker();
 		Behavior behavior = rule.getBehavior();
 		if(behavior != null){
@@ -91,15 +91,40 @@ public class FighterAI {
 			Action fightAction = behavior.getFightAction();
 			executeFightAction(ap.pick(fightAction));
 		}
-		System.out.println(this.ast.getName() + ": " + this.currentMoveAction + " and " + this.currentFightAction);
+		System.out.println(this.ast.getName() + ": " + this.currentMoveAction + " and " + this.currentFightAction
+				+ ", position: " + this.getPosition());
 	}
 	
 	private void executeMoveAction(SimpleAction moveAction){
 		this.currentMoveAction = moveAction.getAction();
+		if("run_towards".equals(this.currentMoveAction)){
+			executeMove(false, true);
+		} else if("walk_towards".equals(this.currentMoveAction)){
+			executeMove(false, false);
+		} else if("run_away".equals(this.currentMoveAction)){
+			executeMove(true, true);
+		} else if("walk_away".equals(this.currentMoveAction)){
+			executeMove(true, false);
+		}
 	}
 	
 	private void executeFightAction(SimpleAction fightAction){
 		this.currentFightAction = fightAction.getAction();
+	}
+	
+	private void executeMove(boolean away, boolean run){
+		int sign = away ? -1 : 1;
+		int steps = run ? 8 : 2;
+		switch(direction()){
+		case RIGHT:
+			setPosition(getPosition()+(steps * sign));
+			break;
+		case LEFT:
+			setPosition(getPosition()-(steps * sign));
+			break;
+			default:
+				break;
+		}
 	}
 	
 	private void setPosition(int position){
@@ -253,6 +278,14 @@ public class FighterAI {
 	 */
 	void setPunchReach(int punchReach) {
 		this.punchReach = punchReach;
+	}
+
+	public String getCurrentFightAction() {
+		return currentFightAction;
+	}
+
+	public String getCurrentMoveAction() {
+		return currentMoveAction;
 	}
 
 	/**
