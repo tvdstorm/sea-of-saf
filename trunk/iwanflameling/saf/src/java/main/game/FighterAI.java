@@ -27,7 +27,8 @@ public class FighterAI {
 	private int punchReach;
 	private int maxPos;
 	private int minPos;
-	private long timestepBlock;
+	private int health;
+	private long recoverySteps;
 	private long speed;
 	private FighterAI opponent;
 	private enum Direction {LEFT, RIGHT};
@@ -45,6 +46,7 @@ public class FighterAI {
 		this.setPosition(initialPosition);
 		initStrengths();
 		this.speed = calculateSpeed();
+		this.health = 100;
 	}
 	
 	public void setOpponent(FighterAI opponent){
@@ -52,9 +54,8 @@ public class FighterAI {
 	}
 	
 	public void takeAction(){
-		if(timestepBlock > 0)
-			timestepBlock--;
-		if(!isBusy()){
+		recover();
+		if(!isRecovering()){
 			Rule rule = pickRule(calculateCondition());
 			executeRule(rule);
 		}
@@ -64,8 +65,24 @@ public class FighterAI {
 		return position;
 	}
 	
-	public boolean isBusy(){
-		if(timestepBlock > 0){
+	/**
+	 * Does a recovery step.
+	 */
+	public void recover(){
+		if(recoverySteps > 0)
+			recoverySteps--;
+	}
+	
+	/**
+	 * Starts the recovery of this fighter, if the fighter is not still busy with a previous recovery.
+	 */
+	public void startRecovery(){
+		if(!isRecovering())
+			recoverySteps = (Arena.STANDARD_TIMESTEP * ((TypeValues.MAX_STRENGTH-speed)));
+	}
+	
+	public boolean isRecovering(){
+		if(recoverySteps > 0){
 			return true;
 		} else{
 			return false;
@@ -82,7 +99,6 @@ public class FighterAI {
 	}
 	
 	private void executeRule(Rule rule){
-		timestepBlock = (Arena.STANDARD_TIMESTEP * ((TypeValues.MAX_STRENGTH-speed)));
 		ActionPicker ap = new ActionPicker();
 		Behavior behavior = rule.getBehavior();
 		if(behavior != null){
@@ -92,7 +108,7 @@ public class FighterAI {
 			executeFightAction(ap.pick(fightAction));
 		}
 		System.out.println(this.ast.getName() + ": " + this.currentMoveAction + " and " + this.currentFightAction
-				+ ", position: " + this.getPosition());
+				+ ", position: " + this.getPosition() + ", health: " + getHealth());
 	}
 	
 	private void executeMoveAction(SimpleAction moveAction){
@@ -189,7 +205,7 @@ public class FighterAI {
 		int myPosition = this.getPosition();
 		int oppPosition = opponent.getPosition();
 		int positionDelta = Math.abs(myPosition-oppPosition);
-		int reach = Math.max(this.getKickReach(), this.getPunchReach());
+		int reach = Math.min(this.getKickReach(), this.getPunchReach());
 		if(positionDelta <= reach){
 			calculatedCondition = "near";
 		} else{
@@ -286,6 +302,20 @@ public class FighterAI {
 
 	public String getCurrentMoveAction() {
 		return currentMoveAction;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
+	public boolean isDefeated(){
+		if(getHealth() <= 0)
+			return true;
+		else return false;
 	}
 
 	/**
