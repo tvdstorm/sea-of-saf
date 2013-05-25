@@ -5,7 +5,7 @@ import java.util.List;
 
 import ast.fighter.Fighter;
 
-public class Arena {
+public class Jury {
 	
 	public static final int MIN_FLOOR_POSITION = 1;
 	public static final int MAX_FLOOR_POSITION = 200;
@@ -16,7 +16,7 @@ public class Arena {
 	FighterAI fighterTwo;
 	private List<FighterAI> winners;
 	
-	public Arena(Fighter fighterOne, Fighter fighterTwo){
+	public Jury(Fighter fighterOne, Fighter fighterTwo){
 		this.fighterOne = new FighterAI(fighterOne, MIN_FLOOR_POSITION);
 		this.fighterTwo = new FighterAI(fighterTwo, MAX_FLOOR_POSITION);
 		init();
@@ -38,7 +38,7 @@ public class Arena {
 			fighterTwo.setHealth(fighterTwo.getHealth()-damageToFighterTwo);
 			fighterOne.startRecovery();
 			fighterTwo.startRecovery();
-			//sleep(1);
+			//sleep(50);
 		}
 		this.winners = winningFighters();
 		printOutcome();

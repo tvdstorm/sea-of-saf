@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.List;
 
-import game.Arena;
+import game.Jury;
 
 import ast.Printer;
 import ast.checker.Checker;
@@ -127,8 +127,8 @@ public class Main {
 	  private static void startFight(List<Fighter> fighters){
 		  Fighter fighterOne = fighters.get(0);
 		  Fighter fighterTwo = fighters.get(1);
-		  Arena arena = new Arena(fighterOne, fighterTwo);
-		  arena.startFight();
+		  Jury jury = new Jury(fighterOne, fighterTwo);
+		  jury.startFight();
 	  }
 
 }

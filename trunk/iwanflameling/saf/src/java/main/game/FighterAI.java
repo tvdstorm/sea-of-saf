@@ -78,7 +78,7 @@ public class FighterAI {
 	 */
 	public void startRecovery(){
 		if(!isRecovering())
-			recoverySteps = (Arena.STANDARD_TIMESTEP * ((TypeValues.MAX_STRENGTH-speed)));
+			recoverySteps = (Jury.STANDARD_TIMESTEP * ((TypeValues.MAX_STRENGTH-speed)));
 	}
 	
 	public boolean isRecovering(){
@@ -154,8 +154,8 @@ public class FighterAI {
 	}
 	
 	private void initPositionRange(){
-		this.maxPos = Arena.MAX_FLOOR_POSITION;
-		this.minPos = Arena.MIN_FLOOR_POSITION;
+		this.maxPos = Jury.MAX_FLOOR_POSITION;
+		this.minPos = Jury.MIN_FLOOR_POSITION;
 		if(opponent != null){
 			switch (direction()){
 			case RIGHT:
