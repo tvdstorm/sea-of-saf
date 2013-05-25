@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.JFrame;
 
-public class Battlefield extends JFrame implements UpdatableGui {
+public class Arena extends JFrame implements UpdatableGui {
 
 	public void init(){
 		
