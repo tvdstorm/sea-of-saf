@@ -9,6 +9,6 @@ package ast;
  */
 public abstract class ASTNode {
 
-	public abstract void accept(Visitor visitor);
+	public abstract void accept(AstVisitor astVisitor);
 	
 }

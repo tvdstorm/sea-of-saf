@@ -3,7 +3,7 @@
  */
 package ast.action;
 
-import ast.Visitor;
+import ast.AstVisitor;
 
 /**
  * @author iwan
@@ -22,8 +22,8 @@ public class SimpleAction extends Action {
 	}
 	
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);
 		
 	}
 	

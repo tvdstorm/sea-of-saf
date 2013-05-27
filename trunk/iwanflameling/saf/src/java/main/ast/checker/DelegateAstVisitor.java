@@ -1,6 +1,6 @@
 package ast.checker;
 
-import ast.Visitor;
+import ast.AstVisitor;
 import ast.action.Choose;
 import ast.action.SimpleAction;
 import ast.condition.And;
@@ -12,7 +12,7 @@ import ast.fighter.Fighter;
 import ast.fighter.FighterProp;
 import ast.fighter.Strength;
 
-public abstract class DelegateVisitor implements Visitor {
+public abstract class DelegateAstVisitor implements AstVisitor {
 
 	@Override
 	public void visit(And and) {

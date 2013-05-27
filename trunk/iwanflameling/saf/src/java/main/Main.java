@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.List;
 
 import game.Jury;
+import gui.Arena;
 
 import ast.Printer;
 import ast.checker.Checker;

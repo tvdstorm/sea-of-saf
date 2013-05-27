@@ -4,7 +4,7 @@
 package ast.condition;
 
 import ast.ASTNode;
-import ast.Visitor;
+import ast.AstVisitor;
 
 /**
  * @author iwan
@@ -20,8 +20,8 @@ public abstract class Condition extends ASTNode {
 	}
 	
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

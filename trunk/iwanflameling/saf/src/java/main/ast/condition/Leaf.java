@@ -3,7 +3,7 @@
  */
 package ast.condition;
 
-import ast.Visitor;
+import ast.AstVisitor;
 
 
 /**
@@ -22,8 +22,8 @@ public class Leaf extends Condition {
 	}
 
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);
 		
 	}
 

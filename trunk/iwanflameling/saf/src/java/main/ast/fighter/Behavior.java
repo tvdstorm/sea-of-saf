@@ -3,7 +3,7 @@
  */
 package ast.fighter;
 
-import ast.Visitor;
+import ast.AstVisitor;
 import ast.action.Action;
 import ast.condition.Condition;
 
@@ -24,8 +24,8 @@ public class Behavior extends FighterProp {
 	}
 	
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);	
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);	
 	}
 
 	/**

@@ -6,9 +6,9 @@ import java.util.Random;
 import ast.action.Action;
 import ast.action.Choose;
 import ast.action.SimpleAction;
-import ast.checker.DelegateVisitor;
+import ast.checker.DelegateAstVisitor;
 
-public class ActionPicker extends DelegateVisitor{
+public class ActionPicker extends DelegateAstVisitor{
 	SimpleAction returnValue;
 	
 	public SimpleAction pick(Action action){
@@ -18,7 +18,7 @@ public class ActionPicker extends DelegateVisitor{
 	}
 
 	/* (non-Javadoc)
-	 * @see ast.checker.DelegateVisitor#visit(ast.action.SimpleAction)
+	 * @see ast.checker.DelegateAstVisitor#visit(ast.action.SimpleAction)
 	 */
 	@Override
 	public void visit(SimpleAction simpleAction) {
@@ -27,7 +27,7 @@ public class ActionPicker extends DelegateVisitor{
 	}
 
 	/* (non-Javadoc)
-	 * @see ast.checker.DelegateVisitor#visit(ast.action.Choose)
+	 * @see ast.checker.DelegateAstVisitor#visit(ast.action.Choose)
 	 */
 	@Override
 	public void visit(Choose choose) {

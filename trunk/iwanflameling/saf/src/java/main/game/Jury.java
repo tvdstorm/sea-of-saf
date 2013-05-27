@@ -1,5 +1,7 @@
 package game;
 
+import gui.Arena;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,10 @@ public class Jury {
 	public static final int STANDARD_TIMESTEP = 5;
 	
 	public enum Outcome{NO_WINNERS, TIE, WINNER};
-	FighterAI fighterOne;
-	FighterAI fighterTwo;
+	private FighterAI fighterOne;
+	private FighterAI fighterTwo;
 	private List<FighterAI> winners;
+	private Arena arena;
 	
 	public Jury(Fighter fighterOne, Fighter fighterTwo){
 		this.fighterOne = new FighterAI(fighterOne, MIN_FLOOR_POSITION);
@@ -26,6 +29,7 @@ public class Jury {
 		this.fighterOne.setOpponent(this.fighterTwo);
 		this.fighterTwo.setOpponent(this.fighterOne);
 		winners = new ArrayList<FighterAI>();
+		this.arena = new Arena(this);
 	}
 	
 	public void startFight(){
@@ -38,7 +42,8 @@ public class Jury {
 			fighterTwo.setHealth(fighterTwo.getHealth()-damageToFighterTwo);
 			fighterOne.startRecovery();
 			fighterTwo.startRecovery();
-			//sleep(50);
+			//this.arena.update();
+			sleep(10);
 		}
 		this.winners = winningFighters();
 		printOutcome();
@@ -156,6 +161,14 @@ public class Jury {
 		if((requiredReach <= attackReach) && !fighter.isRecovering())
 			hit = true;
 		return hit;
+	}
+
+	public FighterAI getFighterOne() {
+		return fighterOne;
+	}
+
+	public FighterAI getFighterTwo() {
+		return fighterTwo;
 	}
 
 }
