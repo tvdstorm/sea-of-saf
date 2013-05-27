@@ -15,7 +15,7 @@ import ast.fighter.Fighter;
 import ast.fighter.FighterProp;
 import ast.fighter.Strength;
 
-public class Checker extends DelegateVisitor {
+public class Checker extends DelegateAstVisitor {
 	
 	private List<Message> messages;
 	
@@ -112,7 +112,7 @@ public class Checker extends DelegateVisitor {
 			}
 	}
 	
-	private class ActionChecker extends DelegateVisitor{
+	private class ActionChecker extends DelegateAstVisitor{
 		private Set<String> legalActions;
 		private String type;
 		

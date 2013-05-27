@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import ast.TypeValues;
-import ast.checker.DelegateVisitor;
+import ast.checker.DelegateAstVisitor;
 import ast.condition.And;
 import ast.condition.Condition;
 import ast.condition.Connective;
@@ -18,7 +18,7 @@ import ast.fighter.Behavior;
 import ast.fighter.Fighter;
 import ast.fighter.FighterProp;
 
-public class RulesFactory extends DelegateVisitor {
+public class RulesFactory extends DelegateAstVisitor {
 	
 	private Set<String> conditions;
 	private List<Rule> rules;
@@ -203,7 +203,7 @@ public class RulesFactory extends DelegateVisitor {
 	}
 	
 	
-	private class RuleConditionsPopulator extends DelegateVisitor{
+	private class RuleConditionsPopulator extends DelegateAstVisitor{
 		
 		private Leaf endNodeChild;
 		private boolean endNode = false;

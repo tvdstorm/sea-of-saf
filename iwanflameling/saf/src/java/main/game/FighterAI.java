@@ -11,7 +11,7 @@ import ast.TypeValues;
 import ast.action.Action;
 import ast.action.Choose;
 import ast.action.SimpleAction;
-import ast.checker.DelegateVisitor;
+import ast.checker.DelegateAstVisitor;
 import ast.fighter.Behavior;
 import ast.fighter.Fighter;
 

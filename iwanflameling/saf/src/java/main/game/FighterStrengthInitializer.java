@@ -1,9 +1,9 @@
 package game;
 
-import ast.checker.DelegateVisitor;
+import ast.checker.DelegateAstVisitor;
 import ast.fighter.Strength;
 
-public class FighterStrengthInitializer extends DelegateVisitor {
+public class FighterStrengthInitializer extends DelegateAstVisitor {
 	
 	FighterAI fighter;
 
@@ -15,7 +15,7 @@ public class FighterStrengthInitializer extends DelegateVisitor {
 		fighter.ast.accept(this);
 	}
 	/* (non-Javadoc)
-	 * @see ast.checker.DelegateVisitor#visit(ast.fighter.Strength)
+	 * @see ast.checker.DelegateAstVisitor#visit(ast.fighter.Strength)
 	 */
 	@Override
 	public void visit(Strength strength) {

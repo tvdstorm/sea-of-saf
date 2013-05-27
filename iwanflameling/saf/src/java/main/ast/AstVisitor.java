@@ -15,7 +15,7 @@ import ast.fighter.Strength;
  * @author iwan
  *
  */
-public interface Visitor {
+public interface AstVisitor {
 	public void visit(And and);
 	public void visit(Leaf leaf);
 	public void visit(Or or);

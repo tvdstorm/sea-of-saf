@@ -4,7 +4,7 @@
 package ast.fighter;
 
 import ast.ASTNode;
-import ast.Visitor;
+import ast.AstVisitor;
 
 /**
  * @author iwan

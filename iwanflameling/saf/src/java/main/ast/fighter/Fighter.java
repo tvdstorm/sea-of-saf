@@ -6,7 +6,7 @@ package ast.fighter;
 import java.util.List;
 
 import ast.ASTNode;
-import ast.Visitor;
+import ast.AstVisitor;
 
 /**
  * Describes a Fighter in the SAF game.
@@ -49,8 +49,8 @@ public class Fighter extends ASTNode {
 	}
 	
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);
 		
 	}
 

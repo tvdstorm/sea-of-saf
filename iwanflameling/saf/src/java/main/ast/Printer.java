@@ -21,7 +21,7 @@ import ast.object.ConditionType;
  * @author iwan
  *
  */
-public class Printer implements Visitor {
+public class Printer implements AstVisitor {
 	
 	public static String print(ASTNode node){
 		Printer printer = new Printer();

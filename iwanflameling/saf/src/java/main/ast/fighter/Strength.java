@@ -1,6 +1,6 @@
 package ast.fighter;
 
-import ast.Visitor;
+import ast.AstVisitor;
 
 /**
  * 
@@ -18,8 +18,8 @@ public class Strength extends FighterProp {
 	}
 	
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);	
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);	
 	}
 
 	/**

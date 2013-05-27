@@ -3,7 +3,7 @@
  */
 package ast.condition;
 
-import ast.Visitor;
+import ast.AstVisitor;
 
 /**
  * @author iwan
@@ -19,8 +19,8 @@ public class And extends Connective {
 	}
 	
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

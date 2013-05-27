@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ast.ASTNode;
-import ast.Visitor;
+import ast.AstVisitor;
 
 /**
  * @author iwan
@@ -23,8 +23,8 @@ public class Choose extends Action {
 
 
 	@Override
-	public void accept(Visitor visitor) {
-		visitor.visit(this);
+	public void accept(AstVisitor astVisitor) {
+		astVisitor.visit(this);
 
 	}
 	
