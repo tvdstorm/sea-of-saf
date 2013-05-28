@@ -42,8 +42,8 @@ public class Jury {
 			fighterTwo.setHealth(fighterTwo.getHealth()-damageToFighterTwo);
 			fighterOne.startRecovery();
 			fighterTwo.startRecovery();
-			//this.arena.update();
-			sleep(10);
+			this.arena.update();
+			sleep(2);
 		}
 		this.winners = winningFighters();
 		printOutcome();

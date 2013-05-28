@@ -1,15 +1,20 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import game.Jury;
 
 import javax.swing.JFrame;
 
-public class Arena extends JFrame implements VisitableGui {
+public class Arena extends JFrame implements UpdatableGui {
 	
 	private Jury jury;
-	private List<VisitableGui> visitableChildren;
+	private Battlefield battlefield;
+	private HealthPanel hp1;
+	private HealthPanel hp2;
 	
 	public Arena(Jury jury){
 		this.jury = jury;
@@ -23,31 +28,26 @@ public class Arena extends JFrame implements VisitableGui {
 		this.setLayout(null);
 		this.setVisible(true);
 		
-		HealthPanel hp1 = new HealthPanel();
+		hp1 = new HealthPanel(jury.getFighterOne());
 		hp1.setBounds(0, 0, 200, 100);
-		this.visitableChildren.add(hp1);
 		this.getContentPane().add(hp1);
 		
-		HealthPanel hp2 = new HealthPanel();
+		hp2 = new HealthPanel(jury.getFighterTwo());
 		hp2.setBounds(600, 0, 200, 100);
-		this.visitableChildren.add(hp2);
 		this.getContentPane().add(hp2);
 		
-		Battlefield bf = new Battlefield(jury.getFighterOne(), jury.getFighterTwo());
-		bf.setBounds(0, 100, 800, 400);
-		this.visitableChildren.add(bf);
-		this.getContentPane().add(bf);
+		battlefield = new Battlefield(jury.getFighterOne(), jury.getFighterTwo());
+		battlefield.setBounds(0, 100, 800, 400);
+		this.getContentPane().add(battlefield);
 		
 		this.setVisible(true);
 	}
 
-	public List<VisitableGui> getVisitableChildren() {
-		return visitableChildren;
-	}
-
 	@Override
-	public void accept(GuiVisitor guiVisitor) {
-		guiVisitor.visit(this);
+	public void update() {
+		this.battlefield.update();
+		this.hp1.update();
+		this.hp2.update();
 	}
 
 
