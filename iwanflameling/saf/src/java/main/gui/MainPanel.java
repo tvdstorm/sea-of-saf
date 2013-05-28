@@ -2,11 +2,14 @@ package gui;
 
 import game.Jury;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,6 +20,8 @@ public class MainPanel extends JPanel implements UpdatableGui {
 	private Jury jury;
 	private JButton startButton;
 	private JLabel infoLabel;
+	public static final int WIDTH = Arena.WIDTH-(2*HealthPanel.WIDTH);
+	public static final int HEIGHT = Arena.HEIGHT-Battlefield.HEIGHT;;
 	
 	public MainPanel(Jury jury){
 		this.jury = jury;
@@ -24,16 +29,17 @@ public class MainPanel extends JPanel implements UpdatableGui {
 	}
 	
 	private void init(){
-		this.setSize(300, 100);
-		this.setLayout(new FlowLayout());
+		//this.setBorder(BorderFactory.createTitledBorder("MainPanel"));
+		this.setSize(WIDTH, HEIGHT);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
 		this.startButton = createStartButton();
+		this.startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		this.infoLabel = new JLabel();
-		infoLabel.setFont(new Font("Serif", Font.PLAIN, 14));
+		this.infoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		infoLabel.setFont(new Font("Arial Black", Font.BOLD, 26));
 		this.add(startButton);
 		this.add(infoLabel);
-		
-		
-		this.setVisible(true);
 	}
 	
 	private JButton createStartButton(){
@@ -69,7 +75,7 @@ public class MainPanel extends JPanel implements UpdatableGui {
 			infoLabel.setText("Fight stopped\ndue to cowardice");
 			break;
 		case WINNER:
-			infoLabel.setText(jury.getWinningFighters().get(0).getAst().getName() + "\nWINS!");
+			infoLabel.setText(jury.getWinningFighters().get(0).getAst().getName() + " WINS!");
 			break;
 		default:
 			break;

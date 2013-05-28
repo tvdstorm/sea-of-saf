@@ -1,21 +1,26 @@
-iwan{
+Iwan{
 
-punchReach = 8
-kickPower = 9
-far[run_towards punch_high]
+punchReach = 7
+kickPower = 8
+kickReach = 10
+punchPower = 6
+far[run_towards kick_high]
 near and far[choose(stand run_away) punch_low]
-much_stronger and far or stronger and near[choose(stand run_away) kick_low]
-always[stand kick_low]
-far[stand kick_high]
-
+near[walk_away kick_high]
+near[walk_away block_high]
+near[walk_towards choose(punch_low punch_high)]
+much_stronger and far or stronger and near[choose(stand walk_away) choose(kick_high block_high)]
+always[stand punch_high]
 }
 
-karel
-{
-punchReach = 8
-kickPower = 9
-far[run_towards punch_high]
-near or far[choose(stand run_away) kick_high]
-near and far and much_stronger or stronger[choose(stand crouch) kick_high]
+Joeri{
+
+punchReach = 6
+kickPower = 7
+kickReach = 2
+punchPower = 7
+far[run_towards punch_low]
+near or far[choose(stand run_towards) punch_high]
+weaker or much_weaker[choose(stand walk_towards) kick_high]
 always[stand kick_low]
 }

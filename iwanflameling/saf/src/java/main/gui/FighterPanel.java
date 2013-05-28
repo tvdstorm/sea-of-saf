@@ -3,10 +3,12 @@ package gui;
 import game.FighterAI;
 import game.FighterAI.Direction;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Image;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,12 +17,12 @@ import ast.TypeValues;
 
 public class FighterPanel extends JPanel implements UpdatableGui {
 	
-	private static final int WIDTH = 200;
-	private static final int HEIGHT = 300;
+	private static final int WIDTH = 203;
+	private static final int HEIGHT = 330;
 
 	private FighterAI fighter;
-	private ImageIcon imageIcon;
 	private JLabel fighterLabel;
+	private JLabel fighterNameLabel;
 	
 	public FighterPanel(FighterAI fighter){
 		this.fighter = fighter;
@@ -28,13 +30,16 @@ public class FighterPanel extends JPanel implements UpdatableGui {
 	}
 	
 	private void init(){
-		this.setBorder(BorderFactory.createTitledBorder("FighterPanel"));
+		//this.setBorder(BorderFactory.createTitledBorder("FighterPanel"));
 		this.setSize(WIDTH, HEIGHT);
-		this.setLayout(new FlowLayout());
-		this.imageIcon = new ImageIcon();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.fighterLabel = new JLabel();
+		this.fighterLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.fighterNameLabel = new JLabel(fighter.getAst().getName());
+		this.fighterNameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.fighterNameLabel.setVisible(false);
+		this.add(fighterNameLabel);
 		this.add(fighterLabel);
-		this.setVisible(true);
 	}
 	
 	
@@ -50,7 +55,9 @@ public class FighterPanel extends JPanel implements UpdatableGui {
 
 	@Override
 	public void update() {
-		this.setLocation(fighter.getPosition(), this.getY());
+		this.setLocation(fighter.getPosition()*(Battlefield.WIDTH/(Battlefield.WIDTH-(2*WIDTH))), this.getY());
+		if(!this.fighterNameLabel.isVisible())
+			this.fighterNameLabel.setVisible(true);
 		setCurrentImageIcon();
 	}
 	

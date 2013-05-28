@@ -12,6 +12,8 @@ public class Battlefield extends JPanel implements UpdatableGui {
 	private FighterAI fighterTwo;
 	private FighterPanel fp1;
 	private FighterPanel fp2;
+	public static final int WIDTH = Arena.WIDTH;
+	public static final int HEIGHT = Arena.HEIGHT-HealthPanel.HEIGTH;
 	
 	public Battlefield(FighterAI fighterOne, FighterAI fighterTwo){
 		this.fighterOne = fighterOne;
@@ -20,8 +22,8 @@ public class Battlefield extends JPanel implements UpdatableGui {
 	}
 	
 	private void init(){
-		this.setBorder(BorderFactory.createTitledBorder("Battlefield"));
-		this.setBounds(0, 100, 800, 400);
+		//this.setBorder(BorderFactory.createTitledBorder("Battlefield"));
+		setSize(WIDTH, HEIGHT);
 		this.setLayout(null);
 		this.add(new JLabel("This is the battlefield!"));
 		this.setVisible(true);
@@ -33,8 +35,6 @@ public class Battlefield extends JPanel implements UpdatableGui {
 		fp2 = new FighterPanel(fighterTwo);
 		fp2.setLocation(200, 50);
 		this.add(fp2);
-		
-		this.setVisible(true);
 	}
 
 	@Override
