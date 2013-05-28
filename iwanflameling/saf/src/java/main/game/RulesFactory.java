@@ -74,7 +74,7 @@ public class RulesFactory extends DelegateAstVisitor {
 		initMembers();
 		this.conditions = conditions;
 		this.fighter = fighter;
-		fighter.ast.accept(this);
+		fighter.getAst().accept(this);
 		return rules;
 	}
 	
