@@ -31,7 +31,7 @@ public class FighterAI {
 	private long recoverySteps;
 	private long speed;
 	private FighterAI opponent;
-	private enum Direction {LEFT, RIGHT};
+	public enum Direction {LEFT, RIGHT};
 	
 	/**
 	 * 
@@ -159,10 +159,10 @@ public class FighterAI {
 		if(opponent != null){
 			switch (direction()){
 			case RIGHT:
-				maxPos = opponent.getPosition();
+				maxPos = opponent.getPosition()-1;
 				break;
 			case LEFT:
-				minPos = opponent.getPosition();
+				minPos = opponent.getPosition()+1;
 				break;
 			default:
 				break;
@@ -170,7 +170,7 @@ public class FighterAI {
 		}
 	}
 	
-	private Direction direction(){
+	public Direction direction(){
 		Direction result = Direction.RIGHT;
 		if (opponent != null) {
 			if (getPosition() >= opponent.getPosition())
