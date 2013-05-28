@@ -7,6 +7,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
+
 import ast.TypeValues;
 import ast.action.Action;
 import ast.action.Choose;
@@ -17,7 +19,7 @@ import ast.fighter.Fighter;
 
 public class FighterAI {
 
-	Fighter ast;
+	private Fighter ast;
 	private int position;
 	private String currentFightAction;
 	private String currentMoveAction;
@@ -31,7 +33,9 @@ public class FighterAI {
 	private long recoverySteps;
 	private long speed;
 	private FighterAI opponent;
+	private long numberOfActionsExecuted;
 	public enum Direction {LEFT, RIGHT};
+	public static final int FULL_HEALTH = 100;
 	
 	/**
 	 * 
@@ -46,7 +50,7 @@ public class FighterAI {
 		this.setPosition(initialPosition);
 		initStrengths();
 		this.speed = calculateSpeed();
-		this.health = 100;
+		this.health = FULL_HEALTH;
 	}
 	
 	public void setOpponent(FighterAI opponent){
@@ -107,6 +111,7 @@ public class FighterAI {
 			Action fightAction = behavior.getFightAction();
 			executeFightAction(ap.pick(fightAction));
 		}
+		this.numberOfActionsExecuted++;
 		System.out.println(this.ast.getName() + ": " + this.currentMoveAction + " and " + this.currentFightAction
 				+ ", position: " + this.getPosition() + ", health: " + getHealth());
 	}
@@ -312,10 +317,18 @@ public class FighterAI {
 		this.health = health;
 	}
 	
+	public Fighter getAst() {
+		return ast;
+	}
+
 	public boolean isDefeated(){
 		if(getHealth() <= 0)
 			return true;
 		else return false;
+	}
+
+	public long getNumberOfActionsExecuted() {
+		return numberOfActionsExecuted;
 	}
 
 	/**

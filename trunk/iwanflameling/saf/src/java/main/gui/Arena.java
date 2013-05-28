@@ -15,6 +15,7 @@ public class Arena extends JFrame implements UpdatableGui {
 	private Battlefield battlefield;
 	private HealthPanel hp1;
 	private HealthPanel hp2;
+	private MainPanel mp;
 	
 	public Arena(Jury jury){
 		this.jury = jury;
@@ -32,6 +33,10 @@ public class Arena extends JFrame implements UpdatableGui {
 		hp1.setBounds(0, 0, 200, 100);
 		this.getContentPane().add(hp1);
 		
+		mp = new MainPanel(this.jury);
+		mp.setLocation(250, 0);
+		this.getContentPane().add(mp);
+		
 		hp2 = new HealthPanel(jury.getFighterTwo());
 		hp2.setBounds(600, 0, 200, 100);
 		this.getContentPane().add(hp2);
@@ -48,6 +53,7 @@ public class Arena extends JFrame implements UpdatableGui {
 		this.battlefield.update();
 		this.hp1.update();
 		this.hp2.update();
+		this.mp.update();
 	}
 
 

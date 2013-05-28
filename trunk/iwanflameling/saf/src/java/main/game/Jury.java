@@ -12,8 +12,9 @@ public class Jury {
 	public static final int MIN_FLOOR_POSITION = 1;
 	public static final int MAX_FLOOR_POSITION = 200;
 	public static final int STANDARD_TIMESTEP = 5;
+	public static final long WHIMP_TRESHOLD = 10000;
 	
-	public enum Outcome{NO_WINNERS, TIE, WINNER};
+	public enum Outcome{NO_WINNERS, TIE, WINNER, WHIMPS};
 	private FighterAI fighterOne;
 	private FighterAI fighterTwo;
 	private List<FighterAI> winners;
@@ -33,7 +34,7 @@ public class Jury {
 	}
 	
 	public void startFight(){
-		while(!fighterIsDefeated()){
+		while(!fighterIsDefeated() || fightersAreWhimps()){
 			fighterOne.takeAction();
 			fighterTwo.takeAction();
 			int damageToFighterOne = calculateDamage(fighterOne, fighterTwo);
@@ -45,10 +46,21 @@ public class Jury {
 			this.arena.update();
 			sleep(2);
 		}
-		this.winners = winningFighters();
+		this.winners = getWinningFighters();
 		printOutcome();
+		this.arena.update();
 	}
 	
+	private boolean fightersAreWhimps() {
+		if(fighterOne.getNumberOfActionsExecuted() >= WHIMP_TRESHOLD
+				&& fighterTwo.getNumberOfActionsExecuted() >= WHIMP_TRESHOLD
+				&& fighterOne.getHealth() == FighterAI.FULL_HEALTH
+				&& fighterTwo.getHealth() == FighterAI.FULL_HEALTH)
+			return true;
+		else
+			return false;
+	}
+
 	private void sleep(long millis){
 		try {
 			Thread.sleep(millis);
@@ -67,17 +79,17 @@ public class Jury {
 			System.out.println("It's a Tie!");
 			break;
 		case WINNER:
-			System.out.println(winners.get(0).ast.getName() + " WINS!");
+			System.out.println(winners.get(0).getAst().getName() + " WINS!");
 
 		default:
 			break;
 		}
 	}
 	
-	private Outcome outcome(){
+	public Outcome outcome(){
 		Outcome outcome;
-		if(winners.isEmpty()){
-			outcome = Outcome.NO_WINNERS;
+		if(fightersAreWhimps()){
+			outcome = Outcome.WHIMPS;
 		} else if (winners.size() >= 2){
 			outcome = Outcome.TIE;
 		} else if(winners.size() == 1) {
@@ -88,7 +100,7 @@ public class Jury {
 		return outcome;
 	}
 	
-	private List<FighterAI> winningFighters(){
+	public List<FighterAI> getWinningFighters(){
 		List<FighterAI> winners = new ArrayList<FighterAI>();
 		if(fighterOne.isDefeated()){
 			winners.add(fighterTwo);

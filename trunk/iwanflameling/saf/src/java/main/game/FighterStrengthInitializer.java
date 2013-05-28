@@ -12,7 +12,7 @@ public class FighterStrengthInitializer extends DelegateAstVisitor {
 	}
 	
 	public void initStrengths(){
-		fighter.ast.accept(this);
+		fighter.getAst().accept(this);
 	}
 	/* (non-Javadoc)
 	 * @see ast.checker.DelegateAstVisitor#visit(ast.fighter.Strength)

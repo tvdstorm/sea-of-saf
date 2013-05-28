@@ -129,7 +129,7 @@ public class Main {
 		  Fighter fighterOne = fighters.get(0);
 		  Fighter fighterTwo = fighters.get(1);
 		  Jury jury = new Jury(fighterOne, fighterTwo);
-		  jury.startFight();
+		  //jury.startFight();
 	  }
 
 }
