@@ -9,8 +9,6 @@ import ast.fighter.Fighter;
 
 public class Jury {
 	
-	public static final int MIN_FLOOR_POSITION = 1;
-	public static final int MAX_FLOOR_POSITION = 200;
 	public static final int STANDARD_TIMESTEP = 5;
 	public static final long WHIMP_TRESHOLD = 10000;
 	
@@ -21,8 +19,8 @@ public class Jury {
 	private Arena arena;
 	
 	public Jury(Fighter fighterOne, Fighter fighterTwo){
-		this.fighterOne = new FighterAI(fighterOne, MIN_FLOOR_POSITION);
-		this.fighterTwo = new FighterAI(fighterTwo, MAX_FLOOR_POSITION);
+		this.fighterOne = new FighterAI(fighterOne, FighterAI.MIN_FLOOR_POSITION);
+		this.fighterTwo = new FighterAI(fighterTwo, FighterAI.MAX_FLOOR_POSITION);
 		init();
 	}
 	
@@ -44,7 +42,7 @@ public class Jury {
 			fighterOne.startRecovery();
 			fighterTwo.startRecovery();
 			this.arena.update();
-			sleep(2);
+			sleep(10);
 		}
 		this.winners = getWinningFighters();
 		printOutcome();
@@ -124,7 +122,10 @@ public class Jury {
 	private int calculateDamage(FighterAI fighter, FighterAI opponent){
 		int damage = 0;
 		if(isHit(fighter, opponent) && !isBlocked(fighter, opponent)){
-			damage = 5;
+			if(fighter.getCurrentFightAction().contains("kick"))
+				damage = fighter.getKickPower();
+			else if(fighter.getCurrentFightAction().contains("punch"))
+				damage = fighter.getPunchPower();
 		}
 		return damage;
 	}

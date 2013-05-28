@@ -36,6 +36,8 @@ public class FighterAI {
 	private long numberOfActionsExecuted;
 	public enum Direction {LEFT, RIGHT};
 	public static final int FULL_HEALTH = 100;
+	public static final int MIN_FLOOR_POSITION = 1;
+	public static final int MAX_FLOOR_POSITION = 200;
 	
 	/**
 	 * 
@@ -159,8 +161,8 @@ public class FighterAI {
 	}
 	
 	private void initPositionRange(){
-		this.maxPos = Jury.MAX_FLOOR_POSITION;
-		this.minPos = Jury.MIN_FLOOR_POSITION;
+		this.maxPos = MAX_FLOOR_POSITION;
+		this.minPos = MIN_FLOOR_POSITION;
 		if(opponent != null){
 			switch (direction()){
 			case RIGHT:
