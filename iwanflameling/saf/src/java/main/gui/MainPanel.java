@@ -3,12 +3,10 @@ package gui;
 import game.Jury;
 
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,7 +27,6 @@ public class MainPanel extends JPanel implements UpdatableGui {
 	}
 	
 	private void init(){
-		//this.setBorder(BorderFactory.createTitledBorder("MainPanel"));
 		this.setSize(WIDTH, HEIGHT);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
@@ -72,7 +69,7 @@ public class MainPanel extends JPanel implements UpdatableGui {
 			infoLabel.setText("It's a tie.");
 			break;
 		case WHIMPS:
-			infoLabel.setText("Fight stopped\ndue to cowardice");
+			infoLabel.setText("Fight stopped due to cowardice");
 			break;
 		case WINNER:
 			infoLabel.setText(jury.getWinningFighters().get(0).getAst().getName() + " WINS!");

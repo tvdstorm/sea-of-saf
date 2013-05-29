@@ -36,7 +36,6 @@ public class SpeedCalculatorTest {
 
 	@Test
 	public void testEqualEverything() {
-		//fail("Not yet implemented");
 		Fighter ast = createFighterAst(5,5,5,5);
 		FighterAI fighter = new FighterAI(ast, 0);
 		long speed = fighter.calculateSpeed();

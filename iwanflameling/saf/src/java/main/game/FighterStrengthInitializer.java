@@ -14,9 +14,7 @@ public class FighterStrengthInitializer extends DelegateAstVisitor {
 	public void initStrengths(){
 		fighter.getAst().accept(this);
 	}
-	/* (non-Javadoc)
-	 * @see ast.checker.DelegateAstVisitor#visit(ast.fighter.Strength)
-	 */
+	
 	@Override
 	public void visit(Strength strength) {
 		String fightId = strength.getFightId();

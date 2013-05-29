@@ -17,18 +17,12 @@ public class ActionPicker extends DelegateAstVisitor{
 		return returnValue;
 	}
 
-	/* (non-Javadoc)
-	 * @see ast.checker.DelegateAstVisitor#visit(ast.action.SimpleAction)
-	 */
 	@Override
 	public void visit(SimpleAction simpleAction) {
 		returnValue = simpleAction;
 		super.visit(simpleAction);
 	}
 
-	/* (non-Javadoc)
-	 * @see ast.checker.DelegateAstVisitor#visit(ast.action.Choose)
-	 */
 	@Override
 	public void visit(Choose choose) {
 		Random rand = new Random();

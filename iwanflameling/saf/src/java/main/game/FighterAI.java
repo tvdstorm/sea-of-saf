@@ -1,19 +1,14 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.Vector;
 
-import javax.swing.plaf.basic.BasicSliderUI.ActionScroller;
-
 import ast.TypeValues;
 import ast.action.Action;
-import ast.action.Choose;
 import ast.action.SimpleAction;
-import ast.checker.DelegateAstVisitor;
 import ast.fighter.Behavior;
 import ast.fighter.Fighter;
 
@@ -114,8 +109,6 @@ public class FighterAI {
 			executeFightAction(ap.pick(fightAction));
 		}
 		this.numberOfActionsExecuted++;
-		System.out.println(this.ast.getName() + ": " + this.currentMoveAction + " and " + this.currentFightAction
-				+ ", position: " + this.getPosition() + ", health: " + getHealth());
 	}
 	
 	private void executeMoveAction(SimpleAction moveAction){
@@ -203,7 +196,6 @@ public class FighterAI {
 		Vector<String> condition = new Vector<String>();
 		condition.add(calculatePositionCondition());
 		condition.add(calculateStrengthCondition());
-		System.out.println(condition);
 		return condition.toArray(new String[0]);
 	}
 	
@@ -247,58 +239,34 @@ public class FighterAI {
 		return calculatedCondition;
 	}
 
-	/**
-	 * @return the kickPower
-	 */
 	public int getKickPower() {
 		return kickPower;
 	}
 
-	/**
-	 * @param kickPower the kickPower to set
-	 */
 	void setKickPower(int kickPower) {
 		this.kickPower = kickPower;
 	}
 
-	/**
-	 * @return the kickReach
-	 */
 	public int getKickReach() {
 		return kickReach;
 	}
 
-	/**
-	 * @param kickReach the kickReach to set
-	 */
 	void setKickReach(int kickReach) {
 		this.kickReach = kickReach;
 	}
 
-	/**
-	 * @return the punchPower
-	 */
 	public int getPunchPower() {
 		return punchPower;
 	}
 
-	/**
-	 * @param punchPower the punchPower to set
-	 */
 	void setPunchPower(int punchPower) {
 		this.punchPower = punchPower;
 	}
 
-	/**
-	 * @return the punchReach
-	 */
 	public int getPunchReach() {
 		return punchReach;
 	}
 
-	/**
-	 * @param punchReach the punchReach to set
-	 */
 	void setPunchReach(int punchReach) {
 		this.punchReach = punchReach;
 	}
@@ -316,7 +284,7 @@ public class FighterAI {
 	}
 
 	public void setHealth(int health) {
-		this.health = health;
+		this.health = Math.max(health, 0);
 	}
 	
 	public Fighter getAst() {

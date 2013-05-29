@@ -1,11 +1,10 @@
 package gui;
 
+import game.FighterAI;
+
 import java.awt.Component;
 import java.awt.Font;
 
-import game.FighterAI;
-
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,7 +22,6 @@ public class HealthPanel extends JPanel implements UpdatableGui{
 	}
 	
 	private void init(){
-		//this.setBorder(BorderFactory.createTitledBorder("HealthPanel"));
 		this.setSize(WIDTH, HEIGTH);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
