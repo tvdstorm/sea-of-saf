@@ -61,7 +61,6 @@ public class Main {
 	    FileReader input;
 	    try{
 	        input = new FileReader("input.txt");
-	        System.out.println("input-file found, using it.");
 	    } catch(FileNotFoundException e) {
 	        System.err.println("input-file not found: " + e);
 	        input = null;
