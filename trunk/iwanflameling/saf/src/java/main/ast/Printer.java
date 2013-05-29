@@ -15,7 +15,6 @@ import ast.fighter.Behavior;
 import ast.fighter.Fighter;
 import ast.fighter.FighterProp;
 import ast.fighter.Strength;
-import ast.object.ConditionType;
 
 /**
  * @author iwan

@@ -10,7 +10,7 @@ import ast.fighter.Fighter;
 public class Jury {
 	
 	public static final int STANDARD_TIMESTEP = 5;
-	public static final long WHIMP_TRESHOLD = 10000;
+	private static final long WHIMP_TRESHOLD = 10000;
 	
 	public enum Outcome{NO_WINNERS, TIE, WINNER, WHIMPS};
 	private FighterAI fighterOne;
@@ -45,7 +45,6 @@ public class Jury {
 			sleep(10);
 		}
 		this.winners = getWinningFighters();
-		printOutcome();
 		this.arena.update();
 	}
 	
@@ -65,22 +64,6 @@ public class Jury {
 		} catch (InterruptedException e) {
 			// this is just to slow down the fight. If it is
 			// interrupted, simply continue the fight.
-		}
-	}
-	
-	private void printOutcome(){
-		switch (outcome()) {
-		case NO_WINNERS:
-			System.out.println("Whimps!");
-			break;
-		case TIE:
-			System.out.println("It's a Tie!");
-			break;
-		case WINNER:
-			System.out.println(winners.get(0).getAst().getName() + " WINS!");
-
-		default:
-			break;
 		}
 	}
 	

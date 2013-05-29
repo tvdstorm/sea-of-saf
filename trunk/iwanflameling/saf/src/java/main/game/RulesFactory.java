@@ -16,7 +16,6 @@ import ast.condition.Leaf;
 import ast.condition.Or;
 import ast.fighter.Behavior;
 import ast.fighter.Fighter;
-import ast.fighter.FighterProp;
 
 public class RulesFactory extends DelegateAstVisitor {
 	
@@ -101,12 +100,12 @@ public class RulesFactory extends DelegateAstVisitor {
 		return result;
 	}
 	
-	
 	@Override
 	public void visit(Fighter fighter) {
 		super.visit(fighter);
 	}
 	
+	@Override
 	public void visit(Behavior behavior){
 		this.behavior = behavior;
 		initNewRule();
@@ -218,13 +217,6 @@ public class RulesFactory extends DelegateAstVisitor {
 			// if this is not the end node, we happily continue visiting.
 			if(!endNode)
 				or.getRhs().accept(this);
-		}
-		
-		@Override
-		public void visit(And and) {
-			and.getLhs().accept(this);
-			and.getRhs().accept(this);
-			//super.visit(and);
 		}
 		
 		@Override

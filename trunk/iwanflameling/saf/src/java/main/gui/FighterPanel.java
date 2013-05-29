@@ -4,10 +4,8 @@ import game.FighterAI;
 import game.FighterAI.Direction;
 
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Image;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -30,7 +28,6 @@ public class FighterPanel extends JPanel implements UpdatableGui {
 	}
 	
 	private void init(){
-		//this.setBorder(BorderFactory.createTitledBorder("FighterPanel"));
 		this.setSize(WIDTH, HEIGHT);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.fighterLabel = new JLabel();
@@ -42,14 +39,11 @@ public class FighterPanel extends JPanel implements UpdatableGui {
 		this.add(fighterLabel);
 	}
 	
-	
-	
 	@Override
 	public void setLocation(int x, int y) {
 		x += WIDTH;
-		if(fighter.direction() == Direction.RIGHT){
+		if(fighter.direction() == Direction.RIGHT)
 			x = x - WIDTH;
-		}
 		super.setLocation(x, y);
 	}
 

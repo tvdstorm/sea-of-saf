@@ -1,10 +1,7 @@
 package gui;
 
-import java.awt.FlowLayout;
-
 import game.Jury;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 
 public class Arena extends JFrame implements UpdatableGui {

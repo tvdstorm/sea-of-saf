@@ -7,7 +7,6 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-@SuppressWarnings("serial")
 public class MirroredImageIcon extends ImageIcon {
 
 	public MirroredImageIcon(Image image) {

@@ -18,7 +18,6 @@ public abstract class DelegateAstVisitor implements AstVisitor {
 	public void visit(And and) {
 		and.getLhs().accept(this);
 		and.getRhs().accept(this);
-
 	}
 
 	@Override
@@ -30,13 +29,11 @@ public abstract class DelegateAstVisitor implements AstVisitor {
 	public void visit(Or or) {
 		or.getLhs().accept(this);
 		or.getRhs().accept(this);
-
 	}
 
 	@Override
 	public void visit(SimpleAction action) {
 		// An action can not further delegate to children.
-
 	}
 
 	@Override

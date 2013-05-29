@@ -2,7 +2,6 @@ package gui;
 
 import game.FighterAI;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,7 +21,6 @@ public class Battlefield extends JPanel implements UpdatableGui {
 	}
 	
 	private void init(){
-		//this.setBorder(BorderFactory.createTitledBorder("Battlefield"));
 		setSize(WIDTH, HEIGHT);
 		this.setLayout(null);
 		this.add(new JLabel("This is the battlefield!"));
