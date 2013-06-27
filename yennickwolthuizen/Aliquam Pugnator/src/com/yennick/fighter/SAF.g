@@ -2,7 +2,7 @@ grammar SAF;
 
 options {
   language = Java;
-  output = AST;
+  //output = AST;
 }
 
 tokens
@@ -17,6 +17,7 @@ tokens
 
 @lexer::header {
   package com.yennick.fighter;
+  import com.yennick.fighter.bot.*;
 }
 
 fighter returns [Bot fighter]
@@ -64,7 +65,7 @@ personality returns [Personality personality]
 		}
 		{
 			System.out.println( $personality.toString()); 
-		}
+		}		
 	;
 IDENT	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'_')*;
 VALUE	: '0'..'9'+;

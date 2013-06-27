@@ -1,8 +1,9 @@
 package com.yennick.fighter.bot;
 
+import java.awt.Color;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Bot{
 	private final String fighterName;
@@ -20,7 +21,7 @@ public class Bot{
 	}
 	
 	public void addPersonality(Personality personality){
-		personality.add(personality);
+		this.personality.add(personality);
 	}
 
 	public void addBehaviour(Behaviour behaviour){
@@ -29,7 +30,7 @@ public class Bot{
 	
 	private int getPersonality(String getP) {
 		for(Personality pers: this.personality){
-			if(pers.getCharacteristic() == getP)
+			if(pers.getCharacteristic().equals(getP))
 				return pers.getValue();
 		}
 		return Constants.getDefaultValue();
@@ -39,25 +40,31 @@ public class Bot{
 		return (this.getPersonality("punchPower")+this.getPersonality("kickPower")) /2;
 	}
 	
-	private double getHeight(){
-		return (this.getPersonality("puchReach")+this.getPersonality("kickReach")) /2;
+	public int getHeight(){
+		return (this.getPersonality("punchReach")+this.getPersonality("kickReach")) /2;
 	}
 	
 	public double getSpeed(){
 		return 0.5*(getHeight() - getWeight()) ;
 	}
+	
+	public Color getColor(){
+		List<String> colorList = Constants.getColors();
+		Color color;
 
-//	private boolean validatePersonality(Personality personality) {
-//		if(Constants.getCharacteristics().contains(personality.getCharacteristic())){
-//			return true;
-//		}
-//		return false;
-//	}
-//	
+		try {
+		    Field field = Class.forName("java.awt.Color").getField(colorList.get(this.getPersonality("color")));
+		    color = (Color)field.get(null);
+		} catch (Exception e) {
+		    color = null; // Not defined
+		}
+		
+		return color;
+	}
+
 	
 	public String toString(){
 		return "Name: " +fighterName + "\n";
 	}
 
-	
 }
