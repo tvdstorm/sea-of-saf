@@ -2,18 +2,23 @@ package com.yennick.fighter;
 
 import java.io.IOException;
 
-import org.antlr.runtime.ANTLRFileStream;
-import org.antlr.runtime.CharStream;
-import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.TokenStream;
 
-import com.yennick.fighter.SAFLexer;
-import com.yennick.fighter.SAFParser;
+import com.yennick.fighter.gui.*;
 
 
 public class Exec {
+	
+	public static void main(String[] args) throws RecognitionException, IOException{
+	//	Fight fight = new Fight();
 
+		System.setProperty("apple.laf.useScreenMenuBar", "true");
+	    System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Aliquam Pugnator");
+
+		new Gui();
+	}
+	
+/*
 	public static void main(String[] args) throws RecognitionException, IOException {
 		CharStream charStream = new ANTLRFileStream("src/JackieChan.txt");
 		SAFLexer lexer = new SAFLexer(charStream);
@@ -23,5 +28,5 @@ public class Exec {
 		parser.fighter();
 		System.out.println("\n----\n");
 	}
-
+*/
 }

@@ -1,7 +1,8 @@
 chicken
 {
   kickReach  = 9
-  punchReach = 1
+  punchReach = 8
+  fly = 5
   kickPower  = 2
   punchPower = 2
   far [run_towards kick_low]
