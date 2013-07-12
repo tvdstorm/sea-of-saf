@@ -1,29 +1,37 @@
 package com.yennick.fighter.bot;
-
-import java.util.ArrayList;
-import java.util.List;
-
+ 
 public class Behaviour {
-	private final List<Condition> condition;
-	private final List<Action> action;
-
-
+	private Condition condition; 
+	private Action action;
+	private Action moveAction;
+	
 	public Behaviour(){
-		this.condition = new ArrayList<Condition>();
-		this.action = new ArrayList<Action>();
 	}
 	
 	public void addCondition(Condition condition) {
-		this.condition.add(condition);
+		this.condition = condition;
 	}
 	
-	public void addAction(Action action,Action moveAction) {
-		this.action.add(action);
-		this.action.add(moveAction);
+	public void addAction(Action moveAction,Action action) {
+		this.moveAction = moveAction;
+		this.action = action;
+	}
+	
+	public Condition getCondition() {
+		return condition;
+	}
+	
+	public Action getMoveAction(){
+		System.out.println(moveAction);
+		return moveAction;
+	}
+	
+	public Action getAction(){
+		return action;
 	}
 	
 	public String toString(){
-		return  this.condition.toString() ;
+		String toString = condition.toString() + " : " + moveAction.toString() + " : " +  action.toString();
+		return  toString ;
 	}
-	
 }

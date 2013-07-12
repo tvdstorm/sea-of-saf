@@ -1,34 +1,37 @@
 package com.yennick.fighter.bot;
 
 public class Condition {
-	private final String first;
-	private final String second;
+	
+	//distance and/or strength
+	private final String[] conditions = new String[2];
+	//private final String second;
+	
+	// and/or
 	private final String type;
 	
 	public Condition(String first,String second,String type){
-		this.first = first;
-		this.second = second;
+		this.conditions[0] = first;
+		this.conditions[1] = second;
 		this.type = type;
 	}
-	
-	public Condition(){
-		this.first = "";
-		this.second = null;
-		this.type = null;
-	}
-	
+
 	public Condition(String first){
-		this.first = first;
-		this.second = null;
+		this.conditions[0] = first;
 		this.type = null;
 	}
 
-	public String getFirst(){
-		return first;
+	public String[] getConditions(){
+		
+		return conditions;
+	}
+	
+	
+	public boolean hasCondition(String cond){
+		return ((conditions[0] != null && conditions[0].equalsIgnoreCase(cond)) || (conditions[1] != null && conditions[1].equalsIgnoreCase(cond)));
 	}
 	
 	public String toString(){
-		return (type != null)? first + " "+ type +" " + second  : first ;		
+		return (type != null)? conditions[0] + " "+ type +" " + conditions[1]  : conditions[0] ;		
 	}
 
 }

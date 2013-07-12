@@ -20,10 +20,8 @@ public class Personality extends ArrayList<Personality> {
 	public boolean add(Personality personality){
 		if(this.validate(personality)){
 			super.add(personality);
-//			System.out.println("valid "+ personality.characteristic);
 			return true;
 		}
-//		System.out.println("not valid "+ personality.characteristic);
 		return false;
 	}
 	
@@ -32,7 +30,7 @@ public class Personality extends ArrayList<Personality> {
 	}
 
 	public String getCharacteristic() {
-		return this.characteristic;
+		return characteristic;
 	}
 
 	public String toString(){

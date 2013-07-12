@@ -5,7 +5,7 @@ chicken
   fly = 5
   kickPower  = 2
   punchPower = 2
-  far [run_towards kick_low]
-  near [run_away kick_high]
+  far [run_towards kick_high]
+  near [run_away punch_low]
   near [crouch punch_low]
 }
