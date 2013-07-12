@@ -15,10 +15,6 @@ import com.yennick.fighter.bot.Bot;
 
 public class Fight {
 	
-/*	public Fight() {
-		
-	}
-	*/
 	public Bot getFighter(String name)  {
 		CharStream charStream = null;
 		
@@ -28,7 +24,6 @@ public class Fight {
 			System.out.println( e.getMessage());
 			
 			return null;
-			//e.printStackTrace();
 		}
 		SAFLexer lexer = new SAFLexer(charStream);
 		TokenStream tokenStream = new CommonTokenStream(lexer);

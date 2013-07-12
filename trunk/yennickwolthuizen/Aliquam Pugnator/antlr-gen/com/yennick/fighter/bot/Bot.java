@@ -69,16 +69,6 @@ public class Bot{
 			} else if (possibleMoves.size() == 1)return behaviour.get(0);
 		return null;
 
-		
-		/*	for(Behaviour beh: behaviour){
-			Condition cond = beh.getCondition();
-			if(cond.hasCondition(conditionString)){
-				System.out.println(beh.toString());
-				return beh;
-			}
-		}
-		System.out.println(conditionString+ " not found... try always..");*/
-//		return (conditionString == "always")? null : getBehaviour("always",null);
 	}
 	
 	public void checkAlways(){
@@ -156,6 +146,8 @@ public class Bot{
 		return 0.5*(getHeight() - getWeight()) ;
 	}
 		
+	
+	// far future implementation ... 
 	public Color getColor(){
 		List<String> colorList = Constants.getColors();
 		Color color;

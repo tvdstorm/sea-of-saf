@@ -11,13 +11,11 @@ public class Engine {
 	private final Bot[] fighters = new Bot[2];
 	
 	private int distance = 5;
-	private boolean isStarted;
 	private int nextAttacker;
 	private boolean gameOver;
 	
 	public Engine(){
 		fight = new SAFFile();
-		isStarted = false;
 	}
 	
 	public Bot[] getFighters(){
@@ -59,12 +57,11 @@ public class Engine {
 			act(fighter,victim);
 			nextAttacker = vict;
 		}
-		isStarted = true;
+		
 	}
 	
 	private void setGameOver() {
 		gameOver = true;
-		
 	}
 	
 	public boolean getGameOverStatus(){
@@ -75,8 +72,6 @@ public class Engine {
 		
 		fighter.stickMan.unAct();
 		victim.stickMan.unAct();
-		
-		
 		
 		String difference = getStrengthDiff(fighter,victim);
 		Behaviour turn = getDistance(fighter,difference);
@@ -140,7 +135,6 @@ public class Engine {
 			int damage = fighter.getPersonality(act.substring(0, act.indexOf('_'))+ "Power");
 			block = (react.contains("block"))? (int) victim.getWeight() /2: 0;
 			victimD = victim.damage(Math.max(damage - block,0));
-	//		victim.stickMan.unAct();
 		}
 			
 		if(!react.contains("block")){
@@ -148,7 +142,6 @@ public class Engine {
 			int damage = victim.getPersonality(react.substring(0, react.indexOf('_'))+ "Power");
 			block = (act.contains("block"))? (int) fighter.getWeight() / 2 : 0;
 			fighterD = fighter.damage(Math.max(damage - block,0));
-		//	fighter.stickMan.unAct();
 		}
 		
 		System.out.println(fighter.getFighterName()+ fighter.getHealth() + " - " + act + " : " + victimD + " | "+ victim.getFighterName()+victim.getHealth() + " - " + react + " : "+ fighterD);

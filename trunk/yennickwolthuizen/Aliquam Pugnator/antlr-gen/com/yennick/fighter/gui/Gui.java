@@ -85,7 +85,6 @@ public class Gui extends JFrame {
 
             	fightersP.revalidate();
         		fightersP.repaint();
-        		//System.out.println("refresh");
             }
             };
 		Timer timer = new Timer( 100 ,refresher);
