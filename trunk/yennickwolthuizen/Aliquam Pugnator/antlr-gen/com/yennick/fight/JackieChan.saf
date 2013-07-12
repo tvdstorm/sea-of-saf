@@ -1,6 +1,6 @@
 JackieChan {
 	kickPower = 7
-	punchPower = 7
+	rareKoe = 3
 	kickReach = 3
 	punchReach = 4
 	color = 0

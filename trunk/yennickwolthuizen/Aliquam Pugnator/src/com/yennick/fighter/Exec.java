@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import org.antlr.runtime.RecognitionException;
 
-import com.yennick.fighter.gui.*;
+import com.yennick.fight.Engine;
+import com.yennick.fighter.gui.Gui;
 
 
 public class Exec {
@@ -15,7 +16,8 @@ public class Exec {
 		System.setProperty("apple.laf.useScreenMenuBar", "true");
 	    System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Aliquam Pugnator");
 
-		new Gui();
+		Engine engine = new Engine();
+		new Gui(engine);
 	}
 	
 /*
