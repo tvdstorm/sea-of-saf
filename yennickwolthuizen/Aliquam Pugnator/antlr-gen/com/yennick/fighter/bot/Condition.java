@@ -4,7 +4,6 @@ public class Condition {
 	
 	//distance and/or strength
 	private final String[] conditions = new String[2];
-	//private final String second;
 	
 	// and/or
 	private final String type;

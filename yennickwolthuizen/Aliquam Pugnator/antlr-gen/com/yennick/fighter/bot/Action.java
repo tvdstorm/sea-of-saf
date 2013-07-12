@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class Action {
 	private final String[] actions = new String[2];
-	//private final String action2;
 	private final Boolean choose;
 	
 	public Action(String action1,String action2,boolean choose){
