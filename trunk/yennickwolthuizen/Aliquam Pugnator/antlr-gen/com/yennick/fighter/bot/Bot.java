@@ -83,15 +83,17 @@ public class Bot{
 
 	private void buildAlways(){
 		System.out.println("Build always");
-		Behaviour beh = new Behaviour();
-		beh.addCondition(new Condition("always"));
 		
 		//pick a random action
 		Random rand = new Random();
 		int fA = rand.nextInt(Constants.getFightActions().size());
 		int mvA = rand.nextInt(Constants.getMoveActions().size());
 		
-		beh.addAction(new Action(Constants.getMoveActions().get(mvA)), new Action(Constants.getFightActions().get(fA)));
+		Action moveAction = new Action(Constants.getMoveActions().get(mvA));
+		Action fightAction= new Action(Constants.getFightActions().get(fA));
+		
+		Behaviour beh = new Behaviour(new Condition("always"),moveAction,fightAction);
+
 		addBehaviour(beh);
 	}
 	
