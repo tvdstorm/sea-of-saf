@@ -1,20 +1,14 @@
 package com.yennick.fighter.bot;
  
 public class Behaviour {
-	private Condition condition; 
-	private Action action;
-	private Action moveAction;
+	private final Condition condition; 
+	private final Action fightAction;
+	private final Action moveAction;
 	
-	public Behaviour(){
-	}
-	
-	public void addCondition(Condition condition) {
+	public Behaviour(Condition condition,Action moveAction, Action fightAction){
 		this.condition = condition;
-	}
-	
-	public void addAction(Action moveAction,Action action) {
 		this.moveAction = moveAction;
-		this.action = action;
+		this.fightAction = fightAction;
 	}
 	
 	public Condition getCondition() {
@@ -27,11 +21,11 @@ public class Behaviour {
 	}
 	
 	public Action getAction(){
-		return action;
+		return fightAction;
 	}
 	
 	public String toString(){
-		String toString = condition.toString() + " : " + moveAction.toString() + " : " +  action.toString();
+		String toString = condition.toString() + " : " + moveAction.toString() + " : " +  fightAction.toString();
 		return  toString ;
 	}
 }
