@@ -8,18 +8,25 @@ import com.yennick.fighter.bot.Constants;
 public class Engine {
 	
 	public final SAFFile fight;
-	private final Bot[] fighters = new Bot[2];
+	private Bot homeFighter;
+	private Bot challenger;
+	
 	
 	private int distance = 5;
-	private int nextAttacker;
+	private boolean nextAttacker;
 	private boolean gameOver;
 	
 	public Engine(){
 		fight = new SAFFile();
+		fight.toString();
 	}
 	
-	public Bot[] getFighters(){
-		return fighters;
+	public Bot getHomeFighter(){
+		return homeFighter;
+	}
+	
+	public Bot getChallenger(){
+		return challenger;
 	}
 	
 	public void fight(){
@@ -32,32 +39,36 @@ public class Engine {
 	}
 	
 	private void refresh() {
-		fighters[0].info();
-		fighters[1].info();
 		
-		fighters[1].stickMan.revalidate();
-		fighters[1].stickMan.repaint();
+		homeFighter.info();
+		challenger.info();
 		
-		fighters[0].stickMan.revalidate();
-		fighters[0].stickMan.repaint();
+		homeFighter.stickMan.revalidate();
+		homeFighter.stickMan.repaint();
+		
+		challenger.stickMan.revalidate();
+		challenger.stickMan.repaint();
 		
 	}
 	
 	private void startFight(){
 		
 		System.out.println("\nnext move...");
+		boolean isVictim = nextAction();
+		Bot fighter = (isVictim)? homeFighter : challenger;
+		Bot victim = (isVictim)? challenger : homeFighter;
 		
-		int vict = (nextAttacker == 1)? 0 : 1;
-		Bot fighter = fighters[nextAttacker];
-		Bot victim = fighters[vict];
-		
-		if(fighter.getHealth() ==0 || victim.getHealth() == 0){
+		if(homeFighter.getHealth() ==0 || challenger.getHealth() == 0){
 			setGameOver();
 		} else{
 			act(fighter,victim);
-			nextAttacker = vict;
 		}
 		
+	}
+	
+	private boolean nextAction(){
+		nextAttacker ^=true;
+		return nextAttacker;
 	}
 	
 	private void setGameOver() {
@@ -163,21 +174,36 @@ public class Engine {
 		distance = Math.max(0,distance - move);
 	}
 		
-	private boolean getOutOfReach(boolean challenger){
-		return (!challenger)? (fighters[0].getReach() < distance) : (fighters[1].getReach() < distance);
+	private boolean getOutOfReach(boolean isChallenger){
+		return (!isChallenger)? (homeFighter.getReach() < distance) : (challenger.getReach() < distance);
 	}
 	
-	public void setFighter(String fighterName, boolean challenger) {
+/*	public void setFighter(String fighterName, boolean isChallenger) {
 		fighterName = fighterName.substring(0, fighterName.lastIndexOf('.'));
 		
-		if(!challenger && fighters[0] == null){
-			fighters[0] = fight.getFighter(fighterName);
-			fighters[0].checkAlways();
+		if(!isChallenger && homeFighter == null){
+			homeFighter = fight.getFighter(fighterName);
+			homeFighter.checkAlways();
 		}
-		else if(challenger && fighters[1] == null ) {
-			fighters[1] = fight.getFighter(fighterName);
-			fighters[1].checkAlways();
-			fighters[1].setAsChallenger();
+		else if(isChallenger && challenger == null ) {
+			challenger = fight.getFighter(fighterName);
+			challenger.checkAlways();
+			challenger.setAsChallenger();
 		}
+	}
+*/	
+	public Bot setFighter(String fighterName, boolean isChallenger) {
+		fighterName = fighterName.substring(0, fighterName.lastIndexOf('.'));
+		
+			Bot fighter = fight.getFighter(fighterName);
+			fighter.checkAlways();
+		if(isChallenger) {
+			fighter.setAsChallenger();
+			challenger = fighter;
+		} else {
+			homeFighter = fighter;
+		}
+		
+		return fighter;
 	}
 }

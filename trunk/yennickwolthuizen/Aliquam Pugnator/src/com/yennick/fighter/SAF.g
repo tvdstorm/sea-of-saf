@@ -2,7 +2,6 @@ grammar SAF;
 
 options {
   language = Java;
-  //output = AST;
 }
 
 tokens
@@ -32,10 +31,7 @@ fighter returns [Bot fighter]
 
 behaviour returns [Behaviour behaviour]
 	: cond=condition  '[' moveAction=action fightAction=action ']'
-	//condition {$condition.condition;}
 	 { 	$behaviour = new Behaviour($cond.condition, $moveAction.action, $fightAction.action);	}
-//		(condition {$behaviour.addCondition($condition.condition);} )
-		// '[' a1=action a2=action ']' {$behaviour.setAction($a1.action,$a2.action);}		
 	;
 
 condition returns [Condition condition]

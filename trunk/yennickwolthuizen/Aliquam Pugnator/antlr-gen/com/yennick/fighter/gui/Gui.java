@@ -21,15 +21,15 @@ import com.yennick.fighter.bot.Bot;
 @SuppressWarnings("serial")
 public class Gui extends JFrame {
 
-	private Engine engine;
-	private Bot[] fighters;
-	private JPanel fightersP;
+	private final Engine engine;
+	private final JPanel fightersP;
+	private Bot homeFighter;
+	private Bot challenger;
 	private JButton start;
 	
 	public Gui(final Engine engine) {
 		
 		this.engine = engine;
-		fighters = this.engine.getFighters();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -55,12 +55,20 @@ public class Gui extends JFrame {
 		setVisible(true);
 	}
 	
-	private void addFighter(String fighterName,boolean challenger){
-		engine.setFighter(fighterName,challenger);
+	private void addFighter(String fighterName,boolean isChallenger){
+		if(isChallenger){
+			challenger = engine.setFighter(fighterName,isChallenger);	
+		} else {
+			homeFighter = engine.setFighter(fighterName, isChallenger);
+		}
+		
+		//System.out.println(challenger.getFighterName());
+		//System.out.println(homeFighter.getFighterName());
 		
 		JPanel fighter;
-		fighter = (challenger)? showFighter(fighters[1]) : showFighter(fighters[0]);
-		if(challenger){
+		fighter = (isChallenger)? showFighter(challenger) : showFighter(homeFighter);
+//		System.out.println(fighter.toString());
+		if(isChallenger){
 			fightersP.add(fighter);
 		} else {
 			fightersP.add(fighter, 0);
@@ -71,7 +79,7 @@ public class Gui extends JFrame {
 	}
 	
 	private void checkStart(){
-		if(fighters[0] != null && fighters[1] != null){
+		if(homeFighter != null && challenger != null){
 			start.setEnabled(true);
 		} else {
 			start.setEnabled(false);
@@ -113,9 +121,10 @@ public class Gui extends JFrame {
 		start.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				engine.fight();
 				if(engine.getGameOverStatus()){
 					start.setEnabled(false);
+				} else {
+					engine.fight();
 				}
 			}
 		});
@@ -149,6 +158,7 @@ public class Gui extends JFrame {
 	
 	public JPanel showFighter(Bot fighter){
 		
+	//	System.out.println(fighter.toString());
 		JPanel fPanel = new JPanel();
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));

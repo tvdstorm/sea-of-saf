@@ -4,18 +4,19 @@ import java.lang.String;
 import java.util.Random;
 
 public class Action {
-	private final String[] actions = new String[2];
+	private final String action1;
+	private final String action2;
 	private final Boolean choose;
 	
 	public Action(String action1,String action2,boolean choose){
-		this.actions[0] = action1;
-		this.actions[1] = action2;
+		this.action1 = action1;
+		this.action2 = action2;
 		this.choose = choose;
 	}
 	
 	public Action(String action1){
-		this.actions[0] = action1;
-	//	this.action2 = null;
+		this.action1 = action1;
+		this.action2 = null;
 		this.choose = false;
 	}
 	
@@ -25,17 +26,17 @@ public class Action {
 	}
 	
 	public String getActionString(){
+		String action = action1;
 		if(choose){
 			Random rand = new Random();
-			
-			return actions[rand.nextInt(1)];
+			action = (rand.nextBoolean())? action1 : action2;
 		} 
 		
-		return actions[0];
+		return action;
 	}
 	
 	public String toString(){
-		return (choose)? "choose" +	": " +actions[0] + " , "+ actions[1]  : actions[0] ;		
+		return (choose)? "choose" +	": " +action1 + " , "+ action2  : action1 ;		
 	}
 
 }
