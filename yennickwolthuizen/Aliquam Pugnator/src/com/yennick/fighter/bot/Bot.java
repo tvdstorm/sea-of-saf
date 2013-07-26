@@ -9,8 +9,8 @@ import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.yennick.fighter.gui.StickMan;
 import com.yennick.fighter.bot.Behaviour;
+import com.yennick.gui.StickMan;
 
 public class Bot{
 	private final String fighterName;

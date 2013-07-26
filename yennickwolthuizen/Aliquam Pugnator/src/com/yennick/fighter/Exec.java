@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.antlr.runtime.RecognitionException;
 
 import com.yennick.fight.Engine;
-import com.yennick.fighter.gui.Gui;
+import com.yennick.gui.Gui;
 
 
 public class Exec {
