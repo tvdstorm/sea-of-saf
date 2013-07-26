@@ -16,7 +16,7 @@ public class Bot{
 	private final String fighterName;
 	private final List<Personality> personality;
 	private final List<Behaviour> behaviour;
-	private List<Integer> possibleMoves;
+	private final List<Integer> possibleMoves;
 	
 	private JLabel info = new JLabel();
 	private int health = 100;
@@ -55,9 +55,9 @@ public class Bot{
 			
 		for (int i = 0; i < behaviour.size(); i++) {
 			
-			//ugly check whether the condition distance or strength is found
-			//law of demeter violation! 
-			if(behaviour.get(i).getCondition().hasCondition(conditionString) || behaviour.get(i).getCondition().hasCondition(difference) || behaviour.get(i).getCondition().hasCondition("always")){
+			Condition cond = behaviour.get(i).getCondition();
+			
+			if(cond.hasCondition(conditionString) || cond.hasCondition(difference) || cond.hasCondition("always")){
 				possibleMoves.add(i);
 			}
 		}
@@ -66,7 +66,9 @@ public class Bot{
 				Random rand = new Random();
 				int move = possibleMoves.get(rand.nextInt(possibleMoves.size() -1));
 				return behaviour.get(move);
-			} else if (possibleMoves.size() == 1)return behaviour.get(0);
+			} else if (possibleMoves.size() == 1) {
+				return behaviour.get(0);
+			}
 		return null;
 
 	}

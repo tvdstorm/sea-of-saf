@@ -16,7 +16,7 @@ public final class StickMan extends JPanel{
 	private boolean challenger;
 	
 	private int height;
-	private int factor = 20;
+	private final int factor = 20;
 	
 	//offsets  
 	private int xOffset;
@@ -44,13 +44,13 @@ public final class StickMan extends JPanel{
 	    return new Dimension(250,250);
 	}
 
-	public StickMan (int height,boolean challenger){
+/*	public StickMan (int height,boolean challenger){
 		this.height = height*factor;
 		this.challenger = challenger;
 		
 		setProps();
 	}
-	
+	*/
 	public StickMan() {
 	}
 
