@@ -44,19 +44,12 @@ public final class StickMan extends JPanel{
 	    return new Dimension(250,250);
 	}
 
-/*	public StickMan (int height,boolean challenger){
-		this.height = height*factor;
-		this.challenger = challenger;
-		
-		setProps();
-	}
-	*/
 	public StickMan() {
 	}
 
 	private void setProps(){
-		xOffset = 125;
-		yOffset = 245 - height ;
+		xOffset = 65;
+		yOffset = 140-height ;
 		
 		xStart = xOffset;
 		yStart = yOffset;
@@ -88,17 +81,20 @@ public final class StickMan extends JPanel{
 		drawLegs();
 		
 		if(dead){
-			this.unAct();
+			unAct();
 			g2.fillRect(xOffset- armSize, yOffset - bodySize,  bodySize +armSize,height *2);
 		}
-
+	}
+	
+	public void refresh() {
+		revalidate();
+		repaint();
 	}
 
 	private void drawMan() {
 		//draw head
 		int headSize = height /5; 
 		g2.drawOval(xOffset - (headSize /2), yOffset - headSize, headSize, headSize);
-		
 		//draw body
 		g2.drawLine(xOffset, yOffset, xOffset, yOffset + bodySize);
 	}
@@ -151,12 +147,8 @@ public final class StickMan extends JPanel{
 			String type = action.substring(us+1);
 			high = type.contains("high");
 			action = action.substring(0,us);
-			
 		}
 		
-		//unAct();
-
-		// not very pretty ...
 		if(action.equals("kick")){
 			kick(high);
 		} else if(action.equals("punch")){
@@ -198,13 +190,12 @@ public final class StickMan extends JPanel{
 	}
 
 	public void move(int y, int x){
-		xOffset = xOffset + x;
-		yOffset = yOffset + y;
+		xOffset = xOffset + x * factor;
+		yOffset = yOffset + y * factor;
 	}
 
 	public void die() {
-		
-		this.dead = true;
+		dead = true;
 	}
 
 	public void setProps(int height, boolean challenger) {

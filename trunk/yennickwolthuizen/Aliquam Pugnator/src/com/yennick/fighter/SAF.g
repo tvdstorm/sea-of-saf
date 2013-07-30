@@ -6,7 +6,9 @@ options {
 
 tokens
 {
-	CHOOSE  		= 'choose'; 
+	CHOOSE       = 'choose'; 
+	LEFTCURLY    = '{';
+	RIGHTCURLY   = '}';
 }
 
 @header {
@@ -20,13 +22,13 @@ tokens
 }
 
 fighter returns [Bot fighter]
-	: IDENT '{'? { $fighter = new Bot($IDENT.text); }
+	: IDENT LEFTCURLY? { $fighter = new Bot($IDENT.text); }
 		{
 			System.out.println( $fighter.toString()); 
 		}
 			(personality {$fighter.addPersonality($personality.personality);}
 			|behaviour {$fighter.addBehaviour($behaviour.behaviour);})* 
-		'}'?		
+		RIGHTCURLY?		
 	;
 
 behaviour returns [Behaviour behaviour]
@@ -42,6 +44,10 @@ condition returns [Condition condition]
 			System.out.println($condition.toString()); 
 		}
 			;
+
+//andcondition returns [Condition condition]
+ // : first=condition 'and' second=condition {$condition = new Condition();}
+  
 
 
 action returns [Action action]

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 
+import javax.swing.JFileChooser;
+
 import org.antlr.runtime.ANTLRFileStream;
 import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
@@ -17,14 +19,36 @@ import com.yennick.parser.SAFParser;
 
 public class SAFFile {
 	
+	private final static String ext = ".txt";
+	private String path = null;
+	
+	JFileChooser pathChooser;
+	
+	public SAFFile(){
+		pathChooser = new JFileChooser(); 
+	    pathChooser.setCurrentDirectory(new java.io.File("."));
+	    pathChooser.setDialogTitle("Pick directory with fighters");
+//	    pathChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//	    pathChooser.setAcceptAllFileFilterUsed(false);
+	    path = getFighterDir()+ File.separator;
+	}
+	
+	private String getFighterDir(){
+		File dir = null;
+		if(pathChooser.showOpenDialog(pathChooser) == JFileChooser.APPROVE_OPTION){
+			dir = pathChooser.getCurrentDirectory();
+		}
+		return dir.toString();
+	}
+	
 	public Bot getFighter(String name)  {
 		CharStream charStream = null;
 		
+		
 		try {
-			charStream = new ANTLRFileStream("src/"+name+".txt");
+			charStream = new ANTLRFileStream(path+name+ext);
 		} catch (IOException e) {
 			System.out.println( e.getMessage());
-			
 			return null;
 		}
 		SAFLexer lexer = new SAFLexer(charStream);
@@ -38,17 +62,17 @@ public class SAFFile {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Building Fighter\n-----");
 		return bot;
 	}
 	
 	public String[] getFighters(){
 		String[] fighters;
 
-		File dir = new File("src/");
+		File dir = new File(path);
 		FilenameFilter filter = new FilenameFilter() {
-		    public boolean accept(File dir, String name) {
-		    	return name.endsWith(".txt");
+		    
+			public boolean accept(File dir, String name) {
+		    	return name.endsWith(ext);
 		    }
 		};
 		
@@ -56,3 +80,4 @@ public class SAFFile {
     	return fighters;
 	}
 }
+ 

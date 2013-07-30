@@ -1,6 +1,7 @@
 package com.yennick.fighter.bot;
+
  
-public class Behaviour {
+public class Behaviour{
 	private final Condition condition; 
 	private final Action fightAction;
 	private final Action moveAction;
@@ -16,12 +17,19 @@ public class Behaviour {
 	}
 	
 	public Action getMoveAction(){
-		System.out.println(moveAction);
 		return moveAction;
 	}
 	
 	public Action getAction(){
 		return fightAction;
+	}
+	
+	public String getActionString(){
+		return getAction().getActionString();
+	}
+	
+	public String getMoveActionString(){
+		return getMoveAction().getActionString();
 	}
 	
 	public String toString(){
