@@ -1,7 +1,5 @@
 package com.yennick.fighter.bot;
 
-import java.awt.Color;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,9 +14,8 @@ public class Bot{
 	private final String fighterName;
 	private final List<Personality> personality;
 	private final List<Behaviour> behaviour;
-	private final List<Integer> possibleMoves;
 	
-	private JLabel info = new JLabel();
+	private final JLabel info = new JLabel();
 	private int health = 100;
 	private boolean challenger = false;
 	
@@ -28,12 +25,10 @@ public class Bot{
 			this.fighterName = fighterName;
 			this.behaviour = new ArrayList<Behaviour>();
 			this.personality = new ArrayList<Personality>();
-			this.possibleMoves = new ArrayList<Integer>();
 			this.stickMan = new StickMan();
-			
 	}
 	
-	public String getFighterName() {
+	public String getFighterName(){
 		return fighterName;
 	}
 	
@@ -49,33 +44,37 @@ public class Bot{
 		return this.personality;
 	}
 
-	public Behaviour getBehaviour(String conditionString,String difference) {
+	public Behaviour getBehaviour(String conditionString,String difference){
 		
 		System.out.println(conditionString + " - " + difference);
-			
-		for (int i = 0; i < behaviour.size(); i++) {
-			
+		List<Integer> possibleMoves = new ArrayList<Integer>();
+		
+		for (int i = 0; i < behaviour.size(); i++){
 			Condition cond = behaviour.get(i).getCondition();
 			
 			if(cond.hasCondition(conditionString) || cond.hasCondition(difference) || cond.hasCondition("always")){
 				possibleMoves.add(i);
 			}
 		}
-		
-			if(possibleMoves.size() > 1){
-				Random rand = new Random();
-				int move = possibleMoves.get(rand.nextInt(possibleMoves.size() -1));
-				return behaviour.get(move);
-			} else if (possibleMoves.size() == 1) {
-				return behaviour.get(0);
-			}
-		return null;
-
+		return getMove(possibleMoves);
 	}
 	
+	private Behaviour getMove(List<Integer> possibleMoves) {
+		
+		Behaviour move = null;
+		
+		if(possibleMoves.size() > 1){
+			Random rand = new Random();
+			int moveInt = possibleMoves.get(rand.nextInt(possibleMoves.size() -1));
+			move =  behaviour.get(moveInt);
+		} else if (possibleMoves.size() == 1) {
+			move =  behaviour.get(0);
+		}
+		return move;
+	}
+
 	public void checkAlways(){
 		if(getBehaviour("always",null) == null){
-			
 			System.out.println("building always");
 			buildAlways();
 		} else {
@@ -110,6 +109,12 @@ public class Bot{
 		}
 		System.out.println(getP + " def");
 		return Constants.getDefaultValue();
+	}
+	
+	public int getPowerByMove(String move){
+		
+		move = move.substring(0, move.indexOf('_'))+ "Power";
+		return getPersonality(move);
 	}
 	
 	public int getHealth(){
@@ -149,24 +154,8 @@ public class Bot{
 	public double getSpeed(){
 		return 0.5*(getHeight() - getWeight()) ;
 	}
-		
-	
-	// far future implementation ... 
-	public Color getColor(){
-		List<String> colorList = Constants.getColors();
-		Color color;
-
-		try {
-		    Field field = Class.forName("java.awt.Color").getField(colorList.get(this.getPersonality("color")));
-		    color = (Color)field.get(null);
-		} catch (Exception e) {
-		    color = null; // Not defined
-		}
-		
-		return color;
-	}
-	
-	public JLabel info(){
+			
+	public JLabel setInfo(){
 		info.setText("Health: " + getHealth());
 		return info;
 	}
@@ -180,8 +169,46 @@ public class Bot{
 		
 		return stickPanel;
 	}
+	
+	public void repaint(){
+		setInfo();
+		stickMan.refresh();
+	}
+	
+	public void goToCorner(){
+		stickMan.unAct();
+	}
+	
+	public void doAction(String action){
+		stickMan.doAction(action);
+	}
+	
+	public void move(int vertical,int horizontal){
+		stickMan.move(vertical, horizontal);
+	}
+	
+	
+	public void doMove(String move) {
+		if(move.contains("crouch")){
+			stickMan.crouch();
+		}
+		if(move.contains("jump")){
+			stickMan.jump();
+		}
+	}
+
 
 	public String toString(){
 		return "Name: " +fighterName + "\n";
+	}
+
+	public String getStrengthDifference(int strength) {
+		int diff = Constants.getStrengthDiff();
+		
+		if(strength > diff)return Constants.getConditions().get(7);
+		else if(strength <=diff && strength > 0) return Constants.getConditions().get(6);
+		else if(strength == 0) return Constants.getConditions().get(5);
+		else if(strength < 0 && strength >= -diff)return Constants.getConditions().get(4);
+		else return Constants.getConditions().get(diff); // smaller than -3 (much weaker)
 	}
 }

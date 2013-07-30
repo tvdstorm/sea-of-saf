@@ -18,7 +18,9 @@ public class Constants {
 	
 	private static final String def = "always";
 
-	private static int defaultValue = 5;
+	private static final int defaultValue = 5;
+	
+	private static final int strengthDifference = 3;
 	
 	
 
@@ -56,9 +58,12 @@ public class Constants {
 	public static List<String> getColors() {
 		return Colors;
 	}
-
+	
 	public static Integer getDefaultValue() {
 		return defaultValue;
 	}
 
+	public static Integer getStrengthDiff() {
+		return strengthDifference;
+	}
 }

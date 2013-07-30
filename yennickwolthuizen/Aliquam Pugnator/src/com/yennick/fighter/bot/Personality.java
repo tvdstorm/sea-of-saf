@@ -28,7 +28,7 @@ public class Personality extends ArrayList<Personality> {
 	public int getValue() {
 		return value;
 	}
-
+	
 	public String getCharacteristic() {
 		return characteristic;
 	}

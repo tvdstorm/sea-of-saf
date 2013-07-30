@@ -167,7 +167,7 @@ public class Gui extends JFrame {
 		if(fighter != null){
 			 fighterName = new JLabel(fighter.getFighterName() );
 			 infoPanel.add(fighterName);	
-			 infoPanel.add(fighter.info());
+			 infoPanel.add(fighter.setInfo());
 			 
 			 if(!fighter.isChallenger())fPanel.add(infoPanel);
 				
