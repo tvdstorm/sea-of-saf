@@ -12,12 +12,12 @@ tokens
 }
 
 @header {
-  package com.yennick.fighter;
+  package com.yennick.parser;
   import com.yennick.fighter.bot.*;
 }
 
 @lexer::header {
-  package com.yennick.fighter;
+  package com.yennick.parser;
   import com.yennick.fighter.bot.*;
 }
 
@@ -36,20 +36,22 @@ behaviour returns [Behaviour behaviour]
 	 { 	$behaviour = new Behaviour($cond.condition, $moveAction.action, $fightAction.action);	}
 	;
 
+
 condition returns [Condition condition]
-	: (first=IDENT { $condition = new Condition($first.text); } | 
-	first=IDENT 'or' second=IDENT { $condition = new Condition($first.text,$second.text,"or"); } | 
-	first=IDENT 'and' second=IDENT { $condition = new Condition($first.text,$second.text,"and"); })* 
-		{
-			System.out.println($condition.toString()); 
-		}
-			;
-
-//andcondition returns [Condition condition]
- // : first=condition 'and' second=condition {$condition = new Condition();}
+  : first=andcondition ('or' second=condition {$condition = new CombCondition($first.condition,$second.condition,false);}) {$condition = new ConcreteCondition($first.text); }
+  ;
   
-
-
+andcondition returns [Condition condition]
+  : first=singlecondition ('and' second=andcondition {$condition = new CombCondition($first.condition,$second.condition,true); })  {$condition = new ConcreteCondition($first.text); }
+  ;
+  
+  
+singlecondition returns [Condition condition]
+  :
+  '(' cond=condition ')' { $condition = cond; } |
+  first=IDENT  { $condition = new ConcreteCondition($first.text); } 
+  ;
+  
 action returns [Action action]
 	:	(
 		'choose' '(' a1=IDENT a2=IDENT ')' { $action = new Action($a1.text, $a2.text,true); }

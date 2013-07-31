@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g 2013-07-25 17:45:28
+// $ANTLR 3.4 C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g 2013-07-31 12:44:56
 
   package com.yennick.parser;
   import com.yennick.fighter.bot.*;
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFLexer extends Lexer {
     public static final int EOF=-1;
-    public static final int T__8=8;
-    public static final int T__9=9;
     public static final int T__10=10;
     public static final int T__11=11;
     public static final int T__12=12;
@@ -23,8 +21,10 @@ public class SAFLexer extends Lexer {
     public static final int T__16=16;
     public static final int CHOOSE=4;
     public static final int IDENT=5;
-    public static final int VALUE=6;
-    public static final int WHITESPACE=7;
+    public static final int LEFTCURLY=6;
+    public static final int RIGHTCURLY=7;
+    public static final int VALUE=8;
+    public static final int WHITESPACE=9;
 
     // delegates
     // delegators
@@ -64,15 +64,15 @@ public class SAFLexer extends Lexer {
     }
     // $ANTLR end "CHOOSE"
 
-    // $ANTLR start "T__8"
-    public final void mT__8() throws RecognitionException {
+    // $ANTLR start "LEFTCURLY"
+    public final void mLEFTCURLY() throws RecognitionException {
         try {
-            int _type = T__8;
+            int _type = LEFTCURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:13:6: ( '(' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:13:8: '('
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:13:11: ( '{' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:13:13: '{'
             {
-            match('('); 
+            match('{'); 
 
             }
 
@@ -83,17 +83,17 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__8"
+    // $ANTLR end "LEFTCURLY"
 
-    // $ANTLR start "T__9"
-    public final void mT__9() throws RecognitionException {
+    // $ANTLR start "RIGHTCURLY"
+    public final void mRIGHTCURLY() throws RecognitionException {
         try {
-            int _type = T__9;
+            int _type = RIGHTCURLY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:14:6: ( ')' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:14:8: ')'
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:14:12: ( '}' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:14:14: '}'
             {
-            match(')'); 
+            match('}'); 
 
             }
 
@@ -104,17 +104,17 @@ public class SAFLexer extends Lexer {
         	// do for sure before leaving
         }
     }
-    // $ANTLR end "T__9"
+    // $ANTLR end "RIGHTCURLY"
 
     // $ANTLR start "T__10"
     public final void mT__10() throws RecognitionException {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:15:7: ( '=' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:15:9: '='
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:15:7: ( '(' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:15:9: '('
             {
-            match('='); 
+            match('('); 
 
             }
 
@@ -132,10 +132,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:16:7: ( '[' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:16:9: '['
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:16:7: ( ')' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:16:9: ')'
             {
-            match('['); 
+            match(')'); 
 
             }
 
@@ -153,10 +153,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:17:7: ( ']' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:17:9: ']'
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:17:7: ( '=' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:17:9: '='
             {
-            match(']'); 
+            match('='); 
 
             }
 
@@ -174,12 +174,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:18:7: ( 'and' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:18:9: 'and'
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:18:7: ( '[' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:18:9: '['
             {
-            match("and"); 
-
-
+            match('['); 
 
             }
 
@@ -197,12 +195,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:19:7: ( 'or' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:19:9: 'or'
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:19:7: ( ']' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:19:9: ']'
             {
-            match("or"); 
-
-
+            match(']'); 
 
             }
 
@@ -220,10 +216,12 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:20:7: ( '{' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:20:9: '{'
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:20:7: ( 'and' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:20:9: 'and'
             {
-            match('{'); 
+            match("and"); 
+
+
 
             }
 
@@ -241,10 +239,12 @@ public class SAFLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:21:7: ( '}' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:21:9: '}'
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:21:7: ( 'or' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:21:9: 'or'
             {
-            match('}'); 
+            match("or"); 
+
+
 
             }
 
@@ -262,8 +262,8 @@ public class SAFLexer extends Lexer {
         try {
             int _type = IDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:67:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )* )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:67:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:75:7: ( ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )* )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:75:9: ( 'a' .. 'z' | 'A' .. 'Z' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
             {
             if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
                 input.consume();
@@ -275,7 +275,7 @@ public class SAFLexer extends Lexer {
             }
 
 
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:67:29: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:75:29: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )*
             loop1:
             do {
                 int alt1=2;
@@ -325,10 +325,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = VALUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:68:7: ( ( '0' .. '9' )+ )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:68:9: ( '0' .. '9' )+
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:76:7: ( ( '0' .. '9' )+ )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:76:9: ( '0' .. '9' )+
             {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:68:9: ( '0' .. '9' )+
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:76:9: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -383,10 +383,10 @@ public class SAFLexer extends Lexer {
         try {
             int _type = WHITESPACE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:70:12: ( ( '\\t' | ' ' | '\\r' | '\\n' )* )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:70:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:78:12: ( ( '\\t' | ' ' | '\\r' | '\\n' )* )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:78:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
             {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:70:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:78:14: ( '\\t' | ' ' | '\\r' | '\\n' )*
             loop3:
             do {
                 int alt3=2;
@@ -434,7 +434,7 @@ public class SAFLexer extends Lexer {
     // $ANTLR end "WHITESPACE"
 
     public void mTokens() throws RecognitionException {
-        // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:8: ( CHOOSE | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | IDENT | VALUE | WHITESPACE )
+        // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:8: ( CHOOSE | LEFTCURLY | RIGHTCURLY | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | IDENT | VALUE | WHITESPACE )
         int alt4=13;
         switch ( input.LA(1) ) {
         case 'c':
@@ -484,36 +484,46 @@ public class SAFLexer extends Lexer {
             }
             }
             break;
-        case '(':
+        case '{':
             {
             alt4=2;
             }
             break;
-        case ')':
+        case '}':
             {
             alt4=3;
             }
             break;
-        case '=':
+        case '(':
             {
             alt4=4;
             }
             break;
-        case '[':
+        case ')':
             {
             alt4=5;
             }
             break;
-        case ']':
+        case '=':
             {
             alt4=6;
             }
             break;
+        case '[':
+            {
+            alt4=7;
+            }
+            break;
+        case ']':
+            {
+            alt4=8;
+            }
+            break;
         case 'a':
             {
-            int LA4_7 = input.LA(2);
+            int LA4_9 = input.LA(2);
 
-            if ( (LA4_7=='n') ) {
+            if ( (LA4_9=='n') ) {
                 int LA4_15 = input.LA(3);
 
                 if ( (LA4_15=='d') ) {
@@ -523,7 +533,7 @@ public class SAFLexer extends Lexer {
                         alt4=11;
                     }
                     else {
-                        alt4=7;
+                        alt4=9;
                     }
                 }
                 else {
@@ -537,31 +547,21 @@ public class SAFLexer extends Lexer {
             break;
         case 'o':
             {
-            int LA4_8 = input.LA(2);
+            int LA4_10 = input.LA(2);
 
-            if ( (LA4_8=='r') ) {
+            if ( (LA4_10=='r') ) {
                 int LA4_16 = input.LA(3);
 
                 if ( ((LA4_16 >= 'A' && LA4_16 <= 'Z')||LA4_16=='_'||(LA4_16 >= 'a' && LA4_16 <= 'z')) ) {
                     alt4=11;
                 }
                 else {
-                    alt4=8;
+                    alt4=10;
                 }
             }
             else {
                 alt4=11;
             }
-            }
-            break;
-        case '{':
-            {
-            alt4=9;
-            }
-            break;
-        case '}':
-            {
-            alt4=10;
             }
             break;
         case 'A':
@@ -645,23 +645,23 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 2 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:17: T__8
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:17: LEFTCURLY
                 {
-                mT__8(); 
+                mLEFTCURLY(); 
 
 
                 }
                 break;
             case 3 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:22: T__9
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:27: RIGHTCURLY
                 {
-                mT__9(); 
+                mRIGHTCURLY(); 
 
 
                 }
                 break;
             case 4 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:27: T__10
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:38: T__10
                 {
                 mT__10(); 
 
@@ -669,7 +669,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 5 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:33: T__11
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:44: T__11
                 {
                 mT__11(); 
 
@@ -677,7 +677,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 6 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:39: T__12
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:50: T__12
                 {
                 mT__12(); 
 
@@ -685,7 +685,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 7 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:45: T__13
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:56: T__13
                 {
                 mT__13(); 
 
@@ -693,7 +693,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 8 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:51: T__14
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:62: T__14
                 {
                 mT__14(); 
 
@@ -701,7 +701,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 9 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:57: T__15
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:68: T__15
                 {
                 mT__15(); 
 
@@ -709,7 +709,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:63: T__16
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:74: T__16
                 {
                 mT__16(); 
 
@@ -717,7 +717,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:69: IDENT
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:80: IDENT
                 {
                 mIDENT(); 
 
@@ -725,7 +725,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 12 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:75: VALUE
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:86: VALUE
                 {
                 mVALUE(); 
 
@@ -733,7 +733,7 @@ public class SAFLexer extends Lexer {
                 }
                 break;
             case 13 :
-                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:81: WHITESPACE
+                // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:1:92: WHITESPACE
                 {
                 mWHITESPACE(); 
 

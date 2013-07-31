@@ -1,4 +1,4 @@
-// $ANTLR 3.4 C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g 2013-07-25 17:45:28
+// $ANTLR 3.4 C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g 2013-07-31 12:44:56
 
   package com.yennick.parser;
   import com.yennick.fighter.bot.*;
@@ -12,12 +12,10 @@ import java.util.ArrayList;
 @SuppressWarnings({"all", "warnings", "unchecked"})
 public class SAFParser extends Parser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "CHOOSE", "IDENT", "VALUE", "WHITESPACE", "'('", "')'", "'='", "'['", "']'", "'and'", "'or'", "'{'", "'}'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "CHOOSE", "IDENT", "LEFTCURLY", "RIGHTCURLY", "VALUE", "WHITESPACE", "'('", "')'", "'='", "'['", "']'", "'and'", "'or'"
     };
 
     public static final int EOF=-1;
-    public static final int T__8=8;
-    public static final int T__9=9;
     public static final int T__10=10;
     public static final int T__11=11;
     public static final int T__12=12;
@@ -27,8 +25,10 @@ public class SAFParser extends Parser {
     public static final int T__16=16;
     public static final int CHOOSE=4;
     public static final int IDENT=5;
-    public static final int VALUE=6;
-    public static final int WHITESPACE=7;
+    public static final int LEFTCURLY=6;
+    public static final int RIGHTCURLY=7;
+    public static final int VALUE=8;
+    public static final int WHITESPACE=9;
 
     // delegates
     public Parser[] getDelegates() {
@@ -51,7 +51,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "fighter"
-    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:22:1: fighter returns [Bot fighter] : IDENT ( '{' )? ( personality | behaviour )* ( '}' )? ;
+    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:24:1: fighter returns [Bot fighter] : IDENT ( LEFTCURLY )? ( personality | behaviour )* ( RIGHTCURLY )? ;
     public final Bot fighter() throws RecognitionException {
         Bot fighter = null;
 
@@ -63,23 +63,23 @@ public class SAFParser extends Parser {
 
 
         try {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:23:2: ( IDENT ( '{' )? ( personality | behaviour )* ( '}' )? )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:23:4: IDENT ( '{' )? ( personality | behaviour )* ( '}' )?
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:25:2: ( IDENT ( LEFTCURLY )? ( personality | behaviour )* ( RIGHTCURLY )? )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:25:4: IDENT ( LEFTCURLY )? ( personality | behaviour )* ( RIGHTCURLY )?
             {
-            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter61); 
+            IDENT1=(Token)match(input,IDENT,FOLLOW_IDENT_in_fighter85); 
 
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:23:10: ( '{' )?
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:25:10: ( LEFTCURLY )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==15) ) {
+            if ( (LA1_0==LEFTCURLY) ) {
                 alt1=1;
             }
             switch (alt1) {
                 case 1 :
-                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:23:10: '{'
+                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:25:10: LEFTCURLY
                     {
-                    match(input,15,FOLLOW_15_in_fighter63); 
+                    match(input,LEFTCURLY,FOLLOW_LEFTCURLY_in_fighter87); 
 
                     }
                     break;
@@ -93,7 +93,7 @@ public class SAFParser extends Parser {
             			System.out.println( fighter.toString()); 
             		
 
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:27:4: ( personality | behaviour )*
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:29:4: ( personality | behaviour )*
             loop2:
             do {
                 int alt2=3;
@@ -102,25 +102,25 @@ public class SAFParser extends Parser {
                 if ( (LA2_0==IDENT) ) {
                     int LA2_2 = input.LA(2);
 
-                    if ( (LA2_2==10) ) {
+                    if ( (LA2_2==12) ) {
                         alt2=1;
                     }
-                    else if ( (LA2_2==IDENT||LA2_2==11||(LA2_2 >= 13 && LA2_2 <= 14)) ) {
+                    else if ( (LA2_2==15) ) {
                         alt2=2;
                     }
 
 
                 }
-                else if ( (LA2_0==11) ) {
+                else if ( (LA2_0==10) ) {
                     alt2=2;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:27:5: personality
+            	    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:29:5: personality
             	    {
-            	    pushFollow(FOLLOW_personality_in_fighter76);
+            	    pushFollow(FOLLOW_personality_in_fighter100);
             	    personality2=personality();
 
             	    state._fsp--;
@@ -131,9 +131,9 @@ public class SAFParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:28:5: behaviour
+            	    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:30:5: behaviour
             	    {
-            	    pushFollow(FOLLOW_behaviour_in_fighter84);
+            	    pushFollow(FOLLOW_behaviour_in_fighter108);
             	    behaviour3=behaviour();
 
             	    state._fsp--;
@@ -150,18 +150,18 @@ public class SAFParser extends Parser {
             } while (true);
 
 
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:29:3: ( '}' )?
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:31:3: ( RIGHTCURLY )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==16) ) {
+            if ( (LA3_0==RIGHTCURLY) ) {
                 alt3=1;
             }
             switch (alt3) {
                 case 1 :
-                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:29:3: '}'
+                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:31:3: RIGHTCURLY
                     {
-                    match(input,16,FOLLOW_16_in_fighter93); 
+                    match(input,RIGHTCURLY,FOLLOW_RIGHTCURLY_in_fighter117); 
 
                     }
                     break;
@@ -187,7 +187,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "behaviour"
-    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:32:1: behaviour returns [Behaviour behaviour] : cond= condition '[' moveAction= action fightAction= action ']' ;
+    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:34:1: behaviour returns [Behaviour behaviour] : cond= condition '[' moveAction= action fightAction= action ']' ;
     public final Behaviour behaviour() throws RecognitionException {
         Behaviour behaviour = null;
 
@@ -200,30 +200,30 @@ public class SAFParser extends Parser {
 
 
         try {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:33:2: (cond= condition '[' moveAction= action fightAction= action ']' )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:33:4: cond= condition '[' moveAction= action fightAction= action ']'
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:35:2: (cond= condition '[' moveAction= action fightAction= action ']' )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:35:4: cond= condition '[' moveAction= action fightAction= action ']'
             {
-            pushFollow(FOLLOW_condition_in_behaviour113);
+            pushFollow(FOLLOW_condition_in_behaviour137);
             cond=condition();
 
             state._fsp--;
 
 
-            match(input,11,FOLLOW_11_in_behaviour116); 
+            match(input,13,FOLLOW_13_in_behaviour140); 
 
-            pushFollow(FOLLOW_action_in_behaviour120);
+            pushFollow(FOLLOW_action_in_behaviour144);
             moveAction=action();
 
             state._fsp--;
 
 
-            pushFollow(FOLLOW_action_in_behaviour124);
+            pushFollow(FOLLOW_action_in_behaviour148);
             fightAction=action();
 
             state._fsp--;
 
 
-            match(input,12,FOLLOW_12_in_behaviour126); 
+            match(input,14,FOLLOW_14_in_behaviour150); 
 
              	behaviour = new Behaviour(cond, moveAction, fightAction);	
 
@@ -245,94 +245,43 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "condition"
-    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:37:1: condition returns [Condition condition] : (first= IDENT |first= IDENT 'or' second= IDENT |first= IDENT 'and' second= IDENT )* ;
+    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:40:1: condition returns [Condition condition] : first= andcondition ( 'or' second= condition ) ;
     public final Condition condition() throws RecognitionException {
         Condition condition = null;
 
 
-        Token first=null;
-        Token second=null;
+        SAFParser.andcondition_return first =null;
+
+        Condition second =null;
+
 
         try {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:38:2: ( (first= IDENT |first= IDENT 'or' second= IDENT |first= IDENT 'and' second= IDENT )* )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:38:4: (first= IDENT |first= IDENT 'or' second= IDENT |first= IDENT 'and' second= IDENT )*
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:41:3: (first= andcondition ( 'or' second= condition ) )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:41:5: first= andcondition ( 'or' second= condition )
             {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:38:4: (first= IDENT |first= IDENT 'or' second= IDENT |first= IDENT 'and' second= IDENT )*
-            loop4:
-            do {
-                int alt4=4;
-                int LA4_0 = input.LA(1);
+            pushFollow(FOLLOW_andcondition_in_condition173);
+            first=andcondition();
 
-                if ( (LA4_0==IDENT) ) {
-                    switch ( input.LA(2) ) {
-                    case 14:
-                        {
-                        alt4=2;
-                        }
-                        break;
-                    case 13:
-                        {
-                        alt4=3;
-                        }
-                        break;
-                    case IDENT:
-                    case 11:
-                        {
-                        alt4=1;
-                        }
-                        break;
-
-                    }
-
-                }
+            state._fsp--;
 
 
-                switch (alt4) {
-            	case 1 :
-            	    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:38:5: first= IDENT
-            	    {
-            	    first=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition148); 
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:41:24: ( 'or' second= condition )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:41:25: 'or' second= condition
+            {
+            match(input,16,FOLLOW_16_in_condition176); 
 
-            	     condition = new Condition((first!=null?first.getText():null)); 
+            pushFollow(FOLLOW_condition_in_condition180);
+            second=condition();
 
-            	    }
-            	    break;
-            	case 2 :
-            	    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:39:2: first= IDENT 'or' second= IDENT
-            	    {
-            	    first=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition158); 
-
-            	    match(input,14,FOLLOW_14_in_condition160); 
-
-            	    second=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition164); 
-
-            	     condition = new Condition((first!=null?first.getText():null),(second!=null?second.getText():null),"or"); 
-
-            	    }
-            	    break;
-            	case 3 :
-            	    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:40:2: first= IDENT 'and' second= IDENT
-            	    {
-            	    first=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition174); 
-
-            	    match(input,13,FOLLOW_13_in_condition176); 
-
-            	    second=(Token)match(input,IDENT,FOLLOW_IDENT_in_condition180); 
-
-            	     condition = new Condition((first!=null?first.getText():null),(second!=null?second.getText():null),"and"); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop4;
-                }
-            } while (true);
+            state._fsp--;
 
 
+            condition = new CombCondition((first!=null?first.condition:null),second,false);
 
-            			System.out.println(condition.toString()); 
-            		
+            }
+
+
+            condition = new ConcreteCondition((first!=null?input.toString(first.start,first.stop):null)); 
 
             }
 
@@ -350,9 +299,153 @@ public class SAFParser extends Parser {
     // $ANTLR end "condition"
 
 
+    public static class andcondition_return extends ParserRuleReturnScope {
+        public Condition condition;
+    };
+
+
+    // $ANTLR start "andcondition"
+    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:44:1: andcondition returns [Condition condition] : first= singlecondition ( 'and' second= andcondition ) ;
+    public final SAFParser.andcondition_return andcondition() throws RecognitionException {
+        SAFParser.andcondition_return retval = new SAFParser.andcondition_return();
+        retval.start = input.LT(1);
+
+
+        SAFParser.singlecondition_return first =null;
+
+        SAFParser.andcondition_return second =null;
+
+
+        try {
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:45:3: (first= singlecondition ( 'and' second= andcondition ) )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:45:5: first= singlecondition ( 'and' second= andcondition )
+            {
+            pushFollow(FOLLOW_singlecondition_in_andcondition206);
+            first=singlecondition();
+
+            state._fsp--;
+
+
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:45:27: ( 'and' second= andcondition )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:45:28: 'and' second= andcondition
+            {
+            match(input,15,FOLLOW_15_in_andcondition209); 
+
+            pushFollow(FOLLOW_andcondition_in_andcondition213);
+            second=andcondition();
+
+            state._fsp--;
+
+
+            retval.condition = new CombCondition((first!=null?first.condition:null),(second!=null?second.condition:null),true); 
+
+            }
+
+
+            retval.condition = new ConcreteCondition((first!=null?input.toString(first.start,first.stop):null)); 
+
+            }
+
+            retval.stop = input.LT(-1);
+
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return retval;
+    }
+    // $ANTLR end "andcondition"
+
+
+    public static class singlecondition_return extends ParserRuleReturnScope {
+        public Condition condition;
+    };
+
+
+    // $ANTLR start "singlecondition"
+    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:49:1: singlecondition returns [Condition condition] : ( '(' cond= condition ')' |first= IDENT );
+    public final SAFParser.singlecondition_return singlecondition() throws RecognitionException {
+        SAFParser.singlecondition_return retval = new SAFParser.singlecondition_return();
+        retval.start = input.LT(1);
+
+
+        Token first=null;
+        Condition cond =null;
+
+
+        try {
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:50:3: ( '(' cond= condition ')' |first= IDENT )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
+
+            if ( (LA4_0==10) ) {
+                alt4=1;
+            }
+            else if ( (LA4_0==IDENT) ) {
+                alt4=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 4, 0, input);
+
+                throw nvae;
+
+            }
+            switch (alt4) {
+                case 1 :
+                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:51:3: '(' cond= condition ')'
+                    {
+                    match(input,10,FOLLOW_10_in_singlecondition243); 
+
+                    pushFollow(FOLLOW_condition_in_singlecondition247);
+                    cond=condition();
+
+                    state._fsp--;
+
+
+                    match(input,11,FOLLOW_11_in_singlecondition249); 
+
+                     retval.condition = cond; 
+
+                    }
+                    break;
+                case 2 :
+                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:52:3: first= IDENT
+                    {
+                    first=(Token)match(input,IDENT,FOLLOW_IDENT_in_singlecondition259); 
+
+                     retval.condition = new ConcreteCondition((first!=null?first.getText():null)); 
+
+                    }
+                    break;
+
+            }
+            retval.stop = input.LT(-1);
+
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+
+        finally {
+        	// do for sure before leaving
+        }
+        return retval;
+    }
+    // $ANTLR end "singlecondition"
+
+
 
     // $ANTLR start "action"
-    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:47:1: action returns [Action action] : ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT ) ;
+    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:55:1: action returns [Action action] : ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT ) ;
     public final Action action() throws RecognitionException {
         Action action = null;
 
@@ -362,10 +455,10 @@ public class SAFParser extends Parser {
         Token act=null;
 
         try {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:48:2: ( ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT ) )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:48:4: ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:56:2: ( ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT ) )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:56:4: ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT )
             {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:48:4: ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:56:4: ( 'choose' '(' a1= IDENT a2= IDENT ')' |act= IDENT )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -384,26 +477,26 @@ public class SAFParser extends Parser {
             }
             switch (alt5) {
                 case 1 :
-                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:49:3: 'choose' '(' a1= IDENT a2= IDENT ')'
+                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:57:3: 'choose' '(' a1= IDENT a2= IDENT ')'
                     {
-                    match(input,CHOOSE,FOLLOW_CHOOSE_in_action211); 
+                    match(input,CHOOSE,FOLLOW_CHOOSE_in_action285); 
 
-                    match(input,8,FOLLOW_8_in_action213); 
+                    match(input,10,FOLLOW_10_in_action287); 
 
-                    a1=(Token)match(input,IDENT,FOLLOW_IDENT_in_action217); 
+                    a1=(Token)match(input,IDENT,FOLLOW_IDENT_in_action291); 
 
-                    a2=(Token)match(input,IDENT,FOLLOW_IDENT_in_action221); 
+                    a2=(Token)match(input,IDENT,FOLLOW_IDENT_in_action295); 
 
-                    match(input,9,FOLLOW_9_in_action223); 
+                    match(input,11,FOLLOW_11_in_action297); 
 
                      action = new Action((a1!=null?a1.getText():null), (a2!=null?a2.getText():null),true); 
 
                     }
                     break;
                 case 2 :
-                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:50:5: act= IDENT
+                    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:58:5: act= IDENT
                     {
-                    act=(Token)match(input,IDENT,FOLLOW_IDENT_in_action233); 
+                    act=(Token)match(input,IDENT,FOLLOW_IDENT_in_action307); 
 
                      action = new Action((act!=null?act.getText():null)); 
 
@@ -435,7 +528,7 @@ public class SAFParser extends Parser {
 
 
     // $ANTLR start "personality"
-    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:58:1: personality returns [Personality personality] : IDENT '=' VALUE ;
+    // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:66:1: personality returns [Personality personality] : IDENT '=' VALUE ;
     public final Personality personality() throws RecognitionException {
         Personality personality = null;
 
@@ -444,14 +537,14 @@ public class SAFParser extends Parser {
         Token VALUE5=null;
 
         try {
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:59:2: ( IDENT '=' VALUE )
-            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:59:4: IDENT '=' VALUE
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:67:2: ( IDENT '=' VALUE )
+            // C:\\Users\\Famke Kweekel\\workspace\\Aliquam Pugnator\\src\\com\\yennick\\fighter\\SAF.g:67:4: IDENT '=' VALUE
             {
-            IDENT4=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality261); 
+            IDENT4=(Token)match(input,IDENT,FOLLOW_IDENT_in_personality335); 
 
-            match(input,10,FOLLOW_10_in_personality263); 
+            match(input,12,FOLLOW_12_in_personality337); 
 
-            VALUE5=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality265); 
+            VALUE5=(Token)match(input,VALUE,FOLLOW_VALUE_in_personality339); 
 
 
             			personality = new Personality((IDENT4!=null?IDENT4.getText():null),Integer.parseInt((VALUE5!=null?VALUE5.getText():null))); 
@@ -481,31 +574,34 @@ public class SAFParser extends Parser {
 
  
 
-    public static final BitSet FOLLOW_IDENT_in_fighter61 = new BitSet(new long[]{0x0000000000018822L});
-    public static final BitSet FOLLOW_15_in_fighter63 = new BitSet(new long[]{0x0000000000010822L});
-    public static final BitSet FOLLOW_personality_in_fighter76 = new BitSet(new long[]{0x0000000000010822L});
-    public static final BitSet FOLLOW_behaviour_in_fighter84 = new BitSet(new long[]{0x0000000000010822L});
-    public static final BitSet FOLLOW_16_in_fighter93 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_condition_in_behaviour113 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_behaviour116 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_action_in_behaviour120 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_action_in_behaviour124 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_behaviour126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_condition148 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_IDENT_in_condition158 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_condition160 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENT_in_condition164 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_IDENT_in_condition174 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_condition176 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENT_in_condition180 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_CHOOSE_in_action211 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_8_in_action213 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENT_in_action217 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_IDENT_in_action221 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_9_in_action223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_action233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_IDENT_in_personality261 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_10_in_personality263 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_VALUE_in_personality265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_fighter85 = new BitSet(new long[]{0x00000000000004E2L});
+    public static final BitSet FOLLOW_LEFTCURLY_in_fighter87 = new BitSet(new long[]{0x00000000000004A2L});
+    public static final BitSet FOLLOW_personality_in_fighter100 = new BitSet(new long[]{0x00000000000004A2L});
+    public static final BitSet FOLLOW_behaviour_in_fighter108 = new BitSet(new long[]{0x00000000000004A2L});
+    public static final BitSet FOLLOW_RIGHTCURLY_in_fighter117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_condition_in_behaviour137 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_behaviour140 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_action_in_behaviour144 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_action_in_behaviour148 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_behaviour150 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_andcondition_in_condition173 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_16_in_condition176 = new BitSet(new long[]{0x0000000000000420L});
+    public static final BitSet FOLLOW_condition_in_condition180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_singlecondition_in_andcondition206 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_andcondition209 = new BitSet(new long[]{0x0000000000000420L});
+    public static final BitSet FOLLOW_andcondition_in_andcondition213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_10_in_singlecondition243 = new BitSet(new long[]{0x0000000000000420L});
+    public static final BitSet FOLLOW_condition_in_singlecondition247 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_singlecondition249 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_singlecondition259 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_CHOOSE_in_action285 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_10_in_action287 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENT_in_action291 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_IDENT_in_action295 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_11_in_action297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_action307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_IDENT_in_personality335 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_personality337 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_VALUE_in_personality339 = new BitSet(new long[]{0x0000000000000002L});
 
 }
