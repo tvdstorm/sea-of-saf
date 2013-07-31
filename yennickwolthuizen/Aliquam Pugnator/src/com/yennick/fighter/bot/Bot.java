@@ -46,13 +46,18 @@ public class Bot{
 
 	public Behaviour getBehaviour(String conditionString,String difference){
 		
-		System.out.println(conditionString + " - " + difference);
 		List<Integer> possibleMoves = new ArrayList<Integer>();
+		
+		List<String> conditions = new ArrayList<String>();
+		
+		conditions.add(conditionString);
+		conditions.add(difference);
+		conditions.add(Constants.getDef());
 		
 		for (int i = 0; i < behaviour.size(); i++){
 			Condition cond = behaviour.get(i).getCondition();
 			
-			if(cond.hasCondition(conditionString) || cond.hasCondition(difference) || cond.hasCondition("always")){
+			if(cond.hasCondition(conditions)){
 				possibleMoves.add(i);
 			}
 		}
@@ -74,7 +79,7 @@ public class Bot{
 	}
 
 	public void checkAlways(){
-		if(getBehaviour("always",null) == null){
+		if(getBehaviour(Constants.getDef(),null) == null){
 			System.out.println("building always");
 			buildAlways();
 		} else {
@@ -93,7 +98,7 @@ public class Bot{
 		Action moveAction = new Action(Constants.getMoveActions().get(mvA));
 		Action fightAction= new Action(Constants.getFightActions().get(fA));
 		
-		Behaviour beh = new Behaviour(new Condition("always"),moveAction,fightAction);
+		Behaviour beh = new Behaviour(new ConcreteCondition(Constants.getDef()),moveAction,fightAction);
 
 		addBehaviour(beh);
 	}
@@ -172,6 +177,7 @@ public class Bot{
 	
 	public void repaint(){
 		setInfo();
+		
 		stickMan.refresh();
 	}
 	
