@@ -19,7 +19,7 @@ import com.yennick.parser.SAFParser;
 
 public class SAFFile {
 	
-	private final static String ext = ".txt";
+	private final static String ext = ".saf";
 	private String path = null;
 	
 	JFileChooser pathChooser;
@@ -29,7 +29,7 @@ public class SAFFile {
 	    pathChooser.setCurrentDirectory(new java.io.File("."));
 	    pathChooser.setDialogTitle("Pick directory with fighters");
 	    pathChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//	    pathChooser.setAcceptAllFileFilterUsed(false);
+	    pathChooser.setAcceptAllFileFilterUsed(false);
 	    path = getFighterDir() + File.separator;
 	}
 	
