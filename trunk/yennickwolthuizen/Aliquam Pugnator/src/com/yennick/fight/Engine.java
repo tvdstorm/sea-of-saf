@@ -88,6 +88,7 @@ public class Engine {
 		
 		doAction(fighter,victim,turn,react);
 		
+		System.out.println(turn.toString() + " - " + react.toString());
 		refresh();
 	}
 	

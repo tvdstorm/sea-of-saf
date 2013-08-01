@@ -47,12 +47,13 @@ public class Bot{
 	public Behaviour getBehaviour(String conditionString,String difference){
 		
 		List<Integer> possibleMoves = new ArrayList<Integer>();
-		
 		List<String> conditions = new ArrayList<String>();
 		
 		conditions.add(conditionString);
 		conditions.add(difference);
 		conditions.add(Constants.getDef());
+		
+		behaviour.toString();
 		
 		for (int i = 0; i < behaviour.size(); i++){
 			Condition cond = behaviour.get(i).getCondition();
@@ -80,15 +81,12 @@ public class Bot{
 
 	public void checkAlways(){
 		if(getBehaviour(Constants.getDef(),null) == null){
-			System.out.println("building always");
 			buildAlways();
 		} else {
-			System.out.println("found always");
 		}
 	}
 
 	private void buildAlways(){
-		System.out.println("Build always");
 		
 		//pick a random action
 		Random rand = new Random();
@@ -104,15 +102,12 @@ public class Bot{
 	}
 	
 	public int getPersonality(String getP) {
-		System.out.println(getP + " check");
 		
 		for(Personality pers: personality){
 			if(pers.getCharacteristic().equals(getP)){
-				System.out.println(getP + " "+pers.getValue());
 				return pers.getValue();
 			}
 		}
-		System.out.println(getP + " def");
 		return Constants.getDefaultValue();
 	}
 	
@@ -205,7 +200,9 @@ public class Bot{
 
 
 	public String toString(){
-		return "Name: " +fighterName + "\n";
+		return "Name: " +fighterName + "\n" ;
+		
+		
 	}
 
 	public String getStrengthDifference(int strength) {
