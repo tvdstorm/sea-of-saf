@@ -79,10 +79,21 @@ public class Bot{
 		return move;
 	}
 
-	public void checkAlways(){
+	private void checkAlways(){
 		if(getBehaviour(Constants.getDef(),null) == null){
 			buildAlways();
-		} else {
+		} 
+	}
+	
+	public void check(List<String> errors){
+		checkAlways();
+		checkName(errors);
+		
+	}
+
+	private void checkName(List<String> errors) {
+		if(fighterName == "" || fighterName == null){
+			errors.add("No name..");
 		}
 	}
 

@@ -1,5 +1,8 @@
 package com.yennick.fight;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.yennick.fighter.bot.Behaviour;
 import com.yennick.fighter.bot.Bot;
 import com.yennick.fighter.bot.Constants;
@@ -7,6 +10,7 @@ import com.yennick.fighter.bot.Constants;
 public class Engine {
 	
 	public final SAFFile fight;
+	private final List<String> errors;
 	private Bot homeFighter;
 	private Bot challenger;
 	
@@ -17,6 +21,7 @@ public class Engine {
 	
 	public Engine(){
 		fight = new SAFFile();
+		errors = new ArrayList<String>();
 	}
 	
 	public Bot getHomeFighter(){
@@ -149,7 +154,7 @@ public class Engine {
 		fighterName = fighterName.substring(0, fighterName.lastIndexOf('.'));
 		
 		Bot fighter = fight.getFighter(fighterName);
-		fighter.checkAlways();
+		fighter.check(errors);
 
 		if(isChallenger){
 			fighter.setAsChallenger();
