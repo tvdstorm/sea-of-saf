@@ -39,9 +39,6 @@ behaviour returns [Behaviour behaviour]
 	 }
 	;
 
-
-
-
 condition returns [Condition condition]
   : first=andcondition ('or' second=condition {$condition = new CombCondition($first.condition,$second.condition,false); })? {$condition = new ConcreteCondition($first.text); }
   ;

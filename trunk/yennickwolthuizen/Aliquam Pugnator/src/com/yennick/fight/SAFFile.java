@@ -28,15 +28,17 @@ public class SAFFile {
 		pathChooser = new JFileChooser(); 
 	    pathChooser.setCurrentDirectory(new java.io.File("."));
 	    pathChooser.setDialogTitle("Pick directory with fighters");
-//	    pathChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    pathChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 //	    pathChooser.setAcceptAllFileFilterUsed(false);
-	    path = getFighterDir()+ File.separator;
+	    path = getFighterDir() + File.separator;
 	}
 	
 	private String getFighterDir(){
 		File dir = null;
-		if(pathChooser.showOpenDialog(pathChooser) == JFileChooser.APPROVE_OPTION){
-			dir = pathChooser.getCurrentDirectory();
+		int returnVal = pathChooser.showOpenDialog(pathChooser);
+		
+		if(returnVal == JFileChooser.APPROVE_OPTION){
+			dir = pathChooser.getSelectedFile();
 		}
 		return dir.toString();
 	}
