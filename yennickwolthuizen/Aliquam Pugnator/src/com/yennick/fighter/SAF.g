@@ -34,22 +34,27 @@ fighter returns [Bot fighter]
 behaviour returns [Behaviour behaviour]
 	: cond=condition  '[' moveAction=action fightAction=action ']'
 	 { 	$behaviour = new Behaviour($cond.condition, $moveAction.action, $fightAction.action);	}
+	 {
+	    System.out.println( $behaviour.toString());
+	 }
 	;
 
 
+
+
 condition returns [Condition condition]
-  : first=andcondition ('or' second=condition {$condition = new CombCondition($first.condition,$second.condition,false);}) {$condition = new ConcreteCondition($first.text); }
+  : first=andcondition ('or' second=condition {$condition = new CombCondition($first.condition,$second.condition,false); })? {$condition = new ConcreteCondition($first.text); }
   ;
   
 andcondition returns [Condition condition]
-  : first=singlecondition ('and' second=andcondition {$condition = new CombCondition($first.condition,$second.condition,true); })  {$condition = new ConcreteCondition($first.text); }
+  : first=singlecondition ('and' second=andcondition {$condition = new CombCondition($first.condition,$second.condition,true); })?  {$condition = new ConcreteCondition($first.text); }
   ;
   
   
 singlecondition returns [Condition condition]
   :
-  '(' cond=condition ')' { $condition = cond; } |
-  first=IDENT  { $condition = new ConcreteCondition($first.text); } 
+  first=IDENT  { $condition = new ConcreteCondition($first.text); } |
+   '(' cond=condition ')' { $condition = $cond.condition; } 
   ;
   
 action returns [Action action]
@@ -57,20 +62,13 @@ action returns [Action action]
 		'choose' '(' a1=IDENT a2=IDENT ')' { $action = new Action($a1.text, $a2.text,true); }
 		| act=IDENT { $action = new Action($act.text); }
 		)
-	{
-			System.out.println( "   " + $action.toString()); 
-		}
- 	;
-	
+	;
 	
 personality returns [Personality personality]
 	: IDENT '=' VALUE
 		{
 			$personality = new Personality($IDENT.text,Integer.parseInt($VALUE.text)); 
 		}
-		{
-			System.out.println( $personality.toString()); 
-		}		
 	;
 IDENT	: ('a'..'z'|'A'..'Z') ('a'..'z'|'A'..'Z'|'_')*;
 VALUE	: '0'..'9'+;
