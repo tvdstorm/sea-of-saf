@@ -1,0 +1,11 @@
+chicken
+{
+  kickReach  = 9
+  punchReach = 8
+  fly = 5
+  kickPower  = 2
+  punchPower = 2
+  fars [run_towarsds kicks_high]
+  near [run_away punch_low]
+  near [crouch punch_low]
+}
