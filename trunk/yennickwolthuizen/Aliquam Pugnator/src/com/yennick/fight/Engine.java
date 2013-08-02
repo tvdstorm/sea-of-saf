@@ -173,9 +173,6 @@ public class Engine {
 		return fighter;
 	}
 
-	/*private void displayDialog() {
-	}*/
-
 	private void showErrors(List<String> errors) {
 		for(String error: errors){
 			System.out.println(error);
