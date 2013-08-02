@@ -24,9 +24,9 @@ public class ConcreteCondition extends Condition {
 
 	@Override
 	public void check(List<String> errors) {
+//		System.out.println(condition);
 		if(!hasCondition(Constants.getConditions())){
 			errors.add("Condition " + condition + " does not exist");
 		}
 	}
-
 }

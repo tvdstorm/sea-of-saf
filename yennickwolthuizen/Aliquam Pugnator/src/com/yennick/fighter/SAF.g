@@ -30,24 +30,22 @@ fighter returns [Bot fighter]
 
 behaviour returns [Behaviour behaviour]
 	: cond=condition  '[' moveAction=action fightAction=action ']'
-	 { 	$behaviour = new Behaviour($cond.condition, $moveAction.action, $fightAction.action);	}
+	 { 	$behaviour = new Behaviour(cond, $moveAction.action, $fightAction.action);}
 	;
 
 condition returns [Condition condition]
-  : first=andcondition ('or' second=condition {$condition = new CombCondition($first.condition,$second.condition,false); })? {$condition = new ConcreteCondition($first.text); }
+  : first=andcondition {$condition = first; } ('or' second=condition {$condition = new CombCondition($first.condition,$second.condition,false); })? 
   ;
   
 andcondition returns [Condition condition]
-  : first=singlecondition ('and' second=andcondition {$condition = new CombCondition($first.condition,$second.condition,true); })?  {$condition = new ConcreteCondition($first.text); }
+  : first=singlecondition  {$condition = first; } ('and' second=andcondition {$condition = new CombCondition($first.condition,$second.condition,true); })? 
   ;
-  
   
 singlecondition returns [Condition condition]
   :
-  first=IDENT  { $condition = new ConcreteCondition($first.text); } |
-   '(' cond=condition ')' { $condition = $cond.condition; } 
+  first=IDENT  { $condition = new ConcreteCondition($first.text); }
   ;
-  
+    
 action returns [Action action]
 	:	(
 		'choose' '(' a1=IDENT a2=IDENT ')' { $action = new Action($a1.text, $a2.text,true); }
