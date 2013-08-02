@@ -106,7 +106,7 @@ public class Engine {
 	private Behaviour getDistance(Bot fighter, String difference){
 		
 		Behaviour turn;
-		if(getOutOfReach(fighter.isChallenger())){
+		if(getOutOfReach(fighter)){
 			turn = fighter.getBehaviour("far",difference);
 		} else {
 			turn = fighter.getBehaviour("near",difference);
@@ -146,15 +146,22 @@ public class Engine {
 		distance = Math.max(0,distance - moveDistance);
 	}
 		
-	private boolean getOutOfReach(boolean isChallenger){
-		return (!isChallenger)? (homeFighter.getReach() < distance) : (challenger.getReach() < distance);
+	private boolean getOutOfReach(Bot fighter){
+		return (fighter.getReach() < distance);
 	}
 	
 	public Bot setFighter(String fighterName, boolean isChallenger){
 		fighterName = fighterName.substring(0, fighterName.lastIndexOf('.'));
 		
 		Bot fighter = fight.getFighter(fighterName);
+		
 		fighter.check(errors);
+		
+		showErrors(errors);
+		
+		if(errors.size() > 0){
+			return null;
+		}
 
 		if(isChallenger){
 			fighter.setAsChallenger();
@@ -164,5 +171,14 @@ public class Engine {
 		}
 		
 		return fighter;
+	}
+
+	/*private void displayDialog() {
+	}*/
+
+	private void showErrors(List<String> errors) {
+		for(String error: errors){
+			System.out.println(error);
+		}
 	}
 }
