@@ -22,4 +22,11 @@ public class ConcreteCondition extends Condition {
 		return getCondition() ;		
 	}
 
+	@Override
+	public void check(List<String> errors) {
+		if(!hasCondition(Constants.getConditions())){
+			errors.add("Condition " + condition + " does not exist");
+		}
+	}
+
 }

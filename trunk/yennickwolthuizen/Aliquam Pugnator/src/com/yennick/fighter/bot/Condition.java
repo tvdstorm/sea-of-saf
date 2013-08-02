@@ -8,4 +8,6 @@ public abstract class Condition {
 	
 	public abstract String toString();
 
+	public abstract void check(List<String> errors);
+
 }

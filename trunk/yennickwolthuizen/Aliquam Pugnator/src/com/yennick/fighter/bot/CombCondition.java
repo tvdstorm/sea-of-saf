@@ -25,11 +25,17 @@ public class CombCondition extends Condition {
 
 		return condition;
 	}
-
+	
 	@Override
 	public String toString() {
 		String andStr = (and)? "and" : "or";
 		return condition1.toString() + andStr + condition2.toString() ;
 	}
 
+	@Override
+	public void check(List<String> errors) {
+		condition1.check(errors);
+		condition2.check(errors);
+	}
+	
 }

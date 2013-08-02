@@ -1,5 +1,7 @@
 package com.yennick.fighter.bot;
 
+import java.util.List;
+
  
 public class Behaviour{
 	private final Condition condition; 
@@ -32,6 +34,24 @@ public class Behaviour{
 		return getMoveAction().getActionString();
 	}
 	
+	public void check(List<String> errors){
+		checkCondition(errors);
+		checkMoveAction(errors);
+		checkFightAction(errors);
+	}
+	
+	private void checkMoveAction(List<String> errors) {
+		moveAction.check(errors,Constants.getMoveActions());
+	}
+	
+	private void checkFightAction(List<String> errors) {
+		fightAction.check(errors,Constants.getFightActions());
+	}
+
+	private void checkCondition(List<String> errors) {
+		condition.check(errors);
+	}
+
 	public String toString(){
 		String toString = condition.toString() + " : " + moveAction.toString() + " : " +  fightAction.toString();
 		return  toString ;

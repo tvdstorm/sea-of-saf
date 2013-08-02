@@ -1,6 +1,7 @@
 package com.yennick.fighter.bot;
 
 import java.lang.String;
+import java.util.List;
 import java.util.Random;
 
 public class Action {
@@ -21,7 +22,6 @@ public class Action {
 	}
 	
 	public Action getAction(){
-		
 		return this;
 	}
 	
@@ -37,6 +37,17 @@ public class Action {
 	
 	public String toString(){
 		return (choose)? "choose" +	": " +action1 + " , "+ action2  : action1 ;		
+	}
+
+	public void check(List<String> errors, List<String> actions) {
+		checkAction(errors, actions, action1);
+		checkAction(errors, actions, action2);
+	}
+	
+	private void checkAction(List<String> errors, List<String> actions, String action){
+		if(!actions.contains(action) && action != null){
+			errors.add("Action " + action + " does not exist" );
+		}
 	}
 
 }

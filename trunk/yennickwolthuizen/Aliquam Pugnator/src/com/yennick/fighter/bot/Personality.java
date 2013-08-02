@@ -2,6 +2,7 @@ package com.yennick.fighter.bot;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.yennick.fighter.bot.Constants;
 
@@ -18,7 +19,7 @@ public class Personality extends ArrayList<Personality> {
 	}
 
 	public boolean add(Personality personality){
-		if(this.validate(personality)){
+		if(validateChar(personality)){
 			super.add(personality);
 			return true;
 		}
@@ -37,11 +38,26 @@ public class Personality extends ArrayList<Personality> {
 		return this.characteristic.toString() + " = " + value ;
 	}
 	
-	public boolean validate(Personality personality){
+	private boolean validateChar(Personality personality){
 		if(Constants.getCharacteristics().contains(personality.getCharacteristic())){
 			return true;
 		}
 		return false;
+	}
+	
+	private boolean validateValue(){
+		return (Constants.getMax() >= getValue() && getValue() >= Constants.getMin());
+	}
+
+	public void check(List<String> errors) {
+		if(!validateChar(this)){
+			errors.add("Element " + this.characteristic + " does not exist");
+		}
+		if(!validateValue()){
+			errors.add("Element " + characteristic + " [" + getValue() + "] requires a value between " + Constants.getMin() + " and " + Constants.getMax());
+		}
+		
+		
 	}
 	
 }

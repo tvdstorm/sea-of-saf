@@ -79,6 +79,7 @@ public class Bot{
 		return move;
 	}
 
+	
 	private void checkAlways(){
 		if(getBehaviour(Constants.getDef(),null) == null){
 			buildAlways();
@@ -88,7 +89,22 @@ public class Bot{
 	public void check(List<String> errors){
 		checkAlways();
 		checkName(errors);
+		checkPersonalities(errors);
+		checkBehaviour(errors);
 		
+	}
+
+	private void checkBehaviour(List<String> errors) {
+		for(Behaviour beh: behaviour){
+			beh.check(errors);
+		}
+		
+	}
+
+	private void checkPersonalities(List<String> errors) {
+		for(Personality pers: personality){
+			pers.check(errors);
+		}
 	}
 
 	private void checkName(List<String> errors) {
@@ -199,7 +215,6 @@ public class Bot{
 		stickMan.move(vertical, horizontal);
 	}
 	
-	
 	public void doMove(String move) {
 		if(move.contains("crouch")){
 			stickMan.crouch();
@@ -212,8 +227,6 @@ public class Bot{
 
 	public String toString(){
 		return "Name: " +fighterName + "\n" ;
-		
-		
 	}
 
 	public String getStrengthDifference(int strength) {
