@@ -29,11 +29,12 @@ public class CombCondition extends Condition {
 	@Override
 	public String toString() {
 		String andStr = (and)? "and" : "or";
-		return condition1.toString() + andStr + condition2.toString() ;
+		return condition1.toString() +" " + andStr +" "+ condition2.toString() ;
 	}
 
 	@Override
 	public void check(List<String> errors) {
+		System.out.println("code: "+ toString());
 		condition1.check(errors);
 		condition2.check(errors);
 	}
