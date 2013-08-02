@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -62,8 +63,6 @@ public class Gui extends JFrame {
 			homeFighter = engine.setFighter(fighterName, isChallenger);
 		}
 		
-		//System.out.println(challenger.getFighterName());
-		//System.out.println(homeFighter.getFighterName());
 		
 		JPanel fighter;
 		fighter = (isChallenger)? showFighter(challenger) : showFighter(homeFighter);
@@ -89,12 +88,12 @@ public class Gui extends JFrame {
 	public void refresh(){
 		
 		ActionListener refresher = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-
-            	fightersP.revalidate();
-        		fightersP.repaint();
-            }
-            };
+	        public void actionPerformed(ActionEvent evt) {
+	
+	        	fightersP.revalidate();
+	    		fightersP.repaint();
+	        }
+	    };
 		Timer timer = new Timer( 100 ,refresher);
         timer.setRepeats(true);
         timer.start();
@@ -158,7 +157,6 @@ public class Gui extends JFrame {
 	
 	public JPanel showFighter(Bot fighter){
 		
-	//	System.out.println(fighter.toString());
 		JPanel fPanel = new JPanel();
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
@@ -177,7 +175,7 @@ public class Gui extends JFrame {
 			 if(fighter.isChallenger())fPanel.add(infoPanel);	
 			 
 		} else {
-			 System.out.println("fighter not found...");
+			JOptionPane.showMessageDialog(this, "Fighter has errors, please edit your fighter and reboot the game..");
 		}
 		return fPanel;
 	}
