@@ -23,20 +23,14 @@ tokens
 
 fighter returns [Bot fighter]
 	: IDENT LEFTCURLY? { $fighter = new Bot($IDENT.text); }
-		{
-			System.out.println( $fighter.toString()); 
-		}
-			(personality {$fighter.addPersonality($personality.personality);}
-			|behaviour {$fighter.addBehaviour($behaviour.behaviour);})* 
+		(personality {$fighter.addPersonality($personality.personality);}
+		|behaviour {$fighter.addBehaviour($behaviour.behaviour);})* 
 		RIGHTCURLY?		
 	;
 
 behaviour returns [Behaviour behaviour]
 	: cond=condition  '[' moveAction=action fightAction=action ']'
 	 { 	$behaviour = new Behaviour($cond.condition, $moveAction.action, $fightAction.action);	}
-	 {
-	    System.out.println( $behaviour.toString());
-	 }
 	;
 
 condition returns [Condition condition]

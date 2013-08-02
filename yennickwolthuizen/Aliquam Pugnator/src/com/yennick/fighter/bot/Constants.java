@@ -22,8 +22,9 @@ public class Constants {
 	
 	private static final int strengthDifference = 3;
 	
+	private static final int max = 10;
+	private static final int min = 0;
 	
-
 	public static List<String> getCharacteristics() {
 		return Characteristics;
 	}
@@ -34,6 +35,13 @@ public class Constants {
 	
 	public static String getDef(){
 		return def;
+	}
+	
+	public static int getMax(){
+		return max;
+	}
+	public static int getMin(){
+		return min;
 	}
 
 	public static List<String> getMoveActions() {
