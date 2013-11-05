@@ -1,0 +1,13 @@
+Tester{
+ kickPower = 15
+ punchPower = 0
+ kickReach = 5
+ punchReach = 3
+ (far or near) and (weaker or much_stronger)[run_towards kick_low]
+ near or far and stronger[crouch punch_low]
+ far or near and much_weaker or much_weaker[run_towards choose(punch_high kick_high)]
+ near or far or weaker[stand choose(block_high block_low)]
+ stronger[stand kick_low]
+ always[walk_away kick_high]
+}
+
