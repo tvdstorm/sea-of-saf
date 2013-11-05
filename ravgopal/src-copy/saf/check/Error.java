@@ -1,0 +1,14 @@
+package saf.check;
+
+public class Error extends Message {
+
+	public Error(String message) {
+		super(message);
+	}
+	
+	@Override
+	public String toString() {
+		return "ERROR: " + super.toString();
+	}
+
+}
