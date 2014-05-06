@@ -209,8 +209,6 @@ public class FighterState implements Config {
 	}
 	
 	public void updateCurrentFightAction(Rule rule) {
-		@SuppressWarnings("unused")
-		String strike = Strikes.block_high.name();
 		List<String> strikes = rule.getFightAction().getActions();
 		
 		if (strikes.size() > 1)
